@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE keyboard SYSTEM "VirtualKeyboardLayout.dtd">
+
+<keyboard catalog="general_test1_phonenumbers" title="GeneralTest1PhoneNumbers" version="1.0">
+  <layout orientation="landscape" type="phonenumber">
+    <section id="main" movable="false">
+      <row height="x-large">
+        <spacer />
+        <key>
+          <binding label="9" />
+        </key>
+        <spacer />
+        <key>
+          <binding label="8" />
+        </key>
+        <spacer />
+      </row>
+      <row height="x-large">
+        <spacer />
+        <key>
+          <binding label="7" />
+        </key>
+        <key>
+          <binding label="6" />
+        </key>
+        <spacer />
+      </row>
+    </section>
+  </layout>
+</keyboard>

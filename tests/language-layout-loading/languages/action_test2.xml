@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE keyboard SYSTEM "VirtualKeyboardLayout.dtd">
+
+<keyboard catalog="action_test2" language="action_test2" title="ActionTest2" version="1.0">
+  <layout type="general">
+    <section id="main">
+      <row>
+        <key>
+          <binding label="q"/>
+        </key>
+        <key>
+          <binding action="shift" />
+        </key>
+        <key>
+          <binding action="backspace" />
+        </key>
+        <key>
+          <binding action="return" />
+        </key>
+      </row>
+    </section>
+  </layout>
+</keyboard>

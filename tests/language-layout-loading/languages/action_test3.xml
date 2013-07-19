@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE keyboard SYSTEM "VirtualKeyboardLayout.dtd">
+
+<keyboard catalog="action_test3" language="action_test3" title="ActionTest3" version="1.0">
+  <layout type="general">
+    <section id="main">
+      <row>
+        <key>
+          <binding dead="true" label="`" />
+        </key>
+      </row>
+    </section>
+  </layout>
+</keyboard>

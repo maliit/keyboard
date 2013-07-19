@@ -1,0 +1,68 @@
+Overview
+========
+
+Maliit Keyboard supports styling (also known as theming) via "styling
+profiles". A styling profile is a self-contained directory with graphical
+assets, fonts, sounds etc. Users can choose the styling profile through the
+current_style setting, for instance (requires running maliit-server):
+
+  $ maliit-exampleapp-settings-python3.py \
+  $ set libmaliit-keyboard-plugin.so current_style gnome3
+
+The styling profiles are found in "data/styles". For an example style named
+"my-style", the directory structure would be:
+
+..+- data/
+     +- styles/
+        +- my-style/
+        |  +- images/
+        |  +- sounds/
+        |  +- fonts/
+        |  +- main.ini
+        |  +- extended-keys.ini
+
+The directories "images", "sounds" and "fonts" are used for binary data. The
+files "main.ini" and "extended-keys.ini" define the styling attributes (one for
+the regular qwerty area, one for the extended keys that pop up on long-press),
+such as key size, background graphics etc. Changes will only become visible
+upon maliit-server restart.
+
+
+INI files for styling
+=====================
+
+Styling attributes are simple key-value pairs, organized by section. The INI
+file format offers a perfect match and is simple to read/edit manually.
+
+The sections in [main|extended-keys].ini are:
+
+[background] - Describes background graphics for different keyboard elements.
+Keys ending with "-borders" allow for 9-tiling of graphics. The value consists
+of 4 integers (left, top, right, bottom), separated by spaces. Example:
+word-ribbon-borders=0 0 0 0
+word-ribbon=background.png
+
+[icon] - Maps icon names found in layout files to graphics assets. Example:
+shift=shift-icon.png
+
+[sound] - Maps events that support sound to sound files, such as key presses.
+Example:
+key-press=typewriter.wav
+
+[default] - Contains default values for a layout file, such as key size and key
+area width, for both landscape and portrait mode orientation. Example:
+landscape\key-area-width=854
+portrait\key-area-width=480
+
+[keys35] - Layout files can specify a style name for each section. If no style
+name is given, it's computed by the amount of keys found in the section. So a
+layout file section with 35 keys gets the auto-computed styling id of "keys35".
+In the INI files, this can be used to define a section of the same name which
+contains override values for the values of the "default" section. Whenever the
+layout file section with this id is used (= actively displayed on screen), the
+override values take precedence over the default values. Example:
+landscape/key-width-xlarge=118
+portrait/key-width-xlarge=64
+
+See data/styles/nokia-n9/main.ini for a complete example and all possible
+key-value pairs.

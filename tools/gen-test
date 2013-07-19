@@ -1,0 +1,71 @@
+#!/bin/bash
+
+### Generate tests from template files.
+
+DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd )"
+TMPL_DIR=${DIR}/templates
+MINIMUM_ARGS=2
+ERROR_GENERAL=1
+ERROR_BADARGS=65
+
+### Functions
+print_usage() {
+    echo "Usage: `basename $0` test-project-name path/to/tests/directory"
+}
+
+create_class_name () {
+    STR="Test-$1"
+    RES=""
+    SKIPNEXT=false
+
+    for idx in $(seq 1 ${#STR})
+    do
+        CURR=${STR:$idx-1:1}
+        NEXT=${STR:$idx:1}
+
+        if [ x${CURR} = x'-' ]
+        then
+            SKIPNEXT=true
+            RES="${RES}$(echo ${NEXT} | tr '[:lower:]' '[:upper:]')"
+        else
+            if ${SKIPNEXT}
+            then
+                SKIPNEXT=false
+            else
+                RES="${RES}${CURR}"
+            fi
+        fi
+    done
+
+    echo ${RES}
+}
+
+generate_test () {
+    TEST_PROJ_NAME=$1
+    TEST_DIR=$2
+    TEST_NAME=$(create_class_name ${TEST_PROJ_NAME})
+    DIR_NAME="${TEST_DIR}/${TEST_PROJ_NAME}"
+
+    mkdir -p "${DIR_NAME}"
+
+    cat ${MAIN_TMPL} | sed -e "s/%{test_name}/${TEST_NAME}/g" \
+                           -e "s/%{dir_name}/${TEST_PROJ_NAME}/g" \
+                         > ${DIR_NAME}/main.cpp
+
+    cat ${PROJ_TMPL} | sed -e "s/%{test_name}/${TEST_NAME}/g" \
+                           -e "s/%{dir_name}/${TEST_PROJ_NAME}/g" \
+                         > ${DIR_NAME}/${TEST_PROJ_NAME}.pro
+
+    echo "${TEST_PROJ_NAME}" > ${DIR_NAME}/.gitignore
+}
+
+### Main
+if [ "$#" -lt "$MINIMUM_ARGS" ]
+then
+  print_usage
+  exit $ERROR_BADARGS
+fi
+
+MAIN_TMPL="${TMPL_DIR}/test-main.tmpl"
+PROJ_TMPL="${TMPL_DIR}/test-proj.tmpl"
+generate_test $1 $2

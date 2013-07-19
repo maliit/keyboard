@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE keyboard SYSTEM "VirtualKeyboardLayout.dtd">
+
+<keyboard catalog="general_test1" language="general_test1" title="GeneralTest1" version="1.0">
+  <import>
+    <symview src="general_test1_symbols.xml" />
+    <number src="general_test1_numbers.xml" />
+    <phonenumber src="general_test1_phonenumbers.xml" />
+  </import>
+  <layout type="general">
+    <section id="main">
+      <row>
+        <key>
+          <binding label="q">
+            <modifiers keys="shift">
+              <binding label="Q" />
+            </modifiers>
+          </binding>
+          <extended>
+            <row>
+              <key>
+                <binding label="y">
+                  <modifiers keys="shift">
+                    <binding label="Y" />
+                  </modifiers>
+                </binding>
+              </key>
+              <key>
+                <binding label="u">
+                  <modifiers keys="shift">
+                    <binding label="U" />
+                  </modifiers>
+                </binding>
+              </key>
+            </row>
+            <row>
+              <key>
+                <binding label="i">
+                  <modifiers keys="shift">
+                    <binding label="I" />
+                  </modifiers>
+                </binding>
+              </key>
+              <key>
+                <binding label="o">
+                  <modifiers keys="shift">
+                    <binding label="O" />
+                  </modifiers>
+                </binding>
+              </key>
+            </row>
+          </extended>
+        </key>
+        <key>
+          <binding label="w" accented_labels="ert" accents="´;'">
+            <modifiers keys="shift">
+              <binding label="W" accented_labels="ErT" accents="´;'"/>
+            </modifiers>
+          </binding>
+        </key>
+      </row>
+      <row>
+        <spacer />
+        <key>
+          <binding label="p" />
+        </key>
+        <spacer />
+        <key>
+          <binding label="a">
+            <modifiers keys="alt">
+              <binding label="A" />
+            </modifiers>
+          </binding>
+        </key>
+        <spacer />
+      </row>
+    </section>
+  </layout>
+</keyboard>

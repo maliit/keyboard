@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE keyboard SYSTEM "VirtualKeyboardLayout.dtd">
+
+<keyboard catalog="styling_profile_test" language="styling_profile_test" title="StylingProfileTest" version="1.0">
+  <layout type="general">
+    <section id="main" style="test">
+      <row>
+        <spacer/>
+        <key><binding label="a"/></key>
+        <key><binding label="b"/></key>
+        <spacer/>
+      </row>
+      <row>
+        <key><binding label="c"/></key>
+        <spacer/>
+        <key><binding label="d"/></key>
+      </row>
+    </section>
+  </layout>
+</keyboard>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE keyboard SYSTEM "VirtualKeyboardLayout.dtd">
+
+<keyboard catalog="general_test1_numbers" title="GeneralTest1Numbers" version="1.0">
+  <layout orientation="landscape" type="number">
+    <section id="main" movable="false">
+      <row>
+        <key>
+          <binding label="0" />
+        </key>
+        <key>
+          <binding label="1" />
+        </key>
+      </row>
+      <row>
+        <spacer />
+        <key>
+          <binding label="2" />
+        </key>
+        <spacer />
+        <key>
+          <binding label="3" />
+        </key>
+        <spacer />
+      </row>
+    </section>
+  </layout>
+</keyboard>

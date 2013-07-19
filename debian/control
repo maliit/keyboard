@@ -1,0 +1,45 @@
+Source: maliit-plugin-ubuntu
+Section: libs
+Priority: extra
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Michael Hasselmann <michaelh@openismus.com>
+Build-Depends: debhelper (>= 9), 
+               pkg-config, 
+               qt5-default, 
+               qtbase5-dev, 
+               qtdeclarative5-dev, 
+               libgl-dev, 
+               libgles2-mesa-dev, 
+               doxygen, 
+               maliit-framework-dev (>= 0.99+git20130702+97e8335), 
+               libhunspell-dev, 
+               libpresage-dev,
+               libubuntu-platform-api1-dev,
+               libpinyin2-dev,
+               libglib2.0-dev
+Standards-Version: 3.9.3
+
+Package: ubuntu-keyboard
+Provides: ubuntu-keyboard
+Architecture: armhf
+Depends:  maliit-framework (>= 0.99+git20130702+97e8335), 
+          libpresage1, 
+          libpinyin2, 
+          ${misc:Depends}, 
+          ${shlibs:Depends}, 
+          qtdeclarative5-window-plugin
+Description: Ubuntu-Keyboard,  qml-based on-screen Keyboard
+ Ubuntu Keyboard based on Maliit-Keyboard
+ Maliit provides a flexible and cross-platform input method framework. It has a
+ plugin-based client-server architecture where applications act as clients and
+ communicate with the Maliit server via input context plugins. The communication
+ link currently uses D-Bus. Maliit is an open source framework (LGPL 2) with
+ open source plugins (BSD).
+ .
+ Ubuntu-Keyboard on-screen keyboard is a Maliit plugin.
+
+Package: ubuntu-keyboard-data
+Architecture: all
+Depends:  ${misc:Depends}, ${shlibs:Depends}
+Description: Ubuntu Keyboard Data files
+ Data files for the Ubuntu virtual keyboard

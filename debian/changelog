@@ -1,0 +1,11 @@
+maliit-plugin-ubuntu (0.99.trunk.phablet1) saucy; urgency=low
+
+  * fix reporting wrong keyboard rectangle
+
+ -- Thomas Moenicke <thomas@pachamama>  Wed, 10 Jul 2013 14:10:11 +0200
+
+maliit-plugin-ubuntu (0.1ubuntu1) saucy; urgency=low
+
+  * new plugin: ubuntu-keyboard
+
+ -- Thomas Moenicke <thomas@pachamama>  Tue, 09 Jul 2013 14:34:23 +0200
