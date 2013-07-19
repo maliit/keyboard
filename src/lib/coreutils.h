@@ -7,6 +7,7 @@ namespace MaliitKeyboard {
 class Key;
 
 namespace CoreUtils {
+const QString &pluginLanguageDirectory();
 const QString &pluginDataDirectory();
 const QString &maliitKeyboardDataDirectory();
 const QString &maliitKeyboardStyleProfilesDirectory();

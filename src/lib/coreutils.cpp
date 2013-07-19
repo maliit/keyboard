@@ -11,6 +11,17 @@ const char *const g_action_key_id = "actionKey";
 
 } // unnamed namespace
 
+const QString &pluginLanguageDirectory()
+{
+    static const QByteArray env_data_directory = qgetenv("UBUNTU_KEYBOARD_DATA_DIR");
+    static QString language_directory = QString::fromUtf8(env_data_directory.isEmpty()
+                                                            ? UBUNTU_KEYBOARD_DATA_DIR
+                                                            : env_data_directory);
+
+    language_directory += "/languages";
+    return language_directory;
+}
+
 const QString &pluginDataDirectory()
 {
     static const QByteArray env_data_directory = qgetenv("MALIIT_PLUGINS_DATADIR");

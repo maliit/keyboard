@@ -57,7 +57,7 @@ QString getLanguagesDir()
         // From http://doc.qt.nokia.com/4.7/qdir.html#separator: If you always
         // use "/", Qt will translate your paths to conform to the underlying
         // operating system.
-        languages_dir = CoreUtils::pluginDataDirectory() + "/languages";
+        languages_dir = CoreUtils::pluginLanguageDirectory();
     }
 
     return languages_dir;
