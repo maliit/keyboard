@@ -78,6 +78,11 @@ public:
     void sendKeyEvent(const QKeyEvent& event, Maliit::EventRequestType);
     QList<Maliit::PreeditTextFormat> lastPreeditTextFormatList() const;
 
+    // unused reimpl pure virtual
+    virtual void registerWindow(QWindow*, Maliit::Position);
+    virtual void setScreenRegion(const QRegion&, QWindow*);
+    virtual void setInputMethodArea(const QRegion&, QWindow*);
+
     Q_SIGNAL void keyEventSent(QKeyEvent ev);
 
     // unused reimpl
@@ -96,7 +101,7 @@ public:
     void setRedirectKeys(bool) {}
     void setDetectableAutoRepeat(bool) {}
     void setGlobalCorrectionEnabled(bool) {}
-    void setInputModeIndicator(Maliit::InputModeIndicator) {}
+
     void switchPlugin(Maliit::SwitchDirection) {}
     void switchPlugin(const QString&) {}
     void setScreenRegion(const QRegion&) {}
@@ -104,7 +109,7 @@ public:
     void setSelection(int, int) {}
     void setOrientationAngleLocked(bool) {}
     QList<MImPluginDescription> pluginDescriptions(Maliit::HandlerState) const {return QList<MImPluginDescription>();}
-    Maliit::Plugins::AbstractSurfaceFactory* surfaceFactory() { return 0; }
+
     Maliit::Plugins::AbstractPluginSetting* registerPluginSetting(const QString &,
                                                                   const QString &,
                                                                   Maliit::SettingEntryType ,

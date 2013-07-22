@@ -96,3 +96,4 @@ SUBDIRS = \
     data \
     qml \
     benchmark \
+    tests \

@@ -1,13 +1,13 @@
-include(../../config.pri)
+include(../../src/config.pri)
 include(../common-check.pri)
-include(../../config-plugin.pri)
+include(../../src/config-plugin.pri)
 
-TOP_BUILDDIR = $${OUT_PWD}/../../..
+TOP_BUILDDIR = $${OUT_PWD}/../..
 TARGET = repeat-backspace
 TEMPLATE = app
 QT = core testlib gui
 
-INCLUDEPATH += ../../lib ../../
+INCLUDEPATH += ../../src/lib ../../src
 LIBS += $${TOP_BUILDDIR}/$${MALIIT_KEYBOARD_PLUGIN_LIB} $${TOP_BUILDDIR}/$${MALIIT_KEYBOARD_LIB}
 PRE_TARGETDEPS += $${TOP_BUILDDIR}/$${MALIIT_KEYBOARD_LIB}
 
@@ -16,4 +16,4 @@ HEADERS += \
 SOURCES += \
     main.cpp \
 
-include(../../word-prediction.pri)
+include(../../src/word-prediction.pri)

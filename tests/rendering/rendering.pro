@@ -1,7 +1,7 @@
-include(../../config.pri)
+include(../../src/config.pri)
 include(../common-check.pri)
 
-TOP_BUILDDIR = $${OUT_PWD}/../../..
+TOP_BUILDDIR = $${OUT_PWD}/../..
 TARGET = rendering
 TEMPLATE = app
 QT = core testlib gui
@@ -10,7 +10,7 @@ QT = core testlib gui
     QT += widgets
 }
 
-INCLUDEPATH += ../ ../../lib ../../
+INCLUDEPATH += ../ ../../src/lib ../../src
 LIBS += $${TOP_BUILDDIR}/$${MALIIT_KEYBOARD_VIEW_LIB} $${TOP_BUILDDIR}/$${MALIIT_KEYBOARD_LIB}
 PRE_TARGETDEPS += $${TOP_BUILDDIR}/$${MALIIT_KEYBOARD_VIEW_LIB} $${TOP_BUILDDIR}/$${MALIIT_KEYBOARD_LIB}
 
@@ -19,5 +19,5 @@ HEADERS += \
 SOURCES += \
     main.cpp \
 
-include(../../word-prediction.pri)
+include(../../src/word-prediction.pri)
 

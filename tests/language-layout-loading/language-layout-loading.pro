@@ -1,12 +1,12 @@
-include(../../config.pri)
+include(../../src/config.pri)
 include(../common-check.pri)
 
-TOP_BUILDDIR = $${OUT_PWD}/../../..
+TOP_BUILDDIR = $${OUT_PWD}/../..
 TARGET = language-layout-loading
 TEMPLATE = app
 QT += core testlib quick
 
-INCLUDEPATH += ../ ../../lib ../../
+INCLUDEPATH += ../ ../../src/lib ../../src
 LIBS += $${TOP_BUILDDIR}/$${MALIIT_KEYBOARD_LIB}
 PRE_TARGETDEPS += $${TOP_BUILDDIR}/$${MALIIT_KEYBOARD_LIB}
 
@@ -18,7 +18,7 @@ HEADERS += \
 SOURCES += \
     main.cpp \
 
-include(../../word-prediction.pri)
+include(../../src/word-prediction.pri)
 
 QMAKE_EXTRA_TARGETS += xml_check
 xml_check.commands = \

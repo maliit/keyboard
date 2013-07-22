@@ -121,3 +121,16 @@ QList<Maliit::PreeditTextFormat> InputMethodHostProbe::lastPreeditTextFormatList
 {
     return m_last_preedit_text_format_list;
 }
+
+void InputMethodHostProbe::registerWindow(QWindow*, Maliit::Position)
+{
+}
+
+void InputMethodHostProbe::setScreenRegion(const QRegion&, QWindow*)
+{
+}
+
+void InputMethodHostProbe::setInputMethodArea(const QRegion&, QWindow*)
+{
+}
+

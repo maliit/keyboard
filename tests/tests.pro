@@ -8,6 +8,7 @@ SUBDIRS = \
     word-candidates \
     language-layout-loading \
     qml-test-app \
+    unittests \
 
 CONFIG += ordered
 QMAKE_EXTRA_TARGETS += check

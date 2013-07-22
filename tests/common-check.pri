@@ -25,5 +25,5 @@ POST_TARGETDEPS += ../common/$$maliitStaticLib(tests-common)
 
 INCLUDEPATH += \
     ../common \
-    ../../lib \
-    ../../ \
+    ../../src/lib \
+    ../../src \
