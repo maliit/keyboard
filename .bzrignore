@@ -1,0 +1,10 @@
+Makefile
+moc_*
+*.pro.user
+*.moc
+debian/tmp
+debian/ubuntu-keyboard/
+debian/ubuntu-keyboard-data/
+*.debhelper.log
+*.substvars
+*.so
