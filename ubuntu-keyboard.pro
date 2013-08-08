@@ -97,3 +97,8 @@ SUBDIRS = \
     qml \
     benchmark \
     tests \
+
+tests.target = test
+tests.command = cd tests/editor
+QMAKE_EXTRA_TARGETS += tests
+

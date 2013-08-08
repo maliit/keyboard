@@ -20,3 +20,5 @@ SOURCES += \
 
 include(../../src/word-prediction.pri)
 
+target.path = $$INSTALL_BIN
+INSTALLS += target

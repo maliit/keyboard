@@ -43,3 +43,9 @@ Architecture: all
 Depends:  ${misc:Depends}, ${shlibs:Depends}
 Description: Ubuntu Keyboard Data files
  Data files for the Ubuntu virtual keyboard
+
+Package: ubuntu-keyboard-tests
+Architecture: armhf
+Depends:  ${misc:Depends}, ${shlibs:Depends}
+Description: Ubuntu Keyboard Tests
+ Tests for the Ubuntu virtual keyboard

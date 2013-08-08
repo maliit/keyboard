@@ -8,3 +8,10 @@ debian/ubuntu-keyboard-data/
 *.debhelper.log
 *.substvars
 *.so
+tests/editor/editor
+tests/language-layout-loading/language-layout-loading
+tests/language-layout-switching/language-layout-switching
+tests/preedit-string/preedit-string
+tests/repeat-backspace/repeat-backspace
+tests/unittests/libdummy.so.1*
+tests/word-candidates/word-candidates

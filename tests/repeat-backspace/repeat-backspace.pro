@@ -17,3 +17,6 @@ SOURCES += \
     main.cpp \
 
 include(../../src/word-prediction.pri)
+
+target.path = $$INSTALL_BIN
+INSTALLS += target
