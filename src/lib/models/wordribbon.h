@@ -61,7 +61,7 @@ public:
          };
 
     virtual QVariant data(const QModelIndex &index, int role) const;
-    virtual int rowCount(const QModelIndex &parent) const;
+    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QHash<int, QByteArray> roleNames() const;
 
     bool valid() const;

@@ -33,13 +33,16 @@ int calculateVerticalMargin(LayoutHelper::Orientation orientation, Keyboard& kb)
     return vMargin;
 }
 
+/*
+ * calculates margin per row
+ **/
+
 QVector<int> DynamicLayout::calculateMargins(LayoutHelper::Orientation orientation,
                               Keyboard& kb)
 {
-    const qreal keyboardWidth = uiConst->windowGeometryRect(qGuiApp->primaryScreen()->orientation()).size().width();
+    const qreal keyboardWidth = windowWidth(orientation);
 
     QVector<int> margins;
-
     int spaceTakenByKeys = 0;
     int numberOfKeysInRow = 0;
     for (int index = 0; index < kb.keys.count(); ++index) {
@@ -81,36 +84,58 @@ void DynamicLayout::calculateNumberOfRows(Keyboard& kb)
 
 DynamicLayout::DynamicLayout(QObject* parent) : QObject(parent),
     d(new DynamicLayoutPrivate(this))
-{}
+{
+    const QScreen* screen = qGuiApp->primaryScreen();
+    connect( screen, SIGNAL(primaryOrientationChanged(Qt::ScreenOrientation)), this, SLOT(onPrimaryOrientationChanged(Qt::ScreenOrientation)) );
+    connect( screen, SIGNAL(orientationChanged(Qt::ScreenOrientation)), this, SLOT(onPrimaryOrientationChanged(Qt::ScreenOrientation)) );
+    connect( screen, SIGNAL(geometryChanged(QRect)), this, SLOT(onGeometryChanged(QRect)) );
+
+    d->primaryOrientation = screen->primaryOrientation();
+    d->orientation = screen->orientation();
+    d->geometry = screen->geometry();
+}
+
 
 DynamicLayout* DynamicLayout::self = 0;
 
-void DynamicLayout::initDynamicLayout()
+void DynamicLayout::initDynamicLayout(QString fileName)
 {
-    d->initDynamicLayout();
+    d->initDynamicLayout(fileName);
+}
+
+int DynamicLayout::windowWidth(LayoutHelper::Orientation orientation)
+{
+    return d->storage(orientation)->windowGeometryRect.width();
 }
 
 QRect DynamicLayout::windowGeometryRect(Qt::ScreenOrientation orientation)
 {
-    LayoutHelper::Orientation maliitOrientation = LayoutHelper::Landscape;
+    if (orientation != d->cachedOrientation)
+        d->invalidateWindowGeometryCache();
 
-    if (orientation == Qt::PortraitOrientation || orientation == Qt::InvertedPortraitOrientation)
+    if ( !d->windowGeometryCacheValid ) {
+        LayoutHelper::Orientation maliitOrientation = LayoutHelper::Landscape;
+
+        if (orientation == Qt::PortraitOrientation || orientation == Qt::InvertedPortraitOrientation)
             maliitOrientation = LayoutHelper::Portrait;
 
-    if (orientation == Qt::InvertedLandscapeOrientation || orientation == Qt::InvertedPortraitOrientation) {
-        if (!d->wordRibbonEnabled) {
-            return d->storage(maliitOrientation)->windowGeometryRectInverted
+        if (orientation == Qt::InvertedLandscapeOrientation || orientation == Qt::InvertedPortraitOrientation) {
+            if (!d->wordRibbonEnabled) {
+                return d->writeCache( orientation, d->storage(maliitOrientation)->windowGeometryRectInverted
                         .adjusted  (0, wordRibbonHeight(maliitOrientation), 0, 0)
-                        .translated(0,-wordRibbonHeight(maliitOrientation));
-        } else {
-            return d->storage(maliitOrientation)->windowGeometryRectInverted;
+                        .translated(0,-wordRibbonHeight(maliitOrientation)) );
+            } else {
+                return d->writeCache( orientation, d->storage(maliitOrientation)->windowGeometryRectInverted );
+            }
         }
+
+        if (!d->wordRibbonEnabled)
+            return d->writeCache( orientation, d->storage(maliitOrientation)->windowGeometryRect.adjusted(0, d->storage(maliitOrientation)->wordRibbonHeight, 0, 0) );
+
+        return d->writeCache( orientation, d->storage(maliitOrientation)->windowGeometryRect );
     }
 
-    if (!d->wordRibbonEnabled)
-        return d->storage(maliitOrientation)->windowGeometryRect.adjusted(0, d->storage(maliitOrientation)->wordRibbonHeight, 0, 0);
-
-    return d->storage(maliitOrientation)->windowGeometryRect;
+    return d->windowGeometryRectCached;
 }
 
 qreal DynamicLayout::keyWidth(LayoutHelper::Orientation orientation, KeyDescription::Width requestedSize)
@@ -285,7 +310,28 @@ int DynamicLayout::wordRibbonHeight(LayoutHelper::Orientation orientation)
 
 void DynamicLayout::onWordEngineSettingsChanged(bool wordEngineEnabled)
 {
-    d->wordRibbonEnabled = wordEngineEnabled;
+    if (d->wordRibbonEnabled != wordEngineEnabled) {
+        d->wordRibbonEnabled = wordEngineEnabled;
+        d->invalidateWindowGeometryCache();
+    }
 }
+
+void DynamicLayout::onPrimaryOrientationChanged(Qt::ScreenOrientation orientation)
+{
+    d->primaryOrientation = orientation;
+}
+
+void DynamicLayout::onOrientationChanged(Qt::ScreenOrientation orientation)
+{
+    d->orientation = orientation;
+}
+
+void DynamicLayout::onGeometryChanged(const QRect & geometry)
+{
+    d->geometry = geometry;
+    d->invalidateWindowGeometryCache();
+}
+
+
 
 }} // namespaces

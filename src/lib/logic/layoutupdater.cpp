@@ -34,7 +34,6 @@
 #include "style.h"
 
 #include "models/area.h"
-#include "models/keyboard.h"
 #include "models/keydescription.h"
 #include "models/wordribbon.h"
 #include "models/wordcandidate.h"
@@ -359,13 +358,7 @@ void LayoutUpdater::setWordRibbonVisible(bool visible)
     if (d->word_ribbon_visible != visible) {
         d->word_ribbon_visible = visible;
 
-        if (d->layout && d->style && d->word_ribbon_visible) {
-            WordRibbon* ribbon = new WordRibbon;
-            applyStyleToWordRibbon(ribbon, d->style, d->layout->orientation());
-            d->layout->setWordRibbon(ribbon);
-        } else if (d->layout) {
-            d->layout->setWordRibbon(new WordRibbon);
-        }
+        d->layout->wordRibbon()->clearCandidates();
 
         Q_EMIT wordRibbonVisibleChanged(visible);
     }

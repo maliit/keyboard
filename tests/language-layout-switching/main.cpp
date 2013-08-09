@@ -87,6 +87,8 @@ private:
         QCOMPARE(layout.activeKeyArea().keys().count(), expected_key_count);
     }
 
+    // Note: this feature is not important in Ubuntu UX
+
     // This test is very trivial. It's required however because none of the
     // current mainline layouts feature layout switch keys, thus making
     // regressions impossible to spot.

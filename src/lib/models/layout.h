@@ -78,6 +78,10 @@ class Layout
     Q_PROPERTY(int invisible_toucharea_height READ invisibleTouchAreaHeight
                                          NOTIFY invisibleTouchAreaHeightChanged)
 
+    Q_PROPERTY(QString activeView READ activeView WRITE setActiveView
+                                         NOTIFY activeViewChanged)
+
+
 public:
     enum Roles {
         RoleKeyRectangle = Qt::UserRole + 1,
@@ -132,6 +136,10 @@ public:
 
     Q_SLOT int invisibleTouchAreaHeight() const;
     Q_SIGNAL void invisibleTouchAreaHeightChanged(int &changed);
+
+    Q_SLOT QString activeView() const;
+    Q_SLOT void setActiveView(const QString& activeViewId);
+    Q_SIGNAL void activeViewChanged(const QString &activeViewId);
 
     virtual QHash<int, QByteArray> roleNames() const;
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;

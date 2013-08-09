@@ -35,7 +35,9 @@
 #include <maliit/plugins/abstractinputmethod.h>
 #include <maliit/plugins/abstractinputmethodhost.h>
 #include <maliit/plugins/keyoverride.h>
+
 #include <QtGui>
+#include <QtQuick/QQuickView>
 
 namespace MaliitKeyboard {
 
@@ -75,14 +77,19 @@ public:
     Q_SLOT void deviceOrientationChanged(Qt::ScreenOrientation orientation);
 
     Q_SLOT void updateWordEngine();
+    Q_SLOT void onQQuickViewStatusChanged(QQuickView::Status status);
 
     Q_PROPERTY(bool predictionEnabled READ predictionEnabled NOTIFY predictionEnabledChanged)
+    Q_PROPERTY(Maliit::TextContentType contentType READ contentType NOTIFY contentTypeChanged)
 
     bool predictionEnabled();
+    Maliit::TextContentType contentType();
+
     void update();
 
 Q_SIGNALS:
     void predictionEnabledChanged();
+    void contentTypeChanged(Maliit::TextContentType contentType);
 
 private:
     void registerStyleSetting(MAbstractInputMethodHost *host);
@@ -97,8 +104,6 @@ private:
     Q_SLOT void onFeedbackSettingChanged();
     Q_SLOT void onAutoCorrectSettingChanged();
     Q_SLOT void onAutoCapsSettingChanged();
-    Q_SLOT void onWordEngineSettingChanged();
-    Q_SLOT void onHideWordRibbonInPortraitModeSettingChanged();
     Q_SLOT void updateKey(const QString &key_id,
                           const MKeyOverride::KeyOverrideAttributes changed_attributes);
     Q_SLOT void onKeyboardClosed();
@@ -114,8 +119,11 @@ private:
     Q_SLOT void onMagnifierLayoutOriginChanged(const QPoint &origin);
 #endif
 
+    Q_SLOT void onContentTypeChanged(Maliit::TextContentType contentType);
+
     Q_SLOT void onHideAnimationFinished();
     Q_SIGNAL void wordEngineEnabledChanged(bool wordEngineEnabled);
+    Q_SIGNAL void wordRibbonEnabledChanged(bool wordRibbonEnabled);
 
     const QScopedPointer<InputMethodPrivate> d_ptr;
 };

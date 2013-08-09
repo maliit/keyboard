@@ -63,6 +63,7 @@ public:
     KeyArea key_area;
     QString image_directory;
     QHash<int, QByteArray> roles;
+    QString activeViewId;
 
     explicit LayoutPrivate();
 };
@@ -227,6 +228,19 @@ int Layout::invisibleTouchAreaHeight() const
     return uiConst->invisibleTouchAreaHeight(
                 uiConst->screenToMaliitOrientation(
                     qGuiApp->primaryScreen()->orientation()) );
+}
+
+
+QString Layout::activeView() const
+{
+    Q_D(const Layout);
+    return d->activeViewId;
+}
+
+void Layout::setActiveView(const QString& activeViewId)
+{
+    Q_D(Layout);
+    d->activeViewId = activeViewId;
 }
 
 void Layout::setImageDirectory(const QString &directory)

@@ -1,5 +1,7 @@
 
-//#include "dynamiclayout.h"
+#include <QtCore>
+
+#include "layouthelper.h"
 
 namespace MaliitKeyboard {
 namespace Logic {
@@ -57,7 +59,7 @@ public:
 
     DynamicLayoutStorage* storage(LayoutHelper::Orientation orientation)
     {
-        initDynamicLayout();
+        q->initDynamicLayout();
 
         if (orientation == LayoutHelper::Landscape)
             return landscapeStorage;
@@ -97,14 +99,36 @@ public:
     bool initialized;
     bool wordRibbonEnabled;
 
+    // short term-caching in memory
+    Qt::ScreenOrientation cachedOrientation;
+    bool windowGeometryCacheValid;
+    QRect windowGeometryRectCached;
+
+    LayoutHelper::Orientation marginsCachedOrientation;
+    bool marginsCacheValid;
+    QVector<int> marginsCached;
+
     DynamicLayoutStorage* portraitStorage;
     DynamicLayoutStorage* landscapeStorage;
     DynamicLayoutStorage* genericStorage;
+
+    Qt::ScreenOrientation primaryOrientation;
+    Qt::ScreenOrientation orientation;
+    QRect geometry;
 
     DynamicLayoutPrivate(DynamicLayout* _q) :
         q(_q),
         initialized(false),
         wordRibbonEnabled(false),
+
+        cachedOrientation(Qt::PortraitOrientation),
+        windowGeometryCacheValid(false),
+        windowGeometryRectCached(QRect(0,0,0,0)),
+
+        marginsCachedOrientation(LayoutHelper::Portrait),
+        marginsCacheValid(false),
+        marginsCached(0),
+
         portraitStorage(new DynamicLayoutStorage),
         landscapeStorage(new DynamicLayoutStorage),
         genericStorage(new DynamicLayoutStorage)
@@ -112,34 +136,34 @@ public:
     }
 
     // ToDo this needs to be refactored
-    void initDynamicLayout()
+    void initDynamicLayout(QString fileName)
     {
         q->instance();
 
         if (!initialized) {
             QQuickView quickView;
-            quickView.setSource(QUrl::fromLocalFile(MALIIT_KEYBOARD_DATA_DIR "/maliit-ui-constants.qml"));
+            quickView.setSource(QUrl::fromLocalFile( fileName ));
             QQuickItem* quickItem = quickView.rootObject();
 
             const QRect rLandscape = qGuiApp->primaryScreen()->mapBetween(
-                        qGuiApp->primaryScreen()->primaryOrientation(),
+                        primaryOrientation,
                         Qt::LandscapeOrientation,
-                        QGuiApplication::primaryScreen()->geometry());
+                        geometry);
 
             const QRect rInvertedLandscape = qGuiApp->primaryScreen()->mapBetween(
-                        qGuiApp->primaryScreen()->primaryOrientation(),
+                        primaryOrientation,
                         Qt::InvertedLandscapeOrientation,
-                        QGuiApplication::primaryScreen()->geometry());
+                        geometry);
 
             const QRect rPortrait = qGuiApp->primaryScreen()->mapBetween(
-                        qGuiApp->primaryScreen()->primaryOrientation(),
+                        primaryOrientation,
                         Qt::PortraitOrientation,
-                        QGuiApplication::primaryScreen()->geometry());
+                        geometry);
 
             const QRect rInvertedPortrait = qGuiApp->primaryScreen()->mapBetween(
-                        qGuiApp->primaryScreen()->primaryOrientation(),
+                        primaryOrientation,
                         Qt::InvertedPortraitOrientation,
-                        QGuiApplication::primaryScreen()->geometry());
+                        geometry);
 
 
             // generic
@@ -159,7 +183,7 @@ public:
             // portrait
 
             qreal portraitHeightRatio = quickItem->property("phone_keyboard_height_portrait").toReal();
-            if (qGuiApp->primaryScreen()->primaryOrientation() == Qt::LandscapeOrientation)
+            if (primaryOrientation == Qt::LandscapeOrientation)
                 portraitHeightRatio = quickItem->property("tablet_keyboard_height_portrait").toReal();
 
             portraitStorage->invisibleTouchAreaHeight = quickItem->property("portrait_invisible_touch_area").toInt();
@@ -174,7 +198,7 @@ public:
 
             // point of origin differs when primary orientation is different
             int yp = 0;
-            if(qGuiApp->primaryScreen()->primaryOrientation() == Qt::PortraitOrientation)
+            if(primaryOrientation == Qt::PortraitOrientation)
                 yp = rPortrait.height() - (portraitStorage->keypadHeight
                                            + portraitStorage->wordRibbonHeight
                                            + portraitStorage->invisibleTouchAreaHeight);
@@ -189,7 +213,7 @@ public:
 
             // point of origin differs when primary orientation is different
             int ypi = 0;
-            if(qGuiApp->primaryScreen()->primaryOrientation() == Qt::LandscapeOrientation)
+            if(primaryOrientation == Qt::LandscapeOrientation)
                 ypi = rInvertedPortrait.height() - (portraitStorage->keypadHeight
                                                     + portraitStorage->wordRibbonHeight
                                                     + portraitStorage->invisibleTouchAreaHeight);
@@ -208,7 +232,7 @@ public:
             // landscape
 
             qreal landscapeHeightRatio = quickItem->property("phone_keyboard_height_landscape").toReal();
-            if (qGuiApp->primaryScreen()->primaryOrientation() == Qt::LandscapeOrientation)
+            if (primaryOrientation == Qt::LandscapeOrientation)
                 landscapeHeightRatio = quickItem->property("tablet_keyboard_height_landscape").toReal();
 
             landscapeStorage->invisibleTouchAreaHeight = quickItem->property("landscape_invisible_touch_area").toInt();
@@ -253,7 +277,7 @@ public:
             genericStorage->keyWidthLarge = quickItem->property("key_width_large").toReal();
             genericStorage->keyWidthXLarge = quickItem->property("key_width_xlarge").toReal();
             genericStorage->keyWidthXXLarge = quickItem->property("key_width_xxlarge").toReal();
-
+            genericStorage->keyWidthStretched = quickItem->property("key_width_stretched").toReal();
 
             landscapeStorage->spaceBetweenRows = quickItem->property("landscape_space_between_rows").toReal();
             landscapeStorage->spaceBetweenKeys = quickItem->property("landscape_space_between_keys").toReal();
@@ -278,6 +302,22 @@ public:
             qDebug() << "portrait          " << rPortrait << portraitStorage->windowGeometryRect;
             qDebug() << "portrait inverted " << rInvertedPortrait << portraitStorage->windowGeometryRectInverted;
         }
+    }
+
+    const QRect& writeCache( Qt::ScreenOrientation orientation, const QRect& cachedRect ) {
+        windowGeometryCacheValid = true;
+        cachedOrientation = orientation;
+        windowGeometryRectCached = cachedRect;
+        return windowGeometryRectCached;
+    }
+
+    void invalidateWindowGeometryCache() {
+        windowGeometryCacheValid = false;
+    }
+
+    void invalidateMarginsCache() {
+        marginsCacheValid = false;
+        marginsCached.clear();
     }
 };
 

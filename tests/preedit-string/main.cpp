@@ -49,7 +49,7 @@
 #include "inputmethodhostprobe.h"
 #include "wordengineprobe.h"
 
-//#include <maliit/plugins/testsurfacefactory.h>
+#include <maliit/plugins/testsurfacefactory.h>
 #include <maliit/plugins/updateevent.h>
 
 #include <QtTest>
@@ -194,8 +194,8 @@ public:
     Logic::LayoutHelper layout_helper;
     Logic::EventHandler event_handler;
     SharedStyle style;
-  //    QScopedPointer<QQuickView> surface;
-  //    QScopedPointer<QQuickView> extended_surface;
+    QSharedPointer<Maliit::Plugins::AbstractGraphicsViewSurface> surface;
+    QSharedPointer<Maliit::Plugins::AbstractGraphicsViewSurface> extended_surface;
     KeyArea key_area;
 
     SetupTest(Logic::LayoutHelper::Orientation orientation = Logic::LayoutHelper::Landscape,
@@ -206,14 +206,14 @@ public:
         , layout_helper()
         , event_handler(&layout, &layout_updater)
         , style(new Style(qApp))
-	  //        , surface(Maliit::Plugins::createTestGraphicsViewSurface())
-	  //        , extended_surface(Maliit::Plugins::createTestGraphicsViewSurface(surface))
+        , surface(Maliit::Plugins::createTestGraphicsViewSurface())
+        , extended_surface(Maliit::Plugins::createTestGraphicsViewSurface(surface))
         , key_area(createAbcdArea())
     {
         // geometry stuff is usually done by maliit-server, so we need
-      //        // to do it manually here:
-      //        surface->view()->setSceneRect(0, 0, g_size, g_size);
-      //        surface->scene()->setSceneRect(0, 0, g_size, g_size);
+        // to do it manually here:
+        surface->view()->setSceneRect(0, 0, g_size, g_size);
+        surface->scene()->setSceneRect(0, 0, g_size, g_size);
         layout_helper.setOrientation(orientation);
 
         Setup::connectEventHandlerToTextEditor(&event_handler, &editor);

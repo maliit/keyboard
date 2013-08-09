@@ -8,11 +8,13 @@ SOURCES += \
            utils.cpp \
            utils-gui.cpp \
            inputmethodhostprobe.cpp \
+           mockscreen.cpp \
            wordengineprobe.cpp \
 
 HEADERS += \
            utils.h \
            inputmethodhostprobe.h \
+           mockscreen.h \
            wordengineprobe.h \
 
 contains(QT_MAJOR_VERSION, 4) {
@@ -29,3 +31,7 @@ QMAKE_EXTRA_TARGETS += check
 check.target = check
 check.command = $$system(true)
 check.depends += libtests-common.a
+
+OTHER_FILES += \
+    helper.js
+

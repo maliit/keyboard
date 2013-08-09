@@ -65,9 +65,9 @@ void WordRibbon::setOrigin(const QPoint &origin)
 
 void WordRibbon::appendCandidate(const WordCandidate &candidate)
 {
-    beginResetModel();
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_candidates.append(candidate);
-    endResetModel();
+    endInsertRows(); // fires signal rowsInserted()
 }
 
 QVector<WordCandidate> WordRibbon::candidates() const

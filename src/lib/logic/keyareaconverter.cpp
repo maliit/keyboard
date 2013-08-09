@@ -86,7 +86,7 @@ KeyArea createFromKeyboard(StyleAttributes *attributes,
 
     static const QMargins bg_margins( uiConst->keyAreaBorders() );
 
-    const qreal max_width( uiConst->windowGeometryRect(qGuiApp->primaryScreen()->orientation()).width() );
+    const qreal max_width( uiConst->windowWidth(orientation) );
     const qreal key_height(uiConst->keyHeight(orientation));
     const qreal keypadHeight = uiConst->keypadHeight(orientation);
 
@@ -100,10 +100,10 @@ KeyArea createFromKeyboard(StyleAttributes *attributes,
     qreal consumed_width = 0;
 
     QVector<int> margins = uiConst->calculateMargins(orientation, kb);
-    qreal margin = margins[0];
 
     int row = 0;
     for (int index = 0; index < kb.keys.count(); ++index) {
+        const qreal margin = margins[row];
         row_indices.append(index);
         Key &key(kb.keys[index]);
         const KeyDescription &desc(kb.key_descriptions.at(index));

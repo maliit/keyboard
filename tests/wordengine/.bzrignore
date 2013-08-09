@@ -1,0 +1,4 @@
+ut_wordengine
+Makefile
+*.moc
+*.o

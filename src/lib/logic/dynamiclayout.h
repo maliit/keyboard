@@ -48,9 +48,16 @@ public:
         return self;
     }
 
-    void initDynamicLayout();
+    static void reset()
+    {
+        if (self)
+            self = new DynamicLayout;
+    }
+
+    void initDynamicLayout(QString fileName = MALIIT_KEYBOARD_DATA_DIR "/maliit-ui-constants.qml");
 
     int keypadHeight(LayoutHelper::Orientation orientation);
+    int windowWidth(LayoutHelper::Orientation orientation);
     QRect windowGeometryRect(Qt::ScreenOrientation orientation);
     qreal keyboardScreenWidthRatio(LayoutHelper::Orientation orientation);
 
@@ -82,6 +89,11 @@ public:
     QVector<int> calculateMargins(LayoutHelper::Orientation orientation, Keyboard& kb);
 
     Q_SLOT void onWordEngineSettingsChanged(bool wordEngineEnabled);
+
+    /* interface to primaryScreen */
+    Q_SLOT void onPrimaryOrientationChanged(Qt::ScreenOrientation orientation);
+    Q_SLOT void onOrientationChanged(Qt::ScreenOrientation orientation);
+    Q_SLOT void onGeometryChanged(const QRect & geometry);
 
 private:
     explicit DynamicLayout(QObject *parent = 0);

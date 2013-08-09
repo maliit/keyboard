@@ -18,11 +18,11 @@ import QtQuick 2.0
 import QtQuick.Window 2.0
 
 Item {
-    id: orientationHelper
+    id: rotationHelper
 
-    property string __rotationString: Screen.angleBetween(Screen.primaryOrientation, Screen.orientation).toString();
+    property string __rotationString: Screen.angleBetween(Screen.primaryOrientation, contentOrientation).toString();
 
-    rotation: Screen.angleBetween(Screen.primaryOrientation, Screen.orientation);
+    rotation: Screen.angleBetween(Screen.primaryOrientation, contentOrientation);
 
     anchors.fill: parent
 
@@ -33,7 +33,7 @@ Item {
             State {
                 name: "270"
                 PropertyChanges {
-                    target: orientationHelper
+                    target: rotationHelper
                     anchors {
                         leftMargin: (parent.width - parent.height) / 2
                         rightMargin: anchors.leftMargin
@@ -45,7 +45,7 @@ Item {
             State {
                 name: "90"
                 PropertyChanges {
-                    target: orientationHelper
+                    target: rotationHelper
                     anchors {
                         leftMargin: (parent.width - parent.height) / 2
                         rightMargin: anchors.leftMargin

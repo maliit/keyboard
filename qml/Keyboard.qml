@@ -40,7 +40,11 @@ Item {
 
     visible: layout.visible
 
+    property int contentOrientation: Qt.PrimaryOrientation
+
     property bool shown: false;
+    property bool wordribbon_visible: true;
+
     property bool hideAnimationFinished: false;
     property int pressedKeyIndex: -1;
     property Item pressedKey;
@@ -77,16 +81,17 @@ Item {
         anchors.bottom: keypadMouseArea.top
         width: parent.width;
 
-        height: maliit_wordribbon.enabled ? layout.wordribbon_height : 0
+        height: wordribbon_visible ? layout.wordribbon_height : 0
     }
 
     MouseArea {
         id: keypadMouseArea
         preventStealing: true
+
         anchors {
             top: wordRibbon.bottom
             fill: parent
-            topMargin: layout.invisible_toucharea_height + (maliit_wordribbon.enabled ? layout.wordribbon_height : 0);
+            topMargin: layout.invisible_toucharea_height + (wordribbon_visible ? layout.wordribbon_height : 0);
         }
 
         Item {

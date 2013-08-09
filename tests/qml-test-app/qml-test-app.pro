@@ -6,5 +6,6 @@ qml.files = *.qml
 
 INSTALLS += qml
 OTHER_FILES += \
-    keyboard-test.qml
+    keyboard-test.qml \
+    layout-test.qml 
 

@@ -4,7 +4,7 @@ include(../common-check.pri)
 
 TOP_BUILDDIR = $${OUT_PWD}/../..
 TEMPLATE = app
-TARGET = editor
+TARGET = ut_editor
 target.path = $$INSTALL_BIN
 
 
