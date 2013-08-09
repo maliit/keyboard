@@ -1,7 +1,7 @@
 include(../config.pri)
 
 VERSION = 0.2.0
-TARGET = $${MALIIT_KEYBOARD_TARGET}
+TARGET = $${UBUNTU_KEYBOARD_TARGET}
 TEMPLATE = lib
 QT += core gui quick
 CONFIG += staticlib

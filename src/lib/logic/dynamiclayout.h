@@ -54,7 +54,7 @@ public:
             self = new DynamicLayout;
     }
 
-    void initDynamicLayout(QString fileName = MALIIT_KEYBOARD_DATA_DIR "/maliit-ui-constants.qml");
+    void initDynamicLayout(QString fileName = UBUNTU_KEYBOARD_DATA_DIR "/maliit-ui-constants.qml");
 
     int keypadHeight(LayoutHelper::Orientation orientation);
     int windowWidth(LayoutHelper::Orientation orientation);

@@ -36,7 +36,7 @@ const QString &maliitKeyboardDataDirectory()
 {
     static const QByteArray env_data_directory = qgetenv("MALIIT_KEYBOARD_DATADIR");
     static const QString data_directory = QString::fromUtf8(env_data_directory.isEmpty()
-                                                            ? MALIIT_KEYBOARD_DATA_DIR
+                                                            ? UBUNTU_KEYBOARD_DATA_DIR
                                                             : env_data_directory);
 
     return data_directory;

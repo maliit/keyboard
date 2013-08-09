@@ -84,9 +84,9 @@ typedef QMap<QString, SharedOverride>::const_iterator OverridesIterator;
 
 namespace {
 
-const QString g_maliit_keyboard_qml(MALIIT_KEYBOARD_DATA_DIR "/maliit-keyboard.qml");
-const QString g_maliit_keyboard_extended_qml(MALIIT_KEYBOARD_DATA_DIR "/maliit-keyboard-extended.qml");
-const QString g_maliit_magnifier_qml(MALIIT_KEYBOARD_DATA_DIR "/maliit-magnifier.qml");
+const QString g_maliit_keyboard_qml(UBUNTU_KEYBOARD_DATA_DIR "/maliit-keyboard.qml");
+const QString g_maliit_keyboard_extended_qml(UBUNTU_KEYBOARD_DATA_DIR "/maliit-keyboard-extended.qml");
+const QString g_maliit_magnifier_qml(UBUNTU_KEYBOARD_DATA_DIR "/maliit-magnifier.qml");
 
 Key overrideToKey(const SharedOverride &override)
 {
@@ -266,7 +266,7 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
 
     // TODO: Figure out whether two views can share one engine.
     QQmlEngine *const engine(view->engine());
-    engine->addImportPath(MALIIT_KEYBOARD_DATA_DIR);
+    engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
     setContextProperties(engine->rootContext());
 
     QObject::connect(view, SIGNAL(statusChanged(QQuickView::Status)),
@@ -274,13 +274,13 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
 
 #ifdef EXTENDED_SURFACE_TEMP_DISABLED
     QQmlEngine *const extended_engine(extended_surface->view()->engine());
-    extended_engine->addImportPath(MALIIT_KEYBOARD_DATA_DIR);
+    extended_engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
     setContextProperties(extended_engine->rootContext());
 
     extended_surface->view()->setSource(QUrl::fromLocalFile(g_maliit_keyboard_extended_qml));
 
     QQmlEngine *const magnifier_engine(magnifier_surface->view()->engine());
-    magnifier_engine->addImportPath(MALIIT_KEYBOARD_DATA_DIR);
+    magnifier_engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
     setContextProperties(magnifier_engine->rootContext());
 
     magnifier_surface->view()->setSource(QUrl::fromLocalFile(g_maliit_magnifier_qml));
