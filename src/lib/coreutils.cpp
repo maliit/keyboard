@@ -18,7 +18,6 @@ const QString &pluginLanguageDirectory()
                                                             ? UBUNTU_KEYBOARD_DATA_DIR
                                                             : env_data_directory);
 
-    language_directory += "/languages";
     return language_directory;
 }
 

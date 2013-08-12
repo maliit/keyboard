@@ -55,6 +55,7 @@ install_dependencies() {
     exec_with_ssh $SUDO add-apt-repository -s -y ppa:phablet-team/ppa
     exec_with_ssh $SUDO apt-get update
     exec_with_ssh $SUDO apt-get -y install qt5-qmake qtdeclarative5-dev-tools qtdeclarative5-test-plugin qtdeclarative5-private-dev libqt5v8-5-private-dev fakeroot
+    exec_with_ssh $SUDO apt-get -y install maliit-framework-dev libpinyin2-dev pkg-config libubuntu-platform-api1-dev debhelper qt5-default libgl-dev doxygen libhunspell-dev libpresage-dev libglib2.0-dev
     exec_with_ssh $SUDO apt-get -y build-dep $PACKAGE
 }
 

@@ -7,7 +7,6 @@ QT += core gui quick
 CONFIG += staticlib
 
 CONFIG += link_pkgconfig
-PKGCONFIG += glib-2.0
 PKGCONFIG += libpinyin
 LIBS += libpinyin
 
