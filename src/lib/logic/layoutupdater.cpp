@@ -733,6 +733,13 @@ void LayoutUpdater::switchToMainView()
     converter.setLayoutOrientation(orientation);
     d->layout->setCenterPanel(d->inShiftedState() ? converter.shiftedKeyArea()
                                                   : converter.keyArea());
+
+    if (d->inShiftedState())
+        Q_EMIT d->layout->stateChanged(Model::Layout::ShiftedState);
+    else if (d->inDeadkeyState())
+        Q_EMIT d->layout->stateChanged(Model::Layout::DeadkeyState);
+    else
+        Q_EMIT d->layout->stateChanged(Model::Layout::DefaultState);
 }
 
 void LayoutUpdater::switchToPrimarySymView()
@@ -750,6 +757,8 @@ void LayoutUpdater::switchToPrimarySymView()
 
     // Reset shift state machine, also see switchToMainView.
     d->shift_machine.restart();
+
+    Q_EMIT d->layout->stateChanged(Model::Layout::PrimarySymbolState);
 }
 
 void LayoutUpdater::switchToSecondarySymView()
@@ -764,6 +773,8 @@ void LayoutUpdater::switchToSecondarySymView()
     KeyAreaConverter converter(d->style->attributes(), &d->loader);
     converter.setLayoutOrientation(orientation);
     d->layout->setCenterPanel(converter.symbolsKeyArea(1));
+
+    Q_EMIT d->layout->stateChanged(Model::Layout::SecondarySymbolState);
 }
 
 void LayoutUpdater::switchToAccentedView()

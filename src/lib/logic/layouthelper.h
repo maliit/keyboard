@@ -35,6 +35,7 @@
 #include "models/key.h"
 #include "models/keyarea.h"
 #include "models/wordribbon.h"
+#include "models/layout.h"
 
 #include <QtCore>
 
@@ -143,6 +144,7 @@ public:
     Q_SLOT void onKeysOverriden(const Logic::KeyOverrides &overriden_keys,
                                 bool update);
 
+    Q_SIGNAL void stateChanged(Model::Layout::State state);
 private:
     const QScopedPointer<LayoutHelperPrivate> d_ptr;
 };

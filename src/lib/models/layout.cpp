@@ -63,6 +63,7 @@ public:
     KeyArea key_area;
     QString image_directory;
     QHash<int, QByteArray> roles;
+    Layout::State state;
     QString activeViewId;
 
     explicit LayoutPrivate();
@@ -74,6 +75,7 @@ LayoutPrivate::LayoutPrivate()
     , key_area()
     , image_directory()
     , roles()
+    , state(Layout::DefaultState)
 {
     // Model roles are used as variables in QML, hence the under_score naming
     // convention:
@@ -88,6 +90,7 @@ LayoutPrivate::LayoutPrivate()
     roles[Layout::RoleKeyFontStretch] = "key_font_stretch";
     roles[Layout::RoleKeyIcon] = "key_icon";
     roles[Layout::RoleKeyActionInsert] = "key_action_insert";
+    roles[Layout::RoleKeyAction] = "key_action_type";
 }
 
 
@@ -230,6 +233,18 @@ int Layout::invisibleTouchAreaHeight() const
                     qGuiApp->primaryScreen()->orientation()) );
 }
 
+Layout::State Layout::state() const
+{
+    Q_D(const Layout);
+    return d->state;
+}
+
+void Layout::setState(Model::Layout::State state)
+{
+    Q_D(Layout);
+    d->state = state;
+    Q_EMIT stateChanged(state);
+}
 
 QString Layout::activeView() const
 {
@@ -321,6 +336,9 @@ QVariant Layout::data(const QModelIndex &index,
 
     case RoleKeyActionInsert:
         return QVariant(key.action() == Key::ActionInsert);
+
+    case RoleKeyAction:
+        return QVariant(key.action());
     }
 
     qWarning() << __PRETTY_FUNCTION__

@@ -39,6 +39,7 @@ Item {
     property alias title: keyboard_title.text
 
     visible: layout.visible
+    readonly property var layoutState: layout.keyboard_state
 
     property int contentOrientation: Qt.PrimaryOrientation
 
@@ -56,6 +57,10 @@ Item {
         onTitleChanged: {
             console.debug("title:" + layout.title)
             title_timeout.start()
+        }
+
+        onStateChanged: {
+            console.error("State Changed: " + layout.keyboard_state)
         }
     }
 
@@ -125,6 +130,7 @@ Item {
             }
 
             Item {
+                objectName: "keyboardKeypad"
                 id: keyPad
 
                 anchors.top: borderTop.bottom
@@ -159,6 +165,7 @@ Item {
 
                         Text {
                             id: key_text_item
+                            property var action_type: key_action_type
 
                             anchors.fill: parent
                             text: key_text
