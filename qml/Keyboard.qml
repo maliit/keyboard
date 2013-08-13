@@ -40,6 +40,7 @@ Item {
 
     visible: layout.visible
     readonly property var layoutState: layout.keyboard_state
+    readonly property var activeView: layout.activeView
 
     property int contentOrientation: Qt.PrimaryOrientation
 
