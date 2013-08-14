@@ -1,7 +1,28 @@
+# -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
+#
+# Ubuntu Keyboard Test Suite
+# Copyright (C) 2012-2013 Canonical
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
 from time import sleep
 
 from autopilot.input import Pointer, Touch
 from autopilot.introspection import get_proxy_object_for_existing_process
+
+from maliit_keyboard.emulators.word_ribbon import WordRibbon, WordItem
 
 
 # Definitions of enums used within the cpp source code.
@@ -44,11 +65,24 @@ class OSK(object):
                 "Unable to find maliit-server dbus object. Has it been started"
                 "with introspection enabled?"
             )
+
         self.keyboard = maliit.select_single("Keyboard")
         self.keypad = maliit.select_single(
             "QQuickItem",
             objectName="keyboardKeypad"
         )
+        # If the wordribbon isn't enabled does it still appear in the
+        # introspection tree?
+        # perhaps have this as a internal emulator.
+        ribbon = maliit.select_single(
+            'QQuickRectangle',
+            objectName='wordRibbon'
+        )
+        self.word_ribbon = WordRibbon(ribbon)
+        # self.word_ribbon = maliit.select_single(
+        #     'QQuickRectangle',
+        #     objectName='wordRibbon'
+        # )
 
         # Contains instructions on how to move the keyboard into a specific
         # state/layout so that we can successfully press the required key.
@@ -61,7 +95,7 @@ class OSK(object):
 
     def dismiss(self):
         """Attempt to swipe the keyboard down so that it is hidden."""
-        if self.is_available:
+        if self.is_available():
             x, y, h, w = self.keyboard.globalRect
             x_pos = int(w / 2)
             # start_y: just inside the keyboard, must be a better way than +1px
@@ -71,13 +105,34 @@ class OSK(object):
 
             self.keyboard.state.wait_for("HIDDEN")
 
+    # I'm hoping to be able to wrap these up in an emulator of some sort.
+    # def word_ribbon_available(self):
+    #     return self.keyboard.wordribbon_visible
+
+    # def get_suggestions(self):
+    #     word_list = self.word_ribbon.select_single('QQuickListView', objectName='wordListView')
+    #     # The z attrib is there so we only get suitable candidates. Perhaps
+    #     # there is a better way in which to do this?
+    #     word_items = word_list.select_many('QQuickItem', z=1.0)
+    #     return [WordItem(i) for i in word_items if hasattr(i, 'word_text')]
+
     def is_available(self):
         """Returns wherever the keyboard is shown and ready to use."""
         return (
             self.keyboard.state == "SHOWN"
-            and self.keyboard.hideAnimationFinished == False
+            and self.keyboard.hideAnimationFinished is False
         )
 
+    # Much like is_available, but attempts to wait for the keyboard to be
+    # ready.
+    def wait_for_keyboard_ready(self):
+        try:
+            self.keyboard.state.wait_for("SHOWN")
+            self.keyboard.hideAnimationFinished.wait_for(False)
+        except RuntimeError:
+            return False
+        else:
+            return True
 
     def press_key(self, key):
         if not self.is_available():
@@ -95,6 +150,13 @@ class OSK(object):
 
     def type(self, string, delay=0.1):
         """Only 'normal' or single characters can be typed this way."""
+        # # Allow some time for the keyboard to render and become ready if
+        # # required.
+        # try:
+        #     self.is_available.wait_for(True)
+        # except RuntimeError as e:
+        #     raise RuntimeError("Keyboard is unavailable (%r)" % e)
+
         for char in string:
             self.press_key(char)
             sleep(delay)

@@ -71,6 +71,7 @@ class OSKeyboardTests(AutopilotTestCase):
                     color: "black";
                     selectionColor: "red"
 
+        // Veebers: This shouldn't have NoAutoUppercase etc. perhaps should only have noPredictive.
                     // Qt.ImhPreferNumbers
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhUrlCharactersOnly | Qt.ImhNoPredictiveText
                     font.pixelSize: units.gu(3)
@@ -227,6 +228,84 @@ class OSKeyboardStateChanges(OSKeyboardTests):
         )
 
 
-# Then add test for specific things, extend test_app so that it has a url
-# element and a password element so that we can type in that and test the
-# results. . .
+class OSKeyboardInputTypeStateChange(OSKeyboardTests):
+    scenarios = [
+        ("Url", dict(hints=['Qt.ImhUrlCharactersOnly'], expected_activeview=0)),
+        ("Password", dict(hints=['Qt.ImhHiddenText', 'Qt.ImhSensitiveData'], expected_activeview=0)),
+        ("Email", dict(hints=['Qt.ImhEmailCharactersOnly'], expected_activeview=0)),
+        ("Number", dict(hints=['Qt.ImhFormattedNumbersOnly'], expected_activeview=0)),
+        ("Telephone", dict(hints=['Qt.ImhDigitsOnly'], expected_activeview=0))
+    ]
+
+    # This does 2 things, launches and clicks waiting for the keyboard. Split
+    # this up.
+    def launch_test_input_area2(self, input_hints=None):
+        self.app = self._launch_input_with_hints(input_hints)
+        text_rectangle = self.app.select_single(
+            "QQuickRectangle",
+            objectName='inputRectangle'
+        )
+        text_area = self.app.select_single("QQuickTextInput")
+        self.pointer.click_object(text_rectangle)
+        keyboard = OSK()
+        self.addCleanup(keyboard.dismiss)
+        self.assertThat(keyboard.is_available, Eventually(Equals(True)))
+
+        return text_area
+
+    # Perhaps this could just be resolved into the main one, i.e. if nothing is
+    # passed then just have an empty string, otherwise produce the string
+    # required to get this working.
+    def _launch_input_with_hints(self, input_hints=None):
+
+        if input_hints is None:
+            extra_script = ""
+        else:
+            extra_script = "|".join(input_hints)
+
+        simple_script = dedent("""
+        import QtQuick 2.0
+        import Ubuntu.Components 0.1
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            //width: 500
+            //height: 500
+            color: "lightgrey"
+
+            Rectangle {
+                objectName: "inputRectangle"
+                width: parent.width
+                height: parent.height / 2
+                color: "white"
+                TextInput {
+                    id: input;
+                    anchors.fill: parent
+                    color: "black";
+                    selectionColor: "red"
+
+                    inputMethodHints: %s
+                    font.pixelSize: units.gu(3)
+                    font.bold: false
+                }
+            }
+        }
+
+        """ % extra_script)
+
+        return self._start_qml_script(simple_script)
+
+    def test_keyboard_layout(self):
+        """The OSK must respond to the input type and change to be the correct
+        state.
+
+        """
+        text_area = self.launch_test_input_area2(self.hints)
+        keyboard = OSK()
+        self.addCleanup(keyboard.dismiss)
+
+        self.assertThat(
+            keyboard.layoutState,
+            Eventually(Equals(self.expected_activeview))
+        )

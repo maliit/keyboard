@@ -83,6 +83,7 @@ Item {
 
     WordRibbon {
         id: wordRibbon
+        objectName: "wordRibbon"
 
         anchors.bottom: keypadMouseArea.top
         width: parent.width;
