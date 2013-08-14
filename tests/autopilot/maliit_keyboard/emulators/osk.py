@@ -120,7 +120,7 @@ class OSK(object):
         """Returns wherever the keyboard is shown and ready to use."""
         return (
             self.keyboard.state == "SHOWN"
-            and self.keyboard.hideAnimationFinished is False
+            and self.keyboard.hideAnimationFinished == False
         )
 
     # Much like is_available, but attempts to wait for the keyboard to be
