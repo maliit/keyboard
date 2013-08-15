@@ -25,9 +25,7 @@ Vcs-Bzr: https://code.launchpad.net/~phablet-team/ubuntu-keyboard/trunk
 
 Package: ubuntu-keyboard
 Architecture: any
-Depends: libpinyin2,
-         libpresage1,
-         maliit-framework (>= 0.99+git20130702+97e8335),
+Depends: maliit-framework (>= 0.99+git20130702+97e8335),
          qtdeclarative5-window-plugin,
          ubuntu-keyboard-data (>= ${source:Version}),
          ${misc:Depends},
