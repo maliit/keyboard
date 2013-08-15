@@ -4,7 +4,7 @@
 export DPKG_GENSYMBOLS_CHECK_LEVEL=4
 
 %:
-	dh $@ --parallel --fail-missing
+	dh $@ --fail-missing
 
 override_dh_auto_configure:
 	dh_auto_configure -- -recursive \
