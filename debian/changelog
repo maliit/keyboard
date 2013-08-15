@@ -2,6 +2,7 @@ ubuntu-keyboard (0.99.trunk.phablet2) UNRELEASED; urgency=low
 
   * Rename source package
   * Update packaging to be more modern
+  * Automatic snapshot from revision 1
 
  -- Michael Terry <mterry@ubuntu.com>  Thu, 15 Aug 2013 15:06:09 -0400
 
