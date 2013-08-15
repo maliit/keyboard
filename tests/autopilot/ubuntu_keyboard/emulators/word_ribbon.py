@@ -31,7 +31,7 @@ class WordRibbon(object):
         displayed ready to use.
 
         """
-        return (self._word_ribbon not None and self._word_ribbon.visible)
+        return (self._word_ribbon is not None and self._word_ribbon.visible)
 
     def select_word_item(self, word_item=None, text=None, pointer=None):
         """Tap on and select a word in the word ribbon suggestion list.

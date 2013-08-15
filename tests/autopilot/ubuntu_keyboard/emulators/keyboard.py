@@ -22,7 +22,7 @@ from time import sleep
 from autopilot.input import Pointer, Touch
 from autopilot.introspection import get_proxy_object_for_existing_process
 
-from maliit_keyboard.emulators.word_ribbon import WordRibbon, WordItem
+from ubuntu_keyboard.emulators.word_ribbon import WordRibbon, WordItem
 
 
 # Definitions of enums used within the cpp source code.
@@ -48,11 +48,11 @@ secondary_symbol = u"1234567890$%[]`^|<>\u20ac\xa3\xa5\xa7\xab\xbb\u201c\u201d\u
 # secondary_symbol = "$%<>[]`^|_{}\"&"
 
 
-class OSKUnsupportedKey(RuntimeError):
+class UnsupportedKey(RuntimeError):
     pass
 
 
-class OSK(object):
+class Keyboard(object):
 
     def __init__(self, pointer=None):
         try:
@@ -61,8 +61,8 @@ class OSK(object):
             )
         except RuntimeError:
             raise RuntimeError(
-                "Unable to find maliit-server dbus object. Has it been started"
-                "with introspection enabled?"
+                "Unable to find maliit-server dbus object. Has it been "
+                "started with introspection enabled?"
             )
 
         self.keyboard = maliit.select_single("Keyboard")
@@ -199,7 +199,7 @@ class OSK(object):
         elif char in secondary_symbol:
             return KB_STATE_SYMBOL_2
         else:
-            raise OSKUnsupportedKey(
+            raise UnsupportedKey(
                 "Don't know which state key '%s' requires" % char
             )
 
@@ -268,7 +268,7 @@ class OSK(object):
             key = self.keypad.select_single('QQuickText', text=key_label)
 
         if key is None:
-            raise OSKUnsupportedKey(
+            raise UnsupportedKey(
                 "Attempting to push an unknown 'special' key: '%s'" % key_label
             )
 

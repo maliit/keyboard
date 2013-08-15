@@ -8,16 +8,16 @@ from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
 
-from maliit_keyboard.emulators.osk import (
-    OSK,
+from ubuntu_keyboard.emulators.keyboard import (
+    Keyboard,
     KB_STATE_DEFAULT,
     KB_STATE_SHIFTED,
 )
 
 
-class OSKeyboardTests(AutopilotTestCase):
+class UbuntuKeyboardTests(AutopilotTestCase):
     def setUp(self):
-        super(OSKeyboardTests, self).setUp()
+        super(UbuntuKeyboardTests, self).setUp()
         self.pointer = Pointer(Touch.create())
 
     # This does 2 things, launches and clicks waiting for the keyboard. Split
@@ -30,7 +30,7 @@ class OSKeyboardTests(AutopilotTestCase):
         )
         text_area = self.app.select_single("QQuickTextInput")
         self.pointer.click_object(text_rectangle)
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
         self.assertThat(keyboard.is_available, Eventually(Equals(True)))
 
@@ -85,15 +85,15 @@ class OSKeyboardTests(AutopilotTestCase):
         return self._start_qml_script(simple_script)
 
 
-class OSKeyboardTestsAccess(OSKeyboardTests):
+class UbuntuKeyboardTestsAccess(UbuntuKeyboardTests):
 
     def test_can_create_keyboard(self):
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
-        self.assertThat(keyboard, IsInstance(OSK))
+        self.assertThat(keyboard, IsInstance(Keyboard))
 
     def test_keyboard_is_available(self):
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
         app = self._launch_simple_input()
         text_rectangle = app.select_single(
@@ -106,7 +106,7 @@ class OSKeyboardTestsAccess(OSKeyboardTests):
         self.assertThat(keyboard.is_available, Eventually(Equals(True)))
 
 
-class OSKeyboardTypingTests(OSKeyboardTests):
+class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
 
     scenarios = [
         ('lower_alpha', dict(input='abcdefghijklmnopqrstuvwxyz')),
@@ -117,7 +117,7 @@ class OSKeyboardTypingTests(OSKeyboardTests):
 
     def test_can_type_string(self):
         text_area = self.launch_test_input_area()
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type(self.input)
@@ -125,7 +125,7 @@ class OSKeyboardTypingTests(OSKeyboardTests):
         self.assertThat(text_area.text, Eventually(Equals(self.input)))
 
 
-class OSKeyboardStateChanges(OSKeyboardTests):
+class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
     def test_keyboard_layout_starts_shifted(self):
         """When first launched the keyboard state must be
@@ -133,7 +133,7 @@ class OSKeyboardStateChanges(OSKeyboardTests):
 
         """
         text_area = self.launch_test_input_area()
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         self.assertThat(
@@ -151,7 +151,7 @@ class OSKeyboardStateChanges(OSKeyboardTests):
 
         """
         text_area = self.launch_test_input_area()
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type('abc')
@@ -171,7 +171,7 @@ class OSKeyboardStateChanges(OSKeyboardTests):
 
         """
         text_area = self.launch_test_input_area()
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         # Normally, type and (press_key) take care of shifting into the correct
@@ -197,7 +197,7 @@ class OSKeyboardStateChanges(OSKeyboardTests):
 
         """
         text_area = self.launch_test_input_area()
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type("abc.")
@@ -214,7 +214,7 @@ class OSKeyboardStateChanges(OSKeyboardTests):
 
     def test_switching_between_states(self):
         text_area = self.launch_test_input_area()
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type(
@@ -228,7 +228,7 @@ class OSKeyboardStateChanges(OSKeyboardTests):
         )
 
 
-class OSKeyboardInputTypeStateChange(OSKeyboardTests):
+class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
     scenarios = [
         ("Url", dict(hints=['Qt.ImhUrlCharactersOnly'], expected_activeview=0)),
         ("Password", dict(hints=['Qt.ImhHiddenText', 'Qt.ImhSensitiveData'], expected_activeview=0)),
@@ -247,7 +247,7 @@ class OSKeyboardInputTypeStateChange(OSKeyboardTests):
         )
         text_area = self.app.select_single("QQuickTextInput")
         self.pointer.click_object(text_rectangle)
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
         self.assertThat(keyboard.is_available, Eventually(Equals(True)))
 
@@ -297,12 +297,12 @@ class OSKeyboardInputTypeStateChange(OSKeyboardTests):
         return self._start_qml_script(simple_script)
 
     def test_keyboard_layout(self):
-        """The OSK must respond to the input type and change to be the correct
-        state.
+        """The Keyboard must respond to the input type and change to be the
+        correct state.
 
         """
         text_area = self.launch_test_input_area2(self.hints)
-        keyboard = OSK()
+        keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         self.assertThat(
