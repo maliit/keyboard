@@ -27,11 +27,32 @@ class WordRibbon(object):
         self._word_ribbon = word_ribbon
 
     def is_enabled(self):
-        return self._word_ribbon.visible
+        """Returns true if the word ribbon is actually available and is
+        displayed ready to use.
+
+        """
+        return (self._word_ribbon not None and self._word_ribbon.visible)
 
     def select_word_item(self, word_item=None, text=None, pointer=None):
+        """Tap on and select a word in the word ribbon suggestion list.
+
+        Passed either a WordItem instance or the text of the word item to
+        select. Will swipe the word item into view if required (i.e. the list
+        runs off the side of the screen).
+
+        :param word_item: WordItem instance that is to be tapped.
+        :param text: String containing the text of the word item to select.
+        :param pointer: Pointer to use when tapping on the target word item. If
+         none is supplied one will be created.
+
+        :raises: **RuntimeError** if neither word_item or text is supplied.
+        :raises: **RuntimeError** if unable to find a word item containing the
+         text **text**
+        """
         if word_item is None and text is None:
-            raise RuntimeError("Need something here buddy.")
+            raise RuntimeError(
+                "Neither word_item of text was supplied. Unable to continue."
+            )
 
         if word_item is None:
             try:
@@ -50,6 +71,12 @@ class WordRibbon(object):
         pointer.click_object(word_item)
 
     def drag_word_item_visible(self, word_item, pointer=None):
+        """Drags the word ribbon in such a manner as to expose the requested
+        word_item so that it is visible as well as being able to be tapped.
+
+        :param word_item: The word_item to be dragged so that it is visible.
+
+        """
         # What about just passing in the word_item text?
 
         #ribbon width is the same as screen width (for now).
@@ -77,6 +104,12 @@ class WordRibbon(object):
         pointer.drag(x_start, y_coord, x_end, y_coord)
 
     def get_suggestions(self, text=None):
+        """Returns a list of words suggested in the word ribbon.
+
+        Returns a list of WordItem instances.
+
+        """
+
         word_list = self._word_ribbon.select_single(
             'QQuickListView',
             objectName='wordListView'
@@ -98,23 +131,28 @@ class WordRibbon(object):
 # For instance have a property globalRect that just returns the correct items
 # globalrect. Property for text etc.
 class WordItem(object):
-    """This class wraps some of the complexities of the word items UI tree.
+    """This class hides some of the complexities of the word items UI tree.
 
     It allows a user an easy way to check the text of the (nestled) word item
-    as well as click on the suggestion itself.
+    as well as the ability to click on the suggestion.
 
     """
 
     def __init__(self, word_item):
         # The word item will contain 2 children
-        # 0: QuickItem (and then some)
+        # 0: QuickItem (that then contains the QQuickText etc.)
         # 1: MouseArea
         self._word_item = word_item
         self.text = word_item.word_text
 
     @property
     def globalRect(self):
+        """Returns the MouseArea's globalRect, used for being clicked on."""
         return self._word_item.select_single("QQuickMouseArea").globalRect
 
     def is_visible(self):
+        """Returns true if the word item is actually visible and not hidden off
+        the side of the screen for instance.
+
+        """
         return self._word_item.focus

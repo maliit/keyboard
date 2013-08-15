@@ -26,6 +26,7 @@ from maliit_keyboard.emulators.word_ribbon import WordRibbon, WordItem
 
 
 # Definitions of enums used within the cpp source code.
+# Perhaps move these into a 'constants' module.
 KB_STATE_DEFAULT = 0
 KB_STATE_SHIFTED = 1
 KB_STATE_SYMBOL_1 = 2
@@ -42,12 +43,10 @@ ACTION_SWITCH = 11
 default_keys = "qwertyuiopasdfghjklzxcvbnm."
 shifted_keys = "QWERTYUIOPASDFGHJKLZXCVBNM."
 primary_symbol = "1234567890*#+-=()!?@~/\\';:,."
+secondary_symbol = u"1234567890$%[]`^|<>\u20ac\xa3\xa5\xa7\xab\xbb\u201c\u201d\u201e\xa1\xbf\xb0"
 # This is _not_ a complete list for this screen.
-secondary_symbol = "$%<>[]`^|_{}\"&"
+# secondary_symbol = "$%<>[]`^|_{}\"&"
 
-# Are we able to reset the keyboard some how? So that there is a addCleanup
-# that resets the keyboard to a known state? This means that we won't have to
-# ensure in setUp that we are in the correct state etc.
 
 class OSKUnsupportedKey(RuntimeError):
     pass
@@ -71,18 +70,12 @@ class OSK(object):
             "QQuickItem",
             objectName="keyboardKeypad"
         )
-        # If the wordribbon isn't enabled does it still appear in the
-        # introspection tree?
-        # perhaps have this as a internal emulator.
+
         ribbon = maliit.select_single(
             'QQuickRectangle',
             objectName='wordRibbon'
         )
         self.word_ribbon = WordRibbon(ribbon)
-        # self.word_ribbon = maliit.select_single(
-        #     'QQuickRectangle',
-        #     objectName='wordRibbon'
-        # )
 
         # Contains instructions on how to move the keyboard into a specific
         # state/layout so that we can successfully press the required key.
@@ -94,7 +87,12 @@ class OSK(object):
             self.pointer = pointer
 
     def dismiss(self):
-        """Attempt to swipe the keyboard down so that it is hidden."""
+        """Swipe the keyboard down to hide it.
+
+        :raises: <something> if the state.wait_for fails meaning that the
+         keyboard failed to hide.
+
+        """
         if self.is_available():
             x, y, h, w = self.keyboard.globalRect
             x_pos = int(w / 2)
@@ -117,7 +115,7 @@ class OSK(object):
     #     return [WordItem(i) for i in word_items if hasattr(i, 'word_text')]
 
     def is_available(self):
-        """Returns wherever the keyboard is shown and ready to use."""
+        """Returns true if the keyboard is shown and ready to use."""
         return (
             self.keyboard.state == "SHOWN"
             and self.keyboard.hideAnimationFinished == False
@@ -126,6 +124,11 @@ class OSK(object):
     # Much like is_available, but attempts to wait for the keyboard to be
     # ready.
     def wait_for_keyboard_ready(self):
+        """Waits for *timeout* for the keyboard to be ready and returns
+        true. Returns False if the keyboard fails to be considered ready within
+        the alloted time.
+
+        """
         try:
             self.keyboard.state.wait_for("SHOWN")
             self.keyboard.hideAnimationFinished.wait_for(False)
@@ -135,6 +138,10 @@ class OSK(object):
             return True
 
     def press_key(self, key):
+        """Tap on the key with the internal pointer
+
+        :params key: String containing the text of the key to tap.
+        """
         if not self.is_available():
             raise RuntimeError("Keyboard is not on screen")
 
@@ -149,7 +156,15 @@ class OSK(object):
 
 
     def type(self, string, delay=0.1):
-        """Only 'normal' or single characters can be typed this way."""
+        """Type the string *string* with a delay of *delay* between each key
+        press
+
+        .. note:: The delay provides a minimum delay, it may take longer
+        between each press as the keyboard shifts between states etc.
+
+        Only 'normal' or single characters can be typed this way.
+
+        """
         # # Allow some time for the keyboard to render and become ready if
         # # required.
         # try:
@@ -168,6 +183,13 @@ class OSK(object):
         """
         # '.' as it is available on all screens (currently)
         # '/' is available on more than 1 screen.
+
+        # veebers todo: need to handle when a character is available on
+        # multiple layouts. Well I guess the current edition will do this,
+        # i.e. will bias default, then shifted etc.
+        # if self.keyboard.activeId is not self.activeId:
+        #     self.update_char_state_lookup()
+
         if char in default_keys:
             return KB_STATE_DEFAULT
         elif char in shifted_keys:
