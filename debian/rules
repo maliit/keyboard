@@ -1,88 +1,28 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
-# Uncomment this to turn on verbose mode.
-export DH_VERBOSE=1
 
-DEBDIR = ..
+export DPKG_GENSYMBOLS_CHECK_LEVEL=4
 
-comma :=,
-empty :=
-space := $(empty) $(empty)
+%:
+	dh $@ --parallel --fail-missing
 
-# Build options
-QMAKE_OPTIONS = \
-	MALIIT_DEFAULT_PROFILE=ubuntu \
-	CONFIG+=debug \
-	CONFIG+=nodoc \
-	CONFIG+=notests \
-	CONFIG+=enable-presage \
-	CONFIG+=enable-hunspell \
-	CONFIG+=enable-preedit \
-	CONFIG+=enable-pinyin \
-	CONFIG+=enable-qt-mobility
+override_dh_auto_configure:
+	dh_auto_configure -- -recursive \
+	                     MALIIT_DEFAULT_PROFILE=ubuntu \
+	                     CONFIG+=debug \
+	                     CONFIG+=nodoc \
+	                     CONFIG+=notests \
+	                     CONFIG+=enable-presage \
+	                     CONFIG+=enable-hunspell \
+	                     CONFIG+=enable-preedit \
+	                     CONFIG+=enable-pinyin \
+	                     CONFIG+=enable-qt-mobility
 
-# shared library versions, option 1
-version=0.1.0
-major=0
-
-configure: configure-stamp
-configure-stamp:
-	dh_testdir
-
-	qmake -r $(QMAKE_OPTIONS)
-
-	touch configure-stamp
-
-
-build: build-stamp
-build-stamp: configure-stamp 
-	dh_testdir
-
-	make $(PARALLEL_MAKEFLAGS)
-
-	touch build-stamp
-
-clean:
-	dh_testdir
-	dh_testroot
-
-	rm -f build-stamp configure-stamp
-
-	make  $(PARALLEL_MAKEFLAGS) clean || true
-	rm -f lib/*
-	rm -rf .obj	
-
-	dh_clean 
-
-install: build
-	dh_testdir
-	dh_testroot
-	dh_clean -k 
-	dh_installdirs
-
-	INSTALL_ROOT=$(CURDIR)/debian/tmp make  $(PARALLEL_MAKEFLAGS) install
-
-# Build architecture-independent files here.
-binary-indep: build install
-# We have nothing to do by default.
-
-# Build architecture-dependent files here.
-binary-arch: build install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs 
-	dh_installdocs
-	dh_install --sourcedir=debian/tmp -v 
-	dh_gconf
-	dh_link
-	dh_compress
-	dh_fixperms
-	dh_makeshlibs
-	dh_installdeb
-	dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb --destdir=$(DEBDIR)
-
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure
+override_dh_install:
+	# Don't install the tests
+	rm debian/tmp/usr/bin/language-layout-loading
+	rm debian/tmp/usr/bin/language-layout-switching
+	rm debian/tmp/usr/bin/repeat-backspace
+	rm debian/tmp/usr/bin/ut_editor
+	rm debian/tmp/usr/bin/word-candidates
+	dh_install

@@ -5,6 +5,7 @@ moc_*
 debian/tmp
 debian/ubuntu-keyboard/
 debian/ubuntu-keyboard-data/
+debian/ubuntu-keyboard-tests/
 *.debhelper.log
 *.substvars
 *.so
