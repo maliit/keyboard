@@ -35,7 +35,7 @@ configure-stamp:
 
 
 build: build-stamp
-build-stamp: configure-stamp 
+build-stamp: configure-stamp
 	dh_testdir
 
 	make $(PARALLEL_MAKEFLAGS)
@@ -50,15 +50,21 @@ clean:
 
 	make  $(PARALLEL_MAKEFLAGS) clean || true
 	rm -f lib/*
-	rm -rf .obj	
+	rm -rf .obj
 
-	dh_clean 
+	dh_clean
 
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k 
+	dh_clean -k
 	dh_installdirs
+
+	cd tests/autopilot; \
+    set -ex; for python in $(shell pyversions -r); do \
+        $$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
+    done; \
+    cd $(CURDIR)
 
 	INSTALL_ROOT=$(CURDIR)/debian/tmp make  $(PARALLEL_MAKEFLAGS) install
 
@@ -70,9 +76,9 @@ binary-indep: build install
 binary-arch: build install
 	dh_testdir
 	dh_testroot
-	dh_installchangelogs 
+	dh_installchangelogs
 	dh_installdocs
-	dh_install --sourcedir=debian/tmp -v 
+	dh_install --sourcedir=debian/tmp -v -X'*.pyc'
 	dh_gconf
 	dh_link
 	dh_compress

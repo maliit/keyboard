@@ -3,30 +3,32 @@ Section: libs
 Priority: extra
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Michael Hasselmann <michaelh@openismus.com>
-Build-Depends: debhelper (>= 9), 
-               pkg-config, 
-               qt5-default, 
-               qtbase5-dev, 
-               qtdeclarative5-dev, 
-               libgl-dev, 
-               libgles2-mesa-dev, 
-               doxygen, 
-               maliit-framework-dev (>= 0.99+git20130702+97e8335), 
-               libhunspell-dev, 
+Build-Depends: debhelper (>= 9),
+               pkg-config,
+               qt5-default,
+               qtbase5-dev,
+               qtdeclarative5-dev,
+               libgl-dev,
+               libgles2-mesa-dev,
+               doxygen,
+               maliit-framework-dev (>= 0.99+git20130702+97e8335),
+               libhunspell-dev,
                libpresage-dev,
                libubuntu-platform-api1-dev,
                libpinyin2-dev,
-               libglib2.0-dev
+               libglib2.0-dev,
+               python (>= 2.7),
+               python-setuptools,
 Standards-Version: 3.9.3
 
 Package: ubuntu-keyboard
 Provides: ubuntu-keyboard
 Architecture: armhf
-Depends:  maliit-framework (>= 0.99+git20130702+97e8335), 
-          libpresage1, 
-          libpinyin2, 
-          ${misc:Depends}, 
-          ${shlibs:Depends}, 
+Depends:  maliit-framework (>= 0.99+git20130702+97e8335),
+          libpresage1,
+          libpinyin2,
+          ${misc:Depends},
+          ${shlibs:Depends},
           qtdeclarative5-window-plugin
 Description: Ubuntu-Keyboard,  qml-based on-screen Keyboard
  Ubuntu Keyboard based on Maliit-Keyboard
@@ -49,3 +51,13 @@ Architecture: armhf
 Depends:  ${misc:Depends}, ${shlibs:Depends}
 Description: Ubuntu Keyboard Tests
  Tests for the Ubuntu virtual keyboard
+
+Package: ubuntu-keyboard-autopilot
+Architecture: all
+Depends: ubuntu-keyboard (>= ${source:Version}),
+         libautopilot-qt,
+         ${python:Depends},
+         ${misc:Depends},
+Description: Tests and emulators package for maliit-keyboard
+ Autopilot tests for the maliit-keyboard package
+
