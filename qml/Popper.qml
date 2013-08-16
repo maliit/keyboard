@@ -31,7 +31,7 @@ import QtQuick 2.0
 
 Image {
     id: popper
-    source: "styles/ubuntu/images/popper.png"
+    source: "styles/ubuntu/images/keyboard_popover.png"
     opacity: 0
 
     property Item target: null
@@ -42,10 +42,10 @@ Image {
         anchors.centerIn: parent
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.family: "sans"
+        font.family: "Ubuntu Medium"
         font.pixelSize: 45
         font.bold: true
-        color: "white"
+        color: "black"
     }
 
     states: State {

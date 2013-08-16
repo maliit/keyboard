@@ -1,3 +1,5 @@
+include(../../config.pri)
+
 TARGET = dummy
 TEMPLATE = lib
 
