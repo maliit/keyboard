@@ -177,7 +177,6 @@ public:
     explicit InputMethodPrivate(InputMethod * const q,
                                 MAbstractInputMethodHost *host);
     void setLayoutOrientation(Qt::ScreenOrientation qtOrientation);
-    void updateKeyboardOrientation();
     void updateWordRibbon();
 
     void setActiveKeyboardId(const QString& id);
@@ -301,7 +300,7 @@ void InputMethodPrivate::updateWordRibbon()
     Q_EMIT q->wordRibbonEnabledChanged( predictionEnabled );
     qmlRootItem->setProperty("wordribbon_visible", predictionEnabled );
 
-    updateKeyboardOrientation();
+    setLayoutOrientation(appsCurrentOrientation);
 }
 
 void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrientation)
@@ -360,11 +359,6 @@ void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrient
     }
 
 #endif
-}
-
-void InputMethodPrivate::updateKeyboardOrientation()
-{
-    setLayoutOrientation(appsCurrentOrientation);
 }
 
 /*
@@ -471,7 +465,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     // Setting layout orientation depends on word engine and hide word ribbon
     // settings to be initialized first:
-    d->updateKeyboardOrientation();
+    d->setLayoutOrientation(d->appsCurrentOrientation);
 }
 
 InputMethod::~InputMethod()
@@ -760,7 +754,7 @@ void InputMethod::onScreenSizeChange(const QSize &size)
     d->extended_layout.helper.setScreenSize(d->layout.helper.screenSize());
 
 #ifdef TEMP_DISABLED
-    d->updateKeyboardOrientation();
+    d->setLayoutOrientation(d->appsCurrentOrientation);
 #endif
 }
 
@@ -908,7 +902,7 @@ void InputMethod::deviceOrientationChanged(Qt::ScreenOrientation orientation)
 {
     Q_UNUSED(orientation);
     Q_D(InputMethod);
-    d->updateKeyboardOrientation();
+    d->setLayoutOrientation(d->appsCurrentOrientation);
 }
 
 /*
