@@ -30,6 +30,7 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Window 2.0
 
 Item {
     id: canvas
@@ -40,7 +41,7 @@ Item {
 
     visible: layout.visible
 
-    property int contentOrientation: Qt.PrimaryOrientation
+    property int contentOrientation: Screen.orientation
 
     property bool shown: false;
     property bool wordribbon_visible: true;

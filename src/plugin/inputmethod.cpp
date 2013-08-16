@@ -172,6 +172,8 @@ public:
     Maliit::TextContentType contentType;
     QString activeLanguageId;
 
+    Qt::ScreenOrientation appsCurrentOrientation;
+
     explicit InputMethodPrivate(InputMethod * const q,
                                 MAbstractInputMethodHost *host);
     void setLayoutOrientation(Qt::ScreenOrientation qtOrientation);
@@ -209,6 +211,7 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
     , predictionEnabled(false)
     , contentType(Maliit::FreeTextContentType)
     , activeLanguageId("en_us")
+    , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
 {
     view = createWindow(host);
 
@@ -361,7 +364,7 @@ void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrient
 
 void InputMethodPrivate::updateKeyboardOrientation()
 {
-    setLayoutOrientation(QGuiApplication::primaryScreen()->orientation());
+    setLayoutOrientation(appsCurrentOrientation);
 }
 
 /*
@@ -597,20 +600,19 @@ void InputMethod::handleAppOrientationChanged(int angle)
 {
     Q_D(InputMethod);
 
-    Qt::ScreenOrientation orientation = Qt::PortraitOrientation;
     switch (angle) {
         case 0:
-            orientation = Qt::LandscapeOrientation; break;
+            d->appsCurrentOrientation = Qt::LandscapeOrientation; break;
         case 90:
-            orientation = Qt::InvertedPortraitOrientation; break;
+            d->appsCurrentOrientation = Qt::InvertedPortraitOrientation; break;
         case 180:
-            orientation = Qt::InvertedLandscapeOrientation; break;
+            d->appsCurrentOrientation = Qt::InvertedLandscapeOrientation; break;
         case 270:
         default:
-            orientation = Qt::PortraitOrientation; break;
+            d->appsCurrentOrientation = Qt::PortraitOrientation; break;
     }
 
-    d->setLayoutOrientation(orientation);
+    d->setLayoutOrientation(d->appsCurrentOrientation);
 }
 
 bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
@@ -909,6 +911,9 @@ void InputMethod::deviceOrientationChanged(Qt::ScreenOrientation orientation)
     d->updateKeyboardOrientation();
 }
 
+/*
+ * this method is being triggered a lot by the inputcontext plugin
+ */
 void InputMethod::update()
 {
     Q_D(InputMethod);
@@ -951,6 +956,7 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
+    // settings overwrite input-context plugin
     if (!d->settings.word_engine.data()->value().toBool())
         d->predictionEnabled = false;
 
