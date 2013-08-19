@@ -172,10 +172,11 @@ public:
     Maliit::TextContentType contentType;
     QString activeLanguageId;
 
+    Qt::ScreenOrientation appsCurrentOrientation;
+
     explicit InputMethodPrivate(InputMethod * const q,
                                 MAbstractInputMethodHost *host);
     void setLayoutOrientation(Qt::ScreenOrientation qtOrientation);
-    void updateKeyboardOrientation();
     void updateWordRibbon();
 
     void setActiveKeyboardId(const QString& id);
@@ -209,6 +210,7 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
     , predictionEnabled(false)
     , contentType(Maliit::FreeTextContentType)
     , activeLanguageId("en_us")
+    , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
 {
     view = createWindow(host);
 
@@ -301,7 +303,7 @@ void InputMethodPrivate::updateWordRibbon()
     Q_EMIT q->wordRibbonEnabledChanged( predictionEnabled );
     qmlRootItem->setProperty("wordribbon_visible", predictionEnabled );
 
-    updateKeyboardOrientation();
+    setLayoutOrientation(appsCurrentOrientation);
 }
 
 void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrientation)
@@ -360,11 +362,6 @@ void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrient
     }
 
 #endif
-}
-
-void InputMethodPrivate::updateKeyboardOrientation()
-{
-    setLayoutOrientation(QGuiApplication::primaryScreen()->orientation());
 }
 
 /*
@@ -471,7 +468,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     // Setting layout orientation depends on word engine and hide word ribbon
     // settings to be initialized first:
-    d->updateKeyboardOrientation();
+    d->setLayoutOrientation(d->appsCurrentOrientation);
 }
 
 InputMethod::~InputMethod()
@@ -600,20 +597,19 @@ void InputMethod::handleAppOrientationChanged(int angle)
 {
     Q_D(InputMethod);
 
-    Qt::ScreenOrientation orientation = Qt::PortraitOrientation;
     switch (angle) {
         case 0:
-            orientation = Qt::LandscapeOrientation; break;
+            d->appsCurrentOrientation = Qt::LandscapeOrientation; break;
         case 90:
-            orientation = Qt::InvertedPortraitOrientation; break;
+            d->appsCurrentOrientation = Qt::InvertedPortraitOrientation; break;
         case 180:
-            orientation = Qt::InvertedLandscapeOrientation; break;
+            d->appsCurrentOrientation = Qt::InvertedLandscapeOrientation; break;
         case 270:
         default:
-            orientation = Qt::PortraitOrientation; break;
+            d->appsCurrentOrientation = Qt::PortraitOrientation; break;
     }
 
-    d->setLayoutOrientation(orientation);
+    d->setLayoutOrientation(d->appsCurrentOrientation);
 }
 
 bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
@@ -761,7 +757,7 @@ void InputMethod::onScreenSizeChange(const QSize &size)
     d->extended_layout.helper.setScreenSize(d->layout.helper.screenSize());
 
 #ifdef TEMP_DISABLED
-    d->updateKeyboardOrientation();
+    d->setLayoutOrientation(d->appsCurrentOrientation);
 #endif
 }
 
@@ -909,9 +905,12 @@ void InputMethod::deviceOrientationChanged(Qt::ScreenOrientation orientation)
 {
     Q_UNUSED(orientation);
     Q_D(InputMethod);
-    d->updateKeyboardOrientation();
+    d->setLayoutOrientation(d->appsCurrentOrientation);
 }
 
+/*
+ * this method is being triggered a lot by the inputcontext plugin
+ */
 void InputMethod::update()
 {
     Q_D(InputMethod);
@@ -954,6 +953,7 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
+    // settings overwrite input-context plugin
     if (!d->settings.word_engine.data()->value().toBool())
         d->predictionEnabled = false;
 
