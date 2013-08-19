@@ -4,8 +4,7 @@ include(../common-check.pri)
 
 TOP_BUILDDIR = $${OUT_PWD}/../..
 TEMPLATE = app
-TARGET = ut_editor
-target.path = $$INSTALL_BIN
+TARGET = editor
 
 
 QMAKE_LFLAGS_RPATH=$${TOP_BUILDDIR}/src/plugin
@@ -30,4 +29,3 @@ SOURCES += \
     main.cpp \
 
 QT = core testlib gui
-INSTALLS += target

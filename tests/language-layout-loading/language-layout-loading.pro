@@ -25,6 +25,3 @@ xml_check.commands = \
     xmllint --path "$$PWD/../../data/languages" --noout --dtdvalid "$$PWD/../../data/languages/VirtualKeyboardLayout.dtd" "$$PWD/languages/*.xml"
 
 check.depends += xml_check
-
-target.path = $$INSTALL_BIN
-INSTALLS += target

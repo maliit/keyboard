@@ -42,6 +42,11 @@ class TestDynamicLayout: public QObject
   Q_OBJECT
 private:
 
+    Q_SLOT void initTestCase()
+    {
+        QVERIFY(qputenv("UBUNTU_KEYBOARD_DATA_DIR", TEST_MALIIT_KEYBOARD_DATADIR));
+    }
+
     void connectUiConstToScreen(const MockScreen& mockScreen)
     {
         const QScreen* screen = qGuiApp->primaryScreen();
@@ -66,7 +71,7 @@ private:
         mockScreen.setOrientation(Qt::PortraitOrientation);
         mockScreen.setPrimaryOrientation(Qt::PortraitOrientation);
 
-        uiConst->initDynamicLayout( "maliit-keyboard/tests/dynamic-layout/test-ui-constants.qml" );
+        uiConst->initDynamicLayout( "test-ui-constants.qml" );
         QCOMPARE( uiConst->windowGeometryRect(Qt::PortraitOrientation).width(), 300 );
 
         KeyboardLoader loader;
@@ -84,7 +89,7 @@ private:
         mockScreen.setOrientation(Qt::PortraitOrientation);
         mockScreen.setPrimaryOrientation(Qt::PortraitOrientation);
 
-        uiConst->initDynamicLayout( "maliit-keyboard/tests/dynamic-layout/test-ui-constants.qml" );
+        uiConst->initDynamicLayout( "test-ui-constants.qml" );
 
         QCOMPARE( uiConst->windowGeometryRect(Qt::PortraitOrientation).width(), 720 );
 

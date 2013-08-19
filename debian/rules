@@ -11,18 +11,11 @@ override_dh_auto_configure:
 	                     MALIIT_DEFAULT_PROFILE=ubuntu \
 	                     CONFIG+=debug \
 	                     CONFIG+=nodoc \
-	                     CONFIG+=notests \
 	                     CONFIG+=enable-presage \
 	                     CONFIG+=enable-hunspell \
 	                     CONFIG+=enable-preedit \
 	                     CONFIG+=enable-pinyin \
 	                     CONFIG+=enable-qt-mobility
 
-override_dh_install:
-	# Don't install the tests
-	rm debian/tmp/usr/bin/language-layout-loading
-	rm debian/tmp/usr/bin/language-layout-switching
-	rm debian/tmp/usr/bin/repeat-backspace
-	rm debian/tmp/usr/bin/ut_editor
-	rm debian/tmp/usr/bin/word-candidates
-	dh_install
+override_dh_auto_test:
+	xvfb-run make check

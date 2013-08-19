@@ -5,7 +5,7 @@ include(../../config-plugin.pri)
 TOP_BUILDDIR = $${OUT_PWD}/../..
 CONFIG += testlib
 TEMPLATE = app
-TARGET = ut_wordengine
+TARGET = wordengine
 INCLUDEPATH += . ../ ../../lib ../../
 QT = core testlib gui
 

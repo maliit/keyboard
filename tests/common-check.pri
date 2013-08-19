@@ -11,11 +11,12 @@ qws {
 # Note that if datafiles are generated they would end out in
 # $$OUT_PWD and this would fail
 DATA_DIR = $$PWD/../data
+PLUGIN_DIR = $$PWD/../src/plugin
 
 check.commands = \
     MALIIT_PLUGINS_DATADIR=$$DATA_DIR \
     MALIIT_KEYBOARD_DATADIR=$$DATA_DIR \
-    LD_LIBRARY_PATH=$$MALIIT_INSTALL_LIBS:$$[QT_INSTALL_LIBS]:$(LD_LIBRARY_PATH) \
+    LD_LIBRARY_PATH=$$MALIIT_INSTALL_LIBS:$$PLUGIN_DIR:$$[QT_INSTALL_LIBS]:$(LD_LIBRARY_PATH) \
     ./$$TARGET $$test_arguments
 
 check.depends += $$TARGET
