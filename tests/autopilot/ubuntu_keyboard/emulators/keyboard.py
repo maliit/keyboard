@@ -22,7 +22,7 @@ from time import sleep
 from autopilot.input import Pointer, Touch
 from autopilot.introspection import get_proxy_object_for_existing_process
 
-from ubuntu_keyboard.emulators.word_ribbon import WordRibbon, WordItem
+from ubuntu_keyboard.emulators.word_ribbon import WordRibbon
 
 
 # Definitions of enums used within the cpp source code.
@@ -45,8 +45,7 @@ ACTION_SWITCH = 11
 default_keys = "qwertyuiopasdfghjklzxcvbnm."
 shifted_keys = "QWERTYUIOPASDFGHJKLZXCVBNM."
 primary_symbol = "1234567890*#+-=()!?@~/\\';:,."
-secondary_symbol = "$%<>[]`^|_{}\"&,.\u20ac\xa3\xa5\u20b9\xa7\xa1\xbf\xab\xbb\u201c\u201d\u201e"
-#secondary_symbol = u"1234567890$%[]`^|<>\u20ac\xa3\xa5\xa7\xab\xbb\u201c\u201d\u201e\xa1\xbf\xb0"
+secondary_symbol = u"$%<>[]`^|_{}\"&,.\u20ac\xa3\xa5\u20b9\xa7\xa1\xbf\xab\xbb\u201c\u201d\u201e"
 
 
 class UnsupportedKey(RuntimeError):
@@ -104,17 +103,6 @@ class Keyboard(object):
 
             self.keyboard.state.wait_for("HIDDEN")
 
-    # I'm hoping to be able to wrap these up in an emulator of some sort.
-    # def word_ribbon_available(self):
-    #     return self.keyboard.wordribbon_visible
-
-    # def get_suggestions(self):
-    #     word_list = self.word_ribbon.select_single('QQuickListView', objectName='wordListView')
-    #     # The z attrib is there so we only get suitable candidates. Perhaps
-    #     # there is a better way in which to do this?
-    #     word_items = word_list.select_many('QQuickItem', z=1.0)
-    #     return [WordItem(i) for i in word_items if hasattr(i, 'word_text')]
-
     def is_available(self):
         """Returns true if the keyboard is shown and ready to use."""
         return (
@@ -154,7 +142,6 @@ class Keyboard(object):
 
             key = self.keypad.select_single('QQuickText', text=key)
             self.pointer.click_object(key)
-
 
     def type(self, string, delay=0.1):
         """Type the string *string* with a delay of *delay* between each key
@@ -281,10 +268,10 @@ class Keyboard(object):
     def _is_special_key(self, key):
         return key in ["\n", "\b", " ", "SHIFT", "?123", "ABC", "1/2", "2/2"]
 
-    # Give the state that you want and the current state, get instructions on how
-    # to move to that state.
-    # lookup_table[REQUESTED_STATE][CURRENT_STATE] -> Instructions(Key to press,
-    #   Expected state after key press.)
+    # Give the state that you want and the current state, get instructions on
+    # how to move to that state.
+    # lookup_table[REQUESTED_STATE][CURRENT_STATE] -> Instructions(Key to
+    # press, Expected state after key press.)
     def _generate_state_lookup_table(self):
         state_lookup_table = [
             # KB_STATE_DEFAULT
