@@ -43,7 +43,7 @@ Item {
 
     // Expose details for use with Autopilot.
     readonly property var layoutState: layout.keyboard_state
-    readonly property var activeView: layout.activeView
+    readonly property string activeView: layout.activeView
 
     property int contentOrientation: Screen.orientation
 
