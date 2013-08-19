@@ -40,6 +40,8 @@ Item {
     property alias title: keyboard_title.text
 
     visible: layout.visible
+
+    // Expose details for use with Autopilot.
     readonly property var layoutState: layout.keyboard_state
     readonly property var activeView: layout.activeView
 
@@ -59,10 +61,6 @@ Item {
         onTitleChanged: {
             console.debug("title:" + layout.title)
             title_timeout.start()
-        }
-
-        onStateChanged: {
-            console.error("State Changed: " + layout.keyboard_state)
         }
     }
 
@@ -168,6 +166,8 @@ Item {
 
                         Text {
                             id: key_text_item
+
+                            // Expose detail for use within Autopilot
                             property var action_type: key_action_type
 
                             anchors.fill: parent
