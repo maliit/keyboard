@@ -1,8 +1,98 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+License: LGPL-3
 
 Files: *
-Copyright: 2012-2013 Canonical, Ltd.
-           2010-2011 Nokia Corporation
+Copyright: 2013 Canonical Ltd
+License: LGPL-3
+
+Files: benchmark/*
+       src/lib/logic/hitlogic.*
+       src/lib/logic/keyareaconverter.*
+       src/lib/logic/keyboardloader.*
+       src/lib/logic/layout.*
+       src/lib/logic/layouthelper.*
+       src/lib/logic/spellchecker.*
+       src/lib/logic/state-machines/*
+       src/lib/logic/wordengine.*
+       src/lib/models/*
+       src/lib/parser/*
+       src/plugin/*
+       src/view/*
+       src/viewer/*
+       tests/common/inputmethodhostprobe.*
+       tests/common/utils.*
+       tests/common/utils-gui.cpp
+       tests/language-layout-switching/*
+       tests/preedit-string/*
+       tests/repeat-backspace/*
+Copyright: 2011 Nokia Corporation
+License: BSD-3-clause
+
+Files: qml/Keyboard.qml
+       qml/maliit-keyboard.qml
+       qml/maliit-keyboard-extended.qml
+       qml/maliit-magnifier.qml
+       src/lib/logic/abstractlanguagefeatures.*
+       src/lib/logic/abstractwordengine.*
+       src/lib/logic/eventhandler.*
+       src/lib/logic/languagefeatures.*
+       src/lib/models/layout.*
+       src/lib/parser/alltagtypes.*
+       src/lib/parser/tagbindingcontainer.*
+       src/lib/parser/tagextended.*
+       src/lib/parser/tagmodifiers.*
+       src/lib/parser/tagrowcontainer.*
+       src/plugin/maliitcontext.*
+       src/plugin/updatenotifier.*
+       tests/common/wordengineprobe.*
+       tests/editor/*
+       tests/language-layout-loading/*
+       tests/word-candidates/*
+       tools/*
+Copyright: 2012 Openismus GmbH
+License: BSD-3-clause
+
+Files: src/lib/models/styleattributes.*
+       src/view/abstractfeedback.*
+       src/view/nullfeedback.*
+       src/view/soundfeedback.*
+       tests/rendering/*
+Copyright: 2012 One Laptop per Child Association
+License: BSD-3-clause
+
+Files: qml/Popper.qml
+Copyright: Jakub Pavelek <jpavelek@live.com>
+License: BSD-3-clause
+
+Files: src/lib/logic/style.*
+Copyright: 2011 Nokia Corporation
+           2012 One Laptop per Child Association
+License: BSD-3-clause
+
+Files: src/lib/logic/layoutupdater.*
+       src/lib/logic/spellchecker.*
+       src/view/renderer.*
+Copyright: 2011 Nokia Corporation
+           2012 Openismus GmbH
+License: BSD-3-clause
+
+Files: data/styles/*/sounds/typewriter.wav
+Copyright: 2005 ddohler (http://www.freesound.org/people/ddohler/)
+License: CC-BY-3.0
+
+License: LGPL-3
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License Version 3.0 as published by the Free Software Foundation.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ .
+ On Debian/Ubuntu systems, the full text of the LGPL v3 can be found in
+ `/usr/share/common-licenses/LGPL-3'
+
 License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions
@@ -15,12 +105,10 @@ License: BSD-3-clause
  this list of conditions and the following disclaimer in the documentation
  and/or other materials provided with the distribution.
  .
- Neither the name of Nokia Corporation nor Canonical Ltd may
+ Neither the name of the copyright holders and contributors may
  be used to endorse or promote products derived from this software without
  specific prior written permission.
 
-Files: data/styles/*/sounds/typewriter.wav
-Copyright: 2005 ddohler (http://www.freesound.org/people/ddohler/)
 License: CC-BY-3.0
  Creative Commons Attribution 3.0 Unported License
  .
