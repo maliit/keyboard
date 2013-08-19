@@ -39,13 +39,14 @@ ACTION_SYM = 6
 ACTION_RETURN = 7
 ACTION_SWITCH = 11
 
+# Note (veebers 19-aug-13): this hardcoded right now, but will be reading data
+# from the keyboard itself in the very near future.
 # Moved '/' to primary symbol, default layout can have a .com instead.
 default_keys = "qwertyuiopasdfghjklzxcvbnm."
 shifted_keys = "QWERTYUIOPASDFGHJKLZXCVBNM."
 primary_symbol = "1234567890*#+-=()!?@~/\\';:,."
-secondary_symbol = u"1234567890$%[]`^|<>\u20ac\xa3\xa5\xa7\xab\xbb\u201c\u201d\u201e\xa1\xbf\xb0"
-# This is _not_ a complete list for this screen.
-# secondary_symbol = "$%<>[]`^|_{}\"&"
+secondary_symbol = "$%<>[]`^|_{}\"&,.\u20ac\xa3\xa5\u20b9\xa7\xa1\xbf\xab\xbb\u201c\u201d\u201e"
+#secondary_symbol = u"1234567890$%[]`^|<>\u20ac\xa3\xa5\xa7\xab\xbb\u201c\u201d\u201e\xa1\xbf\xb0"
 
 
 class UnsupportedKey(RuntimeError):
