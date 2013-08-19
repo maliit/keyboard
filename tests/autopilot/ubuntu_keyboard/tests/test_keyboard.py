@@ -154,6 +154,7 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
 
 class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
+    # Note: based on UX design doc
     def test_keyboard_layout_starts_shifted(self):
         """When first launched the keyboard state must be
         shifted/capitalised.
@@ -194,6 +195,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         )
         self.assertThat(text_area.text, Eventually(Equals('abcS')))
 
+    # Note: based on UX design doc
     def test_shift_state_returns_to_default_after_letter_typed(self):
         """Pushing shift and then typing an uppercase letter must automatically
         shift the keyboard back into the default state.
@@ -220,7 +222,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         self.assertThat(text_area.text, Eventually(Equals('abcA')))
 
     # Note: this is a failing test.
-    # Note: Based of UX design spec.
+    # Note: Based on UX design doc.
     def test_shift_state_entered_after_fullstop(self):
         """After typing a fullstop the keyboard state must automatically
         enter the shifted state.
@@ -244,16 +246,20 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         )
 
     def test_switching_between_states(self):
+        """The user must be able to type many different characters including
+        spaces and backspaces.
+
+        """
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type(
-            'This shouldd\b type & display different  \bCHARs (characters).'
+            'abc gone\b\b &  \bABC (123)'
         )
 
-        expected = "This should type & display different CHARs (characters)."
+        expected = "abc go & ABC (123)"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
@@ -304,6 +310,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
         ),
     ]
 
+    # Note: based on UX design doc
     def test_keyboard_layout(self):
         """The Keyboard must respond to the input type and change to be the
         correct state.
