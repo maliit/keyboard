@@ -287,7 +287,9 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
 
     magnifier_surface->view()->setSource(QUrl::fromLocalFile(g_maliit_magnifier_qml));
 #endif
-    view->setProperty("role", 7);
+    // following used to help shell identify the OSK surface
+    view->setProperty("role", static_cast<int>(U_ON_SCREEN_KEYBOARD_ROLE));
+    view->setTitle("MaliitOnScreenKeyboard");
 
     // workaround: resizeMode not working in current qpa imlementation
     // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
