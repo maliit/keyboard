@@ -17,12 +17,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from collections import defaultdict, namedtuple
 from time import sleep
+import logging
 
 from autopilot.input import Pointer, Touch
 from autopilot.introspection import get_proxy_object_for_existing_process
 
 from ubuntu_keyboard.emulators.word_ribbon import WordRibbon
+
+logger = logging.getLogger(__name__)
 
 
 # Definitions of enums used within the cpp source code.
@@ -32,6 +36,7 @@ KB_STATE_SHIFTED = 1
 KB_STATE_SYMBOL_1 = 2
 KB_STATE_SYMBOL_2 = 3
 
+ACTION_INSERT = 0
 ACTION_SHIFT = 1
 ACTION_BACKSPACE = 2
 ACTION_SPACE = 3
@@ -53,6 +58,16 @@ class UnsupportedKey(RuntimeError):
 
 
 class Keyboard(object):
+
+    KeyPos = namedtuple("KeyPos", ['x', 'y', 'h', 'w'])
+
+    # The ability to name the non-text keys.
+    _action_id_to_text = {
+        ACTION_SHIFT: 'SHIFT',
+        ACTION_BACKSPACE: '\b',
+        ACTION_SPACE: ' ',
+        ACTION_RETURN: '\n'
+    }
 
     def __init__(self, pointer=None):
         try:
@@ -80,6 +95,8 @@ class Keyboard(object):
         # Contains instructions on how to move the keyboard into a specific
         # state/layout so that we can successfully press the required key.
         self._state_lookup_table = self._generate_state_lookup_table()
+        # Cache the position of the keys
+        self._key_pos_table = defaultdict(dict)
 
         if pointer is None:
             self.pointer = Pointer(Touch.create())
@@ -126,6 +143,31 @@ class Keyboard(object):
         else:
             return True
 
+    def get_key_position(self, key):
+        """Returns the global rect of the given key.
+
+        It may need to do a lookup to update the table of positions.
+
+        """
+        current_state = self.keyboard.layoutState
+        if self._key_pos_table.get(current_state) is None:
+            self._update_pos_table_for_current_state()
+
+        return self._key_pos_table[current_state][key]
+
+    def _update_pos_table_for_current_state(self):
+        all_keys = self.keypad.select_many('QQuickText')
+        current_state = self.keyboard.layoutState
+        labeled_keys = [ACTION_INSERT, ACTION_SWITCH, ACTION_SYM]
+        for key in all_keys:
+            with key.no_automatic_refreshing():
+                key_pos = Keyboard.KeyPos(*key.globalRect)
+                if key.action_type in labeled_keys:
+                    self._key_pos_table[current_state][key.text] = key_pos
+                else:
+                    key_text = Keyboard._action_id_to_text[key.action_type]
+                    self._key_pos_table[current_state][key_text] = key_pos
+
     def press_key(self, key):
         """Tap on the key with the internal pointer
 
@@ -140,8 +182,9 @@ class Keyboard(object):
             required_state_for_key = self._get_keys_required_state(key)
             self._switch_keyboard_to_state(required_state_for_key)
 
-            key = self.keypad.select_single('QQuickText', text=key)
-            self.pointer.click_object(key)
+            # key = self.keypad.select_single('QQuickText', text=key)
+            key_rect = self.get_key_position(key)
+            self.pointer.click_object(key_rect)
 
     def type(self, string, delay=0.1):
         """Type the string *string* with a delay of *delay* between each key
@@ -222,48 +265,14 @@ class Keyboard(object):
             # self.press_key(key)
             self.keyboard.layoutState.wait_for(expected_state)
 
+    # Special keys are less and less special now with the caching.
     def _press_special_key(self, key_label):
         """Press a named special key like Delete, Shift or ?123/ i.e. keys that
         don't necessarily have text names or are multi-character named.
 
         """
-
-        key = None
-        uppercase_key_label = key_label.upper()
-        if uppercase_key_label == "\b":
-            key = self.keypad.select_single(
-                'QQuickText',
-                action_type=ACTION_BACKSPACE
-            )
-        elif uppercase_key_label == "\n":
-            key = self.keypad.select_single(
-                'QQuickText',
-                action_type=ACTION_RETURN
-            )
-        elif key_label == " ":
-            key = self.keypad.select_single(
-                'QQuickText',
-                action_type=ACTION_SPACE
-            )
-        elif uppercase_key_label == "SHIFT":
-            key = self.keypad.select_single(
-                'QQuickText',
-                action_type=ACTION_SHIFT
-            )
-        elif key_label in ["?123", "ABC", "1/2", "2/2"]:
-            # These aren't really special keys, now the xpathselect bug has
-            # been sorted.
-            key = self.keypad.select_single('QQuickText', text=key_label)
-
-        if key is None:
-            raise UnsupportedKey(
-                "Attempting to push an unknown 'special' key: '%s'" % key_label
-            )
-
-        # Get required state for the key to be pushed (i.e not '\b', '\n', ' '
-        # as they are always available.)
-
-        self.pointer.click_object(key)
+        key_rect = self.get_key_position(key_label)
+        self.pointer.click_object(key_rect)
 
     def _is_special_key(self, key):
         return key in ["\n", "\b", " ", "SHIFT", "?123", "ABC", "1/2", "2/2"]
