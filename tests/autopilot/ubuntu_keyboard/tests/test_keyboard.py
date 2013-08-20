@@ -185,8 +185,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type('abc')
-        keyboard._press_special_key('SHIFT')
-        keyboard._press_special_key('SHIFT')
+        keyboard.press_key('SHIFT')
+        keyboard.press_key('SHIFT')
         keyboard.type('S')
 
         self.assertThat(
@@ -209,7 +209,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         # Normally, type and (press_key) take care of shifting into the correct
         # state, we do it manually here as that's what we're testing.
         keyboard.type('abc')
-        keyboard._press_special_key('SHIFT')
+        keyboard.press_key('SHIFT')
         keyboard.type('A')
 
         # Once the capital letter has been typed, we must be able to access the

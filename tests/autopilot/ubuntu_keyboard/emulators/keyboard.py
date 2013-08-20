@@ -117,8 +117,12 @@ class Keyboard(object):
         """Returns true if the keyboard is shown and ready to use."""
         return (
             self.keyboard.state == "SHOWN"
-            and self.keyboard.hideAnimationFinished == False
+            and not self.keyboard.hideAnimationFinished
         )
+
+    @property
+    def current_state(self):
+        return self.keyboard.layoutState
 
     # Much like is_available, but attempts to wait for the keyboard to be
     # ready.
@@ -169,15 +173,12 @@ class Keyboard(object):
         if not self.is_available():
             raise RuntimeError("Keyboard is not on screen")
 
-        if self._is_special_key(key):
-            self._press_special_key(key)
-        else:
+        if not self._is_special_key(key):
             required_state_for_key = self._get_keys_required_state(key)
             self._switch_keyboard_to_state(required_state_for_key)
 
-            # key = self.keypad.select_single('QQuickText', text=key)
-            key_rect = self.get_key_position(key)
-            self.pointer.click_object(key_rect)
+        key_rect = self.get_key_position(key)
+        self.pointer.click_object(key_rect)
 
     def type(self, string, delay=0.1):
         """Type the string *string* with a delay of *delay* between each key
@@ -205,14 +206,6 @@ class Keyboard(object):
         so that it is visible and can be clicked.
 
         """
-        # '.' as it is available on all screens (currently)
-        # '/' is available on more than 1 screen.
-
-        # veebers todo: need to handle when a character is available on
-        # multiple layouts. Well I guess the current edition will do this,
-        # i.e. will bias default, then shifted etc.
-        # if self.keyboard.activeId is not self.activeId:
-        #     self.update_char_state_lookup()
 
         if char in default_keys:
             return KB_STATE_DEFAULT
@@ -252,20 +245,8 @@ class Keyboard(object):
 
         for step in instructions:
             key, expected_state = step
-            # Veebers todo: just use press_key here, need to update the lookup
-            # too.
-            self._press_special_key(key)
-            # self.press_key(key)
+            self.press_key(key)
             self.keyboard.layoutState.wait_for(expected_state)
-
-    # Special keys are less and less special now with the caching.
-    def _press_special_key(self, key_label):
-        """Press a named special key like Delete, Shift or ?123/ i.e. keys that
-        don't necessarily have text names or are multi-character named.
-
-        """
-        key_rect = self.get_key_position(key_label)
-        self.pointer.click_object(key_rect)
 
     def _is_special_key(self, key):
         return key in ["\n", "\b", " ", "SHIFT", "?123", "ABC", "1/2", "2/2"]
@@ -275,9 +256,9 @@ class Keyboard(object):
     # lookup_table[REQUESTED_STATE][CURRENT_STATE] -> Instructions(Key to
     # press, Expected state after key press.)
     def _generate_state_lookup_table(self):
-        state_lookup_table = [
-            # KB_STATE_DEFAULT
-            {
+        state_lookup_table = defaultdict(lambda: defaultdict(list))
+        state_lookup_table = {
+            KB_STATE_DEFAULT: {
                 KB_STATE_SHIFTED: [
                     ("SHIFT", KB_STATE_DEFAULT)
                 ],
@@ -288,8 +269,7 @@ class Keyboard(object):
                     ("ABC", KB_STATE_DEFAULT)
                 ],
             },
-            # KB_STATE_SHIFTED
-            {
+            KB_STATE_SHIFTED: {
                 KB_STATE_DEFAULT: [
                     ("SHIFT", KB_STATE_SHIFTED)
                 ],
@@ -302,8 +282,7 @@ class Keyboard(object):
                     ("SHIFT", KB_STATE_SHIFTED)
                 ],
             },
-            # KB_STATE_SYMBOL_1
-            {
+            KB_STATE_SYMBOL_1: {
                 KB_STATE_DEFAULT: [
                     ("?123", KB_STATE_SYMBOL_1)
                 ],
@@ -314,8 +293,7 @@ class Keyboard(object):
                     ("2/2", KB_STATE_SYMBOL_1)
                 ],
             },
-            # KB_STATE_SYMBOL_2
-            {
+            KB_STATE_SYMBOL_2: {
                 KB_STATE_DEFAULT: [
                     ("?123", KB_STATE_SYMBOL_1),
                     ("1/2", KB_STATE_SYMBOL_2)
@@ -328,6 +306,6 @@ class Keyboard(object):
                     ("1/2", KB_STATE_SYMBOL_2)
                 ],
             },
-        ]
+        }
 
         return state_lookup_table
