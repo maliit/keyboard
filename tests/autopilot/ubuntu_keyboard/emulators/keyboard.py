@@ -24,7 +24,6 @@ import logging
 from autopilot.input import Pointer, Touch
 from autopilot.introspection import get_proxy_object_for_existing_process
 
-from ubuntu_keyboard.emulators.word_ribbon import WordRibbon
 
 logger = logging.getLogger(__name__)
 
@@ -85,12 +84,6 @@ class Keyboard(object):
             "QQuickItem",
             objectName="keyboardKeypad"
         )
-
-        ribbon = maliit.select_single(
-            'QQuickRectangle',
-            objectName='wordRibbon'
-        )
-        self.word_ribbon = WordRibbon(ribbon)
 
         # Contains instructions on how to move the keyboard into a specific
         # state/layout so that we can successfully press the required key.
