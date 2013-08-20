@@ -1,31 +1,10 @@
-ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130819-0ubuntu1) saucy; urgency=low
+ubuntu-keyboard (0.99.trunk.phablet2) UNRELEASED; urgency=low
 
-  [ Michael Terry ]
   * Rename source package
   * Update packaging to be more modern
   * Automatic snapshot from revision 1
 
-  [ Thomas Moenicke ]
-  * added language directory path to coreutils. Maliit-Plugins stores
-    all languages in /usr/share/maliit/plugins/languages/, but we
-    changed the language xml files as well, so they should be in a
-    plugin-related directory:
-    /usr/share/maliit/plugins/languages/com/ubuntu/
-  * added qml unittests added .bzrignore file
-  * more work on buildsystem
-  * sync with latest trunk phablet maliit-plugins
-  * fixes in buildsystem
-  * fixed language directory fixed build script
-  * new style for magnifier.
-  * tracking contentOrientation of app, fixes bug.
-
-  [ root ]
-  * fixed tests to build with the new plugin cleanup bazaar repo
-
-  [ Ubuntu daily release ]
-  * Automatic snapshot from revision 11
-
- -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 19 Aug 2013 02:04:41 +0000
+ -- Michael Terry <mterry@ubuntu.com>  Thu, 15 Aug 2013 15:06:09 -0400
 
 maliit-plugin-ubuntu (0.99.trunk.phablet1) saucy; urgency=low
 
