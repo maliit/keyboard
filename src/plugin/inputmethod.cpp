@@ -71,6 +71,7 @@ typedef MaliitKeyboard::NullFeedback DefaultFeedback;
 
 #ifdef QT_OPENGL_ES_2
 #include <ubuntu/ui/ubuntu_ui_session_service.h>
+#include <ubuntu/application/ui/window_properties.h>
   #define HAVE_UBUNTU_PLATFORM_API
 #endif
 
@@ -287,7 +288,13 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
 
     magnifier_surface->view()->setSource(QUrl::fromLocalFile(g_maliit_magnifier_qml));
 #endif
+#ifdef HAVE_UBUNTU_PLATFORM_API
+    // following used to help shell identify the OSK surface
+    view->setProperty("role", static_cast<int>(U_ON_SCREEN_KEYBOARD_ROLE));
+    view->setTitle("MaliitOnScreenKeyboard");
+#else
     view->setProperty("role", 7);
+#endif
 
     // workaround: resizeMode not working in current qpa imlementation
     // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
