@@ -162,6 +162,7 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
 
 class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
+    # Note: this is a failing test due to bug lp:1214695
     # Note: based on UX design doc
     def test_keyboard_layout_starts_shifted(self):
         """When first launched the keyboard state must be
@@ -229,7 +230,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
         self.assertThat(text_area.text, Eventually(Equals('abcA')))
 
-    # Note: this is a failing test.
+    # Note: this is a failing test due to bug lp:1214695
     # Note: Based on UX design doc.
     def test_shift_state_entered_after_fullstop(self):
         """After typing a fullstop the keyboard state must automatically
@@ -275,13 +276,19 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
 
 class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
+    """Note: these tests are currently failing due to bug lp:1214694 (the
+    activeView detail isn't exposed correctly nor is it updated as expected
+    (i.e. when the view changes.))
+
+    """
+
     scenarios = [
         (
             "Url",
             dict(
                 label="Url",
                 hints=['Qt.ImhUrlCharactersOnly'],
-                expected_activeview=0
+                expected_activeview="url"
             )
         ),
         (
@@ -289,7 +296,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             dict(
                 label="Password",
                 hints=['Qt.ImhHiddenText', 'Qt.ImhSensitiveData'],
-                expected_activeview=0
+                expected_activeview="password"
             )
         ),
         (
@@ -297,7 +304,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             dict(
                 label="Email",
                 hints=['Qt.ImhEmailCharactersOnly'],
-                expected_activeview=0
+                expected_activeview="email"
             )
         ),
         (
@@ -305,7 +312,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             dict(
                 label="Number",
                 hints=['Qt.ImhFormattedNumbersOnly'],
-                expected_activeview=0
+                expected_activeview="number"
             )
         ),
         (
@@ -313,7 +320,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             dict(
                 label="Telephone",
                 hints=['Qt.ImhDigitsOnly'],
-                expected_activeview=0
+                expected_activeview="phonenumber"
             )
         ),
     ]
@@ -330,6 +337,6 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         self.assertThat(
-            keyboard.keyboard.layoutState,
+            keyboard.keyboard.activeView,
             Eventually(Equals(self.expected_activeview))
         )
