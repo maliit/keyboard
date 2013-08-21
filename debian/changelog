@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130821-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Set name and role on OSK Window, helps unity8 shell identify the
+    window.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 13
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 21 Aug 2013 15:04:32 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130819-0ubuntu1) saucy; urgency=low
 
   [ Michael Terry ]
