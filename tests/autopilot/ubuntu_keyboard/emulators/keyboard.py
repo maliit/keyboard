@@ -84,31 +84,30 @@ class Keyboard(object):
 
         try:
             self.keyboard = maliit.select_single("Keyboard")
-        except ValueError as e:
-            e.message = "There was more than one Keyboard object found," \
-                "aborting. ({original_msg})".format(original_msg=e.message)
-        else:
             if self.keyboard is None:
                 raise RuntimeError(
                     "Unable to find the Keyboard object within the "
                     "maliit server"
                 )
+        except ValueError as e:
+            e.message = "There was more than one Keyboard object found," \
+                "aborting. ({original_msg})".format(original_msg=e.message)
 
         try:
             self.keypad = maliit.select_single(
                 "QQuickItem",
                 objectName="keyboardKeypad"
             )
-        except ValueError as e:
-            e.message = "There was more than one keyboard keypad object " \
-                "found, aborting. ({original_msg})".format(
-                    original_msg=e.message
-                )
-        else:
+
             if self.keyboard is None:
                 raise RuntimeError(
                     "Unable to find the keypad object within the "
                     "maliit server"
+                )
+        except ValueError as e:
+            e.message = "There was more than one keyboard keypad object " \
+                "found, aborting. ({original_msg})".format(
+                    original_msg=e.message
                 )
 
         # Contains instructions on how to move the keyboard into a specific
@@ -125,7 +124,7 @@ class Keyboard(object):
     def dismiss(self):
         """Swipe the keyboard down to hide it.
 
-        :raises: <something> if the state.wait_for fails meaning that the
+        :raises: *AssertionError* if the state.wait_for fails meaning that the
          keyboard failed to hide.
 
         """
@@ -164,10 +163,9 @@ class Keyboard(object):
                 False,
                 timeout=timeout
             )
+            return True
         except RuntimeError:
             return False
-        else:
-            return True
 
     def get_key_position(self, key):
         """Returns the global rect of the given key.
@@ -198,6 +196,11 @@ class Keyboard(object):
         """Tap on the key with the internal pointer
 
         :params key: String containing the text of the key to tap.
+
+        :raises: *RuntimeError* if the keyboard is not available and thus not
+          ready to be used.
+        :raises: *UnsupportedKey* if the supplied key cannot be found on any of
+          the the current keyboards layouts.
         """
         if not self.is_available():
             raise RuntimeError("Keyboard is not on screen")
@@ -217,6 +220,9 @@ class Keyboard(object):
         between each press as the keyboard shifts between states etc.
 
         Only 'normal' or single characters can be typed this way.
+
+        :raises: *UnsupportedKey* if one of the the supplied keys cannot be
+          found on any of the the current keyboards layouts.
 
         """
         for char in string:
