@@ -16,9 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+
 import os
 
-from testtools.matchers import IsInstance, Equals
+from testtools.matchers import Equals
 from tempfile import mktemp
 from textwrap import dedent
 
@@ -26,11 +27,7 @@ from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
 
-from ubuntu_keyboard.emulators.keyboard import (
-    Keyboard,
-    KB_STATE_DEFAULT,
-    KB_STATE_SHIFTED,
-)
+from ubuntu_keyboard.emulators.keyboard import Keyboard, KeyboardState
 
 
 class UbuntuKeyboardTests(AutopilotTestCase):
@@ -75,13 +72,11 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         Rectangle {
             id: window
             objectName: "windowRectangle"
-            //width: 500
-            //height: 500
             color: "lightgrey"
 
             Text {
                 id: inputLabel
-                text: "%s"
+                text: "%(label)s"
                 font.pixelSize: units.gu(3)
                 anchors {
                     left: input.left
@@ -99,21 +94,16 @@ class UbuntuKeyboardTests(AutopilotTestCase):
                     horizontalCenter: parent.horizontalCenter
                     topMargin: 10
                 }
-                inputMethodHints: %s
+                inputMethodHints: %(input_method)s
             }
         }
 
-        """  % (label, extra_script))
+        """ % {'label': label, 'input_method': extra_script})
 
         return self._start_qml_script(simple_script)
 
 
 class UbuntuKeyboardTestsAccess(UbuntuKeyboardTests):
-
-    def test_can_create_keyboard(self):
-        keyboard = Keyboard()
-        self.addCleanup(keyboard.dismiss)
-        self.assertThat(keyboard, IsInstance(Keyboard))
 
     def test_keyboard_is_available(self):
         keyboard = Keyboard()
@@ -185,7 +175,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
         self.assertThat(
             keyboard.keyboard.layoutState,
-            Eventually(Equals(KB_STATE_SHIFTED))
+            Eventually(Equals(KeyboardState.SHIFTED))
         )
 
     def test_shift_latch(self):
@@ -209,7 +199,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
         self.assertThat(
             keyboard.keyboard.layoutState,
-            Eventually(Equals(KB_STATE_SHIFTED))
+            Eventually(Equals(KeyboardState.SHIFTED))
         )
         self.assertThat(text_area.text, Eventually(Equals('abcS')))
 
@@ -234,7 +224,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         # lowercase letters, otherwise it's not in the correct state.
         self.assertThat(
             keyboard.keyboard.layoutState,
-            Eventually(Equals(KB_STATE_DEFAULT))
+            Eventually(Equals(KeyboardState.DEFAULT))
         )
 
         self.assertThat(text_area.text, Eventually(Equals('abcA')))
@@ -260,7 +250,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
         self.assertThat(
             keyboard.keyboard.layoutState,
-            Eventually(Equals(KB_STATE_SHIFTED))
+            Eventually(Equals(KeyboardState.SHIFTED))
         )
 
     def test_switching_between_states(self):

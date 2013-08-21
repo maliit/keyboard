@@ -29,27 +29,21 @@ logger = logging.getLogger(__name__)
 
 
 # Definitions of enums used within the cpp source code.
-# Perhaps move these into a 'constants' module.
-KB_STATE_DEFAULT = 0
-KB_STATE_SHIFTED = 1
-KB_STATE_SYMBOL_1 = 2
-KB_STATE_SYMBOL_2 = 3
+class KeyboardState:
+    DEFAULT = 0
+    SHIFTED = 1
+    SYMBOL_1 = 2
+    SYMBOL_2 = 3
 
-ACTION_INSERT = 0
-ACTION_SHIFT = 1
-ACTION_BACKSPACE = 2
-ACTION_SPACE = 3
-ACTION_SYM = 6
-ACTION_RETURN = 7
-ACTION_SWITCH = 11
 
-# Note (veebers 19-aug-13): this hardcoded right now, but will be reading data
-# from the keyboard itself in the very near future.
-# Moved '/' to primary symbol, default layout can have a .com instead.
-default_keys = "qwertyuiopasdfghjklzxcvbnm."
-shifted_keys = "QWERTYUIOPASDFGHJKLZXCVBNM."
-primary_symbol = "1234567890*#+-=()!?@~/\\';:,."
-secondary_symbol = u"$%<>[]`^|_{}\"&,.\u20ac\xa3\xa5\u20b9\xa7\xa1\xbf\xab\xbb\u201c\u201d\u201e"
+class KeyAction:
+    INSERT = 0
+    SHIFT = 1
+    BACKSPACE = 2
+    SPACE = 3
+    SYM = 6
+    RETURN = 7
+    SWITCH = 11
 
 
 class UnsupportedKey(RuntimeError):
@@ -60,12 +54,21 @@ class Keyboard(object):
 
     KeyPos = namedtuple("KeyPos", ['x', 'y', 'h', 'w'])
 
+    # Note (veebers 19-aug-13): this hardcoded right now, but will be reading
+    # data from the keyboard itself in the very near future. Moved '/' to
+    # primary symbol, default layout can have a .com instead.
+    default_keys = "qwertyuiopasdfghjklzxcvbnm."
+    shifted_keys = "QWERTYUIOPASDFGHJKLZXCVBNM."
+    primary_symbol = "1234567890*#+-=()!?@~/\\';:,."
+    secondary_symbol = u"$%<>[]`^|_{}\"&,.\u20ac\xa3\xa5\u20b9\xa7\xa1\xbf" \
+        u"\xab\xbb\u201c\u201d\u201e"
+
     # The ability to name the non-text keys.
     _action_id_to_text = {
-        ACTION_SHIFT: 'SHIFT',
-        ACTION_BACKSPACE: '\b',
-        ACTION_SPACE: ' ',
-        ACTION_RETURN: '\n'
+        KeyAction.SHIFT: 'SHIFT',
+        KeyAction.BACKSPACE: '\b',
+        KeyAction.SPACE: ' ',
+        KeyAction.RETURN: '\n'
     }
 
     def __init__(self, pointer=None):
@@ -73,17 +76,40 @@ class Keyboard(object):
             maliit = get_proxy_object_for_existing_process(
                 connection_name='org.maliit.server'
             )
-        except RuntimeError:
-            raise RuntimeError(
-                "Unable to find maliit-server dbus object. Has it been "
-                "started with introspection enabled?"
-            )
+        except RuntimeError as e:
+            e.message = "Unable to find maliit-server dbus object. Has it" \
+                "been started with introspection enabled? Original message: " \
+                "{original_msg}".format(original_msg=e.message)
+            raise e
 
-        self.keyboard = maliit.select_single("Keyboard")
-        self.keypad = maliit.select_single(
-            "QQuickItem",
-            objectName="keyboardKeypad"
-        )
+        try:
+            self.keyboard = maliit.select_single("Keyboard")
+        except ValueError as e:
+            e.message = "There was more than one Keyboard object found," \
+                "aborting. ({original_msg})".format(original_msg=e.message)
+        else:
+            if self.keyboard is None:
+                raise RuntimeError(
+                    "Unable to find the Keyboard object within the "
+                    "maliit server"
+                )
+
+        try:
+            self.keypad = maliit.select_single(
+                "QQuickItem",
+                objectName="keyboardKeypad"
+            )
+        except ValueError as e:
+            e.message = "There was more than one keyboard keypad object " \
+                "found, aborting. ({original_msg})".format(
+                    original_msg=e.message
+                )
+        else:
+            if self.keyboard is None:
+                raise RuntimeError(
+                    "Unable to find the keypad object within the "
+                    "maliit server"
+                )
 
         # Contains instructions on how to move the keyboard into a specific
         # state/layout so that we can successfully press the required key.
@@ -126,15 +152,18 @@ class Keyboard(object):
 
     # Much like is_available, but attempts to wait for the keyboard to be
     # ready.
-    def wait_for_keyboard_ready(self):
+    def wait_for_keyboard_ready(self, timeout=10):
         """Waits for *timeout* for the keyboard to be ready and returns
         true. Returns False if the keyboard fails to be considered ready within
         the alloted time.
 
         """
         try:
-            self.keyboard.state.wait_for("SHOWN")
-            self.keyboard.hideAnimationFinished.wait_for(False)
+            self.keyboard.state.wait_for("SHOWN", timeout=timeout)
+            self.keyboard.hideAnimationFinished.wait_for(
+                False,
+                timeout=timeout
+            )
         except RuntimeError:
             return False
         else:
@@ -155,7 +184,7 @@ class Keyboard(object):
     def _update_pos_table_for_current_state(self):
         all_keys = self.keypad.select_many('QQuickText')
         current_state = self.keyboard.layoutState
-        labeled_keys = [ACTION_INSERT, ACTION_SWITCH, ACTION_SYM]
+        labeled_keys = (KeyAction.INSERT, KeyAction.SWITCH, KeyAction.SYM)
         for key in all_keys:
             with key.no_automatic_refreshing():
                 key_pos = Keyboard.KeyPos(*key.globalRect)
@@ -190,13 +219,6 @@ class Keyboard(object):
         Only 'normal' or single characters can be typed this way.
 
         """
-        # # Allow some time for the keyboard to render and become ready if
-        # # required.
-        # try:
-        #     self.is_available.wait_for(True)
-        # except RuntimeError as e:
-        #     raise RuntimeError("Keyboard is unavailable (%r)" % e)
-
         for char in string:
             self.press_key(char)
             sleep(delay)
@@ -207,14 +229,14 @@ class Keyboard(object):
 
         """
 
-        if char in default_keys:
-            return KB_STATE_DEFAULT
-        elif char in shifted_keys:
-            return KB_STATE_SHIFTED
-        elif char in primary_symbol:
-            return KB_STATE_SYMBOL_1
-        elif char in secondary_symbol:
-            return KB_STATE_SYMBOL_2
+        if char in Keyboard.default_keys:
+            return KeyboardState.DEFAULT
+        elif char in Keyboard.shifted_keys:
+            return KeyboardState.SHIFTED
+        elif char in Keyboard.primary_symbol:
+            return KeyboardState.SYMBOL_1
+        elif char in Keyboard.secondary_symbol:
+            return KeyboardState.SYMBOL_2
         else:
             raise UnsupportedKey(
                 "Don't know which state key '%s' requires" % char
@@ -256,56 +278,53 @@ class Keyboard(object):
     # lookup_table[REQUESTED_STATE][CURRENT_STATE] -> Instructions(Key to
     # press, Expected state after key press.)
     def _generate_state_lookup_table(self):
-        state_lookup_table = defaultdict(lambda: defaultdict(list))
-        state_lookup_table = {
-            KB_STATE_DEFAULT: {
-                KB_STATE_SHIFTED: [
-                    ("SHIFT", KB_STATE_DEFAULT)
+        return {
+            KeyboardState.DEFAULT: {
+                KeyboardState.SHIFTED: [
+                    ("SHIFT", KeyboardState.DEFAULT)
                 ],
-                KB_STATE_SYMBOL_1: [
-                    ("ABC", KB_STATE_DEFAULT)
+                KeyboardState.SYMBOL_1: [
+                    ("ABC", KeyboardState.DEFAULT)
                 ],
-                KB_STATE_SYMBOL_2: [
-                    ("ABC", KB_STATE_DEFAULT)
-                ],
-            },
-            KB_STATE_SHIFTED: {
-                KB_STATE_DEFAULT: [
-                    ("SHIFT", KB_STATE_SHIFTED)
-                ],
-                KB_STATE_SYMBOL_1: [
-                    ("ABC", KB_STATE_DEFAULT),
-                    ("SHIFT", KB_STATE_SHIFTED)
-                ],
-                KB_STATE_SYMBOL_2: [
-                    ("ABC", KB_STATE_DEFAULT),
-                    ("SHIFT", KB_STATE_SHIFTED)
+                KeyboardState.SYMBOL_2: [
+                    ("ABC", KeyboardState.DEFAULT)
                 ],
             },
-            KB_STATE_SYMBOL_1: {
-                KB_STATE_DEFAULT: [
-                    ("?123", KB_STATE_SYMBOL_1)
+            KeyboardState.SHIFTED: {
+                KeyboardState.DEFAULT: [
+                    ("SHIFT", KeyboardState.SHIFTED)
                 ],
-                KB_STATE_SHIFTED: [
-                    ("?123", KB_STATE_SYMBOL_1)
+                KeyboardState.SYMBOL_1: [
+                    ("ABC", KeyboardState.DEFAULT),
+                    ("SHIFT", KeyboardState.SHIFTED)
                 ],
-                KB_STATE_SYMBOL_2: [
-                    ("2/2", KB_STATE_SYMBOL_1)
+                KeyboardState.SYMBOL_2: [
+                    ("ABC", KeyboardState.DEFAULT),
+                    ("SHIFT", KeyboardState.SHIFTED)
                 ],
             },
-            KB_STATE_SYMBOL_2: {
-                KB_STATE_DEFAULT: [
-                    ("?123", KB_STATE_SYMBOL_1),
-                    ("1/2", KB_STATE_SYMBOL_2)
+            KeyboardState.SYMBOL_1: {
+                KeyboardState.DEFAULT: [
+                    ("?123", KeyboardState.SYMBOL_1)
                 ],
-                KB_STATE_SHIFTED: [
-                    ("?123", KB_STATE_SYMBOL_1),
-                    ("1/2", KB_STATE_SYMBOL_2)
+                KeyboardState.SHIFTED: [
+                    ("?123", KeyboardState.SYMBOL_1)
                 ],
-                KB_STATE_SYMBOL_1: [
-                    ("1/2", KB_STATE_SYMBOL_2)
+                KeyboardState.SYMBOL_2: [
+                    ("2/2", KeyboardState.SYMBOL_1)
+                ],
+            },
+            KeyboardState.SYMBOL_2: {
+                KeyboardState.DEFAULT: [
+                    ("?123", KeyboardState.SYMBOL_1),
+                    ("1/2", KeyboardState.SYMBOL_2)
+                ],
+                KeyboardState.SHIFTED: [
+                    ("?123", KeyboardState.SYMBOL_1),
+                    ("1/2", KeyboardState.SYMBOL_2)
+                ],
+                KeyboardState.SYMBOL_1: [
+                    ("1/2", KeyboardState.SYMBOL_2)
                 ],
             },
         }
-
-        return state_lookup_table
