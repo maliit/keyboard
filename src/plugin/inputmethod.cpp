@@ -360,7 +360,6 @@ void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrient
                     keyboardVisibleRect.height()
                     );
     }
-
 }
 
 void InputMethodPrivate::updateKeyboardOrientation()
