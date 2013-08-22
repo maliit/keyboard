@@ -34,6 +34,7 @@ import QtQuick.Window 2.0
 
 Item {
     id: canvas
+    objectName: "ubuntuKeyboard" // Allow us to specify a specific keyboard within autopilot.
     property alias layout: keyRepeater.model
     property variant event_handler
     property bool area_enabled // MouseArea has no id property so we cannot alias its enabled property.

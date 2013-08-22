@@ -22,7 +22,10 @@ from time import sleep
 import logging
 
 from autopilot.input import Pointer, Touch
-from autopilot.introspection import get_proxy_object_for_existing_process
+from autopilot.introspection import (
+    get_proxy_object_for_existing_process,
+    ProcessSearchError
+)
 
 
 logger = logging.getLogger(__name__)
@@ -76,39 +79,46 @@ class Keyboard(object):
             maliit = get_proxy_object_for_existing_process(
                 connection_name='org.maliit.server'
             )
-        except RuntimeError as e:
-            e.message = "Unable to find maliit-server dbus object. Has it" \
-                "been started with introspection enabled? Original message: " \
-                "{original_msg}".format(original_msg=e.message)
-            raise e
+        except ProcessSearchError as e:
+            e.args += (
+                "Unable to find maliit-server dbus object. Has it been "
+                "started with introspection enabled?",
+            )
+            raise
 
         try:
-            self.keyboard = maliit.select_single("Keyboard")
+            self.keyboard = maliit.select_single(
+                "Keyboard",
+                objectName="ubuntuKeyboard"
+            )
             if self.keyboard is None:
                 raise RuntimeError(
-                    "Unable to find the Keyboard object within the "
+                    "Unable to find the Ubuntu Keyboard object within the "
                     "maliit server"
                 )
         except ValueError as e:
-            e.message = "There was more than one Keyboard object found," \
-                "aborting. ({original_msg})".format(original_msg=e.message)
+            e.args += (
+                "There was more than one Keyboard object found, aborting.",
+            )
+            raise
 
         try:
-            self.keypad = maliit.select_single(
+            self.keypad = self.keyboard.select_single(
                 "QQuickItem",
                 objectName="keyboardKeypad"
             )
 
-            if self.keyboard is None:
+            if self.keypad is None:
                 raise RuntimeError(
                     "Unable to find the keypad object within the "
                     "maliit server"
                 )
         except ValueError as e:
-            e.message = "There was more than one keyboard keypad object " \
-                "found, aborting. ({original_msg})".format(
-                    original_msg=e.message
-                )
+            e.args += (
+                "There was more than one keyboard keypad object found, "
+                "aborting.",
+            )
+            raise
 
         # Contains instructions on how to move the keyboard into a specific
         # state/layout so that we can successfully press the required key.
