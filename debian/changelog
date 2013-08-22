@@ -1,3 +1,28 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130822-0ubuntu1) saucy; urgency=low
+
+  [ Bill Filler ]
+  * revert code committed in rev 11 as it's causing regressions with
+    orientation (lp:1214575 and lp:1214578). (LP: #1214578, #1214575)
+  * Install server.conf file to replace the default keyboard, until the
+    config system is better handled later on.
+  * Removing unused styles.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 17
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 06:08:28 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130821-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Set name and role on OSK Window, helps unity8 shell identify the
+    window.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 13
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 21 Aug 2013 15:04:32 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130819-0ubuntu1) saucy; urgency=low
 
   [ Michael Terry ]

@@ -1,1 +1,2 @@
+debian/server.conf etc/xdg/maliit.org/
 usr/lib/maliit/plugins/libubuntu-keyboard-plugin.so
