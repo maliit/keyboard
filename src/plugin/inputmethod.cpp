@@ -171,6 +171,7 @@ public:
 
     explicit InputMethodPrivate(InputMethod * const q,
                                 MAbstractInputMethodHost *host);
+    ~InputMethodPrivate();
     void setLayoutOrientation(Qt::ScreenOrientation qtOrientation);
     void updateKeyboardOrientation();
     void updateWordRibbon();
@@ -203,10 +204,10 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
     , context(q, style)
     , host(host)
     , view(0)
+    , applicationApiWrapper(new UbuntuApplicationApiWrapper)
     , predictionEnabled(false)
     , contentType(Maliit::FreeTextContentType)
     , activeLanguageId("en_us")
-    , applicationApiWrapper(new UbuntuapplicationApiWrapper)
 {
     view = createWindow(host);
 
@@ -293,7 +294,7 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
     view->setResizeMode(QQuickView::SizeRootObjectToView);
 }
 
-void InputMethodPrivate::~InputMethodPrivate()
+InputMethodPrivate::~InputMethodPrivate()
 {
     delete applicationApiWrapper;
 }

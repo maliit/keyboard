@@ -22,7 +22,11 @@
   #define HAVE_UBUNTU_PLATFORM_API
 #endif
 
+#include <QtGlobal>
+#include <QByteArray>
+
 UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
+    : m_implemented(false)
 {
     if (qgetenv("QT_QPA_PLATFORM") == "ubuntumirclient") {
         // some application api features not available
@@ -36,6 +40,11 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
     if (m_implemented) {
 #ifdef HAVE_UBUNTU_PLATFORM_API
         ubuntu_ui_report_osk_visible(x, y, width, height);
+#else
+    Q_UNUSED(x)
+    Q_UNUSED(y)
+    Q_UNUSED(width)
+    Q_UNUSED(height)
 #endif
     }
 }
