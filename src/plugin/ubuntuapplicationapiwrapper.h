@@ -39,7 +39,7 @@ public:
     void reportOSKInvisible();
 
 private:
-    bool m_implemented;
+    bool m_runningOnMir;
 };
 
 #endif // UBUNTUAPPLICATIONAPIWRAPPER_H

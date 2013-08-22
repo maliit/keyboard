@@ -26,19 +26,17 @@
 #include <QByteArray>
 
 UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
-    : m_implemented(false)
+    : m_runningOnMir(false)
 {
     if (qgetenv("QT_QPA_PLATFORM") == "ubuntumirclient") {
-        // some application api features not available
-    } else {
-        m_implemented = true;
+        m_runningOnMir = false;
     }
 }
 
 void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, const int width, const int height)
 {
 #ifdef HAVE_UBUNTU_PLATFORM_API
-    if (m_implemented) {
+    if (!m_runningOnMir) { // following method not implemented on Mir
         ubuntu_ui_report_osk_visible(x, y, width, height);
     }
 #else
@@ -52,7 +50,7 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
 void UbuntuApplicationApiWrapper::reportOSKInvisible()
 {
 #ifdef HAVE_UBUNTU_PLATFORM_API
-    if (m_implemented) {
+    if (!m_runningOnMir) { // following method not implemented on Mir
         ubuntu_ui_report_osk_invisible();
     }
 #endif
