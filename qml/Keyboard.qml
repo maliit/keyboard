@@ -30,7 +30,6 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Window 2.0
 
 Item {
     id: canvas
@@ -46,7 +45,7 @@ Item {
     readonly property var layoutState: layout.keyboard_state
     readonly property string activeView: layout.activeView
 
-    property int contentOrientation: Screen.orientation
+    property int contentOrientation: Qt.PrimaryOrientation
 
     property bool shown: false;
     property bool wordribbon_visible: true;
