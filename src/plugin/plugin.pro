@@ -25,6 +25,7 @@ HEADERS += \
     editor.h \
     updatenotifier.h \
     maliitcontext.h \
+    ubuntuapplicationapiwrapper.h
 
 SOURCES += \
     plugin.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     editor.cpp \
     updatenotifier.cpp \
     maliitcontext.cpp \
+    ubuntuapplicationapiwrapper.cpp
 
 target.path += $${MALIIT_PLUGINS_DIR}
 INSTALLS += target
