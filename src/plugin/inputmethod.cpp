@@ -33,6 +33,7 @@
 #include "editor.h"
 #include "updatenotifier.h"
 #include "maliitcontext.h"
+#include "ubuntuapplicationapiwrapper.h"
 
 #include "models/key.h"
 #include "models/keyarea.h"
@@ -68,12 +69,6 @@ typedef MaliitKeyboard::NullFeedback DefaultFeedback;
 #include <QWidget>
 #include <QDesktopWidget>
 #include <QtQuick>
-
-#ifdef QT_OPENGL_ES_2
-#include <ubuntu/ui/ubuntu_ui_session_service.h>
-#include <ubuntu/application/ui/window_properties.h>
-  #define HAVE_UBUNTU_PLATFORM_API
-#endif
 
 class MImUpdateEvent;
 
@@ -168,6 +163,7 @@ public:
     QRect keyboardVisibleRect;
     MAbstractInputMethodHost* host;
     QQuickView* view;
+    UbuntuApplicationApiWrapper* applicationApiWrapper;
 
     bool predictionEnabled;
     Maliit::TextContentType contentType;
@@ -175,6 +171,7 @@ public:
 
     explicit InputMethodPrivate(InputMethod * const q,
                                 MAbstractInputMethodHost *host);
+    ~InputMethodPrivate();
     void setLayoutOrientation(Qt::ScreenOrientation qtOrientation);
     void updateKeyboardOrientation();
     void updateWordRibbon();
@@ -207,6 +204,7 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
     , context(q, style)
     , host(host)
     , view(0)
+    , applicationApiWrapper(new UbuntuApplicationApiWrapper)
     , predictionEnabled(false)
     , contentType(Maliit::FreeTextContentType)
     , activeLanguageId("en_us")
@@ -286,17 +284,19 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
 
     magnifier_surface->view()->setSource(QUrl::fromLocalFile(g_maliit_magnifier_qml));
 #endif
-#ifdef HAVE_UBUNTU_PLATFORM_API
+
     // following used to help shell identify the OSK surface
-    view->setProperty("role", static_cast<int>(U_ON_SCREEN_KEYBOARD_ROLE));
+    view->setProperty("role", applicationApiWrapper->oskWindowRole());
     view->setTitle("MaliitOnScreenKeyboard");
-#else
-    view->setProperty("role", 7);
-#endif
 
     // workaround: resizeMode not working in current qpa imlementation
     // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
     view->setResizeMode(QQuickView::SizeRootObjectToView);
+}
+
+InputMethodPrivate::~InputMethodPrivate()
+{
+    delete applicationApiWrapper;
 }
 
 void InputMethodPrivate::updateWordRibbon()
@@ -338,9 +338,8 @@ void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrient
 
     qmlRootItem->setProperty("contentOrientation", screenOrientation);
 
-#ifdef HAVE_UBUNTU_PLATFORM_API
     if (qmlRootItem->property("shown").toBool()) {
-        ubuntu_ui_report_osk_invisible();
+        applicationApiWrapper->reportOSKInvisible();
 
         qDebug() << "keyboard is reporting: total <x y w h>: <"
                  << windowGeometryRect.x()
@@ -355,15 +354,13 @@ void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrient
                  << "> to the app manager.";
 
         // report the visible part as input trap, the invisible part can click through, e.g. browser url bar
-        ubuntu_ui_report_osk_visible(
+        applicationApiWrapper->reportOSKVisible(
                     keyboardVisibleRect.x(),
                     keyboardVisibleRect.y(),
                     keyboardVisibleRect.width(),
                     keyboardVisibleRect.height()
                     );
     }
-
-#endif
 }
 
 void InputMethodPrivate::updateKeyboardOrientation()
@@ -498,7 +495,6 @@ void InputMethod::show()
     rect.moveTop( d->windowGeometryRect.height() - d->keyboardVisibleRect.height() );
     inputMethodHost()->setInputMethodArea(rect, d->view);
 
-#ifdef HAVE_UBUNTU_PLATFORM_API
     qDebug() << "keyboard is reporting <x y w h>: <"
                 << d->keyboardVisibleRect.x()
                 << d->keyboardVisibleRect.y()
@@ -506,13 +502,12 @@ void InputMethod::show()
                 << d->keyboardVisibleRect.height()
                 << "> to the app manager.";
 
-    ubuntu_ui_report_osk_visible(
+    d->applicationApiWrapper->reportOSKVisible(
                 d->keyboardVisibleRect.x(),
                 d->keyboardVisibleRect.y(),
                 d->keyboardVisibleRect.width(),
                 d->keyboardVisibleRect.height()
                 );
-#endif
 
     d->qmlRootItem->setProperty("shown", true);
 }
@@ -534,9 +529,7 @@ void InputMethod::hide()
     inputMethodHost()->setInputMethodArea(r);
 #endif
 
-#ifdef HAVE_UBUNTU_PLATFORM_API
-    ubuntu_ui_report_osk_invisible();
-#endif
+    d->applicationApiWrapper->reportOSKInvisible();
 
     d->qmlRootItem->setProperty("shown", false);
 }
