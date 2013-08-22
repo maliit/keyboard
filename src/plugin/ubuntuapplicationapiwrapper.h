@@ -33,7 +33,6 @@ class UbuntuApplicationApiWrapper
 public:
     UbuntuApplicationApiWrapper();
 
-    bool haveApplicationApi() const;
     int oskWindowRole() const;
 
     void reportOSKVisible(const int, const int, const int, const int);

@@ -31,15 +31,6 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
     }
 }
 
-bool UbuntuApplicationApiWrapper::haveApplicationApi() const
-{
-#ifdef HAVE_UBUNTU_PLATFORM_API
-    return true;
-#else
-    return false;
-#endif
-}
-
 void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, const int width, const int height)
 {
     if (m_implemented) {

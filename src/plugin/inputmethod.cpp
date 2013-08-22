@@ -337,8 +337,7 @@ void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrient
 
     qmlRootItem->setProperty("contentOrientation", screenOrientation);
 
-    if (applicationApiWrapper->haveApplicationApi()
-            && qmlRootItem->property("shown").toBool()) {
+    if (qmlRootItem->property("shown").toBool()) {
         applicationApiWrapper->reportOSKInvisible();
 
         qDebug() << "keyboard is reporting: total <x y w h>: <"
@@ -496,21 +495,19 @@ void InputMethod::show()
     rect.moveTop( d->windowGeometryRect.height() - d->keyboardVisibleRect.height() );
     inputMethodHost()->setInputMethodArea(rect, d->view);
 
-    if (d->applicationApiWrapper->haveApplicationApi()) {
-        qDebug() << "keyboard is reporting <x y w h>: <"
-                    << d->keyboardVisibleRect.x()
-                    << d->keyboardVisibleRect.y()
-                    << d->keyboardVisibleRect.width()
-                    << d->keyboardVisibleRect.height()
-                    << "> to the app manager.";
+    qDebug() << "keyboard is reporting <x y w h>: <"
+                << d->keyboardVisibleRect.x()
+                << d->keyboardVisibleRect.y()
+                << d->keyboardVisibleRect.width()
+                << d->keyboardVisibleRect.height()
+                << "> to the app manager.";
 
-        d->applicationApiWrapper->reportOSKVisible(
-                    d->keyboardVisibleRect.x(),
-                    d->keyboardVisibleRect.y(),
-                    d->keyboardVisibleRect.width(),
-                    d->keyboardVisibleRect.height()
-                    );
-    }
+    d->applicationApiWrapper->reportOSKVisible(
+                d->keyboardVisibleRect.x(),
+                d->keyboardVisibleRect.y(),
+                d->keyboardVisibleRect.width(),
+                d->keyboardVisibleRect.height()
+                );
 
     d->qmlRootItem->setProperty("shown", true);
 }
@@ -532,7 +529,7 @@ void InputMethod::hide()
     inputMethodHost()->setInputMethodArea(r);
 #endif
 
-    if (d->applicationApiWrapper->haveApplicationApi()) d->applicationApiWrapper->reportOSKInvisible();
+    d->applicationApiWrapper->reportOSKInvisible();
 
     d->qmlRootItem->setProperty("shown", false);
 }
