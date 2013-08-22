@@ -37,25 +37,25 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
 
 void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, const int width, const int height)
 {
-    if (m_implemented) {
 #ifdef HAVE_UBUNTU_PLATFORM_API
+    if (m_implemented) {
         ubuntu_ui_report_osk_visible(x, y, width, height);
+    }
 #else
     Q_UNUSED(x)
     Q_UNUSED(y)
     Q_UNUSED(width)
     Q_UNUSED(height)
 #endif
-    }
 }
 
 void UbuntuApplicationApiWrapper::reportOSKInvisible()
 {
-    if (m_implemented) {
 #ifdef HAVE_UBUNTU_PLATFORM_API
+    if (m_implemented) {
         ubuntu_ui_report_osk_invisible();
-#endif
     }
+#endif
 }
 
 int UbuntuApplicationApiWrapper::oskWindowRole() const
