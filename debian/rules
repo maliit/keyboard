@@ -4,7 +4,7 @@
 export DPKG_GENSYMBOLS_CHECK_LEVEL=4
 
 %:
-	dh $@ --fail-missing
+	dh $@ --fail-missing --with python2
 
 override_dh_auto_configure:
 	dh_auto_configure -- -recursive \
@@ -19,10 +19,16 @@ override_dh_auto_configure:
 	                     CONFIG+=enable-qt-mobility
 
 override_dh_install:
-	# Don't install the tests
+	# install autopilot tests
+	cd tests/autopilot; \
+	set -ex; for python in $(shell pyversions -r); do \
+	    $$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
+	done; \
+	cd $(CURDIR)
+	# Don't install the other tests
 	rm debian/tmp/usr/bin/language-layout-loading
 	rm debian/tmp/usr/bin/language-layout-switching
 	rm debian/tmp/usr/bin/repeat-backspace
 	rm debian/tmp/usr/bin/ut_editor
 	rm debian/tmp/usr/bin/word-candidates
-	dh_install
+	dh_install -X'*.pyc' --fail-missing

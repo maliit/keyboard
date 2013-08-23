@@ -246,6 +246,9 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
     QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
                      &editor,  SLOT(onLanguageChanged(const QString&)));
 
+    QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
+                     &layout.model,  SLOT(setState(Model::Layout::State)));
+
 #ifdef EXTENDED_SURFACE_TEMP_DISABLED
     QObject::connect(&layout.event_handler,          SIGNAL(extendedKeysShown(Key)),
                      &extended_layout.event_handler, SLOT(onExtendedKeysShown(Key)));

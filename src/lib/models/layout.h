@@ -78,11 +78,22 @@ class Layout
     Q_PROPERTY(int invisible_toucharea_height READ invisibleTouchAreaHeight
                                          NOTIFY invisibleTouchAreaHeightChanged)
 
+    Q_PROPERTY(State keyboard_state READ state WRITE setState
+                            NOTIFY stateChanged)
     Q_PROPERTY(QString activeView READ activeView WRITE setActiveView
                                          NOTIFY activeViewChanged)
 
+    Q_ENUMS(State)
 
 public:
+    enum State {
+        DefaultState,
+        ShiftedState,
+        PrimarySymbolState,
+        SecondarySymbolState,
+        DeadkeyState
+    };
+
     enum Roles {
         RoleKeyRectangle = Qt::UserRole + 1,
         RoleKeyReactiveArea,
@@ -94,7 +105,8 @@ public:
         RoleKeyFontSize,
         RoleKeyFontStretch,
         RoleKeyIcon,
-        RoleKeyActionInsert
+        RoleKeyActionInsert,
+        RoleKeyAction   // Extra introspection detail for testing.
     };
 
     explicit Layout(QObject *parent = 0);
@@ -136,6 +148,10 @@ public:
 
     Q_SLOT int invisibleTouchAreaHeight() const;
     Q_SIGNAL void invisibleTouchAreaHeightChanged(int &changed);
+
+    Q_SLOT State state() const;
+    Q_SLOT void setState(Model::Layout::State state);
+    Q_SIGNAL void stateChanged(Model::Layout::State state);
 
     Q_SLOT QString activeView() const;
     Q_SLOT void setActiveView(const QString& activeViewId);
