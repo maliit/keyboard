@@ -1,3 +1,29 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130822.1-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Create UbuntuApplicationApiWrapper to consolidate the differences
+    between SurfaceFlinger and Mir operations. Fixes crash on Mir-only
+    platform.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 19
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 18:36:25 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130822-0ubuntu1) saucy; urgency=low
+
+  [ Bill Filler ]
+  * revert code committed in rev 11 as it's causing regressions with
+    orientation (lp:1214575 and lp:1214578). (LP: #1214578, #1214575)
+  * Install server.conf file to replace the default keyboard, until the
+    config system is better handled later on.
+  * Removing unused styles.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 17
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 06:08:28 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130821-0ubuntu1) saucy; urgency=low
 
   [ Gerry Boland ]

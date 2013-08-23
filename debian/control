@@ -12,7 +12,7 @@ Build-Depends: debhelper (>= 9),
                libpinyin2-dev,
                libpresage-dev,
                libubuntu-platform-api1-dev,
-               maliit-framework-dev (>= 0.99+git20130702+97e8335),
+               maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
                pkg-config,
                python:any (>= 2.7),
                python-setuptools,
@@ -27,7 +27,7 @@ Vcs-Bzr: https://code.launchpad.net/~phablet-team/ubuntu-keyboard/trunk
 
 Package: ubuntu-keyboard
 Architecture: any
-Depends: maliit-framework (>= 0.99+git20130702+97e8335),
+Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
          qtdeclarative5-window-plugin,
          ubuntu-keyboard-data (>= ${source:Version}),
          ${misc:Depends},
