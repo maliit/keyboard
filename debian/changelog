@@ -1,3 +1,13 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130823-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Revert accidentally approved MR for revno 19, code needs review.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 21
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 23 Aug 2013 10:08:24 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130822.1-0ubuntu1) saucy; urgency=low
 
   [ Gerry Boland ]
