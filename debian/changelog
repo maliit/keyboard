@@ -1,3 +1,26 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130827-0ubuntu1) saucy; urgency=low
+
+  [ Bill Filler ]
+  * adding autopilot test, and re-merge from trunk.
+
+  [ Gerry Boland ]
+  * Create UbuntuApplicationApiWrapper to consolidate the differences
+    between the ubuntu-application-api on SurfaceFlinger and Mir (some
+    portions of the API are deprecated, so not implemented on Mir).
+    Fixes crash on Mir-only platform.
+
+  [ Christopher Lee ]
+  * adding autopilot test, and re-merge from trunk.
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * As pointed out by Sebastian, the package:any stanza is not really
+    valid - we already had to revert a similar change in the past.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 25
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Aug 2013 02:10:27 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130823-0ubuntu1) saucy; urgency=low
 
   [ Gerry Boland ]
