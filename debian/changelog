@@ -1,3 +1,13 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130827.1-0ubuntu1) saucy; urgency=low
+
+  [ Thomas Moenicke ]
+  * fixing size of magnifier to not being cut when shown in first row .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 27
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Aug 2013 19:11:27 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130827-0ubuntu1) saucy; urgency=low
 
   [ Bill Filler ]
