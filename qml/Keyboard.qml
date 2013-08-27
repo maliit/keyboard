@@ -30,6 +30,7 @@
  */
 
 import QtQuick 2.0
+import "constants.js" as Const
 
 Item {
     id: canvas
@@ -225,6 +226,8 @@ Item {
             Popper {
                 id: popper
                 target: pressedKey
+                width: units.gu(Const.magnifierWidth);
+                height: units.gu(Const.magnifierHeight);
             }
 
             // Keyboard title rendering

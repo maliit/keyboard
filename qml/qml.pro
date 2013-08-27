@@ -4,7 +4,7 @@ TARGET = dummy
 TEMPLATE = lib
 
 qml.path = $$UBUNTU_KEYBOARD_DATA_DIR
-qml.files = *.qml
+qml.files = *.qml *.js
 
 INSTALLS += qml
 OTHER_FILES += \
@@ -15,5 +15,6 @@ OTHER_FILES += \
     maliit-ui-constants.qml \
     RotationHelper.qml \
     WordRibbon.qml \
-    Popper.qml
+    Popper.qml \
+    constants.js \
 
