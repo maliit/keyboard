@@ -16,6 +16,9 @@
 
 #include "ubuntuapplicationapiwrapper.h"
 
+// FIXME: this is hacky way of deciding if running on Touch platform or not
+#include <QtCore/qconfig.h>
+
 #ifdef QT_OPENGL_ES_2
 #include <ubuntu/ui/ubuntu_ui_session_service.h>
 #include <ubuntu/application/ui/window_properties.h>
