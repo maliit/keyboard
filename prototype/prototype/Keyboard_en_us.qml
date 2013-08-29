@@ -74,7 +74,7 @@ KeyPad {
             CharKey { label: "b"; shifted: "B"; }
             CharKey { label: "n"; shifted: "N"; }
             CharKey { label: "m"; shifted: "M"; }
-            ActionKey { action: "backspace"; }
+            ActionKey { iconNormal: "images/icon_backspace@18.png"; iconShifted: "images/icon_backspace@18.png"; action: "backspace"; }
         }
 
         Row {
