@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130829.1-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Fix crash on Mir, actually disable broken functions when using Mir
+    (i.e. typo false -> true).
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 31
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 15:21:32 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130829-0ubuntu1) saucy; urgency=low
 
   [ Gerry Boland ]
