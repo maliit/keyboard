@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130829-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Fix platform detection, corrects OSK surface management with
+    platform-api. Fixes bug: 1217501. (LP: #1217501)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 29
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 02:10:20 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130827.1-0ubuntu1) saucy; urgency=low
 
   [ Thomas Moenicke ]
