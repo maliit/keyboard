@@ -17,6 +17,9 @@
 import QtQuick 2.0
 
 ActionKey {
+
+    action: "shift"
+
     MouseArea {
         anchors.fill: parent
         onClicked: {

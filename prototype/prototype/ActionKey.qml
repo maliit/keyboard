@@ -16,38 +16,27 @@
 
 import QtQuick 2.0
 
-Rectangle {
-    width: panel.keyWidth
-    height: panel.keyHeight
-    color: "green"
+import "constants.js" as UI
 
-    property string label: ""
-    property string shifted: ""
+CharKey {
+    id: actionKeyRoot
+    property string iconNormal: ""
+    property string iconShifted: ""
     property string action: ""
-    property string icon: ""
 
-    state: panel.activeKeypad.state
+    imgNormal: UI.imageActionKey
+    imgPressed: UI.imageActionKeyPressed
 
-    Text {
-        id: actionKeyLabel
-        text: label
+    Image {
+        id: iconImage
+        source: iconNormal
         anchors.centerIn: parent
     }
 
-    states: [
-        State {
-            name: "NORMAL"
-            PropertyChanges {
-                target: actionKeyLabel
-                text: label
-            }
-        },
-        State {
-            name: "SHIFTED"
-            PropertyChanges {
-                target: actionKeyLabel
-                text: shifted
-            }
-        }
-    ]
+    onOskStateChanged: {
+        if (panel.activeKeypad.state == "NORMAL")
+            iconImage.source = iconNormal;
+        if (panel.activeKeypad.state == "SHIFTED")
+            iconImage.source = iconShifted;
+    }
 }

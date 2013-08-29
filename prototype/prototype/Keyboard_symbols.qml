@@ -66,7 +66,7 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            ShiftKey { label: "1/2"; shifted: "2/2"; icon: "icon"; action: "shift" }
+            ShiftKey { label: "1/2"; shifted: "2/2"; fontSize: units.gu(3); }
             CharKey { label: "@"; shifted: "«"; }
             CharKey { label: "~"; shifted: "»"; }
             CharKey { label: "/"; shifted: "¨"; }
@@ -74,7 +74,7 @@ KeyPad {
             CharKey { label: "'"; shifted: "”"; }
             CharKey { label: ";"; shifted: "„"; }
             CharKey { label: ":"; shifted: "&"; }
-            ActionKey { icon: "backspace"; action: "backspace"; }
+            ActionKey { action: "backspace"; }
         }
 
         Row {
@@ -82,11 +82,11 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            SymbolShiftKey { label: "ABC"; shifted: "ABC"; icon: "symbols"; action: "symbols" }
+            SymbolShiftKey { label: "ABC"; shifted: "ABC"; action: "symbols" }
             CharKey { label: ","; }
             ActionKey { action: "space" }
             CharKey { label: "."; }
-            ActionKey { icon: "enter"; action: "enter" }
+            ActionKey { action: "enter" }
         }
     } // column
 }

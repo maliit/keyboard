@@ -50,7 +50,7 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; symbol1: "*"; symbol2: "`"; }
+            CharKey { label: "a"; shifted: "A"; }
             CharKey { label: "s"; shifted: "S"; }
             CharKey { label: "d"; shifted: "D"; }
             CharKey { label: "f"; shifted: "F"; }
@@ -66,7 +66,7 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            ShiftKey { label: "NRML"; shifted: "SHFT"; icon: "icon"; action: "shift" }
+            ShiftKey { iconNormal: "images/icon_shift@18.png"; iconShifted: "images/icon_shift_upsidedown@18.png"; }
             CharKey { label: "z"; shifted: "Z"; }
             CharKey { label: "x"; shifted: "X"; }
             CharKey { label: "c"; shifted: "C"; }
@@ -74,7 +74,7 @@ KeyPad {
             CharKey { label: "b"; shifted: "B"; }
             CharKey { label: "n"; shifted: "N"; }
             CharKey { label: "m"; shifted: "M"; }
-            ActionKey { icon: "backspace"; action: "backspace"; }
+            ActionKey { action: "backspace"; }
         }
 
         Row {
@@ -82,11 +82,11 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            SymbolShiftKey { label: "?123"; shifted: "?123"; icon: "symbols"; action: "symbols" }
+            SymbolShiftKey { label: "?123"; shifted: "?123"; action: "symbols" }
             CharKey { label: ","; }
             ActionKey { action: "space" }
             CharKey { label: "."; }
-            ActionKey { icon: "enter"; action: "enter" }
+            ActionKey { action: "enter" }
         }
     } // column
 }

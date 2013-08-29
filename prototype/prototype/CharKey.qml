@@ -16,6 +16,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+
 import "constants.js" as UI
 
 Item {
@@ -25,11 +26,14 @@ Item {
 
     property string label: ""
     property string shifted: ""
-    property string symbol1: ""
-    property string symbol2: ""
     property var extended; // list of extended keys
 
+    property string imgNormal: UI.imageCharKey
+    property string imgPressed: UI.imageCharKeyPressed
+
     property string oskState: panel.activeKeypad.state
+
+    property int fontSize: units.gu( UI.fontSize );
 
     state: "NORMAL"
 
@@ -51,8 +55,8 @@ Item {
         id: keyLabel
         text: ""
         anchors.centerIn: parent
-        font.family: "Ubuntu"
-        font.pixelSize: units.gu( UI.fontSize );
+        font.family: UI.fontFamily
+        font.pixelSize: fontSize
     }
 
     MouseArea {
@@ -83,14 +87,14 @@ Item {
             name: "NORMAL"
             PropertyChanges {
                 target: buttonImage
-                source: "images/keybg@18.png"
+                source: imgNormal
             }
         },
         State {
             name: "PRESSED"
             PropertyChanges {
                 target: buttonImage
-                source: "images/keybg_action@18.png"
+                source: imgPressed
             }
         }
     ]

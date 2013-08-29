@@ -17,6 +17,9 @@
 import QtQuick 2.0
 
 ActionKey {
+
+    fontSize: units.gu(3);
+
     MouseArea {
         anchors.fill: parent
         onClicked: {
