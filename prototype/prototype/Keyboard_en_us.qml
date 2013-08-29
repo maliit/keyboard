@@ -77,16 +77,18 @@ KeyPad {
             BackspaceKey {}
         }
 
-        Row {
+        Item {
+            anchors.left: parent.left
+            anchors.right: parent.right
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
-            spacing: 0
 
-            SymbolShiftKey { label: "?123"; shifted: "?123"; action: "symbols" }
-            CharKey { label: ","; }
-            ActionKey { action: "space" }
-            CharKey { label: "."; }
-            EnterKey {}
+            height: panel.keyHeight;
+
+            SymbolShiftKey { id: symShiftKey; label: "?123"; shifted: "?123"; action: "symbols"; anchors.left: parent.left; }
+            CharKey { id: commaKey; label: ",";  anchors.left: symShiftKey.right; }
+            ActionKey { anchors.left: commaKey.right; anchors.right: dotKey.left; action: "space"; }
+            CharKey { id: dotKey; label: "."; anchors.right: enterKey.left; }
+            EnterKey { id: enterKey; anchors.right: parent.right }
         }
     } // column
 }

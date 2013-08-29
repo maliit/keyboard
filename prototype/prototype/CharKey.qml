@@ -44,8 +44,9 @@ Item {
             keyLabel.text = shifted;
     }
 
-    Image {
+    BorderImage {
         id: buttonImage
+        border { left: 22; top: 22; right: 22; bottom: 22 }
         anchors.centerIn: parent
         anchors.fill: key
         anchors.margins: units.gu( UI.keyMargins );
