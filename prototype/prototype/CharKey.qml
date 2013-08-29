@@ -15,12 +15,13 @@
  */
 
 import QtQuick 2.0
+import Ubuntu.Components 0.1
+import "constants.js" as UI
 
-Rectangle {
+Item {
     id: key
     width: panel.keyWidth
     height: panel.keyHeight
-    color: "red"
 
     property string label: ""
     property string shifted: ""
@@ -30,6 +31,8 @@ Rectangle {
 
     property string oskState: panel.activeKeypad.state
 
+    state: "NORMAL"
+
     onOskStateChanged: {
         if (panel.activeKeypad.state == "NORMAL")
             keyLabel.text = label;
@@ -37,16 +40,31 @@ Rectangle {
             keyLabel.text = shifted;
     }
 
+    Image {
+        id: buttonImage
+        anchors.centerIn: parent
+        anchors.fill: key
+        anchors.margins: units.gu( UI.keyMargins );
+    }
+
     Text {
         id: keyLabel
         text: ""
         anchors.centerIn: parent
+        font.family: "Ubuntu"
+        font.pixelSize: units.gu( UI.fontSize );
     }
 
     MouseArea {
         anchors.fill: key
         onPressAndHold: extKeysContainer.visible = true
-        onReleased: extKeysContainer.visible = false
+        onReleased: {
+            key.state = "NORMAL"
+            extKeysContainer.visible = false
+        }
+        onPressed: {
+            key.state = "PRESSED"
+        }
     }
 
     Row {
@@ -59,4 +77,21 @@ Rectangle {
             }
         }
     }
+
+    states: [
+        State {
+            name: "NORMAL"
+            PropertyChanges {
+                target: buttonImage
+                source: "images/keybg@18.png"
+            }
+        },
+        State {
+            name: "PRESSED"
+            PropertyChanges {
+                target: buttonImage
+                source: "images/keybg_action@18.png"
+            }
+        }
+    ]
 }
