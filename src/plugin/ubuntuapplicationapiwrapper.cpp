@@ -32,7 +32,7 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
     : m_runningOnMir(false)
 {
     if (qgetenv("QT_QPA_PLATFORM") == "ubuntumirclient") {
-        m_runningOnMir = false;
+        m_runningOnMir = true;
     }
 }
 
