@@ -213,4 +213,24 @@ void EventHandler::onLanguageChangeRequested(QString languageId)
     d->updater->setActiveKeyboardId(languageId);
 }
 
+void EventHandler::onKeyPressed(QString label)
+{
+    Key key;
+    Label mlabel;
+    mlabel.setText(label);
+    key.setLabel(mlabel);
+
+    Q_EMIT keyPressed(key);
+}
+
+void EventHandler::onKeyReleased(QString label)
+{
+    Key key;
+    Label mlabel;
+    mlabel.setText(label);
+    key.setLabel(mlabel);
+
+    Q_EMIT keyReleased(key);
+}
+
 }} // namespace Logic, MaliitKeyboard
