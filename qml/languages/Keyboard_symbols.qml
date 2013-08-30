@@ -85,11 +85,11 @@ KeyPad {
 
             height: panel.keyHeight;
 
-            SymbolShiftKey { id: symShiftKey; label: "ABC"; shifted: "ABC"; action: "symbols"; anchors.left: parent.left; }
-            CharKey { id: commaKey; label: ",";  anchors.left: symShiftKey.right; }
-            ActionKey { anchors.left: commaKey.right; anchors.right: dotKey.left; action: "space"; }
-            CharKey { id: dotKey; label: "."; anchors.right: enterKey.left; }
-            EnterKey { id: enterKey; anchors.right: parent.right }
+            SymbolShiftKey { id: symShiftKey; label: "ABC"; shifted: "ABC"; anchors.left: parent.left; }
+            CharKey        { id: commaKey;    label: ","; shifted: "/";     anchors.left: symShiftKey.right; }
+            CharKey        { id: spaceKey;    label: " "; shifted: " ";     anchors.left: commaKey.right; anchors.right: dotKey.left; }
+            CharKey        { id: dotKey;      label: "."; shifted: ".";     anchors.right: enterKey.left; }
+            EnterKey       { id: enterKey;                                  anchors.right: parent.right }
         }
     } // column
 }
