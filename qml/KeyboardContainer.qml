@@ -18,7 +18,7 @@ import QtQuick 2.0
 import QtQuick.Window 2.0
 import "languages/"
 
-Rectangle {
+Item {
     id: panel
 
     width: 720

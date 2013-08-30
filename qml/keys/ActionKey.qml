@@ -25,7 +25,7 @@ CharKey {
     property string action: ""
 
     // TODO implement sizes S,M,L,XL,XXL in C++ enums
-    Component.onCompleted: width = width*1.2;
+    //Component.onCompleted: width = width*1.2;
 
     imgNormal: UI.imageActionKey
     imgPressed: UI.imageActionKeyPressed

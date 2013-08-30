@@ -31,6 +31,8 @@
 
 import QtQuick 2.0
 
+import "keys/key_constants.js" as UI
+
 Item {
     id: canvas
     property alias layout: keyRepeater.model
@@ -125,8 +127,12 @@ Item {
             }
 
             KeyboardContainer {
+                id: keypad
+
                 anchors.top: borderTop.bottom
                 anchors.bottom: borderBottom.top
+                anchors.topMargin: units.gu( UI.top_margin )
+                anchors.bottomMargin: units.gu( UI.bottom_margin )
                 width: parent.width
             }
 

@@ -58,6 +58,7 @@ Item {
         anchors.centerIn: parent
         font.family: UI.fontFamily
         font.pixelSize: fontSize
+        font.bold: UI.fontBold
         color: UI.fontColor
     }
 

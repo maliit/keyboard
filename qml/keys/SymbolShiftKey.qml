@@ -21,7 +21,7 @@ ActionKey {
     shifted: "?123";
     action: "symbols";
 
-    fontSize: units.gu(3);
+    fontSize: units.gu(1);
 
     MouseArea {
         anchors.fill: parent
