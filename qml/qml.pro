@@ -4,7 +4,7 @@ TARGET = dummy
 TEMPLATE = lib
 
 qml.path = $$UBUNTU_KEYBOARD_DATA_DIR
-qml.files = *.qml
+qml.files = *.qml *.js
 
 qml_keys.path = "$$UBUNTU_KEYBOARD_DATA_DIR/keys"
 qml_keys.files = keys/*.qml keys/*.js

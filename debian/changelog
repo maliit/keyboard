@@ -1,10 +1,133 @@
-ubuntu-keyboard (0.99.trunk.phablet2) UNRELEASED; urgency=low
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130829.1-0ubuntu1) saucy; urgency=low
 
+  [ Gerry Boland ]
+  * Fix crash on Mir, actually disable broken functions when using Mir
+    (i.e. typo false -> true).
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 31
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 15:21:32 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130829-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Fix platform detection, corrects OSK surface management with
+    platform-api. Fixes bug: 1217501. (LP: #1217501)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 29
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 02:10:20 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130827.1-0ubuntu1) saucy; urgency=low
+
+  [ Thomas Moenicke ]
+  * fixing size of magnifier to not being cut when shown in first row .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 27
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Aug 2013 19:11:27 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130827-0ubuntu1) saucy; urgency=low
+
+  [ Bill Filler ]
+  * adding autopilot test, and re-merge from trunk.
+
+  [ Gerry Boland ]
+  * Create UbuntuApplicationApiWrapper to consolidate the differences
+    between the ubuntu-application-api on SurfaceFlinger and Mir (some
+    portions of the API are deprecated, so not implemented on Mir).
+    Fixes crash on Mir-only platform.
+
+  [ Christopher Lee ]
+  * adding autopilot test, and re-merge from trunk.
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * As pointed out by Sebastian, the package:any stanza is not really
+    valid - we already had to revert a similar change in the past.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 25
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Aug 2013 02:10:27 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130823-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Revert accidentally approved MR for revno 19, code needs review.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 21
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 23 Aug 2013 10:08:24 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130822.1-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Create UbuntuApplicationApiWrapper to consolidate the differences
+    between SurfaceFlinger and Mir operations. Fixes crash on Mir-only
+    platform.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 19
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 18:36:25 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130822-0ubuntu1) saucy; urgency=low
+
+  [ Bill Filler ]
+  * revert code committed in rev 11 as it's causing regressions with
+    orientation (lp:1214575 and lp:1214578). (LP: #1214578, #1214575)
+  * Install server.conf file to replace the default keyboard, until the
+    config system is better handled later on.
+  * Removing unused styles.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 17
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 06:08:28 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130821-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Set name and role on OSK Window, helps unity8 shell identify the
+    window.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 13
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 21 Aug 2013 15:04:32 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130819-0ubuntu1) saucy; urgency=low
+
+  [ Michael Terry ]
   * Rename source package
   * Update packaging to be more modern
   * Automatic snapshot from revision 1
 
- -- Michael Terry <mterry@ubuntu.com>  Thu, 15 Aug 2013 15:06:09 -0400
+  [ Thomas Moenicke ]
+  * added language directory path to coreutils. Maliit-Plugins stores
+    all languages in /usr/share/maliit/plugins/languages/, but we
+    changed the language xml files as well, so they should be in a
+    plugin-related directory:
+    /usr/share/maliit/plugins/languages/com/ubuntu/
+  * added qml unittests added .bzrignore file
+  * more work on buildsystem
+  * sync with latest trunk phablet maliit-plugins
+  * fixes in buildsystem
+  * fixed language directory fixed build script
+  * new style for magnifier.
+  * tracking contentOrientation of app, fixes bug.
+
+  [ root ]
+  * fixed tests to build with the new plugin cleanup bazaar repo
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 11
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 19 Aug 2013 02:04:41 +0000
 
 maliit-plugin-ubuntu (0.99.trunk.phablet1) saucy; urgency=low
 

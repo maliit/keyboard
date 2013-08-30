@@ -30,17 +30,23 @@
  */
 
 import QtQuick 2.0
+import "constants.js" as Const
 
 import "keys/key_constants.js" as UI
 
 Item {
     id: canvas
+    objectName: "ubuntuKeyboard" // Allow us to specify a specific keyboard within autopilot.
     property alias layout: keyRepeater.model
     property variant event_handler
     property bool area_enabled // MouseArea has no id property so we cannot alias its enabled property.
     property alias title: keyboard_title.text
 
     visible: layout.visible
+
+    // Expose details for use with Autopilot.
+    readonly property var layoutState: layout.keyboard_state
+    readonly property string activeView: layout.activeView
 
     property int contentOrientation: Qt.PrimaryOrientation
 
@@ -79,6 +85,7 @@ Item {
 
     WordRibbon {
         id: wordRibbon
+        objectName: "wordRibbon"
 
         anchors.bottom: keypadMouseArea.top
         width: parent.width;
@@ -137,6 +144,7 @@ Item {
             }
 
             Item {
+                objectName: "keyboardKeypad"
                 id: keyPad
                 visible: false;
                 anchors.top: borderTop.bottom
@@ -171,6 +179,9 @@ Item {
 
                         Text {
                             id: key_text_item
+
+                            // Expose detail for use within Autopilot
+                            property var action_type: key_action_type
 
                             anchors.fill: parent
                             text: key_text
@@ -237,6 +248,8 @@ Item {
             Popper {
                 id: popper
                 target: pressedKey
+                width: units.gu(Const.magnifierWidth);
+                height: units.gu(Const.magnifierHeight);
             }
 
             // Keyboard title rendering
