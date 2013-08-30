@@ -15,5 +15,17 @@ OTHER_FILES += \
     maliit-ui-constants.qml \
     RotationHelper.qml \
     WordRibbon.qml \
-    Popper.qml
+    Popper.qml \
+    prototype.qml \
+    KeyPad.qml \
+    Keyboard_symbols.qml \
+    Keyboard_en_us.qml \
+    constants.js \
+    keys/CharKey.qml \
+    keys/ActionKey.qml \
+    keys/BackspaceKey.qml \
+    keys/EnterKey.qml \
+    keys/ShiftKey.qml \
+    keys/SymbolShiftKey.qml \
+
 

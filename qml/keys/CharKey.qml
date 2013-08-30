@@ -17,7 +17,7 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 
-import "constants.js" as UI
+import "key_constants.js" as UI
 
 Item {
     id: key

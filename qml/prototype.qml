@@ -16,11 +16,12 @@
 
 import QtQuick 2.0
 import QtQuick.Window 2.0
+import "languages"
 
 Rectangle {
     id: panel
 
-    width: 1020
+    width: 720
     height: 486
 
     property int keyWidth: 0

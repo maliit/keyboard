@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.0
+import "../keys"
 
 KeyPad {
     anchors.fill: parent
@@ -33,16 +34,16 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; }
-            CharKey { label: "w"; shifted: "W"; }
-            CharKey { label: "e"; shifted: "E"; extended: ["È","€"] }
-            CharKey { label: "r"; shifted: "R"; }
-            CharKey { label: "t"; shifted: "T"; }
-            CharKey { label: "y"; shifted: "Y"; }
-            CharKey { label: "u"; shifted: "U"; }
-            CharKey { label: "i"; shifted: "I"; }
-            CharKey { label: "o"; shifted: "O"; }
-            CharKey { label: "p"; shifted: "P"; }
+            CharKey { label: "1"; shifted: "€"; }
+            CharKey { label: "2"; shifted: "£"; }
+            CharKey { label: "3"; shifted: "$"; extended: ["È","€"] }
+            CharKey { label: "4"; shifted: "¥"; }
+            CharKey { label: "5"; shifted: "₹"; }
+            CharKey { label: "6"; shifted: "%"; }
+            CharKey { label: "7"; shifted: "<"; }
+            CharKey { label: "8"; shifted: ">"; }
+            CharKey { label: "9"; shifted: "["; }
+            CharKey { label: "0"; shifted: "]"; }
         }
 
         Row {
@@ -50,15 +51,15 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; }
-            CharKey { label: "s"; shifted: "S"; }
-            CharKey { label: "d"; shifted: "D"; }
-            CharKey { label: "f"; shifted: "F"; }
-            CharKey { label: "g"; shifted: "G"; }
-            CharKey { label: "h"; shifted: "H"; }
-            CharKey { label: "j"; shifted: "J"; }
-            CharKey { label: "k"; shifted: "K"; }
-            CharKey { label: "l"; shifted: "L"; }
+            CharKey { label: "*"; shifted: "`"; }
+            CharKey { label: "#"; shifted: "^"; }
+            CharKey { label: "+"; shifted: "|"; }
+            CharKey { label: "-"; shifted: "_"; }
+            CharKey { label: "="; shifted: "§"; }
+            CharKey { label: "("; shifted: "{"; }
+            CharKey { label: ")"; shifted: "}"; }
+            CharKey { label: "!"; shifted: "¡"; }
+            CharKey { label: "?"; shifted: "¿"; }
         }
 
         Row {
@@ -66,14 +67,14 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            ShiftKey { iconNormal: "images/icon_shift@18.png"; iconShifted: "images/icon_shift_upsidedown@18.png"; }
-            CharKey { label: "z"; shifted: "Z"; }
-            CharKey { label: "x"; shifted: "X"; }
-            CharKey { label: "c"; shifted: "C"; }
-            CharKey { label: "v"; shifted: "V"; }
-            CharKey { label: "b"; shifted: "B"; }
-            CharKey { label: "n"; shifted: "N"; }
-            CharKey { label: "m"; shifted: "M"; }
+            ShiftKey { label: "1/2"; shifted: "2/2"; fontSize: units.gu(3); }
+            CharKey { label: "@"; shifted: "«"; }
+            CharKey { label: "~"; shifted: "»"; }
+            CharKey { label: "/"; shifted: "¨"; }
+            CharKey { label: "\\"; shifted: "“"; }
+            CharKey { label: "'"; shifted: "”"; }
+            CharKey { label: ";"; shifted: "„"; }
+            CharKey { label: ":"; shifted: "&"; }
             BackspaceKey {}
         }
 
@@ -84,7 +85,7 @@ KeyPad {
 
             height: panel.keyHeight;
 
-            SymbolShiftKey { id: symShiftKey; label: "?123"; shifted: "?123"; action: "symbols"; anchors.left: parent.left; }
+            SymbolShiftKey { id: symShiftKey; label: "ABC"; shifted: "ABC"; action: "symbols"; anchors.left: parent.left; }
             CharKey { id: commaKey; label: ",";  anchors.left: symShiftKey.right; }
             ActionKey { anchors.left: commaKey.right; anchors.right: dotKey.left; action: "space"; }
             CharKey { id: dotKey; label: "."; anchors.right: enterKey.left; }

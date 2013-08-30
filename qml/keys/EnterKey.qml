@@ -17,16 +17,7 @@
 import QtQuick 2.0
 
 ActionKey {
-
-    action: "shift"
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            if (panel.activeKeypad.state == "NORMAL")
-                panel.activeKeypad.state = "SHIFTED";
-            else
-                panel.activeKeypad.state = "NORMAL";
-        }
-    }
+    iconNormal: "../images/icon_enter@18.png";
+    iconShifted: "../images/icon_enter@18.png";
+    action: "enter"
 }

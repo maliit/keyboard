@@ -16,27 +16,21 @@
 
 import QtQuick 2.0
 
-import "constants.js" as UI
+ActionKey {
+    label: "?123";
+    shifted: "?123";
+    action: "symbols";
 
-CharKey {
-    id: actionKeyRoot
-    property string iconNormal: ""
-    property string iconShifted: ""
-    property string action: ""
+    fontSize: units.gu(3);
 
-    imgNormal: UI.imageActionKey
-    imgPressed: UI.imageActionKeyPressed
-
-    Image {
-        id: iconImage
-        source: iconNormal
-        anchors.centerIn: parent
-    }
-
-    onOskStateChanged: {
-        if (panel.activeKeypad.state == "NORMAL")
-            iconImage.source = iconNormal;
-        if (panel.activeKeypad.state == "SHIFTED")
-            iconImage.source = iconShifted;
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            console.log(panel.state)
+            if (panel.state == "CHARACTERS")
+                panel.state = "SYMBOLS";
+            else
+                panel.state = "CHARACTERS";
+        }
     }
 }

@@ -16,13 +16,13 @@
 
 .pragma library
 
-var keyMargins  =   2;    // gu
+var keyMargins  =   1;    // gu
 var fontSize    =   6;    // gu
 var fontFamily  =   "Ubuntu";
 
-var imageCharKey        = "images/keybg@18.png"
-var imageCharKeyPressed = "images/keybg_action_active@18.png"
+var imageCharKey        = "../images/keybg@18.png"
+var imageCharKeyPressed = "../images/keybg_action_active@18.png"
 
-var imageActionKey        = "images/keybg_action@18.png"
-var imageActionKeyPressed = "images/keybg_action_active@18.png"
+var imageActionKey        = "../images/keybg_action@18.png"
+var imageActionKeyPressed = "../images/keybg_action_active@18.png"
 
