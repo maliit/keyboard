@@ -89,7 +89,7 @@ KeyPad {
             CharKey        { id: commaKey;    label: ","; shifted: "/";     anchors.left: symShiftKey.right; }
             CharKey        { id: spaceKey;    label: " "; shifted: " ";     anchors.left: commaKey.right; anchors.right: dotKey.left; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";     anchors.right: enterKey.left; }
-            EnterKey       { id: enterKey;                                  anchors.right: parent.right }
+            ReturnKey      { id: enterKey;                                  anchors.right: parent.right }
         }
     } // column
 }

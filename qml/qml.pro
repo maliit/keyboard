@@ -35,7 +35,7 @@ OTHER_FILES += \
     keys/CharKey.qml \
     keys/ActionKey.qml \
     keys/BackspaceKey.qml \
-    keys/EnterKey.qml \
     keys/ShiftKey.qml \
     keys/SymbolShiftKey.qml \
+    keys/ReturnKey.qml
 

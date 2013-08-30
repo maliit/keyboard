@@ -69,6 +69,8 @@ Item {
             key.state = "NORMAL"
             extKeysContainer.visible = false
             event_handler.onKeyReleased(label);
+            if (action !== null)
+                event_handler.onActionKeyReleased(action);
         }
         onPressed: {
             key.state = "PRESSED"

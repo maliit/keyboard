@@ -233,4 +233,22 @@ void EventHandler::onKeyReleased(QString label)
     Q_EMIT keyReleased(key);
 }
 
+void EventHandler::onActionKeyReleased(QString action)
+{
+    if (action.isEmpty())
+        return;
+
+    Key key;
+
+    // TODO use an enum
+    if (action == "return")
+        key.setAction(Key::ActionReturn);
+    else if (action == "backspace")
+        key.setAction(Key::ActionBackspace);
+
+    Q_EMIT keyReleased(key);
+}
+
+
+
 }} // namespace Logic, MaliitKeyboard

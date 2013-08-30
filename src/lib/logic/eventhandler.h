@@ -77,6 +77,7 @@ public:
 
     Q_INVOKABLE void onKeyPressed(QString label);
     Q_INVOKABLE void onKeyReleased(QString label);
+    Q_INVOKABLE void onActionKeyReleased(QString action);
 
     // Key signals:
     Q_SIGNAL void keyPressed(const Key &key);
