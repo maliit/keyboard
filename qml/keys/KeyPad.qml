@@ -46,17 +46,13 @@ Item {
 
         var maxNrOfKeys = 0;
         for (var i = 0; i < numberOfRows(); ++i) {
-            console.log( content.children[i].children.length  + " <> " + i);
             if (content.children[i].children.length > maxNrOfKeys)
                 maxNrOfKeys = content.children[i].children.length;
         }
-        console.log( maxNrOfKeys )
 
         var maxSpaceForKeys = panel.width / maxNrOfKeys;
-        console.log( maxSpaceForKeys )
 
         panel.keyWidth = maxSpaceForKeys;
-
     }
 
     function calculateKeyHeight() {

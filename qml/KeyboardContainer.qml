@@ -16,7 +16,7 @@
 
 import QtQuick 2.0
 import QtQuick.Window 2.0
-import "languages"
+import "languages/"
 
 Rectangle {
     id: panel

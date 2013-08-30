@@ -16,9 +16,10 @@
 
 .pragma library
 
-var keyMargins  =   1;    // gu
-var fontSize    =   6;    // gu
-var fontFamily  =   "Ubuntu";
+var keyMargins  =   1.4;    // dp
+var fontSize    =   2;    // gu
+var fontFamily  =   "Ubuntu Medium";
+var fontColor   =   "#666666"
 
 var imageCharKey        = "../images/keybg@18.png"
 var imageCharKeyPressed = "../images/keybg_action_active@18.png"

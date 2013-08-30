@@ -124,9 +124,15 @@ Item {
                 anchors.bottom: background.bottom
             }
 
+            KeyboardContainer {
+                anchors.top: borderTop.bottom
+                anchors.bottom: borderBottom.top
+                width: parent.width
+            }
+
             Item {
                 id: keyPad
-
+                visible: false;
                 anchors.top: borderTop.bottom
                 anchors.bottom: borderBottom.top
                 width: parent.width

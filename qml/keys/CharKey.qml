@@ -49,7 +49,7 @@ Item {
         border { left: 22; top: 22; right: 22; bottom: 22 }
         anchors.centerIn: parent
         anchors.fill: key
-        anchors.margins: units.gu( UI.keyMargins );
+        anchors.margins: units.dp( UI.keyMargins );
     }
 
     Text {
@@ -58,6 +58,7 @@ Item {
         anchors.centerIn: parent
         font.family: UI.fontFamily
         font.pixelSize: fontSize
+        color: UI.fontColor
     }
 
     MouseArea {
