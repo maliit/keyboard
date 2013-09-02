@@ -80,9 +80,7 @@ typedef QMap<QString, SharedOverride>::const_iterator OverridesIterator;
 
 namespace {
 
-const QString g_maliit_keyboard_qml(UBUNTU_KEYBOARD_DATA_DIR "/maliit-keyboard.qml");
-const QString g_maliit_keyboard_extended_qml(UBUNTU_KEYBOARD_DATA_DIR "/maliit-keyboard-extended.qml");
-const QString g_maliit_magnifier_qml(UBUNTU_KEYBOARD_DATA_DIR "/maliit-magnifier.qml");
+const QString g_maliit_keyboard_qml(UBUNTU_KEYBOARD_DATA_DIR "/Keyboard.qml");
 
 Key overrideToKey(const SharedOverride &override)
 {
@@ -145,10 +143,6 @@ class InputMethodPrivate
 public:
     InputMethod* q;
     QQuickItem* qmlRootItem;
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    SharedSurface extended_surface;
-    SharedSurface magnifier_surface;
-#endif
     Editor editor;
     DefaultFeedback feedback;
     SharedStyle style;
@@ -156,8 +150,6 @@ public:
     QMap<QString, SharedOverride> key_overrides;
     Settings settings;
     LayoutGroup layout;
-    LayoutGroup extended_layout;
-    Model::Layout magnifier_layout;
     MaliitContext context;
     QRect windowGeometryRect;
     QRect keyboardVisibleRect;
@@ -184,13 +176,7 @@ public:
 
 InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
                                        MAbstractInputMethodHost *host)
-  //    : surface_factory(host->surfaceFactory())
-  //    , surface(qSharedPointerDynamicCast<Surface>(surface_factory->create(g_surface_options)))
     : q(_q)
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    , extended_surface(qSharedPointerDynamicCast<Surface>(surface_factory->create(g_extended_surface_options, surface)))
-    , magnifier_surface(qSharedPointerDynamicCast<Surface>(surface_factory->create(g_extended_surface_options, surface)))
-#endif
     , qmlRootItem(0)
     , editor(EditorOptions(), new Model::Text, new Logic::WordEngine, new Logic::LanguageFeatures)
     , feedback()
@@ -199,8 +185,6 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
     , key_overrides()
     , settings()
     , layout()
-    , extended_layout()
-    , magnifier_layout()
     , context(q, style)
     , host(host)
     , view(0)
@@ -214,17 +198,13 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
     editor.setHost(host);
 
     layout.updater.setLayout(&layout.helper);
-    extended_layout.updater.setLayout(&extended_layout.helper);
 
     layout.updater.setStyle(style);
-    extended_layout.updater.setStyle(style);
     feedback.setStyle(style);
 
     const QSize &screen_size(view->screen()->size());
     layout.helper.setScreenSize(screen_size);
     layout.helper.setAlignment(Logic::LayoutHelper::Bottom);
-    extended_layout.helper.setScreenSize(screen_size);
-    extended_layout.helper.setAlignment(Logic::LayoutHelper::Floating);
 
     QObject::connect(&layout.event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
                      &layout.updater, SLOT( onWordCandidatePressed(WordCandidate) ));
@@ -247,10 +227,6 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
     QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
                      &layout.model,  SLOT(setState(Model::Layout::State)));
 
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    QObject::connect(&layout.event_handler,          SIGNAL(extendedKeysShown(Key)),
-                     &extended_layout.event_handler, SLOT(onExtendedKeysShown(Key)));
-#endif
     connectToNotifier();
 
 #ifdef DISABLED_FLAGS_FROM_SURFACE
@@ -273,20 +249,6 @@ InputMethodPrivate::InputMethodPrivate(InputMethod *const _q,
 
     QObject::connect(view, SIGNAL(statusChanged(QQuickView::Status)),
                     q, SLOT(onQQuickViewStatusChanged(QQuickView::Status)));
-
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    QQmlEngine *const extended_engine(extended_surface->view()->engine());
-    extended_engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
-    setContextProperties(extended_engine->rootContext());
-
-    extended_surface->view()->setSource(QUrl::fromLocalFile(g_maliit_keyboard_extended_qml));
-
-    QQmlEngine *const magnifier_engine(magnifier_surface->view()->engine());
-    magnifier_engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
-    setContextProperties(magnifier_engine->rootContext());
-
-    magnifier_surface->view()->setSource(QUrl::fromLocalFile(g_maliit_magnifier_qml));
-#endif
 
     // following used to help shell identify the OSK surface
     view->setProperty("role", applicationApiWrapper->oskWindowRole());
@@ -316,7 +278,6 @@ void InputMethodPrivate::setLayoutOrientation(Qt::ScreenOrientation screenOrient
     Logic::LayoutHelper::Orientation orientation = uiConst->screenToMaliitOrientation(screenOrientation);
 
     layout.updater.setOrientation(orientation);
-    extended_layout.updater.setOrientation(orientation);
 
     windowGeometryRect = uiConst->windowGeometryRect( screenOrientation );
 
@@ -381,7 +342,6 @@ void InputMethodPrivate::setActiveKeyboardId(const QString &id)
 {
     // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
     layout.updater.setActiveKeyboardId(id);
-    extended_layout.updater.setActiveKeyboardId(id);
     layout.model.setActiveView(id);
 }
 
@@ -400,9 +360,6 @@ void InputMethodPrivate::setContextProperties(QQmlContext *qml_context)
     qml_context->setContextProperty("maliit", &context);
     qml_context->setContextProperty("maliit_layout", &layout.model);
     qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
-    qml_context->setContextProperty("maliit_extended_layout", &extended_layout.model);
-    qml_context->setContextProperty("maliit_extended_event_handler", &extended_layout.event_handler);
-    qml_context->setContextProperty("maliit_magnifier_layout", &magnifier_layout);
     qml_context->setContextProperty("maliit_wordribbon", layout.helper.wordRibbon());
 }
 
@@ -416,45 +373,9 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     // FIXME: Reconnect feedback instance.
     Setup::connectAll(&d->layout.event_handler, &d->layout.updater, &d->editor);
-    Setup::connectAll(&d->extended_layout.event_handler, &d->extended_layout.updater, &d->editor);
 
     connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
             &d->layout.model, SLOT(setKeyArea(KeyArea)));
-
-    connect(&d->extended_layout.helper, SIGNAL(extendedPanelChanged(KeyArea,Logic::KeyOverrides)),
-            &d->extended_layout.model, SLOT(setKeyArea(KeyArea)));
-
-    connect(&d->layout.helper,    SIGNAL(magnifierChanged(KeyArea)),
-            &d->magnifier_layout, SLOT(setKeyArea(KeyArea)));
-
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    connect(&d->layout.model, SIGNAL(widthChanged(int)),
-            this,             SLOT(onLayoutWidthChanged(int)));
-
-    connect(&d->layout.model, SIGNAL(heightChanged(int)),
-            this,             SLOT(onLayoutHeightChanged(int)));
-
-    connect(&d->layout.updater, SIGNAL(keyboardTitleChanged(QString)),
-            &d->layout.model,   SLOT(setTitle(QString)));
-
-    connect(&d->extended_layout.model, SIGNAL(widthChanged(int)),
-            this,                      SLOT(onExtendedLayoutWidthChanged(int)));
-
-    connect(&d->extended_layout.model, SIGNAL(heightChanged(int)),
-            this,                      SLOT(onExtendedLayoutHeightChanged(int)));
-
-    connect(&d->extended_layout.model, SIGNAL(originChanged(QPoint)),
-            this,                      SLOT(onExtendedLayoutOriginChanged(QPoint)));
-
-    connect(&d->magnifier_layout, SIGNAL(widthChanged(int)),
-            this,                 SLOT(onMagnifierLayoutWidthChanged(int)));
-
-    connect(&d->magnifier_layout, SIGNAL(heightChanged(int)),
-            this,                 SLOT(onMagnifierLayoutHeightChanged(int)));
-
-    connect(&d->magnifier_layout, SIGNAL(originChanged(QPoint)),
-            this,                 SLOT(onMagnifierLayoutOriginChanged(QPoint)));
-#endif
 
     connect(&d->editor, SIGNAL(rightLayoutSelected()),
             this,       SLOT(onRightLayoutSelected()));
@@ -487,11 +408,6 @@ void InputMethod::show()
 
     d->view->setVisible(true);
 
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    d->surface->show();
-    d->extended_surface->show();
-    d->magnifier_surface->show();
-#endif
     inputMethodHost()->setScreenRegion(QRegion(d->keyboardVisibleRect));
 
     QRect rect(d->keyboardVisibleRect);
@@ -522,15 +438,6 @@ void InputMethod::hide()
     d->editor.clearPreedit();
 
     d->view->setVisible(false);
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    d->surface->hide();
-    d->extended_surface->hide();
-    d->magnifier_surface->hide();
-
-    const QRegion r;
-    inputMethodHost()->setScreenRegion(r);
-    inputMethodHost()->setInputMethodArea(r);
-#endif
 
     d->applicationApiWrapper->reportOSKInvisible();
 
@@ -758,7 +665,6 @@ void InputMethod::onScreenSizeChange(const QSize &size)
     Q_D(InputMethod);
 
     d->layout.helper.setScreenSize(size);
-    d->extended_layout.helper.setScreenSize(d->layout.helper.screenSize());
 
 #ifdef TEMP_DISABLED
     d->updateKeyboardOrientation();
@@ -770,8 +676,6 @@ void InputMethod::onStyleSettingChanged()
     Q_D(InputMethod);
     d->style->setProfile(d->settings.style->value().toString());
     d->layout.model.setImageDirectory(d->style->directory(Style::Images));
-    d->extended_layout.model.setImageDirectory(d->style->directory(Style::Images));
-    d->magnifier_layout.setImageDirectory(d->style->directory(Style::Images));
 }
 
 void InputMethod::onFeedbackSettingChanged()
@@ -854,44 +758,6 @@ void InputMethod::onLayoutHeightChanged(int height)
 {
   Q_UNUSED(height);
 }
-
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-void InputMethod::onExtendedLayoutWidthChanged(int width)
-{
-    Q_D(InputMethod);
-    d->extended_surface->setSize(QSize(width, d->extended_surface->size().height()));
-}
-
-void InputMethod::onExtendedLayoutHeightChanged(int height)
-{
-    Q_D(InputMethod);
-    d->extended_surface->setSize(QSize(d->extended_surface->size().width(), height));
-}
-
-void InputMethod::onExtendedLayoutOriginChanged(const QPoint &origin)
-{
-    Q_D(InputMethod);
-    d->extended_surface->setRelativePosition(origin);
-}
-
-void InputMethod::onMagnifierLayoutWidthChanged(int width)
-{
-    Q_D(InputMethod);
-    d->magnifier_surface->setSize(QSize(width, d->magnifier_surface->size().height()));
-}
-
-void InputMethod::onMagnifierLayoutHeightChanged(int height)
-{
-    Q_D(InputMethod);
-    d->magnifier_surface->setSize(QSize(d->magnifier_surface->size().width(), height));
-}
-
-void InputMethod::onMagnifierLayoutOriginChanged(const QPoint &origin)
-{
-    Q_D(InputMethod);
-    d->magnifier_surface->setRelativePosition(origin);
-}
-#endif
 
 void InputMethod::onHideAnimationFinished()
 {
