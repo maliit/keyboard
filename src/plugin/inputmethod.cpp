@@ -46,9 +46,9 @@
 #include "view/setup.h"
 
 #include <maliit/plugins/subviewdescription.h>
-#include <maliit/plugins/abstractpluginsetting.h>
+
 #include <maliit/plugins/updateevent.h>
-#include <maliit/plugins/abstractinputmethodhost.h>
+
 #include <maliit/namespace.h>
 
 #include <QApplication>
@@ -100,12 +100,12 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(this, SIGNAL(predictionEnabledChanged()), this, SLOT(updateWordEngine()));
     connect(this, SIGNAL(contentTypeChanged(Maliit::TextContentType)), this, SLOT(onContentTypeChanged(Maliit::TextContentType)));
 
-    registerStyleSetting(host);
+    d->registerStyleSetting(host);
 
-    registerFeedbackSetting(host);
-    registerAutoCorrectSetting(host);
-    registerAutoCapsSetting(host);
-    registerWordEngineSetting(host);
+    d->registerFeedbackSetting(host);
+    d->registerAutoCorrectSetting(host);
+    d->registerAutoCapsSetting(host);
+    d->registerWordEngineSetting(host);
 
     setActiveSubView("en_us");
 
@@ -251,117 +251,6 @@ bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
     d->notifier.notify(update_event);
 
     return true;
-}
-
-void InputMethod::registerStyleSetting(MAbstractInputMethodHost *host)
-{
-    Q_D(InputMethod);
-
-    QVariantMap attributes;
-    QStringList available_styles = d->style->availableProfiles();
-    attributes[Maliit::SettingEntryAttributes::defaultValue] = MALIIT_DEFAULT_PROFILE;
-    attributes[Maliit::SettingEntryAttributes::valueDomain] = available_styles;
-    attributes[Maliit::SettingEntryAttributes::valueDomainDescriptions] = available_styles;
-
-    d->settings.style.reset(host->registerPluginSetting("current_style",
-                                                        QT_TR_NOOP("Keyboard style"),
-                                                        Maliit::StringType,
-                                                        attributes));
-
-    connect(d->settings.style.data(), SIGNAL(valueChanged()),
-            this,                     SLOT(onStyleSettingChanged()));
-
-    // Call manually for the first time to initialize dependent values:
-    onStyleSettingChanged();
-}
-
-void InputMethod::registerFeedbackSetting(MAbstractInputMethodHost *host)
-{
-    Q_D(InputMethod);
-
-    QVariantMap attributes;
-    attributes[Maliit::SettingEntryAttributes::defaultValue] = true;
-
-    d->settings.feedback.reset(host->registerPluginSetting("feedback_enabled",
-                                                           QT_TR_NOOP("Feedback enabled"),
-                                                           Maliit::BoolType,
-                                                           attributes));
-
-    connect(d->settings.feedback.data(), SIGNAL(valueChanged()),
-            this,                        SLOT(onFeedbackSettingChanged()));
-
-    d->feedback.setEnabled(d->settings.feedback->value().toBool());
-}
-
-void InputMethod::registerAutoCorrectSetting(MAbstractInputMethodHost *host)
-{
-    Q_D(InputMethod);
-
-    QVariantMap attributes;
-    attributes[Maliit::SettingEntryAttributes::defaultValue] = true;
-
-    d->settings.auto_correct.reset(host->registerPluginSetting("auto_correct_enabled",
-                                                               QT_TR_NOOP("Auto-correct enabled"),
-                                                               Maliit::BoolType,
-                                                               attributes));
-
-    connect(d->settings.auto_correct.data(), SIGNAL(valueChanged()),
-            this,                            SLOT(onAutoCorrectSettingChanged()));
-
-    d->editor.setAutoCorrectEnabled(d->settings.auto_correct->value().toBool());
-}
-
-void InputMethod::registerAutoCapsSetting(MAbstractInputMethodHost *host)
-{
-    Q_D(InputMethod);
-
-    QVariantMap attributes;
-    attributes[Maliit::SettingEntryAttributes::defaultValue] = true;
-
-    d->settings.auto_caps.reset(host->registerPluginSetting("auto_caps_enabled",
-                                                            QT_TR_NOOP("Auto-capitalization enabled"),
-                                                            Maliit::BoolType,
-                                                            attributes));
-
-    connect(d->settings.auto_caps.data(), SIGNAL(valueChanged()),
-            this,                         SLOT(onAutoCapsSettingChanged()));
-
-    d->editor.setAutoCapsEnabled(d->settings.auto_caps->value().toBool());
-}
-
-void InputMethod::registerWordEngineSetting(MAbstractInputMethodHost *host)
-{
-    Q_D(InputMethod);
-
-    QVariantMap attributes;
-    attributes[Maliit::SettingEntryAttributes::defaultValue] = false;
-
-    d->settings.word_engine.reset(host->registerPluginSetting("word_engine_enabled",
-                                                              QT_TR_NOOP("Error correction/word prediction enabled"),
-                                                              Maliit::BoolType,
-                                                              attributes));
-
-    connect(d->settings.word_engine.data(), SIGNAL(valueChanged()),
-            this,                           SLOT(updateWordEngine()));
-
-    Q_EMIT wordEngineEnabledChanged( d->settings.word_engine.data()->value().toBool() );
-
-#ifndef DISABLE_PREEDIT
-    d->editor.wordEngine()->setEnabled(d->settings.word_engine->value().toBool());
-#else
-    d->editor.wordEngine()->setEnabled(false);
-#endif
-}
-
-void InputMethod::onScreenSizeChange(const QSize &size)
-{
-    Q_D(InputMethod);
-
-    d->layout.helper.setScreenSize(size);
-
-#ifdef TEMP_DISABLED
-    d->updateKeyboardOrientation();
-#endif
 }
 
 void InputMethod::onStyleSettingChanged()

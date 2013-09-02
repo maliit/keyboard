@@ -90,14 +90,6 @@ Q_SIGNALS:
     void contentTypeChanged(Maliit::TextContentType contentType);
 
 private:
-    void registerStyleSetting(MAbstractInputMethodHost *host);
-    void registerFeedbackSetting(MAbstractInputMethodHost *host);
-    void registerAutoCorrectSetting(MAbstractInputMethodHost *host);
-    void registerAutoCapsSetting(MAbstractInputMethodHost *host);
-    void registerWordEngineSetting(MAbstractInputMethodHost *host);
-    void registerHideWordRibbonInPortraitModeSetting(MAbstractInputMethodHost *host);
-
-    Q_SLOT void onScreenSizeChange(const QSize &size);
     Q_SLOT void onStyleSettingChanged();
     Q_SLOT void onFeedbackSettingChanged();
     Q_SLOT void onAutoCorrectSettingChanged();

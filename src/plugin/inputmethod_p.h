@@ -13,6 +13,9 @@
 
 #include "ubuntuapplicationapiwrapper.h"
 
+#include <maliit/plugins/abstractinputmethodhost.h>
+#include <maliit/plugins/abstractpluginsetting.h>
+
 #include <QtQuick>
 
 #ifdef HAVE_QT_MOBILITY
@@ -279,6 +282,106 @@ public:
         qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
         qml_context->setContextProperty("maliit_wordribbon", layout.helper.wordRibbon());
     }
+
+
+    /*
+     * register settings
+     */
+
+    void registerStyleSetting(MAbstractInputMethodHost *host)
+    {
+        QVariantMap attributes;
+        QStringList available_styles = style->availableProfiles();
+        attributes[Maliit::SettingEntryAttributes::defaultValue] = MALIIT_DEFAULT_PROFILE;
+        attributes[Maliit::SettingEntryAttributes::valueDomain] = available_styles;
+        attributes[Maliit::SettingEntryAttributes::valueDomainDescriptions] = available_styles;
+
+        settings.style.reset(host->registerPluginSetting("current_style",
+                                                            QT_TR_NOOP("Keyboard style"),
+                                                            Maliit::StringType,
+                                                            attributes));
+
+        QObject::connect(settings.style.data(), SIGNAL(valueChanged()), q, SLOT(onStyleSettingChanged()));
+
+        // Call manually for the first time to initialize dependent values:
+        q->onStyleSettingChanged();
+    }
+
+    void registerFeedbackSetting(MAbstractInputMethodHost *host)
+    {
+        QVariantMap attributes;
+        attributes[Maliit::SettingEntryAttributes::defaultValue] = true;
+
+        settings.feedback.reset(host->registerPluginSetting("feedback_enabled",
+                                                               QT_TR_NOOP("Feedback enabled"),
+                                                               Maliit::BoolType,
+                                                               attributes));
+
+        QObject::connect(settings.feedback.data(), SIGNAL(valueChanged()), q, SLOT(onFeedbackSettingChanged()));
+
+        feedback.setEnabled(settings.feedback->value().toBool());
+    }
+
+    void registerAutoCorrectSetting(MAbstractInputMethodHost *host)
+    {
+        QVariantMap attributes;
+        attributes[Maliit::SettingEntryAttributes::defaultValue] = true;
+
+        settings.auto_correct.reset(host->registerPluginSetting("auto_correct_enabled",
+                                                                   QT_TR_NOOP("Auto-correct enabled"),
+                                                                   Maliit::BoolType,
+                                                                   attributes));
+
+        QObject::connect(settings.auto_correct.data(), SIGNAL(valueChanged()), q, SLOT(onAutoCorrectSettingChanged()));
+
+        editor.setAutoCorrectEnabled(settings.auto_correct->value().toBool());
+    }
+
+    void registerAutoCapsSetting(MAbstractInputMethodHost *host)
+    {
+        QVariantMap attributes;
+        attributes[Maliit::SettingEntryAttributes::defaultValue] = true;
+
+        settings.auto_caps.reset(host->registerPluginSetting("auto_caps_enabled",
+                                                                QT_TR_NOOP("Auto-capitalization enabled"),
+                                                                Maliit::BoolType,
+                                                                attributes));
+
+        QObject::connect(settings.auto_caps.data(), SIGNAL(valueChanged()), q, SLOT(onAutoCapsSettingChanged()));
+
+        editor.setAutoCapsEnabled(settings.auto_caps->value().toBool());
+    }
+
+    void registerWordEngineSetting(MAbstractInputMethodHost *host)
+    {
+        QVariantMap attributes;
+        attributes[Maliit::SettingEntryAttributes::defaultValue] = false;
+
+        settings.word_engine.reset(host->registerPluginSetting("word_engine_enabled",
+                                                                  QT_TR_NOOP("Error correction/word prediction enabled"),
+                                                                  Maliit::BoolType,
+                                                                  attributes));
+
+        QObject::connect(settings.word_engine.data(), SIGNAL(valueChanged()), q, SLOT(updateWordEngine()));
+
+        Q_EMIT q->wordEngineEnabledChanged( settings.word_engine.data()->value().toBool() );
+
+    #ifndef DISABLE_PREEDIT
+        editor.wordEngine()->setEnabled(settings.word_engine->value().toBool());
+    #else
+        editor.wordEngine()->setEnabled(false);
+    #endif
+    }
+
+    void onScreenSizeChange(const QSize &size)
+    {
+        layout.helper.setScreenSize(size);
+
+    #ifdef TEMP_DISABLED
+        updateKeyboardOrientation();
+    #endif
+    }
+
 };
 
 } // namespace
