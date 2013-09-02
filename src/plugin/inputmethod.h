@@ -72,8 +72,6 @@ public:
     virtual void setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides);
     //! \reimp_end
 
-    Q_SLOT void onLeftLayoutSelected();
-    Q_SLOT void onRightLayoutSelected();
     Q_SLOT void deviceOrientationChanged(Qt::ScreenOrientation orientation);
 
     Q_SLOT void updateWordEngine();
@@ -110,14 +108,6 @@ private:
 
     Q_SLOT void onLayoutWidthChanged(int width);
     Q_SLOT void onLayoutHeightChanged(int height);
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    Q_SLOT void onExtendedLayoutWidthChanged(int width);
-    Q_SLOT void onExtendedLayoutHeightChanged(int height);
-    Q_SLOT void onExtendedLayoutOriginChanged(const QPoint &origin);
-    Q_SLOT void onMagnifierLayoutWidthChanged(int width);
-    Q_SLOT void onMagnifierLayoutHeightChanged(int height);
-    Q_SLOT void onMagnifierLayoutOriginChanged(const QPoint &origin);
-#endif
 
     Q_SLOT void onContentTypeChanged(Maliit::TextContentType contentType);
 
