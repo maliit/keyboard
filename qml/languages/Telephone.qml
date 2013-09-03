@@ -64,7 +64,7 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "."; }
+            CharKey { label: "+"; extended: ["*", "(", ")"] }
             CharKey { label: "0"; }
             BackspaceKey {}
         }

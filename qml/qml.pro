@@ -39,5 +39,6 @@ OTHER_FILES += \
     keys/SymbolShiftKey.qml \
     keys/ReturnKey.qml \
     languages/Numbers.qml \
-    languages/Keyboard_en_url.qml
+    languages/Keyboard_en_url.qml \
+    languages/Telephone.qml
 
