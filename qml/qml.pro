@@ -37,5 +37,6 @@ OTHER_FILES += \
     keys/BackspaceKey.qml \
     keys/ShiftKey.qml \
     keys/SymbolShiftKey.qml \
-    keys/ReturnKey.qml
+    keys/ReturnKey.qml \
+    languages/Numbers.qml
 
