@@ -31,7 +31,7 @@ Item {
 
     state: "CHARACTERS"
 
-    Keyboard_en_url_search {
+    Keyboard_en_email {
         id: characterKeypad
     }
 
