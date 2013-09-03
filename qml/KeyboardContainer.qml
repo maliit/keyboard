@@ -31,7 +31,7 @@ Item {
 
     state: "CHARACTERS"
 
-    Numbers {
+    Keyboard_en_url {
         id: characterKeypad
     }
 

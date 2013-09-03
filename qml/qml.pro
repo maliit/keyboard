@@ -38,5 +38,6 @@ OTHER_FILES += \
     keys/ShiftKey.qml \
     keys/SymbolShiftKey.qml \
     keys/ReturnKey.qml \
-    languages/Numbers.qml
+    languages/Numbers.qml \
+    languages/Keyboard_en_url.qml
 
