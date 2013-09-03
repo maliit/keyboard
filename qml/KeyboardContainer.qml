@@ -27,12 +27,29 @@ Item {
     property int keyWidth: 0
     property int keyHeight: 0
 
-    property var activeKeypad: characterKeypad
+    property var activeKeypad: characterKeypad.item
 
     state: "CHARACTERS"
 
-    Keyboard_en_email {
+    function loadLayout(layoutId)
+    {
+        if (layoutId === "number")
+            characterKeypad.source = "languages/Keyboard_numbers.qml"
+        if (layoutId === "phonenumber")
+            characterKeypad.source = "languages/Keyboard_telephone.qml"
+        if (layoutId === "email")
+            characterKeypad.source = "languages/Keyboard_en_email.qml"
+        if (layoutId === "url")
+            characterKeypad.source = "languages/Keyboard_en_url.qml"
+        if (layoutId === "en_us")
+            characterKeypad.source = "languages/Keyboard_en_us.qml"
+    }
+
+    Loader {
         id: characterKeypad
+        anchors.fill: parent
+
+        source: "languages/Keyboard_en_us.qml"
     }
 
     Keyboard_symbols {
@@ -44,7 +61,7 @@ Item {
             name: "CHARACTERS"
             PropertyChanges {
                 target: panel
-                activeKeypad: characterKeypad
+                activeKeypad: characterKeypad.item
             }
             PropertyChanges {
                 target: characterKeypad

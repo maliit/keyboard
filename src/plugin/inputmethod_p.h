@@ -264,6 +264,8 @@ public:
         // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
         layout.updater.setActiveKeyboardId(id);
         layout.model.setActiveView(id);
+
+        qmlRootItem->setProperty("layoutId", id);
     }
 
     void connectToNotifier()

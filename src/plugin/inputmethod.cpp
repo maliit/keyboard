@@ -426,6 +426,8 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
 {
     Q_D(InputMethod);
 
+    // TODO when refactoring, forward the enum to QML
+
     if (contentType == Maliit::FreeTextContentType)
         d->setActiveKeyboardId( d->activeLanguageId );
 

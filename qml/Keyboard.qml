@@ -40,6 +40,9 @@ Item {
     property variant layout: maliit_layout
     property variant event_handler: maliit_event_handler
 
+    property string layoutId: "en_us"
+    onLayoutIdChanged: keypad.loadLayout(layoutId);
+
     visible: layout.visible
 
     // Expose details for use with Autopilot.
