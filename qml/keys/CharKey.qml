@@ -23,6 +23,8 @@ import "key_constants.js" as UI
 Item {
     id: key
 
+    property int padding: 0
+
     width: panel.keyWidth
     height: panel.keyHeight
 

@@ -22,6 +22,8 @@ var fontFamily  =   "Ubuntu Medium";
 var fontColor   =   "#666666"
 var fontBold    =   true
 
+var actionKeyPadding = 2;  // gu, action keys are a bit bigger
+
 var imageCharKey        = "../images/keybg@18.png"
 var imageCharKeyPressed = "../images/keybg_action_active@18.png"
 

@@ -24,6 +24,8 @@ CharKey {
     property string iconShifted: ""
     property string action: ""
 
+    width: panel.keyWidth + units.gu( UI.actionKeyPadding )
+
     // TODO implement sizes S,M,L,XL,XXL in C++ enums
     //Component.onCompleted: width = width*1.2;
 
