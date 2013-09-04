@@ -38,6 +38,7 @@ OTHER_FILES += \
     keys/ShiftKey.qml \
     keys/SymbolShiftKey.qml \
     keys/ReturnKey.qml \
+    keys/Popper.qml \
     languages/Keyboard_en_url.qml \
     languages/Keyboard_en_url_search.qml \
     languages/Keyboard_en_email.qml \

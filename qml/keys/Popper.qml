@@ -31,10 +31,10 @@ import QtQuick 2.0
 
 Image {
     id: popper
-    source: "styles/ubuntu/images/keyboard_popover.png"
+    source: "/usr/share/maliit/plugins/com/ubuntu/styles/ubuntu/images/keyboard_popover.png"
     opacity: 0
 
-    property Item target: null
+    property Item popTarget: null
 
     Text {
         id: popperText
@@ -50,19 +50,19 @@ Image {
 
     states: State {
         name: "active"
-        when: target !== null
+        when: popTarget !== null
 
         PropertyChanges {
             target: popperText
-            text: target.text
+            text: popTarget.text
         }
 
         PropertyChanges {
             target: popper
             opacity: 1
 
-            x: popper.parent.mapFromItem(target, 0, 0).x + (target.width - popper.width) / 2
-            y: popper.parent.mapFromItem(target, 0, 0).y - popper.height
+            x: popper.parent.mapFromItem(popTarget, 0, 0).x + (popTarget.width - popper.width) / 2
+            y: popper.parent.mapFromItem(popTarget, 0, 0).y - popper.height
         }
     }
 

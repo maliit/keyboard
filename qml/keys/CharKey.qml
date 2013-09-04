@@ -111,6 +111,12 @@ Item {
         }
     }
 
+    Popper {
+        id: popper
+        width: panel.keyWidth
+        height: panel.keyHeight
+    }
+
     states: [
         State {
             name: "NORMAL"
@@ -118,12 +124,20 @@ Item {
                 target: buttonImage
                 source: imgNormal
             }
+            PropertyChanges {
+                target: popper
+                popTarget: null
+            }
         },
         State {
             name: "PRESSED"
             PropertyChanges {
                 target: buttonImage
                 source: imgPressed
+            }
+            PropertyChanges {
+                target: popper
+                popTarget: keyLabel
             }
         }
     ]
