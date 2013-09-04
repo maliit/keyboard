@@ -115,7 +115,7 @@ Item {
 
     Popper {
         id: popper
-        width: panel.keyWidth
+        width: units.gu( UI.magnifierWidth )
         height: panel.keyHeight
     }
 

@@ -29,6 +29,8 @@
 
 import QtQuick 2.0
 
+import "key_constants.js" as UI
+
 Image {
     id: popper
     source: "/usr/share/maliit/plugins/com/ubuntu/styles/ubuntu/images/keyboard_popover.png"
@@ -40,12 +42,11 @@ Image {
         id: popperText
         text: ""
         anchors.centerIn: parent
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.family: "Ubuntu Medium"
-        font.pixelSize: 45
-        font.bold: true
-        color: "black"
+
+        font.family: UI.fontFamily
+        font.pixelSize: units.gu( UI.fontSize )
+        font.bold: UI.fontBold
+        color: UI.fontColor
     }
 
     states: State {

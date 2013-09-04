@@ -26,7 +26,6 @@ ActionKey {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            console.log(panel.state)
             if (panel.state == "CHARACTERS")
                 panel.state = "SYMBOLS";
             else
