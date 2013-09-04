@@ -42,5 +42,6 @@ OTHER_FILES += \
     languages/Keyboard_en_url_search.qml \
     languages/Keyboard_en_email.qml \
     languages/Keyboard_numbers.qml \
-    languages/Keyboard_telephone.qml
+    languages/Keyboard_telephone.qml \
+    keys/ExtendedKeysSelector.qml
 

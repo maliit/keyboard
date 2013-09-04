@@ -16,32 +16,51 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.Popups 0.1
 
 import "key_constants.js" as UI
 
 Item {
     id: key
+
     width: panel.keyWidth
     height: panel.keyHeight
 
+    /* to be set in keyboard layouts */
     property string label: ""
     property string shifted: ""
     property var extended; // list of extended keys
+    property var extendedShifted; // list of extended keys in shifted state
 
+    /* design */
     property string imgNormal: UI.imageCharKey
     property string imgPressed: UI.imageCharKeyPressed
-
-    property string oskState: panel.activeKeypad.state
-
+    // fontSize can be overwritten when using the component, e.g. SymbolShiftKey uses smaller fontSize
     property int fontSize: units.gu( UI.fontSize );
 
     state: "NORMAL"
 
+    /**
+     * this property specifies if the key can submit its value or not (e.g. when the popover is shown, it does not commit its value)
+     */
+
+    property bool popoverHasFocus: false
+
+    /*
+     * label changes when keyboard is in shifted mode
+     * extended keys change as well when shifting keyboard, typically lower-uppercase: ê vs Ê
+     */
+    property string oskState: panel.activeKeypad.state
+    property var activeExtendedModel: extended
+
     onOskStateChanged: {
-        if (panel.activeKeypad.state == "NORMAL")
+        if (panel.activeKeypad.state == "NORMAL") {
             keyLabel.text = label;
-        if (panel.activeKeypad.state == "SHIFTED")
+            activeExtendedModel = extended;
+        } else if (panel.activeKeypad.state == "SHIFTED") {
             keyLabel.text = shifted;
+            activeExtendedModel = extendedShifted
+        }
     }
 
     BorderImage {
@@ -63,14 +82,19 @@ Item {
     }
 
     MouseArea {
+        id: keyMouseArea
         anchors.fill: key
-        onPressAndHold: extKeysContainer.visible = true
+        onPressAndHold: PopupUtils.open(popoverComponent, keyMouseArea)
+
         onReleased: {
             key.state = "NORMAL"
-            extKeysContainer.visible = false
-            event_handler.onKeyReleased(label);
-            if (action !== null)
-                event_handler.onActionKeyReleased(action);
+
+            if (!popoverHasFocus) {
+                event_handler.onKeyReleased(label);
+
+                if (action !== null)
+                    event_handler.onActionKeyReleased(action);
+            }
         }
         onPressed: {
             key.state = "PRESSED"
@@ -78,14 +102,12 @@ Item {
         }
     }
 
-    Row {
-        id: extKeysContainer
-        visible: false
-        Repeater {
-            model: extended;
-            Text {
-                text: modelData
-            }
+    Component {
+        id: popoverComponent
+        ExtendedKeysSelector {
+            id: extendedKeysSelector
+            extendedKeysModel: activeExtendedModel
+            onVisibleChanged: popoverHasFocus = visible;
         }
     }
 
