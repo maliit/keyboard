@@ -26,6 +26,7 @@ var magnifierVerticalPadding = 1; // gu, stretch the magnifier a little bit in y
 var actionKeyPadding = 2;  // gu, action keys are a bit bigger
 var symbolShiftKeyFontSize = 2; // gu
 var urlKeyFontSize = 1; // gu
+var popoverCellSize = 4; // gu
 
 var imageCharKey        = "../images/keybg@18.png"
 var imageCharKeyPressed = "../images/keybg_action_active@18.png"

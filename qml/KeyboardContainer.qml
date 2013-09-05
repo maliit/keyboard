@@ -37,7 +37,7 @@ Item {
         if (layoutId === "email")
             characterKeypad.source = "languages/Keyboard_en_email.qml"
         if (layoutId === "url")
-            characterKeypad.source = "languages/Keyboard_url_search.qml"
+            characterKeypad.source = "languages/Keyboard_en_url_search.qml"
         if (layoutId === "en_us")
             characterKeypad.source = "languages/Keyboard_en_us.qml"
     }

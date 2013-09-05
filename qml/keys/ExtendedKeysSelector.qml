@@ -45,7 +45,7 @@ Popover {
             model: extendedKeysModel
 
             Item {
-                width: panel.keyWidth;
+                width: units.gu( UI.popoverCellSize );
                 height: panel.keyHeight;
 
                 Text {
