@@ -36,6 +36,7 @@ CharKey {
         id: iconImage
         source: iconNormal
         anchors.centerIn: parent
+        visible: (label == "")
     }
 
     onOskStateChanged: {

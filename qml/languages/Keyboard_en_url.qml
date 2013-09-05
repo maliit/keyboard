@@ -16,6 +16,7 @@
 
 import QtQuick 2.0
 import "../keys"
+import "../keys/key_constants.js" as UI
 
 KeyPad {
     anchors.fill: parent
@@ -86,7 +87,7 @@ KeyPad {
             height: panel.keyHeight;
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            CharKey        { id: urlKey;    label: ".com"; shifted: "/";  anchors.left: symShiftKey.right; }
+            CharKey        { id: urlKey;    label: ".com"; shifted: "/"; extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"]; fontSize: units.gu(UI.urlKeyFontSize); anchors.left: symShiftKey.right; }
             CharKey        { id: spaceKey;    label: " "; shifted: " ";  anchors.left: urlKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }

@@ -16,12 +16,14 @@
 
 import QtQuick 2.0
 
+import "key_constants.js" as UI
+
 ActionKey {
     label: "?123";
     shifted: "?123";
     action: "symbols";
 
-    fontSize: units.gu(1);
+    fontSize: units.gu(UI.symbolShiftKeyFontSize);
 
     MouseArea {
         anchors.fill: parent
