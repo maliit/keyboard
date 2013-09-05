@@ -117,8 +117,8 @@ Item {
 
     Popper {
         id: popper
-        width: units.gu( UI.magnifierWidth )
-        height: panel.keyHeight
+        width: panel.keyWidth
+        height: panel.keyHeight + units.gu(UI.magnifierVerticalPadding)
     }
 
     states: [

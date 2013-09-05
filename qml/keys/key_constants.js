@@ -22,8 +22,7 @@ var fontFamily  =   "Ubuntu Medium";
 var fontColor   =   "#666666"
 var fontBold    =   true
 
-var magnifierWidth = 8; // gu
-
+var magnifierVerticalPadding = 1; // gu, stretch the magnifier a little bit in y-axis
 var actionKeyPadding = 2;  // gu, action keys are a bit bigger
 
 var imageCharKey        = "../images/keybg@18.png"
