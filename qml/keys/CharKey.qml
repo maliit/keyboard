@@ -34,6 +34,8 @@ Item {
     property var extended; // list of extended keys
     property var extendedShifted; // list of extended keys in shifted state
 
+    property alias valueToSubmit: keyLabel.text
+
     /* design */
     property string imgNormal: UI.imageCharKey
     property string imgPressed: UI.imageCharKeyPressed
@@ -92,7 +94,7 @@ Item {
             key.state = "NORMAL"
 
             if (!popoverHasFocus) {
-                event_handler.onKeyReleased(label);
+                event_handler.onKeyReleased(valueToSubmit);
 
                 if (action !== null)
                     event_handler.onActionKeyReleased(action);
@@ -100,7 +102,7 @@ Item {
         }
         onPressed: {
             key.state = "PRESSED"
-            event_handler.onKeyPressed(label);
+            event_handler.onKeyPressed(valueToSubmit);
         }
     }
 
