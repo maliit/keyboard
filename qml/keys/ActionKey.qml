@@ -25,9 +25,10 @@ CharKey {
     property string iconCapsLock: ""
 
     noMagnifier: true
+    property int padding: UI.actionKeyPadding
 
     // action keys are a bit wider
-    width: panel.keyWidth + units.gu( UI.actionKeyPadding )
+    width: panel.keyWidth + units.gu( padding )
 
     imgNormal: UI.imageActionKey
     imgPressed: UI.imageActionKeyPressed

@@ -21,9 +21,6 @@ import "languages/"
 Item {
     id: panel
 
-    width: 720
-    height: 486
-
     property int keyWidth: 0
     property int keyHeight: 0
 
@@ -40,7 +37,7 @@ Item {
         if (layoutId === "email")
             characterKeypad.source = "languages/Keyboard_en_email.qml"
         if (layoutId === "url")
-            characterKeypad.source = "languages/Keyboard_en_url_search.qml"
+            characterKeypad.source = "languages/Keyboard_url_search.qml"
         if (layoutId === "en_us")
             characterKeypad.source = "languages/Keyboard_en_us.qml"
     }

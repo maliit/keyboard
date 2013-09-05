@@ -66,7 +66,7 @@ KeyPad {
 
             CharKey { label: "."; }
             CharKey { label: "0"; }
-            BackspaceKey {}
+            BackspaceKey { padding: 0; }
         }
     } // column
 }
