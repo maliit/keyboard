@@ -29,7 +29,7 @@ Popover {
     property variant extendedKeysModel
 
     Rectangle {
-        anchors.fill: parent
+        anchors.fill: containerLayout
         color: "white"
     }
 
