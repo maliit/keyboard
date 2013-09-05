@@ -25,13 +25,10 @@ KeyPad {
     Column {
         id: c1
         anchors.fill: parent
-        anchors.margins: 0;
-
         spacing: 0
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
             spacing: 0
 
             CharKey { label: "q"; shifted: "Q"; }
@@ -48,7 +45,6 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
             spacing: 0
 
             CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","á","ã","å"]; extendedShifted: ["Ä","À","Â","Á","Ã","Å"] }
@@ -64,7 +60,6 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
             spacing: 0
 
             ShiftKey {}
