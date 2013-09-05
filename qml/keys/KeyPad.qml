@@ -22,6 +22,7 @@ Item {
     state: "NORMAL"
 
     property var content: c1
+    property bool capsLock: false
 
     Column {
         id: c1
@@ -68,6 +69,12 @@ Item {
         },
         State {
             name: "SHIFTED"
+            PropertyChanges {
+                target: panel
+            }
+        },
+        State {
+            name: "CAPSLOCK"
             PropertyChanges {
                 target: panel
             }

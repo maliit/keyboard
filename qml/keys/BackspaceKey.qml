@@ -19,5 +19,6 @@ import QtQuick 2.0
 ActionKey {
     iconNormal: "../images/icon_backspace@18.png";
     iconShifted: "../images/icon_backspace@18.png";
+    iconCapsLock: "../images/icon_backspace@18.png";
     action: "backspace";
 }

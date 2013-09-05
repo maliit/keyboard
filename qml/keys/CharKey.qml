@@ -36,6 +36,8 @@ Item {
 
     property alias valueToSubmit: keyLabel.text
 
+    property string action
+
     /* design */
     property string imgNormal: UI.imageCharKey
     property string imgPressed: UI.imageCharKeyPressed
@@ -65,6 +67,7 @@ Item {
             keyLabel.text = shifted;
             activeExtendedModel = extendedShifted
         }
+        // CAPSLOCK keeps everything as in SHIFTED, nothing to do
     }
 
     BorderImage {
@@ -100,8 +103,11 @@ Item {
             if (!popoverHasFocus) {
                 event_handler.onKeyReleased(valueToSubmit);
 
-                if (action !== null)
+                if (action != "")
                     event_handler.onActionKeyReleased(action);
+
+                if (panel.activeKeypad.state === "SHIFTED")
+                    panel.activeKeypad.state = "NORMAL"
             }
         }
         onPressed: {

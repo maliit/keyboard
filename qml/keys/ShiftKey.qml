@@ -18,7 +18,8 @@ import QtQuick 2.0
 
 ActionKey {
     iconNormal: "../images/icon_shift@18.png";
-    iconShifted: "../images/icon_shift_upsidedown@18.png";
+    iconShifted: "../images/icon_shift_white@18.png";
+    iconCapsLock: "../images/icon_shift_upsidedown@18.png";
     action: "shift"
 
     MouseArea {
@@ -26,8 +27,12 @@ ActionKey {
         onClicked: {
             if (panel.activeKeypad.state == "NORMAL")
                 panel.activeKeypad.state = "SHIFTED";
-            else
-                panel.activeKeypad.state = "NORMAL";
+
+            else if (panel.activeKeypad.state == "SHIFTED")
+                panel.activeKeypad.state = "CAPSLOCK"
+
+            else if (panel.activeKeypad.state == "CAPSLOCK")
+                panel.activeKeypad.state = "NORMAL"
         }
     }
 }

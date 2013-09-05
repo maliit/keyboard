@@ -22,7 +22,7 @@ CharKey {
     id: actionKeyRoot
     property string iconNormal: ""
     property string iconShifted: ""
-    property string action: ""
+    property string iconCapsLock: ""
 
     width: panel.keyWidth + units.gu( UI.actionKeyPadding )
 
@@ -43,5 +43,7 @@ CharKey {
             iconImage.source = iconNormal;
         if (panel.activeKeypad.state == "SHIFTED")
             iconImage.source = iconShifted;
+        if (panel.activeKeypad.state == "CAPSLOCK")
+            iconImage.source = iconCapsLock
     }
 }
