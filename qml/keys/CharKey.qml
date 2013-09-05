@@ -88,6 +88,10 @@ Item {
     MouseArea {
         id: keyMouseArea
         anchors.fill: key
+
+        hoverEnabled: true
+        preventStealing: true
+
         onPressAndHold: PopupUtils.open(popoverComponent, keyMouseArea)
 
         onReleased: {
