@@ -96,7 +96,10 @@ Item {
         hoverEnabled: true
         preventStealing: true
 
-        onPressAndHold: PopupUtils.open(popoverComponent, keyMouseArea)
+        onPressAndHold: {
+            if (activeExtendedModel != undefined)
+                PopupUtils.open(popoverComponent, keyMouseArea)
+        }
 
         onReleased: {
             key.state = "NORMAL"
@@ -128,7 +131,7 @@ Item {
 
     Popper {
         id: popper
-        visible: !noMagnifier
+        visible: !noMagnifier && !popoverHasFocus
         width: panel.keyWidth
         height: panel.keyHeight + units.gu(UI.magnifierVerticalPadding)
     }
