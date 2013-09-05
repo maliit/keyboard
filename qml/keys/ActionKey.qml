@@ -24,10 +24,10 @@ CharKey {
     property string iconShifted: ""
     property string iconCapsLock: ""
 
-    width: panel.keyWidth + units.gu( UI.actionKeyPadding )
+    noMagnifier: true
 
-    // TODO implement sizes S,M,L,XL,XXL in C++ enums
-    //Component.onCompleted: width = width*1.2;
+    // action keys are a bit wider
+    width: panel.keyWidth + units.gu( UI.actionKeyPadding )
 
     imgNormal: UI.imageActionKey
     imgPressed: UI.imageActionKeyPressed

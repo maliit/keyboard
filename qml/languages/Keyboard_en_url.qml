@@ -87,7 +87,7 @@ KeyPad {
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             CharKey        { id: urlKey;    label: ".com"; shifted: "/";  anchors.left: symShiftKey.right; }
-            CharKey        { id: spaceKey;    label: " "; shifted: " ";  anchors.left: urlKey.right; anchors.right: dotKey.left; }
+            CharKey        { id: spaceKey;    label: " "; shifted: " ";  anchors.left: urlKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }

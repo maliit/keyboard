@@ -37,6 +37,7 @@ Item {
     property alias valueToSubmit: keyLabel.text
 
     property string action
+    property bool noMagnifier: false
 
     /* design */
     property string imgNormal: UI.imageCharKey
@@ -127,6 +128,7 @@ Item {
 
     Popper {
         id: popper
+        visible: !noMagnifier
         width: panel.keyWidth
         height: panel.keyHeight + units.gu(UI.magnifierVerticalPadding)
     }
