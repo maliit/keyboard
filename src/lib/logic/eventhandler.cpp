@@ -247,6 +247,8 @@ void EventHandler::onActionKeyReleased(QString action)
         key.setAction(Key::ActionBackspace);
     else if (action == "space")
         key.setAction(Key::ActionSpace);
+    else if (action == "shift")
+        key.setAction(Key::ActionShift);
 
     Q_EMIT keyReleased(key);
 }
