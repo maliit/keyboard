@@ -72,8 +72,7 @@ Item {
     property int contentOrientation: Qt.PrimaryOrientation // overwritten by inputMethod
 
     property bool shown: false;
-    property bool wordribbon_visible: true;
-
+    property bool wordribbon_visible: false;
     property bool hideAnimationFinished: false;
     property int pressedKeyIndex: -1;
     property Item pressedKey;
@@ -99,16 +98,18 @@ Item {
                 id: wordRibbon
                 objectName: "wordRibbon"
 
+                visible: canvas.wordribbon_visible
+
                 anchors.bottom: keyboardComp.top
                 width: parent.width;
 
-                height: wordribbon_visible ? layout.wordribbon_height : 0
+                height: visible ? layout.wordribbon_height : 0
             }
 
             Item {
                 id: keyboardComp
 
-                height: canvas.keypadHeight
+                height: canvas.keypadHeight - wordRibbon.height
                 width: parent.width
                 anchors.bottom: parent.bottom
 
