@@ -33,12 +33,32 @@ import QtQuick 2.0
 import "constants.js" as Const
 
 import "keys/key_constants.js" as UI
+import Ubuntu.Components 0.1
+import QtQuick.Window 2.0
+
+Item {
+    objectName: "fullScreenItem"
+
+    property variant layout: maliit_layout
+    property variant event_handler: maliit_event_handler
+
+OrientationHelper {
+
+    automaticOrientation: false
+    transitionEnabled: false
+
+    orientationAngle: Screen.angleBetween(Screen.primaryOrientation, canvas.contentOrientation);
 
 Item {
     id: canvas
     objectName: "ubuntuKeyboard" // Allow us to specify a specific keyboard within autopilot.
-    property variant layout: maliit_layout
-    property variant event_handler: maliit_event_handler
+
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+
+    width: parent.width
+
+    property int keypadHeight: 0 // set by InputMethod
 
     property string layoutId: "en_us"
     onLayoutIdChanged: keypad.loadLayout(layoutId);
@@ -49,7 +69,7 @@ Item {
     //readonly property var layoutState: layout.keyboard_state
     //readonly property string activeView: layout.activeView
 
-    property int contentOrientation: Qt.PrimaryOrientation
+    property int contentOrientation: Qt.PrimaryOrientation // overwritten by inputMethod
 
     property bool shown: false;
     property bool wordribbon_visible: true;
@@ -58,7 +78,6 @@ Item {
     property int pressedKeyIndex: -1;
     property Item pressedKey;
 
-    RotationHelper {
 
         MouseArea {
             id: keyboardSurface
@@ -89,11 +108,9 @@ Item {
             Item {
                 id: keyboardComp
 
-                anchors {
-                    top: wordRibbon.bottom
-                    fill: parent
-                    topMargin: layout.invisible_toucharea_height + (wordribbon_visible ? layout.wordribbon_height : 0);
-                }
+                height: canvas.keypadHeight
+                width: parent.width
+                anchors.bottom: parent.bottom
 
                 Rectangle {
                     id: background
@@ -150,7 +167,6 @@ Item {
             }
 
         } // big mousearea
-    } // rotation helper
 
     state: "HIDDEN"
 
@@ -175,5 +191,7 @@ Item {
     transitions: Transition {
         PropertyAnimation { target: canvas; properties: "y"; easing.type: Easing.InOutQuad }
     }
-}
 
+} // canvas
+} // OrientationHelper
+} // fullScreenItem
