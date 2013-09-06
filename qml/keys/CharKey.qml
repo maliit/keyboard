@@ -105,10 +105,7 @@ Item {
             key.state = "NORMAL"
 
             if (!popoverHasFocus) {
-                event_handler.onKeyReleased(valueToSubmit);
-
-                if (action != "")
-                    event_handler.onActionKeyReleased(action);
+                event_handler.onKeyReleased(valueToSubmit, action);
 
                 if (panel.activeKeypad.state === "SHIFTED" && panel.state === "CHARACTERS")
                     panel.activeKeypad.state = "NORMAL"
