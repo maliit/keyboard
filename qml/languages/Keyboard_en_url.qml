@@ -83,7 +83,7 @@ KeyPad {
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             CharKey        { id: urlKey;    label: ".com"; shifted: "/"; extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"]; fontSize: units.gu(UI.urlKeyFontSize); anchors.left: symShiftKey.right; }
-            CharKey        { id: spaceKey;    label: " "; shifted: " ";  anchors.left: urlKey.right; anchors.right: dotKey.left; noMagnifier: true }
+            SpaceKey       { id: spaceKey;                               anchors.left: urlKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }

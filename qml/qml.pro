@@ -45,5 +45,6 @@ OTHER_FILES += \
     languages/Keyboard_en_email.qml \
     languages/Keyboard_numbers.qml \
     languages/Keyboard_telephone.qml \
-    keys/ExtendedKeysSelector.qml
+    keys/ExtendedKeysSelector.qml \
+    keys/SpaceKey.qml
 
