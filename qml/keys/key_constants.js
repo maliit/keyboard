@@ -34,5 +34,5 @@ var imageCharKeyPressed = "../images/keybg_action_active@18.png"
 var imageActionKey        = "../images/keybg_action@18.png"
 var imageActionKeyPressed = "../images/keybg_action_active@18.png"
 
-var top_margin = 1.35;
-var bottom_margin = 2.00;
+var top_margin = 1.35;  // gu
+var bottom_margin = 1.00; // gu
