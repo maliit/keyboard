@@ -80,7 +80,8 @@ KeyPad {
 
             height: panel.keyHeight;
 
-            CharKey        { id: atKey;    label: "@"; shifted: "/";  anchors.left: parent.left; }
+            Spacer         { id: leftSpacer;                             anchors.left: parent.left; }
+            CharKey        { id: atKey;    label: "@"; shifted: "/";     anchors.left: leftSpacer.right; }
             SymbolShiftKey { id: symShiftKey;                            anchors.left: atKey.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: symShiftKey.right; anchors.right: urlKey.left; noMagnifier: true }
             CharKey        { id: urlKey;    label: ".com"; shifted: "/";  anchors.right: dotKey.left; }

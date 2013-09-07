@@ -81,9 +81,12 @@ KeyPad {
 
             height: panel.keyHeight;
 
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            CharKey        { id: urlKey;    label: ".com"; shifted: "/"; extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"]; fontSize: units.gu(UI.urlKeyFontSize); anchors.left: symShiftKey.right; }
-            SpaceKey       { id: spaceKey;                               anchors.left: urlKey.right; anchors.right: dotKey.left; noMagnifier: true }
+            Spacer         { id: leftSpacer;                             anchors.left: parent.left; }
+            CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: leftSpacer.right; }
+            SymbolShiftKey { id: symShiftKey;                            anchors.left: slashKey.right; }
+            CharKey        { id: urlKey;    label: ".com"; shifted: "/";  extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"];
+                                                                          fontSize: units.gu(UI.urlKeyFontSize);
+                                                                         anchors.left: symShiftKey.right; anchors.right: dotKey.left; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
