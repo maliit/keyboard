@@ -110,6 +110,8 @@ Item {
                     id: noSwipeDown
                     anchors.fill: parent
                     preventStealing: true
+                    anchors.top: borderTop.bottom
+                    anchors.topMargin: units.gu( UI.top_margin )
                 }
 
                 Image {
