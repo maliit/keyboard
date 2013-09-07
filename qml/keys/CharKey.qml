@@ -129,7 +129,7 @@ Item {
     Popper {
         id: popper
         visible: !noMagnifier && !popoverHasFocus
-        width: panel.keyWidth
+        width: panel.keyWidth + units.gu(UI.magnifierHorizontalPadding)
         height: panel.keyHeight + units.gu(UI.magnifierVerticalPadding)
     }
 
