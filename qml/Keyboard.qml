@@ -106,6 +106,12 @@ Item {
                     }
                 }
 
+                MouseArea {
+                    id: noSwipeDown
+                    anchors.fill: parent
+                    preventStealing: true
+                }
+
                 Image {
                     id: borderTop
                     source: "styles/ubuntu/images/border_top.png"
