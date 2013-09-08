@@ -1,9 +1,7 @@
 /*
  * This file is part of Maliit plugins
  *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) Jakub Pavelek <jpavelek@live.com>
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,9 +27,61 @@
  *
  */
 
-Keyboard {
-    layout: maliit_layout
-    event_handler: maliit_event_handler
-    area_enabled: !maliit_extended_layout.visible
-    title: maliit_layout.title
+import QtQuick 2.0
+
+import "key_constants.js" as UI
+
+Image {
+    id: popper
+    source: "/usr/share/maliit/plugins/com/ubuntu/styles/ubuntu/images/keyboard_popover.png"
+    opacity: 0
+
+    property Item popTarget: null
+
+    Text {
+        id: popperText
+        text: ""
+        anchors.centerIn: parent
+
+        font.family: UI.fontFamily
+        font.pixelSize: units.gu( UI.fontSize )
+        font.bold: UI.fontBold
+        color: UI.fontColor
+    }
+
+    states: State {
+        name: "active"
+        when: popTarget !== null
+
+        PropertyChanges {
+            target: popperText
+            text: popTarget.text
+        }
+
+        PropertyChanges {
+            target: popper
+            opacity: 1
+
+            x: popper.parent.mapFromItem(popTarget, 0, 0).x + (popTarget.width - popper.width) / 2
+            y: popper.parent.mapFromItem(popTarget, 0, 0).y - popper.height
+        }
+    }
+
+    transitions: Transition {
+        from: "active"
+
+        SequentialAnimation {
+            PauseAnimation {
+                duration: 50
+            }
+            PropertyAction {
+                target: popper
+                properties: "opacity, x, y"
+            }
+            PropertyAction {
+                target: popperText
+                property: "text"
+            }
+        }
+    }
 }

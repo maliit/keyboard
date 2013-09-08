@@ -72,8 +72,6 @@ public:
     virtual void setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides);
     //! \reimp_end
 
-    Q_SLOT void onLeftLayoutSelected();
-    Q_SLOT void onRightLayoutSelected();
     Q_SLOT void deviceOrientationChanged(Qt::ScreenOrientation orientation);
 
     Q_SLOT void updateWordEngine();
@@ -92,14 +90,6 @@ Q_SIGNALS:
     void contentTypeChanged(Maliit::TextContentType contentType);
 
 private:
-    void registerStyleSetting(MAbstractInputMethodHost *host);
-    void registerFeedbackSetting(MAbstractInputMethodHost *host);
-    void registerAutoCorrectSetting(MAbstractInputMethodHost *host);
-    void registerAutoCapsSetting(MAbstractInputMethodHost *host);
-    void registerWordEngineSetting(MAbstractInputMethodHost *host);
-    void registerHideWordRibbonInPortraitModeSetting(MAbstractInputMethodHost *host);
-
-    Q_SLOT void onScreenSizeChange(const QSize &size);
     Q_SLOT void onStyleSettingChanged();
     Q_SLOT void onFeedbackSettingChanged();
     Q_SLOT void onAutoCorrectSettingChanged();
@@ -110,14 +100,6 @@ private:
 
     Q_SLOT void onLayoutWidthChanged(int width);
     Q_SLOT void onLayoutHeightChanged(int height);
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    Q_SLOT void onExtendedLayoutWidthChanged(int width);
-    Q_SLOT void onExtendedLayoutHeightChanged(int height);
-    Q_SLOT void onExtendedLayoutOriginChanged(const QPoint &origin);
-    Q_SLOT void onMagnifierLayoutWidthChanged(int width);
-    Q_SLOT void onMagnifierLayoutHeightChanged(int height);
-    Q_SLOT void onMagnifierLayoutOriginChanged(const QPoint &origin);
-#endif
 
     Q_SLOT void onContentTypeChanged(Maliit::TextContentType contentType);
 

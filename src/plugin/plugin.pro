@@ -24,7 +24,6 @@ HEADERS += \
     inputmethod.h \
     editor.h \
     updatenotifier.h \
-    maliitcontext.h \
     ubuntuapplicationapiwrapper.h
 
 SOURCES += \
@@ -32,7 +31,6 @@ SOURCES += \
     inputmethod.cpp \
     editor.cpp \
     updatenotifier.cpp \
-    maliitcontext.cpp \
     ubuntuapplicationapiwrapper.cpp
 
 target.path += $${MALIIT_PLUGINS_DIR}

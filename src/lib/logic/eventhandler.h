@@ -75,6 +75,9 @@ public:
     Q_INVOKABLE void onWordCandidateReleased(QString word);
     Q_INVOKABLE void onLanguageChangeRequested(QString languageId);
 
+    Q_INVOKABLE void onKeyPressed(QString label);
+    Q_INVOKABLE void onKeyReleased(QString label, QString action = "");
+
     // Key signals:
     Q_SIGNAL void keyPressed(const Key &key);
     Q_SIGNAL void keyLongPressed(const Key &key);

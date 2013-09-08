@@ -32,19 +32,22 @@
 import QtQuick 2.0
 import "constants.js" as Const
 
+import "keys/key_constants.js" as UI
+
 Item {
     id: canvas
     objectName: "ubuntuKeyboard" // Allow us to specify a specific keyboard within autopilot.
-    property alias layout: keyRepeater.model
-    property variant event_handler
-    property bool area_enabled // MouseArea has no id property so we cannot alias its enabled property.
-    property alias title: keyboard_title.text
+    property variant layout: maliit_layout
+    property variant event_handler: maliit_event_handler
+
+    property string layoutId: "en_us"
+    onLayoutIdChanged: keypad.loadLayout(layoutId);
 
     visible: layout.visible
 
     // Expose details for use with Autopilot.
-    readonly property var layoutState: layout.keyboard_state
-    readonly property string activeView: layout.activeView
+    //readonly property var layoutState: layout.keyboard_state
+    //readonly property string activeView: layout.activeView
 
     property int contentOrientation: Qt.PrimaryOrientation
 
@@ -57,272 +60,104 @@ Item {
 
     RotationHelper {
 
-    Connections {
-        target: layout
-        onTitleChanged: {
-            console.debug("title:" + layout.title)
-            title_timeout.start()
-        }
-    }
+        MouseArea {
+            id: keyboardSurface
+            property int jumpBackThreshold: 170
 
-    MouseArea {
-        id: keyboardSurface
-        property int jumpBackThreshold: 170
+            drag.target: keyboardSurface
+            drag.axis: Drag.YAxis;
+            drag.minimumY: 0
+            drag.maximumY: height
+            drag.filterChildren: true
 
-        drag.target: keyboardSurface
-        drag.axis: Drag.YAxis;
-        drag.minimumY: 0
-        drag.maximumY: height
-        drag.filterChildren: true
-
-        x:0
-        y:0
-        width: parent.width
-        height: parent.height
+            x:0
+            y:0
+            width: parent.width
+            height: parent.height
 
 
-    WordRibbon {
-        id: wordRibbon
-        objectName: "wordRibbon"
+            WordRibbon {
+                id: wordRibbon
+                objectName: "wordRibbon"
 
-        anchors.bottom: keypadMouseArea.top
-        width: parent.width;
+                anchors.bottom: keyboardComp.top
+                width: parent.width;
 
-        height: wordribbon_visible ? layout.wordribbon_height : 0
-    }
-
-    MouseArea {
-        id: keypadMouseArea
-        preventStealing: true
-
-        anchors {
-            top: wordRibbon.bottom
-            fill: parent
-            topMargin: layout.invisible_toucharea_height + (wordribbon_visible ? layout.wordribbon_height : 0);
-        }
-
-        Item {
-            id: keyboardContainer
-
-            anchors.fill: parent
-
-            Rectangle {
-                id: background
-
-                anchors.fill: parent
-
-                gradient: Gradient {
-                    GradientStop { position: 0.0; color: "#f1f1f1" }
-                    GradientStop { position: 1.0; color: "#e4e4e4" }
-                }
-            }
-
-            Image {
-                id: borderTop
-                source: "styles/ubuntu/images/border_top.png"
-                width: parent.width
-                anchors.top: parent.top.bottom
-            }
-
-            Image {
-                id: borderBottom
-                source: "styles/ubuntu/images/border_bottom.png"
-                width: parent.width
-                anchors.bottom: background.bottom
+                height: wordribbon_visible ? layout.wordribbon_height : 0
             }
 
             Item {
-                objectName: "keyboardKeypad"
-                id: keyPad
+                id: keyboardComp
 
-                anchors.top: borderTop.bottom
-                anchors.bottom: borderBottom.top
-                width: parent.width
+                anchors {
+                    top: wordRibbon.bottom
+                    fill: parent
+                    topMargin: layout.invisible_toucharea_height + (wordribbon_visible ? layout.wordribbon_height : 0);
+                }
 
-            Repeater {
-                id: keyRepeater
-                model: layout
-                anchors.fill: parent
+                Rectangle {
+                    id: background
 
-                Item {
-                    property alias text: key_text_item.text;
+                    anchors.fill: parent
 
-                    x: key_reactive_area.x
-                    y: key_reactive_area.y
-                    width: key_reactive_area.width
-                    height: key_reactive_area.height
-
-                    BorderImage {
-                        x: key_rectangle.x
-                        y: key_rectangle.y
-                        width: key_rectangle.width
-                        height: key_rectangle.height
-
-                        border.left: key_background_borders.x
-                        border.top: key_background_borders.y
-                        border.right: key_background_borders.width
-                        border.bottom: key_background_borders.height
-
-                        source: key_background
-
-                        Text {
-                            id: key_text_item
-
-                            // Expose detail for use within Autopilot
-                            property var action_type: key_action_type
-
-                            anchors.fill: parent
-                            text: key_text
-                            font.family: key_font
-                            font.pixelSize: key_font_size
-                            color: key_font_color
-                            font.bold: true
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            visible: (key_text.length != 0)
-                        }
-
-                        Image {
-                            anchors.centerIn: parent
-                            source: key_icon
-                            visible: (key_icon.length != 0)
-                        }
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: "#f1f1f1" }
+                        GradientStop { position: 1.0; color: "#e4e4e4" }
                     }
+                }
 
-                    MouseArea {
-                        enabled: area_enabled
-                        anchors.fill: parent
-                        hoverEnabled: true
+                MouseArea {
+                    id: noSwipeDown
+                    anchors.fill: parent
+                    preventStealing: true
+                    anchors.top: borderTop.bottom
+                    anchors.topMargin: units.gu( UI.top_margin )
+                }
 
-                        onEntered: event_handler.onEntered(index)
-                        onExited: event_handler.onExited(index)
+                Image {
+                    id: borderTop
+                    source: "styles/ubuntu/images/border_top.png"
+                    width: parent.width
+                    anchors.top: parent.top.bottom
+                }
 
-                        onPressed: {
-                            if(!drag.active) {
-                                pressedKeyIndex = index;
-                                event_handler.onEntered(index)
-                            }
+                Image {
+                    id: borderBottom
+                    source: "styles/ubuntu/images/border_bottom.png"
+                    width: parent.width
+                    anchors.bottom: background.bottom
+                }
 
-                            if (key_action_insert)
-                                pressedKey = parent
-                            else
-                                pressedKey = null
+                KeyboardContainer {
+                    id: keypad
 
-                            event_handler.onPressed(index)
-                            mouse.accepted = false;
-                        }
+                    anchors.top: borderTop.bottom
+                    anchors.bottom: borderBottom.top
+                    anchors.topMargin: units.gu( UI.top_margin )
+                    anchors.bottomMargin: units.gu( UI.bottom_margin )
+                    width: parent.width
+                }
+            } // keyboardComp
 
-                        onReleased: {
-                            console.error("ON_RELEASED")
-                            if (pressedKeyIndex == -1)
-                                return;
-
-                            if (!drag.active)
-                                event_handler.onReleased(pressedKeyIndex);
-
-                            event_handler.onExited(pressedKeyIndex)
-                            pressedKeyIndex = -1;
-
-                        }
-
-                        onPressAndHold: event_handler.onPressAndHold(index)
-                    }
-
-                } // Item
-            } // Repeater
-
-            } // keyPad
-
-            Popper {
-                id: popper
-                target: pressedKey
-                width: units.gu(Const.magnifierWidth);
-                height: units.gu(Const.magnifierHeight);
+            onReleased: {
+                if (y > jumpBackThreshold) {
+                    canvas.shown = false;
+                } else {
+                    bounceBackAnimation.from = y
+                    bounceBackAnimation.start();
+                }
             }
 
-            // Keyboard title rendering
-            // TODO: Make separate component?
-            Item {
-                anchors.centerIn: parent
-                opacity: title_timeout.running ? 1.0 : 0.0
-
-                Behavior on opacity {
-                    PropertyAnimation {
-                        duration: 300
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-
-                Timer {
-                    id: title_timeout
-                    interval: 1000
-                }
-
-                // TODO: Make title background part of styling profile.
-                BorderImage {
-                    anchors.centerIn: parent
-
-                    // Manual padding of text:
-                    width: keyboard_title.width * 1.2
-                    height: keyboard_title.height * 1.2
-
-                    //anchors.fill: keyboard_title
-                    source: layout.background
-                    z: 1000 // Move behind Text element but in front of rest.
-
-                    border.left: layout.background_borders.x
-                    border.top: layout.background_borders.y
-                    border.right: layout.background_borders.width
-                    border.bottom: layout.background_borders.height
-                }
-
-                Text {
-                    id: keyboard_title
-                    anchors.centerIn: parent
-
-                    text: title;
-                    z: 1001
-
-                    // TODO: Make title font part of styling profile.
-                    font.pointSize: 48
-                    color: "white"
-                }
+            PropertyAnimation {
+                id: bounceBackAnimation
+                target: keyboardSurface
+                properties: "y"
+                easing.type: Easing.OutBounce;
+                easing.overshoot: 2.0
+                to: 0
             }
-        } // keyboardContainer
 
-        onReleased: {
-            if (pressedKeyIndex == -1)
-                return;
-
-            if (!drag.active)
-                event_handler.onReleased(pressedKeyIndex);
-
-            event_handler.onExited(pressedKeyIndex)
-            pressedKeyIndex = -1;
-            pressedKey = null;
-
-        }
-    } // keypadMouseArea
-
-    onReleased: {
-        if (y > jumpBackThreshold) {
-            canvas.shown = false;
-        } else {
-            bounceBackAnimation.from = y
-            bounceBackAnimation.start();
-        }
-    }
-
-    PropertyAnimation {
-        id: bounceBackAnimation
-        target: keyboardSurface
-        properties: "y"
-        easing.type: Easing.OutBounce;
-        easing.overshoot: 2.0
-        to: 0
-    }
-
-    } // big mousearea
+        } // big mousearea
     } // rotation helper
 
     state: "HIDDEN"
