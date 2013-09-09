@@ -223,28 +223,23 @@ void EventHandler::onKeyPressed(QString label)
     Q_EMIT keyPressed(key);
 }
 
-void EventHandler::onKeyReleased(QString label)
+void EventHandler::onKeyReleased(QString label, QString action)
 {
     Key key;
     Label mlabel;
     mlabel.setText(label);
     key.setLabel(mlabel);
 
-    Q_EMIT keyReleased(key);
-}
-
-void EventHandler::onActionKeyReleased(QString action)
-{
-    if (action.isEmpty())
-        return;
-
-    Key key;
-
-    // TODO use an enum
     if (action == "return")
         key.setAction(Key::ActionReturn);
     else if (action == "backspace")
         key.setAction(Key::ActionBackspace);
+    else if (action == "space")
+        key.setAction(Key::ActionSpace);
+    else if (action == "shift")
+        key.setAction(Key::ActionShift);
+    else
+        key.setAction(Key::ActionInsert);
 
     Q_EMIT keyReleased(key);
 }

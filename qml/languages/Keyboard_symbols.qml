@@ -67,7 +67,7 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            ShiftKey { label: "1/2"; shifted: "2/2"; fontSize: units.gu(3); }
+            OneTwoKey { label: "1/2"; shifted: "2/2"; fontSize: units.gu(3); }
             CharKey { label: "@"; shifted: "«"; }
             CharKey { label: "~"; shifted: "»"; }
             CharKey { label: "/"; shifted: "¨"; }

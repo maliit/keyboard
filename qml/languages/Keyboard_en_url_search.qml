@@ -26,13 +26,11 @@ KeyPad {
     Column {
         id: c1
         anchors.fill: parent
-        anchors.margins: 0;
 
         spacing: 0
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
             spacing: 0
 
             CharKey { label: "q"; shifted: "Q"; }
@@ -49,7 +47,6 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
             spacing: 0
 
             CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","á","ã","å"]; extendedShifted: ["Ä","À","Â","Á","Ã","Å"] }
@@ -65,7 +62,6 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
             spacing: 0
 
             ShiftKey {}
@@ -86,9 +82,10 @@ KeyPad {
 
             height: panel.keyHeight;
 
-            CharKey        { id: slashKey;    label: "/"; shifted: "/";  anchors.left: parent.left; }
+            Spacer         { id: leftSpacer;                             anchors.left: parent.left; }
+            CharKey        { id: slashKey;    label: "/"; shifted: "/";  anchors.left: leftSpacer.right; }
             SymbolShiftKey { id: symShiftKey;                            anchors.left: slashKey.right; }
-            CharKey        { id: spaceKey;    label: " "; shifted: " ";  anchors.left: symShiftKey.right; anchors.right: urlKey.left; noMagnifier: true }
+            SpaceKey       { id: spaceKey;                               anchors.left: symShiftKey.right; anchors.right: urlKey.left; noMagnifier: true }
             CharKey        { id: urlKey;    label: ".com"; shifted: "/"; extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"]; fontSize: units.gu(UI.urlKeyFontSize); anchors.right: dotKey.left; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }

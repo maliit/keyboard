@@ -105,12 +105,9 @@ Item {
             key.state = "NORMAL"
 
             if (!popoverHasFocus) {
-                event_handler.onKeyReleased(valueToSubmit);
+                event_handler.onKeyReleased(valueToSubmit, action);
 
-                if (action != "")
-                    event_handler.onActionKeyReleased(action);
-
-                if (panel.activeKeypad.state === "SHIFTED")
+                if (panel.activeKeypad.state === "SHIFTED" && panel.state === "CHARACTERS")
                     panel.activeKeypad.state = "NORMAL"
             }
         }
@@ -132,7 +129,7 @@ Item {
     Popper {
         id: popper
         visible: !noMagnifier && !popoverHasFocus
-        width: panel.keyWidth
+        width: panel.keyWidth + units.gu(UI.magnifierHorizontalPadding)
         height: panel.keyHeight + units.gu(UI.magnifierVerticalPadding)
     }
 

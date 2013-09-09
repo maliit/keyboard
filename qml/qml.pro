@@ -38,10 +38,13 @@ OTHER_FILES += \
     keys/SymbolShiftKey.qml \
     keys/ReturnKey.qml \
     keys/Popper.qml \
+    keys/OneTwoKey.qml \
     languages/Keyboard_en_url.qml \
     languages/Keyboard_en_url_search.qml \
     languages/Keyboard_en_email.qml \
     languages/Keyboard_numbers.qml \
     languages/Keyboard_telephone.qml \
-    keys/ExtendedKeysSelector.qml
+    keys/ExtendedKeysSelector.qml \
+    keys/SpaceKey.qml \
+    keys/Spacer.qml
 

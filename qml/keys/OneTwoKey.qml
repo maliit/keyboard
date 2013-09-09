@@ -34,10 +34,5 @@ ActionKey {
             else if (panel.activeKeypad.state == "CAPSLOCK")
                 panel.activeKeypad.state = "NORMAL"
         }
-
-        onDoubleClicked: {
-            if (panel.activeKeypad.state == "SHIFTED")
-                panel.activeKeypad.state = "CAPSLOCK"
-        }
     }
 }
