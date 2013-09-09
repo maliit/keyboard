@@ -55,6 +55,11 @@ Item {
     property bool wordribbon_visible: true;
 
     property bool hideAnimationFinished: false;
+    property bool autoCapsActivated: false
+    onAutoCapsActivatedChanged: {
+        if (autoCapsActivated)
+            keypad.activeKeypad.state = "SHIFTED";
+    }
     property int pressedKeyIndex: -1;
     property Item pressedKey;
 

@@ -92,8 +92,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
             &d->layout.model, SLOT(setKeyArea(KeyArea)));
 
-    connect(&d->editor, SIGNAL(rightLayoutSelected()),
-            this,       SLOT(onRightLayoutSelected()));
+    connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SLOT(onAutoCapsActivated()));
 
     connect(this, SIGNAL(wordRibbonEnabledChanged(bool)), uiConst, SLOT(onWordEngineSettingsChanged(bool)));
 
@@ -458,6 +457,16 @@ void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
     default:
         break;
     }
+}
+
+/*
+ * activated by the editor after e.g. pressing period
+ **/
+
+void InputMethod::onAutoCapsActivated()
+{
+    Q_D(InputMethod);
+    d->qmlRootItem->setProperty("autoCapsActivated", true);
 }
 
 } // namespace MaliitKeyboard

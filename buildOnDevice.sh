@@ -79,7 +79,7 @@ build() {
     exec_with_ssh "cd $CODE_DIR/ && qmake && make -j 4"
     echo "Installing"
     exec_with_ssh "cd $CODE_DIR/ && " $SUDO " make install"
-#    exec_with_ssh "cd $CODE_DIR/ && dpkg-buildpackage -j4"
+    exec_with_ssh "cd $CODE_DIR/ && dpkg-buildpackage -j4"
 }
 
 run() {
@@ -88,7 +88,7 @@ run() {
     adb shell pkill "webbrowser-app"
     adb shell pkill "qmlscene"
 
-    exec_with_ssh "$BINARY $RUN_OPTIONS"
+#    exec_with_ssh "$BINARY $RUN_OPTIONS"
 }
 
 set -- `getopt -n$0 -u -a --longoptions="setup,help" "sh" "$@"`

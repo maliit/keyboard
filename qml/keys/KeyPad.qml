@@ -66,6 +66,10 @@ Item {
             PropertyChanges {
                 target: panel
             }
+            PropertyChanges {
+                target: canvas
+                autoCapsActivated: false
+            }
         },
         State {
             name: "SHIFTED"

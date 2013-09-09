@@ -38,6 +38,7 @@ Item {
 
     property string action
     property bool noMagnifier: false
+    property bool skipAutoCaps: false
 
     /* design */
     property string imgNormal: UI.imageCharKey
@@ -106,9 +107,9 @@ Item {
 
             if (!popoverHasFocus) {
                 event_handler.onKeyReleased(valueToSubmit, action);
-
-                if (panel.activeKeypad.state === "SHIFTED" && panel.state === "CHARACTERS")
-                    panel.activeKeypad.state = "NORMAL"
+                if (!skipAutoCaps)
+                    if (panel.activeKeypad.state === "SHIFTED" && panel.state === "CHARACTERS")
+                        panel.activeKeypad.state = "NORMAL"
             }
         }
         onPressed: {
