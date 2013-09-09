@@ -24,6 +24,7 @@ ActionKey {
 
     MouseArea {
         anchors.fill: parent
+        preventStealing: true
         onClicked: {
             if (panel.activeKeypad.state == "NORMAL")
                 panel.activeKeypad.state = "SHIFTED";
