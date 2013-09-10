@@ -21,6 +21,7 @@ KeyPad {
     anchors.fill: parent
 
     content: c1
+    symbols: ""
 
     Column {
         id: c1

@@ -20,8 +20,8 @@ import "../keys"
 KeyPad {
     anchors.fill: parent
 
-    symbols: ""
     content: c1
+    symbols: ""
 
     Column {
         id: c1
