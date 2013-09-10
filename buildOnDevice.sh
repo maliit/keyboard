@@ -79,7 +79,7 @@ build() {
     exec_with_ssh "cd $CODE_DIR/ && qmake && make -j 4"
     echo "Installing"
     exec_with_ssh "cd $CODE_DIR/ && " $SUDO " make install"
-    exec_with_ssh "cd $CODE_DIR/ && dpkg-buildpackage -j4"
+#    exec_with_ssh "cd $CODE_DIR/ && dpkg-buildpackage -j4"
 }
 
 run() {

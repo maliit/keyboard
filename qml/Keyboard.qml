@@ -172,7 +172,10 @@ Item {
             name: "SHOWN"
             PropertyChanges { target: canvas; y: 0; }
             when: canvas.shown === true
-            onCompleted: canvas.hideAnimationFinished = false;
+            onCompleted: {
+                keypad.state = "CHARACTERS"
+                canvas.hideAnimationFinished = false;
+            }
         },
 
         State {
