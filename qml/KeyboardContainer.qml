@@ -25,7 +25,7 @@ Item {
     property int keyHeight: 0
 
     property Item activeKeypad: characterKeypadLoader.item
-    property var symbolKeypad
+    property string symbolKeypadSource
 
     state: "CHARACTERS"
 
@@ -48,17 +48,12 @@ Item {
         anchors.fill: parent
 
         source: "languages/Keyboard_en_us.qml"
-
-        onLoaded: {
-            activeKeypad = characterKeypadLoader.item
-            symbolKeypad = characterKeypadLoader.item.symbols
-        }
-
+        onLoaded: symbolKeypadSource = characterKeypadLoader.item.symbols
     }
 
-    onSymbolKeypadChanged: {
-        if (symbolKeypad != "")
-            symbolKeypadLoader.source = symbolKeypad
+    onSymbolKeypadSourceChanged: {
+        if (symbolKeypadSource != "")
+            symbolKeypadLoader.source = symbolKeypadSource
         else
             state = "CHARACTERS"
     }
@@ -91,7 +86,7 @@ Item {
             name: "SYMBOLS"
             PropertyChanges {
                 target: panel
-                activeKeypad: symbolKeypadLoader
+                activeKeypad: symbolKeypadLoader.item
             }
             PropertyChanges {
                 target: characterKeypadLoader
