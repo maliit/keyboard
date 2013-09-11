@@ -47,5 +47,6 @@ OTHER_FILES += \
     languages/Keyboard_telephone.qml \
     keys/ExtendedKeysSelector.qml \
     keys/SpaceKey.qml \
-    keys/Spacer.qml
+    keys/Spacer.qml \
+    keys/UrlKey.qml
 
