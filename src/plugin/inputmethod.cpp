@@ -430,17 +430,29 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
     if (contentType == Maliit::FreeTextContentType)
         d->setActiveKeyboardId( d->activeLanguageId );
 
-    if (contentType == Maliit::NumberContentType)
+    if (contentType == Maliit::NumberContentType) {
+        d->predictionEnabled = false;
+        updateWordEngine();
         d->setActiveKeyboardId( "number" );
+    }
 
-    if (contentType == Maliit::PhoneNumberContentType)
+    if (contentType == Maliit::PhoneNumberContentType) {
+        d->predictionEnabled = false;
+        updateWordEngine();
         d->setActiveKeyboardId( "phonenumber" );
+    }
 
-    if (contentType == Maliit::EmailContentType)
+    if (contentType == Maliit::EmailContentType) {
+        d->predictionEnabled = false;
+        updateWordEngine();
         d->setActiveKeyboardId( "email" );
+    }
 
-    if (contentType == Maliit::UrlContentType)
+    if (contentType == Maliit::UrlContentType) {
+        d->predictionEnabled = false;
+        updateWordEngine();
         d->setActiveKeyboardId("url");
+    }
 }
 
 void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
