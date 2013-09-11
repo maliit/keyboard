@@ -1,3 +1,9 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130911.1-0ubuntu1) UNRELEASED; urgency=low
+
+  * Add GSettings schema file to ubuntu-keyboard-data.
+
+ -- William Hua <william.hua@canonical.com>  Wed, 11 Sep 2013 13:47:42 -0400
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130829.1-0ubuntu1) saucy; urgency=low
 
   [ Gerry Boland ]
