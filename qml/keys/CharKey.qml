@@ -46,7 +46,14 @@ Item {
     // fontSize can be overwritten when using the component, e.g. SymbolShiftKey uses smaller fontSize
     property int fontSize: units.gu( UI.fontSize );
 
+    /// annotation shows a small label in the upper right corner
+    // if the annotiation property is set, it will be used. If not, the first position in extended[] list or extendedShifted[] list will
+    // be used, depending on the state. If no extended/extendedShifted arrays exist, no annotation is shown
     property string annotation: ""
+
+    /* internal */
+    property string __annotationLabelNormal
+    property string __annotationLabelShifted
 
     state: "NORMAL"
 
@@ -72,6 +79,18 @@ Item {
             activeExtendedModel = extendedShifted
         }
         // CAPSLOCK keeps everything as in SHIFTED, nothing to do
+    }
+
+    Component.onCompleted: {
+        if (annotation) {
+            __annotationLabelNormal = annotation
+            __annotationLabelShifted = annotation
+        } else {
+            if (extended)
+                __annotationLabelNormal = extended[0]
+            if (extendedShifted)
+                __annotationLabelShifted = extendedShifted[0]
+        }
     }
 
     BorderImage {
@@ -100,13 +119,13 @@ Item {
 
     Text {
         id: annotationLabel
-        text: annotation
+        text: (panel.activeKeypad.state != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
 
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.margins: units.gu( UI.annotationMargins )
 
-        font.pixelSize: UI.annotationFontSize
+        font.pixelSize: units.gu( UI.annotationFontSize )
         font.bold: false
         color: UI.fontColor
     }
