@@ -151,6 +151,36 @@ MainView {
                 font.pixelSize: units.gu(1.5)
             }
         }
+
+        /**
+         * Qt.ImhEmailCharactersOnly
+         */
+        Row {
+            spacing: units.gu(1)
+            Item {
+                width: inputWidth
+                height: units.gu(4);
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "white"
+                }
+
+                TextInput {
+                    anchors.fill: parent
+                    color: "black"; selectionColor: "red"
+
+                    inputMethodHints: Qt.ImhEmailCharactersOnly
+                    font.pixelSize: units.gu(3)
+                    font.bold: false
+                }
+            }
+            Text {
+                text: "Qt.ImhEmailCharactersOnly"
+                anchors.verticalCenter: parent
+                font.pixelSize: units.gu(1.5)
+            }
+        }
     } // column
 
     Rectangle {
