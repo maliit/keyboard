@@ -72,7 +72,6 @@ QString LanguageFeatures::appendixForReplacedPreedit(const QString &preedit) con
         }
     }
 
-    appendix.append(" ");
     return appendix;
 }
 
