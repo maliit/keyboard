@@ -24,7 +24,6 @@ OTHER_FILES += \
     maliit-magnifier.qml \
     Keyboard.qml \
     maliit-ui-constants.qml \
-    RotationHelper.qml \
     WordRibbon.qml \
     Popper.qml \
     KeyboardContainer.qml \

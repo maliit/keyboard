@@ -195,14 +195,15 @@ public:
 
         keyboardVisibleRect = windowGeometryRect.adjusted(0,uiConst->invisibleTouchAreaHeight(orientation),0,0);
 
+        qmlRootItem->setProperty("height", windowGeometryRect.height());
+        qmlRootItem->setProperty("keypadHeight", keyboardVisibleRect.height());
+        qmlRootItem->setProperty("contentOrientation", screenOrientation);
+
         // qpa does not rotate the coordinate system
         windowGeometryRect = qGuiApp->primaryScreen()->mapBetween(
                         screenOrientation,
                         qGuiApp->primaryScreen()->primaryOrientation(),
                         windowGeometryRect);
-
-
-        view->setGeometry(windowGeometryRect);
 
         if (qmlRootItem->property("shown").toBool()) {
             host->setScreenRegion(QRegion(keyboardVisibleRect));
@@ -211,8 +212,6 @@ public:
             rect.moveTop( windowGeometryRect.height() - keyboardVisibleRect.height() );
             host->setInputMethodArea(rect, view);
         }
-
-        qmlRootItem->setProperty("contentOrientation", screenOrientation);
 
         if (qmlRootItem->property("shown").toBool()) {
             applicationApiWrapper->reportOSKInvisible();

@@ -85,6 +85,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     Q_D(InputMethod);
 
     d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
+    d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
 
     // FIXME: Reconnect feedback instance.
     Setup::connectAll(&d->layout.event_handler, &d->layout.updater, &d->editor);
@@ -451,7 +452,7 @@ void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
     switch (status) {
     case QQuickView::Ready:
     {
-        d->qmlRootItem = qobject_cast<QQuickItem*> (d->view->rootObject());
+        d->qmlRootItem = d->view->rootObject()->findChild<QQuickItem*>("ubuntuKeyboard");
         QObject::connect(d->qmlRootItem, SIGNAL(hideAnimationFinishedChanged()), this, SLOT(onHideAnimationFinished()));
     }
         break;
