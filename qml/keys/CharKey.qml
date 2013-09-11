@@ -46,6 +46,8 @@ Item {
     // fontSize can be overwritten when using the component, e.g. SymbolShiftKey uses smaller fontSize
     property int fontSize: units.gu( UI.fontSize );
 
+    property string annotation: ""
+
     state: "NORMAL"
 
     /**
@@ -80,6 +82,9 @@ Item {
         anchors.margins: units.dp( UI.keyMargins );
     }
 
+    /// label of the key
+    //  the label is also the value subitted to the app
+
     Text {
         id: keyLabel
         text: ""
@@ -87,6 +92,22 @@ Item {
         font.family: UI.fontFamily
         font.pixelSize: fontSize
         font.bold: UI.fontBold
+        color: UI.fontColor
+    }
+
+    /// shows an annotation
+    // used e.g. for indicating the existence of extended keys
+
+    Text {
+        id: annotationLabel
+        text: annotation
+
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.margins: units.gu( UI.annotationMargins )
+
+        font.pixelSize: UI.annotationFontSize
+        font.bold: false
         color: UI.fontColor
     }
 
