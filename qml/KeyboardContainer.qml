@@ -31,6 +31,7 @@ Item {
 
     function loadLayout(layoutId)
     {
+        state = "CHARACTERS"
         if (layoutId === "number")
             characterKeypadLoader.source = "languages/Keyboard_numbers.qml"
         if (layoutId === "phonenumber")
