@@ -194,7 +194,7 @@ MainView {
             visible: Qt.inputMethod.visible
             anchors.centerIn: parent
             font.pixelSize: units.gu(1)
-            text: "browser url bar"
+            text: "app bottom"
         }
     }
 
