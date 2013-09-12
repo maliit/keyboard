@@ -22,8 +22,9 @@ var fontFamily  =   "Ubuntu Medium";
 var fontColor   =   "#666666"
 var fontBold    =   true
 
-var annotationFontSize = 1; // gu
-var annotationMargins = 1; // gu
+var annotationFontSize = 0.85; // gu
+var annotationMargins = 0.7; // gu
+var annotationFontColor = "#88666666"
 
 /* magnifier */
 var magnifierHorizontalPadding = 1; // gu, stretch the magnifier a little bit in x-axis

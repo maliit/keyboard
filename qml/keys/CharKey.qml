@@ -127,7 +127,7 @@ Item {
 
         font.pixelSize: units.gu( UI.annotationFontSize )
         font.bold: false
-        color: UI.fontColor
+        color: UI.annotationFontColor
     }
 
     MouseArea {
