@@ -404,6 +404,9 @@ void InputMethod::updateWordEngine()
     if (!d->settings.word_engine.data()->value().toBool())
         d->predictionEnabled = false;
 
+    if (d->contentType != Maliit::FreeTextContentType)
+        d->predictionEnabled = false;
+
     d->editor.clearPreedit();
     d->editor.wordEngine()->setEnabled( d->predictionEnabled );
     d->updateWordRibbon();
@@ -430,29 +433,19 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
     if (contentType == Maliit::FreeTextContentType)
         d->setActiveKeyboardId( d->activeLanguageId );
 
-    if (contentType == Maliit::NumberContentType) {
-        d->predictionEnabled = false;
-        updateWordEngine();
+    if (contentType == Maliit::NumberContentType)
         d->setActiveKeyboardId( "number" );
-    }
 
-    if (contentType == Maliit::PhoneNumberContentType) {
-        d->predictionEnabled = false;
-        updateWordEngine();
+    if (contentType == Maliit::PhoneNumberContentType)
         d->setActiveKeyboardId( "phonenumber" );
-    }
 
-    if (contentType == Maliit::EmailContentType) {
-        d->predictionEnabled = false;
-        updateWordEngine();
+    if (contentType == Maliit::EmailContentType)
         d->setActiveKeyboardId( "email" );
-    }
 
-    if (contentType == Maliit::UrlContentType) {
-        d->predictionEnabled = false;
-        updateWordEngine();
+    if (contentType == Maliit::UrlContentType)
         d->setActiveKeyboardId("url");
-    }
+
+    updateWordEngine();
 }
 
 void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
