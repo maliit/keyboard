@@ -190,9 +190,9 @@ Item {
         State {
             name: "SHOWN"
             PropertyChanges { target: canvas; y: 0; }
+            PropertyChanges{ target: keypad; state: "CHARACTERS" }
             when: canvas.shown === true
             onCompleted: {
-                keypad.state = "CHARACTERS"
                 canvas.hideAnimationFinished = false;
             }
         },
