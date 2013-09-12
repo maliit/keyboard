@@ -48,5 +48,6 @@ OTHER_FILES += \
     keys/ExtendedKeysSelector.qml \
     keys/SpaceKey.qml \
     keys/Spacer.qml \
-    keys/UrlKey.qml
+    keys/UrlKey.qml \
+    languages/Keyboard_zh_cn_pinyin.qml
 
