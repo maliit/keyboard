@@ -21,7 +21,7 @@
       <description>Suggest potential words in word ribbon.</description>
       <default>true</default>
     </key>
-    <key name="feedback" type="b">
+    <key name="key-press-feedback" type="b">
       <summary>Key press feedback</summary>
       <description>Vibrate or emit sound on key press.</description>
       <default>true</default>
