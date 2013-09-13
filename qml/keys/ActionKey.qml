@@ -25,6 +25,7 @@ CharKey {
     property string iconCapsLock: ""
 
     noMagnifier: true
+    skipAutoCaps: true
     property int padding: UI.actionKeyPadding
 
     // action keys are a bit wider

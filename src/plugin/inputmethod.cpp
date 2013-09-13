@@ -93,8 +93,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
             &d->layout.model, SLOT(setKeyArea(KeyArea)));
 
-    connect(&d->editor, SIGNAL(rightLayoutSelected()),
-            this,       SLOT(onRightLayoutSelected()));
+    connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SLOT(onAutoCapsActivated()));
 
     connect(this, SIGNAL(wordRibbonEnabledChanged(bool)), uiConst, SLOT(onWordEngineSettingsChanged(bool)));
 
@@ -406,6 +405,9 @@ void InputMethod::updateWordEngine()
     if (!d->settings.word_engine.data()->value().toBool())
         d->predictionEnabled = false;
 
+    if (d->contentType != Maliit::FreeTextContentType)
+        d->predictionEnabled = false;
+
     d->editor.clearPreedit();
     d->editor.wordEngine()->setEnabled( d->predictionEnabled );
     d->updateWordRibbon();
@@ -443,6 +445,8 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
 
     if (contentType == Maliit::UrlContentType)
         d->setActiveKeyboardId("url");
+
+    updateWordEngine();
 }
 
 void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
@@ -459,6 +463,16 @@ void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
     default:
         break;
     }
+}
+
+/*
+ * activated by the editor after e.g. pressing period
+ **/
+
+void InputMethod::onAutoCapsActivated()
+{
+    Q_D(InputMethod);
+    d->qmlRootItem->setProperty("autoCapsActivated", true);
 }
 
 } // namespace MaliitKeyboard

@@ -27,6 +27,7 @@ ActionKey {
 
     MouseArea {
         anchors.fill: parent
+        preventStealing: true
         onClicked: {
             if (panel.state == "CHARACTERS")
                 panel.state = "SYMBOLS";

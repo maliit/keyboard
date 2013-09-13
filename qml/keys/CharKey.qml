@@ -38,12 +38,22 @@ Item {
 
     property string action
     property bool noMagnifier: false
+    property bool skipAutoCaps: false
 
     /* design */
     property string imgNormal: UI.imageCharKey
     property string imgPressed: UI.imageCharKeyPressed
     // fontSize can be overwritten when using the component, e.g. SymbolShiftKey uses smaller fontSize
     property int fontSize: units.gu( UI.fontSize );
+
+    /// annotation shows a small label in the upper right corner
+    // if the annotiation property is set, it will be used. If not, the first position in extended[] list or extendedShifted[] list will
+    // be used, depending on the state. If no extended/extendedShifted arrays exist, no annotation is shown
+    property string annotation: ""
+
+    /* internal */
+    property string __annotationLabelNormal
+    property string __annotationLabelShifted
 
     state: "NORMAL"
 
@@ -71,6 +81,18 @@ Item {
         // CAPSLOCK keeps everything as in SHIFTED, nothing to do
     }
 
+    Component.onCompleted: {
+        if (annotation) {
+            __annotationLabelNormal = annotation
+            __annotationLabelShifted = annotation
+        } else {
+            if (extended)
+                __annotationLabelNormal = extended[0]
+            if (extendedShifted)
+                __annotationLabelShifted = extendedShifted[0]
+        }
+    }
+
     BorderImage {
         id: buttonImage
         border { left: 22; top: 22; right: 22; bottom: 22 }
@@ -78,6 +100,9 @@ Item {
         anchors.fill: key
         anchors.margins: units.dp( UI.keyMargins );
     }
+
+    /// label of the key
+    //  the label is also the value subitted to the app
 
     Text {
         id: keyLabel
@@ -87,6 +112,22 @@ Item {
         font.pixelSize: fontSize
         font.bold: UI.fontBold
         color: UI.fontColor
+    }
+
+    /// shows an annotation
+    // used e.g. for indicating the existence of extended keys
+
+    Text {
+        id: annotationLabel
+        text: (panel.activeKeypad.state != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
+
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.margins: units.gu( UI.annotationMargins )
+
+        font.pixelSize: units.gu( UI.annotationFontSize )
+        font.bold: false
+        color: UI.annotationFontColor
     }
 
     MouseArea {
@@ -106,9 +147,9 @@ Item {
 
             if (!popoverHasFocus) {
                 event_handler.onKeyReleased(valueToSubmit, action);
-
-                if (panel.activeKeypad.state === "SHIFTED" && panel.state === "CHARACTERS")
-                    panel.activeKeypad.state = "NORMAL"
+                if (!skipAutoCaps)
+                    if (panel.activeKeypad.state === "SHIFTED" && panel.state === "CHARACTERS")
+                        panel.activeKeypad.state = "NORMAL"
             }
         }
         onPressed: {
@@ -129,8 +170,8 @@ Item {
     Popper {
         id: popper
         visible: !noMagnifier && !popoverHasFocus
-        width: panel.keyWidth + units.gu(UI.magnifierHorizontalPadding)
-        height: panel.keyHeight + units.gu(UI.magnifierVerticalPadding)
+        width: key.width + units.gu(UI.magnifierHorizontalPadding)
+        height: key.height + units.gu(UI.magnifierVerticalPadding)
     }
 
     states: [

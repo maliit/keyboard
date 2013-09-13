@@ -22,6 +22,10 @@ var fontFamily  =   "Ubuntu Medium";
 var fontColor   =   "#666666"
 var fontBold    =   true
 
+var annotationFontSize = 0.85; // gu
+var annotationMargins = 0.7; // gu
+var annotationFontColor = "#88666666"
+
 /* magnifier */
 var magnifierHorizontalPadding = 1; // gu, stretch the magnifier a little bit in x-axis
 var magnifierVerticalPadding = 1; // gu, stretch the magnifier a little bit in y-axis
@@ -45,3 +49,4 @@ var bottom_margin = 1.00; // gu
 
 
 var urlLayoutLeftSpacerSize = 5; // gu
+var emailLayoutUrlKeyPadding = 4; // gu

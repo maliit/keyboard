@@ -10,19 +10,19 @@ MainView {
 
     automaticOrientation: true
 
+    property int inputWidth: units.gu( 14 )
+
     Rectangle {
         anchors.fill: parent
-        color: "lightblue"
+        color: "orange"
     }
 
     Column {
-
+        id: c1
         y: units.gu(3)
-        width: parent.width
+
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: units.gu(1)
-
-        anchors.margins: units.gu(1)
 
         Text {
             id: label
@@ -32,133 +32,155 @@ MainView {
             font.bold: true
         }
 
-        Rectangle {
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: units.gu(18);
-            height: units.gu(6);
-
-            anchors.leftMargin: units.gu(1)
-
-            color: "white"
-
-            TextInput {
-                id: input;
-                anchors.fill: parent
-                color: "black"; selectionColor: "red"
-
-                // Qt.ImhPreferNumbers
-                inputMethodHints: Qt.ImhUrlCharactersOnly
-                font.pixelSize: units.gu(3)
-                font.bold: true
-            }
-        }
-
-        Rectangle {
-            anchors.horizontalCenter: parent.horizontalCenter;
-            width: units.gu(18);
-            height: units.gu(6);
-
-            color: "white"
-
-            TextInput {
-                id: secondInput;
-                anchors.fill: parent
-                font.pixelSize: units.gu(3)
-                inputMethodHints: Qt.ImhNone
-            }
-        }
-
-        Rectangle {
-            anchors.horizontalCenter: parent.horizontalCenter;
-            width: units.gu(18);
-            height: units.gu(6);
-
-            color: "white"
-
-            TextInput {
-                anchors.fill: parent
-                font.pixelSize: units.gu(3)
-                inputMethodHints: Qt.ImhDigitsOnly
-            }
-        }
-
-        Rectangle {
-            anchors.horizontalCenter: parent.horizontalCenter;
-            width: units.gu(18);
-            height: units.gu(6);
-
-            color: "white"
-
-            TextInput {
-                anchors.fill: parent
-                font.pixelSize: units.gu(3)
-                inputMethodHints: Qt.ImhDialableCharactersOnly
-            }
-        }
-
-
+        /**
+         * Url Characters
+         */
         Row {
-            anchors.horizontalCenter: parent.horizontalCenter;
+            spacing: units.gu(1)
+            Item {
+                width: inputWidth
+                height: units.gu(4);
 
-            Text {
-                id: textRectangle
-
-                font.pixelSize: units.gu(1)
-                text: Qt.inputMethod.keyboardRectangle + " "
-            }
-
-            Rectangle {
-                id: clickBehindOSKDetectedIndicator
-
-                width: units.gu(18)
-                height: units.gu(3)
-                state: "default"
-
-                Text {
-                    id: clickBehindOSKDetectedIndicatorText
-                    anchors.centerIn: parent
-                    text: "clicked"
-                    font.pixelSize: units.gu(2)
-                    font.bold: true
+                Rectangle {
+                    anchors.fill: parent
+                    color: "white"
                 }
 
-                states: [
-                    State {
-                        name: "default"
-                        PropertyChanges {
-                            target: clickBehindOSKDetectedIndicator
-                            color: "gray"
-                        }
-                        PropertyChanges {
-                            target: clickBehindOSKDetectedIndicatorText
-                            color: "gray"
-                        }
-                    },
-                    State {
-                        name: "highlight"
-                        PropertyChanges {
-                            target: clickBehindOSKDetectedIndicator
-                            color: "red"
-                        }
-                        PropertyChanges {
-                            target: clickBehindOSKDetectedIndicatorText
-                            color: "white"
-                        }
-                    }
-                ]
+                TextInput {
+                    anchors.fill: parent
+                    color: "black"; selectionColor: "red"
+
+                    inputMethodHints: Qt.ImhUrlCharactersOnly
+                    font.pixelSize: units.gu(3)
+                    font.bold: false
+                }
             }
-
+            Text {
+                text: "Qt.ImhUrlCharactersOnly"
+                anchors.verticalCenter: parent
+                font.pixelSize: units.gu(1.5)
+            }
         }
 
-        Text {
-            id: textVisible
+        /**
+         * Qt.ImhNone
+         */
+        Row {
+            spacing: units.gu(1)
+            Item {
+                width: inputWidth
+                height: units.gu(4);
 
-            anchors.horizontalCenter: parent.horizontalCenter;
+                Rectangle {
+                    anchors.fill: parent
+                    color: "white"
+                }
 
-            font.pixelSize: units.gu(2)
-            text: "keyboard reports visible: " + Qt.inputMethod.visible
+                TextInput {
+                    anchors.fill: parent
+                    color: "black"; selectionColor: "red"
+
+                    inputMethodHints: Qt.ImhNone
+                    font.pixelSize: units.gu(3)
+                    font.bold: false
+                }
+            }
+            Text {
+                text: "Qt.ImhNone"
+                anchors.verticalCenter: parent
+                font.pixelSize: units.gu(1.5)
+            }
         }
 
+        /**
+         * Qt.ImhDigitsOnly
+         */
+        Row {
+            spacing: units.gu(1)
+            Item {
+                width: inputWidth
+                height: units.gu(4);
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "white"
+                }
+
+                TextInput {
+                    anchors.fill: parent
+                    color: "black"; selectionColor: "red"
+
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    font.pixelSize: units.gu(3)
+                    font.bold: false
+                }
+            }
+            Text {
+                text: "Qt.ImhDigitsOnly"
+                anchors.verticalCenter: parent
+                font.pixelSize: units.gu(1.5)
+            }
+        }
+
+        /**
+         * Qt.ImhDialableCharactersOnly
+         */
+        Row {
+            spacing: units.gu(1)
+            Item {
+                width: inputWidth
+                height: units.gu(4);
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "white"
+                }
+
+                TextInput {
+                    anchors.fill: parent
+                    color: "black"; selectionColor: "red"
+
+                    inputMethodHints: Qt.ImhDialableCharactersOnly
+                    font.pixelSize: units.gu(3)
+                    font.bold: false
+                }
+            }
+            Text {
+                text: "Qt.ImhDialableCharactersOnly"
+                anchors.verticalCenter: parent
+                font.pixelSize: units.gu(1.5)
+            }
+        }
+
+        /**
+         * Qt.ImhEmailCharactersOnly
+         */
+        Row {
+            spacing: units.gu(1)
+            Item {
+                width: inputWidth
+                height: units.gu(4);
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "white"
+                }
+
+                TextInput {
+                    anchors.fill: parent
+                    color: "black"; selectionColor: "red"
+
+                    inputMethodHints: Qt.ImhEmailCharactersOnly
+                    font.pixelSize: units.gu(3)
+                    font.bold: false
+                }
+            }
+            Text {
+                text: "Qt.ImhEmailCharactersOnly"
+                anchors.verticalCenter: parent
+                font.pixelSize: units.gu(1.5)
+            }
+        }
     } // column
 
     Rectangle {
@@ -172,7 +194,7 @@ MainView {
             visible: Qt.inputMethod.visible
             anchors.centerIn: parent
             font.pixelSize: units.gu(1)
-            text: "browser url bar"
+            text: "app bottom"
         }
     }
 

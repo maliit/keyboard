@@ -21,6 +21,7 @@ KeyPad {
     anchors.fill: parent
 
     content: c1
+    symbols: ""
 
     Column {
         id: c1
@@ -64,7 +65,7 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "+"; extended: ["*", "(", ")"] }
+            CharKey { label: "+"; annotation: "+*#"; extended: ["*", "#", "(", ")"] }
             CharKey { label: "0"; }
             BackspaceKey { padding: 0; }
         }

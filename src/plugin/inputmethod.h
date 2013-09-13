@@ -76,6 +76,7 @@ public:
 
     Q_SLOT void updateWordEngine();
     Q_SLOT void onQQuickViewStatusChanged(QQuickView::Status status);
+    Q_SLOT void onAutoCapsActivated();
 
     Q_PROPERTY(bool predictionEnabled READ predictionEnabled NOTIFY predictionEnabledChanged)
     Q_PROPERTY(Maliit::TextContentType contentType READ contentType NOTIFY contentTypeChanged)

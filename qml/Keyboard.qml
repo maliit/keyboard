@@ -74,6 +74,13 @@ Item {
     property bool shown: false;
     property bool wordribbon_visible: false;
     property bool hideAnimationFinished: false;
+    property bool autoCapsActivated: false
+    onAutoCapsActivatedChanged: {
+        if (autoCapsActivated) {
+            keypad.state = "CHARACTERS"
+            keypad.activeKeypad.state = "SHIFTED";
+        }
+    }
     property int pressedKeyIndex: -1;
     property Item pressedKey;
 
@@ -183,8 +190,11 @@ Item {
         State {
             name: "SHOWN"
             PropertyChanges { target: canvas; y: 0; }
+            PropertyChanges{ target: keypad; state: "CHARACTERS" }
             when: canvas.shown === true
-            onCompleted: canvas.hideAnimationFinished = false;
+            onCompleted: {
+                canvas.hideAnimationFinished = false;
+            }
         },
 
         State {

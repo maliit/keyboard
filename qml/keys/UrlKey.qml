@@ -15,25 +15,13 @@
  */
 
 import QtQuick 2.0
+import "../keys/key_constants.js" as UI
 
-ActionKey {
-    iconNormal: "../images/icon_shift@18.png";
-    iconShifted: "../images/icon_shift_upsidedown@18.png";
-    iconCapsLock: "../images/icon_shift_white@18.png";
-    action: "shift"
+CharKey {
+    width: panel.keyWidth + units.gu( UI.emailLayoutUrlKeyPadding )
 
-    MouseArea {
-        anchors.fill: parent
-        preventStealing: true
-        onClicked: {
-            if (panel.activeKeypad.state == "NORMAL")
-                panel.activeKeypad.state = "SHIFTED";
-
-            else if (panel.activeKeypad.state == "SHIFTED")
-                panel.activeKeypad.state = "NORMAL"
-
-            else if (panel.activeKeypad.state == "CAPSLOCK")
-                panel.activeKeypad.state = "NORMAL"
-        }
-    }
+    label: ".com";
+    shifted: "/";
+    extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"];
+    fontSize: units.gu(UI.urlKeyFontSize);
 }

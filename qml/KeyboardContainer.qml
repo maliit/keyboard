@@ -24,48 +24,62 @@ Item {
     property int keyWidth: 0
     property int keyHeight: 0
 
-    property var activeKeypad: characterKeypad.item
+    property Item activeKeypad: characterKeypadLoader.item
+    property string symbolKeypadSource
 
     state: "CHARACTERS"
 
     function loadLayout(layoutId)
     {
+        state = "CHARACTERS"
         if (layoutId === "number")
-            characterKeypad.source = "languages/Keyboard_numbers.qml"
+            characterKeypadLoader.source = "languages/Keyboard_numbers.qml"
         if (layoutId === "phonenumber")
-            characterKeypad.source = "languages/Keyboard_telephone.qml"
+            characterKeypadLoader.source = "languages/Keyboard_telephone.qml"
         if (layoutId === "email")
-            characterKeypad.source = "languages/Keyboard_en_email.qml"
+            characterKeypadLoader.source = "languages/Keyboard_en_email.qml"
         if (layoutId === "url")
-            characterKeypad.source = "languages/Keyboard_en_url_search.qml"
+            characterKeypadLoader.source = "languages/Keyboard_en_url_search.qml"
         if (layoutId === "en_us")
-            characterKeypad.source = "languages/Keyboard_en_us.qml"
+            characterKeypadLoader.source = "languages/Keyboard_en_us.qml"
     }
 
     Loader {
-        id: characterKeypad
+        id: characterKeypadLoader
         anchors.fill: parent
 
         source: "languages/Keyboard_en_us.qml"
+        onLoaded: symbolKeypadSource = characterKeypadLoader.item.symbols
     }
 
-    Keyboard_symbols {
-        id: symbolKeypad
+    onSymbolKeypadSourceChanged: {
+        if (symbolKeypadSource != "")
+            symbolKeypadLoader.source = symbolKeypadSource
+        else
+            state = "CHARACTERS"
     }
+
+    Loader {
+        id: symbolKeypadLoader
+        anchors.fill: parent
+
+        source: "languages/Keyboard_symbols.qml"
+    }
+
 
     states: [
         State {
             name: "CHARACTERS"
             PropertyChanges {
                 target: panel
-                activeKeypad: characterKeypad.item
+                activeKeypad: characterKeypadLoader.item
             }
             PropertyChanges {
-                target: characterKeypad
+                target: characterKeypadLoader
                 visible: true
             }
             PropertyChanges {
-                target: symbolKeypad
+                target: symbolKeypadLoader
                 visible: false
             }
         },
@@ -73,14 +87,14 @@ Item {
             name: "SYMBOLS"
             PropertyChanges {
                 target: panel
-                activeKeypad: symbolKeypad
+                activeKeypad: symbolKeypadLoader.item
             }
             PropertyChanges {
-                target: characterKeypad
+                target: characterKeypadLoader
                 visible: false
             }
             PropertyChanges {
-                target: symbolKeypad
+                target: symbolKeypadLoader
                 visible: true
             }
         }

@@ -22,6 +22,7 @@ Item {
     state: "NORMAL"
 
     property var content: c1
+    property string symbols: "languages/Keyboard_symbols.qml"
     property bool capsLock: false
 
     Column {
@@ -65,6 +66,10 @@ Item {
             name: "NORMAL"
             PropertyChanges {
                 target: panel
+            }
+            PropertyChanges {
+                target: canvas
+                autoCapsActivated: false
             }
         },
         State {

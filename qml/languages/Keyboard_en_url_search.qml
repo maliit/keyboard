@@ -16,12 +16,12 @@
 
 import QtQuick 2.0
 import "../keys"
-import "../keys/key_constants.js" as UI
 
 KeyPad {
     anchors.fill: parent
 
     content: c1
+    symbols: "languages/Keyboard_symbols.qml"
 
     Column {
         id: c1
@@ -86,7 +86,7 @@ KeyPad {
             CharKey        { id: slashKey;    label: "/"; shifted: "/";  anchors.left: leftSpacer.right; }
             SymbolShiftKey { id: symShiftKey;                            anchors.left: slashKey.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: symShiftKey.right; anchors.right: urlKey.left; noMagnifier: true }
-            CharKey        { id: urlKey;    label: ".com"; shifted: "/"; extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"]; fontSize: units.gu(UI.urlKeyFontSize); anchors.right: dotKey.left; }
+            UrlKey         { id: urlKey;                                 anchors.right: dotKey.left; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }

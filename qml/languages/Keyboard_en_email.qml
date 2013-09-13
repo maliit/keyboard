@@ -21,6 +21,7 @@ KeyPad {
     anchors.fill: parent
 
     content: c1
+    symbols: "languages/Keyboard_symbols.qml"
 
     Column {
         id: c1
@@ -84,7 +85,7 @@ KeyPad {
             CharKey        { id: atKey;    label: "@"; shifted: "/";     anchors.left: leftSpacer.right; }
             SymbolShiftKey { id: symShiftKey;                            anchors.left: atKey.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: symShiftKey.right; anchors.right: urlKey.left; noMagnifier: true }
-            CharKey        { id: urlKey;    label: ".com"; shifted: "/";  anchors.right: dotKey.left; }
+            UrlKey         { id: urlKey;                                 anchors.right: dotKey.left; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
