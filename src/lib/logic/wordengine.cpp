@@ -169,7 +169,7 @@ WordEngine::~WordEngine()
 void WordEngine::setEnabled(bool enabled)
 {
  // Don't allow to enable word engine if no backends are available:
-#if defined(HAVE_PRESAGE) || defined(HAVE_HUNSPELL)
+#if defined(HAVE_PRESAGE) || defined(HAVE_HUNSPELL) || defined(HAVE_PINYIN)
 #else
     if (enabled) {
         qWarning() << __PRETTY_FUNCTION__
