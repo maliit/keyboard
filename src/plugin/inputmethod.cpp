@@ -149,14 +149,7 @@ void InputMethod::show()
 void InputMethod::hide()
 {
     Q_D(InputMethod);
-    d->layout.updater.resetOnKeyboardClosed();
-    d->editor.clearPreedit();
-
-    d->view->setVisible(false);
-
-    d->applicationApiWrapper->reportOSKInvisible();
-
-    d->qmlRootItem->setProperty("shown", false);
+    d->closeOskWindow();
 }
 
 void InputMethod::setPreedit(const QString &preedit,
@@ -213,7 +206,8 @@ QString InputMethod::activeSubView(Maliit::HandlerState state) const
     return d->layout.updater.activeKeyboardId();
 }
 
-void InputMethod::handleFocusChange(bool focusIn) {
+void InputMethod::handleFocusChange(bool focusIn)
+{
     if (not focusIn)
         hide();
 }
@@ -341,18 +335,6 @@ void InputMethod::onLayoutHeightChanged(int height)
   Q_UNUSED(height);
 }
 
-void InputMethod::onHideAnimationFinished()
-{
-    Q_D(InputMethod);
-
-    d->qmlRootItem->setProperty("hidePropertyAnimationFinished", false);
-
-    if (d->qmlRootItem->property("state").toByteArray() == "HIDDEN") {
-        d->host->notifyImInitiatedHiding();
-        hide();
-    }
-}
-
 void InputMethod::deviceOrientationChanged(Qt::ScreenOrientation orientation)
 {
     Q_UNUSED(orientation);
@@ -449,6 +431,14 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
     updateWordEngine();
 }
 
+void InputMethod::onQMLStateChanged(QString state)
+{
+    Q_D(InputMethod);
+
+    if (state == "HIDDEN")
+        d->closeOskWindow();
+}
+
 void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
 {
     Q_D(InputMethod);
@@ -457,7 +447,7 @@ void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
     case QQuickView::Ready:
     {
         d->qmlRootItem = d->view->rootObject()->findChild<QQuickItem*>("ubuntuKeyboard");
-        QObject::connect(d->qmlRootItem, SIGNAL(hideAnimationFinishedChanged()), this, SLOT(onHideAnimationFinished()));
+        QObject::connect(d->qmlRootItem, SIGNAL(stateChanged(QString)), this, SLOT(onQMLStateChanged(QString)));
     }
         break;
     default:
