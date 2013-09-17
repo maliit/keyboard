@@ -185,8 +185,6 @@ Item {
 
     state: "HIDDEN"
 
-    onShownChanged: console.log("onShownChanged: " + shown)
-
     states: [
         State {
             name: "SHOWN"
