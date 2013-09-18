@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130918-0ubuntu1) saucy; urgency=low
+
+  [ Thomas Moenicke ]
+  * various fixes.
+  * added layout-test and generic test qml apps.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 37
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 18 Sep 2013 07:06:45 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130912-0ubuntu1) saucy; urgency=low
 
   [ Thomas Moenicke ]
