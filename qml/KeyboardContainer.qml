@@ -31,39 +31,34 @@ Item {
 
     function loadLayout(layoutId)
     {
-        state = "CHARACTERS"
         if (layoutId === "number")
-            characterKeypadLoader.source = "languages/Keyboard_numbers.qml"
+            characterKeypadLoader.setSource("languages/Keyboard_numbers.qml");
         if (layoutId === "phonenumber")
-            characterKeypadLoader.source = "languages/Keyboard_telephone.qml"
+            characterKeypadLoader.setSource("languages/Keyboard_telephone.qml");
         if (layoutId === "email")
-            characterKeypadLoader.source = "languages/Keyboard_en_email.qml"
+            characterKeypadLoader.setSource("languages/Keyboard_en_email.qml");
         if (layoutId === "url")
-            characterKeypadLoader.source = "languages/Keyboard_en_url_search.qml"
+            characterKeypadLoader.setSource("languages/Keyboard_en_url_search.qml");
         if (layoutId === "en_us")
-            characterKeypadLoader.source = "languages/Keyboard_en_us.qml"
+            characterKeypadLoader.setSource("languages/Keyboard_en_us.qml");
     }
 
     Loader {
         id: characterKeypadLoader
         anchors.fill: parent
-
+        asynchronous: true
         source: "languages/Keyboard_en_us.qml"
-        onLoaded: symbolKeypadSource = characterKeypadLoader.item.symbols
-    }
+        onLoaded: {
 
-    onSymbolKeypadSourceChanged: {
-        if (symbolKeypadSource != "")
-            symbolKeypadLoader.source = symbolKeypadSource
-        else
-            state = "CHARACTERS"
+            symbolKeypadLoader.setSource(characterKeypadLoader.item.symbols)
+            panel.state = "CHARACTERS"
+        }
     }
 
     Loader {
         id: symbolKeypadLoader
         anchors.fill: parent
-
-        source: "languages/Keyboard_symbols.qml"
+        asynchronous: true
     }
 
 
@@ -76,11 +71,13 @@ Item {
             }
             PropertyChanges {
                 target: characterKeypadLoader
-                visible: true
+                enabled: true
+                opacity: 1
             }
             PropertyChanges {
                 target: symbolKeypadLoader
-                visible: false
+                enabled: false
+                opacity: 0
             }
         },
         State {
@@ -91,11 +88,13 @@ Item {
             }
             PropertyChanges {
                 target: characterKeypadLoader
-                visible: false
+                enabled: false
+                opacity: 0
             }
             PropertyChanges {
                 target: symbolKeypadLoader
-                visible: true
+                enabled: true
+                opacity: 1
             }
         }
     ]
