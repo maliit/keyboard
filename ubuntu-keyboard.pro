@@ -63,6 +63,11 @@ disable-preedit {
 
 enable-pinyin {
     COVERAGE_CONFIG_STRING += CONFIG+=enable-pinyin
+    CONFIG += link_pkgconfig
+    PKGCONFIG += glib-2.0
+    PKGCONFIG += libpinyin
+    DEFINES += HAVE_PINYIN
+    message(pinyin is enabled)
 }
 
 enable-qt-mobility {
