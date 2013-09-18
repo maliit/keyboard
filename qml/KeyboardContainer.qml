@@ -42,6 +42,8 @@ Item {
             characterKeypadLoader.source = "languages/Keyboard_en_url_search.qml"
         if (layoutId === "en_us")
             characterKeypadLoader.source = "languages/Keyboard_en_us.qml"
+        if (layoutId === "zh_cn_pinyin")
+            characterKeypadLoader.source = "languages/Keyboard_zh_cn_pinyin.qml"
     }
 
     Loader {

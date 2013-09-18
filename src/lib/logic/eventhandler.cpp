@@ -244,6 +244,27 @@ void EventHandler::onKeyReleased(QString label, QString action)
     Q_EMIT keyReleased(key);
 }
 
+void EventHandler::onKeyEntered(QString label)
+{
+    Key key;
+    Label mlabel;
+    mlabel.setText(label);
+    key.setLabel(mlabel);
+
+    Q_EMIT keyEntered(key);
+}
+
+
+void EventHandler::onKeyExited(QString label)
+{
+    Key key;
+    Label mlabel;
+    mlabel.setText(label);
+    key.setLabel(mlabel);
+
+    Q_EMIT keyExited(key);
+}
+
 
 
 }} // namespace Logic, MaliitKeyboard
