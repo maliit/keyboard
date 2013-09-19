@@ -17,8 +17,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from autopilot.introspection import CustomEmulatorBase
+from ubuntu_keyboard.emulators import UbuntuKeyboardEmulatorBase
+
+from collections import namedtuple
+import logging
+
+logger = logging.getLogger(__name__)
 
 
-class UbuntuKeyboardEmulatorBase(CustomEmulatorBase):
-    """A base class for all Ubuntu Keyboard emulators."""
+class Key(UbuntuKeyboardEmulatorBase):
+
+    Pos = namedtuple("KeyPos", ['x', 'y', 'h', 'w'])
