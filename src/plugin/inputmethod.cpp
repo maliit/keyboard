@@ -111,7 +111,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     // Setting layout orientation depends on word engine and hide word ribbon
     // settings to be initialized first:
-    d->setLayoutOrientation(d->appsCurrentOrientation);
+    d->updateKeyboardOrientation();
 }
 
 InputMethod::~InputMethod()
@@ -216,19 +216,20 @@ void InputMethod::handleAppOrientationChanged(int angle)
 {
     Q_D(InputMethod);
 
+    Qt::ScreenOrientation orientation = Qt::PortraitOrientation;
     switch (angle) {
         case 0:
-            d->appsCurrentOrientation = Qt::LandscapeOrientation; break;
-        case 90:
-            d->appsCurrentOrientation = Qt::InvertedPortraitOrientation; break;
+            orientation = Qt::LandscapeOrientation; break;
+    case 90:
+            orientation = Qt::InvertedPortraitOrientation; break;
         case 180:
-            d->appsCurrentOrientation = Qt::InvertedLandscapeOrientation; break;
+            orientation = Qt::InvertedLandscapeOrientation; break;
         case 270:
         default:
-            d->appsCurrentOrientation = Qt::PortraitOrientation; break;
+            orientation = Qt::PortraitOrientation; break;
     }
 
-    d->setLayoutOrientation(d->appsCurrentOrientation);
+    d->setLayoutOrientation(orientation);
 }
 
 bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
@@ -339,7 +340,7 @@ void InputMethod::deviceOrientationChanged(Qt::ScreenOrientation orientation)
     Q_UNUSED(orientation);
     Q_D(InputMethod);
 
-    d->setLayoutOrientation(d->appsCurrentOrientation);
+    d->updateKeyboardOrientation();
 }
 
 void InputMethod::update()

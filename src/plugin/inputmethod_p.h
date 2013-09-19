@@ -95,7 +95,6 @@ public:
     bool predictionEnabled;
     Maliit::TextContentType contentType;
     QString activeLanguageId;
-    Qt::ScreenOrientation appsCurrentOrientation;
 
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
@@ -114,7 +113,6 @@ public:
         , predictionEnabled(false)
         , contentType(Maliit::FreeTextContentType)
         , activeLanguageId("en_us")
-        , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
     {
         view = createWindow(host);
 
@@ -240,13 +238,18 @@ public:
         }
     }
 
+    void updateKeyboardOrientation()
+    {
+        setLayoutOrientation(QGuiApplication::primaryScreen()->orientation());
+    }
+
     void updateWordRibbon()
     {
         layout.helper.wordRibbon()->setEnabled( predictionEnabled );
         Q_EMIT q->wordRibbonEnabledChanged( predictionEnabled );
         qmlRootItem->setProperty("wordribbon_visible", predictionEnabled );
 
-        setLayoutOrientation(appsCurrentOrientation);
+        updateKeyboardOrientation();
     }
 
     /*
@@ -376,7 +379,7 @@ public:
         layout.helper.setScreenSize(size);
 
     #ifdef TEMP_DISABLED
-        setLayoutOrientation(appsCurrentOrientation);
+        updateKeyboardOrientation();
     #endif
     }
 
