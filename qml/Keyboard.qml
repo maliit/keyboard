@@ -69,7 +69,7 @@ Item {
     //readonly property var layoutState: layout.keyboard_state
     //readonly property string activeView: layout.activeView
 
-    property int contentOrientation:  Screen.orientation // overwritten by inputMethod
+    property int contentOrientation: Qt.PrimaryOrientation // overwritten by inputMethod
 
     property bool shown: false;
     property bool wordribbon_visible: false;
