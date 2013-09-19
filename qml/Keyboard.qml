@@ -73,7 +73,6 @@ Item {
 
     property bool shown: false;
     property bool wordribbon_visible: false;
-    property bool hideAnimationFinished: false;
     property bool autoCapsActivated: false
     onAutoCapsActivatedChanged: {
         if (autoCapsActivated) {
@@ -190,11 +189,7 @@ Item {
         State {
             name: "SHOWN"
             PropertyChanges { target: canvas; y: 0; }
-            PropertyChanges{ target: keypad; state: "CHARACTERS" }
             when: canvas.shown === true
-            onCompleted: {
-                canvas.hideAnimationFinished = false;
-            }
         },
 
         State {
@@ -202,7 +197,8 @@ Item {
             PropertyChanges { target: canvas; y: height; }
             onCompleted: {
                 keyboardSurface.y = 0;
-                canvas.hideAnimationFinished = true;
+                keypad.activeKeypad.state = "NORMAL"
+                keypad.state = "CHARACTERS"
             }
             when: canvas.shown === false
         }

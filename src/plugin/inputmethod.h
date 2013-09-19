@@ -104,7 +104,7 @@ private:
 
     Q_SLOT void onContentTypeChanged(Maliit::TextContentType contentType);
 
-    Q_SLOT void onHideAnimationFinished();
+    Q_SLOT void onQMLStateChanged(QString state);
     Q_SIGNAL void wordEngineEnabledChanged(bool wordEngineEnabled);
     Q_SIGNAL void wordRibbonEnabledChanged(bool wordRibbonEnabled);
 
