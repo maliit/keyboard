@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130920-0ubuntu1) saucy; urgency=low
+
+  [ Thomas Moenicke ]
+  * fix chinese.
+  * cleanup SHOW/HIDDEN state .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 40
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 20 Sep 2013 10:54:52 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130918-0ubuntu1) saucy; urgency=low
 
   [ Thomas Moenicke ]
