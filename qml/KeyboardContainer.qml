@@ -17,6 +17,7 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
 import "languages/"
+import "keys/"
 
 Item {
     id: panel
@@ -64,6 +65,13 @@ Item {
         anchors.fill: parent
 
         source: "languages/Keyboard_symbols.qml"
+    }
+
+    ExtendedKeysSelector {
+        id: extendedKeysSelector
+        anchors.fill: parent
+
+        onVisibleChanged: popoverHasFocus = visible;
     }
 
 

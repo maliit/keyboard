@@ -139,7 +139,9 @@ Item {
 
         onPressAndHold: {
             if (activeExtendedModel != undefined)
-                PopupUtils.open(popoverComponent, keyMouseArea)
+                extendedKeysSelector.visible = true
+                extendedKeysSelector.extendedKeysModel = activeExtendedModel
+                extendedKeysSelector.currentlyAssignedKey = key
         }
 
         onReleased: {
@@ -155,15 +157,6 @@ Item {
         onPressed: {
             key.state = "PRESSED"
             event_handler.onKeyPressed(valueToSubmit);
-        }
-    }
-
-    Component {
-        id: popoverComponent
-        ExtendedKeysSelector {
-            id: extendedKeysSelector
-            extendedKeysModel: activeExtendedModel
-            onVisibleChanged: popoverHasFocus = visible;
         }
     }
 
