@@ -264,20 +264,24 @@ class Keyboard(object):
     def _show_character_keypad(self):
         """Brings the characters KeyPad to the forefront."""
         if not self.character_keypad.visible:
-            self.symbol_keypad.press_key("ABC")
+            print ">>> Bringing up character pad"
+            self.symbol_keypad.press_key("symbols")
             self.character_keypad.visible.wait_for(True)
+            print "Character visible: %s" % self.symbol_keypad.visible
             self.character_keypad.opacity.wait_for(1.0)
             # Fix me.
-            # sleep(1)
+            # sleep(.5)
 
     def _show_symbol_keypad(self):
         """Brings the symbol KeyPad to the forefront."""
         if not self.symbol_keypad.visible:
-            self.character_keypad.press_key("?123")
+            print ">>> Bringing up symbol pad"
+            self.character_keypad.press_key("symbols")
             self.symbol_keypad.visible.wait_for(True)
+            print "Symbol visible: %s" % self.symbol_keypad.visible
             self.symbol_keypad.opacity.wait_for(1.0)
             # Fix me.
-            # sleep(1)
+            # sleep(.5)
 
     def _translate_key(self, label):
         """Get the label for a 'special key' (i.e. space) so that it can be

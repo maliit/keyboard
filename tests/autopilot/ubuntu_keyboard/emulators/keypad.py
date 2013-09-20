@@ -91,7 +91,11 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         _iter_keys("ActionKey", lambda x: x.action)
 
     def _get_keys_required_keypad_state(self, key):
-        if key in self._contained_keys:
+
+        # if key is special, return current state.
+        if key in ('shift', 'backspace', 'symbols', 'space', 'return'):
+            return self.state
+        elif key in self._contained_keys:
             return KeyPad.State.NORMAL
         elif key in self._contained_shifted_keys:
             return KeyPad.State.SHIFTED
@@ -106,6 +110,7 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         i.e. move from NORMAL to SHIFTED
 
         """
+        print "> Switching from %s to %s" % (self.state, state)
         if state == self.state:
             return
 
@@ -117,6 +122,10 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
 
         key_rect = self.get_key_position("shift")
 
+        # Hack as we cannot tell if the other button has finished being pushed
+        # so otherwise the shift click goes un-recognised.
+        from time import sleep; sleep(.5)
+        print "(%s) >>> Hitting shift" % self.objectName
         self._tap_key(key_rect, pointer)
         self.state.wait_for(expected_state)
 
@@ -153,6 +162,7 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
 
         self._switch_to_state(required_state, pointer)
 
+        print "> Tapping key: ", key
         key_rect = self.get_key_position(key)
         self._tap_key(key_rect, pointer)
 
