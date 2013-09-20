@@ -28,7 +28,14 @@ logger = logging.getLogger(__name__)
 
 
 class KeyPad(UbuntuKeyboardEmulatorBase):
-    """An emulator that understands what the KeyPad contains and does."""
+    """An emulator that understands the KeyPad and its internals and how to
+    interact with it.
+
+      - Which keys are displayed within it
+      - The positions of these keys
+      - The state (NORMAL/SHIFTED) the KeyPad is in
+
+    """
 
     class State:
         NORMAL = "NORMAL"
@@ -36,19 +43,12 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
 
     def __init__(self, *args):
         super(KeyPad, self).__init__(*args)
-        # store positions for both states? I'm not sure if this is needed. Do
-        # they move?
-        # Perhaps have an orientation hash part so we don't need to cache it
-        # every orientation change.
-        # self._key_pos = defaultdict(dict)
         self._key_pos = dict()
-        # Storing them in different lists allows us to determine which state is
-        # required to press the key.
         self._contained_keys = []
         self._contained_shifted_keys = []
 
         self.update_key_positions()
-        self._update_contained_keys()
+        self.update_contained_keys()
 
     def contains_key(self, label):
         """Returns true if a key with the label *label* is contained within
@@ -59,40 +59,51 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
                 or label in self._contained_shifted_keys)
 
     def update_key_positions(self):
+        """Store the positions of the keys that are contained within this
+        KeyPad.
+
+        """
         def _iter_keys(key_type, label_fn):
             for key in self.select_many(key_type):
                 with key.no_automatic_refreshing():
                     key_pos = Key.Pos(*key.globalRect)
-                    self._key_pos[label_fn(key)] = key_pos
+                    label = label_fn(key)
+                    if label != '':
+                        self._key_pos[label] = key_pos
                     if key.shifted != '':
                         self._key_pos[key.shifted] = key_pos
 
         _iter_keys("CharKey", lambda x: x.label)
         _iter_keys("ActionKey", lambda x: x.action)
 
-    def _update_contained_keys(self):
-        """Probably slow, could be better."""
+    def update_contained_keys(self):
+        """Store which keys are contained within this KeyPad."""
         def _iter_keys(key_type, label_fn):
             for key in self.select_many(key_type):
                 with key.no_automatic_refreshing():
-                    self._contained_keys.append(key.label)
+                    label = label_fn(key)
+                    if label != '':
+                        self._contained_keys.append(label)
                     if key.shifted != '':
                         self._contained_shifted_keys.append(key.shifted)
 
         _iter_keys("CharKey", lambda x: x.label)
         _iter_keys("ActionKey", lambda x: x.action)
 
-    def _get_keys_required_keypad_state(self, label):
-        if label in self._contained_keys:
+    def _get_keys_required_keypad_state(self, key):
+        if key in self._contained_keys:
             return KeyPad.State.NORMAL
-        elif label in self._contained_shifted_keys:
+        elif key in self._contained_shifted_keys:
             return KeyPad.State.SHIFTED
         else:
-            raise RuntimeError("Unknown Key")
+            raise ValueError(
+                "Don't know which state key '%s' requires." % key
+            )
 
     def _switch_to_state(self, state, pointer):
-        """Move from one state to the next (i.e. move from NORMAL to
-        SHIFTED)
+        """Move from one state to the other.
+
+        i.e. move from NORMAL to SHIFTED
 
         """
         if state == self.state:
@@ -115,29 +126,46 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         else:
             self.pointer.click_object(key_rect)
 
-    def press_key(self, label, pointer=None):
-        if not self.contains_key(label):
-            return None
+    def press_key(self, key, pointer=None):
+        """Taps key *key* with *pointer*
+
+        If no pointer is passed in one is created for this purpose
+
+        raises *ValueError* if *key* is not contained within this KeyPad.
+        raises *RuntimeError* if this KeyPad is not visible.
+
+        """
+        if not self.contains_key(key):
+            raise ValueError(
+                "Key '%s' is not contained by this KeyPad (%s),"
+                " cannot press it." % (key, self.objectName)
+            )
 
         if pointer is None:
             pointer = pointer = Pointer(Touch.create())
 
-        # Check that we are the visible one here
         if not self.visible:
-            raise RuntimeError("This keypad is not visible/enabled")
+            raise RuntimeError(
+                "This Keypad (%s) is not visible" % self.objectName
+            )
 
-        required_state = self._get_keys_required_keypad_state(label)
+        required_state = self._get_keys_required_keypad_state(key)
 
         self._switch_to_state(required_state, pointer)
 
-        key_rect = self.get_key_position(label)
+        key_rect = self.get_key_position(key)
         self._tap_key(key_rect, pointer)
 
-    def get_key_position(self, label):
-        key_rect = self._key_pos.get(label)
+    def get_key_position(self, key):
+        """Returns Key.Pos for the key with *key*.
 
-        # What to do about this?
+        raises *ValueError* if unable to find the stored position for *key*
+          (i.e. not contained within this KeyPad.)
+
+        """
+        key_rect = self._key_pos.get(key)
+
         if key_rect is None:
-            raise RuntimeError()
+            raise ValueError("Unknown position for key '%s'" % key)
 
         return key_rect

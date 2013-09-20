@@ -26,5 +26,8 @@ logger = logging.getLogger(__name__)
 
 
 class Key(UbuntuKeyboardEmulatorBase):
+    """An emulator that encapsulates details of a keyboard key (i.e. extended
+    characters).
 
-    Pos = namedtuple("KeyPos", ['x', 'y', 'h', 'w'])
+    """
+    Pos = namedtuple("KeyPosition", ['x', 'y', 'w', 'h'])

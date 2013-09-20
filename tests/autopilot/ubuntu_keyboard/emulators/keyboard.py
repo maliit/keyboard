@@ -33,45 +33,19 @@ from autopilot.introspection import (
 logger = logging.getLogger(__name__)
 
 
-# Definitions of enums used within the cpp source code.
-class KeyboardState:
-    DEFAULT = 0
-    SHIFTED = 1
-    SYMBOL_1 = 2
-    SYMBOL_2 = 3
-
-
-class KeyAction:
-    INSERT = 0
-    SHIFT = 1
-    BACKSPACE = 2
-    SPACE = 3
-    SYM = 6
-    RETURN = 7
-    SWITCH = 11
-
-
 class UnsupportedKey(RuntimeError):
     pass
 
 
 class Keyboard(object):
 
-    # Note (veebers 19-aug-13): this hardcoded right now, but will be reading
-    # data from the keyboard itself in the very near future. Moved '/' to
-    # primary symbol, default layout can have a .com instead.
-    default_keys = "qwertyuiopasdfghjklzxcvbnm."
-    shifted_keys = "QWERTYUIOPASDFGHJKLZXCVBNM."
-    primary_symbol = "1234567890*#+-=()!?@~/\\';:,."
-    secondary_symbol = u"$%<>[]`^|_{}\"&,.\u20ac\xa3\xa5\u20b9\xa7\xa1\xbf" \
-        u"\xab\xbb\u201c\u201d\u201e"
-
-    # The ability to name the non-text keys.
-    _action_id_to_text = {
-        KeyAction.SHIFT: 'SHIFT',
-        KeyAction.BACKSPACE: '\b',
-        KeyAction.SPACE: ' ',
-        KeyAction.RETURN: '\n'
+    _action_to_label = {
+        'SHIFT': 'shift',
+        '\b': 'backspace',
+        'ABC': 'symbols',
+        '?123': 'symbols',
+        ' ': 'space',
+        '\n': 'return',
     }
 
     def __init__(self, pointer=None):
@@ -115,8 +89,6 @@ class Keyboard(object):
             )
             raise
 
-        # Make the keypads a property that are cached th first time that they
-        # are used.
         try:
             # self.character_keypad = self.keyboard.select_single(
             self.character_keypad = self.maliit.select_single(
@@ -155,8 +127,8 @@ class Keyboard(object):
             )
             raise
 
-        self._stored_orientation = self.orientation.orientationAngle
-        self._stored_language_id = self.keyboard.layoutId
+        self._store_current_orientation()
+        self._store_current_language_id()
 
         if pointer is None:
             self.pointer = Pointer(Touch.create())
@@ -209,43 +181,6 @@ class Keyboard(object):
         except RuntimeError:
             return False
 
-    def _ensure_key_positions_up_to_date(self):
-        if self._orientation_changed() or self._language_changed():
-            logger.info(
-                "Language or orientation changed, updating key position cache."
-            )
-            self._store_current_orientation()
-            self._store_current_language_id()
-
-            self.character_keypad.update_key_positions()
-            self.symbol_keypad.update_key_positions()
-
-    def _orientation_changed(self):
-        return self._stored_orientation != self.orientation.orientationAngle
-
-    def _language_changed(self):
-        return self._stored_language_id != self.keyboard.layoutId
-
-    def _store_current_orientation(self):
-        self._stored_orientation = self.orientation.orientationAngle
-
-    def _store_current_language_id(self):
-        self._stored_language_id = self.keyboard.layoutId
-
-    def _show_character_keypad(self):
-        if not self.character_keypad.visible:
-            self.symbol_keypad.press_key("ABC")
-            self.character_keypad.visible.wait_for(True)
-            # Fix me.
-            sleep(1)
-
-    def _show_symbol_keypad(self):
-        if not self.symbol_keypad.visible:
-            self.character_keypad.press_key("?123")
-            self.symbol_keypad.visible.wait_for(True)
-            # Fix me.
-            sleep(1)
-
     def press_key(self, key):
         """Tap on the key with the internal pointer
 
@@ -259,7 +194,9 @@ class Keyboard(object):
         if not self.is_available():
             raise RuntimeError("Keyboard is not on screen")
 
-        self._ensure_key_positions_up_to_date()
+        self._ensure_keypads_up_to_date()
+
+        key = self._translate_key(key)
 
         # Cleanup this, the changing of keypads. Probably shouldn't be the
         # responsibility of the keypad, but this can be cleaned up.
@@ -269,6 +206,10 @@ class Keyboard(object):
         elif self.symbol_keypad.contains_key(key):
             self._show_symbol_keypad()
             active_keypad = self.symbol_keypad
+        else:
+            raise ValueError(
+                "Key '%s' was not found on the keyboard." % key
+            )
 
         active_keypad.press_key(key)
 
@@ -288,3 +229,59 @@ class Keyboard(object):
         for char in string:
             self.press_key(char)
             sleep(delay)
+
+    def _ensure_keypads_up_to_date(self):
+        """Determine if the state of the keyboard or keypads has changed that
+        will require an update of stored details.
+
+        """
+        if self._language_changed():
+            logger.debug("Language ID has changed, updating keypads.")
+            self._store_current_language_id()
+            self.character_keypad.update_contained_keys()
+            self.symbol_keypad.update_contained_keys()
+
+        # This currently assumes that the language id change doesn't mean that
+        # the keys position changes.
+        if self._orientation_changed():
+            logger.debug("Orientation has changed, updating keypads.")
+            self._store_current_orientation()
+            self.character_keypad.update_key_positions()
+            self.symbol_keypad.update_key_positions()
+
+    def _orientation_changed(self):
+        return self._stored_orientation != self.orientation.orientationAngle
+
+    def _language_changed(self):
+        return self._stored_language_id != self.keyboard.layoutId
+
+    def _store_current_orientation(self):
+        self._stored_orientation = self.orientation.orientationAngle
+
+    def _store_current_language_id(self):
+        self._stored_language_id = self.keyboard.layoutId
+
+    def _show_character_keypad(self):
+        """Brings the characters KeyPad to the forefront."""
+        if not self.character_keypad.visible:
+            self.symbol_keypad.press_key("ABC")
+            self.character_keypad.visible.wait_for(True)
+            self.character_keypad.opacity.wait_for(1.0)
+            # Fix me.
+            # sleep(1)
+
+    def _show_symbol_keypad(self):
+        """Brings the symbol KeyPad to the forefront."""
+        if not self.symbol_keypad.visible:
+            self.character_keypad.press_key("?123")
+            self.symbol_keypad.visible.wait_for(True)
+            self.symbol_keypad.opacity.wait_for(1.0)
+            # Fix me.
+            # sleep(1)
+
+    def _translate_key(self, label):
+        """Get the label for a 'special key' (i.e. space) so that it can be
+        addressed and clicked.
+
+        """
+        return Keyboard._action_to_label.get(label, label)
