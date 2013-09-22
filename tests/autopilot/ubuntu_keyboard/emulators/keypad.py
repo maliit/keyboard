@@ -23,6 +23,7 @@ from ubuntu_keyboard.emulators.key import Key
 import logging
 
 from autopilot.input import Pointer, Touch
+from time import sleep;
 
 logger = logging.getLogger(__name__)
 
@@ -110,7 +111,7 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         i.e. move from NORMAL to SHIFTED
 
         """
-        print "> Switching from %s to %s" % (self.state, state)
+        logger.debug("Switching from %s to %s" % (self.state, state))
         if state == self.state:
             return
 
@@ -124,8 +125,7 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
 
         # Hack as we cannot tell if the other button has finished being pushed
         # so otherwise the shift click goes un-recognised.
-        from time import sleep; sleep(.5)
-        print "(%s) >>> Hitting shift" % self.objectName
+        sleep(.2)
         self._tap_key(key_rect, pointer)
         self.state.wait_for(expected_state)
 
@@ -162,7 +162,6 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
 
         self._switch_to_state(required_state, pointer)
 
-        print "> Tapping key: ", key
         key_rect = self.get_key_position(key)
         self._tap_key(key_rect, pointer)
 

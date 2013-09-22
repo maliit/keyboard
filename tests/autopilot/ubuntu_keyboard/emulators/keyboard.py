@@ -198,8 +198,6 @@ class Keyboard(object):
 
         key = self._translate_key(key)
 
-        # Cleanup this, the changing of keypads. Probably shouldn't be the
-        # responsibility of the keypad, but this can be cleaned up.
         if self.character_keypad.contains_key(key):
             self._show_character_keypad()
             active_keypad = self.character_keypad
@@ -264,24 +262,16 @@ class Keyboard(object):
     def _show_character_keypad(self):
         """Brings the characters KeyPad to the forefront."""
         if not self.character_keypad.visible:
-            print ">>> Bringing up character pad"
             self.symbol_keypad.press_key("symbols")
             self.character_keypad.visible.wait_for(True)
-            print "Character visible: %s" % self.symbol_keypad.visible
             self.character_keypad.opacity.wait_for(1.0)
-            # Fix me.
-            # sleep(.5)
 
     def _show_symbol_keypad(self):
         """Brings the symbol KeyPad to the forefront."""
         if not self.symbol_keypad.visible:
-            print ">>> Bringing up symbol pad"
             self.character_keypad.press_key("symbols")
             self.symbol_keypad.visible.wait_for(True)
-            print "Symbol visible: %s" % self.symbol_keypad.visible
             self.symbol_keypad.opacity.wait_for(1.0)
-            # Fix me.
-            # sleep(.5)
 
     def _translate_key(self, label):
         """Get the label for a 'special key' (i.e. space) so that it can be
