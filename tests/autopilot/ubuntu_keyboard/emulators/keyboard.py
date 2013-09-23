@@ -89,43 +89,8 @@ class Keyboard(object):
             )
             raise
 
-        try:
-            # self.character_keypad = self.keyboard.select_single(
-            self.character_keypad = self.maliit.select_single(
-                KeyPad,
-                objectName="charactersKeyPad"
-            )
-
-            if self.character_keypad is None:
-                raise RuntimeError(
-                    "Unable to find the character keypad within the maliit"
-                    "server"
-                )
-        except ValueError as e:
-            e.args += (
-                "There was more than one character keypad object found, "
-                "aborting.",
-            )
-            raise
-
-        try:
-            # self.symbol_keypad = self.keyboard.select_single(
-            self.symbol_keypad = self.maliit.select_single(
-                KeyPad,
-                objectName="symbolsKeyPad"
-            )
-
-            if self.symbol_keypad is None:
-                raise RuntimeError(
-                    "Unable to find the symbols keypad within the maliit"
-                    "server"
-                )
-        except ValueError as e:
-            e.args += (
-                "There was more than one symbols keypad object found, "
-                "aborting.",
-            )
-            raise
+        self.character_keypad = self._get_keypad("character")
+        self.symbol_keypad = self._get_keypad("symbol")
 
         self._store_current_orientation()
         self._store_current_language_id()
@@ -134,6 +99,24 @@ class Keyboard(object):
             self.pointer = Pointer(Touch.create())
         else:
             self.pointer = pointer
+
+    def _get_keypad(self, name):
+        """Raises exception of keypad not found also when more than one keypad
+        (or loader) is found.
+
+        """
+        objectName = "{name}KeyPadLoader".format(name=name)
+        loader = self.maliit.select_single(
+            "QQuickLoader",
+            objectName=objectName
+        )
+        keypad = loader.select_single(KeyPad)
+        if keypad is None:
+            raise RuntimeError(
+                "Unable to find the {named} keypad within the maliit"
+                "server".format(named=name)
+            )
+        return keypad
 
     def dismiss(self):
         """Swipe the keyboard down to hide it.
@@ -156,7 +139,7 @@ class Keyboard(object):
         """Returns true if the keyboard is shown and ready to use."""
         return (
             self.keyboard.state == "SHOWN"
-            and not self.keyboard.hideAnimationFinished
+            #and not self.keyboard.hideAnimationFinished
         )
 
     @property
