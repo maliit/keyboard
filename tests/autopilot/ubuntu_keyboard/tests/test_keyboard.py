@@ -332,7 +332,8 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
     ]
 
     # Note: based on UX design doc
-    # Note: this currently has a failing test for the password input.
+    # Note: this currently has a failing test for the password input bug
+    # lp:1229098.
     def test_keyboard_layout(self):
         """The Keyboard must respond to the input type and change to be the
         correct state.
