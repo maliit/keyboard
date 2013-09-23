@@ -37,6 +37,7 @@ var urlKeyFontSize = 1.5; // gu
 
 /* extended keys */
 var popoverCellPadding = 2; // gu
+var popoverTopMargin   = 10; // dp
 
 var imageCharKey        = "../images/keybg@18.png"
 var imageCharKeyPressed = "../images/keybg_action_active@18.png"

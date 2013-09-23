@@ -162,7 +162,7 @@ Item {
         var point = keypad.mapFromItem(item.parent, item.x, item.y)
 
         anchorItem.x = point.x;
-        anchorItem.y = point.y - panel.keyHeight;
+        anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
     }
 
     function __restoreAssignedKey()
