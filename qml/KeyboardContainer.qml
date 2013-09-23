@@ -71,7 +71,10 @@ Item {
         id: extendedKeysSelector
         anchors.fill: parent
 
-        onVisibleChanged: popoverHasFocus = visible;
+        onVisibleChanged: {
+            if (currentlyAssignedKey != null)
+                currentlyAssignedKey.popoverHasFocus = visible;
+        }
     }
 
 

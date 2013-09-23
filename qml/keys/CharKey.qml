@@ -134,19 +134,26 @@ Item {
         id: keyMouseArea
         anchors.fill: key
 
-        hoverEnabled: true
+        hoverEnabled: false
         preventStealing: true
-
+        propagateComposedEvents: true
         onPressAndHold: {
-            if (activeExtendedModel != undefined)
+            if (activeExtendedModel != undefined) {
                 extendedKeysSelector.visible = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
+
+                noMagnifier = !false
+                popoverHasFocus = !false
+                keyMouseArea.enabled = false
+                visible = false
+                extendedKeysSelector.mouseArea.enabled = true
+            }
         }
 
         onReleased: {
             key.state = "NORMAL"
-
+            extendedKeysSelector.visible = false;
             if (!popoverHasFocus) {
                 event_handler.onKeyReleased(valueToSubmit, action);
                 if (!skipAutoCaps)
