@@ -76,6 +76,8 @@ Item {
         anchors.fill: parent
         preventStealing: true
 
+        property int highlightedKeyIndex: 0;
+
         /// checks the x value
         // if mouses x is inside the range of popovers x, it looks closer and finds out
         // which section of extended keys is above mouses x value, and selects it
@@ -87,20 +89,24 @@ Item {
             if (mouse.x > startX && mouse.x < endX) {
                 for (var i = 0; i < keyRepeater.count; i++) {
 
-                    // reset highlight for all keys
-                    keyRepeater.itemAt(i).highlight = false;
-
                     if (((startX+keyRepeater.itemAt(i).x) < mouse.x)
                             && ((startX + keyRepeater.itemAt(i).x + keyRepeater.itemAt(i).width) > mouse.x)) {
 
-                        keyRepeater.itemAt(i).highlight = true;
+                        keyRepeater.itemAt( highlightedKeyIndex ).highlight = false;
+                        highlightedKeyIndex = i;
+                        keyRepeater.itemAt( highlightedKeyIndex ).highlight = true;
+
                         __commitStr = keyRepeater.itemAt(i).commitStr;
                     }
                 }
+            } else {
+                keyRepeater.itemAt( highlightedKeyIndex ).highlight = false;
+                __commitStr = currentlyAssignedKey.label;
             }
         }
 
         onReleased: {
+            highlightedKeyIndex = 0;
             __restoreAssignedKey();
             popover.visible = false
             event_handler.onKeyReleased(__commitStr);
