@@ -37,6 +37,12 @@ class UnsupportedKey(RuntimeError):
     pass
 
 
+class QQuickLoader(UbuntuKeyboardEmulatorBase):
+    # This is a work around so that when we select_single a KeyPad we don't get
+    # back a generic version.
+    pass
+
+
 class Keyboard(object):
 
     _action_to_label = {
@@ -107,7 +113,7 @@ class Keyboard(object):
         """
         objectName = "{name}KeyPadLoader".format(name=name)
         loader = self.maliit.select_single(
-            "QQuickLoader",
+            QQuickLoader,
             objectName=objectName
         )
         keypad = loader.select_single(KeyPad)
@@ -244,16 +250,16 @@ class Keyboard(object):
 
     def _show_character_keypad(self):
         """Brings the characters KeyPad to the forefront."""
-        if not self.character_keypad.visible:
+        if not self.character_keypad.enabled:
             self.symbol_keypad.press_key("symbols")
-            self.character_keypad.visible.wait_for(True)
+            self.character_keypad.enabled.wait_for(True)
             self.character_keypad.opacity.wait_for(1.0)
 
     def _show_symbol_keypad(self):
         """Brings the symbol KeyPad to the forefront."""
-        if not self.symbol_keypad.visible:
+        if not self.symbol_keypad.enabled:
             self.character_keypad.press_key("symbols")
-            self.symbol_keypad.visible.wait_for(True)
+            self.symbol_keypad.enabled.wait_for(True)
             self.symbol_keypad.opacity.wait_for(1.0)
 
     def _translate_key(self, label):

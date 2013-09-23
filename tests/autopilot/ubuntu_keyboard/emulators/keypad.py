@@ -23,7 +23,7 @@ from ubuntu_keyboard.emulators.key import Key
 import logging
 
 from autopilot.input import Pointer, Touch
-from time import sleep;
+from time import sleep
 
 logger = logging.getLogger(__name__)
 
@@ -125,15 +125,15 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
 
         # Hack as we cannot tell if the other button has finished being pushed
         # so otherwise the shift click goes un-recognised.
+        # bug lp:1229003 and lp:1229001
         sleep(.2)
         self._tap_key(key_rect, pointer)
         self.state.wait_for(expected_state)
 
     def _tap_key(self, key_rect, pointer):
-        if pointer is not None:
-            pointer.click_object(key_rect)
-        else:
-            self.pointer.click_object(key_rect)
+        if pointer is None:
+            pointer = Pointer(Touch.create())
+        pointer.click_object(key_rect)
 
     def press_key(self, key, pointer=None):
         """Taps key *key* with *pointer*
@@ -149,9 +149,6 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
                 "Key '%s' is not contained by this KeyPad (%s),"
                 " cannot press it." % (key, self.objectName)
             )
-
-        if pointer is None:
-            pointer = pointer = Pointer(Touch.create())
 
         if not self.visible:
             raise RuntimeError(
