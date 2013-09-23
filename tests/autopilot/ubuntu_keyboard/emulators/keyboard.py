@@ -103,8 +103,8 @@ class Keyboard(object):
             )
             raise
 
-        self.character_keypad = self._get_keypad("character")
-        self.symbol_keypad = self._get_keypad("symbol")
+        self._character_keypad = None
+        self._symbol_keypad = None
 
         self._store_current_orientation()
         self._store_current_language_id()
@@ -113,6 +113,23 @@ class Keyboard(object):
             self.pointer = Pointer(Touch.create())
         else:
             self.pointer = pointer
+
+    def _keyboard_details_changed(self):
+        return self._language_changed() or self._orientation_changed()
+
+    @property
+    def character_keypad(self):
+        if self._character_keypad is None or self._keyboard_details_changed():
+            self._character_keypad = self._get_keypad("character")
+        return self._character_keypad
+
+    @property
+    def symbol_keypad(self):
+        if (self._symbol_keypad is None
+                or (self._language_changed() or self._orientation_changed())):
+            self._symbol_keypad = self._get_keypad("symbol")
+
+        return self._symbol_keypad
 
     def _get_keypad(self, name):
         """Raises exception of keypad not found also when more than one keypad
@@ -197,8 +214,6 @@ class Keyboard(object):
         if not self.is_available():
             raise RuntimeError("Keyboard is not on screen")
 
-        self._ensure_keypads_up_to_date()
-
         key = self._translate_key(key)
 
         if self.character_keypad.contains_key(key):
@@ -231,25 +246,19 @@ class Keyboard(object):
             self.press_key(char)
             sleep(delay)
 
-    def _ensure_keypads_up_to_date(self):
-        """Determine if the state of the keyboard or keypads has changed that
-        will require an update of stored details.
-
-        """
-        if self._language_changed() or self._orientation_changed():
-            logger.debug(
-                "Language ID or orientation has changed, updating keypads."
-            )
-            self._store_current_orientation()
-            self._store_current_language_id()
-            self.character_keypad.update_key_details()
-            self.symbol_keypad.update_key_details()
-
     def _orientation_changed(self):
-        return self._stored_orientation != self.orientation.orientationAngle
+        if self._stored_orientation != self.orientation.orientationAngle:
+            self._store_current_orientation()
+            return True
+        else:
+            return False
 
     def _language_changed(self):
-        return self._stored_language_id != self.keyboard.layoutId
+        if self._stored_language_id != self.keyboard.layoutId:
+            self._store_current_language_id()
+            return True
+        else:
+            return False
 
     def _store_current_orientation(self):
         self._stored_orientation = self.orientation.orientationAngle
