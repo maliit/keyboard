@@ -54,21 +54,27 @@ class Keyboard(object):
         '\n': 'return',
     }
 
+    # mallit is a class attribute because get_proxy_object_for_existing_process
+    # clears backends for proxy objects, this means that with:
+    #   kb = Keyboard()
+    #   kb2 = Keyboard()
+    # The proxy objects in kb have had their _Backends cleared which means we
+    # can no longer query them.
+    try:
+        maliit = get_proxy_object_for_existing_process(
+            connection_name='org.maliit.server',
+            emulator_base=UbuntuKeyboardEmulatorBase
+        )
+    except ProcessSearchError as e:
+        e.args += (
+            "Unable to find maliit-server dbus object. Has it been "
+            "started with introspection enabled?",
+        )
+        raise
+
     def __init__(self, pointer=None):
         try:
-            self.maliit = get_proxy_object_for_existing_process(
-                connection_name='org.maliit.server',
-                emulator_base=UbuntuKeyboardEmulatorBase
-            )
-        except ProcessSearchError as e:
-            e.args += (
-                "Unable to find maliit-server dbus object. Has it been "
-                "started with introspection enabled?",
-            )
-            raise
-
-        try:
-            self.orientation = self.maliit.select_single("OrientationHelper")
+            self.orientation = Keyboard.maliit.select_single("OrientationHelper")
             if self.orientation is None:
                 raise RuntimeError(
                     "Unable to find the Orientation Helper, aborting."
@@ -80,7 +86,7 @@ class Keyboard(object):
             raise
 
         try:
-            self.keyboard = self.maliit.select_single(
+            self.keyboard = Keyboard.maliit.select_single(
                 "QQuickItem",
                 objectName="ubuntuKeyboard"
             )
@@ -112,7 +118,7 @@ class Keyboard(object):
 
         """
         objectName = "{name}KeyPadLoader".format(name=name)
-        loader = self.maliit.select_single(
+        loader = Keyboard.maliit.select_single(
             QQuickLoader,
             objectName=objectName
         )
@@ -143,10 +149,7 @@ class Keyboard(object):
 
     def is_available(self):
         """Returns true if the keyboard is shown and ready to use."""
-        return (
-            self.keyboard.state == "SHOWN"
-            #and not self.keyboard.hideAnimationFinished
-        )
+        return (self.keyboard.state == "SHOWN")
 
     @property
     def current_state(self):
@@ -222,19 +225,14 @@ class Keyboard(object):
         will require an update of stored details.
 
         """
-        if self._language_changed():
-            logger.debug("Language ID has changed, updating keypads.")
-            self._store_current_language_id()
-            self.character_keypad.update_contained_keys()
-            self.symbol_keypad.update_contained_keys()
-
-        # This currently assumes that the language id change doesn't mean that
-        # the keys position changes.
-        if self._orientation_changed():
-            logger.debug("Orientation has changed, updating keypads.")
+        if self._language_changed() or self._orientation_changed():
+            logger.debug(
+                "Language ID or orientation has changed, updating keypads."
+            )
             self._store_current_orientation()
-            self.character_keypad.update_key_positions()
-            self.symbol_keypad.update_key_positions()
+            self._store_current_language_id()
+            self.character_keypad.update_key_details()
+            self.symbol_keypad.update_key_details()
 
     def _orientation_changed(self):
         return self._stored_orientation != self.orientation.orientationAngle

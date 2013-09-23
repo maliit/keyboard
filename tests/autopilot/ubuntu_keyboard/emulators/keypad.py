@@ -28,6 +28,14 @@ from time import sleep
 logger = logging.getLogger(__name__)
 
 
+class CharKey(UbuntuKeyboardEmulatorBase):
+    pass
+
+
+class ActionKey(UbuntuKeyboardEmulatorBase):
+    pass
+
+
 class KeyPad(UbuntuKeyboardEmulatorBase):
     """An emulator that understands the KeyPad and its internals and how to
     interact with it.
@@ -48,8 +56,7 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         self._contained_keys = []
         self._contained_shifted_keys = []
 
-        self.update_key_positions()
-        self.update_contained_keys()
+        self.update_key_details()
 
     def contains_key(self, label):
         """Returns true if a key with the label *label* is contained within
@@ -59,37 +66,21 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         return (label in self._contained_keys
                 or label in self._contained_shifted_keys)
 
-    def update_key_positions(self):
-        """Store the positions of the keys that are contained within this
-        KeyPad.
-
-        """
+    def update_key_details(self):
         def _iter_keys(key_type, label_fn):
             for key in self.select_many(key_type):
                 with key.no_automatic_refreshing():
                     key_pos = Key.Pos(*key.globalRect)
                     label = label_fn(key)
                     if label != '':
+                        self._contained_keys.append(label)
                         self._key_pos[label] = key_pos
                     if key.shifted != '':
+                        self._contained_shifted_keys.append(key.shifted)
                         self._key_pos[key.shifted] = key_pos
 
-        _iter_keys("CharKey", lambda x: x.label)
-        _iter_keys("ActionKey", lambda x: x.action)
-
-    def update_contained_keys(self):
-        """Store which keys are contained within this KeyPad."""
-        def _iter_keys(key_type, label_fn):
-            for key in self.select_many(key_type):
-                with key.no_automatic_refreshing():
-                    label = label_fn(key)
-                    if label != '':
-                        self._contained_keys.append(label)
-                    if key.shifted != '':
-                        self._contained_shifted_keys.append(key.shifted)
-
-        _iter_keys("CharKey", lambda x: x.label)
-        _iter_keys("ActionKey", lambda x: x.action)
+        _iter_keys(CharKey, lambda x: x.label)
+        _iter_keys(ActionKey, lambda x: x.action)
 
     def _get_keys_required_keypad_state(self, key):
 
