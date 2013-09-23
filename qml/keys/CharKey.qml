@@ -143,11 +143,10 @@ Item {
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
 
-                noMagnifier = !false
-                popoverHasFocus = !false
-                keyMouseArea.enabled = false
-                visible = false
-                extendedKeysSelector.mouseArea.enabled = true
+                noMagnifier = true
+                popoverHasFocus = true
+                disableMouseArea();
+                extendedKeysSelector.enableMouseArea();
             }
         }
 
@@ -165,6 +164,18 @@ Item {
             key.state = "PRESSED"
             event_handler.onKeyPressed(valueToSubmit);
         }
+    }
+
+    function disableMouseArea()
+    {
+        keyMouseArea.enabled = false;
+        keyMouseArea.visible = false;
+    }
+
+    function enableMouseArea()
+    {
+        keyMouseArea.enabled = true;
+        keyMouseArea.visible = true;
     }
 
     Popper {

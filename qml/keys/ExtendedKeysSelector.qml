@@ -26,25 +26,25 @@ import "key_constants.js" as UI
 
 Item {
     id: popover
+    visible: false
 
     property variant extendedKeysModel
-
     property Item currentlyAssignedKey
 
-    property alias mouseArea: dismissMouseArea
-
-    visible: false
+    property int __width: 0
+    property string __commitStr: ""
 
     onCurrentlyAssignedKeyChanged:
     {
         if (currentlyAssignedKey == null)
             return;
 
-        var point = keypad.mapFromItem(currentlyAssignedKey.parent, currentlyAssignedKey.x, currentlyAssignedKey.y)
-
-        anchorItem.x = point.x;
-        anchorItem.y = point.y - panel.keyHeight;
+        __repositionPopoverTo(currentlyAssignedKey);
     }
+
+    ///
+    // Item gets repositioned above the currently active key on keyboard.
+    // extended keys area will center on top of this
 
     Item {
         id: anchorItem
@@ -53,17 +53,17 @@ Item {
     }
 
     Rectangle {
-        id: background
+        id: popoverBackground
 
         anchors.centerIn: anchorItem
         width: {
-            if (containerLayout.width < keypad.keyWidth)
+            if (rowOfKeys.width < keypad.keyWidth)
                 return keypad.keyWidth;
             else
-                return containerLayout.width;
+                return rowOfKeys.width;
         }
 
-        height: containerLayout.height
+        height: rowOfKeys.height
         radius: 17
         color: "white"
         border.color: "lightGray"
@@ -71,64 +71,64 @@ Item {
     }
 
     MouseArea {
-        id: dismissMouseArea
+        id: extendedKeysMouseArea
 
         anchors.fill: parent
-        propagateComposedEvents: true
-        onClicked: popover.visible = false
         preventStealing: true
 
+        /// checks the x value
+        // if mouses x is inside the range of popovers x, it looks closer and finds out
+        // which section of extended keys is above mouses x value, and selects it
         onPositionChanged:
         {
-            var startX = containerLayout.x
-            var endX = containerLayout.x + __width
+            var startX = rowOfKeys.x;
+            var endX = rowOfKeys.x + __width;
 
             if (mouse.x > startX && mouse.x < endX) {
-                for (var i = 0; i < layoutRepeater.count; i++) {
+                for (var i = 0; i < keyRepeater.count; i++) {
 
-                    layoutRepeater.itemAt(i).highlight = false
+                    // reset highlight for all keys
+                    keyRepeater.itemAt(i).highlight = false;
 
-                    if (((startX+layoutRepeater.itemAt(i).x) < mouse.x)
-                            && ((startX + layoutRepeater.itemAt(i).x + layoutRepeater.itemAt(i).width) > mouse.x)) {
-                        layoutRepeater.itemAt(i).highlight = true
-                        __commitStr = layoutRepeater.itemAt(i).txt
+                    if (((startX+keyRepeater.itemAt(i).x) < mouse.x)
+                            && ((startX + keyRepeater.itemAt(i).x + keyRepeater.itemAt(i).width) > mouse.x)) {
+
+                        keyRepeater.itemAt(i).highlight = true;
+                        __commitStr = keyRepeater.itemAt(i).commitStr;
                     }
                 }
             }
         }
 
         onReleased: {
-            currentlyAssignedKey.state = "NORMAL"
+            __restoreAssignedKey();
             popover.visible = false
             event_handler.onKeyReleased(__commitStr);
         }
     }
 
-    property int __width: 0
-    property string __commitStr: ""
-
     Row {
-        id: containerLayout
+        id: rowOfKeys
         anchors.centerIn: anchorItem
 
         Component.onCompleted: __width = 0
 
         Repeater {
-            id: layoutRepeater
+            id: keyRepeater
             model: extendedKeysModel
 
             Item {
-                id: itemContainer
+                id: key
                 width: textCell.width + units.gu( UI.popoverCellPadding );
 
                 height: panel.keyHeight;
 
-                property alias txt: textCell.text
+                property alias commitStr: textCell.text
                 property bool highlight: false
 
                 Rectangle {
                     anchors.fill: parent
-                    color: itemContainer.highlight ? "red" : "#00000000"
+                    color: key.highlight ? "lightGray" : "transparent"
                 }
 
                 Text {
@@ -142,21 +142,29 @@ Item {
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
-                MouseArea {
-                    anchors.fill: parent
-                    enabled: true
-                    visible: true
-                    onReleased: {
-                        event_handler.onKeyReleased(modelData);
-                        popover.visible = false;
-                    }
-
-                    preventStealing: true
-                }
-
             }
         }
     }
+
+    function enableMouseArea()
+    {
+        extendedKeysMouseArea.enabled = true
+    }
+
+    function __repositionPopoverTo(item)
+    {
+        var point = keypad.mapFromItem(item.parent, item.x, item.y)
+
+        anchorItem.x = point.x;
+        anchorItem.y = point.y - panel.keyHeight;
+    }
+
+    function __restoreAssignedKey()
+    {
+        currentlyAssignedKey.state = "NORMAL"
+        currentlyAssignedKey.enableMouseArea();
+    }
+
 }
 
 
