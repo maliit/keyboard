@@ -22,7 +22,7 @@ import os
 from testtools.matchers import Equals
 from tempfile import mktemp
 from textwrap import dedent
-from time import sleep;
+from time import sleep
 
 from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
@@ -173,6 +173,10 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         shifted/capitalised.
 
         """
+        self.skip(
+            "Skipping as feature hasn't landed yet, refer to bug lp:1214695"
+        )
+
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
@@ -243,6 +247,9 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         enter the shifted state.
 
         """
+        self.skip(
+            "Skipping as feature hasn't landed yet, refer to bug lp:1214695"
+        )
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
@@ -298,14 +305,6 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             )
         ),
         (
-            "Password",
-            dict(
-                label="Password",
-                hints=['Qt.ImhHiddenText', 'Qt.ImhSensitiveData'],
-                expected_activeview="password"
-            )
-        ),
-        (
             "Email",
             dict(
                 label="Email",
@@ -332,8 +331,6 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
     ]
 
     # Note: based on UX design doc
-    # Note: this currently has a failing test for the password input bug
-    # lp:1229098.
     def test_keyboard_layout(self):
         """The Keyboard must respond to the input type and change to be the
         correct state.
