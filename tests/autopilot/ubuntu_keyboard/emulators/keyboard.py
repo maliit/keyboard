@@ -74,7 +74,9 @@ class Keyboard(object):
 
     def __init__(self, pointer=None):
         try:
-            self.orientation = Keyboard.maliit.select_single("OrientationHelper")
+            self.orientation = Keyboard.maliit.select_single(
+                "OrientationHelper"
+            )
             if self.orientation is None:
                 raise RuntimeError(
                     "Unable to find the Orientation Helper, aborting."
@@ -154,6 +156,15 @@ class Keyboard(object):
     @property
     def current_state(self):
         return self.keyboard.state
+
+    @property
+    def active_keypad(self):
+        if self.character_keypad.enabled:
+            return self.character_keypad
+        elif self.symbol_keypad.enabled:
+            return self.symbol_keypad
+        else:
+            raise RuntimeError("There are no currently active KeyPads.")
 
     # Much like is_available, but attempts to wait for the keyboard to be
     # ready.

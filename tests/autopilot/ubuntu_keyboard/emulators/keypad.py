@@ -49,6 +49,7 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
     class State:
         NORMAL = "NORMAL"
         SHIFTED = "SHIFTED"
+        CAPSLOCK = "CAPSLOCK"
 
     def __init__(self, *args):
         super(KeyPad, self).__init__(*args)
@@ -102,11 +103,19 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         i.e. move from NORMAL to SHIFTED
 
         """
-        logger.debug("Switching from %s to %s" % (self.state, state))
         if state == self.state:
             return
 
-        # Clean this up, what about auto caps too?
+        # If shifted is needed and we're in CAPSLOCK that's fine.
+        if (state == KeyPad.State.SHIFTED
+                and self.state == KeyPad.State.CAPSLOCK):
+            logger.debug(
+                "Ignoring request to switch to SHIFTED, already in CAPSLOCK."
+            )
+            return
+
+        logger.debug("Switching from %s to %s" % (self.state, state))
+
         if self.state == KeyPad.State.NORMAL:
             expected_state = KeyPad.State.SHIFTED
         else:
