@@ -69,14 +69,14 @@ MainView {
             spacing: units.gu(1)
             Item {
                 width: inputWidth
-                height: units.gu(4);
+                height: units.gu(8);
 
                 Rectangle {
                     anchors.fill: parent
                     color: "white"
                 }
 
-                TextInput {
+                TextEdit {
                     anchors.fill: parent
                     color: "black"; selectionColor: "red"
 
@@ -86,7 +86,7 @@ MainView {
                 }
             }
             Text {
-                text: "Qt.ImhNone"
+                text: "Qt.ImhNone, multiline"
                 anchors.verticalCenter: parent
                 font.pixelSize: units.gu(1.5)
             }

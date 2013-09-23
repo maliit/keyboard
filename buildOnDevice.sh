@@ -46,11 +46,13 @@ install_ssh_key() {
     adb shell chown $USER_ID:$USER_ID $HOME_DIR/.ssh/authorized_keys
     adb shell chmod 700 $HOME_DIR/.ssh
     adb shell chmod 600 $HOME_DIR/.ssh/authorized_keys
+    adb shell rm /etc/init/ssh.override
 }
 
 install_dependencies() {
     exec_with_adb apt-get -y install openssh-server
     exec_with_ssh $SUDO apt-get -y install build-essential rsync bzr ccache gdb libglib2.0-bin
+    exec_with_ssh $SUDO apt-get -y install emacs23-nox mc unzip
     exec_with_ssh $SUDO add-apt-repository -y ppa:canonical-qt5-edgers/qt5-proper
     exec_with_ssh $SUDO add-apt-repository -s -y ppa:phablet-team/ppa
     exec_with_ssh $SUDO apt-get update
