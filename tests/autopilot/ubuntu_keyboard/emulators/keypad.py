@@ -83,58 +83,6 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         _iter_keys(CharKey, lambda x: x.label)
         _iter_keys(ActionKey, lambda x: x.action)
 
-    def _get_keys_required_keypad_state(self, key):
-
-        # if key is special, return current state.
-        if key in ('shift', 'backspace', 'symbols', 'space', 'return'):
-            return self.state
-        elif key in self._contained_keys:
-            return KeyPad.State.NORMAL
-        elif key in self._contained_shifted_keys:
-            return KeyPad.State.SHIFTED
-        else:
-            raise ValueError(
-                "Don't know which state key '%s' requires." % key
-            )
-
-    def _switch_to_state(self, state, pointer):
-        """Move from one state to the other.
-
-        i.e. move from NORMAL to SHIFTED
-
-        """
-        if state == self.state:
-            return
-
-        # If shifted is needed and we're in CAPSLOCK that's fine.
-        if (state == KeyPad.State.SHIFTED
-                and self.state == KeyPad.State.CAPSLOCK):
-            logger.debug(
-                "Ignoring request to switch to SHIFTED, already in CAPSLOCK."
-            )
-            return
-
-        logger.debug("Switching from %s to %s" % (self.state, state))
-
-        if self.state == KeyPad.State.NORMAL:
-            expected_state = KeyPad.State.SHIFTED
-        else:
-            expected_state = KeyPad.State.NORMAL
-
-        key_rect = self.get_key_position("shift")
-
-        # Hack as we cannot tell if the other button has finished being pushed
-        # so otherwise the shift click goes un-recognised.
-        # bug lp:1229003 and lp:1229001
-        sleep(.2)
-        self._tap_key(key_rect, pointer)
-        self.state.wait_for(expected_state)
-
-    def _tap_key(self, key_rect, pointer):
-        if pointer is None:
-            pointer = Pointer(Touch.create())
-        pointer.click_object(key_rect)
-
     def press_key(self, key, pointer=None):
         """Taps key *key* with *pointer*
 
@@ -175,3 +123,52 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
             raise ValueError("Unknown position for key '%s'" % key)
 
         return key_rect
+
+    def _get_keys_required_keypad_state(self, key):
+        if key in ('shift', 'backspace', 'symbols', 'space', 'return'):
+            return self.state
+        elif key in self._contained_keys:
+            return KeyPad.State.NORMAL
+        elif key in self._contained_shifted_keys:
+            return KeyPad.State.SHIFTED
+        else:
+            raise ValueError(
+                "Don't know which state key '%s' requires." % key
+            )
+
+    def _switch_to_state(self, state, pointer):
+        """Move from one state to the other.
+
+        i.e. move from NORMAL to SHIFTED
+
+        """
+        if state == self.state:
+            return
+
+        # If shifted is needed and we're in CAPSLOCK that's fine.
+        if (state == KeyPad.State.SHIFTED
+                and self.state == KeyPad.State.CAPSLOCK):
+            logger.debug(
+                "Ignoring request to switch to SHIFTED, already in CAPSLOCK."
+            )
+            return
+
+        logger.debug("Switching from %s to %s" % (self.state, state))
+
+        if self.state == KeyPad.State.NORMAL:
+            expected_state = KeyPad.State.SHIFTED
+        else:
+            expected_state = KeyPad.State.NORMAL
+
+        key_rect = self.get_key_position("shift")
+
+        # Hack as we cannot tell when the shift key is ready to be pressed
+        # bug lp:1229003 and lp:1229001
+        sleep(.2)
+        self._tap_key(key_rect, pointer)
+        self.state.wait_for(expected_state)
+
+    def _tap_key(self, key_rect, pointer):
+        if pointer is None:
+            pointer = Pointer(Touch.create())
+        pointer.click_object(key_rect)

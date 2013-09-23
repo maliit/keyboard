@@ -33,7 +33,7 @@ from autopilot.introspection import (
 logger = logging.getLogger(__name__)
 
 
-class UnsupportedKey(RuntimeError):
+class KeyPadNotLoaded(Exception):
     pass
 
 
@@ -132,8 +132,12 @@ class Keyboard(object):
         return self._symbol_keypad
 
     def _get_keypad(self, name):
-        """Raises exception of keypad not found also when more than one keypad
-        (or loader) is found.
+        """Attempt to retrieve KeyPad object of either 'character' or 'symbol'
+
+        *name* must be either 'character' or 'symbol'.
+
+        Raises KeyPadNotLoaded exception if none or more than one keypad is
+        found.
 
         """
         objectName = "{name}KeyPadLoader".format(name=name)
@@ -143,10 +147,8 @@ class Keyboard(object):
         )
         keypad = loader.select_single(KeyPad)
         if keypad is None:
-            raise RuntimeError(
-                "Unable to find the {named} keypad within the maliit"
-                "server".format(named=name)
-            )
+            raise KeyPadNotLoaded("{name} keypad is not currently loaded.")
+
         return keypad
 
     def dismiss(self):
@@ -208,21 +210,26 @@ class Keyboard(object):
 
         :raises: *RuntimeError* if the keyboard is not available and thus not
           ready to be used.
-        :raises: *UnsupportedKey* if the supplied key cannot be found on any of
+        :raises: *ValueError* if the supplied key cannot be found on any of
           the the current keyboards layouts.
         """
         if not self.is_available():
             raise RuntimeError("Keyboard is not on screen")
 
         key = self._translate_key(key)
+        active_keypad = None
 
-        if self.character_keypad.contains_key(key):
-            self._show_character_keypad()
-            active_keypad = self.character_keypad
-        elif self.symbol_keypad.contains_key(key):
-            self._show_symbol_keypad()
-            active_keypad = self.symbol_keypad
-        else:
+        try:
+            if self.character_keypad.contains_key(key):
+                self._show_character_keypad()
+                active_keypad = self.character_keypad
+            elif self.symbol_keypad.contains_key(key):
+                self._show_symbol_keypad()
+                active_keypad = self.symbol_keypad
+        except KeyPadNotLoaded:
+            pass
+
+        if active_keypad is None:
             raise ValueError(
                 "Key '%s' was not found on the keyboard." % key
             )
@@ -238,7 +245,7 @@ class Keyboard(object):
 
         Only 'normal' or single characters can be typed this way.
 
-        :raises: *UnsupportedKey* if one of the the supplied keys cannot be
+        :raises: *ValueError* if one of the the supplied keys cannot be
           found on any of the the current keyboards layouts.
 
         """
@@ -269,6 +276,8 @@ class Keyboard(object):
     def _show_character_keypad(self):
         """Brings the characters KeyPad to the forefront."""
         if not self.character_keypad.enabled:
+            # If the character keypad isn't enabled than the symbol keypad must
+            # be active
             self.symbol_keypad.press_key("symbols")
             self.character_keypad.enabled.wait_for(True)
             self.character_keypad.opacity.wait_for(1.0)
@@ -276,6 +285,8 @@ class Keyboard(object):
     def _show_symbol_keypad(self):
         """Brings the symbol KeyPad to the forefront."""
         if not self.symbol_keypad.enabled:
+            # If the symbol keypad isn't enabled than the character keypad must
+            # be active
             self.character_keypad.press_key("symbols")
             self.symbol_keypad.enabled.wait_for(True)
             self.symbol_keypad.opacity.wait_for(1.0)
