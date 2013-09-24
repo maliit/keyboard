@@ -68,6 +68,21 @@ Item {
         color: "white"
         border.color: "lightGray"
         border.width: 1
+
+        onXChanged: {
+
+            if (x < 30) {
+                anchorItem.x += Math.abs(x) + 30;
+                return
+            }
+
+            var rightEdge = (x + width)
+            if ( rightEdge > (panel.width - 30)) {
+                var diff = rightEdge - panel.width
+                anchorItem.x -= diff;
+            }
+        }
+
     }
 
     MouseArea {
@@ -108,7 +123,7 @@ Item {
         onReleased: {
             highlightedKeyIndex = 0;
             __restoreAssignedKey();
-            popover.visible = false
+            __shutdownPopover();
             event_handler.onKeyReleased(__commitStr);
         }
     }
@@ -171,6 +186,10 @@ Item {
         currentlyAssignedKey.enableMouseArea();
     }
 
+    function __shutdownPopover()
+    {
+        popover.visible = false
+    }
 }
 
 
