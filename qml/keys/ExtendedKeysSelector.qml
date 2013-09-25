@@ -71,15 +71,15 @@ Item {
 
         onXChanged: {
 
-            if (x < 30) {
-                anchorItem.x += Math.abs(x) + 30;
+            if (x < UI.popoverEdgeMargin) {
+                anchorItem.x += Math.abs(x) + UI.popoverEdgeMargin;
                 return
             }
 
             var rightEdge = (x + width)
-            if ( rightEdge > (panel.width - 30)) {
+            if ( rightEdge > (panel.width - UI.popoverEdgeMargin)) {
                 var diff = rightEdge - panel.width
-                anchorItem.x -= diff;
+                anchorItem.x -= diff + UI.popoverEdgeMargin;
             }
         }
     }
