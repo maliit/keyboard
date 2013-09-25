@@ -194,7 +194,11 @@ Item {
 
     function closePopover()
     {
+        for (var i = 0; i < keyRepeater.count; i++)
+            keyRepeater.itemAt( i ).highlight = false;
+
         popover.visible = false
+
     }
 }
 
