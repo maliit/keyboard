@@ -143,7 +143,6 @@ Item {
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
 
-                noMagnifier = true
                 popoverHasFocus = true
                 disableMouseArea();
             }
