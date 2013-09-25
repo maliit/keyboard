@@ -81,15 +81,16 @@ Item {
             }
         }
     }
-
+/*
     DropShadow {
+        id: dropShadow
         itemSource: popoverBackground
 
         xOffset: 0
         yOffset: 2
         intensity: 0.3
     }
-
+*/
     MouseArea {
         id: extendedKeysMouseArea
 

@@ -36,7 +36,7 @@ var symbolShiftKeyFontSize = 2; // gu
 var urlKeyFontSize = 1.5; // gu
 
 /* extended keys */
-var popoverCellPadding = 2; // gu
+var popoverCellPadding = 1.6; // gu
 var popoverTopMargin   = 10; // dp
 
 var imageCharKey        = "../images/keybg@18.png"
