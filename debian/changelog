@@ -1,3 +1,17 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130925-0ubuntu1) saucy; urgency=low
+
+  [ William Hua ]
+  * Add GSettings schema file.
+
+  [ Christopher Lee ]
+  * Update the autopilot emulator code to work with the recent changes
+    (moving more UI code to QML).
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 43
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 25 Sep 2013 11:05:45 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130920-0ubuntu1) saucy; urgency=low
 
   [ Thomas Moenicke ]
