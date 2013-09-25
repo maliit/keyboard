@@ -64,10 +64,8 @@ Item {
         }
 
         height: rowOfKeys.height
-        radius: 17
+        radius: 15
         color: "white"
-        border.color: "lightGray"
-        border.width: 1
 
         onXChanged: {
 
@@ -82,7 +80,14 @@ Item {
                 anchorItem.x -= diff;
             }
         }
+    }
 
+    DropShadow {
+        itemSource: popoverBackground
+
+        xOffset: 0
+        yOffset: 2
+        intensity: 0.3
     }
 
     MouseArea {
@@ -153,11 +158,6 @@ Item {
                 property alias commitStr: textCell.text
                 property bool highlight: false
 
-                Rectangle {
-                    anchors.fill: parent
-                    color: key.highlight ? "lightGray" : "transparent"
-                }
-
                 Text {
                     id: textCell
                     anchors.centerIn: parent;
@@ -165,7 +165,7 @@ Item {
                     font.family: UI.fontFamily
                     font.pixelSize: units.gu( UI.fontSize )
                     font.bold: UI.fontBold
-                    color: UI.fontColor
+                    color: key.highlight ? "red" : UI.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
