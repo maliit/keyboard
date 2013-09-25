@@ -47,6 +47,7 @@ Item {
 
     Loader {
         id: characterKeypadLoader
+        objectName: "characterKeyPadLoader"
         anchors.fill: parent
         asynchronous: true
         source: "languages/Keyboard_en_us.qml"
@@ -59,6 +60,7 @@ Item {
 
     Loader {
         id: symbolKeypadLoader
+        objectName: "symbolKeyPadLoader"
         anchors.fill: parent
         asynchronous: true
     }
