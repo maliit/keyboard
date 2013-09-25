@@ -123,7 +123,7 @@ Item {
         onReleased: {
             highlightedKeyIndex = 0;
             __restoreAssignedKey();
-            __shutdownPopover();
+            closePopover();
             event_handler.onKeyReleased(__commitStr);
         }
 
@@ -192,7 +192,7 @@ Item {
         currentlyAssignedKey.enableMouseArea();
     }
 
-    function __shutdownPopover()
+    function closePopover()
     {
         popover.visible = false
     }

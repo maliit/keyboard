@@ -77,6 +77,10 @@ Item {
         }
     }
 
+    function closeExtendedKeys()
+    {
+        extendedKeysSelector.closePopover();
+    }
 
     states: [
         State {

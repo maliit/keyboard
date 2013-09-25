@@ -203,6 +203,7 @@ Item {
             onCompleted: {
                 keyboardSurface.y = 0;
                 canvas.hideAnimationFinished = true;
+                keypad.closeExtendedKeys();
             }
             when: canvas.shown === false
         }
