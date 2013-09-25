@@ -126,6 +126,12 @@ Item {
             __shutdownPopover();
             event_handler.onKeyReleased(__commitStr);
         }
+
+        enabled: true
+
+        onEntered: currentlyAssignedKey.disableMouseArea();
+
+        onExited: keyRepeater.itemAt( highlightedKeyIndex ).highlight = false;
     }
 
     Row {

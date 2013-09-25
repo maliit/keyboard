@@ -146,7 +146,6 @@ Item {
                 noMagnifier = true
                 popoverHasFocus = true
                 disableMouseArea();
-                extendedKeysSelector.enableMouseArea();
             }
         }
 
