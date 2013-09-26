@@ -48,7 +48,7 @@ class Keyboard(object):
         '\n': 'return',
     }
 
-    __maliit_server = None
+    __maliit = None
 
     def __init__(self, pointer=None):
         try:
@@ -94,21 +94,18 @@ class Keyboard(object):
 
     @property
     def maliit(self):
-        # cache __mallit_server as a class attribute because
+        # We cache __mallit_server as a class attribute because
         # get_proxy_object_for_existing_process clears backends for proxy
-        # objects, this means that with:
-        #   kb = Keyboard()
-        #   kb2 = Keyboard()
-        # The proxy objects in kb have had their _Backends cleared which means we
-        # can no longer query them.
-        if Keyboard.__maliit_server is None:
+        # objects, this means that if this is called twice within a test the
+        # first keyboard object created has now lost all its _Backends.
+        if Keyboard.__maliit is None:
             try:
-                Keyboard.__maliit_server = get_proxy_object_for_existing_process(
+                Keyboard.__maliit = get_proxy_object_for_existing_process(
                     connection_name='org.maliit.server',
                     emulator_base=UbuntuKeyboardEmulatorBase
                 )
 
-                if Keyboard.__maliit_server is None:
+                if Keyboard.__maliit is None:
                     raise RuntimeError("Maliit Server could not be found.")
             except ProcessSearchError as e:
                 e.args += (
@@ -116,7 +113,7 @@ class Keyboard(object):
                     "started with introspection enabled?",
                 )
                 raise
-        return Keyboard.__maliit_server
+        return Keyboard.__maliit
 
     def _keyboard_details_changed(self):
         return self._language_changed() or self._orientation_changed()
