@@ -42,11 +42,11 @@ CharKey {
     }
 
     onOskStateChanged: {
-        if (panel.activeKeypad.state == "NORMAL")
+        if (panel.activeKeypadState == "NORMAL")
             iconImage.source = iconNormal;
-        if (panel.activeKeypad.state == "SHIFTED")
+        if (panel.activeKeypadState == "SHIFTED")
             iconImage.source = iconShifted;
-        if (panel.activeKeypad.state == "CAPSLOCK")
+        if (panel.activeKeypadState == "CAPSLOCK")
             iconImage.source = iconCapsLock
     }
 }

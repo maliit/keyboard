@@ -67,14 +67,14 @@ Item {
      * label changes when keyboard is in shifted mode
      * extended keys change as well when shifting keyboard, typically lower-uppercase: ê vs Ê
      */
-    property string oskState: panel.activeKeypad.state
+    property string oskState: panel.activeKeypadState
     property var activeExtendedModel: extended
 
     onOskStateChanged: {
-        if (panel.activeKeypad.state == "NORMAL") {
+        if (panel.activeKeypadState == "NORMAL") {
             keyLabel.text = label;
             activeExtendedModel = extended;
-        } else if (panel.activeKeypad.state == "SHIFTED") {
+        } else if (panel.activeKeypadState == "SHIFTED") {
             keyLabel.text = shifted;
             activeExtendedModel = extendedShifted
         }
@@ -119,7 +119,7 @@ Item {
 
     Text {
         id: annotationLabel
-        text: (panel.activeKeypad.state != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
+        text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
 
         anchors.right: parent.right
         anchors.top: parent.top
@@ -152,8 +152,8 @@ Item {
             if (!popoverHasFocus) {
                 event_handler.onKeyReleased(valueToSubmit, action);
                 if (!skipAutoCaps)
-                    if (panel.activeKeypad.state === "SHIFTED" && panel.state === "CHARACTERS")
-                        panel.activeKeypad.state = "NORMAL"
+                    if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
+                        panel.activeKeypadState = "NORMAL"
             }
         }
         onPressed: {

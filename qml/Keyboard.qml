@@ -78,7 +78,7 @@ Item {
     onAutoCapsActivatedChanged: {
         if (autoCapsActivated) {
             keypad.state = "CHARACTERS"
-            keypad.activeKeypad.state = "SHIFTED";
+            keypad.activeKeypadState = "SHIFTED";
         }
     }
     property int pressedKeyIndex: -1;
@@ -198,9 +198,8 @@ Item {
             PropertyChanges { target: canvas; y: height; }
             onCompleted: {
                 keyboardSurface.y = 0;
-                canvas.hideAnimationFinished = true;
                 keypad.closeExtendedKeys();
-                keypad.activeKeypad.state = "NORMAL"
+                keypad.activeKeypadState = "NORMAL"
                 keypad.state = "CHARACTERS"
             }
             when: canvas.shown === false

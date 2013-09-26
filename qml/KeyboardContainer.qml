@@ -25,7 +25,8 @@ Item {
     property int keyWidth: 0
     property int keyHeight: 0
 
-    property Item activeKeypad: characterKeypadLoader.item
+    property variant activeKeypad: characterKeypadLoader.item
+    property string activeKeypadState: characterKeypadLoader.item ? item.state : ""
     property string symbolKeypadSource
 
     state: "CHARACTERS"
@@ -52,7 +53,6 @@ Item {
         asynchronous: true
         source: "languages/Keyboard_en_us.qml"
         onLoaded: {
-
             symbolKeypadLoader.setSource(characterKeypadLoader.item.symbols)
             panel.state = "CHARACTERS"
         }
