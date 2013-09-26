@@ -1,3 +1,10 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130926-0ubuntu1) saucy; urgency=low
+  
+  [ Ubuntu daily release ]
+   * New rebuild forced from rev 45
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Sep 2013 10:37:17 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130925-0ubuntu1) saucy; urgency=low
 
   [ William Hua ]
