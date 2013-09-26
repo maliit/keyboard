@@ -37,12 +37,6 @@ class KeyPadNotLoaded(Exception):
     pass
 
 
-class QQuickLoader(UbuntuKeyboardEmulatorBase):
-    # This is a work around so that when we select_single a KeyPad we don't get
-    # back a generic version.
-    pass
-
-
 class Keyboard(object):
 
     _action_to_label = {
@@ -152,7 +146,7 @@ class Keyboard(object):
         """
         objectName = "{name}KeyPadLoader".format(name=name)
         loader = self.maliit.select_single(
-            QQuickLoader,
+            "QQuickLoader",
             objectName=objectName
         )
         keypad = loader.select_single(KeyPad)
