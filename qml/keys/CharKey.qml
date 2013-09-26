@@ -136,7 +136,7 @@ Item {
 
         hoverEnabled: false
         preventStealing: true
-        propagateComposedEvents: true
+
         onPressAndHold: {
             if (activeExtendedModel != undefined) {
                 extendedKeysSelector.visible = true
@@ -144,13 +144,11 @@ Item {
                 extendedKeysSelector.currentlyAssignedKey = key
 
                 popoverHasFocus = true
-                disableMouseArea();
             }
         }
 
         onReleased: {
             key.state = "NORMAL"
-            extendedKeysSelector.visible = false;
             if (!popoverHasFocus) {
                 event_handler.onKeyReleased(valueToSubmit, action);
                 if (!skipAutoCaps)

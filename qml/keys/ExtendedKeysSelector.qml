@@ -83,64 +83,6 @@ Item {
             }
         }
     }
-/*
-    DropShadow {
-        id: dropShadow
-        itemSource: popoverBackground
-
-        xOffset: 0
-        yOffset: 2
-        intensity: 0.3
-    }
-*/
-    MouseArea {
-        id: extendedKeysMouseArea
-
-        anchors.fill: parent
-        preventStealing: true
-
-        property int highlightedKeyIndex: 0;
-
-        /// checks the x value
-        // if mouses x is inside the range of popovers x, it looks closer and finds out
-        // which section of extended keys is above mouses x value, and selects it
-        onPositionChanged:
-        {
-            var startX = rowOfKeys.x;
-            var endX = rowOfKeys.x + __width;
-
-            if (mouse.x > startX && mouse.x < endX) {
-                for (var i = 0; i < keyRepeater.count; i++) {
-
-                    if (((startX+keyRepeater.itemAt(i).x) < mouse.x)
-                            && ((startX + keyRepeater.itemAt(i).x + keyRepeater.itemAt(i).width) > mouse.x)) {
-
-                        keyRepeater.itemAt( highlightedKeyIndex ).highlight = false;
-                        highlightedKeyIndex = i;
-                        keyRepeater.itemAt( highlightedKeyIndex ).highlight = true;
-
-                        __commitStr = keyRepeater.itemAt(i).commitStr;
-                    }
-                }
-            } else {
-                keyRepeater.itemAt( highlightedKeyIndex ).highlight = false;
-                __commitStr = currentlyAssignedKey.label;
-            }
-        }
-
-        onReleased: {
-            highlightedKeyIndex = 0;
-            __restoreAssignedKey();
-            closePopover();
-            event_handler.onKeyReleased(__commitStr);
-        }
-
-        enabled: true
-
-        onEntered: currentlyAssignedKey.disableMouseArea();
-
-        onExited: keyRepeater.itemAt( highlightedKeyIndex ).highlight = false;
-    }
 
     Row {
         id: rowOfKeys
@@ -170,6 +112,15 @@ Item {
                     font.bold: UI.fontBold
                     color: key.highlight ? "red" : UI.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    preventStealing: true
+                    onReleased: {
+                        event_handler.onKeyReleased(modelData);
+                        popover.closePopover();
+                    }
                 }
 
             }
