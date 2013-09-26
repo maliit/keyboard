@@ -2,7 +2,7 @@
 #include "inputmethod.h"
 
 #include "editor.h"
-
+#include "keyboadsettings.h"
 #include "updatenotifier.h"
 
 #include "logic/layoutupdater.h"
@@ -36,10 +36,6 @@ class Settings
 {
 public:
     ScopedSetting style;
-    ScopedSetting feedback;
-    ScopedSetting auto_correct;
-    ScopedSetting auto_caps;
-    ScopedSetting word_engine;
 };
 
 class LayoutGroup
@@ -96,6 +92,8 @@ public:
     Maliit::TextContentType contentType;
     QString activeLanguageId;
 
+    KeyboadSettings m_settings;
+
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
@@ -113,6 +111,7 @@ public:
         , predictionEnabled(false)
         , contentType(Maliit::FreeTextContentType)
         , activeLanguageId("en_us")
+        , m_settings()
     {
         view = createWindow(host);
 
@@ -308,67 +307,33 @@ public:
         q->onStyleSettingChanged();
     }
 
-    void registerFeedbackSetting(MAbstractInputMethodHost *host)
+    void registerFeedbackSetting()
     {
-        QVariantMap attributes;
-        attributes[Maliit::SettingEntryAttributes::defaultValue] = true;
-
-        settings.feedback.reset(host->registerPluginSetting("feedback_enabled",
-                                                               QT_TR_NOOP("Feedback enabled"),
-                                                               Maliit::BoolType,
-                                                               attributes));
-
-        QObject::connect(settings.feedback.data(), SIGNAL(valueChanged()), q, SLOT(onFeedbackSettingChanged()));
-
-        feedback.setEnabled(settings.feedback->value().toBool());
+        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged()),
+                         q, SLOT(onFeedbackSettingChanged()));
+        feedback.setEnabled(m_settings.keyPressFeedback());
     }
 
-    void registerAutoCorrectSetting(MAbstractInputMethodHost *host)
+    void registerAutoCorrectSetting()
     {
-        QVariantMap attributes;
-        attributes[Maliit::SettingEntryAttributes::defaultValue] = true;
-
-        settings.auto_correct.reset(host->registerPluginSetting("auto_correct_enabled",
-                                                                   QT_TR_NOOP("Auto-correct enabled"),
-                                                                   Maliit::BoolType,
-                                                                   attributes));
-
-        QObject::connect(settings.auto_correct.data(), SIGNAL(valueChanged()), q, SLOT(onAutoCorrectSettingChanged()));
-
-        editor.setAutoCorrectEnabled(settings.auto_correct->value().toBool());
+        QObject::connect(&m_settings, SIGNAL(autoCompletionChanged()),
+                         q, SLOT(onAutoCorrectSettingChanged()));
+        editor.setAutoCorrectEnabled(m_settings.autoCompletion());
     }
 
-    void registerAutoCapsSetting(MAbstractInputMethodHost *host)
+    void registerAutoCapsSetting()
     {
-        QVariantMap attributes;
-        attributes[Maliit::SettingEntryAttributes::defaultValue] = true;
-
-        settings.auto_caps.reset(host->registerPluginSetting("auto_caps_enabled",
-                                                                QT_TR_NOOP("Auto-capitalization enabled"),
-                                                                Maliit::BoolType,
-                                                                attributes));
-
-        QObject::connect(settings.auto_caps.data(), SIGNAL(valueChanged()), q, SLOT(onAutoCapsSettingChanged()));
-
-        editor.setAutoCapsEnabled(settings.auto_caps->value().toBool());
+        QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged()),
+                         q, SLOT(onAutoCapsSettingChanged()));
+        editor.setAutoCapsEnabled(m_settings.autoCapitalization());
     }
 
-    void registerWordEngineSetting(MAbstractInputMethodHost *host)
+    void registerWordEngineSetting()
     {
-        QVariantMap attributes;
-        attributes[Maliit::SettingEntryAttributes::defaultValue] = false;
-
-        settings.word_engine.reset(host->registerPluginSetting("word_engine_enabled",
-                                                                  QT_TR_NOOP("Error correction/word prediction enabled"),
-                                                                  Maliit::BoolType,
-                                                                  attributes));
-
-        QObject::connect(settings.word_engine.data(), SIGNAL(valueChanged()), q, SLOT(updateWordEngine()));
-
-        Q_EMIT q->wordEngineEnabledChanged( settings.word_engine.data()->value().toBool() );
-
+        QObject::connect(&m_settings, SIGNAL(predictiveTextChanged()),
+                         q, SLOT(updateWordEngine()));
     #ifndef DISABLE_PREEDIT
-        editor.wordEngine()->setEnabled(settings.word_engine->value().toBool());
+        editor.wordEngine()->setEnabled(m_settings.predictiveText());
     #else
         editor.wordEngine()->setEnabled(false);
     #endif

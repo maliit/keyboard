@@ -102,10 +102,10 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     d->registerStyleSetting(host);
 
-    d->registerFeedbackSetting(host);
-    d->registerAutoCorrectSetting(host);
-    d->registerAutoCapsSetting(host);
-    d->registerWordEngineSetting(host);
+    d->registerFeedbackSetting();
+    d->registerAutoCorrectSetting();
+    d->registerAutoCapsSetting();
+    d->registerWordEngineSetting();
 
     setActiveSubView("en_us");
 
@@ -257,19 +257,19 @@ void InputMethod::onStyleSettingChanged()
 void InputMethod::onFeedbackSettingChanged()
 {
     Q_D(InputMethod);
-    d->feedback.setEnabled(d->settings.feedback->value().toBool());
+    d->feedback.setEnabled(d->m_settings.keyPressFeedback());
 }
 
 void InputMethod::onAutoCorrectSettingChanged()
 {
     Q_D(InputMethod);
-    d->editor.setAutoCorrectEnabled(d->settings.auto_correct->value().toBool());
+    d->editor.setAutoCorrectEnabled(d->m_settings.autoCompletion());
 }
 
 void InputMethod::onAutoCapsSettingChanged()
 {
     Q_D(InputMethod);
-    d->editor.setAutoCapsEnabled(d->settings.auto_caps->value().toBool());
+    d->editor.setAutoCapsEnabled(d->m_settings.autoCapitalization());
 }
 
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
@@ -385,7 +385,7 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
-    if (!d->settings.word_engine.data()->value().toBool())
+    if (!d->m_settings.predictiveText())
         d->predictionEnabled = false;
 
     if (d->contentType != Maliit::FreeTextContentType)
