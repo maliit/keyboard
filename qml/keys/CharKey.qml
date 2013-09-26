@@ -160,6 +160,9 @@ Item {
             key.state = "PRESSED"
             event_handler.onKeyPressed(valueToSubmit);
         }
+
+        onExited: event_handler.onExited(label);
+        onEntered: event_handler.onEntered(label);
     }
 
     function disableMouseArea()

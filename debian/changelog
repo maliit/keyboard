@@ -1,3 +1,36 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130920-0ubuntu1) saucy; urgency=low
+
+  [ Thomas Moenicke ]
+  * fix chinese.
+  * cleanup SHOW/HIDDEN state .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 40
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 20 Sep 2013 10:54:52 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130918-0ubuntu1) saucy; urgency=low
+
+  [ Thomas Moenicke ]
+  * various fixes.
+  * added layout-test and generic test qml apps.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 37
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 18 Sep 2013 07:06:45 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130912-0ubuntu1) saucy; urgency=low
+
+  [ Thomas Moenicke ]
+  * language-layouts in QML .
+  * ubuntu-keyboard fullscreen.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 34
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 12 Sep 2013 12:23:00 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130829.1-0ubuntu1) saucy; urgency=low
 
   [ Gerry Boland ]

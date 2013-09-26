@@ -383,6 +383,22 @@ public:
     #endif
     }
 
+    void closeOskWindow()
+    {
+        if (!view->isVisible())
+            return;
+
+        host->notifyImInitiatedHiding();
+
+        qmlRootItem->setProperty("shown", false);
+
+        layout.updater.resetOnKeyboardClosed();
+        editor.clearPreedit();
+
+        view->setVisible(false);
+
+        applicationApiWrapper->reportOSKInvisible();
+    }
 };
 
 } // namespace
