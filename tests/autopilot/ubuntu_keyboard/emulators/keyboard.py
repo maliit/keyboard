@@ -17,9 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from ubuntu_keyboard.emulators import UbuntuKeyboardEmulatorBase
-from ubuntu_keyboard.emulators.keypad import KeyPad
-
+from collections import defaultdict, namedtuple
 from time import sleep
 import logging
 
@@ -33,69 +31,70 @@ from autopilot.introspection import (
 logger = logging.getLogger(__name__)
 
 
-class KeyPadNotLoaded(Exception):
-    pass
+# Definitions of enums used within the cpp source code.
+class KeyboardState:
+    DEFAULT = 0
+    SHIFTED = 1
+    SYMBOL_1 = 2
+    SYMBOL_2 = 3
 
 
-class QQuickLoader(UbuntuKeyboardEmulatorBase):
-    # This is a work around so that when we select_single a KeyPad we don't get
-    # back a generic version.
+class KeyAction:
+    INSERT = 0
+    SHIFT = 1
+    BACKSPACE = 2
+    SPACE = 3
+    SYM = 6
+    RETURN = 7
+    SWITCH = 11
+
+
+class UnsupportedKey(RuntimeError):
     pass
 
 
 class Keyboard(object):
 
-    _action_to_label = {
-        'SHIFT': 'shift',
-        '\b': 'backspace',
-        'ABC': 'symbols',
-        '?123': 'symbols',
-        ' ': 'space',
-        '\n': 'return',
-    }
+    KeyPos = namedtuple("KeyPos", ['x', 'y', 'h', 'w'])
 
-    # mallit is a class attribute because get_proxy_object_for_existing_process
-    # clears backends for proxy objects, this means that with:
-    #   kb = Keyboard()
-    #   kb2 = Keyboard()
-    # The proxy objects in kb have had their _Backends cleared which means we
-    # can no longer query them.
-    try:
-        maliit = get_proxy_object_for_existing_process(
-            connection_name='org.maliit.server',
-            emulator_base=UbuntuKeyboardEmulatorBase
-        )
-    except ProcessSearchError as e:
-        e.args += (
-            "Unable to find maliit-server dbus object. Has it been "
-            "started with introspection enabled?",
-        )
-        raise
+    # Note (veebers 19-aug-13): this hardcoded right now, but will be reading
+    # data from the keyboard itself in the very near future. Moved '/' to
+    # primary symbol, default layout can have a .com instead.
+    default_keys = "qwertyuiopasdfghjklzxcvbnm."
+    shifted_keys = "QWERTYUIOPASDFGHJKLZXCVBNM."
+    primary_symbol = "1234567890*#+-=()!?@~/\\';:,."
+    secondary_symbol = u"$%<>[]`^|_{}\"&,.\u20ac\xa3\xa5\u20b9\xa7\xa1\xbf" \
+        u"\xab\xbb\u201c\u201d\u201e"
+
+    # The ability to name the non-text keys.
+    _action_id_to_text = {
+        KeyAction.SHIFT: 'SHIFT',
+        KeyAction.BACKSPACE: '\b',
+        KeyAction.SPACE: ' ',
+        KeyAction.RETURN: '\n'
+    }
 
     def __init__(self, pointer=None):
         try:
-            self.orientation = Keyboard.maliit.select_single(
-                "OrientationHelper"
+            maliit = get_proxy_object_for_existing_process(
+                connection_name='org.maliit.server'
             )
-            if self.orientation is None:
-                raise RuntimeError(
-                    "Unable to find the Orientation Helper, aborting."
-                )
-        except ValueError as e:
+        except ProcessSearchError as e:
             e.args += (
-                "More than one OrientationHelper object was found, aborting."
+                "Unable to find maliit-server dbus object. Has it been "
+                "started with introspection enabled?",
             )
             raise
 
         try:
-            self.keyboard = Keyboard.maliit.select_single(
-                "QQuickItem",
+            self.keyboard = maliit.select_single(
+                "Keyboard",
                 objectName="ubuntuKeyboard"
             )
             if self.keyboard is None:
                 raise RuntimeError(
                     "Unable to find the Ubuntu Keyboard object within the "
-                    "maliit server."
+                    "maliit server"
                 )
         except ValueError as e:
             e.args += (
@@ -103,53 +102,34 @@ class Keyboard(object):
             )
             raise
 
-        self._character_keypad = None
-        self._symbol_keypad = None
+        try:
+            self.keypad = self.keyboard.select_single(
+                "QQuickItem",
+                objectName="keyboardKeypad"
+            )
 
-        self._store_current_orientation()
-        self._store_current_language_id()
+            if self.keypad is None:
+                raise RuntimeError(
+                    "Unable to find the keypad object within the "
+                    "maliit server"
+                )
+        except ValueError as e:
+            e.args += (
+                "There was more than one keyboard keypad object found, "
+                "aborting.",
+            )
+            raise
+
+        # Contains instructions on how to move the keyboard into a specific
+        # state/layout so that we can successfully press the required key.
+        self._state_lookup_table = self._generate_state_lookup_table()
+        # Cache the position of the keys
+        self._key_pos_table = defaultdict(dict)
 
         if pointer is None:
             self.pointer = Pointer(Touch.create())
         else:
             self.pointer = pointer
-
-    def _keyboard_details_changed(self):
-        return self._language_changed() or self._orientation_changed()
-
-    @property
-    def character_keypad(self):
-        if self._character_keypad is None or self._keyboard_details_changed():
-            self._character_keypad = self._get_keypad("character")
-        return self._character_keypad
-
-    @property
-    def symbol_keypad(self):
-        if (self._symbol_keypad is None
-                or (self._language_changed() or self._orientation_changed())):
-            self._symbol_keypad = self._get_keypad("symbol")
-
-        return self._symbol_keypad
-
-    def _get_keypad(self, name):
-        """Attempt to retrieve KeyPad object of either 'character' or 'symbol'
-
-        *name* must be either 'character' or 'symbol'.
-
-        Raises KeyPadNotLoaded exception if none or more than one keypad is
-        found.
-
-        """
-        objectName = "{name}KeyPadLoader".format(name=name)
-        loader = Keyboard.maliit.select_single(
-            QQuickLoader,
-            objectName=objectName
-        )
-        keypad = loader.select_single(KeyPad)
-        if keypad is None:
-            raise KeyPadNotLoaded("{name} keypad is not currently loaded.")
-
-        return keypad
 
     def dismiss(self):
         """Swipe the keyboard down to hide it.
@@ -170,20 +150,14 @@ class Keyboard(object):
 
     def is_available(self):
         """Returns true if the keyboard is shown and ready to use."""
-        return (self.keyboard.state == "SHOWN")
+        return (
+            self.keyboard.state == "SHOWN"
+            and not self.keyboard.hideAnimationFinished
+        )
 
     @property
     def current_state(self):
-        return self.keyboard.state
-
-    @property
-    def active_keypad(self):
-        if self.character_keypad.enabled:
-            return self.character_keypad
-        elif self.symbol_keypad.enabled:
-            return self.symbol_keypad
-        else:
-            raise RuntimeError("There are no currently active KeyPads.")
+        return self.keyboard.layoutState
 
     # Much like is_available, but attempts to wait for the keyboard to be
     # ready.
@@ -203,6 +177,31 @@ class Keyboard(object):
         except RuntimeError:
             return False
 
+    def get_key_position(self, key):
+        """Returns the global rect of the given key.
+
+        It may need to do a lookup to update the table of positions.
+
+        """
+        current_state = self.keyboard.layoutState
+        if self._key_pos_table.get(current_state) is None:
+            self._update_pos_table_for_current_state()
+
+        return self._key_pos_table[current_state][key]
+
+    def _update_pos_table_for_current_state(self):
+        all_keys = self.keypad.select_many('QQuickText')
+        current_state = self.keyboard.layoutState
+        labeled_keys = (KeyAction.INSERT, KeyAction.SWITCH, KeyAction.SYM)
+        for key in all_keys:
+            with key.no_automatic_refreshing():
+                key_pos = Keyboard.KeyPos(*key.globalRect)
+                if key.action_type in labeled_keys:
+                    self._key_pos_table[current_state][key.text] = key_pos
+                else:
+                    key_text = Keyboard._action_id_to_text[key.action_type]
+                    self._key_pos_table[current_state][key_text] = key_pos
+
     def press_key(self, key):
         """Tap on the key with the internal pointer
 
@@ -210,31 +209,18 @@ class Keyboard(object):
 
         :raises: *RuntimeError* if the keyboard is not available and thus not
           ready to be used.
-        :raises: *ValueError* if the supplied key cannot be found on any of
+        :raises: *UnsupportedKey* if the supplied key cannot be found on any of
           the the current keyboards layouts.
         """
         if not self.is_available():
             raise RuntimeError("Keyboard is not on screen")
 
-        key = self._translate_key(key)
-        active_keypad = None
+        if not self._is_special_key(key):
+            required_state_for_key = self._get_keys_required_state(key)
+            self._switch_keyboard_to_state(required_state_for_key)
 
-        try:
-            if self.character_keypad.contains_key(key):
-                self._show_character_keypad()
-                active_keypad = self.character_keypad
-            elif self.symbol_keypad.contains_key(key):
-                self._show_symbol_keypad()
-                active_keypad = self.symbol_keypad
-        except KeyPadNotLoaded:
-            pass
-
-        if active_keypad is None:
-            raise ValueError(
-                "Key '%s' was not found on the keyboard." % key
-            )
-
-        active_keypad.press_key(key)
+        key_rect = self.get_key_position(key)
+        self.pointer.click_object(key_rect)
 
     def type(self, string, delay=0.1):
         """Type the string *string* with a delay of *delay* between each key
@@ -245,7 +231,7 @@ class Keyboard(object):
 
         Only 'normal' or single characters can be typed this way.
 
-        :raises: *ValueError* if one of the the supplied keys cannot be
+        :raises: *UnsupportedKey* if one of the the supplied keys cannot be
           found on any of the the current keyboards layouts.
 
         """
@@ -253,47 +239,108 @@ class Keyboard(object):
             self.press_key(char)
             sleep(delay)
 
-    def _orientation_changed(self):
-        if self._stored_orientation != self.orientation.orientationAngle:
-            self._store_current_orientation()
-            return True
-        else:
-            return False
-
-    def _language_changed(self):
-        if self._stored_language_id != self.keyboard.layoutId:
-            self._store_current_language_id()
-            return True
-        else:
-            return False
-
-    def _store_current_orientation(self):
-        self._stored_orientation = self.orientation.orientationAngle
-
-    def _store_current_language_id(self):
-        self._stored_language_id = self.keyboard.layoutId
-
-    def _show_character_keypad(self):
-        """Brings the characters KeyPad to the forefront."""
-        if not self.character_keypad.enabled:
-            # If the character keypad isn't enabled than the symbol keypad must
-            # be active
-            self.symbol_keypad.press_key("symbols")
-            self.character_keypad.enabled.wait_for(True)
-            self.character_keypad.opacity.wait_for(1.0)
-
-    def _show_symbol_keypad(self):
-        """Brings the symbol KeyPad to the forefront."""
-        if not self.symbol_keypad.enabled:
-            # If the symbol keypad isn't enabled than the character keypad must
-            # be active
-            self.character_keypad.press_key("symbols")
-            self.symbol_keypad.enabled.wait_for(True)
-            self.symbol_keypad.opacity.wait_for(1.0)
-
-    def _translate_key(self, label):
-        """Get the label for a 'special key' (i.e. space) so that it can be
-        addressed and clicked.
+    def _get_keys_required_state(self, char):
+        """Given a character determine which state the keyboard needs to be in
+        so that it is visible and can be clicked.
 
         """
-        return Keyboard._action_to_label.get(label, label)
+
+        if char in Keyboard.default_keys:
+            return KeyboardState.DEFAULT
+        elif char in Keyboard.shifted_keys:
+            return KeyboardState.SHIFTED
+        elif char in Keyboard.primary_symbol:
+            return KeyboardState.SYMBOL_1
+        elif char in Keyboard.secondary_symbol:
+            return KeyboardState.SYMBOL_2
+        else:
+            raise UnsupportedKey(
+                "Don't know which state key '%s' requires" % char
+            )
+
+    def _switch_keyboard_to_state(self, target_state):
+        """Given a target_state, presses the required keys to bring the
+        keyboard into the correct state.
+
+        :raises: *RuntimeError* if unable to change the keyboard into the
+          expected state.
+
+        """
+        current_state = self.keyboard.layoutState
+
+        if target_state == current_state:
+            return
+
+        instructions = self._state_lookup_table[target_state].get(
+            current_state,
+            None
+        )
+        if instructions is None:
+            raise RuntimeError(
+                "Don't know how to get to state %d from current state (%d)"
+                % (target_state, current_state)
+            )
+
+        for step in instructions:
+            key, expected_state = step
+            self.press_key(key)
+            self.keyboard.layoutState.wait_for(expected_state)
+
+    def _is_special_key(self, key):
+        return key in ["\n", "\b", " ", "SHIFT", "?123", "ABC", "1/2", "2/2"]
+
+    # Give the state that you want and the current state, get instructions on
+    # how to move to that state.
+    # lookup_table[REQUESTED_STATE][CURRENT_STATE] -> Instructions(Key to
+    # press, Expected state after key press.)
+    def _generate_state_lookup_table(self):
+        return {
+            KeyboardState.DEFAULT: {
+                KeyboardState.SHIFTED: [
+                    ("SHIFT", KeyboardState.DEFAULT)
+                ],
+                KeyboardState.SYMBOL_1: [
+                    ("ABC", KeyboardState.DEFAULT)
+                ],
+                KeyboardState.SYMBOL_2: [
+                    ("ABC", KeyboardState.DEFAULT)
+                ],
+            },
+            KeyboardState.SHIFTED: {
+                KeyboardState.DEFAULT: [
+                    ("SHIFT", KeyboardState.SHIFTED)
+                ],
+                KeyboardState.SYMBOL_1: [
+                    ("ABC", KeyboardState.DEFAULT),
+                    ("SHIFT", KeyboardState.SHIFTED)
+                ],
+                KeyboardState.SYMBOL_2: [
+                    ("ABC", KeyboardState.DEFAULT),
+                    ("SHIFT", KeyboardState.SHIFTED)
+                ],
+            },
+            KeyboardState.SYMBOL_1: {
+                KeyboardState.DEFAULT: [
+                    ("?123", KeyboardState.SYMBOL_1)
+                ],
+                KeyboardState.SHIFTED: [
+                    ("?123", KeyboardState.SYMBOL_1)
+                ],
+                KeyboardState.SYMBOL_2: [
+                    ("2/2", KeyboardState.SYMBOL_1)
+                ],
+            },
+            KeyboardState.SYMBOL_2: {
+                KeyboardState.DEFAULT: [
+                    ("?123", KeyboardState.SYMBOL_1),
+                    ("1/2", KeyboardState.SYMBOL_2)
+                ],
+                KeyboardState.SHIFTED: [
+                    ("?123", KeyboardState.SYMBOL_1),
+                    ("1/2", KeyboardState.SYMBOL_2)
+                ],
+                KeyboardState.SYMBOL_1: [
+                    ("1/2", KeyboardState.SYMBOL_2)
+                ],
+            },
+        }
