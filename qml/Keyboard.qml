@@ -31,12 +31,13 @@
 
 import QtQuick 2.0
 import "constants.js" as Const
-
+import "keys/"
 import "keys/key_constants.js" as UI
 import Ubuntu.Components 0.1
 import QtQuick.Window 2.0
 
 Item {
+    id: fullScreenItem
     objectName: "fullScreenItem"
 
     property variant layout: maliit_layout

@@ -84,6 +84,14 @@ Item {
         }
     }
 
+    MouseArea {
+        anchors.centerIn: panel
+        width: panel.width
+        height: panel.height
+
+        onClicked: closePopover();
+    }
+
     Row {
         id: rowOfKeys
         anchors.centerIn: anchorItem
@@ -152,7 +160,6 @@ Item {
             keyRepeater.itemAt( i ).highlight = false;
 
         popover.visible = false
-
     }
 }
 
