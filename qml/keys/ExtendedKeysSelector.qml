@@ -147,6 +147,11 @@ Item {
 
         anchorItem.x = point.x;
         anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
+
+        /// FIXME need to avoid being drawn outside of the keyboard, and clicking
+        /// on the application below
+        if (anchorItem.y < -units.gu(UI.top_margin))
+            anchorItem.y = - (units.gu(UI.top_margin) + units.gu(2) )
     }
 
     function __restoreAssignedKey()
