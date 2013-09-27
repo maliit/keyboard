@@ -1,7 +1,11 @@
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130926-0ubuntu1) saucy; urgency=low
-
+  
   [ Ubuntu daily release ]
-  * New rebuild forced
+  * New rebuild forced from rev 45
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Sep 2013 10:37:17 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130925-0ubuntu1) saucy; urgency=low
 
   [ William Hua ]
   * Add GSettings schema file.
@@ -11,9 +15,9 @@ ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130926-0ubuntu1) saucy; urgency=low
     (moving more UI code to QML).
 
   [ Ubuntu daily release ]
-  * Automatic snapshot from revision 45
+  * Automatic snapshot from revision 43
 
- -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Sep 2013 10:37:17 +0000
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 25 Sep 2013 11:05:45 +0000
 
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130920-0ubuntu1) saucy; urgency=low
 
