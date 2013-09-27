@@ -165,6 +165,7 @@ Item {
         for (var i = 0; i < keyRepeater.count; i++)
             keyRepeater.itemAt( i ).highlight = false;
 
+        extendedKeysModel = null;
         popover.visible = false
     }
 }
