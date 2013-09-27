@@ -67,11 +67,6 @@ Item {
     ExtendedKeysSelector {
         id: extendedKeysSelector
         anchors.fill: parent
-
-        onVisibleChanged: {
-            if (currentlyAssignedKey != null)
-                currentlyAssignedKey.popoverHasFocus = visible;
-        }
     }
 
     function closeExtendedKeys()

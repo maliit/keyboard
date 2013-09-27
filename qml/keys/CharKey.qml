@@ -61,7 +61,7 @@ Item {
      * this property specifies if the key can submit its value or not (e.g. when the popover is shown, it does not commit its value)
      */
 
-    property bool popoverHasFocus: false
+    property bool popoverHasFocus: extendedKeysSelector.visible
 
     /*
      * label changes when keyboard is in shifted mode
@@ -142,8 +142,6 @@ Item {
                 extendedKeysSelector.visible = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
-
-                popoverHasFocus = true
             }
         }
 
