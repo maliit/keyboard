@@ -36,9 +36,9 @@ var symbolShiftKeyFontSize = 2; // gu
 var smallFontSize = 1.5; // gu, for keys that show more than one char, e.g. '.com'
 
 /* extended keys */
-var popoverCellPadding = 2; // gu
+var popoverCellPadding = 2.2; // gu
 var popoverTopMargin   = 10; // dp
-var popoverEdgeMargin = 2; // gu
+var popoverEdgeMargin = 2.2; // gu
 
 var imageCharKey        = "../images/keybg@18.png"
 var imageCharKeyPressed = "../images/keybg_action_active@18.png"

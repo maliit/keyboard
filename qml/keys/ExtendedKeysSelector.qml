@@ -85,10 +85,7 @@ Item {
     }
 
     MouseArea {
-        anchors.centerIn: panel
-        width: panel.width
-        height: panel.height
-
+        anchors.fill: parent
         onClicked: closePopover();
     }
 
@@ -125,7 +122,11 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     preventStealing: true
+
+                    onPressed: key.highlight = true;
+
                     onReleased: {
+                        key.highlight = false;
                         event_handler.onKeyReleased(modelData);
                         popover.closePopover();
                     }
