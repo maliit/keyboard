@@ -22,12 +22,14 @@ import os
 from testtools.matchers import Equals
 from tempfile import mktemp
 from textwrap import dedent
+from time import sleep
 
 from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
 
-from ubuntu_keyboard.emulators.keyboard import Keyboard, KeyboardState
+from ubuntu_keyboard.emulators.keyboard import Keyboard
+from ubuntu_keyboard.emulators.keypad import KeyPad
 
 
 class UbuntuKeyboardTests(AutopilotTestCase):
@@ -141,10 +143,12 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
             )
         ),
         (
+            # Currently the en_us layout doesn't have ", but has \u201c and
+            # \u201d
             'punctuation',
             dict(
                 label="Puncuation",
-                input='`~!@#$%^&*()_-+={}[]|\\:;"\'<>,.?/'
+                input=u'`~!@#$%^&*()_-+={}[]|\\:;\'<>,.?/\u201c'
             )
         )
     ]
@@ -169,14 +173,18 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         shifted/capitalised.
 
         """
+        self.skip(
+            "Skipping as feature hasn't landed yet, refer to bug lp:1214695"
+        )
+
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         self.assertThat(
-            keyboard.keyboard.layoutState,
-            Eventually(Equals(KeyboardState.SHIFTED))
+            keyboard.active_keypad.state,
+            Eventually(Equals(KeyPad.State.SHIFTED))
         )
 
     def test_shift_latch(self):
@@ -194,13 +202,15 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type('abc')
-        keyboard.press_key('SHIFT')
-        keyboard.press_key('SHIFT')
+        # Bug lp:1229003 and lp:1229001
+        sleep(.2)
+        keyboard.press_key('shift')
+        keyboard.press_key('shift')
         keyboard.type('S')
 
         self.assertThat(
-            keyboard.keyboard.layoutState,
-            Eventually(Equals(KeyboardState.SHIFTED))
+            keyboard.active_keypad.state,
+            Eventually(Equals(KeyPad.State.CAPSLOCK))
         )
         self.assertThat(text_area.text, Eventually(Equals('abcS')))
 
@@ -224,8 +234,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         # Once the capital letter has been typed, we must be able to access the
         # lowercase letters, otherwise it's not in the correct state.
         self.assertThat(
-            keyboard.keyboard.layoutState,
-            Eventually(Equals(KeyboardState.DEFAULT))
+            keyboard.active_keypad.state,
+            Eventually(Equals(KeyPad.State.NORMAL))
         )
 
         self.assertThat(text_area.text, Eventually(Equals('abcA')))
@@ -237,6 +247,9 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         enter the shifted state.
 
         """
+        self.skip(
+            "Skipping as feature hasn't landed yet, refer to bug lp:1214695"
+        )
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
@@ -250,8 +263,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         )
 
         self.assertThat(
-            keyboard.keyboard.layoutState,
-            Eventually(Equals(KeyboardState.SHIFTED))
+            keyboard.active_keypad.state,
+            Eventually(Equals(KeyPad.State.SHIFTED))
         )
 
     def test_switching_between_states(self):
@@ -292,14 +305,6 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             )
         ),
         (
-            "Password",
-            dict(
-                label="Password",
-                hints=['Qt.ImhHiddenText', 'Qt.ImhSensitiveData'],
-                expected_activeview="password"
-            )
-        ),
-        (
             "Email",
             dict(
                 label="Email",
@@ -320,7 +325,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             dict(
                 label="Telephone",
                 hints=['Qt.ImhDigitsOnly'],
-                expected_activeview="phonenumber"
+                expected_activeview="number"
             )
         ),
     ]
@@ -337,6 +342,6 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         self.assertThat(
-            keyboard.keyboard.activeView,
+            keyboard.keyboard.layoutId,
             Eventually(Equals(self.expected_activeview))
         )
