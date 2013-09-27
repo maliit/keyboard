@@ -33,10 +33,10 @@ var magnifierVerticalPadding = 1; // gu, stretch the magnifier a little bit in y
 /* special keys */
 var actionKeyPadding = 2;  // gu, action keys are a bit bigger
 var symbolShiftKeyFontSize = 2; // gu
-var urlKeyFontSize = 1.5; // gu
+var smallFontSize = 1.5; // gu, for keys that show more than one char, e.g. '.com'
 
 /* extended keys */
-var popoverCellPadding = 1.6; // gu
+var popoverCellPadding = 2; // gu
 var popoverTopMargin   = 10; // dp
 var popoverEdgeMargin = 2; // gu
 

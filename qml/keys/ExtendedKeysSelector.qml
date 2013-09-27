@@ -116,7 +116,7 @@ Item {
                     anchors.centerIn: parent;
                     text: modelData
                     font.family: UI.fontFamily
-                    font.pixelSize: units.gu( UI.fontSize )
+                    font.pixelSize: text.length > 2 ? units.gu( UI.smallFontSize ) : units.gu( UI.fontSize )
                     font.bold: UI.fontBold
                     color: key.highlight ? "red" : UI.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));

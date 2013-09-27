@@ -99,6 +99,7 @@ Item {
         anchors.centerIn: parent
         anchors.fill: key
         anchors.margins: units.dp( UI.keyMargins );
+        source: key.state == "PRESSED" ? key.imgPressed : key.imgNormal
     }
 
     /// label of the key
@@ -186,20 +187,12 @@ Item {
         State {
             name: "NORMAL"
             PropertyChanges {
-                target: buttonImage
-                source: imgNormal
-            }
-            PropertyChanges {
                 target: popper
                 popTarget: null
             }
         },
         State {
             name: "PRESSED"
-            PropertyChanges {
-                target: buttonImage
-                source: imgPressed
-            }
             PropertyChanges {
                 target: popper
                 popTarget: keyLabel
