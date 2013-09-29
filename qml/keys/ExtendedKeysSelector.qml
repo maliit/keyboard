@@ -31,6 +31,14 @@ Item {
     property variant extendedKeysModel
     property Item currentlyAssignedKey
 
+    property int currentlyAssignedKeyParentY: currentlyAssignedKey.parent.y
+    property int currentlyAssignedKeyX: currentlyAssignedKey.x
+    property int currentlyAssignedKeyY: currentlyAssignedKey.y
+
+    onCurrentlyAssignedKeyXChanged: __repositionPopoverTo(currentlyAssignedKey)
+    onCurrentlyAssignedKeyYChanged: __repositionPopoverTo(currentlyAssignedKey)
+    onCurrentlyAssignedKeyParentYChanged: __repositionPopoverTo(currentlyAssignedKey);
+
     property int __width: 0
     property string __commitStr: ""
 
@@ -143,9 +151,9 @@ Item {
 
     function __repositionPopoverTo(item)
     {
+        // item.parent is a row
         var point = keypad.mapFromItem(item.parent, item.x, item.y)
-
-        anchorItem.x = point.x;
+        anchorItem.x = item.x;
         anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
 
         /// FIXME need to avoid being drawn outside of the keyboard, and clicking
