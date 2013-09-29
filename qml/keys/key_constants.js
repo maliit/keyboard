@@ -39,6 +39,7 @@ var smallFontSize = 1.5; // gu, for keys that show more than one char, e.g. '.co
 var popoverCellPadding = 2.2; // gu
 var popoverTopMargin   = 10; // dp
 var popoverEdgeMargin = 2.2; // gu
+var popoverSquat      = 3; // gu, when no wordribbon, avoid click-through above input trap
 
 var imageCharKey        = "../images/keybg@18.png"
 var imageCharKeyPressed = "../images/keybg_action_active@18.png"
