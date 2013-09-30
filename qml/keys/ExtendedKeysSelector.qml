@@ -26,7 +26,7 @@ import "key_constants.js" as UI
 
 Item {
     id: popover
-    visible: false
+    enabled: false
 
     property variant extendedKeysModel
     property Item currentlyAssignedKey
@@ -171,11 +171,8 @@ Item {
 
     function closePopover()
     {
-        for (var i = 0; i < keyRepeater.count; i++)
-            keyRepeater.itemAt( i ).highlight = false;
-
         extendedKeysModel = null;
-        popover.visible = false
+        popover.enabled = false
     }
 }
 

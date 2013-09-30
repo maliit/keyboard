@@ -140,7 +140,7 @@ Item {
 
         onPressAndHold: {
             if (activeExtendedModel != undefined) {
-                extendedKeysSelector.visible = true
+                extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
             }
@@ -162,18 +162,6 @@ Item {
 
         onExited: event_handler.onExited(label);
         onEntered: event_handler.onEntered(label);
-    }
-
-    function disableMouseArea()
-    {
-        keyMouseArea.enabled = false;
-        keyMouseArea.visible = false;
-    }
-
-    function enableMouseArea()
-    {
-        keyMouseArea.enabled = true;
-        keyMouseArea.visible = true;
     }
 
     Popper {
