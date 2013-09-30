@@ -5,7 +5,11 @@ include(../view/view.pri)
 TOP_BUILDDIR = $${OUT_PWD}/../../
 TARGET = $${UBUNTU_KEYBOARD_PLUGIN_TARGET}
 TEMPLATE = lib
-LIBS += $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_VIEW_LIB} $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB} -lubuntu_application_api
+LIBS += \
+    $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_VIEW_LIB} \
+    $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB} \
+    -lubuntu_application_api \
+    -lgsettings-qt
 PRE_TARGETDEPS += $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_VIEW_LIB} $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB}
 INCLUDEPATH += ../lib ../
 DEFINES += MALIIT_DEFAULT_PROFILE=\\\"$$MALIIT_DEFAULT_PROFILE\\\"
@@ -22,7 +26,9 @@ CONFIG += \
 HEADERS += \
     plugin.h \
     inputmethod.h \
+    inputmethod_p.h \
     editor.h \
+    keyboadsettings.h \
     updatenotifier.h \
     ubuntuapplicationapiwrapper.h
 
@@ -30,6 +36,7 @@ SOURCES += \
     plugin.cpp \
     inputmethod.cpp \
     editor.cpp \
+    keyboadsettings.cpp \
     updatenotifier.cpp \
     ubuntuapplicationapiwrapper.cpp
 
