@@ -3,13 +3,13 @@ SUBDIRS = \
     common \
     dynamic-layout \
     editor \
+    keyboardsettings \
+    language-layout-loading \
     language-layout-switching \
 #    preedit-string \
-    repeat-backspace \
-    word-candidates \
-    language-layout-loading \
     qml-api-tests \
     qml-test-app \
+    repeat-backspace \
     unittests \
     word-candidates \
     wordengine \
