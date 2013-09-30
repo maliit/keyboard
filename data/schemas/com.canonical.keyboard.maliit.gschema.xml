@@ -26,5 +26,15 @@
       <description>Vibrate or emit sound on key press.</description>
       <default>true</default>
     </key>
+    <key name="spell-checking" type="b">
+      <summary>Spell checking</summary>
+      <description>Check spelling of entered text.</description>
+      <default>true</default>
+    </key>
+    <key name="spell-checking-languages" type="as">
+      <summary>Spell checking languages</summary>
+      <description>User-defined list of activatable spell-checking languages.</description>
+      <default>[]</default>
+    </key>
   </schema>
 </schemalist>
