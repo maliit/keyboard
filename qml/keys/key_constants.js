@@ -38,10 +38,10 @@ var urlKeyFontSize = 1.5; // gu
 /* extended keys */
 var popoverCellSize = 4; // gu
 
-var imageCharKey        = "../images/keybg@18.png"
+var imageCharKey        = "../images/key_bg@27.png"
 var imageCharKeyPressed = "../images/keybg_action_active@18.png"
 
-var imageActionKey        = "../images/keybg_action@18.png"
+var imageActionKey        = "../images/action_key_bg@27.png"
 var imageActionKeyPressed = "../images/keybg_action_active@18.png"
 
 var top_margin = 1.35;  // gu

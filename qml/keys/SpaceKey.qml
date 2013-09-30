@@ -16,9 +16,14 @@
 
 import QtQuick 2.0
 
+import "key_constants.js" as UI
+
 ActionKey {
     label: " ";
     shifted: " ";
+
+    imgNormal: UI.imageCharKey
+    imgPressed: UI.imageCharKeyPressed
 
     action: "space"
 }
