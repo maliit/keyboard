@@ -52,7 +52,7 @@ install_ssh_key() {
 install_dependencies() {
     exec_with_adb apt-get -y install openssh-server
     adb shell start ssh
-    slep 1
+    sleep 2
     exec_with_ssh $SUDO apt-get -y install build-essential rsync bzr ccache gdb libglib2.0-bin
     exec_with_ssh $SUDO apt-get -y install emacs23-nox mc unzip
     exec_with_ssh $SUDO add-apt-repository -y ppa:canonical-qt5-edgers/qt5-proper
