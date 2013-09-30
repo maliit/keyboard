@@ -12,7 +12,7 @@ QMAKE_LFLAGS_RPATH=$${TOP_BUILDDIR}/src/plugin
 INCLUDEPATH += ../ ../../src/lib ../../src
 
 #LIBS += $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_PLUGIN_LIB}
-LIBS += -L$${TOP_BUILDDIR}/src/plugin -lubuntu-keyboard-plugin
+LIBS += -L$${TOP_BUILDDIR}/src/plugin -lubuntu-keyboard-plugin -lgsettings-qt
 
 ##LIBS += $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB} $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_VIEW_LIB} -l$${UBUNTU_KEYBOARD_PLUGIN_TARGET}
 #-Lubuntu-keyboard-plugin
