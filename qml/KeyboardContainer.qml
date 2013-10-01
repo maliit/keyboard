@@ -25,36 +25,40 @@ Item {
     property int keyWidth: 0
     property int keyHeight: 0
 
-    property variant activeKeypad: characterKeypadLoader.item
+    property Item activeKeypad: characterKeypadLoader.item
     property string activeKeypadState: characterKeypadLoader.item ? item.state : ""
-    property string symbolKeypadSource
+    property string characterKeypadSource: ""
+    property string symbolKeypadSource: ""
+
 
     state: "CHARACTERS"
 
     function loadLayout(layoutId)
     {
         if (layoutId === "number")
-            characterKeypadLoader.setSource("languages/Keyboard_numbers.qml");
+            characterKeypadSource = "languages/Keyboard_numbers.qml";
         if (layoutId === "phonenumber")
-            characterKeypadLoader.setSource("languages/Keyboard_telephone.qml");
+            characterKeypadSource = "languages/Keyboard_telephone.qml";
         if (layoutId === "email")
-            characterKeypadLoader.setSource("languages/Keyboard_en_email.qml");
+            characterKeypadSource = "languages/Keyboard_en_email.qml";
         if (layoutId === "url")
-            characterKeypadLoader.setSource("languages/Keyboard_en_url_search.qml");
+            characterKeypadSource = "languages/Keyboard_en_url_search.qml";
         if (layoutId === "en_us")
-            characterKeypadLoader.setSource("languages/Keyboard_en_us.qml");
+            characterKeypadSource = "languages/Keyboard_en_us.qml";
         if (layoutId === "zh_cn_pinyin")
-            characterKeypadLoader.setSource("languages/Keyboard_zh_cn_pinyin.qml");
+            characterKeypadSource = "languages/Keyboard_zh_cn_pinyin.qml";
     }
 
     Loader {
         id: characterKeypadLoader
         objectName: "characterKeyPadLoader"
         anchors.fill: parent
-        asynchronous: true
-        source: "languages/Keyboard_en_us.qml"
+        asynchronous: false
+        enabled: panel.state === "CHARACTERS" ? true : false
+        opacity: panel.state === "CHARACTERS" ? 1 : 0
+        source: characterKeypadSource
         onLoaded: {
-            symbolKeypadLoader.setSource(characterKeypadLoader.item.symbols)
+            symbolKeypadSource = activeKeypad.symbols
             panel.state = "CHARACTERS"
         }
     }
@@ -63,7 +67,10 @@ Item {
         id: symbolKeypadLoader
         objectName: "symbolKeyPadLoader"
         anchors.fill: parent
-        asynchronous: true
+        enabled: panel.state === "SYMBOLS" ? true : false
+        opacity: panel.state == "SYMBOLS" ? 1 : 0
+        source: symbolKeypadSource
+        asynchronous: false
     }
 
     ExtendedKeysSelector {
@@ -83,32 +90,12 @@ Item {
                 target: panel
                 activeKeypad: characterKeypadLoader.item
             }
-            PropertyChanges {
-                target: characterKeypadLoader
-                enabled: true
-                opacity: 1
-            }
-            PropertyChanges {
-                target: symbolKeypadLoader
-                enabled: false
-                opacity: 0
-            }
         },
         State {
             name: "SYMBOLS"
             PropertyChanges {
                 target: panel
                 activeKeypad: symbolKeypadLoader.item
-            }
-            PropertyChanges {
-                target: characterKeypadLoader
-                enabled: false
-                opacity: 0
-            }
-            PropertyChanges {
-                target: symbolKeypadLoader
-                enabled: true
-                opacity: 1
             }
         }
     ]
