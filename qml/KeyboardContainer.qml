@@ -30,6 +30,8 @@ Item {
 
     state: "CHARACTERS"
 
+    Component.onCompleted: loadLayout("en_us");
+
     function loadLayout(layoutId)
     {
         if (layoutId === "number")
