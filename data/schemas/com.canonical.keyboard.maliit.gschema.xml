@@ -19,7 +19,7 @@
     <key name="predictive-text" type="b">
       <summary>Predictive text</summary>
       <description>Suggest potential words in word ribbon.</description>
-      <default>true</default>
+      <default>false</default>
     </key>
     <key name="key-press-feedback" type="b">
       <summary>Key press feedback</summary>
