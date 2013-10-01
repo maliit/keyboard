@@ -19,12 +19,22 @@
     <key name="predictive-text" type="b">
       <summary>Predictive text</summary>
       <description>Suggest potential words in word ribbon.</description>
-      <default>true</default>
+      <default>false</default>
     </key>
     <key name="key-press-feedback" type="b">
       <summary>Key press feedback</summary>
       <description>Vibrate or emit sound on key press.</description>
       <default>true</default>
+    </key>
+    <key name="spell-checking" type="b">
+      <summary>Spell checking</summary>
+      <description>Check spelling of entered text.</description>
+      <default>true</default>
+    </key>
+    <key name="spell-checking-languages" type="as">
+      <summary>Spell checking languages</summary>
+      <description>User-defined list of activatable spell-checking languages.</description>
+      <default>[]</default>
     </key>
   </schema>
 </schemalist>

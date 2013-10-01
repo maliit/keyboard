@@ -1,3 +1,34 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131001-0ubuntu1) saucy; urgency=low
+
+  [ William Hua ]
+  * Re-add the schema that was removed in r45, and append spell-checking
+    settings.
+
+  [ Robert Bruce Park ]
+  * Disable predictive text.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 54
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 01 Oct 2013 00:20:04 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130930.2-0ubuntu1) saucy; urgency=low
+
+  [ Thomas Moenicke ]
+  * design update. (LP: #1227248)
+  * improves orientation changing behavior when osk is hidden, fixes
+    #1213127. (LP: #1213127)
+
+  [ Guenter Schwann ]
+  * Use GSettings for the settings instead of the maliit ones.
+  * Use smaller font for 1/2 and 2/2 key fixes LP: #1227225. (LP:
+    #1227225)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 51
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 30 Sep 2013 18:38:51 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130926-0ubuntu1) saucy; urgency=low
   
   [ Ubuntu daily release ]
