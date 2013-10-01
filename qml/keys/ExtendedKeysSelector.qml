@@ -60,7 +60,7 @@ Item {
         height: panel.keyHeight
     }
 
-    Rectangle {
+    BorderImage {
         id: popoverBackground
 
         anchors.centerIn: anchorItem
@@ -72,10 +72,8 @@ Item {
         }
 
         height: rowOfKeys.height
-        radius: 15
-        color: "white"
-        border.width: 1
-        border.color: "lightGray"
+
+        source: "../images/popover@27.png"
 
         onXChanged: {
 
