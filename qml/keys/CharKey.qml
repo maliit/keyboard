@@ -61,7 +61,7 @@ Item {
      * this property specifies if the key can submit its value or not (e.g. when the popover is shown, it does not commit its value)
      */
 
-    property bool popoverHasFocus: extendedKeysSelector.visible
+    property bool popoverHasFocus: extendedKeysSelector.enabled
 
     /*
      * label changes when keyboard is in shifted mode
