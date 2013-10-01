@@ -164,7 +164,6 @@ Item {
     function __restoreAssignedKey()
     {
         currentlyAssignedKey.state = "NORMAL"
-        currentlyAssignedKey.enableMouseArea();
     }
 
     function closePopover()

@@ -61,7 +61,7 @@ Item {
      * this property specifies if the key can submit its value or not (e.g. when the popover is shown, it does not commit its value)
      */
 
-    property bool popoverHasFocus: extendedKeysSelector.enabled
+    property bool extendedKeysShown: extendedKeysSelector.enabled
 
     /*
      * label changes when keyboard is in shifted mode
@@ -139,6 +139,7 @@ Item {
 
         onPressAndHold: {
             if (activeExtendedModel != undefined) {
+                popper.popTarget = null
                 extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
@@ -147,7 +148,7 @@ Item {
 
         onReleased: {
             key.state = "NORMAL"
-            if (!popoverHasFocus) {
+            if (!extendedKeysShown) {
                 event_handler.onKeyReleased(valueToSubmit, action);
                 if (!skipAutoCaps)
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
@@ -165,7 +166,7 @@ Item {
 
     Popper {
         id: popper
-        visible: !noMagnifier && !popoverHasFocus
+        enabled: !noMagnifier && !extendedKeysShown
         width: key.width + units.gu(UI.magnifierHorizontalPadding)
         height: key.height + units.gu(UI.magnifierVerticalPadding)
     }
