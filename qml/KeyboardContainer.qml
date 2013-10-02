@@ -28,7 +28,7 @@ Item {
     property Item activeKeypad: characterKeypadLoader.item
     property string activeKeypadState: characterKeypadLoader.item ? item.state : ""
     property string characterKeypadSource: ""
-    property string symbolKeypadSource: ""
+    property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
 
 
     state: "CHARACTERS"
@@ -49,30 +49,19 @@ Item {
             characterKeypadSource = "languages/Keyboard_zh_cn_pinyin.qml";
     }
 
+    onCharacterKeypadSourceChanged: {
+        panel.state = "CHARACTERS"
+    }
+
+    Component.onCompleted: symbolKeypadSource = activeKeypad.symbols;
+
     Loader {
         id: characterKeypadLoader
         objectName: "characterKeyPadLoader"
         anchors.fill: parent
         asynchronous: false
-        enabled: panel.state === "CHARACTERS" ? true : false
-        opacity: panel.state === "CHARACTERS" ? 1 : 0
-        source: characterKeypadSource
-        onLoaded: {
-            symbolKeypadSource = activeKeypad.symbols
-            panel.state = "CHARACTERS"
-        }
+        source: panel.state === "CHARACTERS" ? characterKeypadSource : symbolKeypadSource
     }
-
-    Loader {
-        id: symbolKeypadLoader
-        objectName: "symbolKeyPadLoader"
-        anchors.fill: parent
-        enabled: panel.state === "SYMBOLS" ? true : false
-        opacity: panel.state == "SYMBOLS" ? 1 : 0
-        source: symbolKeypadSource
-        asynchronous: false
-    }
-
     ExtendedKeysSelector {
         id: extendedKeysSelector
         anchors.fill: parent
