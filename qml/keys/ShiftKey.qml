@@ -37,6 +37,10 @@ ActionKey {
                 panel.activeKeypadState = "NORMAL"
         }
 
+        onPressAndHold: {
+            panel.activeKeypad.state = "CAPSLOCK"
+        }
+
         onDoubleClicked: {
             if (panel.activeKeypadState == "SHIFTED")
                 panel.activeKeypadState = "CAPSLOCK"

@@ -67,19 +67,11 @@ Item {
      * label changes when keyboard is in shifted mode
      * extended keys change as well when shifting keyboard, typically lower-uppercase: ê vs Ê
      */
+
     property string oskState: panel.activeKeypadState
     property var activeExtendedModel: extended
 
-    onOskStateChanged: {
-        if (panel.activeKeypadState == "NORMAL") {
-            keyLabel.text = label;
-            activeExtendedModel = extended;
-        } else if (panel.activeKeypadState == "SHIFTED") {
-            keyLabel.text = shifted;
-            activeExtendedModel = extendedShifted
-        }
-        // CAPSLOCK keeps everything as in SHIFTED, nothing to do
-    }
+    property var activeExtendedModel: (panel.activeKeypad.state === "NORMAL") ? extended : extendedShifted
 
     Component.onCompleted: {
         if (annotation) {
@@ -106,7 +98,7 @@ Item {
 
     Text {
         id: keyLabel
-        text: ""
+        text: (panel.activeKeypad.state === "NORMAL") ? label : shifted;
         anchors.centerIn: parent
         font.family: UI.fontFamily
         font.pixelSize: fontSize
