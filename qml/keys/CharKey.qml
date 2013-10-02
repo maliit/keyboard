@@ -118,12 +118,9 @@ Item {
         color: UI.annotationFontColor
     }
 
-    MouseArea {
+    PressArea {
         id: keyMouseArea
         anchors.fill: key
-
-        hoverEnabled: true
-        preventStealing: true
 
         onPressAndHold: {
             if (activeExtendedModel != undefined)
@@ -144,9 +141,6 @@ Item {
             key.state = "PRESSED"
             event_handler.onKeyPressed(valueToSubmit);
         }
-
-        onExited: event_handler.onExited(label);
-        onEntered: event_handler.onEntered(label);
     }
 
     Component {
