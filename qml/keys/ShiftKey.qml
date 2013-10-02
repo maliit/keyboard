@@ -38,7 +38,7 @@ ActionKey {
         }
 
         onPressAndHold: {
-            panel.activeKeypad.state = "CAPSLOCK"
+            panel.activeKeypadState = "CAPSLOCK"
         }
 
         onDoubleClicked: {

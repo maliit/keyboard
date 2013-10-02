@@ -69,9 +69,7 @@ Item {
      */
 
     property string oskState: panel.activeKeypadState
-    property var activeExtendedModel: extended
-
-    property var activeExtendedModel: (panel.activeKeypad.state === "NORMAL") ? extended : extendedShifted
+    property var activeExtendedModel: (panel.activeKeypadState === "NORMAL") ? extended : extendedShifted
 
     Component.onCompleted: {
         if (annotation) {
@@ -98,7 +96,7 @@ Item {
 
     Text {
         id: keyLabel
-        text: (panel.activeKeypad.state === "NORMAL") ? label : shifted;
+        text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
         anchors.centerIn: parent
         font.family: UI.fontFamily
         font.pixelSize: fontSize
