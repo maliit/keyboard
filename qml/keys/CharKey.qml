@@ -61,14 +61,15 @@ Item {
      * this property specifies if the key can submit its value or not (e.g. when the popover is shown, it does not commit its value)
      */
 
-    property bool popoverHasFocus: false
+    property bool extendedKeysShown: extendedKeysSelector.enabled
 
     /*
      * label changes when keyboard is in shifted mode
      * extended keys change as well when shifting keyboard, typically lower-uppercase: ê vs Ê
      */
-    property string oskState: panel.activeKeypad.state
-    property var activeExtendedModel: (panel.activeKeypad.state === "NORMAL") ? extended : extendedShifted
+
+    property string oskState: panel.activeKeypadState
+    property var activeExtendedModel: (panel.activeKeypadState === "NORMAL") ? extended : extendedShifted
 
     Component.onCompleted: {
         if (annotation) {
@@ -87,6 +88,7 @@ Item {
         anchors.centerIn: parent
         anchors.fill: key
         anchors.margins: units.dp( UI.keyMargins );
+        source: key.state == "PRESSED" ? key.imgPressed : key.imgNormal
     }
 
     /// label of the key
@@ -94,7 +96,7 @@ Item {
 
     Text {
         id: keyLabel
-        text: (panel.activeKeypad.state === "NORMAL") ? label : shifted;
+        text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
         anchors.centerIn: parent
         font.family: UI.fontFamily
         font.pixelSize: fontSize
@@ -107,7 +109,7 @@ Item {
 
     Text {
         id: annotationLabel
-        text: (panel.activeKeypad.state != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
+        text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
 
         anchors.right: parent.right
         anchors.top: parent.top
@@ -123,18 +125,21 @@ Item {
         anchors.fill: key
 
         onPressAndHold: {
-            if (activeExtendedModel != undefined)
-                PopupUtils.open(popoverComponent, keyMouseArea)
+            if (activeExtendedModel != undefined) {
+                popper.popTarget = null
+                extendedKeysSelector.enabled = true
+                extendedKeysSelector.extendedKeysModel = activeExtendedModel
+                extendedKeysSelector.currentlyAssignedKey = key
+            }
         }
 
         onReleased: {
             key.state = "NORMAL"
-
-            if (!popoverHasFocus) {
+            if (!extendedKeysShown) {
                 event_handler.onKeyReleased(valueToSubmit, action);
                 if (!skipAutoCaps)
-                    if (panel.activeKeypad.state === "SHIFTED" && panel.state === "CHARACTERS")
-                        panel.activeKeypad.state = "NORMAL"
+                    if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
+                        panel.activeKeypadState = "NORMAL"
             }
         }
         onPressed: {
@@ -143,18 +148,9 @@ Item {
         }
     }
 
-    Component {
-        id: popoverComponent
-        ExtendedKeysSelector {
-            id: extendedKeysSelector
-            extendedKeysModel: activeExtendedModel
-            onVisibleChanged: popoverHasFocus = visible;
-        }
-    }
-
     Popper {
         id: popper
-        visible: !noMagnifier && !popoverHasFocus
+        enabled: !noMagnifier && !extendedKeysShown
         width: key.width + units.gu(UI.magnifierHorizontalPadding)
         height: key.height + units.gu(UI.magnifierVerticalPadding)
     }
@@ -163,20 +159,12 @@ Item {
         State {
             name: "NORMAL"
             PropertyChanges {
-                target: buttonImage
-                source: imgNormal
-            }
-            PropertyChanges {
                 target: popper
                 popTarget: null
             }
         },
         State {
             name: "PRESSED"
-            PropertyChanges {
-                target: buttonImage
-                source: imgPressed
-            }
             PropertyChanges {
                 target: popper
                 popTarget: keyLabel

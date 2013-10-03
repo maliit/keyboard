@@ -31,6 +31,7 @@ OTHER_FILES += \
     keys/ActionKey.qml \
     keys/CharKey.qml \
     keys/BackspaceKey.qml \
+    keys/DropShadow.qml \
     keys/ExtendedKeysSelector.qml \
     keys/KeyPad.qml \
     keys/OneTwoKey.qml \

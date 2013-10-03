@@ -17,6 +17,7 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
 import "languages/"
+import "keys/"
 
 Item {
     id: panel
@@ -25,8 +26,10 @@ Item {
     property int keyHeight: 0
 
     property Item activeKeypad: characterKeypadLoader.item
+    property string activeKeypadState: characterKeypadLoader.item ? item.state : ""
     property string characterKeypadSource: ""
     property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
+
 
     state: "CHARACTERS"
 
@@ -58,6 +61,15 @@ Item {
         anchors.fill: parent
         asynchronous: false
         source: panel.state === "CHARACTERS" ? characterKeypadSource : symbolKeypadSource
+    }
+    ExtendedKeysSelector {
+        id: extendedKeysSelector
+        anchors.fill: parent
+    }
+
+    function closeExtendedKeys()
+    {
+        extendedKeysSelector.closePopover();
     }
 
     states: [

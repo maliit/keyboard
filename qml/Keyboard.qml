@@ -31,12 +31,13 @@
 
 import QtQuick 2.0
 import "constants.js" as Const
-
+import "keys/"
 import "keys/key_constants.js" as UI
 import Ubuntu.Components 0.1
 import QtQuick.Window 2.0
 
 Item {
+    id: fullScreenItem
     objectName: "fullScreenItem"
 
     property variant layout: maliit_layout
@@ -78,7 +79,7 @@ Item {
     onAutoCapsActivatedChanged: {
         if (autoCapsActivated) {
             keypad.state = "CHARACTERS"
-            keypad.activeKeypad.state = "SHIFTED";
+            keypad.activeKeypadState = "SHIFTED";
         }
     }
 
@@ -197,7 +198,8 @@ Item {
             PropertyChanges { target: canvas; y: height; }
             onCompleted: {
                 keyboardSurface.y = 0;
-                keypad.activeKeypad.state = "NORMAL"
+                keypad.closeExtendedKeys();
+                keypad.activeKeypadState = "NORMAL"
                 keypad.state = "CHARACTERS"
             }
             when: canvas.shown === false

@@ -27,23 +27,23 @@ ActionKey {
         preventStealing: true
 
         onClicked: {
-            if (panel.activeKeypad.state == "NORMAL")
-                panel.activeKeypad.state = "SHIFTED";
+            if (panel.activeKeypadState == "NORMAL")
+                panel.activeKeypadState = "SHIFTED";
 
-            else if (panel.activeKeypad.state == "SHIFTED")
-                panel.activeKeypad.state = "NORMAL"
+            else if (panel.activeKeypadState == "SHIFTED")
+                panel.activeKeypadState = "NORMAL"
 
-            else if (panel.activeKeypad.state == "CAPSLOCK")
-                panel.activeKeypad.state = "NORMAL"
+            else if (panel.activeKeypadState == "CAPSLOCK")
+                panel.activeKeypadState = "NORMAL"
         }
 
         onPressAndHold: {
-            panel.activeKeypad.state = "CAPSLOCK"
+            panel.activeKeypadState = "CAPSLOCK"
         }
 
         onDoubleClicked: {
-            if (panel.activeKeypad.state == "SHIFTED")
-                panel.activeKeypad.state = "CAPSLOCK"
+            if (panel.activeKeypadState == "SHIFTED")
+                panel.activeKeypadState = "CAPSLOCK"
         }
     }
 }

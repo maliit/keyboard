@@ -23,5 +23,5 @@ CharKey {
     label: ".com";
     shifted: "/";
     extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"];
-    fontSize: units.gu(UI.urlKeyFontSize);
+    fontSize: units.gu(UI.smallFontSize);
 }

@@ -20,52 +20,156 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
 
+import QtQuick.Window 2.0
+
 import "key_constants.js" as UI
 
-Popover {
-
+Item {
     id: popover
+    enabled: false
 
     property variant extendedKeysModel
+    property Item currentlyAssignedKey
 
-    Rectangle {
-        anchors.fill: containerLayout
-        color: "white"
+    property int currentlyAssignedKeyParentY: currentlyAssignedKey.parent.y
+    property int currentlyAssignedKeyX: currentlyAssignedKey.x
+    property int currentlyAssignedKeyY: currentlyAssignedKey.y
+
+    onCurrentlyAssignedKeyXChanged: __repositionPopoverTo(currentlyAssignedKey)
+    onCurrentlyAssignedKeyYChanged: __repositionPopoverTo(currentlyAssignedKey)
+    onCurrentlyAssignedKeyParentYChanged: __repositionPopoverTo(currentlyAssignedKey);
+
+    property int __width: 0
+    property string __commitStr: ""
+
+    onCurrentlyAssignedKeyChanged:
+    {
+        if (currentlyAssignedKey == null)
+            return;
+
+        __repositionPopoverTo(currentlyAssignedKey);
+    }
+
+    ///
+    // Item gets repositioned above the currently active key on keyboard.
+    // extended keys area will center on top of this
+
+    Item {
+        id: anchorItem
+        width: panel.keyWidth
+        height: panel.keyHeight
+    }
+
+    BorderImage {
+        id: popoverBackground
+
+        anchors.centerIn: anchorItem
+        width: {
+            if (rowOfKeys.width < keypad.keyWidth)
+                return keypad.keyWidth;
+            else
+                return rowOfKeys.width;
+        }
+
+        height: rowOfKeys.height
+
+        source: "../images/popover@27.png"
+
+        onXChanged: {
+
+            if (x < UI.popoverEdgeMargin) {
+                anchorItem.x += Math.abs(x) + UI.popoverEdgeMargin;
+                return
+            }
+
+            var rightEdge = (x + width)
+            if ( rightEdge > (panel.width - UI.popoverEdgeMargin)) {
+                var diff = rightEdge - panel.width
+                anchorItem.x -= diff + UI.popoverEdgeMargin;
+            }
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: closePopover();
     }
 
     Row {
-        id: containerLayout
-        anchors {
-            left: parent.left
-            top: parent.top
-            right: parent.right
-        }
+        id: rowOfKeys
+        anchors.centerIn: anchorItem
+
+        Component.onCompleted: __width = 0
 
         Repeater {
+            id: keyRepeater
             model: extendedKeysModel
 
             Item {
-                width: units.gu( UI.popoverCellSize );
+                id: key
+                width: textCell.width + units.gu( UI.popoverCellPadding );
+
                 height: panel.keyHeight;
 
+                property alias commitStr: textCell.text
+                property bool highlight: false
+
                 Text {
+                    id: textCell
                     anchors.centerIn: parent;
                     text: modelData
                     font.family: UI.fontFamily
-                    font.pixelSize: fontSize
+                    font.pixelSize: text.length > 2 ? units.gu( UI.smallFontSize ) : units.gu( UI.fontSize )
                     font.bold: UI.fontBold
-                    color: UI.fontColor
+                    color: key.highlight ? "red" : UI.fontColor
+                    Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
                 MouseArea {
                     anchors.fill: parent
+                    preventStealing: true
+
+                    onPressed: key.highlight = true;
+
                     onReleased: {
+                        key.highlight = false;
                         event_handler.onKeyReleased(modelData);
-                        popover.hide();
+                        popover.closePopover();
                     }
                 }
+
             }
         }
+    }
+
+    function enableMouseArea()
+    {
+        extendedKeysMouseArea.enabled = true
+    }
+
+    function __repositionPopoverTo(item)
+    {
+        // item.parent is a row
+        var point = keypad.mapFromItem(item.parent, item.x, item.y)
+        anchorItem.x = item.x;
+        anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
+
+        /// FIXME need to avoid being drawn outside of the keyboard, and clicking
+        /// on the application below
+        // if (!wordRibbon.visible) // TODO possible to do this only when wordribbon is off
+        if (anchorItem.y < -units.gu(UI.top_margin))
+            anchorItem.y = - (units.gu(UI.top_margin) + units.gu(UI.popoverSquat) )
+    }
+
+    function __restoreAssignedKey()
+    {
+        currentlyAssignedKey.state = "NORMAL"
+    }
+
+    function closePopover()
+    {
+        extendedKeysModel = null;
+        popover.enabled = false
     }
 }
 
