@@ -82,108 +82,107 @@ Item {
             keypad.activeKeypadState = "SHIFTED";
         }
     }
-    property int pressedKeyIndex: -1;
-    property Item pressedKey;
 
+    Item {
+        id: keyboardSurface
 
-        MouseArea {
-            id: keyboardSurface
-            property int jumpBackThreshold: 170
+        x:0
+        y:0
+        width: parent.width
+        height: parent.height
 
-            drag.target: keyboardSurface
-            drag.axis: Drag.YAxis;
-            drag.minimumY: 0
-            drag.maximumY: height
-            drag.filterChildren: true
+        WordRibbon {
+            id: wordRibbon
+            objectName: "wordRibbon"
 
-            x:0
-            y:0
+            visible: canvas.wordribbon_visible
+
+            anchors.bottom: keyboardComp.top
+            width: parent.width;
+
+            height: visible ? layout.wordribbon_height : 0
+        }
+
+        Item {
+            id: keyboardComp
+
+            height: canvas.keypadHeight - wordRibbon.height
             width: parent.width
-            height: parent.height
+            anchors.bottom: parent.bottom
 
+            Rectangle {
+                id: background
 
-            WordRibbon {
-                id: wordRibbon
-                objectName: "wordRibbon"
+                anchors.fill: parent
 
-                visible: canvas.wordribbon_visible
-
-                anchors.bottom: keyboardComp.top
-                width: parent.width;
-
-                height: visible ? layout.wordribbon_height : 0
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: "#f1f1f1" }
+                    GradientStop { position: 1.0; color: "#e4e4e4" }
+                }
             }
 
-            Item {
-                id: keyboardComp
-
-                height: canvas.keypadHeight - wordRibbon.height
+            Image {
+                id: borderTop
+                source: "styles/ubuntu/images/border_top.png"
                 width: parent.width
-                anchors.bottom: parent.bottom
-
-                Rectangle {
-                    id: background
-
-                    anchors.fill: parent
-
-                    gradient: Gradient {
-                        GradientStop { position: 0.0; color: "#f1f1f1" }
-                        GradientStop { position: 1.0; color: "#e4e4e4" }
-                    }
-                }
-
-                MouseArea {
-                    id: noSwipeDown
-                    anchors.fill: parent
-                    preventStealing: true
-                    anchors.top: borderTop.bottom
-                    anchors.topMargin: units.gu( UI.top_margin )
-                }
-
-                Image {
-                    id: borderTop
-                    source: "styles/ubuntu/images/border_top.png"
-                    width: parent.width
-                    anchors.top: parent.top.bottom
-                }
-
-                Image {
-                    id: borderBottom
-                    source: "styles/ubuntu/images/border_bottom.png"
-                    width: parent.width
-                    anchors.bottom: background.bottom
-                }
-
-                KeyboardContainer {
-                    id: keypad
-
-                    anchors.top: borderTop.bottom
-                    anchors.bottom: borderBottom.top
-                    anchors.topMargin: units.gu( UI.top_margin )
-                    anchors.bottomMargin: units.gu( UI.bottom_margin )
-                    width: parent.width
-                }
-            } // keyboardComp
-
-            onReleased: {
-                if (y > jumpBackThreshold) {
-                    canvas.shown = false;
-                } else {
-                    bounceBackAnimation.from = y
-                    bounceBackAnimation.start();
-                }
+                anchors.top: parent.top.bottom
             }
 
-            PropertyAnimation {
-                id: bounceBackAnimation
-                target: keyboardSurface
-                properties: "y"
-                easing.type: Easing.OutBounce;
-                easing.overshoot: 2.0
-                to: 0
+            Image {
+                id: borderBottom
+                source: "styles/ubuntu/images/border_bottom.png"
+                width: parent.width
+                anchors.bottom: background.bottom
             }
 
-        } // big mousearea
+            KeyboardContainer {
+                id: keypad
+
+                anchors.top: borderTop.bottom
+                anchors.bottom: borderBottom.top
+                anchors.topMargin: units.gu( UI.top_margin )
+                anchors.bottomMargin: units.gu( UI.bottom_margin )
+                width: parent.width
+            }
+        } // keyboardComp
+    }
+
+    MouseArea {
+        id: swipeArea
+
+        property int jumpBackThreshold: units.gu(10)
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        height: keyboardComp.y + borderTop.height
+
+        drag.target: keyboardSurface
+        drag.axis: Drag.YAxis;
+        drag.minimumY: 0
+        drag.maximumY: parent.height
+        drag.filterChildren: true
+
+        propagateComposedEvents: true
+
+        onReleased: {
+            if (keyboardSurface.y > jumpBackThreshold) {
+                canvas.shown = false;
+            } else {
+                bounceBackAnimation.from = keyboardSurface.y
+                bounceBackAnimation.start();
+            }
+        }
+    }
+
+    PropertyAnimation {
+        id: bounceBackAnimation
+        target: keyboardSurface
+        properties: "y"
+        easing.type: Easing.OutBounce;
+        easing.overshoot: 2.0
+        to: 0
+    }
 
     state: "HIDDEN"
 

@@ -22,32 +22,32 @@ OTHER_FILES += \
     maliit-keyboard.qml \
     maliit-keyboard-extended.qml \
     maliit-magnifier.qml \
-    Keyboard.qml \
     maliit-ui-constants.qml \
-    WordRibbon.qml \
-    Popper.qml \
+    Keyboard.qml \
     KeyboardContainer.qml \
-    languages/Keyboard_symbols.qml \
-    languages/Keyboard_en_us.qml \
+    Popper.qml \
+    WordRibbon.qml \
     keys/key_constants.js \
-    keys/KeyPad.qml \
-    keys/CharKey.qml \
     keys/ActionKey.qml \
+    keys/CharKey.qml \
     keys/BackspaceKey.qml \
-    keys/ShiftKey.qml \
-    keys/SymbolShiftKey.qml \
-    keys/ReturnKey.qml \
-    keys/Popper.qml \
-    keys/OneTwoKey.qml \
-    languages/Keyboard_en_url.qml \
-    languages/Keyboard_en_url_search.qml \
-    languages/Keyboard_en_email.qml \
-    languages/Keyboard_numbers.qml \
-    languages/Keyboard_telephone.qml \
+    keys/DropShadow.qml \
     keys/ExtendedKeysSelector.qml \
+    keys/KeyPad.qml \
+    keys/OneTwoKey.qml \
+    keys/Popper.qml \
+    keys/PressArea.qml \
+    keys/ReturnKey.qml \
+    keys/ShiftKey.qml \
     keys/SpaceKey.qml \
     keys/Spacer.qml \
+    keys/SymbolShiftKey.qml \
     keys/UrlKey.qml \
+    languages/Keyboard_en_email.qml \
+    languages/Keyboard_en_url.qml \
+    languages/Keyboard_en_url_search.qml \
+    languages/Keyboard_en_us.qml \
+    languages/Keyboard_numbers.qml \
+    languages/Keyboard_symbols.qml \
+    languages/Keyboard_telephone.qml \
     languages/Keyboard_zh_cn_pinyin.qml \
-    keys/DropShadow.qml
-
