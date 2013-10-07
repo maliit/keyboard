@@ -64,6 +64,7 @@ void Editor::sendPreeditString(const QString &preedit,
     if (not m_host) {
         qWarning() << __PRETTY_FUNCTION__
                    << "Host not set, ignoring.";
+        return;
     }
 
     QList<Maliit::PreeditTextFormat> format_list;
@@ -83,6 +84,7 @@ void Editor::sendCommitString(const QString &commit)
     if (not m_host) {
         qWarning() << __PRETTY_FUNCTION__
                    << "Host not set, ignoring.";
+        return;
     }
 
     m_host->sendCommitString(commit);
@@ -93,6 +95,7 @@ void Editor::sendKeyEvent(const QKeyEvent &ev)
     if (not m_host) {
         qWarning() << __PRETTY_FUNCTION__
                      << "Host not set, ignoring.";
+        return;
     }
 
     m_host->sendKeyEvent(ev);
@@ -103,6 +106,7 @@ void Editor::invokeAction(const QString &action, const QKeySequence &sequence)
     if (not m_host) {
         qWarning() << __PRETTY_FUNCTION__
                      << "Host not set, ignoring.";
+        return;
     }
 
     m_host->invokeAction(action, sequence);
