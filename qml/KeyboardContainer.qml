@@ -26,7 +26,7 @@ Item {
     property int keyHeight: 0
 
     property Item activeKeypad: characterKeypadLoader.item
-    property string activeKeypadState: activeKeypad ? activeKeypad.state : ""
+    property string activeKeypadState: "NORMAL"
     property string characterKeypadSource: ""
     property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
 
