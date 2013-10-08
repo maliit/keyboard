@@ -34,8 +34,8 @@ OTHER_FILES += \
     keys/DropShadow.qml \
     keys/ExtendedKeysSelector.qml \
     keys/KeyPad.qml \
+    keys/Magnifier.qml \
     keys/OneTwoKey.qml \
-    keys/Popper.qml \
     keys/PressArea.qml \
     keys/ReturnKey.qml \
     keys/ShiftKey.qml \
