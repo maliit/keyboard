@@ -77,7 +77,6 @@ KeyPad {
         Item {
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.horizontalCenter: parent.horizontalCenter;
 
             height: panel.keyHeight;
 
