@@ -409,6 +409,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     }
 
     const QString &text(key.label().text());
+    QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
 
     switch(key.action()) {
@@ -458,9 +459,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         }
     } break;
 
-    case Key::ActionReturn:
+    case Key::ActionReturn: {
         event_key = Qt::Key_Return;
-        break;
+        keyText = QString("\r");
+    } break;
 
     case Key::ActionClose:
         Q_EMIT keyboardClosed();
@@ -499,7 +501,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     if (event_key != Qt::Key_unknown) {
         commitPreedit();
-        QKeyEvent ev(QEvent::KeyPress, event_key, Qt::NoModifier);
+        QKeyEvent ev(QEvent::KeyPress, event_key, Qt::NoModifier, keyText);
         sendKeyEvent(ev);
     }
 }

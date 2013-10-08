@@ -1,3 +1,22 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131004-0ubuntu1) saucy; urgency=low
+
+  [ Thomas Moenicke ]
+  * KeyboardContainer more declarative to avoid timing issues, fixes
+    part of #1233207 . (LP: #1233207)
+  * shift state/key fixes . (LP: #1229114, #1231611)
+  * using only one loader for character and symbol layouts .
+  * fix popover.
+
+  [ Guenter Schwann ]
+  * Handle the case, that two keys are touched at the same time fixes
+    LP: #1230003. (LP: #1230003)
+  * fix popover.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 60
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 04 Oct 2013 02:44:45 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131001-0ubuntu1) saucy; urgency=low
 
   [ William Hua ]
