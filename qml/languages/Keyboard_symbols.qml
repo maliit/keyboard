@@ -37,7 +37,7 @@ KeyPad {
 
             CharKey { label: "1"; shifted: "€"; }
             CharKey { label: "2"; shifted: "£"; }
-            CharKey { label: "3"; shifted: "$"; extended: ["È","€"] }
+            CharKey { label: "3"; shifted: "$"; }
             CharKey { label: "4"; shifted: "¥"; }
             CharKey { label: "5"; shifted: "₹"; }
             CharKey { label: "6"; shifted: "%"; }
