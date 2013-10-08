@@ -83,70 +83,6 @@ Item {
         }
     }
 
-    Item {
-        id: keyboardSurface
-
-        x:0
-        y:0
-        width: parent.width
-        height: parent.height
-
-        WordRibbon {
-            id: wordRibbon
-            objectName: "wordRibbon"
-
-            visible: canvas.wordribbon_visible
-
-            anchors.bottom: keyboardComp.top
-            width: parent.width;
-
-            height: visible ? layout.wordribbon_height : 0
-        }
-
-        Item {
-            id: keyboardComp
-
-            height: canvas.keypadHeight - wordRibbon.height
-            width: parent.width
-            anchors.bottom: parent.bottom
-
-            Rectangle {
-                id: background
-
-                anchors.fill: parent
-
-                gradient: Gradient {
-                    GradientStop { position: 0.0; color: "#f1f1f1" }
-                    GradientStop { position: 1.0; color: "#e4e4e4" }
-                }
-            }
-
-            Image {
-                id: borderTop
-                source: "styles/ubuntu/images/border_top.png"
-                width: parent.width
-                anchors.top: parent.top.bottom
-            }
-
-            Image {
-                id: borderBottom
-                source: "styles/ubuntu/images/border_bottom.png"
-                width: parent.width
-                anchors.bottom: background.bottom
-            }
-
-            KeyboardContainer {
-                id: keypad
-
-                anchors.top: borderTop.bottom
-                anchors.bottom: borderBottom.top
-                anchors.topMargin: units.gu( UI.top_margin )
-                anchors.bottomMargin: units.gu( UI.bottom_margin )
-                width: parent.width
-            }
-        } // keyboardComp
-    }
-
     MouseArea {
         id: swipeArea
 
@@ -155,15 +91,13 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: keyboardComp.y + borderTop.height
+        height: (parent.height - canvas.keypadHeight) + wordRibbon.height + units.gu(UI.top_margin)
 
         drag.target: keyboardSurface
         drag.axis: Drag.YAxis;
         drag.minimumY: 0
         drag.maximumY: parent.height
         drag.filterChildren: true
-
-        propagateComposedEvents: true
 
         onReleased: {
             if (keyboardSurface.y > jumpBackThreshold) {
@@ -172,6 +106,70 @@ Item {
                 bounceBackAnimation.from = keyboardSurface.y
                 bounceBackAnimation.start();
             }
+        }
+
+        Item {
+            id: keyboardSurface
+
+            x:0
+            y:0
+            width: parent.width
+            height: canvas.height
+
+            WordRibbon {
+                id: wordRibbon
+                objectName: "wordRibbon"
+
+                visible: canvas.wordribbon_visible
+
+                anchors.bottom: keyboardComp.top
+                width: parent.width;
+
+                height: visible ? layout.wordribbon_height : 0
+            }
+
+            Item {
+                id: keyboardComp
+
+                height: canvas.keypadHeight - wordRibbon.height
+                width: parent.width
+                anchors.bottom: parent.bottom
+
+                Rectangle {
+                    id: background
+
+                    anchors.fill: parent
+
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: "#f1f1f1" }
+                        GradientStop { position: 1.0; color: "#e4e4e4" }
+                    }
+                }
+
+                Image {
+                    id: borderTop
+                    source: "styles/ubuntu/images/border_top.png"
+                    width: parent.width
+                    anchors.top: parent.top.bottom
+                }
+
+                Image {
+                    id: borderBottom
+                    source: "styles/ubuntu/images/border_bottom.png"
+                    width: parent.width
+                    anchors.bottom: background.bottom
+                }
+
+                KeyboardContainer {
+                    id: keypad
+
+                    anchors.top: borderTop.bottom
+                    anchors.bottom: borderBottom.top
+                    anchors.topMargin: units.gu( UI.top_margin )
+                    anchors.bottomMargin: units.gu( UI.bottom_margin )
+                    width: parent.width
+                }
+            } // keyboardComp
         }
     }
 

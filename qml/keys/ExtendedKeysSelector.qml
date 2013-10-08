@@ -31,9 +31,9 @@ Item {
     property variant extendedKeysModel
     property Item currentlyAssignedKey
 
-    property int currentlyAssignedKeyParentY: currentlyAssignedKey.parent.y
-    property int currentlyAssignedKeyX: currentlyAssignedKey.x
-    property int currentlyAssignedKeyY: currentlyAssignedKey.y
+    property int currentlyAssignedKeyParentY: currentlyAssignedKey ? currentlyAssignedKey.parent.y : 0
+    property int currentlyAssignedKeyX: currentlyAssignedKey ? currentlyAssignedKey.x : 0
+    property int currentlyAssignedKeyY: currentlyAssignedKey ? currentlyAssignedKey.y : 0
 
     onCurrentlyAssignedKeyXChanged: __repositionPopoverTo(currentlyAssignedKey)
     onCurrentlyAssignedKeyYChanged: __repositionPopoverTo(currentlyAssignedKey)
