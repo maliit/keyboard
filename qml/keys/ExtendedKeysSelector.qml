@@ -121,7 +121,7 @@ Item {
                     font.family: UI.fontFamily
                     font.pixelSize: text.length > 2 ? units.gu( UI.smallFontSize ) : units.gu( UI.fontSize )
                     font.bold: UI.fontBold
-                    color: key.highlight ? "red" : UI.fontColor
+                    color: key.highlight ? UI.extendedKeysHighlight : UI.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
