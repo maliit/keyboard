@@ -51,3 +51,4 @@ OTHER_FILES += \
     languages/Keyboard_symbols.qml \
     languages/Keyboard_telephone.qml \
     languages/Keyboard_zh_cn_pinyin.qml \
+    languages/Keyboard_es.qml
