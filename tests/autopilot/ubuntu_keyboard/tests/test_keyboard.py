@@ -18,6 +18,7 @@
 #
 
 import os
+import subprocess
 
 from testtools.matchers import Equals
 from tempfile import mktemp
@@ -31,8 +32,76 @@ from autopilot.matchers import Eventually
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPad
 
+import logging
+
+
+logger = logging.getLogger(__name__)
+
+
+def _stop_maliit_server():
+    try:
+        output = subprocess.check_output(['status', 'maliit-server'])
+        if output.split()[1].startswith('start'):
+            try:
+                logger.debug("Stopping maliit server")
+                subprocess.check_call(['stop', 'maliit-server'])
+            except subprocess.CalledProcessError as e:
+                e.args += ("Unable to stop mallit server",)
+                raise
+    except subprocess.CalledProcessError:
+        e.args += ("maliit-server appears to be an unknown service.", )
+        raise
+
+
+def _start_maliit_server():
+    try:
+        output = subprocess.check_output(['status', 'maliit-server'])
+        if output.split()[1].startswith('stop'):
+            try:
+                logger.debug("Starting maliit-server")
+                subprocess.check_call(['start', 'maliit-server'])
+            except subprocess.CalledProcessError as e:
+                e.args += ("Unable to start mallit server",)
+                raise
+    except subprocess.CalledProcessError as e:
+        e.args += ("maliit-server appears to be an unknown service.", )
+        raise
+
+
+def _restart_maliit_server():
+    _stop_maliit_server()
+    _start_maliit_server()
+
 
 class UbuntuKeyboardTests(AutopilotTestCase):
+    maliit_override_file = os.path.expanduser(
+        "~/.config/upstart/maliit-server.override"
+    )
+
+    @classmethod
+    def setUpClass(cls):
+        try:
+            logger.debug("Creating the override file.")
+            open(UbuntuKeyboardTests.maliit_override_file, 'w').write(
+                "exec maliit-server -testability"
+            )
+            _restart_maliit_server()
+        except IOError as e:
+            e.args += (
+                "Failed attempting to write override file to {file}".format(
+                    file=UbuntuKeyboardTests.maliit_override_file
+                ),
+            )
+            raise
+
+    @classmethod
+    def tearDownClass(cls):
+        try:
+            os.remove(UbuntuKeyboardTests.maliit_override_file)
+        except OSError:
+            logger.warning("Attempted to remove non-existent override file")
+        _restart_maliit_server()
+
     def setUp(self):
         super(UbuntuKeyboardTests, self).setUp()
         self.pointer = Pointer(Touch.create())
