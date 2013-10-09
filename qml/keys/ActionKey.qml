@@ -16,6 +16,8 @@
 
 import QtQuick 2.0
 
+import Ubuntu.Components 0.1
+
 import "key_constants.js" as UI
 
 CharKey {
@@ -34,19 +36,33 @@ CharKey {
     imgNormal: UI.imageActionKey
     imgPressed: UI.imageActionKeyPressed
 
-    Image {
+    property string __icon: iconNormal
+
+    // can be overwritten by keys
+    property color colorNormal: "transparent"
+    property color colorShifted: "transparent"
+    property color colorCapsLock: "transparent"
+
+    Icon {
         id: iconImage
-        source: iconNormal
+        name: __icon
         anchors.centerIn: parent
         visible: (label == "")
+        width: units.gu(2.5)
+        height: units.gu(2.5)
     }
 
     onOskStateChanged: {
-        if (panel.activeKeypadState == "NORMAL")
-            iconImage.source = iconNormal;
-        if (panel.activeKeypadState == "SHIFTED")
-            iconImage.source = iconShifted;
-        if (panel.activeKeypadState == "CAPSLOCK")
-            iconImage.source = iconCapsLock
+        if (panel.activeKeypadState == "NORMAL") {
+            __icon = iconNormal;
+            iconImage.color = colorNormal;
+        } else if (panel.activeKeypadState == "SHIFTED") {
+            __icon = iconShifted;
+            iconImage.color = colorShifted;
+            console.log(colorShifted)
+        } else if (panel.activeKeypadState == "CAPSLOCK") {
+            __icon = iconCapsLock;
+            iconImage.color = colorCapsLock;
+        }
     }
 }
