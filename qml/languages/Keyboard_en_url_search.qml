@@ -81,10 +81,9 @@ KeyPad {
 
             height: panel.keyHeight;
 
-            Spacer         { id: leftSpacer;                             anchors.left: parent.left; }
-            CharKey        { id: slashKey;    label: "/"; shifted: "/";  anchors.left: leftSpacer.right; }
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: slashKey.right; }
-            SpaceKey       { id: spaceKey;                               anchors.left: symShiftKey.right; anchors.right: urlKey.left; noMagnifier: true }
+            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
+            CharKey        { id: slashKey;    label: "/"; shifted: "/";  anchors.left: symShiftKey.right; }
+            SpaceKey       { id: spaceKey;                               anchors.left: slashKey.right; anchors.right: urlKey.left; noMagnifier: true }
             UrlKey         { id: urlKey;                                 anchors.right: dotKey.left; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }

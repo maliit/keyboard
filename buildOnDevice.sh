@@ -40,7 +40,7 @@ adb_root() {
 
 install_ssh_key() {
     ssh-keygen -R $TARGET_IP
-    HOME_DIR=/data/ubuntu/home/phablet
+    HOME_DIR=/home/phablet
     adb push ~/.ssh/id_rsa.pub $HOME_DIR/.ssh/authorized_keys
     adb shell chown $USER_ID:$USER_ID $HOME_DIR/.ssh
     adb shell chown $USER_ID:$USER_ID $HOME_DIR/.ssh/authorized_keys

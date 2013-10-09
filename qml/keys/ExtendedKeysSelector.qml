@@ -121,7 +121,7 @@ Item {
                     font.family: UI.fontFamily
                     font.pixelSize: text.length > 2 ? units.gu( UI.smallFontSize ) : units.gu( UI.fontSize )
                     font.bold: UI.fontBold
-                    color: key.highlight ? "red" : UI.fontColor
+                    color: key.highlight ? UbuntuColors.orange  : UI.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
@@ -150,8 +150,10 @@ Item {
     function __repositionPopoverTo(item)
     {
         // item.parent is a row
-        var point = keypad.mapFromItem(item.parent, item.x, item.y)
-        anchorItem.x = item.x;
+        var row = item.parent;
+        var point = popover.mapFromItem(item, item.x, item.y)
+
+        anchorItem.x = item.x + row.x
         anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
 
         /// FIXME need to avoid being drawn outside of the keyboard, and clicking
