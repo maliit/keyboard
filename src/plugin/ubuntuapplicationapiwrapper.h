@@ -17,6 +17,10 @@
 #ifndef UBUNTUAPPLICATIONAPIWRAPPER_H
 #define UBUNTUAPPLICATIONAPIWRAPPER_H
 
+#include <QObject>
+#include <QLocalServer>
+#include <QLocalSocket>
+
 /*
  * Class: UbuntuApplicationApiWrapper
  * The OSK-related functions in the ubuntu application api are marked as deprecated.
@@ -24,12 +28,11 @@
  * we are running on: if SurfaceFlinger-based, call the deprecated API, else NOOP.
  *
  * Have added other little methods to help smooth the transition.
- *
- * Once we discard the SurfaceFlinger-base, much of this can be removed.
  */
 
-class UbuntuApplicationApiWrapper
+class UbuntuApplicationApiWrapper : public QObject
 {
+    Q_OBJECT
 public:
     UbuntuApplicationApiWrapper();
 
@@ -38,8 +41,23 @@ public:
     void reportOSKVisible(const int, const int, const int, const int);
     void reportOSKInvisible();
 
+private Q_SLOTS:
+    void onNewConnection();
+    void onClientDisconnected();
+    void onClientError(QLocalSocket::LocalSocketError socketError);
+
 private:
+    // NB! Must match the definition in unity-mir. Not worth creating a shared header
+    // just for that.
+    struct SharedInfo {
+        qint32 keyboardWidth;
+        qint32 keyboardHeight;
+    };
+    void sendInfoToClientConnection(int width, int height);
+
     bool m_runningOnMir;
+    QLocalServer m_localServer;
+    QLocalSocket *m_clientConnection;
 };
 
 #endif // UBUNTUAPPLICATIONAPIWRAPPER_H

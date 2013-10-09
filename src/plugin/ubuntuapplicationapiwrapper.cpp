@@ -28,11 +28,26 @@
 #include <QtGlobal>
 #include <QByteArray>
 
+namespace {
+    const char gServerName[] = "ubuntu-keyboard-info";
+}
+
 UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
-    : m_runningOnMir(false)
+    : m_runningOnMir(false),
+      m_clientConnection(0)
 {
     if (qgetenv("QT_QPA_PLATFORM") == "ubuntumirclient") {
         m_runningOnMir = true;
+    }
+
+    if (m_runningOnMir) {
+        connect(&m_localServer, &QLocalServer::newConnection,
+                this, &UbuntuApplicationApiWrapper::onNewConnection);
+        bool ok = m_localServer.listen(gServerName);
+        if (!ok) {
+            qWarning() << "UbuntuApplicationApiWrapper: failed to listen for connections on"
+                       << gServerName;
+        }
     }
 }
 
@@ -48,6 +63,8 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
     Q_UNUSED(width)
     Q_UNUSED(height)
 #endif
+
+    sendInfoToClientConnection(width, height);
 }
 
 void UbuntuApplicationApiWrapper::reportOSKInvisible()
@@ -68,3 +85,55 @@ int UbuntuApplicationApiWrapper::oskWindowRole() const
 #endif
 }
 
+void UbuntuApplicationApiWrapper::sendInfoToClientConnection(int width, int height)
+{
+    if (!m_clientConnection
+            || m_clientConnection->state() != QLocalSocket::ConnectedState) {
+        // can't do it
+        return;
+    }
+
+    struct SharedInfo sharedInfo;
+    sharedInfo.keyboardWidth = width;
+    sharedInfo.keyboardHeight = height;
+    const qint64 sharedInfoSize = sizeof(struct SharedInfo);
+    qint64 bytesWritten = m_clientConnection->write(reinterpret_cast<char *>(&sharedInfo),
+                                                    sharedInfoSize);
+
+    if (bytesWritten < 0) {
+        qWarning("UbuntuApplicationApiWrapper: Failed to write bytes on client connection");
+    } else if (bytesWritten != sharedInfoSize) {
+        // Could try sending the remaining bytes until completion but it's really unlikely that
+        // this situation will occur
+        qWarning() << "UbuntuApplicationApiWrapper: tried to write" << sharedInfoSize << "bytes"
+                      "but only" << bytesWritten << "went through";
+    }
+}
+
+void UbuntuApplicationApiWrapper::onNewConnection()
+{
+    if (m_clientConnection)
+        return; // ignore it. for simplicity we care to serve only one client (unity8-mir)
+
+    m_clientConnection = m_localServer.nextPendingConnection();
+    connect(m_clientConnection, &QLocalSocket::disconnected,
+            this, &UbuntuApplicationApiWrapper::onClientDisconnected);
+
+    typedef void (QLocalSocket::*MemberFunctionType)(QLocalSocket::LocalSocketError);
+    MemberFunctionType funcPointer = &QLocalSocket::error;
+    connect(m_clientConnection, funcPointer,
+            this, &UbuntuApplicationApiWrapper::onClientError);
+}
+
+void UbuntuApplicationApiWrapper::onClientDisconnected()
+{
+    delete m_clientConnection;
+    m_clientConnection = 0;
+}
+
+void UbuntuApplicationApiWrapper::onClientError(QLocalSocket::LocalSocketError socketError)
+{
+    Q_UNUSED(socketError);
+    delete m_clientConnection;
+    m_clientConnection = 0;
+}
