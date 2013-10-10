@@ -53,4 +53,5 @@ OTHER_FILES += \
     languages/Keyboard_zh_cn_pinyin.qml \
     languages/Keyboard_es.qml \
     languages/Keyboard_pt.qml \
-    languages/Keyboard_de.qml
+    languages/Keyboard_de.qml \
+    languages/Keyboard_fr.qml
