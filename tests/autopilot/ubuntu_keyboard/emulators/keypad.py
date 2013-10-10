@@ -28,6 +28,12 @@ from time import sleep
 logger = logging.getLogger(__name__)
 
 
+class KeyPadState:
+    NORMAL = "NORMAL"
+    SHIFTED = "SHIFTED"
+    CAPSLOCK = "CAPSLOCK"
+
+
 class KeyPad(UbuntuKeyboardEmulatorBase):
     """An emulator that understands the KeyPad and its internals and how to
     interact with it.
@@ -37,11 +43,6 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
       - The state (NORMAL/SHIFTED) the KeyPad is in
 
     """
-
-    class State:
-        NORMAL = "NORMAL"
-        SHIFTED = "SHIFTED"
-        CAPSLOCK = "CAPSLOCK"
 
     def __init__(self, *args):
         super(KeyPad, self).__init__(*args)
@@ -85,10 +86,10 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
                     key_pos = Key.Pos(*key.globalRect)
                     label = label_fn(key)
                     if label != '':
-                        contained_keys[label] = 'NORMAL'
+                        contained_keys[label] = KeyPadState.NORMAL
                         key_positions[label] = key_pos
                     if key.shifted != '':
-                        contained_keys[key.shifted] = 'SHIFTED'
+                        contained_keys[key.shifted] = KeyPadState.SHIFTED
                         key_positions[key.shifted] = key_pos
 
         _iter_keys("CharKey", lambda x: x.label)

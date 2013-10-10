@@ -29,7 +29,7 @@ from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
-from ubuntu_keyboard.emulators.keypad import KeyPad
+from ubuntu_keyboard.emulators.keypad import KeyPadState
 
 
 class UbuntuKeyboardTests(AutopilotTestCase):
@@ -183,8 +183,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         self.assertThat(
-            keyboard.active_keypad.state,
-            Eventually(Equals(KeyPad.State.SHIFTED))
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.SHIFTED))
         )
 
     def test_shift_latch(self):
@@ -209,8 +209,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         keyboard.type('S')
 
         self.assertThat(
-            keyboard.active_keypad.state,
-            Eventually(Equals(KeyPad.State.CAPSLOCK))
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.CAPSLOCK))
         )
         self.assertThat(text_area.text, Eventually(Equals('abcS')))
 
@@ -234,8 +234,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         # Once the capital letter has been typed, we must be able to access the
         # lowercase letters, otherwise it's not in the correct state.
         self.assertThat(
-            keyboard.active_keypad.state,
-            Eventually(Equals(KeyPad.State.NORMAL))
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.NORMAL))
         )
 
         self.assertThat(text_area.text, Eventually(Equals('abcA')))
@@ -263,8 +263,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         )
 
         self.assertThat(
-            keyboard.active_keypad.state,
-            Eventually(Equals(KeyPad.State.SHIFTED))
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.SHIFTED))
         )
 
     def test_switching_between_states(self):

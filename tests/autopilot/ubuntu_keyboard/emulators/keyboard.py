@@ -156,6 +156,10 @@ class Keyboard(object):
         return self.keyboard.state
 
     @property
+    def active_keypad_state(self):
+        return self._keyboard_container.activeKeypadState
+
+    @property
     def active_keypad(self):
         if (
             self._stored_active_keypad_name != self._current_keypad_name
