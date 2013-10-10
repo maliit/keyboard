@@ -241,9 +241,7 @@ class Keyboard(object):
 
     def _update_details_for_keypad(self, keypad_name):
         self._show_keypad(keypad_name)
-        self._update_details_for_current_keypad()
 
-    def _update_details_for_current_keypad(self):
         contained, positions = self.active_keypad.get_key_details()
         self._keys_contained[self._keyboard_container.state] = contained
         self._keys_position[self._keyboard_container.state] = positions
