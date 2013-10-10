@@ -75,6 +75,27 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         _iter_keys("CharKey", lambda x: x.label)
         _iter_keys("ActionKey", lambda x: x.action)
 
+    def get_key_details(self):
+        contained_keys = {}
+        key_positions = {}
+
+        def _iter_keys(key_type, label_fn):
+            for key in self.select_many(key_type):
+                with key.no_automatic_refreshing():
+                    key_pos = Key.Pos(*key.globalRect)
+                    label = label_fn(key)
+                    if label != '':
+                        contained_keys[label] = 'NORMAL'
+                        key_positions[label] = key_pos
+                    if key.shifted != '':
+                        contained_keys[key.shifted] = 'SHIFTED'
+                        key_positions[key.shifted] = key_pos
+
+        _iter_keys("CharKey", lambda x: x.label)
+        _iter_keys("ActionKey", lambda x: x.action)
+
+        return (contained_keys, key_positions)
+
     def press_key(self, key, pointer=None):
         """Taps key *key* with *pointer*
 
