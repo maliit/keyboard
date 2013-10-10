@@ -41,6 +41,7 @@ class KeyboardState:
 
 
 class Keyboard(object):
+    """Emulator that provides the OSK as an input backend."""
 
     _action_to_label = {
         'SHIFT': 'shift',
@@ -91,8 +92,6 @@ class Keyboard(object):
         self._stored_active_keypad_name = None
         self._active_keypad = None
 
-        # Store the keys in a Keyboard.Container.state [CHARACTER|SYMBOL]
-        # [state] = [key]: position.
         self._keys_position = defaultdict(dict)
         self._keys_contained = defaultdict(dict)
 
@@ -249,10 +248,11 @@ class Keyboard(object):
         self._keys_contained[self._keyboard_container.state] = contained
         self._keys_position[self._keyboard_container.state] = positions
 
-    # self._keys_contained has a mapping of key -> state
     def _keypad_contains_key(self, keypad_name, key):
-        """Returns the keypad state the key is found or None if not contained
-        in the keypad.
+        """Returns the keypad state that key is found in.
+
+        Returns either a KeyPadState if the key is found on the provided keypad
+        or None if not found.
 
         """
         if self._keypad_details_expired(keypad_name):
@@ -261,8 +261,8 @@ class Keyboard(object):
         return self._keys_contained[keypad_name].get(key, None)
 
     def _get_key_pos_from_keypad(self, keypad_name, key):
-        """Returns either the position of the key if it is found on that keypad
-        otherwise None if it is not.
+        """Returns the position of the key if it is found on that keypad or
+        None if it is not.
 
         """
         if self._keypad_details_expired(keypad_name):
@@ -293,7 +293,6 @@ class Keyboard(object):
         )
         self._tap_key(key_pos)
         self._keyboard_container.activeKeypadState.wait_for(state)
-        # Leave this in for now.
         self.active_keypad.opacity.wait_for(1.0)
 
     def _tap_key(self, key_rect, pointer=None):
