@@ -35,9 +35,6 @@ from autopilot.introspection import (
 logger = logging.getLogger(__name__)
 
 
-class KeyPadNotLoaded(Exception):
-    pass
-
 class KeyboardState:
     character = "CHARACTERS"
     symbol = "SYMBOLS"
@@ -91,12 +88,13 @@ class Keyboard(object):
             "KeyboardContainer"
         )
 
+        self._stored_active_keypad_name = None
+        self._active_keypad = None
+
         # Store the keys in a Keyboard.Container.state [CHARACTER|SYMBOL]
         # [state] = [key]: position.
         self._keys_position = defaultdict(dict)
         self._keys_contained = defaultdict(dict)
-
-        self._update_details_for_current_keypad()
 
         self._store_current_orientation()
         self._store_current_language_id()
@@ -132,26 +130,6 @@ class Keyboard(object):
     def _keyboard_details_changed(self):
         return self._language_changed() or self._orientation_changed()
 
-    # def _get_keypad(self, name):
-    #     """Attempt to retrieve KeyPad object of either 'character' or 'symbol'
-
-    #     *name* must be either 'character' or 'symbol'.
-
-    #     Raises KeyPadNotLoaded exception if none or more than one keypad is
-    #     found.
-
-    #     """
-    #     objectName = "{name}KeyPadLoader".format(name=name)
-    #     loader = self.maliit.select_single(
-    #         "QQuickLoader",
-    #         objectName=objectName
-    #     )
-    #     keypad = loader.select_single(KeyPad)
-    #     if keypad is None:
-    #         raise KeyPadNotLoaded("{name} keypad is not currently loaded.")
-
-    #     return keypad
-
     def dismiss(self):
         """Swipe the keyboard down to hide it.
 
@@ -179,19 +157,18 @@ class Keyboard(object):
 
     @property
     def active_keypad(self):
-        # Probably just return the active keypad . . .
-        loader = self.maliit.select_single(
-            "QQuickLoader",
-            objectName='characterKeyPadLoader'
-        )
-        return loader.select_single(KeyPad)
-        # return None
-        # if self.character_keypad.enabled:
-        #     return self.character_keypad
-        # elif self.symbol_keypad.enabled:
-        #     return self.symbol_keypad
-        # else:
-        #     raise RuntimeError("There are no currently active KeyPads.")
+        if (
+            self._stored_active_keypad_name != self._current_keypad_name
+            or self._keyboard_details_changed()
+        ):
+            self._stored_active_keypad_name = self._current_keypad_name
+            loader = self.maliit.select_single(
+                "QQuickLoader",
+                objectName='characterKeyPadLoader'
+            )
+            logger.debug("Keypad lookup")
+            self._active_keypad = loader.select_single(KeyPad)
+        return self._active_keypad
 
     # Much like is_available, but attempts to wait for the keyboard to be
     # ready.
@@ -226,10 +203,7 @@ class Keyboard(object):
         in the keypad.
 
         """
-        if (
-            self._keys_contained.get(keypad_name) is None
-            or self._keyboard_details_changed()
-        ):
+        if self._keypad_details_expired(keypad_name):
             self._update_details_for_keypad(keypad_name)
 
         return self._keys_contained[keypad_name].get(key, None)
@@ -239,16 +213,18 @@ class Keyboard(object):
         otherwise None if it is not.
 
         """
-        if (
-            self._keys_contained.get(keypad_name) is None
-            or self._keyboard_details_changed()
-        ):
+        if self._keypad_details_expired(keypad_name):
             self._update_details_for_keypad(keypad_name)
 
         return self._keys_position[keypad_name].get(key, None)
 
+    def _keypad_details_expired(self, keypad_name):
+        return (
+            self._keys_contained.get(keypad_name) is None
+            or self._keyboard_details_changed()
+        )
+
     def _show_keypad(self, keypad_name):
-        # Keypad state is owned by the keyboard contained now.
         if self._current_keypad_name == keypad_name:
             return
 
@@ -285,8 +261,9 @@ class Keyboard(object):
         if req_key_state is None:
             req_keypad = KeyboardState.symbol
             req_key_state = self._keypad_contains_key(req_keypad, key)
-            if req_key_state is None:
-                raise ValueError()
+
+        if req_key_state is None:
+            raise ValueError("Key '%s' was not found on the keyboard" % key)
 
         key_pos = self._get_key_pos_from_keypad(req_keypad, key)
         self._show_keypad(req_keypad)
