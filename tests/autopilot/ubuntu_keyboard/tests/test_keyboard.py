@@ -82,9 +82,10 @@ class UbuntuKeyboardTests(AutopilotTestCase):
     def setUpClass(cls):
         try:
             logger.debug("Creating the override file.")
-            open(UbuntuKeyboardTests.maliit_override_file, 'w').write(
-                "exec maliit-server -testability"
-            )
+            with open(
+                UbuntuKeyboardTests.maliit_override_file, 'w'
+            ) as override_file:
+                override_file.write("exec maliit-server -testability")
             _restart_maliit_server()
         except IOError as e:
             e.args += (
