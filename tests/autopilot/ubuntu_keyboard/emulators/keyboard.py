@@ -37,12 +37,6 @@ class KeyPadNotLoaded(Exception):
     pass
 
 
-class QQuickLoader(UbuntuKeyboardEmulatorBase):
-    # This is a work around so that when we select_single a KeyPad we don't get
-    # back a generic version.
-    pass
-
-
 class Keyboard(object):
 
     _action_to_label = {
@@ -54,27 +48,11 @@ class Keyboard(object):
         '\n': 'return',
     }
 
-    # mallit is a class attribute because get_proxy_object_for_existing_process
-    # clears backends for proxy objects, this means that with:
-    #   kb = Keyboard()
-    #   kb2 = Keyboard()
-    # The proxy objects in kb have had their _Backends cleared which means we
-    # can no longer query them.
-    try:
-        maliit = get_proxy_object_for_existing_process(
-            connection_name='org.maliit.server',
-            emulator_base=UbuntuKeyboardEmulatorBase
-        )
-    except ProcessSearchError as e:
-        e.args += (
-            "Unable to find maliit-server dbus object. Has it been "
-            "started with introspection enabled?",
-        )
-        raise
+    __maliit = None
 
     def __init__(self, pointer=None):
         try:
-            self.orientation = Keyboard.maliit.select_single(
+            self.orientation = self.maliit.select_single(
                 "OrientationHelper"
             )
             if self.orientation is None:
@@ -88,7 +66,7 @@ class Keyboard(object):
             raise
 
         try:
-            self.keyboard = Keyboard.maliit.select_single(
+            self.keyboard = self.maliit.select_single(
                 "QQuickItem",
                 objectName="ubuntuKeyboard"
             )
@@ -113,6 +91,29 @@ class Keyboard(object):
             self.pointer = Pointer(Touch.create())
         else:
             self.pointer = pointer
+
+    @property
+    def maliit(self):
+        # We cache __mallit_server as a class attribute because
+        # get_proxy_object_for_existing_process clears backends for proxy
+        # objects, this means that if this is called twice within a test the
+        # first keyboard object created has now lost all its _Backends.
+        if Keyboard.__maliit is None:
+            try:
+                Keyboard.__maliit = get_proxy_object_for_existing_process(
+                    connection_name='org.maliit.server',
+                    emulator_base=UbuntuKeyboardEmulatorBase
+                )
+
+                if Keyboard.__maliit is None:
+                    raise RuntimeError("Maliit Server could not be found.")
+            except ProcessSearchError as e:
+                e.args += (
+                    "Unable to find maliit-server dbus object. Has it been "
+                    "started with introspection enabled?",
+                )
+                raise
+        return Keyboard.__maliit
 
     def _keyboard_details_changed(self):
         return self._language_changed() or self._orientation_changed()
@@ -141,8 +142,8 @@ class Keyboard(object):
 
         """
         objectName = "{name}KeyPadLoader".format(name=name)
-        loader = Keyboard.maliit.select_single(
-            QQuickLoader,
+        loader = self.maliit.select_single(
+            "QQuickLoader",
             objectName=objectName
         )
         keypad = loader.select_single(KeyPad)

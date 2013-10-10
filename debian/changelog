@@ -1,3 +1,39 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131009.2-0ubuntu1) saucy; urgency=low
+
+  [ Daniel d'Andrada ]
+  * Publish keyboard info on a socket so that unity-mir can have it Have
+    a communication channel between ubuntu-keyboard and unity-mir where
+    the former hands out all the information about itself that unity-mir
+    might be interested into. That all should go away once a proper
+    architecure gets implemented. Fixes LP#1234600. (LP: #1234600,
+    #1237472)
+
+  [ Thomas Moenicke ]
+  * 3-key on symbols layout does not have extended keys .
+  * fixes #1236501 wrong layout when symbols. (LP: #1236501)
+  * fixing spacebar background.
+  * various fixes, prioritized by Bill .
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Christopher Lee ]
+  * Remove workarounds and fixed uncaught exception at import time.
+
+  [ Guenter Schwann ]
+  * Send return ("\r") as text in return key event fixes LP: #1230035.
+    (LP: #1230035, #1236388)
+  * Propagating mouse events does not work as expected when dragging
+    Going back to make the keyboard a child item of the swipe mouse
+    area. Fixes LP: #1236474. (LP: #1236474)
+  * New Magnifier that fixes the old Popper element fixes LP: #1236478
+    fixes LP: #1236477. (LP: #1236477, #1236478)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 70
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 09 Oct 2013 23:35:18 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131004-0ubuntu1) saucy; urgency=low
 
   [ Thomas Moenicke ]

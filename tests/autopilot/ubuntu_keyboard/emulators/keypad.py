@@ -28,14 +28,6 @@ from time import sleep
 logger = logging.getLogger(__name__)
 
 
-class CharKey(UbuntuKeyboardEmulatorBase):
-    pass
-
-
-class ActionKey(UbuntuKeyboardEmulatorBase):
-    pass
-
-
 class KeyPad(UbuntuKeyboardEmulatorBase):
     """An emulator that understands the KeyPad and its internals and how to
     interact with it.
@@ -80,8 +72,8 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
                         self._contained_shifted_keys.append(key.shifted)
                         self._key_pos[key.shifted] = key_pos
 
-        _iter_keys(CharKey, lambda x: x.label)
-        _iter_keys(ActionKey, lambda x: x.action)
+        _iter_keys("CharKey", lambda x: x.label)
+        _iter_keys("ActionKey", lambda x: x.action)
 
     def press_key(self, key, pointer=None):
         """Taps key *key* with *pointer*
