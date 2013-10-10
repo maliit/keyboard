@@ -26,7 +26,7 @@ Item {
     property int keyHeight: 0
 
     property Item activeKeypad: characterKeypadLoader.item
-    property string activeKeypadState: characterKeypadLoader.item ? item.state : ""
+    property string activeKeypadState: "NORMAL"
     property string characterKeypadSource: ""
     property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
 
@@ -61,6 +61,7 @@ Item {
         anchors.fill: parent
         asynchronous: false
         source: panel.state === "CHARACTERS" ? characterKeypadSource : symbolKeypadSource
+        onLoaded: activeKeypadState = "NORMAL"
     }
     ExtendedKeysSelector {
         id: extendedKeysSelector
@@ -75,17 +76,9 @@ Item {
     states: [
         State {
             name: "CHARACTERS"
-            PropertyChanges {
-                target: panel
-                activeKeypad: characterKeypadLoader.item
-            }
         },
         State {
             name: "SYMBOLS"
-            PropertyChanges {
-                target: panel
-                activeKeypad: symbolKeypadLoader.item
-            }
         }
     ]
 

@@ -51,11 +51,12 @@ Item {
     // be used, depending on the state. If no extended/extendedShifted arrays exist, no annotation is shown
     property string annotation: ""
 
+    /*! indicates if te key is currently pressed/down*/
+    property alias pressed: keyMouseArea.pressed
+
     /* internal */
     property string __annotationLabelNormal
     property string __annotationLabelShifted
-
-    state: "NORMAL"
 
     /**
      * this property specifies if the key can submit its value or not (e.g. when the popover is shown, it does not commit its value)
@@ -85,10 +86,11 @@ Item {
 
     BorderImage {
         id: buttonImage
+        border { left: 27; top: 29; right: 27; bottom: 29 }
         anchors.centerIn: parent
         anchors.fill: key
         anchors.margins: units.dp( UI.keyMargins );
-        source: key.state == "PRESSED" ? key.imgPressed : key.imgNormal
+        source: key.pressed ? key.imgPressed : key.imgNormal
     }
 
     /// label of the key
@@ -126,7 +128,6 @@ Item {
 
         onPressAndHold: {
             if (activeExtendedModel != undefined) {
-                popper.popTarget = null
                 extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
@@ -134,7 +135,6 @@ Item {
         }
 
         onReleased: {
-            key.state = "NORMAL"
             if (!extendedKeysShown) {
                 event_handler.onKeyReleased(valueToSubmit, action);
                 if (!skipAutoCaps)
@@ -143,32 +143,16 @@ Item {
             }
         }
         onPressed: {
-            key.state = "PRESSED"
             event_handler.onKeyPressed(valueToSubmit);
         }
     }
 
-    Popper {
-        id: popper
-        enabled: !noMagnifier && !extendedKeysShown
+    Magnifier {
+        anchors.horizontalCenter: buttonImage.horizontalCenter
+        anchors.bottom: buttonImage.top
         width: key.width + units.gu(UI.magnifierHorizontalPadding)
         height: key.height + units.gu(UI.magnifierVerticalPadding)
+        text: keyLabel.text
+        shown: key.pressed && !noMagnifier && !extendedKeysShown
     }
-
-    states: [
-        State {
-            name: "NORMAL"
-            PropertyChanges {
-                target: popper
-                popTarget: null
-            }
-        },
-        State {
-            name: "PRESSED"
-            PropertyChanges {
-                target: popper
-                popTarget: keyLabel
-            }
-        }
-    ]
 }
