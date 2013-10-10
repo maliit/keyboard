@@ -44,11 +44,13 @@ Item {
         if (layoutId === "url")
             characterKeypadSource = "languages/Keyboard_en_url_search.qml";
         if (layoutId === "en_us")
-            characterKeypadSource = "languages/Keyboard_pt.qml";
+            characterKeypadSource = "languages/Keyboard_de.qml";
         if (layoutId === "es")
             characterKeypadSource = "languages/Keyboard_es.qml";
         if (layoutId === "pt")
             characterKeypadSource = "languages/Keyboard_pt.qml";
+        if (layoutId === "de")
+            characterKeypadSource = "languages/Keyboard_de.qml";
         if (layoutId === "zh_cn_pinyin")
             characterKeypadSource = "languages/Keyboard_zh_cn_pinyin.qml";
     }
