@@ -15,11 +15,15 @@
  */
 
 import QtQuick 2.0
+import Ubuntu.Components 0.1
 
 ActionKey {
-    iconNormal: "../images/icon_shift@18.png";
-    iconShifted: "../images/icon_shift_upsidedown@18.png";
-    iconCapsLock: "../images/icon_shift_white@18.png";
+    iconNormal: "keyboard-caps"
+    iconShifted: "keyboard-caps"
+    iconCapsLock: "keyboard-caps-lock"
+
+    colorShifted: UbuntuColors.orange
+
     action: "shift"
 
     MouseArea {
