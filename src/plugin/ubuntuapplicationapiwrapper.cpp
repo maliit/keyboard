@@ -25,11 +25,12 @@
   #define HAVE_UBUNTU_PLATFORM_API
 #endif
 
+#include <QFile>
 #include <QtGlobal>
 #include <QByteArray>
 
 namespace {
-    const char gServerName[] = "ubuntu-keyboard-info";
+    const char gServerName[] = "/tmp/ubuntu-keyboard-info";
 }
 
 UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
@@ -41,13 +42,31 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
     }
 
     if (m_runningOnMir) {
-        connect(&m_localServer, &QLocalServer::newConnection,
-                this, &UbuntuApplicationApiWrapper::onNewConnection);
-        bool ok = m_localServer.listen(gServerName);
-        if (!ok) {
-            qWarning() << "UbuntuApplicationApiWrapper: failed to listen for connections on"
-                       << gServerName;
+        startLocalServer();
+    }
+}
+
+void UbuntuApplicationApiWrapper::startLocalServer()
+{
+    {
+        QFile socketFile(gServerName);
+        if (socketFile.exists()) {
+            // It's a leftover from a previous run of maliit-server. let's get rid of it.
+            // The other possibility is that another instance of maliit-server is already
+            // running, but that's absolutely unsupported.
+            if (!socketFile.remove()) {
+                qWarning() << "UbuntuApplicationApiWrapper: unable to remove pre-existing"
+                           << gServerName;
+            }
         }
+    }
+
+    connect(&m_localServer, &QLocalServer::newConnection,
+            this, &UbuntuApplicationApiWrapper::onNewConnection);
+    bool ok = m_localServer.listen(gServerName);
+    if (!ok) {
+        qWarning() << "UbuntuApplicationApiWrapper: failed to listen for connections on"
+                   << gServerName;
     }
 }
 
@@ -96,6 +115,13 @@ void UbuntuApplicationApiWrapper::sendInfoToClientConnection(int width, int heig
     struct SharedInfo sharedInfo;
     sharedInfo.keyboardWidth = width;
     sharedInfo.keyboardHeight = height;
+
+    if (sharedInfo == m_lastInfoShared) {
+        // do not flood our listener with redundant info. This also means that
+        // were are getting called unnecessarily
+        return;
+    }
+
     const qint64 sharedInfoSize = sizeof(struct SharedInfo);
     qint64 bytesWritten = m_clientConnection->write(reinterpret_cast<char *>(&sharedInfo),
                                                     sharedInfoSize);
@@ -108,32 +134,43 @@ void UbuntuApplicationApiWrapper::sendInfoToClientConnection(int width, int heig
         qWarning() << "UbuntuApplicationApiWrapper: tried to write" << sharedInfoSize << "bytes"
                       "but only" << bytesWritten << "went through";
     }
+
+    m_lastInfoShared = sharedInfo;
 }
 
 void UbuntuApplicationApiWrapper::onNewConnection()
 {
-    if (m_clientConnection)
-        return; // ignore it. for simplicity we care to serve only one client (unity8-mir)
+    QLocalSocket *newConnection = m_localServer.nextPendingConnection();
 
-    m_clientConnection = m_localServer.nextPendingConnection();
+    if (m_clientConnection) {
+        qWarning() << "UbuntuApplicationApiWrapper: Refusing incoming connection as we "
+                      "already have an active one.";
+        delete newConnection;
+        return; // ignore it. for simplicity we care to serve only one client (unity8-mir)
+    }
+    m_clientConnection = newConnection;
+    m_lastInfoShared.reset();
+
     connect(m_clientConnection, &QLocalSocket::disconnected,
             this, &UbuntuApplicationApiWrapper::onClientDisconnected);
-
-    typedef void (QLocalSocket::*MemberFunctionType)(QLocalSocket::LocalSocketError);
-    MemberFunctionType funcPointer = &QLocalSocket::error;
-    connect(m_clientConnection, funcPointer,
-            this, &UbuntuApplicationApiWrapper::onClientError);
 }
 
 void UbuntuApplicationApiWrapper::onClientDisconnected()
 {
-    delete m_clientConnection;
+    m_clientConnection->deleteLater();
     m_clientConnection = 0;
 }
 
-void UbuntuApplicationApiWrapper::onClientError(QLocalSocket::LocalSocketError socketError)
+// ------------------------------- SharedInfo ----------------------------
+
+bool UbuntuApplicationApiWrapper::SharedInfo::operator ==(const struct SharedInfo &other)
 {
-    Q_UNUSED(socketError);
-    delete m_clientConnection;
-    m_clientConnection = 0;
+    return keyboardWidth == other.keyboardWidth
+        && keyboardHeight == other.keyboardHeight;
+}
+
+void UbuntuApplicationApiWrapper::SharedInfo::reset()
+{
+    keyboardWidth = 0;
+    keyboardHeight = 0;
 }
