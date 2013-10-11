@@ -25,6 +25,7 @@ OTHER_FILES += \
     maliit-ui-constants.qml \
     Keyboard.qml \
     KeyboardContainer.qml \
+    LanguageMenu.qml \
     Popper.qml \
     WordRibbon.qml \
     keys/key_constants.js \
@@ -51,3 +52,4 @@ OTHER_FILES += \
     languages/Keyboard_symbols.qml \
     languages/Keyboard_telephone.qml \
     languages/Keyboard_zh_cn_pinyin.qml \
+    keys/Language.qml

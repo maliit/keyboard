@@ -80,7 +80,8 @@ KeyPad {
 
             height: panel.keyHeight;
 
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
+            Language       { id: languageMenuButton;                     anchors.left: parent.left; }
+            SymbolShiftKey { id: symShiftKey;                            anchors.left: languageMenuButton.right; }
             CharKey        { id: commaKey;    label: ","; shifted: "/";  anchors.left: symShiftKey.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }

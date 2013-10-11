@@ -46,7 +46,8 @@ Item {
             text: language
             onClicked: {
                 event_handler.onLanguageChangeRequested(languageId);
-                canvas.languageMenuVisible = false;
+                canvas.layoutId = languageId;
+                canvas.languageMenuShown = false;
             }
          }
     }

@@ -83,6 +83,8 @@ Item {
         }
     }
 
+    property bool languageMenuShown: false
+
     MouseArea {
         id: swipeArea
 
@@ -168,6 +170,15 @@ Item {
                     anchors.topMargin: units.gu( UI.top_margin )
                     anchors.bottomMargin: units.gu( UI.bottom_margin )
                     width: parent.width
+                }
+
+                LanguageMenu {
+                    id: languageMenu
+                    anchors.centerIn: parent
+                    width: 400;
+                    height: 400;
+                    enabled: canvas.languageMenuShown
+                    opacity: canvas.languageMenuShown ? 1.0 : 0.0
                 }
             } // keyboardComp
         }
