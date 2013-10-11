@@ -57,6 +57,7 @@ private:
     };
     void sendInfoToClientConnection(int width, int height);
     void startLocalServer();
+    QString buildSocketFilePath() const;
 
     bool m_runningOnMir;
     QLocalServer m_localServer;

@@ -25,12 +25,13 @@
   #define HAVE_UBUNTU_PLATFORM_API
 #endif
 
+#include <QDir>
 #include <QFile>
 #include <QtGlobal>
 #include <QByteArray>
 
 namespace {
-    const char gServerName[] = "/tmp/ubuntu-keyboard-info";
+    const char gServerName[] = "ubuntu-keyboard-info";
 }
 
 UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
@@ -48,25 +49,27 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
 
 void UbuntuApplicationApiWrapper::startLocalServer()
 {
+    QString socketFilePath = buildSocketFilePath();
+
     {
-        QFile socketFile(gServerName);
+        QFile socketFile(socketFilePath);
         if (socketFile.exists()) {
             // It's a leftover from a previous run of maliit-server. let's get rid of it.
             // The other possibility is that another instance of maliit-server is already
             // running, but that's absolutely unsupported.
             if (!socketFile.remove()) {
                 qWarning() << "UbuntuApplicationApiWrapper: unable to remove pre-existing"
-                           << gServerName;
+                           << socketFilePath ;
             }
         }
     }
 
     connect(&m_localServer, &QLocalServer::newConnection,
             this, &UbuntuApplicationApiWrapper::onNewConnection);
-    bool ok = m_localServer.listen(gServerName);
+    bool ok = m_localServer.listen(socketFilePath);
     if (!ok) {
         qWarning() << "UbuntuApplicationApiWrapper: failed to listen for connections on"
-                   << gServerName;
+                   << socketFilePath;
     }
 }
 
@@ -159,6 +162,17 @@ void UbuntuApplicationApiWrapper::onClientDisconnected()
 {
     m_clientConnection->deleteLater();
     m_clientConnection = 0;
+}
+
+QString UbuntuApplicationApiWrapper::buildSocketFilePath() const
+{
+    char *xdgRuntimeDir = getenv("XDG_RUNTIME_DIR");
+
+    if (xdgRuntimeDir) {
+        return QDir(xdgRuntimeDir).filePath(gServerName);
+    } else {
+        return QDir("/tmp").filePath(gServerName);
+    }
 }
 
 // ------------------------------- SharedInfo ----------------------------
