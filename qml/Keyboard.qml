@@ -80,6 +80,7 @@ Item {
         if (autoCapsActivated) {
             keypad.state = "CHARACTERS"
             keypad.activeKeypadState = "SHIFTED";
+            autoCapsActivated = false;
         }
     }
 
