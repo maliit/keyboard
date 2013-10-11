@@ -44,7 +44,6 @@ Item {
     property variant event_handler: maliit_event_handler
 
 OrientationHelper {
-
     automaticOrientation: false
     transitionEnabled: false
 

@@ -18,15 +18,28 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
+import "key_constants.js" as UI
+
 Item {
+
+    MouseArea {
+        width: fullScreenItem.width
+        height: fullScreenItem.height
+
+        anchors.centerIn: parent
+
+        onClicked: canvas.languageMenuShown = false
+    }
 
     BorderImage {
         id: name
         anchors.fill: parent
         source: "../images/popover@27.png"
 
-        border.left: 45; border.top: 45
-        border.right: 45; border.bottom: 45
+        property int __corner: units.gu(UI.languageMenuCorner)
+
+        border.left: __corner; border.top: __corner;
+        border.right: __corner; border.bottom: __corner;
     }
 
     // tempor., will come from settings
@@ -43,8 +56,8 @@ Item {
     ListView {
         id: menuList
         anchors.centerIn: parent
-        width: parent.width - 40
-        height: parent.height - 40
+        width: parent.width - units.gu(UI.languageMenuListViewPadding)
+        height: parent.height - units.gu(UI.languageMenuListViewPadding)
         interactive: true
         clip: true
 
