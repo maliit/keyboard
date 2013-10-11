@@ -205,6 +205,7 @@ Item {
             name: "HIDDEN"
             PropertyChanges { target: canvas; y: height; }
             onCompleted: {
+                canvas.languageMenuShown = false
                 keyboardSurface.y = 0;
                 keypad.closeExtendedKeys();
                 keypad.activeKeypadState = "NORMAL"
