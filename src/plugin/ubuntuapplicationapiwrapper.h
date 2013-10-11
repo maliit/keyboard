@@ -44,7 +44,6 @@ public:
 private Q_SLOTS:
     void onNewConnection();
     void onClientDisconnected();
-    void onClientError(QLocalSocket::LocalSocketError socketError);
 
 private:
     // NB! Must match the definition in unity-mir. Not worth creating a shared header
@@ -52,12 +51,18 @@ private:
     struct SharedInfo {
         qint32 keyboardWidth;
         qint32 keyboardHeight;
+
+        bool operator ==(const struct SharedInfo &other);
+        void reset();
     };
     void sendInfoToClientConnection(int width, int height);
+    void startLocalServer();
+    QString buildSocketFilePath() const;
 
     bool m_runningOnMir;
     QLocalServer m_localServer;
     QLocalSocket *m_clientConnection;
+    struct SharedInfo m_lastInfoShared;
 };
 
 #endif // UBUNTUAPPLICATIONAPIWRAPPER_H
