@@ -42,17 +42,6 @@ Item {
         border.right: __corner; border.bottom: __corner;
     }
 
-    // tempor., will come from settings
-    ListModel {
-        id: availableLanguagesModel
-        ListElement { language: "English - US"; languageId: "en_us"; }
-        ListElement { language: "Spanish"; languageId: "es"; }
-        ListElement { language: "Portuguese"; languageId: "pt"; }
-        ListElement { language: "French"; languageId: "fr"; }
-        ListElement { language: "German"; languageId: "de"; }
-        ListElement { language: "Chinese - Pinyin"; languageId: "zh_cn_pinyin"; }
-    }
-
     ListView {
         id: menuList
         anchors.centerIn: parent
@@ -61,14 +50,25 @@ Item {
         interactive: true
         clip: true
 
-        model: availableLanguagesModel
+        model: canvas.enabledLanguages
 
         delegate: ListItem.Standard {
-            text: language
+            text: languageIdToName(modelData)
             onClicked: {
-                canvas.layoutId = languageId;
+                canvas.layoutId = modelData;
                 canvas.languageMenuShown = false;
             }
          }
     }
+
+    function languageIdToName(languageId)
+    {
+        if (languageId == "en_us")        return "English - US";
+        if (languageId == "es")           return "Spanish";
+        if (languageId == "pt")           return "Portuguese";
+        if (languageId == "fr")           return "French";
+        if (languageId == "de")           return "German";
+        if (languageId == "zh_cn_pinyin") return "Chinese - Pinyin";
+    }
+
 }

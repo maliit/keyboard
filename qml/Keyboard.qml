@@ -64,6 +64,9 @@ Item {
     Component.onCompleted: keypad.loadLayout(layoutId);
     onLayoutIdChanged: keypad.loadLayout(layoutId);
 
+    // set by C++
+    property var enabledLanguages: []
+
     visible: layout.visible
 
     // Expose details for use with Autopilot.

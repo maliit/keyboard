@@ -95,6 +95,7 @@ private:
     Q_SLOT void onFeedbackSettingChanged();
     Q_SLOT void onAutoCorrectSettingChanged();
     Q_SLOT void onAutoCapsSettingChanged();
+    Q_SLOT void onEnabledLanguagesChanged();
     Q_SLOT void updateKey(const QString &key_id,
                           const MKeyOverride::KeyOverrideAttributes changed_attributes);
     Q_SLOT void onKeyboardClosed();

@@ -336,6 +336,13 @@ public:
     #endif
     }
 
+    void registerEnabledLanguages()
+    {
+        QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
+                         q, SLOT(onEnabledLanguagesChanged()));
+        qmlRootItem->setProperty("enabledLanguages", m_settings.enabledLanguages());
+    }
+
     void onScreenSizeChange(const QSize &size)
     {
         layout.helper.setScreenSize(size);

@@ -106,6 +106,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
+    d->registerEnabledLanguages();
 
     setActiveSubView("en_us");
 
@@ -269,6 +270,12 @@ void InputMethod::onAutoCapsSettingChanged()
 {
     Q_D(InputMethod);
     d->editor.setAutoCapsEnabled(d->m_settings.autoCapitalization());
+}
+
+void InputMethod::onEnabledLanguagesChanged()
+{
+    Q_D(InputMethod);
+    d->qmlRootItem->setProperty("enabledLanguages", d->m_settings.enabledLanguages());
 }
 
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
