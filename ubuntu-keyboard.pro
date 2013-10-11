@@ -51,14 +51,17 @@ COVERAGE_CONFIG_STRING = CONFIG+=debug CONFIG+=nodoc CONFIG+=no-werror
 
 enable-presage {
     COVERAGE_CONFIG_STRING += CONFIG+=enable-presage
+    message(presage is enabled)
 }
 
 enable-hunspell {
     COVERAGE_CONFIG_STRING += CONFIG+=enable-hunspell
+    message(hunspell is enabled)
 }
 
 disable-preedit {
     COVERAGE_CONFIG_STRING += CONFIG+=disable-preedit
+    message(preedit is enabled)
 }
 
 enable-pinyin {
@@ -72,6 +75,7 @@ enable-pinyin {
 
 enable-qt-mobility {
     COVERAGE_CONFIG_STRING += CONFIG+=enable-qt-mobility
+    message(qt-mobility is enabled)
 }
 
 
