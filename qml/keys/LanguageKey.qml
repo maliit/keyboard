@@ -23,8 +23,8 @@ ActionKey {
 
     padding: 0
 
-    visible: canvas.enabledLanguages.length > 0 ? true : false
-    width: canvas.enabledLanguages.length > 0 ? panel.keyWidth : 0
+    visible: canvas.enabledLanguages.length > 1 ? true : false
+    width: canvas.enabledLanguages.length > 1 ? panel.keyWidth : 0
 
     MouseArea {
         anchors.fill: parent
