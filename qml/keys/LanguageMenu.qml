@@ -43,7 +43,7 @@ Item {
     ListView {
         id: menuList
         anchors.centerIn: parent
-        width: parent.width - 10
+        width: parent.width - 40
         height: parent.height - 40
         interactive: true
         clip: true
