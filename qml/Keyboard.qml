@@ -176,7 +176,7 @@ Item {
                     id: languageMenu
                     anchors.centerIn: parent
                     width: 400;
-                    height: 600;
+                    height: keypad.height;
                     enabled: canvas.languageMenuShown
                     opacity: canvas.languageMenuShown ? 1.0 : 0.0
                 }

@@ -20,9 +20,13 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Item {
 
-    Rectangle {
+    BorderImage {
+        id: name
         anchors.fill: parent
-        color: "lightGray"
+        source: "../images/popover@27.png"
+
+        border.left: 45; border.top: 45
+        border.right: 45; border.bottom: 45
     }
 
     // tempor., will come from settings
@@ -38,8 +42,11 @@ Item {
 
     ListView {
         id: menuList
-        anchors.fill: parent
-        interactive: false
+        anchors.centerIn: parent
+        width: parent.width - 10
+        height: parent.height - 40
+        interactive: true
+        clip: true
 
         model: availableLanguagesModel
 

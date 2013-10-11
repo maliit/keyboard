@@ -25,7 +25,6 @@ OTHER_FILES += \
     maliit-ui-constants.qml \
     Keyboard.qml \
     KeyboardContainer.qml \
-    LanguageMenu.qml \
     Popper.qml \
     WordRibbon.qml \
     keys/key_constants.js \
@@ -36,6 +35,7 @@ OTHER_FILES += \
     keys/ExtendedKeysSelector.qml \
     keys/KeyPad.qml \
     keys/LanguageKey.qml \
+    keys/LanguageMenu.qml \
     keys/Magnifier.qml \
     keys/OneTwoKey.qml \
     keys/PressArea.qml \
