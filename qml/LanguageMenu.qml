@@ -29,10 +29,11 @@ Item {
     ListModel {
         id: availableLanguagesModel
         ListElement { language: "English - US"; languageId: "en_us"; }
-        ListElement { language: "English - UK"; languageId: "en_gb"; }
-        ListElement { language: "Chinese - Pinyin"; languageId: "zh_cn_pinyin"; }
         ListElement { language: "Spanish"; languageId: "es"; }
+        ListElement { language: "Portuguese"; languageId: "pt"; }
+        ListElement { language: "French"; languageId: "fr"; }
         ListElement { language: "German"; languageId: "de"; }
+        ListElement { language: "Chinese - Pinyin"; languageId: "zh_cn_pinyin"; }
     }
 
     ListView {
@@ -45,7 +46,6 @@ Item {
         delegate: ListItem.Standard {
             text: language
             onClicked: {
-                event_handler.onLanguageChangeRequested(languageId);
                 canvas.layoutId = languageId;
                 canvas.languageMenuShown = false;
             }

@@ -17,10 +17,11 @@
 import QtQuick 2.0
 
 ActionKey {
-    iconNormal: "../images/icon_shift@18.png";
-    iconShifted: "../images/icon_shift_upsidedown@18.png";
-    iconCapsLock: "../images/icon_shift_white@18.png";
-    action: "shift"
+    iconNormal: "language-chooser";
+    iconShifted: "language-chooser";
+    iconCapsLock: "language-chooser";
+
+    padding: 0
 
     MouseArea {
         anchors.fill: parent

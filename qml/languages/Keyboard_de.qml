@@ -83,7 +83,8 @@ KeyPad {
             height: panel.keyHeight;
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            CharKey        { id: commaKey;    label: ","; shifted: "/";  anchors.left: symShiftKey.right; }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
+            CharKey        { id: commaKey;    label: ","; shifted: "/";  anchors.left: languageMenuButton.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: umlaut.left; }
             CharKey        { id: umlaut;      label: "ö"; shifted: "Ö";  anchors.right: enterKey.left; }
