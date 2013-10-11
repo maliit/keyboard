@@ -35,6 +35,7 @@ OTHER_FILES += \
     keys/DropShadow.qml \
     keys/ExtendedKeysSelector.qml \
     keys/KeyPad.qml \
+    keys/Language.qml
     keys/Magnifier.qml \
     keys/OneTwoKey.qml \
     keys/PressArea.qml \
@@ -52,4 +53,8 @@ OTHER_FILES += \
     languages/Keyboard_symbols.qml \
     languages/Keyboard_telephone.qml \
     languages/Keyboard_zh_cn_pinyin.qml \
-    keys/Language.qml
+    languages/Keyboard_es.qml \
+    languages/Keyboard_pt.qml \
+    languages/Keyboard_de.qml \
+    languages/Keyboard_fr.qml
+

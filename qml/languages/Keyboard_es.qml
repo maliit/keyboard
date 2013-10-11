@@ -37,10 +37,10 @@ KeyPad {
             CharKey { label: "e"; shifted: "E"; extended: ["è", "é", "ê", "ë", "€"]; extendedShifted: ["È","É", "Ê", "Ë", "€"] }
             CharKey { label: "r"; shifted: "R"; }
             CharKey { label: "t"; shifted: "T"; extended: ["þ"]; extendedShifted: ["Þ"] }
-            CharKey { label: "y"; shifted: "Y"; extended: ["ý", "¥"]; extendedShifted: ["Ý", "¥"] }
+            CharKey { label: "y"; shifted: "Y"; extended: ["ý", "¥", "ÿ"]; extendedShifted: ["Ý", "¥", "Ÿ"] }
             CharKey { label: "u"; shifted: "U"; extended: ["û","ù","ú","ü"]; extendedShifted: ["Û","Ù","Ú","Ü"] }
             CharKey { label: "i"; shifted: "I"; extended: ["î","ï","ì","í"]; extendedShifted: ["Î","Ï","Ì","Í"] }
-            CharKey { label: "o"; shifted: "O"; extended: ["ö","ô","ò","ó"]; extendedShifted: ["Ö","Ô","Ò","Ó"] }
+            CharKey { label: "o"; shifted: "O"; extended: ["ö","ô","ò","ó", "º","õ"]; extendedShifted: ["Ö","Ô","Ò","Ó", "º","Õ"] }
             CharKey { label: "p"; shifted: "P"; }
         }
 
@@ -48,7 +48,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","ª","á","å", "æ"]; extendedShifted: ["Ä","À","Â","ª","Á","Å","Æ"] }
+            CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","á","ã","å","ª","æ"]; extendedShifted: ["Ä","À","Â","Á","Ã","Å","ª","Æ"] }
             CharKey { label: "s"; shifted: "S"; extended: ["ß","$"]; extendedShifted: ["$"] }
             CharKey { label: "d"; shifted: "D"; extended: ["ð"]; extendedShifted: ["Ð"] }
             CharKey { label: "f"; shifted: "F"; }
@@ -57,6 +57,7 @@ KeyPad {
             CharKey { label: "j"; shifted: "J"; }
             CharKey { label: "k"; shifted: "K"; }
             CharKey { label: "l"; shifted: "L"; }
+            CharKey { label: "ñ"; shifted: "Ñ"; }
         }
 
         Row {
@@ -80,8 +81,7 @@ KeyPad {
 
             height: panel.keyHeight;
 
-            Language       { id: languageMenuButton;                     anchors.left: parent.left; }
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: languageMenuButton.right; }
+            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             CharKey        { id: commaKey;    label: ","; shifted: "/";  anchors.left: symShiftKey.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
