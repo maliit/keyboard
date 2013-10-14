@@ -80,8 +80,11 @@ sync_code() {
 }
 
 build() {
-    exec_with_ssh "cd $CODE_DIR/ && qmake && make -j 4"
+    # same options as in debian/rules
+    QMAKE_OPTIONS="-recursive MALIIT_DEFAULT_PROFILE=ubuntu CONFIG+=\\\"debug nodoc notests enable-presage enable-hunspell enable-preedit enable-pinyin enable-qt-mobility\\\""
+    exec_with_ssh "cd $CODE_DIR/ && qmake $QMAKE_OPTIONS && make -j 4"
     echo "Installing"
+    adb shell pkill "maliit-server"
     exec_with_ssh "cd $CODE_DIR/ && " $SUDO " make install"
 #    exec_with_ssh "cd $CODE_DIR/ && dpkg-buildpackage -j4"
 }
