@@ -32,10 +32,6 @@
 
 namespace {
     const char gServerName[] = "ubuntu-keyboard-info";
-
-    // Not too short to avoid hogging the CPU and not too long to avoid
-    // a noticeable lag between what's on screen and what we are reporting.
-    const int gKeyboardGeometryCheckIntervalMs = 500;
 }
 
 UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
@@ -52,9 +48,8 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
         startLocalServer();
     }
 
-    connect(&m_sharedInfoUpdateTimer, &QTimer::timeout,
+    connect(&m_sceneRectWatcher, &SceneRectWatcher::sceneRectChanged,
             this, &UbuntuApplicationApiWrapper::updateSharedInfo);
-    m_sharedInfoUpdateTimer.setInterval(gKeyboardGeometryCheckIntervalMs);
 }
 
 void UbuntuApplicationApiWrapper::startLocalServer()
@@ -96,17 +91,8 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
     Q_UNUSED(height)
 #endif
 
-    // We have to update our SharedInfo whenever keyboardSurface in qml/Keyboard.qml changes
-    // its position in the scene or its size, but there's no easy or reliable way to do that in QML.
-    // It's easy to monitor changes in the parent's coordinate system but not in scene's coordinates
-    // as it is affected by changes in any one of keyboardSurface's parents along the scene hirearchy.
-    //
-    // So the safest and simplest approach is to check keyboardSurface's scene coordinates at regular
-    // intervals while the keyboard is visible. Notice that we only send updates through our
-    // ubuntu-keyboard-info socket when those coordinates actually change, so we won't bother our
-    // listener unnecessarily.
-    if (!m_sharedInfoUpdateTimer.isActive())
-        m_sharedInfoUpdateTimer.start();
+    m_sceneRectWatcher.setItem(m_keyboardSurface);
+    updateSharedInfo();
 }
 
 void UbuntuApplicationApiWrapper::reportOSKInvisible()
@@ -117,7 +103,7 @@ void UbuntuApplicationApiWrapper::reportOSKInvisible()
     }
 #endif
 
-    m_sharedInfoUpdateTimer.stop();
+    m_sceneRectWatcher.setItem(0);
 }
 
 int UbuntuApplicationApiWrapper::oskWindowRole() const

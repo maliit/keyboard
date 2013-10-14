@@ -29,6 +29,7 @@ HEADERS += \
     inputmethod_p.h \
     editor.h \
     keyboadsettings.h \
+    scenerectwatcher.h \
     updatenotifier.h \
     ubuntuapplicationapiwrapper.h
 
@@ -37,6 +38,7 @@ SOURCES += \
     inputmethod.cpp \
     editor.cpp \
     keyboadsettings.cpp \
+    scenerectwatcher.cpp \
     updatenotifier.cpp \
     ubuntuapplicationapiwrapper.cpp
 

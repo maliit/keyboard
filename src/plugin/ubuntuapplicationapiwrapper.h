@@ -21,8 +21,9 @@
 #include <QLocalServer>
 #include <QLocalSocket>
 #include <QQuickItem>
+#include <QPointer>
 
-#include <QTimer>
+#include "scenerectwatcher.h"
 
 /*
  * Class: UbuntuApplicationApiWrapper
@@ -73,10 +74,9 @@ private:
     struct SharedInfo m_lastInfoShared;
 
     // Item from qml/Keyboard.qml
-    QQuickItem *m_keyboardSurface;
+    QPointer<QQuickItem> m_keyboardSurface;
 
-    // Used to call updateSharedInfo() at regular intervals
-    QTimer m_sharedInfoUpdateTimer;
+    SceneRectWatcher m_sceneRectWatcher;
 };
 
 #endif // UBUNTUAPPLICATIONAPIWRAPPER_H
