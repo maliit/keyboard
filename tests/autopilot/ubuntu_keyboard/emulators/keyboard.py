@@ -17,6 +17,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from collections import defaultdict
+
 from ubuntu_keyboard.emulators import UbuntuKeyboardEmulatorBase
 from ubuntu_keyboard.emulators.keypad import KeyPad
 
@@ -33,11 +35,13 @@ from autopilot.introspection import (
 logger = logging.getLogger(__name__)
 
 
-class KeyPadNotLoaded(Exception):
-    pass
+class KeyboardState:
+    character = "CHARACTERS"
+    symbol = "SYMBOLS"
 
 
 class Keyboard(object):
+    """Emulator that provides the OSK as an input backend."""
 
     _action_to_label = {
         'SHIFT': 'shift',
@@ -81,8 +85,15 @@ class Keyboard(object):
             )
             raise
 
-        self._character_keypad = None
-        self._symbol_keypad = None
+        self._keyboard_container = self.keyboard.select_single(
+            "KeyboardContainer"
+        )
+
+        self._stored_active_keypad_name = None
+        self._active_keypad = None
+
+        self._keys_position = defaultdict(dict)
+        self._keys_contained = defaultdict(dict)
 
         self._store_current_orientation()
         self._store_current_language_id()
@@ -115,43 +126,6 @@ class Keyboard(object):
                 raise
         return Keyboard.__maliit
 
-    def _keyboard_details_changed(self):
-        return self._language_changed() or self._orientation_changed()
-
-    @property
-    def character_keypad(self):
-        if self._character_keypad is None or self._keyboard_details_changed():
-            self._character_keypad = self._get_keypad("character")
-        return self._character_keypad
-
-    @property
-    def symbol_keypad(self):
-        if (self._symbol_keypad is None
-                or (self._language_changed() or self._orientation_changed())):
-            self._symbol_keypad = self._get_keypad("symbol")
-
-        return self._symbol_keypad
-
-    def _get_keypad(self, name):
-        """Attempt to retrieve KeyPad object of either 'character' or 'symbol'
-
-        *name* must be either 'character' or 'symbol'.
-
-        Raises KeyPadNotLoaded exception if none or more than one keypad is
-        found.
-
-        """
-        objectName = "{name}KeyPadLoader".format(name=name)
-        loader = self.maliit.select_single(
-            "QQuickLoader",
-            objectName=objectName
-        )
-        keypad = loader.select_single(KeyPad)
-        if keypad is None:
-            raise KeyPadNotLoaded("{name} keypad is not currently loaded.")
-
-        return keypad
-
     def dismiss(self):
         """Swipe the keyboard down to hide it.
 
@@ -160,10 +134,10 @@ class Keyboard(object):
 
         """
         if self.is_available():
-            x, y, h, w = self.keyboard.globalRect
+            x, y, h, w = self._keyboard_container.globalRect
             x_pos = int(w / 2)
             # start_y: just inside the keyboard, must be a better way than +1px
-            start_y = y + 1
+            start_y = y - 10
             end_y = y + int(h / 2)
             self.pointer.drag(x_pos, start_y, x_pos, end_y)
 
@@ -172,19 +146,6 @@ class Keyboard(object):
     def is_available(self):
         """Returns true if the keyboard is shown and ready to use."""
         return (self.keyboard.state == "SHOWN")
-
-    @property
-    def current_state(self):
-        return self.keyboard.state
-
-    @property
-    def active_keypad(self):
-        if self.character_keypad.enabled:
-            return self.character_keypad
-        elif self.symbol_keypad.enabled:
-            return self.symbol_keypad
-        else:
-            raise RuntimeError("There are no currently active KeyPads.")
 
     # Much like is_available, but attempts to wait for the keyboard to be
     # ready.
@@ -218,24 +179,21 @@ class Keyboard(object):
             raise RuntimeError("Keyboard is not on screen")
 
         key = self._translate_key(key)
-        active_keypad = None
 
-        try:
-            if self.character_keypad.contains_key(key):
-                self._show_character_keypad()
-                active_keypad = self.character_keypad
-            elif self.symbol_keypad.contains_key(key):
-                self._show_symbol_keypad()
-                active_keypad = self.symbol_keypad
-        except KeyPadNotLoaded:
-            pass
+        req_keypad = KeyboardState.character
+        req_key_state = self._keypad_contains_key(req_keypad, key)
+        if req_key_state is None:
+            req_keypad = KeyboardState.symbol
+            req_key_state = self._keypad_contains_key(req_keypad, key)
 
-        if active_keypad is None:
-            raise ValueError(
-                "Key '%s' was not found on the keyboard." % key
-            )
+        if req_key_state is None:
+            raise ValueError("Key '%s' was not found on the keyboard" % key)
 
-        active_keypad.press_key(key)
+        key_pos = self._get_key_pos_from_keypad(req_keypad, key)
+        self._show_keypad(req_keypad)
+        self._change_keypad_to_state(req_key_state)
+
+        self._tap_key(key_pos)
 
     def type(self, string, delay=0.1):
         """Type the string *string* with a delay of *delay* between each key
@@ -253,6 +211,101 @@ class Keyboard(object):
         for char in string:
             self.press_key(char)
             sleep(delay)
+
+    @property
+    def current_state(self):
+        return self.keyboard.state
+
+    @property
+    def active_keypad_state(self):
+        return self._keyboard_container.activeKeypadState
+
+    @property
+    def active_keypad(self):
+        if (
+            self._stored_active_keypad_name != self._current_keypad_name
+            or self._keyboard_details_changed()
+        ):
+            self._stored_active_keypad_name = self._current_keypad_name
+            loader = self.maliit.select_single(
+                "QQuickLoader",
+                objectName='characterKeyPadLoader'
+            )
+            logger.debug("Keypad lookup")
+            self._active_keypad = loader.select_single(KeyPad)
+        return self._active_keypad
+
+    @property
+    def _current_keypad_name(self):
+        return self._keyboard_container.state
+
+    def _update_details_for_keypad(self, keypad_name):
+        self._show_keypad(keypad_name)
+
+        contained, positions = self.active_keypad.get_key_details()
+        self._keys_contained[self._keyboard_container.state] = contained
+        self._keys_position[self._keyboard_container.state] = positions
+
+    def _keypad_contains_key(self, keypad_name, key):
+        """Returns the keypad state that key is found in.
+
+        Returns either a KeyPadState if the key is found on the provided keypad
+        or None if not found.
+
+        """
+        if self._keypad_details_expired(keypad_name):
+            self._update_details_for_keypad(keypad_name)
+
+        return self._keys_contained[keypad_name].get(key, None)
+
+    def _get_key_pos_from_keypad(self, keypad_name, key):
+        """Returns the position of the key if it is found on that keypad or
+        None if it is not.
+
+        """
+        if self._keypad_details_expired(keypad_name):
+            self._update_details_for_keypad(keypad_name)
+
+        return self._keys_position[keypad_name].get(key, None)
+
+    def _show_keypad(self, keypad_name):
+        if self._current_keypad_name == keypad_name:
+            return
+
+        key_pos = self._get_key_pos_from_keypad(
+            self._current_keypad_name,
+            "symbols"
+        )
+        self._tap_key(key_pos)
+        # Can I do the property thing here?
+        self._keyboard_container.state.wait_for(keypad_name)
+        self.active_keypad.opacity.wait_for(1.0)
+
+    def _change_keypad_to_state(self, state):
+        if self._keyboard_container.activeKeypadState == state:
+            return
+
+        key_pos = self._get_key_pos_from_keypad(
+            self._current_keypad_name,
+            "shift"
+        )
+        self._tap_key(key_pos)
+        self._keyboard_container.activeKeypadState.wait_for(state)
+        self.active_keypad.opacity.wait_for(1.0)
+
+    def _tap_key(self, key_rect, pointer=None):
+        if pointer is None:
+            pointer = Pointer(Touch.create())
+        pointer.click_object(key_rect)
+
+    def _keyboard_details_changed(self):
+        return self._language_changed() or self._orientation_changed()
+
+    def _keypad_details_expired(self, keypad_name):
+        return (
+            self._keys_contained.get(keypad_name) is None
+            or self._keyboard_details_changed()
+        )
 
     def _orientation_changed(self):
         if self._stored_orientation != self.orientation.orientationAngle:
@@ -273,24 +326,6 @@ class Keyboard(object):
 
     def _store_current_language_id(self):
         self._stored_language_id = self.keyboard.layoutId
-
-    def _show_character_keypad(self):
-        """Brings the characters KeyPad to the forefront."""
-        if not self.character_keypad.enabled:
-            # If the character keypad isn't enabled than the symbol keypad must
-            # be active
-            self.symbol_keypad.press_key("symbols")
-            self.character_keypad.enabled.wait_for(True)
-            self.character_keypad.opacity.wait_for(1.0)
-
-    def _show_symbol_keypad(self):
-        """Brings the symbol KeyPad to the forefront."""
-        if not self.symbol_keypad.enabled:
-            # If the symbol keypad isn't enabled than the character keypad must
-            # be active
-            self.character_keypad.press_key("symbols")
-            self.symbol_keypad.enabled.wait_for(True)
-            self.symbol_keypad.opacity.wait_for(1.0)
 
     def _translate_key(self, label):
         """Get the label for a 'special key' (i.e. space) so that it can be
