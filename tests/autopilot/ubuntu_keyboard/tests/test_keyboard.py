@@ -20,7 +20,7 @@
 import os
 
 from testtools.matchers import Equals
-from tempfile import mktemp
+import tempfile
 from textwrap import dedent
 from time import sleep
 
@@ -51,14 +51,44 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
     def _start_qml_script(self, script_contents):
         """Launch a qml script."""
-        qml_path = mktemp(suffix='.qml')
+        qml_path = tempfile.mktemp(suffix='.qml')
         open(qml_path, 'w').write(script_contents)
         self.addCleanup(os.remove, qml_path)
 
+        desktop_file = self._write_test_desktop_file()
         return self.launch_test_application(
             "qmlscene",
             qml_path,
+            '--desktop_file_hint=%s' % desktop_file,
             app_type='qt',
+        )
+
+    def _write_test_desktop_file(self):
+        desktop_file_dir = self.get_local_desktop_file_directory()
+        if not os.path.exists(desktop_file_dir):
+            os.makedirs(desktop_file_dir)
+        with tempfile.NamedTemporaryFile(
+            suffix='.desktop',
+            dir=desktop_file_dir,
+            delete=False
+        ) as desktop_file:
+            desktop_file.write(
+                "[Desktop Entry]\n"
+                "Type=Application\n"
+                "Exec=Not important\n"
+                "Path=Not important\n"
+                "Name=Test app\n"
+                "Icon=Not important"
+            )
+        self.addCleanup(os.remove, desktop_file.name)
+        return desktop_file.name
+
+    def get_local_desktop_file_directory(self):
+        return os.path.join(
+            os.getenv('HOME'),
+            '.local',
+            'share',
+            'applications'
         )
 
     def _launch_simple_input(self, label="", input_hints=None):
@@ -160,7 +190,6 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type(self.input)
-
         self.assertThat(text_area.text, Eventually(Equals(self.input)))
 
 
