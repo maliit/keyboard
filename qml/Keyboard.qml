@@ -111,6 +111,7 @@ Item {
 
         Item {
             id: keyboardSurface
+            objectName: "keyboardSurface"
 
             x:0
             y:0

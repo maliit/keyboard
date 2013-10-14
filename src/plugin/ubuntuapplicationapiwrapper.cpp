@@ -25,13 +25,17 @@
   #define HAVE_UBUNTU_PLATFORM_API
 #endif
 
+#include <QByteArray>
 #include <QDir>
 #include <QFile>
 #include <QtGlobal>
-#include <QByteArray>
 
 namespace {
     const char gServerName[] = "ubuntu-keyboard-info";
+
+    // Not too short to avoid hogging the CPU and not too long to avoid
+    // a noticeable lag between what's on screen and what we are reporting.
+    const int gKeyboardGeometryCheckIntervalMs = 500;
 }
 
 UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
@@ -42,9 +46,15 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
         m_runningOnMir = true;
     }
 
+    m_sharedInfo.reset();
+
     if (m_runningOnMir) {
         startLocalServer();
     }
+
+    connect(&m_sharedInfoUpdateTimer, &QTimer::timeout,
+            this, &UbuntuApplicationApiWrapper::updateSharedInfo);
+    m_sharedInfoUpdateTimer.setInterval(gKeyboardGeometryCheckIntervalMs);
 }
 
 void UbuntuApplicationApiWrapper::startLocalServer()
@@ -86,7 +96,17 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
     Q_UNUSED(height)
 #endif
 
-    sendInfoToClientConnection(width, height);
+    // We have to update our SharedInfo whenever keyboardSurface in qml/Keyboard.qml changes
+    // its position in the scene or its size, but there's no easy or reliable way to do that in QML.
+    // It's easy to monitor changes in the parent's coordinate system but not in scene's coordinates
+    // as it is affected by changes in any one of keyboardSurface's parents along the scene hirearchy.
+    //
+    // So the safest and simplest approach is to check keyboardSurface's scene coordinates at regular
+    // intervals while the keyboard is visible. Notice that we only send updates through our
+    // ubuntu-keyboard-info socket when those coordinates actually change, so we won't bother our
+    // listener unnecessarily.
+    if (!m_sharedInfoUpdateTimer.isActive())
+        m_sharedInfoUpdateTimer.start();
 }
 
 void UbuntuApplicationApiWrapper::reportOSKInvisible()
@@ -96,6 +116,8 @@ void UbuntuApplicationApiWrapper::reportOSKInvisible()
         ubuntu_ui_report_osk_invisible();
     }
 #endif
+
+    m_sharedInfoUpdateTimer.stop();
 }
 
 int UbuntuApplicationApiWrapper::oskWindowRole() const
@@ -107,7 +129,7 @@ int UbuntuApplicationApiWrapper::oskWindowRole() const
 #endif
 }
 
-void UbuntuApplicationApiWrapper::sendInfoToClientConnection(int width, int height)
+void UbuntuApplicationApiWrapper::sendInfoToClientConnection()
 {
     if (!m_clientConnection
             || m_clientConnection->state() != QLocalSocket::ConnectedState) {
@@ -115,18 +137,14 @@ void UbuntuApplicationApiWrapper::sendInfoToClientConnection(int width, int heig
         return;
     }
 
-    struct SharedInfo sharedInfo;
-    sharedInfo.keyboardWidth = width;
-    sharedInfo.keyboardHeight = height;
-
-    if (sharedInfo == m_lastInfoShared) {
+    if (m_sharedInfo == m_lastInfoShared) {
         // do not flood our listener with redundant info. This also means that
         // were are getting called unnecessarily
         return;
     }
 
     const qint64 sharedInfoSize = sizeof(struct SharedInfo);
-    qint64 bytesWritten = m_clientConnection->write(reinterpret_cast<char *>(&sharedInfo),
+    qint64 bytesWritten = m_clientConnection->write(reinterpret_cast<char *>(&m_sharedInfo),
                                                     sharedInfoSize);
 
     if (bytesWritten < 0) {
@@ -138,7 +156,7 @@ void UbuntuApplicationApiWrapper::sendInfoToClientConnection(int width, int heig
                       "but only" << bytesWritten << "went through";
     }
 
-    m_lastInfoShared = sharedInfo;
+    m_lastInfoShared = m_sharedInfo;
 }
 
 void UbuntuApplicationApiWrapper::onNewConnection()
@@ -175,16 +193,45 @@ QString UbuntuApplicationApiWrapper::buildSocketFilePath() const
     }
 }
 
+void UbuntuApplicationApiWrapper::updateSharedInfo()
+{
+    if (!m_keyboardSurface)
+        return;
+
+    QRectF keyboardSceneRect =
+        m_keyboardSurface->mapRectToScene(QRectF(0, 0,
+                                                 m_keyboardSurface->width(),
+                                                 m_keyboardSurface->height()));
+
+    m_sharedInfo.keyboardX = keyboardSceneRect.x();
+    m_sharedInfo.keyboardY = keyboardSceneRect.y();
+    m_sharedInfo.keyboardWidth = keyboardSceneRect.width();
+    m_sharedInfo.keyboardHeight = keyboardSceneRect.height();
+
+    sendInfoToClientConnection();
+}
+
+void UbuntuApplicationApiWrapper::setRootObject(QQuickItem *rootObject)
+{
+    // Getting items from qml/Keyboard.qml
+
+    m_keyboardSurface = rootObject->findChild<QQuickItem*>("keyboardSurface");
+}
+
 // ------------------------------- SharedInfo ----------------------------
 
 bool UbuntuApplicationApiWrapper::SharedInfo::operator ==(const struct SharedInfo &other)
 {
-    return keyboardWidth == other.keyboardWidth
+    return keyboardX == other.keyboardX
+        && keyboardY == other.keyboardY
+        && keyboardWidth == other.keyboardWidth
         && keyboardHeight == other.keyboardHeight;
 }
 
 void UbuntuApplicationApiWrapper::SharedInfo::reset()
 {
+    keyboardX = -1;
+    keyboardY = -1;
     keyboardWidth = 0;
     keyboardHeight = 0;
 }

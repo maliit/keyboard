@@ -20,6 +20,9 @@
 #include <QObject>
 #include <QLocalServer>
 #include <QLocalSocket>
+#include <QQuickItem>
+
+#include <QTimer>
 
 /*
  * Class: UbuntuApplicationApiWrapper
@@ -41,28 +44,39 @@ public:
     void reportOSKVisible(const int, const int, const int, const int);
     void reportOSKInvisible();
 
+    void setRootObject(QQuickItem *rootObject);
 private Q_SLOTS:
     void onNewConnection();
     void onClientDisconnected();
+    void updateSharedInfo();
 
 private:
     // NB! Must match the definition in unity-mir. Not worth creating a shared header
     // just for that.
     struct SharedInfo {
+        qint32 keyboardX;
+        qint32 keyboardY;
         qint32 keyboardWidth;
         qint32 keyboardHeight;
 
         bool operator ==(const struct SharedInfo &other);
         void reset();
     };
-    void sendInfoToClientConnection(int width, int height);
+    void sendInfoToClientConnection();
     void startLocalServer();
     QString buildSocketFilePath() const;
 
     bool m_runningOnMir;
     QLocalServer m_localServer;
     QLocalSocket *m_clientConnection;
+    struct SharedInfo m_sharedInfo;
     struct SharedInfo m_lastInfoShared;
+
+    // Item from qml/Keyboard.qml
+    QQuickItem *m_keyboardSurface;
+
+    // Used to call updateSharedInfo() at regular intervals
+    QTimer m_sharedInfoUpdateTimer;
 };
 
 #endif // UBUNTUAPPLICATIONAPIWRAPPER_H
