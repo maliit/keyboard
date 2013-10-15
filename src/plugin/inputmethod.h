@@ -94,7 +94,7 @@ private:
     Q_SLOT void onStyleSettingChanged();
     Q_SLOT void onFeedbackSettingChanged();
     Q_SLOT void onAutoCorrectSettingChanged();
-    Q_SLOT void onAutoCapsSettingChanged();
+    Q_SLOT void updateAutoCaps();
     Q_SLOT void updateKey(const QString &key_id,
                           const MKeyOverride::KeyOverrideAttributes changed_attributes);
     Q_SLOT void onKeyboardClosed();
@@ -107,6 +107,8 @@ private:
     Q_SLOT void onQMLStateChanged(QString state);
     Q_SIGNAL void wordEngineEnabledChanged(bool wordEngineEnabled);
     Q_SIGNAL void wordRibbonEnabledChanged(bool wordRibbonEnabled);
+
+    void checkInitialAutocaps();
 
     const QScopedPointer<InputMethodPrivate> d_ptr;
 };

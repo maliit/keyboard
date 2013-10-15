@@ -88,6 +88,7 @@ public:
     QQuickView* view;
     UbuntuApplicationApiWrapper* applicationApiWrapper;
 
+    bool autocapsEnabled;
     bool predictionEnabled;
     Maliit::TextContentType contentType;
     QString activeLanguageId;
@@ -109,6 +110,7 @@ public:
         , host(host)
         , view(0)
         , applicationApiWrapper(new UbuntuApplicationApiWrapper)
+        , autocapsEnabled(false)
         , predictionEnabled(false)
         , contentType(Maliit::FreeTextContentType)
         , activeLanguageId("en_us")
@@ -321,8 +323,7 @@ public:
     void registerAutoCapsSetting()
     {
         QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged()),
-                         q, SLOT(onAutoCapsSettingChanged()));
-        editor.setAutoCapsEnabled(m_settings.autoCapitalization());
+                         q, SLOT(updateAutoCaps()));
     }
 
     void registerWordEngineSetting()
