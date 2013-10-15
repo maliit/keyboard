@@ -147,6 +147,14 @@ Item {
         }
     }
 
+    Connections {
+        target: swipeArea.drag
+        onActiveChanged: {
+            if (swipeArea.drag.active)
+                keyMouseArea.cancelPress();
+        }
+    }
+
     Magnifier {
         anchors.horizontalCenter: buttonImage.horizontalCenter
         anchors.bottom: buttonImage.top
