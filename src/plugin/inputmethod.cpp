@@ -93,7 +93,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
             &d->layout.model, SLOT(setKeyArea(KeyArea)));
 
-    connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SLOT(onAutoCapsActivated()));
+    connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SIGNAL(activateAutocaps()));
 
     connect(this, SIGNAL(wordRibbonEnabledChanged(bool)), uiConst, SLOT(onWordEngineSettingsChanged(bool)));
 
@@ -472,18 +472,6 @@ void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
     }
 }
 
-/*
- * activated by the editor after e.g. pressing period
- **/
-void InputMethod::onAutoCapsActivated()
-{
-    Q_D(InputMethod);
-    if (!d->qmlRootItem)
-        return;
-
-    d->qmlRootItem->setProperty("autoCapsActivated", true);
-}
-
 /*!
  * \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be
  * set to uppercase, because the auto caps is enabled and the text is empty.
@@ -498,7 +486,7 @@ void InputMethod::checkInitialAutocaps()
         int position;
         bool ok = d->host->surroundingText(text, position);
         if (ok && text.isEmpty() && position == 0)
-            onAutoCapsActivated();
+            Q_EMIT activateAutocaps();
     }
 }
 

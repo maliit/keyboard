@@ -277,6 +277,7 @@ public:
 
     void setContextProperties(QQmlContext *qml_context)
     {
+        qml_context->setContextProperty("maliit_input_method", q);
         qml_context->setContextProperty("maliit_layout", &layout.model);
         qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
         qml_context->setContextProperty("maliit_wordribbon", layout.helper.wordRibbon());
