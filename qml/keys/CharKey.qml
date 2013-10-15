@@ -143,7 +143,7 @@ Item {
             }
         }
         onPressed: {
-            event_handler.onKeyPressed(valueToSubmit);
+            event_handler.onKeyPressed(valueToSubmit, action);
         }
     }
 
