@@ -73,6 +73,7 @@ Item {
     }
     ExtendedKeysSelector {
         id: extendedKeysSelector
+        objectName: "extendedKeysSelector"
         anchors.fill: parent
     }
 

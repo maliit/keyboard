@@ -91,7 +91,8 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
     Q_UNUSED(height)
 #endif
 
-    m_sceneRectWatcher.setItem(m_keyboardSurface);
+    m_sceneRectWatcher.setItem(m_keyboardComp);
+    startWatchingExtendedKeysSelector();
     updateSharedInfo();
 }
 
@@ -104,6 +105,7 @@ void UbuntuApplicationApiWrapper::reportOSKInvisible()
 #endif
 
     m_sceneRectWatcher.setItem(0);
+    stopWatchingExtendedKeysSelector();
 }
 
 int UbuntuApplicationApiWrapper::oskWindowRole() const
@@ -181,13 +183,26 @@ QString UbuntuApplicationApiWrapper::buildSocketFilePath() const
 
 void UbuntuApplicationApiWrapper::updateSharedInfo()
 {
-    if (!m_keyboardSurface)
+    if (m_keyboardComp.isNull() || m_keyboardSurface.isNull()
+            || m_extendedKeysSelector.isNull()) {
         return;
+    }
 
-    QRectF keyboardSceneRect =
-        m_keyboardSurface->mapRectToScene(QRectF(0, 0,
-                                                 m_keyboardSurface->width(),
-                                                 m_keyboardSurface->height()));
+    QRectF keyboardSceneRect;
+
+    if (m_extendedKeysSelector->isEnabled() && m_extendedKeysSelector->isVisible()) {
+        // The pop-up could be above the keyboard, so we need a bigger area that's guaranteed
+        // to contain both the keyboard and that extended keys selector pop-up, which is the
+        // keyboardSurface.
+        keyboardSceneRect = m_keyboardSurface->mapRectToScene(QRectF(0, 0,
+                                                              m_keyboardSurface->width(),
+                                                              m_keyboardSurface->height()));
+    } else {
+        // Regular case, just the keyboard area.
+        keyboardSceneRect = m_keyboardComp->mapRectToScene(QRectF(0, 0,
+                                                           m_keyboardComp->width(),
+                                                           m_keyboardComp->height()));
+    }
 
     m_sharedInfo.keyboardX = keyboardSceneRect.x();
     m_sharedInfo.keyboardY = keyboardSceneRect.y();
@@ -202,7 +217,35 @@ void UbuntuApplicationApiWrapper::setRootObject(QQuickItem *rootObject)
     // Getting items from qml/Keyboard.qml
 
     m_keyboardSurface = rootObject->findChild<QQuickItem*>("keyboardSurface");
+    if (m_keyboardSurface.isNull()) {
+        qFatal("UbuntuApplicationApiWrapper: couldn't find \"keyboardSurface\" QML item");
+    }
+
+    m_keyboardComp = rootObject->findChild<QQuickItem*>("keyboardComp");
+    if (m_keyboardComp.isNull()) {
+        qFatal("UbuntuApplicationApiWrapper: couldn't find \"keyboardComp\" QML item");
+    }
+
+    // In qml/KeyboardContainer.qml, a child of qml/Keyboard.qml
+    m_extendedKeysSelector = rootObject->findChild<QQuickItem*>("extendedKeysSelector");
+    if (m_extendedKeysSelector.isNull()) {
+        qFatal("UbuntuApplicationApiWrapper: couldn't find \"extendedKeysSelector\" QML item");
+    }
 }
+
+void UbuntuApplicationApiWrapper::startWatchingExtendedKeysSelector()
+{
+    connect(m_extendedKeysSelector.data(), &QQuickItem::enabledChanged,
+            this, &UbuntuApplicationApiWrapper::updateSharedInfo);
+    connect(m_extendedKeysSelector.data(), &QQuickItem::visibleChanged,
+            this, &UbuntuApplicationApiWrapper::updateSharedInfo);
+}
+
+void UbuntuApplicationApiWrapper::stopWatchingExtendedKeysSelector()
+{
+    disconnect(m_extendedKeysSelector.data(), 0, this, 0);
+}
+
 
 // ------------------------------- SharedInfo ----------------------------
 

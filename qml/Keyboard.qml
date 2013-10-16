@@ -29,6 +29,13 @@
  *
  */
 
+
+//////////////////////
+// !!!IMPORTANT!!! Heavy modifications here might break the assumptions made by
+// UbuntuApplicationApiWrapper code (e.g. object names and what the items do/contain).
+// Update the code there accordingly, if needed. That code should no longer be needed
+// once the final architecture is in place.
+
 import QtQuick 2.0
 import "constants.js" as Const
 import "keys/"
@@ -132,6 +139,7 @@ Item {
 
             Item {
                 id: keyboardComp
+                objectName: "keyboardComp"
 
                 height: canvas.keypadHeight - wordRibbon.height
                 width: parent.width

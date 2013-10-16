@@ -66,6 +66,8 @@ private:
     void sendInfoToClientConnection();
     void startLocalServer();
     QString buildSocketFilePath() const;
+    void startWatchingExtendedKeysSelector();
+    void stopWatchingExtendedKeysSelector();
 
     bool m_runningOnMir;
     QLocalServer m_localServer;
@@ -73,8 +75,18 @@ private:
     struct SharedInfo m_sharedInfo;
     struct SharedInfo m_lastInfoShared;
 
-    // Item from qml/Keyboard.qml
+    /////
+    // Items from qml/Keyboard.qml
+
+    // Just the keyboard area
+    QPointer<QQuickItem> m_keyboardComp;
+
+    // Keyboard + space for the word ribbon on top
     QPointer<QQuickItem> m_keyboardSurface;
+
+    // The baloon that pops-up when you long press a character key to get
+    // its accented versions etc.
+    QPointer<QQuickItem> m_extendedKeysSelector;
 
     SceneRectWatcher m_sceneRectWatcher;
 };
