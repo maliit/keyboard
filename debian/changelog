@@ -1,3 +1,17 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131016.1-0ubuntu1) saucy; urgency=low
+
+  [ Christopher Lee ]
+  * Update to the ubuntu-keyboard emulator so that they work after the
+    recent changes to the loader.
+
+  [ Guenter Schwann ]
+  * Increase the size of the swipe area.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 78
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 16 Oct 2013 11:02:01 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131011.1-0ubuntu1) saucy; urgency=low
 
   [ Daniel d'Andrada ]
