@@ -25,10 +25,10 @@
   #define HAVE_UBUNTU_PLATFORM_API
 #endif
 
+#include <QByteArray>
 #include <QDir>
 #include <QFile>
 #include <QtGlobal>
-#include <QByteArray>
 
 namespace {
     const char gServerName[] = "ubuntu-keyboard-info";
@@ -42,9 +42,14 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
         m_runningOnMir = true;
     }
 
+    m_sharedInfo.reset();
+
     if (m_runningOnMir) {
         startLocalServer();
     }
+
+    connect(&m_sceneRectWatcher, &SceneRectWatcher::sceneRectChanged,
+            this, &UbuntuApplicationApiWrapper::updateSharedInfo);
 }
 
 void UbuntuApplicationApiWrapper::startLocalServer()
@@ -86,7 +91,9 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
     Q_UNUSED(height)
 #endif
 
-    sendInfoToClientConnection(width, height);
+    m_sceneRectWatcher.setItem(m_keyboardComp);
+    startWatchingExtendedKeysSelector();
+    updateSharedInfo();
 }
 
 void UbuntuApplicationApiWrapper::reportOSKInvisible()
@@ -96,6 +103,9 @@ void UbuntuApplicationApiWrapper::reportOSKInvisible()
         ubuntu_ui_report_osk_invisible();
     }
 #endif
+
+    m_sceneRectWatcher.setItem(0);
+    stopWatchingExtendedKeysSelector();
 }
 
 int UbuntuApplicationApiWrapper::oskWindowRole() const
@@ -107,7 +117,7 @@ int UbuntuApplicationApiWrapper::oskWindowRole() const
 #endif
 }
 
-void UbuntuApplicationApiWrapper::sendInfoToClientConnection(int width, int height)
+void UbuntuApplicationApiWrapper::sendInfoToClientConnection()
 {
     if (!m_clientConnection
             || m_clientConnection->state() != QLocalSocket::ConnectedState) {
@@ -115,18 +125,14 @@ void UbuntuApplicationApiWrapper::sendInfoToClientConnection(int width, int heig
         return;
     }
 
-    struct SharedInfo sharedInfo;
-    sharedInfo.keyboardWidth = width;
-    sharedInfo.keyboardHeight = height;
-
-    if (sharedInfo == m_lastInfoShared) {
+    if (m_sharedInfo == m_lastInfoShared) {
         // do not flood our listener with redundant info. This also means that
         // were are getting called unnecessarily
         return;
     }
 
     const qint64 sharedInfoSize = sizeof(struct SharedInfo);
-    qint64 bytesWritten = m_clientConnection->write(reinterpret_cast<char *>(&sharedInfo),
+    qint64 bytesWritten = m_clientConnection->write(reinterpret_cast<char *>(&m_sharedInfo),
                                                     sharedInfoSize);
 
     if (bytesWritten < 0) {
@@ -138,7 +144,7 @@ void UbuntuApplicationApiWrapper::sendInfoToClientConnection(int width, int heig
                       "but only" << bytesWritten << "went through";
     }
 
-    m_lastInfoShared = sharedInfo;
+    m_lastInfoShared = m_sharedInfo;
 }
 
 void UbuntuApplicationApiWrapper::onNewConnection()
@@ -175,16 +181,86 @@ QString UbuntuApplicationApiWrapper::buildSocketFilePath() const
     }
 }
 
+void UbuntuApplicationApiWrapper::updateSharedInfo()
+{
+    if (m_keyboardComp.isNull() || m_keyboardSurface.isNull()
+            || m_extendedKeysSelector.isNull()) {
+        return;
+    }
+
+    QRectF keyboardSceneRect;
+
+    if (m_extendedKeysSelector->isEnabled() && m_extendedKeysSelector->isVisible()) {
+        // The pop-up could be above the keyboard, so we need a bigger area that's guaranteed
+        // to contain both the keyboard and that extended keys selector pop-up, which is the
+        // keyboardSurface.
+        keyboardSceneRect = m_keyboardSurface->mapRectToScene(QRectF(0, 0,
+                                                              m_keyboardSurface->width(),
+                                                              m_keyboardSurface->height()));
+    } else {
+        // Regular case, just the keyboard area.
+        keyboardSceneRect = m_keyboardComp->mapRectToScene(QRectF(0, 0,
+                                                           m_keyboardComp->width(),
+                                                           m_keyboardComp->height()));
+    }
+
+    m_sharedInfo.keyboardX = keyboardSceneRect.x();
+    m_sharedInfo.keyboardY = keyboardSceneRect.y();
+    m_sharedInfo.keyboardWidth = keyboardSceneRect.width();
+    m_sharedInfo.keyboardHeight = keyboardSceneRect.height();
+
+    sendInfoToClientConnection();
+}
+
+void UbuntuApplicationApiWrapper::setRootObject(QQuickItem *rootObject)
+{
+    // Getting items from qml/Keyboard.qml
+
+    m_keyboardSurface = rootObject->findChild<QQuickItem*>("keyboardSurface");
+    if (m_keyboardSurface.isNull()) {
+        qFatal("UbuntuApplicationApiWrapper: couldn't find \"keyboardSurface\" QML item");
+    }
+
+    m_keyboardComp = rootObject->findChild<QQuickItem*>("keyboardComp");
+    if (m_keyboardComp.isNull()) {
+        qFatal("UbuntuApplicationApiWrapper: couldn't find \"keyboardComp\" QML item");
+    }
+
+    // In qml/KeyboardContainer.qml, a child of qml/Keyboard.qml
+    m_extendedKeysSelector = rootObject->findChild<QQuickItem*>("extendedKeysSelector");
+    if (m_extendedKeysSelector.isNull()) {
+        qFatal("UbuntuApplicationApiWrapper: couldn't find \"extendedKeysSelector\" QML item");
+    }
+}
+
+void UbuntuApplicationApiWrapper::startWatchingExtendedKeysSelector()
+{
+    connect(m_extendedKeysSelector.data(), &QQuickItem::enabledChanged,
+            this, &UbuntuApplicationApiWrapper::updateSharedInfo);
+    connect(m_extendedKeysSelector.data(), &QQuickItem::visibleChanged,
+            this, &UbuntuApplicationApiWrapper::updateSharedInfo);
+}
+
+void UbuntuApplicationApiWrapper::stopWatchingExtendedKeysSelector()
+{
+    disconnect(m_extendedKeysSelector.data(), 0, this, 0);
+}
+
+
 // ------------------------------- SharedInfo ----------------------------
 
 bool UbuntuApplicationApiWrapper::SharedInfo::operator ==(const struct SharedInfo &other)
 {
-    return keyboardWidth == other.keyboardWidth
+    return keyboardX == other.keyboardX
+        && keyboardY == other.keyboardY
+        && keyboardWidth == other.keyboardWidth
         && keyboardHeight == other.keyboardHeight;
 }
 
 void UbuntuApplicationApiWrapper::SharedInfo::reset()
 {
+    keyboardX = -1;
+    keyboardY = -1;
     keyboardWidth = 0;
     keyboardHeight = 0;
 }
