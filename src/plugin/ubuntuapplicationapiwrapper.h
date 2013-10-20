@@ -20,6 +20,10 @@
 #include <QObject>
 #include <QLocalServer>
 #include <QLocalSocket>
+#include <QQuickItem>
+#include <QPointer>
+
+#include "scenerectwatcher.h"
 
 /*
  * Class: UbuntuApplicationApiWrapper
@@ -41,23 +45,50 @@ public:
     void reportOSKVisible(const int, const int, const int, const int);
     void reportOSKInvisible();
 
+    void setRootObject(QQuickItem *rootObject);
 private Q_SLOTS:
     void onNewConnection();
     void onClientDisconnected();
-    void onClientError(QLocalSocket::LocalSocketError socketError);
+    void updateSharedInfo();
 
 private:
     // NB! Must match the definition in unity-mir. Not worth creating a shared header
     // just for that.
     struct SharedInfo {
+        qint32 keyboardX;
+        qint32 keyboardY;
         qint32 keyboardWidth;
         qint32 keyboardHeight;
+
+        bool operator ==(const struct SharedInfo &other);
+        void reset();
     };
-    void sendInfoToClientConnection(int width, int height);
+    void sendInfoToClientConnection();
+    void startLocalServer();
+    QString buildSocketFilePath() const;
+    void startWatchingExtendedKeysSelector();
+    void stopWatchingExtendedKeysSelector();
 
     bool m_runningOnMir;
     QLocalServer m_localServer;
     QLocalSocket *m_clientConnection;
+    struct SharedInfo m_sharedInfo;
+    struct SharedInfo m_lastInfoShared;
+
+    /////
+    // Items from qml/Keyboard.qml
+
+    // Just the keyboard area
+    QPointer<QQuickItem> m_keyboardComp;
+
+    // Keyboard + space for the word ribbon on top
+    QPointer<QQuickItem> m_keyboardSurface;
+
+    // The baloon that pops-up when you long press a character key to get
+    // its accented versions etc.
+    QPointer<QQuickItem> m_extendedKeysSelector;
+
+    SceneRectWatcher m_sceneRectWatcher;
 };
 
 #endif // UBUNTUAPPLICATIONAPIWRAPPER_H

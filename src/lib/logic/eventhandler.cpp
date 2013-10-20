@@ -213,12 +213,15 @@ void EventHandler::onLanguageChangeRequested(QString languageId)
     d->updater->setActiveKeyboardId(languageId);
 }
 
-void EventHandler::onKeyPressed(QString label)
+void EventHandler::onKeyPressed(QString label, QString action)
 {
     Key key;
     Label mlabel;
     mlabel.setText(label);
     key.setLabel(mlabel);
+
+    if (action == "backspace")
+        key.setAction(Key::ActionBackspace);
 
     Q_EMIT keyPressed(key);
 }

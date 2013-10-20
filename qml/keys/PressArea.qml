@@ -30,8 +30,14 @@ MultiPointTouchArea {
     /// Is true while the area is touched, and the finger did not yet lift
     property bool pressed: false
 
-    /// same as MouseArea pressAndHold()
+    /// Same as MouseArea pressAndHold()
     signal pressAndHold()
+
+    /// Cancels the current pressed state of the mouse are
+    function cancelPress() {
+        pressed = false;
+        holdTimer.stop();
+    }
 
     Timer {
         id: holdTimer
