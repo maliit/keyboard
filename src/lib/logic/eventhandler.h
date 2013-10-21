@@ -77,8 +77,8 @@ public:
 
     Q_INVOKABLE void onKeyEntered(QString label);
     Q_INVOKABLE void onKeyExited(QString label);
-    Q_INVOKABLE void onKeyPressed(QString label);
-    Q_INVOKABLE void onKeyReleased(QString label, QString action = "");
+    Q_INVOKABLE void onKeyPressed(QString label, QString action = QString());
+    Q_INVOKABLE void onKeyReleased(QString label, QString action = QString());
 
     // Key signals:
     Q_SIGNAL void keyPressed(const Key &key);

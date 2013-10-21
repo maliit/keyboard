@@ -143,7 +143,15 @@ Item {
             }
         }
         onPressed: {
-            event_handler.onKeyPressed(valueToSubmit);
+            event_handler.onKeyPressed(valueToSubmit, action);
+        }
+    }
+
+    Connections {
+        target: swipeArea.drag
+        onActiveChanged: {
+            if (swipeArea.drag.active)
+                keyMouseArea.cancelPress();
         }
     }
 

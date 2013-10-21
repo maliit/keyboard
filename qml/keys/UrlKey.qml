@@ -21,7 +21,8 @@ CharKey {
     width: panel.keyWidth + units.gu( UI.emailLayoutUrlKeyPadding )
 
     label: ".com";
-    shifted: "/";
+    shifted: ".com";
     extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"];
+    extendedShifted: extended
     fontSize: units.gu(UI.smallFontSize);
 }

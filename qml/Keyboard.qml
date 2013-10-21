@@ -29,6 +29,13 @@
  *
  */
 
+
+//////////////////////
+// !!!IMPORTANT!!! Heavy modifications here might break the assumptions made by
+// UbuntuApplicationApiWrapper code (e.g. object names and what the items do/contain).
+// Update the code there accordingly, if needed. That code should no longer be needed
+// once the final architecture is in place.
+
 import QtQuick 2.0
 import "constants.js" as Const
 import "keys/"
@@ -82,6 +89,7 @@ Item {
         if (autoCapsActivated) {
             keypad.state = "CHARACTERS"
             keypad.activeKeypadState = "SHIFTED";
+            autoCapsActivated = false;
         }
     }
 
@@ -95,7 +103,8 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: (parent.height - canvas.keypadHeight) + wordRibbon.height + units.gu(UI.top_margin)
+        height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
+                borderTop.height + units.gu(UI.top_margin) * 3
 
         drag.target: keyboardSurface
         drag.axis: Drag.YAxis;
@@ -114,6 +123,7 @@ Item {
 
         Item {
             id: keyboardSurface
+            objectName: "keyboardSurface"
 
             x:0
             y:0
@@ -134,6 +144,7 @@ Item {
 
             Item {
                 id: keyboardComp
+                objectName: "keyboardComp"
 
                 height: canvas.keypadHeight - wordRibbon.height
                 width: parent.width

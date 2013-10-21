@@ -1,3 +1,36 @@
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131016.1-0ubuntu1) saucy; urgency=low
+
+  [ Christopher Lee ]
+  * Update to the ubuntu-keyboard emulator so that they work after the
+    recent changes to the loader.
+
+  [ Guenter Schwann ]
+  * Increase the size of the swipe area.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 78
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 16 Oct 2013 11:02:01 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131011.1-0ubuntu1) saucy; urgency=low
+
+  [ Daniel d'Andrada ]
+  * Various improvements to ubuntu-keyboard-info socket server Make it
+    more robust. (LP: #1237870)
+
+  [ Thomas Moenicke ]
+  * more languages.
+  * new action key icons.
+
+  [ Guenter Schwann ]
+  * Fix for auto caps to work more than once Essentially it's only 25 +
+    autoCapsActivated = false;.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 75
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Oct 2013 16:52:53 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131009.2-0ubuntu1) saucy; urgency=low
 
   [ Daniel d'Andrada ]

@@ -456,6 +456,8 @@ void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
         d->qmlRootItem = d->view->rootObject()->findChild<QQuickItem*>("ubuntuKeyboard");
         QObject::connect(d->qmlRootItem, SIGNAL(stateChanged(QString)), this, SLOT(onQMLStateChanged(QString)));
         QObject::connect(d->qmlRootItem, SIGNAL(layoutIdChanged(QString)), &d->editor, SLOT(onLanguageChanged(QString)));
+
+        d->applicationApiWrapper->setRootObject(d->view->rootObject());
     }
         break;
     default:
