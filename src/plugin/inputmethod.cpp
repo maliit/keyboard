@@ -93,7 +93,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
             &d->layout.model, SLOT(setKeyArea(KeyArea)));
 
-    connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SLOT(onAutoCapsActivated()));
+    connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SIGNAL(activateAutocaps()));
 
     connect(this, SIGNAL(wordRibbonEnabledChanged(bool)), uiConst, SLOT(onWordEngineSettingsChanged(bool)));
 
@@ -208,8 +208,11 @@ QString InputMethod::activeSubView(Maliit::HandlerState state) const
 
 void InputMethod::handleFocusChange(bool focusIn)
 {
-    if (not focusIn)
+    if (focusIn) {
+        checkInitialAutocaps();
+    } else {
         hide();
+    }
 }
 
 void InputMethod::handleAppOrientationChanged(int angle)
@@ -265,10 +268,23 @@ void InputMethod::onAutoCorrectSettingChanged()
     d->editor.setAutoCorrectEnabled(d->m_settings.autoCompletion());
 }
 
-void InputMethod::onAutoCapsSettingChanged()
+/*!
+ * \brief InputMethod::updateAutoCaps enabled the use of auto capitalization
+ * when the setting iss eto true, and the text area does not prevent to use it
+ */
+void InputMethod::updateAutoCaps()
 {
     Q_D(InputMethod);
-    d->editor.setAutoCapsEnabled(d->m_settings.autoCapitalization());
+    bool enabled = d->m_settings.autoCapitalization();
+    enabled &= d->contentType == Maliit::FreeTextContentType;
+    bool valid = true;
+    bool autocap = d->host->autoCapitalizationEnabled(valid);
+    enabled &= autocap;
+
+    if (enabled != d->autocapsEnabled) {
+        d->autocapsEnabled = enabled;
+        d->editor.setAutoCapsEnabled(enabled);
+    }
 }
 
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
@@ -326,12 +342,12 @@ void InputMethod::onKeyboardClosed()
 
 void InputMethod::onLayoutWidthChanged(int width)
 {
-  Q_UNUSED(width);
+    Q_UNUSED(width);
 }
 
 void InputMethod::onLayoutHeightChanged(int height)
 {
-  Q_UNUSED(height);
+    Q_UNUSED(height);
 }
 
 void InputMethod::deviceOrientationChanged(Qt::ScreenOrientation orientation)
@@ -349,7 +365,6 @@ void InputMethod::update()
     bool valid;
 
     bool emitPredictionEnabled = false;
-    bool emitContentType = false;
 
     bool newPredictionEnabled = inputMethodHost()->predictionEnabled(valid);
 
@@ -365,19 +380,12 @@ void InputMethod::update()
     if (!valid) {
         newContentType = Maliit::FreeTextContentType;
     }
-
-    if (newContentType != d->contentType) {
-        d->contentType = newContentType;
-        emitContentType = true;
-    }
-
+    onContentTypeChanged(newContentType);
 
     if (emitPredictionEnabled)
         Q_EMIT predictionEnabledChanged();
 
-    if (emitContentType)
-           Q_EMIT contentTypeChanged(d->contentType);
-
+    updateAutoCaps();
 }
 
 void InputMethod::updateWordEngine()
@@ -411,6 +419,11 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
 {
     Q_D(InputMethod);
 
+    if (contentType == d->contentType)
+        return;
+
+    d->contentType = contentType;
+
     // TODO when refactoring, forward the enum to QML
 
     if (contentType == Maliit::FreeTextContentType)
@@ -429,6 +442,10 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
         d->setActiveKeyboardId("url");
 
     updateWordEngine();
+
+    Q_EMIT contentTypeChanged(contentType);
+
+    updateAutoCaps();
 }
 
 void InputMethod::onQMLStateChanged(QString state)
@@ -457,14 +474,22 @@ void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
     }
 }
 
-/*
- * activated by the editor after e.g. pressing period
- **/
-
-void InputMethod::onAutoCapsActivated()
+/*!
+ * \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be
+ * set to uppercase, because the auto caps is enabled and the text is empty.
+ */
+void InputMethod::checkInitialAutocaps()
 {
     Q_D(InputMethod);
-    d->qmlRootItem->setProperty("autoCapsActivated", true);
+    update();
+
+    if (d->autocapsEnabled) {
+        QString text;
+        int position;
+        bool ok = d->host->surroundingText(text, position);
+        if (ok && text.isEmpty() && position == 0)
+            Q_EMIT activateAutocaps();
+    }
 }
 
 } // namespace MaliitKeyboard

@@ -88,6 +88,7 @@ public:
     QQuickView* view;
     UbuntuApplicationApiWrapper* applicationApiWrapper;
 
+    bool autocapsEnabled;
     bool predictionEnabled;
     Maliit::TextContentType contentType;
     QString activeLanguageId;
@@ -109,6 +110,7 @@ public:
         , host(host)
         , view(0)
         , applicationApiWrapper(new UbuntuApplicationApiWrapper)
+        , autocapsEnabled(false)
         , predictionEnabled(false)
         , contentType(Maliit::FreeTextContentType)
         , activeLanguageId("en_us")
@@ -275,6 +277,7 @@ public:
 
     void setContextProperties(QQmlContext *qml_context)
     {
+        qml_context->setContextProperty("maliit_input_method", q);
         qml_context->setContextProperty("maliit_layout", &layout.model);
         qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
         qml_context->setContextProperty("maliit_wordribbon", layout.helper.wordRibbon());
@@ -321,8 +324,7 @@ public:
     void registerAutoCapsSetting()
     {
         QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged()),
-                         q, SLOT(onAutoCapsSettingChanged()));
-        editor.setAutoCapsEnabled(m_settings.autoCapitalization());
+                         q, SLOT(updateAutoCaps()));
     }
 
     void registerWordEngineSetting()
