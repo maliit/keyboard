@@ -47,6 +47,7 @@ Item {
     id: fullScreenItem
     objectName: "fullScreenItem"
 
+    property variant input_method: maliit_input_method
     property variant layout: maliit_layout
     property variant event_handler: maliit_event_handler
 
@@ -84,14 +85,6 @@ Item {
 
     property bool shown: false;
     property bool wordribbon_visible: false;
-    property bool autoCapsActivated: false
-    onAutoCapsActivatedChanged: {
-        if (autoCapsActivated) {
-            keypad.state = "CHARACTERS"
-            keypad.activeKeypadState = "SHIFTED";
-            autoCapsActivated = false;
-        }
-    }
 
     property bool languageMenuShown: false
 
@@ -230,6 +223,14 @@ Item {
     ]
     transitions: Transition {
         PropertyAnimation { target: canvas; properties: "y"; easing.type: Easing.InOutQuad }
+    }
+
+    Connections {
+        target: input_method
+        onActivateAutocaps: {
+            keypad.state = "CHARACTERS";
+            keypad.activeKeypadState = "SHIFTED";
+        }
     }
 
 } // canvas
