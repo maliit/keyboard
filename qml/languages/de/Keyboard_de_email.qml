@@ -85,7 +85,7 @@ KeyPad {
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             CharKey        { id: atKey;    label: "@"; shifted: "@";     anchors.left: symShiftKey.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: atKey.right; anchors.right: urlKey.left; noMagnifier: true }
-            UrlKey         { id: urlKey;                                 anchors.right: dotKey.left; }
+            UrlKey         { id: urlKey; label: ".de"; extended: [".at", ".ch", ".de"]; anchors.right: dotKey.left; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: umlaut.left; }
             CharKey        { id: umlaut;      label: "ö"; shifted: "Ö";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
