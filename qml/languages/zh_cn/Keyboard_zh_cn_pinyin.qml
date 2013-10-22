@@ -15,7 +15,7 @@
  */
 
 import QtQuick 2.0
-import "../keys"
+import "../../keys"
 
 KeyPad {
     anchors.fill: parent

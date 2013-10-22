@@ -12,10 +12,29 @@ qml_keys.files = keys/*.qml keys/*.js
 qml_languages.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages"
 qml_languages.files = languages/*.qml languages/*.js
 
+lang_de.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/de"
+lang_de.files = languages/de/*.qml languages/de/*.js
+
+lang_es.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/es"
+lang_es.files = languages/es/*.qml languages/es/*.js
+
+lang_pt.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/pt"
+lang_pt.files = languages/pt/*.qml languages/pt/*.js
+
+lang_fr.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/fr"
+lang_fr.files = languages/fr/*.qml languages/fr/*.js
+
+lang_en_us.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/en_us"
+lang_en_us.files = languages/en_us/*.qml languages/en_us/*.js
+
+lang_zh_cn.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/zh_cn"
+lang_zh_cn.files = languages/zh_cn/*.qml languages/zh_cn/*.js
+
+
 images.path = "$$UBUNTU_KEYBOARD_DATA_DIR/images"
 images.files = images/*.png images/*.sci
 
-INSTALLS += qml qml_keys qml_languages images
+INSTALLS += qml qml_keys qml_languages lang_de lang_es lang_pt lang_fr lang_en_us lang_zh_cn images
 
 # for QtCreator
 OTHER_FILES += \
@@ -45,17 +64,17 @@ OTHER_FILES += \
     keys/Spacer.qml \
     keys/SymbolShiftKey.qml \
     keys/UrlKey.qml \
-    languages/Keyboard_en_email.qml \
-    languages/Keyboard_en_url.qml \
-    languages/Keyboard_en_url_search.qml \
-    languages/Keyboard_en_us.qml \
+    languages/en_us/Keyboard_en_email.qml \
+    languages/en_us/Keyboard_en_url.qml \
+    languages/en_us/Keyboard_en_url_search.qml \
+    languages/en_us/Keyboard_en_us.qml \
     languages/Keyboard_numbers.qml \
     languages/Keyboard_symbols.qml \
     languages/Keyboard_telephone.qml \
-    languages/Keyboard_zh_cn_pinyin.qml \
-    languages/Keyboard_es.qml \
-    languages/Keyboard_pt.qml \
-    languages/Keyboard_de.qml \
-    languages/Keyboard_fr.qml
+    languages/zh_cn/Keyboard_zh_cn_pinyin.qml \
+    languages/es/Keyboard_es.qml \
+    languages/pt/Keyboard_pt.qml \
+    languages/de/Keyboard_de.qml \
+    languages/fr/Keyboard_fr.qml
 
 

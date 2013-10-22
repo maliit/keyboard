@@ -15,7 +15,7 @@
  */
 
 import QtQuick 2.0
-import "../keys"
+import "../../keys"
 
 KeyPad {
     anchors.fill: parent
@@ -32,23 +32,22 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; }
-            CharKey { label: "w"; shifted: "W"; }
-            CharKey { label: "e"; shifted: "E"; extended: ["è", "é", "ê", "ë", "€"]; extendedShifted: ["È","É", "Ê", "Ë", "€"] }
+            CharKey { label: "a"; shifted: "A"; extended: ["à","â","æ","á","ã","ä"]; extendedShifted: ["À","Â","Æ","Á","Ã","Ä"] }
+            CharKey { label: "z"; shifted: "Z"; }
+            CharKey { label: "e"; shifted: "E"; extended: ["è","é","ë","ê","€"]; extendedShifted: ["È","É","Ë","Ê","€"] }
             CharKey { label: "r"; shifted: "R"; }
-            CharKey { label: "t"; shifted: "T"; extended: ["þ"]; extendedShifted: ["Þ"] }
-            CharKey { label: "y"; shifted: "Y"; extended: ["ý", "¥"]; extendedShifted: ["Ý", "¥"] }
+            CharKey { label: "t"; shifted: "T"; }
+            CharKey { label: "y"; shifted: "Y"; extended: ["ÿ","¥"]; extendedShifted: ["Ÿ","¥"] }
             CharKey { label: "u"; shifted: "U"; extended: ["û","ù","ú","ü"]; extendedShifted: ["Û","Ù","Ú","Ü"] }
             CharKey { label: "i"; shifted: "I"; extended: ["î","ï","ì","í"]; extendedShifted: ["Î","Ï","Ì","Í"] }
-            CharKey { label: "o"; shifted: "O"; extended: ["ö","ô","ò","ó"]; extendedShifted: ["Ö","Ô","Ò","Ó"] }
+            CharKey { label: "o"; shifted: "O"; extended: ["ô","œ","ò","ó","õ"]; extendedShifted: ["Ô","Œ","Ò","Ó","Õ"] }
             CharKey { label: "p"; shifted: "P"; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
-
-            CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","á","ã","å"]; extendedShifted: ["Ä","À","Â","Á","Ã","Å"] }
+            CharKey { label: "q"; shifted: "Q"; }
             CharKey { label: "s"; shifted: "S"; extended: ["ß","$"]; extendedShifted: ["$"] }
             CharKey { label: "d"; shifted: "D"; extended: ["ð"]; extendedShifted: ["Ð"] }
             CharKey { label: "f"; shifted: "F"; }
@@ -57,6 +56,7 @@ KeyPad {
             CharKey { label: "j"; shifted: "J"; }
             CharKey { label: "k"; shifted: "K"; }
             CharKey { label: "l"; shifted: "L"; }
+            CharKey { label: "m"; shifted: "M"; }
         }
 
         Row {
@@ -64,13 +64,14 @@ KeyPad {
             spacing: 0
 
             ShiftKey {}
-            CharKey { label: "z"; shifted: "Z"; }
+
+            CharKey { label: "w"; shifted: "W"; }
             CharKey { label: "x"; shifted: "X"; }
             CharKey { label: "c"; shifted: "C"; extended: ["ç"]; extendedShifted: ["Ç"] }
             CharKey { label: "v"; shifted: "V"; }
             CharKey { label: "b"; shifted: "B"; }
             CharKey { label: "n"; shifted: "N"; extended: ["ñ"]; extendedShifted: ["Ñ"] }
-            CharKey { label: "m"; shifted: "M"; }
+            CharKey { label: "ç"; shifted: "Ç"; }
             BackspaceKey {}
         }
 
@@ -81,9 +82,9 @@ KeyPad {
             height: panel.keyHeight;
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            CharKey        { id: atKey;    label: "@"; shifted: "@";     anchors.left: symShiftKey.right; }
-            SpaceKey       { id: spaceKey;                               anchors.left: atKey.right; anchors.right: urlKey.left; noMagnifier: true }
-            UrlKey         { id: urlKey;                                 anchors.right: dotKey.left; }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
+            CharKey        { id: commaKey;    label: "'"; shifted: "/";  anchors.left: languageMenuButton.right; }
+            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }

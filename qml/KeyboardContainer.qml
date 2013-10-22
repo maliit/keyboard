@@ -40,21 +40,21 @@ Item {
         if (layoutId === "phonenumber")
             characterKeypadSource = "languages/Keyboard_telephone.qml";
         if (layoutId === "email")
-            characterKeypadSource = "languages/Keyboard_en_email.qml";
+            characterKeypadSource = "languages/en_us/Keyboard_en_email.qml";
         if (layoutId === "url")
-            characterKeypadSource = "languages/Keyboard_en_url_search.qml";
+            characterKeypadSource = "languages/en_us/Keyboard_en_url_search.qml";
         if (layoutId === "en_us")
-            characterKeypadSource = "languages/Keyboard_en_us.qml";
+            characterKeypadSource = "languages/en_us/Keyboard_en_us.qml";
         if (layoutId === "es")
-            characterKeypadSource = "languages/Keyboard_es.qml";
+            characterKeypadSource = "languages/es/Keyboard_es.qml";
         if (layoutId === "pt")
-            characterKeypadSource = "languages/Keyboard_pt.qml";
+            characterKeypadSource = "languages/pt/Keyboard_pt.qml";
         if (layoutId === "de")
-            characterKeypadSource = "languages/Keyboard_de.qml";
+            characterKeypadSource = "languages/de/Keyboard_de.qml";
         if (layoutId === "fr")
-            characterKeypadSource = "languages/Keyboard_fr.qml";
+            characterKeypadSource = "languages/fr/Keyboard_fr.qml";
         if (layoutId === "zh_cn_pinyin")
-            characterKeypadSource = "languages/Keyboard_zh_cn_pinyin.qml";
+            characterKeypadSource = "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
     }
 
     onCharacterKeypadSourceChanged: {
