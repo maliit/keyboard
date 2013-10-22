@@ -24,8 +24,8 @@ lang_pt.files = languages/pt/*.qml languages/pt/*.js
 lang_fr.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/fr"
 lang_fr.files = languages/fr/*.qml languages/fr/*.js
 
-lang_en_us.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/en_us"
-lang_en_us.files = languages/en_us/*.qml languages/en_us/*.js
+lang_en.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/en"
+lang_en.files = languages/en/*.qml languages/en/*.js
 
 lang_zh_cn.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/zh_cn"
 lang_zh_cn.files = languages/zh_cn/*.qml languages/zh_cn/*.js
@@ -34,7 +34,7 @@ lang_zh_cn.files = languages/zh_cn/*.qml languages/zh_cn/*.js
 images.path = "$$UBUNTU_KEYBOARD_DATA_DIR/images"
 images.files = images/*.png images/*.sci
 
-INSTALLS += qml qml_keys qml_languages lang_de lang_es lang_pt lang_fr lang_en_us lang_zh_cn images
+INSTALLS += qml qml_keys qml_languages lang_de lang_es lang_pt lang_fr lang_en lang_zh_cn images
 
 # for QtCreator
 OTHER_FILES += \
@@ -66,7 +66,6 @@ OTHER_FILES += \
     keys/UrlKey.qml \
     languages/en_us/Keyboard_en_email.qml \
     languages/en_us/Keyboard_en_url.qml \
-    languages/en_us/Keyboard_en_url_search.qml \
     languages/en_us/Keyboard_en_us.qml \
     languages/Keyboard_numbers.qml \
     languages/Keyboard_symbols.qml \
@@ -75,6 +74,11 @@ OTHER_FILES += \
     languages/es/Keyboard_es.qml \
     languages/pt/Keyboard_pt.qml \
     languages/de/Keyboard_de.qml \
-    languages/fr/Keyboard_fr.qml
+    languages/fr/Keyboard_fr.qml \
+    languages/de/Keyboard_de_url_search.qml \
+    languages/en_us/Keyboard_en_us_url_search.qml \
+    languages/es/Keyboard_es_url_search.qml \
+    languages/fr/Keyboard_fr_url_search.qml \
+    languages/pt/Keyboard_pt_url_search.qml
 
 

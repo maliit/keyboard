@@ -33,8 +33,20 @@ Item {
 
     state: "CHARACTERS"
 
+    property variant supportedLocales: ["en", "de", "es", "fr", "zh", "pt"]
+
+    function localeIsSupported(locale)
+    {
+        console.log("checking if locale is supported " + locale.toLowerCase() + (supportedLocales.indexOf( locale ) > -1))
+        return (supportedLocales.indexOf( locale ) > -1)
+    }
+
     function loadLayout(layoutId)
     {
+
+        console.log(Qt.locale().name + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        var locale = Qt.locale().name.slice(0,2).toLowerCase();
+        console.log(locale + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
         if (layoutId === "number")
             characterKeypadSource = "languages/Keyboard_numbers.qml";
         if (layoutId === "phonenumber")
@@ -42,7 +54,8 @@ Item {
         if (layoutId === "email")
             characterKeypadSource = "languages/en_us/Keyboard_en_email.qml";
         if (layoutId === "url")
-            characterKeypadSource = "languages/en_us/Keyboard_en_url_search.qml";
+            if (localeIsSupported(locale))
+                characterKeypadSource = "languages/"+locale+"/Keyboard_"+locale+"_url_search.qml";
         if (layoutId === "en_us")
             characterKeypadSource = "languages/en_us/Keyboard_en_us.qml";
         if (layoutId === "es")
@@ -54,7 +67,7 @@ Item {
         if (layoutId === "fr")
             characterKeypadSource = "languages/fr/Keyboard_fr.qml";
         if (layoutId === "zh_cn_pinyin")
-            characterKeypadSource = "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
+            characterKeypadSource = "languages/zh/Keyboard_zh_pinyin.qml";
     }
 
     onCharacterKeypadSourceChanged: {
