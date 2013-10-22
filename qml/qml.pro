@@ -64,9 +64,10 @@ OTHER_FILES += \
     keys/Spacer.qml \
     keys/SymbolShiftKey.qml \
     keys/UrlKey.qml \
-    languages/en_us/Keyboard_en_email.qml \
-    languages/en_us/Keyboard_en_url.qml \
-    languages/en_us/Keyboard_en_us.qml \
+    languages/en/Keyboard_en_email.qml \
+    languages/en/Keyboard_en_url.qml \
+    languages/en/Keyboard_en.qml \
+    languages/en/Keyboard_en_url_search.qml \
     languages/Keyboard_numbers.qml \
     languages/Keyboard_symbols.qml \
     languages/Keyboard_telephone.qml \
@@ -76,9 +77,10 @@ OTHER_FILES += \
     languages/de/Keyboard_de.qml \
     languages/fr/Keyboard_fr.qml \
     languages/de/Keyboard_de_url_search.qml \
-    languages/en_us/Keyboard_en_us_url_search.qml \
     languages/es/Keyboard_es_url_search.qml \
     languages/fr/Keyboard_fr_url_search.qml \
-    languages/pt/Keyboard_pt_url_search.qml
+    languages/pt/Keyboard_pt_url_search.qml \
+    languages/de/Keyboard_de_email.qml \
+    languages/de/Keyboard_de_url.qml
 
 

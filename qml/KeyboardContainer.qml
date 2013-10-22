@@ -37,27 +37,25 @@ Item {
 
     function localeIsSupported(locale)
     {
-        console.log("checking if locale is supported " + locale.toLowerCase() + (supportedLocales.indexOf( locale ) > -1))
         return (supportedLocales.indexOf( locale ) > -1)
     }
 
     function loadLayout(layoutId)
     {
-
-        console.log(Qt.locale().name + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
         var locale = Qt.locale().name.slice(0,2).toLowerCase();
-        console.log(locale + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+
         if (layoutId === "number")
             characterKeypadSource = "languages/Keyboard_numbers.qml";
         if (layoutId === "phonenumber")
             characterKeypadSource = "languages/Keyboard_telephone.qml";
         if (layoutId === "email")
-            characterKeypadSource = "languages/en_us/Keyboard_en_email.qml";
+            if (localeIsSupported(locale))
+                characterKeypadSource = "languages/"+locale+"/Keyboard_"+locale+"_email.qml";
         if (layoutId === "url")
             if (localeIsSupported(locale))
                 characterKeypadSource = "languages/"+locale+"/Keyboard_"+locale+"_url_search.qml";
         if (layoutId === "en_us")
-            characterKeypadSource = "languages/en_us/Keyboard_en_us.qml";
+            characterKeypadSource = "languages/en_us/Keyboard_en.qml";
         if (layoutId === "es")
             characterKeypadSource = "languages/es/Keyboard_es.qml";
         if (layoutId === "pt")
