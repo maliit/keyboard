@@ -38,39 +38,55 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def _stop_maliit_server():
+def _get_maliit_server_status():
     try:
-        output = subprocess.check_output(['status', 'maliit-server'])
-        if output.split()[1].startswith('start'):
-            try:
-                logger.debug("Stopping maliit server")
-                subprocess.check_call(['stop', 'maliit-server'])
-            except subprocess.CalledProcessError as e:
-                e.args += ("Unable to stop mallit server",)
-                raise
-    except subprocess.CalledProcessError:
-        e.args += ("maliit-server appears to be an unknown service.", )
-        raise
-
-
-def _start_maliit_server():
-    try:
-        output = subprocess.check_output(['status', 'maliit-server'])
-        if output.split()[1].startswith('stop'):
-            try:
-                logger.debug("Starting maliit-server")
-                subprocess.check_call(['start', 'maliit-server'])
-            except subprocess.CalledProcessError as e:
-                e.args += ("Unable to start mallit server",)
-                raise
+        return subprocess.check_output([
+            'initctl',
+            'status',
+            'maliit-server'
+        ])
     except subprocess.CalledProcessError as e:
         e.args += ("maliit-server appears to be an unknown service.", )
         raise
 
 
-def _restart_maliit_server():
+def _stop_maliit_server():
+    status = _get_maliit_server_status()
+    if "start/" in status:
+        try:
+            logger.debug("Stopping maliit server")
+            subprocess.check_call(['initctl', 'stop', 'maliit-server'])
+        except subprocess.CalledProcessError as e:
+            e.args += ("Unable to stop mallit server",)
+            raise
+    else:
+        logger.debug("No need to stop server.")
+
+
+def _start_maliit_server(args):
+    status = _get_maliit_server_status()
+    if "stop/" in status:
+        try:
+            logger.debug(
+                "Starting maliit-server with the args: '%s'" % ",".join(args)
+            )
+            subprocess.check_call(
+                ['initctl', 'start', 'maliit-server'] + args
+            )
+        except subprocess.CalledProcessError as e:
+            e.args += ("Unable to start mallit server",)
+            raise
+    else:
+        raise RuntimeError(
+            "Unable to start maliit-server: server is currently running."
+        )
+
+
+def _restart_maliit_server(args=None):
+    if args is None:
+        args = []
     _stop_maliit_server()
-    _start_maliit_server()
+    _start_maliit_server(args)
 
 
 class UbuntuKeyboardTests(AutopilotTestCase):
@@ -80,27 +96,10 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
     @classmethod
     def setUpClass(cls):
-        try:
-            logger.debug("Creating the override file.")
-            with open(
-                UbuntuKeyboardTests.maliit_override_file, 'w'
-            ) as override_file:
-                override_file.write("exec maliit-server -testability")
-            _restart_maliit_server()
-        except IOError as e:
-            e.args += (
-                "Failed attempting to write override file to {file}".format(
-                    file=UbuntuKeyboardTests.maliit_override_file
-                ),
-            )
-            raise
+        _restart_maliit_server(['QT_LOAD_TESTABILITY=1'])
 
     @classmethod
     def tearDownClass(cls):
-        try:
-            os.remove(UbuntuKeyboardTests.maliit_override_file)
-        except OSError:
-            logger.warning("Attempted to remove non-existent override file")
         _restart_maliit_server()
 
     def setUp(self):
