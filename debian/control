@@ -62,7 +62,7 @@ Description: Ubuntu on-screen keyboard tests
 
 Package: ubuntu-keyboard-autopilot
 Architecture: all
-Depends: libautopilot-qt,
+Depends: libautopilot-qt (<< 1.4),
          ${misc:Depends},
          ${python:Depends},
          ubuntu-keyboard (>= ${source:Version}),
