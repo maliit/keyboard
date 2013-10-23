@@ -342,7 +342,7 @@ public:
     void registerEnabledLanguages()
     {
         QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
-                         q, SLOT(__onEnabledLanguagesChanged()));
+                         q, SLOT(onEnabledLanguageSettingsChanged()));
         Q_EMIT q->enabledLanguagesChanged(m_settings.enabledLanguages());
 
         registerActiveLanguage();
