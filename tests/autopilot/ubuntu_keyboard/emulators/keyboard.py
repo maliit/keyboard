@@ -157,10 +157,6 @@ class Keyboard(object):
         """
         try:
             self.keyboard.state.wait_for("SHOWN", timeout=timeout)
-            self.keyboard.hideAnimationFinished.wait_for(
-                False,
-                timeout=timeout
-            )
             return True
         except RuntimeError:
             return False
