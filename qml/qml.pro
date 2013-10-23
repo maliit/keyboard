@@ -83,6 +83,8 @@ OTHER_FILES += \
     languages/de/Keyboard_de_email.qml \
     languages/de/Keyboard_de_url.qml \
     languages/es/Keyboard_es_email.qml \
-    languages/es/Keyboard_es_url.qml
+    languages/es/Keyboard_es_url.qml \
+    languages/fr/Keyboard_fr_email.qml \
+    languages/fr/Keyboard_fr_url.qml
 
 
