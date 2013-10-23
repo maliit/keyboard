@@ -220,9 +220,12 @@ class Keyboard(object):
     @property
     def active_keypad(self):
         need_to_update = True
+        if self._active_keypad is None:
+            need_to_update = True
         try:
+            # Check if the current keypad object still exists.
             self._active_keypad.enabled
-        except (AttributeError, StateNotFoundError):
+        except StateNotFoundError:
             need_to_update = True
 
         if (
