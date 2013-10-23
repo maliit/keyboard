@@ -342,7 +342,8 @@ public:
     {
         QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
                          q, SLOT(__onEnabledLanguagesChanged()));
-        qmlRootItem->setProperty("enabledLanguages", m_settings.enabledLanguages());
+        Q_EMIT enabledLanguagesChanged(d->m_settings.enabledLanguages());
+
     }
 
     void onScreenSizeChange(const QSize &size)
