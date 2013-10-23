@@ -68,6 +68,8 @@ Item {
 
     property int keypadHeight: 0 // set by InputMethod
 
+    property string activeLanguage: input_method.activeLanguage
+
     property string layoutId: "en_us"
     Component.onCompleted: keypad.loadLayout(layoutId);
     onLayoutIdChanged: keypad.loadLayout(layoutId);

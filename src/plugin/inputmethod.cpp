@@ -195,7 +195,7 @@ void InputMethod::setActiveSubView(const QString &id,
 
     // store language id, so we can switch back to current active view
     // after showing special layouts as e.g. URL or Num layouts
-    d->activeLanguageId = id;
+    d->activeLayoutId = id;
     d->setActiveKeyboardId(id);
 }
 
@@ -434,7 +434,7 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
     // TODO when refactoring, forward the enum to QML
 
     if (contentType == Maliit::FreeTextContentType)
-        d->setActiveKeyboardId( d->activeLanguageId );
+        d->setActiveKeyboardId( d->activeLayoutId );
 
     if (contentType == Maliit::NumberContentType)
         d->setActiveKeyboardId( "number" );
@@ -504,6 +504,12 @@ QStringList InputMethod::enabledLanguages()
 {
     Q_D(InputMethod);
     return d->m_settings.enabledLanguages();
+}
+
+QString InputMethod::activeLanguage()
+{
+    Q_D(InputMethod);
+    return d->activeLanguage;
 }
 
 } // namespace MaliitKeyboard

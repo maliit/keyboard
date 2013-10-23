@@ -89,6 +89,10 @@ public:
     QStringList enabledLanguages();
     Q_SIGNAL void enabledLanguagesChanged(QStringList languages);
 
+    Q_PROPERTY(QString activeLanguage READ activeLanguage NOTIFY activeLanguageChanged)
+    QString activeLanguage();
+    Q_SIGNAL void activeLanguageChanged(QString language);
+
 Q_SIGNALS:
     void predictionEnabledChanged();
     void contentTypeChanged(Maliit::TextContentType contentType);

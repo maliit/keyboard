@@ -42,7 +42,7 @@ Item {
 
     function loadLayout(layoutId)
     {
-        var locale = Qt.locale().name.slice(0,2).toLowerCase();
+        var locale = canvas.activeLanguage.slice(0,2).toLowerCase();
 
         if (layoutId === "number")
             characterKeypadSource = "languages/Keyboard_numbers.qml";
