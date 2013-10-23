@@ -350,7 +350,7 @@ public:
 
     void registerActiveLanguage()
     {
-        activeLanguage = QLocale::system().name();
+        activeLanguage = QString(getenv("LANGUAGE"));
 
         Q_EMIT q->activeLanguageChanged(activeLanguage);
     }
