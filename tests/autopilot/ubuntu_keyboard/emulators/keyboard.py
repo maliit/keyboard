@@ -219,7 +219,7 @@ class Keyboard(object):
 
     @property
     def active_keypad(self):
-        need_to_update = True
+        need_to_update = False
         if self._active_keypad is None:
             need_to_update = True
         try:
