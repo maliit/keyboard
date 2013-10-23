@@ -341,7 +341,7 @@ public:
     void registerEnabledLanguages()
     {
         QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
-                         q, SLOT(onEnabledLanguagesChanged()));
+                         q, SLOT(__onEnabledLanguagesChanged()));
         qmlRootItem->setProperty("enabledLanguages", m_settings.enabledLanguages());
     }
 

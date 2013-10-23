@@ -72,8 +72,7 @@ Item {
     Component.onCompleted: keypad.loadLayout(layoutId);
     onLayoutIdChanged: keypad.loadLayout(layoutId);
 
-    // set by C++
-    property var enabledLanguages: []
+    property var enabledLanguages: input_method.enabledLanguages
 
     visible: layout.visible
 

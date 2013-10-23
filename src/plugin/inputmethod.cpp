@@ -288,10 +288,10 @@ void InputMethod::updateAutoCaps()
     }
 }
 
-void InputMethod::onEnabledLanguagesChanged()
+void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
-    d->qmlRootItem->setProperty("enabledLanguages", d->m_settings.enabledLanguages());
+    Q_EMIT enabledLanguagesChanged(d->m_settings.enabledLanguages());
 }
 
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
@@ -498,6 +498,12 @@ void InputMethod::checkInitialAutocaps()
         if (ok && text.isEmpty() && position == 0)
             Q_EMIT activateAutocaps();
     }
+}
+
+QStringList InputMethod::enabledLanguages()
+{
+    Q_D(InputMethod);
+    return d->m_settings.enabledLanguages();
 }
 
 } // namespace MaliitKeyboard
