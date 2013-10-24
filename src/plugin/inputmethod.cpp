@@ -106,8 +106,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
-
-    setActiveSubView("en_us");
+    d->registerEnabledLanguages();
 
     // Setting layout orientation depends on word engine and hide word ribbon
     // settings to be initialized first:
@@ -190,12 +189,13 @@ void InputMethod::setActiveSubView(const QString &id,
                                    Maliit::HandlerState state)
 {
     Q_UNUSED(state)
+    Q_UNUSED(id);
     Q_D(InputMethod);
 
-    // store language id, so we can switch back to current active view
-    // after showing special layouts as e.g. URL or Num layouts
-    d->activeLanguageId = id;
-    d->setActiveKeyboardId(id);
+    QString locale = QString(getenv("LANGUAGE"));
+    locale.truncate(2);
+    d->activeLanguage = locale;
+    d->setActiveKeyboardId(locale);
 }
 
 QString InputMethod::activeSubView(Maliit::HandlerState state) const
@@ -285,6 +285,12 @@ void InputMethod::updateAutoCaps()
         d->autocapsEnabled = enabled;
         d->editor.setAutoCapsEnabled(enabled);
     }
+}
+
+void InputMethod::onEnabledLanguageSettingsChanged()
+{
+    Q_D(InputMethod);
+    Q_EMIT enabledLanguagesChanged(d->m_settings.enabledLanguages());
 }
 
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
@@ -435,7 +441,7 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
     // TODO when refactoring, forward the enum to QML
 
     if (contentType == Maliit::FreeTextContentType)
-        d->setActiveKeyboardId( d->activeLanguageId );
+        d->setActiveKeyboardId( d->activeLanguage );
 
     if (contentType == Maliit::NumberContentType)
         d->setActiveKeyboardId( "number" );
@@ -473,6 +479,7 @@ void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
     {
         d->qmlRootItem = d->view->rootObject()->findChild<QQuickItem*>("ubuntuKeyboard");
         QObject::connect(d->qmlRootItem, SIGNAL(stateChanged(QString)), this, SLOT(onQMLStateChanged(QString)));
+        QObject::connect(d->qmlRootItem, SIGNAL(layoutIdChanged(QString)), &d->editor, SLOT(onLanguageChanged(QString)));
 
         d->applicationApiWrapper->setRootObject(d->view->rootObject());
     }
@@ -498,6 +505,18 @@ void InputMethod::checkInitialAutocaps()
         if (ok && text.isEmpty() && position == 0)
             Q_EMIT activateAutocaps();
     }
+}
+
+QStringList InputMethod::enabledLanguages()
+{
+    Q_D(InputMethod);
+    return d->m_settings.enabledLanguages();
+}
+
+QString InputMethod::activeLanguage()
+{
+    Q_D(InputMethod);
+    return d->activeLanguage;
 }
 
 } // namespace MaliitKeyboard
