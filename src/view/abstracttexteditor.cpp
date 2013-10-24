@@ -672,9 +672,6 @@ void AbstractTextEditor::autoRepeatBackspace()
 {
     Q_D(AbstractTextEditor);
 
-    if (d->text->surroundingOffset() <= 0)
-        return;
-
     if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
         QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
         sendKeyEvent(ev);
@@ -693,13 +690,15 @@ void AbstractTextEditor::autoRepeatWordBackspace()
 {
     Q_D(AbstractTextEditor);
 
-    if (d->text->surroundingOffset() <= 0)
-        return;
-
-    QString word = wordLeftOfCursor();
     QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
-    for (int i=0; i<word.length(); ++i)
+
+    if (d->text->surroundingOffset() > 0) {
+        QString word = wordLeftOfCursor();
+        for (int i=0; i<word.length(); ++i)
+            sendKeyEvent(ev);
+    } else {
         sendKeyEvent(ev);
+    }
 
     d->backspace_sent = true;
     d->auto_repeat_backspace_timer.start(d->options.backspace_word_interval);
