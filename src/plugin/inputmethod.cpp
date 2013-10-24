@@ -108,8 +108,6 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerWordEngineSetting();
     d->registerEnabledLanguages();
 
-    setActiveSubView("en_us");
-
     // Setting layout orientation depends on word engine and hide word ribbon
     // settings to be initialized first:
     d->setLayoutOrientation(d->appsCurrentOrientation);
@@ -121,6 +119,12 @@ InputMethod::~InputMethod()
 void InputMethod::show()
 {
     Q_D(InputMethod);
+
+    QString locale = QString(getenv("LANGUAGE"));
+    locale.truncate(2);
+
+    d->activeLanguage = locale;
+    d->setActiveKeyboardId(locale);
 
     d->view->setVisible(true);
 
@@ -191,12 +195,7 @@ void InputMethod::setActiveSubView(const QString &id,
                                    Maliit::HandlerState state)
 {
     Q_UNUSED(state)
-    Q_D(InputMethod);
-
-    // store language id, so we can switch back to current active view
-    // after showing special layouts as e.g. URL or Num layouts
-    d->activeLayoutId = id;
-    d->setActiveKeyboardId(id);
+    Q_UNUSED(id);
 }
 
 QString InputMethod::activeSubView(Maliit::HandlerState state) const
@@ -434,7 +433,7 @@ void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
     // TODO when refactoring, forward the enum to QML
 
     if (contentType == Maliit::FreeTextContentType)
-        d->setActiveKeyboardId( d->activeLayoutId );
+        d->setActiveKeyboardId( d->activeLanguage );
 
     if (contentType == Maliit::NumberContentType)
         d->setActiveKeyboardId( "number" );

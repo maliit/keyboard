@@ -91,7 +91,6 @@ public:
     bool autocapsEnabled;
     bool predictionEnabled;
     Maliit::TextContentType contentType;
-    QString activeLayoutId;
     QString activeLanguage;
     Qt::ScreenOrientation appsCurrentOrientation;
 
@@ -114,7 +113,6 @@ public:
         , autocapsEnabled(false)
         , predictionEnabled(false)
         , contentType(Maliit::FreeTextContentType)
-        , activeLayoutId("en_us")
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , m_settings()
     {
@@ -351,6 +349,7 @@ public:
     void registerActiveLanguage()
     {
         activeLanguage = QString(getenv("LANGUAGE"));
+        activeLanguage.truncate(2);
 
         Q_EMIT q->activeLanguageChanged(activeLanguage);
     }
