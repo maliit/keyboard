@@ -85,14 +85,6 @@ public:
 
     void update();
 
-    Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
-    QStringList enabledLanguages();
-    Q_SIGNAL void enabledLanguagesChanged(QStringList languages);
-
-    Q_PROPERTY(QString activeLanguage READ activeLanguage NOTIFY activeLanguageChanged)
-    QString activeLanguage();
-    Q_SIGNAL void activeLanguageChanged(QString language);
-
 Q_SIGNALS:
     void predictionEnabledChanged();
     void contentTypeChanged(Maliit::TextContentType contentType);
@@ -102,9 +94,7 @@ private:
     Q_SLOT void onStyleSettingChanged();
     Q_SLOT void onFeedbackSettingChanged();
     Q_SLOT void onAutoCorrectSettingChanged();
-    Q_SLOT void onEnabledLanguageSettingsChanged();
     Q_SLOT void updateAutoCaps();
-
     Q_SLOT void updateKey(const QString &key_id,
                           const MKeyOverride::KeyOverrideAttributes changed_attributes);
     Q_SLOT void onKeyboardClosed();

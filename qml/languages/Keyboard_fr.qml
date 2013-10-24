@@ -15,7 +15,7 @@
  */
 
 import QtQuick 2.0
-import "../../keys"
+import "../keys"
 
 KeyPad {
     anchors.fill: parent
@@ -82,8 +82,8 @@ KeyPad {
             height: panel.keyHeight;
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: symShiftKey.right; }
-            UrlKey         { id: urlKey; label: ".fr"; extended: [".ca", ".cd", ".ci", ".ch", ".be", ".ht"]; anchors.right: dotKey.left; }
+            CharKey        { id: commaKey;    label: "'"; shifted: "/";  anchors.left: symShiftKey.right; }
+            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }

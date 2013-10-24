@@ -15,7 +15,7 @@
  */
 
 import QtQuick 2.0
-import "../../keys"
+import "../keys"
 
 KeyPad {
     anchors.fill: parent
@@ -81,8 +81,7 @@ KeyPad {
             height: panel.keyHeight;
 
             SymbolShiftKey { id: symShiftKey; label: "符号";              anchors.left: parent.left; }
-            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
-            CharKey        { id: commaKey;    label: ","; shifted: "，";  anchors.left: languageMenuButton.right; }
+            CharKey        { id: commaKey;    label: "，"; shifted: "，"; anchors.left: symShiftKey.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "。"; shifted: "。"; anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
