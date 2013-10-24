@@ -1,7 +1,8 @@
 TEMPLATE = subdirs
 SUBDIRS = \
-    qmltests \
-    unittests \
+    api-test \
+    qml-api-tests \
+    qml-test-app \
 
 CONFIG += ordered
 QMAKE_EXTRA_TARGETS += check
