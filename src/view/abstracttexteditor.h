@@ -49,6 +49,8 @@ struct EditorOptions
     // all delays are in milliseconds
     int backspace_auto_repeat_delay; // delay before first automatically repeated key
     int backspace_auto_repeat_interval; // interval between automatically repeated keys
+    int backspace_word_delay; // delay before first automatically delete whole words
+    int backspace_word_interval; // interval between deleting word on while pressing the backspace
 };
 
 class AbstractTextEditorPrivate;
@@ -156,6 +158,8 @@ private:
 
     void commitPreedit();
     Q_SLOT void autoRepeatBackspace();
+    void autoRepeatWordBackspace();
+    QString wordLeftOfCursor() const;
 };
 
 } // namespace MaliitKeyboard

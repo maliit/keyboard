@@ -385,6 +385,14 @@ void InputMethod::update()
     if (emitPredictionEnabled)
         Q_EMIT predictionEnabledChanged();
 
+    QString text;
+    int position;
+    bool ok = d->host->surroundingText(text, position);
+    if (ok) {
+        d->editor.text()->setSurrounding(text);
+        d->editor.text()->setSurroundingOffset(position);
+    }
+
     updateAutoCaps();
 }
 
