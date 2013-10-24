@@ -120,12 +120,6 @@ void InputMethod::show()
 {
     Q_D(InputMethod);
 
-    QString locale = QString(getenv("LANGUAGE"));
-    locale.truncate(2);
-
-    d->activeLanguage = locale;
-    d->setActiveKeyboardId(locale);
-
     d->view->setVisible(true);
 
     inputMethodHost()->setScreenRegion(QRegion(d->keyboardVisibleRect));
@@ -196,6 +190,12 @@ void InputMethod::setActiveSubView(const QString &id,
 {
     Q_UNUSED(state)
     Q_UNUSED(id);
+    Q_D(InputMethod);
+
+    QString locale = QString(getenv("LANGUAGE"));
+    locale.truncate(2);
+    d->activeLanguage = locale;
+    d->setActiveKeyboardId(locale);
 }
 
 QString InputMethod::activeSubView(Maliit::HandlerState state) const
