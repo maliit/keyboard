@@ -448,8 +448,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
      } break;
 
     case Key::ActionSpace: {
-        QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
-        const bool auto_caps_activated = d->language_features->activateAutoCaps(textOnLeft);
+        const bool auto_caps_activated = d->language_features->activateAutoCaps(d->text->preedit());
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty();
 
         if (replace_preedit) {
