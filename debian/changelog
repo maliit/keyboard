@@ -1,3 +1,40 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131025-0ubuntu1) trusty; urgency=low
+
+  [ Daniel d'Andrada ]
+  * ubuntu-keyboard-info socket now reports the keyboard's scene
+    geometry That's enough to cover keyboard rotations and animations.
+    (LP: #1236489)
+
+  [ Thomas Moenicke ]
+  * adding key to change language.
+
+  [ Leo Arias ]
+  * Prepare for the release of autopilot 1.4 adding the dependency on an
+    earlier release.
+
+  [ Christopher Lee ]
+  * Minor update/fixes for the autopilot emulators.
+
+  [ Guenter Schwann ]
+  * Keep url and @ key unchanged in shiftet state. (LP: #1240603)
+  * Keep removing text when keeping the backspace key pressed.
+  * Disable auto capitalization for any other content type than
+    FreeTextContentType Wieth auto capitalizatin start with a capital on
+    empty text fields.
+  * After holding the backspace for a while, remove whole words. (LP:
+    #1201988)
+  * Reorganize tests let "make check" pass.
+  * Decouple autocaps from predictive text fixes LP: #1214695. (LP:
+    #1234685, #1214695)
+  * Revert last 2 commit because of language issues.
+  * Decouple autocaps from predictive text fixes LP: #1214695. (LP:
+    #1214695)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 91
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 25 Oct 2013 11:04:48 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20131016.1-0ubuntu1) saucy; urgency=low
 
   [ Christopher Lee ]
