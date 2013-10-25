@@ -15,7 +15,7 @@
  */
 
 import QtQuick 2.0
-import "../keys"
+import "../../keys"
 
 KeyPad {
     anchors.fill: parent
@@ -48,7 +48,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","á","ã","å"]; extendedShifted: ["Ä","À","Â","Á","Ã","Å"] }
+            CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","ª","á","å", "æ"]; extendedShifted: ["Ä","À","Â","ª","Á","Å","Æ"] }
             CharKey { label: "s"; shifted: "S"; extended: ["ß","$"]; extendedShifted: ["$"] }
             CharKey { label: "d"; shifted: "D"; extended: ["ð"]; extendedShifted: ["Ð"] }
             CharKey { label: "f"; shifted: "F"; }
@@ -81,9 +81,9 @@ KeyPad {
             height: panel.keyHeight;
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            CharKey        { id: atKey;    label: "@"; shifted: "@";     anchors.left: symShiftKey.right; }
-            SpaceKey       { id: spaceKey;                               anchors.left: atKey.right; anchors.right: urlKey.left; noMagnifier: true }
-            UrlKey         { id: urlKey;                                 anchors.right: dotKey.left; }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
+            CharKey        { id: commaKey;    label: ","; shifted: "/";  anchors.left: languageMenuButton.right; }
+            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
