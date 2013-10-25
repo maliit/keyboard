@@ -192,9 +192,14 @@ void InputMethod::setActiveSubView(const QString &id,
     Q_UNUSED(id);
     Q_D(InputMethod);
 
+    // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
+    d->layout.updater.setActiveKeyboardId(id);
+    d->layout.model.setActiveView(id);
+
     QString locale = QString(getenv("LANGUAGE"));
     locale.truncate(2);
     d->activeLanguage = locale;
+    Q_EMIT activeLanguageChanged(d->activeLanguage);
     d->setActiveKeyboardId(locale);
 }
 

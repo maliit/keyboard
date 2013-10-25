@@ -54,7 +54,7 @@ Item {
         if (layoutId === "url")
             if (localeIsSupported(locale))
                 characterKeypadSource = "languages/"+locale+"/Keyboard_"+locale+"_url_search.qml";
-        if (layoutId === "en_us")
+        if (layoutId === "en")
             characterKeypadSource = "languages/en/Keyboard_en.qml";
         if (layoutId === "es")
             characterKeypadSource = "languages/es/Keyboard_es.qml";
