@@ -378,6 +378,7 @@ public:
 
     void truncateEnabledLanguageLocales(QStringList locales)
     {
+        enabledLanguages.clear();
         foreach (QString locale, locales) {
             locale.truncate(2);
             enabledLanguages << locale;
