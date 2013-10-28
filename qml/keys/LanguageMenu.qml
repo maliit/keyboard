@@ -63,12 +63,12 @@ Item {
 
     function languageIdToName(languageId)
     {
-        if (languageId == "en_us")        return "English - US";
-        if (languageId == "es")           return "Spanish";
-        if (languageId == "pt")           return "Portuguese";
-        if (languageId == "fr")           return "French";
-        if (languageId == "de")           return "German";
-        if (languageId == "zh_cn_pinyin") return "Chinese - Pinyin";
+        if (languageId == "en")         return "English";
+        if (languageId == "es")         return "Spanish";
+        if (languageId == "pt")         return "Portuguese";
+        if (languageId == "fr")         return "French";
+        if (languageId == "de")         return "German";
+        if (languageId == "zh")         return "Chinese - Pinyin";
     }
 
 }

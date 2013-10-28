@@ -295,7 +295,8 @@ void InputMethod::updateAutoCaps()
 void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
-    Q_EMIT enabledLanguagesChanged(d->m_settings.enabledLanguages());
+    d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
+    Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
 
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
@@ -515,7 +516,7 @@ void InputMethod::checkInitialAutocaps()
 QStringList InputMethod::enabledLanguages()
 {
     Q_D(InputMethod);
-    return d->m_settings.enabledLanguages();
+    return d->enabledLanguages;
 }
 
 QString InputMethod::activeLanguage()

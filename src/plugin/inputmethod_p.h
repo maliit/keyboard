@@ -17,6 +17,8 @@
 #include <maliit/plugins/abstractpluginsetting.h>
 
 #include <QtQuick>
+#include <QStringList>
+#include <qglobal.h>
 
 #ifdef HAVE_QT_MOBILITY
 #include "view/soundfeedback.h"
@@ -92,6 +94,7 @@ public:
     bool predictionEnabled;
     Maliit::TextContentType contentType;
     QString activeLanguage;
+    QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
 
     KeyboadSettings m_settings;
@@ -337,7 +340,8 @@ public:
     {
         QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
                          q, SLOT(onEnabledLanguageSettingsChanged()));
-        Q_EMIT q->enabledLanguagesChanged(m_settings.enabledLanguages());
+        truncateEnabledLanguageLocales(m_settings.enabledLanguages());
+        Q_EMIT q->enabledLanguagesChanged(enabledLanguages);
 
         registerActiveLanguage();
     }
@@ -370,6 +374,14 @@ public:
         view->setVisible(false);
 
         applicationApiWrapper->reportOSKInvisible();
+    }
+
+    void truncateEnabledLanguageLocales(QStringList locales)
+    {
+        foreach (QString locale, locales) {
+            locale.truncate(2);
+            enabledLanguages << locale;
+        }
     }
 };
 
