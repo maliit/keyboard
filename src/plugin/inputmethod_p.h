@@ -190,9 +190,26 @@ public:
         delete applicationApiWrapper;
     }
 
+    Logic::LayoutHelper::Orientation screenToMaliitOrientation(Qt::ScreenOrientation screenOrientation) const
+    {
+        switch (screenOrientation) {
+        case Qt::LandscapeOrientation:
+        case Qt::InvertedLandscapeOrientation:
+            return Logic::LayoutHelper::Landscape;
+            break;
+        case Qt::PortraitOrientation:
+        case Qt::InvertedPortraitOrientation:
+        case Qt::PrimaryOrientation:
+        default:
+            return Logic::LayoutHelper::Portrait;
+        }
+
+        return Logic::LayoutHelper::Portrait;
+    }
+
     void setLayoutOrientation(Qt::ScreenOrientation screenOrientation)
     {
-        Logic::LayoutHelper::Orientation orientation = uiConst->screenToMaliitOrientation(screenOrientation);
+        Logic::LayoutHelper::Orientation orientation = screenToMaliitOrientation(screenOrientation);
 
         layout.updater.setOrientation(orientation);
 
