@@ -65,7 +65,7 @@ Item {
         if (layoutId === "fr")
             characterKeypadSource = "languages/fr/Keyboard_fr.qml";
         if (layoutId === "zh")
-            characterKeypadSource = "languages/zh/Keyboard_zh_pinyin.qml";
+            characterKeypadSource = "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
     }
 
     onCharacterKeypadSourceChanged: {
