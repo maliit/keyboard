@@ -8,7 +8,7 @@ no-werror {
     QMAKE_CXXFLAGS_DEBUG+=-Werror -O0
 }
 
-CONFIG += no_keywords
+#CONFIG += no_keywords
 
 # The feature maliit-defines initializes some variables related for MALIIT, such as installation paths
 # here have to load it early, to start using the defines immediately

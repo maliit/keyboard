@@ -17,6 +17,8 @@
 #include <maliit/plugins/abstractpluginsetting.h>
 
 #include <QtQuick>
+#include <QStringList>
+#include <qglobal.h>
 
 #ifdef HAVE_QT_MOBILITY
 #include "view/soundfeedback.h"
@@ -91,7 +93,8 @@ public:
     bool autocapsEnabled;
     bool predictionEnabled;
     Maliit::TextContentType contentType;
-    QString activeLanguageId;
+    QString activeLanguage;
+    QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
 
     KeyboadSettings m_settings;
@@ -113,7 +116,6 @@ public:
         , autocapsEnabled(false)
         , predictionEnabled(false)
         , contentType(Maliit::FreeTextContentType)
-        , activeLanguageId("en_us")
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , m_settings()
     {
@@ -258,10 +260,6 @@ public:
 
     void setActiveKeyboardId(const QString& id)
     {
-        // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
-        layout.updater.setActiveKeyboardId(id);
-        layout.model.setActiveView(id);
-
         qmlRootItem->setProperty("layoutId", id);
     }
 
@@ -338,6 +336,24 @@ public:
     #endif
     }
 
+    void registerEnabledLanguages()
+    {
+        QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
+                         q, SLOT(onEnabledLanguageSettingsChanged()));
+        truncateEnabledLanguageLocales(m_settings.enabledLanguages());
+        Q_EMIT q->enabledLanguagesChanged(enabledLanguages);
+
+        registerActiveLanguage();
+    }
+
+    void registerActiveLanguage()
+    {
+        activeLanguage = QString(getenv("LANGUAGE"));
+        activeLanguage.truncate(2);
+
+        Q_EMIT q->activeLanguageChanged(activeLanguage);
+    }
+
     void onScreenSizeChange(const QSize &size)
     {
         layout.helper.setScreenSize(size);
@@ -358,6 +374,15 @@ public:
         view->setVisible(false);
 
         applicationApiWrapper->reportOSKInvisible();
+    }
+
+    void truncateEnabledLanguageLocales(QStringList locales)
+    {
+        enabledLanguages.clear();
+        foreach (QString locale, locales) {
+            locale.truncate(2);
+            enabledLanguages << locale;
+        }
     }
 };
 

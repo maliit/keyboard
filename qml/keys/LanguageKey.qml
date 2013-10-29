@@ -15,13 +15,20 @@
  */
 
 import QtQuick 2.0
-import "../keys/key_constants.js" as UI
 
-CharKey {
-    width: panel.keyWidth + units.gu( UI.emailLayoutUrlKeyPadding )
+ActionKey {
+    iconNormal: "language-chooser";
+    iconShifted: "language-chooser";
+    iconCapsLock: "language-chooser";
 
-    label: ".com";
-    shifted: label
-    extendedShifted: extended
-    fontSize: units.gu(UI.smallFontSize);
+    padding: 0
+
+    visible: canvas.enabledLanguages.length > 1 ? true : false
+    width: canvas.enabledLanguages.length > 1 ? panel.keyWidth : 0
+
+    MouseArea {
+        anchors.fill: parent
+        preventStealing: true
+        onPressAndHold: canvas.languageMenuShown = true
+    }
 }

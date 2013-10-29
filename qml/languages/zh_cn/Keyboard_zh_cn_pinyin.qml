@@ -15,13 +15,13 @@
  */
 
 import QtQuick 2.0
-import "../keys"
+import "../../keys"
 
 KeyPad {
     anchors.fill: parent
 
     content: c1
-    symbols: ""
+    symbols: "languages/Keyboard_symbols.qml"
 
     Column {
         id: c1
@@ -81,7 +81,8 @@ KeyPad {
             height: panel.keyHeight;
 
             SymbolShiftKey { id: symShiftKey; label: "符号";              anchors.left: parent.left; }
-            CharKey        { id: commaKey;    label: "，"; shifted: "，"; anchors.left: symShiftKey.right; }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
+            CharKey        { id: commaKey;    label: ","; shifted: "，";  anchors.left: languageMenuButton.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
             CharKey        { id: dotKey;      label: "。"; shifted: "。"; anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
