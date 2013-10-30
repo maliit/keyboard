@@ -60,29 +60,4 @@ Item {
     function calculateKeyHeight() {
         panel.keyHeight = panel.height / numberOfRows();
     }
-
-    states: [
-        State {
-            name: "NORMAL"
-            PropertyChanges {
-                target: panel
-            }
-            PropertyChanges {
-                target: canvas
-                autoCapsActivated: false
-            }
-        },
-        State {
-            name: "SHIFTED"
-            PropertyChanges {
-                target: panel
-            }
-        },
-        State {
-            name: "CAPSLOCK"
-            PropertyChanges {
-                target: panel
-            }
-        }
-    ]
 }

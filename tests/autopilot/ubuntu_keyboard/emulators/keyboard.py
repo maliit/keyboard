@@ -30,6 +30,7 @@ from autopilot.introspection import (
     get_proxy_object_for_existing_process,
     ProcessSearchError
 )
+from autopilot.introspection.dbus import StateNotFoundError
 
 
 logger = logging.getLogger(__name__)
@@ -157,10 +158,6 @@ class Keyboard(object):
         """
         try:
             self.keyboard.state.wait_for("SHOWN", timeout=timeout)
-            self.keyboard.hideAnimationFinished.wait_for(
-                False,
-                timeout=timeout
-            )
             return True
         except RuntimeError:
             return False
@@ -222,8 +219,18 @@ class Keyboard(object):
 
     @property
     def active_keypad(self):
+        need_to_update = False
+        if self._active_keypad is None:
+            need_to_update = True
+        try:
+            # Check if the current keypad object still exists.
+            self._active_keypad.enabled
+        except StateNotFoundError:
+            need_to_update = True
+
         if (
-            self._stored_active_keypad_name != self._current_keypad_name
+            need_to_update
+            or self._stored_active_keypad_name != self._current_keypad_name
             or self._keyboard_details_changed()
         ):
             self._stored_active_keypad_name = self._current_keypad_name
@@ -277,8 +284,7 @@ class Keyboard(object):
             "symbols"
         )
         self._tap_key(key_pos)
-        # Can I do the property thing here?
-        self._keyboard_container.state.wait_for(keypad_name)
+        self._current_keypad_name.wait_for(keypad_name)
         self.active_keypad.opacity.wait_for(1.0)
 
     def _change_keypad_to_state(self, state):

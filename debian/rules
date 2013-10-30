@@ -26,9 +26,5 @@ override_dh_install:
 	done; \
 	cd $(CURDIR)
 	# Don't install the other tests
-	rm debian/tmp/usr/bin/language-layout-loading
-	rm debian/tmp/usr/bin/language-layout-switching
-	rm debian/tmp/usr/bin/repeat-backspace
-	rm debian/tmp/usr/bin/ut_editor
-	rm debian/tmp/usr/bin/word-candidates
+	rm debian/tmp/usr/bin/ut_*
 	dh_install -X'*.pyc' --fail-missing

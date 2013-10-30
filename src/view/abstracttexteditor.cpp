@@ -35,6 +35,8 @@
 #include "logic/chineselanguagefeatures.h"
 #include "logic/languagefeatures.h"
 
+#include <QElapsedTimer>
+
 namespace MaliitKeyboard {
 
 //! \class EditorOptions
@@ -263,13 +265,16 @@ bool extractWordBoundariesAtCursor(const QString& surrounding_text,
 
 EditorOptions::EditorOptions()
     : backspace_auto_repeat_delay(500)
-    , backspace_auto_repeat_interval(300)
+    , backspace_auto_repeat_interval(200)
+    , backspace_word_delay(3000)
+    , backspace_word_interval(400)
 {}
 
 class AbstractTextEditorPrivate
 {
 public:
     QTimer auto_repeat_backspace_timer;
+    QElapsedTimer backspace_hold_timer;
     bool backspace_sent;
     EditorOptions options;
     QScopedPointer<Model::Text> text;
@@ -389,6 +394,7 @@ void AbstractTextEditor::onKeyPressed(const Key &key)
 
         commitPreedit();
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_delay);
+        d->backspace_hold_timer.restart();
     }
 }
 
@@ -442,7 +448,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
      } break;
 
     case Key::ActionSpace: {
-        const bool auto_caps_activated = d->language_features->activateAutoCaps(d->text->preedit());
+        QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+        const bool auto_caps_activated = d->language_features->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty();
 
         if (replace_preedit) {
@@ -666,10 +673,55 @@ void AbstractTextEditor::autoRepeatBackspace()
 {
     Q_D(AbstractTextEditor);
 
+    if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
+        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
+        sendKeyEvent(ev);
+        d->backspace_sent = true;
+        d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
+    } else {
+        autoRepeatWordBackspace();
+    }
+}
+
+/*!
+ * \brief AbstractTextEditor::autoRepeatWordBackspace same as autoRepeatBackspace()
+ * but deletes whole words
+ */
+void AbstractTextEditor::autoRepeatWordBackspace()
+{
+    Q_D(AbstractTextEditor);
+
     QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
-    sendKeyEvent(ev);
+
+    if (d->text->surroundingOffset() > 0) {
+        QString word = wordLeftOfCursor();
+        for (int i=0; i<word.length(); ++i)
+            sendKeyEvent(ev);
+    } else {
+        sendKeyEvent(ev);
+    }
+
     d->backspace_sent = true;
-    d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
+    d->auto_repeat_backspace_timer.start(d->options.backspace_word_interval);
+}
+
+/*!
+ * \brief AbstractTextEditor::wordLeftOfCursor returns the word that is left to
+ * to the cursor
+ * \return
+ */
+QString AbstractTextEditor::wordLeftOfCursor() const
+{
+    Q_D(const AbstractTextEditor);
+
+    const QString leftSurrounding = d->text->surroundingLeft();
+    int idx = leftSurrounding.length() - 1;
+    while (idx >= 0 && !isSeparator(leftSurrounding.at(idx))) {
+        --idx;
+    }
+    int length = d->text->surroundingOffset() - idx;
+
+    return leftSurrounding.right(length);
 }
 
 //! \brief Emits wordCandidatesChanged() signal with current preedit

@@ -47,11 +47,11 @@ Item {
     id: fullScreenItem
     objectName: "fullScreenItem"
 
+    property variant input_method: maliit_input_method
     property variant layout: maliit_layout
     property variant event_handler: maliit_event_handler
 
 OrientationHelper {
-
     automaticOrientation: false
     transitionEnabled: false
 
@@ -68,9 +68,13 @@ Item {
 
     property int keypadHeight: 0 // set by InputMethod
 
+    property string activeLanguage: input_method.activeLanguage
+
     property string layoutId: "en_us"
     Component.onCompleted: keypad.loadLayout(layoutId);
     onLayoutIdChanged: keypad.loadLayout(layoutId);
+
+    property var enabledLanguages: input_method.enabledLanguages
 
     visible: layout.visible
 
@@ -82,14 +86,8 @@ Item {
 
     property bool shown: false;
     property bool wordribbon_visible: false;
-    property bool autoCapsActivated: false
-    onAutoCapsActivatedChanged: {
-        if (autoCapsActivated) {
-            keypad.state = "CHARACTERS"
-            keypad.activeKeypadState = "SHIFTED";
-            autoCapsActivated = false;
-        }
-    }
+
+    property bool languageMenuShown: false
 
     MouseArea {
         id: swipeArea
@@ -180,6 +178,15 @@ Item {
                     anchors.bottomMargin: units.gu( UI.bottom_margin )
                     width: parent.width
                 }
+
+                LanguageMenu {
+                    id: languageMenu
+                    anchors.centerIn: parent
+                    width: 400;
+                    height: keypad.height;
+                    enabled: canvas.languageMenuShown
+                    opacity: canvas.languageMenuShown ? 1.0 : 0.0
+                }
             } // keyboardComp
         }
     }
@@ -206,6 +213,7 @@ Item {
             name: "HIDDEN"
             PropertyChanges { target: canvas; y: height; }
             onCompleted: {
+                canvas.languageMenuShown = false
                 keyboardSurface.y = 0;
                 keypad.closeExtendedKeys();
                 keypad.activeKeypadState = "NORMAL"
@@ -216,6 +224,14 @@ Item {
     ]
     transitions: Transition {
         PropertyAnimation { target: canvas; properties: "y"; easing.type: Easing.InOutQuad }
+    }
+
+    Connections {
+        target: input_method
+        onActivateAutocaps: {
+            keypad.state = "CHARACTERS";
+            keypad.activeKeypadState = "SHIFTED";
+        }
     }
 
 } // canvas
