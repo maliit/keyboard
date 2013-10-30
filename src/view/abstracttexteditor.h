@@ -156,6 +156,8 @@ private:
     virtual void sendKeyEvent(const QKeyEvent &ev) = 0;
     virtual void invokeAction(const QString &action, const QKeySequence &sequence) = 0;
 
+    virtual void singleBackspace();
+
     void commitPreedit();
     Q_SLOT void autoRepeatBackspace();
     void autoRepeatWordBackspace();

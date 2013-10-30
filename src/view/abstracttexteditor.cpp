@@ -385,14 +385,7 @@ void AbstractTextEditor::onKeyPressed(const Key &key)
     }
 
     if (key.action() == Key::ActionBackspace) {
-        if (d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty()) {
-            d->text->setPrimaryCandidate(QString());
-            d->backspace_sent = true;
-        } else {
-            d->backspace_sent = false;
-        }
-
-        commitPreedit();
+        d->backspace_sent = false;
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_delay);
         d->backspace_hold_timer.restart();
     }
@@ -438,10 +431,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         break;
 
     case Key::ActionBackspace: {
-        commitPreedit();
-
         if (not d->backspace_sent) {
-            event_key = Qt::Key_Backspace;
+            singleBackspace();
         }
 
         d->auto_repeat_backspace_timer.stop();
@@ -674,9 +665,7 @@ void AbstractTextEditor::autoRepeatBackspace()
     Q_D(AbstractTextEditor);
 
     if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
-        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
-        sendKeyEvent(ev);
-        d->backspace_sent = true;
+        singleBackspace();
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
     } else {
         autoRepeatWordBackspace();
@@ -691,17 +680,14 @@ void AbstractTextEditor::autoRepeatWordBackspace()
 {
     Q_D(AbstractTextEditor);
 
-    QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
-
     if (d->text->surroundingOffset() > 0) {
         QString word = wordLeftOfCursor();
         for (int i=0; i<word.length(); ++i)
-            sendKeyEvent(ev);
+            singleBackspace();
     } else {
-        sendKeyEvent(ev);
+        singleBackspace();
     }
 
-    d->backspace_sent = true;
     d->auto_repeat_backspace_timer.start(d->options.backspace_word_interval);
 }
 
@@ -761,6 +747,25 @@ void AbstractTextEditor::sendPreeditString(const QString &preedit,
                                            Model::Text::PreeditFace face)
 {
     sendPreeditString(preedit, face, Replacement());
+}
+
+//! \brief AbstractTextEditor::singleBackspace deletes one charater at he current
+//! cursor position.
+void AbstractTextEditor::singleBackspace()
+{
+    Q_D(AbstractTextEditor);
+
+    if (d->text->preedit().isEmpty()) {
+        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
+        sendKeyEvent(ev);
+    } else {
+        d->text->removeFromPreedit(1);
+        d->word_engine->computeCandidates(d->text.data());
+        sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                          Replacement());
+    }
+
+    d->backspace_sent = true;
 }
 
 //! \brief Reacts to cursor position change in application's text
