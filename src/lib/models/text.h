@@ -63,7 +63,7 @@ public:
     void setPreedit(const QString &preedit,
                     int cursor_pos_override = -1);
     void appendToPreedit(const QString &appendix);
-    bool removeFromPreedit(int length = 1);
+    bool removeFromPreedit(int length);
     void commitPreedit();
 
     QString primaryCandidate() const;
