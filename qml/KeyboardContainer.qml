@@ -18,7 +18,7 @@ import QtQuick 2.0
 import QtQuick.Window 2.0
 import "languages/"
 import "keys/"
-import Ubuntu.Keyboard 1.0
+import UbuntuKeyboard 1.0
 
 Item {
     id: panel

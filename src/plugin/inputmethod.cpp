@@ -37,18 +37,14 @@
 #include "models/wordribbon.h"
 #include "models/layout.h"
 
-#include "logic/layouthelper.h"
-
-#include "logic/style.h"
-
 #include "logic/keyareaconverter.h"
+#include "logic/layouthelper.h"
+#include "logic/style.h"
 
 #include "view/setup.h"
 
 #include <maliit/plugins/subviewdescription.h>
-
 #include <maliit/plugins/updateevent.h>
-
 #include <maliit/namespace.h>
 
 #include <QApplication>
@@ -461,10 +457,8 @@ void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
     }
 }
 
-/*!
- * \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be
- * set to uppercase, because the auto caps is enabled and the text is empty.
- */
+//! \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be
+//! set to uppercase, because the auto caps is enabled and the text is empty.
 void InputMethod::checkInitialAutocaps()
 {
     Q_D(InputMethod);
@@ -479,12 +473,15 @@ void InputMethod::checkInitialAutocaps()
     }
 }
 
+//! \brief InputMethod::enabledLanguages list of all languages that can be selected
 const QStringList &InputMethod::enabledLanguages() const
 {
     Q_D(const InputMethod);
     return d->enabledLanguages;
 }
 
+//! \brief InputMethod::activeLanguage returns the language that is currently
+//! used by the keyboard
 const QString &InputMethod::activeLanguage() const
 {
     Q_D(const InputMethod);

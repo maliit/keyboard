@@ -57,7 +57,7 @@ class InputMethod
     Q_ENUMS(TextContentType)
 
 public:
-    /// Same as Maliit::TextContentType but usabe in QML
+    /// Same as Maliit::TextContentType but usable in QML
     enum TextContentType {
         FreeTextContentType = Maliit::FreeTextContentType,
         NumberContentType = Maliit::NumberContentType,
