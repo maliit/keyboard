@@ -424,6 +424,13 @@ bool InputMethod::predictionEnabled()
     return d->predictionEnabled;
 }
 
+//! \brief InputMethod::showWordRibbon returns if the word ribbon should be shown
+bool InputMethod::showWordRibbon()
+{
+    Q_D(InputMethod);
+    return d->showWordRibbon;
+}
+
 InputMethod::TextContentType InputMethod::contentType()
 {
     Q_D(InputMethod);

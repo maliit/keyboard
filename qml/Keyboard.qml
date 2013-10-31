@@ -77,7 +77,7 @@ Item {
     property int contentOrientation: Qt.PrimaryOrientation // overwritten by inputMethod
 
     property bool shown: false;
-    property bool wordribbon_visible: maliit_input_method.predictionEnabled
+    property bool wordribbon_visible: maliit_input_method.showWordRibbon
 
     property bool languageMenuShown: false
 

@@ -92,6 +92,7 @@ public:
 
     bool autocapsEnabled;
     bool predictionEnabled;
+    bool showWordRibbon;
     InputMethod::TextContentType contentType;
     QString systemLanguage;
     QString activeLanguage;
@@ -116,6 +117,7 @@ public:
         , applicationApiWrapper(new UbuntuApplicationApiWrapper)
         , autocapsEnabled(false)
         , predictionEnabled(false)
+        , showWordRibbon(false)
         , contentType(InputMethod::FreeTextContentType)
         , systemLanguage("en")
         , activeLanguage(systemLanguage)
@@ -251,6 +253,11 @@ public:
     {
         layout.helper.wordRibbon()->setEnabled( predictionEnabled );
         Q_EMIT q->wordRibbonEnabledChanged( predictionEnabled );
+
+        if (predictionEnabled != showWordRibbon) {
+            showWordRibbon = predictionEnabled;
+            Q_EMIT q->showWordRibbonChanged(showWordRibbon);
+        }
 
         setLayoutOrientation(appsCurrentOrientation);
     }
