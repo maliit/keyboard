@@ -811,7 +811,6 @@ void AbstractTextEditor::onCursorPositionChanged(int cursor_position,
 
 //! \brief sets language features
 //! \param language id as string (as found in settings file)
-//!
 void AbstractTextEditor::onLanguageChanged(const QString& languageId)
 {
     Q_D(AbstractTextEditor);

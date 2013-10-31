@@ -32,10 +32,15 @@
 #include "plugin.h"
 #include "inputmethod.h"
 
+#include <QtQml>
+
 MaliitKeyboardPlugin::MaliitKeyboardPlugin(QObject *parent)
     : QObject(parent)
     , Maliit::Plugins::InputMethodPlugin()
-{}
+{
+    qmlRegisterUncreatableType<InputMethod>("Ubuntu.Keyboard", 1, 0, "InputMethod",
+                                            QString("InputMethod can't be created in QML"));
+}
 
 QString MaliitKeyboardPlugin::name() const
 {
@@ -44,7 +49,7 @@ QString MaliitKeyboardPlugin::name() const
 
 MAbstractInputMethod * MaliitKeyboardPlugin::createInputMethod(MAbstractInputMethodHost *host)
 {
-    return new MaliitKeyboard::InputMethod(host);
+    return new InputMethod(host);
 }
 
 QSet<Maliit::HandlerState> MaliitKeyboardPlugin::supportedStates() const

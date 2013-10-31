@@ -28,7 +28,7 @@ typedef MaliitKeyboard::SoundFeedback DefaultFeedback;
 typedef MaliitKeyboard::NullFeedback DefaultFeedback;
 #endif
 
-namespace MaliitKeyboard {
+using namespace MaliitKeyboard;
 
 typedef QScopedPointer<Maliit::Plugins::AbstractPluginSetting> ScopedSetting;
 typedef QSharedPointer<MKeyOverride> SharedOverride;
@@ -92,7 +92,8 @@ public:
 
     bool autocapsEnabled;
     bool predictionEnabled;
-    Maliit::TextContentType contentType;
+    InputMethod::TextContentType contentType;
+    QString systemLanguage;
     QString activeLanguage;
     QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
@@ -115,7 +116,10 @@ public:
         , applicationApiWrapper(new UbuntuApplicationApiWrapper)
         , autocapsEnabled(false)
         , predictionEnabled(false)
-        , contentType(Maliit::FreeTextContentType)
+        , contentType(InputMethod::FreeTextContentType)
+        , systemLanguage("en")
+        , activeLanguage(systemLanguage)
+        , enabledLanguages(systemLanguage)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , m_settings()
     {
@@ -247,20 +251,8 @@ public:
     {
         layout.helper.wordRibbon()->setEnabled( predictionEnabled );
         Q_EMIT q->wordRibbonEnabledChanged( predictionEnabled );
-        qmlRootItem->setProperty("wordribbon_visible", predictionEnabled );
 
         setLayoutOrientation(appsCurrentOrientation);
-    }
-
-    /*
-     * changes keyboard layout
-     * called directly to show URL or num layout for special contentTypes,
-     * does not change the current language id / activeView
-     */
-
-    void setActiveKeyboardId(const QString& id)
-    {
-        qmlRootItem->setProperty("layoutId", id);
     }
 
     void connectToNotifier()
@@ -340,18 +332,19 @@ public:
     {
         QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
                          q, SLOT(onEnabledLanguageSettingsChanged()));
-        truncateEnabledLanguageLocales(m_settings.enabledLanguages());
-        Q_EMIT q->enabledLanguagesChanged(enabledLanguages);
+        q->onEnabledLanguageSettingsChanged();
 
-        registerActiveLanguage();
+        registerSystemLanguage();
+        q->setActiveLanguage(systemLanguage);
     }
 
-    void registerActiveLanguage()
+    //! \brief registerSystemLanguage reads the language from the system
+    //! FIXME check if the language is supported - if not use "en" as fallback
+    void registerSystemLanguage()
     {
-        activeLanguage = QString(getenv("LANGUAGE"));
-        activeLanguage.truncate(2);
-
-        Q_EMIT q->activeLanguageChanged(activeLanguage);
+        systemLanguage = QString(getenv("LANGUAGE"));
+        systemLanguage.truncate(2);
+        Q_EMIT q->systemLanguageChanged(systemLanguage);
     }
 
     void onScreenSizeChange(const QSize &size)
@@ -385,6 +378,3 @@ public:
         }
     }
 };
-
-} // namespace
-
