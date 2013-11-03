@@ -27,6 +27,7 @@ from time import sleep
 from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
+from autopilot.platform import model
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
@@ -34,6 +35,8 @@ from ubuntu_keyboard.emulators.keypad import KeyPadState
 
 class UbuntuKeyboardTests(AutopilotTestCase):
     def setUp(self):
+        if model() == "Desktop":
+            self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
         self.pointer = Pointer(Touch.create())
 
