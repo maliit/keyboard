@@ -29,6 +29,7 @@ from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
 from autopilot.platform import model
+from ubuntuuitoolkit import base
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
@@ -125,7 +126,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
         desktop_file = self._write_test_desktop_file()
         return self.launch_test_application(
-            "qmlscene",
+            base.get_qmlscene_launch_command(),
             qml_path,
             '--desktop_file_hint=%s' % desktop_file,
             app_type='qt',
