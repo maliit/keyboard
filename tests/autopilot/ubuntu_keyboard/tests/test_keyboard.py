@@ -18,6 +18,7 @@
 #
 
 import os
+import subprocess
 
 from testtools.matchers import Equals
 import tempfile
@@ -32,8 +33,72 @@ from autopilot.platform import model
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
 
+import logging
+
+
+logger = logging.getLogger(__name__)
+
+
+def _get_maliit_server_status():
+    try:
+        return subprocess.check_output([
+            'initctl',
+            'status',
+            'maliit-server'
+        ])
+    except subprocess.CalledProcessError as e:
+        e.args += ("maliit-server appears to be an unknown service.", )
+        raise
+
+
+def _stop_maliit_server():
+    status = _get_maliit_server_status()
+    if "start/" in status:
+        try:
+            logger.debug("Stopping maliit server")
+            subprocess.check_call(['initctl', 'stop', 'maliit-server'])
+        except subprocess.CalledProcessError as e:
+            e.args += ("Unable to stop mallit server",)
+            raise
+    else:
+        logger.debug("No need to stop server.")
+
+
+def _start_maliit_server(args):
+    status = _get_maliit_server_status()
+    if "stop/" in status:
+        try:
+            logger.debug(
+                "Starting maliit-server with the args: '%s'" % ",".join(args)
+            )
+            subprocess.check_call(
+                ['initctl', 'start', 'maliit-server'] + args
+            )
+        except subprocess.CalledProcessError as e:
+            e.args += ("Unable to start mallit server",)
+            raise
+    else:
+        raise RuntimeError(
+            "Unable to start maliit-server: server is currently running."
+        )
+
+
+def _restart_maliit_server(args=None):
+    if args is None:
+        args = []
+    _stop_maliit_server()
+    _start_maliit_server(args)
+
 
 class UbuntuKeyboardTests(AutopilotTestCase):
+    @classmethod
+    def setUpClass(cls):
+        _restart_maliit_server(['QT_LOAD_TESTABILITY=1'])
+
+    @classmethod
+    def tearDownClass(cls):
+        _restart_maliit_server()
+
     def setUp(self):
         if model() == "Desktop":
             self.skipTest("Ubuntu Keyboard tests only run on device.")

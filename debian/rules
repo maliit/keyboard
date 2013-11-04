@@ -11,12 +11,14 @@ override_dh_auto_configure:
 	                     MALIIT_DEFAULT_PROFILE=ubuntu \
 	                     CONFIG+=debug \
 	                     CONFIG+=nodoc \
-	                     CONFIG+=notests \
 	                     CONFIG+=enable-presage \
 	                     CONFIG+=enable-hunspell \
 	                     CONFIG+=enable-preedit \
 	                     CONFIG+=enable-pinyin \
 	                     CONFIG+=enable-qt-mobility
+
+override_dh_auto_test:
+	xvfb-run make check
 
 override_dh_install:
 	# install autopilot tests
