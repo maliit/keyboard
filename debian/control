@@ -8,13 +8,16 @@ Build-Depends: debhelper (>= 9),
                libgl1-mesa-dev | libgl-dev,
                libgles2-mesa-dev,
                libglib2.0-dev,
+               libgsettings-qt-dev,
                libhunspell-dev,
                libpinyin2-dev,
+               libplatform-api1-dev,
                libpresage-dev,
-               libubuntu-platform-api1-dev,
                libxml2-utils,
-               maliit-framework-dev (>= 0.99+git20130702+97e8335),
+               maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
                pkg-config,
+               python (>= 2.7),
+               python-setuptools,
                qt5-default,
                qtbase5-dev,
                qtdeclarative5-dev,
@@ -28,7 +31,7 @@ Vcs-Bzr: https://code.launchpad.net/~phablet-team/ubuntu-keyboard/trunk
 
 Package: ubuntu-keyboard
 Architecture: any
-Depends: maliit-framework (>= 0.99+git20130702+97e8335),
+Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
          qtdeclarative5-window-plugin,
          ubuntu-keyboard-data (>= ${source:Version}),
          ${misc:Depends},
@@ -47,6 +50,7 @@ Description: Ubuntu on-screen keyboard
 Package: ubuntu-keyboard-data
 Architecture: all
 Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files
  Data files for the Ubuntu virtual keyboard
@@ -58,3 +62,12 @@ Depends: ubuntu-keyboard (>= ${source:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard tests
  Tests for the Ubuntu virtual keyboard
+
+Package: ubuntu-keyboard-autopilot
+Architecture: all
+Depends: libautopilot-qt (<< 1.4),
+         ${misc:Depends},
+         ${python:Depends},
+         ubuntu-keyboard (>= ${source:Version}),
+Description: Tests and emulators package for ubuntu-keyboard
+ Autopilot tests for the ubuntu-keyboard package

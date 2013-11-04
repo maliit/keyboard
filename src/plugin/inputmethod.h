@@ -72,8 +72,6 @@ public:
     virtual void setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides);
     //! \reimp_end
 
-    Q_SLOT void onLeftLayoutSelected();
-    Q_SLOT void onRightLayoutSelected();
     Q_SLOT void deviceOrientationChanged(Qt::ScreenOrientation orientation);
 
     Q_SLOT void updateWordEngine();
@@ -87,43 +85,40 @@ public:
 
     void update();
 
+    Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
+    QStringList enabledLanguages();
+    Q_SIGNAL void enabledLanguagesChanged(QStringList languages);
+
+    Q_PROPERTY(QString activeLanguage READ activeLanguage NOTIFY activeLanguageChanged)
+    QString activeLanguage();
+    Q_SIGNAL void activeLanguageChanged(QString language);
+
 Q_SIGNALS:
     void predictionEnabledChanged();
     void contentTypeChanged(Maliit::TextContentType contentType);
+    void activateAutocaps();
 
 private:
-    void registerStyleSetting(MAbstractInputMethodHost *host);
-    void registerFeedbackSetting(MAbstractInputMethodHost *host);
-    void registerAutoCorrectSetting(MAbstractInputMethodHost *host);
-    void registerAutoCapsSetting(MAbstractInputMethodHost *host);
-    void registerWordEngineSetting(MAbstractInputMethodHost *host);
-    void registerHideWordRibbonInPortraitModeSetting(MAbstractInputMethodHost *host);
-
-    Q_SLOT void onScreenSizeChange(const QSize &size);
     Q_SLOT void onStyleSettingChanged();
     Q_SLOT void onFeedbackSettingChanged();
     Q_SLOT void onAutoCorrectSettingChanged();
-    Q_SLOT void onAutoCapsSettingChanged();
+    Q_SLOT void onEnabledLanguageSettingsChanged();
+    Q_SLOT void updateAutoCaps();
+
     Q_SLOT void updateKey(const QString &key_id,
                           const MKeyOverride::KeyOverrideAttributes changed_attributes);
     Q_SLOT void onKeyboardClosed();
 
     Q_SLOT void onLayoutWidthChanged(int width);
     Q_SLOT void onLayoutHeightChanged(int height);
-#ifdef EXTENDED_SURFACE_TEMP_DISABLED
-    Q_SLOT void onExtendedLayoutWidthChanged(int width);
-    Q_SLOT void onExtendedLayoutHeightChanged(int height);
-    Q_SLOT void onExtendedLayoutOriginChanged(const QPoint &origin);
-    Q_SLOT void onMagnifierLayoutWidthChanged(int width);
-    Q_SLOT void onMagnifierLayoutHeightChanged(int height);
-    Q_SLOT void onMagnifierLayoutOriginChanged(const QPoint &origin);
-#endif
 
     Q_SLOT void onContentTypeChanged(Maliit::TextContentType contentType);
 
-    Q_SLOT void onHideAnimationFinished();
+    Q_SLOT void onQMLStateChanged(QString state);
     Q_SIGNAL void wordEngineEnabledChanged(bool wordEngineEnabled);
     Q_SIGNAL void wordRibbonEnabledChanged(bool wordRibbonEnabled);
+
+    void checkInitialAutocaps();
 
     const QScopedPointer<InputMethodPrivate> d_ptr;
 };

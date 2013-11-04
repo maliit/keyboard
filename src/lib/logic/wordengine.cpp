@@ -169,7 +169,7 @@ WordEngine::~WordEngine()
 void WordEngine::setEnabled(bool enabled)
 {
  // Don't allow to enable word engine if no backends are available:
-#if defined(HAVE_PRESAGE) || defined(HAVE_HUNSPELL)
+#if defined(HAVE_PRESAGE) || defined(HAVE_HUNSPELL) || defined(HAVE_PINYIN)
 #else
     if (enabled) {
         qWarning() << __PRETTY_FUNCTION__
@@ -183,11 +183,12 @@ void WordEngine::setEnabled(bool enabled)
 
 void WordEngine::onWordCandidateSelected(QString word)
 {
-    Q_D(WordEngine);
-
 #ifdef HAVE_PINYIN
+    Q_D(WordEngine);
     if (d->predictiveBackend == WordEnginePrivate::PinyinBackend)
         d->pinyinAdapter->wordCandidateSelected(word);
+#else
+    Q_UNUSED(word);
 #endif
 }
 

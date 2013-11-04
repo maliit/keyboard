@@ -40,17 +40,21 @@ adb_root() {
 
 install_ssh_key() {
     ssh-keygen -R $TARGET_IP
-    HOME_DIR=/data/ubuntu/home/phablet
+    HOME_DIR=/home/phablet
     adb push ~/.ssh/id_rsa.pub $HOME_DIR/.ssh/authorized_keys
     adb shell chown $USER_ID:$USER_ID $HOME_DIR/.ssh
     adb shell chown $USER_ID:$USER_ID $HOME_DIR/.ssh/authorized_keys
     adb shell chmod 700 $HOME_DIR/.ssh
     adb shell chmod 600 $HOME_DIR/.ssh/authorized_keys
+    adb shell rm /etc/init/ssh.override
 }
 
 install_dependencies() {
     exec_with_adb apt-get -y install openssh-server
+    adb shell start ssh
+    sleep 2
     exec_with_ssh $SUDO apt-get -y install build-essential rsync bzr ccache gdb libglib2.0-bin
+    exec_with_ssh $SUDO apt-get -y install emacs23-nox mc unzip
     exec_with_ssh $SUDO add-apt-repository -y ppa:canonical-qt5-edgers/qt5-proper
     exec_with_ssh $SUDO add-apt-repository -s -y ppa:phablet-team/ppa
     exec_with_ssh $SUDO apt-get update
@@ -76,14 +80,21 @@ sync_code() {
 }
 
 build() {
-    exec_with_ssh "cd $CODE_DIR/ && qmake && make -j 4"
+    # same options as in debian/rules
+    QMAKE_OPTIONS="-recursive MALIIT_DEFAULT_PROFILE=ubuntu CONFIG+=\\\"debug nodoc notests enable-presage enable-hunspell enable-preedit enable-pinyin enable-qt-mobility\\\""
+    exec_with_ssh "cd $CODE_DIR/ && qmake $QMAKE_OPTIONS && make -j 4"
+    echo "Installing"
+    adb shell pkill "maliit-server"
+    exec_with_ssh "cd $CODE_DIR/ && " $SUDO " make install"
 #    exec_with_ssh "cd $CODE_DIR/ && dpkg-buildpackage -j4"
 }
 
 run() {
-#    exec_with_ssh $SUDO "make install"
     exec_with_ssh $SUDO "/sbin/initctl stop maliit-server"
-#    adb shell pkill $BINARY
+    adb shell pkill $BINARY
+    adb shell pkill "webbrowser-app"
+    adb shell pkill "qmlscene"
+
 #    exec_with_ssh "$BINARY $RUN_OPTIONS"
 }
 

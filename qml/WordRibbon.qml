@@ -20,6 +20,7 @@ import Ubuntu.Components 0.1
 Rectangle {
 
     id: wordRibbonCanvas
+    objectName: "wordRibbenCanvas"
     state: "NORMAL"
 
     Rectangle {
@@ -29,6 +30,7 @@ Rectangle {
 
     ListView {
         id: listView
+        objectName: "wordListView"
         anchors.fill: parent;
 
         model: maliit_wordribbon
@@ -44,6 +46,7 @@ Rectangle {
             id: wordCandidateItem
             width: wordItem.width + units.gu(2);
             height: wordRibbonCanvas.height
+            property alias word_text: wordItem // For testing in Autopilot
 
             Item {
                 anchors.fill: parent

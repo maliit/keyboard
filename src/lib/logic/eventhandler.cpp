@@ -213,4 +213,61 @@ void EventHandler::onLanguageChangeRequested(QString languageId)
     d->updater->setActiveKeyboardId(languageId);
 }
 
+void EventHandler::onKeyPressed(QString label, QString action)
+{
+    Key key;
+    Label mlabel;
+    mlabel.setText(label);
+    key.setLabel(mlabel);
+
+    if (action == "backspace")
+        key.setAction(Key::ActionBackspace);
+
+    Q_EMIT keyPressed(key);
+}
+
+void EventHandler::onKeyReleased(QString label, QString action)
+{
+    Key key;
+    Label mlabel;
+    mlabel.setText(label);
+    key.setLabel(mlabel);
+
+    if (action == "return")
+        key.setAction(Key::ActionReturn);
+    else if (action == "backspace")
+        key.setAction(Key::ActionBackspace);
+    else if (action == "space")
+        key.setAction(Key::ActionSpace);
+    else if (action == "shift")
+        key.setAction(Key::ActionShift);
+    else
+        key.setAction(Key::ActionInsert);
+
+    Q_EMIT keyReleased(key);
+}
+
+void EventHandler::onKeyEntered(QString label)
+{
+    Key key;
+    Label mlabel;
+    mlabel.setText(label);
+    key.setLabel(mlabel);
+
+    Q_EMIT keyEntered(key);
+}
+
+
+void EventHandler::onKeyExited(QString label)
+{
+    Key key;
+    Label mlabel;
+    mlabel.setText(label);
+    key.setLabel(mlabel);
+
+    Q_EMIT keyExited(key);
+}
+
+
+
 }} // namespace Logic, MaliitKeyboard

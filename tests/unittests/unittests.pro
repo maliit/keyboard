@@ -1,12 +1,18 @@
-include(../../config.pri)
+TEMPLATE = subdirs
+SUBDIRS = \
+    common \
+#    ut_dynamic-layout \
+    ut_editor \
+    ut_keyboardsettings \
+    ut_language-layout-loading \
+    ut_language-layout-switching \
+#    ut_preedit-string \
+    ut_repeat-backspace \
+    ut_text \
+    ut_word-candidates \
+    ut_wordengine \
 
-TARGET = dummy
-TEMPLATE = lib
-
-qml.path = $$UBUNTU_KEYBOARD_DATA_DIR
-qml.files = *.qml
-
-INSTALLS += qml
-OTHER_FILES += \
-    api_tests.qml
-
+CONFIG += ordered
+QMAKE_EXTRA_TARGETS += check
+check.target = check
+check.CONFIG = recursive

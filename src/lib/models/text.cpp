@@ -82,6 +82,24 @@ void Text::appendToPreedit(const QString &appendix)
     m_cursor_position += appendix.length();
 }
 
+//! \brief Text::removeFromPreedit removes \length character from the preedit
+//! from the current cursor position
+//! \param length the number of charcaters to delete. Has to be 1 or greater
+//! \return true if removing the text was ok, false if there was an error.
+//! In case of an error, the preedit stays the same
+bool Text::removeFromPreedit(int length)
+{
+    if (length <= 0)
+        return false;
+
+    if (preedit().length() < length || m_cursor_position < length)
+        return false;
+
+    m_preedit.remove(m_cursor_position-length, length);
+    m_cursor_position -= length;
+    return true;
+}
+
 //! Commits current preedit. Insert preedit into surrounding text and
 //! updates surrounding offset to match expected cursor position.
 void Text::commitPreedit()

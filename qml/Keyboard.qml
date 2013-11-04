@@ -29,275 +29,165 @@
  *
  */
 
+
+//////////////////////
+// !!!IMPORTANT!!! Heavy modifications here might break the assumptions made by
+// UbuntuApplicationApiWrapper code (e.g. object names and what the items do/contain).
+// Update the code there accordingly, if needed. That code should no longer be needed
+// once the final architecture is in place.
+
 import QtQuick 2.0
+import "constants.js" as Const
+import "keys/"
+import "keys/key_constants.js" as UI
+import Ubuntu.Components 0.1
 import QtQuick.Window 2.0
 
 Item {
+    id: fullScreenItem
+    objectName: "fullScreenItem"
+
+    property variant input_method: maliit_input_method
+    property variant layout: maliit_layout
+    property variant event_handler: maliit_event_handler
+
+OrientationHelper {
+    automaticOrientation: false
+    transitionEnabled: false
+
+    orientationAngle: Screen.angleBetween(Screen.primaryOrientation, canvas.contentOrientation);
+
+Item {
     id: canvas
-    property alias layout: keyRepeater.model
-    property variant event_handler
-    property bool area_enabled // MouseArea has no id property so we cannot alias its enabled property.
-    property alias title: keyboard_title.text
+    objectName: "ubuntuKeyboard" // Allow us to specify a specific keyboard within autopilot.
+
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+
+    width: parent.width
+
+    property int keypadHeight: 0 // set by InputMethod
+
+    property string activeLanguage: input_method.activeLanguage
+
+    property string layoutId: "en_us"
+    Component.onCompleted: keypad.loadLayout(layoutId);
+    onLayoutIdChanged: keypad.loadLayout(layoutId);
+
+    property var enabledLanguages: input_method.enabledLanguages
 
     visible: layout.visible
 
-    property int contentOrientation: Screen.orientation
+    // Expose details for use with Autopilot.
+    //readonly property var layoutState: layout.keyboard_state
+    //readonly property string activeView: layout.activeView
+
+    property int contentOrientation: Qt.PrimaryOrientation // overwritten by inputMethod
 
     property bool shown: false;
-    property bool wordribbon_visible: true;
+    property bool wordribbon_visible: false;
 
-    property bool hideAnimationFinished: false;
-    property int pressedKeyIndex: -1;
-    property Item pressedKey;
-
-    RotationHelper {
-
-    Connections {
-        target: layout
-        onTitleChanged: {
-            console.debug("title:" + layout.title)
-            title_timeout.start()
-        }
-    }
+    property bool languageMenuShown: false
 
     MouseArea {
-        id: keyboardSurface
-        property int jumpBackThreshold: 170
+        id: swipeArea
+
+        property int jumpBackThreshold: units.gu(10)
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
+                borderTop.height + units.gu(UI.top_margin) * 3
 
         drag.target: keyboardSurface
         drag.axis: Drag.YAxis;
         drag.minimumY: 0
-        drag.maximumY: height
+        drag.maximumY: parent.height
         drag.filterChildren: true
 
-        x:0
-        y:0
-        width: parent.width
-        height: parent.height
-
-
-    WordRibbon {
-        id: wordRibbon
-
-        anchors.bottom: keypadMouseArea.top
-        width: parent.width;
-
-        height: wordribbon_visible ? layout.wordribbon_height : 0
-    }
-
-    MouseArea {
-        id: keypadMouseArea
-        preventStealing: true
-
-        anchors {
-            top: wordRibbon.bottom
-            fill: parent
-            topMargin: layout.invisible_toucharea_height + (wordribbon_visible ? layout.wordribbon_height : 0);
+        onReleased: {
+            if (keyboardSurface.y > jumpBackThreshold) {
+                canvas.shown = false;
+            } else {
+                bounceBackAnimation.from = keyboardSurface.y
+                bounceBackAnimation.start();
+            }
         }
 
         Item {
-            id: keyboardContainer
+            id: keyboardSurface
+            objectName: "keyboardSurface"
 
-            anchors.fill: parent
+            x:0
+            y:0
+            width: parent.width
+            height: canvas.height
 
-            Rectangle {
-                id: background
+            WordRibbon {
+                id: wordRibbon
+                objectName: "wordRibbon"
 
-                anchors.fill: parent
+                visible: canvas.wordribbon_visible
 
-                gradient: Gradient {
-                    GradientStop { position: 0.0; color: "#f1f1f1" }
-                    GradientStop { position: 1.0; color: "#e4e4e4" }
-                }
-            }
+                anchors.bottom: keyboardComp.top
+                width: parent.width;
 
-            Image {
-                id: borderTop
-                source: "styles/ubuntu/images/border_top.png"
-                width: parent.width
-                anchors.top: parent.top.bottom
-            }
-
-            Image {
-                id: borderBottom
-                source: "styles/ubuntu/images/border_bottom.png"
-                width: parent.width
-                anchors.bottom: background.bottom
+                height: visible ? layout.wordribbon_height : 0
             }
 
             Item {
-                id: keyPad
+                id: keyboardComp
+                objectName: "keyboardComp"
 
-                anchors.top: borderTop.bottom
-                anchors.bottom: borderBottom.top
+                height: canvas.keypadHeight - wordRibbon.height
                 width: parent.width
+                anchors.bottom: parent.bottom
 
-            Repeater {
-                id: keyRepeater
-                model: layout
-                anchors.fill: parent
+                Rectangle {
+                    id: background
 
-                Item {
-                    property alias text: key_text_item.text;
+                    anchors.fill: parent
 
-                    x: key_reactive_area.x
-                    y: key_reactive_area.y
-                    width: key_reactive_area.width
-                    height: key_reactive_area.height
-
-                    BorderImage {
-                        x: key_rectangle.x
-                        y: key_rectangle.y
-                        width: key_rectangle.width
-                        height: key_rectangle.height
-
-                        border.left: key_background_borders.x
-                        border.top: key_background_borders.y
-                        border.right: key_background_borders.width
-                        border.bottom: key_background_borders.height
-
-                        source: key_background
-
-                        Text {
-                            id: key_text_item
-
-                            anchors.fill: parent
-                            text: key_text
-                            font.family: key_font
-                            font.pixelSize: key_font_size
-                            color: key_font_color
-                            font.bold: true
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            visible: (key_text.length != 0)
-                        }
-
-                        Image {
-                            anchors.centerIn: parent
-                            source: key_icon
-                            visible: (key_icon.length != 0)
-                        }
-                    }
-
-                    MouseArea {
-                        enabled: area_enabled
-                        anchors.fill: parent
-                        hoverEnabled: true
-
-                        onEntered: event_handler.onEntered(index)
-                        onExited: event_handler.onExited(index)
-
-                        onPressed: {
-                            if(!drag.active) {
-                                pressedKeyIndex = index;
-                                event_handler.onEntered(index)
-                            }
-
-                            if (key_action_insert)
-                                pressedKey = parent
-                            else
-                                pressedKey = null
-
-                            event_handler.onPressed(index)
-                            mouse.accepted = false;
-                        }
-
-                        onReleased: {
-                            console.error("ON_RELEASED")
-                            if (pressedKeyIndex == -1)
-                                return;
-
-                            if (!drag.active)
-                                event_handler.onReleased(pressedKeyIndex);
-
-                            event_handler.onExited(pressedKeyIndex)
-                            pressedKeyIndex = -1;
-
-                        }
-
-                        onPressAndHold: event_handler.onPressAndHold(index)
-                    }
-
-                } // Item
-            } // Repeater
-
-            } // keyPad
-
-            Popper {
-                id: popper
-                target: pressedKey
-            }
-
-            // Keyboard title rendering
-            // TODO: Make separate component?
-            Item {
-                anchors.centerIn: parent
-                opacity: title_timeout.running ? 1.0 : 0.0
-
-                Behavior on opacity {
-                    PropertyAnimation {
-                        duration: 300
-                        easing.type: Easing.InOutQuad
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: "#f1f1f1" }
+                        GradientStop { position: 1.0; color: "#e4e4e4" }
                     }
                 }
 
-                Timer {
-                    id: title_timeout
-                    interval: 1000
+                Image {
+                    id: borderTop
+                    source: "styles/ubuntu/images/border_top.png"
+                    width: parent.width
+                    anchors.top: parent.top.bottom
                 }
 
-                // TODO: Make title background part of styling profile.
-                BorderImage {
+                Image {
+                    id: borderBottom
+                    source: "styles/ubuntu/images/border_bottom.png"
+                    width: parent.width
+                    anchors.bottom: background.bottom
+                }
+
+                KeyboardContainer {
+                    id: keypad
+
+                    anchors.top: borderTop.bottom
+                    anchors.bottom: borderBottom.top
+                    anchors.topMargin: units.gu( UI.top_margin )
+                    anchors.bottomMargin: units.gu( UI.bottom_margin )
+                    width: parent.width
+                }
+
+                LanguageMenu {
+                    id: languageMenu
                     anchors.centerIn: parent
-
-                    // Manual padding of text:
-                    width: keyboard_title.width * 1.2
-                    height: keyboard_title.height * 1.2
-
-                    //anchors.fill: keyboard_title
-                    source: layout.background
-                    z: 1000 // Move behind Text element but in front of rest.
-
-                    border.left: layout.background_borders.x
-                    border.top: layout.background_borders.y
-                    border.right: layout.background_borders.width
-                    border.bottom: layout.background_borders.height
+                    width: 400;
+                    height: keypad.height;
+                    enabled: canvas.languageMenuShown
+                    opacity: canvas.languageMenuShown ? 1.0 : 0.0
                 }
-
-                Text {
-                    id: keyboard_title
-                    anchors.centerIn: parent
-
-                    text: title;
-                    z: 1001
-
-                    // TODO: Make title font part of styling profile.
-                    font.pointSize: 48
-                    color: "white"
-                }
-            }
-        } // keyboardContainer
-
-        onReleased: {
-            if (pressedKeyIndex == -1)
-                return;
-
-            if (!drag.active)
-                event_handler.onReleased(pressedKeyIndex);
-
-            event_handler.onExited(pressedKeyIndex)
-            pressedKeyIndex = -1;
-            pressedKey = null;
-
-        }
-    } // keypadMouseArea
-
-    onReleased: {
-        if (y > jumpBackThreshold) {
-            canvas.shown = false;
-        } else {
-            bounceBackAnimation.from = y
-            bounceBackAnimation.start();
+            } // keyboardComp
         }
     }
 
@@ -310,9 +200,6 @@ Item {
         to: 0
     }
 
-    } // big mousearea
-    } // rotation helper
-
     state: "HIDDEN"
 
     states: [
@@ -320,15 +207,17 @@ Item {
             name: "SHOWN"
             PropertyChanges { target: canvas; y: 0; }
             when: canvas.shown === true
-            onCompleted: canvas.hideAnimationFinished = false;
         },
 
         State {
             name: "HIDDEN"
             PropertyChanges { target: canvas; y: height; }
             onCompleted: {
+                canvas.languageMenuShown = false
                 keyboardSurface.y = 0;
-                canvas.hideAnimationFinished = true;
+                keypad.closeExtendedKeys();
+                keypad.activeKeypadState = "NORMAL"
+                keypad.state = "CHARACTERS"
             }
             when: canvas.shown === false
         }
@@ -336,5 +225,15 @@ Item {
     transitions: Transition {
         PropertyAnimation { target: canvas; properties: "y"; easing.type: Easing.InOutQuad }
     }
-}
 
+    Connections {
+        target: input_method
+        onActivateAutocaps: {
+            keypad.state = "CHARACTERS";
+            keypad.activeKeypadState = "SHIFTED";
+        }
+    }
+
+} // canvas
+} // OrientationHelper
+} // fullScreenItem

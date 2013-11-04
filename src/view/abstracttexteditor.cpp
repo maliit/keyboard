@@ -35,6 +35,8 @@
 #include "logic/chineselanguagefeatures.h"
 #include "logic/languagefeatures.h"
 
+#include <QElapsedTimer>
+
 namespace MaliitKeyboard {
 
 //! \class EditorOptions
@@ -263,13 +265,16 @@ bool extractWordBoundariesAtCursor(const QString& surrounding_text,
 
 EditorOptions::EditorOptions()
     : backspace_auto_repeat_delay(500)
-    , backspace_auto_repeat_interval(300)
+    , backspace_auto_repeat_interval(200)
+    , backspace_word_delay(3000)
+    , backspace_word_interval(400)
 {}
 
 class AbstractTextEditorPrivate
 {
 public:
     QTimer auto_repeat_backspace_timer;
+    QElapsedTimer backspace_hold_timer;
     bool backspace_sent;
     EditorOptions options;
     QScopedPointer<Model::Text> text;
@@ -380,15 +385,9 @@ void AbstractTextEditor::onKeyPressed(const Key &key)
     }
 
     if (key.action() == Key::ActionBackspace) {
-        if (d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty()) {
-            d->text->setPrimaryCandidate(QString());
-            d->backspace_sent = true;
-        } else {
-            d->backspace_sent = false;
-        }
-
-        commitPreedit();
+        d->backspace_sent = false;
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_delay);
+        d->backspace_hold_timer.restart();
     }
 }
 
@@ -409,6 +408,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     }
 
     const QString &text(key.label().text());
+    QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
 
     switch(key.action()) {
@@ -431,17 +431,16 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         break;
 
     case Key::ActionBackspace: {
-        commitPreedit();
-
         if (not d->backspace_sent) {
-            event_key = Qt::Key_Backspace;
+            singleBackspace();
         }
 
         d->auto_repeat_backspace_timer.stop();
      } break;
 
     case Key::ActionSpace: {
-        const bool auto_caps_activated = d->language_features->activateAutoCaps(d->text->preedit());
+        QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+        const bool auto_caps_activated = d->language_features->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty();
 
         if (replace_preedit) {
@@ -458,9 +457,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         }
     } break;
 
-    case Key::ActionReturn:
+    case Key::ActionReturn: {
         event_key = Qt::Key_Return;
-        break;
+        keyText = QString("\r");
+    } break;
 
     case Key::ActionClose:
         Q_EMIT keyboardClosed();
@@ -499,7 +499,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     if (event_key != Qt::Key_unknown) {
         commitPreedit();
-        QKeyEvent ev(QEvent::KeyPress, event_key, Qt::NoModifier);
+        QKeyEvent ev(QEvent::KeyPress, event_key, Qt::NoModifier, keyText);
         sendKeyEvent(ev);
     }
 }
@@ -664,10 +664,50 @@ void AbstractTextEditor::autoRepeatBackspace()
 {
     Q_D(AbstractTextEditor);
 
-    QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
-    sendKeyEvent(ev);
-    d->backspace_sent = true;
-    d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
+    if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
+        singleBackspace();
+        d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
+    } else {
+        autoRepeatWordBackspace();
+    }
+}
+
+/*!
+ * \brief AbstractTextEditor::autoRepeatWordBackspace same as autoRepeatBackspace()
+ * but deletes whole words
+ */
+void AbstractTextEditor::autoRepeatWordBackspace()
+{
+    Q_D(AbstractTextEditor);
+
+    if (d->text->surroundingOffset() > 0) {
+        QString word = wordLeftOfCursor();
+        for (int i=0; i<word.length(); ++i)
+            singleBackspace();
+    } else {
+        singleBackspace();
+    }
+
+    d->auto_repeat_backspace_timer.start(d->options.backspace_word_interval);
+}
+
+/*!
+ * \brief AbstractTextEditor::wordLeftOfCursor returns the word that is left to
+ * to the cursor
+ * \return
+ */
+QString AbstractTextEditor::wordLeftOfCursor() const
+{
+    Q_D(const AbstractTextEditor);
+
+    const QString leftSurrounding = d->text->surroundingLeft();
+    int idx = leftSurrounding.length() - 1;
+    while (idx >= 0 && !isSeparator(leftSurrounding.at(idx))) {
+        --idx;
+    }
+    int length = d->text->surroundingOffset() - idx;
+
+    return leftSurrounding.right(length);
 }
 
 //! \brief Emits wordCandidatesChanged() signal with current preedit
@@ -707,6 +747,25 @@ void AbstractTextEditor::sendPreeditString(const QString &preedit,
                                            Model::Text::PreeditFace face)
 {
     sendPreeditString(preedit, face, Replacement());
+}
+
+//! \brief AbstractTextEditor::singleBackspace deletes one charater at he current
+//! cursor position.
+void AbstractTextEditor::singleBackspace()
+{
+    Q_D(AbstractTextEditor);
+
+    if (d->text->preedit().isEmpty()) {
+        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
+        sendKeyEvent(ev);
+    } else {
+        d->text->removeFromPreedit(1);
+        d->word_engine->computeCandidates(d->text.data());
+        sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                          Replacement());
+    }
+
+    d->backspace_sent = true;
 }
 
 //! \brief Reacts to cursor position change in application's text

@@ -19,12 +19,12 @@ Files: benchmark/*
        src/plugin/*
        src/view/*
        src/viewer/*
-       tests/common/inputmethodhostprobe.*
-       tests/common/utils.*
-       tests/common/utils-gui.cpp
-       tests/language-layout-switching/*
-       tests/preedit-string/*
-       tests/repeat-backspace/*
+       tests/unittests/common/inputmethodhostprobe.*
+       tests/unittests/common/utils.*
+       tests/unittests/common/utils-gui.cpp
+       tests/unittests/ut_language-layout-switching/*
+       tests/unittests/ut_preedit-string/*
+       tests/unittests/ut_repeat-backspace/*
 Copyright: 2011 Nokia Corporation
 License: BSD-3-clause
 
@@ -44,10 +44,10 @@ Files: qml/Keyboard.qml
        src/lib/parser/tagrowcontainer.*
        src/plugin/maliitcontext.*
        src/plugin/updatenotifier.*
-       tests/common/wordengineprobe.*
-       tests/editor/*
-       tests/language-layout-loading/*
-       tests/word-candidates/*
+       tests/unittests/common/wordengineprobe.*
+       tests/unittests/ut_editor/*
+       tests/unittests/ut_language-layout-loading/*
+       tests/unittests/ut_word-candidates/*
        tools/*
 Copyright: 2012 Openismus GmbH
 License: BSD-3-clause
@@ -56,7 +56,6 @@ Files: src/lib/models/styleattributes.*
        src/view/abstractfeedback.*
        src/view/nullfeedback.*
        src/view/soundfeedback.*
-       tests/rendering/*
 Copyright: 2012 One Laptop per Child Association
 License: BSD-3-clause
 
