@@ -90,10 +90,6 @@ def _restart_maliit_server(args=None):
 
 
 class UbuntuKeyboardTests(AutopilotTestCase):
-    maliit_override_file = os.path.expanduser(
-        "~/.config/upstart/maliit-server.override"
-    )
-
     @classmethod
     def setUpClass(cls):
         _restart_maliit_server(['QT_LOAD_TESTABILITY=1'])
