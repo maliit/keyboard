@@ -67,6 +67,7 @@ Item {
         if (languageId == "es")         return "Spanish";
         if (languageId == "pt")         return "Portuguese";
         if (languageId == "fr")         return "French";
+        if (languageId == "it")         return "Italian";
         if (languageId == "de")         return "German";
         if (languageId == "zh")         return "Chinese - Pinyin";
     }

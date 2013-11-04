@@ -33,7 +33,7 @@ Item {
 
     state: "CHARACTERS"
 
-    property variant supportedLocales: ["en", "de", "es", "fr", "zh", "pt"]
+    property variant supportedLocales: ["en", "de", "es", "fr", "it", "zh", "pt"]
 
     function localeIsSupported(locale)
     {
@@ -64,6 +64,8 @@ Item {
             characterKeypadSource = "languages/de/Keyboard_de.qml";
         if (layoutId === "fr")
             characterKeypadSource = "languages/fr/Keyboard_fr.qml";
+        if (layoutId === "it")
+            characterKeypadSource = "languages/fr/Keyboard_it.qml";
         if (layoutId === "zh")
             characterKeypadSource = "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
     }
