@@ -1,3 +1,9 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131025-0ubuntu2) UNRELEASED; urgency=low
+
+  * Port to libpinyin4-dev API. (LP: #1247840)
+
+ -- Dmitrijs Ledkovs <xnox@ubuntu.com>  Mon, 04 Nov 2013 23:14:10 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131025-0ubuntu1) trusty; urgency=low
 
   [ Daniel d'Andrada ]
