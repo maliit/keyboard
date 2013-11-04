@@ -209,7 +209,7 @@ public:
 
     void setLayoutOrientation(Qt::ScreenOrientation screenOrientation)
     {
-        Logic::LayoutHelper::Orientation orientation = screenToMaliitOrientation(screenOrientation);
+        Logic::LayoutHelper::Orientation orientation = uiConst->screenToMaliitOrientation(screenOrientation);
 
         layout.updater.setOrientation(orientation);
 

@@ -14,6 +14,7 @@ HEADERS += \
     logic/languagefeatures.h \
     logic/eventhandler.h \
     logic/dynamiclayout.h \
+    logic/dynamiclayout_p.h \
     logic/pinyinadapter.h \
     logic/chineselanguagefeatures.h
 

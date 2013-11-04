@@ -44,14 +44,6 @@ private:
 
     void connectUiConstToScreen(const MockScreen& mockScreen)
     {
-        const QScreen* screen = qGuiApp->primaryScreen();
-        disconnect( screen, SIGNAL(primaryOrientationChanged(Qt::ScreenOrientation)), uiConst, SLOT(onPrimaryOrientationChanged(Qt::ScreenOrientation)) );
-        disconnect( screen, SIGNAL(orientationChanged(Qt::ScreenOrientation)), uiConst, SLOT(onPrimaryOrientationChanged(Qt::ScreenOrientation)) );
-        disconnect( screen, SIGNAL(geometryChanged(QRect)), uiConst, SLOT(onGeometryChanged(QRect)) );
-
-        connect( &mockScreen, SIGNAL(primaryOrientationChanged(Qt::ScreenOrientation)), uiConst, SLOT(onPrimaryOrientationChanged(Qt::ScreenOrientation)) );
-        connect( &mockScreen, SIGNAL(orientationChanged(Qt::ScreenOrientation)), uiConst, SLOT(onPrimaryOrientationChanged(Qt::ScreenOrientation)) );
-        connect( &mockScreen, SIGNAL(geometryChanged(QRect)), uiConst, SLOT(onGeometryChanged(QRect)) );
     }
 
   Q_SLOT void dynamicLayout()
@@ -108,10 +100,6 @@ private:
         QCOMPARE( uiConst->keyWidth(LayoutHelper::Portrait, KeyDescription::XXLarge),   24.0 );
         QCOMPARE( uiConst->keyWidth(LayoutHelper::Portrait, KeyDescription::Stretched), 30.0 );
 
-        // keyHeight() not tested, calculated
-
-        QCOMPARE( uiConst->fontSize(LayoutHelper::Portrait), 12.0 );
-        QCOMPARE( uiConst->fontSizeSmall(LayoutHelper::Portrait), 10.0 );
   }
 
     /*

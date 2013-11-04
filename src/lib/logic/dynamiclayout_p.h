@@ -38,11 +38,7 @@ public:
         qreal keyWidthXLarge;
         qreal keyWidthXXLarge;
         qreal keyWidthStretched;
-        QMargins keyAreaBorders;
-        qreal fontSize;
-        qreal fontSizeSmall;
-        QByteArray fontColor;
-        QByteArray fontFamily;
+
         qreal widthStretchFactor;
         qreal heightStretchFactor;
         qreal keypadTopMargin;
@@ -167,16 +163,6 @@ public:
 
 
             // generic
-
-            genericStorage->keyAreaBorders = QMargins(quickItem->property("key_area_borders").toInt(),
-                                                      quickItem->property("key_area_borders").toInt(),
-                                                      quickItem->property("key_area_borders").toInt(),
-                                                      quickItem->property("key_area_borders").toInt()
-                                                      );
-
-            genericStorage->fontColor = quickItem->property("font_color").toByteArray();
-            genericStorage->fontFamily = quickItem->property("font_family").toByteArray();
-
             landscapeStorage->wordRibbonHeight = quickItem->property("landscape_wordribbon_height").toInt();
             portraitStorage->wordRibbonHeight = quickItem->property("portrait_wordribbon_height").toInt();
 
@@ -286,10 +272,6 @@ public:
             portraitStorage->spaceBetweenKeys = quickItem->property("portrait_space_between_keys").toReal();
 
             // S M L XL XXL Stretched
-
-            genericStorage->fontSize = quickItem->property("font_size").toReal();
-            genericStorage->fontSizeSmall = quickItem->property("font_size_small").toReal();
-
             genericStorage->keyBackgroundNormal = quickItem->property("key_background_normal").toByteArray();
             genericStorage->keyBackgroundSpecial = quickItem->property("key_background_special").toByteArray();
             genericStorage->keyBackgroundDead = quickItem->property("key_background_deadkey").toByteArray();

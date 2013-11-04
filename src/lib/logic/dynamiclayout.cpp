@@ -19,20 +19,6 @@
 
 namespace MaliitKeyboard {
 namespace Logic {
-
-int calculateVerticalMargin(LayoutHelper::Orientation orientation, Keyboard& kb)
-{
-    Q_UNUSED(kb);
-
-    const int freeSpace = uiConst->keypadHeight(orientation)
-                            - (uiConst->keyHeight(orientation) * uiConst->numberOfRows())
-                            - uiConst->keypadTopMargin(orientation);
-
-    const int vMargin = (freeSpace / (uiConst->numberOfRows()-1)) / 2;
-
-    return vMargin;
-}
-
 /*
  * calculates margin per row
  **/
@@ -86,9 +72,6 @@ DynamicLayout::DynamicLayout(QObject* parent) : QObject(parent),
     d(new DynamicLayoutPrivate(this))
 {
     const QScreen* screen = qGuiApp->primaryScreen();
-    connect( screen, SIGNAL(primaryOrientationChanged(Qt::ScreenOrientation)), this, SLOT(onPrimaryOrientationChanged(Qt::ScreenOrientation)) );
-    connect( screen, SIGNAL(orientationChanged(Qt::ScreenOrientation)), this, SLOT(onPrimaryOrientationChanged(Qt::ScreenOrientation)) );
-    connect( screen, SIGNAL(geometryChanged(QRect)), this, SLOT(onGeometryChanged(QRect)) );
 
     d->primaryOrientation = screen->primaryOrientation();
     d->orientation = screen->orientation();
@@ -252,47 +235,18 @@ qreal DynamicLayout::keyboardScreenWidthRatio(LayoutHelper::Orientation orientat
     return d->storage(orientation)->keyboardScreenWidthRatio;
 }
 
-QMargins DynamicLayout::keyAreaBorders()
-{
-    return d->genericStorage->keyAreaBorders;
-}
-
-qreal DynamicLayout::fontSize(LayoutHelper::Orientation orientation)
-{
-    Q_UNUSED(orientation);
-    return d->genericStorage->fontSize;
-}
-qreal DynamicLayout::fontSizeSmall(LayoutHelper::Orientation orientation)
-{
-    Q_UNUSED(orientation);
-    return d->genericStorage->fontSizeSmall;
-}
-
-QByteArray DynamicLayout::fontColor()
-{
-    return d->genericStorage->fontColor;
-}
-
-QByteArray DynamicLayout::fontFamily()
-{
-    return d->genericStorage->fontFamily;
-}
-
+// used internally
 qreal DynamicLayout::keypadTopMargin(LayoutHelper::Orientation orientation)
 {
     return d->storage(orientation)->keypadTopMargin;
 }
-
+// used internally
 qreal DynamicLayout::spaceBetweenRows(LayoutHelper::Orientation orientation)
 {
     return d->storage(orientation)->spaceBetweenRows;
 }
 
-qreal DynamicLayout::spaceBetweenKeys(LayoutHelper::Orientation orientation)
-{
-    return d->storage(orientation)->spaceBetweenKeys;
-}
-
+// used by inputmethod_h
 int DynamicLayout::invisibleTouchAreaHeight(LayoutHelper::Orientation orientation)
 {
     return d->storage(orientation)->invisibleTouchAreaHeight;
@@ -315,23 +269,4 @@ void DynamicLayout::onWordEngineSettingsChanged(bool wordEngineEnabled)
         d->invalidateWindowGeometryCache();
     }
 }
-
-void DynamicLayout::onPrimaryOrientationChanged(Qt::ScreenOrientation orientation)
-{
-    d->primaryOrientation = orientation;
-}
-
-void DynamicLayout::onOrientationChanged(Qt::ScreenOrientation orientation)
-{
-    d->orientation = orientation;
-}
-
-void DynamicLayout::onGeometryChanged(const QRect & geometry)
-{
-    d->geometry = geometry;
-    d->invalidateWindowGeometryCache();
-}
-
-
-
 }} // namespaces

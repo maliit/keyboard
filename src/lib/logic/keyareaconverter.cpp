@@ -77,14 +77,14 @@ KeyArea createFromKeyboard(StyleAttributes *attributes,
     attributes->setStyleName(kb.style_name);
 
     Font font;
-    font.setName(uiConst->fontFamily());
-    font.setSize(uiConst->fontSize(orientation));
-    font.setColor(uiConst->fontColor());
+    font.setName("");
+    font.setSize(1.0);
+    font.setColor("");
 
     Font small_font(font);
-    small_font.setSize(uiConst->fontSizeSmall(orientation));
+    small_font.setSize(1.0);
 
-    static const QMargins bg_margins( uiConst->keyAreaBorders() );
+    static const QMargins bg_margins( QMargin() );
 
     const qreal max_width( uiConst->windowWidth(orientation) );
     const qreal key_height(uiConst->keyHeight(orientation));

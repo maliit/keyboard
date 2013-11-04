@@ -64,20 +64,12 @@ public:
     qreal keyHeight(LayoutHelper::Orientation orientation);
     qreal keyWidth(LayoutHelper::Orientation orientation, KeyDescription::Width width);
 
-    QMargins keyAreaBorders();
-
-    qreal fontSize(LayoutHelper::Orientation orientation);
-    qreal fontSizeSmall(LayoutHelper::Orientation orientation);
-    QByteArray fontColor();
-    QByteArray fontFamily();
-
     qreal keypadTopMargin(LayoutHelper::Orientation orientation);
 
     QByteArray keyBackground(Key::Style style, KeyDescription::State state) const;
     Logic::LayoutHelper::Orientation screenToMaliitOrientation(Qt::ScreenOrientation screenOrientation) const;
 
     qreal spaceBetweenRows(LayoutHelper::Orientation orientation);
-    qreal spaceBetweenKeys(LayoutHelper::Orientation orientation);
 
     int invisibleTouchAreaHeight(LayoutHelper::Orientation orientation);
 
@@ -89,11 +81,6 @@ public:
     QVector<int> calculateMargins(LayoutHelper::Orientation orientation, Keyboard& kb);
 
     Q_SLOT void onWordEngineSettingsChanged(bool wordEngineEnabled);
-
-    /* interface to primaryScreen */
-    Q_SLOT void onPrimaryOrientationChanged(Qt::ScreenOrientation orientation);
-    Q_SLOT void onOrientationChanged(Qt::ScreenOrientation orientation);
-    Q_SLOT void onGeometryChanged(const QRect & geometry);
 
 private:
     explicit DynamicLayout(QObject *parent = 0);
