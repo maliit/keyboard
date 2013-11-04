@@ -245,6 +245,7 @@ private:
     {
         QVERIFY(qputenv("MALIIT_PLUGINS_DATADIR", TEST_DATADIR));
         QVERIFY(qputenv("MALIIT_KEYBOARD_DATADIR", TEST_MALIIT_KEYBOARD_DATADIR));
+        QVERIFY(qputenv("UBUNTU_KEYBOARD_DATA_DIR", TEST_MALIIT_KEYBOARD_DATADIR));
     }
 
     Q_SLOT void testSanity_data()
