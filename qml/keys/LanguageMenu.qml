@@ -63,13 +63,13 @@ Item {
 
     function languageIdToName(languageId)
     {
+        if (languageId == "de")         return qsTr("German");
         if (languageId == "en")         return qsTr("English");
         if (languageId == "es")         return qsTr("Spanish");
-        if (languageId == "pt")         return qsTr("Portuguese");
         if (languageId == "fr")         return qsTr("French");
         if (languageId == "it")         return qsTr("Italian");
         if (languageId == "nl")         return qsTr("Dutch");
-        if (languageId == "de")         return qsTr("German");
+        if (languageId == "pt")         return qsTr("Portuguese");
         if (languageId == "sv")         return qsTr("Swedish");
         if (languageId == "zh")         return qsTr("Chinese - Pinyin");
     }

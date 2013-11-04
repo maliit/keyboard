@@ -54,20 +54,20 @@ Item {
         if (layoutId === "url")
             if (localeIsSupported(locale))
                 characterKeypadSource = "languages/"+locale+"/Keyboard_"+locale+"_url_search.qml";
+        if (layoutId === "de")
+            characterKeypadSource = "languages/de/Keyboard_de.qml";
         if (layoutId === "en")
             characterKeypadSource = "languages/en/Keyboard_en.qml";
         if (layoutId === "es")
             characterKeypadSource = "languages/es/Keyboard_es.qml";
-        if (layoutId === "nl")
-            characterKeypadSource = "languages/nl/Keyboard_nl.qml";
-        if (layoutId === "pt")
-            characterKeypadSource = "languages/pt/Keyboard_pt.qml";
-        if (layoutId === "de")
-            characterKeypadSource = "languages/de/Keyboard_de.qml";
         if (layoutId === "fr")
             characterKeypadSource = "languages/fr/Keyboard_fr.qml";
         if (layoutId === "it")
             characterKeypadSource = "languages/it/Keyboard_it.qml";
+        if (layoutId === "nl")
+            characterKeypadSource = "languages/nl/Keyboard_nl.qml";
+        if (layoutId === "pt")
+            characterKeypadSource = "languages/pt/Keyboard_pt.qml";
         if (layoutId === "sv")
             characterKeypadSource = "languages/sv/Keyboard_sv.qml";
         if (layoutId === "zh")
