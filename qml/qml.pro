@@ -33,6 +33,9 @@ lang_nl.files = languages/nl/*.qml languages/nl/*.js
 lang_pt.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/pt"
 lang_pt.files = languages/pt/*.qml languages/pt/*.js
 
+lang_ru.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/ru"
+lang_ru.files = languages/ru/*.qml languages/ru/*.js
+
 lang_sv.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/sv"
 lang_sv.files = languages/sv/*.qml languages/sv/*.js
 
@@ -51,6 +54,7 @@ INSTALLS += qml qml_keys qml_languages images \
     lang_it \
     lang_nl \
     lang_pt \
+    lang_ru \
     lang_sv \
     lang_zh_cn
 
@@ -113,6 +117,10 @@ OTHER_FILES += \
     languages/pt/Keyboard_pt_email.qml \
     languages/pt/Keyboard_pt_url.qml \
     languages/pt/Keyboard_pt_url_search.qml \
+    languages/ru/Keyboard_ru.qml \
+    languages/ru/Keyboard_ru_email.qml \
+    languages/ru/Keyboard_ru_url.qml \
+    languages/ru/Keyboard_ru_url_search.qml \
     languages/sv/Keyboard_sv.qml \
     languages/sv/Keyboard_sv_email.qml \
     languages/sv/Keyboard_sv_url.qml \
