@@ -70,6 +70,7 @@ Item {
         if (languageId == "it")         return qsTr("Italian");
         if (languageId == "nl")         return qsTr("Dutch");
         if (languageId == "de")         return qsTr("German");
+        if (languageId == "sv")         return qsTr("Swedish");
         if (languageId == "zh")         return qsTr("Chinese - Pinyin");
     }
 

@@ -59,7 +59,7 @@ Item {
         if (layoutId === "es")
             characterKeypadSource = "languages/es/Keyboard_es.qml";
         if (layoutId === "nl")
-            characterKeypadSource = "languages/es/Keyboard_nl.qml";
+            characterKeypadSource = "languages/nl/Keyboard_nl.qml";
         if (layoutId === "pt")
             characterKeypadSource = "languages/pt/Keyboard_pt.qml";
         if (layoutId === "de")
@@ -67,7 +67,9 @@ Item {
         if (layoutId === "fr")
             characterKeypadSource = "languages/fr/Keyboard_fr.qml";
         if (layoutId === "it")
-            characterKeypadSource = "languages/fr/Keyboard_it.qml";
+            characterKeypadSource = "languages/it/Keyboard_it.qml";
+        if (layoutId === "sv")
+            characterKeypadSource = "languages/sv/Keyboard_sv.qml";
         if (layoutId === "zh")
             characterKeypadSource = "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
     }

@@ -33,6 +33,9 @@ lang_nl.files = languages/nl/*.qml languages/nl/*.js
 lang_en.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/en"
 lang_en.files = languages/en/*.qml languages/en/*.js
 
+lang_sv.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/sv"
+lang_sv.files = languages/sv/*.qml languages/sv/*.js
+
 lang_zh_cn.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/zh_cn"
 lang_zh_cn.files = languages/zh_cn/*.qml languages/zh_cn/*.js
 
@@ -40,7 +43,7 @@ lang_zh_cn.files = languages/zh_cn/*.qml languages/zh_cn/*.js
 images.path = "$$UBUNTU_KEYBOARD_DATA_DIR/images"
 images.files = images/*.png images/*.sci
 
-INSTALLS += qml qml_keys qml_languages lang_de lang_es lang_pt lang_fr lang_it lang_nl lang_en lang_zh_cn images
+INSTALLS += qml qml_keys qml_languages lang_de lang_es lang_pt lang_fr lang_it lang_nl lang_en lang_sv lang_zh_cn images
 
 # for QtCreator
 OTHER_FILES += \
@@ -101,5 +104,10 @@ OTHER_FILES += \
     languages/nl/Keyboard_nl.qml \
     languages/nl/Keyboard_nl_email.qml \
     languages/nl/Keyboard_nl_url.qml \
-    languages/nl/Keyboard_nl_url_search.qml
+    languages/nl/Keyboard_nl_url_search.qml \
+    languages/sv/Keyboard_sv_email.qml \
+    languages/sv/Keyboard_sv.qml \
+    languages/sv/Keyboard_sv_url.com \
+    languages/sv/Keyboard_sv_url.qml \
+    languages/sv/Keyboard_sv_url_search.qml
 
