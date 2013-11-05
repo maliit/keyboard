@@ -18,6 +18,8 @@ override_dh_auto_configure:
 	                     CONFIG+=enable-qt-mobility
 
 override_dh_auto_test:
+	# Tests write $HOME/.presage/lm.db, make sure $HOME is
+	# writable.
 	rm -rf $(CURDIR)/debian/test-home
 	mkdir -p $(CURDIR)/debian/test-home
 	HOME=$(CURDIR)/debian/test-home xvfb-run make check
