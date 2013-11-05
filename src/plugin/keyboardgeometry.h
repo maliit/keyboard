@@ -40,6 +40,7 @@ class KeyboardGeometry : public QObject
     Q_PROPERTY(int canvasHeight READ canvasHeight NOTIFY canvasHeightChanged)
     Q_PROPERTY(QRectF visibleRect READ visibleRect WRITE setVisibleRect NOTIFY visibleRectChanged)
     Q_PROPERTY(Qt::ScreenOrientation orientation READ orientation NOTIFY orientationChanged)
+    Q_PROPERTY(bool shown READ shown WRITE setShown NOTIFY shownChanged)
 
 public:
     explicit KeyboardGeometry(QObject *parent = 0);
@@ -56,17 +57,22 @@ public:
     Qt::ScreenOrientation orientation() const;
     void setOrientation(Qt::ScreenOrientation orient);
 
+    bool shown() const;
+    Q_SLOT void setShown(bool show);
+
 Q_SIGNALS:
     void keypadHeightChanged();
     void canvasHeightChanged();
     void visibleRectChanged();
     void orientationChanged();
+    void shownChanged();
     
 private:
     int m_keypadHeight;
     int m_canvasHeight;
     QRectF m_visibleRect;
     Qt::ScreenOrientation m_orientation;
+    bool m_shown;
 };
 
 #endif // KEYBOARDGEOMETRY_H

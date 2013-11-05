@@ -92,7 +92,6 @@ public:
     Q_SLOT void deviceOrientationChanged(Qt::ScreenOrientation orientation);
 
     Q_SLOT void updateWordEngine();
-    Q_SLOT void onQQuickViewStatusChanged(QQuickView::Status status);
 
     bool predictionEnabled();
     bool showWordRibbon();

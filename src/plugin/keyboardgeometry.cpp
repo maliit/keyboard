@@ -35,6 +35,7 @@ KeyboardGeometry::KeyboardGeometry(QObject *parent) :
   , m_canvasHeight(0)
   , m_visibleRect()
   , m_orientation(Qt::PrimaryOrientation)
+  , m_shown(false)
 {
 }
 
@@ -53,7 +54,7 @@ int KeyboardGeometry::keypadHeight() const
 //! \param height height of the keypad in pixel
 void KeyboardGeometry::setKeypadHeight(int height)
 {
-    if (m_keypadHeight == height)
+    if (height == m_keypadHeight)
         return;
 
     m_keypadHeight = height;
@@ -73,7 +74,7 @@ int KeyboardGeometry::canvasHeight() const
 //! \param height
 void KeyboardGeometry::setCanvasHeight(int height)
 {
-    if (m_canvasHeight == height)
+    if (height == m_canvasHeight)
         return;
 
     m_canvasHeight = height;
@@ -92,10 +93,11 @@ const QRectF &KeyboardGeometry::visibleRect() const
 //! \param rect
 void KeyboardGeometry::setVisibleRect(const QRectF &rect)
 {
-    if (m_visibleRect == rect)
+    if (rect == m_visibleRect)
         return;
 
     m_visibleRect = rect;
+    qDebug() << Q_FUNC_INFO << m_visibleRect;
     Q_EMIT visibleRectChanged();
 }
 
@@ -111,9 +113,27 @@ Qt::ScreenOrientation KeyboardGeometry::orientation() const
 //! \param orient
 void KeyboardGeometry::setOrientation(Qt::ScreenOrientation orient)
 {
-    if (m_orientation == orient)
+    if (orient == m_orientation)
         return;
 
     m_orientation = orient;
     Q_EMIT orientationChanged();
+}
+
+//! \brief KeyboardGeometry::shown property to indicate if the OSK is visible
+//! \return
+bool KeyboardGeometry::shown() const
+{
+    return m_shown;
+}
+
+//! \brief KeyboardGeometry::setShown
+//! \param show
+void KeyboardGeometry::setShown(bool show)
+{
+    if (show == m_shown)
+        return;
+
+    m_shown = show;
+    Q_EMIT shownChanged();
 }

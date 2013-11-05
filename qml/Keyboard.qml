@@ -77,7 +77,6 @@ Item {
     property int contentOrientation: maliit_geometry.orientation
     onContentOrientationChanged: fullScreenItem.reportKeyboardVisibleRect();
 
-    property bool shown: false;
     property bool wordribbon_visible: maliit_input_method.showWordRibbon
 
     property bool languageMenuShown: false
@@ -214,7 +213,7 @@ Item {
         State {
             name: "SHOWN"
             PropertyChanges { target: canvas; y: 0; }
-            when: canvas.shown === true
+            when: maliit_geometry.shown === true
         },
 
         State {
@@ -228,7 +227,7 @@ Item {
                 keypad.state = "CHARACTERS";
                 maliit_input_method.hide();
             }
-            when: canvas.shown === false
+            when: maliit_geometry.shown === false
         }
     ]
     transitions: Transition {

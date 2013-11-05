@@ -138,7 +138,7 @@ void InputMethod::show()
                 d->keyboardVisibleRect.height()
                 );
 
-    d->qmlRootItem->setProperty("shown", true);
+    d->m_geometry->setShown(true);
 }
 
 void InputMethod::hide()
@@ -452,15 +452,6 @@ void InputMethod::setContentType(TextContentType contentType)
     Q_EMIT contentTypeChanged(contentType);
 
     updateAutoCaps();
-}
-
-void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
-{
-    Q_D(InputMethod);
-
-    if (status == QQuickView::Ready) {
-        d->qmlRootItem = d->view->rootObject()->findChild<QQuickItem*>("ubuntuKeyboard");
-    }
 }
 
 //! \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be

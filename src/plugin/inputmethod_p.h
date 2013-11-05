@@ -77,7 +77,6 @@ class InputMethodPrivate
 {
 public:
     InputMethod* q;
-    QQuickItem* qmlRootItem;
     Editor editor;
     DefaultFeedback feedback;
     SharedStyle style;
@@ -106,7 +105,6 @@ public:
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
-        , qmlRootItem(0)
         , editor(EditorOptions(), new Model::Text, new Logic::WordEngine, new Logic::LanguageFeatures)
         , feedback()
         , style(new Style)
@@ -184,9 +182,6 @@ public:
         engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
         setContextProperties(engine->rootContext());
 
-        QObject::connect(view, SIGNAL(statusChanged(QQuickView::Status)),
-                        q, SLOT(onQQuickViewStatusChanged(QQuickView::Status)));
-
         // following used to help shell identify the OSK surface
         view->setProperty("role", applicationApiWrapper->oskWindowRole());
         view->setTitle("MaliitOnScreenKeyboard");
@@ -221,7 +216,7 @@ public:
                         qGuiApp->primaryScreen()->primaryOrientation(),
                         windowGeometryRect);
 
-        if (qmlRootItem->property("shown").toBool()) {
+        if (m_geometry->shown()) {
             host->setScreenRegion(QRegion(keyboardVisibleRect));
 
             QRect rect(keyboardVisibleRect);
@@ -229,7 +224,7 @@ public:
             host->setInputMethodArea(rect, view);
         }
 
-        if (qmlRootItem->property("shown").toBool()) {
+        if (m_geometry->shown()) {
             applicationApiWrapper->reportOSKInvisible();
 
             qDebug() << "keyboard is reporting: total <x y w h>: <"
@@ -372,7 +367,7 @@ public:
 
         host->notifyImInitiatedHiding();
 
-        qmlRootItem->setProperty("shown", false);
+        m_geometry->setShown(false);
 
         layout.updater.resetOnKeyboardClosed();
         editor.clearPreedit();
