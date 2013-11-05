@@ -1,6 +1,4 @@
 /*
- * This file is part of Maliit Plugins
- *
  * Copyright (C) 2013 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -27,43 +25,48 @@
  *
  */
 
-#ifndef KEYBOADSETTINGS_H
-#define KEYBOADSETTINGS_H
+#ifndef KEYBOARDGEOMETRY_H
+#define KEYBOARDGEOMETRY_H
 
 #include <QObject>
-#include <QStringList>
+#include <QRectF>
 
-class QGSettings;
-
-namespace MaliitKeyboard {
-
-class KeyboadSettings : public QObject
+//! \brief The KeyboardGeometry class hold the geometry of the QML keyboard
+//! representation
+class KeyboardGeometry : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int keypadHeight READ keypadHeight NOTIFY keypadHeightChanged)
+    Q_PROPERTY(int canvasHeight READ canvasHeight NOTIFY canvasHeightChanged)
+    Q_PROPERTY(QRectF visibleRect READ visibleRect WRITE setVisibleRect NOTIFY visibleRectChanged)
+    Q_PROPERTY(Qt::ScreenOrientation orientation READ orientation NOTIFY orientationChanged)
+
 public:
-    explicit KeyboadSettings(QObject *parent = 0);
-    
-    QStringList enabledLanguages() const;
-    bool autoCapitalization() const;
-    bool autoCompletion() const;
-    bool predictiveText() const;
-    bool keyPressFeedback() const;
+    explicit KeyboardGeometry(QObject *parent = 0);
+
+    int keypadHeight() const;
+    void setKeypadHeight(int height);
+
+    int canvasHeight() const;
+    void setCanvasHeight(int height);
+
+    const QRectF &visibleRect() const;
+    Q_SLOT void setVisibleRect(const QRectF &rect);
+
+    Qt::ScreenOrientation orientation() const;
+    void setOrientation(Qt::ScreenOrientation orient);
 
 Q_SIGNALS:
-    void enabledLanguagesChanged();
-    void autoCapitalizationChanged();
-    void autoCompletionChanged();
-    void predictiveTextChanged();
-    void keyPressFeedbackChanged();
-
+    void keypadHeightChanged();
+    void canvasHeightChanged();
+    void visibleRectChanged();
+    void orientationChanged();
+    
 private:
-    Q_SLOT void settingUpdated(const QString &key);
-
-    QGSettings *m_settings;
-
-    friend class TestKeyboardSettings;
+    int m_keypadHeight;
+    int m_canvasHeight;
+    QRectF m_visibleRect;
+    Qt::ScreenOrientation m_orientation;
 };
 
-} // namespace
-
-#endif // KEYBOADSETTINGS_H
+#endif // KEYBOARDGEOMETRY_H

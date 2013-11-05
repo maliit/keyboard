@@ -2,7 +2,8 @@
 #include "inputmethod.h"
 
 #include "editor.h"
-#include "keyboadsettings.h"
+#include "keyboardgeometry.h"
+#include "keyboardsettings.h"
 #include "updatenotifier.h"
 
 #include "logic/layoutupdater.h"
@@ -97,7 +98,8 @@ public:
     QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
 
-    KeyboadSettings m_settings;
+    KeyboardGeometry *m_geometry;
+    KeyboardSettings m_settings;
 
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
@@ -117,8 +119,11 @@ public:
         , predictionEnabled(false)
         , contentType(Maliit::FreeTextContentType)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
+        , m_geometry(new KeyboardGeometry(q))
         , m_settings()
     {
+        applicationApiWrapper->setGeometryItem(m_geometry);
+
         view = createWindow(host);
 
         editor.setHost(host);
@@ -200,9 +205,9 @@ public:
 
         keyboardVisibleRect = windowGeometryRect.adjusted(0,uiConst->invisibleTouchAreaHeight(orientation),0,0);
 
-        qmlRootItem->setProperty("height", windowGeometryRect.height());
-        qmlRootItem->setProperty("keypadHeight", keyboardVisibleRect.height());
-        qmlRootItem->setProperty("contentOrientation", screenOrientation);
+        m_geometry->setCanvasHeight(windowGeometryRect.height());
+        m_geometry->setKeypadHeight(keyboardVisibleRect.height());
+        m_geometry->setOrientation(screenOrientation);
 
         // qpa does not rotate the coordinate system
         windowGeometryRect = qGuiApp->primaryScreen()->mapBetween(
@@ -276,6 +281,7 @@ public:
     void setContextProperties(QQmlContext *qml_context)
     {
         qml_context->setContextProperty("maliit_input_method", q);
+        qml_context->setContextProperty("maliit_geometry", m_geometry);
         qml_context->setContextProperty("maliit_layout", &layout.model);
         qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
         qml_context->setContextProperty("maliit_wordribbon", layout.helper.wordRibbon());

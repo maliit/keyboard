@@ -29,6 +29,7 @@ Item {
     property string activeKeypadState: "NORMAL"
     property string characterKeypadSource: ""
     property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
+    property alias popoverEnabled: extendedKeysSelector.enabled
 
 
     state: "CHARACTERS"
@@ -71,8 +72,6 @@ Item {
     onCharacterKeypadSourceChanged: {
         panel.state = "CHARACTERS"
     }
-
-    Component.onCompleted: symbolKeypadSource = activeKeypad.symbols;
 
     Loader {
         id: characterKeypadLoader

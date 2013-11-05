@@ -29,13 +29,6 @@
  *
  */
 
-
-//////////////////////
-// !!!IMPORTANT!!! Heavy modifications here might break the assumptions made by
-// UbuntuApplicationApiWrapper code (e.g. object names and what the items do/contain).
-// Update the code there accordingly, if needed. That code should no longer be needed
-// once the final architecture is in place.
-
 import QtQuick 2.0
 import "constants.js" as Const
 import "keys/"
@@ -57,6 +50,12 @@ OrientationHelper {
 
     orientationAngle: Screen.angleBetween(Screen.primaryOrientation, canvas.contentOrientation);
 
+    onOrientationAngleChanged: fullScreenItem.reportKeyboardVisibleRect();
+    onXChanged: fullScreenItem.reportKeyboardVisibleRect();
+    onYChanged: fullScreenItem.reportKeyboardVisibleRect();
+    onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
+    onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
+
 Item {
     id: canvas
     objectName: "ubuntuKeyboard" // Allow us to specify a specific keyboard within autopilot.
@@ -65,8 +64,9 @@ Item {
     anchors.left: parent.left
 
     width: parent.width
+    height: maliit_geometry.canvasHeight
 
-    property int keypadHeight: 0 // set by InputMethod
+    property int keypadHeight: maliit_geometry.keypadHeight
 
     property string activeLanguage: input_method.activeLanguage
 
@@ -82,12 +82,18 @@ Item {
     //readonly property var layoutState: layout.keyboard_state
     //readonly property string activeView: layout.activeView
 
-    property int contentOrientation: Qt.PrimaryOrientation // overwritten by inputMethod
+    property int contentOrientation: maliit_geometry.orientation
+    onContentOrientationChanged: fullScreenItem.reportKeyboardVisibleRect();
 
     property bool shown: false;
     property bool wordribbon_visible: false;
 
     property bool languageMenuShown: false
+
+    onXChanged: fullScreenItem.reportKeyboardVisibleRect();
+    onYChanged: fullScreenItem.reportKeyboardVisibleRect();
+    onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
+    onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
 
     MouseArea {
         id: swipeArea
@@ -124,6 +130,11 @@ Item {
             width: parent.width
             height: canvas.height
 
+            onXChanged: fullScreenItem.reportKeyboardVisibleRect();
+            onYChanged: fullScreenItem.reportKeyboardVisibleRect();
+            onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
+            onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
+
             WordRibbon {
                 id: wordRibbon
                 objectName: "wordRibbon"
@@ -134,6 +145,7 @@ Item {
                 width: parent.width;
 
                 height: visible ? layout.wordribbon_height : 0
+                onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
             }
 
             Item {
@@ -143,6 +155,8 @@ Item {
                 height: canvas.keypadHeight - wordRibbon.height
                 width: parent.width
                 anchors.bottom: parent.bottom
+
+                onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
 
                 Rectangle {
                     id: background
@@ -177,6 +191,8 @@ Item {
                     anchors.topMargin: units.gu( UI.top_margin )
                     anchors.bottomMargin: units.gu( UI.bottom_margin )
                     width: parent.width
+
+                    onPopoverEnabledChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
 
                 LanguageMenu {
@@ -236,4 +252,21 @@ Item {
 
 } // canvas
 } // OrientationHelper
+
+// calculates the size of the visible keyboard to report to the window system
+// FIXME get the correct size for enabled extended keys instead of that big area
+function reportKeyboardVisibleRect() {
+    var vx = 0;
+    var vy = wordRibbon.y;
+    var vwidth = keyboardSurface.width;
+    var vheight = keyboardComp.height + wordRibbon.height;
+    if (canvas.wordribbon_visible && keypad.popoverEnabled) {
+        vy = 0;
+        vheight = keyboardSurface.height;
+    }
+
+    var obj = mapFromItem(keyboardSurface, vx, vy, vwidth, vheight);
+    maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
+}
+
 } // fullScreenItem
