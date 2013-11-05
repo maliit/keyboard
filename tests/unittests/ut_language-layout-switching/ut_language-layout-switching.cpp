@@ -35,6 +35,7 @@
 #include "models/key.h"
 #include "models/keyarea.h"
 #include "view/setup.h"
+#include "logic/dynamiclayout.h"
 #include "logic/layouthelper.h"
 #include "logic/layoutupdater.h"
 #include "logic/style.h"
@@ -52,6 +53,11 @@ class TestLanguageLayoutSwitching
     Q_OBJECT
 
 private:
+    Q_SLOT void initTestCase()
+    {
+        QVERIFY(qputenv("UBUNTU_KEYBOARD_DATA_DIR", TEST_MALIIT_KEYBOARD_DATADIR));
+    }
+
     Q_SLOT void testActiveKeyboardId_data()
     {
         QTest::addColumn<QString>("keyboard_id");
@@ -73,6 +79,8 @@ private:
         QFETCH(int, expected_key_count);
 
         Logic::LayoutUpdater layout_updater;
+
+        uiConst->initDynamicLayout( TEST_QML_DATADIR "/maliit-ui-constants.qml" );
 
         Logic::LayoutHelper layout(new Logic::LayoutHelper);
         layout_updater.setLayout(&layout);

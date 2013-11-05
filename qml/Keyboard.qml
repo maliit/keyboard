@@ -68,14 +68,6 @@ Item {
 
     property int keypadHeight: maliit_geometry.keypadHeight
 
-    property string activeLanguage: input_method.activeLanguage
-
-    property string layoutId: "en_us"
-    Component.onCompleted: keypad.loadLayout(layoutId);
-    onLayoutIdChanged: keypad.loadLayout(layoutId);
-
-    property var enabledLanguages: input_method.enabledLanguages
-
     visible: layout.visible
 
     // Expose details for use with Autopilot.
@@ -86,7 +78,7 @@ Item {
     onContentOrientationChanged: fullScreenItem.reportKeyboardVisibleRect();
 
     property bool shown: false;
-    property bool wordribbon_visible: false;
+    property bool wordribbon_visible: maliit_input_method.showWordRibbon
 
     property bool languageMenuShown: false
 
@@ -229,11 +221,12 @@ Item {
             name: "HIDDEN"
             PropertyChanges { target: canvas; y: height; }
             onCompleted: {
-                canvas.languageMenuShown = false
+                canvas.languageMenuShown = false;
                 keyboardSurface.y = 0;
                 keypad.closeExtendedKeys();
-                keypad.activeKeypadState = "NORMAL"
-                keypad.state = "CHARACTERS"
+                keypad.activeKeypadState = "NORMAL";
+                keypad.state = "CHARACTERS";
+                maliit_input_method.hide();
             }
             when: canvas.shown === false
         }

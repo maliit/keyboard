@@ -50,12 +50,12 @@ Item {
         interactive: true
         clip: true
 
-        model: canvas.enabledLanguages
+        model: maliit_input_method.enabledLanguages
 
         delegate: ListItem.Standard {
             text: languageIdToName(modelData)
             onClicked: {
-                canvas.layoutId = modelData;
+                maliit_input_method.activeLanguage = modelData
                 canvas.languageMenuShown = false;
             }
          }
@@ -63,12 +63,12 @@ Item {
 
     function languageIdToName(languageId)
     {
-        if (languageId == "en")         return "English";
-        if (languageId == "es")         return "Spanish";
-        if (languageId == "pt")         return "Portuguese";
-        if (languageId == "fr")         return "French";
-        if (languageId == "de")         return "German";
-        if (languageId == "zh")         return "Chinese - Pinyin";
+        if (languageId == "en") return i18n.tr("English");
+        if (languageId == "es") return i18n.tr("Spanish");
+        if (languageId == "pt") return i18n.tr("Portuguese");
+        if (languageId == "fr") return i18n.tr("French");
+        if (languageId == "de") return i18n.tr("German");
+        if (languageId == "zh") return i18n.tr("Chinese - Pinyin");
     }
 
 }
