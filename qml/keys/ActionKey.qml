@@ -59,7 +59,6 @@ CharKey {
         } else if (panel.activeKeypadState == "SHIFTED") {
             __icon = iconShifted;
             iconImage.color = colorShifted;
-            console.log(colorShifted)
         } else if (panel.activeKeypadState == "CAPSLOCK") {
             __icon = iconCapsLock;
             iconImage.color = colorCapsLock;
