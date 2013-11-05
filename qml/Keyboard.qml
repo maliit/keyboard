@@ -253,7 +253,7 @@ function reportKeyboardVisibleRect() {
     var vy = wordRibbon.y;
     var vwidth = keyboardSurface.width;
     var vheight = keyboardComp.height + wordRibbon.height;
-    if (canvas.wordribbon_visible && keypad.popoverEnabled) {
+    if (!canvas.wordribbon_visible && keypad.popoverEnabled) {
         vy = 0;
         vheight = keyboardSurface.height;
     }

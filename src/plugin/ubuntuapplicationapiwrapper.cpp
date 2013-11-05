@@ -105,6 +105,7 @@ void UbuntuApplicationApiWrapper::reportOSKInvisible()
     }
 #endif
 
+    m_geometryUpdateTimer.stop();
     QObject::disconnect(&m_geometryUpdateTimer, SIGNAL(timeout()),
                         this, SLOT(updateSharedInfo()));
 }
@@ -196,7 +197,6 @@ void UbuntuApplicationApiWrapper::updateSharedInfo()
 //! \brief UbuntuApplicationApiWrapper::delayedGeometryUpdate
 void UbuntuApplicationApiWrapper::delayedGeometryUpdate()
 {
-    qDebug() << Q_FUNC_INFO;
     if (m_geometryUpdateTimer.isActive())
         m_geometryUpdateTimer.stop();
 
