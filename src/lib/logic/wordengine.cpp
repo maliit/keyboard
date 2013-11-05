@@ -260,7 +260,7 @@ void WordEngine::onLanguageChanged(const QString &languageId)
 {
     Q_D(WordEngine);
 
-    if (languageId == "zh_cn_pinyin")
+    if (languageId == "zh")
         d->predictiveBackend = WordEnginePrivate::PinyinBackend;
     else
         d->predictiveBackend = WordEnginePrivate::PresageBackend;
