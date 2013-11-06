@@ -50,12 +50,12 @@ Item {
         interactive: true
         clip: true
 
-        model: canvas.enabledLanguages
+        model: maliit_input_method.enabledLanguages
 
         delegate: ListItem.Standard {
             text: languageIdToName(modelData)
             onClicked: {
-                canvas.layoutId = modelData;
+                maliit_input_method.activeLanguage = modelData
                 canvas.languageMenuShown = false;
             }
          }
@@ -63,17 +63,17 @@ Item {
 
     function languageIdToName(languageId)
     {
-        if (languageId == "de")         return qsTr("German");
-        if (languageId == "en")         return qsTr("English");
-        if (languageId == "es")         return qsTr("Spanish");
-        if (languageId == "fi")         return qsTr("Finnish");
-        if (languageId == "fr")         return qsTr("French");
-        if (languageId == "he")         return qsTr("Hebrew");
-        if (languageId == "it")         return qsTr("Italian");
-        if (languageId == "nl")         return qsTr("Dutch");
-        if (languageId == "pt")         return qsTr("Portuguese");
-        if (languageId == "sv")         return qsTr("Swedish");
-        if (languageId == "zh")         return qsTr("Chinese - Pinyin");
+        if (languageId == "de")         return i18n.tr("German");
+        if (languageId == "en")         return i18n.tr("English");
+        if (languageId == "es")         return i18n.tr("Spanish");
+        if (languageId == "fi")         return i18n.tr("Finnish");
+        if (languageId == "fr")         return i18n.tr("French");
+        if (languageId == "he")         return i18n.tr("Hebrew");
+        if (languageId == "it")         return i18n.tr("Italian");
+        if (languageId == "nl")         return i18n.tr("Dutch");
+        if (languageId == "pt")         return i18n.tr("Portuguese");
+        if (languageId == "sv")         return i18n.tr("Swedish");
+        if (languageId == "zh")         return i18n.tr("Chinese - Pinyin");
     }
 
 }

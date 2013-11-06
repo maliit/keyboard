@@ -1,3 +1,29 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131105.1-0ubuntu1) trusty; urgency=low
+
+  [ Michael Terry ]
+  * Enable tests during build and document the various copyrights
+    better. Adds Build-Depends on libxml2-utils, qtdeclarative5-ubuntu-
+    ui-toolkit-plugin, and xvfb.
+
+  [ Thomas Moenicke ]
+  * language branch.
+
+  [ Christopher Lee ]
+  * For ease of testing the ubuntu-keyboard testsuite takes care of
+    restarting maliit-server with testability for the duration of the
+    tests. (LP: #1243444)
+
+  [ Guenter Schwann ]
+  * Add a helper skript to disable all settings on the device.
+  * Do not cancel predictive text on backspace, but update it. (LP:
+    #1202694)
+  * Split up C++ and QML a bit better.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 98
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 05 Nov 2013 15:25:54 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131025-0ubuntu1) trusty; urgency=low
 
   [ Daniel d'Andrada ]

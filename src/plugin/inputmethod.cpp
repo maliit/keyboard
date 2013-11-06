@@ -37,18 +37,14 @@
 #include "models/wordribbon.h"
 #include "models/layout.h"
 
-#include "logic/layouthelper.h"
-
-#include "logic/style.h"
-
 #include "logic/keyareaconverter.h"
+#include "logic/layouthelper.h"
+#include "logic/style.h"
 
 #include "view/setup.h"
 
 #include <maliit/plugins/subviewdescription.h>
-
 #include <maliit/plugins/updateevent.h>
-
 #include <maliit/namespace.h>
 
 #include <QApplication>
@@ -58,7 +54,7 @@
 
 class MImUpdateEvent;
 
-namespace MaliitKeyboard {
+using namespace MaliitKeyboard;
 
 namespace {
 
@@ -98,7 +94,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(this, SIGNAL(wordRibbonEnabledChanged(bool)), uiConst, SLOT(onWordEngineSettingsChanged(bool)));
 
     connect(this, SIGNAL(predictionEnabledChanged()), this, SLOT(updateWordEngine()));
-    connect(this, SIGNAL(contentTypeChanged(Maliit::TextContentType)), this, SLOT(onContentTypeChanged(Maliit::TextContentType)));
+    connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
 
     d->registerStyleSetting(host);
 
@@ -196,11 +192,8 @@ void InputMethod::setActiveSubView(const QString &id,
     d->layout.updater.setActiveKeyboardId(id);
     d->layout.model.setActiveView(id);
 
-    QString locale = QString(getenv("LANGUAGE"));
-    locale.truncate(2);
-    d->activeLanguage = locale;
-    Q_EMIT activeLanguageChanged(d->activeLanguage);
-    d->setActiveKeyboardId(locale);
+    d->registerSystemLanguage();
+    setActiveLanguage(d->systemLanguage);
 }
 
 QString InputMethod::activeSubView(Maliit::HandlerState state) const
@@ -281,7 +274,7 @@ void InputMethod::updateAutoCaps()
 {
     Q_D(InputMethod);
     bool enabled = d->m_settings.autoCapitalization();
-    enabled &= d->contentType == Maliit::FreeTextContentType;
+    enabled &= d->contentType == FreeTextContentType;
     bool valid = true;
     bool autocap = d->host->autoCapitalizationEnabled(valid);
     enabled &= autocap;
@@ -292,6 +285,8 @@ void InputMethod::updateAutoCaps()
     }
 }
 
+//! \brief InputMethod::onEnabledLanguageSettingsChanged
+//! Updates the list of languages that can be used
 void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
@@ -388,11 +383,11 @@ void InputMethod::update()
         emitPredictionEnabled = true;
     }
 
-    Maliit::TextContentType newContentType = static_cast<Maliit::TextContentType>( inputMethodHost()->contentType(valid) );
+    TextContentType newContentType = static_cast<TextContentType>( inputMethodHost()->contentType(valid) );
     if (!valid) {
-        newContentType = Maliit::FreeTextContentType;
+        newContentType = FreeTextContentType;
     }
-    onContentTypeChanged(newContentType);
+    setContentType(newContentType);
 
     if (emitPredictionEnabled)
         Q_EMIT predictionEnabledChanged();
@@ -415,7 +410,7 @@ void InputMethod::updateWordEngine()
     if (!d->m_settings.predictiveText())
         d->predictionEnabled = false;
 
-    if (d->contentType != Maliit::FreeTextContentType)
+    if (d->contentType != FreeTextContentType)
         d->predictionEnabled = false;
 
     d->editor.clearPreedit();
@@ -429,77 +424,52 @@ bool InputMethod::predictionEnabled()
     return d->predictionEnabled;
 }
 
-Maliit::TextContentType InputMethod::contentType()
+//! \brief InputMethod::showWordRibbon returns if the word ribbon should be shown
+bool InputMethod::showWordRibbon()
+{
+    Q_D(InputMethod);
+    return d->showWordRibbon;
+}
+
+InputMethod::TextContentType InputMethod::contentType()
 {
     Q_D(InputMethod);
     return d->contentType;
 }
 
-void InputMethod::onContentTypeChanged(Maliit::TextContentType contentType)
+void InputMethod::setContentType(TextContentType contentType)
 {
     Q_D(InputMethod);
 
     if (contentType == d->contentType)
         return;
 
-    d->contentType = contentType;
-
-    // TODO when refactoring, forward the enum to QML
-
-    if (contentType == Maliit::FreeTextContentType)
-        d->setActiveKeyboardId( d->activeLanguage );
-
-    if (contentType == Maliit::NumberContentType)
-        d->setActiveKeyboardId( "number" );
-
-    if (contentType == Maliit::PhoneNumberContentType)
-        d->setActiveKeyboardId( "phonenumber" );
-
-    if (contentType == Maliit::EmailContentType)
-        d->setActiveKeyboardId( "email" );
-
-    if (contentType == Maliit::UrlContentType)
-        d->setActiveKeyboardId("url");
+    setActiveLanguage(d->systemLanguage);
 
     updateWordEngine();
 
+    d->contentType = contentType;
     Q_EMIT contentTypeChanged(contentType);
 
     updateAutoCaps();
-}
-
-void InputMethod::onQMLStateChanged(QString state)
-{
-    Q_D(InputMethod);
-
-    if (state == "HIDDEN")
-        d->closeOskWindow();
 }
 
 void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
 {
     Q_D(InputMethod);
 
-    switch (status) {
-    case QQuickView::Ready:
-    {
+    if (status == QQuickView::Ready) {
         d->qmlRootItem = d->view->rootObject()->findChild<QQuickItem*>("ubuntuKeyboard");
-        QObject::connect(d->qmlRootItem, SIGNAL(stateChanged(QString)), this, SLOT(onQMLStateChanged(QString)));
+
         QObject::connect(this, SIGNAL(activeLanguageChanged(QString)), &d->editor, SLOT(onLanguageChanged(QString)));
         QObject::connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
 
         d->applicationApiWrapper->setRootObject(d->view->rootObject());
     }
-        break;
-    default:
-        break;
-    }
 }
 
-/*!
- * \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be
- * set to uppercase, because the auto caps is enabled and the text is empty.
- */
+//! \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be
+//! set to uppercase, because the auto caps is enabled and the text is empty.
 void InputMethod::checkInitialAutocaps()
 {
     Q_D(InputMethod);
@@ -514,16 +484,46 @@ void InputMethod::checkInitialAutocaps()
     }
 }
 
-QStringList InputMethod::enabledLanguages()
+//! \brief InputMethod::enabledLanguages list of all languages that can be selected
+const QStringList &InputMethod::enabledLanguages() const
 {
-    Q_D(InputMethod);
+    Q_D(const InputMethod);
     return d->enabledLanguages;
 }
 
-QString InputMethod::activeLanguage()
+//! \brief InputMethod::activeLanguage returns the language that is currently
+//! used by the keyboard
+const QString &InputMethod::activeLanguage() const
 {
-    Q_D(InputMethod);
+    Q_D(const InputMethod);
     return d->activeLanguage;
 }
 
-} // namespace MaliitKeyboard
+//! \brief InputMethod::systemLanguage returns the languageset as the one used
+//! in the whole system
+const QString &InputMethod::systemLanguage() const
+{
+    Q_D(const InputMethod);
+    return d->systemLanguage;
+}
+
+//! \brief InputMethod::setActiveLanguage
+//! Sets the currently active/used language
+//! \param newLanguage id of the new language. For example "en" or "es"
+//! FIXME check if the language is supported - if not use "en" as fallback
+void InputMethod::setActiveLanguage(const QString &newLanguage)
+{
+    Q_D(InputMethod);
+
+    if (newLanguage.length() != 2) {
+        qWarning() << Q_FUNC_INFO << "newLanguage is not valid:" << newLanguage;
+        return;
+    }
+
+    if (d->activeLanguage == newLanguage)
+        return;
+
+    d->activeLanguage = newLanguage;
+    d->editor.onLanguageChanged(d->activeLanguage);
+    Q_EMIT activeLanguageChanged(d->activeLanguage);
+}
