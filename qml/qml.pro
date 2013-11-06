@@ -93,6 +93,10 @@ OTHER_FILES += \
     languages/cs/Keyboard_cs_email.qml \
     languages/cs/Keyboard_cs_url.qml \
     languages/cs/Keyboard_cs_url_search.qml \
+    languages/da/Keyboard_da.qml \
+    languages/da/Keyboard_da_email.qml \
+    languages/da/Keyboard_da_url.qml \
+    languages/da/Keyboard_da_url_search.qml \
     languages/de/Keyboard_de.qml \
     languages/de/Keyboard_de_email.qml \
     languages/de/Keyboard_de_url.qml \
