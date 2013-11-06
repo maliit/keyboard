@@ -105,7 +105,7 @@ Item {
 
         onReleased: {
             if (keyboardSurface.y > jumpBackThreshold) {
-                canvas.shown = false;
+                maliit_geometry.shown = false;
             } else {
                 bounceBackAnimation.from = keyboardSurface.y
                 bounceBackAnimation.start();

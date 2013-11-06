@@ -389,8 +389,10 @@ void InputMethod::update()
     }
     setContentType(newContentType);
 
-    if (emitPredictionEnabled)
+    if (emitPredictionEnabled) {
+        d->updateWordRibbon();
         Q_EMIT predictionEnabledChanged();
+    }
 
     QString text;
     int position;
@@ -405,6 +407,7 @@ void InputMethod::update()
 
 void InputMethod::updateWordEngine()
 {
+    qDebug() << Q_FUNC_INFO;
     Q_D(InputMethod);
 
     if (!d->m_settings.predictiveText())
@@ -431,12 +434,16 @@ bool InputMethod::showWordRibbon()
     return d->showWordRibbon;
 }
 
+//! \brief InputMethod::contentType returns the type, of the input field, like free text, email, url
+//! \return
 InputMethod::TextContentType InputMethod::contentType()
 {
     Q_D(InputMethod);
     return d->contentType;
 }
 
+//! \brief InputMethod::setContentType sets the type, of the input field, like free text, email, url
+//! \param contentType
 void InputMethod::setContentType(TextContentType contentType)
 {
     Q_D(InputMethod);
@@ -444,13 +451,14 @@ void InputMethod::setContentType(TextContentType contentType)
     if (contentType == d->contentType)
         return;
 
-    setActiveLanguage(d->systemLanguage);
+    qDebug() << Q_FUNC_INFO << "switching to" << d->contentType;
 
-    updateWordEngine();
+    setActiveLanguage(d->systemLanguage);
 
     d->contentType = contentType;
     Q_EMIT contentTypeChanged(contentType);
 
+    updateWordEngine();
     updateAutoCaps();
 }
 

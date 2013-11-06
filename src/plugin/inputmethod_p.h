@@ -251,11 +251,15 @@ public:
 
     void updateWordRibbon()
     {
-        layout.helper.wordRibbon()->setEnabled( predictionEnabled );
-        Q_EMIT q->wordRibbonEnabledChanged( predictionEnabled );
+        bool enabled = predictionEnabled;
+        enabled = enabled && (contentType == InputMethod::FreeTextContentType);
+        enabled = enabled && m_settings.predictiveText();
 
-        if (predictionEnabled != showWordRibbon) {
-            showWordRibbon = predictionEnabled;
+        layout.helper.wordRibbon()->setEnabled( enabled );
+        Q_EMIT q->wordRibbonEnabledChanged( enabled );
+
+        if (enabled != showWordRibbon) {
+            showWordRibbon = enabled;
             Q_EMIT q->showWordRibbonChanged(showWordRibbon);
         }
 
