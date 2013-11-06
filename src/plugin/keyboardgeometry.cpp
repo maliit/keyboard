@@ -97,7 +97,6 @@ void KeyboardGeometry::setVisibleRect(const QRectF &rect)
         return;
 
     m_visibleRect = rect;
-    qDebug() << Q_FUNC_INFO << m_visibleRect;
     Q_EMIT visibleRectChanged();
 }
 
