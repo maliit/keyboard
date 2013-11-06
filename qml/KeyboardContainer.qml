@@ -89,6 +89,8 @@ Item {
                 language = "en";
             }
 
+            if (language === "cs")
+                return "languages/cs/Keyboard_cs.qml";
             if (language === "de")
                 return "languages/de/Keyboard_de.qml";
             if (language === "en")

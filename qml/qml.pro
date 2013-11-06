@@ -89,6 +89,10 @@ OTHER_FILES += \
     languages/Keyboard_numbers.qml \
     languages/Keyboard_symbols.qml \
     languages/Keyboard_telephone.qml \
+    languages/cs/Keyboard_cs.qml \
+    languages/cs/Keyboard_cs_email.qml \
+    languages/cs/Keyboard_cs_url.qml \
+    languages/cs/Keyboard_cs_url_search.qml \
     languages/de/Keyboard_de.qml \
     languages/de/Keyboard_de_email.qml \
     languages/de/Keyboard_de_url.qml \

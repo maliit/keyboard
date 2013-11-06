@@ -63,6 +63,7 @@ Item {
 
     function languageIdToName(languageId)
     {
+        if (languageId == "cs")         return i18n.tr("Czech");
         if (languageId == "de")         return i18n.tr("German");
         if (languageId == "en")         return i18n.tr("English");
         if (languageId == "es")         return i18n.tr("Spanish");
