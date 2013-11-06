@@ -89,16 +89,28 @@ Item {
                 language = "en";
             }
 
+            if (language === "de")
+                return "languages/de/Keyboard_de.qml";
             if (language === "en")
                 return "languages/en/Keyboard_en.qml";
             if (language === "es")
                 return "languages/es/Keyboard_es.qml";
-            if (language === "pt")
-                return "languages/pt/Keyboard_pt.qml";
-            if (language === "de")
-                return "languages/de/Keyboard_de.qml";
+            if (language === "fi")
+                return "languages/fi/Keyboard_fi.qml";
             if (language === "fr")
                 return "languages/fr/Keyboard_fr.qml";
+            if (language === "he")
+                return "languages/he/Keyboard_he.qml";
+            if (language === "it")
+                return "languages/it/Keyboard_it.qml";
+            if (language === "nl")
+                return "languages/nl/Keyboard_nl.qml";
+            if (language === "pt")
+                return "languages/pt/Keyboard_pt.qml";
+            if (language === "ru")
+                return "languages/ru/Keyboard_ru.qml";
+            if (language === "sv")
+                return "languages/sv/Keyboard_sv.qml";
             if (language === "zh")
                 return "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
         }
