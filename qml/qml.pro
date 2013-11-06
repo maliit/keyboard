@@ -109,6 +109,10 @@ OTHER_FILES += \
     languages/fr/Keyboard_fr_email.qml \
     languages/fr/Keyboard_fr_url.qml \
     languages/fr/Keyboard_fr_url_search.qml \
+    languages/he/Keyboard_he.qml \
+    languages/he/Keyboard_he_email.qml \
+    languages/he/Keyboard_he_url.qml \
+    languages/he/Keyboard_he_url_search.qml \
     languages/it/Keyboard_it.qml \
     languages/it/Keyboard_it_email.qml \
     languages/it/Keyboard_it_url.qml \
@@ -130,4 +134,3 @@ OTHER_FILES += \
     languages/sv/Keyboard_sv_url.qml \
     languages/sv/Keyboard_sv_url_search.qml \
     languages/zh_cn/Keyboard_zh_cn_pinyin.qml
-

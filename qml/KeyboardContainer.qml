@@ -64,6 +64,8 @@ Item {
             characterKeypadSource = "languages/fi/Keyboard_fi.qml";
         if (layoutId === "fr")
             characterKeypadSource = "languages/fr/Keyboard_fr.qml";
+        if (layoutId === "he")
+            characterKeypadSource = "languages/he/Keyboard_he.qml";
         if (layoutId === "it")
             characterKeypadSource = "languages/it/Keyboard_it.qml";
         if (layoutId === "nl")
