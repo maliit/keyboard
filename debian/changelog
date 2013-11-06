@@ -1,3 +1,13 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131106-0ubuntu1) trusty; urgency=low
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Port/update the emulators in preparation of autopilot 1.4
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 100
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 06 Nov 2013 14:39:01 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131105.1-0ubuntu1) trusty; urgency=low
 
   [ Michael Terry ]
