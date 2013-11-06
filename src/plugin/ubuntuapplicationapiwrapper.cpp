@@ -49,8 +49,10 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
         startLocalServer();
     }
 
-    m_geometryUpdateTimer.setInterval(50);
+    m_geometryUpdateTimer.setInterval(100);
     m_geometryUpdateTimer.setSingleShot(true);
+    QObject::connect(&m_geometryUpdateTimer, SIGNAL(timeout()),
+                     this, SLOT(updateSharedInfo()));
 }
 
 void UbuntuApplicationApiWrapper::startLocalServer()
@@ -92,8 +94,8 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
     Q_UNUSED(height)
 #endif
 
-    QObject::connect(&m_geometryUpdateTimer, SIGNAL(timeout()),
-                     this, SLOT(updateSharedInfo()));
+    QObject::connect(m_geometry, SIGNAL(visibleRectChanged()),
+                     this, SLOT(delayedGeometryUpdate()));
     updateSharedInfo();
 }
 
@@ -106,8 +108,8 @@ void UbuntuApplicationApiWrapper::reportOSKInvisible()
 #endif
 
     m_geometryUpdateTimer.stop();
-    QObject::disconnect(&m_geometryUpdateTimer, SIGNAL(timeout()),
-                        this, SLOT(updateSharedInfo()));
+    QObject::disconnect(m_geometry, SIGNAL(visibleRectChanged()),
+                        this, SLOT(delayedGeometryUpdate()));
 }
 
 int UbuntuApplicationApiWrapper::oskWindowRole() const
@@ -185,7 +187,7 @@ QString UbuntuApplicationApiWrapper::buildSocketFilePath() const
 
 void UbuntuApplicationApiWrapper::updateSharedInfo()
 {
-    QRectF keyboardSceneRect = m_geometry->visibleRect();
+    const QRectF &keyboardSceneRect = m_geometry->visibleRect();
     m_sharedInfo.keyboardX = keyboardSceneRect.x();
     m_sharedInfo.keyboardY = keyboardSceneRect.y();
     m_sharedInfo.keyboardWidth = keyboardSceneRect.width();

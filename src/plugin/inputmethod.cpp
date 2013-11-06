@@ -407,7 +407,6 @@ void InputMethod::update()
 
 void InputMethod::updateWordEngine()
 {
-    qDebug() << Q_FUNC_INFO;
     Q_D(InputMethod);
 
     if (!d->m_settings.predictiveText())
@@ -450,8 +449,6 @@ void InputMethod::setContentType(TextContentType contentType)
 
     if (contentType == d->contentType)
         return;
-
-    qDebug() << Q_FUNC_INFO << "switching to" << d->contentType;
 
     setActiveLanguage(d->systemLanguage);
 
