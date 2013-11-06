@@ -60,14 +60,13 @@ class Keyboard(object):
             self.orientation = self.maliit.select_single(
                 "OrientationHelper"
             )
-            if self.orientation is None:
-                raise RuntimeError(
-                    "Unable to find the Orientation Helper, aborting."
-                )
         except ValueError as e:
             e.args += (
-                "More than one OrientationHelper object was found, aborting."
+                "More than one OrientationHelper object was found, aborting.",
             )
+            raise
+        except StateNotFoundError:
+            logger.error("Unable to find the Orientation Helper, aborting.")
             raise
 
         try:
@@ -75,14 +74,15 @@ class Keyboard(object):
                 "QQuickItem",
                 objectName="ubuntuKeyboard"
             )
-            if self.keyboard is None:
-                raise RuntimeError(
-                    "Unable to find the Ubuntu Keyboard object within the "
-                    "maliit server."
-                )
         except ValueError as e:
             e.args += (
                 "There was more than one Keyboard object found, aborting.",
+            )
+            raise
+        except StateNotFoundError:
+            logger.error(
+                "Unable to find the Ubuntu Keyboard object within the "
+                "maliit server, aborting."
             )
             raise
 
@@ -222,11 +222,12 @@ class Keyboard(object):
         need_to_update = False
         if self._active_keypad is None:
             need_to_update = True
-        try:
-            # Check if the current keypad object still exists.
-            self._active_keypad.enabled
-        except StateNotFoundError:
-            need_to_update = True
+        else:
+            try:
+                # Check if the current keypad object still exists.
+                self._active_keypad.enabled
+            except StateNotFoundError:
+                need_to_update = True
 
         if (
             need_to_update

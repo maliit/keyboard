@@ -28,6 +28,8 @@ from time import sleep
 from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
+from autopilot.platform import model
+from ubuntuuitoolkit import base
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
@@ -99,6 +101,8 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         _restart_maliit_server()
 
     def setUp(self):
+        if model() == "Desktop":
+            self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
         self.pointer = Pointer(Touch.create())
 
@@ -122,7 +126,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
         desktop_file = self._write_test_desktop_file()
         return self.launch_test_application(
-            "qmlscene",
+            base.get_qmlscene_launch_command(),
             qml_path,
             '--desktop_file_hint=%s' % desktop_file,
             app_type='qt',
