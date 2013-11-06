@@ -8,8 +8,6 @@ CONFIG += testcase
 TARGET = ut_keyboardgeometry
 QT = core testlib
 
-QGSETTINGS_INCDIR = /usr/include/qt5/QGSettings
-
 HEADERS += \
     $${TOP_SRCDIR}/src/plugin/keyboardgeometry.h
 
