@@ -66,6 +66,7 @@ Item {
         if (languageId == "de")         return qsTr("German");
         if (languageId == "en")         return qsTr("English");
         if (languageId == "es")         return qsTr("Spanish");
+        if (languageId == "fi")         return qsTr("Finnish");
         if (languageId == "fr")         return qsTr("French");
         if (languageId == "it")         return qsTr("Italian");
         if (languageId == "nl")         return qsTr("Dutch");
