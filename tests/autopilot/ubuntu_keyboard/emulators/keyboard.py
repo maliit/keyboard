@@ -97,7 +97,6 @@ class Keyboard(object):
         self._keys_contained = defaultdict(dict)
 
         self._store_current_orientation()
-        self._store_current_language_id()
 
         if pointer is None:
             self.pointer = Pointer(Touch.create())
@@ -306,7 +305,7 @@ class Keyboard(object):
         pointer.click_object(key_rect)
 
     def _keyboard_details_changed(self):
-        return self._language_changed() or self._orientation_changed()
+        return self._orientation_changed()
 
     def _keypad_details_expired(self, keypad_name):
         return (
@@ -321,18 +320,8 @@ class Keyboard(object):
         else:
             return False
 
-    def _language_changed(self):
-        if self._stored_language_id != self.keyboard.layoutId:
-            self._store_current_language_id()
-            return True
-        else:
-            return False
-
     def _store_current_orientation(self):
         self._stored_orientation = self.orientation.orientationAngle
-
-    def _store_current_language_id(self):
-        self._stored_language_id = self.keyboard.layoutId
 
     def _translate_key(self, label):
         """Get the label for a 'special key' (i.e. space) so that it can be
