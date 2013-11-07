@@ -65,16 +65,13 @@ def _stop_maliit_server():
         logger.debug("No need to stop server.")
 
 
-def _start_maliit_server(args):
+def _start_maliit_server():
     status = _get_maliit_server_status()
     if "stop/" in status:
         try:
-            logger.debug(
-                "Starting maliit-server with the args: '%s'" % ",".join(args)
-            )
-            subprocess.check_call(
-                ['initctl', 'start', 'maliit-server'] + args
-            )
+            logger.debug("Starting maliit-server")
+            subprocess.check_call(['initctl', 'start', 'maliit-server'])
+            sleep(10)
         except subprocess.CalledProcessError as e:
             e.args += ("Unable to start mallit server",)
             raise
@@ -84,20 +81,39 @@ def _start_maliit_server(args):
         )
 
 
-def _restart_maliit_server(args=None):
-    if args is None:
-        args = []
+def _restart_maliit_server():
     _stop_maliit_server()
-    _start_maliit_server(args)
+    _start_maliit_server()
 
 
 class UbuntuKeyboardTests(AutopilotTestCase):
+    maliit_override_file = os.path.expanduser(
+        "~/.config/upstart/maliit-server.override"
+    )
+
     @classmethod
     def setUpClass(cls):
-        _restart_maliit_server(['QT_LOAD_TESTABILITY=1'])
+        try:
+            logger.debug("Creating the override file.")
+            with open(
+                UbuntuKeyboardTests.maliit_override_file, 'w'
+            ) as override_file:
+                override_file.write("exec maliit-server -testability")
+            _restart_maliit_server()
+        except IOError as e:
+            e.args += (
+                "Failed attempting to write override file to {file}".format(
+                    file=UbuntuKeyboardTests.maliit_override_file
+                ),
+            )
+            raise
 
     @classmethod
     def tearDownClass(cls):
+        try:
+            os.remove(UbuntuKeyboardTests.maliit_override_file)
+        except OSError:
+            logger.warning("Attempted to remove non-existent override file")
         _restart_maliit_server()
 
     def setUp(self):
