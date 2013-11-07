@@ -109,6 +109,8 @@ Item {
                 return "languages/it/Keyboard_it.qml";
             if (language === "nl")
                 return "languages/nl/Keyboard_nl.qml";
+            if (language === "pl")
+                return "languages/pl/Keyboard_pl.qml";
             if (language === "pt")
                 return "languages/pt/Keyboard_pt.qml";
             if (language === "ru")

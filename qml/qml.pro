@@ -129,6 +129,7 @@ OTHER_FILES += \
     languages/nl/Keyboard_nl_email.qml \
     languages/nl/Keyboard_nl_url.qml \
     languages/nl/Keyboard_nl_url_search.qml \
+    languages/pl/Keyboard_pl.qml \
     languages/pt/Keyboard_pt.qml \
     languages/pt/Keyboard_pt_email.qml \
     languages/pt/Keyboard_pt_url.qml \
@@ -141,4 +142,7 @@ OTHER_FILES += \
     languages/sv/Keyboard_sv_email.qml \
     languages/sv/Keyboard_sv_url.qml \
     languages/sv/Keyboard_sv_url_search.qml \
-    languages/zh_cn/Keyboard_zh_cn_pinyin.qml
+    languages/zh_cn/Keyboard_zh_cn_pinyin.qml \
+    languages/pl/Keyboard_pl_email.qml \
+    languages/pl/Keyboard_pl_url.qml \
+    languages/pl/Keyboard_pl_url_search.qml
