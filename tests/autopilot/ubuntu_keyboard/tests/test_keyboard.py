@@ -269,7 +269,7 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
             # \u201d
             'punctuation',
             dict(
-                label="Puncuation",
+                label="Punctuation",
                 input=u'`~!@#$%^&*()_-+={}[]|\\:;\'<>,.?/\u201c'
             )
         )
