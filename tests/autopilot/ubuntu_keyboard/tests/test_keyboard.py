@@ -107,6 +107,12 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
             process_helpers.restart_unity_with_testability()
             _assertUnityReady()
+            #### FIXME: This is a work around re: lp:1238417 ####
+            if model() != "Desktop":
+                from autopilot.input import _uinput
+                _uinput._touch_device = _uinput.create_touch_device()
+            ####
+
         except IOError as e:
             e.args += (
                 "Failed attempting to write override file to {file}".format(

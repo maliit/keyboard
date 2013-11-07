@@ -158,7 +158,7 @@ class Keyboard(object):
         try:
             self.keyboard.state.wait_for("SHOWN", timeout=timeout)
             return True
-        except RuntimeError:
+        except AssertionError:
             return False
 
     def press_key(self, key):
