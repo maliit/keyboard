@@ -113,6 +113,12 @@ class UbuntuKeyboardTests(AutopilotTestCase):
                 _uinput._touch_device = _uinput.create_touch_device()
             ####
 
+
+            #### FIXME: Workaround re: lp:1248902 and lp:1248913
+            logger.debug("Waiting for maliit-server to be ready")
+            sleep(10)
+            ####
+
         except IOError as e:
             e.args += (
                 "Failed attempting to write override file to {file}".format(
