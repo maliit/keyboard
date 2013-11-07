@@ -28,8 +28,12 @@ from time import sleep
 
 from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
+from autopilot.introspection import get_proxy_object_for_existing_process
 from autopilot.matchers import Eventually
 from autopilot.platform import model
+from unity8 import process_helpers
+from unity8.shell.emulators.dash import Dash
+from unity8.shell.emulators import UnityEmulatorBase
 from ubuntuuitoolkit import base
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
@@ -41,50 +45,50 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def _get_maliit_server_status():
-    try:
-        return subprocess.check_output([
-            'initctl',
-            'status',
-            'maliit-server'
-        ])
-    except subprocess.CalledProcessError as e:
-        e.args += ("maliit-server appears to be an unknown service.", )
-        raise
-
-
-def _stop_maliit_server():
-    status = _get_maliit_server_status()
+def _stop_unity8():
+    status = process_helpers._get_unity_status()
     if "start/" in status:
         try:
-            logger.debug("Stopping maliit server")
-            subprocess.check_call(['initctl', 'stop', 'maliit-server'])
+            logger.debug("Stopping unity8")
+            subprocess.check_call(['initctl', 'stop', 'unity8'])
         except subprocess.CalledProcessError as e:
-            e.args += ("Unable to stop mallit server",)
+            e.args += ("Unable to stop unity8",)
             raise
     else:
-        logger.debug("No need to stop server.")
+        logger.debug("No need to stop unity.")
 
 
-def _start_maliit_server():
-    status = _get_maliit_server_status()
+def _start_unity8():
+    status = process_helpers._get_unity_status()
     if "stop/" in status:
         try:
-            logger.debug("Starting maliit-server")
-            subprocess.check_call(['initctl', 'start', 'maliit-server'])
-            sleep(10)
+            logger.debug("Starting unity8")
+            subprocess.check_call(['initctl', 'start', 'unity8'])
         except subprocess.CalledProcessError as e:
-            e.args += ("Unable to start mallit server",)
+            e.args += ("Unable to start unity8",)
             raise
     else:
         raise RuntimeError(
-            "Unable to start maliit-server: server is currently running."
+            "Unable to start unity8: server is currently running."
         )
 
 
-def _restart_maliit_server():
-    _stop_maliit_server()
-    _start_maliit_server()
+def _assertUnityReady():
+        unity_pid = process_helpers._get_unity_pid()
+        unity = get_proxy_object_for_existing_process(
+            pid=unity_pid,
+            emulator_base=UnityEmulatorBase,
+        )
+        dash = unity.wait_select_single(Dash)
+        home_scope = dash.get_scope('home')
+
+        home_scope.isLoaded.wait_for(True)
+        home_scope.isCurrent.wait_for(True)
+
+
+def _restart_unity8():
+    _stop_unity8()
+    _start_unity8()
 
 
 class UbuntuKeyboardTests(AutopilotTestCase):
@@ -100,7 +104,9 @@ class UbuntuKeyboardTests(AutopilotTestCase):
                 UbuntuKeyboardTests.maliit_override_file, 'w'
             ) as override_file:
                 override_file.write("exec maliit-server -testability")
-            _restart_maliit_server()
+
+            process_helpers.restart_unity_with_testability()
+            _assertUnityReady()
         except IOError as e:
             e.args += (
                 "Failed attempting to write override file to {file}".format(
@@ -115,7 +121,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
             os.remove(UbuntuKeyboardTests.maliit_override_file)
         except OSError:
             logger.warning("Attempted to remove non-existent override file")
-        _restart_maliit_server()
+        _restart_unity8()
 
     def setUp(self):
         if model() == "Desktop":
