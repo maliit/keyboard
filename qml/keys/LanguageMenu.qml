@@ -63,6 +63,7 @@ Item {
 
     function languageIdToName(languageId)
     {
+        if (languageId == "ar")         return i18n.tr("Arabic");
         if (languageId == "cs")         return i18n.tr("Czech");
         if (languageId == "da")         return i18n.tr("Danish");
         if (languageId == "de")         return i18n.tr("German");
@@ -78,6 +79,9 @@ Item {
         if (languageId == "pt")         return i18n.tr("Portuguese");
         if (languageId == "sv")         return i18n.tr("Swedish");
         if (languageId == "zh")         return i18n.tr("Chinese - Pinyin");
+
+        // fallback
+        return i18n.tr("language " + languageId);
     }
 
 }
