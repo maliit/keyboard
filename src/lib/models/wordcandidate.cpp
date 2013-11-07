@@ -49,16 +49,16 @@ WordCandidate::WordCandidate(Source source, const QString &word)
     , m_word(word)
 {
     if (source == WordCandidate::SourceUser) {
-        m_label.setText(QString(QT_TR_NOOP("Add '%1' to user dictionary")).arg(word));
+        m_label = QString(QT_TR_NOOP("Add '%1' to user dictionary")).arg(word);
     } else {
-        m_label.setText(word);
+        m_label = word;
     }
 }
 
 bool WordCandidate::valid() const
 {
     return (m_area.size().isValid()
-            && not m_label.text().isEmpty());
+            && not m_label.isEmpty());
 }
 
 QRect WordCandidate::rect() const
@@ -91,17 +91,17 @@ void WordCandidate::setArea(const Area &area)
     m_area = area;
 }
 
-Label WordCandidate::label() const
+QString WordCandidate::label() const
 {
     return m_label;
 }
 
-Label & WordCandidate::rLabel()
+QString & WordCandidate::rLabel()
 {
     return m_label;
 }
 
-void WordCandidate::setLabel(const Label &label)
+void WordCandidate::setLabel(const QString &label)
 {
     m_label = label;
 }

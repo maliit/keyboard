@@ -5,7 +5,6 @@ HEADERS += \
     logic/layouthelper.h \
     logic/layoutupdater.h \
     logic/keyboardloader.h \
-    logic/keyareaconverter.h \
     logic/style.h \
     logic/spellchecker.h \
     logic/abstractwordengine.h \
@@ -22,7 +21,6 @@ SOURCES += \
     logic/layouthelper.cpp \
     logic/layoutupdater.cpp \
     logic/keyboardloader.cpp \
-    logic/keyareaconverter.cpp \
     logic/style.cpp \
     logic/spellchecker.cpp \
     logic/abstractwordengine.cpp \

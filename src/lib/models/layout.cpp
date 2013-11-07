@@ -34,7 +34,6 @@
 #include "key.h"
 #include "keydescription.h"
 
-#include "logic/keyareaconverter.h"
 #include "logic/dynamiclayout.h"
 
 #include <QtGui/QGuiApplication>
@@ -315,21 +314,21 @@ QVariant Layout::data(const QModelIndex &index,
     }
 
     case RoleKeyText:
-        return QVariant(key.label().text());
+        return QVariant(key.label());
 
     case RoleKeyFont:
-        return QVariant(QString(key.label().font().name()));
+        return QVariant(QString());
 
     case RoleKeyFontColor:
         // FIXME: QML expects QVariant(QColor(...)) here, but then we'd have a QtGui dependency, no?
-        return QVariant(QString(key.label().font().color()));
+        return QVariant(QString());
 
     case RoleKeyFontSize:
         // FIXME: Using qMax to suppress warning about "invalid" 0.0 font sizes in QFont::setPointSizeF.
-        return QVariant(qMax<int>(1, key.label().font().size()));
+        return QVariant(1);
 
     case RoleKeyFontStretch:
-        return QVariant(key.label().font().stretch());
+        return QVariant(1);
 
     case RoleKeyIcon:
         return QVariant(toUrl(d->image_directory, key.icon()));

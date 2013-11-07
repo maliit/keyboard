@@ -1,11 +1,8 @@
 TEMPLATE = subdirs
 SUBDIRS = \
     common \
-#    ut_dynamic-layout \
     ut_editor \
     ut_keyboardsettings \
-    ut_language-layout-loading \
-    ut_language-layout-switching \
 #    ut_preedit-string \
     ut_repeat-backspace \
     ut_text \

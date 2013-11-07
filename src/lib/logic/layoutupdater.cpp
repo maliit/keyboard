@@ -40,8 +40,6 @@
 #include "models/text.h"
 #include "models/styleattributes.h"
 
-#include "logic/keyareaconverter.h"
-
 namespace MaliitKeyboard {
 namespace Logic {
 
@@ -71,28 +69,10 @@ void applyStyleToCandidate(WordCandidate *candidate,
                            LayoutHelper::Orientation orientation,
                            ActivationPolicy policy)
 {
-    if (not candidate || not attributes) {
-        return;
-    }
-
-    Label &label(candidate->rLabel());
-    Font f(label.font());
-    f.setSize(attributes->candidateFontSize(orientation));
-    f.setStretch(attributes->candidateFontStretch(orientation));
-
-    QByteArray color;
-    switch(policy) {
-    case ActivateElement:
-        color = QByteArray("#fff");
-        break;
-
-    case DeactivateElement:
-        color = QByteArray("#ddd");
-        break;
-    }
-
-    f.setColor(color);
-    label.setFont(f);
+    Q_UNUSED(candidate);
+    Q_UNUSED(attributes);
+    Q_UNUSED(orientation);
+    Q_UNUSED(policy);
 }
 
 // FIXME: Make word candidates fit word ribbon also after orientation change.
@@ -127,7 +107,7 @@ bool updateWordRibbon(LayoutHelper *layout,
     for (int index = 0; index < candidates.count(); ++index) {
         WordCandidate &current(candidates[index]);
 
-        if (current.label().text() == candidate.label().text()) {
+        if (current.label() == candidate.label()) {
             // in qml we don´t care about ( current.rect() == candidate.rect() )
             applyStyleToCandidate(&current, attributes, layout->orientation(), policy);
             layout->setWordRibbon(layout->wordRibbon());
@@ -149,11 +129,6 @@ Key magnifyKey(const Key &key,
                LayoutHelper::Orientation orientation,
                const QRectF &key_area_rect)
 {
-    Font magnifier_font;
-    magnifier_font.setName(attributes->fontName(orientation));
-    magnifier_font.setColor(attributes->fontColor(orientation));
-    magnifier_font.setSize(attributes->magnifierFontSize(orientation));
-
     if (key.action() != Key::ActionInsert) {
         return Key();
     }
@@ -186,15 +161,7 @@ Key magnifyKey(const Key &key,
     magnifier.rArea().setBackground(attributes->magnifierKeyBackground());
     magnifier.rArea().setSize(magnifier_rect.size());
     magnifier.rArea().setBackgroundBorders(attributes->magnifierKeyBackgroundBorders());
-    magnifier.rLabel().setFont(magnifier_font);
 
-    // Compute label rectangle, contains the text:
-    const qreal label_offset(attributes->magnifierKeyLabelVerticalOffset(orientation));
-    const QSize &magnifier_size(magnifier.area().size());
-    const QRect label_rect(0, 0,
-                           magnifier_size.width(),
-                           magnifier_size.height() - label_offset);
-    magnifier.rLabel().setRect(label_rect);
     magnifier.setMargins(QMargins());
 
     return magnifier;
@@ -305,21 +272,7 @@ void LayoutUpdater::setLayout(LayoutHelper *layout)
 
 void LayoutUpdater::setOrientation(LayoutHelper::Orientation orientation)
 {
-    Q_D(LayoutUpdater);
-
-    if (d->layout && d->style && d->layout->orientation() != orientation) {
-        d->layout->setOrientation(orientation);
-
-        KeyAreaConverter converter(d->style->attributes(), &d->loader);
-        converter.setLayoutOrientation(orientation);
-        d->layout->setCenterPanel(d->inShiftedState() ? converter.shiftedKeyArea()
-                                                      : converter.keyArea());
-
-        if (isWordRibbonVisible())
-            applyStyleToWordRibbon(d->layout->wordRibbon(), d->style, orientation);
-
-        clearActiveKeysAndMagnifier();
-    }
+    Q_UNUSED(orientation);
 }
 
 void LayoutUpdater::setStyle(const SharedStyle &style)
@@ -395,86 +348,11 @@ void LayoutUpdater::onKeyPressed(const Key &key)
 void LayoutUpdater::onKeyLongPressed(const Key &key)
 {
     Q_UNUSED(key);
-    Q_D(LayoutUpdater);
-
-    if (not d->layout || d->style.isNull()) {
-        return;
-    }
-
-    clearActiveKeysAndMagnifier();
-
-    const LayoutHelper::Orientation orientation(d->layout->orientation());
-    StyleAttributes * const extended_attributes(d->style->extendedKeysAttributes());
-    const qreal vertical_offset(d->style->attributes()->verticalOffset(orientation));
-    KeyAreaConverter converter(extended_attributes, &d->loader);
-    converter.setLayoutOrientation(orientation);
-    KeyArea ext_ka(converter.extendedKeyArea(key));
-
-    if (not ext_ka.hasKeys()) {
-        if (key.action() == Key::ActionSpace) {
-            Q_EMIT addToUserDictionary();
-        }
-        return;
-    }
-
-    const QSize &ext_panel_size(ext_ka.area().size());
-    const QSize &center_panel_size(d->layout->centerPanel().area().size());
-    const QPointF &key_center(key.rect().center());
-    const qreal safety_margin(extended_attributes->safetyMargin(orientation));
-
-    QPoint offset(qMax<int>(safety_margin, key_center.x() - ext_panel_size.width() / 2),
-                  key.rect().top() - vertical_offset);
-
-    if (offset.x() + ext_panel_size.width() > center_panel_size.width()) {
-        offset.rx() = center_panel_size.width() - ext_panel_size.width() - safety_margin;
-    }
-
-    ext_ka.setOrigin(offset);
-    d->layout->setExtendedPanel(ext_ka);
-    d->layout->setActivePanel(LayoutHelper::ExtendedPanel);
 }
 
 void LayoutUpdater::onKeyReleased(const Key &key)
 {
-    Q_D(const LayoutUpdater);
-
-    if (not d->layout) {
-        return;
-    }
-
-    d->layout->removeActiveKey(key);
-    d->layout->clearMagnifierKey();
-
-    if (d->layout->activePanel() == LayoutHelper::ExtendedPanel) {
-        d->layout->clearActiveKeys();
-        d->layout->setExtendedPanel(KeyArea());
-        d->layout->setActivePanel(LayoutHelper::CenterPanel);
-        return;
-    }
-
-    switch (key.action()) {
-    case Key::ActionShift:
-        Q_EMIT shiftReleased();
-        break;
-
-    case Key::ActionInsert:
-        break;
-
-    case Key::ActionSym:
-        Q_EMIT symKeyReleased();
-        break;
-
-    case Key::ActionSwitch:
-        Q_EMIT symSwitcherReleased();
-        break;
-
-    case Key::ActionDead:
-        Q_EMIT deadkeyReleased();
-        break;
-
-    default:
-        break;
-    }
+    Q_UNUSED(key);
 }
 
 void LayoutUpdater::onKeyAreaPressed(LayoutHelper::Panel panel)
@@ -588,43 +466,7 @@ void LayoutUpdater::onWordCandidatesChanged(const WordCandidateList &candidates)
 
 void LayoutUpdater::onExtendedKeysShown(const Key &main_key)
 {
-    Q_D(LayoutUpdater);
-
-    if (not d->layout || d->style.isNull()) {
-        return;
-    }
-
-    clearActiveKeysAndMagnifier();
-
-    const LayoutHelper::Orientation orientation(d->layout->orientation());
-    StyleAttributes * const extended_attributes(d->style->extendedKeysAttributes());
-    const qreal vertical_offset(d->style->attributes()->verticalOffset(orientation));
-    KeyAreaConverter converter(extended_attributes, &d->loader);
-    converter.setLayoutOrientation(orientation);
-    KeyArea ext_ka(converter.extendedKeyArea(main_key));
-
-    if (not ext_ka.hasKeys()) {
-        if (main_key.action() == Key::ActionSpace) {
-            Q_EMIT addToUserDictionary();
-        }
-        return;
-    }
-
-    const QSize &ext_panel_size(ext_ka.area().size());
-    const QSize &center_panel_size(d->layout->centerPanel().area().size());
-    const QPointF &key_center(main_key.rect().center());
-    const qreal safety_margin(extended_attributes->safetyMargin(orientation));
-
-    QPoint offset(qMax<int>(safety_margin, key_center.x() - ext_panel_size.width() / 2),
-                  main_key.rect().top() - vertical_offset);
-
-    if (offset.x() + ext_panel_size.width() > center_panel_size.width()) {
-        offset.rx() = center_panel_size.width() - ext_panel_size.width() - safety_margin;
-    }
-
-    ext_ka.setOrigin(offset);
-    d->layout->setExtendedPanel(ext_ka);
-    d->layout->setActivePanel(LayoutHelper::ExtendedPanel);
+    Q_UNUSED(main_key);
 }
 
 void LayoutUpdater::onWordCandidatePressed(const WordCandidate &candidate)
@@ -682,77 +524,18 @@ void LayoutUpdater::onKeyboardsChanged()
 
 void LayoutUpdater::switchToMainView()
 {
-    Q_D(LayoutUpdater);
-
-    if (not d->layout || d->style.isNull()) {
-        return;
-    }
-
-    d->layout->clearActiveKeys();
-    d->layout->clearMagnifierKey();
-
-    const LayoutHelper::Orientation orientation(d->layout->orientation());
-
-    if (d->word_ribbon_visible)
-        applyStyleToWordRibbon(d->layout->wordRibbon(), d->style, orientation);
-
-    KeyAreaConverter converter(d->style->attributes(), &d->loader);
-    converter.setLayoutOrientation(orientation);
-    d->layout->setCenterPanel(d->inShiftedState() ? converter.shiftedKeyArea()
-                                                  : converter.keyArea());
-
-    if (d->inShiftedState())
-        Q_EMIT d->layout->stateChanged(Model::Layout::ShiftedState);
-    else if (d->inDeadkeyState())
-        Q_EMIT d->layout->stateChanged(Model::Layout::DeadkeyState);
-    else
-        Q_EMIT d->layout->stateChanged(Model::Layout::DefaultState);
 }
 
 void LayoutUpdater::switchToPrimarySymView()
 {
-    Q_D(LayoutUpdater);
-
-    if (not d->layout || d->style.isNull()) {
-        return;
-    }
-
-    const LayoutHelper::Orientation orientation(d->layout->orientation());
-    KeyAreaConverter converter(d->style->attributes(), &d->loader);
-    converter.setLayoutOrientation(orientation);
-    d->layout->setCenterPanel(converter.symbolsKeyArea(0));
-
-    Q_EMIT d->layout->stateChanged(Model::Layout::PrimarySymbolState);
 }
 
 void LayoutUpdater::switchToSecondarySymView()
 {
-    Q_D(LayoutUpdater);
-
-    if (not d->layout || d->style.isNull()) {
-        return;
-    }
-
-    const LayoutHelper::Orientation orientation(d->layout->orientation());
-    KeyAreaConverter converter(d->style->attributes(), &d->loader);
-    converter.setLayoutOrientation(orientation);
-    d->layout->setCenterPanel(converter.symbolsKeyArea(1));
-
-    Q_EMIT d->layout->stateChanged(Model::Layout::SecondarySymbolState);
 }
 
 void LayoutUpdater::switchToAccentedView()
 {
-    Q_D(LayoutUpdater);
-
-    if (not d->layout || d->style.isNull()) {
-        return;
-    }
-
-
-    const LayoutHelper::Orientation orientation(d->layout->orientation());
-    KeyAreaConverter converter(d->style->attributes(), &d->loader);
-    converter.setLayoutOrientation(orientation);
 }
 
 }} // namespace Logic, MaliitKeyboard

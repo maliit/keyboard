@@ -71,7 +71,7 @@ WordCandidateList WordEngineProbe::fetchCandidates(Model::Text *text)
             // simulates case when there are some candidates, preedit
             // spelling correctnes is not important here.
             WordCandidate candidate;
-            candidate.rLabel().setText(preedit + "d");
+            candidate.rLabel() = preedit + "d";
             result << candidate;
             face = Model::Text::PreeditActive;
         }
