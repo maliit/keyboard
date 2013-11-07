@@ -37,5 +37,3 @@ SOURCES += \
 DEFINES += HUNSPELL_DICT_PATH=\\\"$$HUNSPELL_DICT_PATH\\\"
 
 DEPENDPATH += $$LOGIC_DIR
-
-include(state-machines/state-machines.pri)

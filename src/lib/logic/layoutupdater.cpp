@@ -41,9 +41,6 @@
 #include "models/styleattributes.h"
 
 #include "logic/keyareaconverter.h"
-#include "logic/state-machines/shiftmachine.h"
-#include "logic/state-machines/viewmachine.h"
-#include "logic/state-machines/deadkeymachine.h"
 
 namespace MaliitKeyboard {
 namespace Logic {
@@ -209,9 +206,6 @@ public:
     bool initialized;
     LayoutHelper *layout;
     KeyboardLoader loader;
-    ShiftMachine shift_machine;
-    ViewMachine view_machine;
-    DeadkeyMachine deadkey_machine;
     SharedStyle style;
     bool word_ribbon_visible;
     LayoutHelper::Panel close_extended_on_release;
@@ -220,9 +214,6 @@ public:
         : initialized(false)
         , layout(0)
         , loader()
-        , shift_machine()
-        , view_machine()
-        , deadkey_machine()
         , style()
         , word_ribbon_visible(false)
         , close_extended_on_release(LayoutHelper::NumPanels) // NumPanels counts as invalid panel.
@@ -230,19 +221,17 @@ public:
 
     bool inShiftedState() const
     {
-        return (shift_machine.inState(ShiftMachine::shift_state) or
-                shift_machine.inState(ShiftMachine::caps_lock_state) or
-                shift_machine.inState(ShiftMachine::latched_shift_state));
+        return false;
     }
 
     bool arePrimarySymbolsShown() const
     {
-        return view_machine.inState(ViewMachine::symbols0_state);
+        return false;
     }
 
     bool areSecondarySymbolsShown() const
     {
-        return view_machine.inState(ViewMachine::symbols1_state);
+        return false;
     }
 
     bool areSymbolsShown() const
@@ -252,8 +241,7 @@ public:
 
     bool inDeadkeyState() const
     {
-        return (deadkey_machine.inState(DeadkeyMachine::deadkey_state) or
-                deadkey_machine.inState(DeadkeyMachine::latched_deadkey_state));
+        return false;
     }
 
     const StyleAttributes * activeStyleAttributes() const
@@ -277,11 +265,6 @@ LayoutUpdater::~LayoutUpdater()
 
 void LayoutUpdater::init()
 {
-    Q_D(LayoutUpdater);
-
-    d->shift_machine.setup(this);
-    d->view_machine.setup(this);
-    d->deadkey_machine.setup(this);
 }
 
 QStringList LayoutUpdater::keyboardIds() const
@@ -401,7 +384,6 @@ void LayoutUpdater::onKeyPressed(const Key &key)
         break;
 
     case Key::ActionDead:
-        d->deadkey_machine.setAccentKey(key);
         Q_EMIT deadkeyPressed();
         break;
 
@@ -476,13 +458,13 @@ void LayoutUpdater::onKeyReleased(const Key &key)
         break;
 
     case Key::ActionInsert:
-        if (d->shift_machine.inState(ShiftMachine::latched_shift_state)) {
-            Q_EMIT shiftCancelled();
-        }
+//        if (d->shift_machine.inState(ShiftMachine::latched_shift_state)) {
+//            Q_EMIT shiftCancelled();
+//        }
 
-        if (d->deadkey_machine.inState(DeadkeyMachine::latched_deadkey_state)) {
-            Q_EMIT deadkeyCancelled();
-        }
+//        if (d->deadkey_machine.inState(DeadkeyMachine::latched_deadkey_state)) {
+//            Q_EMIT deadkeyCancelled();
+//        }
 
         break;
 
@@ -703,13 +685,6 @@ void LayoutUpdater::onKeyboardsChanged()
 {
     Q_D(LayoutUpdater);
 
-    // Resetting state machines should reset layout also.
-    // FIXME: Most probably reloading will happen three
-    // times, which is not what we want.
-    d->shift_machine.restart();
-    d->deadkey_machine.restart();
-    d->view_machine.restart();
-
     Q_EMIT keyboardTitleChanged(d->loader.title(d->loader.activeId()));
 }
 
@@ -755,9 +730,6 @@ void LayoutUpdater::switchToPrimarySymView()
     converter.setLayoutOrientation(orientation);
     d->layout->setCenterPanel(converter.symbolsKeyArea(0));
 
-    // Reset shift state machine, also see switchToMainView.
-    d->shift_machine.restart();
-
     Q_EMIT d->layout->stateChanged(Model::Layout::PrimarySymbolState);
 }
 
@@ -789,9 +761,6 @@ void LayoutUpdater::switchToAccentedView()
     const LayoutHelper::Orientation orientation(d->layout->orientation());
     KeyAreaConverter converter(d->style->attributes(), &d->loader);
     converter.setLayoutOrientation(orientation);
-    const Key accent(d->deadkey_machine.accentKey());
-    d->layout->setCenterPanel(d->inShiftedState() ? converter.shiftedDeadKeyArea(accent)
-                                                  : converter.deadKeyArea(accent));
 }
 
 }} // namespace Logic, MaliitKeyboard
