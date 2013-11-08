@@ -27,6 +27,7 @@ Item {
     property int keyHeight: 0
 
     property string activeKeypadState: "NORMAL"
+    property alias popoverEnabled: extendedKeysSelector.enabled
 
     state: "CHARACTERS"
 

@@ -28,19 +28,19 @@ HEADERS += \
     inputmethod.h \
     inputmethod_p.h \
     editor.h \
-    keyboadsettings.h \
-    scenerectwatcher.h \
+    keyboardgeometry.h \
+    keyboardsettings.h \
     updatenotifier.h \
-    ubuntuapplicationapiwrapper.h
+    ubuntuapplicationapiwrapper.h \
 
 SOURCES += \
     plugin.cpp \
     inputmethod.cpp \
     editor.cpp \
-    keyboadsettings.cpp \
-    scenerectwatcher.cpp \
+    keyboardgeometry.cpp \
+    keyboardsettings.cpp \
     updatenotifier.cpp \
-    ubuntuapplicationapiwrapper.cpp
+    ubuntuapplicationapiwrapper.cpp \
 
 target.path += $${MALIIT_PLUGINS_DIR}
 INSTALLS += target

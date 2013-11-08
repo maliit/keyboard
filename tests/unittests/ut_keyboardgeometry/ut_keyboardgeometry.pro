@@ -5,17 +5,15 @@ include($${TOP_SRCDIR}/config.pri)
 include(../common-check.pri)
 
 CONFIG += testcase
-TARGET = ut_text
+TARGET = ut_keyboardgeometry
 QT = core testlib
 
-QMAKE_LFLAGS_RPATH=$${TOP_BUILDDIR}/src/plugin
-LIBS += -L$${TOP_BUILDDIR}/src/plugin -lubuntu-keyboard-plugin
-
 HEADERS += \
-    $${TOP_SRCDIR}/src/lib/models/text.h
+    $${TOP_SRCDIR}/src/plugin/keyboardgeometry.h
 
 SOURCES += \
-    ut_text.cpp
+    ut_keyboardgeometry.cpp \
+    $${TOP_SRCDIR}/src/plugin/keyboardgeometry.cpp
 
 target.path = $$INSTALL_BIN
 INSTALLS += target

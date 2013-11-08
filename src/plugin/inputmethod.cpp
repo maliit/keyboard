@@ -138,7 +138,7 @@ void InputMethod::show()
                 d->keyboardVisibleRect.height()
                 );
 
-    d->qmlRootItem->setProperty("shown", true);
+    d->m_geometry->setShown(true);
 }
 
 void InputMethod::hide()
@@ -389,8 +389,10 @@ void InputMethod::update()
     }
     setContentType(newContentType);
 
-    if (emitPredictionEnabled)
+    if (emitPredictionEnabled) {
+        d->updateWordRibbon();
         Q_EMIT predictionEnabledChanged();
+    }
 
     QString text;
     int position;
@@ -431,12 +433,16 @@ bool InputMethod::showWordRibbon()
     return d->showWordRibbon;
 }
 
+//! \brief InputMethod::contentType returns the type, of the input field, like free text, email, url
+//! \return
 InputMethod::TextContentType InputMethod::contentType()
 {
     Q_D(InputMethod);
     return d->contentType;
 }
 
+//! \brief InputMethod::setContentType sets the type, of the input field, like free text, email, url
+//! \param contentType
 void InputMethod::setContentType(TextContentType contentType)
 {
     Q_D(InputMethod);
@@ -446,26 +452,11 @@ void InputMethod::setContentType(TextContentType contentType)
 
     setActiveLanguage(d->systemLanguage);
 
-    updateWordEngine();
-
     d->contentType = contentType;
     Q_EMIT contentTypeChanged(contentType);
 
+    updateWordEngine();
     updateAutoCaps();
-}
-
-void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
-{
-    Q_D(InputMethod);
-
-    if (status == QQuickView::Ready) {
-        d->qmlRootItem = d->view->rootObject()->findChild<QQuickItem*>("ubuntuKeyboard");
-
-        QObject::connect(this, SIGNAL(activeLanguageChanged(QString)), &d->editor, SLOT(onLanguageChanged(QString)));
-        QObject::connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
-
-        d->applicationApiWrapper->setRootObject(d->view->rootObject());
-    }
 }
 
 //! \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be

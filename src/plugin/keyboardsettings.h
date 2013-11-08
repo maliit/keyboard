@@ -1,9 +1,7 @@
 /*
  * This file is part of Maliit Plugins
  *
- * Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies). All rights reserved.
- *
- * Contact: Mohammad Anwari <Mohammad.Anwari@nokia.com>
+ * Copyright (C) 2013 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,34 +27,43 @@
  *
  */
 
-#ifndef MALIIT_KEYBOARD_HITLOGIC_H
-#define MALIIT_KEYBOARD_HITLOGIC_H
+#ifndef KEYBOARDSETTINGS_H
+#define KEYBOARDSETTINGS_H
 
-#include "models/key.h"
-#include "models/wordcandidate.h"
+#include <QObject>
+#include <QStringList>
 
-#include <QtCore>
+class QGSettings;
 
 namespace MaliitKeyboard {
-namespace Logic {
 
-enum FilterBehaviour {
-    IgnoreIfInFilter,
-    AcceptIfInFilter
+class KeyboardSettings : public QObject
+{
+    Q_OBJECT
+public:
+    explicit KeyboardSettings(QObject *parent = 0);
+    
+    QStringList enabledLanguages() const;
+    bool autoCapitalization() const;
+    bool autoCompletion() const;
+    bool predictiveText() const;
+    bool keyPressFeedback() const;
+
+Q_SIGNALS:
+    void enabledLanguagesChanged();
+    void autoCapitalizationChanged();
+    void autoCompletionChanged();
+    void predictiveTextChanged();
+    void keyPressFeedbackChanged();
+
+private:
+    Q_SLOT void settingUpdated(const QString &key);
+
+    QGSettings *m_settings;
+
+    friend class TestKeyboardSettings;
 };
 
-Key keyHit(const QVector<Key> &keys,
-           const QRect &geometry,
-           const QPoint &pos,
-           const QVector<Key> &filtered_keys = QVector<Key>(),
-           FilterBehaviour behaviour = IgnoreIfInFilter);
+} // namespace
 
-WordCandidate wordCandidateHit(const QVector<WordCandidate> &candidates,
-                               const QRect &geometry,
-                               const QPoint &pos,
-                               const QVector<WordCandidate> &filtered_candidates = QVector<WordCandidate>(),
-                               FilterBehaviour behaviour = IgnoreIfInFilter);
-
-}} // namespace Logic, MaliitKeyboard
-
-#endif // MALIIT_KEYBOARD_HITLOGIC_H
+#endif // KEYBOARDSETTINGS_H
