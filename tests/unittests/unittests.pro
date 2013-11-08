@@ -4,6 +4,7 @@ SUBDIRS = \
 #    ut_dynamic-layout \
     ut_editor \
     ut_keyboardsettings \
+    ut_languagefeatures \
     ut_language-layout-loading \
     ut_language-layout-switching \
 #    ut_preedit-string \
