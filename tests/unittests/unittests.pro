@@ -2,6 +2,7 @@ TEMPLATE = subdirs
 SUBDIRS = \
     common \
     ut_editor \
+    ut_keyboardgeometry \
     ut_keyboardsettings \
 #    ut_preedit-string \
     ut_repeat-backspace \
