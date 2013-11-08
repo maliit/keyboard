@@ -62,7 +62,6 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            ShiftKey {}
             CharKey { label: "ז"; shifted: ""; }
             CharKey { label: "ס"; shifted: ""; }
             CharKey { label: "ב"; shifted: ""; }
@@ -72,7 +71,7 @@ KeyPad {
             CharKey { label: "צ"; shifted: ""; }
             CharKey { label: "ת"; shifted: ""; }
             CharKey { label: "ץ"; shifted: ""; }
-            BackspaceKey {}
+            BackspaceKey { padding: 0 }
         }
 
         Item {

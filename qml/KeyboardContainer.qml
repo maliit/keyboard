@@ -85,11 +85,6 @@ Item {
         {
             language = language .slice(0,2).toLowerCase();
 
-            if (!languageIsSupported(language)) {
-                console.log("Language '"+language+"' not supported - using 'en' instead");
-                language = "en";
-            }
-
             if (language === "ar")
                 return "languages/ar/Keyboard_ar.qml";
             if (language === "cs")
@@ -124,6 +119,9 @@ Item {
                 return "languages/sv/Keyboard_sv.qml";
             if (language === "zh")
                 return "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
+
+            console.log("Language '"+language+"' not supported - using 'en' instead");
+            return "languages/en/Keyboard_en.qml";
         }
 
         function loadLayout(contentType, systemLanguage, activeLanguage)

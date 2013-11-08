@@ -66,7 +66,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            ShiftKey {}
+            ShiftKey { padding: 0 }
             CharKey { label: "ئ"; }
             CharKey { label: "ء"; }
             CharKey { label: "ؤ"; }
@@ -76,7 +76,7 @@ KeyPad {
             CharKey { label: "و"; }
             CharKey { label: "ز"; }
             CharKey { label: "ظ"; }
-            BackspaceKey {}
+            BackspaceKey { padding: 0 }
         }
 
         Item {
@@ -85,7 +85,6 @@ KeyPad {
 
             height: panel.keyHeight;
 
-            CharKey { label: ; }
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
             CharKey        { id: commaKey;    label: "ذ"; shifted: "/";  anchors.left: languageMenuButton.right; }
