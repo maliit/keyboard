@@ -12,6 +12,15 @@ qml_keys.files = keys/*.qml keys/*.js
 qml_languages.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages"
 qml_languages.files = languages/*.qml languages/*.js
 
+lang_ar.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/ar"
+lang_ar.files = languages/ar/*.qml languages/ar/*.js
+
+lang_cs.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/cs"
+lang_cs.files = languages/cs/*.qml languages/cs/*.js
+
+lang_da.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/da"
+lang_da.files = languages/da/*.qml languages/da/*.js
+
 lang_de.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/de"
 lang_de.files = languages/de/*.qml languages/de/*.js
 
@@ -21,14 +30,26 @@ lang_en.files = languages/en/*.qml languages/en/*.js
 lang_es.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/es"
 lang_es.files = languages/es/*.qml languages/es/*.js
 
+lang_fi.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/fi"
+lang_fi.files = languages/fi/*.qml languages/fi/*.js
+
 lang_fr.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/fr"
 lang_fr.files = languages/fr/*.qml languages/fr/*.js
+
+lang_he.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/he"
+lang_he.files = languages/he/*.qml languages/he/*.js
+
+lang_hu.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/hu"
+lang_hu.files = languages/hu/*.qml languages/hu/*.js
 
 lang_it.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/it"
 lang_it.files = languages/it/*.qml languages/it/*.js
 
 lang_nl.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/nl"
 lang_nl.files = languages/nl/*.qml languages/nl/*.js
+
+lang_pl.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/pl"
+lang_pl.files = languages/pl/*.qml languages/pl/*.js
 
 lang_pt.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/pt"
 lang_pt.files = languages/pt/*.qml languages/pt/*.js
@@ -47,12 +68,19 @@ images.path = "$$UBUNTU_KEYBOARD_DATA_DIR/images"
 images.files = images/*.png images/*.sci
 
 INSTALLS += qml qml_keys qml_languages images \
+    lang_ar \
+    lang_cs \
+    lang_da \
     lang_de \
     lang_en \
     lang_es \
+    lang_fi \
     lang_fr \
+    lang_he \
+    lang_hu \
     lang_it \
     lang_nl \
+    lang_pl \
     lang_pt \
     lang_ru \
     lang_sv \
