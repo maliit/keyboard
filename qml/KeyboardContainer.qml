@@ -76,7 +76,25 @@ Item {
         /// FIXME the possible languages should be checked in C++
         function languageIsSupported(locale)
         {
-            var supportedLocales = ["en", "de", "es", "fr", "zh", "pt"];
+            var supportedLocales = [
+                        "ar",
+                        "cs",
+                        "da",
+                        "de",
+                        "en",
+                        "es",
+                        "fi",
+                        "fr",
+                        "he",
+                        "hu",
+                        "it",
+                        "nl",
+                        "pl",
+                        "pt",
+                        "ru",
+                        "sv",
+                        "zh",
+                    ];
             return (supportedLocales.indexOf( locale ) > -1);
         }
 
@@ -84,6 +102,11 @@ Item {
         function freeTextLanguageKeyboard(language)
         {
             language = language .slice(0,2).toLowerCase();
+
+            if (!languageIsSupported(language)) {
+                console.log("Language '"+language+"' not supported - using 'en' instead");
+                language = "en";
+            }
 
             if (language === "ar")
                 return "languages/ar/Keyboard_ar.qml";
@@ -119,9 +142,6 @@ Item {
                 return "languages/sv/Keyboard_sv.qml";
             if (language === "zh")
                 return "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
-
-            console.log("Language '"+language+"' not supported - using 'en' instead");
-            return "languages/en/Keyboard_en.qml";
         }
 
         function loadLayout(contentType, systemLanguage, activeLanguage)

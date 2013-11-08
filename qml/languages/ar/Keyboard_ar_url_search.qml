@@ -85,6 +85,8 @@ KeyPad {
 
             height: panel.keyHeight;
 
+            // note FIXME: full list of tld:
+            // [".ma", ".dz", ".ly", ".tn", ".iq", ".lb", ".ps", ".jo", ".ye", ".bh", ".dj", ".kw", ".km", ".mr‎", ".om", ".qa", ".sa", ".sy", ".so‎", ".sd", ".ae"]
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: symShiftKey.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: slashKey.right; anchors.right: urlKey.left; noMagnifier: true }
