@@ -27,7 +27,7 @@
  *
  */
 
-#include "keyboadsettings.h"
+#include "keyboardsettings.h"
 
 #include <QDebug>
 #include <QGSettings/QGSettings>
@@ -41,11 +41,11 @@ const QLatin1String PREDICTIVE_TEXT_KEY = QLatin1String("predictiveText");
 const QLatin1String KEY_PRESS_FEEDBACK_KEY = QLatin1String("keyPressFeedback");
 
 /*!
- * \brief KeyboadSettings::KeyboadSettings class to load the settings, and
+ * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
  * listens on runtime to changes of them
  * \param parent
  */
-KeyboadSettings::KeyboadSettings(QObject *parent) :
+KeyboardSettings::KeyboardSettings(QObject *parent) :
     QObject(parent)
   , m_settings(new QGSettings("com.canonical.keyboard.maliit",
                               "/com/canonical/keyboard/maliit/", this))
@@ -55,61 +55,61 @@ KeyboadSettings::KeyboadSettings(QObject *parent) :
 }
 
 /*!
- * \brief KeyboadSettings::enabledLanguages returns a list of languages that are
+ * \brief KeyboardSettings::enabledLanguages returns a list of languages that are
  * active
  * \return
  */
-QStringList KeyboadSettings::enabledLanguages() const
+QStringList KeyboardSettings::enabledLanguages() const
 {
     return m_settings->get(ENABLED_LANGUAGES_KEY).toStringList();
 }
 
 /*!
- * \brief KeyboadSettings::autoCapitalization returns true id the first letter
+ * \brief KeyboardSettings::autoCapitalization returns true id the first letter
  * of each sentence should be capitalized
  * \return
  */
-bool KeyboadSettings::autoCapitalization() const
+bool KeyboardSettings::autoCapitalization() const
 {
     return m_settings->get(AUTO_CAPITALIZATION_KEY).toBool();
 }
 
 /*!
- * \brief KeyboadSettings::autoCompletion returns true if the current word should
+ * \brief KeyboardSettings::autoCompletion returns true if the current word should
  * be completed with first suggestion when hitting space
  * \return
  */
-bool KeyboadSettings::autoCompletion() const
+bool KeyboardSettings::autoCompletion() const
 {
     return m_settings->get(AUTO_COMPLETION_KEY).toBool();
 }
 
 /*!
- * \brief KeyboadSettings::predictiveText returns true, if potential words in the
+ * \brief KeyboardSettings::predictiveText returns true, if potential words in the
  * word ribbon should be suggested
  * \return
  */
-bool KeyboadSettings::predictiveText() const
+bool KeyboardSettings::predictiveText() const
 {
     return m_settings->get(PREDICTIVE_TEXT_KEY).toBool();
 }
 
 /*!
- * \brief KeyboadSettings::keyPressFeedback returns true if feedback is enabled
+ * \brief KeyboardSettings::keyPressFeedback returns true if feedback is enabled
  * when the user presses a keyboad key
  * \return
  */
-bool KeyboadSettings::keyPressFeedback() const
+bool KeyboardSettings::keyPressFeedback() const
 {
     return m_settings->get(KEY_PRESS_FEEDBACK_KEY).toBool();
 }
 
 /*!
- * \brief KeyboadSettings::settingUpdated slot to handle changes in the settings backend
+ * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
  * \param key
  */
-void KeyboadSettings::settingUpdated(const QString &key)
+void KeyboardSettings::settingUpdated(const QString &key)
 {
     if (key == ENABLED_LANGUAGES_KEY) {
         Q_EMIT enabledLanguagesChanged();

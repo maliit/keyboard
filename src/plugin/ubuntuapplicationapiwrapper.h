@@ -17,13 +17,14 @@
 #ifndef UBUNTUAPPLICATIONAPIWRAPPER_H
 #define UBUNTUAPPLICATIONAPIWRAPPER_H
 
+#include "keyboardgeometry.h"
+
 #include <QObject>
 #include <QLocalServer>
 #include <QLocalSocket>
 #include <QQuickItem>
 #include <QPointer>
-
-#include "scenerectwatcher.h"
+#include <QTimer>
 
 /*
  * Class: UbuntuApplicationApiWrapper
@@ -45,11 +46,13 @@ public:
     void reportOSKVisible(const int, const int, const int, const int);
     void reportOSKInvisible();
 
-    void setRootObject(QQuickItem *rootObject);
+    void setGeometryItem(KeyboardGeometry *geometry);
+
 private Q_SLOTS:
     void onNewConnection();
     void onClientDisconnected();
     void updateSharedInfo();
+    void delayedGeometryUpdate();
 
 private:
     // NB! Must match the definition in unity-mir. Not worth creating a shared header
@@ -66,29 +69,14 @@ private:
     void sendInfoToClientConnection();
     void startLocalServer();
     QString buildSocketFilePath() const;
-    void startWatchingExtendedKeysSelector();
-    void stopWatchingExtendedKeysSelector();
 
     bool m_runningOnMir;
     QLocalServer m_localServer;
     QLocalSocket *m_clientConnection;
     struct SharedInfo m_sharedInfo;
     struct SharedInfo m_lastInfoShared;
-
-    /////
-    // Items from qml/Keyboard.qml
-
-    // Just the keyboard area
-    QPointer<QQuickItem> m_keyboardComp;
-
-    // Keyboard + space for the word ribbon on top
-    QPointer<QQuickItem> m_keyboardSurface;
-
-    // The baloon that pops-up when you long press a character key to get
-    // its accented versions etc.
-    QPointer<QQuickItem> m_extendedKeysSelector;
-
-    SceneRectWatcher m_sceneRectWatcher;
+    KeyboardGeometry *m_geometry;
+    QTimer m_geometryUpdateTimer;
 };
 
 #endif // UBUNTUAPPLICATIONAPIWRAPPER_H
