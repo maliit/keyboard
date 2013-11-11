@@ -2,8 +2,6 @@ MODELS_DIR = ./models
 
 HEADERS += \
     models/area.h \
-    models/font.h \
-    models/label.h \
     models/key.h \
     models/keyarea.h \
     models/layout.h \
@@ -16,8 +14,6 @@ HEADERS += \
 
 SOURCES += \
     models/area.cpp \
-    models/font.cpp \
-    models/label.cpp \
     models/key.cpp \
     models/keyarea.cpp \
     models/layout.cpp \

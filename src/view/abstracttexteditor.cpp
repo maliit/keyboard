@@ -407,7 +407,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         return;
     }
 
-    const QString &text(key.label().text());
+    const QString &text(key.label());
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
 

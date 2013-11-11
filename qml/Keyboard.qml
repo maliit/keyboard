@@ -69,7 +69,7 @@ Item {
 
     property int keypadHeight: maliit_geometry.keypadHeight
 
-    visible: layout.visible
+    visible: true
 
     // Expose details for use with Autopilot.
     //readonly property var layoutState: layout.keyboard_state

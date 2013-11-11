@@ -216,9 +216,7 @@ void EventHandler::onLanguageChangeRequested(QString languageId)
 void EventHandler::onKeyPressed(QString label, QString action)
 {
     Key key;
-    Label mlabel;
-    mlabel.setText(label);
-    key.setLabel(mlabel);
+    key.setLabel(label);
 
     if (action == "backspace")
         key.setAction(Key::ActionBackspace);
@@ -229,9 +227,7 @@ void EventHandler::onKeyPressed(QString label, QString action)
 void EventHandler::onKeyReleased(QString label, QString action)
 {
     Key key;
-    Label mlabel;
-    mlabel.setText(label);
-    key.setLabel(mlabel);
+    key.setLabel(label);
 
     if (action == "return")
         key.setAction(Key::ActionReturn);
@@ -250,9 +246,7 @@ void EventHandler::onKeyReleased(QString label, QString action)
 void EventHandler::onKeyEntered(QString label)
 {
     Key key;
-    Label mlabel;
-    mlabel.setText(label);
-    key.setLabel(mlabel);
+    key.setLabel(label);
 
     Q_EMIT keyEntered(key);
 }
@@ -261,9 +255,7 @@ void EventHandler::onKeyEntered(QString label)
 void EventHandler::onKeyExited(QString label)
 {
     Key key;
-    Label mlabel;
-    mlabel.setText(label);
-    key.setLabel(mlabel);
+    key.setLabel(label);
 
     Q_EMIT keyExited(key);
 }

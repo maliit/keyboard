@@ -72,7 +72,7 @@ namespace {
                 key.setAction(Key::ActionSpace);
             } else {
                 key.setAction(Key::ActionInsert);
-                key.rLabel().setText(QString(c));
+                key.rLabel() = QString(c);
             }
             editor->onKeyPressed(key);
             editor->onKeyReleased(key);
