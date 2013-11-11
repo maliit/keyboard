@@ -58,6 +58,7 @@ private:
 #include <QTextCodec>
 #include <QStringList>
 #include <QDebug>
+#include <QDir>
 
 namespace MaliitKeyboard {
 namespace Logic {
@@ -68,7 +69,7 @@ namespace Logic {
 
 struct SpellCheckerPrivate
 {
-    Hunspell hunspell; //!< The spellchecker backend, Hunspell.
+    Hunspell *hunspell; //!< The spellchecker backend, Hunspell.
     QTextCodec *codec; //!< Which codec to use.
     bool enabled; //!< Whether the spellchecker is enabled.
     QSet<QString> ignored_words; //!< The words to ignore.
@@ -76,37 +77,45 @@ struct SpellCheckerPrivate
 
     SpellCheckerPrivate(const QString &dictionary_path,
                         const QString &user_dictionary);
+    ~SpellCheckerPrivate();
+    void addUserDictionary(const QString &user_dictionary);
 };
 
 
 SpellCheckerPrivate::SpellCheckerPrivate(const QString &dictionary_path,
                                          const QString &user_dictionary)
     // XXX: toUtf8? toLatin1? toAscii? toLocal8Bit?
-    : hunspell((dictionary_path + ".aff").toUtf8().constData(),
-               (dictionary_path + ".dic").toUtf8().constData())
-    , codec(QTextCodec::codecForName(hunspell.get_dic_encoding()))
+    : hunspell(0)
+    , codec(0)
     , enabled(false)
     , ignored_words()
     , user_dictionary_file(user_dictionary)
 {
-    if (not codec) {
-        qWarning () << __PRETTY_FUNCTION__ << ":Could not find codec for" << hunspell.get_dic_encoding() << "- turning off spellchecking and suggesting.";
+    Q_UNUSED(dictionary_path);
+    enabled = true;
+}
+
+SpellCheckerPrivate::~SpellCheckerPrivate()
+{
+    delete(hunspell);
+}
+
+
+void SpellCheckerPrivate::addUserDictionary(const QString &user_dictionary)
+{
+    if (not hunspell)
         return;
-    }
 
     if (not user_dictionary.isEmpty() and QFile::exists(user_dictionary)) {
         QFile file(user_dictionary);
         if (file.open(QFile::ReadOnly)) {
             QTextStream stream(&file);
             while (!stream.atEnd()) {
-                hunspell.add(codec->fromUnicode(stream.readLine()));
+                hunspell->add(codec->fromUnicode(stream.readLine()));
             }
         }
     }
-
-    enabled = true;
 }
-
 
 SpellChecker::~SpellChecker()
 {}
@@ -130,11 +139,14 @@ bool SpellChecker::spell(const QString &word)
 {
     Q_D(SpellChecker);
 
+    if (not d->hunspell)
+        return true;
+
     if (not d->enabled or d->ignored_words.contains(word)) {
         return true;
     }
 
-    return d->hunspell.spell(d->codec->fromUnicode(word));
+    return d->hunspell->spell(d->codec->fromUnicode(word));
 }
 
 
@@ -147,12 +159,12 @@ QStringList SpellChecker::suggest(const QString &word,
 {
     Q_D(SpellChecker);
 
-    if (not d->enabled) {
+    if (not d->enabled || not d->hunspell) {
         return QStringList();
     }
 
     char** suggestions = NULL;
-    const int suggestions_count = d->hunspell.suggest(&suggestions, d->codec->fromUnicode(word));
+    const int suggestions_count = d->hunspell->suggest(&suggestions, d->codec->fromUnicode(word));
 
     // Less than zero means some error.
     if (suggestions_count < 0) {
@@ -166,7 +178,7 @@ QStringList SpellChecker::suggest(const QString &word,
     for (int index(0); index < final_limit; ++index) {
         result << d->codec->toUnicode(suggestions[index]);
     }
-    d->hunspell.free_list(&suggestions, suggestions_count);
+    d->hunspell->free_list(&suggestions, suggestions_count);
     return result;
 }
 
@@ -177,7 +189,7 @@ void SpellChecker::ignoreWord(const QString &word)
 {
     Q_D(SpellChecker);
 
-    if (not d->enabled) {
+    if (not d->enabled || not d->hunspell) {
         return;
     }
 
@@ -191,7 +203,7 @@ void SpellChecker::addToUserWordlist(const QString &word)
 {
     Q_D(SpellChecker);
 
-    if (not d->enabled) {
+    if (not d->enabled || not d->hunspell) {
         return;
     }
 
@@ -203,9 +215,44 @@ void SpellChecker::addToUserWordlist(const QString &word)
     }
 
     // Non-zero return value means some error.
-    if (d->hunspell.add(d->codec->fromUnicode(word))) {
+    if (d->hunspell->add(d->codec->fromUnicode(word))) {
         qWarning() << __PRETTY_FUNCTION__ << ": Failed to add '" << word << "' to user dictionary.";
     }
+}
+
+//! \brief SpellChecker::setLanguage switches to the given language if possible
+//! \param language The new language use "en" or "en_US". If more than one
+//! exists, the first one in the directory listing is used
+//! \return true if switching the language succeded
+bool SpellChecker::setLanguage(const QString &language)
+{
+    Q_D(SpellChecker);
+
+    QDir dictDir(dictPath());
+    QStringList affMatches = dictDir.entryList(QStringList(language+"*.aff"));
+    QStringList dicMatches = dictDir.entryList(QStringList(language+"*.dic"));
+
+    if (affMatches.isEmpty() || dicMatches.isEmpty()) {
+        qWarning() << "No dictionary found for" << language;
+        return false;
+    }
+
+    if (d->hunspell)
+        delete(d->hunspell);
+
+    QString affFile = dictPath() + "/" + affMatches[0];
+    QString dicFile = dictPath() + "/" + dicMatches[0];
+    d->hunspell = new Hunspell(affFile.toUtf8().constData(),
+                            dicFile.toUtf8().constData());
+
+    d->codec = QTextCodec::codecForName(d->hunspell->get_dic_encoding());
+    if (not d->codec) {
+        qWarning () << Q_FUNC_INFO << ":Could not find codec for" << d->hunspell->get_dic_encoding() << "- turning off spellchecking and suggesting.";
+        return false;
+    }
+
+    d->addUserDictionary(d->user_dictionary_file);
+    return true;
 }
 
 // static

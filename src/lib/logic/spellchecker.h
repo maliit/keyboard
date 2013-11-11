@@ -46,7 +46,7 @@ class SpellChecker
 public:
     // FIXME: Find better way to discover default dictionaries.
     // FIXME: Allow changing languages in between.
-    explicit SpellChecker(const QString &dictionary_path = QString("%1/en_GB").arg(SpellChecker::dictPath()),
+    explicit SpellChecker(const QString &dictionary_path = QString("%1/en_US").arg(SpellChecker::dictPath()),
                           const QString &user_dictionary = QString("%1/.config/maliit/userwords.txt").arg(QDir::homePath()));
 
     ~SpellChecker();
@@ -56,6 +56,8 @@ public:
                         int limit = -1);
     void ignoreWord(const QString &word);
     void addToUserWordlist(const QString &word);
+
+    bool setLanguage(const QString& language);
 
     static QString dictPath();
 

@@ -264,6 +264,8 @@ void WordEngine::onLanguageChanged(const QString &languageId)
         d->predictiveBackend = WordEnginePrivate::PinyinBackend;
     else
         d->predictiveBackend = WordEnginePrivate::PresageBackend;
+
+    d->spell_checker.setLanguage(languageId);
 }
 
 }} // namespace Logic, MaliitKeyboard
