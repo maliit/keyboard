@@ -79,10 +79,6 @@ enable-qt-mobility {
 }
 
 
-!notests {
-    SUBDIRS += tests
-}
-
 QMAKE_EXTRA_TARGETS += check
 check.target = check
 check.CONFIG = recursive
@@ -105,7 +101,11 @@ SUBDIRS = \
     data \
     qml \
     benchmark \
-    tests \
+
+!notests {
+    SUBDIRS += tests
+}
+
 
 tests.target = test
 tests.command = cd tests/editor

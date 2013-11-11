@@ -39,8 +39,6 @@
 #include <QtGui>
 #include <QtQuick/QQuickView>
 
-namespace MaliitKeyboard {
-
 class InputMethodPrivate;
 
 class InputMethod
@@ -50,7 +48,27 @@ class InputMethod
     Q_DISABLE_COPY(InputMethod)
     Q_DECLARE_PRIVATE(InputMethod)
 
+    Q_PROPERTY(bool predictionEnabled READ predictionEnabled NOTIFY predictionEnabledChanged)
+    Q_PROPERTY(bool showWordRibbon READ showWordRibbon NOTIFY showWordRibbonChanged)
+    Q_PROPERTY(TextContentType contentType READ contentType WRITE setContentType NOTIFY contentTypeChanged)
+    Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
+    Q_PROPERTY(QString activeLanguage READ activeLanguage WRITE setActiveLanguage NOTIFY activeLanguageChanged)
+    Q_PROPERTY(QString systemLanguage READ systemLanguage NOTIFY systemLanguageChanged)
+    Q_PROPERTY(QRect windowGeometryRect READ windowGeometryRect WRITE setWindowGeometryRect NOTIFY windowGeometryRectChanged)
+
+    Q_ENUMS(TextContentType)
+
 public:
+    /// Same as Maliit::TextContentType but usable in QML
+    enum TextContentType {
+        FreeTextContentType = Maliit::FreeTextContentType,
+        NumberContentType = Maliit::NumberContentType,
+        PhoneNumberContentType = Maliit::PhoneNumberContentType,
+        EmailContentType = Maliit::EmailContentType,
+        UrlContentType = Maliit::UrlContentType,
+        CustomContentType = Maliit::CustomContentType
+    };
+
     explicit InputMethod(MAbstractInputMethodHost *host);
     virtual ~InputMethod();
 
@@ -75,28 +93,36 @@ public:
     Q_SLOT void deviceOrientationChanged(Qt::ScreenOrientation orientation);
 
     Q_SLOT void updateWordEngine();
-    Q_SLOT void onQQuickViewStatusChanged(QQuickView::Status status);
-
-    Q_PROPERTY(bool predictionEnabled READ predictionEnabled NOTIFY predictionEnabledChanged)
-    Q_PROPERTY(Maliit::TextContentType contentType READ contentType NOTIFY contentTypeChanged)
 
     bool predictionEnabled();
-    Maliit::TextContentType contentType();
+    bool showWordRibbon();
+
+    TextContentType contentType();
+    Q_SLOT void setContentType(TextContentType contentType);
 
     void update();
 
-    Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
-    QStringList enabledLanguages();
-    Q_SIGNAL void enabledLanguagesChanged(QStringList languages);
+    const QStringList &enabledLanguages() const;
 
-    Q_PROPERTY(QString activeLanguage READ activeLanguage NOTIFY activeLanguageChanged)
-    QString activeLanguage();
-    Q_SIGNAL void activeLanguageChanged(QString language);
+    const QString &activeLanguage() const;
+    Q_SLOT void setActiveLanguage(const QString& newLanguage);
+
+    const QString &systemLanguage() const;
+
+    QRect windowGeometryRect() const;
+    Q_SLOT void setWindowGeometryRect(QRect rect);
 
 Q_SIGNALS:
     void predictionEnabledChanged();
-    void contentTypeChanged(Maliit::TextContentType contentType);
+    void showWordRibbonChanged(bool show);
+    void contentTypeChanged(TextContentType contentType);
     void activateAutocaps();
+    void enabledLanguagesChanged(QStringList languages);
+    void activeLanguageChanged(QString language);
+    void systemLanguageChanged(QString language);
+    void wordEngineEnabledChanged(bool wordEngineEnabled);
+    void wordRibbonEnabledChanged(bool wordRibbonEnabled);
+    void windowGeometryRectChanged(QRect rect);
 
 private:
     Q_SLOT void onStyleSettingChanged();
@@ -112,17 +138,9 @@ private:
     Q_SLOT void onLayoutWidthChanged(int width);
     Q_SLOT void onLayoutHeightChanged(int height);
 
-    Q_SLOT void onContentTypeChanged(Maliit::TextContentType contentType);
-
-    Q_SLOT void onQMLStateChanged(QString state);
-    Q_SIGNAL void wordEngineEnabledChanged(bool wordEngineEnabled);
-    Q_SIGNAL void wordRibbonEnabledChanged(bool wordRibbonEnabled);
-
     void checkInitialAutocaps();
 
     const QScopedPointer<InputMethodPrivate> d_ptr;
 };
-
-} // namespace MaliitKeyboard
 
 #endif // MALIIT_KEYBOARD_INPUTMETHOD_H

@@ -1,7 +1,6 @@
 LOGIC_DIR = ./logic
 
 HEADERS += \
-    logic/hitlogic.h \
     logic/layouthelper.h \
     logic/layoutupdater.h \
     logic/keyboardloader.h \
@@ -19,7 +18,6 @@ HEADERS += \
     logic/chineselanguagefeatures.h
 
 SOURCES += \
-    logic/hitlogic.cpp \
     logic/layouthelper.cpp \
     logic/layoutupdater.cpp \
     logic/keyboardloader.cpp \

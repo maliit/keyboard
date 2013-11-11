@@ -29,7 +29,7 @@
 PinyinAdapter::PinyinAdapter(QObject *parent) :
     QObject(parent)
 {
-    m_context = pinyin_init("/usr/lib/arm-linux-gnueabihf/libpinyin/data/", ".");
+    m_context = pinyin_init(PINYIN_DATA_DIR, ".");
     m_instance = pinyin_alloc_instance(m_context);
 
     pinyin_set_options(m_context, IS_PINYIN | USE_DIVIDED_TABLE | USE_RESPLIT_TABLE);

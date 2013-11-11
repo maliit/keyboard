@@ -50,12 +50,12 @@ Item {
         interactive: true
         clip: true
 
-        model: canvas.enabledLanguages
+        model: maliit_input_method.enabledLanguages
 
         delegate: ListItem.Standard {
             text: languageIdToName(modelData)
             onClicked: {
-                canvas.layoutId = modelData;
+                maliit_input_method.activeLanguage = modelData
                 canvas.languageMenuShown = false;
             }
          }
@@ -63,12 +63,26 @@ Item {
 
     function languageIdToName(languageId)
     {
-        if (languageId == "en")         return "English";
-        if (languageId == "es")         return "Spanish";
-        if (languageId == "pt")         return "Portuguese";
-        if (languageId == "fr")         return "French";
-        if (languageId == "de")         return "German";
-        if (languageId == "zh")         return "Chinese - Pinyin";
+        if (languageId == "ar")         return i18n.tr("Arabic");
+        if (languageId == "cs")         return i18n.tr("Czech");
+        if (languageId == "da")         return i18n.tr("Danish");
+        if (languageId == "de")         return i18n.tr("German");
+        if (languageId == "en")         return i18n.tr("English");
+        if (languageId == "es")         return i18n.tr("Spanish");
+        if (languageId == "fi")         return i18n.tr("Finnish");
+        if (languageId == "fr")         return i18n.tr("French");
+        if (languageId == "he")         return i18n.tr("Hebrew");
+        if (languageId == "hu")         return i18n.tr("Hungarian");
+        if (languageId == "it")         return i18n.tr("Italian");
+        if (languageId == "nl")         return i18n.tr("Dutch");
+        if (languageId == "pl")         return i18n.tr("Polish");
+        if (languageId == "pt")         return i18n.tr("Portuguese");
+        if (languageId == "ru")         return i18n.tr("Russian");
+        if (languageId == "sv")         return i18n.tr("Swedish");
+        if (languageId == "zh")         return i18n.tr("Chinese - Pinyin");
+
+        // fallback
+        return i18n.tr("language " + languageId);
     }
 
 }

@@ -84,7 +84,8 @@ KeyArea createFromKeyboard(StyleAttributes *attributes,
     Font small_font(font);
     small_font.setSize(1.0);
 
-    static const QMargins bg_margins( QMargin() );
+    QMargins mg;
+    static const QMargins bg_margins( mg );
 
     const qreal max_width( uiConst->windowWidth(orientation) );
     const qreal key_height(uiConst->keyHeight(orientation));

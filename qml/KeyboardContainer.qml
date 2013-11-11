@@ -18,6 +18,7 @@ import QtQuick 2.0
 import QtQuick.Window 2.0
 import "languages/"
 import "keys/"
+import UbuntuKeyboard 1.0
 
 Item {
     id: panel
@@ -25,72 +26,28 @@ Item {
     property int keyWidth: 0
     property int keyHeight: 0
 
-    property Item activeKeypad: characterKeypadLoader.item
     property string activeKeypadState: "NORMAL"
-    property string characterKeypadSource: ""
-    property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
-
+    property alias popoverEnabled: extendedKeysSelector.enabled
 
     state: "CHARACTERS"
 
-    property variant supportedLocales: ["en", "de", "es", "fr", "zh", "pt"]
-
-    function localeIsSupported(locale)
+    function closeExtendedKeys()
     {
-        return (supportedLocales.indexOf( locale ) > -1)
+        extendedKeysSelector.closePopover();
     }
-
-    function loadLayout(layoutId)
-    {
-        var locale = canvas.activeLanguage.slice(0,2).toLowerCase();
-
-        if (layoutId === "number")
-            characterKeypadSource = "languages/Keyboard_numbers.qml";
-        if (layoutId === "phonenumber")
-            characterKeypadSource = "languages/Keyboard_telephone.qml";
-        if (layoutId === "email")
-            if (localeIsSupported(locale))
-                characterKeypadSource = "languages/"+locale+"/Keyboard_"+locale+"_email.qml";
-        if (layoutId === "url")
-            if (localeIsSupported(locale))
-                characterKeypadSource = "languages/"+locale+"/Keyboard_"+locale+"_url_search.qml";
-        if (layoutId === "en")
-            characterKeypadSource = "languages/en/Keyboard_en.qml";
-        if (layoutId === "es")
-            characterKeypadSource = "languages/es/Keyboard_es.qml";
-        if (layoutId === "pt")
-            characterKeypadSource = "languages/pt/Keyboard_pt.qml";
-        if (layoutId === "de")
-            characterKeypadSource = "languages/de/Keyboard_de.qml";
-        if (layoutId === "fr")
-            characterKeypadSource = "languages/fr/Keyboard_fr.qml";
-        if (layoutId === "zh")
-            characterKeypadSource = "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
-    }
-
-    onCharacterKeypadSourceChanged: {
-        panel.state = "CHARACTERS"
-    }
-
-    Component.onCompleted: symbolKeypadSource = activeKeypad.symbols;
 
     Loader {
         id: characterKeypadLoader
         objectName: "characterKeyPadLoader"
         anchors.fill: parent
         asynchronous: false
-        source: panel.state === "CHARACTERS" ? characterKeypadSource : symbolKeypadSource
+        source: panel.state === "CHARACTERS" ? internal.characterKeypadSource : internal.symbolKeypadSource
         onLoaded: activeKeypadState = "NORMAL"
     }
     ExtendedKeysSelector {
         id: extendedKeysSelector
         objectName: "extendedKeysSelector"
         anchors.fill: parent
-    }
-
-    function closeExtendedKeys()
-    {
-        extendedKeysSelector.closePopover();
     }
 
     states: [
@@ -102,5 +59,121 @@ Item {
         }
     ]
 
-}
+    QtObject {
+        id: internal
 
+        property Item activeKeypad: characterKeypadLoader.item
+        property string characterKeypadSource: loadLayout(maliit_input_method.contentType,
+                                                          maliit_input_method.systemLanguage,
+                                                          maliit_input_method.activeLanguage)
+        property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
+
+        onCharacterKeypadSourceChanged: {
+            panel.state = "CHARACTERS";
+        }
+
+        /// Returns if the given language is supported
+        /// FIXME the possible languages should be checked in C++
+        function languageIsSupported(locale)
+        {
+            var supportedLocales = [
+                        "ar",
+                        "cs",
+                        "da",
+                        "de",
+                        "en",
+                        "es",
+                        "fi",
+                        "fr",
+                        "he",
+                        "hu",
+                        "it",
+                        "nl",
+                        "pl",
+                        "pt",
+                        "ru",
+                        "sv",
+                        "zh",
+                    ];
+            return (supportedLocales.indexOf( locale ) > -1);
+        }
+
+        /// Returns the relative path to the keyboard QML file for a given language for free text
+        function freeTextLanguageKeyboard(language)
+        {
+            language = language .slice(0,2).toLowerCase();
+
+            if (!languageIsSupported(language)) {
+                console.log("Language '"+language+"' not supported - using 'en' instead");
+                language = "en";
+            }
+
+            if (language === "ar")
+                return "languages/ar/Keyboard_ar.qml";
+            if (language === "cs")
+                return "languages/cs/Keyboard_cs.qml";
+            if (language === "da")
+                return "languages/da/Keyboard_da.qml";
+            if (language === "de")
+                return "languages/de/Keyboard_de.qml";
+            if (language === "en")
+                return "languages/en/Keyboard_en.qml";
+            if (language === "es")
+                return "languages/es/Keyboard_es.qml";
+            if (language === "fi")
+                return "languages/fi/Keyboard_fi.qml";
+            if (language === "fr")
+                return "languages/fr/Keyboard_fr.qml";
+            if (language === "he")
+                return "languages/he/Keyboard_he.qml";
+            if (language === "hu")
+                return "languages/hu/Keyboard_hu.qml";
+            if (language === "it")
+                return "languages/it/Keyboard_it.qml";
+            if (language === "nl")
+                return "languages/nl/Keyboard_nl.qml";
+            if (language === "pl")
+                return "languages/pl/Keyboard_pl.qml";
+            if (language === "pt")
+                return "languages/pt/Keyboard_pt.qml";
+            if (language === "ru")
+                return "languages/ru/Keyboard_ru.qml";
+            if (language === "sv")
+                return "languages/sv/Keyboard_sv.qml";
+            if (language === "zh")
+                return "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
+        }
+
+        function loadLayout(contentType, systemLanguage, activeLanguage)
+        {
+//            if (contentType === InputMethod.NumberContentType) {
+            if (contentType === 1) {
+                return "languages/Keyboard_numbers.qml";
+            }
+
+//            if (contentType === InputMethod.PhoneNumberContentType) {
+            if (contentType === 2) {
+                return "languages/Keyboard_telephone.qml";
+            }
+
+            var locale = systemLanguage.slice(0,2).toLowerCase();
+            if (!languageIsSupported(locale)) {
+                console.log("System language '"+locale+"' can't be used in OSK - using 'en' instead")
+                locale = "en"
+            }
+
+//            if (contentType === InputMethod.EmailContentType) {
+            if (contentType === 3) {
+                return "languages/"+locale+"/Keyboard_"+locale+"_email.qml";
+            }
+
+//            if (contentType === InputMethod.UrlContentType) {
+            if (contentType === 4) {
+                return "languages/"+locale+"/Keyboard_"+locale+"_url_search.qml";
+            }
+
+            // FreeTextContentType used as fallback
+            return freeTextLanguageKeyboard(activeLanguage);
+        }
+    }
+}
