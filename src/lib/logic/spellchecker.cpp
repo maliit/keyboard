@@ -75,15 +75,13 @@ struct SpellCheckerPrivate
     QSet<QString> ignored_words; //!< The words to ignore.
     QString user_dictionary_file;
 
-    SpellCheckerPrivate(const QString &dictionary_path,
-                        const QString &user_dictionary);
+    SpellCheckerPrivate(const QString &user_dictionary);
     ~SpellCheckerPrivate();
     void addUserDictionary(const QString &user_dictionary);
 };
 
 
-SpellCheckerPrivate::SpellCheckerPrivate(const QString &dictionary_path,
-                                         const QString &user_dictionary)
+SpellCheckerPrivate::SpellCheckerPrivate(const QString &user_dictionary)
     // XXX: toUtf8? toLatin1? toAscii? toLocal8Bit?
     : hunspell(0)
     , codec(0)
@@ -91,7 +89,6 @@ SpellCheckerPrivate::SpellCheckerPrivate(const QString &dictionary_path,
     , ignored_words()
     , user_dictionary_file(user_dictionary)
 {
-    Q_UNUSED(dictionary_path);
     enabled = true;
 }
 
@@ -121,11 +118,9 @@ SpellChecker::~SpellChecker()
 {}
 
 
-//! \param dictionary_path The directory path to the (system) dictionaries.
 //! \param user_dictionary The file path to the user's own dictionary.
-SpellChecker::SpellChecker(const QString &dictionary_path,
-                           const QString &user_dictionary)
-    : d_ptr(new SpellCheckerPrivate(dictionary_path, user_dictionary))
+SpellChecker::SpellChecker(const QString &user_dictionary)
+    : d_ptr(new SpellCheckerPrivate(user_dictionary))
 {}
 
 
