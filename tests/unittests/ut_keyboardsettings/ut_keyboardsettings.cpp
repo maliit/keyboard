@@ -27,7 +27,7 @@
  *
  */
 
-#include "plugin/keyboadsettings.h"
+#include "plugin/keyboardsettings.h"
 
 #include <QtCore>
 #include <QtTest>
@@ -40,14 +40,14 @@ class TestKeyboardSettings
     Q_OBJECT
 
 private:
-    KeyboadSettings *m_settings;
+    KeyboardSettings *m_settings;
 
     Q_SLOT void initTestCase()
     {}
 
     Q_SLOT void init()
     {
-        m_settings = new KeyboadSettings(this);
+        m_settings = new KeyboardSettings(this);
     }
 
     Q_SLOT void cleanup()

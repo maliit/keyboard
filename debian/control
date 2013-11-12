@@ -16,7 +16,7 @@ Build-Depends: debhelper (>= 9),
                libxml2-utils,
                maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
                pkg-config,
-               python (>= 2.7),
+               python:any (>= 2.7),
                python-setuptools,
                qt5-default,
                qtbase5-dev,
@@ -65,9 +65,11 @@ Description: Ubuntu on-screen keyboard tests
 
 Package: ubuntu-keyboard-autopilot
 Architecture: all
-Depends: libautopilot-qt (<< 1.4),
+Depends: libautopilot-qt (>= 1.4),
          ${misc:Depends},
          ${python:Depends},
          ubuntu-keyboard (>= ${source:Version}),
+         ubuntu-ui-toolkit-autopilot,
+         unity8-autopilot,
 Description: Tests and emulators package for ubuntu-keyboard
  Autopilot tests for the ubuntu-keyboard package

@@ -820,7 +820,7 @@ void AbstractTextEditor::onLanguageChanged(const QString& languageId)
 {
     Q_D(AbstractTextEditor);
 
-    if (languageId == "zh_cn_pinyin")
+    if (languageId == "zh")
         d->language_features.reset(new Logic::ChineseLanguageFeatures);
     else
         d->language_features.reset(new Logic::LanguageFeatures);
