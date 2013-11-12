@@ -50,6 +50,9 @@ public:
 
     ~SpellChecker();
 
+    bool enabled() const;
+    bool setEnabled(bool on);
+
     bool spell(const QString &word);
     QStringList suggest(const QString &word,
                         int limit = -1);
