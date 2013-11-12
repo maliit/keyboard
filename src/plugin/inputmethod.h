@@ -112,6 +112,7 @@ public:
     QRect windowGeometryRect() const;
     Q_SLOT void setWindowGeometryRect(QRect rect);
 
+    Q_SLOT void onVisibleRectChanged();
 Q_SIGNALS:
     void predictionEnabledChanged();
     void showWordRibbonChanged(bool show);

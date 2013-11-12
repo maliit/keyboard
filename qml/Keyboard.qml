@@ -44,13 +44,19 @@ Item {
     property variant layout: maliit_layout
     property variant event_handler: maliit_event_handler
 
+    onHeightChanged: calculateSize();
+
 OrientationHelper {
+    id: orientationHelper
     automaticOrientation: false
     transitionEnabled: false
 
     orientationAngle: Screen.angleBetween(Screen.primaryOrientation, canvas.contentOrientation);
 
-    onOrientationAngleChanged: fullScreenItem.reportKeyboardVisibleRect();
+    onOrientationAngleChanged: {
+        calculateSize();
+        fullScreenItem.reportKeyboardVisibleRect();
+    }
     onXChanged: fullScreenItem.reportKeyboardVisibleRect();
     onYChanged: fullScreenItem.reportKeyboardVisibleRect();
     onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
@@ -64,10 +70,11 @@ Item {
     anchors.left: parent.left
 
     width: parent.width
-    height: maliit_geometry.canvasHeight
-//    height: (fullScreenItem.height * UI.phone_keyboard_height_portrait) + wordRibbon.height
+    height: 0
 
-    property int keypadHeight: maliit_geometry.keypadHeight
+    property int keypadHeight: height;
+
+    onRotationChanged: console.log("now rotation has changed!!" + rotation)
 
     visible: true
 
@@ -246,9 +253,30 @@ Item {
 } // canvas
 } // OrientationHelper
 
+function calculateSize()
+{
+    // TODO tablet
+    if (orientationHelper.orientationAngle == 270) {
+        console.log("LANDSCAPE");
+        canvas.height = (fullScreenItem.width * UI.phone_keyboard_height_landscape) + wordRibbon.height
+    }
+    else if (orientationHelper.orientationAngle == 0) {
+        console.log("PORTRAIT");
+        canvas.height = (fullScreenItem.height * UI.phone_keyboard_height_portrait) + wordRibbon.height
+    }
+
+    // fallback
+    else {
+        canvas.height = (fullScreenItem.height * UI.phone_keyboard_height_portrait) + wordRibbon.height
+    }
+//    console.log("calc height " + canvas.height + fullScreenItem.height)
+    reportKeyboardVisibleRect();
+}
+
 // calculates the size of the visible keyboard to report to the window system
 // FIXME get the correct size for enabled extended keys instead of that big area
 function reportKeyboardVisibleRect() {
+
     var vx = 0;
     var vy = wordRibbon.y;
     var vwidth = keyboardSurface.width;
