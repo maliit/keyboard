@@ -262,7 +262,6 @@ void WordEngine::addToUserDictionary(const QString &word)
 //! \param on
 void WordEngine::enableSpellchecker(bool on)
 {
-    qDebug() << Q_FUNC_INFO << on;
     Q_D(WordEngine);
     d->use_spell_checker = on;
     d->spell_checker.setEnabled(d->use_spell_checker);
