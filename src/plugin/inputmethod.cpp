@@ -499,21 +499,6 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
     Q_EMIT activeLanguageChanged(d->activeLanguage);
 }
 
-
-QRect InputMethod::windowGeometryRect() const
-{
-    Q_D(const InputMethod);
-    return d->windowGeometryRect;
-}
-
-void InputMethod::setWindowGeometryRect(QRect rect)
-{
-    Q_D(InputMethod);
-    d->windowGeometryRect = rect;
-
-    Q_EMIT windowGeometryRectChanged(rect);
-}
-
 void InputMethod::onVisibleRectChanged()
 {
     Q_D(InputMethod);
@@ -524,10 +509,7 @@ void InputMethod::onVisibleRectChanged()
                             d->m_geometry->visibleRect().toRect());
 
     inputMethodHost()->setScreenRegion(QRegion(visibleRect));
-
-    QRect rect(visibleRect);
-    rect.moveTop( d->windowGeometryRect.height() - visibleRect.height() );
-    inputMethodHost()->setInputMethodArea(rect, d->view);
+    inputMethodHost()->setInputMethodArea(visibleRect, d->view);
 
     qDebug() << "keyboard is reporting <x y w h>: <"
                 << visibleRect.x()

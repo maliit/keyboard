@@ -54,7 +54,6 @@ class InputMethod
     Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
     Q_PROPERTY(QString activeLanguage READ activeLanguage WRITE setActiveLanguage NOTIFY activeLanguageChanged)
     Q_PROPERTY(QString systemLanguage READ systemLanguage NOTIFY systemLanguageChanged)
-    Q_PROPERTY(QRect windowGeometryRect READ windowGeometryRect WRITE setWindowGeometryRect NOTIFY windowGeometryRectChanged)
 
     Q_ENUMS(TextContentType)
 
@@ -108,9 +107,6 @@ public:
     Q_SLOT void setActiveLanguage(const QString& newLanguage);
 
     const QString &systemLanguage() const;
-
-    QRect windowGeometryRect() const;
-    Q_SLOT void setWindowGeometryRect(QRect rect);
 
     Q_SLOT void onVisibleRectChanged();
 Q_SIGNALS:

@@ -84,7 +84,6 @@ public:
     QMap<QString, SharedOverride> key_overrides;
     Settings settings;
     LayoutGroup layout;
-    QRect windowGeometryRect;
     MAbstractInputMethodHost* host;
     QQuickView* view;
     UbuntuApplicationApiWrapper* applicationApiWrapper;
@@ -215,10 +214,7 @@ public:
     void setLayoutOrientation(Qt::ScreenOrientation screenOrientation)
     {
         Logic::LayoutHelper::Orientation orientation = uiConst->screenToMaliitOrientation(screenOrientation);
-
         layout.updater.setOrientation(orientation);
-
-        windowGeometryRect = m_geometry->visibleRect().toRect();
 
         m_geometry->setOrientation(screenOrientation);
     }
