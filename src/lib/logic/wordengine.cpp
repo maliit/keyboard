@@ -244,7 +244,7 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
                                               : Model::Text::PreeditActive);
 
     text->setPrimaryCandidate(candidates.isEmpty() ? QString()
-                                                   : candidates.first().label().text());
+                                                   : candidates.first().label());
 
 
     return candidates;

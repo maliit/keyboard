@@ -47,7 +47,7 @@ Key::Key()
 bool Key::valid() const
 {
     return (m_area.size().isValid()
-            && (not m_label.text().isEmpty() || m_action != Key::ActionCommit));
+            && (not m_label.isEmpty() || m_action != Key::ActionCommit));
 }
 
 QRect Key::rect() const
@@ -80,17 +80,17 @@ void Key::setArea(const Area &area)
     m_area = area;
 }
 
-Label Key::label() const
+QString Key::label() const
 {
     return m_label;
 }
 
-Label & Key::rLabel()
+QString & Key::rLabel()
 {
     return m_label;
 }
 
-void Key::setLabel(const Label &label)
+void Key::setLabel(const QString &label)
 {
     m_label = label;
 }
