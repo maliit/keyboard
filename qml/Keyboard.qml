@@ -143,7 +143,7 @@ Item {
                 anchors.bottom: keyboardComp.top
                 width: parent.width;
 
-                height: visible ? UI.wordribbon_height : 0
+                height: visible ? UI.wordribbonHeight : 0
                 onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
             }
 
@@ -259,15 +259,15 @@ function calculateSize()
 
     if (orientationHelper.orientationAngle == 270 ||
         orientationHelper.orientationAngle == 90) {
-        canvas.height = (fullScreenItem.width * UI.phone_keyboard_height_landscape) + wordRibbon.height
+        canvas.height = (fullScreenItem.width * UI.phoneKeyboardHeightLandscape) + wordRibbon.height
     } else if (orientationHelper.orientationAngle == 0 ||
                orientationHelper.orientationAngle == 180) {
-        canvas.height = (fullScreenItem.height * UI.phone_keyboard_height_portrait) + wordRibbon.height
+        canvas.height = (fullScreenItem.height * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
     }
 
 
     else { // fallback
-        canvas.height = (fullScreenItem.height * UI.phone_keyboard_height_portrait) + wordRibbon.height
+        canvas.height = (fullScreenItem.height * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
     }
 
     reportKeyboardVisibleRect();
