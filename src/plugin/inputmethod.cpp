@@ -255,12 +255,6 @@ void InputMethod::onStyleSettingChanged()
     d->layout.model.setImageDirectory(d->style->directory(Style::Images));
 }
 
-void InputMethod::onFeedbackSettingChanged()
-{
-    Q_D(InputMethod);
-    d->feedback.setEnabled(d->m_settings.keyPressFeedback());
-}
-
 void InputMethod::onAutoCorrectSettingChanged()
 {
     Q_D(InputMethod);
@@ -497,6 +491,15 @@ const QString &InputMethod::systemLanguage() const
 {
     Q_D(const InputMethod);
     return d->systemLanguage;
+}
+
+//! \brief InputMethod::useAudioFeedback is true, when keys should play a audio
+//! feedback when pressed
+//! \return
+bool InputMethod::useAudioFeedback() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.keyPressFeedback();
 }
 
 //! \brief InputMethod::setActiveLanguage

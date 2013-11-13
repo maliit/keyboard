@@ -21,14 +21,6 @@
 #include <QStringList>
 #include <qglobal.h>
 
-#ifdef HAVE_QT_MOBILITY
-#include "view/soundfeedback.h"
-typedef MaliitKeyboard::SoundFeedback DefaultFeedback;
-#else
-#include "view/nullfeedback.h"
-typedef MaliitKeyboard::NullFeedback DefaultFeedback;
-#endif
-
 using namespace MaliitKeyboard;
 
 typedef QScopedPointer<Maliit::Plugins::AbstractPluginSetting> ScopedSetting;
@@ -78,7 +70,6 @@ class InputMethodPrivate
 public:
     InputMethod* q;
     Editor editor;
-    DefaultFeedback feedback;
     SharedStyle style;
     UpdateNotifier notifier;
     QMap<QString, SharedOverride> key_overrides;
@@ -106,7 +97,6 @@ public:
                                 MAbstractInputMethodHost *host)
         : q(_q)
         , editor(EditorOptions(), new Model::Text, new Logic::WordEngine, new Logic::LanguageFeatures)
-        , feedback()
         , style(new Style)
         , notifier()
         , key_overrides()
@@ -135,7 +125,6 @@ public:
         layout.updater.setLayout(&layout.helper);
 
         layout.updater.setStyle(style);
-        feedback.setStyle(style);
 
         const QSize &screen_size(view->screen()->size());
         layout.helper.setScreenSize(screen_size);
@@ -312,8 +301,7 @@ public:
     void registerFeedbackSetting()
     {
         QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged()),
-                         q, SLOT(onFeedbackSettingChanged()));
-        feedback.setEnabled(m_settings.keyPressFeedback());
+                         q, SIGNAL(useAudioFeedbackChanged));
     }
 
     void registerAutoCorrectSetting()

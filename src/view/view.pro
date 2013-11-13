@@ -1,5 +1,4 @@
 include(../config.pri)
-include(view.pri)
 
 TOP_BUILDDIR = $${OUT_PWD}/../..
 VERSION = 0.2.0
@@ -20,18 +19,9 @@ contains(QT_MAJOR_VERSION, 4) {
 HEADERS += \
     setup.h \
     abstracttexteditor.h \
-    abstractfeedback.h \
-    nullfeedback.h \
 
 SOURCES += \
     setup.cpp \
     abstracttexteditor.cpp \
-    abstractfeedback.cpp \
-    nullfeedback.cpp \
-
-enable-qt-mobility {
-    HEADERS += soundfeedback.h
-    SOURCES += soundfeedback.cpp
-}
 
 include(../word-prediction.pri)
