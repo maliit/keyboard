@@ -85,7 +85,6 @@ public:
     Settings settings;
     LayoutGroup layout;
     QRect windowGeometryRect;
-    QRect keyboardVisibleRect;
     MAbstractInputMethodHost* host;
     QQuickView* view;
     UbuntuApplicationApiWrapper* applicationApiWrapper;
@@ -221,7 +220,6 @@ public:
 
         windowGeometryRect = m_geometry->visibleRect().toRect();
 
-        keyboardVisibleRect = m_geometry->visibleRect().toRect();
         m_geometry->setOrientation(screenOrientation);
     }
 

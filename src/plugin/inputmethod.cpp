@@ -518,29 +518,28 @@ void InputMethod::onVisibleRectChanged()
 {
     Q_D(InputMethod);
 
-    d->keyboardVisibleRect = qGuiApp->primaryScreen()->mapBetween(
+    QRect visibleRect = qGuiApp->primaryScreen()->mapBetween(
                             d->m_geometry->orientation(),
                             qGuiApp->primaryScreen()->primaryOrientation(),
                             d->m_geometry->visibleRect().toRect());
 
-    inputMethodHost()->setScreenRegion(QRegion(d->keyboardVisibleRect));
+    inputMethodHost()->setScreenRegion(QRegion(visibleRect));
 
-    QRect rect(d->keyboardVisibleRect);
-
-    rect.moveTop( d->windowGeometryRect.height() - d->keyboardVisibleRect.height() );
+    QRect rect(visibleRect);
+    rect.moveTop( d->windowGeometryRect.height() - visibleRect.height() );
     inputMethodHost()->setInputMethodArea(rect, d->view);
 
     qDebug() << "keyboard is reporting <x y w h>: <"
-                << d->keyboardVisibleRect.x()
-                << d->keyboardVisibleRect.y()
-                << d->keyboardVisibleRect.width()
-                << d->keyboardVisibleRect.height()
+                << visibleRect.x()
+                << visibleRect.y()
+                << visibleRect.width()
+                << visibleRect.height()
                 << "> to the app manager.";
 
     d->applicationApiWrapper->reportOSKVisible(
-                d->keyboardVisibleRect.x(),
-                d->keyboardVisibleRect.y(),
-                d->keyboardVisibleRect.width(),
-                d->keyboardVisibleRect.height()
+                visibleRect.x(),
+                visibleRect.y(),
+                visibleRect.width(),
+                visibleRect.height()
                 );
 }
