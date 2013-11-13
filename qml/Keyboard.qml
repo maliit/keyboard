@@ -256,20 +256,20 @@ Item {
 function calculateSize()
 {
     // TODO tablet
-    if (orientationHelper.orientationAngle == 270) {
-        console.log("LANDSCAPE");
+
+    if (orientationHelper.orientationAngle == 270 ||
+        orientationHelper.orientationAngle == 90) {
         canvas.height = (fullScreenItem.width * UI.phone_keyboard_height_landscape) + wordRibbon.height
-    }
-    else if (orientationHelper.orientationAngle == 0) {
-        console.log("PORTRAIT");
+    } else if (orientationHelper.orientationAngle == 0 ||
+               orientationHelper.orientationAngle == 180) {
         canvas.height = (fullScreenItem.height * UI.phone_keyboard_height_portrait) + wordRibbon.height
     }
 
-    // fallback
-    else {
+
+    else { // fallback
         canvas.height = (fullScreenItem.height * UI.phone_keyboard_height_portrait) + wordRibbon.height
     }
-//    console.log("calc height " + canvas.height + fullScreenItem.height)
+
     reportKeyboardVisibleRect();
 }
 
