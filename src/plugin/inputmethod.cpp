@@ -37,7 +37,6 @@
 #include "models/wordribbon.h"
 #include "models/layout.h"
 
-#include "logic/keyareaconverter.h"
 #include "logic/layouthelper.h"
 #include "logic/style.h"
 
@@ -64,7 +63,7 @@ Key overrideToKey(const SharedOverride &override)
 {
     Key key;
 
-    key.rLabel().setText(override->label());
+    key.rLabel() = override->label();
     key.setIcon(override->icon().toUtf8());
     // TODO: hightlighted and enabled information are not available in
     // Key. Should we just really create a KeyOverride model?

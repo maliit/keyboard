@@ -57,7 +57,7 @@ void appendToPreedit(Editor *editor,
     Key k;
     QCOMPARE(k.action(), Key::ActionInsert);
 
-    k.rLabel().setText(appendix);
+    k.rLabel() =appendix;
     editor->onKeyReleased(k);
 }
 
@@ -229,7 +229,7 @@ private:
 
         appendToPreedit(&editor, "bcd");
         const WordCandidate &candidate(layout.wordRibbon()->candidates().first());
-        QCOMPARE(candidate.label().text(), QString("dcb"));
+        QCOMPARE(candidate.label(), QString("dcb"));
 
         editor.wordEngine()->setEnabled(false);
         QCOMPARE(spy.count(), 2);

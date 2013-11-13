@@ -12,7 +12,6 @@ LIBS += libpinyin
 
 include(models/models.pri)
 include(logic/logic.pri)
-include(parser/parser.pri)
 
 HEADERS += coreutils.h
 SOURCES += coreutils.cpp

@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies). All rights reserved.
- *
- * Contact: Mohammad Anwari <Mohammad.Anwari@nokia.com>
+ * Copyright (C) 2013 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,27 +25,49 @@
  *
  */
 
-#ifndef MALIIT_KEYBOARD_ABSTRACTSTATEMACHINE_H
-#define MALIIT_KEYBOARD_ABSTRACTSTATEMACHINE_H
+#include "logic/languagefeatures.h"
 
-class QString;
+#include <QtCore>
+#include <QtTest>
 
 namespace MaliitKeyboard {
-namespace Logic {
 
-class LayoutUpdater;
-
-class AbstractStateMachine
+class TestLanguageFeatures : public QObject
 {
-public:
-    explicit AbstractStateMachine();
-    virtual ~AbstractStateMachine() = 0;
+    Q_OBJECT
 
-    virtual void setup(LayoutUpdater *updater) = 0;
-    virtual bool inState(const QString &name) const;
-    virtual void restart();
+private:
+    Logic::LanguageFeatures m_languageFeatures;
+
+    Q_SLOT void initTestCase()
+    {}
+
+    Q_SLOT void init()
+    {}
+
+    Q_SLOT void cleanup()
+    {}
+
+    Q_SLOT void testAppendixForReplacedPreedit_data()
+    {
+        QTest::addColumn<QString>("preedit");
+        QTest::addColumn<QString>("expectedResult");
+
+        QTest::newRow("usual case") << QString("hello") << QString(" ");
+        QTest::newRow("empty preedit") << QString("") << QString("");
+    }
+
+    Q_SLOT void testAppendixForReplacedPreedit()
+    {
+        QFETCH(QString, preedit);
+        QFETCH(QString, expectedResult);
+
+        QString result = m_languageFeatures.appendixForReplacedPreedit(preedit);
+        QCOMPARE(result, expectedResult);
+    }
 };
 
-}} // namespace Logic, MaliitKeyboard
+} // namespace
 
-#endif // MALIIT_KEYBOARD_ABSTRACTSTATEMACHINE_H
+QTEST_MAIN(MaliitKeyboard::TestLanguageFeatures)
+#include "ut_languagefeatures.moc"
