@@ -33,7 +33,6 @@
 #define MALIIT_KEYBOARD_KEY_H
 
 #include "models/area.h"
-#include "models/label.h"
 
 #include <QtCore>
 
@@ -82,7 +81,7 @@ public:
 private:
     QPoint m_origin;
     Area m_area;
-    Label m_label;
+    QString m_label;
     Action m_action;
     Style m_style;
     QMargins m_margins;
@@ -105,9 +104,9 @@ public:
     Area & rArea();
     void setArea(const Area &area);
 
-    Label label() const;
-    Label & rLabel();
-    void setLabel(const Label &label);
+    QString label() const;
+    QString & rLabel();
+    void setLabel(const QString &label);
 
     Action action() const;
     void setAction(Action action);

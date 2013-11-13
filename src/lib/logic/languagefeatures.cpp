@@ -62,17 +62,10 @@ bool LanguageFeatures::activateAutoCaps(const QString &preedit) const
 
 QString LanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
-    // Get punctation chars at the end of preedit string
-    QString appendix;
-    for (int i = preedit.size() - 1; i >= 0; i--)
-    {
-        if (not preedit.at(i).isPunct()) {
-            appendix = preedit.right(preedit.size() - i - 1);
-            break;
-        }
-    }
+    if (preedit.isEmpty())
+        return QString("");
 
-    return appendix;
+    return QString(" ");
 }
 
 } // namespace Logic
