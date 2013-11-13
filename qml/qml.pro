@@ -91,7 +91,6 @@ OTHER_FILES += \
     maliit-keyboard.qml \
     maliit-keyboard-extended.qml \
     maliit-magnifier.qml \
-    maliit-ui-constants.qml \
     Keyboard.qml \
     KeyboardContainer.qml \
     Popper.qml \
