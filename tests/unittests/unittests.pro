@@ -4,6 +4,7 @@ SUBDIRS = \
     ut_editor \
     ut_keyboardgeometry \
     ut_keyboardsettings \
+    ut_languagefeatures \
 #    ut_preedit-string \
     ut_repeat-backspace \
     ut_text \

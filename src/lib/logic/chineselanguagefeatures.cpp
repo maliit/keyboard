@@ -37,7 +37,7 @@ bool ChineseLanguageFeatures::activateAutoCaps(const QString &preedit) const
 QString ChineseLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
     Q_UNUSED(preedit)
-    return "";
+    return QString("");
 }
 
 } // namespace Logic

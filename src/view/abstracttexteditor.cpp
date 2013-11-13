@@ -407,12 +407,12 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         return;
     }
 
-    const QString &text(key.label());
+    const QString text = key.label();
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
 
     switch(key.action()) {
-    case Key::ActionInsert:
+    case Key::ActionInsert: {
         d->text->appendToPreedit(text);
 
         // computeCandidates can change preedit face, so needs to happen
@@ -427,8 +427,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         if (not d->preedit_enabled) {
             commitPreedit();
         }
-
-        break;
+    } break;
 
     case Key::ActionBackspace: {
         if (not d->backspace_sent) {
@@ -436,7 +435,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         }
 
         d->auto_repeat_backspace_timer.stop();
-     } break;
+    } break;
 
     case Key::ActionSpace: {
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
@@ -561,9 +560,9 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
         return;
     }
 
-    const bool auto_caps_activated = d->language_features->activateAutoCaps(d->text->preedit());
-    const QString &appendix(d->language_features->appendixForReplacedPreedit(d->text->preedit()));
     d->text->setPreedit(replacement);
+    const bool auto_caps_activated = d->language_features->activateAutoCaps(d->text->preedit());
+    const QString appendix = d->language_features->appendixForReplacedPreedit(d->text->preedit());
     d->text->appendToPreedit(appendix);
     commitPreedit();
 

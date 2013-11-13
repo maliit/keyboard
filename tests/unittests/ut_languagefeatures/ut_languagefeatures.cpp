@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2013 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,44 +25,49 @@
  *
  */
 
-#include "languagefeatures.h"
+#include "logic/languagefeatures.h"
 
 #include <QtCore>
+#include <QtTest>
 
 namespace MaliitKeyboard {
-namespace Logic {
 
-LanguageFeatures::LanguageFeatures(QObject *parent) :
-    AbstractLanguageFeatures(parent)
+class TestLanguageFeatures : public QObject
 {
-}
+    Q_OBJECT
 
-LanguageFeatures::~LanguageFeatures()
-{
-}
+private:
+    Logic::LanguageFeatures m_languageFeatures;
 
-bool LanguageFeatures::activateAutoCaps(const QString &preedit) const
-{
-    static const QString sentenceBreak = QString::fromUtf8("!.?:");
+    Q_SLOT void initTestCase()
+    {}
 
-    if (preedit.isEmpty()) {
-        return false;
+    Q_SLOT void init()
+    {}
+
+    Q_SLOT void cleanup()
+    {}
+
+    Q_SLOT void testAppendixForReplacedPreedit_data()
+    {
+        QTest::addColumn<QString>("preedit");
+        QTest::addColumn<QString>("expectedResult");
+
+        QTest::newRow("usual case") << QString("hello") << QString(" ");
+        QTest::newRow("empty preedit") << QString("") << QString("");
     }
 
-    if (sentenceBreak.contains(preedit.right(1))) {
-        return true;
+    Q_SLOT void testAppendixForReplacedPreedit()
+    {
+        QFETCH(QString, preedit);
+        QFETCH(QString, expectedResult);
+
+        QString result = m_languageFeatures.appendixForReplacedPreedit(preedit);
+        QCOMPARE(result, expectedResult);
     }
+};
 
-    return false;
-}
+} // namespace
 
-QString LanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
-{
-    if (preedit.isEmpty())
-        return QString("");
-
-    return QString(" ");
-}
-
-} // namespace Logic
-} // namespace MaliitKeyboard
+QTEST_MAIN(MaliitKeyboard::TestLanguageFeatures)
+#include "ut_languagefeatures.moc"
