@@ -11,8 +11,6 @@ HEADERS += \
     logic/abstractlanguagefeatures.h \
     logic/languagefeatures.h \
     logic/eventhandler.h \
-    logic/dynamiclayout.h \
-    logic/dynamiclayout_p.h \
     logic/pinyinadapter.h \
     logic/chineselanguagefeatures.h
 
@@ -27,7 +25,6 @@ SOURCES += \
     logic/abstractlanguagefeatures.cpp \
     logic/languagefeatures.cpp \
     logic/eventhandler.cpp \
-    logic/dynamiclayout.cpp \
     logic/pinyinadapter.cpp \
     logic/chineselanguagefeatures.cpp
 

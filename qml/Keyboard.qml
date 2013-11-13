@@ -143,7 +143,7 @@ Item {
                 anchors.bottom: keyboardComp.top
                 width: parent.width;
 
-                height: visible ? layout.wordribbon_height : 0
+                height: visible ? UI.wordribbon_height : 0
                 onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
             }
 

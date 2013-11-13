@@ -10,7 +10,6 @@
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
 #include "logic/languagefeatures.h"
-#include "logic/dynamiclayout.h"
 
 #include "ubuntuapplicationapiwrapper.h"
 
@@ -213,9 +212,6 @@ public:
 
     void setLayoutOrientation(Qt::ScreenOrientation screenOrientation)
     {
-        Logic::LayoutHelper::Orientation orientation = uiConst->screenToMaliitOrientation(screenOrientation);
-        layout.updater.setOrientation(orientation);
-
         m_geometry->setOrientation(screenOrientation);
     }
 

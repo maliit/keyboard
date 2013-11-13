@@ -59,7 +59,7 @@ var languageMenuListViewPadding = 2.22; // gu
 var languageMenuCorner = 2.5; // gu
 
 
-
+var wordribbon_height = 72;
 
 var phone_keyboard_height_portrait = 0.365;
 var phone_keyboard_height_landscape = 0.50;
