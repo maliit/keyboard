@@ -5,6 +5,7 @@ SUBDIRS = \
     ut_editor \
     ut_keyboardgeometry \
     ut_keyboardsettings \
+    ut_languagefeatures \
     ut_language-layout-loading \
     ut_language-layout-switching \
 #    ut_preedit-string \
