@@ -181,4 +181,5 @@ OTHER_FILES += \
     languages/sv/Keyboard_sv_email.qml \
     languages/sv/Keyboard_sv_url.qml \
     languages/sv/Keyboard_sv_url_search.qml \
-    languages/zh_cn/Keyboard_zh_cn_pinyin.qml
+    languages/zh_cn/Keyboard_zh_cn_pinyin.qml \
+    languages/zh_cn/Keyboard_zh_url_search.qml
