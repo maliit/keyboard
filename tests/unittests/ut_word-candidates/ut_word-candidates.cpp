@@ -160,6 +160,7 @@ private:
     Q_SLOT void testWordCandidatesChanged()
     {
         Editor editor(EditorOptions(), new Model::Text, new Logic::WordEngineProbe, new Logic::LanguageFeatures);
+        editor.wordEngine()->setWordPredictionEnabled(true);
         QSignalSpy spy(&editor, SIGNAL(wordCandidatesChanged(WordCandidateList)));
 
         InputMethodHostProbe host;
@@ -200,6 +201,7 @@ private:
     Q_SLOT void testWordRibbonVisible()
     {
         Editor editor(EditorOptions(), new Model::Text, new Logic::WordEngineProbe, new Logic::LanguageFeatures);
+        editor.wordEngine()->setWordPredictionEnabled(true);
         InputMethodHostProbe host;
         editor.setHost(&host);
 

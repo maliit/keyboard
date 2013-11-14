@@ -117,6 +117,7 @@ public:
     };
 
     PredictiveBackend predictiveBackend;
+    bool use_predictive_text;
 
     SpellChecker spell_checker;
     bool use_spell_checker;
@@ -143,7 +144,6 @@ WordEnginePrivate::WordEnginePrivate()
     , presage(&presage_candidates)
 #endif
 {
-    // FIXME: Check whether spellchecker is enabled, and update enabled flag!
 #ifdef HAVE_PRESAGE
     presage.config("Presage.Selector.SUGGESTIONS", "6");
     presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
@@ -167,9 +167,18 @@ WordEngine::WordEngine(QObject *parent)
 WordEngine::~WordEngine()
 {}
 
-
-void WordEngine::setEnabled(bool enabled)
+//! \brief WordEngine::isEnabled returns if the word engine is functional and enabled
+//! \return
+bool WordEngine::isEnabled() const
 {
+    Q_D(const WordEngine);
+    return (AbstractWordEngine::isEnabled() &&
+            (d->use_predictive_text || d->spell_checker.enabled()));
+}
+
+void WordEngine::setWordPredictionEnabled(bool enabled)
+{
+    Q_D(WordEngine);
  // Don't allow to enable word engine if no backends are available:
 #if defined(HAVE_PRESAGE) || defined(HAVE_HUNSPELL) || defined(HAVE_PINYIN)
 #else
@@ -180,7 +189,29 @@ void WordEngine::setEnabled(bool enabled)
 
     enabled = false;
 #endif
-    AbstractWordEngine::setEnabled(enabled);
+    if (enabled == d->use_predictive_text)
+        return;
+
+    bool totalEnabled = isEnabled();
+
+    d->use_predictive_text = enabled;
+
+    if(totalEnabled != isEnabled())
+        Q_EMIT enabledChanged(isEnabled());
+}
+
+//! \brief WordEngine::enableSpellcheker turns on/off the usage of the spellchecker
+//! \param enabled
+void WordEngine::setSpellcheckerEnabled(bool enabled)
+{
+    Q_D(WordEngine);
+    bool totalEnabled = isEnabled();
+
+    d->use_spell_checker = enabled;
+
+    d->spell_checker.setEnabled(d->use_spell_checker);
+    if(totalEnabled != isEnabled())
+        Q_EMIT enabledChanged(isEnabled());
 }
 
 void WordEngine::onWordCandidateSelected(QString word)
@@ -202,36 +233,38 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
     const QString &preedit(text->preedit());
     const bool is_preedit_capitalized(not preedit.isEmpty() && preedit.at(0).isUpper());
 
+    if (d->use_predictive_text) {
 #ifdef HAVE_PINYIN
-    if (d->predictiveBackend == WordEnginePrivate::PinyinBackend) {
-        QString sentence = d->pinyinAdapter->parse(preedit);
+        if (d->predictiveBackend == WordEnginePrivate::PinyinBackend) {
+            QString sentence = d->pinyinAdapter->parse(preedit);
 
-        QStringList suggestions = d->pinyinAdapter->getWordCandidates();
+            QStringList suggestions = d->pinyinAdapter->getWordCandidates();
 
-        Q_FOREACH(const QString &suggestion, suggestions) {
-            appendToCandidates(&candidates, WordCandidate::SourcePrediction, suggestion, is_preedit_capitalized);
+            Q_FOREACH(const QString &suggestion, suggestions) {
+                appendToCandidates(&candidates, WordCandidate::SourcePrediction, suggestion, is_preedit_capitalized);
+            }
         }
-    }
 #endif
 
 #ifdef HAVE_PRESAGE
-    if (d->predictiveBackend == WordEnginePrivate::PresageBackend) {
-        const QString &context = (text->surroundingLeft() + preedit);
-        d->candidates_context = context.toStdString();
-        const std::vector<std::string> predictions = d->presage.predict();
+        if (d->predictiveBackend == WordEnginePrivate::PresageBackend) {
+            const QString &context = (text->surroundingLeft() + preedit);
+            d->candidates_context = context.toStdString();
+            const std::vector<std::string> predictions = d->presage.predict();
 
-        // TODO: Fine-tune presage behaviour to also perform error correction, not just word prediction.
-        if (not context.isEmpty()) {
-            // FIXME: max_candidates should come from style, too:
-            const static unsigned int max_candidates = 7;
-            const int count(qMin<int>(predictions.size(), max_candidates));
-            for (int index = 0; index < count; ++index) {
-                appendToCandidates(&candidates, WordCandidate::SourcePrediction, QString::fromStdString(predictions.at(index)),
-                                   is_preedit_capitalized);
+            // TODO: Fine-tune presage behaviour to also perform error correction, not just word prediction.
+            if (not context.isEmpty()) {
+                // FIXME: max_candidates should come from style, too:
+                const static unsigned int max_candidates = 7;
+                const int count(qMin<int>(predictions.size(), max_candidates));
+                for (int index = 0; index < count; ++index) {
+                    appendToCandidates(&candidates, WordCandidate::SourcePrediction, QString::fromStdString(predictions.at(index)),
+                                       is_preedit_capitalized);
+                }
             }
         }
-    }
 #endif
+    }
 
     const bool correct_spelling(d->spell_checker.spell(preedit));
 
@@ -256,15 +289,6 @@ void WordEngine::addToUserDictionary(const QString &word)
 {
     Q_D(WordEngine);
     d->spell_checker.addToUserWordlist(word);
-}
-
-//! \brief WordEngine::enableSpellcheker turns on/off the usage of the spellchecker
-//! \param on
-void WordEngine::enableSpellchecker(bool on)
-{
-    Q_D(WordEngine);
-    d->use_spell_checker = on;
-    d->spell_checker.setEnabled(d->use_spell_checker);
 }
 
 void WordEngine::onLanguageChanged(const QString &languageId)

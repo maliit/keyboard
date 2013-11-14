@@ -48,8 +48,6 @@ class InputMethod
     Q_DISABLE_COPY(InputMethod)
     Q_DECLARE_PRIVATE(InputMethod)
 
-    Q_PROPERTY(bool predictionEnabled READ predictionEnabled NOTIFY predictionEnabledChanged)
-    Q_PROPERTY(bool showWordRibbon READ showWordRibbon NOTIFY showWordRibbonChanged)
     Q_PROPERTY(TextContentType contentType READ contentType WRITE setContentType NOTIFY contentTypeChanged)
     Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
     Q_PROPERTY(QString activeLanguage READ activeLanguage WRITE setActiveLanguage NOTIFY activeLanguageChanged)
@@ -93,9 +91,6 @@ public:
 
     Q_SLOT void updateWordEngine();
 
-    bool predictionEnabled();
-    bool showWordRibbon();
-
     TextContentType contentType();
     Q_SLOT void setContentType(TextContentType contentType);
 
@@ -109,8 +104,6 @@ public:
     const QString &systemLanguage() const;
 
 Q_SIGNALS:
-    void predictionEnabledChanged();
-    void showWordRibbonChanged(bool show);
     void contentTypeChanged(TextContentType contentType);
     void activateAutocaps();
     void enabledLanguagesChanged(QStringList languages);

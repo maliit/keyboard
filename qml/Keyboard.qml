@@ -77,7 +77,7 @@ Item {
     property int contentOrientation: maliit_geometry.orientation
     onContentOrientationChanged: fullScreenItem.reportKeyboardVisibleRect();
 
-    property bool wordribbon_visible: maliit_input_method.showWordRibbon
+    property bool wordribbon_visible: maliit_word_engine.enabled
 
     property bool languageMenuShown: false
 

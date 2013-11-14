@@ -92,7 +92,6 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     connect(this, SIGNAL(wordRibbonEnabledChanged(bool)), uiConst, SLOT(onWordEngineSettingsChanged(bool)));
 
-    connect(this, SIGNAL(predictionEnabledChanged()), this, SLOT(updateWordEngine()));
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
 
@@ -102,7 +101,6 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
-    d->registerSpellcheckingSetting();
     d->registerEnabledLanguages();
 
     // Setting layout orientation depends on word engine and hide word ribbon
@@ -379,8 +377,8 @@ void InputMethod::update()
     if (!valid)
         newPredictionEnabled = true;
 
-    if (d->predictionEnabled != newPredictionEnabled) {
-        d->predictionEnabled = newPredictionEnabled;
+    if (d->wordEngineEnabled != newPredictionEnabled) {
+        d->wordEngineEnabled = newPredictionEnabled;
         emitPredictionEnabled = true;
     }
 
@@ -391,8 +389,7 @@ void InputMethod::update()
     setContentType(newContentType);
 
     if (emitPredictionEnabled) {
-        d->updateWordRibbon();
-        Q_EMIT predictionEnabledChanged();
+        updateWordEngine();
     }
 
     QString text;
@@ -410,28 +407,11 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
-    if (!d->m_settings.predictiveText())
-        d->predictionEnabled = false;
-
     if (d->contentType != FreeTextContentType)
-        d->predictionEnabled = false;
+        d->wordEngineEnabled = false;
 
     d->editor.clearPreedit();
-    d->editor.wordEngine()->setEnabled( d->predictionEnabled );
-    d->updateWordRibbon();
-}
-
-bool InputMethod::predictionEnabled()
-{
-    Q_D(InputMethod);
-    return d->predictionEnabled;
-}
-
-//! \brief InputMethod::showWordRibbon returns if the word ribbon should be shown
-bool InputMethod::showWordRibbon()
-{
-    Q_D(InputMethod);
-    return d->showWordRibbon;
+    d->editor.wordEngine()->setEnabled( d->wordEngineEnabled );
 }
 
 //! \brief InputMethod::contentType returns the type, of the input field, like free text, email, url
@@ -517,5 +497,6 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
 
     d->activeLanguage = newLanguage;
     d->editor.onLanguageChanged(d->activeLanguage);
+    d->host->setLanguage(newLanguage);
     Q_EMIT activeLanguageChanged(d->activeLanguage);
 }
