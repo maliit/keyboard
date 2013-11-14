@@ -102,6 +102,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
+    d->registerSpellcheckingSetting();
     d->registerEnabledLanguages();
 
     // Setting layout orientation depends on word engine and hide word ribbon

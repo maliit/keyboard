@@ -119,6 +119,7 @@ public:
     PredictiveBackend predictiveBackend;
 
     SpellChecker spell_checker;
+    bool use_spell_checker;
 #ifdef HAVE_PRESAGE
     std::string candidates_context;
     CandidatesCallback presage_candidates;
@@ -135,6 +136,7 @@ public:
 WordEnginePrivate::WordEnginePrivate()
     : predictiveBackend(PresageBackend)
     , spell_checker()
+    , use_spell_checker(false)
 #ifdef HAVE_PRESAGE
     , candidates_context()
     , presage_candidates(CandidatesCallback(candidates_context))
@@ -256,6 +258,15 @@ void WordEngine::addToUserDictionary(const QString &word)
     d->spell_checker.addToUserWordlist(word);
 }
 
+//! \brief WordEngine::enableSpellcheker turns on/off the usage of the spellchecker
+//! \param on
+void WordEngine::enableSpellchecker(bool on)
+{
+    Q_D(WordEngine);
+    d->use_spell_checker = on;
+    d->spell_checker.setEnabled(d->use_spell_checker);
+}
+
 void WordEngine::onLanguageChanged(const QString &languageId)
 {
     Q_D(WordEngine);
@@ -264,6 +275,10 @@ void WordEngine::onLanguageChanged(const QString &languageId)
         d->predictiveBackend = WordEnginePrivate::PinyinBackend;
     else
         d->predictiveBackend = WordEnginePrivate::PresageBackend;
+
+    bool ok = d->spell_checker.setLanguage(languageId);
+    if (ok)
+        d->spell_checker.setEnabled(d->use_spell_checker);
 }
 
 }} // namespace Logic, MaliitKeyboard
