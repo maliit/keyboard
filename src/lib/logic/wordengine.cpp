@@ -136,6 +136,7 @@ public:
 
 WordEnginePrivate::WordEnginePrivate()
     : predictiveBackend(PresageBackend)
+    , use_predictive_text(false)
     , spell_checker()
     , use_spell_checker(false)
 #ifdef HAVE_PRESAGE
