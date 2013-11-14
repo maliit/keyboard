@@ -281,6 +281,13 @@ bool SpellChecker::setLanguage(const QString &language)
     QStringList dicMatches = dictDir.entryList(QStringList(language+"*.dic"));
 
     if (affMatches.isEmpty() || dicMatches.isEmpty()) {
+        // try again with short version ("en" instead of "en-us")
+        QString lang = language;
+        lang.truncate(2);
+        if (language.length() > 2) {
+            return setLanguage(lang);
+        }
+
         qWarning() << "No dictionary found for" << language << "turning off spellchecking";
         d->clear();
         return false;
