@@ -55,7 +55,6 @@ OrientationHelper {
 
     onOrientationAngleChanged: {
         calculateSize();
-        fullScreenItem.reportKeyboardVisibleRect();
     }
     onXChanged: fullScreenItem.reportKeyboardVisibleRect();
     onYChanged: fullScreenItem.reportKeyboardVisibleRect();
@@ -144,8 +143,8 @@ Item {
                 anchors.bottom: keyboardComp.top
                 width: parent.width;
 
-                height: visible ? UI.wordribbonHeight : 0
-                onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
+                height: canvas.wordribbon_visible ? UI.wordribbonHeight : 0
+                onHeightChanged: calculateSize();
             }
 
             Item {
@@ -257,7 +256,6 @@ Item {
 function calculateSize()
 {
     // TODO tablet
-
     if (orientationHelper.orientationAngle == 270 ||
         orientationHelper.orientationAngle == 90) {
         canvas.height = (fullScreenItem.width * UI.phoneKeyboardHeightLandscape) + wordRibbon.height
@@ -270,9 +268,6 @@ function calculateSize()
     else { // fallback
         canvas.height = (fullScreenItem.height * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
     }
-
-    if (!canvas.wordribbon_visible)
-        canvas.height -= wordRibbon.height;
 
     reportKeyboardVisibleRect();
 }
