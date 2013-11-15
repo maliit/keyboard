@@ -159,11 +159,6 @@ Item {
         }
     }
 
-    Audio {
-        id: audioFeedback
-        source: Qt.resolvedUrl("../styles/ubuntu/sounds/typewriter.wav")
-    }
-
     Magnifier {
         anchors.horizontalCenter: buttonImage.horizontalCenter
         anchors.bottom: buttonImage.top
