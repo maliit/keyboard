@@ -159,4 +159,11 @@ void AbstractWordEngine::addToUserDictionary(const QString &word)
     Q_UNUSED(word);
 }
 
+//!
+void AbstractWordEngine::enableSpellchecker(bool on)
+{
+    Q_UNUSED(on);
+    qDebug() << Q_FUNC_INFO << "should be implemented by inherited class";
+}
+
 }} // namespace MaliitKeyboard, Logic

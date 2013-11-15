@@ -63,20 +63,23 @@ private:
         QTest::addColumn<int>("capitalSpyCount");
         QTest::addColumn<int>("completionSpyCount");
         QTest::addColumn<int>("predictSpyCount");
+        QTest::addColumn<int>("spellSpyCount");
         QTest::addColumn<int>("feedbackSpyCount");
 
         QTest::newRow("languages changed") << QString("enabledLanguages")
-                                           << 1 << 0 << 0 << 0 << 0;
+                                           << 1 << 0 << 0 << 0 << 0 << 0;
         QTest::newRow("capitalization changed") << QString("autoCapitalization")
-                                                << 0 << 1 << 0 << 0 << 0;
+                                                << 0 << 1 << 0 << 0 << 0 << 0;
         QTest::newRow("completion changed") << QString("autoCompletion")
-                                            << 0 << 0 << 1 << 0 << 0;
+                                            << 0 << 0 << 1 << 0 << 0 << 0;
         QTest::newRow("predict changed") << QString("predictiveText")
-                                         << 0 << 0 << 0 << 1 << 0;
+                                         << 0 << 0 << 0 << 1 << 0 << 0;
+        QTest::newRow("spellcheck changed") << QString("spellChecking")
+                                         << 0 << 0 << 0 << 0 << 1 << 0;
         QTest::newRow("feedback changed") << QString("keyPressFeedback")
-                                          << 0 << 0 << 0 << 0 << 1;
+                                          << 0 << 0 << 0 << 0 << 0 << 1;
         QTest::newRow("unknown changed") << QString("unknownKey")
-                                         << 0 << 0 << 0 << 0 << 0;
+                                         << 0 << 0 << 0 << 0 << 0 << 0;
     }
 
     Q_SLOT void testSettingUpdated()
@@ -86,13 +89,15 @@ private:
         QFETCH(int, capitalSpyCount);
         QFETCH(int, completionSpyCount);
         QFETCH(int, predictSpyCount);
+        QFETCH(int, spellSpyCount);
         QFETCH(int, feedbackSpyCount);
 
-        QSignalSpy languagesSpy(m_settings, SIGNAL(enabledLanguagesChanged()));
-        QSignalSpy capitalSpy(m_settings, SIGNAL(autoCapitalizationChanged()));
-        QSignalSpy completionSpy(m_settings, SIGNAL(autoCompletionChanged()));
-        QSignalSpy predictSpy(m_settings, SIGNAL(predictiveTextChanged()));
-        QSignalSpy feedbackSpy(m_settings, SIGNAL(keyPressFeedbackChanged()));
+        QSignalSpy languagesSpy(m_settings, SIGNAL(enabledLanguagesChanged(QStringList)));
+        QSignalSpy capitalSpy(m_settings, SIGNAL(autoCapitalizationChanged(bool)));
+        QSignalSpy completionSpy(m_settings, SIGNAL(autoCompletionChanged(bool)));
+        QSignalSpy predictSpy(m_settings, SIGNAL(predictiveTextChanged(bool)));
+        QSignalSpy spellSpy(m_settings, SIGNAL(spellCheckingChanged(bool)));
+        QSignalSpy feedbackSpy(m_settings, SIGNAL(keyPressFeedbackChanged(bool)));
 
         m_settings->settingUpdated(key);
 
@@ -100,6 +105,7 @@ private:
         QCOMPARE(capitalSpy.count(), capitalSpyCount);
         QCOMPARE(completionSpy.count(), completionSpyCount);
         QCOMPARE(predictSpy.count(), predictSpyCount);
+        QCOMPARE(spellSpy.count(), spellSpyCount);
         QCOMPARE(feedbackSpy.count(), feedbackSpyCount);
     }
 };

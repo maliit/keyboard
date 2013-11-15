@@ -300,26 +300,32 @@ public:
 
     void registerFeedbackSetting()
     {
+<<<<<<< TREE
         QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged()),
                          q, SIGNAL(useAudioFeedbackChanged));
+=======
+        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
+                         q, SLOT(onFeedbackSettingChanged()));
+        feedback.setEnabled(m_settings.keyPressFeedback());
+>>>>>>> MERGE-SOURCE
     }
 
     void registerAutoCorrectSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(autoCompletionChanged()),
+        QObject::connect(&m_settings, SIGNAL(autoCompletionChanged(bool)),
                          q, SLOT(onAutoCorrectSettingChanged()));
         editor.setAutoCorrectEnabled(m_settings.autoCompletion());
     }
 
     void registerAutoCapsSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged()),
+        QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged(bool)),
                          q, SLOT(updateAutoCaps()));
     }
 
     void registerWordEngineSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(predictiveTextChanged()),
+        QObject::connect(&m_settings, SIGNAL(predictiveTextChanged(bool)),
                          q, SLOT(updateWordEngine()));
     #ifndef DISABLE_PREEDIT
         editor.wordEngine()->setEnabled(m_settings.predictiveText());
@@ -328,9 +334,16 @@ public:
     #endif
     }
 
+    void registerSpellcheckingSetting()
+    {
+        QObject::connect(&m_settings, SIGNAL(spellCheckingChanged(bool)),
+                         editor.wordEngine(), SLOT(enableSpellchecker(bool)));
+        editor.wordEngine()->enableSpellchecker(m_settings.spellchecking());
+    }
+
     void registerEnabledLanguages()
     {
-        QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
+        QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged(QStringList)),
                          q, SLOT(onEnabledLanguageSettingsChanged()));
         q->onEnabledLanguageSettingsChanged();
 

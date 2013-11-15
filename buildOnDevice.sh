@@ -29,10 +29,6 @@ exec_with_ssh() {
     ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t $USER@$TARGET_IP -p $TARGET_SSH_PORT "bash -ic \"$@\""
 }
 
-exec_with_adb() {
-    adb shell chroot /data/ubuntu /usr/bin/env -i PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin "$@"
-}
-
 adb_root() {
     adb root
     adb wait-for-device
@@ -50,18 +46,13 @@ install_ssh_key() {
 }
 
 install_dependencies() {
-    exec_with_adb apt-get -y install openssh-server
+    adb shell apt-get -y install openssh-server
     adb shell start ssh
     sleep 2
     exec_with_ssh $SUDO apt-get -y install build-essential rsync bzr ccache gdb libglib2.0-bin unzip
 #    exec_with_ssh $SUDO add-apt-repository -s -y ppa:phablet-team/ppa
 #    exec_with_ssh $SUDO apt-get update
     exec_with_ssh $SUDO apt-get -y build-dep $PACKAGE
-}
-
-reset_screen_powerdown() {
-    exec_with_ssh $SUDO dbus-launch gsettings set com.canonical.powerd activity-timeout 600
-    exec_with_ssh $SUDO sudo initctl restart powerd
 }
 
 setup_adb_forwarding() {
@@ -82,7 +73,6 @@ build() {
     echo "Installing"
     adb shell pkill "maliit-server"
     exec_with_ssh "cd $CODE_DIR/ && " $SUDO " make install"
-#    exec_with_ssh "cd $CODE_DIR/ && dpkg-buildpackage -j4"
 }
 
 run() {
@@ -114,7 +104,6 @@ if $SETUP; then
     echo "Setting up environment for building shell.."
     install_ssh_key
     install_dependencies
-    reset_screen_powerdown
     sync_code
 else
     echo "Transferring code.."

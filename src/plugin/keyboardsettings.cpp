@@ -38,6 +38,7 @@ const QLatin1String ENABLED_LANGUAGES_KEY = QLatin1String("enabledLanguages");
 const QLatin1String AUTO_CAPITALIZATION_KEY = QLatin1String("autoCapitalization");
 const QLatin1String AUTO_COMPLETION_KEY = QLatin1String("autoCompletion");
 const QLatin1String PREDICTIVE_TEXT_KEY = QLatin1String("predictiveText");
+const QLatin1String SPELL_CHECKING_KEY = QLatin1String("spellChecking");
 const QLatin1String KEY_PRESS_FEEDBACK_KEY = QLatin1String("keyPressFeedback");
 
 /*!
@@ -95,6 +96,15 @@ bool KeyboardSettings::predictiveText() const
 }
 
 /*!
+ * \brief KeyboardSettings::spellchecking returns true if spellchecking should be used
+ * \return
+ */
+bool KeyboardSettings::spellchecking() const
+{
+    return m_settings->get(SPELL_CHECKING_KEY).toBool();
+}
+
+/*!
  * \brief KeyboardSettings::keyPressFeedback returns true if feedback is enabled
  * when the user presses a keyboad key
  * \return
@@ -112,19 +122,22 @@ bool KeyboardSettings::keyPressFeedback() const
 void KeyboardSettings::settingUpdated(const QString &key)
 {
     if (key == ENABLED_LANGUAGES_KEY) {
-        Q_EMIT enabledLanguagesChanged();
+        Q_EMIT enabledLanguagesChanged(enabledLanguages());
         return;
     } else if (key == AUTO_CAPITALIZATION_KEY) {
-        Q_EMIT autoCapitalizationChanged();
+        Q_EMIT autoCapitalizationChanged(autoCapitalization());
         return;
     } else if (key == AUTO_COMPLETION_KEY) {
-        Q_EMIT autoCompletionChanged();
+        Q_EMIT autoCompletionChanged(autoCompletion());
         return;
     } else if (key == PREDICTIVE_TEXT_KEY) {
-        Q_EMIT predictiveTextChanged();
+        Q_EMIT predictiveTextChanged(predictiveText());
+        return;
+    } else if (key == SPELL_CHECKING_KEY) {
+        Q_EMIT spellCheckingChanged(spellchecking());
         return;
     } else if (key == KEY_PRESS_FEEDBACK_KEY) {
-        Q_EMIT keyPressFeedbackChanged();
+        Q_EMIT keyPressFeedbackChanged(keyPressFeedback());
         return;
     }
 
