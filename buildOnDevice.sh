@@ -49,6 +49,7 @@ install_dependencies() {
     adb shell apt-get -y install openssh-server
     adb shell start ssh
     sleep 2
+    exec_with_ssh $SUDO apt-get update
     exec_with_ssh $SUDO apt-get -y install build-essential rsync bzr ccache gdb libglib2.0-bin unzip
 #    exec_with_ssh $SUDO add-apt-repository -s -y ppa:phablet-team/ppa
     exec_with_ssh $SUDO apt-get update
@@ -68,7 +69,7 @@ sync_code() {
 
 build() {
     # same options as in debian/rules
-    QMAKE_OPTIONS="-recursive MALIIT_DEFAULT_PROFILE=ubuntu CONFIG+=\\\"debug nodoc notests enable-presage enable-hunspell enable-preedit enable-pinyin\\\""
+    QMAKE_OPTIONS="-recursive MALIIT_DEFAULT_PROFILE=ubuntu CONFIG+=\\\"debug nodoc notests enable-presage enable-hunspell enable-pinyin\\\""
     exec_with_ssh "cd $CODE_DIR/ && qmake $QMAKE_OPTIONS && make -j 4"
     echo "Installing"
     adb shell pkill "maliit-server"

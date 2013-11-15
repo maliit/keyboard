@@ -13,7 +13,6 @@ override_dh_auto_configure:
 	                     CONFIG+=nodoc \
 	                     CONFIG+=enable-presage \
 	                     CONFIG+=enable-hunspell \
-	                     CONFIG+=enable-preedit \
 	                     CONFIG+=enable-pinyin
 
 override_dh_auto_test:

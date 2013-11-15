@@ -79,8 +79,7 @@ public:
     UbuntuApplicationApiWrapper* applicationApiWrapper;
 
     bool autocapsEnabled;
-    bool predictionEnabled;
-    bool showWordRibbon;
+    bool wordEngineEnabled;
     InputMethod::TextContentType contentType;
     QString systemLanguage;
     QString activeLanguage;
@@ -103,8 +102,7 @@ public:
         , view(0)
         , applicationApiWrapper(new UbuntuApplicationApiWrapper)
         , autocapsEnabled(false)
-        , predictionEnabled(false)
-        , showWordRibbon(false)
+        , wordEngineEnabled(false)
         , contentType(InputMethod::FreeTextContentType)
         , systemLanguage("en")
         , activeLanguage(systemLanguage)
@@ -204,23 +202,6 @@ public:
         m_geometry->setOrientation(screenOrientation);
     }
 
-    void updateWordRibbon()
-    {
-        bool enabled = predictionEnabled;
-        enabled = enabled && (contentType == InputMethod::FreeTextContentType);
-        enabled = enabled && m_settings.predictiveText();
-
-        layout.helper.wordRibbon()->setEnabled( enabled );
-        Q_EMIT q->wordRibbonEnabledChanged( enabled );
-
-        if (enabled != showWordRibbon) {
-            showWordRibbon = enabled;
-            Q_EMIT q->showWordRibbonChanged(showWordRibbon);
-        }
-
-        setLayoutOrientation(appsCurrentOrientation);
-    }
-
     void connectToNotifier()
     {
     #ifdef TEMP_DISABLED
@@ -238,6 +219,7 @@ public:
         qml_context->setContextProperty("maliit_layout", &layout.model);
         qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
         qml_context->setContextProperty("maliit_wordribbon", layout.helper.wordRibbon());
+        qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
     }
 
 
@@ -286,19 +268,12 @@ public:
     void registerWordEngineSetting()
     {
         QObject::connect(&m_settings, SIGNAL(predictiveTextChanged(bool)),
-                         q, SLOT(updateWordEngine()));
-    #ifndef DISABLE_PREEDIT
-        editor.wordEngine()->setEnabled(m_settings.predictiveText());
-    #else
-        editor.wordEngine()->setEnabled(false);
-    #endif
-    }
+                         editor.wordEngine(), SLOT(setWordPredictionEnabled(bool)));
+        editor.wordEngine()->setWordPredictionEnabled(m_settings.predictiveText());
 
-    void registerSpellcheckingSetting()
-    {
         QObject::connect(&m_settings, SIGNAL(spellCheckingChanged(bool)),
-                         editor.wordEngine(), SLOT(enableSpellchecker(bool)));
-        editor.wordEngine()->enableSpellchecker(m_settings.spellchecking());
+                         editor.wordEngine(), SLOT(setSpellcheckerEnabled(bool)));
+        editor.wordEngine()->setSpellcheckerEnabled(m_settings.spellchecking());
     }
 
     void registerEnabledLanguages()

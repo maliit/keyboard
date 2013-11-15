@@ -10,10 +10,6 @@ enable-hunspell {
     DEFINES += HAVE_HUNSPELL
 }
 
-disable-preedit|!enable-presage:!enable-hunspell {
-    DEFINES += DISABLE_PREEDIT
-}
-
 enable-pinyin {
     CONFIG += link_pkgconfig
     PKGCONFIG += glib-2.0

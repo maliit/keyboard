@@ -12,7 +12,6 @@ include(config.pri)
         \\nRecognised CONFIG flags: \
         \\n\\t enable-presage: Use presage to calculate word candidates \
         \\n\\t enable-hunspell: Use hunspell for error correction \
-        \\n\\t disable-preedit: Always commit characters and never use preedit \
         \\n\\t enable-pinyin: Use libpinyin as chinese input method \
         \\n\\t notests: Do not attempt to build tests \
         \\n\\t nodoc: Do not build documentation \
