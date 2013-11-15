@@ -37,7 +37,6 @@ namespace MaliitKeyboard {
 class Glass;
 class Renderer;
 class AbstractTextEditor;
-class AbstractFeedback;
 
 namespace Logic {
 class LayoutHelper;

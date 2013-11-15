@@ -68,7 +68,7 @@ sync_code() {
 
 build() {
     # same options as in debian/rules
-    QMAKE_OPTIONS="-recursive MALIIT_DEFAULT_PROFILE=ubuntu CONFIG+=\\\"debug nodoc notests enable-presage enable-hunspell enable-preedit enable-pinyin enable-qt-mobility\\\""
+    QMAKE_OPTIONS="-recursive MALIIT_DEFAULT_PROFILE=ubuntu CONFIG+=\\\"debug nodoc notests enable-presage enable-hunspell enable-preedit enable-pinyin\\\""
     exec_with_ssh "cd $CODE_DIR/ && qmake $QMAKE_OPTIONS && make -j 4"
     echo "Installing"
     adb shell pkill "maliit-server"
