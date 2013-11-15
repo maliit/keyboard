@@ -300,14 +300,8 @@ public:
 
     void registerFeedbackSetting()
     {
-<<<<<<< TREE
         QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged()),
                          q, SIGNAL(useAudioFeedbackChanged));
-=======
-        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
-                         q, SLOT(onFeedbackSettingChanged()));
-        feedback.setEnabled(m_settings.keyPressFeedback());
->>>>>>> MERGE-SOURCE
     }
 
     void registerAutoCorrectSetting()
