@@ -13,8 +13,7 @@ override_dh_auto_configure:
 	                     CONFIG+=nodoc \
 	                     CONFIG+=enable-presage \
 	                     CONFIG+=enable-hunspell \
-	                     CONFIG+=enable-pinyin \
-	                     CONFIG+=enable-qt-mobility
+	                     CONFIG+=enable-pinyin
 
 override_dh_auto_test:
 	xvfb-run -a make check

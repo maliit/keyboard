@@ -31,7 +31,6 @@
 
 #include "setup.h"
 #include "abstracttexteditor.h"
-#include "abstractfeedback.h"
 
 #include "models/layout.h"
 #include "models/key.h"
@@ -49,7 +48,6 @@ void connectAll(Logic::EventHandler *event_handler,
                 Logic::LayoutUpdater *updater,
                 AbstractTextEditor *editor)
 {
-    // TODO: Connect event handler to feedback.
     connectEventHandlerToTextEditor(event_handler, editor);
     connectLayoutUpdaterToTextEditor(updater, editor);
 }

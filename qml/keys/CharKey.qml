@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.0
+import QtMultimedia 5.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 
@@ -136,6 +137,9 @@ Item {
 
         onReleased: {
             if (!extendedKeysShown) {
+                if (maliit_input_method.useAudioFeedback)
+                    audioFeedback.play();
+
                 event_handler.onKeyReleased(valueToSubmit, action);
                 if (!skipAutoCaps)
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
@@ -153,6 +157,11 @@ Item {
             if (swipeArea.drag.active)
                 keyMouseArea.cancelPress();
         }
+    }
+
+    Audio {
+        id: audioFeedback
+        source: Qt.resolvedUrl("../styles/ubuntu/sounds/typewriter.wav")
     }
 
     Magnifier {
