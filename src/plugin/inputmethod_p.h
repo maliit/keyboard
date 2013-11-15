@@ -10,7 +10,6 @@
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
 #include "logic/languagefeatures.h"
-#include "logic/dynamiclayout.h"
 
 #include "ubuntuapplicationapiwrapper.h"
 
@@ -75,8 +74,6 @@ public:
     QMap<QString, SharedOverride> key_overrides;
     Settings settings;
     LayoutGroup layout;
-    QRect windowGeometryRect;
-    QRect keyboardVisibleRect;
     MAbstractInputMethodHost* host;
     QQuickView* view;
     UbuntuApplicationApiWrapper* applicationApiWrapper;
@@ -183,57 +180,26 @@ public:
         delete applicationApiWrapper;
     }
 
+    Logic::LayoutHelper::Orientation screenToMaliitOrientation(Qt::ScreenOrientation screenOrientation) const
+    {
+        switch (screenOrientation) {
+        case Qt::LandscapeOrientation:
+        case Qt::InvertedLandscapeOrientation:
+            return Logic::LayoutHelper::Landscape;
+            break;
+        case Qt::PortraitOrientation:
+        case Qt::InvertedPortraitOrientation:
+        case Qt::PrimaryOrientation:
+        default:
+            return Logic::LayoutHelper::Portrait;
+        }
+
+        return Logic::LayoutHelper::Portrait;
+    }
+
     void setLayoutOrientation(Qt::ScreenOrientation screenOrientation)
     {
-        Logic::LayoutHelper::Orientation orientation = uiConst->screenToMaliitOrientation(screenOrientation);
-
-        layout.updater.setOrientation(orientation);
-
-        windowGeometryRect = uiConst->windowGeometryRect( screenOrientation );
-
-        keyboardVisibleRect = windowGeometryRect.adjusted(0,uiConst->invisibleTouchAreaHeight(orientation),0,0);
-
-        m_geometry->setCanvasHeight(windowGeometryRect.height());
-        m_geometry->setKeypadHeight(keyboardVisibleRect.height());
         m_geometry->setOrientation(screenOrientation);
-
-        // qpa does not rotate the coordinate system
-        windowGeometryRect = qGuiApp->primaryScreen()->mapBetween(
-                        screenOrientation,
-                        qGuiApp->primaryScreen()->primaryOrientation(),
-                        windowGeometryRect);
-
-        if (m_geometry->shown()) {
-            host->setScreenRegion(QRegion(keyboardVisibleRect));
-
-            QRect rect(keyboardVisibleRect);
-            rect.moveTop( windowGeometryRect.height() - keyboardVisibleRect.height() );
-            host->setInputMethodArea(rect, view);
-        }
-
-        if (m_geometry->shown()) {
-            applicationApiWrapper->reportOSKInvisible();
-
-            qDebug() << "keyboard is reporting: total <x y w h>: <"
-                     << windowGeometryRect.x()
-                     << windowGeometryRect.y()
-                     << windowGeometryRect.width()
-                     << windowGeometryRect.height()
-                     << "> and visible <"
-                     << keyboardVisibleRect.x()
-                     << keyboardVisibleRect.y()
-                     << keyboardVisibleRect.width()
-                     << keyboardVisibleRect.height()
-                     << "> to the app manager.";
-
-            // report the visible part as input trap, the invisible part can click through, e.g. browser url bar
-            applicationApiWrapper->reportOSKVisible(
-                        keyboardVisibleRect.x(),
-                        keyboardVisibleRect.y(),
-                        keyboardVisibleRect.width(),
-                        keyboardVisibleRect.height()
-                        );
-        }
     }
 
     void connectToNotifier()

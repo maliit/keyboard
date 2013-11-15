@@ -34,8 +34,6 @@
 #include "key.h"
 #include "keydescription.h"
 
-#include "logic/dynamiclayout.h"
-
 #include <QtGui/QGuiApplication>
 #include <QScreen>
 
@@ -196,13 +194,6 @@ int Layout::height() const
     return d->key_area.rect().height();
 }
 
-int Layout::wordRibbonHeight() const
-{
-    return uiConst->wordRibbonHeight(
-                uiConst->screenToMaliitOrientation(
-                    qGuiApp->primaryScreen()->orientation()) );
-}
-
 QPoint Layout::origin() const
 {
     Q_D(const Layout);
@@ -223,13 +214,6 @@ QRectF Layout::backgroundBorders() const
 
     const QMargins &m(d->key_area.area().backgroundBorders());
     return QRectF(m.left(), m.top(), m.right(), m.bottom());
-}
-
-int Layout::invisibleTouchAreaHeight() const
-{
-    return uiConst->invisibleTouchAreaHeight(
-                uiConst->screenToMaliitOrientation(
-                    qGuiApp->primaryScreen()->orientation()) );
 }
 
 Layout::State Layout::state() const

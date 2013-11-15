@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.0
+import QtMultimedia 5.0
 import QtQuick.Window 2.0
 import "languages/"
 import "keys/"
@@ -44,10 +45,16 @@ Item {
         source: panel.state === "CHARACTERS" ? internal.characterKeypadSource : internal.symbolKeypadSource
         onLoaded: activeKeypadState = "NORMAL"
     }
+
     ExtendedKeysSelector {
         id: extendedKeysSelector
         objectName: "extendedKeysSelector"
         anchors.fill: parent
+    }
+
+    Audio {
+        id: audioFeedback
+        source: Qt.resolvedUrl("styles/ubuntu/sounds/typewriter.wav")
     }
 
     states: [

@@ -542,6 +542,10 @@ void AbstractTextEditor::replacePreedit(const QString &replacement)
         return;
     }
 
+    if (replacement == d->text->preedit()) {
+        return;
+    }
+
     d->text->setPreedit(replacement);
     // computeCandidates can change preedit face, so needs to happen
     // before sending preedit:

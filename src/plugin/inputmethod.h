@@ -104,6 +104,7 @@ public:
 
     const QString &systemLanguage() const;
 
+    Q_SLOT void onVisibleRectChanged();
     bool useAudioFeedback() const;
 
 Q_SIGNALS:
@@ -115,6 +116,7 @@ Q_SIGNALS:
     void useAudioFeedbackChanged();
     void wordEngineEnabledChanged(bool wordEngineEnabled);
     void wordRibbonEnabledChanged(bool wordRibbonEnabled);
+    void windowGeometryRectChanged(QRect rect);
 
 private:
     Q_SLOT void onStyleSettingChanged();
