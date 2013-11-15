@@ -67,16 +67,12 @@ class Layout
                          NOTIFY widthChanged)
     Q_PROPERTY(int height READ height
                           NOTIFY heightChanged)
-    Q_PROPERTY(int wordribbon_height READ wordRibbonHeight
-                          NOTIFY wordRibbonHeightChanged)
     Q_PROPERTY(QPoint origin READ origin
                              NOTIFY originChanged)
     Q_PROPERTY(QUrl background READ background
                                NOTIFY backgroundChanged)
     Q_PROPERTY(QRectF background_borders READ backgroundBorders
                                          NOTIFY backgroundBordersChanged)
-    Q_PROPERTY(int invisible_toucharea_height READ invisibleTouchAreaHeight
-                                         NOTIFY invisibleTouchAreaHeightChanged)
 
     Q_PROPERTY(State keyboard_state READ state WRITE setState
                             NOTIFY stateChanged)
@@ -131,9 +127,6 @@ public:
     Q_SLOT int height() const;
     Q_SIGNAL void heightChanged(int changed);
 
-    Q_SLOT int wordRibbonHeight() const;
-    Q_SIGNAL void wordRibbonHeightChanged(int changed);
-
     Q_SLOT QPoint origin() const;
     Q_SIGNAL void originChanged(const QPoint &changed);
 
@@ -145,9 +138,6 @@ public:
 
     // FIXME: Turn into class variable?
     Q_SLOT void setImageDirectory(const QString &directory);
-
-    Q_SLOT int invisibleTouchAreaHeight() const;
-    Q_SIGNAL void invisibleTouchAreaHeightChanged(int &changed);
 
     Q_SLOT State state() const;
     Q_SLOT void setState(Model::Layout::State state);

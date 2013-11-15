@@ -57,3 +57,12 @@ var emailLayoutUrlKeyPadding = 4; // gu
 /* language menu */
 var languageMenuListViewPadding = 2.22; // gu
 var languageMenuCorner = 2.5; // gu
+
+
+var wordribbonHeight = 72;
+
+var phoneKeyboardHeightPortrait = 0.365;
+var phoneKeyboardHeightLandscape = 0.50;
+
+var tabletKeyboardHeightPortrait = 0.28;
+var tabletKeyboardHeightLandscape = 0.38;
