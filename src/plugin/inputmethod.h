@@ -112,7 +112,6 @@ public:
     Q_SLOT void onVisibleRectChanged();
     bool useAudioFeedback() const;
 
->>>>>>> MERGE-SOURCE
 Q_SIGNALS:
     void predictionEnabledChanged();
     void showWordRibbonChanged(bool show);
