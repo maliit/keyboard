@@ -86,6 +86,7 @@ Item {
     onContentOrientationChanged: fullScreenItem.reportKeyboardVisibleRect();
 
     property bool wordribbon_visible: maliit_input_method.showWordRibbon
+    onWordribbon_visibleChanged: calculateSize();
 
     property bool languageMenuShown: false
 
@@ -269,6 +270,9 @@ function calculateSize()
     else { // fallback
         canvas.height = (fullScreenItem.height * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
     }
+
+    if (!canvas.wordribbon_visible)
+        canvas.height -= wordRibbon.height;
 
     reportKeyboardVisibleRect();
 }
