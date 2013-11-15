@@ -60,8 +60,8 @@ lang_ru.files = languages/ru/*.qml languages/ru/*.js
 lang_sv.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/sv"
 lang_sv.files = languages/sv/*.qml languages/sv/*.js
 
-lang_zh_cn.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/zh_cn"
-lang_zh_cn.files = languages/zh_cn/*.qml languages/zh_cn/*.js
+lang_zh.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/zh"
+lang_zh.files = languages/zh/*.qml languages/zh/*.js
 
 
 images.path = "$$UBUNTU_KEYBOARD_DATA_DIR/images"
@@ -84,7 +84,7 @@ INSTALLS += qml qml_keys qml_languages images \
     lang_pt \
     lang_ru \
     lang_sv \
-    lang_zh_cn
+    lang_zh
 
 # for QtCreator
 OTHER_FILES += \
@@ -180,4 +180,7 @@ OTHER_FILES += \
     languages/sv/Keyboard_sv_email.qml \
     languages/sv/Keyboard_sv_url.qml \
     languages/sv/Keyboard_sv_url_search.qml \
-    languages/zh_cn/Keyboard_zh_cn_pinyin.qml
+    languages/zh/Keyboard_zh_cn_pinyin.qml \
+    languages/zh/Keyboard_zh_email.qml \
+    languages/zh/Keyboard_zh_url.qml \
+    languages/zh/Keyboard_zh_url_search.qml

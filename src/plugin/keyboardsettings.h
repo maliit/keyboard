@@ -47,14 +47,16 @@ public:
     bool autoCapitalization() const;
     bool autoCompletion() const;
     bool predictiveText() const;
+    bool spellchecking() const;
     bool keyPressFeedback() const;
 
 Q_SIGNALS:
-    void enabledLanguagesChanged();
-    void autoCapitalizationChanged();
-    void autoCompletionChanged();
-    void predictiveTextChanged();
-    void keyPressFeedbackChanged();
+    void enabledLanguagesChanged(QStringList);
+    void autoCapitalizationChanged(bool);
+    void autoCompletionChanged(bool);
+    void predictiveTextChanged(bool);
+    void spellCheckingChanged(bool);
+    void keyPressFeedbackChanged(bool);
 
 private:
     Q_SLOT void settingUpdated(const QString &key);
