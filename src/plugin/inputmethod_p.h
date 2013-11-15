@@ -21,14 +21,6 @@
 #include <QStringList>
 #include <qglobal.h>
 
-#ifdef HAVE_QT_MOBILITY
-#include "view/soundfeedback.h"
-typedef MaliitKeyboard::SoundFeedback DefaultFeedback;
-#else
-#include "view/nullfeedback.h"
-typedef MaliitKeyboard::NullFeedback DefaultFeedback;
-#endif
-
 using namespace MaliitKeyboard;
 
 typedef QScopedPointer<Maliit::Plugins::AbstractPluginSetting> ScopedSetting;
@@ -78,7 +70,6 @@ class InputMethodPrivate
 public:
     InputMethod* q;
     Editor editor;
-    DefaultFeedback feedback;
     SharedStyle style;
     UpdateNotifier notifier;
     QMap<QString, SharedOverride> key_overrides;
@@ -106,7 +97,6 @@ public:
                                 MAbstractInputMethodHost *host)
         : q(_q)
         , editor(EditorOptions(), new Model::Text, new Logic::WordEngine, new Logic::LanguageFeatures)
-        , feedback()
         , style(new Style)
         , notifier()
         , key_overrides()
@@ -135,7 +125,6 @@ public:
         layout.updater.setLayout(&layout.helper);
 
         layout.updater.setStyle(style);
-        feedback.setStyle(style);
 
         const QSize &screen_size(view->screen()->size());
         layout.helper.setScreenSize(screen_size);
@@ -312,26 +301,25 @@ public:
     void registerFeedbackSetting()
     {
         QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged()),
-                         q, SLOT(onFeedbackSettingChanged()));
-        feedback.setEnabled(m_settings.keyPressFeedback());
+                         q, SIGNAL(useAudioFeedbackChanged));
     }
 
     void registerAutoCorrectSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(autoCompletionChanged()),
+        QObject::connect(&m_settings, SIGNAL(autoCompletionChanged(bool)),
                          q, SLOT(onAutoCorrectSettingChanged()));
         editor.setAutoCorrectEnabled(m_settings.autoCompletion());
     }
 
     void registerAutoCapsSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged()),
+        QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged(bool)),
                          q, SLOT(updateAutoCaps()));
     }
 
     void registerWordEngineSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(predictiveTextChanged()),
+        QObject::connect(&m_settings, SIGNAL(predictiveTextChanged(bool)),
                          q, SLOT(updateWordEngine()));
     #ifndef DISABLE_PREEDIT
         editor.wordEngine()->setEnabled(m_settings.predictiveText());
@@ -340,9 +328,16 @@ public:
     #endif
     }
 
+    void registerSpellcheckingSetting()
+    {
+        QObject::connect(&m_settings, SIGNAL(spellCheckingChanged(bool)),
+                         editor.wordEngine(), SLOT(enableSpellchecker(bool)));
+        editor.wordEngine()->enableSpellchecker(m_settings.spellchecking());
+    }
+
     void registerEnabledLanguages()
     {
-        QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
+        QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged(QStringList)),
                          q, SLOT(onEnabledLanguageSettingsChanged()));
         q->onEnabledLanguageSettingsChanged();
 

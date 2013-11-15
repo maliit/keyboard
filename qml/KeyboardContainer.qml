@@ -141,7 +141,7 @@ Item {
             if (language === "sv")
                 return "languages/sv/Keyboard_sv.qml";
             if (language === "zh")
-                return "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
+                return "languages/zh/Keyboard_zh_cn_pinyin.qml";
         }
 
         function loadLayout(contentType, systemLanguage, activeLanguage)

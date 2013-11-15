@@ -57,6 +57,7 @@ public:
     virtual void setEnabled(bool enabled);
 
     virtual void addToUserDictionary(const QString &word);
+    virtual void enableSpellchecker(bool on);
     //! \reimp_end
 
     Q_SLOT void onWordCandidateSelected(QString word);

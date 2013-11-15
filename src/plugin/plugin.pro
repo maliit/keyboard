@@ -1,6 +1,5 @@
 include(../config.pri)
 include(../config-plugin.pri)
-include(../view/view.pri)
 
 TOP_BUILDDIR = $${OUT_PWD}/../../
 TARGET = $${UBUNTU_KEYBOARD_PLUGIN_TARGET}

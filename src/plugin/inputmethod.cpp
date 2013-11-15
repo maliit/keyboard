@@ -102,6 +102,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
+    d->registerSpellcheckingSetting();
     d->registerEnabledLanguages();
 
     // Setting layout orientation depends on word engine and hide word ribbon
@@ -252,12 +253,6 @@ void InputMethod::onStyleSettingChanged()
     Q_D(InputMethod);
     d->style->setProfile(d->settings.style->value().toString());
     d->layout.model.setImageDirectory(d->style->directory(Style::Images));
-}
-
-void InputMethod::onFeedbackSettingChanged()
-{
-    Q_D(InputMethod);
-    d->feedback.setEnabled(d->m_settings.keyPressFeedback());
 }
 
 void InputMethod::onAutoCorrectSettingChanged()
@@ -496,6 +491,15 @@ const QString &InputMethod::systemLanguage() const
 {
     Q_D(const InputMethod);
     return d->systemLanguage;
+}
+
+//! \brief InputMethod::useAudioFeedback is true, when keys should play a audio
+//! feedback when pressed
+//! \return
+bool InputMethod::useAudioFeedback() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.keyPressFeedback();
 }
 
 //! \brief InputMethod::setActiveLanguage
