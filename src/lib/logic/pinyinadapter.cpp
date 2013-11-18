@@ -57,8 +57,8 @@ QString PinyinAdapter::parse(const QString& string)
     std::cout << std::endl;
 #endif
 
-    m_array = g_array_new(FALSE, FALSE, sizeof(lookup_candidate_t));
-    pinyin_get_candidates(m_instance, 0, m_array);
+
+    pinyin_guess_candidates(m_instance, 0);
 
     pinyin_guess_sentence(m_instance);
 
@@ -66,16 +66,20 @@ QString PinyinAdapter::parse(const QString& string)
     pinyin_get_sentence(m_instance, &sentence);
 
     candidates.clear();
-    for (unsigned int i = 0 ; i < m_array->len; i ++ )
+    guint len = 0;
+    pinyin_get_n_candidate(m_instance, &len);
+    for (unsigned int i = 0 ; i < len; i ++ )
     {
-        lookup_candidate_t token = g_array_index(m_array, lookup_candidate_t, i);
-        char* word = NULL;
+        lookup_candidate_t * candidate = NULL;
+	pinyin_get_candidate(m_instance, i, &candidate);
+
+        const char* word = NULL;
+	pinyin_get_candidate_string(m_instance, candidate, &word);
+
         // Translate the token to utf-8 phrase.
-        pinyin_translate_token(m_instance, token.m_token, &word);
         if (word) {
             candidates.append(QString(word));
         }
-        g_free(word);
     }
 
     QString unicode(sentence);
@@ -91,7 +95,10 @@ QStringList PinyinAdapter::getWordCandidates() const
 void PinyinAdapter::wordCandidateSelected(const QString& word)
 {
     Q_UNUSED(word)
-    pinyin_choose_candidate(m_instance, 0, &g_array_index(m_array, lookup_candidate_t, 1));
+
+    lookup_candidate_t * candidate = NULL;
+    pinyin_get_candidate(m_instance, 1, &candidate);
+    pinyin_choose_candidate(m_instance, 0, candidate);
 }
 
 void PinyinAdapter::reset()
