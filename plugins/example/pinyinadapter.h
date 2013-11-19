@@ -17,8 +17,6 @@
 #ifndef PINYINADAPTER_H
 #define PINYINADAPTER_H
 
-#ifdef HAVE_PINYIN
-
 #include <QObject>
 #include <QStringList>
 
@@ -45,6 +43,5 @@ public:
     void reset();
 };
 
-#endif
 
 #endif // PINYINADAPTER_H

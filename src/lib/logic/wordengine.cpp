@@ -32,15 +32,8 @@
 #include "wordengine.h"
 #include "spellchecker.h"
 
-#include "languageplugininterface.h"
-
 #ifdef HAVE_PRESAGE
 #include <presage.h>
-#endif
-
-#ifdef HAVE_PINYIN
-#include "pinyinadapter.h"
-#include <iostream>
 #endif
 
 namespace MaliitKeyboard {
@@ -129,10 +122,8 @@ public:
     Presage presage;
 #endif
 
-    // TODO there is too many ifdef in this class
-#ifdef HAVE_PINYIN
-    PinyinAdapter* pinyinAdapter;
-#endif
+    LanguagePluginInterface* languagePlugin;
+
     explicit WordEnginePrivate();
 };
 
@@ -152,10 +143,6 @@ WordEnginePrivate::WordEnginePrivate()
     presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
 #endif
 
-#ifdef HAVE_PINYIN
-    pinyinAdapter = new PinyinAdapter;
-#endif
-
     // load plugin
     QDir pluginsDir("/home/phablet/ubuntu-keyboard/plugins/");
     pluginsDir.cd("plugins");
@@ -164,7 +151,7 @@ WordEnginePrivate::WordEnginePrivate()
         QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
         QObject *plugin = pluginLoader.instance();
         if (plugin) {
-            LanguagePluginInterface* languagePlugin = qobject_cast<LanguagePluginInterface *>(plugin);
+            languagePlugin = qobject_cast<LanguagePluginInterface *>(plugin);
             if (languagePlugin)
                 qDebug() << "loading plugin successfull";
                 languagePlugin->hello();
@@ -237,7 +224,7 @@ void WordEngine::onWordCandidateSelected(QString word)
 #ifdef HAVE_PINYIN
     Q_D(WordEngine);
     if (d->predictiveBackend == WordEnginePrivate::PinyinBackend)
-        d->pinyinAdapter->wordCandidateSelected(word);
+        d->languagePlugin->wordCandidateSelected(word);
 #else
     Q_UNUSED(word);
 #endif
@@ -254,9 +241,8 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
     if (d->use_predictive_text) {
 #ifdef HAVE_PINYIN
         if (d->predictiveBackend == WordEnginePrivate::PinyinBackend) {
-            QString sentence = d->pinyinAdapter->parse(preedit);
-
-            QStringList suggestions = d->pinyinAdapter->getWordCandidates();
+            QString sentence = d->languagePlugin->parse(preedit);
+            QStringList suggestions = d->languagePlugin->getWordCandidates();
 
             Q_FOREACH(const QString &suggestion, suggestions) {
                 appendToCandidates(&candidates, WordCandidate::SourcePrediction, suggestion, is_preedit_capitalized);

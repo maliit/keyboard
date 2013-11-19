@@ -4,6 +4,10 @@
 #include <QObject>
 #include "../src/lib/logic/languageplugininterface.h"
 
+#include "pinyinadapter.h"
+#include <iostream>
+
+
 class ExamplePlugin : public QObject, LanguagePluginInterface
 {
     Q_OBJECT
@@ -16,10 +20,16 @@ public:
 
     virtual void hello();
     
+    QString parse(const QString& str);
+    QStringList getWordCandidates();
+    void wordCandidateSelected(QString word);
+
 signals:
     
 public slots:
     
+private:
+    PinyinAdapter* pinyinAdapter;
 };
 
 #endif // EXAMPLEPLUGIN_H

@@ -14,8 +14,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef HAVE_PINYIN
-
 #include "pinyinadapter.h"
 
 #include <iostream>
@@ -99,4 +97,3 @@ void PinyinAdapter::reset()
     pinyin_reset(m_instance);
 }
 
-#endif

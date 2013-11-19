@@ -11,7 +11,6 @@ HEADERS += \
     logic/abstractlanguagefeatures.h \
     logic/languagefeatures.h \
     logic/eventhandler.h \
-    logic/pinyinadapter.h \
     logic/chineselanguagefeatures.h \
     logic/languageplugininterface.h
 
@@ -26,7 +25,6 @@ SOURCES += \
     logic/abstractlanguagefeatures.cpp \
     logic/languagefeatures.cpp \
     logic/eventhandler.cpp \
-    logic/pinyinadapter.cpp \
     logic/chineselanguagefeatures.cpp
 
 DEFINES += HUNSPELL_DICT_PATH=\\\"$$HUNSPELL_DICT_PATH\\\"

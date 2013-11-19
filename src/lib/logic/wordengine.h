@@ -34,6 +34,7 @@
 
 #include "models/text.h"
 #include "logic/abstractwordengine.h"
+#include "languageplugininterface.h"
 
 #include <QtCore>
 
