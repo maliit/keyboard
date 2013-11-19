@@ -32,7 +32,7 @@
 #include "wordengine.h"
 #include "spellchecker.h"
 
-#include "abstractlanguageplugininterface.h"
+#include "languageplugininterface.h"
 
 #ifdef HAVE_PRESAGE
 #include <presage.h>
@@ -164,7 +164,7 @@ WordEnginePrivate::WordEnginePrivate()
         QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
         QObject *plugin = pluginLoader.instance();
         if (plugin) {
-            AbstractLanguagePluginInterface* languagePlugin = qobject_cast<AbstractLanguagePluginInterface *>(plugin);
+            LanguagePluginInterface* languagePlugin = qobject_cast<LanguagePluginInterface *>(plugin);
             if (languagePlugin)
                 qDebug() << "loading plugin successfull";
                 languagePlugin->hello();

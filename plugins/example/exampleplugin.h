@@ -2,13 +2,13 @@
 #define EXAMPLEPLUGIN_H
 
 #include <QObject>
-#include "../src/lib/logic/abstractlanguageplugininterface.h"
+#include "../src/lib/logic/languageplugininterface.h"
 
-class ExamplePlugin : public QObject, AbstractLanguagePluginInterface
+class ExamplePlugin : public QObject, LanguagePluginInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.EchoInterface" FILE "exampleplugin.json")
-    Q_INTERFACES(AbstractLanguagePluginInterface)
+    Q_INTERFACES(LanguagePluginInterface)
 
 public:
     explicit ExamplePlugin(QObject *parent = 0);

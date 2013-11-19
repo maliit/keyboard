@@ -13,7 +13,7 @@ HEADERS += \
     logic/eventhandler.h \
     logic/pinyinadapter.h \
     logic/chineselanguagefeatures.h \
-    logic/abstractlanguageplugininterface.h
+    logic/languageplugininterface.h
 
 SOURCES += \
     logic/layouthelper.cpp \
