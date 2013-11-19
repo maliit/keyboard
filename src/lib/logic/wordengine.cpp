@@ -32,6 +32,8 @@
 #include "wordengine.h"
 #include "spellchecker.h"
 
+#include "abstractlanguageplugininterface.h"
+
 #ifdef HAVE_PRESAGE
 #include <presage.h>
 #endif
@@ -153,6 +155,21 @@ WordEnginePrivate::WordEnginePrivate()
 #ifdef HAVE_PINYIN
     pinyinAdapter = new PinyinAdapter;
 #endif
+
+    // load plugin
+    QDir pluginsDir("/home/phablet/ubuntu-keyboard/plugins/");
+    pluginsDir.cd("plugins");
+
+    foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
+        QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
+        QObject *plugin = pluginLoader.instance();
+        if (plugin) {
+            AbstractLanguagePluginInterface* languagePlugin = qobject_cast<AbstractLanguagePluginInterface *>(plugin);
+            if (languagePlugin)
+                qDebug() << "loading plugin successfull";
+                languagePlugin->hello();
+        }
+    }
 }
 
 

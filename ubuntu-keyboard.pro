@@ -94,6 +94,7 @@ SUBDIRS = \
     data \
     qml \
     benchmark \
+    plugins \
 
 !notests {
     SUBDIRS += tests
