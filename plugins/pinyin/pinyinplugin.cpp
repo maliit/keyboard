@@ -1,29 +1,29 @@
-#include "exampleplugin.h"
+#include "pinyinplugin.h"
 
 #include <QDebug>
 
 
-ExamplePlugin::ExamplePlugin(QObject *parent) :
+PinyinPlugin::PinyinPlugin(QObject *parent) :
     QObject(parent)
   , pinyinAdapter(new PinyinAdapter)
 {
 }
 
-ExamplePlugin::~ExamplePlugin()
+PinyinPlugin::~PinyinPlugin()
 {
 }
 
-QString ExamplePlugin::parse(const QString& str)
+QString PinyinPlugin::parse(const QString& str)
 {
     return pinyinAdapter->parse(str);
 }
 
-QStringList ExamplePlugin::getWordCandidates()
+QStringList PinyinPlugin::getWordCandidates()
 {
     return pinyinAdapter->getWordCandidates();
 }
 
-void ExamplePlugin::wordCandidateSelected(QString word)
+void PinyinPlugin::wordCandidateSelected(QString word)
 {
     return pinyinAdapter->wordCandidateSelected(word);
 }

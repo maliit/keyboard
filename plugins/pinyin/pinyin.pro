@@ -26,4 +26,3 @@ OTHER_FILES += \
 CONFIG += link_pkgconfig
 PKGCONFIG += glib-2.0
 PKGCONFIG += libpinyin
-DEFINES += HAVE_PINYIN
