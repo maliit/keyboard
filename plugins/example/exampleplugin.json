@@ -3,6 +3,5 @@
     "MetaData": {
     },
     "className": "ExamplePlugin",
-    "debug": true,
-    "version": 927682
+    "debug": true
 }

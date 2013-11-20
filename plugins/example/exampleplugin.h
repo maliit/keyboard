@@ -17,8 +17,6 @@ class ExamplePlugin : public QObject, LanguagePluginInterface
 public:
     explicit ExamplePlugin(QObject *parent = 0);
     virtual ~ExamplePlugin();
-
-    virtual void hello();
     
     QString parse(const QString& str);
     QStringList getWordCandidates();

@@ -7,19 +7,11 @@ ExamplePlugin::ExamplePlugin(QObject *parent) :
     QObject(parent)
   , pinyinAdapter(new PinyinAdapter)
 {
-    qDebug() << __PRETTY_FUNCTION__;
 }
 
 ExamplePlugin::~ExamplePlugin()
 {
-    qDebug() << __PRETTY_FUNCTION__ << "vdestructor";
 }
-
-void ExamplePlugin::hello()
-{
-    qDebug() << __PRETTY_FUNCTION__ << "<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-}
-
 
 QString ExamplePlugin::parse(const QString& str)
 {
