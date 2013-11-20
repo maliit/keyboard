@@ -1,7 +1,0 @@
-{
-    "IID": "org.qt-project.Qt.Examples.EchoInterface",
-    "MetaData": {
-    },
-    "className": "ExamplePlugin",
-    "debug": true
-}

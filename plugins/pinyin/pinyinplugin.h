@@ -8,15 +8,15 @@
 #include <iostream>
 
 
-class ExamplePlugin : public QObject, LanguagePluginInterface
+class PinyinPlugin : public QObject, LanguagePluginInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.EchoInterface" FILE "exampleplugin.json")
     Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    explicit ExamplePlugin(QObject *parent = 0);
-    virtual ~ExamplePlugin();
+    explicit PinyinPlugin(QObject *parent = 0);
+    virtual ~PinyinPlugin();
     
     QString parse(const QString& str);
     QStringList getWordCandidates();

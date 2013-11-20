@@ -5,22 +5,23 @@ TEMPLATE        = lib
 CONFIG         += plugin
 QT             += widgets
 INCLUDEPATH    += ../../src/
-HEADERS         = exampleplugin.h \
-                  pinyinadapter.h
-    exampleplugin.h
-SOURCES         = exampleplugin.cpp \
-                  pinyinadapter.cpp
-TARGET          = $$qtLibraryTarget(exampleplugin)
+HEADERS         =
+                  pinyinadapter.h \
+                  pinyinplugin.h
+SOURCES         = \
+                  pinyinadapter.cpp \
+                  pinyinplugin.cpp
+TARGET          = $$qtLibraryTarget(pinyinplugin)
 DESTDIR         = ../plugins
 
-EXAMPLE_FILES = exampleplugin.json
+EXAMPLE_FILES = pinyinplugin.json
 
 # install
-target.path = $$[QT_INSTALL_EXAMPLES]/widgets/tools/exampleplugin/plugin
+target.path = $$[QT_INSTALL_EXAMPLES]/widgets/tools/pinyinplugin/plugin
 INSTALLS += target
 
 OTHER_FILES += \
-    exampleplugin.json
+    pinyinplugin.json
 
 CONFIG += link_pkgconfig
 PKGCONFIG += glib-2.0

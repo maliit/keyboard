@@ -1,7 +1,7 @@
 CONFIG += ordered
 TEMPLATE = subdirs
 SUBDIRS = \
-    example \
+    pinyin \
     western
 
 QMAKE_EXTRA_TARGETS += check
