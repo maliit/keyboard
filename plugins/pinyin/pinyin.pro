@@ -4,13 +4,19 @@ DEFINES += PINYIN_DATA_DIR=\\\"$${PINYIN_DATA_DIR}\\\"
 TEMPLATE        = lib
 CONFIG         += plugin
 QT             += widgets
-INCLUDEPATH    += ../../src/
-HEADERS         =
+INCLUDEPATH    += \
+    ../../src/ \
+    ../../src/lib/logic
+
+HEADERS         = \
                   pinyinadapter.h \
-                  pinyinplugin.h
+                  pinyinplugin.h \
+                  chineselanguagefeatures.h
 SOURCES         = \
                   pinyinadapter.cpp \
-                  pinyinplugin.cpp
+                  pinyinplugin.cpp \
+                  chineselanguagefeatures.cpp
+
 TARGET          = $$qtLibraryTarget(pinyinplugin)
 DESTDIR         = ../plugins
 

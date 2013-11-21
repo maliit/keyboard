@@ -1,11 +1,12 @@
 #include "pinyinplugin.h"
+#include "chineselanguagefeatures.h"
 
 #include <QDebug>
-
 
 PinyinPlugin::PinyinPlugin(QObject *parent) :
     QObject(parent)
   , pinyinAdapter(new PinyinAdapter)
+  , m_chineseLanguageFeatures(new ChineseLanguageFeatures)
 {
 }
 
@@ -26,4 +27,9 @@ QStringList PinyinPlugin::getWordCandidates()
 void PinyinPlugin::wordCandidateSelected(QString word)
 {
     return pinyinAdapter->wordCandidateSelected(word);
+}
+
+AbstractLanguageFeatures* PinyinPlugin::languageFeature()
+{
+    return m_chineseLanguageFeatures;
 }

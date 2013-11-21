@@ -9,6 +9,7 @@
 #include <presage.h>
 
 class CandidatesCallback;
+class LanguageFeatures;
 
 class WesternLanguagePlugin : public QObject, LanguagePluginInterface
 {
@@ -24,6 +25,8 @@ public:
     QStringList getWordCandidates();
     void wordCandidateSelected(QString word);
 
+    virtual AbstractLanguageFeatures* languageFeature();
+
 signals:
     
 public slots:
@@ -32,6 +35,7 @@ private:
     std::string candidates_context;
     CandidatesCallback presage_candidates;
     Presage presage;
+    LanguageFeatures* m_languageFeatures;
 };
 
 #endif // WESTERNPLUGIN_H

@@ -2,11 +2,19 @@
 TEMPLATE        = lib
 CONFIG         += plugin
 QT             += widgets
-INCLUDEPATH    += ../../src/
-HEADERS         = westernplugin.h \
-    candidatescallback.h
-SOURCES         = westernplugin.cpp \ 
-    candidatescallback.cpp
+INCLUDEPATH    += \
+    ../../src/ \
+    ../../src/lib/logic
+
+HEADERS         = \
+    westernplugin.h \
+    candidatescallback.h \
+    languagefeatures.h
+SOURCES         = \
+    westernplugin.cpp \
+    candidatescallback.cpp \
+    languagefeatures.cpp
+
 TARGET          = $$qtLibraryTarget(westernplugin)
 DESTDIR         = ../plugins
 

@@ -4,6 +4,8 @@
 #include <QString>
 #include <QStringList>
 
+class AbstractLanguageFeatures;
+
 class LanguagePluginInterface
 {
 public:
@@ -12,6 +14,8 @@ public:
     virtual QString parse(const QString& str) = 0;
     virtual QStringList getWordCandidates() = 0;
     virtual void wordCandidateSelected(QString word) = 0;
+
+    virtual AbstractLanguageFeatures* languageFeature() = 0;
 };
 
 #define LanguagePluginInterface_iid "com.canonical.UbuntuKeyboard.LanguagePluginInterface"

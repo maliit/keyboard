@@ -1,4 +1,5 @@
 #include "westernplugin.h"
+#include "languagefeatures.h"
 
 #include <QDebug>
 
@@ -7,6 +8,7 @@ WesternLanguagePlugin::WesternLanguagePlugin(QObject *parent) :
   , candidates_context()
   , presage_candidates(CandidatesCallback(candidates_context))
   , presage(&presage_candidates)
+  , m_languageFeatures(new LanguageFeatures)
 {
     presage.config("Presage.Selector.SUGGESTIONS", "6");
     presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
@@ -39,4 +41,9 @@ QStringList WesternLanguagePlugin::getWordCandidates()
 void WesternLanguagePlugin::wordCandidateSelected(QString word)
 {
 
+}
+
+AbstractLanguageFeatures* WesternLanguagePlugin::languageFeature()
+{
+    return m_languageFeatures;
 }

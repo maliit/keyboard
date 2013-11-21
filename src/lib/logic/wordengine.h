@@ -65,6 +65,8 @@ public:
     Q_SLOT void onWordCandidateSelected(QString word);
     Q_SLOT void onLanguageChanged(const QString& languageId);
 
+    virtual AbstractLanguageFeatures* languageFeature();
+
 private:
     //! \reimp
     virtual WordCandidateList fetchCandidates(Model::Text *text);

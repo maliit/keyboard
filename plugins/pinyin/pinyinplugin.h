@@ -1,5 +1,5 @@
-#ifndef EXAMPLEPLUGIN_H
-#define EXAMPLEPLUGIN_H
+#ifndef PINYINPLUGIN_H
+#define PINYINPLUGIN_H
 
 #include <QObject>
 #include "../src/lib/logic/languageplugininterface.h"
@@ -7,11 +7,12 @@
 #include "pinyinadapter.h"
 #include <iostream>
 
+class ChineseLanguageFeatures;
 
 class PinyinPlugin : public QObject, LanguagePluginInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.EchoInterface" FILE "exampleplugin.json")
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.PinyinPlugin" FILE "pinyinplugin.json")
     Q_INTERFACES(LanguagePluginInterface)
 
 public:
@@ -22,12 +23,15 @@ public:
     QStringList getWordCandidates();
     void wordCandidateSelected(QString word);
 
+    virtual AbstractLanguageFeatures* languageFeature();
+
 signals:
     
 public slots:
     
 private:
     PinyinAdapter* pinyinAdapter;
+    ChineseLanguageFeatures* m_chineseLanguageFeatures;
 };
 
-#endif // EXAMPLEPLUGIN_H
+#endif // PINYINPLUGIN_H

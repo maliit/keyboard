@@ -29,18 +29,38 @@
  *
  */
 
-#include "abstractlanguagefeatures.h"
+#include "languagefeatures.h"
 
-namespace MaliitKeyboard {
-namespace Logic {
+#include <QtCore>
 
-AbstractLanguageFeatures::AbstractLanguageFeatures(QObject *parent) :
+LanguageFeatures::LanguageFeatures(QObject *parent) :
     QObject(parent)
 {
 }
 
-AbstractLanguageFeatures::~AbstractLanguageFeatures()
+LanguageFeatures::~LanguageFeatures()
 {
 }
 
-}} // namespace MaliitKeyboard, Logic
+bool LanguageFeatures::activateAutoCaps(const QString &preedit) const
+{
+    static const QString sentenceBreak = QString::fromUtf8("!.?:");
+
+    if (preedit.isEmpty()) {
+        return false;
+    }
+
+    if (sentenceBreak.contains(preedit.right(1))) {
+        return true;
+    }
+
+    return false;
+}
+
+QString LanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
+{
+    if (preedit.isEmpty())
+        return QString("");
+
+    return QString(" ");
+}

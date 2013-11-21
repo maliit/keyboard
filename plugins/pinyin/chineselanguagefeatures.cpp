@@ -14,26 +14,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CHINESELANGUAGEFEATURES_H
-#define CHINESELANGUAGEFEATURES_H
+#include "chineselanguagefeatures.h"
 
-#include "abstractlanguagefeatures.h"
-
-namespace MaliitKeyboard {
-namespace Logic {
-
-class ChineseLanguageFeatures : public AbstractLanguageFeatures
+ChineseLanguageFeatures::ChineseLanguageFeatures(QObject *parent) :
+    QObject(parent)
 {
-    Q_OBJECT
-public:
-    explicit ChineseLanguageFeatures(QObject *parent = 0);
-    virtual ~ChineseLanguageFeatures();
+}
 
-    virtual bool activateAutoCaps(const QString &preedit) const;
-    virtual QString appendixForReplacedPreedit(const QString &preedit) const;
-};
+ChineseLanguageFeatures::~ChineseLanguageFeatures()
+{
+}
 
-} // namespace Logic
-} // namespace MaliitKeyboard
+bool ChineseLanguageFeatures::activateAutoCaps(const QString &preedit) const
+{
+    Q_UNUSED(preedit)
+    return false;
+}
 
-#endif // CHINESELANGUAGEFEATURES_H
+QString ChineseLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
+{
+    Q_UNUSED(preedit)
+    return QString("");
+}

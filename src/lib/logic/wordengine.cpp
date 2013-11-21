@@ -220,13 +220,19 @@ void WordEngine::onLanguageChanged(const QString &languageId)
     Q_D(WordEngine);
 
     if (languageId == "zh")
-        d->loadPlugin("libexampleplugin.so");
+        d->loadPlugin("libpinyinplugin.so");
     else
         d->loadPlugin("libwesternplugin.so");
 
     bool ok = d->spell_checker.setLanguage(languageId);
     if (ok)
         d->spell_checker.setEnabled(d->use_spell_checker);
+}
+
+AbstractLanguageFeatures* WordEngine::languageFeature()
+{
+    Q_D(WordEngine);
+    return d->languagePlugin->languageFeature();
 }
 
 }} // namespace Logic, MaliitKeyboard
