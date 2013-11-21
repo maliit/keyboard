@@ -5,7 +5,6 @@ HEADERS += \
     logic/layoutupdater.h \
     logic/keyboardloader.h \
     logic/style.h \
-    logic/spellchecker.h \
     logic/abstractwordengine.h \
     logic/wordengine.h \
     logic/abstractlanguagefeatures.h \
@@ -17,11 +16,8 @@ SOURCES += \
     logic/layoutupdater.cpp \
     logic/keyboardloader.cpp \
     logic/style.cpp \
-    logic/spellchecker.cpp \
     logic/abstractwordengine.cpp \
     logic/wordengine.cpp \
     logic/eventhandler.cpp \
-
-DEFINES += HUNSPELL_DICT_PATH=\\\"$$HUNSPELL_DICT_PATH\\\"
 
 DEPENDPATH += $$LOGIC_DIR

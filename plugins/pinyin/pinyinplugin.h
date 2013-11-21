@@ -2,6 +2,7 @@
 #define PINYINPLUGIN_H
 
 #include <QObject>
+#include <QStringList>
 #include "../src/lib/logic/languageplugininterface.h"
 
 #include "pinyinadapter.h"
@@ -24,6 +25,14 @@ public:
     void wordCandidateSelected(QString word);
 
     virtual AbstractLanguageFeatures* languageFeature();
+
+    //! spell checker
+    virtual bool spellCheckerEnabled() { return false; }
+    virtual bool setSpellCheckerEnabled(bool enabled) { Q_UNUSED(enabled); return false; }
+    virtual bool spell(const QString& word) { Q_UNUSED(word); return false; }
+    virtual QStringList suggest(const QString& word, int limit) { Q_UNUSED(word); Q_UNUSED(limit); return QStringList(); }
+    virtual void addToUserWordList(const QString& word) { Q_UNUSED(word); }
+    virtual bool setLanguage(const QString& languageId) { Q_UNUSED(languageId); return false; }
 
 signals:
     

@@ -30,7 +30,6 @@
  */
 
 #include "wordengine.h"
-#include "spellchecker.h"
 
 namespace MaliitKeyboard {
 namespace Logic {
@@ -71,7 +70,6 @@ public:
 
     bool use_predictive_text;
 
-    SpellChecker spell_checker;
     bool use_spell_checker;
 
     LanguagePluginInterface* languagePlugin;
@@ -100,7 +98,6 @@ public:
 
 WordEnginePrivate::WordEnginePrivate()
     : use_predictive_text(false)
-    , spell_checker()
     , use_spell_checker(false)
     , languagePlugin(0)
 {
@@ -126,7 +123,7 @@ bool WordEngine::isEnabled() const
 {
     Q_D(const WordEngine);
     return (AbstractWordEngine::isEnabled() &&
-            (d->use_predictive_text || d->spell_checker.enabled()));
+            (d->use_predictive_text || d->languagePlugin->spellCheckerEnabled()));
 }
 
 void WordEngine::setWordPredictionEnabled(bool enabled)
@@ -160,7 +157,7 @@ void WordEngine::setSpellcheckerEnabled(bool enabled)
 
     d->use_spell_checker = enabled;
 
-    d->spell_checker.setEnabled(d->use_spell_checker);
+    d->languagePlugin->setSpellCheckerEnabled(d->use_spell_checker);
     if(totalEnabled != isEnabled())
         Q_EMIT enabledChanged(isEnabled());
 }
@@ -190,10 +187,10 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
         }
     }
 
-    const bool correct_spelling(d->spell_checker.spell(preedit));
+    const bool correct_spelling(d->languagePlugin->spell(preedit));
 
     if (candidates.isEmpty() and not correct_spelling) {
-        Q_FOREACH(const QString &correction, d->spell_checker.suggest(preedit, 5)) {
+        Q_FOREACH(const QString &correction, d->languagePlugin->suggest(preedit, 5)) {
             appendToCandidates(&candidates, WordCandidate::SourceSpellChecking, correction, is_preedit_capitalized);
         }
     }
@@ -212,7 +209,7 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
 void WordEngine::addToUserDictionary(const QString &word)
 {
     Q_D(WordEngine);
-    d->spell_checker.addToUserWordlist(word);
+    d->languagePlugin->addToUserWordList(word);
 }
 
 void WordEngine::onLanguageChanged(const QString &languageId)
@@ -224,9 +221,9 @@ void WordEngine::onLanguageChanged(const QString &languageId)
     else
         d->loadPlugin("libwesternplugin.so");
 
-    bool ok = d->spell_checker.setLanguage(languageId);
+    bool ok = d->languagePlugin->setLanguage(languageId);
     if (ok)
-        d->spell_checker.setEnabled(d->use_spell_checker);
+        d->languagePlugin->setSpellCheckerEnabled(d->use_spell_checker);
 }
 
 AbstractLanguageFeatures* WordEngine::languageFeature()

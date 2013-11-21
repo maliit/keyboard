@@ -60,9 +60,6 @@ private:
 #include <QDebug>
 #include <QDir>
 
-namespace MaliitKeyboard {
-namespace Logic {
-
 //! \class SpellChecker
 //! Checks spelling and suggest words. Currently Spellchecker is
 //! implemented by using Hunspell.
@@ -309,5 +306,3 @@ QString SpellChecker::dictPath()
 {
     return QString(HUNSPELL_DICT_PATH);
 }
-
-}} // namespace Logic, MaliitKeyboard

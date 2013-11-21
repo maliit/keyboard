@@ -34,9 +34,6 @@
 
 #include <QtCore>
 
-namespace MaliitKeyboard {
-namespace Logic {
-
 class SpellCheckerPrivate;
 
 class SpellChecker
@@ -66,7 +63,5 @@ public:
 private:
     const QScopedPointer<SpellCheckerPrivate> d_ptr;
 };
-
-}} // namespace Logic, MaliitKeyboard
 
 #endif // MALIIT_KEYBOARD_SPELLCHECKER_H
