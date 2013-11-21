@@ -32,9 +32,9 @@ public:
     virtual bool spellCheckerEnabled();
     virtual bool setSpellCheckerEnabled(bool enabled);
     virtual bool spell(const QString& word);
-    virtual QStringList suggest(const QString& word, int limit);
-    virtual void addToUserWordList(const QString& word);
-    virtual bool setLanguage(const QString& languageId);
+    virtual QStringList spellCheckerSuggest(const QString& word, int limit);
+    virtual void addToSpellCheckerUserWordList(const QString& word);
+    virtual bool setSpellCheckerLanguage(const QString& languageId);
 
 signals:
     

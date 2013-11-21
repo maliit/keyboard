@@ -65,17 +65,17 @@ bool WesternLanguagePlugin::spell(const QString& word)
     return m_spellChecker.spell(word);
 }
 
-QStringList WesternLanguagePlugin::suggest(const QString& word, int limit)
+QStringList WesternLanguagePlugin::spellCheckerSuggest(const QString& word, int limit)
 {
     return m_spellChecker.suggest(word, limit);
 }
 
-void WesternLanguagePlugin::addToUserWordList(const QString& word)
+void WesternLanguagePlugin::addToSpellCheckerUserWordList(const QString& word)
 {
     return m_spellChecker.addToUserWordlist(word);
 }
 
-bool WesternLanguagePlugin::setLanguage(const QString& languageId)
+bool WesternLanguagePlugin::setSpellCheckerLanguage(const QString& languageId)
 {
     return m_spellChecker.setLanguage(languageId);
 }

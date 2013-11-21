@@ -190,7 +190,7 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
     const bool correct_spelling(d->languagePlugin->spell(preedit));
 
     if (candidates.isEmpty() and not correct_spelling) {
-        Q_FOREACH(const QString &correction, d->languagePlugin->suggest(preedit, 5)) {
+        Q_FOREACH(const QString &correction, d->languagePlugin->spellCheckerSuggest(preedit, 5)) {
             appendToCandidates(&candidates, WordCandidate::SourceSpellChecking, correction, is_preedit_capitalized);
         }
     }
@@ -209,7 +209,7 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
 void WordEngine::addToUserDictionary(const QString &word)
 {
     Q_D(WordEngine);
-    d->languagePlugin->addToUserWordList(word);
+    d->languagePlugin->addToSpellCheckerUserWordList(word);
 }
 
 void WordEngine::onLanguageChanged(const QString &languageId)
@@ -221,7 +221,7 @@ void WordEngine::onLanguageChanged(const QString &languageId)
     else
         d->loadPlugin("libwesternplugin.so");
 
-    bool ok = d->languagePlugin->setLanguage(languageId);
+    bool ok = d->languagePlugin->setSpellCheckerLanguage(languageId);
     if (ok)
         d->languagePlugin->setSpellCheckerEnabled(d->use_spell_checker);
 }

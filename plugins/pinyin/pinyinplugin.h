@@ -30,9 +30,9 @@ public:
     virtual bool spellCheckerEnabled() { return false; }
     virtual bool setSpellCheckerEnabled(bool enabled) { Q_UNUSED(enabled); return false; }
     virtual bool spell(const QString& word) { Q_UNUSED(word); return false; }
-    virtual QStringList suggest(const QString& word, int limit) { Q_UNUSED(word); Q_UNUSED(limit); return QStringList(); }
-    virtual void addToUserWordList(const QString& word) { Q_UNUSED(word); }
-    virtual bool setLanguage(const QString& languageId) { Q_UNUSED(languageId); return false; }
+    virtual QStringList spellCheckerSuggest(const QString& word, int limit) { Q_UNUSED(word); Q_UNUSED(limit); return QStringList(); }
+    virtual void addToSpellCheckerUserWordList(const QString& word) { Q_UNUSED(word); }
+    virtual bool setSpellCheckerLanguage(const QString& languageId) { Q_UNUSED(languageId); return false; }
 
 signals:
     
