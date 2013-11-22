@@ -1,3 +1,6 @@
+TOP_BUILDDIR = $$OUT_PWD/../..
+TOP_SRCDIR = $$PWD/../..
+
 PINYIN_DATA_DIR = "$$system(pkg-config --variable pkgdatadir libpinyin)/data"
 DEFINES += PINYIN_DATA_DIR=\\\"$${PINYIN_DATA_DIR}\\\"
 
@@ -5,8 +8,8 @@ TEMPLATE        = lib
 CONFIG         += plugin
 QT             += widgets
 INCLUDEPATH    += \
-    ../../src/ \
-    ../../src/lib/logic
+    $${TOP_SRCDIR}/src/ \
+    $${TOP_SRCDIR}/src/lib/logic
 
 HEADERS         = \
                   pinyinadapter.h \
@@ -18,7 +21,7 @@ SOURCES         = \
                   chineselanguagefeatures.cpp
 
 TARGET          = $$qtLibraryTarget(pinyinplugin)
-DESTDIR         = ../plugins
+DESTDIR         = $${TOP_BUILDDIR}/plugins/plugins
 
 EXAMPLE_FILES = pinyinplugin.json
 

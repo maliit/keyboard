@@ -1,16 +1,20 @@
+TOP_BUILDDIR = $$OUT_PWD/../../..
+TOP_SRCDIR = $$PWD/../../..
 
 TEMPLATE        = lib
 CONFIG         += plugin
 QT             += widgets
 INCLUDEPATH    += \
-    ../../src/ \
-    ../../src/lib/logic
+    $${TOP_SRCDIR}/src/ \
+    $${TOP_SRCDIR}/src/lib/ \
+    $${TOP_SRCDIR}/src/lib/logic/
 
 HEADERS         = \
     westernplugin.h \
     candidatescallback.h \
     spellchecker.h \
     languagefeatures.h
+
 SOURCES         = \
     westernplugin.cpp \
     candidatescallback.cpp \
@@ -18,7 +22,7 @@ SOURCES         = \
     languagefeatures.cpp
 
 TARGET          = $$qtLibraryTarget(westernplugin)
-DESTDIR         = ../plugins
+DESTDIR         = $${TOP_BUILDDIR}/plugins/plugins
 
 EXAMPLE_FILES = westernplugin.json
 

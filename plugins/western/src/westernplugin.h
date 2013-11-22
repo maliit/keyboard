@@ -2,7 +2,7 @@
 #define WESTERNPLUGIN_H
 
 #include <QObject>
-#include "../src/lib/logic/languageplugininterface.h"
+#include "languageplugininterface.h"
 
 #include "candidatescallback.h"
 #include "spellchecker.h"
