@@ -24,7 +24,7 @@
     <key name="key-press-feedback" type="b">
       <summary>Key press feedback</summary>
       <description>Vibrate or emit sound on key press.</description>
-      <default>true</default>
+      <default>false</default>
     </key>
     <key name="spell-checking" type="b">
       <summary>Spell checking</summary>
