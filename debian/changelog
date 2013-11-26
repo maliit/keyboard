@@ -1,3 +1,13 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131126-0ubuntu1) trusty; urgency=low
+
+  [ Thomas Moenicke ]
+  * sound off by default.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 118
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 26 Nov 2013 03:48:28 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131122.1-0ubuntu1) trusty; urgency=low
 
   [ Thomas Moenicke ]
