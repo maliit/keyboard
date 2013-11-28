@@ -60,6 +60,8 @@ void appendToCandidates(WordCandidateList *candidates,
 
 } // namespace
 
+#define DEFAULT_PLUGIN "libenglishplugin.so"
+
 //! \class WordEngine
 //! \brief Provides error correction (based on Hunspell) and word
 //! prediction (based on Presage).
@@ -78,20 +80,22 @@ public:
 
     void loadPlugin(QString pluginName)
     {
-        QDir pluginsDir("/home/phablet/ubuntu-keyboard/plugins/");
-        pluginsDir.cd("plugins");
-
+        QDir pluginsDir("/usr/share/maliit/plugins/com/ubuntu/lib/");
+        //pluginsDir.cd("plugins");
+        qDebug() << "loading plugin <<<<<<<<<<<<=====================";
         QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(pluginName));
         QObject *plugin = pluginLoader.instance();
+        qDebug() << plugin << pluginName << pluginsDir.absoluteFilePath(pluginName);
         if (plugin) {
             languagePlugin = qobject_cast<LanguagePluginInterface *>(plugin);
             if (!languagePlugin) {
                 qCritical() << "loading plugin failed: " + pluginName;
 
                 // fallback
-                if (pluginName != "libwesternplugin.so")
-                    loadPlugin("libwesternplugin.so");
-            }
+                if (pluginName != DEFAULT_PLUGIN)
+                    loadPlugin(DEFAULT_PLUGIN);
+            } else
+                qDebug("plugin loaded");
         }
     }
 };
@@ -101,7 +105,7 @@ WordEnginePrivate::WordEnginePrivate()
     , use_spell_checker(false)
     , languagePlugin(0)
 {
-    loadPlugin("libwesternplugin.so");
+    loadPlugin(DEFAULT_PLUGIN);
 }
 
 
@@ -219,7 +223,7 @@ void WordEngine::onLanguageChanged(const QString &languageId)
     if (languageId == "zh")
         d->loadPlugin("libpinyinplugin.so");
     else
-        d->loadPlugin("libwesternplugin.so");
+        d->loadPlugin(DEFAULT_PLUGIN);
 
     bool ok = d->languagePlugin->setSpellCheckerLanguage(languageId);
     if (ok)

@@ -29,38 +29,21 @@
  *
  */
 
-#include "languagefeatures.h"
+#ifndef MALIITKEYBOARD_LANGUAGEFEATURES_H
+#define MALIITKEYBOARD_LANGUAGEFEATURES_H
 
-#include <QtCore>
+#include "abstractlanguagefeatures.h"
+#include <QObject>
 
-LanguageFeatures::LanguageFeatures(QObject *parent) :
-    QObject(parent)
+class WesternLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {
-}
+    Q_OBJECT
+public:
+    explicit WesternLanguageFeatures(QObject *parent = 0);
+    virtual ~WesternLanguageFeatures();
 
-LanguageFeatures::~LanguageFeatures()
-{
-}
+    virtual bool activateAutoCaps(const QString &preedit) const;
+    virtual QString appendixForReplacedPreedit(const QString &preedit) const;
+};
 
-bool LanguageFeatures::activateAutoCaps(const QString &preedit) const
-{
-    static const QString sentenceBreak = QString::fromUtf8("!.?:");
-
-    if (preedit.isEmpty()) {
-        return false;
-    }
-
-    if (sentenceBreak.contains(preedit.right(1))) {
-        return true;
-    }
-
-    return false;
-}
-
-QString LanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
-{
-    if (preedit.isEmpty())
-        return QString("");
-
-    return QString(" ");
-}
+#endif // MALIITKEYBOARD_LANGUAGEFEATURES_H

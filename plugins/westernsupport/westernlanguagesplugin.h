@@ -1,31 +1,29 @@
-﻿#ifndef WESTERNPLUGIN_H
-#define WESTERNPLUGIN_H
+#ifndef WESTERNLANGUAGESPLUGIN_H
+#define WESTERNLANGUAGESPLUGIN_H
 
-#include <QObject>
 #include "languageplugininterface.h"
-
 #include "candidatescallback.h"
+#include "westernlanguagefeatures.h"
 #include "spellchecker.h"
 
 #include <presage.h>
 
-class CandidatesCallback;
-class LanguageFeatures;
+#include <QObject>
 
-class WesternLanguagePlugin : public QObject, LanguagePluginInterface
+class WesternLanguageFeatures;
+
+class WesternLanguagesPlugin : /*public QObject,*/ public LanguagePluginInterface
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.WesternLanguagePlugin" FILE "westernplugin.json")
+    //Q_OBJECT
     Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    explicit WesternLanguagePlugin(QObject *parent = 0);
-    virtual ~WesternLanguagePlugin();
+    explicit WesternLanguagesPlugin(/*QObject *parent = 0*/);
+    virtual ~WesternLanguagesPlugin();
 
-    QString parse(const QString& str);
-    QStringList getWordCandidates();
-    void wordCandidateSelected(QString word);
-
+    virtual QString parse(const QString& str);
+    virtual QStringList getWordCandidates();
+    virtual void wordCandidateSelected(QString word);
     virtual AbstractLanguageFeatures* languageFeature();
 
     //! spell checker
@@ -37,16 +35,16 @@ public:
     virtual bool setSpellCheckerLanguage(const QString& languageId);
 
 signals:
-    
+
 public slots:
-    
+
 private:
     std::string m_candidatesContext;
     CandidatesCallback m_presageCandidates;
     Presage m_presage;
-    LanguageFeatures* m_languageFeatures;
+    WesternLanguageFeatures* m_languageFeatures;
 
     SpellChecker m_spellChecker;
 };
 
-#endif // WESTERNPLUGIN_H
+#endif // WESTERNLANGUAGESPLUGIN_H
