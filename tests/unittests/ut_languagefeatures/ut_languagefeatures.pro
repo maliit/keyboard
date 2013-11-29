@@ -25,9 +25,7 @@ SOURCES += \
 target.path = $$INSTALL_BIN
 INSTALLS += target
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/release/ -lwesternsupport
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/debug/ -lwesternsupport
-else:unix: LIBS += -L$$OUT_PWD/ -lwesternsupport
+LIBS += -L$$TOP_BUILDDIR/plugins/plugins -lwesternsupport
 
-INCLUDEPATH += $$PWD/../../../plugins/westernsupport
-DEPENDPATH += $$PWD/../../../plugins/westernsupport
+INCLUDEPATH += $$TOP_SRCDIR/plugins/westernsupport
+DEPENDPATH += $$TOP_SRCDIR/plugins/westernsupport

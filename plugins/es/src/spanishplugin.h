@@ -23,4 +23,4 @@ public:
     }
 };
 
-#endif // SPANISHPlugin_H
+#endif // SPANISHPLUGIN_H

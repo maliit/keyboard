@@ -23,6 +23,7 @@ Build-Depends: debhelper (>= 9),
                qtdeclarative5-dev,
                qtdeclarative5-ubuntu-ui-toolkit-plugin,
                xvfb,
+               presage
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-keyboard
 # If you aren't a member of ~phablet-team but need to upload packaging changes,
