@@ -16,6 +16,7 @@ public:
         : QObject(parent)
         , WesternLanguagesPlugin()
     {
+        _useDatabase("/home/phablet/ubuntu-keyboard/database_de.db");
     }
 
     virtual ~GermanPlugin()

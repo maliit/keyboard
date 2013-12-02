@@ -38,6 +38,8 @@ signals:
 
 public slots:
 
+protected:
+    void _useDatabase(const QString& dbFileName);
 private:
     std::string m_candidatesContext;
     CandidatesCallback m_presageCandidates;

@@ -80,3 +80,7 @@ bool WesternLanguagesPlugin::setSpellCheckerLanguage(const QString& languageId)
     return m_spellChecker.setLanguage(languageId);
 }
 
+void WesternLanguagesPlugin::_useDatabase(const QString &dbFileName)
+{
+    m_presage.config("Predictors.DefaultSmoothedNgramPredictor.DBFILENAME", dbFileName.toLatin1().data());
+}
