@@ -54,7 +54,7 @@ Item {
 
     Audio {
         id: audioFeedback
-        source: Qt.resolvedUrl("styles/ubuntu/sounds/typewriter.wav")
+        source: Qt.resolvedUrl("styles/ubuntu/sounds/key_tick2_quiet.wav")
     }
 
     states: [
