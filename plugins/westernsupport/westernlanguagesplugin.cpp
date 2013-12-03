@@ -82,5 +82,7 @@ bool WesternLanguagesPlugin::setSpellCheckerLanguage(const QString& languageId)
 
 void WesternLanguagesPlugin::_useDatabase(const QString &dbFileName)
 {
-    m_presage.config("Predictors.DefaultSmoothedNgramPredictor.DBFILENAME", dbFileName.toLatin1().data());
+    QString fullPath("/usr/share/maliit/plugins/com/ubuntu/lib/");
+    fullPath.append(dbFileName);
+    m_presage.config("Presage.Predictors.DefaultSmoothedNgramPredictor.DBFILENAME", fullPath.toLatin1().data());
 }

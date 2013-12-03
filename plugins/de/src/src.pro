@@ -24,9 +24,11 @@ QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_de.db 
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_de.db
 
 # install
+lang_db_de.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_de.files += $$TOP_BUILDDIR/database_de.db
+
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-target.files += $$PWD/database_de.db
-INSTALLS += target
+INSTALLS += target lang_db_de
 
 OTHER_FILES += \
     germanplugin.json

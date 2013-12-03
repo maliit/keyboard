@@ -21,17 +21,21 @@ EXAMPLE_FILES = englishplugin.json
 
 # generate database for presage:
 QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_en.db $$PWD/the_picture_of_dorian_gray.txt
+QMAKE_POST_LINK = text2ngram -n 2 -l -f sqlite -o $$TOP_BUILDDIR/database_en.db $$PWD/the_picture_of_dorian_gray.txt
+QMAKE_POST_LINK = text2ngram -n 3 -l -f sqlite -o $$TOP_BUILDDIR/database_en.db $$PWD/the_picture_of_dorian_gray.txt
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_en.db
 
 # install
+lang_db_en.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_en.files += $$TOP_BUILDDIR/database_en.db
+
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-target.files += $$PWD/database_en.db
-INSTALLS += target
+INSTALLS += target lang_db_en
 
 OTHER_FILES += \
     englishplugin.json
 
-LIBS += -L$${TOP_SRCDIR}/plugins/plugins/ -lwesternsupport
+LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
 
 INCLUDEPATH += $$PWD/../../westernsupport
 DEPENDPATH += $$PWD/../../westernsupport

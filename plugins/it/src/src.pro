@@ -24,9 +24,11 @@ QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_it.db 
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_it.db
 
 # install
+lang_db_it.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_it.files += $$TOP_BUILDDIR/database_it.db
+
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-target.files += $$PWD/database_it.db
-INSTALLS += target
+INSTALLS += target lang_db_it
 
 OTHER_FILES += \
     italianplugin.json

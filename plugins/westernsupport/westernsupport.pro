@@ -2,6 +2,7 @@ QT       -= gui
 
 TARGET = westernsupport
 TEMPLATE = lib
+CONFIG += staticlib
 
 DEFINES += WESTERNSUPPORT_LIBRARY
 

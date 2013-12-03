@@ -24,9 +24,11 @@ QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_pt.db 
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_pt.db
 
 # install
+lang_db_pt.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_pt.files += $$TOP_BUILDDIR/database_pt.db
+
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-target.files += $$PWD/database_pt.db
-INSTALLS += target
+INSTALLS += target lang_db_pt
 
 OTHER_FILES += \
     portugueseplugin.json

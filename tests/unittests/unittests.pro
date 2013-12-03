@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
+CONFIG += ordered
 SUBDIRS = \
     common \
     ut_editor \
@@ -11,7 +12,8 @@ SUBDIRS = \
     ut_word-candidates \
     ut_wordengine \
 
-CONFIG += ordered
+ut_editor.depends = common
+
 QMAKE_EXTRA_TARGETS += check
 check.target = check
 check.CONFIG = recursive

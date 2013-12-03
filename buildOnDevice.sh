@@ -54,6 +54,7 @@ install_dependencies() {
 #    exec_with_ssh $SUDO add-apt-repository -s -y ppa:phablet-team/ppa
     exec_with_ssh $SUDO apt-get update
     exec_with_ssh $SUDO apt-get -y build-dep $PACKAGE
+    exec_with_ssh $SUDO apt-get -y install presage
 }
 
 setup_adb_forwarding() {

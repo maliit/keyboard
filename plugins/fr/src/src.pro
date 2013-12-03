@@ -24,9 +24,11 @@ QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_fr.db 
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_fr.db
 
 # install
+lang_db_fr.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_fr.files += $$TOP_BUILDDIR/database_fr.db
+
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-target.files += $$PWD/database_fr.db
-INSTALLS += target
+INSTALLS += target lang_db_fr
 
 OTHER_FILES += \
     frenchplugin.json

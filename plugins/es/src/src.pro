@@ -24,9 +24,11 @@ QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_es.db 
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_es.db
 
 # install
+lang_db_es.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_es.files += $$TOP_BUILDDIR/database_es.db
+
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-target.files += $$PWD/database_es.db
-INSTALLS += target
+INSTALLS += target lang_db_es
 
 OTHER_FILES += \
     spanishplugin.json
