@@ -21,6 +21,8 @@ EXAMPLE_FILES = italianplugin.json
 
 # generate database for presage:
 QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_it.db $$PWD/la_francia_dal_primo_impero.txt
+QMAKE_POST_LINK = text2ngram -n 2 -l -f sqlite -o $$TOP_BUILDDIR/database_it.db $$PWD/la_francia_dal_primo_impero.txt
+QMAKE_POST_LINK = text2ngram -n 3 -l -f sqlite -o $$TOP_BUILDDIR/database_it.db $$PWD/la_francia_dal_primo_impero.txt
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_it.db
 
 # install
@@ -33,7 +35,7 @@ INSTALLS += target lang_db_it
 OTHER_FILES += \
     italianplugin.json
 
-LIBS += -L$${TOP_SRCDIR}/plugins/plugins/ -lwesternsupport
+LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
 
 INCLUDEPATH += $$PWD/../../westernsupport
 DEPENDPATH += $$PWD/../../westernsupport

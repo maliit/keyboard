@@ -21,6 +21,8 @@ EXAMPLE_FILES = germanplugin.json
 
 # generate database for presage:
 QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_de.db $$PWD/buddenbrooks.txt
+QMAKE_POST_LINK = text2ngram -n 2 -l -f sqlite -o $$TOP_BUILDDIR/database_de.db $$PWD/buddenbrooks.txt
+QMAKE_POST_LINK = text2ngram -n 3 -l -f sqlite -o $$TOP_BUILDDIR/database_de.db $$PWD/buddenbrooks.txt
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_de.db
 
 # install
@@ -33,7 +35,7 @@ INSTALLS += target lang_db_de
 OTHER_FILES += \
     germanplugin.json
 
-LIBS += -L$${TOP_SRCDIR}/plugins/plugins/ -lwesternsupport
+LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
 
 INCLUDEPATH += $$PWD/../../westernsupport
 DEPENDPATH += $$PWD/../../westernsupport

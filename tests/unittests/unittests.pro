@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 CONFIG += ordered
 SUBDIRS = \
     common \
-    ut_editor \
+##    ut_editor \
     ut_keyboardgeometry \
     ut_keyboardsettings \
     ut_languagefeatures \
@@ -10,7 +10,7 @@ SUBDIRS = \
     ut_repeat-backspace \
     ut_text \
     ut_word-candidates \
-    ut_wordengine \
+##    ut_wordengine \
 
 ut_editor.depends = common
 

@@ -21,6 +21,8 @@ EXAMPLE_FILES = spanishplugin.json
 
 # generate database for presage:
 QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_es.db $$PWD/el_quijote.txt
+QMAKE_POST_LINK = text2ngram -n 2 -l -f sqlite -o $$TOP_BUILDDIR/database_es.db $$PWD/el_quijote.txt
+QMAKE_POST_LINK = text2ngram -n 3 -l -f sqlite -o $$TOP_BUILDDIR/database_es.db $$PWD/el_quijote.txt
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_es.db
 
 # install
@@ -33,7 +35,7 @@ INSTALLS += target lang_db_es
 OTHER_FILES += \
     spanishplugin.json
 
-LIBS += -L$${TOP_SRCDIR}/plugins/plugins/ -lwesternsupport
+LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
 
 INCLUDEPATH += $$PWD/../../westernsupport
 DEPENDPATH += $$PWD/../../westernsupport
