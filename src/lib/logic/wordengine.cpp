@@ -78,11 +78,14 @@ public:
 
     explicit WordEnginePrivate();
 
+    QString currentPlugin;
     void loadPlugin(QString pluginName)
     {
+        if (pluginName == currentPlugin)
+            return;
+
         QDir pluginsDir("/usr/share/maliit/plugins/com/ubuntu/lib/");
-        //pluginsDir.cd("plugins");
-        qDebug() << "loading plugin <<<<<<<<<<<<=====================";
+
         QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(pluginName));
         QObject *plugin = pluginLoader.instance();
         qDebug() << plugin << pluginName << pluginsDir.absoluteFilePath(pluginName);
@@ -94,8 +97,10 @@ public:
                 // fallback
                 if (pluginName != DEFAULT_PLUGIN)
                     loadPlugin(DEFAULT_PLUGIN);
-            } else
-                qDebug("plugin loaded");
+            } else {
+                qDebug() << "plugin" << pluginName << "loaded";
+                currentPlugin = pluginName;
+            }
         }
     }
 };
@@ -182,8 +187,8 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
     const bool is_preedit_capitalized(not preedit.isEmpty() && preedit.at(0).isUpper());
 
     if (d->use_predictive_text) {
-        const QString &context = preedit; //(text->surroundingLeft() + preedit);
-        d->languagePlugin->parse(context);
+
+        d->languagePlugin->parse(text->surroundingLeft(), preedit);
         const QStringList suggestions = d->languagePlugin->getWordCandidates();
 
         Q_FOREACH(const QString &suggestion, suggestions) {
@@ -191,6 +196,7 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
         }
     }
 
+    // spell checking
     const bool correct_spelling(d->languagePlugin->spell(preedit));
 
     if (candidates.isEmpty() and not correct_spelling) {

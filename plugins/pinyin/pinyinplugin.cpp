@@ -14,9 +14,10 @@ PinyinPlugin::~PinyinPlugin()
 {
 }
 
-QString PinyinPlugin::parse(const QString& str)
+QString PinyinPlugin::parse(const QString& surroundingLeft, const QString& preedit)
 {
-    return pinyinAdapter->parse(str);
+    Q_UNUSED(surroundingLeft);
+    return pinyinAdapter->parse(preedit);
 }
 
 QStringList PinyinPlugin::getWordCandidates()

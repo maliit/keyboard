@@ -20,23 +20,26 @@ WesternLanguagesPlugin::~WesternLanguagesPlugin()
 {
 }
 
-// TODO no return
-QString WesternLanguagesPlugin::parse(const QString& str)
+void WesternLanguagesPlugin::parse(const QString& surroundingLeft, const QString& preedit)
 {
-    m_candidatesContext = str.toStdString();
-
-    return str;
+    m_candidatesContext = (surroundingLeft.toStdString() + preedit.toStdString());
 }
 
 QStringList WesternLanguagesPlugin::getWordCandidates()
 {
-    const std::vector<std::string> predictions = m_presage.predict();
-
     QStringList list;
-    std::vector<std::string>::const_iterator it;
-    for (it = predictions.begin(); it != predictions.end(); ++it)
-        list << QString::fromStdString(*it);
 
+    try {
+        const std::vector<std::string> predictions = m_presage.predict();
+
+        std::vector<std::string>::const_iterator it;
+        for (it = predictions.begin(); it != predictions.end(); ++it) {
+            list << QString::fromStdString(*it);
+        }
+
+    } catch (int error) {
+        qWarning() << "An exception was thrown in libpresage, exception nr: " << error;
+    }
     return list;
 }
 

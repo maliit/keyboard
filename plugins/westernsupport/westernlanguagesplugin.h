@@ -11,6 +11,7 @@
 #include <QObject>
 
 class WesternLanguageFeatures;
+class CandidatesCallback;
 
 class WesternLanguagesPlugin : /*public QObject,*/ public LanguagePluginInterface
 {
@@ -21,7 +22,7 @@ public:
     explicit WesternLanguagesPlugin(/*QObject *parent = 0*/);
     virtual ~WesternLanguagesPlugin();
 
-    virtual QString parse(const QString& str);
+    virtual void parse(const QString& surroundingLeft, const QString& preedit);
     virtual QStringList getWordCandidates();
     virtual void wordCandidateSelected(QString word);
     virtual AbstractLanguageFeatures* languageFeature();

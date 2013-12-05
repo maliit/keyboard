@@ -20,7 +20,7 @@ public:
     explicit PinyinPlugin(QObject *parent = 0);
     virtual ~PinyinPlugin();
     
-    QString parse(const QString& str);
+    QString parse(const QString& surroundingLeft, const QString& preedit);
     QStringList getWordCandidates();
     void wordCandidateSelected(QString word);
 
