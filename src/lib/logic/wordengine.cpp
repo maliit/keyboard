@@ -236,19 +236,18 @@ void WordEngine::onLanguageChanged(const QString &languageId)
 
     if (languageId == "zh")
         d->loadPlugin("libpinyinplugin.so");
-    if (languageId == "de")
+    else if (languageId == "de")
         d->loadPlugin("libgermanplugin.so");
-    if (languageId == "en")
+    else if (languageId == "en")
         d->loadPlugin("libenglishplugin.so");
-    if (languageId == "es")
+    else if (languageId == "es")
         d->loadPlugin("libspanishplugin.so");
-    if (languageId == "fr")
+    else if (languageId == "fr")
         d->loadPlugin("libfrenchplugin.so");
-    if (languageId == "it")
+    else if (languageId == "it")
         d->loadPlugin("libitalianplugin.so");
-    if (languageId == "pt")
+    else if (languageId == "pt")
         d->loadPlugin("libportugueseplugin.so");
-
     else
         d->loadPlugin(DEFAULT_PLUGIN);
 
