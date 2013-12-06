@@ -20,20 +20,25 @@ TARGET          = $$qtLibraryTarget(spanishplugin)
 EXAMPLE_FILES = spanishplugin.json
 
 # generate database for presage:
-QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_es.db $$PWD/el_quijote.txt
-QMAKE_POST_LINK = text2ngram -n 2 -l -f sqlite -o $$TOP_BUILDDIR/database_es.db $$PWD/el_quijote.txt
-QMAKE_POST_LINK = text2ngram -n 3 -l -f sqlite -o $$TOP_BUILDDIR/database_es.db $$PWD/el_quijote.txt
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_es.db
 
 # install
 lang_db_es.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-lang_db_es.files += $$TOP_BUILDDIR/database_es.db
+lang_db_es.commands += \
+  rm -f $$PWD/database_es.db && \
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_es.db $$PWD/el_quijote.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_es.db $$PWD/el_quijote.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_es.db $$PWD/el_quijote.txt
+
+lang_db_es.files += $$PWD/database_es.db
+QMAKE_EXTRA_TARGETS += lang_db_es
 
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
 INSTALLS += target lang_db_es
 
 OTHER_FILES += \
-    spanishplugin.json
+    spanishplugin.json \
+    el_quijote.txt
 
 LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

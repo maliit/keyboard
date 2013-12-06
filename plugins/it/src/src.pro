@@ -20,20 +20,25 @@ TARGET          = $$qtLibraryTarget(italianplugin)
 EXAMPLE_FILES = italianplugin.json
 
 # generate database for presage:
-QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_it.db $$PWD/la_francia_dal_primo_impero.txt
-QMAKE_POST_LINK = text2ngram -n 2 -l -f sqlite -o $$TOP_BUILDDIR/database_it.db $$PWD/la_francia_dal_primo_impero.txt
-QMAKE_POST_LINK = text2ngram -n 3 -l -f sqlite -o $$TOP_BUILDDIR/database_it.db $$PWD/la_francia_dal_primo_impero.txt
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_it.db
 
 # install
 lang_db_it.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-lang_db_it.files += $$TOP_BUILDDIR/database_it.db
+lang_db_it.commands += \
+  rm -f $$PWD/database_it.db && \
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_it.db $$PWD/la_francia_dal_primo_impero.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_it.db $$PWD/la_francia_dal_primo_impero.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_it.db $$PWD/la_francia_dal_primo_impero.txt
+
+lang_db_it.files += $$PWD/database_it.db
+QMAKE_EXTRA_TARGETS += lang_db_it
 
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
 INSTALLS += target lang_db_it
 
 OTHER_FILES += \
-    italianplugin.json
+    italianplugin.json \
+    la_francia_dal_primo_impero.txt
 
 LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

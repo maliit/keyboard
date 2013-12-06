@@ -20,20 +20,26 @@ TARGET          = $$qtLibraryTarget(frenchplugin)
 EXAMPLE_FILES = frenchplugin.json
 
 # generate database for presage:
-QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_fr.db $$PWD/les_trois_mousquetaires.txt
-QMAKE_POST_LINK = text2ngram -n 2 -l -f sqlite -o $$TOP_BUILDDIR/database_fr.db $$PWD/les_trois_mousquetaires.txt
-QMAKE_POST_LINK = text2ngram -n 3 -l -f sqlite -o $$TOP_BUILDDIR/database_fr.db $$PWD/les_trois_mousquetaires.txt
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_fr.db
 
 # install
 lang_db_fr.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-lang_db_fr.files += $$TOP_BUILDDIR/database_fr.db
+lang_db_fr.commands += \
+  rm -f $$PWD/database_fr.db && \
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt
+
+lang_db_fr.files += $$PWD/database_fr.db
+QMAKE_EXTRA_TARGETS += lang_db_fr
 
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
 INSTALLS += target lang_db_fr
 
+
 OTHER_FILES += \
-    frenchplugin.json
+    frenchplugin.json \
+    les_trois_mousquetaires.txt
 
 LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

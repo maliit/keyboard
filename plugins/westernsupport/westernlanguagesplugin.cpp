@@ -38,7 +38,7 @@ QStringList WesternLanguagesPlugin::getWordCandidates()
         }
 
     } catch (int error) {
-        qWarning() << "An exception was thrown in libpresage, exception nr: " << error;
+        qWarning() << "An exception was thrown in libpresage when calling predict(), exception nr: " << error;
     }
     return list;
 }
@@ -87,5 +87,10 @@ void WesternLanguagesPlugin::_useDatabase(const QString &dbFileName)
 {
     QString fullPath("/usr/share/maliit/plugins/com/ubuntu/lib/");
     fullPath.append(dbFileName);
-    m_presage.config("Presage.Predictors.DefaultSmoothedNgramPredictor.DBFILENAME", fullPath.toLatin1().data());
+
+    try {
+        m_presage.config("Presage.Predictors.DefaultSmoothedNgramPredictor.DBFILENAME", fullPath.toLatin1().data());
+    } catch (int error) {
+        qWarning() << "An exception was thrown in libpresage when changing language database, exception nr: " << error;
+    }
 }

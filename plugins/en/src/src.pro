@@ -20,20 +20,25 @@ TARGET          = $$qtLibraryTarget(englishplugin)
 EXAMPLE_FILES = englishplugin.json
 
 # generate database for presage:
-QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_en.db $$PWD/the_picture_of_dorian_gray.txt
-QMAKE_POST_LINK = text2ngram -n 2 -l -f sqlite -o $$TOP_BUILDDIR/database_en.db $$PWD/the_picture_of_dorian_gray.txt
-QMAKE_POST_LINK = text2ngram -n 3 -l -f sqlite -o $$TOP_BUILDDIR/database_en.db $$PWD/the_picture_of_dorian_gray.txt
-QMAKE_CLEAN     += $$TOP_BUILDDIR/database_en.db
+QMAKE_CLEAN     += $$PWD/database_en.db
 
 # install
-lang_db_en.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-lang_db_en.files += $$TOP_BUILDDIR/database_en.db
+lang_db_en.path = $$UBUNTU_KEYBOARD_LIB_DIR
+lang_db_en.commands += \
+  rm -f $$PWD/database_en.db && \
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_en.db $$PWD/the_picture_of_dorian_gray.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_en.db $$PWD/the_picture_of_dorian_gray.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_en.db $$PWD/the_picture_of_dorian_gray.txt
 
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_en.files += $$PWD/database_en.db
+QMAKE_EXTRA_TARGETS += lang_db_en
+
+target.path = $$UBUNTU_KEYBOARD_LIB_DIR
 INSTALLS += target lang_db_en
 
 OTHER_FILES += \
-    englishplugin.json
+    englishplugin.json \
+    the_picture_of_dorian_gray.txt
 
 LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

@@ -20,20 +20,25 @@ TARGET          = $$qtLibraryTarget(portugueseplugin)
 EXAMPLE_FILES = portugueseplugin.json
 
 # generate database for presage:
-QMAKE_POST_LINK = text2ngram -n 1 -l -f sqlite -o $$TOP_BUILDDIR/database_pt.db $$PWD/historias_sem_data.txt
-QMAKE_POST_LINK = text2ngram -n 2 -l -f sqlite -o $$TOP_BUILDDIR/database_pt.db $$PWD/historias_sem_data.txt
-QMAKE_POST_LINK = text2ngram -n 3 -l -f sqlite -o $$TOP_BUILDDIR/database_pt.db $$PWD/historias_sem_data.txt
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_pt.db
 
 # install
 lang_db_pt.path = $${UBUNTU_KEYBOARD_LIB_DIR}
-lang_db_pt.files += $$TOP_BUILDDIR/database_pt.db
+lang_db_pt.commands += \
+  rm -f $$PWD/database_pt.db && \
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_pt.db $$PWD/historias_sem_data.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_pt.db $$PWD/historias_sem_data.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_pt.db $$PWD/historias_sem_data.txt
+
+lang_db_pt.files += $$PWD/database_pt.db
+QMAKE_EXTRA_TARGETS += lang_db_pt
 
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
 INSTALLS += target lang_db_pt
 
 OTHER_FILES += \
-    portugueseplugin.json
+    portugueseplugin.json \
+    historias_sem_data.txt
 
 LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
 
