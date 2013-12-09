@@ -23,6 +23,8 @@ EXAMPLE_FILES = italianplugin.json
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_it.db
 
 # install
+PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/it/
+
 lang_db_it.path = $$PLUGIN_INSTALL_PATH
 lang_db_it.commands += \
   rm -f $$PWD/database_it.db && \

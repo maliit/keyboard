@@ -23,6 +23,8 @@ EXAMPLE_FILES = spanishplugin.json
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_es.db
 
 # install
+PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/es/
+
 lang_db_es.path = $$PLUGIN_INSTALL_PATH
 lang_db_es.commands += \
   rm -f $$PWD/database_es.db && \

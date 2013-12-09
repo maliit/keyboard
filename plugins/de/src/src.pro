@@ -23,6 +23,8 @@ EXAMPLE_FILES = germanplugin.json
 QMAKE_CLEAN     += $$PWD/database_de.db
 
 # install
+PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/de/
+
 lang_db_de.path = $$PLUGIN_INSTALL_PATH
 lang_db_de.commands += \
   rm -f $$PWD/database_de.db && \

@@ -23,6 +23,8 @@ EXAMPLE_FILES = frenchplugin.json
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_fr.db
 
 # install
+PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/fr/
+
 lang_db_fr.path = $$PLUGIN_INSTALL_PATH
 lang_db_fr.commands += \
   rm -f $$PWD/database_fr.db && \

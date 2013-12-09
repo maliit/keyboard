@@ -23,6 +23,8 @@ EXAMPLE_FILES = englishplugin.json
 QMAKE_CLEAN     += $$PWD/database_en.db
 
 # install
+PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/en/
+
 lang_db_en.path = $$PLUGIN_INSTALL_PATH
 lang_db_en.commands += \
   rm -f $$PWD/database_en.db && \
