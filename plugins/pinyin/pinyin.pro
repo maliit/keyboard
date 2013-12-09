@@ -21,12 +21,11 @@ SOURCES         = \
                   chineselanguagefeatures.cpp
 
 TARGET          = $$qtLibraryTarget(pinyinplugin)
-DESTDIR         = $${TOP_BUILDDIR}/plugins/plugins
 
 EXAMPLE_FILES = pinyinplugin.json
 
 # install
-target.path = $$[QT_INSTALL_EXAMPLES]/widgets/tools/pinyinplugin/plugin
+target.path = $${UBUNTU_KEYBOARD_LIB_DIR}/cn-pinyin/
 INSTALLS += target
 
 OTHER_FILES += \

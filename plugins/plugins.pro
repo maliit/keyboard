@@ -8,7 +8,7 @@ SUBDIRS = \
     fr \
     it \
     pt \
-    #pinyin \
+    pinyin \
 
 QMAKE_EXTRA_TARGETS += check
 check.target = check
