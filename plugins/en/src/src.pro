@@ -23,7 +23,7 @@ EXAMPLE_FILES = englishplugin.json
 QMAKE_CLEAN     += $$PWD/database_en.db
 
 # install
-lang_db_en.path = $$UBUNTU_KEYBOARD_LIB_DIR
+lang_db_en.path = $$PLUGIN_INSTALL_PATH
 lang_db_en.commands += \
   rm -f $$PWD/database_en.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_en.db $$PWD/the_picture_of_dorian_gray.txt && \
@@ -33,7 +33,7 @@ lang_db_en.commands += \
 lang_db_en.files += $$PWD/database_en.db
 QMAKE_EXTRA_TARGETS += lang_db_en
 
-target.path = $$UBUNTU_KEYBOARD_LIB_DIR
+target.path = $$PLUGIN_INSTALL_PATH
 INSTALLS += target lang_db_en
 
 OTHER_FILES += \

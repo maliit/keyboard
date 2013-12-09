@@ -10,7 +10,7 @@ Build-Depends: debhelper (>= 9),
                libglib2.0-dev,
                libgsettings-qt-dev,
                libhunspell-dev,
-               libpinyin2-dev,
+               libpinyin4-dev,
                libplatform-api1-dev,
                libpresage-dev,
                libxml2-utils,
@@ -74,3 +74,60 @@ Depends: libautopilot-qt (>= 1.4),
          unity8-autopilot,
 Description: Tests and emulators package for ubuntu-keyboard
  Autopilot tests for the ubuntu-keyboard package
+
+
+Package: ubuntu-keyboard-english
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - English
+ Data files for the Ubuntu virtual keyboard - English
+
+Package: ubuntu-keyboard-french
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - French
+ Data files for the Ubuntu virtual keyboard - French
+
+Package: ubuntu-keyboard-german
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - German
+ Data files for the Ubuntu virtual keyboard - German
+
+Package: ubuntu-keyboard-italian
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Italian
+ Data files for the Ubuntu virtual keyboard - Italian
+
+Package: ubuntu-keyboard-portuguese
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Portuguese
+ Data files for the Ubuntu virtual keyboard - Portuguese
+
+Package: ubuntu-keyboard-chinese-pinyin
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Chinese Pinyin
+ Data files for the Ubuntu virtual keyboard - Chinese Pinyin
+
+Package: ubuntu-keyboard-spanish
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Spanish
+ Data files for the Ubuntu virtual keyboard - Spanish

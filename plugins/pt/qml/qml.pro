@@ -2,7 +2,7 @@
 TARGET = dummy
 TEMPLATE = lib
 
-lang.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages/pt"
+lang.path = "$$PLUGIN_INSTALL_PATH"
 lang.files = languages/pt/*.qml languages/pt/*.js
 
 INSTALLS +=     lang

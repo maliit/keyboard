@@ -23,7 +23,7 @@ EXAMPLE_FILES = spanishplugin.json
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_es.db
 
 # install
-lang_db_es.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_es.path = $$PLUGIN_INSTALL_PATH
 lang_db_es.commands += \
   rm -f $$PWD/database_es.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_es.db $$PWD/el_quijote.txt && \
@@ -33,7 +33,7 @@ lang_db_es.commands += \
 lang_db_es.files += $$PWD/database_es.db
 QMAKE_EXTRA_TARGETS += lang_db_es
 
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+target.path = $$PLUGIN_INSTALL_PATH
 INSTALLS += target lang_db_es
 
 OTHER_FILES += \

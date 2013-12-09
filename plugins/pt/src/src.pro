@@ -23,7 +23,7 @@ EXAMPLE_FILES = portugueseplugin.json
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_pt.db
 
 # install
-lang_db_pt.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_pt.path = $$PLUGIN_INSTALL_PATH
 lang_db_pt.commands += \
   rm -f $$PWD/database_pt.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_pt.db $$PWD/historias_sem_data.txt && \
@@ -33,7 +33,7 @@ lang_db_pt.commands += \
 lang_db_pt.files += $$PWD/database_pt.db
 QMAKE_EXTRA_TARGETS += lang_db_pt
 
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+target.path = $$PLUGIN_INSTALL_PATH
 INSTALLS += target lang_db_pt
 
 OTHER_FILES += \

@@ -23,7 +23,7 @@ EXAMPLE_FILES = frenchplugin.json
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_fr.db
 
 # install
-lang_db_fr.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_fr.path = $$PLUGIN_INSTALL_PATH
 lang_db_fr.commands += \
   rm -f $$PWD/database_fr.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt && \
@@ -33,7 +33,7 @@ lang_db_fr.commands += \
 lang_db_fr.files += $$PWD/database_fr.db
 QMAKE_EXTRA_TARGETS += lang_db_fr
 
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+target.path = $$PLUGIN_INSTALL_PATH
 INSTALLS += target lang_db_fr
 
 

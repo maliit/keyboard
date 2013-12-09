@@ -1,3 +1,6 @@
+
+PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/en/
+
 CONFIG += ordered
 TEMPLATE = subdirs
 SUBDIRS = \

@@ -23,7 +23,7 @@ EXAMPLE_FILES = italianplugin.json
 QMAKE_CLEAN     += $$TOP_BUILDDIR/database_it.db
 
 # install
-lang_db_it.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+lang_db_it.path = $$PLUGIN_INSTALL_PATH
 lang_db_it.commands += \
   rm -f $$PWD/database_it.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_it.db $$PWD/la_francia_dal_primo_impero.txt && \
@@ -33,7 +33,7 @@ lang_db_it.commands += \
 lang_db_it.files += $$PWD/database_it.db
 QMAKE_EXTRA_TARGETS += lang_db_it
 
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+target.path = $$PLUGIN_INSTALL_PATH
 INSTALLS += target lang_db_it
 
 OTHER_FILES += \
