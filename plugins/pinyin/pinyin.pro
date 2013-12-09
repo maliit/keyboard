@@ -1,6 +1,8 @@
 TOP_BUILDDIR = $$OUT_PWD/../..
 TOP_SRCDIR = $$PWD/../..
 
+include($${TOP_SRCDIR}/config.pri)
+
 PINYIN_DATA_DIR = "$$system(pkg-config --variable pkgdatadir libpinyin)/data"
 DEFINES += PINYIN_DATA_DIR=\\\"$${PINYIN_DATA_DIR}\\\"
 

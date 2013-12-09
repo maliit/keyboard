@@ -37,7 +37,7 @@ public:
     explicit PinyinAdapter(QObject *parent = 0);
     ~PinyinAdapter();
 
-    QString parse(const QString& string);
+    void parse(const QString& string);
     QStringList getWordCandidates() const;
     void wordCandidateSelected(const QString& word);
     void reset();

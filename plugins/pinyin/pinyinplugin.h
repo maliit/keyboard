@@ -20,9 +20,9 @@ public:
     explicit PinyinPlugin(QObject *parent = 0);
     virtual ~PinyinPlugin();
     
-    QString parse(const QString& surroundingLeft, const QString& preedit);
-    QStringList getWordCandidates();
-    void wordCandidateSelected(QString word);
+    virtual void parse(const QString& surroundingLeft, const QString& preedit);
+    virtual QStringList getWordCandidates();
+    virtual void wordCandidateSelected(QString word);
 
     virtual AbstractLanguageFeatures* languageFeature();
 

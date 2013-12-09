@@ -14,7 +14,7 @@ PinyinPlugin::~PinyinPlugin()
 {
 }
 
-QString PinyinPlugin::parse(const QString& surroundingLeft, const QString& preedit)
+void PinyinPlugin::parse(const QString& surroundingLeft, const QString& preedit)
 {
     Q_UNUSED(surroundingLeft);
     return pinyinAdapter->parse(preedit);
