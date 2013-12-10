@@ -6,10 +6,10 @@ include($${TOP_SRCDIR}/config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-lang.path = "$${UBUNTU_KEYBOARD_LIB_DIR}/pt/"
-lang.files = languages/pt/*.qml languages/pt/*.js
+lang_pt.path = "$$UBUNTU_KEYBOARD_LIB_DIR/pt/"
+lang_pt.files = *.qml *.js
 
-INSTALLS +=     lang
+INSTALLS += lang_pt
 
 # for QtCreator
 OTHER_FILES += \
