@@ -122,27 +122,27 @@ Item {
             if (language === "da")
                 return "languages/da/Keyboard_da.qml";
             if (language === "de")
-                return "languages/de/Keyboard_de.qml";
+                return "lib/de/Keyboard_de.qml";
             if (language === "en")
-                return "languages/en/Keyboard_en.qml";
+                return "lib/en/Keyboard_en.qml";
             if (language === "es")
-                return "languages/es/Keyboard_es.qml";
+                return "lib/es/Keyboard_es.qml";
             if (language === "fi")
                 return "languages/fi/Keyboard_fi.qml";
             if (language === "fr")
-                return "languages/fr/Keyboard_fr.qml";
+                return "lib/fr/Keyboard_fr.qml";
             if (language === "he")
                 return "languages/he/Keyboard_he.qml";
             if (language === "hu")
                 return "languages/hu/Keyboard_hu.qml";
             if (language === "it")
-                return "languages/it/Keyboard_it.qml";
+                return "lib/it/Keyboard_it.qml";
             if (language === "nl")
                 return "languages/nl/Keyboard_nl.qml";
             if (language === "pl")
                 return "languages/pl/Keyboard_pl.qml";
             if (language === "pt")
-                return "languages/pt/Keyboard_pt.qml";
+                return "lib/pt/Keyboard_pt.qml";
             if (language === "ru")
                 return "languages/ru/Keyboard_ru.qml";
             if (language === "sv")
