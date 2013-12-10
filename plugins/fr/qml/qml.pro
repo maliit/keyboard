@@ -1,3 +1,7 @@
+TOP_BUILDDIR = $$OUT_PWD/../../..
+TOP_SRCDIR = $$PWD/../../..
+
+include($${TOP_SRCDIR}/config.pri)
 
 TARGET = dummy
 TEMPLATE = lib
