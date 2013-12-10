@@ -1,3 +1,52 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131126-0ubuntu1) trusty; urgency=low
+
+  [ Thomas Moenicke ]
+  * sound off by default.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 118
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 26 Nov 2013 03:48:28 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131122.1-0ubuntu1) trusty; urgency=low
+
+  [ Thomas Moenicke ]
+  * more languages.
+
+  [ Dmitrijs Ledkovs ]
+  * Port to libpinyin4-dev API. (LP: #1247840). (LP: #1247840)
+
+  [ Christopher Lee ]
+  * Updating the tests and emulators so so they run without
+    interference.
+
+  [ Michael Terry ]
+  * When running the tests, tell xvfb-run to find next available
+    servernum instead of assuming :99 and failing if that is not
+    available.
+
+  [ Colin Watson ]
+  * Build-depend on python:any rather than python, to ease cross-
+    building.
+
+  [ Guenter Schwann ]
+  * Set the keyboard geometry from QML to C++, not the other way around.
+    (LP: #1245481)
+  * Add space after selected predictited text for non chinese
+  * Remove some dead code
+  * improvements on chinese language support
+  * Spellchecker uses active language (if installed)
+  * Enable audio feedback
+  * Only update the preedit when needed
+  * cleanup
+  * Use only one Audio item to load keyboards faster
+  * Make spell check usable without predictive text
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 116
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 22 Nov 2013 17:36:06 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131106-0ubuntu1) trusty; urgency=low
 
   [ Łukasz 'sil2100' Zemczak ]

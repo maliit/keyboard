@@ -68,6 +68,7 @@ void PinyinAdapter::parse(const QString& string)
     for (unsigned int i = 0 ; i < len; i ++ )
     {
         lookup_candidate_t * candidate = NULL;
+
         pinyin_get_candidate(m_instance, i, &candidate);
 
         const char* word = NULL;
