@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 CONFIG += ordered
 SUBDIRS = \
     common \
-##    ut_editor \
+    ut_editor \
     ut_keyboardgeometry \
     ut_keyboardsettings \
     ut_languagefeatures \
