@@ -20,9 +20,6 @@ TARGET          = $$qtLibraryTarget(italianplugin)
 EXAMPLE_FILES = italianplugin.json
 
 # generate database for presage:
-QMAKE_CLEAN     += $$TOP_BUILDDIR/database_it.db
-
-# install
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/it/
 
 lang_db_it.path = $$PLUGIN_INSTALL_PATH

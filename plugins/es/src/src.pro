@@ -20,9 +20,6 @@ TARGET          = $$qtLibraryTarget(spanishplugin)
 EXAMPLE_FILES = spanishplugin.json
 
 # generate database for presage:
-QMAKE_CLEAN     += $$TOP_BUILDDIR/database_es.db
-
-# install
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/es/
 
 lang_db_es.path = $$PLUGIN_INSTALL_PATH

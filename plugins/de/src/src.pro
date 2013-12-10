@@ -20,9 +20,6 @@ TARGET          = $$qtLibraryTarget(germanplugin)
 EXAMPLE_FILES = germanplugin.json
 
 # generate database for presage:
-QMAKE_CLEAN     += $$PWD/database_de.db
-
-# install
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/de/
 
 lang_db_de.path = $$PLUGIN_INSTALL_PATH

@@ -2,10 +2,10 @@
 TARGET = dummy
 TEMPLATE = lib
 
-lang.path = "$${UBUNTU_KEYBOARD_LIB_DIR}/it/"
-lang.files = languages/it/*.qml languages/it/*.js
+lang_it.path = "$$UBUNTU_KEYBOARD_LIB_DIR/it/"
+lang_it.files = *.qml *.js
 
-INSTALLS +=     lang
+INSTALLS += lang_it
 
 # for QtCreator
 OTHER_FILES += \
