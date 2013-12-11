@@ -8,6 +8,8 @@ SUBDIRS = \
     es \
     fi \
     fr \
+    he \
+    hu \
     it \
     pt \
     pinyin \
