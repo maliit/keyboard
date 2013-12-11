@@ -203,6 +203,7 @@ private:
         appendInput(&editor, input);
 
         QCOMPARE(host.commitStringHistory(), expected_commit_history);
+        Q_UNUSED(expected_auto_caps_activated_count)
 //        QCOMPARE(auto_caps_activated_spy.count(), expected_auto_caps_activated_count);
     }
 };
