@@ -75,6 +75,13 @@ Depends: libautopilot-qt (>= 1.4),
 Description: Tests and emulators package for ubuntu-keyboard
  Autopilot tests for the ubuntu-keyboard package
 
+Package: ubuntu-keyboard-danish
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Danish
+ Data files for the Ubuntu virtual keyboard - Danish
 
 Package: ubuntu-keyboard-english
 Architecture: all
@@ -83,6 +90,14 @@ Depends: fonts-droid,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - English
  Data files for the Ubuntu virtual keyboard - English
+
+Package: ubuntu-keyboard-finnish
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Finnish
+ Data files for the Ubuntu virtual keyboard - Finnish
 
 Package: ubuntu-keyboard-french
 Architecture: all

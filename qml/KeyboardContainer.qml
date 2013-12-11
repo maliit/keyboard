@@ -120,7 +120,7 @@ Item {
             if (language === "cs")
                 return "languages/cs/Keyboard_cs.qml";
             if (language === "da")
-                return "languages/da/Keyboard_da.qml";
+                return "lib/da/Keyboard_da.qml";
             if (language === "de")
                 return "lib/de/Keyboard_de.qml";
             if (language === "en")
@@ -128,7 +128,7 @@ Item {
             if (language === "es")
                 return "lib/es/Keyboard_es.qml";
             if (language === "fi")
-                return "languages/fi/Keyboard_fi.qml";
+                return "lib/fi/Keyboard_fi.qml";
             if (language === "fr")
                 return "lib/fr/Keyboard_fr.qml";
             if (language === "he")
