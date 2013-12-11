@@ -16,7 +16,7 @@ public:
         : QObject(parent)
         , WesternLanguagesPlugin()
     {
-        _useDatabase("database_da.db");
+        _useDatabase("da");
     }
 
     virtual ~DanishPlugin()

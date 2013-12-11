@@ -81,7 +81,7 @@ public:
     explicit WordEnginePrivate();
 
     QString currentPlugin;
-    void loadPlugin(QString pluginName)
+    void loadPlugin(QString pluginName, QString locale="en")
     {
         if (pluginName == currentPlugin)
             return;
@@ -92,7 +92,7 @@ public:
         QLocale::setDefault(QLocale::c());
         setlocale(LC_NUMERIC, "C");
 
-        QDir pluginsDir("/usr/share/maliit/plugins/com/ubuntu/lib/");
+        QDir pluginsDir("/usr/share/maliit/plugins/com/ubuntu/lib/"+locale);
 
         pluginLoader.setFileName(pluginsDir.absoluteFilePath(pluginName));
         QObject *plugin = pluginLoader.instance();
@@ -235,19 +235,23 @@ void WordEngine::onLanguageChanged(const QString &languageId)
     Q_D(WordEngine);
 
     if (languageId == "zh")
-        d->loadPlugin("libpinyinplugin.so");
+        d->loadPlugin("libpinyinplugin.so", "zh");
+    else if (languageId == "da")
+        d->loadPlugin("libdanishplugin.so", "da");
     else if (languageId == "de")
-        d->loadPlugin("libgermanplugin.so");
+        d->loadPlugin("libgermanplugin.so", "de");
     else if (languageId == "en")
-        d->loadPlugin("libenglishplugin.so");
+        d->loadPlugin("libenglishplugin.so", "en");
     else if (languageId == "es")
-        d->loadPlugin("libspanishplugin.so");
+        d->loadPlugin("libspanishplugin.so", "es");
+    else if (languageId == "fi")
+        d->loadPlugin("libfinnishplugin.so", "fi");
     else if (languageId == "fr")
-        d->loadPlugin("libfrenchplugin.so");
+        d->loadPlugin("libfrenchplugin.so", "fr");
     else if (languageId == "it")
-        d->loadPlugin("libitalianplugin.so");
+        d->loadPlugin("libitalianplugin.so", "it");
     else if (languageId == "pt")
-        d->loadPlugin("libportugueseplugin.so");
+        d->loadPlugin("libportugueseplugin.so", "pt");
     else
         d->loadPlugin(DEFAULT_PLUGIN);
 

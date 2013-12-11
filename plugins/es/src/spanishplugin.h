@@ -16,7 +16,7 @@ public:
         : QObject(parent)
         , WesternLanguagesPlugin()
     {
-        _useDatabase("database_es.db");
+        _useDatabase("es");
     }
 
     virtual ~SpanishPlugin()

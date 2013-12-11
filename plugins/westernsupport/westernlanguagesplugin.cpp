@@ -83,9 +83,10 @@ bool WesternLanguagesPlugin::setSpellCheckerLanguage(const QString& languageId)
     return m_spellChecker.setLanguage(languageId);
 }
 
-void WesternLanguagesPlugin::_useDatabase(const QString &dbFileName)
+void WesternLanguagesPlugin::_useDatabase(const QString &locale)
 {
-    QString fullPath("/usr/share/maliit/plugins/com/ubuntu/lib/");
+    QString dbFileName = "database_"+locale+".db";
+    QString fullPath("/usr/share/maliit/plugins/com/ubuntu/lib/"+locale+"/");
     fullPath.append(dbFileName);
 
     try {
