@@ -16,7 +16,7 @@ public:
         : QObject(parent)
         , WesternLanguagesPlugin()
     {
-        _useDatabase("database_hu.db");
+        _useDatabase("hu");
     }
 
     virtual ~HungarianPlugin()
