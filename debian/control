@@ -79,6 +79,7 @@ Package: ubuntu-keyboard-danish
 Architecture: all
 Depends: fonts-droid,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         hunspell-fr,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Danish
  Data files for the Ubuntu virtual keyboard - Danish
@@ -87,6 +88,7 @@ Package: ubuntu-keyboard-english
 Architecture: all
 Depends: fonts-droid,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         hunspell-en-us,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - English
  Data files for the Ubuntu virtual keyboard - English
@@ -103,6 +105,7 @@ Package: ubuntu-keyboard-french
 Architecture: all
 Depends: fonts-droid,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         hunspell-fr,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - French
  Data files for the Ubuntu virtual keyboard - French
@@ -111,6 +114,7 @@ Package: ubuntu-keyboard-german
 Architecture: all
 Depends: fonts-droid,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         hunspell-de-de,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - German
  Data files for the Ubuntu virtual keyboard - German
@@ -127,6 +131,7 @@ Package: ubuntu-keyboard-hungarian
 Architecture: all
 Depends: fonts-droid,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         hunspell-hu,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Hungarian
  Data files for the Ubuntu virtual keyboard - Hungarian
