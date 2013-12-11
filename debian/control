@@ -79,7 +79,7 @@ Package: ubuntu-keyboard-danish
 Architecture: all
 Depends: fonts-droid,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
-         hunspell-fr,
+         hunspell-da,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Danish
  Data files for the Ubuntu virtual keyboard - Danish
