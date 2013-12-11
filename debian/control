@@ -115,6 +115,22 @@ Depends: fonts-droid,
 Description: Ubuntu on-screen keyboard data files - German
  Data files for the Ubuntu virtual keyboard - German
 
+Package: ubuntu-keyboard-hebrew
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Hebrew
+ Data files for the Ubuntu virtual keyboard - Hebrew
+
+Package: ubuntu-keyboard-hungarian
+Architecture: all
+Depends: fonts-droid,
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Hungarian
+ Data files for the Ubuntu virtual keyboard - Hungarian
+
 Package: ubuntu-keyboard-italian
 Architecture: all
 Depends: fonts-droid,

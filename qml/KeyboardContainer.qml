@@ -132,9 +132,9 @@ Item {
             if (language === "fr")
                 return "lib/fr/Keyboard_fr.qml";
             if (language === "he")
-                return "languages/he/Keyboard_he.qml";
+                return "lib/he/Keyboard_he.qml";
             if (language === "hu")
-                return "languages/hu/Keyboard_hu.qml";
+                return "lib/hu/Keyboard_hu.qml";
             if (language === "it")
                 return "lib/it/Keyboard_it.qml";
             if (language === "nl")
