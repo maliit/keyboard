@@ -21,6 +21,7 @@ Build-Depends: debhelper (>= 9),
                qt5-default,
                qtbase5-dev,
                qtdeclarative5-dev,
+               qtdeclarative5-private-dev,
                qtdeclarative5-ubuntu-ui-toolkit-plugin,
                xvfb,
 Standards-Version: 3.9.4
