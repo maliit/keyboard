@@ -2,6 +2,8 @@ CONFIG += ordered
 TEMPLATE = subdirs
 SUBDIRS = \
     westernsupport \
+    ar \
+    cs \
     da \
     de \
     en \
@@ -11,7 +13,11 @@ SUBDIRS = \
     he \
     hu \
     it \
+    nl \
+    pl \
     pt \
+    ru \
+    sv \
     pinyin \
 
 QMAKE_EXTRA_TARGETS += check

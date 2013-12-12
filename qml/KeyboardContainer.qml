@@ -116,9 +116,9 @@ Item {
             }
 
             if (language === "ar")
-                return "languages/ar/Keyboard_ar.qml";
+                return "lib/ar/Keyboard_ar.qml";
             if (language === "cs")
-                return "languages/cs/Keyboard_cs.qml";
+                return "lib/cs/Keyboard_cs.qml";
             if (language === "da")
                 return "lib/da/Keyboard_da.qml";
             if (language === "de")
@@ -138,15 +138,15 @@ Item {
             if (language === "it")
                 return "lib/it/Keyboard_it.qml";
             if (language === "nl")
-                return "languages/nl/Keyboard_nl.qml";
+                return "lib/nl/Keyboard_nl.qml";
             if (language === "pl")
-                return "languages/pl/Keyboard_pl.qml";
+                return "lib/pl/Keyboard_pl.qml";
             if (language === "pt")
                 return "lib/pt/Keyboard_pt.qml";
             if (language === "ru")
-                return "languages/ru/Keyboard_ru.qml";
+                return "lib/ru/Keyboard_ru.qml";
             if (language === "sv")
-                return "languages/sv/Keyboard_sv.qml";
+                return "lib/sv/Keyboard_sv.qml";
             if (language === "zh")
                 return "languages/zh/Keyboard_zh_cn_pinyin.qml";
         }
