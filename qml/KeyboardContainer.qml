@@ -171,12 +171,12 @@ Item {
 
 //            if (contentType === InputMethod.EmailContentType) {
             if (contentType === 3) {
-                return "languages/"+locale+"/Keyboard_"+locale+"_email.qml";
+                return "lib/"+locale+"/Keyboard_"+locale+"_email.qml";
             }
 
 //            if (contentType === InputMethod.UrlContentType) {
             if (contentType === 4) {
-                return "languages/"+locale+"/Keyboard_"+locale+"_url_search.qml";
+                return "lib/"+locale+"/Keyboard_"+locale+"_url_search.qml";
             }
 
             // FreeTextContentType used as fallback
