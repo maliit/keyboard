@@ -36,5 +36,11 @@ HEADERS += \
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
 INSTALLS += target
 
+# hunspell
+CONFIG += link_pkgconfig
+PKGCONFIG += hunspell
+DEFINES += HAVE_HUNSPELL
+
+# presage
 LIBS += -lpresage
 DEFINES += HUNSPELL_DICT_PATH=\\\"$$HUNSPELL_DICT_PATH\\\"
