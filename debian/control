@@ -56,6 +56,11 @@ Depends: fonts-droid,
 Description: Ubuntu on-screen keyboard data files
  Data files for the Ubuntu virtual keyboard
 
+Package: ubuntu-keyboard-dev
+Architecture: all
+Depends: ${misc:Depends},
+Description: Ubuntu on-screen keyboard - development files
+
 Package: ubuntu-keyboard-tests
 Architecture: any
 Depends: ubuntu-keyboard (>= ${source:Version}),
