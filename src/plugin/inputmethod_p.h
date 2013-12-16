@@ -9,7 +9,6 @@
 #include "logic/layoutupdater.h"
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
-#include "logic/languagefeatures.h"
 
 #include "ubuntuapplicationapiwrapper.h"
 
@@ -92,7 +91,7 @@ public:
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
-        , editor(EditorOptions(), new Model::Text, new Logic::WordEngine, new Logic::LanguageFeatures)
+        , editor(EditorOptions(), new Model::Text, new Logic::WordEngine)
         , style(new Style)
         , notifier()
         , key_overrides()
@@ -139,9 +138,6 @@ public:
 
         QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
                          editor.wordEngine(),  SLOT(onLanguageChanged(QString)));
-
-        QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
-                         &editor,  SLOT(onLanguageChanged(const QString&)));
 
         QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
                          &layout.model,  SLOT(setState(Model::Layout::State)));

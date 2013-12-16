@@ -17,3 +17,10 @@ HEADERS += coreutils.h
 SOURCES += coreutils.cpp
 
 include(../word-prediction.pri)
+
+# for plugins
+API_HEADERS = logic/languageplugininterface.h
+
+api_headers.files = $$API_HEADERS
+api_headers.path = $$UBUNTU_KEYBOARD_HEADERS_DIR
+INSTALLS += api_headers

@@ -70,4 +70,9 @@ WordCandidateList WordEngineProbe::fetchCandidates(Model::Text *text)
     return result;
 }
 
+AbstractLanguageFeatures* WordEngineProbe::languageFeature()
+{
+    return new MockLanguageFeatures();
+}
+
 }} // namespace MaliitKeyboard

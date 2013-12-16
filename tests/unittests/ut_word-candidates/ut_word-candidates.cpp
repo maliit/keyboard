@@ -36,7 +36,6 @@
 #include "plugin/editor.h"
 #include "models/key.h"
 #include "models/text.h"
-#include "logic/languagefeatures.h"
 #include "logic/layouthelper.h"
 #include "logic/layoutupdater.h"
 #include "logic/style.h"
@@ -116,7 +115,7 @@ private:
         QFETCH(QString, expected_word_candidate);
         QFETCH(QString, expected_commit_history);
 
-        Editor editor(EditorOptions(), new Model::Text, new Logic::WordEngineProbe, new Logic::LanguageFeatures);
+        Editor editor(EditorOptions(), new Model::Text, new Logic::WordEngineProbe);
         QSignalSpy spy(&editor, SIGNAL(wordCandidatesChanged(WordCandidateList)));
         QSignalSpy preedit_enabled_spy(&editor, SIGNAL(preeditEnabledChanged(bool)));
         QSignalSpy auto_correct_enabled_spy(&editor, SIGNAL(autoCorrectEnabledChanged(bool)));
@@ -159,7 +158,7 @@ private:
 
     Q_SLOT void testWordCandidatesChanged()
     {
-        Editor editor(EditorOptions(), new Model::Text, new Logic::WordEngineProbe, new Logic::LanguageFeatures);
+        Editor editor(EditorOptions(), new Model::Text, new Logic::WordEngineProbe);
         editor.wordEngine()->setWordPredictionEnabled(true);
         QSignalSpy spy(&editor, SIGNAL(wordCandidatesChanged(WordCandidateList)));
 
@@ -200,7 +199,7 @@ private:
 
     Q_SLOT void testWordRibbonVisible()
     {
-        Editor editor(EditorOptions(), new Model::Text, new Logic::WordEngineProbe, new Logic::LanguageFeatures);
+        Editor editor(EditorOptions(), new Model::Text, new Logic::WordEngineProbe);
         editor.wordEngine()->setWordPredictionEnabled(true);
         InputMethodHostProbe host;
         editor.setHost(&host);

@@ -36,7 +36,6 @@
 #include "models/wordcandidate.h"
 #include "models/text.h"
 #include "logic/abstractwordengine.h"
-#include "logic/abstractlanguagefeatures.h"
 
 #include <QtCore>
 #include <QtGui/QKeyEvent>
@@ -102,13 +101,11 @@ public:
     explicit AbstractTextEditor(const EditorOptions &options,
                                 Model::Text *text,
                                 Logic::AbstractWordEngine *word_engine,
-                                Logic::AbstractLanguageFeatures *language_features,
                                 QObject *parent = 0);
     virtual ~AbstractTextEditor() = 0;
 
     Model::Text * text() const;
     Logic::AbstractWordEngine * wordEngine() const;
-    Logic::AbstractLanguageFeatures * languageFeatures() const;
 
     Q_SLOT void onKeyPressed(const Key &key);
     Q_SLOT void onKeyReleased(const Key &key);
@@ -140,8 +137,6 @@ public:
     Q_SIGNAL void autoCapsActivated();
     Q_SIGNAL void leftLayoutSelected();
     Q_SIGNAL void rightLayoutSelected();
-
-    Q_SLOT virtual void onLanguageChanged(const QString& languageId);
 
 private:
     const QScopedPointer<AbstractTextEditorPrivate> d_ptr;
