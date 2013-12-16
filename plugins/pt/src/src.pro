@@ -39,7 +39,7 @@ OTHER_FILES += \
     portugueseplugin.json \
     historias_sem_data.txt
 
-LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
+LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
 
 INCLUDEPATH += $$PWD/../../westernsupport
 DEPENDPATH += $$PWD/../../westernsupport

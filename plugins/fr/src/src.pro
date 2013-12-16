@@ -40,7 +40,7 @@ OTHER_FILES += \
     frenchplugin.json \
     les_trois_mousquetaires.txt
 
-LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage
+LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
 
 INCLUDEPATH += $$PWD/../../westernsupport
 DEPENDPATH += $$PWD/../../westernsupport
