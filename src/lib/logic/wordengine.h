@@ -34,6 +34,7 @@
 
 #include "models/text.h"
 #include "logic/abstractwordengine.h"
+#include "languageplugininterface.h"
 
 #include <QtCore>
 
@@ -63,6 +64,8 @@ public:
 
     Q_SLOT void onWordCandidateSelected(QString word);
     Q_SLOT void onLanguageChanged(const QString& languageId);
+
+    virtual AbstractLanguageFeatures* languageFeature();
 
 private:
     //! \reimp

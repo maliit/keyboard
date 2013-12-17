@@ -25,7 +25,7 @@
  *
  */
 
-#include "logic/languagefeatures.h"
+#include "westernlanguagefeatures.h"
 
 #include <QtCore>
 #include <QtTest>
@@ -37,7 +37,7 @@ class TestLanguageFeatures : public QObject
     Q_OBJECT
 
 private:
-    Logic::LanguageFeatures m_languageFeatures;
+    WesternLanguageFeatures m_languageFeatures;
 
     Q_SLOT void initTestCase()
     {}

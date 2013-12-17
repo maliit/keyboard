@@ -21,8 +21,10 @@ Build-Depends: debhelper (>= 9),
                qt5-default,
                qtbase5-dev,
                qtdeclarative5-dev,
+               qtdeclarative5-private-dev,
                qtdeclarative5-ubuntu-ui-toolkit-plugin,
                xvfb,
+               presage
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-keyboard
 # If you aren't a member of ~phablet-team but need to upload packaging changes,
@@ -55,6 +57,11 @@ Depends: fonts-droid,
 Description: Ubuntu on-screen keyboard data files
  Data files for the Ubuntu virtual keyboard
 
+Package: ubuntu-keyboard-dev
+Architecture: all
+Depends: ${misc:Depends},
+Description: Ubuntu on-screen keyboard - development files
+
 Package: ubuntu-keyboard-tests
 Architecture: any
 Depends: ubuntu-keyboard (>= ${source:Version}),
@@ -73,3 +80,134 @@ Depends: libautopilot-qt (>= 1.4),
          unity8-autopilot,
 Description: Tests and emulators package for ubuntu-keyboard
  Autopilot tests for the ubuntu-keyboard package
+
+
+
+Package: ubuntu-keyboard-arabic
+Architecture: all
+Depends: ubuntu-keyboard,
+         hunspell-ar,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Arabic
+ Data files for the Ubuntu virtual keyboard - Arabic
+
+Package: ubuntu-keyboard-chinese-pinyin
+Architecture: all
+Depends: ubuntu-keyboard,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Chinese Pinyin
+ Data files for the Ubuntu virtual keyboard - Chinese Pinyin
+
+Package: ubuntu-keyboard-czech
+Architecture: all
+Depends: ubuntu-keyboard,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Czech
+ Data files for the Ubuntu virtual keyboard - Czech
+
+Package: ubuntu-keyboard-danish
+Architecture: all
+Depends: ubuntu-keyboard,
+         hunspell-da,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Danish
+ Data files for the Ubuntu virtual keyboard - Danish
+
+Package: ubuntu-keyboard-dutch
+Architecture: all
+Depends: ubuntu-keyboard,
+         myspell-nl,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Dutch
+ Data files for the Ubuntu virtual keyboard - Dutch
+
+Package: ubuntu-keyboard-english
+Architecture: all
+Depends: ubuntu-keyboard,
+         hunspell-en-us,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - English
+ Data files for the Ubuntu virtual keyboard - English
+
+Package: ubuntu-keyboard-finnish
+Architecture: all
+Depends: ubuntu-keyboard,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Finnish
+ Data files for the Ubuntu virtual keyboard - Finnish
+
+Package: ubuntu-keyboard-french
+Architecture: all
+Depends: ubuntu-keyboard,
+         hunspell-fr,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - French
+ Data files for the Ubuntu virtual keyboard - French
+
+Package: ubuntu-keyboard-german
+Architecture: all
+Depends: ubuntu-keyboard,
+         hunspell-de-de,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - German
+ Data files for the Ubuntu virtual keyboard - German
+
+Package: ubuntu-keyboard-hebrew
+Architecture: all
+Depends: ubuntu-keyboard,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Hebrew
+ Data files for the Ubuntu virtual keyboard - Hebrew
+
+Package: ubuntu-keyboard-hungarian
+Architecture: all
+Depends: ubuntu-keyboard,
+         hunspell-hu,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Hungarian
+ Data files for the Ubuntu virtual keyboard - Hungarian
+
+Package: ubuntu-keyboard-italian
+Architecture: all
+Depends: ubuntu-keyboard,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Italian
+ Data files for the Ubuntu virtual keyboard - Italian
+
+Package: ubuntu-keyboard-polish
+Architecture: all
+Depends: ubuntu-keyboard,
+         myspell-pl,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Polish
+ Data files for the Ubuntu virtual keyboard - Polish
+
+Package: ubuntu-keyboard-portuguese
+Architecture: all
+Depends: ubuntu-keyboard,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Portuguese
+ Data files for the Ubuntu virtual keyboard - Portuguese
+
+Package: ubuntu-keyboard-russian
+Architecture: all
+Depends: ubuntu-keyboard,
+         hunspell-ru,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Russian
+ Data files for the Ubuntu virtual keyboard - Russian
+
+Package: ubuntu-keyboard-spanish
+Architecture: all
+Depends: ubuntu-keyboard,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Spanish
+ Data files for the Ubuntu virtual keyboard - Spanish
+
+Package: ubuntu-keyboard-swedish
+Architecture: all
+Depends: ubuntu-keyboard,
+         hunspell-sv-se,
+         ${misc:Depends},
+Description: Ubuntu on-screen keyboard data files - Swedish
+ Data files for the Ubuntu virtual keyboard - Swedish

@@ -31,9 +31,7 @@
 
 #include "abstracttexteditor.h"
 #include "models/wordribbon.h"
-
-#include "logic/chineselanguagefeatures.h"
-#include "logic/languagefeatures.h"
+#include "logic/abstractlanguagefeatures.h"
 
 #include <QElapsedTimer>
 
@@ -279,7 +277,6 @@ public:
     EditorOptions options;
     QScopedPointer<Model::Text> text;
     QScopedPointer<Logic::AbstractWordEngine> word_engine;
-    QScopedPointer<Logic::AbstractLanguageFeatures> language_features;
     bool preedit_enabled;
     bool auto_correct_enabled;
     bool auto_caps_enabled;
@@ -288,21 +285,18 @@ public:
 
     explicit AbstractTextEditorPrivate(const EditorOptions &new_options,
                                        Model::Text *new_text,
-                                       Logic::AbstractWordEngine *new_word_engine,
-                                       Logic::AbstractLanguageFeatures *new_language_features);
+                                       Logic::AbstractWordEngine *new_word_engine);
     bool valid() const;
 };
 
 AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_options,
                                                      Model::Text *new_text,
-                                                     Logic::AbstractWordEngine *new_word_engine,
-                                                     Logic::AbstractLanguageFeatures *new_language_features)
+                                                     Logic::AbstractWordEngine *new_word_engine)
     : auto_repeat_backspace_timer()
     , backspace_sent(false)
     , options(new_options)
     , text(new_text)
     , word_engine(new_word_engine)
-    , language_features(new_language_features)
     , preedit_enabled(false)
     , auto_correct_enabled(false)
     , auto_caps_enabled(false)
@@ -315,7 +309,8 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
 
 bool AbstractTextEditorPrivate::valid() const
 {
-    const bool is_invalid(text.isNull() || word_engine.isNull() || language_features.isNull());
+                                                         // TODO language_fetaures
+    const bool is_invalid(text.isNull() || word_engine.isNull());
 
     if (is_invalid) {
         qCritical() << __PRETTY_FUNCTION__
@@ -329,17 +324,15 @@ bool AbstractTextEditorPrivate::valid() const
 //! \param options Editor options.
 //! \param text Text model.
 //! \param word_engine Word engine.
-//! \param language_features Language features.
 //! \param parent Parent of this instance or \c NULL if none is needed.
 //!
 //! Takes ownership of \a text, \a word_engine and \a language_features.
 AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
                                        Model::Text *text,
                                        Logic::AbstractWordEngine *word_engine,
-                                       Logic::AbstractLanguageFeatures *language_features,
                                        QObject *parent)
     : QObject(parent)
-    , d_ptr(new AbstractTextEditorPrivate(options, text, word_engine, language_features))
+    , d_ptr(new AbstractTextEditorPrivate(options, text, word_engine))
 {
     connect(&d_ptr->auto_repeat_backspace_timer, SIGNAL(timeout()),
             this,                                SLOT(autoRepeatBackspace()));
@@ -439,11 +432,11 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     case Key::ActionSpace: {
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
-        const bool auto_caps_activated = d->language_features->activateAutoCaps(textOnLeft);
+        const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty();
 
         if (replace_preedit) {
-            const QString &appendix = d->language_features->appendixForReplacedPreedit(d->text->preedit());
+            const QString &appendix = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
             d->text->setPreedit(d->text->primaryCandidate());
             d->text->appendToPreedit(appendix);
         } else {
@@ -565,8 +558,8 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
     }
 
     d->text->setPreedit(replacement);
-    const bool auto_caps_activated = d->language_features->activateAutoCaps(d->text->preedit());
-    const QString appendix = d->language_features->appendixForReplacedPreedit(d->text->preedit());
+    const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->preedit());
+    const QString appendix = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
     d->text->appendToPreedit(appendix);
     commitPreedit();
 
@@ -815,18 +808,6 @@ void AbstractTextEditor::onCursorPositionChanged(int cursor_position,
         d->ignore_next_cursor_position = r.start;
         d->ignore_next_surrounding_text = QString(surrounding_text).remove(r.start, r.length);
     }
-}
-
-//! \brief sets language features
-//! \param language id as string (as found in settings file)
-void AbstractTextEditor::onLanguageChanged(const QString& languageId)
-{
-    Q_D(AbstractTextEditor);
-
-    if (languageId == "zh")
-        d->language_features.reset(new Logic::ChineseLanguageFeatures);
-    else
-        d->language_features.reset(new Logic::LanguageFeatures);
 }
 
 } // namespace MaliitKeyboard

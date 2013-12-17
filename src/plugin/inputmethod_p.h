@@ -9,7 +9,6 @@
 #include "logic/layoutupdater.h"
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
-#include "logic/languagefeatures.h"
 
 #include "ubuntuapplicationapiwrapper.h"
 
@@ -47,7 +46,11 @@ LayoutGroup::LayoutGroup()
     : helper()
     , updater()
     , model()
+#ifdef TEMP_DISABLED
     , event_handler(&model, &updater)
+#else
+    , event_handler()
+#endif
 {}
 
 QQuickView *createWindow(MAbstractInputMethodHost *host)
@@ -92,7 +95,7 @@ public:
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
-        , editor(EditorOptions(), new Model::Text, new Logic::WordEngine, new Logic::LanguageFeatures)
+        , editor(EditorOptions(), new Model::Text, new Logic::WordEngine)
         , style(new Style)
         , notifier()
         , key_overrides()
@@ -124,13 +127,13 @@ public:
         const QSize &screen_size(view->screen()->size());
         layout.helper.setScreenSize(screen_size);
         layout.helper.setAlignment(Logic::LayoutHelper::Bottom);
-
+#ifdef TEMP_DISABLED
         QObject::connect(&layout.event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
                          &layout.updater, SLOT( onWordCandidatePressed(WordCandidate) ));
 
         QObject::connect(&layout.event_handler, SIGNAL(wordCandidateReleased(WordCandidate)),
                          &layout.updater, SLOT( onWordCandidateReleased(WordCandidate) ));
-
+#endif
         QObject::connect(&editor,  SIGNAL(preeditEnabledChanged(bool)),
                          &layout.updater, SLOT(setWordRibbonVisible(bool)));
 
@@ -139,9 +142,6 @@ public:
 
         QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
                          editor.wordEngine(),  SLOT(onLanguageChanged(QString)));
-
-        QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
-                         &editor,  SLOT(onLanguageChanged(const QString&)));
 
         QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
                          &layout.model,  SLOT(setState(Model::Layout::State)));

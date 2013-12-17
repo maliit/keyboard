@@ -172,5 +172,10 @@ void AbstractWordEngine::setSpellcheckerEnabled(bool on)
     Q_UNUSED(on);
     qDebug() << Q_FUNC_INFO << "should be implemented by inherited class";
 }
-
+/*
+AbstractLanguageFeature* AbstractWordEngine::languageFeature()
+{
+    return new AbstractLanguageFeature;
+}
+*/
 }} // namespace MaliitKeyboard, Logic

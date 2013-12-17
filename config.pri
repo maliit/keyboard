@@ -51,7 +51,9 @@ enable-opengl {
 UBUNTU_KEYBOARD_PACKAGENAME = ubuntu-keyboard
 UBUNTU_KEYBOARD_VERSION = $$system(cat $$PWD/VERSION)
 UBUNTU_KEYBOARD_DATA_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu"
+UBUNTU_KEYBOARD_LIB_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/lib"
 UBUNTU_KEYBOARD_TEST_DIR = "/usr/share/maliit/tests/ubuntu-keyboard"
+UBUNTU_KEYBOARD_HEADERS_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/include"
 
 PINYIN_DATA_DIR = "$$system(pkg-config --variable pkgdatadir libpinyin)/data"
 
