@@ -168,9 +168,6 @@ void InputMethod::setActiveSubView(const QString &id,
     // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
     d->layout.updater.setActiveKeyboardId(id);
     d->layout.model.setActiveView(id);
-
-    d->registerSystemLanguage();
-    setActiveLanguage(d->systemLanguage);
 }
 
 QString InputMethod::activeSubView(Maliit::HandlerState state) const
@@ -254,6 +251,15 @@ void InputMethod::updateAutoCaps()
         d->autocapsEnabled = enabled;
         d->editor.setAutoCapsEnabled(enabled);
     }
+}
+
+//! \brief InputMethod::onActiveLanguageChanged
+//! Updates currently active language
+void InputMethod::onActiveLanguageSettingChanged()
+{
+    Q_D(InputMethod);
+    d->activeLanguage.truncate(2);
+    Q_EMIT activeLanguageChanged(d->activeLanguage);
 }
 
 //! \brief InputMethod::onEnabledLanguageSettingsChanged
@@ -403,7 +409,7 @@ void InputMethod::setContentType(TextContentType contentType)
     if (contentType == d->contentType)
         return;
 
-    setActiveLanguage(d->systemLanguage);
+    setActiveLanguage(d->activeLanguage);
 
     d->contentType = contentType;
     Q_EMIT contentTypeChanged(contentType);
@@ -441,14 +447,6 @@ const QString &InputMethod::activeLanguage() const
 {
     Q_D(const InputMethod);
     return d->activeLanguage;
-}
-
-//! \brief InputMethod::systemLanguage returns the languageset as the one used
-//! in the whole system
-const QString &InputMethod::systemLanguage() const
-{
-    Q_D(const InputMethod);
-    return d->systemLanguage;
 }
 
 //! \brief InputMethod::useAudioFeedback is true, when keys should play a audio

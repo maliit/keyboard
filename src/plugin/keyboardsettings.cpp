@@ -34,6 +34,7 @@
 
 using namespace MaliitKeyboard;
 
+const QLatin1String ACTIVE_LANGUAGE_KEY = QLatin1String("activeLanguage");
 const QLatin1String ENABLED_LANGUAGES_KEY = QLatin1String("enabledLanguages");
 const QLatin1String AUTO_CAPITALIZATION_KEY = QLatin1String("autoCapitalization");
 const QLatin1String AUTO_COMPLETION_KEY = QLatin1String("autoCompletion");
@@ -53,6 +54,16 @@ KeyboardSettings::KeyboardSettings(QObject *parent) :
 {
     QObject::connect(m_settings, SIGNAL(changed(QString)),
                      this, SLOT(settingUpdated(QString)));
+}
+
+/*!
+ * \brief KeyboardSettings::activeLanguage returns currently active language
+ * \return active language
+ */
+
+QString KeyboardSettings::activeLanguage() const
+{
+    return m_settings->get(ACTIVE_LANGUAGE_KEY).toString();
 }
 
 /*!
@@ -121,7 +132,10 @@ bool KeyboardSettings::keyPressFeedback() const
  */
 void KeyboardSettings::settingUpdated(const QString &key)
 {
-    if (key == ENABLED_LANGUAGES_KEY) {
+    if (key == ACTIVE_LANGUAGE_KEY) {
+        Q_EMIT activeLanguageChanged(activeLanguage());
+        return;
+    } else if (key == ENABLED_LANGUAGES_KEY) {
         Q_EMIT enabledLanguagesChanged(enabledLanguages());
         return;
     } else if (key == AUTO_CAPITALIZATION_KEY) {

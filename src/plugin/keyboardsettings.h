@@ -43,6 +43,7 @@ class KeyboardSettings : public QObject
 public:
     explicit KeyboardSettings(QObject *parent = 0);
     
+    QString activeLanguage() const;
     QStringList enabledLanguages() const;
     bool autoCapitalization() const;
     bool autoCompletion() const;
@@ -51,6 +52,7 @@ public:
     bool keyPressFeedback() const;
 
 Q_SIGNALS:
+    void activeLanguageChanged(QString);
     void enabledLanguagesChanged(QStringList);
     void autoCapitalizationChanged(bool);
     void autoCompletionChanged(bool);

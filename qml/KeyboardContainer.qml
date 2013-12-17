@@ -71,7 +71,6 @@ Item {
 
         property Item activeKeypad: characterKeypadLoader.item
         property string characterKeypadSource: loadLayout(maliit_input_method.contentType,
-                                                          maliit_input_method.systemLanguage,
                                                           maliit_input_method.activeLanguage)
         property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
 
@@ -151,7 +150,7 @@ Item {
                 return "lib/zh/Keyboard_zh_cn_pinyin.qml";
         }
 
-        function loadLayout(contentType, systemLanguage, activeLanguage)
+        function loadLayout(contentType, activeLanguage)
         {
 //            if (contentType === InputMethod.NumberContentType) {
             if (contentType === 1) {
@@ -163,7 +162,7 @@ Item {
                 return "languages/Keyboard_telephone.qml";
             }
 
-            var locale = systemLanguage.slice(0,2).toLowerCase();
+            var locale = activeLanguage.slice(0,2).toLowerCase();
             if (!languageIsSupported(locale)) {
                 console.log("System language '"+locale+"' can't be used in OSK - using 'en' instead")
                 locale = "en"
