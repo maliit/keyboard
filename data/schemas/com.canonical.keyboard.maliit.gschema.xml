@@ -14,7 +14,7 @@
     <key name="auto-completion" type="b">
       <summary>Auto-completion</summary>
       <description>Complete current word with first suggestion when hitting space.</description>
-      <default>true</default>
+      <default>false</default>
     </key>
     <key name="predictive-text" type="b">
       <summary>Predictive text</summary>
@@ -29,7 +29,7 @@
     <key name="spell-checking" type="b">
       <summary>Spell checking</summary>
       <description>Check spelling of entered text.</description>
-      <default>true</default>
+      <default>false</default>
     </key>
     <key name="spell-checking-languages" type="as">
       <summary>Spell checking languages</summary>
