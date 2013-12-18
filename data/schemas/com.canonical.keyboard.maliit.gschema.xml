@@ -4,7 +4,7 @@
     <key name="active-language" type="s">
       <summary>Active language</summary>
       <description>Currently active language, selected by user in the keyboard language menu</description>
-      <default>en</default>
+      <default>'en'</default>
     </key>
     <key name="enabled-languages" type="as">
       <summary>Enabled languages</summary>
