@@ -166,8 +166,10 @@ void InputMethod::setActiveSubView(const QString &id,
     Q_D(InputMethod);
 
     // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
+#ifdef TEMP_DISABLED
     d->layout.updater.setActiveKeyboardId(id);
     d->layout.model.setActiveView(id);
+#endif
 
     d->registerSystemLanguage();
     setActiveLanguage(d->systemLanguage);

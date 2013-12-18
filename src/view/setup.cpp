@@ -60,12 +60,13 @@ void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
 
     QObject::connect(event_handler, SIGNAL(keyReleased(Key)),
                      editor,        SLOT(onKeyReleased(Key)));
-
+#ifdef TEMP_DISABLED
     QObject::connect(event_handler, SIGNAL(keyEntered(Key)),
                      editor,        SLOT(onKeyEntered(Key)));
 
     QObject::connect(event_handler, SIGNAL(keyExited(Key)),
                      editor,        SLOT(onKeyExited(Key)));
+#endif
 }
 
 void connectLayoutUpdaterToTextEditor(Logic::LayoutUpdater *updater,

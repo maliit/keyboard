@@ -46,22 +46,29 @@ class Layout;
 namespace Logic {
 
 class LayoutUpdater;
+#ifdef TEMP_DISABLED
 class EventHandlerPrivate;
+#endif
 
 class EventHandler
     : public QObject
 {
     Q_OBJECT
     Q_DISABLE_COPY(EventHandler)
+#ifdef TEMP_DISABLED
     Q_DECLARE_PRIVATE(EventHandler)
+#endif
 
 public:
-    explicit EventHandler(Model::Layout * const layout,
+    explicit EventHandler(
+#ifdef TEMP_DISABLED
+            Model::Layout * const layout,
                           LayoutUpdater * const updater,
+#endif
                           QObject *parent = 0);
     virtual ~EventHandler();
 
-
+#ifdef TEMP_DISABLED
     Q_SLOT void onExtendedKeysShown(const Key &key);
     Q_SIGNAL void extendedKeysShown(const Key &key);
 
@@ -70,30 +77,35 @@ public:
     Q_INVOKABLE void onPressed(int index);
     Q_INVOKABLE void onReleased(int index);
     Q_INVOKABLE void onPressAndHold(int index);
-
+#endif
     Q_INVOKABLE void onWordCandidatePressed(QString word);
     Q_INVOKABLE void onWordCandidateReleased(QString word);
+#ifdef TEMP_DISABLED
     Q_INVOKABLE void onLanguageChangeRequested(QString languageId);
-
     Q_INVOKABLE void onKeyEntered(QString label);
     Q_INVOKABLE void onKeyExited(QString label);
+#endif
     Q_INVOKABLE void onKeyPressed(QString label, QString action = QString());
     Q_INVOKABLE void onKeyReleased(QString label, QString action = QString());
 
     // Key signals:
     Q_SIGNAL void keyPressed(const Key &key);
+#ifdef TEMP_DISABLED
     Q_SIGNAL void keyLongPressed(const Key &key);
+#endif
     Q_SIGNAL void keyReleased(const Key &key);
+#ifdef TEMP_DISABLED
     Q_SIGNAL void keyEntered(const Key &key);
     Q_SIGNAL void keyExited(const Key &key);
-
+#endif
     Q_SIGNAL void wordCandidatePressed(const WordCandidate &candidate);
     Q_SIGNAL void wordCandidateReleased(const WordCandidate &candidate);
 
     Q_SIGNAL void languageChangeRequested(QString languageId);
-
+#ifdef TEMP_DISABLED
 private:
     const QScopedPointer<EventHandlerPrivate> d_ptr;
+#endif
 };
 
 }} // namespace Logic, MaliitKeyboard
