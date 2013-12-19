@@ -1,12 +1,12 @@
 
 #include "inputmethod.h"
 
+#include "logic/layoutupdater.h"
 #include "editor.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
 #include "updatenotifier.h"
 
-#include "logic/layoutupdater.h"
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
 
@@ -35,7 +35,6 @@ class LayoutGroup
 {
 public:
     Logic::LayoutHelper helper;
-    Logic::LayoutUpdater updater;
     Model::Layout model;
     Logic::EventHandler event_handler;
 
@@ -44,7 +43,6 @@ public:
 
 LayoutGroup::LayoutGroup()
     : helper()
-    , updater()
     , model()
 #ifdef TEMP_DISABLED
     , event_handler(&model, &updater)
@@ -123,10 +121,6 @@ public:
 
         editor.setHost(host);
 
-        layout.updater.setLayout(&layout.helper);
-
-        layout.updater.setStyle(style);
-
         const QSize &screen_size(view->screen()->size());
         layout.helper.setScreenSize(screen_size);
         layout.helper.setAlignment(Logic::LayoutHelper::Bottom);
@@ -152,10 +146,10 @@ public:
 
         QObject::connect(wordRibbon, SIGNAL(wordCandidateSelected(QString)),
                          editor.wordEngine(),  SLOT(onWordCandidateSelected(QString)));
-
-        QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)), //??
+#ifdef TEMP_DISABLED //this is also connected in inputmethod.cpp
+        QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
                          editor.wordEngine(),  SLOT(onLanguageChanged(QString)));
-
+#endif
         QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
                          &layout.model,  SLOT(setState(Model::Layout::State)));
 
@@ -322,7 +316,6 @@ public:
 
         m_geometry->setShown(false);
 
-        layout.updater.resetOnKeyboardClosed();
         editor.clearPreedit();
 
         view->setVisible(false);

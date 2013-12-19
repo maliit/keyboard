@@ -45,11 +45,12 @@ namespace MaliitKeyboard {
 namespace Setup {
 
 void connectAll(Logic::EventHandler *event_handler,
-                Logic::LayoutUpdater *updater,
                 AbstractTextEditor *editor)
 {
     connectEventHandlerToTextEditor(event_handler, editor);
+#ifdef TEMP_DISABLED
     connectLayoutUpdaterToTextEditor(updater, editor);
+#endif
 }
 
 void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
@@ -68,11 +69,10 @@ void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
                      editor,        SLOT(onKeyExited(Key)));
 #endif
 }
-
+#ifdef TEMP_DISABLED
 void connectLayoutUpdaterToTextEditor(Logic::LayoutUpdater *updater,
                                       AbstractTextEditor *editor)
 {
-#ifdef TEMP_DISABLED
     QObject::connect(updater, SIGNAL(wordCandidateSelected(QString)),
                      editor,  SLOT(replaceAndCommitPreedit(QString)));
     // could not find any emit for this signal
@@ -81,15 +81,14 @@ void connectLayoutUpdaterToTextEditor(Logic::LayoutUpdater *updater,
 
     QObject::connect(updater, SIGNAL(userCandidateSelected(QString)),
                      editor,  SLOT(addToUserDictionary(QString)));
-#endif
+
     QObject::connect(editor,  SIGNAL(preeditEnabledChanged(bool)),
                      updater, SLOT(setWordRibbonVisible(bool)));
-#ifdef TEMP_DISABLED
+
     QObject::connect(editor,  SIGNAL(wordCandidatesChanged(WordCandidateList)),
                      updater, SLOT(onWordCandidatesChanged(WordCandidateList)));
-#endif
     QObject::connect(editor,  SIGNAL(autoCapsActivated()),
                      updater, SIGNAL(autoCapsActivated()));
 }
-
+#endif
 }} // namespace Setup, MaliitKeyboard

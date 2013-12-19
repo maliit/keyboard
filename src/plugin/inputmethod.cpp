@@ -83,7 +83,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
 
     // FIXME: Reconnect feedback instance.
-    Setup::connectAll(&d->layout.event_handler, &d->layout.updater, &d->editor);
+    Setup::connectAll(&d->layout.event_handler, &d->editor);
 
     connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
             &d->layout.model, SLOT(setKeyArea(KeyArea)));
@@ -143,6 +143,7 @@ QList<MAbstractInputMethod::MInputMethodSubView>
 InputMethod::subViews(Maliit::HandlerState state) const
 {
     Q_UNUSED(state)
+#ifdef TEMP_DISABLED
     Q_D(const InputMethod);
 
     QList<MInputMethodSubView> views;
@@ -154,6 +155,9 @@ InputMethod::subViews(Maliit::HandlerState state) const
         views.append(v);
     }
 
+    return views;
+#endif
+    QList<MInputMethodSubView> views;
     return views;
 }
 
@@ -180,7 +184,7 @@ QString InputMethod::activeSubView(Maliit::HandlerState state) const
     Q_UNUSED(state)
     Q_D(const InputMethod);
 
-    return d->layout.updater.activeKeyboardId();
+    return d->activeLanguage;
 }
 
 void InputMethod::handleFocusChange(bool focusIn)
