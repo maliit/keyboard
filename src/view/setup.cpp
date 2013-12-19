@@ -37,7 +37,7 @@
 #include "models/wordcandidate.h"
 #include "models/text.h"
 
-#include "logic/layouthelper.h"
+//#include "logic/layouthelper.h"
 #include "logic/layoutupdater.h"
 #include "logic/eventhandler.h"
 

@@ -1,9 +1,9 @@
 LOGIC_DIR = ./logic
 
 HEADERS += \
-    logic/layouthelper.h \
-    logic/layoutupdater.h \
-    logic/keyboardloader.h \
+#    logic/layouthelper.h \
+#    logic/layoutupdater.h \
+#    logic/keyboardloader.h \
     logic/style.h \
     logic/abstractwordengine.h \
     logic/wordengine.h \
@@ -12,9 +12,9 @@ HEADERS += \
     logic/languageplugininterface.h \
 
 SOURCES += \
-    logic/layouthelper.cpp \
-    logic/layoutupdater.cpp \
-    logic/keyboardloader.cpp \
+#    logic/layouthelper.cpp \
+#    logic/layoutupdater.cpp \
+#    logic/keyboardloader.cpp \
     logic/style.cpp \
     logic/abstractwordengine.cpp \
     logic/wordengine.cpp \

@@ -37,7 +37,7 @@
 #include "models/wordribbon.h"
 #include "models/layout.h"
 
-#include "logic/layouthelper.h"
+// #include "logic/layouthelper.h"
 #include "logic/style.h"
 
 #include "view/setup.h"
