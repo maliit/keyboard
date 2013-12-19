@@ -84,7 +84,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     // FIXME: Reconnect feedback instance.
     Setup::connectAll(&d->event_handler, &d->editor);
-#ifdef TEMP_DISABLED
+#ifdef LEGACY_CODE_TO_BE_REMOVED
     connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
             &d->layout.model, SLOT(setKeyArea(KeyArea)));
 #endif
@@ -93,7 +93,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
-#ifdef TEMP_DISABLED
+#ifdef LEGACY_CODE_TO_BE_REMOVED
     d->registerStyleSetting(host);
 #endif
     d->registerFeedbackSetting();
@@ -143,7 +143,7 @@ QList<MAbstractInputMethod::MInputMethodSubView>
 InputMethod::subViews(Maliit::HandlerState state) const
 {
     Q_UNUSED(state)
-#ifdef TEMP_DISABLED
+#ifdef LEGACY_CODE_TO_BE_REMOVED
     Q_D(const InputMethod);
 
     QList<MInputMethodSubView> views;
@@ -170,7 +170,7 @@ void InputMethod::setActiveSubView(const QString &id,
     Q_D(InputMethod);
 
     // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
-#ifdef TEMP_DISABLED
+#ifdef LEGACY_CODE_TO_BE_REMOVED
     d->layout.updater.setActiveKeyboardId(id);
     d->layout.model.setActiveView(id);
 #endif
@@ -220,7 +220,7 @@ bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
     if (not event or event->type() != MImExtensionEvent::Update) {
         return false;
     }
-#ifdef TEMP_DISABLED
+#ifdef LEGACY_CODE_TO_BE_REMOVED
     Q_D(InputMethod);
 
     MImUpdateEvent *update_event(static_cast<MImUpdateEvent *>(event));
@@ -229,7 +229,7 @@ bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
 #endif
     return true;
 }
-#ifdef TEMP_DISABLED
+#ifdef LEGACY_CODE_TO_BE_REMOVED
 void InputMethod::onStyleSettingChanged()
 {
     Q_D(InputMethod);
@@ -297,7 +297,7 @@ void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverrid
             overriden_keys.insert(i.key(), overrideToKey(override));
         }
     }
-#ifdef TEMP_DISABLED
+#ifdef LEGACY_CODE_TO_BE_REMOVED
     d->notifier.notifyOverride(overriden_keys);
 #endif
 }
@@ -316,7 +316,7 @@ void InputMethod::updateKey(const QString &key_id,
         Logic::KeyOverrides overrides_update;
 
         overrides_update.insert(key_id, override_key);
-#ifdef TEMP_DISABLED
+#ifdef LEGACY_CODE_TO_BE_REMOVED
         d->notifier.notifyOverride(overrides_update, true);
 #endif
     }
