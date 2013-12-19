@@ -161,7 +161,23 @@ void WordRibbon::onWordCandidatePressed(const WordCandidate &candidate)
 //! \todo implement WordRibbon::onWordCandidateReleased()
 void WordRibbon::onWordCandidateReleased(const WordCandidate &candidate)
 {
-    Q_UNUSED(candidate);
+    if (candidate.source() == WordCandidate::SourcePrediction
+        || candidate.source() == WordCandidate::SourceSpellChecking) {
+        Q_EMIT wordCandidateSelected(candidate.word());
+    } else if (candidate.source() == WordCandidate::SourceUser) {
+        Q_EMIT userCandidateSelected(candidate.word());
+    }
 }
+
+void WordRibbon::onWordCandidatesChanged(const WordCandidateList &candidates)
+{
+    clearCandidates();
+
+    for (int index = 0; index < candidates.count(); ++index) {
+        WordCandidate word_candidate(candidates.at(index));
+        appendCandidate(word_candidate);
+    }
+}
+
 
 } // namespace MaliitKeyboard

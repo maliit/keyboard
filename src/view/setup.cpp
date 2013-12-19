@@ -83,10 +83,10 @@ void connectLayoutUpdaterToTextEditor(Logic::LayoutUpdater *updater,
 
     QObject::connect(editor,  SIGNAL(preeditEnabledChanged(bool)),
                      updater, SLOT(setWordRibbonVisible(bool)));
-
+#ifdef TEMP_DISABLED
     QObject::connect(editor,  SIGNAL(wordCandidatesChanged(WordCandidateList)),
                      updater, SLOT(onWordCandidatesChanged(WordCandidateList)));
-
+#endif
     QObject::connect(editor,  SIGNAL(autoCapsActivated()),
                      updater, SIGNAL(autoCapsActivated()));
 }

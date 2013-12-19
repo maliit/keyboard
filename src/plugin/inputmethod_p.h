@@ -131,11 +131,21 @@ public:
         layout.helper.setScreenSize(screen_size);
         layout.helper.setAlignment(Logic::LayoutHelper::Bottom);
 
+        //! connect wordRibbon
         QObject::connect(&layout.event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
                          wordRibbon, SLOT( onWordCandidatePressed(WordCandidate) ));
 
         QObject::connect(&layout.event_handler, SIGNAL(wordCandidateReleased(WordCandidate)),
                          wordRibbon, SLOT( onWordCandidateReleased(WordCandidate) ));
+
+        QObject::connect(&editor,  SIGNAL(wordCandidatesChanged(WordCandidateList)),
+                         wordRibbon, SLOT(onWordCandidatesChanged(WordCandidateList)));
+
+        QObject::connect(wordRibbon, SIGNAL(wordCandidateSelected(QString)),
+                         &editor,  SLOT(replaceAndCommitPreedit(QString)));
+
+        QObject::connect(wordRibbon, SIGNAL(userCandidateSelected(QString)),
+                         &editor,  SLOT(addToUserDictionary(QString)));
 
         QObject::connect(&editor,  SIGNAL(preeditEnabledChanged(bool)),
                          &layout.updater, SLOT(setWordRibbonVisible(bool)));
@@ -221,7 +231,7 @@ public:
         qml_context->setContextProperty("maliit_geometry", m_geometry);
         qml_context->setContextProperty("maliit_layout", &layout.model);
         qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
-        qml_context->setContextProperty("maliit_wordribbon", layout.helper.wordRibbon());
+        qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
         qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
     }
 
