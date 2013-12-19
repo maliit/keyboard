@@ -38,7 +38,7 @@
 #include "models/layout.h"
 
 // #include "logic/layouthelper.h"
-#include "logic/style.h"
+//#include "logic/style.h"
 
 #include "view/setup.h"
 
@@ -93,9 +93,9 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
-
+#ifdef TEMP_DISABLED
     d->registerStyleSetting(host);
-
+#endif
     d->registerFeedbackSetting();
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
@@ -229,16 +229,14 @@ bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
 #endif
     return true;
 }
-
+#ifdef TEMP_DISABLED
 void InputMethod::onStyleSettingChanged()
 {
     Q_D(InputMethod);
     d->style->setProfile(d->settings.style->value().toString());
-#ifdef TEMP_DISABLED
     d->layout.model.setImageDirectory(d->style->directory(Style::Images));
-#endif
 }
-
+#endif
 void InputMethod::onAutoCorrectSettingChanged()
 {
     Q_D(InputMethod);

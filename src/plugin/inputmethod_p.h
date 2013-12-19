@@ -24,12 +24,6 @@ typedef QScopedPointer<Maliit::Plugins::AbstractPluginSetting> ScopedSetting;
 typedef QSharedPointer<MKeyOverride> SharedOverride;
 typedef QMap<QString, SharedOverride>::const_iterator OverridesIterator;
 
-class Settings
-{
-public:
-    ScopedSetting style;
-};
-
 QQuickView *createWindow(MAbstractInputMethodHost *host)
 {
     QScopedPointer<QQuickView> view(new QQuickView);
@@ -49,9 +43,7 @@ class InputMethodPrivate
 public:
     InputMethod* q;
     Editor editor;
-    SharedStyle style;
     QMap<QString, SharedOverride> key_overrides;
-    Settings settings;  // todo: remove
     Logic::EventHandler event_handler;
     MAbstractInputMethodHost* host;
     QQuickView* view;
@@ -74,9 +66,7 @@ public:
                                 MAbstractInputMethodHost *host)
         : q(_q)
         , editor(EditorOptions(), new Model::Text, new Logic::WordEngine)
-        , style(new Style)
         , key_overrides()
-        , settings()
         , event_handler()
         , host(host)
         , view(0)
@@ -209,6 +199,7 @@ public:
     /*
      * register settings
      */
+#ifdef TEMP_REMOVED
     //! probably not needed anymore
     void registerStyleSetting(MAbstractInputMethodHost *host)
     {
@@ -228,7 +219,7 @@ public:
         // Call manually for the first time to initialize dependent values:
         q->onStyleSettingChanged();
     }
-
+#endif
     void registerFeedbackSetting()
     {
         QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged()),
