@@ -84,10 +84,10 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     // FIXME: Reconnect feedback instance.
     Setup::connectAll(&d->layout.event_handler, &d->editor);
-
+#ifdef TEMP_DISABLED
     connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
             &d->layout.model, SLOT(setKeyArea(KeyArea)));
-
+#endif
     connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SIGNAL(activateAutocaps()));
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));

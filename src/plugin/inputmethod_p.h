@@ -34,7 +34,6 @@ public:
 class LayoutGroup
 {
 public:
-    Logic::LayoutHelper helper;
     Model::Layout model;
     Logic::EventHandler event_handler;
 
@@ -42,8 +41,7 @@ public:
 };
 
 LayoutGroup::LayoutGroup()
-    : helper()
-    , model()
+    : model()
 #ifdef TEMP_DISABLED
     , event_handler(&model, &updater)
 #else
@@ -121,10 +119,11 @@ public:
 
         editor.setHost(host);
 
+#ifdef TEMP_DISABLED
         const QSize &screen_size(view->screen()->size());
         layout.helper.setScreenSize(screen_size);
         layout.helper.setAlignment(Logic::LayoutHelper::Bottom);
-
+#endif
         //! connect wordRibbon
         QObject::connect(&layout.event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
                          wordRibbon, SLOT( onWordCandidatePressed(WordCandidate) ));
@@ -149,10 +148,10 @@ public:
 #ifdef TEMP_DISABLED //this is also connected in inputmethod.cpp
         QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
                          editor.wordEngine(),  SLOT(onLanguageChanged(QString)));
-#endif
+
         QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
                          &layout.model,  SLOT(setState(Model::Layout::State)));
-
+#endif
         connectToNotifier();
 
     #ifdef DISABLED_FLAGS_FROM_SURFACE
@@ -214,9 +213,10 @@ public:
     #ifdef TEMP_DISABLED
         QObject::connect(&notifier, SIGNAL(cursorPositionChanged(int, QString)),
                          &editor,   SLOT(onCursorPositionChanged(int, QString)));
-    #endif
+
         QObject::connect(&notifier,      SIGNAL(keysOverriden(Logic::KeyOverrides, bool)),
                          &layout.helper, SLOT(onKeysOverriden(Logic::KeyOverrides, bool)));
+    #endif
     }
 
     void setContextProperties(QQmlContext *qml_context)
@@ -301,12 +301,12 @@ public:
         systemLanguage.truncate(2);
         Q_EMIT q->systemLanguageChanged(systemLanguage);
     }
-
+#ifdef TEMP_DISABLED
     void onScreenSizeChange(const QSize &size)
     {
         layout.helper.setScreenSize(size);
     }
-
+#endif
     void closeOskWindow()
     {
         if (!view->isVisible())
