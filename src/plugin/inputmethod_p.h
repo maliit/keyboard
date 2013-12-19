@@ -92,6 +92,8 @@ public:
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
 
+    WordRibbon* wordRibbon;
+
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
@@ -113,6 +115,7 @@ public:
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
+        , wordRibbon(new WordRibbon)
     {
         applicationApiWrapper->setGeometryItem(m_geometry);
 
@@ -127,13 +130,13 @@ public:
         const QSize &screen_size(view->screen()->size());
         layout.helper.setScreenSize(screen_size);
         layout.helper.setAlignment(Logic::LayoutHelper::Bottom);
-#ifdef TEMP_DISABLED
+
         QObject::connect(&layout.event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
-                         &layout.updater, SLOT( onWordCandidatePressed(WordCandidate) ));
+                         wordRibbon, SLOT( onWordCandidatePressed(WordCandidate) ));
 
         QObject::connect(&layout.event_handler, SIGNAL(wordCandidateReleased(WordCandidate)),
-                         &layout.updater, SLOT( onWordCandidateReleased(WordCandidate) ));
-#endif
+                         wordRibbon, SLOT( onWordCandidateReleased(WordCandidate) ));
+
         QObject::connect(&editor,  SIGNAL(preeditEnabledChanged(bool)),
                          &layout.updater, SLOT(setWordRibbonVisible(bool)));
 

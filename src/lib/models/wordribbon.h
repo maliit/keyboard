@@ -86,6 +86,9 @@ public:
     bool enabled() const;
     void setEnabled(bool enabled);
 
+    Q_SLOT void onWordCandidatePressed(const WordCandidate &candidate);
+    Q_SLOT void onWordCandidateReleased(const WordCandidate &candidate);
+
 Q_SIGNALS:
     void enabledChanged(bool enabled);
 };

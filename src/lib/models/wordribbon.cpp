@@ -153,4 +153,15 @@ void WordRibbon::setEnabled(bool enabled)
     Q_EMIT enabledChanged(m_enabled);
 }
 
+void WordRibbon::onWordCandidatePressed(const WordCandidate &candidate)
+{
+    appendCandidate(candidate);
+}
+
+//! \todo implement WordRibbon::onWordCandidateReleased()
+void WordRibbon::onWordCandidateReleased(const WordCandidate &candidate)
+{
+    Q_UNUSED(candidate);
+}
+
 } // namespace MaliitKeyboard
