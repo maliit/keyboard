@@ -44,6 +44,7 @@ public:
     explicit KeyboardSettings(QObject *parent = 0);
     
     QString activeLanguage() const;
+    void setActiveLanguage(const QString& id);
     QStringList enabledLanguages() const;
     bool autoCapitalization() const;
     bool autoCompletion() const;

@@ -474,6 +474,7 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
     if (d->activeLanguage == newLanguage)
         return;
 
+    d->m_settings->setActiveLanguage(newLanguage);
     d->activeLanguage = newLanguage;
     d->host->setLanguage(newLanguage);
     Q_EMIT activeLanguageChanged(d->activeLanguage);

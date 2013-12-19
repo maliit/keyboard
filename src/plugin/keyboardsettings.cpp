@@ -66,6 +66,12 @@ QString KeyboardSettings::activeLanguage() const
     return m_settings->get(ACTIVE_LANGUAGE_KEY).toString();
 }
 
+void setActiveLanguage(const QString& id)
+{
+    m_settings->set(ACTIVE_LANGUAGE_KEY, id);
+}
+
+
 /*!
  * \brief KeyboardSettings::enabledLanguages returns a list of languages that are
  * active
