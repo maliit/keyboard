@@ -41,7 +41,6 @@ Item {
     objectName: "fullScreenItem"
 
     property variant input_method: maliit_input_method
-    property variant layout: maliit_layout
     property variant event_handler: maliit_event_handler
 
     onHeightChanged: calculateSize();
@@ -76,10 +75,6 @@ Item {
     onRotationChanged: console.log("now rotation has changed!!" + rotation)
 
     visible: true
-
-    // Expose details for use with Autopilot.
-    //readonly property var layoutState: layout.keyboard_state
-    //readonly property string activeView: layout.activeView
 
     property int contentOrientation: maliit_geometry.orientation
     onContentOrientationChanged: fullScreenItem.reportKeyboardVisibleRect();

@@ -234,7 +234,9 @@ void InputMethod::onStyleSettingChanged()
 {
     Q_D(InputMethod);
     d->style->setProfile(d->settings.style->value().toString());
+#ifdef TEMP_DISABLED
     d->layout.model.setImageDirectory(d->style->directory(Style::Images));
+#endif
 }
 
 void InputMethod::onAutoCorrectSettingChanged()

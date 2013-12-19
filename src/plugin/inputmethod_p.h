@@ -34,18 +34,17 @@ public:
 class LayoutGroup
 {
 public:
-    Model::Layout model;
     Logic::EventHandler event_handler;
 
     explicit LayoutGroup();
 };
 
 LayoutGroup::LayoutGroup()
-    : model()
+    :
 #ifdef TEMP_DISABLED
     , event_handler(&model, &updater)
 #else
-    , event_handler()
+    event_handler()
 #endif
 {}
 
@@ -223,7 +222,6 @@ public:
     {
         qml_context->setContextProperty("maliit_input_method", q);
         qml_context->setContextProperty("maliit_geometry", m_geometry);
-        qml_context->setContextProperty("maliit_layout", &layout.model);
         qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
         qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
         qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
@@ -233,7 +231,7 @@ public:
     /*
      * register settings
      */
-
+    //! probably not needed anymore
     void registerStyleSetting(MAbstractInputMethodHost *host)
     {
         QVariantMap attributes;
