@@ -72,15 +72,16 @@ void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
 void connectLayoutUpdaterToTextEditor(Logic::LayoutUpdater *updater,
                                       AbstractTextEditor *editor)
 {
+#ifdef TEMP_DISABLED
     QObject::connect(updater, SIGNAL(wordCandidateSelected(QString)),
                      editor,  SLOT(replaceAndCommitPreedit(QString)));
-
+    // could not find any emit for this signal
     QObject::connect(updater, SIGNAL(addToUserDictionary()),
                      editor,  SLOT(showUserCandidate()));
 
     QObject::connect(updater, SIGNAL(userCandidateSelected(QString)),
                      editor,  SLOT(addToUserDictionary(QString)));
-
+#endif
     QObject::connect(editor,  SIGNAL(preeditEnabledChanged(bool)),
                      updater, SLOT(setWordRibbonVisible(bool)));
 #ifdef TEMP_DISABLED

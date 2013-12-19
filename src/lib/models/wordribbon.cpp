@@ -179,5 +179,10 @@ void WordRibbon::onWordCandidatesChanged(const WordCandidateList &candidates)
     }
 }
 
+void WordRibbon::setWordRibbonVisible(bool visible)
+{
+    Q_UNUSED(visible);
+    clearCandidates();
+}
 
 } // namespace MaliitKeyboard

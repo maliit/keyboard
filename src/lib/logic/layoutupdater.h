@@ -52,10 +52,11 @@ class LayoutUpdater
     Q_OBJECT
     Q_DISABLE_COPY(LayoutUpdater)
     Q_DECLARE_PRIVATE(LayoutUpdater)
+#ifdef TEMP_DISABLED
     Q_PROPERTY(bool wordRibbonVisible READ isWordRibbonVisible
                                       WRITE setWordRibbonVisible
                                       NOTIFY wordRibbonVisibleChanged)
-
+#endif
 public:
     explicit LayoutUpdater(QObject *parent = 0);
     virtual ~LayoutUpdater();
@@ -71,11 +72,11 @@ public:
     Q_SLOT void setOrientation(LayoutHelper::Orientation orientation);
 
     void setStyle(const SharedStyle &style);
-
+#ifdef TEMP_DISABLED
     bool isWordRibbonVisible() const;
     Q_SLOT void setWordRibbonVisible(bool visible);
     Q_SIGNAL void wordRibbonVisibleChanged(bool visible);
-
+#endif
     Key modifyKey(const Key &key,
                   KeyDescription::State state) const;
 
@@ -89,18 +90,19 @@ public:
     Q_SLOT void onKeyExited(const Key &key);
     Q_SLOT void clearActiveKeysAndMagnifier();
     Q_SLOT void resetOnKeyboardClosed();
+#ifdef TEMP_DISABLED
     Q_SLOT void onWordCandidatesChanged(const WordCandidateList &candidates);
-
+#endif
     // ExtendedKeyArea signal handlers:
     Q_SLOT void onExtendedKeysShown(const Key &main_key);
-
+#ifdef TEMP_DISABLED
     // WordCandidate signal handlers:
     Q_SLOT void onWordCandidatePressed(const WordCandidate &candidate);
     Q_SLOT void onWordCandidateReleased(const WordCandidate &candidate);
 
     Q_SIGNAL void wordCandidateSelected(const QString &candidate);
     Q_SIGNAL void userCandidateSelected(const QString &candidate);
-
+#endif
     Q_SIGNAL void addToUserDictionary();
 
     Q_SIGNAL void keyboardTitleChanged(const QString &title);

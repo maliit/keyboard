@@ -92,7 +92,7 @@ void applyStyleToWordRibbon(WordRibbon *ribbon,
     area.setSize(QSize(a->keyAreaWidth(orientation), a->wordRibbonHeight(orientation)));
     ribbon->setArea(area);
 }
-
+#ifdef TEMP_DISABLED
 bool updateWordRibbon(LayoutHelper *layout,
                       const WordCandidate &candidate,
                       const StyleAttributes *attributes,
@@ -118,7 +118,7 @@ bool updateWordRibbon(LayoutHelper *layout,
 
     return false;
 }
-
+#endif
 QRect adjustedRect(const QRect &rect, const QMargins &margins)
 {
     return rect.adjusted(margins.left(), margins.top(), -margins.right(), -margins.bottom());
@@ -280,7 +280,7 @@ void LayoutUpdater::setStyle(const SharedStyle &style)
     Q_D(LayoutUpdater);
     d->style = style;
 }
-
+#ifdef TEMP_DISABLED
 bool LayoutUpdater::isWordRibbonVisible() const
 {
     Q_D(const LayoutUpdater);
@@ -299,7 +299,7 @@ void LayoutUpdater::setWordRibbonVisible(bool visible)
         Q_EMIT wordRibbonVisibleChanged(visible);
     }
 }
-
+#endif
 //! \brief Modify visual appearance of a key, depending on state.
 //!
 //! Uses the currently active style and the key action to decide the visual
@@ -435,7 +435,7 @@ void LayoutUpdater::resetOnKeyboardClosed()
     d->layout->setExtendedPanel(KeyArea());
     d->layout->setActivePanel(LayoutHelper::CenterPanel);
 }
-
+#ifdef TEMP_DISABLED
 void LayoutUpdater::onWordCandidatesChanged(const WordCandidateList &candidates)
 {
     Q_D(LayoutUpdater);
@@ -463,12 +463,12 @@ void LayoutUpdater::onWordCandidatesChanged(const WordCandidateList &candidates)
         d->layout->wordRibbon()->appendCandidate(word_candidate);
     }
 }
-
+#endif
 void LayoutUpdater::onExtendedKeysShown(const Key &main_key)
 {
     Q_UNUSED(main_key);
 }
-
+#ifdef TEMP_DISABLED
 void LayoutUpdater::onWordCandidatePressed(const WordCandidate &candidate)
 {
     Q_D(LayoutUpdater);
@@ -494,7 +494,7 @@ void LayoutUpdater::onWordCandidateReleased(const WordCandidate &candidate)
         }
     }
 }
-
+#endif
 void LayoutUpdater::syncLayoutToView()
 {
     Q_D(const LayoutUpdater);

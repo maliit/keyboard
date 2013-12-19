@@ -148,12 +148,12 @@ public:
                          &editor,  SLOT(addToUserDictionary(QString)));
 
         QObject::connect(&editor,  SIGNAL(preeditEnabledChanged(bool)),
-                         &layout.updater, SLOT(setWordRibbonVisible(bool)));
+                         wordRibbon, SLOT(setWordRibbonVisible(bool)));
 
-        QObject::connect(&layout.updater, SIGNAL(wordCandidateSelected(QString)),
+        QObject::connect(wordRibbon, SIGNAL(wordCandidateSelected(QString)),
                          editor.wordEngine(),  SLOT(onWordCandidateSelected(QString)));
 
-        QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
+        QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)), //??
                          editor.wordEngine(),  SLOT(onLanguageChanged(QString)));
 
         QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
