@@ -5,7 +5,6 @@
 #include "editor.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
-#include "updatenotifier.h"
 
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
@@ -31,23 +30,6 @@ public:
     ScopedSetting style;
 };
 
-class LayoutGroup
-{
-public:
-    Logic::EventHandler event_handler;
-
-    explicit LayoutGroup();
-};
-
-LayoutGroup::LayoutGroup()
-    :
-#ifdef TEMP_DISABLED
-    , event_handler(&model, &updater)
-#else
-    event_handler()
-#endif
-{}
-
 QQuickView *createWindow(MAbstractInputMethodHost *host)
 {
     QScopedPointer<QQuickView> view(new QQuickView);
@@ -68,10 +50,9 @@ public:
     InputMethod* q;
     Editor editor;
     SharedStyle style;
-    UpdateNotifier notifier;
     QMap<QString, SharedOverride> key_overrides;
-    Settings settings;
-    LayoutGroup layout;
+    Settings settings;  // todo: remove
+    Logic::EventHandler event_handler;
     MAbstractInputMethodHost* host;
     QQuickView* view;
     UbuntuApplicationApiWrapper* applicationApiWrapper;
@@ -94,10 +75,9 @@ public:
         : q(_q)
         , editor(EditorOptions(), new Model::Text, new Logic::WordEngine)
         , style(new Style)
-        , notifier()
         , key_overrides()
         , settings()
-        , layout()
+        , event_handler()
         , host(host)
         , view(0)
         , applicationApiWrapper(new UbuntuApplicationApiWrapper)
@@ -124,10 +104,10 @@ public:
         layout.helper.setAlignment(Logic::LayoutHelper::Bottom);
 #endif
         //! connect wordRibbon
-        QObject::connect(&layout.event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
+        QObject::connect(&event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
                          wordRibbon, SLOT( onWordCandidatePressed(WordCandidate) ));
 
-        QObject::connect(&layout.event_handler, SIGNAL(wordCandidateReleased(WordCandidate)),
+        QObject::connect(&event_handler, SIGNAL(wordCandidateReleased(WordCandidate)),
                          wordRibbon, SLOT( onWordCandidateReleased(WordCandidate) ));
 
         QObject::connect(&editor,  SIGNAL(wordCandidatesChanged(WordCandidateList)),
@@ -150,9 +130,9 @@ public:
 
         QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
                          &layout.model,  SLOT(setState(Model::Layout::State)));
-#endif
-        connectToNotifier();
 
+        connectToNotifier();
+#endif
     #ifdef DISABLED_FLAGS_FROM_SURFACE
         view->setFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
                           | Qt::X11BypassWindowManagerHint | Qt::WindowDoesNotAcceptFocus);
@@ -206,23 +186,21 @@ public:
     {
         m_geometry->setOrientation(screenOrientation);
     }
-
+#ifdef TEMP_DISABLED
     void connectToNotifier()
     {
-    #ifdef TEMP_DISABLED
         QObject::connect(&notifier, SIGNAL(cursorPositionChanged(int, QString)),
                          &editor,   SLOT(onCursorPositionChanged(int, QString)));
 
         QObject::connect(&notifier,      SIGNAL(keysOverriden(Logic::KeyOverrides, bool)),
                          &layout.helper, SLOT(onKeysOverriden(Logic::KeyOverrides, bool)));
-    #endif
     }
-
+#endif
     void setContextProperties(QQmlContext *qml_context)
     {
         qml_context->setContextProperty("maliit_input_method", q);
         qml_context->setContextProperty("maliit_geometry", m_geometry);
-        qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
+        qml_context->setContextProperty("maliit_event_handler", &event_handler);
         qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
         qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
     }

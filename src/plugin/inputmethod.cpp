@@ -83,7 +83,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
 
     // FIXME: Reconnect feedback instance.
-    Setup::connectAll(&d->layout.event_handler, &d->editor);
+    Setup::connectAll(&d->event_handler, &d->editor);
 #ifdef TEMP_DISABLED
     connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
             &d->layout.model, SLOT(setKeyArea(KeyArea)));
@@ -217,16 +217,16 @@ void InputMethod::handleAppOrientationChanged(int angle)
 
 bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
 {
-    Q_D(InputMethod);
-
     if (not event or event->type() != MImExtensionEvent::Update) {
         return false;
     }
+#ifdef TEMP_DISABLED
+    Q_D(InputMethod);
 
     MImUpdateEvent *update_event(static_cast<MImUpdateEvent *>(event));
 
     d->notifier.notify(update_event);
-
+#endif
     return true;
 }
 
@@ -272,7 +272,7 @@ void InputMethod::onEnabledLanguageSettingsChanged()
     d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
-
+// todo remove
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
 {
     Q_D(InputMethod);
@@ -299,9 +299,11 @@ void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverrid
             overriden_keys.insert(i.key(), overrideToKey(override));
         }
     }
+#ifdef TEMP_DISABLED
     d->notifier.notifyOverride(overriden_keys);
+#endif
 }
-
+// todo remove
 void InputMethod::updateKey(const QString &key_id,
                             const MKeyOverride::KeyOverrideAttributes changed_attributes)
 {
@@ -316,7 +318,9 @@ void InputMethod::updateKey(const QString &key_id,
         Logic::KeyOverrides overrides_update;
 
         overrides_update.insert(key_id, override_key);
+#ifdef TEMP_DISABLED
         d->notifier.notifyOverride(overrides_update, true);
+#endif
     }
 }
 
