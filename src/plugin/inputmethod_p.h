@@ -274,10 +274,10 @@ public:
     {
         QObject::connect(&m_settings, SIGNAL(activeLanguageChanged(QString)),
                          q, SLOT(onActiveLanguageChanged()));
-        q->onEnabledLanguageSettingsChanged();
         q->onActiveLanguageSettingChanged();
 
         //registerSystemLanguage();
+        activeLanguage = m_settings.activeLanguage();
         q->setActiveLanguage(activeLanguage);
     }
 

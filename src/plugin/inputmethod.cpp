@@ -100,6 +100,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
+    d->registerActiveLanguage();
     d->registerEnabledLanguages();
 
     // Setting layout orientation depends on word engine and hide word ribbon
@@ -474,7 +475,7 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
     if (d->activeLanguage == newLanguage)
         return;
 
-    d->m_settings->setActiveLanguage(newLanguage);
+    d->m_settings.setActiveLanguage(newLanguage);
     d->activeLanguage = newLanguage;
     d->host->setLanguage(newLanguage);
     Q_EMIT activeLanguageChanged(d->activeLanguage);
