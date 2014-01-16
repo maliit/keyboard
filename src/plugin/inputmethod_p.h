@@ -273,7 +273,7 @@ public:
     void registerActiveLanguage()
     {
         QObject::connect(&m_settings, SIGNAL(activeLanguageChanged(QString)),
-                         q, SLOT(onActiveLanguageChanged()));
+                         q, SLOT(onActiveLanguageSettingChanged()));
         q->onActiveLanguageSettingChanged();
 
         //registerSystemLanguage();

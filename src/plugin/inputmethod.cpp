@@ -263,7 +263,7 @@ void InputMethod::updateAutoCaps()
     }
 }
 
-//! \brief InputMethod::onActiveLanguageChanged
+//! \brief InputMethod::onActiveLanguageSettingChanged
 //! Updates currently active language
 void InputMethod::onActiveLanguageSettingChanged()
 {
