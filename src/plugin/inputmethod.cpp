@@ -207,6 +207,15 @@ void InputMethod::handleAppOrientationChanged(int angle)
     d->setLayoutOrientation(d->appsCurrentOrientation);
 }
 
+void InputMethod::handleClientChange()
+{
+    // Clients connect to Maliit on startup and disconnect at quit. This method is called
+    // for both those events. It makes sense to hide the keyboard always on these events,
+    // especially if the client crashes, so that the OSK is closed. Fixes bug lp:1267550
+    // Note that clients request OSK to appear & disappear with focus events.
+    hide();
+}
+
 bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
 {
     Q_D(InputMethod);
