@@ -481,9 +481,12 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
         return;
     }
 
+    qWarning() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
+
     if (d->activeLanguage == newLanguage)
         return;
 
+    qWarning() << "in inputMethod.cpp setActiveLanguage() setting activeLanguage to" << newLanguage;
     d->m_settings.setActiveLanguage(newLanguage);
     d->activeLanguage = newLanguage;
     d->host->setLanguage(newLanguage);

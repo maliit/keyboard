@@ -18,6 +18,7 @@
 #include <QtQuick>
 #include <QStringList>
 #include <qglobal.h>
+#include <QDebug>
 
 using namespace MaliitKeyboard;
 
@@ -242,7 +243,7 @@ public:
 
     void registerFeedbackSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged()),
+        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
                          q, SIGNAL(useAudioFeedbackChanged));
     }
 
@@ -277,8 +278,11 @@ public:
         q->onActiveLanguageSettingChanged();
 
         //registerSystemLanguage();
+
         activeLanguage = m_settings.activeLanguage();
+        qWarning() << "inputmethod_p.h registerActiveLanguage(): activeLanguage is:" << activeLanguage;
         q->setActiveLanguage(activeLanguage);
+
     }
 
     void registerEnabledLanguages()
