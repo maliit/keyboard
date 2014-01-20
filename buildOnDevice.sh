@@ -112,6 +112,6 @@ else
     sync_code
     echo "Building.."
     build
-    echo "Running.."
-    run
+#    echo "Running.."
+#    run
 fi

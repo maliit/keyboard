@@ -18,6 +18,7 @@
 #include <QtQuick>
 #include <QStringList>
 #include <qglobal.h>
+#include <QDebug>
 
 using namespace MaliitKeyboard;
 
@@ -80,7 +81,6 @@ public:
     bool autocapsEnabled;
     bool wordEngineEnabled;
     InputMethod::TextContentType contentType;
-    QString systemLanguage;
     QString activeLanguage;
     QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
@@ -103,9 +103,8 @@ public:
         , autocapsEnabled(false)
         , wordEngineEnabled(false)
         , contentType(InputMethod::FreeTextContentType)
-        , systemLanguage("en")
-        , activeLanguage(systemLanguage)
-        , enabledLanguages(systemLanguage)
+        , activeLanguage("en")
+        , enabledLanguages(activeLanguage)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
@@ -244,8 +243,8 @@ public:
 
     void registerFeedbackSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged()),
-                         q, SIGNAL(useAudioFeedbackChanged));
+        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
+                         q, SIGNAL(useAudioFeedbackChanged()));
     }
 
     void registerAutoCorrectSetting()
@@ -272,23 +271,24 @@ public:
         editor.wordEngine()->setSpellcheckerEnabled(m_settings.spellchecking());
     }
 
+    void registerActiveLanguage()
+    {
+        QObject::connect(&m_settings, SIGNAL(activeLanguageChanged(QString)),
+                         q, SLOT(setActiveLanguage(QString)));
+
+        activeLanguage = m_settings.activeLanguage();
+        qDebug() << "inputmethod_p.h registerActiveLanguage(): activeLanguage is:" << activeLanguage;
+        q->setActiveLanguage(activeLanguage);
+    }
+
     void registerEnabledLanguages()
     {
         QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged(QStringList)),
                          q, SLOT(onEnabledLanguageSettingsChanged()));
         q->onEnabledLanguageSettingsChanged();
 
-        registerSystemLanguage();
-        q->setActiveLanguage(systemLanguage);
-    }
-
-    //! \brief registerSystemLanguage reads the language from the system
-    //! FIXME check if the language is supported - if not use "en" as fallback
-    void registerSystemLanguage()
-    {
-        systemLanguage = QString(getenv("LANGUAGE"));
-        systemLanguage.truncate(2);
-        Q_EMIT q->systemLanguageChanged(systemLanguage);
+        //registerSystemLanguage();
+        //q->setActiveLanguage(activeLanguage);
     }
 
     void onScreenSizeChange(const QSize &size)

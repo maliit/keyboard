@@ -71,7 +71,6 @@ Item {
 
         property Item activeKeypad: characterKeypadLoader.item
         property string characterKeypadSource: loadLayout(maliit_input_method.contentType,
-                                                          maliit_input_method.systemLanguage,
                                                           maliit_input_method.activeLanguage)
         property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
 
@@ -84,24 +83,24 @@ Item {
         function languageIsSupported(locale)
         {
             var supportedLocales = [
-                        "ar",
-                        "cs",
-                        "da",
-                        "de",
-                        "en",
-                        "es",
-                        "fi",
-                        "fr",
-                        "he",
-                        "hu",
-                        "it",
-                        "nl",
-                        "pl",
-                        "pt",
-                        "ru",
-                        "sv",
-                        "zh",
-                    ];
+                "ar",
+                "cs",
+                "da",
+                "de",
+                "en",
+                "es",
+                "fi",
+                "fr",
+                "he",
+                "hu",
+                "it",
+                "nl",
+                "pl",
+                "pt",
+                "ru",
+                "sv",
+                "zh",
+            ];
             return (supportedLocales.indexOf( locale ) > -1);
         }
 
@@ -151,30 +150,30 @@ Item {
                 return "lib/zh/Keyboard_zh_cn_pinyin.qml";
         }
 
-        function loadLayout(contentType, systemLanguage, activeLanguage)
+        function loadLayout(contentType, activeLanguage)
         {
-//            if (contentType === InputMethod.NumberContentType) {
+            //            if (contentType === InputMethod.NumberContentType) {
             if (contentType === 1) {
                 return "languages/Keyboard_numbers.qml";
             }
 
-//            if (contentType === InputMethod.PhoneNumberContentType) {
+            //            if (contentType === InputMethod.PhoneNumberContentType) {
             if (contentType === 2) {
                 return "languages/Keyboard_telephone.qml";
             }
 
-            var locale = systemLanguage.slice(0,2).toLowerCase();
+            var locale = activeLanguage.slice(0,2).toLowerCase();
             if (!languageIsSupported(locale)) {
                 console.log("System language '"+locale+"' can't be used in OSK - using 'en' instead")
                 locale = "en"
             }
 
-//            if (contentType === InputMethod.EmailContentType) {
+            //            if (contentType === InputMethod.EmailContentType) {
             if (contentType === 3) {
                 return "lib/"+locale+"/Keyboard_"+locale+"_email.qml";
             }
 
-//            if (contentType === InputMethod.UrlContentType) {
+            //            if (contentType === InputMethod.UrlContentType) {
             if (contentType === 4) {
                 return "lib/"+locale+"/Keyboard_"+locale+"_url_search.qml";
             }

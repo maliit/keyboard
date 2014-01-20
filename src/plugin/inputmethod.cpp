@@ -79,9 +79,6 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 {
     Q_D(InputMethod);
 
-    d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
-    d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
-
     // FIXME: Reconnect feedback instance.
     Setup::connectAll(&d->layout.event_handler, &d->layout.updater, &d->editor);
 
@@ -100,11 +97,18 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
+    d->registerActiveLanguage();
     d->registerEnabledLanguages();
+
+    //fire signal so all listeners know what active language is
+    Q_EMIT activeLanguageChanged(d->activeLanguage);
 
     // Setting layout orientation depends on word engine and hide word ribbon
     // settings to be initialized first:
     d->setLayoutOrientation(d->appsCurrentOrientation);
+
+    d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
+    d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
 }
 
 InputMethod::~InputMethod()
@@ -168,9 +172,6 @@ void InputMethod::setActiveSubView(const QString &id,
     // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
     d->layout.updater.setActiveKeyboardId(id);
     d->layout.model.setActiveView(id);
-
-    d->registerSystemLanguage();
-    setActiveLanguage(d->systemLanguage);
 }
 
 QString InputMethod::activeSubView(Maliit::HandlerState state) const
@@ -412,7 +413,7 @@ void InputMethod::setContentType(TextContentType contentType)
     if (contentType == d->contentType)
         return;
 
-    setActiveLanguage(d->systemLanguage);
+    setActiveLanguage(d->activeLanguage);
 
     d->contentType = contentType;
     Q_EMIT contentTypeChanged(contentType);
@@ -452,14 +453,6 @@ const QString &InputMethod::activeLanguage() const
     return d->activeLanguage;
 }
 
-//! \brief InputMethod::systemLanguage returns the languageset as the one used
-//! in the whole system
-const QString &InputMethod::systemLanguage() const
-{
-    Q_D(const InputMethod);
-    return d->systemLanguage;
-}
-
 //! \brief InputMethod::useAudioFeedback is true, when keys should play a audio
 //! feedback when pressed
 //! \return
@@ -482,11 +475,16 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
         return;
     }
 
+    qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
+
     if (d->activeLanguage == newLanguage)
         return;
 
     d->activeLanguage = newLanguage;
     d->host->setLanguage(newLanguage);
+    d->m_settings.setActiveLanguage(newLanguage);
+
+    qDebug() << "in inputMethod.cpp setActiveLanguage() emitting activeLanguageChanged to" << d->activeLanguage;
     Q_EMIT activeLanguageChanged(d->activeLanguage);
 }
 
