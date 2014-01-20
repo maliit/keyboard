@@ -79,9 +79,6 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 {
     Q_D(InputMethod);
 
-    d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
-    d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
-
     // FIXME: Reconnect feedback instance.
     Setup::connectAll(&d->layout.event_handler, &d->layout.updater, &d->editor);
 
@@ -103,9 +100,15 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerActiveLanguage();
     d->registerEnabledLanguages();
 
+    //fire signal so all listeners know what active language is
+    Q_EMIT activeLanguageChanged(d->activeLanguage);
+
     // Setting layout orientation depends on word engine and hide word ribbon
     // settings to be initialized first:
     d->setLayoutOrientation(d->appsCurrentOrientation);
+
+    d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
+    d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
 }
 
 InputMethod::~InputMethod()
@@ -261,15 +264,6 @@ void InputMethod::updateAutoCaps()
         d->autocapsEnabled = enabled;
         d->editor.setAutoCapsEnabled(enabled);
     }
-}
-
-//! \brief InputMethod::onActiveLanguageSettingChanged
-//! Updates currently active language
-void InputMethod::onActiveLanguageSettingChanged()
-{
-    Q_D(InputMethod);
-    d->activeLanguage.truncate(2);
-    Q_EMIT activeLanguageChanged(d->activeLanguage);
 }
 
 //! \brief InputMethod::onEnabledLanguageSettingsChanged
@@ -481,15 +475,16 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
         return;
     }
 
-    qWarning() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
+    qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
 
     if (d->activeLanguage == newLanguage)
         return;
 
-    qWarning() << "in inputMethod.cpp setActiveLanguage() setting activeLanguage to" << newLanguage;
-    d->m_settings.setActiveLanguage(newLanguage);
     d->activeLanguage = newLanguage;
     d->host->setLanguage(newLanguage);
+    d->m_settings.setActiveLanguage(newLanguage);
+
+    qDebug() << "in inputMethod.cpp setActiveLanguage() emitting activeLanguageChanged to" << d->activeLanguage;
     Q_EMIT activeLanguageChanged(d->activeLanguage);
 }
 

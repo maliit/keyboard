@@ -273,6 +273,8 @@ bool SpellChecker::setLanguage(const QString &language)
 {
     Q_D(SpellChecker);
 
+    qDebug() << "spellechecker.cpp in setLanguage() lang=" << language << "dictPath=" << dictPath();
+
     QDir dictDir(dictPath());
     QStringList affMatches = dictDir.entryList(QStringList(language+"*.aff"));
     QStringList dicMatches = dictDir.entryList(QStringList(language+"*.dic"));
@@ -292,6 +294,8 @@ bool SpellChecker::setLanguage(const QString &language)
 
     d->aff_file = dictPath() + "/" + affMatches[0];
     d->dic_file = dictPath() + "/" + dicMatches[0];
+
+    qDebug() << "spellechecker.cpp in setLanguage() aff_file=" << d->aff_file << "dic_file=" << d->dic_file;
 
     if (enabled()) {
         setEnabled(false);

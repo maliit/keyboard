@@ -244,7 +244,7 @@ public:
     void registerFeedbackSetting()
     {
         QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
-                         q, SIGNAL(useAudioFeedbackChanged));
+                         q, SIGNAL(useAudioFeedbackChanged()));
     }
 
     void registerAutoCorrectSetting()
@@ -274,15 +274,11 @@ public:
     void registerActiveLanguage()
     {
         QObject::connect(&m_settings, SIGNAL(activeLanguageChanged(QString)),
-                         q, SLOT(onActiveLanguageSettingChanged()));
-        q->onActiveLanguageSettingChanged();
-
-        //registerSystemLanguage();
+                         q, SLOT(setActiveLanguage(QString)));
 
         activeLanguage = m_settings.activeLanguage();
-        qWarning() << "inputmethod_p.h registerActiveLanguage(): activeLanguage is:" << activeLanguage;
+        qDebug() << "inputmethod_p.h registerActiveLanguage(): activeLanguage is:" << activeLanguage;
         q->setActiveLanguage(activeLanguage);
-
     }
 
     void registerEnabledLanguages()

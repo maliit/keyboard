@@ -83,24 +83,24 @@ Item {
         function languageIsSupported(locale)
         {
             var supportedLocales = [
-                        "ar",
-                        "cs",
-                        "da",
-                        "de",
-                        "en",
-                        "es",
-                        "fi",
-                        "fr",
-                        "he",
-                        "hu",
-                        "it",
-                        "nl",
-                        "pl",
-                        "pt",
-                        "ru",
-                        "sv",
-                        "zh",
-                    ];
+                "ar",
+                "cs",
+                "da",
+                "de",
+                "en",
+                "es",
+                "fi",
+                "fr",
+                "he",
+                "hu",
+                "it",
+                "nl",
+                "pl",
+                "pt",
+                "ru",
+                "sv",
+                "zh",
+            ];
             return (supportedLocales.indexOf( locale ) > -1);
         }
 
@@ -152,12 +152,12 @@ Item {
 
         function loadLayout(contentType, activeLanguage)
         {
-//            if (contentType === InputMethod.NumberContentType) {
+            //            if (contentType === InputMethod.NumberContentType) {
             if (contentType === 1) {
                 return "languages/Keyboard_numbers.qml";
             }
 
-//            if (contentType === InputMethod.PhoneNumberContentType) {
+            //            if (contentType === InputMethod.PhoneNumberContentType) {
             if (contentType === 2) {
                 return "languages/Keyboard_telephone.qml";
             }
@@ -168,12 +168,12 @@ Item {
                 locale = "en"
             }
 
-//            if (contentType === InputMethod.EmailContentType) {
+            //            if (contentType === InputMethod.EmailContentType) {
             if (contentType === 3) {
                 return "lib/"+locale+"/Keyboard_"+locale+"_email.qml";
             }
 
-//            if (contentType === InputMethod.UrlContentType) {
+            //            if (contentType === InputMethod.UrlContentType) {
             if (contentType === 4) {
                 return "lib/"+locale+"/Keyboard_"+locale+"_url_search.qml";
             }

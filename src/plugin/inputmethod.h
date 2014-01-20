@@ -118,7 +118,6 @@ Q_SIGNALS:
 private:
     Q_SLOT void onStyleSettingChanged();
     Q_SLOT void onAutoCorrectSettingChanged();
-    Q_SLOT void onActiveLanguageSettingChanged();
     Q_SLOT void onEnabledLanguageSettingsChanged();
     Q_SLOT void updateAutoCaps();
 
