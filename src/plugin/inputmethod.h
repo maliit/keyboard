@@ -51,7 +51,6 @@ class InputMethod
     Q_PROPERTY(TextContentType contentType READ contentType WRITE setContentType NOTIFY contentTypeChanged)
     Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
     Q_PROPERTY(QString activeLanguage READ activeLanguage WRITE setActiveLanguage NOTIFY activeLanguageChanged)
-    Q_PROPERTY(QString systemLanguage READ systemLanguage NOTIFY systemLanguageChanged)
     Q_PROPERTY(bool useAudioFeedback READ useAudioFeedback NOTIFY useAudioFeedbackChanged)
 
     Q_ENUMS(TextContentType)
@@ -84,6 +83,7 @@ public:
     virtual QString activeSubView(Maliit::HandlerState state = Maliit::OnScreen) const;
     virtual void handleFocusChange(bool focusIn);
     virtual void handleAppOrientationChanged(int angle);
+    virtual void handleClientChange();
     virtual bool imExtensionEvent(MImExtensionEvent *event);
     virtual void setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides);
     //! \reimp_end
@@ -102,8 +102,6 @@ public:
     const QString &activeLanguage() const;
     Q_SLOT void setActiveLanguage(const QString& newLanguage);
 
-    const QString &systemLanguage() const;
-
     Q_SLOT void onVisibleRectChanged();
     bool useAudioFeedback() const;
 
@@ -112,7 +110,6 @@ Q_SIGNALS:
     void activateAutocaps();
     void enabledLanguagesChanged(QStringList languages);
     void activeLanguageChanged(QString language);
-    void systemLanguageChanged(QString language);
     void useAudioFeedbackChanged();
     void wordEngineEnabledChanged(bool wordEngineEnabled);
     void wordRibbonEnabledChanged(bool wordRibbonEnabled);
