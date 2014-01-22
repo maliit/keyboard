@@ -1,3 +1,25 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140121-0ubuntu1) trusty; urgency=low
+
+  [ Bill Filler ]
+  * turn off spell-checking and auto-complete by default.
+  * changes to load/set the active keyboard based on gsettings key.
+  * change Architecture of plugins to any as they are platform specific.
+
+  [ Gerry Boland ]
+  * Implement handleClientChanged method to react correctly to client
+    connect/disconnect. (LP: #1267550)
+
+  [ Thomas Moenicke ]
+  * build fixes. (LP: #1258061)
+  * language features + backends go into plugins .
+  * new click sound for keys.
+  * changes to load/set the active keyboard based on gsettings key.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 126
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 21 Jan 2014 17:12:09 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20131126-0ubuntu1) trusty; urgency=low
 
   [ Thomas Moenicke ]
