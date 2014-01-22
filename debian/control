@@ -24,8 +24,8 @@ Build-Depends: debhelper (>= 9),
                qtdeclarative5-private-dev,
                qtdeclarative5-ubuntu-ui-toolkit-plugin,
                xvfb,
-               presage
-Standards-Version: 3.9.4
+               presage,
+Standards-Version: 3.9.5
 Homepage: https://launchpad.net/ubuntu-keyboard
 # If you aren't a member of ~phablet-team but need to upload packaging changes,
 # just go ahead.  ~phablet-team will notice and sync up the code again.
@@ -85,7 +85,7 @@ Description: Tests and emulators package for ubuntu-keyboard
 
 Package: ubuntu-keyboard-arabic
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          hunspell-ar,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Arabic
@@ -93,21 +93,21 @@ Description: Ubuntu on-screen keyboard data files - Arabic
 
 Package: ubuntu-keyboard-chinese-pinyin
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Chinese Pinyin
  Data files for the Ubuntu virtual keyboard - Chinese Pinyin
 
 Package: ubuntu-keyboard-czech
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Czech
  Data files for the Ubuntu virtual keyboard - Czech
 
 Package: ubuntu-keyboard-danish
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          hunspell-da,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Danish
@@ -115,7 +115,7 @@ Description: Ubuntu on-screen keyboard data files - Danish
 
 Package: ubuntu-keyboard-dutch
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          myspell-nl,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Dutch
@@ -123,7 +123,7 @@ Description: Ubuntu on-screen keyboard data files - Dutch
 
 Package: ubuntu-keyboard-english
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          hunspell-en-us,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - English
@@ -131,14 +131,14 @@ Description: Ubuntu on-screen keyboard data files - English
 
 Package: ubuntu-keyboard-finnish
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Finnish
  Data files for the Ubuntu virtual keyboard - Finnish
 
 Package: ubuntu-keyboard-french
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          hunspell-fr,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - French
@@ -146,7 +146,7 @@ Description: Ubuntu on-screen keyboard data files - French
 
 Package: ubuntu-keyboard-german
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          hunspell-de-de,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - German
@@ -154,14 +154,14 @@ Description: Ubuntu on-screen keyboard data files - German
 
 Package: ubuntu-keyboard-hebrew
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Hebrew
  Data files for the Ubuntu virtual keyboard - Hebrew
 
 Package: ubuntu-keyboard-hungarian
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          hunspell-hu,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Hungarian
@@ -169,14 +169,14 @@ Description: Ubuntu on-screen keyboard data files - Hungarian
 
 Package: ubuntu-keyboard-italian
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Italian
  Data files for the Ubuntu virtual keyboard - Italian
 
 Package: ubuntu-keyboard-polish
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          myspell-pl,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Polish
@@ -184,14 +184,14 @@ Description: Ubuntu on-screen keyboard data files - Polish
 
 Package: ubuntu-keyboard-portuguese
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Portuguese
  Data files for the Ubuntu virtual keyboard - Portuguese
 
 Package: ubuntu-keyboard-russian
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          hunspell-ru,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Russian
@@ -199,14 +199,14 @@ Description: Ubuntu on-screen keyboard data files - Russian
 
 Package: ubuntu-keyboard-spanish
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Spanish
  Data files for the Ubuntu virtual keyboard - Spanish
 
 Package: ubuntu-keyboard-swedish
 Architecture: any
-Depends: ubuntu-keyboard (> 0.99.trunk.phablet2+14.04.20131126-0ubuntu1),
+Depends: ubuntu-keyboard (= ${binary:Version}),
          hunspell-sv-se,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files - Swedish
