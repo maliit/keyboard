@@ -55,10 +55,6 @@ void connectAll(Logic::EventHandler *event_handler,
 
 void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
                                      AbstractTextEditor *editor);
-#ifdef TEMP_DISABLED
-void connectLayoutUpdaterToTextEditor(Logic::LayoutUpdater *updater,
-                                      AbstractTextEditor *editor);
-#endif
 }} // namespace Setup, MaliitKeyboard
 
 #endif // MALIIT_KEYBOARD_SETUP_H

@@ -81,18 +81,11 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     // FIXME: Reconnect feedback instance.
     Setup::connectAll(&d->event_handler, &d->editor);
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
-            &d->layout.model, SLOT(setKeyArea(KeyArea)));
-#endif
     connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SIGNAL(activateAutocaps()));
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    d->registerStyleSetting(host);
-#endif
     d->registerFeedbackSetting();
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
@@ -147,20 +140,6 @@ QList<MAbstractInputMethod::MInputMethodSubView>
 InputMethod::subViews(Maliit::HandlerState state) const
 {
     Q_UNUSED(state)
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    Q_D(const InputMethod);
-
-    QList<MInputMethodSubView> views;
-
-    Q_FOREACH (const QString &id, d->layout.updater.keyboardIds()) {
-        MInputMethodSubView v;
-        v.subViewId = id;
-        v.subViewTitle = d->layout.updater.keyboardTitle(id);
-        views.append(v);
-    }
-
-    return views;
-#endif
     QList<MInputMethodSubView> views;
     return views;
 }
@@ -171,13 +150,6 @@ void InputMethod::setActiveSubView(const QString &id,
 {
     Q_UNUSED(state)
     Q_UNUSED(id);
-    Q_D(InputMethod);
-
-    // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    d->layout.updater.setActiveKeyboardId(id);
-    d->layout.model.setActiveView(id);
-#endif
 }
 
 QString InputMethod::activeSubView(Maliit::HandlerState state) const
@@ -230,23 +202,9 @@ bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
     if (not event or event->type() != MImExtensionEvent::Update) {
         return false;
     }
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    Q_D(InputMethod);
-
-    MImUpdateEvent *update_event(static_cast<MImUpdateEvent *>(event));
-
-    d->notifier.notify(update_event);
-#endif
     return true;
 }
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-void InputMethod::onStyleSettingChanged()
-{
-    Q_D(InputMethod);
-    d->style->setProfile(d->settings.style->value().toString());
-    d->layout.model.setImageDirectory(d->style->directory(Style::Images));
-}
-#endif
+
 void InputMethod::onAutoCorrectSettingChanged()
 {
     Q_D(InputMethod);
@@ -307,9 +265,7 @@ void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverrid
             overriden_keys.insert(i.key(), overrideToKey(override));
         }
     }
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    d->notifier.notifyOverride(overriden_keys);
-#endif
+
 }
 // todo remove
 void InputMethod::updateKey(const QString &key_id,
@@ -326,9 +282,6 @@ void InputMethod::updateKey(const QString &key_id,
         Logic::KeyOverrides overrides_update;
 
         overrides_update.insert(key_id, override_key);
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-        d->notifier.notifyOverride(overrides_update, true);
-#endif
     }
 }
 

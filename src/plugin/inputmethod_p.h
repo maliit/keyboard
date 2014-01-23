@@ -87,11 +87,6 @@ public:
 
         editor.setHost(host);
 
-#ifdef TEMP_DISABLED
-        const QSize &screen_size(view->screen()->size());
-        layout.helper.setScreenSize(screen_size);
-        layout.helper.setAlignment(Logic::LayoutHelper::Bottom);
-#endif
         //! connect wordRibbon
         QObject::connect(&event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
                          wordRibbon, SLOT( onWordCandidatePressed(WordCandidate) ));
@@ -113,15 +108,7 @@ public:
 
         QObject::connect(wordRibbon, SIGNAL(wordCandidateSelected(QString)),
                          editor.wordEngine(),  SLOT(onWordCandidateSelected(QString)));
-#ifdef TEMP_DISABLED //this is also connected in inputmethod.cpp
-        QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
-                         editor.wordEngine(),  SLOT(onLanguageChanged(QString)));
 
-        QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
-                         &layout.model,  SLOT(setState(Model::Layout::State)));
-
-        connectToNotifier();
-#endif
     #ifdef DISABLED_FLAGS_FROM_SURFACE
         view->setFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
                           | Qt::X11BypassWindowManagerHint | Qt::WindowDoesNotAcceptFocus);
@@ -175,16 +162,7 @@ public:
     {
         m_geometry->setOrientation(screenOrientation);
     }
-#ifdef TEMP_DISABLED
-    void connectToNotifier()
-    {
-        QObject::connect(&notifier, SIGNAL(cursorPositionChanged(int, QString)),
-                         &editor,   SLOT(onCursorPositionChanged(int, QString)));
 
-        QObject::connect(&notifier,      SIGNAL(keysOverriden(Logic::KeyOverrides, bool)),
-                         &layout.helper, SLOT(onKeysOverriden(Logic::KeyOverrides, bool)));
-    }
-#endif
     void setContextProperties(QQmlContext *qml_context)
     {
         qml_context->setContextProperty("maliit_input_method", q);
@@ -198,27 +176,6 @@ public:
     /*
      * register settings
      */
-#ifdef TEMP_REMOVED
-    //! probably not needed anymore
-    void registerStyleSetting(MAbstractInputMethodHost *host)
-    {
-        QVariantMap attributes;
-        QStringList available_styles = style->availableProfiles();
-        attributes[Maliit::SettingEntryAttributes::defaultValue] = MALIIT_DEFAULT_PROFILE;
-        attributes[Maliit::SettingEntryAttributes::valueDomain] = available_styles;
-        attributes[Maliit::SettingEntryAttributes::valueDomainDescriptions] = available_styles;
-
-        settings.style.reset(host->registerPluginSetting("current_style",
-                                                            QT_TR_NOOP("Keyboard style"),
-                                                            Maliit::StringType,
-                                                            attributes));
-
-        QObject::connect(settings.style.data(), SIGNAL(valueChanged()), q, SLOT(onStyleSettingChanged()));
-
-        // Call manually for the first time to initialize dependent values:
-        q->onStyleSettingChanged();
-    }
-#endif
     void registerFeedbackSetting()
     {
         QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
@@ -268,12 +225,6 @@ public:
         //registerSystemLanguage();
         //q->setActiveLanguage(activeLanguage);
     }
-#ifdef TEMP_DISABLED
-    void onScreenSizeChange(const QSize &size)
-    {
-        layout.helper.setScreenSize(size);
-    }
-#endif
     void closeOskWindow()
     {
         if (!view->isVisible())

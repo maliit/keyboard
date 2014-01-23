@@ -46,66 +46,29 @@ class Layout;
 namespace Logic {
 
 class LayoutUpdater;
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-class EventHandlerPrivate;
-#endif
 
 class EventHandler
     : public QObject
 {
     Q_OBJECT
     Q_DISABLE_COPY(EventHandler)
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    Q_DECLARE_PRIVATE(EventHandler)
-#endif
 
 public:
-    explicit EventHandler(
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-            Model::Layout * const layout,
-                          LayoutUpdater * const updater,
-#endif
-                          QObject *parent = 0);
+    explicit EventHandler(QObject *parent = 0);
     virtual ~EventHandler();
 
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    Q_SLOT void onExtendedKeysShown(const Key &key);
-    Q_SIGNAL void extendedKeysShown(const Key &key);
-
-    Q_INVOKABLE void onEntered(int index);
-    Q_INVOKABLE void onExited(int index);
-    Q_INVOKABLE void onPressed(int index);
-    Q_INVOKABLE void onReleased(int index);
-    Q_INVOKABLE void onPressAndHold(int index);
-#endif
     Q_INVOKABLE void onWordCandidatePressed(QString word);
     Q_INVOKABLE void onWordCandidateReleased(QString word);
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    Q_INVOKABLE void onLanguageChangeRequested(QString languageId);
-    Q_INVOKABLE void onKeyEntered(QString label);
-    Q_INVOKABLE void onKeyExited(QString label);
-#endif
     Q_INVOKABLE void onKeyPressed(QString label, QString action = QString());
     Q_INVOKABLE void onKeyReleased(QString label, QString action = QString());
 
     // Key signals:
     Q_SIGNAL void keyPressed(const Key &key);
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    Q_SIGNAL void keyLongPressed(const Key &key);
-#endif
     Q_SIGNAL void keyReleased(const Key &key);
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-    Q_SIGNAL void keyEntered(const Key &key);
-    Q_SIGNAL void keyExited(const Key &key);
-#endif
     Q_SIGNAL void wordCandidatePressed(const WordCandidate &candidate);
     Q_SIGNAL void wordCandidateReleased(const WordCandidate &candidate);
 
     Q_SIGNAL void languageChangeRequested(QString languageId);
-#ifdef LEGACY_CODE_TO_BE_REMOVED
-private:
-    const QScopedPointer<EventHandlerPrivate> d_ptr;
-#endif
 };
 
 }} // namespace Logic, MaliitKeyboard

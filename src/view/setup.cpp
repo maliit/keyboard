@@ -48,9 +48,6 @@ void connectAll(Logic::EventHandler *event_handler,
                 AbstractTextEditor *editor)
 {
     connectEventHandlerToTextEditor(event_handler, editor);
-#ifdef TEMP_DISABLED
-    connectLayoutUpdaterToTextEditor(updater, editor);
-#endif
 }
 
 void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
@@ -61,34 +58,5 @@ void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
 
     QObject::connect(event_handler, SIGNAL(keyReleased(Key)),
                      editor,        SLOT(onKeyReleased(Key)));
-#ifdef TEMP_DISABLED
-    QObject::connect(event_handler, SIGNAL(keyEntered(Key)),
-                     editor,        SLOT(onKeyEntered(Key)));
-
-    QObject::connect(event_handler, SIGNAL(keyExited(Key)),
-                     editor,        SLOT(onKeyExited(Key)));
-#endif
 }
-#ifdef TEMP_DISABLED
-void connectLayoutUpdaterToTextEditor(Logic::LayoutUpdater *updater,
-                                      AbstractTextEditor *editor)
-{
-    QObject::connect(updater, SIGNAL(wordCandidateSelected(QString)),
-                     editor,  SLOT(replaceAndCommitPreedit(QString)));
-    // could not find any emit for this signal
-    QObject::connect(updater, SIGNAL(addToUserDictionary()),
-                     editor,  SLOT(showUserCandidate()));
-
-    QObject::connect(updater, SIGNAL(userCandidateSelected(QString)),
-                     editor,  SLOT(addToUserDictionary(QString)));
-
-    QObject::connect(editor,  SIGNAL(preeditEnabledChanged(bool)),
-                     updater, SLOT(setWordRibbonVisible(bool)));
-
-    QObject::connect(editor,  SIGNAL(wordCandidatesChanged(WordCandidateList)),
-                     updater, SLOT(onWordCandidatesChanged(WordCandidateList)));
-    QObject::connect(editor,  SIGNAL(autoCapsActivated()),
-                     updater, SIGNAL(autoCapsActivated()));
-}
-#endif
 }} // namespace Setup, MaliitKeyboard
