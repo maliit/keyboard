@@ -25,9 +25,9 @@ PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/pl/
 lang_db_pl.path = $$PLUGIN_INSTALL_PATH
 lang_db_pl.commands += \
   rm -f $$PWD/database_pl.db && \
-  text2ngram -n 1 -l -f sqlite -o $$PWD/database_pl.db $$PWD/free_ebook.txt && \
-  text2ngram -n 2 -l -f sqlite -o $$PWD/database_pl.db $$PWD/free_ebook.txt && \
-  text2ngram -n 3 -l -f sqlite -o $$PWD/database_pl.db $$PWD/free_ebook.txt
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_pl.db $$PWD/ziemia_obiecana_tom_pierwszy_4.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_pl.db $$PWD/ziemia_obiecana_tom_pierwszy_4.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_pl.db $$PWD/ziemia_obiecana_tom_pierwszy_4.txt
 
 lang_db_pl.files += $$PWD/database_pl.db
 QMAKE_EXTRA_TARGETS += lang_db_pl
@@ -37,7 +37,7 @@ INSTALLS += target lang_db_pl
 
 OTHER_FILES += \
     polishplugin.json \
-    free_ebook.txt
+    ziemia_obiecana_tom_pierwszy_4.txt
 
 LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
 
