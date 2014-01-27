@@ -116,7 +116,6 @@ Q_SIGNALS:
     void windowGeometryRectChanged(QRect rect);
 
 private:
-    Q_SLOT void onStyleSettingChanged();
     Q_SLOT void onAutoCorrectSettingChanged();
     Q_SLOT void onEnabledLanguageSettingsChanged();
     Q_SLOT void updateAutoCaps();

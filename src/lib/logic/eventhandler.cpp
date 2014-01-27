@@ -36,163 +36,16 @@
 namespace MaliitKeyboard {
 namespace Logic {
 
-class EventHandlerPrivate
-{
-public:
-    Model::Layout * const layout;
-    LayoutUpdater * const updater;
-
-    explicit EventHandlerPrivate(Model::Layout * const new_layout,
-                                 LayoutUpdater * const new_updater);
-};
-
-
-EventHandlerPrivate::EventHandlerPrivate(Model::Layout *const new_layout,
-                                         LayoutUpdater *const new_updater)
-    : layout(new_layout)
-    , updater(new_updater)
-{
-    Q_ASSERT(new_layout != 0);
-    Q_ASSERT(new_updater != 0);
-}
-
-
 //! \brief Performs event handling for Model::Layout instance, using a LayoutUpdater instance.
 //!
 //! Does not take ownership of either layout or updater.
-EventHandler::EventHandler(Model::Layout * const layout,
-                           LayoutUpdater * const updater,
-                           QObject *parent)
+EventHandler::EventHandler(QObject *parent)
     : QObject(parent)
-    , d_ptr(new EventHandlerPrivate(layout, updater))
 {}
 
 
 EventHandler::~EventHandler()
 {}
-
-
-void EventHandler::onExtendedKeysShown(const Key &key)
-{
-    Q_D(EventHandler);
-    d->updater->onExtendedKeysShown(key);
-}
-
-
-void EventHandler::onEntered(int index)
-{
-    Q_D(EventHandler);
-
-    const QVector<Key> &keys(d->layout->keyArea().keys());
-
-    if (index >= keys.count()) {
-        qWarning() << __PRETTY_FUNCTION__
-                   << "Invalid index:" << index
-                   << "Keys available:" << keys.count();
-        return;
-    }
-
-    const Key &key(keys.at(index));
-
-    const Key pressed_key(d->updater->modifyKey(key, KeyDescription::PressedState));
-    d->layout->replaceKey(index, pressed_key);
-    d->updater->onKeyEntered(key);
-
-    Q_EMIT keyEntered(key);
-}
-
-
-void EventHandler::onExited(int index)
-{
-    Q_D(EventHandler);
-
-    const QVector<Key> &keys(d->layout->keyArea().keys());
-
-    if (index >= keys.count()) {
-        qWarning() << __PRETTY_FUNCTION__
-                   << "Invalid index:" << index
-                   << "Keys available:" << keys.count();
-        return;
-    }
-
-    const Key &key(keys.at(index));
-
-    const Key normal_key(d->updater->modifyKey(key, KeyDescription::NormalState));
-    d->layout->replaceKey(index, normal_key);
-    d->updater->onKeyExited(normal_key);
-
-    Q_EMIT keyExited(key);
-}
-
-
-void EventHandler::onPressed(int index)
-{
-    Q_D(EventHandler);
-
-    const QVector<Key> &keys(d->layout->keyArea().keys());
-
-    if (index >= keys.count()) {
-        qWarning() << __PRETTY_FUNCTION__
-                   << "Invalid index:" << index
-                   << "Keys available:" << keys.count();
-        return;
-    }
-
-    const Key &key(keys.at(index));
-
-    const Key pressed_key(d->updater->modifyKey(key, KeyDescription::PressedState));
-    d->layout->replaceKey(index, pressed_key);
-    d->updater->onKeyPressed(pressed_key);
-
-    Q_EMIT keyPressed(pressed_key);
-}
-
-
-void EventHandler::onReleased(int index)
-{
-    Q_D(EventHandler);
-
-    const QVector<Key> &keys(d->layout->keyArea().keys());
-
-    if (index >= keys.count()) {
-        qWarning() << __PRETTY_FUNCTION__
-                   << "Invalid index:" << index
-                   << "Keys available:" << keys.count();
-        return;
-    }
-
-    const Key &key(keys.at(index));
-
-    const Key normal_key(d->updater->modifyKey(key, KeyDescription::NormalState));
-    d->layout->replaceKey(index, normal_key);
-    d->updater->onKeyReleased(normal_key);
-
-    Q_EMIT keyReleased(normal_key);
-}
-
-
-void EventHandler::onPressAndHold(int index)
-{
-    Q_D(EventHandler);
-
-    const QVector<Key> &keys(d->layout->keyArea().keys());
-
-    if (index >= keys.count()) {
-        qWarning() << __PRETTY_FUNCTION__
-                   << "Invalid index:" << index
-                   << "Keys available:" << keys.count();
-        return;
-    }
-
-    const Key &key(keys.at(index));
-
-    // FIXME: long-press on space needs to work again to save words to dictionary!
-    if (key.hasExtendedKeys()) {
-        Q_EMIT extendedKeysShown(key);
-    }
-
-    Q_EMIT keyLongPressed(key);
-}
 
 void EventHandler::onWordCandidatePressed(QString word)
 {
@@ -204,13 +57,6 @@ void EventHandler::onWordCandidateReleased(QString word)
 {
     WordCandidate candidate(WordCandidate::SourcePrediction, word);
     Q_EMIT wordCandidateReleased(candidate);
-}
-
-void EventHandler::onLanguageChangeRequested(QString languageId)
-{
-    Q_D(EventHandler);
-
-    d->updater->setActiveKeyboardId(languageId);
 }
 
 void EventHandler::onKeyPressed(QString label, QString action)
@@ -242,24 +88,5 @@ void EventHandler::onKeyReleased(QString label, QString action)
 
     Q_EMIT keyReleased(key);
 }
-
-void EventHandler::onKeyEntered(QString label)
-{
-    Key key;
-    key.setLabel(label);
-
-    Q_EMIT keyEntered(key);
-}
-
-
-void EventHandler::onKeyExited(QString label)
-{
-    Key key;
-    key.setLabel(label);
-
-    Q_EMIT keyExited(key);
-}
-
-
 
 }} // namespace Logic, MaliitKeyboard

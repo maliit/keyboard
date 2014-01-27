@@ -100,13 +100,13 @@ public:
         if (plugin) {
             languagePlugin = qobject_cast<LanguagePluginInterface *>(plugin);
             if (!languagePlugin) {
-                qCritical() << "loading plugin failed: " + pluginName;
+                qCritical() << "wordengine.cpp - loading plugin failed: " + pluginName;
 
                 // fallback
                 if (pluginName != DEFAULT_PLUGIN)
                     loadPlugin(DEFAULT_PLUGIN);
             } else {
-                qDebug() << "plugin" << pluginName << "loaded";
+                qDebug() << "wordengine.cpp plugin" << pluginName << "loaded";
                 currentPlugin = pluginName;
             }
         }

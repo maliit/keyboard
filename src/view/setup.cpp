@@ -37,7 +37,7 @@
 #include "models/wordcandidate.h"
 #include "models/text.h"
 
-#include "logic/layouthelper.h"
+//#include "logic/layouthelper.h"
 #include "logic/layoutupdater.h"
 #include "logic/eventhandler.h"
 
@@ -45,11 +45,9 @@ namespace MaliitKeyboard {
 namespace Setup {
 
 void connectAll(Logic::EventHandler *event_handler,
-                Logic::LayoutUpdater *updater,
                 AbstractTextEditor *editor)
 {
     connectEventHandlerToTextEditor(event_handler, editor);
-    connectLayoutUpdaterToTextEditor(updater, editor);
 }
 
 void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
@@ -60,34 +58,5 @@ void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
 
     QObject::connect(event_handler, SIGNAL(keyReleased(Key)),
                      editor,        SLOT(onKeyReleased(Key)));
-
-    QObject::connect(event_handler, SIGNAL(keyEntered(Key)),
-                     editor,        SLOT(onKeyEntered(Key)));
-
-    QObject::connect(event_handler, SIGNAL(keyExited(Key)),
-                     editor,        SLOT(onKeyExited(Key)));
 }
-
-void connectLayoutUpdaterToTextEditor(Logic::LayoutUpdater *updater,
-                                      AbstractTextEditor *editor)
-{
-    QObject::connect(updater, SIGNAL(wordCandidateSelected(QString)),
-                     editor,  SLOT(replaceAndCommitPreedit(QString)));
-
-    QObject::connect(updater, SIGNAL(addToUserDictionary()),
-                     editor,  SLOT(showUserCandidate()));
-
-    QObject::connect(updater, SIGNAL(userCandidateSelected(QString)),
-                     editor,  SLOT(addToUserDictionary(QString)));
-
-    QObject::connect(editor,  SIGNAL(preeditEnabledChanged(bool)),
-                     updater, SLOT(setWordRibbonVisible(bool)));
-
-    QObject::connect(editor,  SIGNAL(wordCandidatesChanged(WordCandidateList)),
-                     updater, SLOT(onWordCandidatesChanged(WordCandidateList)));
-
-    QObject::connect(editor,  SIGNAL(autoCapsActivated()),
-                     updater, SIGNAL(autoCapsActivated()));
-}
-
 }} // namespace Setup, MaliitKeyboard

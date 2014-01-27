@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE keyboard SYSTEM "VirtualKeyboardLayout.dtd">
-
-<keyboard catalog="pt_br" language="pt_br" title="Português- Brasil" version="1.0">
-  <import file="pt.xml" />
-</keyboard>

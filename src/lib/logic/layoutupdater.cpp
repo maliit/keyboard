@@ -93,32 +93,6 @@ void applyStyleToWordRibbon(WordRibbon *ribbon,
     ribbon->setArea(area);
 }
 
-bool updateWordRibbon(LayoutHelper *layout,
-                      const WordCandidate &candidate,
-                      const StyleAttributes *attributes,
-                      ActivationPolicy policy)
-{
-    if (not layout || not attributes) {
-        return false;
-    }
-
-    QVector<WordCandidate> &candidates(layout->wordRibbon()->rCandidates());
-
-    for (int index = 0; index < candidates.count(); ++index) {
-        WordCandidate &current(candidates[index]);
-
-        if (current.label() == candidate.label()) {
-            // in qml we don´t care about ( current.rect() == candidate.rect() )
-            applyStyleToCandidate(&current, attributes, layout->orientation(), policy);
-            layout->setWordRibbon(layout->wordRibbon());
-
-            return true;
-        }
-    }
-
-    return false;
-}
-
 QRect adjustedRect(const QRect &rect, const QMargins &margins)
 {
     return rect.adjusted(margins.left(), margins.top(), -margins.right(), -margins.bottom());
@@ -281,25 +255,6 @@ void LayoutUpdater::setStyle(const SharedStyle &style)
     d->style = style;
 }
 
-bool LayoutUpdater::isWordRibbonVisible() const
-{
-    Q_D(const LayoutUpdater);
-    return d->word_ribbon_visible;
-}
-
-void LayoutUpdater::setWordRibbonVisible(bool visible)
-{
-    Q_D(LayoutUpdater);
-
-    if (d->word_ribbon_visible != visible) {
-        d->word_ribbon_visible = visible;
-
-        d->layout->wordRibbon()->clearCandidates();
-
-        Q_EMIT wordRibbonVisibleChanged(visible);
-    }
-}
-
 //! \brief Modify visual appearance of a key, depending on state.
 //!
 //! Uses the currently active style and the key action to decide the visual
@@ -436,63 +391,9 @@ void LayoutUpdater::resetOnKeyboardClosed()
     d->layout->setActivePanel(LayoutHelper::CenterPanel);
 }
 
-void LayoutUpdater::onWordCandidatesChanged(const WordCandidateList &candidates)
-{
-    Q_D(LayoutUpdater);
-
-    if (not d->layout || not isWordRibbonVisible()) {
-        qWarning() << __PRETTY_FUNCTION__
-                   << "No layout specified or word ribbon not visible.";
-        return;
-    }
-
-    // Copy WordRibbon instance in order to preserve geometry and styling:
-    d->layout->wordRibbon()->clearCandidates();
-
-    const StyleAttributes * const attributes(d->activeStyleAttributes());
-    const LayoutHelper::Orientation orientation(d->layout->orientation());
-    const int candidate_width(attributes->keyAreaWidth(orientation) / (orientation == LayoutHelper::Landscape ? 6 : 4));
-
-    for (int index = 0; index < candidates.count(); ++index) {
-        WordCandidate word_candidate(candidates.at(index));
-        // FIXME candidate height needs to come from word ribbon height
-        word_candidate.rArea().setSize(QSize(word_candidate.source() == WordCandidate::SourceUser
-                                             ? attributes->keyAreaWidth(orientation) : candidate_width, 56));
-        word_candidate.setOrigin(QPoint(index * candidate_width, 0));
-        applyStyleToCandidate(&word_candidate, d->activeStyleAttributes(), orientation, DeactivateElement);
-        d->layout->wordRibbon()->appendCandidate(word_candidate);
-    }
-}
-
 void LayoutUpdater::onExtendedKeysShown(const Key &main_key)
 {
     Q_UNUSED(main_key);
-}
-
-void LayoutUpdater::onWordCandidatePressed(const WordCandidate &candidate)
-{
-    Q_D(LayoutUpdater);
-
-    if (d->layout
-        && isWordRibbonVisible()
-        && updateWordRibbon(d->layout, candidate, d->activeStyleAttributes(), ActivateElement)) {
-    }
-}
-
-void LayoutUpdater::onWordCandidateReleased(const WordCandidate &candidate)
-{
-    Q_D(LayoutUpdater);
-
-    if (d->layout
-        && isWordRibbonVisible()
-        && updateWordRibbon(d->layout, candidate, d->activeStyleAttributes(), DeactivateElement)) {
-        if (candidate.source() == WordCandidate::SourcePrediction
-            || candidate.source() == WordCandidate::SourceSpellChecking) {
-            Q_EMIT wordCandidateSelected(candidate.word());
-        } else if (candidate.source() == WordCandidate::SourceUser) {
-            Q_EMIT userCandidateSelected(candidate.word());
-        }
-    }
 }
 
 void LayoutUpdater::syncLayoutToView()

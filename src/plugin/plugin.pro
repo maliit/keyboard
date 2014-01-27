@@ -29,7 +29,7 @@ HEADERS += \
     editor.h \
     keyboardgeometry.h \
     keyboardsettings.h \
-    updatenotifier.h \
+#    updatenotifier.h \
     ubuntuapplicationapiwrapper.h \
 
 SOURCES += \
@@ -38,7 +38,7 @@ SOURCES += \
     editor.cpp \
     keyboardgeometry.cpp \
     keyboardsettings.cpp \
-    updatenotifier.cpp \
+#    updatenotifier.cpp \
     ubuntuapplicationapiwrapper.cpp \
 
 target.path += $${MALIIT_PLUGINS_DIR}

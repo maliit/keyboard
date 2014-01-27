@@ -37,8 +37,8 @@
 #include "models/wordribbon.h"
 #include "models/layout.h"
 
-#include "logic/layouthelper.h"
-#include "logic/style.h"
+// #include "logic/layouthelper.h"
+//#include "logic/style.h"
 
 #include "view/setup.h"
 
@@ -80,19 +80,12 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     Q_D(InputMethod);
 
     // FIXME: Reconnect feedback instance.
-    Setup::connectAll(&d->layout.event_handler, &d->layout.updater, &d->editor);
-
-    connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
-            &d->layout.model, SLOT(setKeyArea(KeyArea)));
-
+    Setup::connectAll(&d->event_handler, &d->editor);
     connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SIGNAL(activateAutocaps()));
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
-
-    d->registerStyleSetting(host);
-
     d->registerFeedbackSetting();
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
@@ -147,17 +140,7 @@ QList<MAbstractInputMethod::MInputMethodSubView>
 InputMethod::subViews(Maliit::HandlerState state) const
 {
     Q_UNUSED(state)
-    Q_D(const InputMethod);
-
     QList<MInputMethodSubView> views;
-
-    Q_FOREACH (const QString &id, d->layout.updater.keyboardIds()) {
-        MInputMethodSubView v;
-        v.subViewId = id;
-        v.subViewTitle = d->layout.updater.keyboardTitle(id);
-        views.append(v);
-    }
-
     return views;
 }
 
@@ -167,11 +150,6 @@ void InputMethod::setActiveSubView(const QString &id,
 {
     Q_UNUSED(state)
     Q_UNUSED(id);
-    Q_D(InputMethod);
-
-    // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
-    d->layout.updater.setActiveKeyboardId(id);
-    d->layout.model.setActiveView(id);
 }
 
 QString InputMethod::activeSubView(Maliit::HandlerState state) const
@@ -179,7 +157,7 @@ QString InputMethod::activeSubView(Maliit::HandlerState state) const
     Q_UNUSED(state)
     Q_D(const InputMethod);
 
-    return d->layout.updater.activeKeyboardId();
+    return d->activeLanguage;
 }
 
 void InputMethod::handleFocusChange(bool focusIn)
@@ -221,24 +199,10 @@ void InputMethod::handleClientChange()
 
 bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
 {
-    Q_D(InputMethod);
-
     if (not event or event->type() != MImExtensionEvent::Update) {
         return false;
     }
-
-    MImUpdateEvent *update_event(static_cast<MImUpdateEvent *>(event));
-
-    d->notifier.notify(update_event);
-
     return true;
-}
-
-void InputMethod::onStyleSettingChanged()
-{
-    Q_D(InputMethod);
-    d->style->setProfile(d->settings.style->value().toString());
-    d->layout.model.setImageDirectory(d->style->directory(Style::Images));
 }
 
 void InputMethod::onAutoCorrectSettingChanged()
@@ -274,7 +238,7 @@ void InputMethod::onEnabledLanguageSettingsChanged()
     d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
-
+// todo remove
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
 {
     Q_D(InputMethod);
@@ -301,9 +265,9 @@ void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverrid
             overriden_keys.insert(i.key(), overrideToKey(override));
         }
     }
-    d->notifier.notifyOverride(overriden_keys);
-}
 
+}
+// todo remove
 void InputMethod::updateKey(const QString &key_id,
                             const MKeyOverride::KeyOverrideAttributes changed_attributes)
 {
@@ -318,7 +282,6 @@ void InputMethod::updateKey(const QString &key_id,
         Logic::KeyOverrides overrides_update;
 
         overrides_update.insert(key_id, override_key);
-        d->notifier.notifyOverride(overrides_update, true);
     }
 }
 

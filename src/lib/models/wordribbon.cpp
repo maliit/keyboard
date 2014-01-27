@@ -153,4 +153,36 @@ void WordRibbon::setEnabled(bool enabled)
     Q_EMIT enabledChanged(m_enabled);
 }
 
+void WordRibbon::onWordCandidatePressed(const WordCandidate &candidate)
+{
+    appendCandidate(candidate);
+}
+
+//! \todo implement WordRibbon::onWordCandidateReleased()
+void WordRibbon::onWordCandidateReleased(const WordCandidate &candidate)
+{
+    if (candidate.source() == WordCandidate::SourcePrediction
+        || candidate.source() == WordCandidate::SourceSpellChecking) {
+        Q_EMIT wordCandidateSelected(candidate.word());
+    } else if (candidate.source() == WordCandidate::SourceUser) {
+        Q_EMIT userCandidateSelected(candidate.word());
+    }
+}
+
+void WordRibbon::onWordCandidatesChanged(const WordCandidateList &candidates)
+{
+    clearCandidates();
+
+    for (int index = 0; index < candidates.count(); ++index) {
+        WordCandidate word_candidate(candidates.at(index));
+        appendCandidate(word_candidate);
+    }
+}
+
+void WordRibbon::setWordRibbonVisible(bool visible)
+{
+    Q_UNUSED(visible);
+    clearCandidates();
+}
+
 } // namespace MaliitKeyboard
