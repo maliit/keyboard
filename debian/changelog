@@ -1,3 +1,24 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140206-0ubuntu1) trusty; urgency=low
+
+  [ Bill Filler ]
+  * Remove legacy code and files: the old language xml files, deprecated
+    LayoutUpdater usage, old layouting.
+
+  [ Daniel d'Andrada ]
+  * Fixes mapping between rotation angles and screen orientations Code
+    was assuming that primary screen orientation was always landscape.
+    (LP: #1251330)
+
+  [ Thomas Moenicke ]
+  * Remove legacy code and files: the old language xml files, deprecated
+    LayoutUpdater usage, old layouting.
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Add a free, open ebook for the polish keyboard plugin for the
+    database - one released on a CC BY-SA 3.0 license.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 06 Feb 2014 16:59:31 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140122-0ubuntu1) trusty; urgency=low
 
   [ Ken VanDine ]
