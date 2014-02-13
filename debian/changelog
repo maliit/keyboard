@@ -1,3 +1,11 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140213-0ubuntu1) trusty; urgency=low
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Disable the shift button coloring, as it breaks things in certain
+    cases - use a custom colored icon instead. (LP: #1251285)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 13 Feb 2014 16:48:17 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140206-0ubuntu1) trusty; urgency=low
 
   [ Bill Filler ]
