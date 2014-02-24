@@ -753,10 +753,11 @@ void AbstractTextEditor::singleBackspace()
 
     if (d->text->preedit().isEmpty()) {
         QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
-        d->word_engine->clearCandidates();
         sendKeyEvent(ev);
     } else {
         d->text->removeFromPreedit(1);
+        if (d->text->preedit().isEmpty())
+            d->word_engine->clearCandidates();
         d->word_engine->computeCandidates(d->text.data());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                           Replacement());
