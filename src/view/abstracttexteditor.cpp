@@ -433,7 +433,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionSpace: {
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
         const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
-        const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty();
+        const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
 
         if (replace_preedit) {
             const QString &appendix = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
