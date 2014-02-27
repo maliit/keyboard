@@ -1,3 +1,10 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140227-0ubuntu1) trusty; urgency=low
+
+  [ Daniel d'Andrada ]
+  * Make out-of-source builds work again
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 27 Feb 2014 02:26:25 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140213-0ubuntu1) trusty; urgency=low
 
   [ Łukasz 'sil2100' Zemczak ]
