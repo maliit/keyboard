@@ -105,6 +105,7 @@ Item {
                 drag.minimumY: 0
                 drag.maximumY: parent.height
                 drag.filterChildren: true
+                preventStealing: true
 
                 onReleased: {
                     if (keyboardSurface.y > jumpBackThreshold) {
