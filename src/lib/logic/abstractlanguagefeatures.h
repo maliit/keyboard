@@ -34,23 +34,15 @@
 
 #include <QObject>
 
-namespace MaliitKeyboard {
-namespace Logic {
-
-class AbstractLanguageFeatures : public QObject
+class QObject;
+class AbstractLanguageFeatures
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(AbstractLanguageFeatures)
-
     // FIXME: Add a language/locale property (also for AbstractWordEngine)
 public:
-    explicit AbstractLanguageFeatures(QObject *parent = 0);
-    virtual ~AbstractLanguageFeatures();
+    virtual ~AbstractLanguageFeatures() {}
     
     virtual bool activateAutoCaps(const QString &preedit) const = 0;
     virtual QString appendixForReplacedPreedit(const QString &preedit) const = 0;
 };
-
-}} // namespace MaliitKeyboard, Logic
 
 #endif // MALIIT_KEYBOARD_ABSTRACTLANGUAGEFEATURES_H

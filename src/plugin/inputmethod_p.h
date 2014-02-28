@@ -1,15 +1,13 @@
 
 #include "inputmethod.h"
 
-#include "editor.h"
-#include "keyboadsettings.h"
-#include "updatenotifier.h"
-
 #include "logic/layoutupdater.h"
+#include "editor.h"
+#include "keyboardgeometry.h"
+#include "keyboardsettings.h"
+
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
-#include "logic/languagefeatures.h"
-#include "logic/dynamiclayout.h"
 
 #include "ubuntuapplicationapiwrapper.h"
 
@@ -19,44 +17,13 @@
 #include <QtQuick>
 #include <QStringList>
 #include <qglobal.h>
-
-#ifdef HAVE_QT_MOBILITY
-#include "view/soundfeedback.h"
-typedef MaliitKeyboard::SoundFeedback DefaultFeedback;
-#else
-#include "view/nullfeedback.h"
-typedef MaliitKeyboard::NullFeedback DefaultFeedback;
-#endif
+#include <QDebug>
 
 using namespace MaliitKeyboard;
 
 typedef QScopedPointer<Maliit::Plugins::AbstractPluginSetting> ScopedSetting;
 typedef QSharedPointer<MKeyOverride> SharedOverride;
 typedef QMap<QString, SharedOverride>::const_iterator OverridesIterator;
-
-class Settings
-{
-public:
-    ScopedSetting style;
-};
-
-class LayoutGroup
-{
-public:
-    Logic::LayoutHelper helper;
-    Logic::LayoutUpdater updater;
-    Model::Layout model;
-    Logic::EventHandler event_handler;
-
-    explicit LayoutGroup();
-};
-
-LayoutGroup::LayoutGroup()
-    : helper()
-    , updater()
-    , model()
-    , event_handler(&model, &updater)
-{}
 
 QQuickView *createWindow(MAbstractInputMethodHost *host)
 {
@@ -76,90 +43,71 @@ class InputMethodPrivate
 {
 public:
     InputMethod* q;
-    QQuickItem* qmlRootItem;
     Editor editor;
-    DefaultFeedback feedback;
-    SharedStyle style;
-    UpdateNotifier notifier;
     QMap<QString, SharedOverride> key_overrides;
-    Settings settings;
-    LayoutGroup layout;
-    QRect windowGeometryRect;
-    QRect keyboardVisibleRect;
+    Logic::EventHandler event_handler;
     MAbstractInputMethodHost* host;
     QQuickView* view;
     UbuntuApplicationApiWrapper* applicationApiWrapper;
 
     bool autocapsEnabled;
-    bool predictionEnabled;
-    bool showWordRibbon;
+    bool wordEngineEnabled;
     InputMethod::TextContentType contentType;
-    QString systemLanguage;
     QString activeLanguage;
     QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
 
-    KeyboadSettings m_settings;
+    KeyboardGeometry *m_geometry;
+    KeyboardSettings m_settings;
+
+    WordRibbon* wordRibbon;
 
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
-        , qmlRootItem(0)
-        , editor(EditorOptions(), new Model::Text, new Logic::WordEngine, new Logic::LanguageFeatures)
-        , feedback()
-        , style(new Style)
-        , notifier()
+        , editor(EditorOptions(), new Model::Text, new Logic::WordEngine)
         , key_overrides()
-        , settings()
-        , layout()
+        , event_handler()
         , host(host)
         , view(0)
         , applicationApiWrapper(new UbuntuApplicationApiWrapper)
         , autocapsEnabled(false)
-        , predictionEnabled(false)
-        , showWordRibbon(false)
+        , wordEngineEnabled(false)
         , contentType(InputMethod::FreeTextContentType)
-        , systemLanguage("en")
-        , activeLanguage(systemLanguage)
-        , enabledLanguages(systemLanguage)
+        , activeLanguage("en")
+        , enabledLanguages(activeLanguage)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
+        , m_geometry(new KeyboardGeometry(q))
         , m_settings()
+        , wordRibbon(new WordRibbon)
     {
+        applicationApiWrapper->setGeometryItem(m_geometry);
+
         view = createWindow(host);
 
         editor.setHost(host);
 
-        layout.updater.setLayout(&layout.helper);
+        //! connect wordRibbon
+        QObject::connect(&event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
+                         wordRibbon, SLOT( onWordCandidatePressed(WordCandidate) ));
 
-        layout.updater.setStyle(style);
-        feedback.setStyle(style);
+        QObject::connect(&event_handler, SIGNAL(wordCandidateReleased(WordCandidate)),
+                         wordRibbon, SLOT( onWordCandidateReleased(WordCandidate) ));
 
-        const QSize &screen_size(view->screen()->size());
-        layout.helper.setScreenSize(screen_size);
-        layout.helper.setAlignment(Logic::LayoutHelper::Bottom);
+        QObject::connect(&editor,  SIGNAL(wordCandidatesChanged(WordCandidateList)),
+                         wordRibbon, SLOT(onWordCandidatesChanged(WordCandidateList)));
 
-        QObject::connect(&layout.event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
-                         &layout.updater, SLOT( onWordCandidatePressed(WordCandidate) ));
+        QObject::connect(wordRibbon, SIGNAL(wordCandidateSelected(QString)),
+                         &editor,  SLOT(replaceAndCommitPreedit(QString)));
 
-        QObject::connect(&layout.event_handler, SIGNAL(wordCandidateReleased(WordCandidate)),
-                         &layout.updater, SLOT( onWordCandidateReleased(WordCandidate) ));
+        QObject::connect(wordRibbon, SIGNAL(userCandidateSelected(QString)),
+                         &editor,  SLOT(addToUserDictionary(QString)));
 
         QObject::connect(&editor,  SIGNAL(preeditEnabledChanged(bool)),
-                         &layout.updater, SLOT(setWordRibbonVisible(bool)));
+                         wordRibbon, SLOT(setWordRibbonVisible(bool)));
 
-        QObject::connect(&layout.updater, SIGNAL(wordCandidateSelected(QString)),
+        QObject::connect(wordRibbon, SIGNAL(wordCandidateSelected(QString)),
                          editor.wordEngine(),  SLOT(onWordCandidateSelected(QString)));
-
-        QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
-                         editor.wordEngine(),  SLOT(onLanguageChanged(QString)));
-
-        QObject::connect(&layout.updater, SIGNAL(languageChanged(QString)),
-                         &editor,  SLOT(onLanguageChanged(const QString&)));
-
-        QObject::connect(&layout.helper, SIGNAL(stateChanged(Model::Layout::State)),
-                         &layout.model,  SLOT(setState(Model::Layout::State)));
-
-        connectToNotifier();
 
     #ifdef DISABLED_FLAGS_FROM_SURFACE
         view->setFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
@@ -179,9 +127,6 @@ public:
         engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
         setContextProperties(engine->rootContext());
 
-        QObject::connect(view, SIGNAL(statusChanged(QQuickView::Status)),
-                        q, SLOT(onQQuickViewStatusChanged(QQuickView::Status)));
-
         // following used to help shell identify the OSK surface
         view->setProperty("role", applicationApiWrapper->oskWindowRole());
         view->setTitle("MaliitOnScreenKeyboard");
@@ -196,169 +141,90 @@ public:
         delete applicationApiWrapper;
     }
 
+    Logic::LayoutHelper::Orientation screenToMaliitOrientation(Qt::ScreenOrientation screenOrientation) const
+    {
+        switch (screenOrientation) {
+        case Qt::LandscapeOrientation:
+        case Qt::InvertedLandscapeOrientation:
+            return Logic::LayoutHelper::Landscape;
+            break;
+        case Qt::PortraitOrientation:
+        case Qt::InvertedPortraitOrientation:
+        case Qt::PrimaryOrientation:
+        default:
+            return Logic::LayoutHelper::Portrait;
+        }
+
+        return Logic::LayoutHelper::Portrait;
+    }
+
     void setLayoutOrientation(Qt::ScreenOrientation screenOrientation)
     {
-        Logic::LayoutHelper::Orientation orientation = uiConst->screenToMaliitOrientation(screenOrientation);
-
-        layout.updater.setOrientation(orientation);
-
-        windowGeometryRect = uiConst->windowGeometryRect( screenOrientation );
-
-        keyboardVisibleRect = windowGeometryRect.adjusted(0,uiConst->invisibleTouchAreaHeight(orientation),0,0);
-
-        qmlRootItem->setProperty("height", windowGeometryRect.height());
-        qmlRootItem->setProperty("keypadHeight", keyboardVisibleRect.height());
-        qmlRootItem->setProperty("contentOrientation", screenOrientation);
-
-        // qpa does not rotate the coordinate system
-        windowGeometryRect = qGuiApp->primaryScreen()->mapBetween(
-                        screenOrientation,
-                        qGuiApp->primaryScreen()->primaryOrientation(),
-                        windowGeometryRect);
-
-        if (qmlRootItem->property("shown").toBool()) {
-            host->setScreenRegion(QRegion(keyboardVisibleRect));
-
-            QRect rect(keyboardVisibleRect);
-            rect.moveTop( windowGeometryRect.height() - keyboardVisibleRect.height() );
-            host->setInputMethodArea(rect, view);
-        }
-
-        if (qmlRootItem->property("shown").toBool()) {
-            applicationApiWrapper->reportOSKInvisible();
-
-            qDebug() << "keyboard is reporting: total <x y w h>: <"
-                     << windowGeometryRect.x()
-                     << windowGeometryRect.y()
-                     << windowGeometryRect.width()
-                     << windowGeometryRect.height()
-                     << "> and visible <"
-                     << keyboardVisibleRect.x()
-                     << keyboardVisibleRect.y()
-                     << keyboardVisibleRect.width()
-                     << keyboardVisibleRect.height()
-                     << "> to the app manager.";
-
-            // report the visible part as input trap, the invisible part can click through, e.g. browser url bar
-            applicationApiWrapper->reportOSKVisible(
-                        keyboardVisibleRect.x(),
-                        keyboardVisibleRect.y(),
-                        keyboardVisibleRect.width(),
-                        keyboardVisibleRect.height()
-                        );
-        }
-    }
-
-    void updateWordRibbon()
-    {
-        layout.helper.wordRibbon()->setEnabled( predictionEnabled );
-        Q_EMIT q->wordRibbonEnabledChanged( predictionEnabled );
-
-        if (predictionEnabled != showWordRibbon) {
-            showWordRibbon = predictionEnabled;
-            Q_EMIT q->showWordRibbonChanged(showWordRibbon);
-        }
-
-        setLayoutOrientation(appsCurrentOrientation);
-    }
-
-    void connectToNotifier()
-    {
-    #ifdef TEMP_DISABLED
-        QObject::connect(&notifier, SIGNAL(cursorPositionChanged(int, QString)),
-                         &editor,   SLOT(onCursorPositionChanged(int, QString)));
-    #endif
-        QObject::connect(&notifier,      SIGNAL(keysOverriden(Logic::KeyOverrides, bool)),
-                         &layout.helper, SLOT(onKeysOverriden(Logic::KeyOverrides, bool)));
+        m_geometry->setOrientation(screenOrientation);
     }
 
     void setContextProperties(QQmlContext *qml_context)
     {
         qml_context->setContextProperty("maliit_input_method", q);
-        qml_context->setContextProperty("maliit_layout", &layout.model);
-        qml_context->setContextProperty("maliit_event_handler", &layout.event_handler);
-        qml_context->setContextProperty("maliit_wordribbon", layout.helper.wordRibbon());
+        qml_context->setContextProperty("maliit_geometry", m_geometry);
+        qml_context->setContextProperty("maliit_event_handler", &event_handler);
+        qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
+        qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
     }
 
 
     /*
      * register settings
      */
-
-    void registerStyleSetting(MAbstractInputMethodHost *host)
-    {
-        QVariantMap attributes;
-        QStringList available_styles = style->availableProfiles();
-        attributes[Maliit::SettingEntryAttributes::defaultValue] = MALIIT_DEFAULT_PROFILE;
-        attributes[Maliit::SettingEntryAttributes::valueDomain] = available_styles;
-        attributes[Maliit::SettingEntryAttributes::valueDomainDescriptions] = available_styles;
-
-        settings.style.reset(host->registerPluginSetting("current_style",
-                                                            QT_TR_NOOP("Keyboard style"),
-                                                            Maliit::StringType,
-                                                            attributes));
-
-        QObject::connect(settings.style.data(), SIGNAL(valueChanged()), q, SLOT(onStyleSettingChanged()));
-
-        // Call manually for the first time to initialize dependent values:
-        q->onStyleSettingChanged();
-    }
-
     void registerFeedbackSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged()),
-                         q, SLOT(onFeedbackSettingChanged()));
-        feedback.setEnabled(m_settings.keyPressFeedback());
+        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
+                         q, SIGNAL(useAudioFeedbackChanged()));
     }
 
     void registerAutoCorrectSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(autoCompletionChanged()),
+        QObject::connect(&m_settings, SIGNAL(autoCompletionChanged(bool)),
                          q, SLOT(onAutoCorrectSettingChanged()));
         editor.setAutoCorrectEnabled(m_settings.autoCompletion());
     }
 
     void registerAutoCapsSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged()),
+        QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged(bool)),
                          q, SLOT(updateAutoCaps()));
     }
 
     void registerWordEngineSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(predictiveTextChanged()),
-                         q, SLOT(updateWordEngine()));
-    #ifndef DISABLE_PREEDIT
-        editor.wordEngine()->setEnabled(m_settings.predictiveText());
-    #else
-        editor.wordEngine()->setEnabled(false);
-    #endif
+        QObject::connect(&m_settings, SIGNAL(predictiveTextChanged(bool)),
+                         editor.wordEngine(), SLOT(setWordPredictionEnabled(bool)));
+        editor.wordEngine()->setWordPredictionEnabled(m_settings.predictiveText());
+
+        QObject::connect(&m_settings, SIGNAL(spellCheckingChanged(bool)),
+                         editor.wordEngine(), SLOT(setSpellcheckerEnabled(bool)));
+        editor.wordEngine()->setSpellcheckerEnabled(m_settings.spellchecking());
+    }
+
+    void registerActiveLanguage()
+    {
+        QObject::connect(&m_settings, SIGNAL(activeLanguageChanged(QString)),
+                         q, SLOT(setActiveLanguage(QString)));
+
+        activeLanguage = m_settings.activeLanguage();
+        qDebug() << "inputmethod_p.h registerActiveLanguage(): activeLanguage is:" << activeLanguage;
+        q->setActiveLanguage(activeLanguage);
     }
 
     void registerEnabledLanguages()
     {
-        QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged()),
+        QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged(QStringList)),
                          q, SLOT(onEnabledLanguageSettingsChanged()));
         q->onEnabledLanguageSettingsChanged();
 
-        registerSystemLanguage();
-        q->setActiveLanguage(systemLanguage);
+        //registerSystemLanguage();
+        //q->setActiveLanguage(activeLanguage);
     }
-
-    //! \brief registerSystemLanguage reads the language from the system
-    //! FIXME check if the language is supported - if not use "en" as fallback
-    void registerSystemLanguage()
-    {
-        systemLanguage = QString(getenv("LANGUAGE"));
-        systemLanguage.truncate(2);
-        Q_EMIT q->systemLanguageChanged(systemLanguage);
-    }
-
-    void onScreenSizeChange(const QSize &size)
-    {
-        layout.helper.setScreenSize(size);
-    }
-
     void closeOskWindow()
     {
         if (!view->isVisible())
@@ -366,9 +232,8 @@ public:
 
         host->notifyImInitiatedHiding();
 
-        qmlRootItem->setProperty("shown", false);
+        m_geometry->setShown(false);
 
-        layout.updater.resetOnKeyboardClosed();
         editor.clearPreedit();
 
         view->setVisible(false);

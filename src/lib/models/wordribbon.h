@@ -86,6 +86,16 @@ public:
     bool enabled() const;
     void setEnabled(bool enabled);
 
+    //! impl. from LayoutUpdater
+    Q_SLOT void onWordCandidatePressed(const WordCandidate &candidate);
+    Q_SLOT void onWordCandidateReleased(const WordCandidate &candidate);
+    Q_SLOT void onWordCandidatesChanged(const WordCandidateList &candidates);
+
+    Q_SIGNAL void wordCandidateSelected(const QString &candidate);
+    Q_SIGNAL void userCandidateSelected(const QString &candidate);
+
+    Q_SLOT void setWordRibbonVisible(bool visible);
+
 Q_SIGNALS:
     void enabledChanged(bool enabled);
 };

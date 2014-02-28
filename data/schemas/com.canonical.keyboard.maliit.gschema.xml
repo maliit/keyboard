@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
   <schema id="com.canonical.keyboard.maliit" path="/com/canonical/keyboard/maliit/">
+    <key name="active-language" type="s">
+      <summary>Active language</summary>
+      <description>Currently active language, selected by user in the keyboard language menu</description>
+      <default>'en'</default>
+    </key>
     <key name="enabled-languages" type="as">
       <summary>Enabled languages</summary>
       <description>User-defined list of activatable languages.</description>
@@ -14,7 +19,7 @@
     <key name="auto-completion" type="b">
       <summary>Auto-completion</summary>
       <description>Complete current word with first suggestion when hitting space.</description>
-      <default>true</default>
+      <default>false</default>
     </key>
     <key name="predictive-text" type="b">
       <summary>Predictive text</summary>
@@ -24,12 +29,12 @@
     <key name="key-press-feedback" type="b">
       <summary>Key press feedback</summary>
       <description>Vibrate or emit sound on key press.</description>
-      <default>true</default>
+      <default>false</default>
     </key>
     <key name="spell-checking" type="b">
       <summary>Spell checking</summary>
       <description>Check spelling of entered text.</description>
-      <default>true</default>
+      <default>false</default>
     </key>
     <key name="spell-checking-languages" type="as">
       <summary>Spell checking languages</summary>

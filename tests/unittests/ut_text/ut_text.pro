@@ -1,5 +1,5 @@
 TOP_BUILDDIR = $${OUT_PWD}/../../..
-TOP_SRCDIR = ../../..
+TOP_SRCDIR = $$PWD/../../..
 
 include($${TOP_SRCDIR}/config.pri)
 include(../common-check.pri)

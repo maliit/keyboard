@@ -1,6 +1,5 @@
 include(../config.pri)
 include(../config-plugin.pri)
-include(../view/view.pri)
 
 TOP_BUILDDIR = $${OUT_PWD}/../../
 TARGET = $${UBUNTU_KEYBOARD_PLUGIN_TARGET}
@@ -28,19 +27,19 @@ HEADERS += \
     inputmethod.h \
     inputmethod_p.h \
     editor.h \
-    keyboadsettings.h \
-    scenerectwatcher.h \
-    updatenotifier.h \
-    ubuntuapplicationapiwrapper.h
+    keyboardgeometry.h \
+    keyboardsettings.h \
+#    updatenotifier.h \
+    ubuntuapplicationapiwrapper.h \
 
 SOURCES += \
     plugin.cpp \
     inputmethod.cpp \
     editor.cpp \
-    keyboadsettings.cpp \
-    scenerectwatcher.cpp \
-    updatenotifier.cpp \
-    ubuntuapplicationapiwrapper.cpp
+    keyboardgeometry.cpp \
+    keyboardsettings.cpp \
+#    updatenotifier.cpp \
+    ubuntuapplicationapiwrapper.cpp \
 
 target.path += $${MALIIT_PLUGINS_DIR}
 INSTALLS += target

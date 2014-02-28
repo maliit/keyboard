@@ -37,9 +37,8 @@
 #include "models/wordribbon.h"
 #include "models/layout.h"
 
-#include "logic/keyareaconverter.h"
-#include "logic/layouthelper.h"
-#include "logic/style.h"
+// #include "logic/layouthelper.h"
+//#include "logic/style.h"
 
 #include "view/setup.h"
 
@@ -58,13 +57,39 @@ using namespace MaliitKeyboard;
 
 namespace {
 
+Qt::ScreenOrientation rotationAngleToScreenOrientation(int angle)
+{
+    bool portraitIsPrimary = QGuiApplication::primaryScreen()->primaryOrientation()
+        == Qt::PortraitOrientation;
+
+    switch (angle) {
+        case 0:
+            return portraitIsPrimary ? Qt::PortraitOrientation
+                                     : Qt::LandscapeOrientation;
+            break;
+        case 90:
+            return portraitIsPrimary ? Qt::InvertedLandscapeOrientation
+                                     : Qt::PortraitOrientation;
+            break;
+        case 180:
+            return portraitIsPrimary ? Qt::InvertedPortraitOrientation
+                                     : Qt::InvertedLandscapeOrientation;
+            break;
+        case 270:
+        default:
+            return portraitIsPrimary ? Qt::LandscapeOrientation
+                                     : Qt::InvertedPortraitOrientation;
+            break;
+    }
+}
+
 const QString g_maliit_keyboard_qml(UBUNTU_KEYBOARD_DATA_DIR "/Keyboard.qml");
 
 Key overrideToKey(const SharedOverride &override)
 {
     Key key;
 
-    key.rLabel().setText(override->label());
+    key.rLabel() = override->label();
     key.setIcon(override->icon().toUtf8());
     // TODO: hightlighted and enabled information are not available in
     // Key. Should we just really create a KeyOverride model?
@@ -80,33 +105,29 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 {
     Q_D(InputMethod);
 
-    d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
-    d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
-
     // FIXME: Reconnect feedback instance.
-    Setup::connectAll(&d->layout.event_handler, &d->layout.updater, &d->editor);
-
-    connect(&d->layout.helper, SIGNAL(centerPanelChanged(KeyArea,Logic::KeyOverrides)),
-            &d->layout.model, SLOT(setKeyArea(KeyArea)));
-
+    Setup::connectAll(&d->event_handler, &d->editor);
     connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SIGNAL(activateAutocaps()));
 
-    connect(this, SIGNAL(wordRibbonEnabledChanged(bool)), uiConst, SLOT(onWordEngineSettingsChanged(bool)));
-
-    connect(this, SIGNAL(predictionEnabledChanged()), this, SLOT(updateWordEngine()));
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
-
-    d->registerStyleSetting(host);
-
+    connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
+    connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
     d->registerFeedbackSetting();
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
+    d->registerActiveLanguage();
     d->registerEnabledLanguages();
+
+    //fire signal so all listeners know what active language is
+    Q_EMIT activeLanguageChanged(d->activeLanguage);
 
     // Setting layout orientation depends on word engine and hide word ribbon
     // settings to be initialized first:
     d->setLayoutOrientation(d->appsCurrentOrientation);
+
+    d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
+    d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
 }
 
 InputMethod::~InputMethod()
@@ -117,28 +138,7 @@ void InputMethod::show()
     Q_D(InputMethod);
 
     d->view->setVisible(true);
-
-    inputMethodHost()->setScreenRegion(QRegion(d->keyboardVisibleRect));
-
-    QRect rect(d->keyboardVisibleRect);
-    rect.moveTop( d->windowGeometryRect.height() - d->keyboardVisibleRect.height() );
-    inputMethodHost()->setInputMethodArea(rect, d->view);
-
-    qDebug() << "keyboard is reporting <x y w h>: <"
-                << d->keyboardVisibleRect.x()
-                << d->keyboardVisibleRect.y()
-                << d->keyboardVisibleRect.width()
-                << d->keyboardVisibleRect.height()
-                << "> to the app manager.";
-
-    d->applicationApiWrapper->reportOSKVisible(
-                d->keyboardVisibleRect.x(),
-                d->keyboardVisibleRect.y(),
-                d->keyboardVisibleRect.width(),
-                d->keyboardVisibleRect.height()
-                );
-
-    d->qmlRootItem->setProperty("shown", true);
+    d->m_geometry->setShown(true);
 }
 
 void InputMethod::hide()
@@ -166,17 +166,7 @@ QList<MAbstractInputMethod::MInputMethodSubView>
 InputMethod::subViews(Maliit::HandlerState state) const
 {
     Q_UNUSED(state)
-    Q_D(const InputMethod);
-
     QList<MInputMethodSubView> views;
-
-    Q_FOREACH (const QString &id, d->layout.updater.keyboardIds()) {
-        MInputMethodSubView v;
-        v.subViewId = id;
-        v.subViewTitle = d->layout.updater.keyboardTitle(id);
-        views.append(v);
-    }
-
     return views;
 }
 
@@ -186,14 +176,6 @@ void InputMethod::setActiveSubView(const QString &id,
 {
     Q_UNUSED(state)
     Q_UNUSED(id);
-    Q_D(InputMethod);
-
-    // FIXME: Perhaps better to let both LayoutUpdater share the same KeyboardLoader instance?
-    d->layout.updater.setActiveKeyboardId(id);
-    d->layout.model.setActiveView(id);
-
-    d->registerSystemLanguage();
-    setActiveLanguage(d->systemLanguage);
 }
 
 QString InputMethod::activeSubView(Maliit::HandlerState state) const
@@ -201,7 +183,7 @@ QString InputMethod::activeSubView(Maliit::HandlerState state) const
     Q_UNUSED(state)
     Q_D(const InputMethod);
 
-    return d->layout.updater.activeKeyboardId();
+    return d->activeLanguage;
 }
 
 void InputMethod::handleFocusChange(bool focusIn)
@@ -217,47 +199,25 @@ void InputMethod::handleAppOrientationChanged(int angle)
 {
     Q_D(InputMethod);
 
-    switch (angle) {
-        case 0:
-            d->appsCurrentOrientation = Qt::LandscapeOrientation; break;
-    case 90:
-            d->appsCurrentOrientation = Qt::InvertedPortraitOrientation; break;
-        case 180:
-            d->appsCurrentOrientation = Qt::InvertedLandscapeOrientation; break;
-        case 270:
-        default:
-            d->appsCurrentOrientation = Qt::PortraitOrientation; break;
-    }
-
+    d->appsCurrentOrientation = rotationAngleToScreenOrientation(angle);
     d->setLayoutOrientation(d->appsCurrentOrientation);
+}
+
+void InputMethod::handleClientChange()
+{
+    // Clients connect to Maliit on startup and disconnect at quit. This method is called
+    // for both those events. It makes sense to hide the keyboard always on these events,
+    // especially if the client crashes, so that the OSK is closed. Fixes bug lp:1267550
+    // Note that clients request OSK to appear & disappear with focus events.
+    hide();
 }
 
 bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
 {
-    Q_D(InputMethod);
-
     if (not event or event->type() != MImExtensionEvent::Update) {
         return false;
     }
-
-    MImUpdateEvent *update_event(static_cast<MImUpdateEvent *>(event));
-
-    d->notifier.notify(update_event);
-
     return true;
-}
-
-void InputMethod::onStyleSettingChanged()
-{
-    Q_D(InputMethod);
-    d->style->setProfile(d->settings.style->value().toString());
-    d->layout.model.setImageDirectory(d->style->directory(Style::Images));
-}
-
-void InputMethod::onFeedbackSettingChanged()
-{
-    Q_D(InputMethod);
-    d->feedback.setEnabled(d->m_settings.keyPressFeedback());
 }
 
 void InputMethod::onAutoCorrectSettingChanged()
@@ -293,7 +253,7 @@ void InputMethod::onEnabledLanguageSettingsChanged()
     d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
-
+// todo remove
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
 {
     Q_D(InputMethod);
@@ -320,9 +280,9 @@ void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverrid
             overriden_keys.insert(i.key(), overrideToKey(override));
         }
     }
-    d->notifier.notifyOverride(overriden_keys);
-}
 
+}
+// todo remove
 void InputMethod::updateKey(const QString &key_id,
                             const MKeyOverride::KeyOverrideAttributes changed_attributes)
 {
@@ -337,7 +297,6 @@ void InputMethod::updateKey(const QString &key_id,
         Logic::KeyOverrides overrides_update;
 
         overrides_update.insert(key_id, override_key);
-        d->notifier.notifyOverride(overrides_update, true);
     }
 }
 
@@ -378,8 +337,8 @@ void InputMethod::update()
     if (!valid)
         newPredictionEnabled = true;
 
-    if (d->predictionEnabled != newPredictionEnabled) {
-        d->predictionEnabled = newPredictionEnabled;
+    if (d->wordEngineEnabled != newPredictionEnabled) {
+        d->wordEngineEnabled = newPredictionEnabled;
         emitPredictionEnabled = true;
     }
 
@@ -389,8 +348,9 @@ void InputMethod::update()
     }
     setContentType(newContentType);
 
-    if (emitPredictionEnabled)
-        Q_EMIT predictionEnabledChanged();
+    if (emitPredictionEnabled) {
+        updateWordEngine();
+    }
 
     QString text;
     int position;
@@ -407,36 +367,23 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
-    if (!d->m_settings.predictiveText())
-        d->predictionEnabled = false;
-
     if (d->contentType != FreeTextContentType)
-        d->predictionEnabled = false;
+        d->wordEngineEnabled = false;
 
     d->editor.clearPreedit();
-    d->editor.wordEngine()->setEnabled( d->predictionEnabled );
-    d->updateWordRibbon();
+    d->editor.wordEngine()->setEnabled( d->wordEngineEnabled );
 }
 
-bool InputMethod::predictionEnabled()
-{
-    Q_D(InputMethod);
-    return d->predictionEnabled;
-}
-
-//! \brief InputMethod::showWordRibbon returns if the word ribbon should be shown
-bool InputMethod::showWordRibbon()
-{
-    Q_D(InputMethod);
-    return d->showWordRibbon;
-}
-
+//! \brief InputMethod::contentType returns the type, of the input field, like free text, email, url
+//! \return
 InputMethod::TextContentType InputMethod::contentType()
 {
     Q_D(InputMethod);
     return d->contentType;
 }
 
+//! \brief InputMethod::setContentType sets the type, of the input field, like free text, email, url
+//! \param contentType
 void InputMethod::setContentType(TextContentType contentType)
 {
     Q_D(InputMethod);
@@ -444,24 +391,13 @@ void InputMethod::setContentType(TextContentType contentType)
     if (contentType == d->contentType)
         return;
 
-    setActiveLanguage(d->systemLanguage);
-
-    updateWordEngine();
+    setActiveLanguage(d->activeLanguage);
 
     d->contentType = contentType;
     Q_EMIT contentTypeChanged(contentType);
 
+    updateWordEngine();
     updateAutoCaps();
-}
-
-void InputMethod::onQQuickViewStatusChanged(QQuickView::Status status)
-{
-    Q_D(InputMethod);
-
-    if (status == QQuickView::Ready) {
-        d->qmlRootItem = d->view->rootObject()->findChild<QQuickItem*>("ubuntuKeyboard");
-        d->applicationApiWrapper->setRootObject(d->view->rootObject());
-    }
 }
 
 //! \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be
@@ -495,12 +431,13 @@ const QString &InputMethod::activeLanguage() const
     return d->activeLanguage;
 }
 
-//! \brief InputMethod::systemLanguage returns the languageset as the one used
-//! in the whole system
-const QString &InputMethod::systemLanguage() const
+//! \brief InputMethod::useAudioFeedback is true, when keys should play a audio
+//! feedback when pressed
+//! \return
+bool InputMethod::useAudioFeedback() const
 {
     Q_D(const InputMethod);
-    return d->systemLanguage;
+    return d->m_settings.keyPressFeedback();
 }
 
 //! \brief InputMethod::setActiveLanguage
@@ -516,10 +453,42 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
         return;
     }
 
+    qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
+
     if (d->activeLanguage == newLanguage)
         return;
 
     d->activeLanguage = newLanguage;
-    d->editor.onLanguageChanged(d->activeLanguage);
+    d->host->setLanguage(newLanguage);
+    d->m_settings.setActiveLanguage(newLanguage);
+
+    qDebug() << "in inputMethod.cpp setActiveLanguage() emitting activeLanguageChanged to" << d->activeLanguage;
     Q_EMIT activeLanguageChanged(d->activeLanguage);
+}
+
+void InputMethod::onVisibleRectChanged()
+{
+    Q_D(InputMethod);
+
+    QRect visibleRect = qGuiApp->primaryScreen()->mapBetween(
+                            d->m_geometry->orientation(),
+                            qGuiApp->primaryScreen()->primaryOrientation(),
+                            d->m_geometry->visibleRect().toRect());
+
+    inputMethodHost()->setScreenRegion(QRegion(visibleRect));
+    inputMethodHost()->setInputMethodArea(visibleRect, d->view);
+
+    qDebug() << "keyboard is reporting <x y w h>: <"
+                << visibleRect.x()
+                << visibleRect.y()
+                << visibleRect.width()
+                << visibleRect.height()
+                << "> to the app manager.";
+
+    d->applicationApiWrapper->reportOSKVisible(
+                visibleRect.x(),
+                visibleRect.y(),
+                visibleRect.width(),
+                visibleRect.height()
+                );
 }

@@ -35,8 +35,9 @@ namespace {
 }
 
 UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
-    : m_runningOnMir(false),
-      m_clientConnection(0)
+    : m_runningOnMir(false)
+    , m_clientConnection(0)
+    , m_geometry(0)
 {
     if (qgetenv("QT_QPA_PLATFORM") == "ubuntumirclient") {
         m_runningOnMir = true;
@@ -48,8 +49,10 @@ UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
         startLocalServer();
     }
 
-    connect(&m_sceneRectWatcher, &SceneRectWatcher::sceneRectChanged,
-            this, &UbuntuApplicationApiWrapper::updateSharedInfo);
+    m_geometryUpdateTimer.setInterval(100);
+    m_geometryUpdateTimer.setSingleShot(true);
+    QObject::connect(&m_geometryUpdateTimer, SIGNAL(timeout()),
+                     this, SLOT(updateSharedInfo()));
 }
 
 void UbuntuApplicationApiWrapper::startLocalServer()
@@ -91,8 +94,8 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
     Q_UNUSED(height)
 #endif
 
-    m_sceneRectWatcher.setItem(m_keyboardComp);
-    startWatchingExtendedKeysSelector();
+    QObject::connect(m_geometry, SIGNAL(visibleRectChanged()),
+                     this, SLOT(delayedGeometryUpdate()));
     updateSharedInfo();
 }
 
@@ -104,8 +107,9 @@ void UbuntuApplicationApiWrapper::reportOSKInvisible()
     }
 #endif
 
-    m_sceneRectWatcher.setItem(0);
-    stopWatchingExtendedKeysSelector();
+    m_geometryUpdateTimer.stop();
+    QObject::disconnect(m_geometry, SIGNAL(visibleRectChanged()),
+                        this, SLOT(delayedGeometryUpdate()));
 }
 
 int UbuntuApplicationApiWrapper::oskWindowRole() const
@@ -183,27 +187,7 @@ QString UbuntuApplicationApiWrapper::buildSocketFilePath() const
 
 void UbuntuApplicationApiWrapper::updateSharedInfo()
 {
-    if (m_keyboardComp.isNull() || m_keyboardSurface.isNull()
-            || m_extendedKeysSelector.isNull()) {
-        return;
-    }
-
-    QRectF keyboardSceneRect;
-
-    if (m_extendedKeysSelector->isEnabled() && m_extendedKeysSelector->isVisible()) {
-        // The pop-up could be above the keyboard, so we need a bigger area that's guaranteed
-        // to contain both the keyboard and that extended keys selector pop-up, which is the
-        // keyboardSurface.
-        keyboardSceneRect = m_keyboardSurface->mapRectToScene(QRectF(0, 0,
-                                                              m_keyboardSurface->width(),
-                                                              m_keyboardSurface->height()));
-    } else {
-        // Regular case, just the keyboard area.
-        keyboardSceneRect = m_keyboardComp->mapRectToScene(QRectF(0, 0,
-                                                           m_keyboardComp->width(),
-                                                           m_keyboardComp->height()));
-    }
-
+    const QRectF &keyboardSceneRect = m_geometry->visibleRect();
     m_sharedInfo.keyboardX = keyboardSceneRect.x();
     m_sharedInfo.keyboardY = keyboardSceneRect.y();
     m_sharedInfo.keyboardWidth = keyboardSceneRect.width();
@@ -212,40 +196,30 @@ void UbuntuApplicationApiWrapper::updateSharedInfo()
     sendInfoToClientConnection();
 }
 
-void UbuntuApplicationApiWrapper::setRootObject(QQuickItem *rootObject)
+//! \brief UbuntuApplicationApiWrapper::delayedGeometryUpdate
+void UbuntuApplicationApiWrapper::delayedGeometryUpdate()
 {
-    // Getting items from qml/Keyboard.qml
+    if (m_geometryUpdateTimer.isActive())
+        m_geometryUpdateTimer.stop();
 
-    m_keyboardSurface = rootObject->findChild<QQuickItem*>("keyboardSurface");
-    if (m_keyboardSurface.isNull()) {
-        qFatal("UbuntuApplicationApiWrapper: couldn't find \"keyboardSurface\" QML item");
-    }
-
-    m_keyboardComp = rootObject->findChild<QQuickItem*>("keyboardComp");
-    if (m_keyboardComp.isNull()) {
-        qFatal("UbuntuApplicationApiWrapper: couldn't find \"keyboardComp\" QML item");
-    }
-
-    // In qml/KeyboardContainer.qml, a child of qml/Keyboard.qml
-    m_extendedKeysSelector = rootObject->findChild<QQuickItem*>("extendedKeysSelector");
-    if (m_extendedKeysSelector.isNull()) {
-        qFatal("UbuntuApplicationApiWrapper: couldn't find \"extendedKeysSelector\" QML item");
-    }
+    m_geometryUpdateTimer.start();
 }
 
-void UbuntuApplicationApiWrapper::startWatchingExtendedKeysSelector()
+//! \brief UbuntuApplicationApiWrapper::setGeometryItem Set the item that
+//! contains the current OKS geometry
+//! \param geometry
+void UbuntuApplicationApiWrapper::setGeometryItem(KeyboardGeometry *geometry)
 {
-    connect(m_extendedKeysSelector.data(), &QQuickItem::enabledChanged,
-            this, &UbuntuApplicationApiWrapper::updateSharedInfo);
-    connect(m_extendedKeysSelector.data(), &QQuickItem::visibleChanged,
-            this, &UbuntuApplicationApiWrapper::updateSharedInfo);
-}
+    if (geometry == m_geometry)
+        return;
 
-void UbuntuApplicationApiWrapper::stopWatchingExtendedKeysSelector()
-{
-    disconnect(m_extendedKeysSelector.data(), 0, this, 0);
-}
+    if (m_geometry) {
+        QObject::disconnect(m_geometry, SIGNAL(visibleRectChanged()),
+                            this, SLOT(delayedGeometryUpdate()));
+    }
 
+    m_geometry = geometry;
+}
 
 // ------------------------------- SharedInfo ----------------------------
 

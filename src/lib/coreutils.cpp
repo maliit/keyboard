@@ -54,7 +54,7 @@ QString idFromKey(const Key &key)
         return g_action_key_id;
 
     case Key::ActionInsert:
-        return key.label().text();
+        return key.label();
 
     default:
         // TODO: handle more key actions if needed.

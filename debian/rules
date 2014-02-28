@@ -13,16 +13,14 @@ override_dh_auto_configure:
 	                     CONFIG+=nodoc \
 	                     CONFIG+=enable-presage \
 	                     CONFIG+=enable-hunspell \
-	                     CONFIG+=enable-preedit \
-	                     CONFIG+=enable-pinyin \
-	                     CONFIG+=enable-qt-mobility
+	                     CONFIG+=enable-pinyin
 
 override_dh_auto_test:
 	# Tests write $HOME/.presage/lm.db, make sure $HOME is
 	# writable.
 	rm -rf $(CURDIR)/debian/test-home
 	mkdir -p $(CURDIR)/debian/test-home
-	HOME=$(CURDIR)/debian/test-home xvfb-run make check
+	HOME=$(CURDIR)/debian/test-home xvfb-run -a make check
 
 override_dh_clean:
 	rm -rf $(CURDIR)/debian/test-home

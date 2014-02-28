@@ -49,6 +49,12 @@ QVariant QGSettings::get(const QString &key) const
     return var;
 }
 
+void QGSettings::set(const QString &key, const QVariant &value)
+{
+    Q_UNUSED(key);
+    Q_UNUSED(value);
+}
+
 QStringList QGSettings::keys() const
 {
     QStringList list;

@@ -20,6 +20,7 @@
 import os
 import subprocess
 
+from testtools import skip
 from testtools.matchers import Equals
 import tempfile
 from textwrap import dedent
@@ -27,7 +28,13 @@ from time import sleep
 
 from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
+from autopilot.introspection import get_proxy_object_for_existing_process
 from autopilot.matchers import Eventually
+from autopilot.platform import model
+from unity8 import process_helpers
+from unity8.shell.emulators.dash import Dash
+from unity8.shell.emulators import UnityEmulatorBase
+from ubuntuuitoolkit import base
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
@@ -38,67 +45,98 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def _get_maliit_server_status():
-    try:
-        return subprocess.check_output([
-            'initctl',
-            'status',
-            'maliit-server'
-        ])
-    except subprocess.CalledProcessError as e:
-        e.args += ("maliit-server appears to be an unknown service.", )
-        raise
-
-
-def _stop_maliit_server():
-    status = _get_maliit_server_status()
+def _stop_unity8():
+    status = process_helpers._get_unity_status()
     if "start/" in status:
         try:
-            logger.debug("Stopping maliit server")
-            subprocess.check_call(['initctl', 'stop', 'maliit-server'])
+            logger.debug("Stopping unity8")
+            subprocess.check_call(['initctl', 'stop', 'unity8'])
         except subprocess.CalledProcessError as e:
-            e.args += ("Unable to stop mallit server",)
+            e.args += ("Unable to stop unity8",)
             raise
     else:
-        logger.debug("No need to stop server.")
+        logger.debug("No need to stop unity.")
 
 
-def _start_maliit_server(args):
-    status = _get_maliit_server_status()
+def _start_unity8():
+    status = process_helpers._get_unity_status()
     if "stop/" in status:
         try:
-            logger.debug(
-                "Starting maliit-server with the args: '%s'" % ",".join(args)
-            )
-            subprocess.check_call(
-                ['initctl', 'start', 'maliit-server'] + args
-            )
+            logger.debug("Starting unity8")
+            subprocess.check_call(['initctl', 'start', 'unity8'])
         except subprocess.CalledProcessError as e:
-            e.args += ("Unable to start mallit server",)
+            e.args += ("Unable to start unity8",)
             raise
     else:
         raise RuntimeError(
-            "Unable to start maliit-server: server is currently running."
+            "Unable to start unity8: server is currently running."
         )
 
 
-def _restart_maliit_server(args=None):
-    if args is None:
-        args = []
-    _stop_maliit_server()
-    _start_maliit_server(args)
+def _assertUnityReady():
+        unity_pid = process_helpers._get_unity_pid()
+        unity = get_proxy_object_for_existing_process(
+            pid=unity_pid,
+            emulator_base=UnityEmulatorBase,
+        )
+        dash = unity.wait_select_single(Dash)
+        home_scope = dash.get_scope('home')
+
+        home_scope.isLoaded.wait_for(True)
+        home_scope.isCurrent.wait_for(True)
+
+
+def _restart_unity8():
+    _stop_unity8()
+    _start_unity8()
 
 
 class UbuntuKeyboardTests(AutopilotTestCase):
+    maliit_override_file = os.path.expanduser(
+        "~/.config/upstart/maliit-server.override"
+    )
+
     @classmethod
     def setUpClass(cls):
-        _restart_maliit_server(['QT_LOAD_TESTABILITY=1'])
+        try:
+            logger.debug("Creating the override file.")
+            with open(
+                UbuntuKeyboardTests.maliit_override_file, 'w'
+            ) as override_file:
+                override_file.write("exec maliit-server -testability")
+
+            process_helpers.restart_unity_with_testability()
+            _assertUnityReady()
+            #### FIXME: This is a work around re: lp:1238417 ####
+            if model() != "Desktop":
+                from autopilot.input import _uinput
+                _uinput._touch_device = _uinput.create_touch_device()
+            ####
+
+            #### FIXME: Workaround re: lp:1248902 and lp:1248913
+            logger.debug("Waiting for maliit-server to be ready")
+            sleep(10)
+            ####
+
+        except IOError as e:
+            e.args += (
+                "Failed attempting to write override file to {file}".format(
+                    file=UbuntuKeyboardTests.maliit_override_file
+                ),
+            )
+            raise
 
     @classmethod
     def tearDownClass(cls):
-        _restart_maliit_server()
+        try:
+            os.remove(UbuntuKeyboardTests.maliit_override_file)
+        except OSError:
+            logger.warning("Attempted to remove non-existent override file")
+        _restart_unity8()
 
     def setUp(self):
+        if model() == "Desktop":
+            self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
         self.pointer = Pointer(Touch.create())
 
@@ -122,7 +160,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
         desktop_file = self._write_test_desktop_file()
         return self.launch_test_application(
-            "qmlscene",
+            base.get_qmlscene_launch_command(),
             qml_path,
             '--desktop_file_hint=%s' % desktop_file,
             app_type='qt',
@@ -242,7 +280,7 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
             # \u201d
             'punctuation',
             dict(
-                label="Puncuation",
+                label="Punctuation",
                 input=u'`~!@#$%^&*()_-+={}[]|\\:;\'<>,.?/\u201c'
             )
         )
@@ -427,6 +465,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
     ]
 
     # Note: based on UX design doc
+    @skip("Unable to determine LayoutId re: bug lp:1248796")
     def test_keyboard_layout(self):
         """The Keyboard must respond to the input type and change to be the
         correct state.

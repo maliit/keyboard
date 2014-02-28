@@ -36,16 +36,13 @@
 #include <QTimer>
 #include <maliit/namespace.h>
 
-#include "logic/abstractlanguagefeatures.h"
-
 namespace MaliitKeyboard {
 
 Editor::Editor(const EditorOptions &options,
                Model::Text *text,
                Logic::AbstractWordEngine *word_engine,
-               Logic::AbstractLanguageFeatures *language_features,
                QObject *parent)
-    : AbstractTextEditor(options, text, word_engine, language_features, parent)
+    : AbstractTextEditor(options, text, word_engine, parent)
     , m_host(0)
 {}
 

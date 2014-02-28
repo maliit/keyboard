@@ -12,9 +12,7 @@ include(config.pri)
         \\nRecognised CONFIG flags: \
         \\n\\t enable-presage: Use presage to calculate word candidates \
         \\n\\t enable-hunspell: Use hunspell for error correction \
-        \\n\\t disable-preedit: Always commit characters and never use preedit \
         \\n\\t enable-pinyin: Use libpinyin as chinese input method \
-        \\n\\t enable-qt-mobility: Enable use of QtMobility (enables sound and haptic feedback) \
         \\n\\t notests: Do not attempt to build tests \
         \\n\\t nodoc: Do not build documentation \
         \\nInfluential environment variables: \
@@ -73,15 +71,6 @@ enable-pinyin {
     message(pinyin is enabled)
 }
 
-enable-qt-mobility {
-    COVERAGE_CONFIG_STRING += CONFIG+=enable-qt-mobility
-    message(qt-mobility is enabled)
-}
-
-
-!notests {
-    SUBDIRS += tests
-}
 
 QMAKE_EXTRA_TARGETS += check
 check.target = check
@@ -104,8 +93,13 @@ SUBDIRS = \
     src \
     data \
     qml \
-    benchmark \
-    tests \
+#    benchmark \
+    plugins \
+
+!notests {
+    SUBDIRS += tests
+}
+
 
 tests.target = test
 tests.command = cd tests/editor

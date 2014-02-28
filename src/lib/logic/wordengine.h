@@ -34,6 +34,7 @@
 
 #include "models/text.h"
 #include "logic/abstractwordengine.h"
+#include "languageplugininterface.h"
 
 #include <QtCore>
 
@@ -54,13 +55,17 @@ public:
     virtual ~WordEngine();
 
     //! \reimp
-    virtual void setEnabled(bool enabled);
+    virtual bool isEnabled() const;
+    virtual void setWordPredictionEnabled(bool enabled);
 
     virtual void addToUserDictionary(const QString &word);
+    virtual void setSpellcheckerEnabled(bool enabled);
     //! \reimp_end
 
     Q_SLOT void onWordCandidateSelected(QString word);
     Q_SLOT void onLanguageChanged(const QString& languageId);
+
+    virtual AbstractLanguageFeatures* languageFeature();
 
 private:
     //! \reimp

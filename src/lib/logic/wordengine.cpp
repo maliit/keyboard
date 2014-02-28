@@ -30,16 +30,6 @@
  */
 
 #include "wordengine.h"
-#include "spellchecker.h"
-
-#ifdef HAVE_PRESAGE
-#include <presage.h>
-#endif
-
-#ifdef HAVE_PINYIN
-#include "pinyinadapter.h"
-#include <iostream>
-#endif
 
 namespace MaliitKeyboard {
 namespace Logic {
@@ -70,86 +60,65 @@ void appendToCandidates(WordCandidateList *candidates,
 
 } // namespace
 
+#define DEFAULT_PLUGIN "libenglishplugin.so"
+
 //! \class WordEngine
 //! \brief Provides error correction (based on Hunspell) and word
 //! prediction (based on Presage).
-
-//! \internal
-#ifdef HAVE_PRESAGE
-class CandidatesCallback
-    : public PresageCallback
-{
-private:
-    const std::string& m_past_context;
-    const std::string m_empty;
-
-public:
-    explicit CandidatesCallback(const std::string& past_context);
-
-    std::string get_past_stream() const;
-    std::string get_future_stream() const;
-};
-
-CandidatesCallback::CandidatesCallback(const std::string &past_context)
-    : m_past_context(past_context)
-    , m_empty()
-{}
-
-std::string CandidatesCallback::get_past_stream() const
-{
-    return m_past_context;
-}
-
-std::string CandidatesCallback::get_future_stream() const
-{
-    return m_empty;
-}
-#endif
-//! \internal_end
 
 class WordEnginePrivate
 {
 public:
 
-    enum PredictiveBackend {
-        PresageBackend = 1,
-        PinyinBackend
-    };
+    bool use_predictive_text;
 
-    PredictiveBackend predictiveBackend;
+    bool use_spell_checker;
 
-    SpellChecker spell_checker;
-#ifdef HAVE_PRESAGE
-    std::string candidates_context;
-    CandidatesCallback presage_candidates;
-    Presage presage;
-#endif
+    LanguagePluginInterface* languagePlugin;
 
-    // TODO there is too many ifdef in this class
-#ifdef HAVE_PINYIN
-    PinyinAdapter* pinyinAdapter;
-#endif
+    QPluginLoader pluginLoader;
+
     explicit WordEnginePrivate();
+
+    QString currentPlugin;
+    void loadPlugin(QString pluginName, QString subfolder="en")
+    {
+        if (pluginName == currentPlugin)
+            return;
+
+        pluginLoader.unload();
+
+        // to avoid hickups in libpresage, libpinyin
+        QLocale::setDefault(QLocale::c());
+        setlocale(LC_NUMERIC, "C");
+
+        QDir pluginsDir("/usr/share/maliit/plugins/com/ubuntu/lib/"+subfolder);
+
+        pluginLoader.setFileName(pluginsDir.absoluteFilePath(pluginName));
+        QObject *plugin = pluginLoader.instance();
+
+        if (plugin) {
+            languagePlugin = qobject_cast<LanguagePluginInterface *>(plugin);
+            if (!languagePlugin) {
+                qCritical() << "wordengine.cpp - loading plugin failed: " + pluginName;
+
+                // fallback
+                if (pluginName != DEFAULT_PLUGIN)
+                    loadPlugin(DEFAULT_PLUGIN);
+            } else {
+                qDebug() << "wordengine.cpp plugin" << pluginName << "loaded";
+                currentPlugin = pluginName;
+            }
+        }
+    }
 };
 
 WordEnginePrivate::WordEnginePrivate()
-    : predictiveBackend(PresageBackend)
-    , spell_checker()
-#ifdef HAVE_PRESAGE
-    , candidates_context()
-    , presage_candidates(CandidatesCallback(candidates_context))
-    , presage(&presage_candidates)
-#endif
+    : use_predictive_text(false)
+    , use_spell_checker(false)
+    , languagePlugin(0)
 {
-    // FIXME: Check whether spellchecker is enabled, and update enabled flag!
-#ifdef HAVE_PRESAGE
-    presage.config("Presage.Selector.SUGGESTIONS", "6");
-    presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
-#endif
-
-#ifdef HAVE_PINYIN
-    pinyinAdapter = new PinyinAdapter;
-#endif
+    loadPlugin(DEFAULT_PLUGIN);
 }
 
 
@@ -165,31 +134,56 @@ WordEngine::WordEngine(QObject *parent)
 WordEngine::~WordEngine()
 {}
 
-
-void WordEngine::setEnabled(bool enabled)
+//! \brief WordEngine::isEnabled returns if the word engine is functional and enabled
+//! \return
+bool WordEngine::isEnabled() const
 {
- // Don't allow to enable word engine if no backends are available:
-#if defined(HAVE_PRESAGE) || defined(HAVE_HUNSPELL) || defined(HAVE_PINYIN)
-#else
-    if (enabled) {
+    Q_D(const WordEngine);
+    return (AbstractWordEngine::isEnabled() &&
+            (d->use_predictive_text || d->languagePlugin->spellCheckerEnabled()));
+}
+
+void WordEngine::setWordPredictionEnabled(bool enabled)
+{
+    Q_D(WordEngine);
+
+    // Don't allow to enable word engine if no backends are available:
+    if (!d->languagePlugin && enabled) {
         qWarning() << __PRETTY_FUNCTION__
                    << "No backend available, cannot enable word engine!";
+        enabled = false;
     }
 
-    enabled = false;
-#endif
-    AbstractWordEngine::setEnabled(enabled);
+    if (enabled == d->use_predictive_text)
+        return;
+
+    bool totalEnabled = isEnabled();
+
+    d->use_predictive_text = enabled;
+
+    if(totalEnabled != isEnabled())
+        Q_EMIT enabledChanged(isEnabled());
+}
+
+//! \brief WordEngine::enableSpellcheker turns on/off the usage of the spellchecker
+//! \param enabled
+void WordEngine::setSpellcheckerEnabled(bool enabled)
+{
+    Q_D(WordEngine);
+    bool totalEnabled = isEnabled();
+
+    d->use_spell_checker = enabled;
+
+    d->languagePlugin->setSpellCheckerEnabled(d->use_spell_checker);
+    if(totalEnabled != isEnabled())
+        Q_EMIT enabledChanged(isEnabled());
 }
 
 void WordEngine::onWordCandidateSelected(QString word)
 {
-#ifdef HAVE_PINYIN
     Q_D(WordEngine);
-    if (d->predictiveBackend == WordEnginePrivate::PinyinBackend)
-        d->pinyinAdapter->wordCandidateSelected(word);
-#else
-    Q_UNUSED(word);
-#endif
+
+    d->languagePlugin->wordCandidateSelected(word);
 }
 
 WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
@@ -200,41 +194,21 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
     const QString &preedit(text->preedit());
     const bool is_preedit_capitalized(not preedit.isEmpty() && preedit.at(0).isUpper());
 
-#ifdef HAVE_PINYIN
-    if (d->predictiveBackend == WordEnginePrivate::PinyinBackend) {
-        QString sentence = d->pinyinAdapter->parse(preedit);
+    if (d->use_predictive_text) {
 
-        QStringList suggestions = d->pinyinAdapter->getWordCandidates();
+        d->languagePlugin->parse(text->surroundingLeft(), preedit);
+        const QStringList suggestions = d->languagePlugin->getWordCandidates();
 
         Q_FOREACH(const QString &suggestion, suggestions) {
             appendToCandidates(&candidates, WordCandidate::SourcePrediction, suggestion, is_preedit_capitalized);
         }
     }
-#endif
 
-#ifdef HAVE_PRESAGE
-    if (d->predictiveBackend == WordEnginePrivate::PresageBackend) {
-        const QString &context = (text->surroundingLeft() + preedit);
-        d->candidates_context = context.toStdString();
-        const std::vector<std::string> predictions = d->presage.predict();
-
-        // TODO: Fine-tune presage behaviour to also perform error correction, not just word prediction.
-        if (not context.isEmpty()) {
-            // FIXME: max_candidates should come from style, too:
-            const static unsigned int max_candidates = 7;
-            const int count(qMin<int>(predictions.size(), max_candidates));
-            for (int index = 0; index < count; ++index) {
-                appendToCandidates(&candidates, WordCandidate::SourcePrediction, QString::fromStdString(predictions.at(index)),
-                                   is_preedit_capitalized);
-            }
-        }
-    }
-#endif
-
-    const bool correct_spelling(d->spell_checker.spell(preedit));
+    // spell checking
+    const bool correct_spelling(d->languagePlugin->spell(preedit));
 
     if (candidates.isEmpty() and not correct_spelling) {
-        Q_FOREACH(const QString &correction, d->spell_checker.suggest(preedit, 5)) {
+        Q_FOREACH(const QString &correction, d->languagePlugin->spellCheckerSuggest(preedit, 5)) {
             appendToCandidates(&candidates, WordCandidate::SourceSpellChecking, correction, is_preedit_capitalized);
         }
     }
@@ -244,7 +218,7 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
                                               : Model::Text::PreeditActive);
 
     text->setPrimaryCandidate(candidates.isEmpty() ? QString()
-                                                   : candidates.first().label().text());
+                                                   : candidates.first().label());
 
 
     return candidates;
@@ -253,17 +227,59 @@ WordCandidateList WordEngine::fetchCandidates(Model::Text *text)
 void WordEngine::addToUserDictionary(const QString &word)
 {
     Q_D(WordEngine);
-    d->spell_checker.addToUserWordlist(word);
+    d->languagePlugin->addToSpellCheckerUserWordList(word);
 }
 
 void WordEngine::onLanguageChanged(const QString &languageId)
 {
     Q_D(WordEngine);
 
-    if (languageId == "zh_cn_pinyin")
-        d->predictiveBackend = WordEnginePrivate::PinyinBackend;
+    if (languageId == "ar")
+        d->loadPlugin("libarabicplugin.so", "ar");
+    else if (languageId == "cs")
+        d->loadPlugin("libczechplugin.so", "cs");
+    else if (languageId == "da")
+        d->loadPlugin("libdanishplugin.so", "da");
+    else if (languageId == "de")
+        d->loadPlugin("libgermanplugin.so", "de");
+    else if (languageId == "en")
+        d->loadPlugin("libenglishplugin.so", "en");
+    else if (languageId == "es")
+        d->loadPlugin("libspanishplugin.so", "es");
+    else if (languageId == "fi")
+        d->loadPlugin("libfinnishplugin.so", "fi");
+    else if (languageId == "fr")
+        d->loadPlugin("libfrenchplugin.so", "fr");
+    else if (languageId == "he")
+        d->loadPlugin("libhebrewplugin.so", "he");
+    else if (languageId == "hu")
+        d->loadPlugin("libhungarianplugin.so", "hu");
+    else if (languageId == "it")
+        d->loadPlugin("libitalianplugin.so", "it");
+    else if (languageId == "nl")
+        d->loadPlugin("libdutchplugin.so", "nl");
+    else if (languageId == "pl")
+        d->loadPlugin("libpolishplugin.so", "pl");
+    else if (languageId == "pt")
+        d->loadPlugin("libportugueseplugin.so", "pt");
+    else if (languageId == "ru")
+        d->loadPlugin("librussianplugin.so", "ru");
+    else if (languageId == "sv")
+        d->loadPlugin("libswedishplugin.so", "sv");
+    else if (languageId == "zh")
+        d->loadPlugin("libpinyinplugin.so", "zh");
     else
-        d->predictiveBackend = WordEnginePrivate::PresageBackend;
+        d->loadPlugin(DEFAULT_PLUGIN);
+
+    bool ok = d->languagePlugin->setSpellCheckerLanguage(languageId);
+    if (ok)
+        d->languagePlugin->setSpellCheckerEnabled(d->use_spell_checker);
+}
+
+AbstractLanguageFeatures* WordEngine::languageFeature()
+{
+    Q_D(WordEngine);
+    return d->languagePlugin->languageFeature();
 }
 
 }} // namespace Logic, MaliitKeyboard

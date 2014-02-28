@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.0
+import QtMultimedia 5.0
 import QtQuick.Window 2.0
 import "languages/"
 import "keys/"
@@ -27,6 +28,7 @@ Item {
     property int keyHeight: 0
 
     property string activeKeypadState: "NORMAL"
+    property alias popoverEnabled: extendedKeysSelector.enabled
 
     state: "CHARACTERS"
 
@@ -43,10 +45,16 @@ Item {
         source: panel.state === "CHARACTERS" ? internal.characterKeypadSource : internal.symbolKeypadSource
         onLoaded: activeKeypadState = "NORMAL"
     }
+
     ExtendedKeysSelector {
         id: extendedKeysSelector
         objectName: "extendedKeysSelector"
         anchors.fill: parent
+    }
+
+    Audio {
+        id: audioFeedback
+        source: Qt.resolvedUrl("styles/ubuntu/sounds/key_tick2_quiet.wav")
     }
 
     states: [
@@ -63,7 +71,6 @@ Item {
 
         property Item activeKeypad: characterKeypadLoader.item
         property string characterKeypadSource: loadLayout(maliit_input_method.contentType,
-                                                          maliit_input_method.systemLanguage,
                                                           maliit_input_method.activeLanguage)
         property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
 
@@ -75,7 +82,25 @@ Item {
         /// FIXME the possible languages should be checked in C++
         function languageIsSupported(locale)
         {
-            var supportedLocales = ["en", "de", "es", "fr", "zh", "pt"];
+            var supportedLocales = [
+                "ar",
+                "cs",
+                "da",
+                "de",
+                "en",
+                "es",
+                "fi",
+                "fr",
+                "he",
+                "hu",
+                "it",
+                "nl",
+                "pl",
+                "pt",
+                "ru",
+                "sv",
+                "zh",
+            ];
             return (supportedLocales.indexOf( locale ) > -1);
         }
 
@@ -89,46 +114,68 @@ Item {
                 language = "en";
             }
 
-            if (language === "en")
-                return "languages/en/Keyboard_en.qml";
-            if (language === "es")
-                return "languages/es/Keyboard_es.qml";
-            if (language === "pt")
-                return "languages/pt/Keyboard_pt.qml";
+            if (language === "ar")
+                return "lib/ar/Keyboard_ar.qml";
+            if (language === "cs")
+                return "lib/cs/Keyboard_cs.qml";
+            if (language === "da")
+                return "lib/da/Keyboard_da.qml";
             if (language === "de")
-                return "languages/de/Keyboard_de.qml";
+                return "lib/de/Keyboard_de.qml";
+            if (language === "en")
+                return "lib/en/Keyboard_en.qml";
+            if (language === "es")
+                return "lib/es/Keyboard_es.qml";
+            if (language === "fi")
+                return "lib/fi/Keyboard_fi.qml";
             if (language === "fr")
-                return "languages/fr/Keyboard_fr.qml";
+                return "lib/fr/Keyboard_fr.qml";
+            if (language === "he")
+                return "lib/he/Keyboard_he.qml";
+            if (language === "hu")
+                return "lib/hu/Keyboard_hu.qml";
+            if (language === "it")
+                return "lib/it/Keyboard_it.qml";
+            if (language === "nl")
+                return "lib/nl/Keyboard_nl.qml";
+            if (language === "pl")
+                return "lib/pl/Keyboard_pl.qml";
+            if (language === "pt")
+                return "lib/pt/Keyboard_pt.qml";
+            if (language === "ru")
+                return "lib/ru/Keyboard_ru.qml";
+            if (language === "sv")
+                return "lib/sv/Keyboard_sv.qml";
             if (language === "zh")
-                return "languages/zh_cn/Keyboard_zh_cn_pinyin.qml";
+                return "lib/zh/Keyboard_zh_cn_pinyin.qml";
         }
 
-        function loadLayout(contentType, systemLanguage, activeLanguage)
+        function loadLayout(contentType, activeLanguage)
         {
-//            if (contentType === InputMethod.NumberContentType) {
+            //            if (contentType === InputMethod.NumberContentType) {
             if (contentType === 1) {
                 return "languages/Keyboard_numbers.qml";
             }
 
-//            if (contentType === InputMethod.PhoneNumberContentType) {
+            //            if (contentType === InputMethod.PhoneNumberContentType) {
             if (contentType === 2) {
                 return "languages/Keyboard_telephone.qml";
             }
 
-            var locale = systemLanguage.slice(0,2).toLowerCase();
+            var locale = activeLanguage.slice(0,2).toLowerCase();
             if (!languageIsSupported(locale)) {
                 console.log("System language '"+locale+"' can't be used in OSK - using 'en' instead")
                 locale = "en"
             }
 
-//            if (contentType === InputMethod.EmailContentType) {
+            //            if (contentType === InputMethod.EmailContentType) {
             if (contentType === 3) {
-                return "languages/"+locale+"/Keyboard_"+locale+"_email.qml";
+                return "lib/"+locale+"/Keyboard_"+locale+"_email.qml";
             }
 
-//            if (contentType === InputMethod.UrlContentType) {
+            //            if (contentType === InputMethod.UrlContentType) {
             if (contentType === 4) {
-                return "languages/"+locale+"/Keyboard_"+locale+"_url_search.qml";
+                return "lib/"+locale+"/Keyboard_"+locale+"_url_search.qml";
             }
 
             // FreeTextContentType used as fallback

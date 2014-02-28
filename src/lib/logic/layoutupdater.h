@@ -52,9 +52,6 @@ class LayoutUpdater
     Q_OBJECT
     Q_DISABLE_COPY(LayoutUpdater)
     Q_DECLARE_PRIVATE(LayoutUpdater)
-    Q_PROPERTY(bool wordRibbonVisible READ isWordRibbonVisible
-                                      WRITE setWordRibbonVisible
-                                      NOTIFY wordRibbonVisibleChanged)
 
 public:
     explicit LayoutUpdater(QObject *parent = 0);
@@ -71,11 +68,6 @@ public:
     Q_SLOT void setOrientation(LayoutHelper::Orientation orientation);
 
     void setStyle(const SharedStyle &style);
-
-    bool isWordRibbonVisible() const;
-    Q_SLOT void setWordRibbonVisible(bool visible);
-    Q_SIGNAL void wordRibbonVisibleChanged(bool visible);
-
     Key modifyKey(const Key &key,
                   KeyDescription::State state) const;
 
@@ -89,18 +81,9 @@ public:
     Q_SLOT void onKeyExited(const Key &key);
     Q_SLOT void clearActiveKeysAndMagnifier();
     Q_SLOT void resetOnKeyboardClosed();
-    Q_SLOT void onWordCandidatesChanged(const WordCandidateList &candidates);
 
     // ExtendedKeyArea signal handlers:
     Q_SLOT void onExtendedKeysShown(const Key &main_key);
-
-    // WordCandidate signal handlers:
-    Q_SLOT void onWordCandidatePressed(const WordCandidate &candidate);
-    Q_SLOT void onWordCandidateReleased(const WordCandidate &candidate);
-
-    Q_SIGNAL void wordCandidateSelected(const QString &candidate);
-    Q_SIGNAL void userCandidateSelected(const QString &candidate);
-
     Q_SIGNAL void addToUserDictionary();
 
     Q_SIGNAL void keyboardTitleChanged(const QString &title);

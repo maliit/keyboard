@@ -36,6 +36,8 @@
 #include "models/wordcandidate.h"
 #include <QtCore>
 
+class AbstractLanguageFeatures;
+
 namespace MaliitKeyboard {
 namespace Logic {
 
@@ -60,11 +62,16 @@ public:
     Q_SLOT virtual void setEnabled(bool enabled);
     Q_SIGNAL void enabledChanged(bool enabled);
 
+    Q_SLOT virtual void setWordPredictionEnabled(bool on);
+    Q_SLOT virtual void setSpellcheckerEnabled(bool on);
+
     void clearCandidates();
     void computeCandidates(Model::Text *text);
     Q_SIGNAL void candidatesChanged(const WordCandidateList &candidates);
 
     virtual void addToUserDictionary(const QString &word);
+
+    virtual AbstractLanguageFeatures* languageFeature() = 0;
 
 private:
     virtual WordCandidateList fetchCandidates(Model::Text *text) = 0;

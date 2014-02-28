@@ -33,7 +33,19 @@
 #define MALIIT_KEYBOARD_WORDENGINEPROBE_H
 
 #include "logic/abstractwordengine.h"
+#include "logic/abstractlanguagefeatures.h"
+
 #include <QtCore>
+
+class MockLanguageFeatures : public AbstractLanguageFeatures
+{
+public:
+    explicit MockLanguageFeatures() {}
+    virtual ~MockLanguageFeatures() {}
+
+    virtual bool activateAutoCaps(const QString &preedit) const { Q_UNUSED(preedit); return false; }
+    virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return ""; }
+};
 
 namespace MaliitKeyboard {
 namespace Logic {
@@ -47,6 +59,8 @@ class WordEngineProbe
 public:
     explicit WordEngineProbe(QObject *parent = 0);
     virtual ~WordEngineProbe();
+
+    virtual AbstractLanguageFeatures* languageFeature();
 
 private:
     virtual WordCandidateList fetchCandidates(Model::Text *text);
