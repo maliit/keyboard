@@ -104,9 +104,9 @@ Item {
                 drag.axis: Drag.YAxis;
                 drag.minimumY: 0
                 drag.maximumY: parent.height
-                //needs to be false to make swiping work from area above top row of keys 
-                //see lp:1277186
-                drag.filterChildren: false
+                //fix for lp:1277186
+                //only filter children when wordRibbon visible
+                drag.filterChildren: wordRibbon.visible
 
                 onReleased: {
                     if (keyboardSurface.y > jumpBackThreshold) {
@@ -142,11 +142,6 @@ Item {
 
                         height: canvas.wordribbon_visible ? UI.wordribbonHeight : 0
                         onHeightChanged: calculateSize();
-                        onVisibleChanged: {
-                            //turn on the filterChildren flag such that we can swipe
-                            //down from within the wordRibbon when it's visible
-                            swipeArea.drag.filterChildren = visible;
-                        }
                     }
 
                     Item {
