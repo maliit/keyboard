@@ -1,3 +1,19 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140228-0ubuntu1) trusty; urgency=low
+
+  [ Bill Filler ]
+  * fix lp:1277186 to allow keyboard to be swiped down as before (LP:
+    #1277186)
+
+  [ Dmitrijs Ledkovs ]
+  * Tests expect writable /home/xnox, provide a fresh one for each
+    build. (LP: #1247994)
+
+  [ Dimitri John Ledkov ]
+  * Tests expect writable /home/xnox, provide a fresh one for each
+    build. (LP: #1247994)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 28 Feb 2014 22:34:38 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140227-0ubuntu1) trusty; urgency=low
 
   [ Daniel d'Andrada ]
