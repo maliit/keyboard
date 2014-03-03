@@ -87,7 +87,6 @@ Item {
 
     BorderImage {
         id: buttonImage
-        border { left: 27; top: 29; right: 27; bottom: 29 }
         anchors.centerIn: parent
         anchors.fill: key
         anchors.margins: units.dp( UI.keyMargins );
