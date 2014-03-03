@@ -137,9 +137,6 @@ Item {
 
         onReleased: {
             if (!extendedKeysShown) {
-                if (maliit_input_method.useAudioFeedback)
-                    audioFeedback.play();
-
                 event_handler.onKeyReleased(valueToSubmit, action);
                 if (!skipAutoCaps)
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
@@ -148,6 +145,10 @@ Item {
         }
         onPressed: {
             event_handler.onKeyPressed(valueToSubmit, action);
+            // TODO, add a setting for haptic feedback
+            if (maliit_input_method.useAudioFeedback)
+                 pressEffect.start()
+                 //audioFeedback.play();
         }
     }
 
