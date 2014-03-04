@@ -73,7 +73,7 @@ Item {
 
         height: rowOfKeys.height
 
-        source: "../images/popover@27.png"
+        source: "../images/popover.sci"
 
         onXChanged: {
 
