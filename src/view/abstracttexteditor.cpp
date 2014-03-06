@@ -756,11 +756,20 @@ void AbstractTextEditor::singleBackspace()
         sendKeyEvent(ev);
     } else {
         d->text->removeFromPreedit(1);
-        if (d->text->preedit().isEmpty())
-            d->word_engine->clearCandidates();
+        
         d->word_engine->computeCandidates(d->text.data());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                           Replacement());
+
+        if (d->text->preedit().isEmpty()) {
+            d->word_engine->clearCandidates();
+            d->text->commitPreedit();
+            // XXX: This is something like a workaround for maliit reporting an invalid state to Qt.
+            //  When preedit is cleared, for Qt not reporting it as inputMethodComposing all the time we need
+            //  to flush out all the TextFormat attributes - so we actually need to commit anything for that
+            //  to happen
+            sendCommitString("");
+        }
     }
 
     d->backspace_sent = true;
