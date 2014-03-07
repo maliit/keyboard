@@ -44,7 +44,7 @@ WesternLanguageFeatures::~WesternLanguageFeatures()
 
 bool WesternLanguageFeatures::activateAutoCaps(const QString &preedit) const
 {
-    static const QString sentenceBreak = QString::fromUtf8("!.?:\n");
+    static const QString sentenceBreak = QString::fromUtf8("!.?:\n\r");
 
     if (preedit.isEmpty()) {
         return false;
