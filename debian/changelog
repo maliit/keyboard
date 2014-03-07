@@ -1,3 +1,63 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140304-0ubuntu1) trusty; urgency=low
+
+  [ Florian Boucault ]
+  * Fixed BorderImage usage: always use .sci files so that resolution
+    independence works adequately. Removed unused assets: keybg*
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Mar 2014 17:22:53 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140228-0ubuntu1) trusty; urgency=low
+
+  [ Bill Filler ]
+  * fix lp:1277186 to allow keyboard to be swiped down as before (LP:
+    #1277186)
+
+  [ Dmitrijs Ledkovs ]
+  * Tests expect writable /home/xnox, provide a fresh one for each
+    build. (LP: #1247994)
+
+  [ Dimitri John Ledkov ]
+  * Tests expect writable /home/xnox, provide a fresh one for each
+    build. (LP: #1247994)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 28 Feb 2014 22:34:38 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140227-0ubuntu1) trusty; urgency=low
+
+  [ Daniel d'Andrada ]
+  * Make out-of-source builds work again
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 27 Feb 2014 02:26:25 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140213-0ubuntu1) trusty; urgency=low
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Disable the shift button coloring, as it breaks things in certain
+    cases - use a custom colored icon instead. (LP: #1251285)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 13 Feb 2014 16:48:17 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140206-0ubuntu1) trusty; urgency=low
+
+  [ Bill Filler ]
+  * Remove legacy code and files: the old language xml files, deprecated
+    LayoutUpdater usage, old layouting.
+
+  [ Daniel d'Andrada ]
+  * Fixes mapping between rotation angles and screen orientations Code
+    was assuming that primary screen orientation was always landscape.
+    (LP: #1251330)
+
+  [ Thomas Moenicke ]
+  * Remove legacy code and files: the old language xml files, deprecated
+    LayoutUpdater usage, old layouting.
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Add a free, open ebook for the polish keyboard plugin for the
+    database - one released on a CC BY-SA 3.0 license.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 06 Feb 2014 16:59:31 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140122-0ubuntu1) trusty; urgency=low
 
   [ Ken VanDine ]

@@ -19,10 +19,11 @@ import Ubuntu.Components 0.1
 
 ActionKey {
     iconNormal: "keyboard-caps"
-    iconShifted: "keyboard-caps"
+    iconShifted: "keyboard-caps-active"
     iconCapsLock: "keyboard-caps-lock"
 
-    colorShifted: UbuntuColors.orange
+    // XXX: Disabled due to problems with coloring - see LP: #1251285 for details
+    // colorShifted: UbuntuColors.orange
 
     action: "shift"
 

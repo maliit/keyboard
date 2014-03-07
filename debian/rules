@@ -16,7 +16,15 @@ override_dh_auto_configure:
 	                     CONFIG+=enable-pinyin
 
 override_dh_auto_test:
-	xvfb-run -a make check
+	# Tests write $HOME/.presage/lm.db, make sure $HOME is
+	# writable.
+	rm -rf $(CURDIR)/debian/test-home
+	mkdir -p $(CURDIR)/debian/test-home
+	HOME=$(CURDIR)/debian/test-home xvfb-run -a make check
+
+override_dh_clean:
+	rm -rf $(CURDIR)/debian/test-home
+	dh_clean
 
 override_dh_install:
 	# install autopilot tests

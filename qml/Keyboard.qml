@@ -104,7 +104,9 @@ Item {
                 drag.axis: Drag.YAxis;
                 drag.minimumY: 0
                 drag.maximumY: parent.height
-                drag.filterChildren: true
+                //fix for lp:1277186
+                //only filter children when wordRibbon visible
+                drag.filterChildren: wordRibbon.visible
 
                 onReleased: {
                     if (keyboardSurface.y > jumpBackThreshold) {

@@ -39,7 +39,7 @@ OTHER_FILES += \
     germanplugin.json \
     buddenbrooks.txt
 
-LIBS += $${TOP_SRCDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
+LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
 
 INCLUDEPATH += $$PWD/../../westernsupport
 DEPENDPATH += $$PWD/../../westernsupport

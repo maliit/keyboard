@@ -57,6 +57,32 @@ using namespace MaliitKeyboard;
 
 namespace {
 
+Qt::ScreenOrientation rotationAngleToScreenOrientation(int angle)
+{
+    bool portraitIsPrimary = QGuiApplication::primaryScreen()->primaryOrientation()
+        == Qt::PortraitOrientation;
+
+    switch (angle) {
+        case 0:
+            return portraitIsPrimary ? Qt::PortraitOrientation
+                                     : Qt::LandscapeOrientation;
+            break;
+        case 90:
+            return portraitIsPrimary ? Qt::InvertedLandscapeOrientation
+                                     : Qt::PortraitOrientation;
+            break;
+        case 180:
+            return portraitIsPrimary ? Qt::InvertedPortraitOrientation
+                                     : Qt::InvertedLandscapeOrientation;
+            break;
+        case 270:
+        default:
+            return portraitIsPrimary ? Qt::LandscapeOrientation
+                                     : Qt::InvertedPortraitOrientation;
+            break;
+    }
+}
+
 const QString g_maliit_keyboard_qml(UBUNTU_KEYBOARD_DATA_DIR "/Keyboard.qml");
 
 Key overrideToKey(const SharedOverride &override)
@@ -173,18 +199,7 @@ void InputMethod::handleAppOrientationChanged(int angle)
 {
     Q_D(InputMethod);
 
-    switch (angle) {
-        case 0:
-            d->appsCurrentOrientation = Qt::LandscapeOrientation; break;
-    case 90:
-            d->appsCurrentOrientation = Qt::InvertedPortraitOrientation; break;
-        case 180:
-            d->appsCurrentOrientation = Qt::InvertedLandscapeOrientation; break;
-        case 270:
-        default:
-            d->appsCurrentOrientation = Qt::PortraitOrientation; break;
-    }
-
+    d->appsCurrentOrientation = rotationAngleToScreenOrientation(angle);
     d->setLayoutOrientation(d->appsCurrentOrientation);
 }
 
