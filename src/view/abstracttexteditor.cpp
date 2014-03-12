@@ -309,7 +309,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
 
 bool AbstractTextEditorPrivate::valid() const
 {
-                                                         // TODO language_fetaures
+  // TODO language_fetaures
     const bool is_invalid(text.isNull() || word_engine.isNull());
 
     if (is_invalid) {
@@ -572,6 +572,15 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
 void AbstractTextEditor::clearPreedit()
 {
     replacePreedit("");
+
+    Q_D(AbstractTextEditor);
+
+    if (not d->valid()) {
+        return;
+    }
+
+    qDebug() << "in clear preedit.. clearing word engine";
+    d->word_engine->clearCandidates();
 }
 
 //! \brief Returns whether preedit functionality is enabled.
