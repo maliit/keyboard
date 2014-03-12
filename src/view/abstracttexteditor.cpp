@@ -309,7 +309,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
 
 bool AbstractTextEditorPrivate::valid() const
 {
-  // TODO language_fetaures
+                                                         // TODO language_fetaures
     const bool is_invalid(text.isNull() || word_engine.isNull());
 
     if (is_invalid) {

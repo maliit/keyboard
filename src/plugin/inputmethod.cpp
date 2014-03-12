@@ -149,11 +149,11 @@ void InputMethod::hide()
 
 void InputMethod::reset()
 {
-  //this gets called from Qt when the focused editor changes
-  //we need to clear preedit/word candidates in this case
-  qDebug() << "inputMethod::reset()";
-  Q_D(InputMethod);
-  d->editor.clearPreedit();
+    //this gets called from Qt when the focused editor changes
+    //we need to clear preedit/word candidates in this case
+    qDebug() << "inputMethod::reset()";
+    Q_D(InputMethod);
+    d->editor.clearPreedit();
 }
 
 void InputMethod::setPreedit(const QString &preedit,
@@ -198,9 +198,9 @@ QString InputMethod::activeSubView(Maliit::HandlerState state) const
 void InputMethod::handleFocusChange(bool focusIn)
 {
     if (focusIn) {
-      checkInitialAutocaps();
+        checkInitialAutocaps();
     } else {
-      hide();
+        hide();
     }
 }
 
