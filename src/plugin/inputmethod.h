@@ -84,6 +84,7 @@ public:
     virtual void handleFocusChange(bool focusIn);
     virtual void handleAppOrientationChanged(int angle);
     virtual void handleClientChange();
+    virtual void reset();
     virtual bool imExtensionEvent(MImExtensionEvent *event);
     virtual void setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides);
     //! \reimp_end
