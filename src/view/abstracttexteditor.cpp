@@ -452,6 +452,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionReturn: {
         event_key = Qt::Key_Return;
         keyText = QString("\r");
+
+        if (d->word_engine->languageFeature()->activateAutoCaps(keyText) && d->auto_caps_enabled) {
+            Q_EMIT autoCapsActivated();
+        }
     } break;
 
     case Key::ActionClose:
