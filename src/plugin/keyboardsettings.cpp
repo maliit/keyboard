@@ -41,6 +41,7 @@ const QLatin1String AUTO_COMPLETION_KEY = QLatin1String("autoCompletion");
 const QLatin1String PREDICTIVE_TEXT_KEY = QLatin1String("predictiveText");
 const QLatin1String SPELL_CHECKING_KEY = QLatin1String("spellChecking");
 const QLatin1String KEY_PRESS_FEEDBACK_KEY = QLatin1String("keyPressFeedback");
+const QLatin1String KEY_PRESS_FEEDBACK_SOUND_KEY = QLatin1String("keyPressFeedbackSound");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -131,6 +132,16 @@ bool KeyboardSettings::keyPressFeedback() const
 }
 
 /*!
+ * \brief KeyboardSettings::keyPressFeedbackSound returns the path to the current key
+ * feedback sound
+ * \return path to the feedback sound
+ */
+QString KeyboardSettings::keyPressFeedbackSound() const
+{
+    return m_settings->get(KEY_PRESS_FEEDBACK_SOUND_KEY).toString();
+}
+
+/*!
  * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
  * \param key
@@ -157,6 +168,9 @@ void KeyboardSettings::settingUpdated(const QString &key)
         return;
     } else if (key == KEY_PRESS_FEEDBACK_KEY) {
         Q_EMIT keyPressFeedbackChanged(keyPressFeedback());
+        return;
+    } else if (key == KEY_PRESS_FEEDBACK_SOUND_KEY) {
+        Q_EMIT keyPressFeedbackSoundChanged(keyPressFeedbackSound());
         return;
     }
 
