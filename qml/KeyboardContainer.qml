@@ -54,7 +54,7 @@ Item {
 
     Audio {
         id: audioFeedback
-        source: Qt.resolvedUrl(maliit_input_method.audioFeedbackSound)
+        source: maliit_input_method.audioFeedbackSound
     }
 
     Connections {
