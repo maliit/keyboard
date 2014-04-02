@@ -1,3 +1,11 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140402-0ubuntu1) trusty; urgency=low
+
+  [ Olivier Tilloy ]
+  * When sending a key event, send KeyPress AND the corresponding
+    KeyRelease event. (LP: #1300382)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Apr 2014 19:32:28 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140318-0ubuntu1) trusty; urgency=low
 
   [ Bill Filler ]
