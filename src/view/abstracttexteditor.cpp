@@ -495,8 +495,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     if (event_key != Qt::Key_unknown) {
         commitPreedit();
-        QKeyEvent ev(QEvent::KeyPress, event_key, Qt::NoModifier, keyText);
-        sendKeyEvent(ev);
+        sendKeyPressAndReleaseEvents(event_key, Qt::NoModifier, keyText);
     }
 }
 
@@ -765,8 +764,7 @@ void AbstractTextEditor::singleBackspace()
     Q_D(AbstractTextEditor);
 
     if (d->text->preedit().isEmpty()) {
-        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
-        sendKeyEvent(ev);
+        sendKeyPressAndReleaseEvents(Qt::Key_Backspace, Qt::NoModifier);
     } else {
         d->text->removeFromPreedit(1);
         
@@ -832,6 +830,14 @@ void AbstractTextEditor::onCursorPositionChanged(int cursor_position,
         d->ignore_next_cursor_position = r.start;
         d->ignore_next_surrounding_text = QString(surrounding_text).remove(r.start, r.length);
     }
+}
+
+void AbstractTextEditor::sendKeyPressAndReleaseEvents(
+    int key, Qt::KeyboardModifiers modifiers, const QString& text) {
+    QKeyEvent press(QEvent::KeyPress, key, modifiers, text);
+    sendKeyEvent(press);
+    QKeyEvent release(QEvent::KeyRelease, key, modifiers, text);
+    sendKeyEvent(release);
 }
 
 } // namespace MaliitKeyboard
