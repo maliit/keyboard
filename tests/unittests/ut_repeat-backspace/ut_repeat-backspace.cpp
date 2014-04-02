@@ -107,13 +107,13 @@ private:
         (editor.data()->*initiate)(backspace);
         editor->onKeyReleased(backspace);
 
-        QCOMPARE(host->keyEventCount(), 1);
-        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyPress);
+        QCOMPARE(host->keyEventCount(), 2);
+        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyRelease);
         QCOMPARE(host->lastKeyEvent().key(), int(Qt::Key_Backspace));
 
         QTest::qWait(delay);
 
-        QCOMPARE(host->keyEventCount(), 1);
+        QCOMPARE(host->keyEventCount(), 2);
     }
 
     /*
@@ -190,20 +190,20 @@ private:
         QCOMPARE(host->keyEventCount(), 0);
 
         TestUtils::waitForSignal(host.data(), SIGNAL(keyEventSent(QKeyEvent)));
-        QCOMPARE(host->keyEventCount(), 1);
-        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyPress);
+        QCOMPARE(host->keyEventCount(), 2);
+        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyRelease);
         QCOMPARE(host->lastKeyEvent().key(), int(Qt::Key_Backspace));
 
         TestUtils::waitForSignal(host.data(), SIGNAL(keyEventSent(QKeyEvent)));
-        QCOMPARE(host->keyEventCount(), 2);
-        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyPress);
+        QCOMPARE(host->keyEventCount(), 4);
+        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyRelease);
         QCOMPARE(host->lastKeyEvent().key(), int(Qt::Key_Backspace));
 
         (editor.data()->*finalize)(backspace);
 
         QTest::qWait(delay);
 
-        QCOMPARE(host->keyEventCount(), 2);
+        QCOMPARE(host->keyEventCount(), 4);
     }
 
 };

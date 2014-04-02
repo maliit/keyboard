@@ -157,6 +157,9 @@ private:
     Q_SLOT void autoRepeatBackspace();
     void autoRepeatWordBackspace();
     QString wordLeftOfCursor() const;
+
+    void sendKeyPressAndReleaseEvents(int key, Qt::KeyboardModifiers modifiers,
+                                      const QString& text = QString());
 };
 
 } // namespace MaliitKeyboard
