@@ -50,6 +50,8 @@ struct EditorOptions
     int backspace_auto_repeat_interval; // interval between automatically repeated keys
     int backspace_word_delay; // delay before first automatically delete whole words
     int backspace_word_interval; // interval between deleting word on while pressing the backspace
+    int backspace_word_acceleration_rate; // rate at which to accelerate word deletion
+    int backspace_word_min_interval; // minimum interval between deleting words after acceleration
 };
 
 class AbstractTextEditorPrivate;

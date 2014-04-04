@@ -266,6 +266,8 @@ EditorOptions::EditorOptions()
     , backspace_auto_repeat_interval(200)
     , backspace_word_delay(3000)
     , backspace_word_interval(400)
+    , backspace_word_acceleration_rate(10)
+    , backspace_word_min_interval(50)
 {}
 
 class AbstractTextEditorPrivate
@@ -282,6 +284,7 @@ public:
     bool auto_caps_enabled;
     int ignore_next_cursor_position;
     QString ignore_next_surrounding_text;
+    int backspace_word_acceleration;
 
     explicit AbstractTextEditorPrivate(const EditorOptions &new_options,
                                        Model::Text *new_text,
@@ -302,6 +305,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , auto_caps_enabled(false)
     , ignore_next_cursor_position(-1)
     , ignore_next_surrounding_text()
+    , backspace_word_acceleration(0)
 {
     auto_repeat_backspace_timer.setSingleShot(true);
     (void) valid();
@@ -675,6 +679,7 @@ void AbstractTextEditor::autoRepeatBackspace()
     if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
         singleBackspace();
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
+        d->backspace_word_acceleration = 0;
     } else {
         autoRepeatWordBackspace();
     }
@@ -696,7 +701,12 @@ void AbstractTextEditor::autoRepeatWordBackspace()
         singleBackspace();
     }
 
-    d->auto_repeat_backspace_timer.start(d->options.backspace_word_interval);
+    // Gradually speed up deletion to allow for deleting large blocks of text
+    if (d->options.backspace_word_interval - d->backspace_word_acceleration > d->options.backspace_word_min_interval) {
+        d->backspace_word_acceleration += d->options.backspace_word_acceleration_rate;
+    }
+
+    d->auto_repeat_backspace_timer.start(d->options.backspace_word_interval - d->backspace_word_acceleration);
 }
 
 /*!
