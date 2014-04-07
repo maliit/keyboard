@@ -1,3 +1,16 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140407.1-0ubuntu1) trusty; urgency=low
+
+  [ Michael Sheldon ]
+  * Gradually decreases the interval between word deletion when
+    backspace is held down, allowing for fast deletion of large blocks
+    of text (fixes bug #1289374). (LP: #1289374)
+  * Reduce latency for key press sounds by switching to a SoundEffect
+    element (lower latency and better at simultaneous sounds than Audio)
+    and triggering the sound on key press rather than on release. (LP:
+    #1289372)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 07 Apr 2014 15:02:24 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140402-0ubuntu1) trusty; urgency=low
 
   [ Olivier Tilloy ]
