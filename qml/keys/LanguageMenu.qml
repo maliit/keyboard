@@ -34,12 +34,7 @@ Item {
     BorderImage {
         id: name
         anchors.fill: parent
-        source: "../images/popover@27.png"
-
-        property int __corner: units.gu(UI.languageMenuCorner)
-
-        border.left: __corner; border.top: __corner;
-        border.right: __corner; border.bottom: __corner;
+        source: "../images/popover.sci"
     }
 
     ListView {

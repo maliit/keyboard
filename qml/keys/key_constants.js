@@ -41,11 +41,11 @@ var popoverTopMargin   = 10; // dp
 var popoverEdgeMargin = 2.2; // gu
 var popoverSquat      = 3; // gu, when no wordribbon, avoid click-through above input trap
 
-var imageCharKey        = "../images/key_bg@27.png"
-var imageCharKeyPressed = "../images/keybg_action_active@18.png"
+var imageCharKey        = "../images/key_bg.sci"
+var imageCharKeyPressed = "../images/keybg_action_active.sci"
 
-var imageActionKey        = "../images/action_key_bg@27.png"
-var imageActionKeyPressed = "../images/keybg_action_active@18.png"
+var imageActionKey        = "../images/action_key_bg.sci"
+var imageActionKeyPressed = "../images/keybg_action_active.sci"
 
 var top_margin = 1.35;  // gu
 var bottom_margin = 1.00; // gu
@@ -56,7 +56,6 @@ var emailLayoutUrlKeyPadding = 4; // gu
 
 /* language menu */
 var languageMenuListViewPadding = 2.22; // gu
-var languageMenuCorner = 2.5; // gu
 
 
 var wordribbonHeight = 72;

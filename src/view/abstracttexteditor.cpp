@@ -433,7 +433,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionSpace: {
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
         const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
-        const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty();
+        const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
 
         if (replace_preedit) {
             const QString &appendix = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
@@ -452,6 +452,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionReturn: {
         event_key = Qt::Key_Return;
         keyText = QString("\r");
+
+        if (d->word_engine->languageFeature()->activateAutoCaps(keyText) && d->auto_caps_enabled) {
+            Q_EMIT autoCapsActivated();
+        }
     } break;
 
     case Key::ActionClose:
@@ -491,8 +495,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     if (event_key != Qt::Key_unknown) {
         commitPreedit();
-        QKeyEvent ev(QEvent::KeyPress, event_key, Qt::NoModifier, keyText);
-        sendKeyEvent(ev);
+        sendKeyPressAndReleaseEvents(event_key, Qt::NoModifier, keyText);
     }
 }
 
@@ -572,6 +575,15 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
 void AbstractTextEditor::clearPreedit()
 {
     replacePreedit("");
+
+    Q_D(AbstractTextEditor);
+
+    if (not d->valid()) {
+        return;
+    }
+
+    qDebug() << "in clear preedit.. clearing word engine";
+    d->word_engine->clearCandidates();
 }
 
 //! \brief Returns whether preedit functionality is enabled.
@@ -752,13 +764,23 @@ void AbstractTextEditor::singleBackspace()
     Q_D(AbstractTextEditor);
 
     if (d->text->preedit().isEmpty()) {
-        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
-        sendKeyEvent(ev);
+        sendKeyPressAndReleaseEvents(Qt::Key_Backspace, Qt::NoModifier);
     } else {
         d->text->removeFromPreedit(1);
+        
         d->word_engine->computeCandidates(d->text.data());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                           Replacement());
+
+        if (d->text->preedit().isEmpty()) {
+            d->word_engine->clearCandidates();
+            d->text->commitPreedit();
+            // XXX: This is something like a workaround for maliit reporting an invalid state to Qt.
+            //  When preedit is cleared, for Qt not reporting it as inputMethodComposing all the time we need
+            //  to flush out all the TextFormat attributes - so we actually need to commit anything for that
+            //  to happen
+            sendCommitString("");
+        }
     }
 
     d->backspace_sent = true;
@@ -808,6 +830,14 @@ void AbstractTextEditor::onCursorPositionChanged(int cursor_position,
         d->ignore_next_cursor_position = r.start;
         d->ignore_next_surrounding_text = QString(surrounding_text).remove(r.start, r.length);
     }
+}
+
+void AbstractTextEditor::sendKeyPressAndReleaseEvents(
+    int key, Qt::KeyboardModifiers modifiers, const QString& text) {
+    QKeyEvent press(QEvent::KeyPress, key, modifiers, text);
+    sendKeyEvent(press);
+    QKeyEvent release(QEvent::KeyRelease, key, modifiers, text);
+    sendKeyEvent(release);
 }
 
 } // namespace MaliitKeyboard

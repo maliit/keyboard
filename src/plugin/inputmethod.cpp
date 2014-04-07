@@ -147,6 +147,15 @@ void InputMethod::hide()
     d->closeOskWindow();
 }
 
+void InputMethod::reset()
+{
+    //this gets called from Qt when the focused editor changes
+    //we need to clear preedit/word candidates in this case
+    qDebug() << "inputMethod::reset()";
+    Q_D(InputMethod);
+    d->editor.clearPreedit();
+}
+
 void InputMethod::setPreedit(const QString &preedit,
                              int cursor_position)
 {

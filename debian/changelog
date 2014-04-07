@@ -1,3 +1,63 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140402-0ubuntu1) trusty; urgency=low
+
+  [ Olivier Tilloy ]
+  * When sending a key event, send KeyPress AND the corresponding
+    KeyRelease event. (LP: #1300382)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Apr 2014 19:32:28 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140318-0ubuntu1) trusty; urgency=low
+
+  [ Bill Filler ]
+  * clear the preedit and word candidates when the focused editor
+    changes by implementing reset() in the plugin (LP: #1271494)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * clear the preedit and word candidates when the focused editor
+    changes by implementing reset() in the plugin (LP: #1271494)
+  * Fix auto-capitalization after a newline. This adds checks for
+    autocapitalization for enter/return key-presses and additional
+    autocap case characters for western languages. (LP: #1272818)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Mar 2014 14:42:28 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140306-0ubuntu1) trusty; urgency=low
+
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 06 Mar 2014 08:28:29 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140304-0ubuntu1) trusty; urgency=low
+
+  [ Florian Boucault ]
+  * Fixed BorderImage usage: always use .sci files so that resolution
+    independence works adequately. Removed unused assets: keybg*
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Mar 2014 17:22:53 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140228-0ubuntu1) trusty; urgency=low
+
+  [ Bill Filler ]
+  * fix lp:1277186 to allow keyboard to be swiped down as before (LP:
+    #1277186)
+
+  [ Dmitrijs Ledkovs ]
+  * Tests expect writable /home/xnox, provide a fresh one for each
+    build. (LP: #1247994)
+
+  [ Dimitri John Ledkov ]
+  * Tests expect writable /home/xnox, provide a fresh one for each
+    build. (LP: #1247994)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 28 Feb 2014 22:34:38 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140227-0ubuntu1) trusty; urgency=low
+
+  [ Daniel d'Andrada ]
+  * Make out-of-source builds work again
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 27 Feb 2014 02:26:25 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140213-0ubuntu1) trusty; urgency=low
 
   [ Łukasz 'sil2100' Zemczak ]
