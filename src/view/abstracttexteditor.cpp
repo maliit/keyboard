@@ -282,6 +282,8 @@ public:
     bool auto_caps_enabled;
     int ignore_next_cursor_position;
     QString ignore_next_surrounding_text;
+    bool look_for_extra_end_characters;
+    QString appendix_for_previous_preedit;
 
     explicit AbstractTextEditorPrivate(const EditorOptions &new_options,
                                        Model::Text *new_text,
@@ -302,6 +304,8 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , auto_caps_enabled(false)
     , ignore_next_cursor_position(-1)
     , ignore_next_surrounding_text()
+    , look_for_extra_end_characters(false)
+    , appendix_for_previous_preedit()
 {
     auto_repeat_backspace_timer.setSingleShot(true);
     (void) valid();
@@ -403,22 +407,59 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     const QString text = key.label();
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
+    bool look_for_extra_end_characters = d->look_for_extra_end_characters;
+
+    if (look_for_extra_end_characters) {
+        // we reset the flag here so that we won't have to add boilerplate code later
+        d->look_for_extra_end_characters = false;
+    }
 
     switch(key.action()) {
     case Key::ActionInsert: {
-        d->text->appendToPreedit(text);
+        bool alreadyAppended = false;
+        bool auto_caps_activated = false;
 
-        // computeCandidates can change preedit face, so needs to happen
-        // before sending preedit:
-        if (d->preedit_enabled) {
-            d->word_engine->computeCandidates(d->text.data());
+        // check if a 'preedit' completion happened, in which case we are looking for separators in the input, so that
+        // we can modify the preedit to include a space (or appendix) after it for ease of typing
+        if (look_for_extra_end_characters) {
+            QString textOnLeft;
+
+            if (d->word_engine->languageFeature()->isSeparator(text)) {
+                // the input is (or ends with) a separator, move the appendix to be put 'after' the input text
+                d->text->removeFromPreedit(d->appendix_for_previous_preedit.length());
+                d->text->appendToPreedit(text);
+                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
+                d->text->appendToPreedit(d->appendix_for_previous_preedit);
+                alreadyAppended = true;
+            }
+            else {
+                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
+            }
+
+            commitPreedit();
         }
 
-        sendPreeditString(d->text->preedit(), d->text->preeditFace(),
-                          Replacement(d->text->cursorPosition()));
+        // if we had modified the preedit already because of a separator entry, there is no need to perform all the
+        // steps like appending the input or computing candidates - as all we needed was already done in the previous part
+        if (not alreadyAppended) {
+            d->text->appendToPreedit(text);     
+
+            // computeCandidates can change preedit face, so needs to happen
+            // before sending preedit:
+            if (d->preedit_enabled) {
+                d->word_engine->computeCandidates(d->text.data());
+            }
+
+            sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                              Replacement(d->text->cursorPosition()));
+        }
 
         if (not d->preedit_enabled) {
             commitPreedit();
+        }
+        else if (auto_caps_activated && d->auto_caps_enabled) {
+            // standard input (like certain separators, e.g. '.' in western languages) can also trigger autoCaps
+            Q_EMIT autoCapsActivated();
         }
     } break;
 
@@ -436,13 +477,16 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
 
         if (replace_preedit) {
-            const QString &appendix = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+            d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
             d->text->setPreedit(d->text->primaryCandidate());
-            d->text->appendToPreedit(appendix);
-        } else {
+            commitPreedit();
+            d->text->appendToPreedit(d->appendix_for_previous_preedit);
+            d->look_for_extra_end_characters = true;
+        } else if (not look_for_extra_end_characters) {
+            // if word completion already happened right beforehand, no need to add " " as it's already in preedit
             d->text->appendToPreedit(" ");
+            commitPreedit();
         }
-        commitPreedit();
 
         if (auto_caps_activated && d->auto_caps_enabled) {
             Q_EMIT autoCapsActivated();
@@ -563,13 +607,15 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
 
     d->text->setPreedit(replacement);
     const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->preedit());
-    const QString appendix = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-    d->text->appendToPreedit(appendix);
+    d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
     commitPreedit();
 
     if (auto_caps_activated && d->auto_caps_enabled) {
         Q_EMIT autoCapsActivated();
     }
+
+    d->text->appendToPreedit(d->appendix_for_previous_preedit);
+    d->look_for_extra_end_characters = true;
 }
 
 //! \brief Clears preedit.

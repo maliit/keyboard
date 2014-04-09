@@ -140,9 +140,14 @@ Item {
                     audioFeedback.play();
 
                 event_handler.onKeyReleased(valueToSubmit, action);
-                if (!skipAutoCaps)
+
+                if (panel.autoCapsTriggered) {
+                    panel.autoCapsTriggered = false;
+                }
+                else if (!skipAutoCaps) {
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
                         panel.activeKeypadState = "NORMAL"
+                }
             }
         }
         onPressed: {

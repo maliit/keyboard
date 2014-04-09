@@ -27,6 +27,8 @@ Item {
     property int keyWidth: 0
     property int keyHeight: 0
 
+    property bool autoCapsTriggered: false
+
     property string activeKeypadState: "NORMAL"
     property alias popoverEnabled: extendedKeysSelector.enabled
 

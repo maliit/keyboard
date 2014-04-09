@@ -64,3 +64,18 @@ QString WesternLanguageFeatures::appendixForReplacedPreedit(const QString &preed
 
     return QString(" ");
 }
+
+bool WesternLanguageFeatures::isSeparator(const QString &text) const
+{
+    static const QString separators = QString::fromUtf8(",.!?:;\r\n");
+
+    if (text.isEmpty()) {
+        return false;
+    }
+
+    if (separators.contains(text.right(1))) {
+        return true;
+    }
+
+    return false;
+}

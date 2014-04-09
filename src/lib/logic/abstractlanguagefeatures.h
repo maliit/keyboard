@@ -43,6 +43,7 @@ public:
     
     virtual bool activateAutoCaps(const QString &preedit) const = 0;
     virtual QString appendixForReplacedPreedit(const QString &preedit) const = 0;
+    virtual bool isSeparator(const QString &text) const { Q_UNUSED(text); return false; }
 };
 
 #endif // MALIIT_KEYBOARD_ABSTRACTLANGUAGEFEATURES_H
