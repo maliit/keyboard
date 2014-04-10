@@ -101,12 +101,22 @@ private:
                 << false << "Helol Wordl! " << "Helol Wordl! ";
         QTest::newRow("auto-correct disabled, multiple punctation")
                 << false << "Helol Wordl!! " << "Helol Wordl!! ";
-        QTest::newRow("auto-correct enabled, digits")
+        QTest::newRow("auto-correct disabled, digits")
                 << false << "Helol Wordl12 " << "Helol Wordl12 ";
 //        QTest::newRow("auto-correct enabled")
 //                << true << "Helol Wordl! " << "Hello World! ";
 //        QTest::newRow("auto-correct enabled, multiple punctation")
 //                << true << "Helol Wordl!! " << "Hello World!! ";
+
+        // tests for the new auto-correct and separator-at-end behavior
+        QTest::newRow("auto-correct enabled, commit with space, check separators")
+                << true << "Hel ,Wor ." << "Hello, World. ";
+
+        // tests for the new auto-correct and autocaps separator functionality
+        QTest::newRow("auto-correct enabled, commiting with separators, space inbetween")
+                << true << "Hel, Wor. " << "Hello, World. ";
+        QTest::newRow("auto-correct enabled, commiting with separators, no space inbetween")
+                << true << "Hel,Wor. " << "Hello, World. ";
     }
 
     Q_SLOT void testAutoCorrect()
@@ -177,6 +187,14 @@ private:
         QTest::newRow("auto-correct enabled, multiple sentences with dots")
                 << true << "First sentence. Second one. And Third. "
                 << "First sentence. Second one. And Third. " << 3;
+
+        // tests for the new auto-correct and autocaps separator functionality
+        QTest::newRow("auto-correct enabled, autocaps after separator auto-correction")
+                << true << "Hello Wor.this should be autocapsed"
+                << "Hello World. This should be autocapsed" << 1;
+        QTest::newRow("auto-correct enabled, autocaps after separator auto-correction #2")
+                << true << "Hello Wor. this should be autocapsed"
+                << "Hello World. This should be autocapsed" << 1;
     }
 
     Q_SLOT void testAutoCaps()

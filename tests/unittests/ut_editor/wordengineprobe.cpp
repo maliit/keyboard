@@ -31,6 +31,23 @@
 
 #include "wordengineprobe.h"
 
+// To properly mock language features, we need to realistically determine separators
+// Since unittests use latin letters, we simply use the same method as in WesternLanguageFeatures
+bool MockLanguageFeatures::isSeparator(const QString &text) const
+{
+    static const QString separators = QString::fromUtf8(",.!?:;\r\n");
+
+    if (text.isEmpty()) {
+        return false;
+    }
+
+    if (separators.contains(text.right(1))) {
+        return true;
+    }
+
+    return false;
+}
+
 namespace MaliitKeyboard {
 namespace Logic {
 
