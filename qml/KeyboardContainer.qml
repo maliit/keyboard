@@ -54,7 +54,7 @@ Item {
         anchors.fill: parent
     }
 
-    Audio {
+    SoundEffect {
         id: audioFeedback
         source: Qt.resolvedUrl("styles/ubuntu/sounds/key_tick2_quiet.wav")
     }

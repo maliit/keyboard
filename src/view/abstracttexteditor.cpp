@@ -266,6 +266,8 @@ EditorOptions::EditorOptions()
     , backspace_auto_repeat_interval(200)
     , backspace_word_delay(3000)
     , backspace_word_interval(400)
+    , backspace_word_acceleration_rate(10)
+    , backspace_word_min_interval(50)
 {}
 
 class AbstractTextEditorPrivate
@@ -284,6 +286,7 @@ public:
     QString ignore_next_surrounding_text;
     bool look_for_extra_end_characters;
     QString appendix_for_previous_preedit;
+    int backspace_word_acceleration;
 
     explicit AbstractTextEditorPrivate(const EditorOptions &new_options,
                                        Model::Text *new_text,
@@ -306,6 +309,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , ignore_next_surrounding_text()
     , look_for_extra_end_characters(false)
     , appendix_for_previous_preedit()
+    , backspace_word_acceleration(0)
 {
     auto_repeat_backspace_timer.setSingleShot(true);
     (void) valid();
@@ -539,8 +543,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     if (event_key != Qt::Key_unknown) {
         commitPreedit();
-        QKeyEvent ev(QEvent::KeyPress, event_key, Qt::NoModifier, keyText);
-        sendKeyEvent(ev);
+        sendKeyPressAndReleaseEvents(event_key, Qt::NoModifier, keyText);
     }
 }
 
@@ -722,6 +725,7 @@ void AbstractTextEditor::autoRepeatBackspace()
     if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
         singleBackspace();
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
+        d->backspace_word_acceleration = 0;
     } else {
         autoRepeatWordBackspace();
     }
@@ -743,7 +747,12 @@ void AbstractTextEditor::autoRepeatWordBackspace()
         singleBackspace();
     }
 
-    d->auto_repeat_backspace_timer.start(d->options.backspace_word_interval);
+    // Gradually speed up deletion to allow for deleting large blocks of text
+    if (d->options.backspace_word_interval - d->backspace_word_acceleration > d->options.backspace_word_min_interval) {
+        d->backspace_word_acceleration += d->options.backspace_word_acceleration_rate;
+    }
+
+    d->auto_repeat_backspace_timer.start(d->options.backspace_word_interval - d->backspace_word_acceleration);
 }
 
 /*!
@@ -811,8 +820,7 @@ void AbstractTextEditor::singleBackspace()
     Q_D(AbstractTextEditor);
 
     if (d->text->preedit().isEmpty()) {
-        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
-        sendKeyEvent(ev);
+        sendKeyPressAndReleaseEvents(Qt::Key_Backspace, Qt::NoModifier);
     } else {
         d->text->removeFromPreedit(1);
         
@@ -878,6 +886,14 @@ void AbstractTextEditor::onCursorPositionChanged(int cursor_position,
         d->ignore_next_cursor_position = r.start;
         d->ignore_next_surrounding_text = QString(surrounding_text).remove(r.start, r.length);
     }
+}
+
+void AbstractTextEditor::sendKeyPressAndReleaseEvents(
+    int key, Qt::KeyboardModifiers modifiers, const QString& text) {
+    QKeyEvent press(QEvent::KeyPress, key, modifiers, text);
+    sendKeyEvent(press);
+    QKeyEvent release(QEvent::KeyRelease, key, modifiers, text);
+    sendKeyEvent(release);
 }
 
 } // namespace MaliitKeyboard

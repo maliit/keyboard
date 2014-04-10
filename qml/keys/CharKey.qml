@@ -136,9 +136,6 @@ Item {
 
         onReleased: {
             if (!extendedKeysShown) {
-                if (maliit_input_method.useAudioFeedback)
-                    audioFeedback.play();
-
                 event_handler.onKeyReleased(valueToSubmit, action);
 
                 if (panel.autoCapsTriggered) {
@@ -151,6 +148,9 @@ Item {
             }
         }
         onPressed: {
+            if (maliit_input_method.useAudioFeedback)
+                audioFeedback.play();
+
             event_handler.onKeyPressed(valueToSubmit, action);
         }
     }
