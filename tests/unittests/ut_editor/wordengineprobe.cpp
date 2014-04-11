@@ -31,8 +31,23 @@
 
 #include "wordengineprobe.h"
 
-// To properly mock language features, we need to realistically determine separators
-// Since unittests use latin letters, we simply use the same method as in WesternLanguageFeatures
+// To properly mock language features, we need to realistically determine separators and autoCaps
+// Since unittests use latin letters, we simply use the same methods as in WesternLanguageFeatures
+bool MockLanguageFeatures::activateAutoCaps(const QString &preedit) const
+{
+    static const QString sentenceBreak = QString::fromUtf8("!.?:\r\n");
+
+    if (preedit.isEmpty()) {
+        return false;
+    }
+
+    if (sentenceBreak.contains(preedit.right(1))) {
+        return true;
+    }
+
+    return false;
+}
+
 bool MockLanguageFeatures::isSeparator(const QString &text) const
 {
     static const QString separators = QString::fromUtf8(",.!?:;\r\n");

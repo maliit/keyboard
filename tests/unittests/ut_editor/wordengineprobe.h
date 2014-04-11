@@ -43,7 +43,7 @@ public:
     explicit MockLanguageFeatures() {}
     virtual ~MockLanguageFeatures() {}
 
-    virtual bool activateAutoCaps(const QString &preedit) const { Q_UNUSED(preedit); return false; }
+    virtual bool activateAutoCaps(const QString &preedit) const;
     virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return " "; }
     virtual bool isSeparator(const QString &text) const;
 };

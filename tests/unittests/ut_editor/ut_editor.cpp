@@ -108,15 +108,9 @@ private:
 //        QTest::newRow("auto-correct enabled, multiple punctation")
 //                << true << "Helol Wordl!! " << "Hello World!! ";
 
-        // tests for the new auto-correct and separator-at-end behavior
+        // Tests for the auto-correct and separator-at-end behavior
         QTest::newRow("auto-correct enabled, commit with space, check separators")
                 << true << "Hel ,Wor ." << "Hello, World. ";
-
-        // tests for the new auto-correct and autocaps separator functionality
-        QTest::newRow("auto-correct enabled, commiting with separators, space inbetween")
-                << true << "Hel, Wor. " << "Hello, World. ";
-        QTest::newRow("auto-correct enabled, commiting with separators, no space inbetween")
-                << true << "Hel,Wor. " << "Hello, World. ";
     }
 
     Q_SLOT void testAutoCorrect()
@@ -188,13 +182,13 @@ private:
                 << true << "First sentence. Second one. And Third. "
                 << "First sentence. Second one. And Third. " << 3;
 
-        // tests for the new auto-correct and autocaps separator functionality
+        // Tests for the auto-correct and autocaps separator functionality
         QTest::newRow("auto-correct enabled, autocaps after separator auto-correction")
-                << true << "Hello Wor.this should be autocapsed"
-                << "Hello World. This should be autocapsed" << 1;
+                << true << "Hello Wor .This should be autocapsed "
+                << "Hello World. This should be autocapsed " << 1;
         QTest::newRow("auto-correct enabled, autocaps after separator auto-correction #2")
-                << true << "Hello Wor. this should be autocapsed"
-                << "Hello World. This should be autocapsed" << 1;
+                << true << "Hello Wor . This should be autocapsed "
+                << "Hello World.  This should be autocapsed " << 1;
     }
 
     Q_SLOT void testAutoCaps()
@@ -214,6 +208,7 @@ private:
         initializeWordEngine(word_engine);
 
         editor.wordEngine()->setWordPredictionEnabled(true);
+        editor.wordEngine()->setEnabled(true);
         editor.setAutoCorrectEnabled(enable_auto_correct);
         editor.setPreeditEnabled(true);
         editor.setAutoCapsEnabled(true);
@@ -222,7 +217,7 @@ private:
 
         QCOMPARE(host.commitStringHistory(), expected_commit_history);
         Q_UNUSED(expected_auto_caps_activated_count)
-//        QCOMPARE(auto_caps_activated_spy.count(), expected_auto_caps_activated_count);
+        QCOMPARE(auto_caps_activated_spy.count(), expected_auto_caps_activated_count);
     }
 };
 
