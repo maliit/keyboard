@@ -248,6 +248,11 @@ void InputMethod::updateAutoCaps()
     bool autocap = d->host->autoCapitalizationEnabled(valid);
     enabled &= autocap;
 
+    if(d->activeLanguage == "zh") {
+        // Autocaps doesn't make sense in the context of a Pinyin keyboard
+        enabled = false;
+    }
+
     if (enabled != d->autocapsEnabled) {
         d->autocapsEnabled = enabled;
         d->editor.setAutoCapsEnabled(enabled);
