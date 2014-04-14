@@ -134,6 +134,8 @@ Item {
                     onReleased: {
                         key.highlight = false;
                         event_handler.onKeyReleased(modelData);
+                        if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
+                            popover.parent.activeKeypadState = "NORMAL"
                         popover.closePopover();
                     }
                 }
