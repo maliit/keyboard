@@ -41,6 +41,7 @@ class AbstractLanguageFeatures
 public:
     virtual ~AbstractLanguageFeatures() {}
     
+    virtual bool autoCapsAvailable() const = 0;
     virtual bool activateAutoCaps(const QString &preedit) const = 0;
     virtual QString appendixForReplacedPreedit(const QString &preedit) const = 0;
 };

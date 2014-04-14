@@ -25,6 +25,11 @@ ChineseLanguageFeatures::~ChineseLanguageFeatures()
 {
 }
 
+bool ChineseLanguageFeatures::autoCapsAvailable() const
+{
+    return false;
+}
+
 bool ChineseLanguageFeatures::activateAutoCaps(const QString &preedit) const
 {
     Q_UNUSED(preedit)
