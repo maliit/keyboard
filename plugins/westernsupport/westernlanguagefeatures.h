@@ -42,6 +42,8 @@ public:
     explicit WesternLanguageFeatures(QObject *parent = 0);
     virtual ~WesternLanguageFeatures();
 
+    virtual bool alwaysShowSuggestions() const;
+    virtual bool autoCapsAvailable() const;
     virtual bool activateAutoCaps(const QString &preedit) const;
     virtual QString appendixForReplacedPreedit(const QString &preedit) const;
 };
