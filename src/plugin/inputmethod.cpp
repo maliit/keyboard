@@ -342,7 +342,8 @@ void InputMethod::update()
 
     bool emitPredictionEnabled = false;
 
-    bool newPredictionEnabled = inputMethodHost()->predictionEnabled(valid);
+    bool newPredictionEnabled = inputMethodHost()->predictionEnabled(valid) 
+                                || d->editor.wordEngine()->languageFeature()->alwaysShowSuggestions();
 
     if (!valid)
         newPredictionEnabled = true;

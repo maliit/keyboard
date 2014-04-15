@@ -42,6 +42,11 @@ WesternLanguageFeatures::~WesternLanguageFeatures()
 {
 }
 
+bool WesternLanguageFeatures::alwaysShowSuggestions() const
+{
+    return false;
+}
+
 bool WesternLanguageFeatures::autoCapsAvailable() const
 {
     return true;
