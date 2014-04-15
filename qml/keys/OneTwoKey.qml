@@ -26,6 +26,9 @@ ActionKey {
         anchors.fill: parent
         preventStealing: true
         onClicked: {
+            if (maliit_input_method.useAudioFeedback)
+                audioFeedback.play();
+            
             if (panel.activeKeypadState == "NORMAL")
                 panel.activeKeypadState = "SHIFTED";
 
