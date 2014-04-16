@@ -154,6 +154,12 @@ void WordEngine::setWordPredictionEnabled(bool enabled)
         enabled = false;
     }
 
+    if (d->languagePlugin->languageFeature()->alwaysShowSuggestions()) {
+        // Override requested setting for languages that should always
+        // display suggestions, such as Pinyin
+        enabled = true;
+    }
+    
     if (enabled == d->use_predictive_text)
         return;
 
@@ -270,6 +276,8 @@ void WordEngine::onLanguageChanged(const QString &languageId)
         d->loadPlugin("libpinyinplugin.so", "zh");
     else
         d->loadPlugin(DEFAULT_PLUGIN);
+
+    setWordPredictionEnabled(d->languagePlugin->languageFeature()->alwaysShowSuggestions());
 
     bool ok = d->languagePlugin->setSpellCheckerLanguage(languageId);
     if (ok)
