@@ -71,6 +71,9 @@ class WordEnginePrivate
 public:
 
     bool use_predictive_text;
+    bool requested_prediction_state; // The state requested by settings prior
+                                     // to being overriden by any language 
+                                     // specific requirements
 
     bool use_spell_checker;
 
@@ -115,6 +118,7 @@ public:
 
 WordEnginePrivate::WordEnginePrivate()
     : use_predictive_text(false)
+    , requested_prediction_state(false)
     , use_spell_checker(false)
     , languagePlugin(0)
 {
@@ -146,6 +150,8 @@ bool WordEngine::isEnabled() const
 void WordEngine::setWordPredictionEnabled(bool enabled)
 {
     Q_D(WordEngine);
+
+    d->requested_prediction_state = enabled;
 
     // Don't allow to enable word engine if no backends are available:
     if (!d->languagePlugin && enabled) {
@@ -277,7 +283,7 @@ void WordEngine::onLanguageChanged(const QString &languageId)
     else
         d->loadPlugin(DEFAULT_PLUGIN);
 
-    setWordPredictionEnabled(d->languagePlugin->languageFeature()->alwaysShowSuggestions());
+    setWordPredictionEnabled(d->requested_prediction_state);
 
     bool ok = d->languagePlugin->setSpellCheckerLanguage(languageId);
     if (ok)
