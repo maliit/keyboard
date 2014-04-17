@@ -145,12 +145,11 @@ Item {
         onPressed: {
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();
+            
+            if (maliit_input_method.useHapticFeedback)
+                 pressEffect.start()
 
             event_handler.onKeyPressed(valueToSubmit, action);
-            // TODO, add a setting for haptic feedback
-            if (maliit_input_method.useAudioFeedback)
-                 pressEffect.start()
-                 //audioFeedback.play();
         }
     }
 

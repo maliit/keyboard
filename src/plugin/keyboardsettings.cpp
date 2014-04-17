@@ -40,7 +40,8 @@ const QLatin1String AUTO_CAPITALIZATION_KEY = QLatin1String("autoCapitalization"
 const QLatin1String AUTO_COMPLETION_KEY = QLatin1String("autoCompletion");
 const QLatin1String PREDICTIVE_TEXT_KEY = QLatin1String("predictiveText");
 const QLatin1String SPELL_CHECKING_KEY = QLatin1String("spellChecking");
-const QLatin1String KEY_PRESS_FEEDBACK_KEY = QLatin1String("keyPressFeedback");
+const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_KEY = QLatin1String("keyPressFeedback");
+const QLatin1String KEY_PRESS_HAPTIC_FEEDBACK_KEY = QLatin1String("keyPressHapticFeedback");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -121,13 +122,23 @@ bool KeyboardSettings::spellchecking() const
 }
 
 /*!
- * \brief KeyboardSettings::keyPressFeedback returns true if feedback is enabled
+ * \brief KeyboardSettings::keyPressAudioFeedback returns true if audio feedback is enabled
  * when the user presses a keyboad key
  * \return
  */
-bool KeyboardSettings::keyPressFeedback() const
+bool KeyboardSettings::keyPressAudioFeedback() const
 {
-    return m_settings->get(KEY_PRESS_FEEDBACK_KEY).toBool();
+    return m_settings->get(KEY_PRESS_AUDIO_FEEDBACK_KEY).toBool();
+}
+
+/*!
+ * \brief KeyboardSettings::keyPressHapticFeedback returns true if haptic feedback is enabled
+ * when the user presses a keyboad key
+ * \return
+ */
+bool KeyboardSettings::keyPressHapticFeedback() const
+{
+    return m_settings->get(KEY_PRESS_HAPTIC_FEEDBACK_KEY).toBool();
 }
 
 /*!
@@ -155,8 +166,11 @@ void KeyboardSettings::settingUpdated(const QString &key)
     } else if (key == SPELL_CHECKING_KEY) {
         Q_EMIT spellCheckingChanged(spellchecking());
         return;
-    } else if (key == KEY_PRESS_FEEDBACK_KEY) {
-        Q_EMIT keyPressFeedbackChanged(keyPressFeedback());
+    } else if (key == KEY_PRESS_AUDIO_FEEDBACK_KEY) {
+        Q_EMIT keyPressAudioFeedbackChanged(keyPressAudioFeedback());
+        return;
+    } else if (key == KEY_PRESS_HAPTIC_FEEDBACK_KEY) {
+        Q_EMIT keyPressHapticFeedbackChanged(keyPressHapticFeedback());
         return;
     }
 
