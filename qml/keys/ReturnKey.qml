@@ -17,17 +17,19 @@
 import QtQuick 2.0
 
 ActionKey {
-    property string overrideIconName: input_method.actionKeyOverride ? input_method.actionKeyOverride.icon : ""
-    property string overrideLabel: input_method.actionKeyOverride ? input_method.actionKeyOverride.icon : ""
-    property string iconName: overrideIconName == "" &&  overrideLabel == "" ? "keyboard-return" : overrideIconName
+    property var actionKeyOverride: maliit_input_method.actionKeyOverride
+    property string overrideIconName: actionKeyOverride && actionKeyOverride.icon ? actionKeyOverride.icon : ""
+    property string overrideLabel: actionKeyOverride && actionKeyOverride.label ? actionKeyOverride.label : ""
 
-    enabled: input_method.actionKeyOverride ? input_method.actionKeyOverride.enabled : true
-
-    // overrideIcon has high priority over lable
+    enabled: actionKeyOverride ? actionKeyOverride.enabled : true
+    // overrideIcon has high priority over label
     label: overrideIconName == "" ? overrideLabel : ""
-    iconNormal: iconName
-    iconShifted: iconName
-    iconCapsLock: iconName
+    shifted: label
+
+    iconNormal: (overrideIconName == "") && (overrideLabel == "") ? "keyboard-return" : overrideIconName
+    iconShifted: iconNormal
+    iconCapsLock: iconNormal
+
     action: "return"
     // TODO: input_method.actionKeyOverride.highlighted
 }

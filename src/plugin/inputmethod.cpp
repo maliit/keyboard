@@ -272,11 +272,13 @@ void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverrid
 
     // we only care about actionKey override by now
     const QMap<QString, SharedOverride >::const_iterator iter(overrides.find(actionKeyName));
+    bool actionKeyChanged = false;
 
     if (d->actionKeyOverrider) {
         disconnect(d->actionKeyOverrider.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
                    this, SIGNAL(actionKeyOverrideChanged()));
         d->actionKeyOverrider.clear();
+        actionKeyChanged = true;
     }
 
     if (iter != overrides.end()) {
@@ -286,9 +288,13 @@ void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverrid
             d->actionKeyOverrider = actionKeyOverrider;
             connect(d->actionKeyOverrider.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
                     this, SIGNAL(actionKeyOverrideChanged()));
-            Q_EMIT actionKeyOverrideChanged();
         }
-   }
+        actionKeyChanged = true;
+    }
+
+    if (actionKeyChanged) {
+        Q_EMIT actionKeyOverrideChanged();
+    }
 }
 
 void InputMethod::onKeyboardClosed()
