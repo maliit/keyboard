@@ -52,6 +52,7 @@ class InputMethod
     Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
     Q_PROPERTY(QString activeLanguage READ activeLanguage WRITE setActiveLanguage NOTIFY activeLanguageChanged)
     Q_PROPERTY(bool useAudioFeedback READ useAudioFeedback NOTIFY useAudioFeedbackChanged)
+    Q_PROPERTY(QObject* actionKeyOverride READ actionKeyOverride NOTIFY actionKeyOverrideChanged)
 
     Q_ENUMS(TextContentType)
 
@@ -106,6 +107,8 @@ public:
     Q_SLOT void onVisibleRectChanged();
     bool useAudioFeedback() const;
 
+    QObject* actionKeyOverride() const;
+
 Q_SIGNALS:
     void contentTypeChanged(TextContentType contentType);
     void activateAutocaps();
@@ -115,14 +118,13 @@ Q_SIGNALS:
     void wordEngineEnabledChanged(bool wordEngineEnabled);
     void wordRibbonEnabledChanged(bool wordRibbonEnabled);
     void windowGeometryRectChanged(QRect rect);
+    void actionKeyOverrideChanged();
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();
     Q_SLOT void onEnabledLanguageSettingsChanged();
     Q_SLOT void updateAutoCaps();
 
-    Q_SLOT void updateKey(const QString &key_id,
-                          const MKeyOverride::KeyOverrideAttributes changed_attributes);
     Q_SLOT void onKeyboardClosed();
 
     Q_SLOT void onLayoutWidthChanged(int width);
