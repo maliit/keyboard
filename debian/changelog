@@ -1,3 +1,25 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140415-0ubuntu1) trusty; urgency=low
+
+  [ Michael Sheldon ]
+  * Implement capital letters for Pinyin keyboard, ignore auto-
+    capitalisation and always display word ribbon when using Pinyin
+    regardless of input hints. (LP: #1281384)
+  * Switch back to normal character mode if in shifted mode after
+    entering extended characters. (LP: #1264860)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Quick-fix: play key feedback sound on key-press for all used keys.
+    The fix is not really sophisticated, but these parts of code might
+    change soon anyway (LP: #1306160)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Apr 2014 15:17:13 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140407.1-0ubuntu2) trusty; urgency=medium
+
+  * No-change rebuild for shlib changes in qtbase and qtdeclarative.
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Mon, 14 Apr 2014 13:51:24 -0300
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140407.1-0ubuntu1) trusty; urgency=low
 
   [ Michael Sheldon ]

@@ -37,6 +37,7 @@
 #include "models/wordribbon.h"
 #include "models/layout.h"
 
+#include "logic/abstractlanguagefeatures.h"
 // #include "logic/layouthelper.h"
 //#include "logic/style.h"
 
@@ -246,7 +247,7 @@ void InputMethod::updateAutoCaps()
     bool enabled = d->m_settings.autoCapitalization();
     enabled &= d->contentType == FreeTextContentType;
     bool valid = true;
-    bool autocap = d->host->autoCapitalizationEnabled(valid);
+    bool autocap = d->host->autoCapitalizationEnabled(valid) && d->editor.wordEngine()->languageFeature()->autoCapsAvailable();
     enabled &= autocap;
 
     if (enabled != d->autocapsEnabled) {
@@ -342,7 +343,8 @@ void InputMethod::update()
 
     bool emitPredictionEnabled = false;
 
-    bool newPredictionEnabled = inputMethodHost()->predictionEnabled(valid);
+    bool newPredictionEnabled = inputMethodHost()->predictionEnabled(valid) 
+                                || d->editor.wordEngine()->languageFeature()->alwaysShowSuggestions();
 
     if (!valid)
         newPredictionEnabled = true;

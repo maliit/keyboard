@@ -32,31 +32,31 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; }
-            CharKey { label: "w"; }
-            CharKey { label: "e"; }
-            CharKey { label: "r"; }
-            CharKey { label: "t"; }
-            CharKey { label: "y"; }
-            CharKey { label: "u"; }
-            CharKey { label: "i"; }
-            CharKey { label: "o"; }
-            CharKey { label: "p"; }
+            CharKey { label: "q"; shifted: "Q"; }
+            CharKey { label: "w"; shifted: "W"; }
+            CharKey { label: "e"; shifted: "E"; }
+            CharKey { label: "r"; shifted: "R"; }
+            CharKey { label: "t"; shifted: "T"; }
+            CharKey { label: "y"; shifted: "Y"; }
+            CharKey { label: "u"; shifted: "U"; }
+            CharKey { label: "i"; shifted: "I"; }
+            CharKey { label: "o"; shifted: "O"; }
+            CharKey { label: "p"; shifted: "P"; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; }
-            CharKey { label: "s"; }
-            CharKey { label: "d"; }
-            CharKey { label: "f"; }
-            CharKey { label: "g"; }
-            CharKey { label: "h"; }
-            CharKey { label: "j"; }
-            CharKey { label: "k"; }
-            CharKey { label: "l"; }
+            CharKey { label: "a"; shifted: "A"; }
+            CharKey { label: "s"; shifted: "S"; }
+            CharKey { label: "d"; shifted: "D"; }
+            CharKey { label: "f"; shifted: "F"; }
+            CharKey { label: "g"; shifted: "G"; }
+            CharKey { label: "h"; shifted: "H"; }
+            CharKey { label: "j"; shifted: "J"; }
+            CharKey { label: "k"; shifted: "K"; }
+            CharKey { label: "l"; shifted: "L"; }
         }
 
         Row {
@@ -64,13 +64,13 @@ KeyPad {
             spacing: 0
 
             ShiftKey {}
-            CharKey { label: "z"; }
-            CharKey { label: "x"; }
-            CharKey { label: "c"; }
-            CharKey { label: "v"; }
-            CharKey { label: "b"; }
-            CharKey { label: "n"; }
-            CharKey { label: "m"; }
+            CharKey { label: "z"; shifted: "Z"; }
+            CharKey { label: "x"; shifted: "X"; }
+            CharKey { label: "c"; shifted: "C"; }
+            CharKey { label: "v"; shifted: "V"; }
+            CharKey { label: "b"; shifted: "B"; }
+            CharKey { label: "n"; shifted: "N"; }
+            CharKey { label: "m"; shifted: "M"; }
             BackspaceKey {}
         }
 

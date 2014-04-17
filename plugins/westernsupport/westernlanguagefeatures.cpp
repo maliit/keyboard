@@ -42,6 +42,16 @@ WesternLanguageFeatures::~WesternLanguageFeatures()
 {
 }
 
+bool WesternLanguageFeatures::alwaysShowSuggestions() const
+{
+    return false;
+}
+
+bool WesternLanguageFeatures::autoCapsAvailable() const
+{
+    return true;
+}
+
 bool WesternLanguageFeatures::activateAutoCaps(const QString &preedit) const
 {
     static const QString sentenceBreak = QString::fromUtf8("!.?:\r\n");
