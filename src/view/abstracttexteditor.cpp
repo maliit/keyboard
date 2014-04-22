@@ -477,7 +477,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     case Key::ActionSpace: {
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
-        const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
+        bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
 
         if (replace_preedit) {
@@ -486,8 +486,17 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             commitPreedit();
             d->text->appendToPreedit(d->appendix_for_previous_preedit);
             d->look_for_extra_end_characters = true;
-        } else if (not look_for_extra_end_characters) {
-            // if word completion already happened right beforehand, no need to add " " as it's already in preedit
+        } else if (not look_for_extra_end_characters) { // if word completion already happened right beforehand, no need to add " " as it's already in preedit
+
+            if (d->auto_correct_enabled && d->text->preedit().endsWith(' ')) {
+                d->text->removeFromPreedit(1);
+                d->text->appendToPreedit(d->word_engine->languageFeature()->fullStopSequence());
+
+                // we need to re-evaluate autocaps after our changes to the preedit
+                textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
+            }
+
             d->text->appendToPreedit(" ");
             commitPreedit();
         }
