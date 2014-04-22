@@ -285,6 +285,7 @@ public:
     int ignore_next_cursor_position;
     QString ignore_next_surrounding_text;
     bool look_for_extra_end_characters;
+    bool look_for_a_double_space;
     QString appendix_for_previous_preedit;
     int backspace_word_acceleration;
 
@@ -308,6 +309,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , ignore_next_cursor_position(-1)
     , ignore_next_surrounding_text()
     , look_for_extra_end_characters(false)
+    , look_for_a_double_space(false)
     , appendix_for_previous_preedit()
     , backspace_word_acceleration(0)
 {
@@ -412,10 +414,16 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
     bool look_for_extra_end_characters = d->look_for_extra_end_characters;
+    bool look_for_a_double_space = d->look_for_a_double_space;
 
     if (look_for_extra_end_characters) {
         // we reset the flag here so that we won't have to add boilerplate code later
         d->look_for_extra_end_characters = false;
+    }
+
+    if (look_for_a_double_space) {
+        // we reset the flag here so that we won't have to add boilerplate code later
+        d->look_for_a_double_space = false;
     }
 
     switch(key.action()) {
@@ -426,8 +434,6 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         // check if a 'preedit' completion happened, in which case we are looking for separators in the input, so that
         // we can modify the preedit to include a space (or appendix) after it for ease of typing
         if (look_for_extra_end_characters) {
-            QString textOnLeft;
-
             if (d->word_engine->languageFeature()->isSeparator(text)) {
                 // the input is (or ends with) a separator, move the appendix to be put 'after' the input text
                 d->text->removeFromPreedit(d->appendix_for_previous_preedit.length());
@@ -439,6 +445,24 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             else {
                 auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
             }
+
+            commitPreedit();
+        }
+        else if (d->auto_correct_enabled && d->word_engine->languageFeature()->isSeparator(text)) {
+            // in case of a separator, remove any leading spaces
+            const QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+
+            QString::const_iterator begin = textOnLeft.cbegin();
+            QString::const_iterator i = textOnLeft.cend();
+            while (i != begin) {
+                --i;
+                if (*i != ' ') break;
+                singleBackspace();
+            }
+            d->text->appendToPreedit(text);
+            auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
+            d->text->appendToPreedit(" ");
+            alreadyAppended = true;
 
             commitPreedit();
         }
@@ -486,8 +510,9 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             commitPreedit();
             d->text->appendToPreedit(d->appendix_for_previous_preedit);
             d->look_for_extra_end_characters = true;
-        } else if (not look_for_extra_end_characters) { // if word completion already happened right beforehand, no need to add " " as it's already in preedit
-
+            d->look_for_a_double_space = true;
+        } 
+        else if (look_for_a_double_space) {
             if (d->auto_correct_enabled && d->text->preedit().endsWith(' ')) {
                 d->text->removeFromPreedit(1);
                 d->text->appendToPreedit(d->word_engine->languageFeature()->fullStopSequence());
@@ -495,8 +520,13 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 // we need to re-evaluate autocaps after our changes to the preedit
                 textOnLeft = d->text->surroundingLeft() + d->text->preedit();
                 auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
-            }
 
+                d->text->appendToPreedit(" ");
+                commitPreedit();
+            }
+        }
+        else if (not look_for_extra_end_characters) { 
+            // if word completion already happened right beforehand, no need to add " " as it's already in preedit
             d->text->appendToPreedit(" ");
             commitPreedit();
         }
