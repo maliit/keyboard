@@ -503,6 +503,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
         bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
+        const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
 
         if (replace_preedit) {
             d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
@@ -512,8 +513,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             d->look_for_extra_end_characters = true;
             d->look_for_a_double_space = true;
         } 
-        else if (look_for_a_double_space) {
-            if (d->auto_correct_enabled && d->text->preedit().endsWith(' ')) {
+        else if (look_for_a_double_space && not stopSequence.isEmpty()) {
+            if (d->auto_correct_enabled) { 
                 d->text->removeFromPreedit(1);
                 d->text->appendToPreedit(d->word_engine->languageFeature()->fullStopSequence());
 
@@ -525,7 +526,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 commitPreedit();
             }
         }
-        else if (not look_for_extra_end_characters) { 
+        else if (not look_for_extra_end_characters || not d->text->preedit().endsWith(' ')) {
             // if word completion already happened right beforehand, no need to add " " as it's already in preedit
             d->text->appendToPreedit(" ");
             commitPreedit();
