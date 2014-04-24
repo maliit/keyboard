@@ -74,7 +74,7 @@ public:
     virtual AbstractLanguageFeatures* languageFeature() = 0;
 
 private:
-    virtual WordCandidateList fetchCandidates(Model::Text *text) = 0;
+    virtual void fetchCandidates(Model::Text *text) = 0;
     const QScopedPointer<AbstractWordEnginePrivate> d_ptr;
 };
 

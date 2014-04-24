@@ -147,7 +147,7 @@ void AbstractWordEngine::computeCandidates(Model::Text *text)
         return;
     }
 
-    Q_EMIT candidatesChanged(fetchCandidates(text));
+    fetchCandidates(text);
 }
 
 //! \brief Adds a word to user dictionary.

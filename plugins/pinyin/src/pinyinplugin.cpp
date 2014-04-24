@@ -4,7 +4,7 @@
 #include <QDebug>
 
 PinyinPlugin::PinyinPlugin(QObject *parent) :
-    QObject(parent)
+    AbstractLanguagePlugin(parent)
   , pinyinAdapter(new PinyinAdapter)
   , m_chineseLanguageFeatures(new ChineseLanguageFeatures)
 {

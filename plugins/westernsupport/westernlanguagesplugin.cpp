@@ -4,9 +4,9 @@
 
 #include <QDebug>
 
-WesternLanguagesPlugin::WesternLanguagesPlugin(/*QObject *parent*/) :
-//    QObject(parent)
-    m_candidatesContext()
+WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
+    AbstractLanguagePlugin(parent)
+  , m_candidatesContext()
   , m_presageCandidates(CandidatesCallback(m_candidatesContext))
   , m_presage(&m_presageCandidates)
   , m_languageFeatures(new WesternLanguageFeatures)
@@ -68,9 +68,9 @@ bool WesternLanguagesPlugin::spell(const QString& word)
     return m_spellChecker.spell(word);
 }
 
-QStringList WesternLanguagesPlugin::spellCheckerSuggest(const QString& word, int limit)
+void WesternLanguagesPlugin::spellCheckerSuggest(const QString& word, int limit)
 {
-    return m_spellChecker.suggest(word, limit);
+    Q_EMIT newSpellCheckerSuggestions(m_spellChecker.suggest(word, limit));
 }
 
 void WesternLanguagesPlugin::addToSpellCheckerUserWordList(const QString& word)

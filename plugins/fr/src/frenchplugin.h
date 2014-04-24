@@ -7,7 +7,7 @@
 
 //#include <presage.h>
 
-class FrenchPlugin : public QObject, public WesternLanguagesPlugin
+class FrenchPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
     Q_INTERFACES(LanguagePluginInterface)
@@ -15,8 +15,7 @@ class FrenchPlugin : public QObject, public WesternLanguagesPlugin
 
 public:
     explicit FrenchPlugin(QObject* parent = 0)
-        : QObject(parent)
-        , WesternLanguagesPlugin()
+        : WesternLanguagesPlugin(parent)
     {
         _useDatabase("fr");
     }

@@ -3,14 +3,15 @@
 
 #include <QObject>
 #include <QStringList>
-#include "../src/lib/logic/languageplugininterface.h"
+#include "languageplugininterface.h"
+#include "abstractlanguageplugin.h"
 
 #include "pinyinadapter.h"
 #include <iostream>
 
 class ChineseLanguageFeatures;
 
-class PinyinPlugin : public QObject, LanguagePluginInterface
+class PinyinPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.PinyinPlugin" FILE "pinyinplugin.json")
@@ -30,7 +31,7 @@ public:
     virtual bool spellCheckerEnabled() { return false; }
     virtual bool setSpellCheckerEnabled(bool enabled) { Q_UNUSED(enabled); return false; }
     virtual bool spell(const QString& word) { Q_UNUSED(word); return false; }
-    virtual QStringList spellCheckerSuggest(const QString& word, int limit) { Q_UNUSED(word); Q_UNUSED(limit); return QStringList(); }
+    virtual void spellCheckerSuggest(const QString& word, int limit) { Q_UNUSED(word); Q_UNUSED(limit); }
     virtual void addToSpellCheckerUserWordList(const QString& word) { Q_UNUSED(word); }
     virtual bool setSpellCheckerLanguage(const QString& languageId) { Q_UNUSED(languageId); return false; }
 
