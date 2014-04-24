@@ -505,6 +505,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
 
+        // there is a lot of logic going on here. At this stage we check the following:
+        // * replacing the current characters with the first candidate if auto-correct is enabled
+        // * looking for a double space character if auto-correct is enabled (which is turned into a full-stop sign)
+        // * appending a space character if it wasn't appended already after a 'word completion'
         if (replace_preedit) {
             d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
             d->text->setPreedit(d->text->primaryCandidate());
