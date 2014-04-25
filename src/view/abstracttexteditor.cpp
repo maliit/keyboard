@@ -773,10 +773,17 @@ void AbstractTextEditor::singleBackspace()
 {
     Q_D(AbstractTextEditor);
 
+    QString textOnLeft = d->text->surroundingLeft();
+
     if (d->text->preedit().isEmpty()) {
         sendKeyPressAndReleaseEvents(Qt::Key_Backspace, Qt::NoModifier);
+        // Deletion of surrounding text isn't updated in the model until later
+        // Update it locally here for autocaps detection
+        textOnLeft.chop(1);
+        textOnLeft = textOnLeft.trimmed();
     } else {
         d->text->removeFromPreedit(1);
+        textOnLeft += d->text->preedit();
         
         d->word_engine->computeCandidates(d->text.data());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
@@ -791,6 +798,11 @@ void AbstractTextEditor::singleBackspace()
             //  to happen
             sendCommitString("");
         }
+    }
+
+    const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft) || textOnLeft.isEmpty();
+    if (auto_caps_activated && d->auto_caps_enabled) {
+        Q_EMIT autoCapsActivated();
     }
 
     d->backspace_sent = true;
