@@ -25,6 +25,20 @@ ChineseLanguageFeatures::~ChineseLanguageFeatures()
 {
 }
 
+bool ChineseLanguageFeatures::alwaysShowSuggestions() const
+{
+    // Pinyin characters can only be entered via suggestions, so we ignore
+    // hints that would otherwise disable them.
+    return true;
+}
+
+bool ChineseLanguageFeatures::autoCapsAvailable() const
+{
+    // Automatic switching to capital letters doen't make sense when 
+    // inputting Pinyin
+    return false;
+}
+
 bool ChineseLanguageFeatures::activateAutoCaps(const QString &preedit) const
 {
     Q_UNUSED(preedit)
