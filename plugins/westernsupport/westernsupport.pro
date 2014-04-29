@@ -23,6 +23,7 @@ SOURCES += \
     westernlanguagesplugin.cpp \
     candidatescallback.cpp \
     spellchecker.cpp \
+    spellcheckerworker.cpp \
     $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.cpp
 
 HEADERS += \
@@ -32,6 +33,7 @@ HEADERS += \
     westernlanguagesplugin.h \
     candidatescallback.h \
     spellchecker.h \
+    spellcheckerworker.h \
     $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.h
 
 

@@ -38,11 +38,17 @@ public:
 
 signals:
     void newSpellCheckerSuggestions(QStringList suggestions);
+    void newSpellCheckWord(QString word);
+    void setSpellCheckLimit(int limit);
+    void setSpellCheckLanguage(QString language);
+    void spellCheckEnabled(bool enabled);
+    void stopSpellCheckThread();
 
 public slots:
 
 protected:
     void _useDatabase(const QString& locale);
+
 private:
     std::string m_candidatesContext;
     CandidatesCallback m_presageCandidates;
@@ -50,6 +56,7 @@ private:
     WesternLanguageFeatures* m_languageFeatures;
 
     SpellChecker m_spellChecker;
+    QThread *m_spellCheckThread;
 };
 
 #endif // WESTERNLANGUAGESPLUGIN_H

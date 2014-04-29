@@ -1,6 +1,7 @@
 #include "westernlanguagesplugin.h"
 #include "westernlanguagefeatures.h"
 #include "spellchecker.h"
+#include "spellcheckerworker.h"
 
 #include <QDebug>
 
@@ -14,10 +15,22 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
 {
     m_presage.config("Presage.Selector.SUGGESTIONS", "6");
     m_presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
+
+    m_spellCheckThread = new QThread();
+    SpellCheckerWorker *worker = new SpellCheckerWorker();
+    worker->moveToThread(m_spellCheckThread);
+
+    connect(worker, SIGNAL(newSuggestions(QStringList)), this, SIGNAL(newSpellCheckerSuggestions(QStringList)));
+    connect(this, SIGNAL(newSpellCheckWord(QString)), worker, SLOT(newSpellCheckWord(QString)));
+    connect(this, SIGNAL(setSpellCheckLanguage(QString)), worker, SLOT(setLanguage(QString)));
+    connect(this, SIGNAL(setSpellCheckLimit(int)), worker, SLOT(setLimit(int)));
+    connect(this, SIGNAL(spellCheckEnabled(bool)), worker, SLOT(setEnabled(bool)));
+    m_spellCheckThread->start();
 }
 
 WesternLanguagesPlugin::~WesternLanguagesPlugin()
 {
+    m_spellCheckThread->quit();
 }
 
 void WesternLanguagesPlugin::parse(const QString& surroundingLeft, const QString& preedit)
@@ -60,6 +73,7 @@ bool WesternLanguagesPlugin::spellCheckerEnabled()
 
 bool WesternLanguagesPlugin::setSpellCheckerEnabled(bool enabled)
 {
+    Q_EMIT spellCheckEnabled(enabled);
     return m_spellChecker.setEnabled(enabled);
 }
 
@@ -70,7 +84,8 @@ bool WesternLanguagesPlugin::spell(const QString& word)
 
 void WesternLanguagesPlugin::spellCheckerSuggest(const QString& word, int limit)
 {
-    Q_EMIT newSpellCheckerSuggestions(m_spellChecker.suggest(word, limit));
+    Q_EMIT setSpellCheckLimit(limit);
+    Q_EMIT newSpellCheckWord(word);
 }
 
 void WesternLanguagesPlugin::addToSpellCheckerUserWordList(const QString& word)
@@ -80,6 +95,7 @@ void WesternLanguagesPlugin::addToSpellCheckerUserWordList(const QString& word)
 
 bool WesternLanguagesPlugin::setSpellCheckerLanguage(const QString& languageId)
 {
+    Q_EMIT setSpellCheckLanguage(languageId);
     return m_spellChecker.setLanguage(languageId);
 }
 
