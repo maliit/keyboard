@@ -1,16 +1,8 @@
 CONFIG += ordered 
 TEMPLATE = subdirs
-SUBDIRS = \
-    lib \
-    view \
-    plugin \
-    imports \
-#    benchmark \
+SUBDIRS = Ubuntu
 
 
-#!notests {
-#    SUBDIRS += tests
-#}
 
 QMAKE_EXTRA_TARGETS += check
 check.target = check
