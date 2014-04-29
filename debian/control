@@ -231,9 +231,7 @@ Description: Ubuntu on-screen keyboard data files - Swedish
 
 Package: qtdeclarative5-ubuntu-keyboard-extensions
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
-         hunspell-sv-se,
-         ${misc:Depends},
+Depends: ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - QML plugin
  QMl extension for the Ubuntu virtual keyboard
