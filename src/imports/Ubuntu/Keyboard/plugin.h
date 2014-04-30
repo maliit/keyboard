@@ -32,8 +32,10 @@
 
 #include <QQmlExtensionPlugin>
 
+namespace Ubuntu {
+namespace Keyboard {
 
-class UbuntuKeyboardInputMethodExtensionPlugin : public QQmlExtensionPlugin
+class InputMethodExtensionPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
@@ -41,5 +43,8 @@ class UbuntuKeyboardInputMethodExtensionPlugin : public QQmlExtensionPlugin
 public:
     void registerTypes(const char *uri);
 };
+
+} // namespace Ubuntu
+} // namespace Keyboard
 
 #endif //UBUNTU_KEYBOARD_INPUTMETHOD_EXTENSION_PLUGIN_H

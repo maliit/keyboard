@@ -31,6 +31,9 @@
 
 #include <QtCore>
 
+namespace Ubuntu {
+namespace Keyboard {
+
 /*!
     \qmltype InputMethod
     \inqmlmodule Ubuntu.Keyboard 0.1
@@ -51,7 +54,7 @@
     \endqml
 */
 
-UbuntuKeyboardInputMethodExtension::UbuntuKeyboardInputMethodExtension(QObject *parent)
+InputMethodExtension::InputMethodExtension(QObject *parent)
     : QObject(parent),
       m_inputText(0)
 {
@@ -69,12 +72,12 @@ UbuntuKeyboardInputMethodExtension::UbuntuKeyboardInputMethodExtension(QObject *
 
     \qmlproperty var extensions
 */
-QVariantMap UbuntuKeyboardInputMethodExtension::inputMethodExtensions() const
+QVariantMap InputMethodExtension::inputMethodExtensions() const
 {
     return m_extensions;
 }
 
-void UbuntuKeyboardInputMethodExtension::setInputMethodExtensions(const QVariantMap &map)
+void InputMethodExtension::setInputMethodExtensions(const QVariantMap &map)
 {
     if (m_extensions != map) {
         m_extensions = map;
@@ -85,7 +88,7 @@ void UbuntuKeyboardInputMethodExtension::setInputMethodExtensions(const QVariant
     }
 }
 
-QObject *UbuntuKeyboardInputMethodExtension::findInput(QObject *parent)
+QObject *InputMethodExtension::findInput(QObject *parent)
 {
     static QStringList inputClasses;
     if (inputClasses.isEmpty()) {
@@ -104,12 +107,15 @@ QObject *UbuntuKeyboardInputMethodExtension::findInput(QObject *parent)
     return 0;
 }
 
-UbuntuKeyboardInputMethod::UbuntuKeyboardInputMethod(QObject *parent)
+InputMethod::InputMethod(QObject *parent)
     : QObject(parent)
 {
 }
 
-UbuntuKeyboardInputMethodExtension *UbuntuKeyboardInputMethod::qmlAttachedProperties(QObject *obj)
+InputMethodExtension *InputMethod::qmlAttachedProperties(QObject *obj)
 {
-    return new UbuntuKeyboardInputMethodExtension(obj);
+    return new InputMethodExtension(obj);
 }
+
+} // namespace Ubuntu
+} // namespace Keyboard

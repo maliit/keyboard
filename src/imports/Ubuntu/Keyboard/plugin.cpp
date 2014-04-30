@@ -32,10 +32,15 @@
 
 #include <QQmlEngine>
 
+namespace Ubuntu {
+namespace Keyboard {
 
-void UbuntuKeyboardInputMethodExtensionPlugin::registerTypes(const char *uri)
+void InputMethodExtensionPlugin::registerTypes(const char *uri)
 {
     // @uri Ubuntu.Maliit
-    qmlRegisterType<UbuntuKeyboardInputMethodExtension>();
-    qmlRegisterType<UbuntuKeyboardInputMethod>(uri, 0, 1, "InputMethod");
+    qmlRegisterType<InputMethodExtension>();
+    qmlRegisterType<InputMethod>(uri, 0, 1, "InputMethod");
 }
+
+} // namespace Ubuntu
+} // namespace Keyboard

@@ -33,12 +33,15 @@
 #include <QtCore>
 #include <QtQuick>
 
-class UbuntuKeyboardInputMethodExtension : public QObject
+namespace Ubuntu {
+namespace Keyboard {
+
+class InputMethodExtension : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QVariantMap extensions READ inputMethodExtensions WRITE setInputMethodExtensions NOTIFY inputMethodExtensionsChanged)
 public:
-    UbuntuKeyboardInputMethodExtension(QObject *parent = 0);
+    InputMethodExtension(QObject *parent = 0);
 
     QVariantMap inputMethodExtensions() const;
     void setInputMethodExtensions(const QVariantMap &map);
@@ -53,16 +56,19 @@ private:
     QObject *findInput(QObject *parent);
 };
 
-class UbuntuKeyboardInputMethod : public QObject
+class InputMethod : public QObject
 {
     Q_OBJECT
 
 public:
-    UbuntuKeyboardInputMethod(QObject *parent = 0);
+    InputMethod(QObject *parent = 0);
 
-    static UbuntuKeyboardInputMethodExtension *qmlAttachedProperties(QObject *obj);
+    static InputMethodExtension *qmlAttachedProperties(QObject *obj);
 };
 
-QML_DECLARE_TYPEINFO(UbuntuKeyboardInputMethod, QML_HAS_ATTACHED_PROPERTIES)
+} // namespace Ubuntu
+} // namespace Keyboard
+
+QML_DECLARE_TYPEINFO(Ubuntu::Keyboard::InputMethod, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif
