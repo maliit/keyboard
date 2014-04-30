@@ -33,7 +33,7 @@
 #include <QQmlEngine>
 
 
-void UbubntuKeyboardInputMethodExtensionPlugin::registerTypes(const char *uri)
+void UbuntuKeyboardInputMethodExtensionPlugin::registerTypes(const char *uri)
 {
     // @uri Ubuntu.Maliit
     qmlRegisterType<UbuntuKeyboardInputMethodExtension>();

@@ -32,7 +32,8 @@
 
 #include <QQmlExtensionPlugin>
 
-class UbubntuKeyboardInputMethodExtensionPlugin : public QQmlExtensionPlugin
+
+class UbuntuKeyboardInputMethodExtensionPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
