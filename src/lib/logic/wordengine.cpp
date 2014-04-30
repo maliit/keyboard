@@ -226,6 +226,7 @@ void WordEngine::fetchCandidates(Model::Text *text)
     text->setPrimaryCandidate(d->candidates->isEmpty() ? QString()
                                                    : d->candidates->first().label());
 
+    Q_EMIT(candidatesChanged(*d->candidates));
 }
 
 void WordEngine::newSuggestions(QStringList suggestions)
