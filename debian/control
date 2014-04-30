@@ -229,7 +229,7 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Swedish
  Data files for the Ubuntu virtual keyboard - Swedish
 
-Package: qtdeclarative5-ubuntu-keyboard-extensions
+Package: qtdeclarative5-ubuntu-keyboard-extensions0.1
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
