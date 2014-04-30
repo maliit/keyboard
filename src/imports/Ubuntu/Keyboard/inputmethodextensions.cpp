@@ -27,7 +27,7 @@
  *
  */
 
-#include "inputmethotdextensions.h"
+#include "inputmethodextensions.h"
 
 #include <QtCore>
 

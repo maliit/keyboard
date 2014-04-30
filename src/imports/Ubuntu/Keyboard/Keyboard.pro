@@ -5,11 +5,11 @@ TARGET = ubuntu-keyboard-qml
 
 HEADERS += \
     plugin.h \
-    inputmethotdextensions.h \
+    inputmethodextensions.h \
 
 SOURCES += \
     plugin.cpp \
-    inputmethotdextensions.cpp \
+    inputmethodextensions.cpp \
 
 QMLDIR_FILE = qmldir
 

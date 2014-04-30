@@ -28,7 +28,7 @@
  */
 
 #include "plugin.h"
-#include "inputmethotdextensions.h"
+#include "inputmethodextensions.h"
 
 #include <QQmlEngine>
 
