@@ -440,6 +440,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             d->text->setPreedit(d->text->primaryCandidate());
             commitPreedit();
             removeWhitespaces = false;
+            d->appendix_for_previous_preedit = QString("");
+            d->look_for_extra_end_characters = true;
         }
 
         // check if a 'preedit' completion happened, in which case we are looking for separators in the input, so that
@@ -460,7 +462,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             commitPreedit();
         }
         else if (d->auto_correct_enabled && isSeparator) {
-            // in case of a separator, remove any leading spaces
+            // in case of a sepa rator, remove any leading spaces
             if (removeWhitespaces) {
                 const QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
 
@@ -474,10 +476,12 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             }
             d->text->appendToPreedit(text);
             auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-            d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
-            alreadyAppended = true;
+            QString appendix = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
 
             commitPreedit();
+
+            d->text->appendToPreedit(appendix);
+            alreadyAppended = true;            
         }
 
         // if we had modified the preedit already because of a separator entry, there is no need to perform all the
@@ -543,8 +547,9 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 commitPreedit();
             }
         }
-        else if (not look_for_extra_end_characters || not d->text->preedit().endsWith(' ')) {
+        else if (not look_for_extra_end_characters && not d->text->preedit().endsWith(' ')) {
             // if word completion already happened right beforehand, no need to add " " as it's already in preedit
+            qWarning() << "Space! : '" << textOnLeft << "' - '" << d->text->preedit() << "'";
             d->text->appendToPreedit(" ");
             commitPreedit();
         }

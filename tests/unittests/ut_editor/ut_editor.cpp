@@ -111,6 +111,9 @@ private:
         // Tests for the auto-correct and separator-at-end behavior
         QTest::newRow("auto-correct enabled, commit with space, check separators")
                 << true << "Hel ,Wor ." << "Hello, World. ";
+
+        QTest::newRow("auto-correct enabled, commit with separators, check separators")
+                << true << "Hel.Wor." << "Hello. World.";
     }
 
     Q_SLOT void testAutoCorrect()
@@ -174,13 +177,13 @@ private:
                 << "This is a \"first sentence\". And a second, one! " << 2;
         QTest::newRow("auto-correct enabled, multiple sentences with mixed punctation")
                 << true << "This is a \"first sentence\". And a second, one! "
-                << "This is a \"first sentence\". And a second, one! " << 2;
+                << "This is a \"first sentence\". And a second, one!" << 2;
         QTest::newRow("auto-correct disabled, multiple sentences with dots")
                 << false << "First sentence. Second one. And Third. "
                 << "First sentence. Second one. And Third. " << 3;
         QTest::newRow("auto-correct enabled, multiple sentences with dots")
                 << true << "First sentence. Second one. And Third. "
-                << "First sentence. Second one. And Third. " << 3;
+                << "First sentence. Second one. And Third." << 3;
 
         // Tests for the auto-correct and autocaps separator functionality
         QTest::newRow("auto-correct enabled, autocaps after separator auto-correction")
