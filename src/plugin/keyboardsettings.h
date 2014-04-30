@@ -50,7 +50,8 @@ public:
     bool autoCompletion() const;
     bool predictiveText() const;
     bool spellchecking() const;
-    bool keyPressFeedback() const;
+    bool keyPressAudioFeedback() const;
+    bool keyPressHapticFeedback() const;
 
 Q_SIGNALS:
     void activeLanguageChanged(QString);
@@ -59,7 +60,8 @@ Q_SIGNALS:
     void autoCompletionChanged(bool);
     void predictiveTextChanged(bool);
     void spellCheckingChanged(bool);
-    void keyPressFeedbackChanged(bool);
+    void keyPressAudioFeedbackChanged(bool);
+    void keyPressHapticFeedbackChanged(bool);
 
 private:
     Q_SLOT void settingUpdated(const QString &key);

@@ -52,6 +52,7 @@ class InputMethod
     Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
     Q_PROPERTY(QString activeLanguage READ activeLanguage WRITE setActiveLanguage NOTIFY activeLanguageChanged)
     Q_PROPERTY(bool useAudioFeedback READ useAudioFeedback NOTIFY useAudioFeedbackChanged)
+    Q_PROPERTY(bool useHapticFeedback READ useHapticFeedback NOTIFY useHapticFeedbackChanged)
 
     Q_ENUMS(TextContentType)
 
@@ -105,6 +106,7 @@ public:
 
     Q_SLOT void onVisibleRectChanged();
     bool useAudioFeedback() const;
+    bool useHapticFeedback() const;
 
 Q_SIGNALS:
     void contentTypeChanged(TextContentType contentType);
@@ -112,6 +114,7 @@ Q_SIGNALS:
     void enabledLanguagesChanged(QStringList languages);
     void activeLanguageChanged(QString language);
     void useAudioFeedbackChanged();
+    void useHapticFeedbackChanged();
     void wordEngineEnabledChanged(bool wordEngineEnabled);
     void wordRibbonEnabledChanged(bool wordRibbonEnabled);
     void windowGeometryRectChanged(QRect rect);

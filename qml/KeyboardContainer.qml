@@ -20,6 +20,7 @@ import QtQuick.Window 2.0
 import "languages/"
 import "keys/"
 import UbuntuKeyboard 1.0
+import QtFeedback 5.0
 
 Item {
     id: panel
@@ -55,6 +56,16 @@ Item {
     SoundEffect {
         id: audioFeedback
         source: Qt.resolvedUrl("styles/ubuntu/sounds/key_tick2_quiet.wav")
+    }
+
+    HapticsEffect {
+        id: pressEffect
+        attackIntensity: 0.0
+        attackTime: 125
+        intensity: 0.5
+        duration: 75
+        fadeTime: 125
+        fadeIntensity: 0.0
     }
 
     states: [
