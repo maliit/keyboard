@@ -115,7 +115,8 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
-    d->registerFeedbackSetting();
+    d->registerAudioFeedbackSetting();
+    d->registerHapticFeedbackSetting();
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
@@ -435,7 +436,16 @@ const QString &InputMethod::activeLanguage() const
 bool InputMethod::useAudioFeedback() const
 {
     Q_D(const InputMethod);
-    return d->m_settings.keyPressFeedback();
+    return d->m_settings.keyPressAudioFeedback();
+}
+
+//! \brief InputMethod::useHapticFeedback is true, when keys should produce haptic
+//! feedback when pressed
+//! \return
+bool InputMethod::useHapticFeedback() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.keyPressHapticFeedback();
 }
 
 //! \brief InputMethod::actionKeyOverride returns any override information about

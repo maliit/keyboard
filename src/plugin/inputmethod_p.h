@@ -175,10 +175,16 @@ public:
     /*
      * register settings
      */
-    void registerFeedbackSetting()
+    void registerAudioFeedbackSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
+        QObject::connect(&m_settings, SIGNAL(keyPressAudioFeedbackChanged(bool)),
                          q, SIGNAL(useAudioFeedbackChanged()));
+    }
+
+    void registerHapticFeedbackSetting()
+    {
+        QObject::connect(&m_settings, SIGNAL(keyPressHapticFeedbackChanged(bool)),
+                         q, SIGNAL(useHapticFeedbackChanged()));
     }
 
     void registerAutoCorrectSetting()
