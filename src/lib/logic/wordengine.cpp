@@ -228,8 +228,8 @@ void WordEngine::fetchCandidates(Model::Text *text)
         Q_EMIT preeditFaceChanged(Model::Text::PreeditNoCandidates);
     }
 
-    text->setPrimaryCandidate(d->candidates->isEmpty() ? QString()
-                                                       : d->candidates->first().label());
+    Q_EMIT primaryCandidateChanged(d->candidates->isEmpty() ? QString()
+                                                            : d->candidates->first().label());
 
     if (!d->languagePlugin->spellCheckerEnabled() || d->correct_spelling || !d->candidates->isEmpty()) {
         Q_EMIT candidatesChanged(*d->candidates);
@@ -247,9 +247,12 @@ void WordEngine::newSuggestions(QStringList suggestions)
         Q_FOREACH(const QString &correction, suggestions) {
             appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
         }
-    }
 
-    Q_EMIT candidatesChanged(*d->candidates);
+        Q_EMIT candidatesChanged(*d->candidates);
+
+        Q_EMIT primaryCandidateChanged(d->candidates->isEmpty() ? QString()
+                                                                : d->candidates->first().label());
+    }
 
     Q_EMIT preeditFaceChanged(d->candidates->isEmpty() ? (d->correct_spelling ? Model::Text::PreeditDefault
                                                                               : Model::Text::PreeditNoCandidates)

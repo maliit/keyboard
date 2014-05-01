@@ -75,6 +75,7 @@ public:
 
 signals:
     void preeditFaceChanged(Model::Text::PreeditFace face);
+    void primaryCandidateChanged(QString candidate);
 
 private:
     virtual void fetchCandidates(Model::Text *text) = 0;
