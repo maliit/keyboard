@@ -51,6 +51,8 @@ public:
 
     bool is_preedit_capitalized;
 
+    bool correct_spelling;
+
     LanguagePluginInterface* languagePlugin;
 
     QPluginLoader pluginLoader;
@@ -98,6 +100,7 @@ WordEnginePrivate::WordEnginePrivate()
     : use_predictive_text(false)
     , use_spell_checker(false)
     , is_preedit_capitalized(false)
+    , correct_spelling(false)
     , languagePlugin(0)
 {
     loadPlugin(DEFAULT_PLUGIN);
@@ -147,8 +150,6 @@ void WordEngine::appendToCandidates(WordCandidateList *candidates,
     if (not candidates->contains(word_candidate)) {
         candidates->append(word_candidate);
     }
-
-    Q_EMIT(candidatesChanged(*candidates));
 }
 
 void WordEngine::setWordPredictionEnabled(bool enabled)
@@ -213,29 +214,46 @@ void WordEngine::fetchCandidates(Model::Text *text)
     }
 
     // spell checking
-    const bool correct_spelling(d->languagePlugin->spell(preedit));
+    d->correct_spelling = d->languagePlugin->spell(preedit);
 
-    if (d->candidates->isEmpty() and not correct_spelling) {
+    if (d->candidates->isEmpty() and not d->correct_spelling) {
         d->languagePlugin->spellCheckerSuggest(preedit, 5);
     }
 
-    text->setPreeditFace(d->candidates->isEmpty() ? (correct_spelling ? Model::Text::PreeditDefault
-                                                                  : Model::Text::PreeditNoCandidates)
-                                              : Model::Text::PreeditActive);
+    if (!d->candidates->isEmpty()) {
+        Q_EMIT preeditFaceChanged(Model::Text::PreeditActive);
+    } else if (d->correct_spelling) {
+        Q_EMIT preeditFaceChanged(Model::Text::PreeditDefault);
+    } else if (!d->languagePlugin->spellCheckerEnabled()) {
+        Q_EMIT preeditFaceChanged(Model::Text::PreeditNoCandidates);
+    }
 
     text->setPrimaryCandidate(d->candidates->isEmpty() ? QString()
-                                                   : d->candidates->first().label());
+                                                       : d->candidates->first().label());
 
-    Q_EMIT(candidatesChanged(*d->candidates));
+    if (!d->languagePlugin->spellCheckerEnabled() || d->correct_spelling || !d->candidates->isEmpty()) {
+        Q_EMIT candidatesChanged(*d->candidates);
+    }
 }
 
 void WordEngine::newSuggestions(QStringList suggestions)
 {
     Q_D(WordEngine);
 
-    Q_FOREACH(const QString &correction, suggestions) {
-        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+    // Only append candidates if we don't have the correct spelling, as these
+    // might be candidates from an earlier version of the word, before it was
+    // spelt correctly
+    if (!d->correct_spelling) {
+        Q_FOREACH(const QString &correction, suggestions) {
+            appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+        }
     }
+
+    Q_EMIT candidatesChanged(*d->candidates);
+
+    Q_EMIT preeditFaceChanged(d->candidates->isEmpty() ? (d->correct_spelling ? Model::Text::PreeditDefault
+                                                                              : Model::Text::PreeditNoCandidates)
+                                                       : Model::Text::PreeditActive);
 }
 
 void WordEngine::addToUserDictionary(const QString &word)

@@ -347,6 +347,9 @@ AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
     connect(word_engine, SIGNAL(candidatesChanged(WordCandidateList)),
             this,        SIGNAL(wordCandidatesChanged(WordCandidateList)));
 
+    connect(word_engine, SIGNAL(preeditFaceChanged(Model::Text::PreeditFace)),
+            this,        SLOT(setPreeditFace(Model::Text::PreeditFace)));
+
     setPreeditEnabled(word_engine->isEnabled());
 }
 
@@ -848,6 +851,14 @@ void AbstractTextEditor::sendKeyPressAndReleaseEvents(
     sendKeyEvent(press);
     QKeyEvent release(QEvent::KeyRelease, key, modifiers, text);
     sendKeyEvent(release);
+}
+
+void AbstractTextEditor::setPreeditFace(Model::Text::PreeditFace face)
+{
+    Q_D(AbstractTextEditor);
+
+    text()->setPreeditFace(face);
+    sendPreeditString(d->text->preedit(), face);
 }
 
 } // namespace MaliitKeyboard

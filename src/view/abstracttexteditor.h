@@ -140,6 +140,8 @@ public:
     Q_SIGNAL void leftLayoutSelected();
     Q_SIGNAL void rightLayoutSelected();
 
+    Q_SLOT void setPreeditFace(Model::Text::PreeditFace face);
+
 private:
     const QScopedPointer<AbstractTextEditorPrivate> d_ptr;
 
