@@ -36,8 +36,6 @@ CharKey {
     imgNormal: UI.imageActionKey
     imgPressed: UI.imageActionKeyPressed
 
-    property string __icon: iconNormal
-
     // can be overwritten by keys
     property color colorNormal: "transparent"
     property color colorShifted: "transparent"
@@ -45,23 +43,33 @@ CharKey {
 
     Icon {
         id: iconImage
-        name: __icon
+        name: actionKeyRoot.iconNormal
+        color: actionKeyRoot.colorNormal
         anchors.centerIn: parent
         visible: (label == "")
         width: units.gu(2.5)
         height: units.gu(2.5)
+
     }
 
-    onOskStateChanged: {
-        if (panel.activeKeypadState == "NORMAL") {
-            __icon = iconNormal;
-            iconImage.color = colorNormal;
-        } else if (panel.activeKeypadState == "SHIFTED") {
-            __icon = iconShifted;
-            iconImage.color = colorShifted;
-        } else if (panel.activeKeypadState == "CAPSLOCK") {
-            __icon = iconCapsLock;
-            iconImage.color = colorCapsLock;
+    // make sure the icon changes even if the property icon* change on runtime
+    state: panel.activeKeypadState
+    states: [
+        State {
+            name: "SHIFTED"
+            PropertyChanges {
+                target: iconImage
+                name: actionKeyRoot.iconShifted
+                color: actionKeyRoot.colorShifted
+            }
+        },
+        State {
+            name: "CAPSLOCK"
+            PropertyChanges {
+                target: iconImage
+                name: actionKeyRoot.iconCapsLock
+                color: actionKeyRoot.colorCapsLock
+            }
         }
-    }
+    ]
 }

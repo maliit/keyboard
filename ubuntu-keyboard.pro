@@ -30,7 +30,7 @@ include(config.pri)
     !build_pass:system(echo -e \"$$config_string\")
 }
 
-CONFIG += ordered 
+CONFIG += ordered
 TEMPLATE = subdirs
 
 DIST_NAME = $$UBUNTU_KEYBOARD_PACKAGENAME-$$UBUNTU_KEYBOARD_VERSION
