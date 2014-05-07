@@ -48,6 +48,7 @@ public:
     virtual bool autoCapsAvailable() const { return true; }
     virtual bool activateAutoCaps(const QString &preedit) const;
     virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return " "; }
+    virtual QString fullStopSequence() const { return QString("."); }
 };
 
 namespace MaliitKeyboard {

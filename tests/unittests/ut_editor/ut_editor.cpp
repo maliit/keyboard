@@ -111,9 +111,13 @@ private:
         // Tests for the auto-correct and separator-at-end behavior
         QTest::newRow("auto-correct enabled, commit with space, check separators")
                 << true << "Hel ,Wor ." << "Hello, World. ";
-
         QTest::newRow("auto-correct enabled, commit with separators, check separators")
                 << true << "Hel.Wor. " << "Hello. World. ";
+        QTest::newRow("auto-correct enabled, check if two spaces are full-stop")
+                << true << "Hel  " << "Hello. ";      
+        // FIXME: In the current testing infra, we cannot really test this properly:
+        //QTest::newRow("auto-correct enabled, check removal of unnecessary whitespaces")
+        //        << true << "Hello.       . " << "Hello.. ";
     }
 
     Q_SLOT void testAutoCorrect()
