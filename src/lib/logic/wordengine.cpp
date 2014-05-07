@@ -202,37 +202,24 @@ void WordEngine::fetchCandidates(Model::Text *text)
     d->candidates = new WordCandidateList();
     const QString &preedit(text->preedit());
     d->is_preedit_capitalized = not preedit.isEmpty() && preedit.at(0).isUpper();
-
-    if (d->use_predictive_text) {
-
-        d->languagePlugin->parse(text->surroundingLeft(), preedit);
-        const QStringList suggestions = d->languagePlugin->getWordCandidates();
-
-        Q_FOREACH(const QString &suggestion, suggestions) {
-            appendToCandidates(d->candidates, WordCandidate::SourcePrediction, suggestion);
-        }
-    }
-
+    
     // spell checking
     d->correct_spelling = d->languagePlugin->spell(preedit);
 
-    if (d->candidates->isEmpty() and not d->correct_spelling) {
-        d->languagePlugin->spellCheckerSuggest(preedit, 5);
-    }
-
-    if (!d->candidates->isEmpty()) {
-        Q_EMIT preeditFaceChanged(Model::Text::PreeditActive);
-    } else if (d->correct_spelling) {
+    Q_EMIT primaryCandidateChanged(QString());
+    
+    if (d->correct_spelling) {
         Q_EMIT preeditFaceChanged(Model::Text::PreeditDefault);
     } else if (!d->languagePlugin->spellCheckerEnabled()) {
         Q_EMIT preeditFaceChanged(Model::Text::PreeditNoCandidates);
     }
 
-    Q_EMIT primaryCandidateChanged(d->candidates->isEmpty() ? QString()
-                                                            : d->candidates->first().label());
+    if (d->use_predictive_text) {
+        d->languagePlugin->predict(text->surroundingLeft(), preedit);
+    }
 
-    if (!d->languagePlugin->spellCheckerEnabled() || d->correct_spelling || !d->candidates->isEmpty()) {
-        Q_EMIT candidatesChanged(*d->candidates);
+    if (!d->correct_spelling) {
+        d->languagePlugin->spellCheckerSuggest(preedit, 5);
     }
 }
 

@@ -11,8 +11,7 @@ class LanguagePluginInterface
 public:
     virtual ~LanguagePluginInterface() {}
 
-    virtual void parse(const QString& surroundingLeft, const QString& preedit) = 0;
-    virtual QStringList getWordCandidates() = 0;
+    virtual void predict(const QString& surroundingLeft, const QString& preedit) = 0;
     virtual void wordCandidateSelected(QString word) = 0;
 
     virtual AbstractLanguageFeatures* languageFeature() = 0;

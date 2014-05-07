@@ -38,14 +38,9 @@ WesternLanguagesPlugin::~WesternLanguagesPlugin()
     m_predictiveTextThread->quit();
 }
 
-void WesternLanguagesPlugin::parse(const QString& surroundingLeft, const QString& preedit)
+void WesternLanguagesPlugin::predict(const QString& surroundingLeft, const QString& preedit)
 {
     Q_EMIT parsePredictionText(surroundingLeft, preedit);
-}
-
-QStringList WesternLanguagesPlugin::getWordCandidates()
-{
-    return QStringList();
 }
 
 void WesternLanguagesPlugin::wordCandidateSelected(QString word)

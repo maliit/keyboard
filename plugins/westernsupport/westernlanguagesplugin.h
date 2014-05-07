@@ -23,8 +23,7 @@ public:
     explicit WesternLanguagesPlugin(QObject *parent = 0);
     virtual ~WesternLanguagesPlugin();
 
-    virtual void parse(const QString& surroundingLeft, const QString& preedit);
-    virtual QStringList getWordCandidates();
+    virtual void predict(const QString& surroundingLeft, const QString& preedit);
     virtual void wordCandidateSelected(QString word);
     virtual AbstractLanguageFeatures* languageFeature();
 
