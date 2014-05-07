@@ -28,7 +28,10 @@ ActionKey {
         onClicked: {
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();
-            
+
+            if (maliit_input_method.useHapticFeedback)
+                 pressEffect.start();
+
             if (panel.activeKeypadState == "NORMAL")
                 panel.activeKeypadState = "SHIFTED";
 

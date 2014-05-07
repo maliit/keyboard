@@ -27,8 +27,13 @@
       <default>false</default>
     </key>
     <key name="key-press-feedback" type="b">
-      <summary>Key press feedback</summary>
-      <description>Vibrate or emit sound on key press.</description>
+      <summary>Key press audio feedback</summary>
+      <description>Emit sound on key press.</description>
+      <default>false</default>
+    </key>
+    <key name="key-press-haptic-feedback" type="b">
+      <summary>Key press haptic feedback</summary>
+      <description>Vibrate on key press.</description>
       <default>false</default>
     </key>
     <key name="spell-checking" type="b">
