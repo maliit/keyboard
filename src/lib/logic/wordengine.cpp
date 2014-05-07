@@ -236,7 +236,7 @@ void WordEngine::fetchCandidates(Model::Text *text)
     }
 }
 
-void WordEngine::newSuggestions(QStringList suggestions)
+void WordEngine::newSpellingSuggestions(QStringList suggestions)
 {
     Q_D(WordEngine);
 
@@ -253,6 +253,24 @@ void WordEngine::newSuggestions(QStringList suggestions)
         Q_EMIT primaryCandidateChanged(d->candidates->isEmpty() ? QString()
                                                                 : d->candidates->first().label());
     }
+
+    Q_EMIT preeditFaceChanged(d->candidates->isEmpty() ? (d->correct_spelling ? Model::Text::PreeditDefault
+                                                                              : Model::Text::PreeditNoCandidates)
+                                                       : Model::Text::PreeditActive);
+}
+
+void WordEngine::newPredictionSuggestions(QStringList suggestions)
+{
+    Q_D(WordEngine);
+
+    Q_FOREACH(const QString &correction, suggestions) {
+        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+    }
+
+    Q_EMIT candidatesChanged(*d->candidates);
+
+    Q_EMIT primaryCandidateChanged(d->candidates->isEmpty() ? QString()
+                                                            : d->candidates->first().label());
 
     Q_EMIT preeditFaceChanged(d->candidates->isEmpty() ? (d->correct_spelling ? Model::Text::PreeditDefault
                                                                               : Model::Text::PreeditNoCandidates)
@@ -310,7 +328,8 @@ void WordEngine::onLanguageChanged(const QString &languageId)
     if (ok)
         d->languagePlugin->setSpellCheckerEnabled(d->use_spell_checker);
 
-    connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newSpellCheckerSuggestions(QStringList)), this, SLOT(newSuggestions(QStringList)));
+    connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newSpellingSuggestions(QStringList)), this, SLOT(newSpellingSuggestions(QStringList)));
+    connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newPredictionSuggestions(QStringList)), this, SLOT(newPredictionSuggestions(QStringList)));
 }
 
 AbstractLanguageFeatures* WordEngine::languageFeature()

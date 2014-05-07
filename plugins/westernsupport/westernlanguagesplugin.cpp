@@ -2,58 +2,50 @@
 #include "westernlanguagefeatures.h"
 #include "spellchecker.h"
 #include "spellcheckerworker.h"
+#include "predictivetextworker.h"
 
 #include <QDebug>
 
 WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
     AbstractLanguagePlugin(parent)
-  , m_candidatesContext()
-  , m_presageCandidates(CandidatesCallback(m_candidatesContext))
-  , m_presage(&m_presageCandidates)
   , m_languageFeatures(new WesternLanguageFeatures)
   , m_spellChecker()
 {
-    m_presage.config("Presage.Selector.SUGGESTIONS", "6");
-    m_presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
-
     m_spellCheckThread = new QThread();
-    SpellCheckerWorker *worker = new SpellCheckerWorker();
-    worker->moveToThread(m_spellCheckThread);
+    SpellCheckerWorker *spellWorker = new SpellCheckerWorker();
+    spellWorker->moveToThread(m_spellCheckThread);
 
-    connect(worker, SIGNAL(newSuggestions(QStringList)), this, SIGNAL(newSpellCheckerSuggestions(QStringList)));
-    connect(this, SIGNAL(newSpellCheckWord(QString)), worker, SLOT(newSpellCheckWord(QString)));
-    connect(this, SIGNAL(setSpellCheckLanguage(QString)), worker, SLOT(setLanguage(QString)));
-    connect(this, SIGNAL(setSpellCheckLimit(int)), worker, SLOT(setLimit(int)));
-    connect(this, SIGNAL(spellCheckEnabled(bool)), worker, SLOT(setEnabled(bool)));
+    connect(spellWorker, SIGNAL(newSuggestions(QStringList)), this, SIGNAL(newSpellingSuggestions(QStringList)));
+    connect(this, SIGNAL(newSpellCheckWord(QString)), spellWorker, SLOT(newSpellCheckWord(QString)));
+    connect(this, SIGNAL(setSpellCheckLanguage(QString)), spellWorker, SLOT(setLanguage(QString)));
+    connect(this, SIGNAL(setSpellCheckLimit(int)), spellWorker, SLOT(setLimit(int)));
+    connect(this, SIGNAL(spellCheckEnabled(bool)), spellWorker, SLOT(setEnabled(bool)));
     m_spellCheckThread->start();
+
+    m_predictiveTextThread = new QThread();
+    PredictiveTextWorker *predictiveWorker = new PredictiveTextWorker();
+    predictiveWorker->moveToThread(m_predictiveTextThread);
+
+    connect(predictiveWorker, SIGNAL(newSuggestions(QStringList)), this, SIGNAL(newPredictionSuggestions(QStringList)));
+    connect(this, SIGNAL(parsePredictionText(QString, QString)), predictiveWorker, SLOT(parsePredictionText(QString, QString)));
+    connect(this, SIGNAL(setPredictionLanguage(QString)), predictiveWorker, SLOT(setPredictionLanguage));
+    m_predictiveTextThread->start();
 }
 
 WesternLanguagesPlugin::~WesternLanguagesPlugin()
 {
     m_spellCheckThread->quit();
+    m_predictiveTextThread->quit();
 }
 
 void WesternLanguagesPlugin::parse(const QString& surroundingLeft, const QString& preedit)
 {
-    m_candidatesContext = (surroundingLeft.toStdString() + preedit.toStdString());
+    Q_EMIT parsePredictionText(surroundingLeft, preedit);
 }
 
 QStringList WesternLanguagesPlugin::getWordCandidates()
 {
-    QStringList list;
-
-    try {
-        const std::vector<std::string> predictions = m_presage.predict();
-
-        std::vector<std::string>::const_iterator it;
-        for (it = predictions.begin(); it != predictions.end(); ++it) {
-            list << QString::fromStdString(*it);
-        }
-
-    } catch (int error) {
-        qWarning() << "An exception was thrown in libpresage when calling predict(), exception nr: " << error;
-    }
-    return list;
+    return QStringList();
 }
 
 void WesternLanguagesPlugin::wordCandidateSelected(QString word)
@@ -101,13 +93,5 @@ bool WesternLanguagesPlugin::setSpellCheckerLanguage(const QString& languageId)
 
 void WesternLanguagesPlugin::_useDatabase(const QString &locale)
 {
-    QString dbFileName = "database_"+locale+".db";
-    QString fullPath("/usr/share/maliit/plugins/com/ubuntu/lib/"+locale+"/");
-    fullPath.append(dbFileName);
-
-    try {
-        m_presage.config("Presage.Predictors.DefaultSmoothedNgramPredictor.DBFILENAME", fullPath.toLatin1().data());
-    } catch (int error) {
-        qWarning() << "An exception was thrown in libpresage when changing language database, exception nr: " << error;
-    }
+    Q_EMIT setPredictionLanguage(locale);
 }

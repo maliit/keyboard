@@ -37,12 +37,14 @@ public:
     virtual bool setSpellCheckerLanguage(const QString& languageId);
 
 signals:
-    void newSpellCheckerSuggestions(QStringList suggestions);
+    void newSpellingSuggestions(QStringList suggestions);
+    void newPredictionSuggestions(QStringList suggestions);
     void newSpellCheckWord(QString word);
     void setSpellCheckLimit(int limit);
     void setSpellCheckLanguage(QString language);
     void spellCheckEnabled(bool enabled);
-    void stopSpellCheckThread();
+    void parsePredictionText(QString surroundingLeft, QString preedit);
+    void setPredictionLanguage(QString language);
 
 public slots:
 
@@ -50,13 +52,11 @@ protected:
     void _useDatabase(const QString& locale);
 
 private:
-    std::string m_candidatesContext;
-    CandidatesCallback m_presageCandidates;
-    Presage m_presage;
     WesternLanguageFeatures* m_languageFeatures;
 
     SpellChecker m_spellChecker;
     QThread *m_spellCheckThread;
+    QThread *m_predictiveTextThread;
 };
 
 #endif // WESTERNLANGUAGESPLUGIN_H

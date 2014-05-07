@@ -25,38 +25,36 @@
  *
  */
 
-#ifndef ABSTRACTLANGUAGEPLUGIN_H
-#define ABSTRACTLANGUAGEPLUGIN_H
+#ifndef PREDICTIVETEXTWORKER_H
+#define PREDICTIVETEXTWORKER_H
 
-#include "languageplugininterface.h"
+#include "candidatescallback.h"
+#include <presage.h>
 
 #include <QObject>
+#include <QStringList>
 
-class AbstractLanguagePlugin : public QObject, public LanguagePluginInterface
+class CandidatesCallback;
+
+class PredictiveTextWorker : public QObject
 {
     Q_OBJECT
-    Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    AbstractLanguagePlugin(QObject *parent = 0);
-    virtual ~AbstractLanguagePlugin();
+    PredictiveTextWorker(QObject *parent = 0);
+    void autocorrect(const QString& word, int limit);
 
-    virtual void parse(const QString& surroundingLeft, const QString& preedit);
-    virtual QStringList getWordCandidates();
-    virtual void wordCandidateSelected(QString word);
-    virtual AbstractLanguageFeatures* languageFeature();
-
-    //! spell checker
-    virtual bool spellCheckerEnabled();
-    virtual bool setSpellCheckerEnabled(bool enabled);
-    virtual bool spell(const QString& word);
-    virtual void spellCheckerSuggest(const QString& word, int limit);
-    virtual void addToSpellCheckerUserWordList(const QString& word);
-    virtual bool setSpellCheckerLanguage(const QString& languageId);
+public slots:
+    void parsePredictionText(const QString& surroundingLeft, const QString& preedit);
+    void setPredictionLanguage(QString language);
 
 signals:
-    void newSpellingSuggestions(QStringList suggestions);
-    void newPredictionSuggestions(QStringList suggestions);
+    void newSuggestions(QStringList suggestions);
+
+private:
+    std::string m_candidatesContext;
+    CandidatesCallback m_presageCandidates;
+    Presage m_presage;
 };
 
-#endif // ABSTRACTLANGUAGEPLUGIN_H
+#endif // PREDICTIVETEXTWORKER_H

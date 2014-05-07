@@ -68,7 +68,8 @@ public:
 
     Q_SLOT void onWordCandidateSelected(QString word);
     Q_SLOT void onLanguageChanged(const QString& languageId);
-    Q_SLOT void newSuggestions(QStringList suggestions);
+    Q_SLOT void newSpellingSuggestions(QStringList suggestions);
+    Q_SLOT void newPredictionSuggestions(QStringList suggestions);
 
     virtual AbstractLanguageFeatures* languageFeature();
 
