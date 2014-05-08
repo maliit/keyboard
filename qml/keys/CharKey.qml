@@ -154,6 +154,8 @@ Item {
             if (maliit_input_method.useHapticFeedback)
                  pressEffect.start();
 
+            // Quick workaround to fix initial autocaps - not beautiful, but works
+            panel.autoCapsTriggered = false;
             event_handler.onKeyPressed(valueToSubmit, action);
         }
     }
