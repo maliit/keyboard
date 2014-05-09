@@ -57,8 +57,6 @@ void PredictiveTextWorker::parsePredictionText(const QString& surroundingLeft, c
         qWarning() << "An exception was thrown in libpresage when calling predict(), exception nr: " << error;
     }
 
-    qDebug() << "Predictive text suggestions: " << list;
-
     Q_EMIT newSuggestions(list);
 }
 

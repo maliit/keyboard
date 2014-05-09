@@ -28,7 +28,7 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
 
     connect(predictiveWorker, SIGNAL(newSuggestions(QStringList)), this, SIGNAL(newPredictionSuggestions(QStringList)));
     connect(this, SIGNAL(parsePredictionText(QString, QString)), predictiveWorker, SLOT(parsePredictionText(QString, QString)));
-    connect(this, SIGNAL(setPredictionLanguage(QString)), predictiveWorker, SLOT(setPredictionLanguage));
+    connect(this, SIGNAL(setPredictionLanguage(QString)), predictiveWorker, SLOT(setPredictionLanguage(QString)));
     m_predictiveTextThread->start();
 }
 
