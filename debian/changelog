@@ -1,3 +1,16 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140512-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * Adjust values of haptic feedback to make less strong and enable by
+    default
+
+  [ Michael Sheldon ]
+  * Refactor language plugins to provide word candidates via signals and
+    move spell checking and predictive text into separate threads (LP:
+    #1299736)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 12 May 2014 23:00:51 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140506.1-0ubuntu1) utopic; urgency=low
 
   [ Bill Filler ]
