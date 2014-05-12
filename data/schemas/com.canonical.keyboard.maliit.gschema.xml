@@ -34,7 +34,7 @@
     <key name="key-press-haptic-feedback" type="b">
       <summary>Key press haptic feedback</summary>
       <description>Vibrate on key press.</description>
-      <default>false</default>
+      <default>true</default>
     </key>
     <key name="spell-checking" type="b">
       <summary>Spell checking</summary>
