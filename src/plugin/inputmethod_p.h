@@ -44,7 +44,7 @@ class InputMethodPrivate
 public:
     InputMethod* q;
     Editor editor;
-    QMap<QString, SharedOverride> key_overrides;
+    SharedOverride actionKeyOverrider;
     Logic::EventHandler event_handler;
     MAbstractInputMethodHost* host;
     QQuickView* view;
@@ -68,7 +68,6 @@ public:
                                 MAbstractInputMethodHost *host)
         : q(_q)
         , editor(EditorOptions(), new Model::Text, new Logic::WordEngine)
-        , key_overrides()
         , event_handler()
         , host(host)
         , view(0)
@@ -179,10 +178,16 @@ public:
     /*
      * register settings
      */
-    void registerFeedbackSetting()
+    void registerAudioFeedbackSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
+        QObject::connect(&m_settings, SIGNAL(keyPressAudioFeedbackChanged(bool)),
                          q, SIGNAL(useAudioFeedbackChanged()));
+    }
+
+    void registerHapticFeedbackSetting()
+    {
+        QObject::connect(&m_settings, SIGNAL(keyPressHapticFeedbackChanged(bool)),
+                         q, SIGNAL(useHapticFeedbackChanged()));
     }
 
     void registerAutoCorrectSetting()

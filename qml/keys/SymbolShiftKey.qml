@@ -31,7 +31,10 @@ ActionKey {
         onClicked: {
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();
-            
+
+            if (maliit_input_method.useHapticFeedback)
+                 pressEffect.start();
+
             if (panel.state == "CHARACTERS")
                 panel.state = "SYMBOLS";
             else

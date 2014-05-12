@@ -1,7 +1,7 @@
 /*
  * This file is part of Maliit Plugins
  *
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2014 Canonical Ltda
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -27,50 +27,48 @@
  *
  */
 
-#ifndef KEYBOARDSETTINGS_H
-#define KEYBOARDSETTINGS_H
+#ifndef UBUNTU_KEYBOARD_EXTENSION_H
+#define UBUNTU_KEYBOARD_EXTENSION_H
 
-#include <QObject>
-#include <QStringList>
+#include <QtCore>
+#include <QtQuick>
 
-class QGSettings;
+namespace Ubuntu {
+namespace Keyboard {
 
-namespace MaliitKeyboard {
-
-class KeyboardSettings : public QObject
+class InputMethodExtension : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QVariantMap extensions READ inputMethodExtensions WRITE setInputMethodExtensions NOTIFY inputMethodExtensionsChanged)
 public:
-    explicit KeyboardSettings(QObject *parent = 0);
-    
-    QString activeLanguage() const;
-    void setActiveLanguage(const QString& id);
-    QStringList enabledLanguages() const;
-    bool autoCapitalization() const;
-    bool autoCompletion() const;
-    bool predictiveText() const;
-    bool spellchecking() const;
-    bool keyPressAudioFeedback() const;
-    bool keyPressHapticFeedback() const;
+    InputMethodExtension(QObject *parent = 0);
+
+    QVariantMap inputMethodExtensions() const;
+    void setInputMethodExtensions(const QVariantMap &map);
 
 Q_SIGNALS:
-    void activeLanguageChanged(QString);
-    void enabledLanguagesChanged(QStringList);
-    void autoCapitalizationChanged(bool);
-    void autoCompletionChanged(bool);
-    void predictiveTextChanged(bool);
-    void spellCheckingChanged(bool);
-    void keyPressAudioFeedbackChanged(bool);
-    void keyPressHapticFeedbackChanged(bool);
+    void inputMethodExtensionsChanged();
 
 private:
-    Q_SLOT void settingUpdated(const QString &key);
+    QVariantMap m_extensions;
+    QObject *m_inputText;
 
-    QGSettings *m_settings;
-
-    friend class TestKeyboardSettings;
+    QObject *findInput(QObject *parent);
 };
 
-} // namespace
+class InputMethod : public QObject
+{
+    Q_OBJECT
 
-#endif // KEYBOARDSETTINGS_H
+public:
+    InputMethod(QObject *parent = 0);
+
+    static InputMethodExtension *qmlAttachedProperties(QObject *obj);
+};
+
+} // namespace Ubuntu
+} // namespace Keyboard
+
+QML_DECLARE_TYPEINFO(Ubuntu::Keyboard::InputMethod, QML_HAS_ATTACHED_PROPERTIES)
+
+#endif

@@ -99,11 +99,16 @@ Item {
     Text {
         id: keyLabel
         text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
-        anchors.centerIn: parent
         font.family: UI.fontFamily
         font.pixelSize: fontSize
         font.bold: UI.fontBold
         color: UI.fontColor
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.margins: units.gu( UI.annotationMargins )
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideRight
     }
 
     /// shows an annotation
@@ -145,6 +150,9 @@ Item {
         onPressed: {
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();
+            
+            if (maliit_input_method.useHapticFeedback)
+                 pressEffect.start();
 
             event_handler.onKeyPressed(valueToSubmit, action);
         }

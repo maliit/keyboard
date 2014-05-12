@@ -1,7 +1,7 @@
 /*
  * This file is part of Maliit Plugins
  *
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2014 Canonical Ltda
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -27,50 +27,20 @@
  *
  */
 
-#ifndef KEYBOARDSETTINGS_H
-#define KEYBOARDSETTINGS_H
+#include "plugin.h"
+#include "inputmethodextensions.h"
 
-#include <QObject>
-#include <QStringList>
+#include <QQmlEngine>
 
-class QGSettings;
+namespace Ubuntu {
+namespace Keyboard {
 
-namespace MaliitKeyboard {
-
-class KeyboardSettings : public QObject
+void InputMethodExtensionPlugin::registerTypes(const char *uri)
 {
-    Q_OBJECT
-public:
-    explicit KeyboardSettings(QObject *parent = 0);
-    
-    QString activeLanguage() const;
-    void setActiveLanguage(const QString& id);
-    QStringList enabledLanguages() const;
-    bool autoCapitalization() const;
-    bool autoCompletion() const;
-    bool predictiveText() const;
-    bool spellchecking() const;
-    bool keyPressAudioFeedback() const;
-    bool keyPressHapticFeedback() const;
+    // @uri Ubuntu.Maliit
+    qmlRegisterType<InputMethodExtension>();
+    qmlRegisterType<InputMethod>(uri, 0, 1, "InputMethod");
+}
 
-Q_SIGNALS:
-    void activeLanguageChanged(QString);
-    void enabledLanguagesChanged(QStringList);
-    void autoCapitalizationChanged(bool);
-    void autoCompletionChanged(bool);
-    void predictiveTextChanged(bool);
-    void spellCheckingChanged(bool);
-    void keyPressAudioFeedbackChanged(bool);
-    void keyPressHapticFeedbackChanged(bool);
-
-private:
-    Q_SLOT void settingUpdated(const QString &key);
-
-    QGSettings *m_settings;
-
-    friend class TestKeyboardSettings;
-};
-
-} // namespace
-
-#endif // KEYBOARDSETTINGS_H
+} // namespace Ubuntu
+} // namespace Keyboard

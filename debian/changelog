@@ -1,3 +1,25 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140506.1-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * add action key support in ubuntu-keyboard
+
+  [ Renato Araujo Oliveira Filho ]
+  * add action key support in ubuntu-keyboard
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 06 May 2014 20:52:25 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140430-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * Enable haptic feedback when the key-press-haptic-feedback gsetting
+    key is true. (LP: #1299088)
+
+  [ Michael Sheldon ]
+  * Enable haptic feedback when the key-press-haptic-feedback gsetting
+    key is true. (LP: #1299088)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Apr 2014 15:37:20 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140415-0ubuntu1) trusty; urgency=low
 
   [ Michael Sheldon ]
