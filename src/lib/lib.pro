@@ -20,6 +20,7 @@ include(../word-prediction.pri)
 
 # for plugins
 API_HEADERS = logic/languageplugininterface.h
+API_HEADERS += logic/abstractplugininterface.h
 
 api_headers.files = $$API_HEADERS
 api_headers.path = $$UBUNTU_KEYBOARD_HEADERS_DIR

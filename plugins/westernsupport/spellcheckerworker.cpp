@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,49 +25,56 @@
  *
  */
 
-#ifndef MALIIT_KEYBOARD_WORDENGINEPROBE_H
-#define MALIIT_KEYBOARD_WORDENGINEPROBE_H
+#include "spellcheckerworker.h"
 
-#include "logic/abstractwordengine.h"
-#include "logic/abstractlanguagefeatures.h"
 
-#include <QtCore>
-
-class MockLanguageFeatures : public AbstractLanguageFeatures
+SpellCheckerWorker::SpellCheckerWorker(QObject *parent)
+    : QObject(parent)
+    , m_spellChecker()
+    , m_word()
+    , m_limit(5)
+    , m_processingWords(false)
 {
-public:
-    explicit MockLanguageFeatures() {}
-    virtual ~MockLanguageFeatures() {}
+}
 
-    virtual bool alwaysShowSuggestions() const { return false; }
-    virtual bool autoCapsAvailable() const { return false; }
-    virtual bool activateAutoCaps(const QString &preedit) const { Q_UNUSED(preedit); return false; }
-    virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return ""; }
-};
-
-namespace MaliitKeyboard {
-namespace Logic {
-
-class WordEngineProbe
-    : public AbstractWordEngine
+void SpellCheckerWorker::suggest(const QString& word, int limit)
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(WordEngineProbe)
+    QStringList suggestions = m_spellChecker.suggest(word, limit);
+    Q_EMIT newSuggestions(suggestions);
+}
 
-public:
-    explicit WordEngineProbe(QObject *parent = 0);
-    virtual ~WordEngineProbe();
+void SpellCheckerWorker::newSpellCheckWord(QString word)
+{
+    // Run through all the words queued in the event loop
+    // so we only fetch suggestions for the latest word
+    bool setProcessingWords = false;
+    if(m_processingWords == false) {
+        setProcessingWords = true;
+        m_processingWords = true;
+    }
+    QCoreApplication::processEvents();
+    if(setProcessingWords == true) {
+        m_processingWords = false;
+    }
 
-    void addSpellingCandidate(const QString &text, const QString &word);
+    m_word = word;
 
-    virtual AbstractLanguageFeatures* languageFeature();
+    if(!m_processingWords) {
+        suggest(m_word, m_limit);
+    }
+}
 
-private:
-    virtual void fetchCandidates(Model::Text *text);
+void SpellCheckerWorker::setLanguage(QString language)
+{
+    m_spellChecker.setLanguage(language);
+}
 
-    QHash<QString, QString> candidates;
-};
+void SpellCheckerWorker::setLimit(int limit)
+{
+    m_limit = limit;
+}
 
-}} // namespace MaliitKeyboard
-
-#endif // MALIIT_KEYBOARD_WORDENGINEPROBE_H
+void SpellCheckerWorker::setEnabled(bool enabled)
+{
+    m_spellChecker.setEnabled(enabled);
+}

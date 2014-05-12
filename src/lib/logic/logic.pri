@@ -10,6 +10,7 @@ HEADERS += \
     logic/abstractlanguagefeatures.h \
     logic/eventhandler.h \
     logic/languageplugininterface.h \
+    logic/abstractlanguageplugin.h \
 
 SOURCES += \
 #    logic/layouthelper.cpp \
@@ -19,5 +20,6 @@ SOURCES += \
     logic/abstractwordengine.cpp \
     logic/wordengine.cpp \
     logic/eventhandler.cpp \
+    logic/abstractlanguageplugin.cpp  
 
 DEPENDPATH += $$LOGIC_DIR

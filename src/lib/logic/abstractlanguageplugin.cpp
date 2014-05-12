@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,49 +25,62 @@
  *
  */
 
-#ifndef MALIIT_KEYBOARD_WORDENGINEPROBE_H
-#define MALIIT_KEYBOARD_WORDENGINEPROBE_H
+#include "abstractlanguageplugin.h"
 
-#include "logic/abstractwordengine.h"
-#include "logic/abstractlanguagefeatures.h"
+AbstractLanguagePlugin::AbstractLanguagePlugin(QObject *parent)
+    : QObject(parent)
+{}
 
-#include <QtCore>
+AbstractLanguagePlugin::~AbstractLanguagePlugin()
+{}
 
-class MockLanguageFeatures : public AbstractLanguageFeatures
+void AbstractLanguagePlugin::predict(const QString& surroundingLeft, const QString& preedit) 
 {
-public:
-    explicit MockLanguageFeatures() {}
-    virtual ~MockLanguageFeatures() {}
-
-    virtual bool alwaysShowSuggestions() const { return false; }
-    virtual bool autoCapsAvailable() const { return false; }
-    virtual bool activateAutoCaps(const QString &preedit) const { Q_UNUSED(preedit); return false; }
-    virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return ""; }
-};
-
-namespace MaliitKeyboard {
-namespace Logic {
-
-class WordEngineProbe
-    : public AbstractWordEngine
+    Q_UNUSED(surroundingLeft)
+    Q_UNUSED(preedit)
+}
+ 
+void AbstractLanguagePlugin::wordCandidateSelected(QString word)
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(WordEngineProbe)
+    Q_UNUSED(word)
+}
 
-public:
-    explicit WordEngineProbe(QObject *parent = 0);
-    virtual ~WordEngineProbe();
+AbstractLanguageFeatures* AbstractLanguagePlugin::languageFeature()
+{
+    return NULL;
+}
 
-    void addSpellingCandidate(const QString &text, const QString &word);
+bool AbstractLanguagePlugin::spellCheckerEnabled()
+{
+    return false;
+}
 
-    virtual AbstractLanguageFeatures* languageFeature();
+bool AbstractLanguagePlugin::setSpellCheckerEnabled(bool enabled)
+{
+    Q_UNUSED(enabled)
+    return false;
+}
 
-private:
-    virtual void fetchCandidates(Model::Text *text);
+bool AbstractLanguagePlugin::spell(const QString& word)
+{
+    Q_UNUSED(word)
+    return false;
+}
 
-    QHash<QString, QString> candidates;
-};
+void AbstractLanguagePlugin::spellCheckerSuggest(const QString& word, int limit)
+{
+    Q_UNUSED(word)
+    Q_UNUSED(limit)
+}
 
-}} // namespace MaliitKeyboard
+void AbstractLanguagePlugin::addToSpellCheckerUserWordList(const QString& word)
+{
+    Q_UNUSED(word)
+}
 
-#endif // MALIIT_KEYBOARD_WORDENGINEPROBE_H
+bool AbstractLanguagePlugin::setSpellCheckerLanguage(const QString& languageId)
+{
+    Q_UNUSED(languageId)
+    return false;
+}
+

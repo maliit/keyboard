@@ -5,7 +5,7 @@
 #include "languageplugininterface.h"
 #include "westernlanguagesplugin.h"
 
-class SwedishPlugin : public QObject, public WesternLanguagesPlugin
+class SwedishPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
     Q_INTERFACES(LanguagePluginInterface)
@@ -13,8 +13,7 @@ class SwedishPlugin : public QObject, public WesternLanguagesPlugin
 
 public:
     explicit SwedishPlugin(QObject* parent = 0)
-        : QObject(parent)
-        , WesternLanguagesPlugin()
+        : WesternLanguagesPlugin(parent)
     {
         _useDatabase("sv");
     }
