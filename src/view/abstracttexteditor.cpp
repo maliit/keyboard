@@ -800,7 +800,7 @@ void AbstractTextEditor::singleBackspace()
         }
     }
 
-    const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft) || textOnLeft.isEmpty();
+    const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
     if (auto_caps_activated && d->auto_caps_enabled) {
         Q_EMIT autoCapsActivated();
     }
