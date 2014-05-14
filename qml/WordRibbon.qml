@@ -58,6 +58,7 @@ Rectangle {
                     font.family: "Ubuntu Medium"
                     color: "#999999"
                     font.bold: false
+                    font.italic: isUserInput
                     text: word;
                 }
             }
