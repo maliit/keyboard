@@ -202,7 +202,10 @@ void WordEngine::fetchCandidates(Model::Text *text)
     d->candidates = new WordCandidateList();
     const QString &preedit(text->preedit());
     d->is_preedit_capitalized = not preedit.isEmpty() && preedit.at(0).isUpper();
-    
+
+    WordCandidate userCandidate(WordCandidate::SourceUser, preedit); 
+    d->candidates->append(userCandidate);
+
     // spell checking
     d->correct_spelling = d->languagePlugin->spell(preedit);
 
@@ -237,13 +240,14 @@ void WordEngine::newSpellingSuggestions(QStringList suggestions)
 
         Q_EMIT candidatesChanged(*d->candidates);
 
-        Q_EMIT primaryCandidateChanged(d->candidates->isEmpty() ? QString()
-                                                                : d->candidates->first().label());
+        // Candidates always has at least one entry from the user input candidate
+        Q_EMIT primaryCandidateChanged(d->candidates->size() == 1 ? QString()
+                                                                : d->candidates->at(1).label());
     }
 
-    Q_EMIT preeditFaceChanged(d->candidates->isEmpty() ? (d->correct_spelling ? Model::Text::PreeditDefault
-                                                                              : Model::Text::PreeditNoCandidates)
-                                                       : Model::Text::PreeditActive);
+    Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
+                                                                                : Model::Text::PreeditNoCandidates)
+                                                         : Model::Text::PreeditActive);
 }
 
 void WordEngine::newPredictionSuggestions(QStringList suggestions)
@@ -256,12 +260,13 @@ void WordEngine::newPredictionSuggestions(QStringList suggestions)
 
     Q_EMIT candidatesChanged(*d->candidates);
 
-    Q_EMIT primaryCandidateChanged(d->candidates->isEmpty() ? QString()
-                                                            : d->candidates->first().label());
+    // Candidates always has at least one entry from the user input candidate
+    Q_EMIT primaryCandidateChanged(d->candidates->size() == 1 ? QString()
+                                                              : d->candidates->at(1).label());
 
-    Q_EMIT preeditFaceChanged(d->candidates->isEmpty() ? (d->correct_spelling ? Model::Text::PreeditDefault
-                                                                              : Model::Text::PreeditNoCandidates)
-                                                       : Model::Text::PreeditActive);
+    Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
+                                                                                : Model::Text::PreeditNoCandidates)
+                                                         : Model::Text::PreeditActive);
 }
 
 void WordEngine::addToUserDictionary(const QString &word)
