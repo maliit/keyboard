@@ -28,6 +28,7 @@
 #ifndef PREDICTIVETEXTWORKER_H
 #define PREDICTIVETEXTWORKER_H
 
+#include "spellchecker.h"
 #include "candidatescallback.h"
 #include <presage.h>
 
@@ -55,6 +56,7 @@ private:
     std::string m_candidatesContext;
     CandidatesCallback m_presageCandidates;
     Presage m_presage;
+    SpellChecker m_spellChecker;
 };
 
 #endif // PREDICTIVETEXTWORKER_H
