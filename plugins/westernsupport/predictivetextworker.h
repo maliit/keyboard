@@ -48,6 +48,7 @@ public:
 public slots:
     void parsePredictionText(const QString& surroundingLeft, const QString& preedit);
     void setPredictionLanguage(QString language);
+    void updateSpellCheckWord(QString word);
 
 signals:
     void newSuggestions(QStringList suggestions);

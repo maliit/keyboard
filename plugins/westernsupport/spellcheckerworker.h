@@ -45,6 +45,7 @@ public slots:
     void setLanguage(QString language);
     void setLimit(int limit);
     void setEnabled(bool enabled);
+    void updateSpellCheckWord(QString word);
 
 signals:
     void newSuggestions(QStringList suggestions);

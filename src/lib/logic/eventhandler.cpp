@@ -47,15 +47,17 @@ EventHandler::EventHandler(QObject *parent)
 EventHandler::~EventHandler()
 {}
 
-void EventHandler::onWordCandidatePressed(QString word)
+void EventHandler::onWordCandidatePressed(QString word, bool userInput)
 {
-    WordCandidate candidate(WordCandidate::SourcePrediction, word);
+    WordCandidate candidate(userInput ? WordCandidate::SourceUser 
+                                      : WordCandidate::SourcePrediction, word);
     Q_EMIT wordCandidatePressed(candidate);
 }
 
-void EventHandler::onWordCandidateReleased(QString word)
+void EventHandler::onWordCandidateReleased(QString word, bool userInput)
 {
-    WordCandidate candidate(WordCandidate::SourcePrediction, word);
+    WordCandidate candidate(userInput ? WordCandidate::SourceUser 
+                                      : WordCandidate::SourcePrediction, word);
     Q_EMIT wordCandidateReleased(candidate);
 }
 

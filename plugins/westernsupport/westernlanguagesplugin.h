@@ -44,6 +44,7 @@ signals:
     void spellCheckEnabled(bool enabled);
     void parsePredictionText(QString surroundingLeft, QString preedit);
     void setPredictionLanguage(QString language);
+    void updateSpellCheckWord(QString word);
 
 public slots:
 

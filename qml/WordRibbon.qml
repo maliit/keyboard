@@ -67,11 +67,11 @@ Rectangle {
                 anchors.fill: wordCandidateItem
                 onPressed: {
                     wordRibbonCanvas.state = "SELECTED"
-                    event_handler.onWordCandidatePressed(wordItem.text);
+                    event_handler.onWordCandidatePressed(wordItem.text, isUserInput)
                 }
                 onReleased: {
                     wordRibbonCanvas.state = "NORMAL"
-                    event_handler.onWordCandidateReleased(wordItem.text)
+                    event_handler.onWordCandidateReleased(wordItem.text, isUserInput)
                 }
             }
         }

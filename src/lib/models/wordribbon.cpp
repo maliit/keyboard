@@ -170,6 +170,7 @@ void WordRibbon::onWordCandidateReleased(const WordCandidate &candidate)
         Q_EMIT wordCandidateSelected(candidate.word());
     } else if (candidate.source() == WordCandidate::SourceUser) {
         Q_EMIT userCandidateSelected(candidate.word());
+        Q_EMIT wordCandidateSelected(candidate.word());
     }
 }
 

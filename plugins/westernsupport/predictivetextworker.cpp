@@ -83,3 +83,8 @@ void PredictiveTextWorker::setPredictionLanguage(QString locale)
         qWarning() << "An exception was thrown in libpresage when changing language database, exception nr: " << error;
     }
 }
+
+void PredictiveTextWorker::updateSpellCheckWord(QString word)
+{
+    m_spellChecker.updateWord(word);
+}
