@@ -61,10 +61,10 @@ Item {
     HapticsEffect {
         id: pressEffect
         attackIntensity: 0.0
-        attackTime: 125
-        intensity: 0.5
-        duration: 75
-        fadeTime: 125
+        attackTime: 30
+        intensity: 0.3
+        duration: 25
+        fadeTime: 30
         fadeIntensity: 0.0
     }
 

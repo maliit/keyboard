@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,49 +25,35 @@
  *
  */
 
-#ifndef MALIIT_KEYBOARD_WORDENGINEPROBE_H
-#define MALIIT_KEYBOARD_WORDENGINEPROBE_H
+#ifndef SPELLCHECKERWORKER_H
+#define SPELLCHECKERWORKER_H
 
-#include "logic/abstractwordengine.h"
-#include "logic/abstractlanguagefeatures.h"
+#include "spellchecker.h"
 
-#include <QtCore>
+#include <QObject>
 
-class MockLanguageFeatures : public AbstractLanguageFeatures
-{
-public:
-    explicit MockLanguageFeatures() {}
-    virtual ~MockLanguageFeatures() {}
-
-    virtual bool alwaysShowSuggestions() const { return false; }
-    virtual bool autoCapsAvailable() const { return false; }
-    virtual bool activateAutoCaps(const QString &preedit) const { Q_UNUSED(preedit); return false; }
-    virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return ""; }
-};
-
-namespace MaliitKeyboard {
-namespace Logic {
-
-class WordEngineProbe
-    : public AbstractWordEngine
+class SpellCheckerWorker : public QObject
 {
     Q_OBJECT
-    Q_DISABLE_COPY(WordEngineProbe)
 
 public:
-    explicit WordEngineProbe(QObject *parent = 0);
-    virtual ~WordEngineProbe();
+    SpellCheckerWorker(QObject *parent = 0);
+    void suggest(const QString& word, int limit);
 
-    void addSpellingCandidate(const QString &text, const QString &word);
+public slots:
+    void newSpellCheckWord(QString word);
+    void setLanguage(QString language);
+    void setLimit(int limit);
+    void setEnabled(bool enabled);
 
-    virtual AbstractLanguageFeatures* languageFeature();
+signals:
+    void newSuggestions(QStringList suggestions);
 
 private:
-    virtual void fetchCandidates(Model::Text *text);
-
-    QHash<QString, QString> candidates;
+    SpellChecker m_spellChecker;
+    QString m_word;
+    int m_limit;
+    bool m_processingWords;
 };
 
-}} // namespace MaliitKeyboard
-
-#endif // MALIIT_KEYBOARD_WORDENGINEPROBE_H
+#endif // SPELLCHECKERWORKER_H

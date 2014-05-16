@@ -62,14 +62,20 @@ public:
     virtual void setSpellcheckerEnabled(bool enabled);
     //! \reimp_end
 
+    void appendToCandidates(WordCandidateList *candidates,
+                                        WordCandidate::Source source,
+                                        const QString &candidate);
+
     Q_SLOT void onWordCandidateSelected(QString word);
     Q_SLOT void onLanguageChanged(const QString& languageId);
+    Q_SLOT void newSpellingSuggestions(QStringList suggestions);
+    Q_SLOT void newPredictionSuggestions(QStringList suggestions);
 
     virtual AbstractLanguageFeatures* languageFeature();
 
 private:
     //! \reimp
-    virtual WordCandidateList fetchCandidates(Model::Text *text);
+    virtual void fetchCandidates(Model::Text *text);
     //! \reimp_end
 
     const QScopedPointer<WordEnginePrivate> d_ptr;

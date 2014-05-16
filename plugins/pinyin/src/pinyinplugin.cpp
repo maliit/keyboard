@@ -4,7 +4,7 @@
 #include <QDebug>
 
 PinyinPlugin::PinyinPlugin(QObject *parent) :
-    QObject(parent)
+    AbstractLanguagePlugin(parent)
   , pinyinAdapter(new PinyinAdapter)
   , m_chineseLanguageFeatures(new ChineseLanguageFeatures)
 {
@@ -14,15 +14,11 @@ PinyinPlugin::~PinyinPlugin()
 {
 }
 
-void PinyinPlugin::parse(const QString& surroundingLeft, const QString& preedit)
+void PinyinPlugin::predict(const QString& surroundingLeft, const QString& preedit)
 {
     Q_UNUSED(surroundingLeft);
-    return pinyinAdapter->parse(preedit);
-}
-
-QStringList PinyinPlugin::getWordCandidates()
-{
-    return pinyinAdapter->getWordCandidates();
+    pinyinAdapter->parse(preedit);
+    Q_EMIT newPredictionSuggestions(pinyinAdapter->getWordCandidates());
 }
 
 void PinyinPlugin::wordCandidateSelected(QString word)

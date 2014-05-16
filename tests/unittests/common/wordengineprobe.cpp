@@ -56,7 +56,7 @@ WordEngineProbe::~WordEngineProbe()
 
 //! \brief Returns new candidates.
 //! \param text Text model.
-WordCandidateList WordEngineProbe::fetchCandidates(Model::Text *text)
+void WordEngineProbe::fetchCandidates(Model::Text *text)
 {
     const QString preedit(text->preedit());
     WordCandidateList result;
@@ -82,7 +82,7 @@ WordCandidateList WordEngineProbe::fetchCandidates(Model::Text *text)
     }
 
     text->setPreeditFace(face);
-    return result;
+    Q_EMIT(candidatesChanged(result));
 }
 
 AbstractLanguageFeatures* WordEngineProbe::languageFeature()

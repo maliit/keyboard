@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,49 +25,36 @@
  *
  */
 
-#ifndef MALIIT_KEYBOARD_WORDENGINEPROBE_H
-#define MALIIT_KEYBOARD_WORDENGINEPROBE_H
+#ifndef PREDICTIVETEXTWORKER_H
+#define PREDICTIVETEXTWORKER_H
 
-#include "logic/abstractwordengine.h"
-#include "logic/abstractlanguagefeatures.h"
+#include "candidatescallback.h"
+#include <presage.h>
 
-#include <QtCore>
+#include <QObject>
+#include <QStringList>
 
-class MockLanguageFeatures : public AbstractLanguageFeatures
-{
-public:
-    explicit MockLanguageFeatures() {}
-    virtual ~MockLanguageFeatures() {}
+class CandidatesCallback;
 
-    virtual bool alwaysShowSuggestions() const { return false; }
-    virtual bool autoCapsAvailable() const { return false; }
-    virtual bool activateAutoCaps(const QString &preedit) const { Q_UNUSED(preedit); return false; }
-    virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return ""; }
-};
-
-namespace MaliitKeyboard {
-namespace Logic {
-
-class WordEngineProbe
-    : public AbstractWordEngine
+class PredictiveTextWorker : public QObject
 {
     Q_OBJECT
-    Q_DISABLE_COPY(WordEngineProbe)
 
 public:
-    explicit WordEngineProbe(QObject *parent = 0);
-    virtual ~WordEngineProbe();
+    PredictiveTextWorker(QObject *parent = 0);
+    void autocorrect(const QString& word, int limit);
 
-    void addSpellingCandidate(const QString &text, const QString &word);
+public slots:
+    void parsePredictionText(const QString& surroundingLeft, const QString& preedit);
+    void setPredictionLanguage(QString language);
 
-    virtual AbstractLanguageFeatures* languageFeature();
+signals:
+    void newSuggestions(QStringList suggestions);
 
 private:
-    virtual void fetchCandidates(Model::Text *text);
-
-    QHash<QString, QString> candidates;
+    std::string m_candidatesContext;
+    CandidatesCallback m_presageCandidates;
+    Presage m_presage;
 };
 
-}} // namespace MaliitKeyboard
-
-#endif // MALIIT_KEYBOARD_WORDENGINEPROBE_H
+#endif // PREDICTIVETEXTWORKER_H
