@@ -15,8 +15,10 @@ LIBS += \
 PRE_TARGETDEPS += $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB}
 
 HEADERS += \
+    ../common/wordengineprobe.h \
 
 SOURCES += \
+    ../common/wordengineprobe.cpp \
     ut_repeat-backspace.cpp \
 
 target.path = $$INSTALL_BIN

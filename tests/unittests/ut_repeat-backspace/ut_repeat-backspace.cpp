@@ -34,6 +34,7 @@
 #include "models/text.h"
 #include "logic/wordengine.h"
 #include "plugin/editor.h"
+#include "common/wordengineprobe.h"
 
 #include <inputmethodhostprobe.h>
 
@@ -68,7 +69,7 @@ private:
 
     Q_SLOT void init()
     {
-        editor.reset(new Editor(options, new Model::Text, new Logic::WordEngine));
+        editor.reset(new Editor(options, new Model::Text, new Logic::WordEngineProbe));
         host.reset(new InputMethodHostProbe);
         editor->setHost(host.data());
     }
