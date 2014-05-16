@@ -794,7 +794,6 @@ void AbstractTextEditor::singleBackspace()
         // Deletion of surrounding text isn't updated in the model until later
         // Update it locally here for autocaps detection
         textOnLeft.chop(1);
-        textOnLeft = textOnLeft.trimmed();
     } else {
         d->text->removeFromPreedit(1);
         textOnLeft += d->text->preedit();
@@ -818,6 +817,8 @@ void AbstractTextEditor::singleBackspace()
             sendCommitString("");
         }
     }
+
+    textOnLeft = textOnLeft.trimmed();
 
     const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
     if (auto_caps_activated && d->auto_caps_enabled) {
