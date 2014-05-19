@@ -48,9 +48,6 @@ signals:
 
 public slots:
 
-protected:
-    void _useDatabase(const QString& locale);
-
 private:
     WesternLanguageFeatures* m_languageFeatures;
 

@@ -85,11 +85,7 @@ void WesternLanguagesPlugin::addToSpellCheckerUserWordList(const QString& word)
 
 bool WesternLanguagesPlugin::setSpellCheckerLanguage(const QString& languageId)
 {
+    Q_EMIT setPredictionLanguage(languageId);
     Q_EMIT setSpellCheckLanguage(languageId);
     return m_spellChecker.setLanguage(languageId);
-}
-
-void WesternLanguagesPlugin::_useDatabase(const QString &locale)
-{
-    Q_EMIT setPredictionLanguage(locale);
 }

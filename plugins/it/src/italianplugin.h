@@ -15,7 +15,6 @@ public:
     explicit ItalianPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("it");
     }
 
     virtual ~ItalianPlugin()
