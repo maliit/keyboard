@@ -35,19 +35,12 @@ namespace {
 }
 
 UbuntuApplicationApiWrapper::UbuntuApplicationApiWrapper()
-    : m_runningOnMir(false)
-    , m_clientConnection(0)
+    : m_clientConnection(0)
     , m_geometry(0)
 {
-    if (qgetenv("QT_QPA_PLATFORM") == "ubuntumirclient") {
-        m_runningOnMir = true;
-    }
-
     m_sharedInfo.reset();
 
-    if (m_runningOnMir) {
-        startLocalServer();
-    }
+    startLocalServer();
 
     m_geometryUpdateTimer.setInterval(100);
     m_geometryUpdateTimer.setSingleShot(true);
@@ -83,16 +76,10 @@ void UbuntuApplicationApiWrapper::startLocalServer()
 
 void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, const int width, const int height)
 {
-#ifdef HAVE_UBUNTU_PLATFORM_API
-    if (!m_runningOnMir) { // following method not implemented on Mir
-        ubuntu_ui_report_osk_visible(x, y, width, height);
-    }
-#else
     Q_UNUSED(x)
     Q_UNUSED(y)
     Q_UNUSED(width)
     Q_UNUSED(height)
-#endif
 
     QObject::connect(m_geometry, SIGNAL(visibleRectChanged()),
                      this, SLOT(delayedGeometryUpdate()));
@@ -101,12 +88,6 @@ void UbuntuApplicationApiWrapper::reportOSKVisible(const int x, const int y, con
 
 void UbuntuApplicationApiWrapper::reportOSKInvisible()
 {
-#ifdef HAVE_UBUNTU_PLATFORM_API
-    if (!m_runningOnMir) { // following method not implemented on Mir
-        ubuntu_ui_report_osk_invisible();
-    }
-#endif
-
     m_geometryUpdateTimer.stop();
     QObject::disconnect(m_geometry, SIGNAL(visibleRectChanged()),
                         this, SLOT(delayedGeometryUpdate()));

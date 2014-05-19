@@ -70,7 +70,6 @@ private:
     void startLocalServer();
     QString buildSocketFilePath() const;
 
-    bool m_runningOnMir;
     QLocalServer m_localServer;
     QLocalSocket *m_clientConnection;
     struct SharedInfo m_sharedInfo;
