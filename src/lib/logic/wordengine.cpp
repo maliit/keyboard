@@ -206,6 +206,8 @@ void WordEngine::fetchCandidates(Model::Text *text)
     WordCandidate userCandidate(WordCandidate::SourceUser, preedit); 
     d->candidates->append(userCandidate);
 
+    Q_EMIT candidatesChanged(*d->candidates);
+
     // spell checking
     d->correct_spelling = d->languagePlugin->spell(preedit);
 
