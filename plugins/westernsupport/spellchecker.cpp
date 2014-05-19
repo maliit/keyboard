@@ -248,7 +248,7 @@ void SpellChecker::addToUserWordlist(const QString &word)
 {
     Q_D(SpellChecker);
 
-    if (not enabled() || spell(word)) {
+    if (spell(word)) {
         return;
     }
 
@@ -267,6 +267,10 @@ void SpellChecker::addToUserWordlist(const QString &word)
 void SpellChecker::updateWord(const QString &word)
 {
     Q_D(SpellChecker);
+
+    if(not enabled()) {
+        return;
+    }
 
     // Non-zero return value means some error.
     if (d->hunspell->add(d->codec->fromUnicode(word))) {
