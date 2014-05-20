@@ -22,18 +22,20 @@ EXAMPLE_FILES = germanplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/de/
 
-lang_db_de.path = $$PLUGIN_INSTALL_PATH
 lang_db_de.commands += \
   rm -f $$PWD/database_de.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_de.db $$PWD/buddenbrooks.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_de.db $$PWD/buddenbrooks.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_de.db $$PWD/buddenbrooks.txt
-
 lang_db_de.files += $$PWD/database_de.db
-QMAKE_EXTRA_TARGETS += lang_db_de
+
+lang_db_de_install.path = $$PLUGIN_INSTALL_PATH
+lang_db_de_install.files += $$PWD/database_de.db
+
+QMAKE_EXTRA_TARGETS += lang_db_de lang_db_de_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_de
+INSTALLS += target lang_db_de_install
 
 OTHER_FILES += \
     germanplugin.json \

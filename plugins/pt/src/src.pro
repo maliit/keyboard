@@ -22,18 +22,20 @@ EXAMPLE_FILES = portugueseplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $$UBUNTU_KEYBOARD_LIB_DIR/pt/
 
-lang_db_pt.path = $$PLUGIN_INSTALL_PATH
 lang_db_pt.commands += \
   rm -f $$PWD/database_pt.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_pt.db $$PWD/historias_sem_data.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_pt.db $$PWD/historias_sem_data.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_pt.db $$PWD/historias_sem_data.txt
-
 lang_db_pt.files += $$PWD/database_pt.db
-QMAKE_EXTRA_TARGETS += lang_db_pt
+
+lang_db_pt_install.files += $$PWD/database_pt.db
+lang_db_pt_install.path = $$PLUGIN_INSTALL_PATH
+
+QMAKE_EXTRA_TARGETS += lang_db_pt lang_db_pt_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_pt
+INSTALLS += target lang_db_pt_install
 
 OTHER_FILES += \
     portugueseplugin.json \
