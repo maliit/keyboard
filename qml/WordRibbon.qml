@@ -57,8 +57,7 @@ Rectangle {
                     font.pixelSize: units.gu(2);
                     font.family: "Ubuntu Medium"
                     color: "#999999"
-                    font.bold: false
-                    font.italic: isUserInput
+                    font.bold: isUserInput
                     text: word;
                 }
             }
