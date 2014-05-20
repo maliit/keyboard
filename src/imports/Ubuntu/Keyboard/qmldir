@@ -1,0 +1,2 @@
+module Ubuntu.Keyboard
+plugin ubuntu-keyboard-qml

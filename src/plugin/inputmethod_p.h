@@ -44,7 +44,7 @@ class InputMethodPrivate
 public:
     InputMethod* q;
     Editor editor;
-    QMap<QString, SharedOverride> key_overrides;
+    SharedOverride actionKeyOverrider;
     Logic::EventHandler event_handler;
     MAbstractInputMethodHost* host;
     QQuickView* view;
@@ -66,7 +66,6 @@ public:
                                 MAbstractInputMethodHost *host)
         : q(_q)
         , editor(EditorOptions(), new Model::Text, new Logic::WordEngine)
-        , key_overrides()
         , event_handler()
         , host(host)
         , view(0)

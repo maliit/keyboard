@@ -1,9 +1,7 @@
 /*
  * This file is part of Maliit Plugins
  *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical Ltda
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,50 +27,24 @@
  *
  */
 
-#include "wordengineprobe.h"
+#ifndef UBUNTU_KEYBOARD_INPUTMETHOD_EXTENSION_PLUGIN_H
+#define UBUNTU_KEYBOARD_INPUTMETHOD_EXTENSION_PLUGIN_H
 
-namespace MaliitKeyboard {
-namespace Logic {
+#include <QQmlExtensionPlugin>
 
-//! \class WordEngineProbe
-//! A word engine that deterministcally predicts word candidates, in such a
-//! way that it can be used for tests. Does not require Hunspell or Presage.
+namespace Ubuntu {
+namespace Keyboard {
 
-
-//! \param parent The owner of this instance (optional).
-WordEngineProbe::WordEngineProbe(QObject *parent)
-    : AbstractWordEngine(parent)
-{}
-
-
-WordEngineProbe::~WordEngineProbe()
-{}
-
-
-//! \brief Returns new candidates.
-//! \param text Preedit of text model is reversed and emitted as only word
-//!             candidate. Special characters (e.g., punctuation) are skipped.
-void WordEngineProbe::fetchCandidates(Model::Text *text)
+class InputMethodExtensionPlugin : public QQmlExtensionPlugin
 {
-    QString reverse;
-    Q_FOREACH(const QChar &c, text->preedit()) {
-        if (c.isLetterOrNumber()) {
-            reverse.prepend(c);
-        }
-    }
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-    text->setPrimaryCandidate(reverse);
+public:
+    void registerTypes(const char *uri);
+};
 
-    WordCandidateList result;
-    WordCandidate candidate(WordCandidate::SourcePrediction, reverse);
-    result.append(candidate);
+} // namespace Ubuntu
+} // namespace Keyboard
 
-    Q_EMIT(candidatesChanged(result));
-}
-
-AbstractLanguageFeatures* WordEngineProbe::languageFeature()
-{
-    return new MockLanguageFeatures();
-}
-
-}} // namespace MaliitKeyboard
+#endif //UBUNTU_KEYBOARD_INPUTMETHOD_EXTENSION_PLUGIN_H

@@ -17,8 +17,19 @@
 import QtQuick 2.0
 
 ActionKey {
-    iconNormal: "keyboard-return"
-    iconShifted: "keyboard-return";
-    iconCapsLock: "keyboard-return";
+    property var actionKeyOverride: maliit_input_method.actionKeyOverride
+    property string overrideIconName: actionKeyOverride && actionKeyOverride.icon ? actionKeyOverride.icon : ""
+    property string overrideLabel: actionKeyOverride && actionKeyOverride.label ? actionKeyOverride.label : ""
+
+    enabled: actionKeyOverride ? actionKeyOverride.enabled : true
+    // overrideIcon has high priority over label
+    label: overrideIconName == "" ? overrideLabel : ""
+    shifted: label
+
+    iconNormal: (overrideIconName == "") && (overrideLabel == "") ? "keyboard-return" : overrideIconName
+    iconShifted: iconNormal
+    iconCapsLock: iconNormal
+
     action: "return"
+    // TODO: input_method.actionKeyOverride.highlighted
 }

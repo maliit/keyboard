@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,50 +25,56 @@
  *
  */
 
-#include "wordengineprobe.h"
-
-namespace MaliitKeyboard {
-namespace Logic {
-
-//! \class WordEngineProbe
-//! A word engine that deterministcally predicts word candidates, in such a
-//! way that it can be used for tests. Does not require Hunspell or Presage.
+#include "spellcheckerworker.h"
 
 
-//! \param parent The owner of this instance (optional).
-WordEngineProbe::WordEngineProbe(QObject *parent)
-    : AbstractWordEngine(parent)
-{}
-
-
-WordEngineProbe::~WordEngineProbe()
-{}
-
-
-//! \brief Returns new candidates.
-//! \param text Preedit of text model is reversed and emitted as only word
-//!             candidate. Special characters (e.g., punctuation) are skipped.
-void WordEngineProbe::fetchCandidates(Model::Text *text)
+SpellCheckerWorker::SpellCheckerWorker(QObject *parent)
+    : QObject(parent)
+    , m_spellChecker()
+    , m_word()
+    , m_limit(5)
+    , m_processingWords(false)
 {
-    QString reverse;
-    Q_FOREACH(const QChar &c, text->preedit()) {
-        if (c.isLetterOrNumber()) {
-            reverse.prepend(c);
-        }
+}
+
+void SpellCheckerWorker::suggest(const QString& word, int limit)
+{
+    QStringList suggestions = m_spellChecker.suggest(word, limit);
+    Q_EMIT newSuggestions(suggestions);
+}
+
+void SpellCheckerWorker::newSpellCheckWord(QString word)
+{
+    // Run through all the words queued in the event loop
+    // so we only fetch suggestions for the latest word
+    bool setProcessingWords = false;
+    if(m_processingWords == false) {
+        setProcessingWords = true;
+        m_processingWords = true;
+    }
+    QCoreApplication::processEvents();
+    if(setProcessingWords == true) {
+        m_processingWords = false;
     }
 
-    text->setPrimaryCandidate(reverse);
+    m_word = word;
 
-    WordCandidateList result;
-    WordCandidate candidate(WordCandidate::SourcePrediction, reverse);
-    result.append(candidate);
-
-    Q_EMIT(candidatesChanged(result));
+    if(!m_processingWords) {
+        suggest(m_word, m_limit);
+    }
 }
 
-AbstractLanguageFeatures* WordEngineProbe::languageFeature()
+void SpellCheckerWorker::setLanguage(QString language)
 {
-    return new MockLanguageFeatures();
+    m_spellChecker.setLanguage(language);
 }
 
-}} // namespace MaliitKeyboard
+void SpellCheckerWorker::setLimit(int limit)
+{
+    m_limit = limit;
+}
+
+void SpellCheckerWorker::setEnabled(bool enabled)
+{
+    m_spellChecker.setEnabled(enabled);
+}

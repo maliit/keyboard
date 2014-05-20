@@ -58,6 +58,8 @@ using namespace MaliitKeyboard;
 
 namespace {
 
+const char * const actionKeyName = "actionKey";
+
 Qt::ScreenOrientation rotationAngleToScreenOrientation(int angle)
 {
     bool portraitIsPrimary = QGuiApplication::primaryScreen()->primaryOrientation()
@@ -264,50 +266,35 @@ void InputMethod::onEnabledLanguageSettingsChanged()
     d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
-// todo remove
+
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
 {
     Q_D(InputMethod);
 
-    for (OverridesIterator i(d->key_overrides.begin()), e(d->key_overrides.end()); i != e; ++i) {
-        const SharedOverride &override(i.value());
+    // we only care about actionKey override by now
+    const QMap<QString, SharedOverride >::const_iterator iter(overrides.find(actionKeyName));
+    bool actionKeyChanged = false;
 
-        if (override) {
-            disconnect(override.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
-                       this,            SLOT(updateKey(const QString &, const MKeyOverride::KeyOverrideAttributes)));
-        }
+    if (d->actionKeyOverrider) {
+        disconnect(d->actionKeyOverrider.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
+                   this, SIGNAL(actionKeyOverrideChanged()));
+        d->actionKeyOverrider.clear();
+        actionKeyChanged = true;
     }
 
-    d->key_overrides.clear();
-    QMap<QString, Key> overriden_keys;
+    if (iter != overrides.end()) {
+        QSharedPointer<MKeyOverride> actionKeyOverrider(*iter);
 
-    for (OverridesIterator i(overrides.begin()), e(overrides.end()); i != e; ++i) {
-        const SharedOverride &override(i.value());
-
-        if (override) {
-            d->key_overrides.insert(i.key(), override);
-            connect(override.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
-                    this,            SLOT(updateKey(const QString &, const MKeyOverride::KeyOverrideAttributes)));
-            overriden_keys.insert(i.key(), overrideToKey(override));
+        if (actionKeyOverrider) {
+            d->actionKeyOverrider = actionKeyOverrider;
+            connect(d->actionKeyOverrider.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
+                    this, SIGNAL(actionKeyOverrideChanged()));
         }
+        actionKeyChanged = true;
     }
 
-}
-// todo remove
-void InputMethod::updateKey(const QString &key_id,
-                            const MKeyOverride::KeyOverrideAttributes changed_attributes)
-{
-    Q_D(InputMethod);
-
-    Q_UNUSED(changed_attributes);
-
-    QMap<QString, SharedOverride>::iterator iter(d->key_overrides.find(key_id));
-
-    if (iter != d->key_overrides.end()) {
-        const Key &override_key(overrideToKey(iter.value()));
-        Logic::KeyOverrides overrides_update;
-
-        overrides_update.insert(key_id, override_key);
+    if (actionKeyChanged) {
+        Q_EMIT actionKeyOverrideChanged();
     }
 }
 
@@ -343,7 +330,7 @@ void InputMethod::update()
 
     bool emitPredictionEnabled = false;
 
-    bool newPredictionEnabled = inputMethodHost()->predictionEnabled(valid) 
+    bool newPredictionEnabled = inputMethodHost()->predictionEnabled(valid)
                                 || d->editor.wordEngine()->languageFeature()->alwaysShowSuggestions();
 
     if (!valid)
@@ -459,6 +446,15 @@ bool InputMethod::useHapticFeedback() const
 {
     Q_D(const InputMethod);
     return d->m_settings.keyPressHapticFeedback();
+}
+
+//! \brief InputMethod::actionKeyOverride returns any override information about
+//! the action key
+//! \return
+QObject *InputMethod::actionKeyOverride() const
+{
+    Q_D(const InputMethod);
+    return d->actionKeyOverrider.data();
 }
 
 //! \brief InputMethod::setActiveLanguage

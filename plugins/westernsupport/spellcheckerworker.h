@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,50 +25,35 @@
  *
  */
 
-#include "wordengineprobe.h"
+#ifndef SPELLCHECKERWORKER_H
+#define SPELLCHECKERWORKER_H
 
-namespace MaliitKeyboard {
-namespace Logic {
+#include "spellchecker.h"
 
-//! \class WordEngineProbe
-//! A word engine that deterministcally predicts word candidates, in such a
-//! way that it can be used for tests. Does not require Hunspell or Presage.
+#include <QObject>
 
-
-//! \param parent The owner of this instance (optional).
-WordEngineProbe::WordEngineProbe(QObject *parent)
-    : AbstractWordEngine(parent)
-{}
-
-
-WordEngineProbe::~WordEngineProbe()
-{}
-
-
-//! \brief Returns new candidates.
-//! \param text Preedit of text model is reversed and emitted as only word
-//!             candidate. Special characters (e.g., punctuation) are skipped.
-void WordEngineProbe::fetchCandidates(Model::Text *text)
+class SpellCheckerWorker : public QObject
 {
-    QString reverse;
-    Q_FOREACH(const QChar &c, text->preedit()) {
-        if (c.isLetterOrNumber()) {
-            reverse.prepend(c);
-        }
-    }
+    Q_OBJECT
 
-    text->setPrimaryCandidate(reverse);
+public:
+    SpellCheckerWorker(QObject *parent = 0);
+    void suggest(const QString& word, int limit);
 
-    WordCandidateList result;
-    WordCandidate candidate(WordCandidate::SourcePrediction, reverse);
-    result.append(candidate);
+public slots:
+    void newSpellCheckWord(QString word);
+    void setLanguage(QString language);
+    void setLimit(int limit);
+    void setEnabled(bool enabled);
 
-    Q_EMIT(candidatesChanged(result));
-}
+signals:
+    void newSuggestions(QStringList suggestions);
 
-AbstractLanguageFeatures* WordEngineProbe::languageFeature()
-{
-    return new MockLanguageFeatures();
-}
+private:
+    SpellChecker m_spellChecker;
+    QString m_word;
+    int m_limit;
+    bool m_processingWords;
+};
 
-}} // namespace MaliitKeyboard
+#endif // SPELLCHECKERWORKER_H

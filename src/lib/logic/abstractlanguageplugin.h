@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies). All rights reserved.
- *
- * Contact: Mohammad Anwari <Mohammad.Anwari@nokia.com>
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,58 +25,37 @@
  *
  */
 
-#ifndef MALIIT_KEYBOARD_WORDENGINE_H
-#define MALIIT_KEYBOARD_WORDENGINE_H
+#ifndef ABSTRACTLANGUAGEPLUGIN_H
+#define ABSTRACTLANGUAGEPLUGIN_H
 
-#include "models/text.h"
-#include "logic/abstractwordengine.h"
 #include "languageplugininterface.h"
 
-#include <QtCore>
+#include <QObject>
 
-namespace MaliitKeyboard {
-namespace Logic {
-
-class WordEnginePrivate;
-
-class WordEngine
-    : public AbstractWordEngine
+class AbstractLanguagePlugin : public QObject, public LanguagePluginInterface
 {
     Q_OBJECT
-    Q_DISABLE_COPY(WordEngine)
-    Q_DECLARE_PRIVATE(WordEngine)
+    Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    explicit WordEngine(QObject *parent = 0);
-    virtual ~WordEngine();
+    AbstractLanguagePlugin(QObject *parent = 0);
+    virtual ~AbstractLanguagePlugin();
 
-    //! \reimp
-    virtual bool isEnabled() const;
-    virtual void setWordPredictionEnabled(bool enabled);
-
-    virtual void addToUserDictionary(const QString &word);
-    virtual void setSpellcheckerEnabled(bool enabled);
-    //! \reimp_end
-
-    void appendToCandidates(WordCandidateList *candidates,
-                                        WordCandidate::Source source,
-                                        const QString &candidate);
-
-    Q_SLOT void onWordCandidateSelected(QString word);
-    Q_SLOT void onLanguageChanged(const QString& languageId);
-    Q_SLOT void newSpellingSuggestions(QStringList suggestions);
-    Q_SLOT void newPredictionSuggestions(QStringList suggestions);
-
+    virtual void predict(const QString& surroundingLeft, const QString& preedit);
+    virtual void wordCandidateSelected(QString word);
     virtual AbstractLanguageFeatures* languageFeature();
 
-private:
-    //! \reimp
-    virtual void fetchCandidates(Model::Text *text);
-    //! \reimp_end
+    //! spell checker
+    virtual bool spellCheckerEnabled();
+    virtual bool setSpellCheckerEnabled(bool enabled);
+    virtual bool spell(const QString& word);
+    virtual void spellCheckerSuggest(const QString& word, int limit);
+    virtual void addToSpellCheckerUserWordList(const QString& word);
+    virtual bool setSpellCheckerLanguage(const QString& languageId);
 
-    const QScopedPointer<WordEnginePrivate> d_ptr;
+signals:
+    void newSpellingSuggestions(QStringList suggestions);
+    void newPredictionSuggestions(QStringList suggestions);
 };
 
-}} // namespace Logic, MaliitKeyboard
-
-#endif // MALIIT_KEYBOARD_WORDENGINE_H
+#endif // ABSTRACTLANGUAGEPLUGIN_H

@@ -90,7 +90,7 @@ void WordEngineProbe::addSpellingCandidate(const QString &text,
 //! \brief Returns new candidates.
 //! \param text Preedit of text model is reversed and emitted as only word
 //!             candidate. Special characters (e.g., punctuation) are skipped.
-WordCandidateList WordEngineProbe::fetchCandidates(Model::Text *text)
+void WordEngineProbe::fetchCandidates(Model::Text *text)
 {
     WordCandidateList result;
 
@@ -102,7 +102,7 @@ WordCandidateList WordEngineProbe::fetchCandidates(Model::Text *text)
         result.append(word_candidate);
     }
 
-    return result;
+    Q_EMIT(candidatesChanged(result));
 }
 
 AbstractLanguageFeatures* WordEngineProbe::languageFeature()

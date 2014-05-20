@@ -1,9 +1,7 @@
 /*
  * This file is part of Maliit Plugins
  *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical Ltda
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,50 +27,20 @@
  *
  */
 
-#include "wordengineprobe.h"
+#include "plugin.h"
+#include "inputmethodextensions.h"
 
-namespace MaliitKeyboard {
-namespace Logic {
+#include <QQmlEngine>
 
-//! \class WordEngineProbe
-//! A word engine that deterministcally predicts word candidates, in such a
-//! way that it can be used for tests. Does not require Hunspell or Presage.
+namespace Ubuntu {
+namespace Keyboard {
 
-
-//! \param parent The owner of this instance (optional).
-WordEngineProbe::WordEngineProbe(QObject *parent)
-    : AbstractWordEngine(parent)
-{}
-
-
-WordEngineProbe::~WordEngineProbe()
-{}
-
-
-//! \brief Returns new candidates.
-//! \param text Preedit of text model is reversed and emitted as only word
-//!             candidate. Special characters (e.g., punctuation) are skipped.
-void WordEngineProbe::fetchCandidates(Model::Text *text)
+void InputMethodExtensionPlugin::registerTypes(const char *uri)
 {
-    QString reverse;
-    Q_FOREACH(const QChar &c, text->preedit()) {
-        if (c.isLetterOrNumber()) {
-            reverse.prepend(c);
-        }
-    }
-
-    text->setPrimaryCandidate(reverse);
-
-    WordCandidateList result;
-    WordCandidate candidate(WordCandidate::SourcePrediction, reverse);
-    result.append(candidate);
-
-    Q_EMIT(candidatesChanged(result));
+    // @uri Ubuntu.Maliit
+    qmlRegisterType<InputMethodExtension>();
+    qmlRegisterType<InputMethod>(uri, 0, 1, "InputMethod");
 }
 
-AbstractLanguageFeatures* WordEngineProbe::languageFeature()
-{
-    return new MockLanguageFeatures();
-}
-
-}} // namespace MaliitKeyboard
+} // namespace Ubuntu
+} // namespace Keyboard

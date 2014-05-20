@@ -1,9 +1,7 @@
 /*
  * This file is part of Maliit Plugins
  *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical Ltda
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,59 +27,48 @@
  *
  */
 
-#ifndef MALIIT_KEYBOARD_ABSTRACTWORDENGINE_H
-#define MALIIT_KEYBOARD_ABSTRACTWORDENGINE_H
+#ifndef UBUNTU_KEYBOARD_EXTENSION_H
+#define UBUNTU_KEYBOARD_EXTENSION_H
 
-#include "models/text.h"
-#include "models/wordcandidate.h"
 #include <QtCore>
+#include <QtQuick>
 
-class AbstractLanguageFeatures;
+namespace Ubuntu {
+namespace Keyboard {
 
-namespace MaliitKeyboard {
-namespace Logic {
-
-class AbstractWordEnginePrivate;
-
-class AbstractWordEngine
-    : public QObject
+class InputMethodExtension : public QObject
 {
     Q_OBJECT
-    Q_DISABLE_COPY(AbstractWordEngine)
-    Q_DECLARE_PRIVATE(AbstractWordEngine)
-
-    Q_PROPERTY(bool enabled READ isEnabled
-                            WRITE setEnabled
-                            NOTIFY enabledChanged)
-
+    Q_PROPERTY(QVariantMap extensions READ inputMethodExtensions WRITE setInputMethodExtensions NOTIFY inputMethodExtensionsChanged)
 public:
-    explicit AbstractWordEngine(QObject *parent = 0);
-    virtual ~AbstractWordEngine();
+    InputMethodExtension(QObject *parent = 0);
 
-    virtual bool isEnabled() const;
-    Q_SLOT virtual void setEnabled(bool enabled);
-    Q_SIGNAL void enabledChanged(bool enabled);
+    QVariantMap inputMethodExtensions() const;
+    void setInputMethodExtensions(const QVariantMap &map);
 
-    Q_SLOT virtual void setWordPredictionEnabled(bool on);
-    Q_SLOT virtual void setSpellcheckerEnabled(bool on);
-
-    void clearCandidates();
-    void computeCandidates(Model::Text *text);
-    Q_SIGNAL void candidatesChanged(const WordCandidateList &candidates);
-
-    virtual void addToUserDictionary(const QString &word);
-
-    virtual AbstractLanguageFeatures* languageFeature() = 0;
-
-signals:
-    void preeditFaceChanged(Model::Text::PreeditFace face);
-    void primaryCandidateChanged(QString candidate);
+Q_SIGNALS:
+    void inputMethodExtensionsChanged();
 
 private:
-    virtual void fetchCandidates(Model::Text *text) = 0;
-    const QScopedPointer<AbstractWordEnginePrivate> d_ptr;
+    QVariantMap m_extensions;
+    QObject *m_inputText;
+
+    QObject *findInput(QObject *parent);
 };
 
-}} // namespace MaliitKeyboard, Logic
+class InputMethod : public QObject
+{
+    Q_OBJECT
 
-#endif // MALIIT_KEYBOARD_ABSTRACTWORDENGINE_H
+public:
+    InputMethod(QObject *parent = 0);
+
+    static InputMethodExtension *qmlAttachedProperties(QObject *obj);
+};
+
+} // namespace Ubuntu
+} // namespace Keyboard
+
+QML_DECLARE_TYPEINFO(Ubuntu::Keyboard::InputMethod, QML_HAS_ATTACHED_PROPERTIES)
+
+#endif

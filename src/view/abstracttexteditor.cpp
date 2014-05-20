@@ -276,6 +276,7 @@ public:
     QTimer auto_repeat_backspace_timer;
     QElapsedTimer backspace_hold_timer;
     bool backspace_sent;
+    bool repeating_backspace;
     EditorOptions options;
     QScopedPointer<Model::Text> text;
     QScopedPointer<Logic::AbstractWordEngine> word_engine;
@@ -299,6 +300,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
                                                      Logic::AbstractWordEngine *new_word_engine)
     : auto_repeat_backspace_timer()
     , backspace_sent(false)
+    , repeating_backspace(false)
     , options(new_options)
     , text(new_text)
     , word_engine(new_word_engine)
@@ -350,6 +352,12 @@ AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
 
     connect(word_engine, SIGNAL(candidatesChanged(WordCandidateList)),
             this,        SIGNAL(wordCandidatesChanged(WordCandidateList)));
+
+    connect(word_engine, SIGNAL(preeditFaceChanged(Model::Text::PreeditFace)),
+            this,        SLOT(setPreeditFace(Model::Text::PreeditFace)));
+
+    connect(word_engine, SIGNAL(primaryCandidateChanged(QString)),
+            this,        SLOT(setPrimaryCandidate(QString)));
 
     setPreeditEnabled(word_engine->isEnabled());
 }
@@ -477,6 +485,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         }
 
         d->auto_repeat_backspace_timer.stop();
+        d->repeating_backspace = false;
+        d->word_engine->computeCandidates(d->text.data());
     } break;
 
     case Key::ActionSpace: {
@@ -588,6 +598,8 @@ void AbstractTextEditor::onKeyExited(const Key &key)
 
     if (key.action() == Key::ActionBackspace) {
         d->auto_repeat_backspace_timer.stop();
+        d->repeating_backspace = false;
+        d->word_engine->computeCandidates(d->text.data());
     }
 }
 
@@ -752,6 +764,8 @@ void AbstractTextEditor::autoRepeatBackspace()
 {
     Q_D(AbstractTextEditor);
 
+    d->repeating_backspace = true;
+
     if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
         singleBackspace();
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
@@ -854,7 +868,12 @@ void AbstractTextEditor::singleBackspace()
     } else {
         d->text->removeFromPreedit(1);
         
-        d->word_engine->computeCandidates(d->text.data());
+        // Don't find word candidates if the user is holding down backspace
+        if(!d->repeating_backspace) {
+            d->word_engine->computeCandidates(d->text.data());
+        } else {
+            Q_EMIT wordCandidatesChanged(WordCandidateList());
+        }
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                           Replacement());
 
@@ -924,6 +943,19 @@ void AbstractTextEditor::sendKeyPressAndReleaseEvents(
     sendKeyEvent(press);
     QKeyEvent release(QEvent::KeyRelease, key, modifiers, text);
     sendKeyEvent(release);
+}
+
+void AbstractTextEditor::setPreeditFace(Model::Text::PreeditFace face)
+{
+    Q_D(AbstractTextEditor);
+
+    text()->setPreeditFace(face);
+    sendPreeditString(d->text->preedit(), face);
+}
+
+void AbstractTextEditor::setPrimaryCandidate(QString candidate)
+{
+    text()->setPrimaryCandidate(candidate);
 }
 
 } // namespace MaliitKeyboard

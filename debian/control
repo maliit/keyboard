@@ -228,3 +228,10 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Swedish
  Data files for the Ubuntu virtual keyboard - Swedish
+
+Package: qtdeclarative5-ubuntu-keyboard-extensions0.1
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - QML plugin
+ QMl extension for the Ubuntu virtual keyboard

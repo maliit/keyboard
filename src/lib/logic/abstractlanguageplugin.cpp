@@ -1,9 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2012 Openismus GmbH
- *
- * Contact: maliit-discuss@lists.maliit.org
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,50 +25,62 @@
  *
  */
 
-#include "wordengineprobe.h"
+#include "abstractlanguageplugin.h"
 
-namespace MaliitKeyboard {
-namespace Logic {
-
-//! \class WordEngineProbe
-//! A word engine that deterministcally predicts word candidates, in such a
-//! way that it can be used for tests. Does not require Hunspell or Presage.
-
-
-//! \param parent The owner of this instance (optional).
-WordEngineProbe::WordEngineProbe(QObject *parent)
-    : AbstractWordEngine(parent)
+AbstractLanguagePlugin::AbstractLanguagePlugin(QObject *parent)
+    : QObject(parent)
 {}
 
-
-WordEngineProbe::~WordEngineProbe()
+AbstractLanguagePlugin::~AbstractLanguagePlugin()
 {}
 
-
-//! \brief Returns new candidates.
-//! \param text Preedit of text model is reversed and emitted as only word
-//!             candidate. Special characters (e.g., punctuation) are skipped.
-void WordEngineProbe::fetchCandidates(Model::Text *text)
+void AbstractLanguagePlugin::predict(const QString& surroundingLeft, const QString& preedit) 
 {
-    QString reverse;
-    Q_FOREACH(const QChar &c, text->preedit()) {
-        if (c.isLetterOrNumber()) {
-            reverse.prepend(c);
-        }
-    }
-
-    text->setPrimaryCandidate(reverse);
-
-    WordCandidateList result;
-    WordCandidate candidate(WordCandidate::SourcePrediction, reverse);
-    result.append(candidate);
-
-    Q_EMIT(candidatesChanged(result));
+    Q_UNUSED(surroundingLeft)
+    Q_UNUSED(preedit)
+}
+ 
+void AbstractLanguagePlugin::wordCandidateSelected(QString word)
+{
+    Q_UNUSED(word)
 }
 
-AbstractLanguageFeatures* WordEngineProbe::languageFeature()
+AbstractLanguageFeatures* AbstractLanguagePlugin::languageFeature()
 {
-    return new MockLanguageFeatures();
+    return NULL;
 }
 
-}} // namespace MaliitKeyboard
+bool AbstractLanguagePlugin::spellCheckerEnabled()
+{
+    return false;
+}
+
+bool AbstractLanguagePlugin::setSpellCheckerEnabled(bool enabled)
+{
+    Q_UNUSED(enabled)
+    return false;
+}
+
+bool AbstractLanguagePlugin::spell(const QString& word)
+{
+    Q_UNUSED(word)
+    return false;
+}
+
+void AbstractLanguagePlugin::spellCheckerSuggest(const QString& word, int limit)
+{
+    Q_UNUSED(word)
+    Q_UNUSED(limit)
+}
+
+void AbstractLanguagePlugin::addToSpellCheckerUserWordList(const QString& word)
+{
+    Q_UNUSED(word)
+}
+
+bool AbstractLanguagePlugin::setSpellCheckerLanguage(const QString& languageId)
+{
+    Q_UNUSED(languageId)
+    return false;
+}
+
