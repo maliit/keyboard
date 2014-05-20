@@ -69,6 +69,8 @@ namespace {
             Key key;
             if (c.isSpace()) {
                 key.setAction(Key::ActionSpace);
+            } else if (c == '\r') {
+                key.setAction(Key::ActionReturn);
             } else {
                 key.setAction(Key::ActionInsert);
                 key.rLabel() = QString(c);
@@ -109,13 +111,14 @@ private:
 //                << true << "Helol Wordl!! " << "Hello World!! ";
 
         // Tests for the auto-correct and separator-at-end behavior
+        // FIXME: In the current testing infra, we cannot really test this properly, as we are using the 'backspace' character
+        //  a lot during auto-correction, which is currently not handled too well here.
         QTest::newRow("auto-correct enabled, commit with space, check separators")
-                << true << "Hel ,Wor ." << "Hello, World. ";
+                << true << "Hel ,Wor ." << "Hello , World . ";
         QTest::newRow("auto-correct enabled, commit with separators, check separators")
-                << true << "Hel.Wor. " << "Hello. World. ";
+                << true << "Hel.Wor." << "Hello. World. ";
         QTest::newRow("auto-correct enabled, check if two spaces are full-stop")
-                << true << "Hel  " << "Hello. ";      
-        // FIXME: In the current testing infra, we cannot really test this properly:
+                << true << "Hel  " << "Hello . ";      
         //QTest::newRow("auto-correct enabled, check removal of unnecessary whitespaces")
         //        << true << "Hello.       . " << "Hello.. ";
     }
@@ -180,22 +183,24 @@ private:
                 << false << "This is a \"first sentence\". And a second, one! "
                 << "This is a \"first sentence\". And a second, one! " << 2;
         QTest::newRow("auto-correct enabled, multiple sentences with mixed punctation")
-                << true << "This is a \"first sentence\". And a second, one! "
+                << true << "This is a \"first sentence\".And a second,one!"
                 << "This is a \"first sentence\". And a second, one! " << 2;
         QTest::newRow("auto-correct disabled, multiple sentences with dots")
                 << false << "First sentence. Second one. And Third. "
                 << "First sentence. Second one. And Third. " << 3;
         QTest::newRow("auto-correct enabled, multiple sentences with dots")
-                << true << "First sentence. Second one. And Third. "
+                << true << "First sentence.Second one.And Third."
                 << "First sentence. Second one. And Third. " << 3;
 
         // Tests for the auto-correct and autocaps separator functionality
+        // FIXME: In the current testing infra, we cannot really test this properly, as we are using the 'backspace' character
+        //  a lot during auto-correction, which is currently not handled too well here.
         QTest::newRow("auto-correct enabled, autocaps after separator auto-correction")
                 << true << "Hello Wor .This should be autocapsed "
-                << "Hello World. This should be autocapsed " << 1;
+                << "Hello World . This should be autocapsed " << 1;
         QTest::newRow("auto-correct enabled, autocaps after separator auto-correction #2")
-                << true << "Hello Wor . This should be autocapsed "
-                << "Hello World.  This should be autocapsed " << 1;
+                << true << "Hello Wor .This should be autocapsed "
+                << "Hello World . This should be autocapsed " << 1;
     }
 
     Q_SLOT void testAutoCaps()

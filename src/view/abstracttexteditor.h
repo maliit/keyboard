@@ -156,6 +156,7 @@ private:
     virtual void singleBackspace();
 
     void commitPreedit();
+    void removeTrailingWhitespaces();
     Q_SLOT void autoRepeatBackspace();
     void autoRepeatWordBackspace();
     QString wordLeftOfCursor() const;

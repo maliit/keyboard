@@ -284,7 +284,6 @@ public:
     bool auto_caps_enabled;
     int ignore_next_cursor_position;
     QString ignore_next_surrounding_text;
-    bool look_for_extra_end_characters;
     bool look_for_a_double_space;
     QString appendix_for_previous_preedit;
     int backspace_word_acceleration;
@@ -308,7 +307,6 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , auto_caps_enabled(false)
     , ignore_next_cursor_position(-1)
     , ignore_next_surrounding_text()
-    , look_for_extra_end_characters(false)
     , look_for_a_double_space(false)
     , appendix_for_previous_preedit()
     , backspace_word_acceleration(0)
@@ -413,13 +411,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     const QString text = key.label();
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
-    bool look_for_extra_end_characters = d->look_for_extra_end_characters;
     bool look_for_a_double_space = d->look_for_a_double_space;
-
-    if (look_for_extra_end_characters) {
-        // we reset the flag here so that we won't have to add boilerplate code later
-        d->look_for_extra_end_characters = false;
-    }
 
     if (look_for_a_double_space) {
         // we reset the flag here so that we won't have to add boilerplate code later
@@ -435,36 +427,24 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                     not d->text->preedit().isEmpty() && isSeparator;
 
         if (replace_preedit) {
-            // in this case we do not append an appendix because by definition after commiting by a separator, the separator should be next to the word
-            d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()); // <- XXX: I guess we should compute that during 'appending'
+            // this means we should commit the candidate, add the separator and whitespace
             d->text->setPreedit(d->text->primaryCandidate());
+            d->text->appendToPreedit(text);
+            d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+            d->text->appendToPreedit(d->appendix_for_previous_preedit);
             commitPreedit();
-            d->look_for_extra_end_characters = true;
             auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
-        }
-        else if (look_for_extra_end_characters) {
-            if (isSeparator) {
-                d->text->appendToPreedit(text);
-                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-                d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
-                alreadyAppended = true;
-            }
-            else {
-                d->text->appendToPreedit(d->appendix_for_previous_preedit);
-            }
-            commitPreedit();
+            alreadyAppended = true;
         }
         else if (d->auto_correct_enabled && isSeparator) {
-            // in case of a separator, remove any leading spaces
-            const QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+            // remove all whitespaces before the separator, then add a whitespace after it
+            removeTrailingWhitespaces();
 
-            QString::const_iterator begin = textOnLeft.cbegin();
-            QString::const_iterator i = textOnLeft.cend();
-            while (i != begin) {
-                --i;
-                if (*i != ' ') break;
-                singleBackspace();
-            }
+            d->text->appendToPreedit(text);
+            auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
+            d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
+            commitPreedit();
+            alreadyAppended = true;
         }
 
         // if we had modified the preedit already because of a separator entry, there is no need to perform all the
@@ -500,37 +480,32 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     } break;
 
     case Key::ActionSpace: {
+        QString space = " ";
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
         bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
-        look_for_a_double_space = look_for_a_double_space && d->auto_correct_enabled && not stopSequence.isEmpty();
 
-        // there is a lot of logic going on here. At this stage we check the following:
-        // * replacing the current characters with the first candidate if auto-correct is enabled
-        // * looking for a double space character if auto-correct is enabled (which is turned into a full-stop sign)
-        // * appending a space character in all other cases
-        if (replace_preedit) {
-            d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-            d->text->setPreedit(d->text->primaryCandidate());
-            commitPreedit();
-            d->look_for_extra_end_characters = true;
+        // every double-space character inputs one-after-another force a full-stop, so trigger it if needed
+        if (d->auto_correct_enabled && not look_for_a_double_space) {
             d->look_for_a_double_space = true;
         }
-        else if (look_for_a_double_space) {
+
+        if (replace_preedit) {
+            space = d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+            d->text->setPreedit(d->text->primaryCandidate());
+        }
+        else if (look_for_a_double_space && not stopSequence.isEmpty()) {
+            removeTrailingWhitespaces();
             d->text->appendToPreedit(d->word_engine->languageFeature()->fullStopSequence());
 
             // we need to re-evaluate autocaps after our changes to the preedit
             textOnLeft = d->text->surroundingLeft() + d->text->preedit();
             auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
+        }
 
-            d->text->appendToPreedit(" ");
-            commitPreedit();
-        }
-        else {
-            d->text->appendToPreedit(" ");
-            commitPreedit();
-        }
+        d->text->appendToPreedit(space);
+        commitPreedit();
 
         if (auto_caps_activated && d->auto_caps_enabled) {
             Q_EMIT autoCapsActivated();
@@ -651,13 +626,14 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
     d->text->setPreedit(replacement);
     const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->preedit());
     d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+    if (d->auto_correct_enabled) {
+        d->text->appendToPreedit(d->appendix_for_previous_preedit);
+    }
     commitPreedit();
 
     if (auto_caps_activated && d->auto_caps_enabled) {
         Q_EMIT autoCapsActivated();
     }
-
-    d->look_for_extra_end_characters = true;
 }
 
 //! \brief Clears preedit.
@@ -745,6 +721,21 @@ void AbstractTextEditor::commitPreedit()
     sendCommitString(d->text->preedit());
     d->text->commitPreedit();
     d->word_engine->clearCandidates();
+}
+
+void AbstractTextEditor::removeTrailingWhitespaces()
+{
+    Q_D(AbstractTextEditor);
+
+    const QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+
+    QString::const_iterator begin = textOnLeft.cbegin();
+    QString::const_iterator i = textOnLeft.cend();
+    while (i != begin) {
+        --i;
+        if (*i != ' ') break;
+        singleBackspace();
+    }
 }
 
 // TODO: this implementation does not take into account following features:
