@@ -769,10 +769,16 @@ void AbstractTextEditor::singleBackspace()
 {
     Q_D(AbstractTextEditor);
 
+    QString textOnLeft = d->text->surroundingLeft();
+
     if (d->text->preedit().isEmpty()) {
         sendKeyPressAndReleaseEvents(Qt::Key_Backspace, Qt::NoModifier);
+        // Deletion of surrounding text isn't updated in the model until later
+        // Update it locally here for autocaps detection
+        textOnLeft.chop(1);
     } else {
         d->text->removeFromPreedit(1);
+        textOnLeft += d->text->preedit();
         
         // Don't find word candidates if the user is holding down backspace
         if(!d->repeating_backspace) {
@@ -792,6 +798,13 @@ void AbstractTextEditor::singleBackspace()
             //  to happen
             sendCommitString("");
         }
+    }
+
+    textOnLeft = textOnLeft.trimmed();
+
+    const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
+    if (auto_caps_activated && d->auto_caps_enabled) {
+        Q_EMIT autoCapsActivated();
     }
 
     d->backspace_sent = true;
