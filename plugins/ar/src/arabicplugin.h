@@ -15,7 +15,6 @@ public:
     explicit ArabicPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("ar");
     }
 
     virtual ~ArabicPlugin()

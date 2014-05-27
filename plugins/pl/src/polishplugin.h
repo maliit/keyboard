@@ -15,7 +15,6 @@ public:
     explicit PolishPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("pl");
     }
 
     virtual ~PolishPlugin()

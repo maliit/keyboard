@@ -20,6 +20,7 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
     connect(this, SIGNAL(setSpellCheckLanguage(QString)), spellWorker, SLOT(setLanguage(QString)));
     connect(this, SIGNAL(setSpellCheckLimit(int)), spellWorker, SLOT(setLimit(int)));
     connect(this, SIGNAL(spellCheckEnabled(bool)), spellWorker, SLOT(setEnabled(bool)));
+    connect(this, SIGNAL(updateSpellCheckWord(QString)), spellWorker, SLOT(updateSpellCheckWord(QString)));
     m_spellCheckThread->start();
 
     m_predictiveTextThread = new QThread();
@@ -29,6 +30,7 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
     connect(predictiveWorker, SIGNAL(newSuggestions(QStringList)), this, SIGNAL(newPredictionSuggestions(QStringList)));
     connect(this, SIGNAL(parsePredictionText(QString, QString)), predictiveWorker, SLOT(parsePredictionText(QString, QString)));
     connect(this, SIGNAL(setPredictionLanguage(QString)), predictiveWorker, SLOT(setPredictionLanguage(QString)));
+    connect(this, SIGNAL(updateSpellCheckWord(QString)), predictiveWorker, SLOT(updateSpellCheckWord(QString)));
     m_predictiveTextThread->start();
 }
 
@@ -77,16 +79,13 @@ void WesternLanguagesPlugin::spellCheckerSuggest(const QString& word, int limit)
 
 void WesternLanguagesPlugin::addToSpellCheckerUserWordList(const QString& word)
 {
+    Q_EMIT updateSpellCheckWord(word);
     return m_spellChecker.addToUserWordlist(word);
 }
 
 bool WesternLanguagesPlugin::setSpellCheckerLanguage(const QString& languageId)
 {
+    Q_EMIT setPredictionLanguage(languageId);
     Q_EMIT setSpellCheckLanguage(languageId);
     return m_spellChecker.setLanguage(languageId);
-}
-
-void WesternLanguagesPlugin::_useDatabase(const QString &locale)
-{
-    Q_EMIT setPredictionLanguage(locale);
 }

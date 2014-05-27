@@ -15,7 +15,6 @@ public:
     explicit DutchPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("nl");
     }
 
     virtual ~DutchPlugin()
