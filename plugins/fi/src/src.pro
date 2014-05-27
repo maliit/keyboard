@@ -22,18 +22,20 @@ EXAMPLE_FILES = finnishplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/fi/
 
-lang_db_fi.path = $$PLUGIN_INSTALL_PATH
 lang_db_fi.commands += \
   rm -f $$PWD/database_fi.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_fi.db $$PWD/free_ebook.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_fi.db $$PWD/free_ebook.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_fi.db $$PWD/free_ebook.txt
-
 lang_db_fi.files += $$PWD/database_fi.db
-QMAKE_EXTRA_TARGETS += lang_db_fi
+
+lang_db_fi_install.files += $$PWD/database_fi.db
+lang_db_fi_install.path = $$PLUGIN_INSTALL_PATH
+
+QMAKE_EXTRA_TARGETS += lang_db_fi lang_db_fi_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_fi
+INSTALLS += target lang_db_fi_install
 
 OTHER_FILES += \
     finnishplugin.json \
