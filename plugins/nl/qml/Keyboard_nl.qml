@@ -32,16 +32,16 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; }
-            CharKey { label: "w"; shifted: "W"; }
-            CharKey { label: "e"; shifted: "E"; extended: ["ë","è","é","ê","€"]; extendedShifted: ["Ë","È","É","Ê","€"] }
-            CharKey { label: "r"; shifted: "R"; }
-            CharKey { label: "t"; shifted: "T"; extended: ["þ"]; extendedShifted: ["Þ"] }
-            CharKey { label: "y"; shifted: "Y"; extended: ["¥"]; extendedShifted: ["¥"] }
-            CharKey { label: "u"; shifted: "U"; extended: ["û","ù","ü","ú"]; extendedShifted: ["Û","Ù","Ü","Ú"] }
-            CharKey { label: "i"; shifted: "I"; extended: ["ï","î","ì","í"]; extendedShifted: ["Ï","Î","Ì","Í"] }
-            CharKey { label: "o"; shifted: "O"; extended: ["ô","ò","ö","ó","õ"]; extendedShifted: ["Ô","Ò","Ö","Ó","Õ"] }
-            CharKey { label: "p"; shifted: "P"; }
+            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "w"; shifted: "W"; extended: ["2"]; extendedShifted: ["2"] }
+            CharKey { label: "e"; shifted: "E"; extended: ["3", "ë","è","é","ê","€"]; extendedShifted: ["3", "Ë","È","É","Ê","€"] }
+            CharKey { label: "r"; shifted: "R"; extended: ["4"]; extendedShifted: ["4"] }
+            CharKey { label: "t"; shifted: "T"; extended: ["5", "þ"]; extendedShifted: ["5", "Þ"] }
+            CharKey { label: "y"; shifted: "Y"; extended: ["6", "¥"]; extendedShifted: ["6", "¥"] }
+            CharKey { label: "u"; shifted: "U"; extended: ["7", "û","ù","ü","ú"]; extendedShifted: ["7", "Û","Ù","Ü","Ú"] }
+            CharKey { label: "i"; shifted: "I"; extended: ["8", "ï","î","ì","í"]; extendedShifted: ["8", "Ï","Î","Ì","Í"] }
+            CharKey { label: "o"; shifted: "O"; extended: ["9", "ô","ò","ö","ó","õ"]; extendedShifted: ["9", "Ô","Ò","Ö","Ó","Õ"] }
+            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"] }
         }
 
         Row {

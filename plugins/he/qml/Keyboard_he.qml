@@ -32,14 +32,14 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ק"; shifted: ""; }
-            CharKey { label: "ר"; shifted: ""; }
-            CharKey { label: "א"; shifted: ""; }
-            CharKey { label: "ט"; shifted: ""; }
-            CharKey { label: "ו"; shifted: ""; }
-            CharKey { label: "ן"; shifted: ""; }
-            CharKey { label: "ם"; shifted: ""; }
-            CharKey { label: "פ"; shifted: ""; }
+            CharKey { label: "ק"; shifted: ""; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "ר"; shifted: ""; extended: ["2"]; extendedShifted: ["2"] }
+            CharKey { label: "א"; shifted: ""; extended: ["3"]; extendedShifted: ["3"] }
+            CharKey { label: "ט"; shifted: ""; extended: ["4"]; extendedShifted: ["4"] }
+            CharKey { label: "ו"; shifted: ""; extended: ["5"]; extendedShifted: ["5"] }
+            CharKey { label: "ן"; shifted: ""; extended: ["6"]; extendedShifted: ["6"] }
+            CharKey { label: "ם"; shifted: ""; extended: ["7"]; extendedShifted: ["7"] }
+            CharKey { label: "פ"; shifted: ""; extended: ["8"]; extendedShifted: ["8"] }
         }
 
         Row {
@@ -54,8 +54,8 @@ KeyPad {
             CharKey { label: "י"; shifted: ""; }
             CharKey { label: "ח"; shifted: ""; }
             CharKey { label: "ל"; shifted: ""; }
-            CharKey { label: "ך"; shifted: ""; }
-            CharKey { label: "ף"; shifted: ""; }
+            CharKey { label: "ך"; shifted: ""; extended: ["9"]; extendedShifted: ["9"] }
+            CharKey { label: "ף"; shifted: ""; extended: ["0"]; extendedShifted: ["0"] }
         }
 
         Row {
