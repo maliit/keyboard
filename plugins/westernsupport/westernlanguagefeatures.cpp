@@ -77,7 +77,7 @@ QString WesternLanguageFeatures::appendixForReplacedPreedit(const QString &preed
 
 bool WesternLanguageFeatures::isSeparator(const QString &text) const
 {
-    static const QString separators = QString::fromUtf8(",.!?:;\r\n");
+    static const QString separators = QString::fromUtf8(",.!?\r\n");
 
     if (text.isEmpty()) {
         return false;
