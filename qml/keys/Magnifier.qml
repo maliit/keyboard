@@ -48,7 +48,7 @@ Item {
 
         // this property is used to synchronize scale and opacity animation
         property real animationStep: 0
-        scale: animationStep
+        scale: animationStep * 1.25
         transformOrigin: Item.Bottom
         opacity: animationStep
 
