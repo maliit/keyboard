@@ -43,6 +43,7 @@ KeyPad {
             CharKey { label: "щ"; shifted: "Щ"; }
             CharKey { label: "з"; shifted: "З"; }
             CharKey { label: "х"; shifted: "Х"; }
+            CharKey { label: "ъ"; shifted: "Ъ"; }
         }
 
         Row {
@@ -71,8 +72,7 @@ KeyPad {
             CharKey { label: "ч"; shifted: "Ч"; }
             CharKey { label: "с"; shifted: "С"; }
             CharKey { label: "м"; shifted: "М"; }
-            CharKey { label: "і"; shifted: "І"; }
-            CharKey { label: "и"; shifted: "И"; }
+            CharKey { label: "и"; shifted: "И"; extended: ["і", "І"]; }
             CharKey { label: "т"; shifted: "Т"; }
             CharKey { label: "ь"; shifted: "Ь"; }
             CharKey { label: "б"; shifted: "Б"; }
@@ -90,7 +90,6 @@ KeyPad {
             SpaceKey       { id: spaceKey;                               anchors.left: slashKey.right; anchors.right: urlKey.left; noMagnifier: true }
             UrlKey         { id: urlKey; label: ".ru"; extended: [".ua",".su",".kg",".рф","укр",".by",".tj"]; anchors.right: dotKey.left; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: extraCharKey.left; }
-            CharKey        { id: extraCharKey; label: "ъ"; shifted: "Ъ"; anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
     } // column
