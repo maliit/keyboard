@@ -1,3 +1,30 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140527-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Modify the build system so that presage databases are only updated
+    when manually requested, instead of during every compile.
+  * Add user input to the word ribbon as the first entry, allowing for
+    autocomplete suggestions to be overridden. Use the selection of that
+    entry as the cue to add words to the user spell check dictionary and
+    filter presage's predictions based on what words are in the spell
+    check dictionary. (LP: #1318808)
+  * Re-evaluate the state of autocaps when the user is deleting
+    characters and when the cursor position changes to the beginning of
+    a field (LP: #1312329)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 May 2014 15:37:47 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140515-0ubuntu1) utopic; urgency=low
+
+  [ Daniel d'Andrada ]
+  * Remove SurfaceFlinger "support" That simplifies code and enables it
+    to work in the "Qt as Mir compositor" future architecture.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 15 May 2014 23:17:20 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140512-0ubuntu1) utopic; urgency=low
 
   [ Bill Filler ]

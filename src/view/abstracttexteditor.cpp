@@ -758,24 +758,6 @@ QString AbstractTextEditor::wordLeftOfCursor() const
     return leftSurrounding.right(length);
 }
 
-//! \brief Emits wordCandidatesChanged() signal with current preedit
-//! as a candidate.
-void AbstractTextEditor::showUserCandidate()
-{
-    Q_D(AbstractTextEditor);
-
-    if (d->text->preedit().isEmpty()) {
-        return;
-    }
-
-    WordCandidateList candidates;
-    WordCandidate candidate(WordCandidate::SourceUser, d->text->preedit());
-
-    candidates << candidate;
-
-    Q_EMIT wordCandidatesChanged(candidates);
-}
-
 //! \brief Adds \a word to user dictionary.
 //! \param word Word to be added.
 void AbstractTextEditor::addToUserDictionary(const QString &word)

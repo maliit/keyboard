@@ -15,7 +15,6 @@ public:
     explicit SwedishPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("sv");
     }
 
     virtual ~SwedishPlugin()

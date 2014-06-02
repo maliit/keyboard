@@ -132,7 +132,6 @@ public:
     Q_SLOT void setAutoCapsEnabled(bool enabled);
     Q_SIGNAL void autoCapsEnabledChanged(bool enabled);
 
-    Q_SLOT void showUserCandidate();
     Q_SLOT void addToUserDictionary(const QString &word);
 
     Q_SIGNAL void keyboardClosed();

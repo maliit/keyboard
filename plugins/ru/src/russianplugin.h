@@ -15,7 +15,6 @@ public:
     explicit RussianPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("ru");
     }
 
     virtual ~RussianPlugin()
