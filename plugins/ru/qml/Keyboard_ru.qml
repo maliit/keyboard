@@ -36,7 +36,7 @@ KeyPad {
             CharKey { label: "ц"; shifted: "Ц"; }
             CharKey { label: "у"; shifted: "У"; extended: ["ў"]; extendedShifted: ["Ў"] }
             CharKey { label: "к"; shifted: "К"; }
-            CharKey { label: "e"; shifted: "E"; extended: ["ë", "€"]; extendedShifted: ["Ë", "€"] }
+            CharKey { label: "е"; shifted: "Е"; extended: ["ё", "€"]; extendedShifted: ["Ё", "€"] }
             CharKey { label: "н"; shifted: "Н"; }
             CharKey { label: "г"; shifted: "Г"; }
             CharKey { label: "ш"; shifted: "Ш"; }
@@ -53,9 +53,9 @@ KeyPad {
             CharKey { label: "ф"; shifted: "Ф"; }
             CharKey { label: "ы"; shifted: "Ы"; }
             CharKey { label: "в"; shifted: "В"; }
-            CharKey { label: "a"; shifted: "A"; }
+            CharKey { label: "а"; shifted: "А"; }
             CharKey { label: "п"; shifted: "П"; }
-            CharKey { label: "р"; shifted: "Р"; }
+            CharKey { label: "р"; shifted: "Р"; extended: ["₽"]; extendedShifted: ["₽"] }
             CharKey { label: "о"; shifted: "О"; }
             CharKey { label: "л"; shifted: "Л"; }
             CharKey { label: "д"; shifted: "Д"; }
