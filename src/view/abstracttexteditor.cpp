@@ -907,15 +907,20 @@ void AbstractTextEditor::checkPreeditReentry()
         QString lastChar = text()->surrounding().at(currentOffset-2);
         if(!QRegExp("\\W+").exactMatch(lastChar)) {
             QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("\\W+"));
+            int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
             if(!text()->surroundingRight().trimmed().isEmpty()) {
                 // We don't currently handle reentering preedit in the middle of the text
                 return;
             }
             QString recreatedPreedit = leftWords.last();
+            if(trimDiff == 0) {
+                // Remove the last character from the word if we weren't just deleting a space
+                // as the last backspace hasn't been committed yet.
+                recreatedPreedit.chop(1);
+            }
             int position = currentOffset - recreatedPreedit.size();
             QString surroundWithoutPreedit = text()->surrounding().remove(position, recreatedPreedit.size());
 
-            // -1 as we've just deleted a character via backspace but it hasn't been committed yet
             for(int i = 0; i < recreatedPreedit.size(); i++) {
                 singleBackspace();
             }
