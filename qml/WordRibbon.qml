@@ -57,7 +57,7 @@ Rectangle {
                     font.pixelSize: units.gu(2);
                     font.family: "Ubuntu Medium"
                     color: "#999999"
-                    font.bold: false
+                    font.bold: isUserInput
                     text: word;
                 }
             }
@@ -66,11 +66,11 @@ Rectangle {
                 anchors.fill: wordCandidateItem
                 onPressed: {
                     wordRibbonCanvas.state = "SELECTED"
-                    event_handler.onWordCandidatePressed(wordItem.text);
+                    event_handler.onWordCandidatePressed(wordItem.text, isUserInput)
                 }
                 onReleased: {
                     wordRibbonCanvas.state = "NORMAL"
-                    event_handler.onWordCandidateReleased(wordItem.text)
+                    event_handler.onWordCandidateReleased(wordItem.text, isUserInput)
                 }
             }
         }

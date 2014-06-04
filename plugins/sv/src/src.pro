@@ -22,18 +22,20 @@ EXAMPLE_FILES = swedishplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/sv/
 
-lang_db_sv.path = $$PLUGIN_INSTALL_PATH
 lang_db_sv.commands += \
   rm -f $$PWD/database_sv.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_sv.db $$PWD/free_ebook.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_sv.db $$PWD/free_ebook.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_sv.db $$PWD/free_ebook.txt
-
 lang_db_sv.files += $$PWD/database_sv.db
-QMAKE_EXTRA_TARGETS += lang_db_sv
+
+lang_db_sv_install.files += $$PWD/database_sv.db
+lang_db_sv_install.path = $$PLUGIN_INSTALL_PATH
+
+QMAKE_EXTRA_TARGETS += lang_db_sv lang_db_sv_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_sv
+INSTALLS += target lang_db_sv_install
 
 OTHER_FILES += \
     swedishplugin.json \

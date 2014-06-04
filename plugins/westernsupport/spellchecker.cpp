@@ -241,14 +241,14 @@ void SpellChecker::ignoreWord(const QString &word)
     d->ignored_words.insert(word);
 }
 
-//! \brief Adds a given word to user dictionary.
+//! \brief Adds a given word to user's permanent dictionary.
 //! \param word The word to be added to user dictionary - it will be used for
 //!             spellchecking and suggesting.
 void SpellChecker::addToUserWordlist(const QString &word)
 {
     Q_D(SpellChecker);
 
-    if (not enabled()) {
+    if (spell(word)) {
         return;
     }
 
@@ -257,6 +257,19 @@ void SpellChecker::addToUserWordlist(const QString &word)
     if (user_dictionary.open(QFile::Append)) {
         QTextStream stream(&user_dictionary);
         stream << word << endl;
+    }
+
+    updateWord(word);
+}
+
+//! \brief Adds a new word to the current hunspell instance
+//! \param word The word to be added to the current runtime dictionary
+void SpellChecker::updateWord(const QString &word)
+{
+    Q_D(SpellChecker);
+
+    if(not enabled()) {
+        return;
     }
 
     // Non-zero return value means some error.
@@ -292,10 +305,11 @@ bool SpellChecker::setLanguage(const QString &language)
         return false;
     }
 
-    d->aff_file = dictPath() + "/" + affMatches[0];
-    d->dic_file = dictPath() + "/" + dicMatches[0];
+    d->aff_file = dictPath() + QDir::separator() + affMatches[0];
+    d->dic_file = dictPath() + QDir::separator() + dicMatches[0];
+    d->user_dictionary_file = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + language + "_userDictionary.dic";
 
-    qDebug() << "spellechecker.cpp in setLanguage() aff_file=" << d->aff_file << "dic_file=" << d->dic_file;
+    qDebug() << "spellechecker.cpp in setLanguage() aff_file=" << d->aff_file << "dic_file=" << d->dic_file << "user dictionary=" << d->user_dictionary_file;
 
     if (enabled()) {
         setEnabled(false);

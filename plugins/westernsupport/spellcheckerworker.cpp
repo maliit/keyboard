@@ -78,3 +78,9 @@ void SpellCheckerWorker::setEnabled(bool enabled)
 {
     m_spellChecker.setEnabled(enabled);
 }
+
+void SpellCheckerWorker::updateSpellCheckWord(QString word)
+{   
+    m_spellChecker.updateWord(word);
+}
+

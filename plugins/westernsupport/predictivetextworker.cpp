@@ -34,6 +34,7 @@ PredictiveTextWorker::PredictiveTextWorker(QObject *parent)
     , m_candidatesContext()
     , m_presageCandidates(CandidatesCallback(m_candidatesContext))
     , m_presage(&m_presageCandidates)
+    , m_spellChecker()
 {
     m_presage.config("Presage.Selector.SUGGESTIONS", "6");
     m_presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
@@ -50,7 +51,15 @@ void PredictiveTextWorker::parsePredictionText(const QString& surroundingLeft, c
 
         std::vector<std::string>::const_iterator it;
         for (it = predictions.begin(); it != predictions.end(); ++it) {
-            list << QString::fromStdString(*it);
+            QString prediction = QString::fromStdString(*it);
+            // Presage will implicitly learn any words the user types as part
+            // of its prediction model, so we only provide predictions for 
+            // words that have been explicitly added to the spellcheck dictionary.
+            QString predictionTitleCase = prediction;
+            predictionTitleCase[0] = prediction.at(0).toUpper();
+            if (m_spellChecker.spell(prediction) || m_spellChecker.spell(predictionTitleCase) || m_spellChecker.spell(prediction.toUpper())) {
+                list << prediction;
+            }
         }
 
     } catch (int error) {
@@ -65,10 +74,17 @@ void PredictiveTextWorker::setPredictionLanguage(QString locale)
     QString dbFileName = "database_"+locale+".db";
     QString fullPath("/usr/share/maliit/plugins/com/ubuntu/lib/"+locale+"/");
     fullPath.append(dbFileName);
+    m_spellChecker.setLanguage(locale);
+    m_spellChecker.setEnabled(true);
 
     try {
         m_presage.config("Presage.Predictors.DefaultSmoothedNgramPredictor.DBFILENAME", fullPath.toLatin1().data());
     } catch (int error) {
         qWarning() << "An exception was thrown in libpresage when changing language database, exception nr: " << error;
     }
+}
+
+void PredictiveTextWorker::updateSpellCheckWord(QString word)
+{
+    m_spellChecker.updateWord(word);
 }
