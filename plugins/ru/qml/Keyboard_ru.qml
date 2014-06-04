@@ -55,7 +55,7 @@ KeyPad {
             CharKey { label: "в"; shifted: "В"; }
             CharKey { label: "а"; shifted: "А"; }
             CharKey { label: "п"; shifted: "П"; }
-            CharKey { label: "р"; shifted: "Р"; extended: ["₽"]; extendedShifted: ["₽"] }
+            CharKey { label: "р"; shifted: "Р"; }
             CharKey { label: "о"; shifted: "О"; }
             CharKey { label: "л"; shifted: "Л"; }
             CharKey { label: "д"; shifted: "Д"; }
