@@ -1,3 +1,24 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140611-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Disable magnification on the dial pad and number pad layouts, remove
+    transparency from magnifier background. (LP: #1323855)
+  * Place words back in to pre-edit if the user presses backspace to
+    reach that word
+  * Preserve user input as the first prediction candidate if it is spelt
+    correctly (LP: #1313635)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Changes related to fixing the preedit word completion, enhancing the
+    usage with regards to adding whitespaces, separators. Enhanced
+    autocaps. Added possibility to commit (word-completion) when using
+    separators (., etc). Double-space with auto-correction enabled now
+    results in a full-stop sign. Also, in auto-correct unnecessary
+    whitespaces before separators are removed. Include unit-testing of
+    some of the features. (LP: #1244227)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 11 Jun 2014 15:30:55 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140527-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
