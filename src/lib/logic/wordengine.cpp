@@ -256,13 +256,19 @@ void WordEngine::newPredictionSuggestions(QStringList suggestions)
 {
     Q_D(WordEngine);
 
+    // If the current user entry is a valid word, add this as the first prediction
+    if(d->correct_spelling) {
+        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, d->candidates->at(0).word());
+    }
+
     Q_FOREACH(const QString &correction, suggestions) {
-        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+        if(correction != d->candidates->at(0).word()) { // Don't repeat correctly spelt user word
+            appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+        }
     }
 
     Q_EMIT candidatesChanged(*d->candidates);
 
-    // Candidates always has at least one entry from the user input candidate
     Q_EMIT primaryCandidateChanged(d->candidates->size() == 1 ? QString()
                                                               : d->candidates->at(1).label());
 
