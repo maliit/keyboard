@@ -22,18 +22,20 @@ EXAMPLE_FILES = hebrewplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/he/
 
-lang_db_he.path = $$PLUGIN_INSTALL_PATH
 lang_db_he.commands += \
   rm -f $$PWD/database_he.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_he.db $$PWD/free_ebook.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_he.db $$PWD/free_ebook.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_he.db $$PWD/free_ebook.txt
-
 lang_db_he.files += $$PWD/database_he.db
-QMAKE_EXTRA_TARGETS += lang_db_he
+
+lang_db_he_files.files += $$PWD/database_he.db
+lang_db_he_files.path = $$PLUGIN_INSTALL_PATH
+
+QMAKE_EXTRA_TARGETS += lang_db_he lang_db_he_files
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_he
+INSTALLS += target lang_db_he_files
 
 OTHER_FILES += \
     hebrewplugin.json \

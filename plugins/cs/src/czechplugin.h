@@ -15,7 +15,6 @@ public:
     explicit CzechPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("cs");
     }
 
     virtual ~CzechPlugin()

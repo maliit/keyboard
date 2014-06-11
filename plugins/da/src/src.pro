@@ -22,18 +22,20 @@ EXAMPLE_FILES = danishplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/da/
 
-lang_db_da.path = $$PLUGIN_INSTALL_PATH
 lang_db_da.commands += \
   rm -f $$PWD/database_da.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_da.db $$PWD/free_ebook.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_da.db $$PWD/free_ebook.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_da.db $$PWD/free_ebook.txt
-
 lang_db_da.files += $$PWD/database_da.db
-QMAKE_EXTRA_TARGETS += lang_db_da
+
+lang_db_da_install.files += $$PWD/database_da.db
+lang_db_da_install.path = $$PLUGIN_INSTALL_PATH
+
+QMAKE_EXTRA_TARGETS += lang_db_da lang_db_da_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_da
+INSTALLS += target lang_db_da_install
 
 OTHER_FILES += \
     danishplugin.json \

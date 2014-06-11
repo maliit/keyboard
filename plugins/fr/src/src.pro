@@ -22,18 +22,20 @@ EXAMPLE_FILES = frenchplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/fr/
 
-lang_db_fr.path = $$PLUGIN_INSTALL_PATH
 lang_db_fr.commands += \
   rm -f $$PWD/database_fr.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt
-
 lang_db_fr.files += $$PWD/database_fr.db
-QMAKE_EXTRA_TARGETS += lang_db_fr
+
+lang_db_fr_install.files += $$PWD/database_fr.db
+lang_db_fr_install.path = $$PLUGIN_INSTALL_PATH
+
+QMAKE_EXTRA_TARGETS += lang_db_fr lang_db_fr_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_fr
+INSTALLS += target lang_db_fr_install
 
 
 OTHER_FILES += \
