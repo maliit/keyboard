@@ -434,25 +434,27 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
                     not d->text->preedit().isEmpty() && isSeparator;
 
-        if (replace_preedit) {
-            // this means we should commit the candidate, add the separator and whitespace
-            d->text->setPreedit(d->text->primaryCandidate());
-            d->text->appendToPreedit(text);
-            d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-            d->text->appendToPreedit(d->appendix_for_previous_preedit);
-            commitPreedit();
-            auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
-            alreadyAppended = true;
-        }
-        else if (d->auto_correct_enabled && isSeparator) {
-            // remove all whitespaces before the separator, then add a whitespace after it
-            removeTrailingWhitespaces();
+        if (d->preedit_enabled) {
+            if (replace_preedit) {
+                // this means we should commit the candidate, add the separator and whitespace
+                d->text->setPreedit(d->text->primaryCandidate());
+                d->text->appendToPreedit(text);
+                d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+                d->text->appendToPreedit(d->appendix_for_previous_preedit);
+                commitPreedit();
+                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
+                alreadyAppended = true;
+            }
+            else if (d->auto_correct_enabled && isSeparator) {
+                // remove all whitespaces before the separator, then add a whitespace after it
+                removeTrailingWhitespaces();
 
-            d->text->appendToPreedit(text);
-            auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-            d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
-            commitPreedit();
-            alreadyAppended = true;
+                d->text->appendToPreedit(text);
+                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
+                d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
+                commitPreedit();
+                alreadyAppended = true;
+            }
         }
 
         // if we had modified the preedit already because of a separator entry, there is no need to perform all the
@@ -497,7 +499,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
 
         // every double-space character inputs one-after-another force a full-stop, so trigger it if needed
-        if (d->auto_correct_enabled && not look_for_a_double_space) {
+        if (d->preedit_enabled && d->auto_correct_enabled && not look_for_a_double_space) {
             d->look_for_a_double_space = true;
         }
 
