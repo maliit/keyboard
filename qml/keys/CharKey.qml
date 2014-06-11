@@ -142,9 +142,14 @@ Item {
         onReleased: {
             if (!extendedKeysShown) {
                 event_handler.onKeyReleased(valueToSubmit, action);
-                if (!skipAutoCaps)
+
+                if (panel.autoCapsTriggered) {
+                    panel.autoCapsTriggered = false;
+                }
+                else if (!skipAutoCaps) {
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
                         panel.activeKeypadState = "NORMAL"
+                }
             }
         }
         onPressed: {
@@ -154,6 +159,8 @@ Item {
             if (maliit_input_method.useHapticFeedback)
                  pressEffect.start();
 
+            // Quick workaround to fix initial autocaps - not beautiful, but works
+            panel.autoCapsTriggered = false;
             event_handler.onKeyPressed(valueToSubmit, action);
         }
     }

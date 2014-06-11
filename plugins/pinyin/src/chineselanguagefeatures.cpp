@@ -47,6 +47,24 @@ bool ChineseLanguageFeatures::activateAutoCaps(const QString &preedit) const
 
 QString ChineseLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
-    Q_UNUSED(preedit)
+    if (isSeparator(preedit.right(1))) {
+        return QString(" ");
+    }
+
     return QString("");
+}
+
+bool ChineseLanguageFeatures::isSeparator(const QString &text) const
+{
+    static const QString separators = QString::fromUtf8("。、,!?:;\r\n");
+
+    if (text.isEmpty()) {
+        return false;
+    }
+
+    if (separators.contains(text.right(1))) {
+        return true;
+    }
+
+    return false;
 }
