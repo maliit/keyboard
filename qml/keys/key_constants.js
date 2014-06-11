@@ -18,6 +18,7 @@
 
 var keyMargins  =   1.8;    // dp
 var fontSize    =   2;    // gu
+var fontSizeMagnified   =   2; // gu
 var fontFamily  =   "Ubuntu Medium";
 var fontColor   =   "#666666"
 var fontBold    =   true

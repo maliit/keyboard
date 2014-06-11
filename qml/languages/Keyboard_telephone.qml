@@ -35,9 +35,9 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "1"; }
-            CharKey { label: "2"; }
-            CharKey { label: "3"; }
+            CharKey { label: "1"; noMagnifier: true; }
+            CharKey { label: "2"; noMagnifier: true; }
+            CharKey { label: "3"; noMagnifier: true; }
         }
 
         Row {
@@ -45,9 +45,9 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "4"; }
-            CharKey { label: "5"; }
-            CharKey { label: "6"; }
+            CharKey { label: "4"; noMagnifier: true; }
+            CharKey { label: "5"; noMagnifier: true; }
+            CharKey { label: "6"; noMagnifier: true; }
         }
 
         Row {
@@ -55,9 +55,9 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "7"; }
-            CharKey { label: "8"; }
-            CharKey { label: "9"; }
+            CharKey { label: "7"; noMagnifier: true; }
+            CharKey { label: "8"; noMagnifier: true; }
+            CharKey { label: "9"; noMagnifier: true; }
         }
 
         Row {
@@ -65,8 +65,8 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "+"; annotation: "+*#"; extended: ["*", "#", "(", ")"] }
-            CharKey { label: "0"; }
+            CharKey { label: "+"; annotation: "+*#"; extended: ["*", "#", "(", ")"]; noMagnifier: true; }
+            CharKey { label: "0"; noMagnifier: true; }
             BackspaceKey { padding: 0; }
         }
     } // column

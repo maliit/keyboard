@@ -59,7 +59,7 @@ Item {
             anchors.centerIn: parent
 
             font.family: UI.fontFamily
-            font.pixelSize: units.gu( UI.fontSize )
+            font.pixelSize: units.gu( UI.fontSizeMagnified )
             font.bold: UI.fontBold
             color: UI.fontColor
         }
