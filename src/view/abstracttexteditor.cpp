@@ -441,6 +441,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
         d->auto_repeat_backspace_timer.stop();
         d->repeating_backspace = false;
+        checkPreeditReentry();
         d->word_engine->computeCandidates(d->text.data());
     } break;
 
@@ -563,6 +564,21 @@ void AbstractTextEditor::replacePreedit(const QString &replacement)
     // before sending preedit:
     d->word_engine->computeCandidates(d->text.data());
     sendPreeditString(d->text->preedit(), d->text->preeditFace());
+}
+
+void AbstractTextEditor::replaceTextWithPreedit(const QString &replacement, int start, int len, int pos)
+{
+    Q_D(AbstractTextEditor);
+
+    if (not d->valid()) {
+        return;
+    }
+
+    d->text->setPreedit(replacement);
+    replacePreedit(replacement);
+    Replacement word_r(start, len, pos);
+    sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                      word_r);
 }
 
 //! \brief Replaces current preedit with given replacement and then
@@ -876,5 +892,46 @@ void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 {
     text()->setPrimaryCandidate(candidate);
 }
+
+//! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should
+//! place a word back in to pre-edit after a character has been deleted
+void AbstractTextEditor::checkPreeditReentry()
+{
+    if(!text()->preedit().isEmpty() || !isPreeditEnabled()) {
+        return;
+    }
+
+    int currentOffset = text()->surroundingOffset();
+    if(currentOffset > 1 && !text()->surrounding().isEmpty()) {
+        // -2 for just deleted character that hasn't been committed and to reach character before cursor
+        QString lastChar = text()->surrounding().at(currentOffset-2);
+        if(!QRegExp("\\W+").exactMatch(lastChar)) {
+            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("\\W+"));
+            int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
+            if(!text()->surroundingRight().trimmed().isEmpty()) {
+                // We don't currently handle reentering preedit in the middle of the text
+                return;
+            }
+            QString recreatedPreedit = leftWords.last();
+            if(trimDiff == 0) {
+                // Remove the last character from the word if we weren't just deleting a space
+                // as the last backspace hasn't been committed yet.
+                recreatedPreedit.chop(1);
+            }
+            int position = currentOffset - recreatedPreedit.size();
+            QString surroundWithoutPreedit = text()->surrounding().remove(position, recreatedPreedit.size());
+
+            for(int i = 0; i < recreatedPreedit.size(); i++) {
+                singleBackspace();
+            }
+
+            text()->setSurrounding(surroundWithoutPreedit);
+            text()->setSurroundingOffset(position);
+            replaceTextWithPreedit(recreatedPreedit, 0, recreatedPreedit.size(), recreatedPreedit.size());
+        }
+
+    }
+}
+
 
 } // namespace MaliitKeyboard

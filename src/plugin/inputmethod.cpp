@@ -88,18 +88,6 @@ Qt::ScreenOrientation rotationAngleToScreenOrientation(int angle)
 
 const QString g_maliit_keyboard_qml(UBUNTU_KEYBOARD_DATA_DIR "/Keyboard.qml");
 
-Key overrideToKey(const SharedOverride &override)
-{
-    Key key;
-
-    key.rLabel() = override->label();
-    key.setIcon(override->icon().toUtf8());
-    // TODO: hightlighted and enabled information are not available in
-    // Key. Should we just really create a KeyOverride model?
-
-    return key;
-}
-
 } // unnamed namespace
 
 InputMethod::InputMethod(MAbstractInputMethodHost *host)
