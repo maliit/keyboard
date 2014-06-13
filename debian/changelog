@@ -1,3 +1,144 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140611-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Disable magnification on the dial pad and number pad layouts, remove
+    transparency from magnifier background. (LP: #1323855)
+  * Place words back in to pre-edit if the user presses backspace to
+    reach that word
+  * Preserve user input as the first prediction candidate if it is spelt
+    correctly (LP: #1313635)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Changes related to fixing the preedit word completion, enhancing the
+    usage with regards to adding whitespaces, separators. Enhanced
+    autocaps. Added possibility to commit (word-completion) when using
+    separators (., etc). Double-space with auto-correction enabled now
+    results in a full-stop sign. Also, in auto-correct unnecessary
+    whitespaces before separators are removed. Include unit-testing of
+    some of the features. (LP: #1244227)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 11 Jun 2014 15:30:55 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140527-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Modify the build system so that presage databases are only updated
+    when manually requested, instead of during every compile.
+  * Add user input to the word ribbon as the first entry, allowing for
+    autocomplete suggestions to be overridden. Use the selection of that
+    entry as the cue to add words to the user spell check dictionary and
+    filter presage's predictions based on what words are in the spell
+    check dictionary. (LP: #1318808)
+  * Re-evaluate the state of autocaps when the user is deleting
+    characters and when the cursor position changes to the beginning of
+    a field (LP: #1312329)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 May 2014 15:37:47 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140515-0ubuntu1) utopic; urgency=low
+
+  [ Daniel d'Andrada ]
+  * Remove SurfaceFlinger "support" That simplifies code and enables it
+    to work in the "Qt as Mir compositor" future architecture.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 15 May 2014 23:17:20 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140512-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * Adjust values of haptic feedback to make less strong and enable by
+    default
+
+  [ Michael Sheldon ]
+  * Refactor language plugins to provide word candidates via signals and
+    move spell checking and predictive text into separate threads (LP:
+    #1299736)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 12 May 2014 23:00:51 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140506.1-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * add action key support in ubuntu-keyboard
+
+  [ Renato Araujo Oliveira Filho ]
+  * add action key support in ubuntu-keyboard
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 06 May 2014 20:52:25 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140430-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * Enable haptic feedback when the key-press-haptic-feedback gsetting
+    key is true. (LP: #1299088)
+
+  [ Michael Sheldon ]
+  * Enable haptic feedback when the key-press-haptic-feedback gsetting
+    key is true. (LP: #1299088)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Apr 2014 15:37:20 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140415-0ubuntu1) trusty; urgency=low
+
+  [ Michael Sheldon ]
+  * Implement capital letters for Pinyin keyboard, ignore auto-
+    capitalisation and always display word ribbon when using Pinyin
+    regardless of input hints. (LP: #1281384)
+  * Switch back to normal character mode if in shifted mode after
+    entering extended characters. (LP: #1264860)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Quick-fix: play key feedback sound on key-press for all used keys.
+    The fix is not really sophisticated, but these parts of code might
+    change soon anyway (LP: #1306160)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Apr 2014 15:17:13 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140407.1-0ubuntu2) trusty; urgency=medium
+
+  * No-change rebuild for shlib changes in qtbase and qtdeclarative.
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Mon, 14 Apr 2014 13:51:24 -0300
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140407.1-0ubuntu1) trusty; urgency=low
+
+  [ Michael Sheldon ]
+  * Gradually decreases the interval between word deletion when
+    backspace is held down, allowing for fast deletion of large blocks
+    of text (fixes bug #1289374). (LP: #1289374)
+  * Reduce latency for key press sounds by switching to a SoundEffect
+    element (lower latency and better at simultaneous sounds than Audio)
+    and triggering the sound on key press rather than on release. (LP:
+    #1289372)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 07 Apr 2014 15:02:24 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140402-0ubuntu1) trusty; urgency=low
+
+  [ Olivier Tilloy ]
+  * When sending a key event, send KeyPress AND the corresponding
+    KeyRelease event. (LP: #1300382)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Apr 2014 19:32:28 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140318-0ubuntu1) trusty; urgency=low
+
+  [ Bill Filler ]
+  * clear the preedit and word candidates when the focused editor
+    changes by implementing reset() in the plugin (LP: #1271494)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * clear the preedit and word candidates when the focused editor
+    changes by implementing reset() in the plugin (LP: #1271494)
+  * Fix auto-capitalization after a newline. This adds checks for
+    autocapitalization for enter/return key-presses and additional
+    autocap case characters for western languages. (LP: #1272818)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Mar 2014 14:42:28 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140306-0ubuntu1) trusty; urgency=low
 
   * New rebuild forced

@@ -5,7 +5,7 @@
 #include "languageplugininterface.h"
 #include "westernlanguagesplugin.h"
 
-class ArabicPlugin : public QObject, public WesternLanguagesPlugin
+class ArabicPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
     Q_INTERFACES(LanguagePluginInterface)
@@ -13,10 +13,8 @@ class ArabicPlugin : public QObject, public WesternLanguagesPlugin
 
 public:
     explicit ArabicPlugin(QObject* parent = 0)
-        : QObject(parent)
-        , WesternLanguagesPlugin()
+        : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("ar");
     }
 
     virtual ~ArabicPlugin()

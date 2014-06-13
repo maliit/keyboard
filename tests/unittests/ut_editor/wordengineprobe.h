@@ -43,8 +43,12 @@ public:
     explicit MockLanguageFeatures() {}
     virtual ~MockLanguageFeatures() {}
 
-    virtual bool activateAutoCaps(const QString &preedit) const { Q_UNUSED(preedit); return false; }
-    virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return ""; }
+    virtual bool isSeparator(const QString &text) const;
+    virtual bool alwaysShowSuggestions() const { return false; }
+    virtual bool autoCapsAvailable() const { return true; }
+    virtual bool activateAutoCaps(const QString &preedit) const;
+    virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return " "; }
+    virtual QString fullStopSequence() const { return QString("."); }
 };
 
 namespace MaliitKeyboard {
@@ -65,7 +69,7 @@ public:
     virtual AbstractLanguageFeatures* languageFeature();
 
 private:
-    virtual WordCandidateList fetchCandidates(Model::Text *text);
+    virtual void fetchCandidates(Model::Text *text);
 
     QHash<QString, QString> candidates;
 };

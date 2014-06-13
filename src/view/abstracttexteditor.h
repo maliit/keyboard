@@ -50,6 +50,8 @@ struct EditorOptions
     int backspace_auto_repeat_interval; // interval between automatically repeated keys
     int backspace_word_delay; // delay before first automatically delete whole words
     int backspace_word_interval; // interval between deleting word on while pressing the backspace
+    int backspace_word_acceleration_rate; // rate at which to accelerate word deletion
+    int backspace_word_min_interval; // minimum interval between deleting words after acceleration
 };
 
 class AbstractTextEditorPrivate;
@@ -114,6 +116,7 @@ public:
     Q_SLOT void onCursorPositionChanged(int cursor_position,
                                         const QString &surrounding_text);
     Q_SLOT void replacePreedit(const QString &replacement);
+    Q_SLOT void replaceTextWithPreedit(const QString &replacement, int start, int len, int pos);
     Q_SLOT void replaceAndCommitPreedit(const QString &replacement);
     Q_SLOT void clearPreedit();
 
@@ -129,7 +132,6 @@ public:
     Q_SLOT void setAutoCapsEnabled(bool enabled);
     Q_SIGNAL void autoCapsEnabledChanged(bool enabled);
 
-    Q_SLOT void showUserCandidate();
     Q_SLOT void addToUserDictionary(const QString &word);
 
     Q_SIGNAL void keyboardClosed();
@@ -137,6 +139,9 @@ public:
     Q_SIGNAL void autoCapsActivated();
     Q_SIGNAL void leftLayoutSelected();
     Q_SIGNAL void rightLayoutSelected();
+
+    Q_SLOT void setPreeditFace(Model::Text::PreeditFace face);
+    Q_SLOT void setPrimaryCandidate(QString);
 
 private:
     const QScopedPointer<AbstractTextEditorPrivate> d_ptr;
@@ -154,9 +159,15 @@ private:
     virtual void singleBackspace();
 
     void commitPreedit();
+    void removeTrailingWhitespaces();
     Q_SLOT void autoRepeatBackspace();
     void autoRepeatWordBackspace();
     QString wordLeftOfCursor() const;
+
+    void sendKeyPressAndReleaseEvents(int key, Qt::KeyboardModifiers modifiers,
+                                      const QString& text = QString());
+
+    void checkPreeditReentry();
 };
 
 } // namespace MaliitKeyboard

@@ -42,9 +42,19 @@ WesternLanguageFeatures::~WesternLanguageFeatures()
 {
 }
 
+bool WesternLanguageFeatures::alwaysShowSuggestions() const
+{
+    return false;
+}
+
+bool WesternLanguageFeatures::autoCapsAvailable() const
+{
+    return true;
+}
+
 bool WesternLanguageFeatures::activateAutoCaps(const QString &preedit) const
 {
-    static const QString sentenceBreak = QString::fromUtf8("!.?:");
+    static const QString sentenceBreak = QString::fromUtf8("!.?:\r\n");
 
     if (preedit.isEmpty()) {
         return false;
@@ -63,4 +73,19 @@ QString WesternLanguageFeatures::appendixForReplacedPreedit(const QString &preed
         return QString("");
 
     return QString(" ");
+}
+
+bool WesternLanguageFeatures::isSeparator(const QString &text) const
+{
+    static const QString separators = QString::fromUtf8(",.!?\r\n");
+
+    if (text.isEmpty()) {
+        return false;
+    }
+
+    if (separators.contains(text.right(1))) {
+        return true;
+    }
+
+    return false;
 }

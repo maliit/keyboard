@@ -22,7 +22,10 @@ SOURCES += \
     westernlanguagefeatures.cpp \
     westernlanguagesplugin.cpp \
     candidatescallback.cpp \
-    spellchecker.cpp
+    spellchecker.cpp \
+    spellcheckerworker.cpp \
+    predictivetextworker.cpp \
+    $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.cpp
 
 HEADERS += \
     westernsupport.h \
@@ -30,7 +33,10 @@ HEADERS += \
     westernlanguagefeatures.h \
     westernlanguagesplugin.h \
     candidatescallback.h \
-    spellchecker.h
+    spellchecker.h \
+    spellcheckerworker.h \
+    predictivetextworker.h \
+    $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.h
 
 
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}

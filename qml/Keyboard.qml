@@ -244,6 +244,7 @@ Item {
                 onActivateAutocaps: {
                     keypad.state = "CHARACTERS";
                     keypad.activeKeypadState = "SHIFTED";
+                    keypad.autoCapsTriggered = true;
                 }
             }
 

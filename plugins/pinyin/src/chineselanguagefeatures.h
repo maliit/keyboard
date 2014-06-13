@@ -27,8 +27,11 @@ public:
     explicit ChineseLanguageFeatures(QObject *parent = 0);
     virtual ~ChineseLanguageFeatures();
 
+    virtual bool alwaysShowSuggestions() const;
+    virtual bool autoCapsAvailable() const;
     virtual bool activateAutoCaps(const QString &preedit) const;
     virtual QString appendixForReplacedPreedit(const QString &preedit) const;
+    virtual bool isSeparator(const QString &text) const;
 };
 
 #endif // CHINESELANGUAGEFEATURES_H

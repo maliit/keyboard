@@ -57,7 +57,8 @@ public:
     explicit WordRibbon(QObject* parent = 0);
 
     enum WordRibbonRoles {
-             WordRole = Qt::UserRole + 1
+             WordRole = Qt::UserRole + 1,
+             IsUserInputRole
          };
 
     virtual QVariant data(const QModelIndex &index, int role) const;

@@ -101,8 +101,8 @@ private:
         QSignalSpy completionSpy(m_settings, SIGNAL(autoCompletionChanged(bool)));
         QSignalSpy predictSpy(m_settings, SIGNAL(predictiveTextChanged(bool)));
         QSignalSpy spellSpy(m_settings, SIGNAL(spellCheckingChanged(bool)));
-        QSignalSpy feedbackSpy(m_settings, SIGNAL(keyPressFeedbackChanged(bool)));
-        QSignalSpy feedbackSoundSpy(m_settings, SIGNAL(keyPressFeedbackSoundChanged(QString)));
+        QSignalSpy feedbackSpy(m_settings, SIGNAL(keyPressAudioFeedbackChanged(bool)));
+        QSignalSpy feedbackSoundSpy(m_settings, SIGNAL(keyPressAudioFeedbackSoundChanged(QString)));
 
         m_settings->settingUpdated(key);
 

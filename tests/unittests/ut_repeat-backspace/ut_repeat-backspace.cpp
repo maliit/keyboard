@@ -34,6 +34,7 @@
 #include "models/text.h"
 #include "logic/wordengine.h"
 #include "plugin/editor.h"
+#include "common/wordengineprobe.h"
 
 #include <inputmethodhostprobe.h>
 
@@ -68,7 +69,7 @@ private:
 
     Q_SLOT void init()
     {
-        editor.reset(new Editor(options, new Model::Text, new Logic::WordEngine));
+        editor.reset(new Editor(options, new Model::Text, new Logic::WordEngineProbe));
         host.reset(new InputMethodHostProbe);
         editor->setHost(host.data());
     }
@@ -107,13 +108,13 @@ private:
         (editor.data()->*initiate)(backspace);
         editor->onKeyReleased(backspace);
 
-        QCOMPARE(host->keyEventCount(), 1);
-        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyPress);
+        QCOMPARE(host->keyEventCount(), 2);
+        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyRelease);
         QCOMPARE(host->lastKeyEvent().key(), int(Qt::Key_Backspace));
 
         QTest::qWait(delay);
 
-        QCOMPARE(host->keyEventCount(), 1);
+        QCOMPARE(host->keyEventCount(), 2);
     }
 
     /*
@@ -190,20 +191,20 @@ private:
         QCOMPARE(host->keyEventCount(), 0);
 
         TestUtils::waitForSignal(host.data(), SIGNAL(keyEventSent(QKeyEvent)));
-        QCOMPARE(host->keyEventCount(), 1);
-        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyPress);
+        QCOMPARE(host->keyEventCount(), 2);
+        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyRelease);
         QCOMPARE(host->lastKeyEvent().key(), int(Qt::Key_Backspace));
 
         TestUtils::waitForSignal(host.data(), SIGNAL(keyEventSent(QKeyEvent)));
-        QCOMPARE(host->keyEventCount(), 2);
-        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyPress);
+        QCOMPARE(host->keyEventCount(), 4);
+        QCOMPARE(host->lastKeyEvent().type(), QEvent::KeyRelease);
         QCOMPARE(host->lastKeyEvent().key(), int(Qt::Key_Backspace));
 
         (editor.data()->*finalize)(backspace);
 
         QTest::qWait(delay);
 
-        QCOMPARE(host->keyEventCount(), 2);
+        QCOMPARE(host->keyEventCount(), 4);
     }
 
 };

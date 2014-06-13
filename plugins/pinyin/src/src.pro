@@ -16,11 +16,14 @@ INCLUDEPATH    += \
 HEADERS         = \
                   pinyinadapter.h \
                   pinyinplugin.h \
-                  chineselanguagefeatures.h
+                  chineselanguagefeatures.h \
+                  $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.h
+
 SOURCES         = \
                   pinyinadapter.cpp \
                   pinyinplugin.cpp \
-                  chineselanguagefeatures.cpp
+                  chineselanguagefeatures.cpp \
+                  $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.cpp
 
 TARGET          = $$qtLibraryTarget(pinyinplugin)
 

@@ -31,6 +31,38 @@
 
 #include "wordengineprobe.h"
 
+// To properly mock language features, we need to realistically determine separators and autoCaps
+// Since unittests use latin letters, we simply use the same methods as in WesternLanguageFeatures
+bool MockLanguageFeatures::activateAutoCaps(const QString &preedit) const
+{
+    static const QString sentenceBreak = QString::fromUtf8("!.?:\r\n");
+
+    if (preedit.isEmpty()) {
+        return false;
+    }
+
+    if (sentenceBreak.contains(preedit.right(1))) {
+        return true;
+    }
+
+    return false;
+}
+
+bool MockLanguageFeatures::isSeparator(const QString &text) const
+{
+    static const QString separators = QString::fromUtf8(",.!?:;\r\n");
+
+    if (text.isEmpty()) {
+        return false;
+    }
+
+    if (separators.contains(text.right(1))) {
+        return true;
+    }
+
+    return false;
+}
+
 namespace MaliitKeyboard {
 namespace Logic {
 
@@ -58,7 +90,7 @@ void WordEngineProbe::addSpellingCandidate(const QString &text,
 //! \brief Returns new candidates.
 //! \param text Preedit of text model is reversed and emitted as only word
 //!             candidate. Special characters (e.g., punctuation) are skipped.
-WordCandidateList WordEngineProbe::fetchCandidates(Model::Text *text)
+void WordEngineProbe::fetchCandidates(Model::Text *text)
 {
     WordCandidateList result;
 
@@ -70,7 +102,7 @@ WordCandidateList WordEngineProbe::fetchCandidates(Model::Text *text)
         result.append(word_candidate);
     }
 
-    return result;
+    Q_EMIT(candidatesChanged(result));
 }
 
 AbstractLanguageFeatures* WordEngineProbe::languageFeature()
