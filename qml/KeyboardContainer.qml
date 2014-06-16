@@ -57,7 +57,12 @@ Item {
 
     SoundEffect {
         id: audioFeedback
-        source: Qt.resolvedUrl("styles/ubuntu/sounds/key_tick2_quiet.wav")
+        source: maliit_input_method.audioFeedbackSound
+    }
+
+    Connections {
+        target: maliit_input_method
+        onAudioFeedbackSoundChanged: audioFeedback.source = sound;
     }
 
     HapticsEffect {
