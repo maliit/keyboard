@@ -88,9 +88,9 @@ KeyPad {
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
-            CharKey        { id: commaKey;    label: ","; shifted: "/";  anchors.left: languageMenuButton.right; }
+            CharKey        { id: commaKey;    label: ","; shifted: "/"; extended: ["'", ";", ":"]; anchors.left: languageMenuButton.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
-            CharKey        { id: dotKey;       label: "."; shifted: "."; anchors.right: extraCharKey.left; }
+            CharKey        { id: dotKey;       label: "."; shifted: "."; extended: ["?", "!"]; anchors.right: extraCharKey.left; }
             CharKey        { id: extraCharKey; label: "ъ"; shifted: "Ъ"; anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
