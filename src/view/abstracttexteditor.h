@@ -116,6 +116,7 @@ public:
     Q_SLOT void onCursorPositionChanged(int cursor_position,
                                         const QString &surrounding_text);
     Q_SLOT void replacePreedit(const QString &replacement);
+    Q_SLOT void replaceTextWithPreedit(const QString &replacement, int start, int len, int pos);
     Q_SLOT void replaceAndCommitPreedit(const QString &replacement);
     Q_SLOT void clearPreedit();
 
@@ -131,7 +132,6 @@ public:
     Q_SLOT void setAutoCapsEnabled(bool enabled);
     Q_SIGNAL void autoCapsEnabledChanged(bool enabled);
 
-    Q_SLOT void showUserCandidate();
     Q_SLOT void addToUserDictionary(const QString &word);
 
     Q_SIGNAL void keyboardClosed();
@@ -159,12 +159,15 @@ private:
     virtual void singleBackspace();
 
     void commitPreedit();
+    void removeTrailingWhitespaces();
     Q_SLOT void autoRepeatBackspace();
     void autoRepeatWordBackspace();
     QString wordLeftOfCursor() const;
 
     void sendKeyPressAndReleaseEvents(int key, Qt::KeyboardModifiers modifiers,
                                       const QString& text = QString());
+
+    void checkPreeditReentry();
 };
 
 } // namespace MaliitKeyboard

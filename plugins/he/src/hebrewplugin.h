@@ -15,7 +15,6 @@ public:
     explicit HebrewPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("he");
     }
 
     virtual ~HebrewPlugin()

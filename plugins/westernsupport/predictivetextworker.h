@@ -28,6 +28,7 @@
 #ifndef PREDICTIVETEXTWORKER_H
 #define PREDICTIVETEXTWORKER_H
 
+#include "spellchecker.h"
 #include "candidatescallback.h"
 #include <presage.h>
 
@@ -47,6 +48,7 @@ public:
 public slots:
     void parsePredictionText(const QString& surroundingLeft, const QString& preedit);
     void setPredictionLanguage(QString language);
+    void updateSpellCheckWord(QString word);
 
 signals:
     void newSuggestions(QStringList suggestions);
@@ -55,6 +57,7 @@ private:
     std::string m_candidatesContext;
     CandidatesCallback m_presageCandidates;
     Presage m_presage;
+    SpellChecker m_spellChecker;
 };
 
 #endif // PREDICTIVETEXTWORKER_H

@@ -22,18 +22,20 @@ EXAMPLE_FILES = englishplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/en/
 
-lang_db_en.path = $$PLUGIN_INSTALL_PATH
 lang_db_en.commands += \
   rm -f $$PWD/database_en.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_en.db $$PWD/the_picture_of_dorian_gray.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_en.db $$PWD/the_picture_of_dorian_gray.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_en.db $$PWD/the_picture_of_dorian_gray.txt
-
 lang_db_en.files += $$PWD/database_en.db
-QMAKE_EXTRA_TARGETS += lang_db_en
+
+lang_db_en_install.files += $$PWD/database_en.db
+lang_db_en_install.path = $$PLUGIN_INSTALL_PATH
+
+QMAKE_EXTRA_TARGETS += lang_db_en lang_db_en_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_en
+INSTALLS += target lang_db_en_install
 
 OTHER_FILES += \
     englishplugin.json \

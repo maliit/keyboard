@@ -62,6 +62,8 @@ public:
 
     WordRibbon* wordRibbon;
 
+    int previous_position;
+
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
@@ -79,6 +81,7 @@ public:
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , wordRibbon(new WordRibbon)
+        , previous_position(-1)
     {
         applicationApiWrapper->setGeometryItem(m_geometry);
 

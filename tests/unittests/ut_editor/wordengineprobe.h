@@ -43,10 +43,12 @@ public:
     explicit MockLanguageFeatures() {}
     virtual ~MockLanguageFeatures() {}
 
+    virtual bool isSeparator(const QString &text) const;
     virtual bool alwaysShowSuggestions() const { return false; }
-    virtual bool autoCapsAvailable() const { return false; }
-    virtual bool activateAutoCaps(const QString &preedit) const { Q_UNUSED(preedit); return false; }
-    virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return ""; }
+    virtual bool autoCapsAvailable() const { return true; }
+    virtual bool activateAutoCaps(const QString &preedit) const;
+    virtual QString appendixForReplacedPreedit(const QString &preedit) const { Q_UNUSED(preedit); return " "; }
+    virtual QString fullStopSequence() const { return QString("."); }
 };
 
 namespace MaliitKeyboard {

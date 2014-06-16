@@ -88,18 +88,6 @@ Qt::ScreenOrientation rotationAngleToScreenOrientation(int angle)
 
 const QString g_maliit_keyboard_qml(UBUNTU_KEYBOARD_DATA_DIR "/Keyboard.qml");
 
-Key overrideToKey(const SharedOverride &override)
-{
-    Key key;
-
-    key.rLabel() = override->label();
-    key.setIcon(override->icon().toUtf8());
-    // TODO: hightlighted and enabled information are not available in
-    // Key. Should we just really create a KeyOverride model?
-
-    return key;
-}
-
 } // unnamed namespace
 
 InputMethod::InputMethod(MAbstractInputMethodHost *host)
@@ -158,6 +146,7 @@ void InputMethod::reset()
     qDebug() << "inputMethod::reset()";
     Q_D(InputMethod);
     d->editor.clearPreedit();
+    d->previous_position = -1;
 }
 
 void InputMethod::setPreedit(const QString &preedit,
@@ -201,9 +190,7 @@ QString InputMethod::activeSubView(Maliit::HandlerState state) const
 
 void InputMethod::handleFocusChange(bool focusIn)
 {
-    if (focusIn) {
-        checkInitialAutocaps();
-    } else {
+    if (!focusIn) {
         hide();
     }
 }
@@ -357,9 +344,16 @@ void InputMethod::update()
     if (ok) {
         d->editor.text()->setSurrounding(text);
         d->editor.text()->setSurroundingOffset(position);
-    }
 
-    updateAutoCaps();
+        updateAutoCaps();
+
+        // If we're at the beginning of a text field (e.g. because it's been cleared,
+        // or the cursor has been moved) then re-evaluate initial autocaps
+        if (position == 0 && position != d->previous_position) {
+            checkInitialAutocaps();
+        }
+        d->previous_position = position;
+    }
 }
 
 void InputMethod::updateWordEngine()
@@ -404,7 +398,6 @@ void InputMethod::setContentType(TextContentType contentType)
 void InputMethod::checkInitialAutocaps()
 {
     Q_D(InputMethod);
-    update();
 
     if (d->autocapsEnabled) {
         QString text;

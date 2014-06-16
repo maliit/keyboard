@@ -22,18 +22,20 @@ EXAMPLE_FILES = hungarianplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/hu/
 
-lang_db_hu.path = $$PLUGIN_INSTALL_PATH
 lang_db_hu.commands += \
   rm -f $$PWD/database_hu.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_hu.db $$PWD/free_ebook.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_hu.db $$PWD/free_ebook.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_hu.db $$PWD/free_ebook.txt
-
 lang_db_hu.files += $$PWD/database_hu.db
-QMAKE_EXTRA_TARGETS += lang_db_hu
+
+lang_db_hu_install.files += $$PWD/database_hu.db
+lang_db_hu_install.path = $$PLUGIN_INSTALL_PATH
+
+QMAKE_EXTRA_TARGETS += lang_db_hu lang_db_hu_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_hu
+INSTALLS += target lang_db_hu_install
 
 OTHER_FILES += \
     hungarianplugin.json \

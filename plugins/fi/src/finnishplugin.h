@@ -15,7 +15,6 @@ public:
     explicit FinnishPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
-        _useDatabase("fi");
     }
 
     virtual ~FinnishPlugin()

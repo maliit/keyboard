@@ -22,18 +22,20 @@ EXAMPLE_FILES = italianplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/it/
 
-lang_db_it.path = $$PLUGIN_INSTALL_PATH
 lang_db_it.commands += \
   rm -f $$PWD/database_it.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_it.db $$PWD/la_francia_dal_primo_impero.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_it.db $$PWD/la_francia_dal_primo_impero.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_it.db $$PWD/la_francia_dal_primo_impero.txt
-
 lang_db_it.files += $$PWD/database_it.db
-QMAKE_EXTRA_TARGETS += lang_db_it
+
+lang_db_it_install.files += $$PWD/database_it.db
+lang_db_it_install.path = $$PLUGIN_INSTALL_PATH
+
+QMAKE_EXTRA_TARGETS += lang_db_it lang_db_it_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_it
+INSTALLS += target lang_db_it_install
 
 OTHER_FILES += \
     italianplugin.json \

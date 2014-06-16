@@ -202,7 +202,12 @@ void WordEngine::fetchCandidates(Model::Text *text)
     d->candidates = new WordCandidateList();
     const QString &preedit(text->preedit());
     d->is_preedit_capitalized = not preedit.isEmpty() && preedit.at(0).isUpper();
-    
+
+    WordCandidate userCandidate(WordCandidate::SourceUser, preedit); 
+    d->candidates->append(userCandidate);
+
+    Q_EMIT candidatesChanged(*d->candidates);
+
     // spell checking
     d->correct_spelling = d->languagePlugin->spell(preedit);
 
@@ -237,31 +242,39 @@ void WordEngine::newSpellingSuggestions(QStringList suggestions)
 
         Q_EMIT candidatesChanged(*d->candidates);
 
-        Q_EMIT primaryCandidateChanged(d->candidates->isEmpty() ? QString()
-                                                                : d->candidates->first().label());
+        // Candidates always has at least one entry from the user input candidate
+        Q_EMIT primaryCandidateChanged(d->candidates->size() == 1 ? QString()
+                                                                : d->candidates->at(1).label());
     }
 
-    Q_EMIT preeditFaceChanged(d->candidates->isEmpty() ? (d->correct_spelling ? Model::Text::PreeditDefault
-                                                                              : Model::Text::PreeditNoCandidates)
-                                                       : Model::Text::PreeditActive);
+    Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
+                                                                                : Model::Text::PreeditNoCandidates)
+                                                         : Model::Text::PreeditActive);
 }
 
 void WordEngine::newPredictionSuggestions(QStringList suggestions)
 {
     Q_D(WordEngine);
 
+    // If the current user entry is a valid word, add this as the first prediction
+    if(d->correct_spelling) {
+        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, d->candidates->at(0).word());
+    }
+
     Q_FOREACH(const QString &correction, suggestions) {
-        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+        if(correction != d->candidates->at(0).word()) { // Don't repeat correctly spelt user word
+            appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+        }
     }
 
     Q_EMIT candidatesChanged(*d->candidates);
 
-    Q_EMIT primaryCandidateChanged(d->candidates->isEmpty() ? QString()
-                                                            : d->candidates->first().label());
+    Q_EMIT primaryCandidateChanged(d->candidates->size() == 1 ? QString()
+                                                              : d->candidates->at(1).label());
 
-    Q_EMIT preeditFaceChanged(d->candidates->isEmpty() ? (d->correct_spelling ? Model::Text::PreeditDefault
-                                                                              : Model::Text::PreeditNoCandidates)
-                                                       : Model::Text::PreeditActive);
+    Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
+                                                                                : Model::Text::PreeditNoCandidates)
+                                                         : Model::Text::PreeditActive);
 }
 
 void WordEngine::addToUserDictionary(const QString &word)
