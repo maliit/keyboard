@@ -279,8 +279,21 @@ Item {
             vheight = keyboardSurface.height;
         }
 
+        // Handle any discrepancy between our fullScreenItem's size and the real
+        // screen size (e.g. caused by the shell's top bar).
+        // Work around for: https://bugs.launchpad.net/ubuntu/+source/ubuntu-keyboard/+bug/1332624
+        var mappingDifference = 0;
+        if (fullScreenItem.height > 0) {
+            if (orientationHelper.orientationAngle == 270 ||
+                orientationHelper.orientationAngle == 90) {
+                mappingDifference = maliit_screen_width - fullScreenItem.width;
+            } else {
+                mappingDifference = maliit_screen_height - fullScreenItem.height;
+            }
+        }
+
         var obj = mapFromItem(keyboardSurface, vx, vy, vwidth, vheight);
-        maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
+        maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y - mappingDifference, obj.width, obj.height);
     }
 
 } // fullScreenItem
