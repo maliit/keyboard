@@ -8,11 +8,9 @@ CONFIG += testcase
 TARGET = ut_keyboardsettings
 QT = core testlib
 
-QGSETTINGS_INCDIR = /usr/include/qt5/QGSettings
-
 HEADERS += \
     $${TOP_SRCDIR}/src/plugin/keyboardsettings.h \
-    $${QGSETTINGS_INCDIR}/qgsettings.h \
+    qgsettings.h
 
 SOURCES += \
     ut_keyboardsettings.cpp \
