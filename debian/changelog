@@ -1,3 +1,12 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140626-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Handle any discrepancy between keyboard's fullScreenItem size and
+    the real screen size (e.g. caused by the shell's top bar) (LP:
+    #1332624)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Jun 2014 16:55:34 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140616-0ubuntu1) utopic; urgency=low
 
   [ Łukasz 'sil2100' Zemczak ]
