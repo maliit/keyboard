@@ -52,6 +52,9 @@ class InputMethod
     Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
     Q_PROPERTY(QString activeLanguage READ activeLanguage WRITE setActiveLanguage NOTIFY activeLanguageChanged)
     Q_PROPERTY(bool useAudioFeedback READ useAudioFeedback NOTIFY useAudioFeedbackChanged)
+    Q_PROPERTY(QString audioFeedbackSound READ audioFeedbackSound NOTIFY audioFeedbackSoundChanged)
+    Q_PROPERTY(QObject* actionKeyOverride READ actionKeyOverride NOTIFY actionKeyOverrideChanged)
+    Q_PROPERTY(bool useHapticFeedback READ useHapticFeedback NOTIFY useHapticFeedbackChanged)
 
     Q_ENUMS(TextContentType)
 
@@ -104,7 +107,12 @@ public:
     Q_SLOT void setActiveLanguage(const QString& newLanguage);
 
     Q_SLOT void onVisibleRectChanged();
+
     bool useAudioFeedback() const;
+    const QString audioFeedbackSound() const;
+    bool useHapticFeedback() const;
+
+    QObject* actionKeyOverride() const;
 
 Q_SIGNALS:
     void contentTypeChanged(TextContentType contentType);
@@ -112,17 +120,18 @@ Q_SIGNALS:
     void enabledLanguagesChanged(QStringList languages);
     void activeLanguageChanged(QString language);
     void useAudioFeedbackChanged();
+    void audioFeedbackSoundChanged(QString sound);
+    void useHapticFeedbackChanged();
     void wordEngineEnabledChanged(bool wordEngineEnabled);
     void wordRibbonEnabledChanged(bool wordRibbonEnabled);
     void windowGeometryRectChanged(QRect rect);
+    void actionKeyOverrideChanged();
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();
     Q_SLOT void onEnabledLanguageSettingsChanged();
     Q_SLOT void updateAutoCaps();
 
-    Q_SLOT void updateKey(const QString &key_id,
-                          const MKeyOverride::KeyOverrideAttributes changed_attributes);
     Q_SLOT void onKeyboardClosed();
 
     Q_SLOT void onLayoutWidthChanged(int width);

@@ -99,11 +99,16 @@ Item {
     Text {
         id: keyLabel
         text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
-        anchors.centerIn: parent
         font.family: UI.fontFamily
         font.pixelSize: fontSize
         font.bold: UI.fontBold
         color: UI.fontColor
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.margins: units.gu( UI.annotationMargins )
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideRight
     }
 
     /// shows an annotation
@@ -137,15 +142,25 @@ Item {
         onReleased: {
             if (!extendedKeysShown) {
                 event_handler.onKeyReleased(valueToSubmit, action);
-                if (!skipAutoCaps)
+
+                if (panel.autoCapsTriggered) {
+                    panel.autoCapsTriggered = false;
+                }
+                else if (!skipAutoCaps) {
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
                         panel.activeKeypadState = "NORMAL"
+                }
             }
         }
         onPressed: {
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();
+            
+            if (maliit_input_method.useHapticFeedback)
+                 pressEffect.start();
 
+            // Quick workaround to fix initial autocaps - not beautiful, but works
+            panel.autoCapsTriggered = false;
             event_handler.onKeyPressed(valueToSubmit, action);
         }
     }

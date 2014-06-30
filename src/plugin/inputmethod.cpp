@@ -58,6 +58,8 @@ using namespace MaliitKeyboard;
 
 namespace {
 
+const char * const actionKeyName = "actionKey";
+
 Qt::ScreenOrientation rotationAngleToScreenOrientation(int angle)
 {
     bool portraitIsPrimary = QGuiApplication::primaryScreen()->primaryOrientation()
@@ -86,18 +88,6 @@ Qt::ScreenOrientation rotationAngleToScreenOrientation(int angle)
 
 const QString g_maliit_keyboard_qml(UBUNTU_KEYBOARD_DATA_DIR "/Keyboard.qml");
 
-Key overrideToKey(const SharedOverride &override)
-{
-    Key key;
-
-    key.rLabel() = override->label();
-    key.setIcon(override->icon().toUtf8());
-    // TODO: hightlighted and enabled information are not available in
-    // Key. Should we just really create a KeyOverride model?
-
-    return key;
-}
-
 } // unnamed namespace
 
 InputMethod::InputMethod(MAbstractInputMethodHost *host)
@@ -113,7 +103,9 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
-    d->registerFeedbackSetting();
+    d->registerAudioFeedbackSoundSetting();
+    d->registerAudioFeedbackSetting();
+    d->registerHapticFeedbackSetting();
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
@@ -155,6 +147,7 @@ void InputMethod::reset()
     qDebug() << "inputMethod::reset()";
     Q_D(InputMethod);
     d->editor.clearPreedit();
+    d->previous_position = -1;
 }
 
 void InputMethod::setPreedit(const QString &preedit,
@@ -198,9 +191,7 @@ QString InputMethod::activeSubView(Maliit::HandlerState state) const
 
 void InputMethod::handleFocusChange(bool focusIn)
 {
-    if (focusIn) {
-        checkInitialAutocaps();
-    } else {
+    if (!focusIn) {
         hide();
     }
 }
@@ -263,50 +254,35 @@ void InputMethod::onEnabledLanguageSettingsChanged()
     d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
-// todo remove
+
 void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides)
 {
     Q_D(InputMethod);
 
-    for (OverridesIterator i(d->key_overrides.begin()), e(d->key_overrides.end()); i != e; ++i) {
-        const SharedOverride &override(i.value());
+    // we only care about actionKey override by now
+    const QMap<QString, SharedOverride >::const_iterator iter(overrides.find(actionKeyName));
+    bool actionKeyChanged = false;
 
-        if (override) {
-            disconnect(override.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
-                       this,            SLOT(updateKey(const QString &, const MKeyOverride::KeyOverrideAttributes)));
-        }
+    if (d->actionKeyOverrider) {
+        disconnect(d->actionKeyOverrider.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
+                   this, SIGNAL(actionKeyOverrideChanged()));
+        d->actionKeyOverrider.clear();
+        actionKeyChanged = true;
     }
 
-    d->key_overrides.clear();
-    QMap<QString, Key> overriden_keys;
+    if (iter != overrides.end()) {
+        QSharedPointer<MKeyOverride> actionKeyOverrider(*iter);
 
-    for (OverridesIterator i(overrides.begin()), e(overrides.end()); i != e; ++i) {
-        const SharedOverride &override(i.value());
-
-        if (override) {
-            d->key_overrides.insert(i.key(), override);
-            connect(override.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
-                    this,            SLOT(updateKey(const QString &, const MKeyOverride::KeyOverrideAttributes)));
-            overriden_keys.insert(i.key(), overrideToKey(override));
+        if (actionKeyOverrider) {
+            d->actionKeyOverrider = actionKeyOverrider;
+            connect(d->actionKeyOverrider.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
+                    this, SIGNAL(actionKeyOverrideChanged()));
         }
+        actionKeyChanged = true;
     }
 
-}
-// todo remove
-void InputMethod::updateKey(const QString &key_id,
-                            const MKeyOverride::KeyOverrideAttributes changed_attributes)
-{
-    Q_D(InputMethod);
-
-    Q_UNUSED(changed_attributes);
-
-    QMap<QString, SharedOverride>::iterator iter(d->key_overrides.find(key_id));
-
-    if (iter != d->key_overrides.end()) {
-        const Key &override_key(overrideToKey(iter.value()));
-        Logic::KeyOverrides overrides_update;
-
-        overrides_update.insert(key_id, override_key);
+    if (actionKeyChanged) {
+        Q_EMIT actionKeyOverrideChanged();
     }
 }
 
@@ -342,7 +318,7 @@ void InputMethod::update()
 
     bool emitPredictionEnabled = false;
 
-    bool newPredictionEnabled = inputMethodHost()->predictionEnabled(valid) 
+    bool newPredictionEnabled = inputMethodHost()->predictionEnabled(valid)
                                 || d->editor.wordEngine()->languageFeature()->alwaysShowSuggestions();
 
     if (!valid)
@@ -369,9 +345,16 @@ void InputMethod::update()
     if (ok) {
         d->editor.text()->setSurrounding(text);
         d->editor.text()->setSurroundingOffset(position);
-    }
 
-    updateAutoCaps();
+        updateAutoCaps();
+
+        // If we're at the beginning of a text field (e.g. because it's been cleared,
+        // or the cursor has been moved) then re-evaluate initial autocaps
+        if (position == 0 && position != d->previous_position) {
+            checkInitialAutocaps();
+        }
+        d->previous_position = position;
+    }
 }
 
 void InputMethod::updateWordEngine()
@@ -416,7 +399,6 @@ void InputMethod::setContentType(TextContentType contentType)
 void InputMethod::checkInitialAutocaps()
 {
     Q_D(InputMethod);
-    update();
 
     if (d->autocapsEnabled) {
         QString text;
@@ -448,7 +430,34 @@ const QString &InputMethod::activeLanguage() const
 bool InputMethod::useAudioFeedback() const
 {
     Q_D(const InputMethod);
-    return d->m_settings.keyPressFeedback();
+    return d->m_settings.keyPressAudioFeedback();
+}
+
+//! \brief InputMethod::useHapticFeedback is true, when keys should produce haptic
+//! feedback when pressed
+//! \return
+bool InputMethod::useHapticFeedback() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.keyPressHapticFeedback();
+}
+
+//! \brief InputMethod::actionKeyOverride returns any override information about
+//! the action key
+//! \return
+QObject *InputMethod::actionKeyOverride() const
+{
+    Q_D(const InputMethod);
+    return d->actionKeyOverrider.data();
+}
+
+//! \brief InputMethod::audioFeedbackSound returns the current path to the audio
+//! feedback sound
+//! \return path to the feedback sound
+const QString InputMethod::audioFeedbackSound() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.keyPressAudioFeedbackSound();
 }
 
 //! \brief InputMethod::setActiveLanguage

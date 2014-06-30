@@ -73,8 +73,12 @@ public:
 
     virtual AbstractLanguageFeatures* languageFeature() = 0;
 
+signals:
+    void preeditFaceChanged(Model::Text::PreeditFace face);
+    void primaryCandidateChanged(QString candidate);
+
 private:
-    virtual WordCandidateList fetchCandidates(Model::Text *text) = 0;
+    virtual void fetchCandidates(Model::Text *text) = 0;
     const QScopedPointer<AbstractWordEnginePrivate> d_ptr;
 };
 

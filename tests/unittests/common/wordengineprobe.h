@@ -65,7 +65,7 @@ public:
     virtual AbstractLanguageFeatures* languageFeature();
 
 private:
-    virtual WordCandidateList fetchCandidates(Model::Text *text);
+    virtual void fetchCandidates(Model::Text *text);
 };
 
 }} // namespace MaliitKeyboard

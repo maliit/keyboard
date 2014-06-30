@@ -44,7 +44,7 @@ class InputMethodPrivate
 public:
     InputMethod* q;
     Editor editor;
-    QMap<QString, SharedOverride> key_overrides;
+    SharedOverride actionKeyOverrider;
     Logic::EventHandler event_handler;
     MAbstractInputMethodHost* host;
     QQuickView* view;
@@ -62,11 +62,12 @@ public:
 
     WordRibbon* wordRibbon;
 
+    int previous_position;
+
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
         , editor(EditorOptions(), new Model::Text, new Logic::WordEngine)
-        , key_overrides()
         , event_handler()
         , host(host)
         , view(0)
@@ -80,6 +81,7 @@ public:
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , wordRibbon(new WordRibbon)
+        , previous_position(-1)
     {
         applicationApiWrapper->setGeometryItem(m_geometry);
 
@@ -170,16 +172,30 @@ public:
         qml_context->setContextProperty("maliit_event_handler", &event_handler);
         qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
         qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
+        qml_context->setContextProperty("maliit_screen_height", QGuiApplication::primaryScreen()->geometry().height());
+        qml_context->setContextProperty("maliit_screen_width", QGuiApplication::primaryScreen()->geometry().width());
     }
 
 
     /*
      * register settings
      */
-    void registerFeedbackSetting()
+    void registerAudioFeedbackSoundSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(keyPressFeedbackChanged(bool)),
+        QObject::connect(&m_settings, SIGNAL(keyPressAudioFeedbackSoundChanged(QString)),
+                         q, SIGNAL(audioFeedbackSoundChanged(QString)));
+    }
+
+    void registerAudioFeedbackSetting()
+    {
+        QObject::connect(&m_settings, SIGNAL(keyPressAudioFeedbackChanged(bool)),
                          q, SIGNAL(useAudioFeedbackChanged()));
+    }
+
+    void registerHapticFeedbackSetting()
+    {
+        QObject::connect(&m_settings, SIGNAL(keyPressHapticFeedbackChanged(bool)),
+                         q, SIGNAL(useHapticFeedbackChanged()));
     }
 
     void registerAutoCorrectSetting()

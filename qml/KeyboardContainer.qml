@@ -20,12 +20,15 @@ import QtQuick.Window 2.0
 import "languages/"
 import "keys/"
 import UbuntuKeyboard 1.0
+import QtFeedback 5.0
 
 Item {
     id: panel
 
     property int keyWidth: 0
     property int keyHeight: 0
+
+    property bool autoCapsTriggered: false
 
     property string activeKeypadState: "NORMAL"
     property alias popoverEnabled: extendedKeysSelector.enabled
@@ -54,7 +57,22 @@ Item {
 
     SoundEffect {
         id: audioFeedback
-        source: Qt.resolvedUrl("styles/ubuntu/sounds/key_tick2_quiet.wav")
+        source: maliit_input_method.audioFeedbackSound
+    }
+
+    Connections {
+        target: maliit_input_method
+        onAudioFeedbackSoundChanged: audioFeedback.source = sound;
+    }
+
+    HapticsEffect {
+        id: pressEffect
+        attackIntensity: 0.0
+        attackTime: 30
+        intensity: 0.3
+        duration: 25
+        fadeTime: 30
+        fadeIntensity: 0.0
     }
 
     states: [

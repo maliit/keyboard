@@ -57,8 +57,8 @@ public:
     explicit EventHandler(QObject *parent = 0);
     virtual ~EventHandler();
 
-    Q_INVOKABLE void onWordCandidatePressed(QString word);
-    Q_INVOKABLE void onWordCandidateReleased(QString word);
+    Q_INVOKABLE void onWordCandidatePressed(QString word, bool userInput);
+    Q_INVOKABLE void onWordCandidateReleased(QString word, bool userInput);
     Q_INVOKABLE void onKeyPressed(QString label, QString action = QString());
     Q_INVOKABLE void onKeyReleased(QString label, QString action = QString());
 

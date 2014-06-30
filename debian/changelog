@@ -1,3 +1,113 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140626-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Handle any discrepancy between keyboard's fullScreenItem size and
+    the real screen size (e.g. caused by the shell's top bar) (LP:
+    #1332624)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Jun 2014 16:55:34 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140616-0ubuntu1) utopic; urgency=low
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Store the keyboard feedback sound in gsettings, making it
+    configurable. Are there any related MPs required for this MP to
+    build/function as expected? Please list. -> No. Is your branch in
+    sync with latest trunk (e.g. bzr pull lp:trunk -> no changes). ->
+    Yes. Did you perform an exploratory manual test run of your code
+    change and any related functionality on device or emulator? -> Yes.
+    Did you successfully run all tests found in your component's Test
+    Plan on device or emulator? -> All testing has been performed on a
+    Mako device. If you changed the UI, was the change
+    specified/approved by design? -> N/A. If you changed the packaging
+    (debian), did you subscribe a core-dev to this MP? -> N/A (LP:
+    #1271947)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 16 Jun 2014 17:26:23 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140611-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Disable magnification on the dial pad and number pad layouts, remove
+    transparency from magnifier background. (LP: #1323855)
+  * Place words back in to pre-edit if the user presses backspace to
+    reach that word
+  * Preserve user input as the first prediction candidate if it is spelt
+    correctly (LP: #1313635)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Changes related to fixing the preedit word completion, enhancing the
+    usage with regards to adding whitespaces, separators. Enhanced
+    autocaps. Added possibility to commit (word-completion) when using
+    separators (., etc). Double-space with auto-correction enabled now
+    results in a full-stop sign. Also, in auto-correct unnecessary
+    whitespaces before separators are removed. Include unit-testing of
+    some of the features. (LP: #1244227)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 11 Jun 2014 15:30:55 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140527-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Modify the build system so that presage databases are only updated
+    when manually requested, instead of during every compile.
+  * Add user input to the word ribbon as the first entry, allowing for
+    autocomplete suggestions to be overridden. Use the selection of that
+    entry as the cue to add words to the user spell check dictionary and
+    filter presage's predictions based on what words are in the spell
+    check dictionary. (LP: #1318808)
+  * Re-evaluate the state of autocaps when the user is deleting
+    characters and when the cursor position changes to the beginning of
+    a field (LP: #1312329)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 May 2014 15:37:47 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140515-0ubuntu1) utopic; urgency=low
+
+  [ Daniel d'Andrada ]
+  * Remove SurfaceFlinger "support" That simplifies code and enables it
+    to work in the "Qt as Mir compositor" future architecture.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 15 May 2014 23:17:20 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140512-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * Adjust values of haptic feedback to make less strong and enable by
+    default
+
+  [ Michael Sheldon ]
+  * Refactor language plugins to provide word candidates via signals and
+    move spell checking and predictive text into separate threads (LP:
+    #1299736)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 12 May 2014 23:00:51 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140506.1-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * add action key support in ubuntu-keyboard
+
+  [ Renato Araujo Oliveira Filho ]
+  * add action key support in ubuntu-keyboard
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 06 May 2014 20:52:25 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140430-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * Enable haptic feedback when the key-press-haptic-feedback gsetting
+    key is true. (LP: #1299088)
+
+  [ Michael Sheldon ]
+  * Enable haptic feedback when the key-press-haptic-feedback gsetting
+    key is true. (LP: #1299088)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Apr 2014 15:37:20 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.04.20140415-0ubuntu1) trusty; urgency=low
 
   [ Michael Sheldon ]
