@@ -172,8 +172,6 @@ public:
         qml_context->setContextProperty("maliit_event_handler", &event_handler);
         qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
         qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
-        qml_context->setContextProperty("maliit_screen_height", QGuiApplication::primaryScreen()->geometry().height());
-        qml_context->setContextProperty("maliit_screen_width", QGuiApplication::primaryScreen()->geometry().width());
     }
 
 
