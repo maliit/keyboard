@@ -1,3 +1,11 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140701-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Remove the workaround for keyboard input area positioning, as this
+    is now fixed in unity-mir
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 01 Jul 2014 09:40:11 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140626-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
