@@ -1,3 +1,11 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140714-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Allow languages to override word suggestion settings when they're
+    critical to the layout (e.g. Pinyin)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 14 Jul 2014 20:42:14 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140701-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
