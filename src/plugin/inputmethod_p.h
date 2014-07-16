@@ -178,6 +178,12 @@ public:
     /*
      * register settings
      */
+    void registerAudioFeedbackSoundSetting()
+    {
+        QObject::connect(&m_settings, SIGNAL(keyPressAudioFeedbackSoundChanged(QString)),
+                         q, SIGNAL(audioFeedbackSoundChanged(QString)));
+    }
+
     void registerAudioFeedbackSetting()
     {
         QObject::connect(&m_settings, SIGNAL(keyPressAudioFeedbackChanged(bool)),

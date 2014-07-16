@@ -31,6 +31,11 @@
       <description>Emit sound on key press.</description>
       <default>false</default>
     </key>
+    <key name="key-press-feedback-sound" type="s">
+      <summary>Key press feedback sound</summary>
+      <description>Path to the key press feedback sound.</description>
+      <default>'/usr/share/maliit/plugins/com/ubuntu/styles/ubuntu/sounds/key_tick2_quiet.wav'</default>
+    </key>
     <key name="key-press-haptic-feedback" type="b">
       <summary>Key press haptic feedback</summary>
       <description>Vibrate on key press.</description>

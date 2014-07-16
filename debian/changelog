@@ -1,3 +1,46 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140714-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Allow languages to override word suggestion settings when they're
+    critical to the layout (e.g. Pinyin)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 14 Jul 2014 20:42:14 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140701-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Remove the workaround for keyboard input area positioning, as this
+    is now fixed in unity-mir
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 01 Jul 2014 09:40:11 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140626-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Handle any discrepancy between keyboard's fullScreenItem size and
+    the real screen size (e.g. caused by the shell's top bar) (LP:
+    #1332624)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Jun 2014 16:55:34 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140616-0ubuntu1) utopic; urgency=low
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Store the keyboard feedback sound in gsettings, making it
+    configurable. Are there any related MPs required for this MP to
+    build/function as expected? Please list. -> No. Is your branch in
+    sync with latest trunk (e.g. bzr pull lp:trunk -> no changes). ->
+    Yes. Did you perform an exploratory manual test run of your code
+    change and any related functionality on device or emulator? -> Yes.
+    Did you successfully run all tests found in your component's Test
+    Plan on device or emulator? -> All testing has been performed on a
+    Mako device. If you changed the UI, was the change
+    specified/approved by design? -> N/A. If you changed the packaging
+    (debian), did you subscribe a core-dev to this MP? -> N/A (LP:
+    #1271947)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 16 Jun 2014 17:26:23 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140611-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]

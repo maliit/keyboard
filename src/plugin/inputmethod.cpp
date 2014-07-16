@@ -103,6 +103,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
+    d->registerAudioFeedbackSoundSetting();
     d->registerAudioFeedbackSetting();
     d->registerHapticFeedbackSetting();
     d->registerAutoCorrectSetting();
@@ -448,6 +449,15 @@ QObject *InputMethod::actionKeyOverride() const
 {
     Q_D(const InputMethod);
     return d->actionKeyOverrider.data();
+}
+
+//! \brief InputMethod::audioFeedbackSound returns the current path to the audio
+//! feedback sound
+//! \return path to the feedback sound
+const QString InputMethod::audioFeedbackSound() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.keyPressAudioFeedbackSound();
 }
 
 //! \brief InputMethod::setActiveLanguage

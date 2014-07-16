@@ -51,6 +51,7 @@ public:
     bool predictiveText() const;
     bool spellchecking() const;
     bool keyPressAudioFeedback() const;
+    QString keyPressAudioFeedbackSound() const;
     bool keyPressHapticFeedback() const;
 
 Q_SIGNALS:
@@ -61,6 +62,7 @@ Q_SIGNALS:
     void predictiveTextChanged(bool);
     void spellCheckingChanged(bool);
     void keyPressAudioFeedbackChanged(bool);
+    void keyPressAudioFeedbackSoundChanged(QString);
     void keyPressHapticFeedbackChanged(bool);
 
 private:

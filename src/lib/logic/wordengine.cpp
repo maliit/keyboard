@@ -46,6 +46,9 @@ class WordEnginePrivate
 public:
 
     bool use_predictive_text;
+    bool requested_prediction_state; // The state requested by settings prior
+                                     // to being overriden by any language 
+                                     // specific requirements
 
     bool use_spell_checker;
 
@@ -98,6 +101,7 @@ public:
 
 WordEnginePrivate::WordEnginePrivate()
     : use_predictive_text(false)
+    , requested_prediction_state(false)
     , use_spell_checker(false)
     , is_preedit_capitalized(false)
     , correct_spelling(false)
@@ -156,6 +160,8 @@ void WordEngine::setWordPredictionEnabled(bool enabled)
 {
     Q_D(WordEngine);
 
+    d->requested_prediction_state = enabled;
+
     // Don't allow to enable word engine if no backends are available:
     if (!d->languagePlugin && enabled) {
         qWarning() << __PRETTY_FUNCTION__
@@ -163,6 +169,12 @@ void WordEngine::setWordPredictionEnabled(bool enabled)
         enabled = false;
     }
 
+    if (d->languagePlugin->languageFeature()->alwaysShowSuggestions()) {
+        // Override requested setting for languages that should always
+        // display suggestions, such as Pinyin
+        enabled = true;
+    }
+    
     if (enabled == d->use_predictive_text)
         return;
 
@@ -323,6 +335,8 @@ void WordEngine::onLanguageChanged(const QString &languageId)
         d->loadPlugin("libpinyinplugin.so", "zh");
     else
         d->loadPlugin(DEFAULT_PLUGIN);
+
+    setWordPredictionEnabled(d->requested_prediction_state);
 
     bool ok = d->languagePlugin->setSpellCheckerLanguage(languageId);
     if (ok)
