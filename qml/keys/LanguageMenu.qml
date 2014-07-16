@@ -54,6 +54,15 @@ Item {
                 canvas.languageMenuShown = false;
             }
          }
+
+        footer: ListItem.Standard {
+            text: i18n.tr("Settings")
+            onClicked: {
+                Qt.openUrlExternally("settings:///system/language")
+                canvas.languageMenuShown = false;
+                maliit_input_method.hide();
+            }
+         }
     }
 
     function languageIdToName(languageId)
