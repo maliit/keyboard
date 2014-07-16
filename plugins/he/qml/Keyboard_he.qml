@@ -46,7 +46,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ש"; shifted: "ש"; }
+            CharKey { label: "ש"; shifted: "ש"; extended: ["₪"]; extendedShifted: ["₪"] }
             CharKey { label: "ד"; shifted: "ד"; }
             CharKey { label: "ג"; shifted: "ג"; }
             CharKey { label: "כ"; shifted: "כ"; }
@@ -82,9 +82,9 @@ KeyPad {
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
-            CharKey        { id: commaKey;    label: ","; shifted: ","; extended: ["'", ";", ":"]; anchors.left: languageMenuButton.right; }
+            CharKey        { id: commaKey;    label: ","; shifted: ","; extended: ["'", ";", ":", "׳", "״"]; extendedShifted: ["'", ";", ":", "׳", "״"]; anchors.left: languageMenuButton.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
-            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "!"]; anchors.right: enterKey.left; }
+            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "!"]; extendedShift: ["?", "!"]; anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
     } // column
