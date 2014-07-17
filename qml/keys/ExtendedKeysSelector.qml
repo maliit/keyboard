@@ -30,6 +30,9 @@ Item {
 
     property variant extendedKeysModel
     property Item currentlyAssignedKey
+    property alias keys: rowOfKeys.children
+    property alias rowX: rowOfKeys.x
+    property alias rowY: rowOfKeys.y
 
     property int currentlyAssignedKeyParentY: currentlyAssignedKey ? currentlyAssignedKey.parent.y : 0
     property int currentlyAssignedKeyX: currentlyAssignedKey ? currentlyAssignedKey.x : 0
@@ -125,21 +128,13 @@ Item {
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
-                MouseArea {
-                    anchors.fill: parent
-                    preventStealing: true
-
-                    onPressed: key.highlight = true;
-
-                    onReleased: {
-                        key.highlight = false;
-                        event_handler.onKeyReleased(modelData);
-                        if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
-                            popover.parent.activeKeypadState = "NORMAL"
-                        popover.closePopover();
-                    }
+                function commit() {
+                    key.highlight = false;
+                    event_handler.onKeyReleased(modelData);
+                    if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
+                        popover.parent.activeKeypadState = "NORMAL"
+                    popover.closePopover();
                 }
-
             }
         }
     }

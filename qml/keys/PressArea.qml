@@ -29,6 +29,10 @@ MultiPointTouchArea {
 
     /// Is true while the area is touched, and the finger did not yet lift
     property bool pressed: false
+    property alias mouseX: point.x
+    property alias mouseY: point.y
+    property alias mouseSceneX: point.sceneX
+    property alias mouseSceneY: point.sceneY
 
     /// Same as MouseArea pressAndHold()
     signal pressAndHold()
@@ -38,6 +42,10 @@ MultiPointTouchArea {
         pressed = false;
         holdTimer.stop();
     }
+
+    touchPoints: [
+        TouchPoint { id: point }
+    ]
 
     Timer {
         id: holdTimer

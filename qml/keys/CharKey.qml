@@ -34,6 +34,7 @@ Item {
     property string shifted: ""
     property var extended; // list of extended keys
     property var extendedShifted; // list of extended keys in shifted state
+    property var currentExtendedKey; // The currently highlighted extended key
 
     property alias valueToSubmit: keyLabel.text
 
@@ -136,11 +137,30 @@ Item {
                 extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
+                var extendedKeys = extendedKeysSelector.keys;
+                var middleKey = extendedKeys.length > 1 ? Math.floor(extendedKeys.length / 2) - 1 : 0;
+                extendedKeys[middleKey].highlight = true;
+                currentExtendedKey = extendedKeys[middleKey];
             }
         }
 
+        onMouseXChanged: {
+            evaluateSelectorSwipe();
+        }
+
+        onMouseYChanged: {
+            evaluateSelectorSwipe();
+        }
+
         onReleased: {
-            if (!extendedKeysShown) {
+            if (extendedKeysShown) {
+                if (currentExtendedKey) {
+                    currentExtendedKey.commit();
+                    currentExtendedKey = null;
+                } else {
+                    extendedKeysSelector.closePopover(); 
+                }
+            } else {
                 event_handler.onKeyReleased(valueToSubmit, action);
 
                 if (panel.autoCapsTriggered) {
@@ -152,6 +172,7 @@ Item {
                 }
             }
         }
+
         onPressed: {
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();
@@ -162,6 +183,32 @@ Item {
             // Quick workaround to fix initial autocaps - not beautiful, but works
             panel.autoCapsTriggered = false;
             event_handler.onKeyPressed(valueToSubmit, action);
+        }
+
+        // Determine which extended key we're underneath when swiping,
+        // highlight it and set it as the currentExtendedKey (to be committed
+        // when press is released)
+        function evaluateSelectorSwipe() {
+            if (extendedKeysSelector.enabled) {
+                var extendedKeys = extendedKeysSelector.keys;
+                currentExtendedKey = null;
+                for(var i = 0; i < extendedKeys.length; i++) {
+                    var posX = extendedKeys[i].x;
+                    var posY = extendedKeys[i].y;
+                    var mx = mouseSceneX - extendedKeysSelector.rowX;
+                    var my = mouseY - extendedKeysSelector.rowY;
+                    if(mx > posX && mx < (posX + extendedKeys[i].width)
+                       && my > posY && my < (posY + extendedKeys[i].height * 2)) {
+                        if(!extendedKeys[i].highlight && maliit_input_method.useHapticFeedback) {
+                            pressEffect.start();
+                        }
+                        extendedKeys[i].highlight = true;
+                        currentExtendedKey = extendedKeys[i];
+                    } else {
+                        extendedKeys[i].highlight = false;
+                    }
+                }
+            }
         }
     }
 
