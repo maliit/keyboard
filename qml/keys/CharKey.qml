@@ -192,8 +192,9 @@ Item {
             if (extendedKeysSelector.enabled) {
                 var extendedKeys = extendedKeysSelector.keys;
                 currentExtendedKey = null;
-                var mx = mouseX - extendedKeysSelector.mapToItem(key, extendedKeysSelector.rowX, 0).x;
-                var my = mouseY;
+                var keyMapping = extendedKeysSelector.mapToItem(key, extendedKeysSelector.rowX, extendedKeysSelector.rowY);
+                var mx = mouseX - keyMapping.x;
+                var my = mouseY - keyMapping.y;
                 for(var i = 0; i < extendedKeys.length; i++) {
                     var posX = extendedKeys[i].x;
                     var posY = extendedKeys[i].y;
