@@ -116,6 +116,7 @@ Item {
 
                 property alias commitStr: textCell.text
                 property bool highlight: false
+                opacity: highlight ? 1.0 : 0.6
 
                 Text {
                     id: textCell
