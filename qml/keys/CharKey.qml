@@ -192,11 +192,11 @@ Item {
             if (extendedKeysSelector.enabled) {
                 var extendedKeys = extendedKeysSelector.keys;
                 currentExtendedKey = null;
+                var mx = mouseX - extendedKeysSelector.mapToItem(key, extendedKeysSelector.rowX, 0).x;
+                var my = mouseY;
                 for(var i = 0; i < extendedKeys.length; i++) {
                     var posX = extendedKeys[i].x;
                     var posY = extendedKeys[i].y;
-                    var mx = mouseX - extendedKeysSelector.mapToItem(key, extendedKeysSelector.rowX, 0).x;
-                    var my = mouseY;
                     if(mx > posX && mx < (posX + extendedKeys[i].width)
                        && my > posY && my < (posY + extendedKeys[i].height * 2)) {
                         if(!extendedKeys[i].highlight && maliit_input_method.useHapticFeedback) {
