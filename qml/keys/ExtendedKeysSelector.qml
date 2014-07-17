@@ -169,6 +169,9 @@ Item {
     function closePopover()
     {
         extendedKeysModel = null;
+        // Forces re-evaluation of anchor position, in case we change
+        // orientation and then open the popover for the same key again
+        currentlyAssignedKey = null;
         popover.enabled = false
     }
 }
