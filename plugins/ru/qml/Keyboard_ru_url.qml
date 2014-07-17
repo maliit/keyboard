@@ -32,16 +32,16 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "й"; shifted: "Й"; }
-            CharKey { label: "ц"; shifted: "Ц"; }
-            CharKey { label: "у"; shifted: "Y"; extended: ["ў"]; extendedShifted: ["Ў"] }
-            CharKey { label: "к"; shifted: "К"; }
-            CharKey { label: "e"; shifted: "E"; extended: ["ë", "€"]; extendedShifted: ["Ë", "€"] }
-            CharKey { label: "н"; shifted: "Н"; }
-            CharKey { label: "г"; shifted: "Г"; }
-            CharKey { label: "ш"; shifted: "Ш"; }
-            CharKey { label: "щ"; shifted: "Щ"; }
-            CharKey { label: "з"; shifted: "З"; }
+            CharKey { label: "й"; shifted: "Й"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "ц"; shifted: "Ц"; extended: ["2"]; extendedShifted: ["2"] }
+            CharKey { label: "у"; shifted: "Y"; extended: ["3", "ў"]; extendedShifted: ["3", "Ў"] }
+            CharKey { label: "к"; shifted: "К"; extended: ["4"]; extendedShifted: ["4"] }
+            CharKey { label: "e"; shifted: "E"; extended: ["5", "ë", "€"]; extendedShifted: ["5", "Ë", "€"] }
+            CharKey { label: "н"; shifted: "Н"; extended: ["6"]; extendedShifted: ["6"] }
+            CharKey { label: "г"; shifted: "Г"; extended: ["7"]; extendedShifted: ["7"] }
+            CharKey { label: "ш"; shifted: "Ш"; extended: ["8"]; extendedShifted: ["8"] }
+            CharKey { label: "щ"; shifted: "Щ"; extended: ["9"]; extendedShifted: ["9"] }
+            CharKey { label: "з"; shifted: "З"; extended: ["0"]; extendedShifted: ["0"] }
             CharKey { label: "х"; shifted: "Х"; }
         }
 
@@ -88,7 +88,7 @@ KeyPad {
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: symShiftKey.right; }
             UrlKey         { id: urlKey; label: ".ru"; extended: [".ua",".su",".kg",".рф","укр",".by",".tj"]; anchors.right: dotKey.left; }
-            CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: extraCharKey.left; }
+            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "!"]; extendedShifted: ["?", "!"]; anchors.right: extraCharKey.left; }
             CharKey        { id: extraCharKey; label: "ъ"; shifted: "Ъ"; anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
