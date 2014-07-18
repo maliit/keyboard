@@ -30,6 +30,9 @@ Item {
 
     property variant extendedKeysModel
     property Item currentlyAssignedKey
+    property alias keys: rowOfKeys.children
+    property alias rowX: rowOfKeys.x
+    property alias rowY: rowOfKeys.y
 
     property int currentlyAssignedKeyParentY: currentlyAssignedKey ? currentlyAssignedKey.parent.y : 0
     property int currentlyAssignedKeyX: currentlyAssignedKey ? currentlyAssignedKey.x : 0
@@ -113,6 +116,7 @@ Item {
 
                 property alias commitStr: textCell.text
                 property bool highlight: false
+                opacity: highlight ? 1.0 : 0.6
 
                 Text {
                     id: textCell
@@ -125,21 +129,13 @@ Item {
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
-                MouseArea {
-                    anchors.fill: parent
-                    preventStealing: true
-
-                    onPressed: key.highlight = true;
-
-                    onReleased: {
-                        key.highlight = false;
-                        event_handler.onKeyReleased(modelData);
-                        if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
-                            popover.parent.activeKeypadState = "NORMAL"
-                        popover.closePopover();
-                    }
+                function commit() {
+                    key.highlight = false;
+                    event_handler.onKeyReleased(modelData);
+                    if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
+                        popover.parent.activeKeypadState = "NORMAL"
+                    popover.closePopover();
                 }
-
             }
         }
     }
@@ -173,6 +169,9 @@ Item {
     function closePopover()
     {
         extendedKeysModel = null;
+        // Forces re-evaluation of anchor position, in case we change
+        // orientation and then open the popover for the same key again
+        currentlyAssignedKey = null;
         popover.enabled = false
     }
 }
