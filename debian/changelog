@@ -1,3 +1,20 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140718-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Enable the language menu when single pressing the language switcher
+    button and add a settings item to the bottom of the language
+    switcher.
+  * Add numbers to the extended keys in the top row and extra
+    punctuation on existing punctuation keys. Also adds the new sheqel
+    symbol to the Hebrew keyboard and ensures that the Hebrew keyboard
+    still displays keys when in capital mode. (LP: #1233578)
+  * Fix incorrect Russian characters and layout (LP: #1321908)
+  * Implement swiping behaviour for the selection of extended keys and
+    fix popover position when selecting the same extended key after
+    changing orientation.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 16:27:52 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140714-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
