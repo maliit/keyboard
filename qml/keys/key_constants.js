@@ -53,7 +53,7 @@ var bottom_margin = 1.00; // gu
 
 
 var urlLayoutLeftSpacerSize = 5; // gu
-var emailLayoutUrlKeyPadding = 4; // gu
+var emailLayoutUrlKeyPadding = 1.5; // gu
 
 /* language menu */
 var languageMenuListViewPadding = 2.22; // gu

@@ -82,7 +82,8 @@ KeyPad {
             height: panel.keyHeight;
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            CharKey        { id: atKey;    label: "@"; shifted: "@";     anchors.left: symShiftKey.right; }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
+            CharKey        { id: atKey;    label: "@"; shifted: "@";     anchors.left: languageMenuButton.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: atKey.right; anchors.right: urlKey.left; noMagnifier: true }
             UrlKey         { id: urlKey; label: ".br"; extended: [".pt", ".mz", ".ao", ".gw", ".tl"]; anchors.right: dotKey.left; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
