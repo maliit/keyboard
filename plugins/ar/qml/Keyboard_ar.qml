@@ -32,17 +32,17 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ض"; }
-            CharKey { label: "ص"; }
-            CharKey { label: "ث"; }
-            CharKey { label: "ق"; }
-            CharKey { label: "ف"; }
-            CharKey { label: "غ"; shifted: "إ"; }
-            CharKey { label: "ع"; }
-            CharKey { label: "ه"; }
-            CharKey { label: "خ"; }
-            CharKey { label: "ح"; }
-            CharKey { label: "ج"; }
+            CharKey { label: "ض"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "ص"; extended: ["2"]; extendedShifted: ["2"] }
+            CharKey { label: "ث"; extended: ["3"]; extendedShifted: ["3"] }
+            CharKey { label: "ق"; extended: ["4"]; extendedShifted: ["4"] }
+            CharKey { label: "ف"; extended: ["5"]; extendedShifted: ["5"] }
+            CharKey { label: "غ"; shifted: "إ"; extended: ["6"]; extendedShifted: ["6"] }
+            CharKey { label: "ع"; extended: ["7"]; extendedShifted: ["7"] }
+            CharKey { label: "ه"; extended: ["8"]; extendedShifted: ["8"] }
+            CharKey { label: "خ"; extended: ["9"]; extendedShifted: ["9"] }
+            CharKey { label: "ح"; extended: ["0"]; extendedShifted: ["0"] }
+            CharKey { label: "ج";}
         }
 
         Row {
@@ -89,7 +89,7 @@ KeyPad {
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
             CharKey        { id: commaKey;    label: "ذ"; shifted: "/";  anchors.left: languageMenuButton.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
-            CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: specialChar.left; }
+            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "!"]; extendedShifted: ["?", "!"]; anchors.right: specialChar.left; }
             CharKey        { id: specialChar; label: "ط";                anchors.right: enterKey.left }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
