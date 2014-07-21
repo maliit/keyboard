@@ -129,11 +129,16 @@ Item {
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
-                function commit() {
+                function commit(skipAutoCaps) {
                     key.highlight = false;
+                    event_handler.onKeyPressed(modelData);
                     event_handler.onKeyReleased(modelData);
-                    if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
-                        popover.parent.activeKeypadState = "NORMAL"
+                    if (panel.autoCapsTriggered) {
+                        panel.autoCapsTriggered = false;
+                    } else if (!skipAutoCaps) {
+                        if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
+                            popover.parent.activeKeypadState = "NORMAL"
+                    }
                     popover.closePopover();
                 }
             }
