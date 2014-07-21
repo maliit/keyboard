@@ -153,12 +153,6 @@ Item {
 
         anchorItem.x = item.x + row.x
         anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
-
-        /// FIXME need to avoid being drawn outside of the keyboard, and clicking
-        /// on the application below
-        // if (!wordRibbon.visible) // TODO possible to do this only when wordribbon is off
-        if (anchorItem.y < -units.gu(UI.top_margin))
-            anchorItem.y = - (units.gu(UI.top_margin) + units.gu(UI.popoverSquat) )
     }
 
     function __restoreAssignedKey()
