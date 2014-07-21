@@ -147,12 +147,14 @@ Item {
 
     function __repositionPopoverTo(item)
     {
-        // item.parent is a row
-        var row = item.parent;
-        var point = popover.mapFromItem(item, item.x, item.y)
+        if(item) {
+            // item.parent is a row
+            var row = item.parent;
+            var point = popover.mapFromItem(item, item.x, item.y)
 
-        anchorItem.x = item.x + row.x
-        anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
+            anchorItem.x = item.x + row.x
+            anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
+        }
     }
 
     function __restoreAssignedKey()
