@@ -142,6 +142,7 @@ private:
         editor.setAutoCorrectEnabled(enable_auto_correct);
         editor.setPreeditEnabled(true);
         editor.setAutoCapsEnabled(true);
+        editor.setDoubleSpaceFullStopEnabled(true);
 
         appendInput(&editor, input);
 

@@ -111,6 +111,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerWordEngineSetting();
     d->registerActiveLanguage();
     d->registerEnabledLanguages();
+    d->registerDoubleSpaceFullStop();
 
     //fire signal so all listeners know what active language is
     Q_EMIT activeLanguageChanged(d->activeLanguage);
@@ -225,6 +226,12 @@ void InputMethod::onAutoCorrectSettingChanged()
 {
     Q_D(InputMethod);
     d->editor.setAutoCorrectEnabled(d->m_settings.autoCompletion());
+}
+
+void InputMethod::onDoubleSpaceSettingChanged()
+{
+    Q_D(InputMethod);
+    d->editor.setDoubleSpaceFullStopEnabled(d->m_settings.doubleSpaceFullStop());
 }
 
 /*!

@@ -51,5 +51,10 @@
       <description>User-defined list of activatable spell-checking languages.</description>
       <default>[]</default>
     </key>
+    <key name="double-space-full-stop" type="b">
+      <summary>Double space full-stop</summary>
+      <description>Insert a full-stop when space is pressed twice.</description>
+      <default>true</default>
+    </key>
   </schema>
 </schemalist>

@@ -130,6 +130,7 @@ Q_SIGNALS:
 private:
     Q_SLOT void onAutoCorrectSettingChanged();
     Q_SLOT void onEnabledLanguageSettingsChanged();
+    Q_SLOT void onDoubleSpaceSettingChanged();
     Q_SLOT void updateAutoCaps();
 
     Q_SLOT void onKeyboardClosed();
