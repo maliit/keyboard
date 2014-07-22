@@ -53,6 +53,10 @@ Item {
         __repositionPopoverTo(currentlyAssignedKey);
     }
 
+    onEnabledChanged: {
+        canvas.extendedKeysShown = enabled
+    }
+
     ///
     // Item gets repositioned above the currently active key on keyboard.
     // extended keys area will center on top of this
