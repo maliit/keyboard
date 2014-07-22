@@ -1,3 +1,12 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140722-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Fix autocaps when entering punctuation via extended keys and make
+    spacing for the top row of extended keys consistent with other rows.
+  * Control double space full stops via a gsettings key
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 22 Jul 2014 15:10:54 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140718-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
