@@ -43,6 +43,7 @@ const QLatin1String SPELL_CHECKING_KEY = QLatin1String("spellChecking");
 const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_KEY = QLatin1String("keyPressFeedback");
 const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY = QLatin1String("keyPressFeedbackSound");
 const QLatin1String KEY_PRESS_HAPTIC_FEEDBACK_KEY = QLatin1String("keyPressHapticFeedback");
+const QLatin1String DOUBLE_SPACE_FULL_STOP = QLatin1String("doubleSpaceFullStop");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -153,6 +154,15 @@ QString KeyboardSettings::keyPressAudioFeedbackSound() const
 }
 
 /*!
+ * \brief KeyboardSettings:doubleSpaceFullStop returns true if double space full-stops are
+ * enabled, which insert a full-stop when the space key is pressed twice.
+ */
+bool KeyboardSettings::doubleSpaceFullStop() const
+{
+    return m_settings->get(DOUBLE_SPACE_FULL_STOP).toBool();
+}
+
+/*!
  * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
  * \param key
@@ -185,6 +195,9 @@ void KeyboardSettings::settingUpdated(const QString &key)
         return;
     } else if (key == KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY) {
         Q_EMIT keyPressAudioFeedbackSoundChanged(keyPressAudioFeedbackSound());
+        return;
+    } else if (key == DOUBLE_SPACE_FULL_STOP) {
+        Q_EMIT doubleSpaceFullStopChanged(doubleSpaceFullStop());
         return;
     }
 

@@ -239,6 +239,14 @@ public:
         //registerSystemLanguage();
         //q->setActiveLanguage(activeLanguage);
     }
+
+    void registerDoubleSpaceFullStop()
+    {
+        QObject::connect(&m_settings, SIGNAL(doubleSpaceFullStopChanged(bool)),
+                         q, SLOT(onDoubleSpaceSettingChanged()));
+        editor.setDoubleSpaceFullStopEnabled(m_settings.doubleSpaceFullStop());
+    }
+
     void closeOskWindow()
     {
         if (!view->isVisible())

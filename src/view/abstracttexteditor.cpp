@@ -286,6 +286,7 @@ public:
     int ignore_next_cursor_position;
     QString ignore_next_surrounding_text;
     bool look_for_a_double_space;
+    bool double_space_full_stop_enabled;
     QString appendix_for_previous_preedit;
     int backspace_word_acceleration;
 
@@ -310,6 +311,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , ignore_next_cursor_position(-1)
     , ignore_next_surrounding_text()
     , look_for_a_double_space(false)
+    , double_space_full_stop_enabled(false)
     , appendix_for_previous_preedit()
     , backspace_word_acceleration(0)
 {
@@ -500,7 +502,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
 
         // every double-space character inputs one-after-another force a full-stop, so trigger it if needed
-        if (d->preedit_enabled && d->auto_correct_enabled && not look_for_a_double_space) {
+        if (d->double_space_full_stop_enabled && not look_for_a_double_space) {
             d->look_for_a_double_space = true;
         }
 
@@ -736,6 +738,27 @@ void AbstractTextEditor::setAutoCapsEnabled(bool enabled)
     if (d->auto_caps_enabled != enabled) {
         d->auto_caps_enabled = enabled;
         Q_EMIT autoCapsEnabledChanged(d->auto_caps_enabled);
+    }
+}
+
+//! \brief Returns whether double space full-stop is enabled
+//! \sa doubleSpaceFullStopEnabled
+bool AbstractTextEditor::isDoubleSpaceFullStopEnabled() const
+{
+    Q_D(const AbstractTextEditor);
+    return d->double_space_full_stop_enabled;
+}
+
+//! \brief Sets whether the double space full-stop functionality is enabled.
+//! \param enabled \c true to enable double space full-stop functionality.
+//! \sa doubleSpaceFullStopEnabled
+void AbstractTextEditor::setDoubleSpaceFullStopEnabled(bool enabled)
+{
+    Q_D(AbstractTextEditor);
+
+    if (d->double_space_full_stop_enabled != enabled) {
+        d->double_space_full_stop_enabled = enabled;
+        Q_EMIT doubleSpaceFullStopEnabledChanged(d->double_space_full_stop_enabled);
     }
 }
 
