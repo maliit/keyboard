@@ -199,7 +199,7 @@ Item {
                     var posX = extendedKeys[i].x;
                     var posY = extendedKeys[i].y;
                     if(mx > posX && mx < (posX + extendedKeys[i].width)
-                       && my > posY && my < (posY + extendedKeys[i].height * 2)) {
+                       && my > posY && my < (posY + extendedKeys[i].height * 2.5)) {
                         if(!extendedKeys[i].highlight && maliit_input_method.useHapticFeedback) {
                             pressEffect.start();
                         }

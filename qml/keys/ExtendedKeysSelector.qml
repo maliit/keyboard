@@ -53,6 +53,10 @@ Item {
         __repositionPopoverTo(currentlyAssignedKey);
     }
 
+    onEnabledChanged: {
+        canvas.extendedKeysShown = enabled
+    }
+
     ///
     // Item gets repositioned above the currently active key on keyboard.
     // extended keys area will center on top of this
@@ -129,11 +133,16 @@ Item {
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
-                function commit() {
+                function commit(skipAutoCaps) {
                     key.highlight = false;
+                    event_handler.onKeyPressed(modelData);
                     event_handler.onKeyReleased(modelData);
-                    if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
-                        popover.parent.activeKeypadState = "NORMAL"
+                    if (panel.autoCapsTriggered) {
+                        panel.autoCapsTriggered = false;
+                    } else if (!skipAutoCaps) {
+                        if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
+                            popover.parent.activeKeypadState = "NORMAL"
+                    }
                     popover.closePopover();
                 }
             }
@@ -147,18 +156,14 @@ Item {
 
     function __repositionPopoverTo(item)
     {
-        // item.parent is a row
-        var row = item.parent;
-        var point = popover.mapFromItem(item, item.x, item.y)
+        if(item) {
+            // item.parent is a row
+            var row = item.parent;
+            var point = popover.mapFromItem(item, item.x, item.y)
 
-        anchorItem.x = item.x + row.x
-        anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
-
-        /// FIXME need to avoid being drawn outside of the keyboard, and clicking
-        /// on the application below
-        // if (!wordRibbon.visible) // TODO possible to do this only when wordribbon is off
-        if (anchorItem.y < -units.gu(UI.top_margin))
-            anchorItem.y = - (units.gu(UI.top_margin) + units.gu(UI.popoverSquat) )
+            anchorItem.x = item.x + row.x
+            anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
+        }
     }
 
     function __restoreAssignedKey()

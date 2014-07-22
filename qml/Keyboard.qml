@@ -83,6 +83,7 @@ Item {
             onWordribbon_visibleChanged: calculateSize();
 
             property bool languageMenuShown: false
+            property bool extendedKeysShown: false
 
             onXChanged: fullScreenItem.reportKeyboardVisibleRect();
             onYChanged: fullScreenItem.reportKeyboardVisibleRect();
@@ -98,7 +99,7 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
                 height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
-                borderTop.height + units.gu(UI.top_margin) * 3
+                borderTop.height + units.gu(UI.top_margin)
 
                 drag.target: keyboardSurface
                 drag.axis: Drag.YAxis;
@@ -107,6 +108,8 @@ Item {
                 //fix for lp:1277186
                 //only filter children when wordRibbon visible
                 drag.filterChildren: wordRibbon.visible
+                // Avoid conflict with extended key swipe selection
+                enabled: !canvas.extendedKeysShown
 
                 onReleased: {
                     if (keyboardSurface.y > jumpBackThreshold) {
