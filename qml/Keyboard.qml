@@ -99,7 +99,7 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
                 height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
-                borderTop.height + units.gu(UI.top_margin) * 3
+                borderTop.height + units.gu(UI.top_margin)
 
                 drag.target: keyboardSurface
                 drag.axis: Drag.YAxis;
