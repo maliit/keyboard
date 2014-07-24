@@ -220,26 +220,25 @@ Item {
             states: [
                 State {
                     name: "SHOWN"
-                    PropertyChanges { target: canvas; y: 0; }
+                    PropertyChanges { target: keyboardSurface; y: 0; }
                     when: maliit_geometry.shown === true
                 },
 
                 State {
                     name: "HIDDEN"
-                    PropertyChanges { target: canvas; y: height; }
+                    PropertyChanges { target: keyboardSurface; y: canvas.height; }
                     onCompleted: {
                         canvas.languageMenuShown = false;
-                        keyboardSurface.y = 0;
                         keypad.closeExtendedKeys();
                         keypad.activeKeypadState = "NORMAL";
                         keypad.state = "CHARACTERS";
-                        maliit_input_method.hide();
+                        maliit_input_method.close();
                     }
                     when: maliit_geometry.shown === false
                 }
             ]
             transitions: Transition {
-                PropertyAnimation { target: canvas; properties: "y"; easing.type: Easing.InOutQuad }
+                UbuntuNumberAnimation { target: keyboardSurface; properties: "y"; }
             }
 
             Connections {

@@ -135,7 +135,19 @@ void InputMethod::show()
     d->m_geometry->setShown(true);
 }
 
+//! \brief InputMethod::hide
+//! Begins the hiding animation within QML
 void InputMethod::hide()
+{
+    Q_D(InputMethod);
+    d->m_geometry->setShown(false);
+}
+
+//! \brief InputMethod::close
+//! Closes the keyboard instantly (typically only called by QML after the
+//! hiding animation has finished, under normal circumstances hide() should
+//! be used instead)
+void InputMethod::close()
 {
     Q_D(InputMethod);
     d->closeOskWindow();
