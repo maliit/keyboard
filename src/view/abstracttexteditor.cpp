@@ -874,12 +874,8 @@ void AbstractTextEditor::singleBackspace()
         d->text->removeFromPreedit(1);
         textOnLeft += d->text->preedit();
         
-        // Don't find word candidates if the user is holding down backspace
-        if(!d->repeating_backspace) {
-            d->word_engine->computeCandidates(d->text.data());
-        } else {
-            Q_EMIT wordCandidatesChanged(WordCandidateList());
-        }
+        // Clear previous word candidates
+        Q_EMIT wordCandidatesChanged(WordCandidateList());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                           Replacement());
 
