@@ -60,6 +60,10 @@ MultiPointTouchArea {
     }
 
     onReleased: {
+        // Allow the user to swipe away the keyboard
+        if (point.y > point.startY + units.gu(8) && holdTimer.running) {
+            maliit_input_method.hide();
+        }
         pressed = false;
         holdTimer.stop();
     }
