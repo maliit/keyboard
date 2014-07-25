@@ -56,7 +56,7 @@ public:
 
     bool correct_spelling;
 
-    bool auto_completion_enabled;
+    bool auto_correct_enabled;
 
     LanguagePluginInterface* languagePlugin;
 
@@ -107,7 +107,7 @@ WordEnginePrivate::WordEnginePrivate()
     , use_spell_checker(false)
     , is_preedit_capitalized(false)
     , correct_spelling(false)
-    , auto_completion_enabled(false)
+    , auto_correct_enabled(false)
     , languagePlugin(0)
 {
     loadPlugin(DEFAULT_PLUGIN);
@@ -207,7 +207,7 @@ void WordEngine::setAutoCorrectEnabled(bool enabled)
 {
     Q_D(WordEngine);
 
-    d->auto_completion_enabled = enabled;
+    d->auto_correct_enabled = enabled;
 }
 
 void WordEngine::onWordCandidateSelected(QString word)
@@ -294,7 +294,7 @@ void WordEngine::calculatePrimaryCandidate()
 {
     Q_D(WordEngine);
 
-    if (!d->auto_completion_enabled) {
+    if (!d->auto_correct_enabled) {
         return;
     }
 
