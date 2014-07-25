@@ -1016,6 +1016,11 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
         if(!QRegExp("\\W+").exactMatch(lastChar)) {
             QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("\\W+"));
             int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
+            if(leftWords.last().isEmpty()) {
+                // If removed char was punctuation trimming will result in an empty entry
+                leftWords.removeLast();
+                trimDiff += 1;
+            }
             if(!text()->surroundingRight().trimmed().isEmpty()) {
                 // We don't currently handle reentering preedit in the middle of the text
                 return;
