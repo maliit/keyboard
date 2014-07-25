@@ -132,6 +132,10 @@ public:
     Q_SLOT void setAutoCapsEnabled(bool enabled);
     Q_SIGNAL void autoCapsEnabledChanged(bool enabled);
 
+    bool isDoubleSpaceFullStopEnabled() const;
+    Q_SLOT void setDoubleSpaceFullStopEnabled(bool enabled);
+    Q_SIGNAL void doubleSpaceFullStopEnabledChanged(bool enabled);
+
     Q_SLOT void addToUserDictionary(const QString &word);
 
     Q_SIGNAL void keyboardClosed();
