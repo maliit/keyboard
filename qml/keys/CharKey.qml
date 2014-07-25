@@ -160,7 +160,7 @@ Item {
                 } else {
                     extendedKeysSelector.closePopover(); 
                 }
-            } else {
+            } else if(!swipedOut) {
                 event_handler.onKeyReleased(valueToSubmit, action);
 
                 if (panel.autoCapsTriggered) {
