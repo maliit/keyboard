@@ -109,6 +109,8 @@ public:
     Model::Text * text() const;
     Logic::AbstractWordEngine * wordEngine() const;
 
+    void checkPreeditReentry(bool uncommittedDelete);
+
     Q_SLOT void onKeyPressed(const Key &key);
     Q_SLOT void onKeyReleased(const Key &key);
     Q_SLOT void onKeyEntered(const Key &key);
@@ -170,8 +172,6 @@ private:
 
     void sendKeyPressAndReleaseEvents(int key, Qt::KeyboardModifiers modifiers,
                                       const QString& text = QString());
-
-    void checkPreeditReentry();
 };
 
 } // namespace MaliitKeyboard
