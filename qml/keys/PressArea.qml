@@ -29,6 +29,9 @@ MultiPointTouchArea {
 
     /// Is true while the area is touched, and the finger did not yet lift
     property bool pressed: false
+    // Track whether we've swiped out of a key press to dismiss the keyboard
+    property bool swipedOut: false
+    property bool held: true
     property alias mouseX: point.x
     property alias mouseY: point.y
 
@@ -42,29 +45,42 @@ MultiPointTouchArea {
     }
 
     touchPoints: [
-        TouchPoint { id: point }
+        TouchPoint { 
+            id: point
+            onYChanged: {
+                if (point.y > root.y + root.height && !swipedOut) {
+                    // We've swiped out of the key
+                    swipedOut = true;
+                    cancelPress();
+                }
+            }
+        }
     ]
 
     Timer {
         id: holdTimer
         interval: 1000
         onTriggered: {
-            if (root.pressed)
+            if (root.pressed) {
                 root.pressAndHold();
+                held = true;
+            }
         }
     }
 
     onPressed: {
         pressed = true;
+        swipedOut = false;
         holdTimer.restart();
     }
 
     onReleased: {
         // Allow the user to swipe away the keyboard
-        if (point.y > point.startY + units.gu(8) && holdTimer.running) {
+        if (point.y > point.startY + units.gu(8) && !held) {
             maliit_input_method.hide();
         }
         pressed = false;
+        held = false;
         holdTimer.stop();
     }
 }
