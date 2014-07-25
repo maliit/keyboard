@@ -64,6 +64,7 @@ public:
 
     Q_SLOT virtual void setWordPredictionEnabled(bool on);
     Q_SLOT virtual void setSpellcheckerEnabled(bool on);
+    Q_SLOT virtual void setAutoCorrectEnabled(bool on);
 
     void clearCandidates();
     void computeCandidates(Model::Text *text);

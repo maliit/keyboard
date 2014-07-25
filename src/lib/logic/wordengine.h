@@ -61,6 +61,7 @@ public:
 
     virtual void addToUserDictionary(const QString &word);
     virtual void setSpellcheckerEnabled(bool enabled);
+    virtual void setAutoCorrectEnabled(bool enabled);
     //! \reimp_end
 
     void appendToCandidates(WordCandidateList *candidates,
@@ -78,6 +79,7 @@ private:
     //! \reimp
     virtual void fetchCandidates(Model::Text *text);
     //! \reimp_end
+    void calculatePrimaryCandidate();
 
     const QScopedPointer<WordEnginePrivate> d_ptr;
 };

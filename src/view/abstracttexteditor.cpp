@@ -358,6 +358,9 @@ AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
 
     connect(word_engine, SIGNAL(primaryCandidateChanged(QString)),
             this,        SLOT(setPrimaryCandidate(QString)));
+    
+    connect(this,        SIGNAL(autoCorrectEnabledChanged(bool)),
+            word_engine, SLOT(setAutoCorrectEnabled(bool)));
 
     setPreeditEnabled(word_engine->isEnabled());
 }

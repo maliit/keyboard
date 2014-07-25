@@ -56,6 +56,8 @@ public:
 
     bool correct_spelling;
 
+    bool auto_completion_enabled;
+
     LanguagePluginInterface* languagePlugin;
 
     QPluginLoader pluginLoader;
@@ -105,6 +107,7 @@ WordEnginePrivate::WordEnginePrivate()
     , use_spell_checker(false)
     , is_preedit_capitalized(false)
     , correct_spelling(false)
+    , auto_completion_enabled(false)
     , languagePlugin(0)
 {
     loadPlugin(DEFAULT_PLUGIN);
@@ -200,6 +203,13 @@ void WordEngine::setSpellcheckerEnabled(bool enabled)
         Q_EMIT enabledChanged(isEnabled());
 }
 
+void WordEngine::setAutoCorrectEnabled(bool enabled)
+{
+    Q_D(WordEngine);
+
+    d->auto_completion_enabled = enabled;
+}
+
 void WordEngine::onWordCandidateSelected(QString word)
 {
     Q_D(WordEngine);
@@ -252,11 +262,7 @@ void WordEngine::newSpellingSuggestions(QStringList suggestions)
             appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
         }
 
-        Q_EMIT candidatesChanged(*d->candidates);
-
-        // Candidates always has at least one entry from the user input candidate
-        Q_EMIT primaryCandidateChanged(d->candidates->size() == 1 ? QString()
-                                                                : d->candidates->at(1).label());
+        calculatePrimaryCandidate();
     }
 
     Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
@@ -274,19 +280,50 @@ void WordEngine::newPredictionSuggestions(QStringList suggestions)
     }
 
     Q_FOREACH(const QString &correction, suggestions) {
-        if(correction != d->candidates->at(0).word()) { // Don't repeat correctly spelt user word
-            appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
-        }
+        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
     }
 
-    Q_EMIT candidatesChanged(*d->candidates);
-
-    Q_EMIT primaryCandidateChanged(d->candidates->size() == 1 ? QString()
-                                                              : d->candidates->at(1).label());
+    calculatePrimaryCandidate();
 
     Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
                                                                                 : Model::Text::PreeditNoCandidates)
                                                          : Model::Text::PreeditActive);
+}
+
+void WordEngine::calculatePrimaryCandidate() 
+{
+    Q_D(WordEngine);
+
+    if (!d->auto_completion_enabled) {
+        return;
+    }
+
+    if (d->candidates->size() == 0) {
+        // We should always have at least one entry due to the user input
+        qWarning() << __PRETTY_FUNCTION__ << "User candidate missing";
+    } else if (d->candidates->size() == 1) {
+        // We don't have any predictions, so the user input is the primary candidate
+        WordCandidate primary = d->candidates->value(0);
+        Q_EMIT primaryCandidateChanged(primary.word());
+    } else if (d->candidates->at(0).word() == d->candidates->at(1).word()) {
+        // The user candidate matches the first prediction; remove the prediction
+        // and make the user input the primary candidate so as not to duplicate
+        // the word.
+        d->candidates->removeAt(1);
+        WordCandidate primary = d->candidates->value(0);
+        primary.setPrimary(true);
+        d->candidates->replace(0, primary);
+        Q_EMIT primaryCandidateChanged(primary.word());
+    } else {
+        // The first prediction is the primary candidate
+        WordCandidate primary = d->candidates->value(1);
+        primary.setPrimary(true);
+        d->candidates->replace(1, primary);
+        Q_EMIT primaryCandidateChanged(primary.word());
+    }
+
+    Q_EMIT candidatesChanged(*d->candidates);
+
 }
 
 void WordEngine::addToUserDictionary(const QString &word)
