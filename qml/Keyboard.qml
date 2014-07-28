@@ -268,20 +268,16 @@ Item {
         reportKeyboardVisibleRect();
     }
 
-    // calculates the size of the visible keyboard to report to the window system
-    // FIXME get the correct size for enabled extended keys instead of that big area
     function reportKeyboardVisibleRect() {
 
         var vx = 0;
         var vy = wordRibbon.y;
         var vwidth = keyboardSurface.width;
         var vheight = keyboardComp.height + wordRibbon.height;
-        if (!canvas.wordribbon_visible && keypad.popoverEnabled) {
-            vy = 0;
-            vheight = keyboardSurface.height;
-        }
 
         var obj = mapFromItem(keyboardSurface, vx, vy, vwidth, vheight);
+        // Report visible height of the keyboard to support anchorToKeyboard
+        obj.height = fullScreenItem.height - obj.y;
         maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
     }
 
