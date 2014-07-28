@@ -295,6 +295,11 @@ void WordEngine::calculatePrimaryCandidate()
     Q_D(WordEngine);
 
     if (!d->auto_correct_enabled) {
+        if (d->candidates->size() > 1 && d->candidates->at(0).word() == d->candidates->at(1).word()) {
+            // Avoid duplicating the user input if the first prediction matches
+            d->candidates->removeAt(1);
+        }
+        Q_EMIT candidatesChanged(*d->candidates);
         return;
     }
 
