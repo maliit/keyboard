@@ -63,7 +63,7 @@ MultiPointTouchArea {
                     var distance = point.y - lastY;
                     // If changing direction wait until movement passes 1 gu
                     // to avoid jitter
-                    if(lastChange * distance > 0 || Math.abs(distance) > units.gu(1)) {
+                    if ((lastChange * distance > 0 || Math.abs(distance) > units.gu(1)) && !held) {
                         keyboardSurface.y += distance;
                         lastY = point.y;
                         lastChange = distance;
