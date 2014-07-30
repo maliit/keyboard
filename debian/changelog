@@ -1,4 +1,4 @@
-ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140722-0ubuntu1) unstable; urgency=low
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140722-0ubuntu1+danilo0) unstable; urgency=low
 
   * plugins/sr: Serbian layout.
 
