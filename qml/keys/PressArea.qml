@@ -47,11 +47,29 @@ MultiPointTouchArea {
     touchPoints: [
         TouchPoint { 
             id: point
+            property double lastY
+            property double lastChange
             onYChanged: {
-                if (point.y > root.y + root.height && !swipedOut) {
-                    // We've swiped out of the key
-                    swipedOut = true;
-                    cancelPress();
+                if (point.y > root.y + root.height) {
+                    if (!swipedOut) {
+                        // We've swiped out of the key
+                        swipedOut = true;
+                        cancelPress();
+                    }
+
+                    // Dragging implemented here rather than in higher level
+                    // mouse area to avoid conflict with swipe selection
+                    // of extended keys
+                    var distance = point.y - lastY;
+                    // If changing direction wait until movement passes 1 gu
+                    // to avoid jitter
+                    if(lastChange * distance > 0 || Math.abs(distance) > units.gu(1)) {
+                        keyboardSurface.y += distance;
+                        lastY = point.y;
+                        lastChange = distance;
+                    }
+                } else {
+                    lastY = point.y;
                 }
             }
         }
@@ -78,6 +96,9 @@ MultiPointTouchArea {
         // Allow the user to swipe away the keyboard
         if (point.y > point.startY + units.gu(8) && !held) {
             maliit_input_method.hide();
+        } else {
+            bounceBackAnimation.from = keyboardSurface.y;
+            bounceBackAnimation.start();
         }
         pressed = false;
         held = false;
