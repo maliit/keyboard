@@ -48,7 +48,7 @@ public slots:
     void updateSpellCheckWord(QString word);
 
 signals:
-    void newSuggestions(QStringList suggestions);
+    void newSuggestions(QString word, QStringList suggestions);
 
 private:
     SpellChecker m_spellChecker;

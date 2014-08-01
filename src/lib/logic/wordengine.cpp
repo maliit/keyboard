@@ -64,6 +64,8 @@ public:
 
     WordCandidateList* candidates;
 
+    QString currentPreedit;
+
     explicit WordEnginePrivate();
 
     QString currentPlugin;
@@ -221,6 +223,8 @@ void WordEngine::fetchCandidates(Model::Text *text)
 {
     Q_D(WordEngine);
 
+    d->currentPreedit = text->preedit();
+
     d->candidates = new WordCandidateList();
     const QString &preedit(text->preedit());
     d->is_preedit_capitalized = not preedit.isEmpty() && preedit.at(0).isUpper();
@@ -250,9 +254,14 @@ void WordEngine::fetchCandidates(Model::Text *text)
     }
 }
 
-void WordEngine::newSpellingSuggestions(QStringList suggestions)
+void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions)
 {
     Q_D(WordEngine);
+
+    if (word != d->currentPreedit) {
+        // Don't add suggestions coming in for a previous word
+        return;
+    }
 
     // Spelling and prediction suggestions arrive asynchronously
     // So we need to ensure only one primary candidate is selected
@@ -276,9 +285,14 @@ void WordEngine::newSpellingSuggestions(QStringList suggestions)
     suggestionMutex.unlock();
 }
 
-void WordEngine::newPredictionSuggestions(QStringList suggestions)
+void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions)
 {
     Q_D(WordEngine);
+
+    if (word != d->currentPreedit) {
+        // Don't add suggestions coming in for a previous word
+        return;
+    }
 
     // Spelling and prediction suggestions arrive asynchronously
     // So we need to ensure only one primary candidate is selected
@@ -396,8 +410,8 @@ void WordEngine::onLanguageChanged(const QString &languageId)
     if (ok)
         d->languagePlugin->setSpellCheckerEnabled(d->use_spell_checker);
 
-    connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newSpellingSuggestions(QStringList)), this, SLOT(newSpellingSuggestions(QStringList)));
-    connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newPredictionSuggestions(QStringList)), this, SLOT(newPredictionSuggestions(QStringList)));
+    connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SLOT(newSpellingSuggestions(QString, QStringList)));
+    connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SLOT(newPredictionSuggestions(QString, QStringList)));
 }
 
 AbstractLanguageFeatures* WordEngine::languageFeature()
