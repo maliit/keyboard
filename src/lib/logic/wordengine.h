@@ -38,6 +38,7 @@
 #include "languageplugininterface.h"
 
 #include <QtCore>
+#include <QMutex>
 
 namespace MaliitKeyboard {
 namespace Logic {
@@ -82,6 +83,8 @@ private:
     void calculatePrimaryCandidate();
 
     const QScopedPointer<WordEnginePrivate> d_ptr;
+
+    QMutex suggestionMutex;
 };
 
 }} // namespace Logic, MaliitKeyboard

@@ -254,6 +254,10 @@ void WordEngine::newSpellingSuggestions(QStringList suggestions)
 {
     Q_D(WordEngine);
 
+    // Spelling and prediction suggestions arrive asynchronously
+    // So we need to ensure only one primary candidate is selected
+    suggestionMutex.lock();
+
     // Only append candidates if we don't have the correct spelling, as these
     // might be candidates from an earlier version of the word, before it was
     // spelt correctly
@@ -268,11 +272,17 @@ void WordEngine::newSpellingSuggestions(QStringList suggestions)
     Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
                                                                                 : Model::Text::PreeditNoCandidates)
                                                          : Model::Text::PreeditDefault);
+
+    suggestionMutex.unlock();
 }
 
 void WordEngine::newPredictionSuggestions(QStringList suggestions)
 {
     Q_D(WordEngine);
+
+    // Spelling and prediction suggestions arrive asynchronously
+    // So we need to ensure only one primary candidate is selected
+    suggestionMutex.lock();
 
     // If the current user entry is a valid word, add this as the first prediction
     if(d->correct_spelling) {
@@ -288,6 +298,8 @@ void WordEngine::newPredictionSuggestions(QStringList suggestions)
     Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
                                                                                 : Model::Text::PreeditNoCandidates)
                                                          : Model::Text::PreeditDefault);
+
+    suggestionMutex.unlock();
 }
 
 void WordEngine::calculatePrimaryCandidate() 
