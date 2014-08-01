@@ -267,7 +267,7 @@ void WordEngine::newSpellingSuggestions(QStringList suggestions)
 
     Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
                                                                                 : Model::Text::PreeditNoCandidates)
-                                                         : Model::Text::PreeditActive);
+                                                         : Model::Text::PreeditDefault);
 }
 
 void WordEngine::newPredictionSuggestions(QStringList suggestions)
@@ -287,7 +287,7 @@ void WordEngine::newPredictionSuggestions(QStringList suggestions)
 
     Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
                                                                                 : Model::Text::PreeditNoCandidates)
-                                                         : Model::Text::PreeditActive);
+                                                         : Model::Text::PreeditDefault);
 }
 
 void WordEngine::calculatePrimaryCandidate() 
