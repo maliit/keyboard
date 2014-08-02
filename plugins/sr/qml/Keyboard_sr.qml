@@ -29,7 +29,7 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            spacing: 0;
+            spacing: 0
 
             CharKey { label: "љ"; shifted: "Љ"; }
             CharKey { label: "њ"; shifted: "Њ"; }
@@ -47,7 +47,7 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            spacing: 0;
+            spacing: 0
 
             CharKey { label: "а"; shifted: "А"; }
             CharKey { label: "с"; shifted: "С"; }
@@ -64,7 +64,7 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            spacing: 0;
+            spacing: 0
 
             ShiftKey { }
             CharKey { label: ","; shifted: "/"; }
