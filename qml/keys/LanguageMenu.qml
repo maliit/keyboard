@@ -82,6 +82,7 @@ Item {
         if (languageId == "pl")         return i18n.tr("Polish");
         if (languageId == "pt")         return i18n.tr("Portuguese");
         if (languageId == "ru")         return i18n.tr("Russian");
+        if (languageId == "sr")         return i18n.tr("Serbian");
         if (languageId == "sv")         return i18n.tr("Swedish");
         if (languageId == "zh")         return i18n.tr("Chinese - Pinyin");
 
