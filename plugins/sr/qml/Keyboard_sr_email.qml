@@ -61,21 +61,23 @@ KeyPad {
             CharKey { label: "л"; shifted: "Л"; }
             CharKey { label: "ч"; shifted: "Ч"; }
             CharKey { label: "ћ"; shifted: "Ћ"; }
-            CharKey { label: "ж"; shifted: "Ж"; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            ShiftKey { padding: 0 }
+            ShiftKey { }
+            CharKey { label: "@"; shifted: "@"; }
             CharKey { label: "џ"; shifted: "Џ"; }
             CharKey { label: "ц"; shifted: "Ц"; }
             CharKey { label: "в"; shifted: "В"; }
             CharKey { label: "б"; shifted: "Б"; }
             CharKey { label: "н"; shifted: "Н"; }
             CharKey { label: "м"; shifted: "М"; }
-            BackspaceKey { padding: 0 }
+            CharKey { label: "ж"; shifted: "Ж"; }
+            CharKey { label: "."; shifted: "."; }
+            BackspaceKey { }
         }
 
         Item {
@@ -84,10 +86,9 @@ KeyPad {
 
             height: panel.keyHeight;
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            CharKey        { id: atKey;    label: "@"; shifted: "@";     anchors.left: symShiftKey.right; }
-            SpaceKey       { id: spaceKey;                               anchors.left: atKey.right; anchors.right: urlKey.left; noMagnifier: true }
-            UrlKey         { id: urlKey; label: ".rs"; extended: [".com",".net",".org",".срб"]; anchors.right: dotKey.left; }
-            CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
+            LanguageKey    { id: languageMenuButton; anchors.left: symShiftKey.right; }
+            SpaceKey       { id: spaceKey;                               anchors.left: languageMenuButton.right; anchors.right: urlKey.left; noMagnifier: true }
+            UrlKey         { id: urlKey; label: ".срб"; extended: [".пр.срб", ".орг.срб", ".обр.срб", ".од.срб", ".ак.срб", ".упр.срб"]; anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
     } // column
