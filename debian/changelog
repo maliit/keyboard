@@ -1,3 +1,9 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140730-0ubuntu2) utopic; urgency=low
+
+  * plugins/sr: Serbian layout.
+
+ -- Danilo Segan <danilo@kvota.net>  Sun, 27 Jul 2014 23:57:38 +0200
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140730.1-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
@@ -12,12 +18,6 @@ ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140730.1-0ubuntu1) utopic; urgency=
   * New rebuild forced
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Jul 2014 20:53:18 +0000
-
-ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140722-0ubuntu1+danilo0) unstable; urgency=low
-
-  * plugins/sr: Serbian layout.
-
- -- Danilo Segan <danilo@kvota.net>  Sun, 27 Jul 2014 23:57:38 +0200
 
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140722-0ubuntu1) utopic; urgency=low
 
