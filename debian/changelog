@@ -1,3 +1,18 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140730.1-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Modify the pre-edit style to just underline text instead of making
+    it bold and blue. (LP: #1347490)
+  * Re-enter pre-edit after changing focus whilst still in a word (e.g.
+    after swiping keyboard down and then tapping back in text field) or
+    deleting punctuation characters and fix the pre-edit offset when
+    deleting by holding backspace. (LP: #1347492)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Jul 2014 20:53:18 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140722-0ubuntu1+danilo0) unstable; urgency=low
 
   * plugins/sr: Serbian layout.
