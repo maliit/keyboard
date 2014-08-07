@@ -25,62 +25,46 @@
  *
  */
 
-#include "spellcheckerworker.h"
+#ifndef SPELLPREDICTWORKER_H
+#define SPELLPREDICTWORKER_H
 
+#include "spellchecker.h"
+#include "candidatescallback.h"
+#include <presage.h>
 
-SpellCheckerWorker::SpellCheckerWorker(QObject *parent)
-    : QObject(parent)
-    , m_spellChecker()
-    , m_word()
-    , m_limit(5)
-    , m_processingWords(false)
+#include <QObject>
+#include <QStringList>
+
+class CandidatesCallback;
+
+class SpellPredictWorker : public QObject
 {
-}
+    Q_OBJECT
 
-void SpellCheckerWorker::suggest(const QString& word, int limit)
-{
-    QStringList suggestions = m_spellChecker.suggest(word, limit);
-    Q_EMIT newSuggestions(word, suggestions);
-}
+public:
+    SpellPredictWorker(QObject *parent = 0);
+    void suggest(const QString& word, int limit);
 
-void SpellCheckerWorker::newSpellCheckWord(QString word)
-{
-    // Run through all the words queued in the event loop
-    // so we only fetch suggestions for the latest word
-    bool setProcessingWords = false;
-    if(m_processingWords == false) {
-        setProcessingWords = true;
-        m_processingWords = true;
-    }
-    QCoreApplication::processEvents();
-    if(setProcessingWords == true) {
-        m_processingWords = false;
-    }
+public slots:
+    void parsePredictionText(const QString& surroundingLeft, const QString& preedit);
+    void newSpellCheckWord(QString word);
+    void setLanguage(QString language);
+    void setSpellCheckLimit(int limit);
+    void addToUserWordList(const QString& word);
 
-    m_word = word;
+signals:
+    void newSpellingSuggestions(QString word, QStringList suggestions);
+    void newPredictionSuggestions(QString word, QStringList suggestions);
 
-    if(!m_processingWords) {
-        suggest(m_word, m_limit);
-    }
-}
+private:
+    std::string m_candidatesContext;
+    CandidatesCallback m_presageCandidates;
+    Presage m_presage;
+    SpellChecker m_spellChecker;
+    QString m_word;
+    int m_limit;
+    bool m_processingWords;
 
-void SpellCheckerWorker::setLanguage(QString language)
-{
-    m_spellChecker.setLanguage(language);
-}
+};
 
-void SpellCheckerWorker::setLimit(int limit)
-{
-    m_limit = limit;
-}
-
-void SpellCheckerWorker::setEnabled(bool enabled)
-{
-    m_spellChecker.setEnabled(enabled);
-}
-
-void SpellCheckerWorker::updateSpellCheckWord(QString word)
-{   
-    m_spellChecker.updateWord(word);
-}
-
+#endif // SPELLPREDICTWORKER_H

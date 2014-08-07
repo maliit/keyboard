@@ -54,7 +54,7 @@ public:
     QStringList suggest(const QString &word,
                         int limit = -1);
     void ignoreWord(const QString &word);
-    void addToUserWordlist(const QString &word);
+    void addToUserWordList(const QString &word);
     void updateWord(const QString &word);
 
     bool setLanguage(const QString& language);

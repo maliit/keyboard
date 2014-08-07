@@ -54,9 +54,9 @@ public:
 
     bool is_preedit_capitalized;
 
-    bool correct_spelling;
-
     bool auto_correct_enabled;
+
+    bool calculated_primary_candidate;
 
     LanguagePluginInterface* languagePlugin;
 
@@ -108,8 +108,8 @@ WordEnginePrivate::WordEnginePrivate()
     , requested_prediction_state(false)
     , use_spell_checker(false)
     , is_preedit_capitalized(false)
-    , correct_spelling(false)
     , auto_correct_enabled(false)
+    , calculated_primary_candidate(false)
     , languagePlugin(0)
 {
     loadPlugin(DEFAULT_PLUGIN);
@@ -123,7 +123,9 @@ WordEnginePrivate::WordEnginePrivate()
 WordEngine::WordEngine(QObject *parent)
     : AbstractWordEngine(parent)
     , d_ptr(new WordEnginePrivate)
-{}
+{
+    Q_EMIT preeditFaceChanged(Model::Text::PreeditDefault);
+}
 
 //! \brief Destructor.
 WordEngine::~WordEngine()
@@ -135,7 +137,7 @@ bool WordEngine::isEnabled() const
 {
     Q_D(const WordEngine);
     return (AbstractWordEngine::isEnabled() &&
-            (d->use_predictive_text || d->languagePlugin->spellCheckerEnabled()));
+            (d->use_predictive_text || d->use_spell_checker));
 }
 
 void WordEngine::appendToCandidates(WordCandidateList *candidates,
@@ -200,7 +202,6 @@ void WordEngine::setSpellcheckerEnabled(bool enabled)
 
     d->use_spell_checker = enabled;
 
-    d->languagePlugin->setSpellCheckerEnabled(d->use_spell_checker);
     if(totalEnabled != isEnabled())
         Q_EMIT enabledChanged(isEnabled());
 }
@@ -223,6 +224,8 @@ void WordEngine::fetchCandidates(Model::Text *text)
 {
     Q_D(WordEngine);
 
+    d->calculated_primary_candidate = false;
+
     d->currentPreedit = text->preedit();
 
     d->candidates = new WordCandidateList();
@@ -234,22 +237,13 @@ void WordEngine::fetchCandidates(Model::Text *text)
 
     Q_EMIT candidatesChanged(*d->candidates);
 
-    // spell checking
-    d->correct_spelling = d->languagePlugin->spell(preedit);
-
     Q_EMIT primaryCandidateChanged(QString());
-    
-    if (d->correct_spelling) {
-        Q_EMIT preeditFaceChanged(Model::Text::PreeditDefault);
-    } else if (!d->languagePlugin->spellCheckerEnabled()) {
-        Q_EMIT preeditFaceChanged(Model::Text::PreeditNoCandidates);
-    }
 
     if (d->use_predictive_text) {
         d->languagePlugin->predict(text->surroundingLeft(), preedit);
     }
 
-    if (!d->correct_spelling) {
+    if (d->use_spell_checker) {
         d->languagePlugin->spellCheckerSuggest(preedit, 5);
     }
 }
@@ -267,20 +261,13 @@ void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions)
     // So we need to ensure only one primary candidate is selected
     suggestionMutex.lock();
 
-    // Only append candidates if we don't have the correct spelling, as these
-    // might be candidates from an earlier version of the word, before it was
-    // spelt correctly
-    if (!d->correct_spelling) {
-        Q_FOREACH(const QString &correction, suggestions) {
-            appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
-        }
-
-        calculatePrimaryCandidate();
+    Q_FOREACH(const QString &correction, suggestions) {
+        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
     }
 
-    Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
-                                                                                : Model::Text::PreeditNoCandidates)
-                                                         : Model::Text::PreeditDefault);
+    calculatePrimaryCandidate();
+
+    Q_EMIT candidatesChanged(*d->candidates);
 
     suggestionMutex.unlock();
 }
@@ -298,20 +285,13 @@ void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions)
     // So we need to ensure only one primary candidate is selected
     suggestionMutex.lock();
 
-    // If the current user entry is a valid word, add this as the first prediction
-    if(d->correct_spelling) {
-        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, d->candidates->at(0).word());
-    }
-
     Q_FOREACH(const QString &correction, suggestions) {
         appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
     }
 
     calculatePrimaryCandidate();
 
-    Q_EMIT preeditFaceChanged(d->candidates->size() == 1 ? (d->correct_spelling ? Model::Text::PreeditDefault
-                                                                                : Model::Text::PreeditNoCandidates)
-                                                         : Model::Text::PreeditDefault);
+    Q_EMIT candidatesChanged(*d->candidates);
 
     suggestionMutex.unlock();
 }
@@ -320,12 +300,18 @@ void WordEngine::calculatePrimaryCandidate()
 {
     Q_D(WordEngine);
 
+    if (d->calculated_primary_candidate) {
+        // We don't want to evaluate the primary candidate twice per
+        // word if we're getting both predictions and spellchecking
+        // suggestions
+        return;
+    }
+
     if (!d->auto_correct_enabled) {
         if (d->candidates->size() > 1 && d->candidates->at(0).word() == d->candidates->at(1).word()) {
             // Avoid duplicating the user input if the first prediction matches
             d->candidates->removeAt(1);
         }
-        Q_EMIT candidatesChanged(*d->candidates);
         return;
     }
 
@@ -353,7 +339,9 @@ void WordEngine::calculatePrimaryCandidate()
         Q_EMIT primaryCandidateChanged(primary.word());
     }
 
-    Q_EMIT candidatesChanged(*d->candidates);
+    if (d->candidates->size() > 1) {
+        d->calculated_primary_candidate = true;
+    }
 
 }
 
@@ -406,9 +394,7 @@ void WordEngine::onLanguageChanged(const QString &languageId)
 
     setWordPredictionEnabled(d->requested_prediction_state);
 
-    bool ok = d->languagePlugin->setSpellCheckerLanguage(languageId);
-    if (ok)
-        d->languagePlugin->setSpellCheckerEnabled(d->use_spell_checker);
+    d->languagePlugin->setLanguage(languageId);
 
     connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SLOT(newSpellingSuggestions(QString, QStringList)));
     connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SLOT(newPredictionSuggestions(QString, QStringList)));
