@@ -24,53 +24,28 @@ import QtQuick.Window 2.0
 
 import "key_constants.js" as UI
 
-Item {
+KeyPopover {
     id: popover
     enabled: false
 
     property variant extendedKeysModel
-    property Item currentlyAssignedKey
     property alias keys: rowOfKeys.children
     property alias rowX: rowOfKeys.x
     property alias rowY: rowOfKeys.y
 
-    property int currentlyAssignedKeyParentY: currentlyAssignedKey ? currentlyAssignedKey.parent.y : 0
-    property int currentlyAssignedKeyX: currentlyAssignedKey ? currentlyAssignedKey.x : 0
-    property int currentlyAssignedKeyY: currentlyAssignedKey ? currentlyAssignedKey.y : 0
-
-    onCurrentlyAssignedKeyXChanged: __repositionPopoverTo(currentlyAssignedKey)
-    onCurrentlyAssignedKeyYChanged: __repositionPopoverTo(currentlyAssignedKey)
-    onCurrentlyAssignedKeyParentYChanged: __repositionPopoverTo(currentlyAssignedKey);
-
     property int __width: 0
     property string __commitStr: ""
 
-    onCurrentlyAssignedKeyChanged:
-    {
-        if (currentlyAssignedKey == null)
-            return;
-
-        __repositionPopoverTo(currentlyAssignedKey);
-    }
-
     onEnabledChanged: {
         canvas.extendedKeysShown = enabled
-    }
-
-    ///
-    // Item gets repositioned above the currently active key on keyboard.
-    // extended keys area will center on top of this
-
-    Item {
-        id: anchorItem
-        width: panel.keyWidth
-        height: panel.keyHeight
     }
 
     BorderImage {
         id: popoverBackground
 
         anchors.centerIn: anchorItem
+        anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
+
         width: {
             if (rowOfKeys.width < keypad.keyWidth)
                 return keypad.keyWidth;
@@ -105,6 +80,7 @@ Item {
     Row {
         id: rowOfKeys
         anchors.centerIn: anchorItem
+        anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
 
         Component.onCompleted: __width = 0
 
@@ -152,18 +128,6 @@ Item {
     function enableMouseArea()
     {
         extendedKeysMouseArea.enabled = true
-    }
-
-    function __repositionPopoverTo(item)
-    {
-        if(item) {
-            // item.parent is a row
-            var row = item.parent;
-            var point = popover.mapFromItem(item, item.x, item.y)
-
-            anchorItem.x = item.x + row.x
-            anchorItem.y = point.y - (panel.keyHeight + units.dp(UI.popoverTopMargin));
-        }
     }
 
     function __restoreAssignedKey()

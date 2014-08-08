@@ -1,0 +1,69 @@
+/*
+ * Copyright 2014 Canonical Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import QtQuick 2.0
+
+import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
+
+import QtQuick.Window 2.0
+
+import "key_constants.js" as UI
+
+Item {
+    id: popover
+
+    property Item currentlyAssignedKey
+    property alias anchorItem: __anchorItem
+
+    property int currentlyAssignedKeyParentY: currentlyAssignedKey ? currentlyAssignedKey.parent.y : 0
+    property int currentlyAssignedKeyX: currentlyAssignedKey ? currentlyAssignedKey.x : 0
+    property int currentlyAssignedKeyY: currentlyAssignedKey ? currentlyAssignedKey.y : 0
+
+    onCurrentlyAssignedKeyXChanged: __repositionPopoverTo(currentlyAssignedKey)
+    onCurrentlyAssignedKeyYChanged: __repositionPopoverTo(currentlyAssignedKey)
+    onCurrentlyAssignedKeyParentYChanged: __repositionPopoverTo(currentlyAssignedKey);
+
+    onCurrentlyAssignedKeyChanged:
+    {
+        if (currentlyAssignedKey == null)
+            return;
+
+        __repositionPopoverTo(currentlyAssignedKey);
+    }
+
+    ///
+    // Item gets repositioned above the currently active key on keyboard.
+    // extended keys area will center on top of this
+    Item {
+        id: __anchorItem
+        width: panel.keyWidth
+        height: panel.keyHeight
+    }
+
+    function __repositionPopoverTo(item)
+    {
+        if(item) {
+            // item.parent is a row
+            var row = item.parent;
+            var point = popover.mapFromItem(item, item.x, item.y)
+
+            __anchorItem.x = item.x + row.x
+            __anchorItem.y = point.y - panel.keyHeight;
+        }
+    }
+}
