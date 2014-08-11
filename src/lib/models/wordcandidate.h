@@ -54,6 +54,7 @@ private:
     QString m_label;
     Source m_source;
     QString m_word;
+    bool m_primary;
 
 public:
     explicit WordCandidate();
@@ -79,6 +80,9 @@ public:
 
     QString word() const;
     void setWord(const QString &word);
+
+    bool primary() const;
+    void setPrimary(const bool primary);
 };
 
 typedef QList<WordCandidate> WordCandidateList;

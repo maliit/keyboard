@@ -40,7 +40,7 @@ SpellCheckerWorker::SpellCheckerWorker(QObject *parent)
 void SpellCheckerWorker::suggest(const QString& word, int limit)
 {
     QStringList suggestions = m_spellChecker.suggest(word, limit);
-    Q_EMIT newSuggestions(suggestions);
+    Q_EMIT newSuggestions(word, suggestions);
 }
 
 void SpellCheckerWorker::newSpellCheckWord(QString word)

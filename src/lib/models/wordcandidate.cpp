@@ -39,6 +39,7 @@ WordCandidate::WordCandidate()
     , m_label()
     , m_source(SourceUnknown)
     , m_word()
+    , m_primary(false)
 {}
 
 WordCandidate::WordCandidate(Source source, const QString &word)
@@ -47,6 +48,7 @@ WordCandidate::WordCandidate(Source source, const QString &word)
     , m_label()
     , m_source(source)
     , m_word(word)
+    , m_primary(false)
 {
     if (source == WordCandidate::SourceUser) {
         m_label = QString(QT_TR_NOOP("Add '%1' to user dictionary")).arg(word);
@@ -124,6 +126,16 @@ QString WordCandidate::word() const
 void WordCandidate::setWord(const QString &word)
 {
     m_word = word;
+}
+
+bool WordCandidate::primary() const
+{
+    return m_primary;
+}
+
+void WordCandidate::setPrimary(const bool primary)
+{
+    m_primary = primary;
 }
 
 bool operator==(const WordCandidate &lhs,

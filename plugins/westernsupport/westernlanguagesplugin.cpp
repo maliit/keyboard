@@ -15,7 +15,7 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
     SpellCheckerWorker *spellWorker = new SpellCheckerWorker();
     spellWorker->moveToThread(m_spellCheckThread);
 
-    connect(spellWorker, SIGNAL(newSuggestions(QStringList)), this, SIGNAL(newSpellingSuggestions(QStringList)));
+    connect(spellWorker, SIGNAL(newSuggestions(QString, QStringList)), this, SIGNAL(newSpellingSuggestions(QString, QStringList)));
     connect(this, SIGNAL(newSpellCheckWord(QString)), spellWorker, SLOT(newSpellCheckWord(QString)));
     connect(this, SIGNAL(setSpellCheckLanguage(QString)), spellWorker, SLOT(setLanguage(QString)));
     connect(this, SIGNAL(setSpellCheckLimit(int)), spellWorker, SLOT(setLimit(int)));
@@ -27,7 +27,7 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
     PredictiveTextWorker *predictiveWorker = new PredictiveTextWorker();
     predictiveWorker->moveToThread(m_predictiveTextThread);
 
-    connect(predictiveWorker, SIGNAL(newSuggestions(QStringList)), this, SIGNAL(newPredictionSuggestions(QStringList)));
+    connect(predictiveWorker, SIGNAL(newSuggestions(QString, QStringList)), this, SIGNAL(newPredictionSuggestions(QString, QStringList)));
     connect(this, SIGNAL(parsePredictionText(QString, QString)), predictiveWorker, SLOT(parsePredictionText(QString, QString)));
     connect(this, SIGNAL(setPredictionLanguage(QString)), predictiveWorker, SLOT(setPredictionLanguage(QString)));
     connect(this, SIGNAL(updateSpellCheckWord(QString)), predictiveWorker, SLOT(updateSpellCheckWord(QString)));
