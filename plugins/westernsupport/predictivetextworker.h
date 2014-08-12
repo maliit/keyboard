@@ -51,7 +51,7 @@ public slots:
     void updateSpellCheckWord(QString word);
 
 signals:
-    void newSuggestions(QStringList suggestions);
+    void newSuggestions(QString word, QStringList suggestions);
 
 private:
     std::string m_candidatesContext;

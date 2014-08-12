@@ -38,6 +38,7 @@
 #include "languageplugininterface.h"
 
 #include <QtCore>
+#include <QMutex>
 
 namespace MaliitKeyboard {
 namespace Logic {
@@ -61,6 +62,7 @@ public:
 
     virtual void addToUserDictionary(const QString &word);
     virtual void setSpellcheckerEnabled(bool enabled);
+    virtual void setAutoCorrectEnabled(bool enabled);
     //! \reimp_end
 
     void appendToCandidates(WordCandidateList *candidates,
@@ -69,8 +71,8 @@ public:
 
     Q_SLOT void onWordCandidateSelected(QString word);
     Q_SLOT void onLanguageChanged(const QString& languageId);
-    Q_SLOT void newSpellingSuggestions(QStringList suggestions);
-    Q_SLOT void newPredictionSuggestions(QStringList suggestions);
+    Q_SLOT void newSpellingSuggestions(QString word, QStringList suggestions);
+    Q_SLOT void newPredictionSuggestions(QString word, QStringList suggestions);
 
     virtual AbstractLanguageFeatures* languageFeature();
 
@@ -78,8 +80,11 @@ private:
     //! \reimp
     virtual void fetchCandidates(Model::Text *text);
     //! \reimp_end
+    void calculatePrimaryCandidate();
 
     const QScopedPointer<WordEnginePrivate> d_ptr;
+
+    QMutex suggestionMutex;
 };
 
 }} // namespace Logic, MaliitKeyboard

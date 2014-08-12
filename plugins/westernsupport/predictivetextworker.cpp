@@ -66,7 +66,7 @@ void PredictiveTextWorker::parsePredictionText(const QString& surroundingLeft, c
         qWarning() << "An exception was thrown in libpresage when calling predict(), exception nr: " << error;
     }
 
-    Q_EMIT newSuggestions(list);
+    Q_EMIT newSuggestions(preedit, list);
 }
 
 void PredictiveTextWorker::setPredictionLanguage(QString locale)
