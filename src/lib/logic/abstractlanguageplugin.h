@@ -46,12 +46,9 @@ public:
     virtual AbstractLanguageFeatures* languageFeature();
 
     //! spell checker
-    virtual bool spellCheckerEnabled();
-    virtual bool setSpellCheckerEnabled(bool enabled);
-    virtual bool spell(const QString& word);
     virtual void spellCheckerSuggest(const QString& word, int limit);
     virtual void addToSpellCheckerUserWordList(const QString& word);
-    virtual bool setSpellCheckerLanguage(const QString& languageId);
+    virtual bool setLanguage(const QString& languageId);
 
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions);

@@ -28,32 +28,26 @@ public:
     virtual AbstractLanguageFeatures* languageFeature();
 
     //! spell checker
-    virtual bool spellCheckerEnabled();
-    virtual bool setSpellCheckerEnabled(bool enabled);
-    virtual bool spell(const QString& word);
     virtual void spellCheckerSuggest(const QString& word, int limit);
     virtual void addToSpellCheckerUserWordList(const QString& word);
-    virtual bool setSpellCheckerLanguage(const QString& languageId);
+    virtual bool setLanguage(const QString& languageId);
 
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions);
     void newPredictionSuggestions(QString word, QStringList suggestions);
     void newSpellCheckWord(QString word);
     void setSpellCheckLimit(int limit);
-    void setSpellCheckLanguage(QString language);
-    void spellCheckEnabled(bool enabled);
+    void setSpellPredictLanguage(QString language);
     void parsePredictionText(QString surroundingLeft, QString preedit);
     void setPredictionLanguage(QString language);
-    void updateSpellCheckWord(QString word);
+    void addToUserWordList(const QString& word);
 
 public slots:
 
 private:
     WesternLanguageFeatures* m_languageFeatures;
-
-    SpellChecker m_spellChecker;
-    QThread *m_spellCheckThread;
-    QThread *m_predictiveTextThread;
+    QThread *m_spellPredictThread;
+    bool m_spellCheckEnabled;
 };
 
 #endif // WESTERNLANGUAGESPLUGIN_H
