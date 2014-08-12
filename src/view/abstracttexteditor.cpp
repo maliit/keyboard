@@ -360,6 +360,9 @@ AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
 
     connect(word_engine, SIGNAL(primaryCandidateChanged(QString)),
             this,        SLOT(setPrimaryCandidate(QString)));
+    
+    connect(this,        SIGNAL(autoCorrectEnabledChanged(bool)),
+            word_engine, SLOT(setAutoCorrectEnabled(bool)));
 
     setPreeditEnabled(word_engine->isEnabled());
 }
@@ -486,11 +489,13 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionBackspace: {
         if (not d->backspace_sent) {
             singleBackspace();
+            checkPreeditReentry(true);
+        } else {
+            checkPreeditReentry(false);
         }
 
         d->auto_repeat_backspace_timer.stop();
         d->repeating_backspace = false;
-        checkPreeditReentry();
         d->word_engine->computeCandidates(d->text.data());
     } break;
 
@@ -897,12 +902,8 @@ void AbstractTextEditor::singleBackspace()
         d->text->removeFromPreedit(1);
         textOnLeft += d->text->preedit();
         
-        // Don't find word candidates if the user is holding down backspace
-        if(!d->repeating_backspace) {
-            d->word_engine->computeCandidates(d->text.data());
-        } else {
-            Q_EMIT wordCandidatesChanged(WordCandidateList());
-        }
+        // Clear previous word candidates
+        Q_EMIT wordCandidatesChanged(WordCandidateList());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                           Replacement());
 
@@ -996,7 +997,7 @@ void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 
 //! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should
 //! place a word back in to pre-edit after a character has been deleted
-void AbstractTextEditor::checkPreeditReentry()
+void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 {
     if(!text()->preedit().isEmpty() || !isPreeditEnabled()) {
         return;
@@ -1004,17 +1005,27 @@ void AbstractTextEditor::checkPreeditReentry()
 
     int currentOffset = text()->surroundingOffset();
     if(currentOffset > 1 && !text()->surrounding().isEmpty()) {
-        // -2 for just deleted character that hasn't been committed and to reach character before cursor
-        QString lastChar = text()->surrounding().at(currentOffset-2);
+        QString lastChar;
+        if(uncommittedDelete) {
+            // -2 for just deleted character that hasn't been committed and to reach character before cursor
+            lastChar = text()->surrounding().at(currentOffset-2);
+        } else {
+            lastChar = text()->surrounding().at(currentOffset-1);
+        }
         if(!QRegExp("\\W+").exactMatch(lastChar)) {
             QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("\\W+"));
             int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
+            if(leftWords.last().isEmpty()) {
+                // If removed char was punctuation trimming will result in an empty entry
+                leftWords.removeLast();
+                trimDiff += 1;
+            }
             if(!text()->surroundingRight().trimmed().isEmpty()) {
                 // We don't currently handle reentering preedit in the middle of the text
                 return;
             }
             QString recreatedPreedit = leftWords.last();
-            if(trimDiff == 0) {
+            if(trimDiff == 0 && uncommittedDelete) {
                 // Remove the last character from the word if we weren't just deleting a space
                 // as the last backspace hasn't been committed yet.
                 recreatedPreedit.chop(1);

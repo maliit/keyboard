@@ -35,7 +35,7 @@ public:
     virtual bool setSpellCheckerLanguage(const QString& languageId) { Q_UNUSED(languageId); return false; }
 
 signals:
-    void newPredictionSuggestions(QStringList suggestions);
+    void newPredictionSuggestions(QString word, QStringList suggestions);
     
 public slots:
     

@@ -18,7 +18,7 @@ void PinyinPlugin::predict(const QString& surroundingLeft, const QString& preedi
 {
     Q_UNUSED(surroundingLeft);
     pinyinAdapter->parse(preedit);
-    Q_EMIT newPredictionSuggestions(pinyinAdapter->getWordCandidates());
+    Q_EMIT newPredictionSuggestions(preedit, pinyinAdapter->getWordCandidates());
 }
 
 void PinyinPlugin::wordCandidateSelected(QString word)

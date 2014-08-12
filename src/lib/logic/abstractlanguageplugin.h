@@ -54,8 +54,8 @@ public:
     virtual bool setSpellCheckerLanguage(const QString& languageId);
 
 signals:
-    void newSpellingSuggestions(QStringList suggestions);
-    void newPredictionSuggestions(QStringList suggestions);
+    void newSpellingSuggestions(QString word, QStringList suggestions);
+    void newPredictionSuggestions(QString word, QStringList suggestions);
 };
 
 #endif // ABSTRACTLANGUAGEPLUGIN_H

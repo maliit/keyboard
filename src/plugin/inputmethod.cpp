@@ -133,6 +133,7 @@ void InputMethod::show()
 
     d->view->setVisible(true);
     d->m_geometry->setShown(true);
+    d->editor.checkPreeditReentry(false);
 }
 
 //! \brief InputMethod::hide
