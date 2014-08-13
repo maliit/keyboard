@@ -178,6 +178,12 @@ Item {
             }
         }
 
+        onSwipedOutChanged: {
+            if(swipedOut && magnifier.currentlyAssignedKey == key) {
+                magnifier.shown = false;
+            }
+        }
+
         onPressed: {
             magnifier.currentlyAssignedKey = key
             magnifier.shown = !noMagnifier
