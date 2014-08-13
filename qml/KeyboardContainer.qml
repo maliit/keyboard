@@ -55,6 +55,11 @@ Item {
         anchors.fill: parent
     }
 
+    Magnifier {
+        id: magnifier
+        shown: false
+    }
+
     SoundEffect {
         id: audioFeedback
         source: maliit_input_method.audioFeedbackSound

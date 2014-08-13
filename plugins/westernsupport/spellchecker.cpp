@@ -244,7 +244,7 @@ void SpellChecker::ignoreWord(const QString &word)
 //! \brief Adds a given word to user's permanent dictionary.
 //! \param word The word to be added to user dictionary - it will be used for
 //!             spellchecking and suggesting.
-void SpellChecker::addToUserWordlist(const QString &word)
+void SpellChecker::addToUserWordList(const QString &word)
 {
     Q_D(SpellChecker);
 
