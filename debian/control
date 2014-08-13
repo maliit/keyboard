@@ -103,6 +103,7 @@ Description: Ubuntu on-screen keyboard data files - Chinese Pinyin
 Package: ubuntu-keyboard-czech
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-cs
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Czech
@@ -164,6 +165,7 @@ Description: Ubuntu on-screen keyboard data files - German
 Package: ubuntu-keyboard-hebrew
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-he
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Hebrew
@@ -181,6 +183,7 @@ Description: Ubuntu on-screen keyboard data files - Hungarian
 Package: ubuntu-keyboard-italian
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-it
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Italian
@@ -198,6 +201,7 @@ Description: Ubuntu on-screen keyboard data files - Polish
 Package: ubuntu-keyboard-portuguese
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-pt
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Portuguese
@@ -224,6 +228,7 @@ Description: Ubuntu on-screen keyboard data files - Serbian
 Package: ubuntu-keyboard-spanish
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-es
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Spanish

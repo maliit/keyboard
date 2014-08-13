@@ -50,23 +50,6 @@ AbstractLanguageFeatures* AbstractLanguagePlugin::languageFeature()
     return NULL;
 }
 
-bool AbstractLanguagePlugin::spellCheckerEnabled()
-{
-    return false;
-}
-
-bool AbstractLanguagePlugin::setSpellCheckerEnabled(bool enabled)
-{
-    Q_UNUSED(enabled)
-    return false;
-}
-
-bool AbstractLanguagePlugin::spell(const QString& word)
-{
-    Q_UNUSED(word)
-    return false;
-}
-
 void AbstractLanguagePlugin::spellCheckerSuggest(const QString& word, int limit)
 {
     Q_UNUSED(word)
@@ -78,7 +61,7 @@ void AbstractLanguagePlugin::addToSpellCheckerUserWordList(const QString& word)
     Q_UNUSED(word)
 }
 
-bool AbstractLanguagePlugin::setSpellCheckerLanguage(const QString& languageId)
+bool AbstractLanguagePlugin::setLanguage(const QString& languageId)
 {
     Q_UNUSED(languageId)
     return false;

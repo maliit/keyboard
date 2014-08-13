@@ -25,8 +25,8 @@
  *
  */
 
-#ifndef PREDICTIVETEXTWORKER_H
-#define PREDICTIVETEXTWORKER_H
+#ifndef SPELLPREDICTWORKER_H
+#define SPELLPREDICTWORKER_H
 
 #include "spellchecker.h"
 #include "candidatescallback.h"
@@ -37,27 +37,34 @@
 
 class CandidatesCallback;
 
-class PredictiveTextWorker : public QObject
+class SpellPredictWorker : public QObject
 {
     Q_OBJECT
 
 public:
-    PredictiveTextWorker(QObject *parent = 0);
-    void autocorrect(const QString& word, int limit);
+    SpellPredictWorker(QObject *parent = 0);
+    void suggest(const QString& word, int limit);
 
 public slots:
     void parsePredictionText(const QString& surroundingLeft, const QString& preedit);
-    void setPredictionLanguage(QString language);
-    void updateSpellCheckWord(QString word);
+    void newSpellCheckWord(QString word);
+    void setLanguage(QString language);
+    void setSpellCheckLimit(int limit);
+    void addToUserWordList(const QString& word);
 
 signals:
-    void newSuggestions(QStringList suggestions);
+    void newSpellingSuggestions(QString word, QStringList suggestions);
+    void newPredictionSuggestions(QString word, QStringList suggestions);
 
 private:
     std::string m_candidatesContext;
     CandidatesCallback m_presageCandidates;
     Presage m_presage;
     SpellChecker m_spellChecker;
+    QString m_word;
+    int m_limit;
+    bool m_processingWords;
+
 };
 
-#endif // PREDICTIVETEXTWORKER_H
+#endif // SPELLPREDICTWORKER_H

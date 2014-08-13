@@ -1,3 +1,24 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140812.1-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Reduces start up memory usage from 60MB to 35MB by refactoring spell
+    check and prediction to reduce the number of hunspell instances in
+    different threads, and reduces memory usage when keyboard is in use
+    by 5MB by implementing a single shared magnifier element (instead of
+    each key having its own). (LP: #1350193)
+  * Add missing dictionary dependencies to their respective keyboard
+    plugins.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 12 Aug 2014 20:11:56 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140811-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Merge user input and primary prediction when they match, highlight
+    auto-completion word instead of user input. (LP: #1347792)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 11 Aug 2014 08:38:34 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140730-0ubuntu2) utopic; urgency=low
 
   * plugins/sr: Serbian layout.

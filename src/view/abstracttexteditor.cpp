@@ -360,6 +360,9 @@ AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
 
     connect(word_engine, SIGNAL(primaryCandidateChanged(QString)),
             this,        SLOT(setPrimaryCandidate(QString)));
+    
+    connect(this,        SIGNAL(autoCorrectEnabledChanged(bool)),
+            word_engine, SLOT(setAutoCorrectEnabled(bool)));
 
     setPreeditEnabled(word_engine->isEnabled());
 }
@@ -493,7 +496,6 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
         d->auto_repeat_backspace_timer.stop();
         d->repeating_backspace = false;
-        d->word_engine->computeCandidates(d->text.data());
     } break;
 
     case Key::ActionSpace: {
@@ -899,12 +901,8 @@ void AbstractTextEditor::singleBackspace()
         d->text->removeFromPreedit(1);
         textOnLeft += d->text->preedit();
         
-        // Don't find word candidates if the user is holding down backspace
-        if(!d->repeating_backspace) {
-            d->word_engine->computeCandidates(d->text.data());
-        } else {
-            Q_EMIT wordCandidatesChanged(WordCandidateList());
-        }
+        // Clear previous word candidates
+        Q_EMIT wordCandidatesChanged(WordCandidateList());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                           Replacement());
 
@@ -997,10 +995,18 @@ void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 }
 
 //! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should
-//! place a word back in to pre-edit after a character has been deleted
+//! place a word back in to pre-edit after a character has been deleted or focus
+//! has changed
 void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 {
-    if(!text()->preedit().isEmpty() || !isPreeditEnabled()) {
+    Q_D(AbstractTextEditor);
+
+    if(!isPreeditEnabled()) {
+        return;
+    }
+
+    if(!text()->preedit().isEmpty()) {
+        d->word_engine->computeCandidates(d->text.data());
         return;
     }
 
@@ -1044,6 +1050,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
         }
 
     }
+
+    d->word_engine->computeCandidates(d->text.data());
 }
 
 
