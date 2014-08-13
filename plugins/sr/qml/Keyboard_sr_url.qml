@@ -34,13 +34,13 @@ KeyPad {
 
             CharKey { label: "љ"; shifted: "Љ"; }
             CharKey { label: "њ"; shifted: "Њ"; }
-            CharKey { label: "е"; shifted: "Е"; extended: ["€"]; extendedShifted: ["€"] }
+            CharKey { label: "е"; shifted: "Е"; extended: ["€", "е́", "е̑", "ѐ", "е̏", "е̄"]; extendedShifted: ["€", "Е́", "Е̑", "Ѐ", "Е̏", "Е̄"] }
             CharKey { label: "р"; shifted: "Р"; }
             CharKey { label: "т"; shifted: "Т"; }
             CharKey { label: "з"; shifted: "З"; }
-            CharKey { label: "у"; shifted: "У"; }
-            CharKey { label: "и"; shifted: "И"; }
-            CharKey { label: "о"; shifted: "О"; }
+            CharKey { label: "у"; shifted: "У"; extended: ["у́", "у̑", "у̀", "у̏", "ӯ"]; extendedShifted: ["У́", "У̑", "У̀", "У̏", "Ӯ"] }
+            CharKey { label: "и"; shifted: "И"; extended: ["и́", "и̑", "ѝ", "и̏", "ӣ"]; extendedShifted: ["И́", "И̑", "Ѝ", "И̏", "Ӣ"] }
+            CharKey { label: "о"; shifted: "О"; extended: ["о́", "о̑", "о̀", "о̏", "о̄"]; extendedShifted: ["О́", "О̑", "О̀", "О̏", "О̄"] }
             CharKey { label: "п"; shifted: "П"; }
             CharKey { label: "ш"; shifted: "Ш"; }
             CharKey { label: "ђ"; shifted: "Ђ"; }
@@ -50,7 +50,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "а"; shifted: "А"; }
+            CharKey { label: "а"; shifted: "А"; extended: ["а́", "а̑", "а̀", "а̏", "а̄"]; extendedShifted: ["А́", "А̑", "А̀", "А̏", "А̄"]}
             CharKey { label: "с"; shifted: "С"; }
             CharKey { label: "д"; shifted: "Д"; }
             CharKey { label: "ф"; shifted: "Ф"; }
