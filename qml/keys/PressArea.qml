@@ -31,7 +31,7 @@ MultiPointTouchArea {
     property bool pressed: false
     // Track whether we've swiped out of a key press to dismiss the keyboard
     property bool swipedOut: false
-    property bool held: true
+    property bool held: false
     property alias mouseX: point.x
     property alias mouseY: point.y
 
@@ -75,7 +75,6 @@ MultiPointTouchArea {
                     if(point.sceneY > fullScreenItem.height - units.gu(4) && point.y > point.startY + units.gu(8) && !held) {
                         maliit_input_method.hide();
                     }
-
                 } else {
                     lastY = point.y;
                 }
@@ -96,6 +95,7 @@ MultiPointTouchArea {
 
     onPressed: {
         pressed = true;
+        held = false;
         swipedOut = false;
         holdTimer.restart();
     }
