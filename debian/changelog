@@ -1,9 +1,3 @@
-ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140812.1-0ubuntu1+danilo0) utopic; urgency=low
-
-  * plugins/sr: Serbian layout.
-
- -- Danilo Segan <danilo@kvota.net>  Sun, 27 Jul 2014 23:57:38 +0200
-
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140812.1-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
