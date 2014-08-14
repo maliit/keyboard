@@ -68,6 +68,14 @@ MultiPointTouchArea {
                         lastY = point.y;
                         lastChange = distance;
                     }
+                    // Hide if we get close to the bottom of the screen
+                    // This works around issues with devices with touch buttons
+                    // below the screen preventing release events when swiped
+                    // over
+                    if(point.sceneY > fullScreenItem.height - units.gu(4) && point.y > point.startY + units.gu(8) && !held) {
+                        maliit_input_method.hide();
+                    }
+
                 } else {
                     lastY = point.y;
                 }
