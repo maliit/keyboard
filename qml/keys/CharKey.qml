@@ -161,7 +161,7 @@ Item {
                 } else {
                     extendedKeysSelector.closePopover(); 
                 }
-            } else {
+            } else if(!swipedOut) {
                 event_handler.onKeyReleased(valueToSubmit, action);
 
                 if (magnifier.currentlyAssignedKey == key) {
@@ -175,6 +175,12 @@ Item {
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
                         panel.activeKeypadState = "NORMAL"
                 }
+            }
+        }
+
+        onSwipedOutChanged: {
+            if(swipedOut && magnifier.currentlyAssignedKey == key) {
+                magnifier.shown = false;
             }
         }
 
