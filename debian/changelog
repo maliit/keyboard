@@ -1,3 +1,11 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140815-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Allow the user to dismiss the keyboard with a quick downward swipe
+    over the main key area. (LP: #1347790)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 15 Aug 2014 02:18:24 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140812.1-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
