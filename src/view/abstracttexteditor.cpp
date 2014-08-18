@@ -496,7 +496,6 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
         d->auto_repeat_backspace_timer.stop();
         d->repeating_backspace = false;
-        d->word_engine->computeCandidates(d->text.data());
     } break;
 
     case Key::ActionSpace: {
@@ -996,10 +995,18 @@ void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 }
 
 //! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should
-//! place a word back in to pre-edit after a character has been deleted
+//! place a word back in to pre-edit after a character has been deleted or focus
+//! has changed
 void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 {
-    if(!text()->preedit().isEmpty() || !isPreeditEnabled()) {
+    Q_D(AbstractTextEditor);
+
+    if(!isPreeditEnabled()) {
+        return;
+    }
+
+    if(!text()->preedit().isEmpty()) {
+        d->word_engine->computeCandidates(d->text.data());
         return;
     }
 
@@ -1043,6 +1050,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
         }
 
     }
+
+    d->word_engine->computeCandidates(d->text.data());
 }
 
 

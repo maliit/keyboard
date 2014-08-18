@@ -22,11 +22,11 @@ import "key_constants.js" as UI
   The bottom center is where the bubble points to, and it animates to that position
   when hiding it.
  */
-Item {
+KeyPopover {
     id: root
 
-    /*! Text to show in the magnifier */
-    property alias text: label.text
+    width: currentlyAssignedKey ? currentlyAssignedKey.width + units.gu(UI.magnifierHorizontalPadding) : 0
+    height: currentlyAssignedKey ? currentlyAssignedKey.height + units.gu(UI.magnifierVerticalPadding) : 0
 
     /*! Sets the Magnifier visible or invisible*/
     property bool shown: false
@@ -35,6 +35,7 @@ Item {
 
     onShownChanged: {
         if (shown) {
+            hidePopperAnimation.stop();
             root.visible = true
             popper.animationStep = 1
         } else {
@@ -44,7 +45,11 @@ Item {
 
     Image {
         id: popper
-        anchors.fill: parent
+
+        width: parent.width
+        height: parent.height
+
+        anchors.centerIn: anchorItem
 
         // this property is used to synchronize scale and opacity animation
         property real animationStep: 0
@@ -57,7 +62,7 @@ Item {
         Text {
             id: label
             anchors.centerIn: parent
-
+            text: currentlyAssignedKey ? currentlyAssignedKey.label : ""
             font.family: UI.fontFamily
             font.pixelSize: units.gu( UI.fontSizeMagnified )
             font.bold: UI.fontBold

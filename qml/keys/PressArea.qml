@@ -29,6 +29,9 @@ MultiPointTouchArea {
 
     /// Is true while the area is touched, and the finger did not yet lift
     property bool pressed: false
+    // Track whether we've swiped out of a key press to dismiss the keyboard
+    property bool swipedOut: false
+    property bool held: false
     property alias mouseX: point.x
     property alias mouseY: point.y
 
@@ -42,25 +45,71 @@ MultiPointTouchArea {
     }
 
     touchPoints: [
-        TouchPoint { id: point }
+        TouchPoint { 
+            id: point
+            property double lastY
+            property double lastChange
+            onYChanged: {
+                if (point.y > root.y + root.height) {
+                    if (!swipedOut) {
+                        // We've swiped out of the key
+                        swipedOut = true;
+                        cancelPress();
+                    }
+
+                    // Dragging implemented here rather than in higher level
+                    // mouse area to avoid conflict with swipe selection
+                    // of extended keys
+                    var distance = point.y - lastY;
+                    // If changing direction wait until movement passes 1 gu
+                    // to avoid jitter
+                    if ((lastChange * distance > 0 || Math.abs(distance) > units.gu(1)) && !held) {
+                        keyboardSurface.y += distance;
+                        lastY = point.y;
+                        lastChange = distance;
+                    }
+                    // Hide if we get close to the bottom of the screen
+                    // This works around issues with devices with touch buttons
+                    // below the screen preventing release events when swiped
+                    // over
+                    if(point.sceneY > fullScreenItem.height - units.gu(4) && point.y > point.startY + units.gu(8) && !held) {
+                        maliit_input_method.hide();
+                    }
+                } else {
+                    lastY = point.y;
+                }
+            }
+        }
     ]
 
     Timer {
         id: holdTimer
         interval: 1000
         onTriggered: {
-            if (root.pressed)
+            if (root.pressed) {
                 root.pressAndHold();
+                held = true;
+            }
         }
     }
 
     onPressed: {
         pressed = true;
+        held = false;
+        swipedOut = false;
         holdTimer.restart();
     }
 
     onReleased: {
+        // Allow the user to swipe away the keyboard
+        if (point.y > point.startY + units.gu(8) && !held) {
+            maliit_input_method.hide();
+        } else {
+            bounceBackAnimation.from = keyboardSurface.y;
+            bounceBackAnimation.start();
+        }
         pressed = false;
+        held = false;
         holdTimer.stop();
     }
 }

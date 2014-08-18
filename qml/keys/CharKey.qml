@@ -134,6 +134,7 @@ Item {
 
         onPressAndHold: {
             if (activeExtendedModel != undefined) {
+                magnifier.shown = false
                 extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
@@ -160,8 +161,12 @@ Item {
                 } else {
                     extendedKeysSelector.closePopover(); 
                 }
-            } else {
+            } else if(!swipedOut) {
                 event_handler.onKeyReleased(valueToSubmit, action);
+
+                if (magnifier.currentlyAssignedKey == key) {
+                    magnifier.shown = false;
+                }
 
                 if (panel.autoCapsTriggered) {
                     panel.autoCapsTriggered = false;
@@ -173,7 +178,16 @@ Item {
             }
         }
 
+        onSwipedOutChanged: {
+            if(swipedOut && magnifier.currentlyAssignedKey == key) {
+                magnifier.shown = false;
+            }
+        }
+
         onPressed: {
+            magnifier.currentlyAssignedKey = key
+            magnifier.shown = !noMagnifier
+
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();
             
@@ -219,14 +233,5 @@ Item {
             if (swipeArea.drag.active)
                 keyMouseArea.cancelPress();
         }
-    }
-
-    Magnifier {
-        anchors.horizontalCenter: buttonImage.horizontalCenter
-        anchors.bottom: buttonImage.top
-        width: key.width + units.gu(UI.magnifierHorizontalPadding)
-        height: key.height + units.gu(UI.magnifierVerticalPadding)
-        text: keyLabel.text
-        shown: key.pressed && !noMagnifier && !extendedKeysShown
     }
 }
