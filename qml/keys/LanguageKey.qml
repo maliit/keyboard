@@ -38,6 +38,11 @@ ActionKey {
 
             canvas.languageMenuShown = true
         }
-        onPressAndHold: canvas.languageMenuShown = true
+        onPressAndHold: {
+            if (maliit_input_method.useHapticFeedback)
+                    pressEffect.start();
+
+            canvas.languageMenuShown = true
+        }
     }
 }
