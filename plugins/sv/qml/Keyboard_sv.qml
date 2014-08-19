@@ -16,6 +16,7 @@
 
 import QtQuick 2.0
 import "../../keys"
+import "../../keys/key_constants.js" as UI
 
 KeyPad {
     anchors.fill: parent
@@ -80,15 +81,15 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight;
+            height: panel.keyHeight + units.gu(UI.bottom_margin);
 
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
-            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "!"]; extendedShifted: ["?", "!"]; anchors.left: languageMenuButton.right; }
-            CharKey        { id: commaKey;    label: ","; shifted: "/"; extended: ["'", ";", ":"]; anchors.left: dotKey.right; }
-            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: umlaut.left; noMagnifier: true }
-            CharKey        { id: umlaut;      label: "ö"; shifted: "Ö";  extended: ["ø"]; extendedShifted: ["Ø"]; anchors.right: enterKey.left; }
-            ReturnKey      { id: enterKey;                               anchors.right: parent.right }
+            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
+            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "!"]; extendedShifted: ["?", "!"]; anchors.left: languageMenuButton.right; height: parent.height; }
+            CharKey        { id: commaKey;    label: ","; shifted: "/"; extended: ["'", ";", ":"]; anchors.left: dotKey.right; height: parent.height; }
+            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: umlaut.left; noMagnifier: true; height: parent.height; }
+            CharKey        { id: umlaut;      label: "ö"; shifted: "Ö";  extended: ["ø"]; extendedShifted: ["Ø"]; anchors.right: enterKey.left; height: parent.height; }
+            ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column
 }
