@@ -26,7 +26,9 @@ KeyPopover {
     id: root
 
     width: currentlyAssignedKey ? currentlyAssignedKey.width + units.gu(UI.magnifierHorizontalPadding) : 0
-    height: currentlyAssignedKey ? currentlyAssignedKey.height + units.gu(UI.magnifierVerticalPadding) : 0
+    // Use visible key height instead of real key height to allow for bottom
+    // row touch area to be extended
+    height: currentlyAssignedKey ? panel.keyHeight + units.gu(UI.magnifierVerticalPadding) : 0
 
     /*! Sets the Magnifier visible or invisible*/
     property bool shown: false
