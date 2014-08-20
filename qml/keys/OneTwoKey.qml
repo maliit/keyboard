@@ -21,25 +21,20 @@ ActionKey {
     iconShifted: "../images/icon_shift_upsidedown@18.png";
     iconCapsLock: "../images/icon_shift_white@18.png";
     action: "shift"
+    overridePressArea: true
 
-    MouseArea {
-        anchors.fill: parent
-        preventStealing: true
-        onClicked: {
-            if (maliit_input_method.useAudioFeedback)
-                audioFeedback.play();
+    onPressed: {
+        if (maliit_input_method.useAudioFeedback)
+            audioFeedback.play();
 
-            if (maliit_input_method.useHapticFeedback)
-                 pressEffect.start();
+        if (maliit_input_method.useHapticFeedback)
+            pressEffect.start();
 
-            if (panel.activeKeypadState == "NORMAL")
-                panel.activeKeypadState = "SHIFTED";
-
-            else if (panel.activeKeypadState == "SHIFTED")
-                panel.activeKeypadState = "NORMAL"
-
-            else if (panel.activeKeypadState == "CAPSLOCK")
-                panel.activeKeypadState = "NORMAL"
-        }
+        if (panel.activeKeypadState == "NORMAL")
+            panel.activeKeypadState = "SHIFTED";
+        else if (panel.activeKeypadState == "SHIFTED")
+            panel.activeKeypadState = "NORMAL"
+        else if (panel.activeKeypadState == "CAPSLOCK")
+            panel.activeKeypadState = "NORMAL"
     }
 }

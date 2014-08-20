@@ -38,6 +38,8 @@ Item {
 
     property alias valueToSubmit: keyLabel.text
 
+    property alias acceptDoubleClick: keyMouseArea.acceptDoubleClick
+
     property string action
     property bool noMagnifier: false
     property bool skipAutoCaps: false
@@ -54,7 +56,7 @@ Item {
     property string annotation: ""
 
     /*! indicates if te key is currently pressed/down*/
-    property alias pressed: keyMouseArea.pressed
+    property alias currentlyPressed: keyMouseArea.pressed
 
     /* internal */
     property string __annotationLabelNormal
@@ -74,6 +76,14 @@ Item {
     property string oskState: panel.activeKeypadState
     property var activeExtendedModel: (panel.activeKeypadState === "NORMAL") ? extended : extendedShifted
 
+    // Allow action keys to override the standard key behaviour
+    property bool overridePressArea: false
+
+    signal pressed()
+    signal released()
+    signal pressAndHold()
+    signal doubleClicked()
+
     Component.onCompleted: {
         if (annotation) {
             __annotationLabelNormal = annotation
@@ -91,7 +101,7 @@ Item {
         anchors.centerIn: parent
         anchors.fill: key
         anchors.margins: units.dp( UI.keyMargins );
-        source: key.pressed ? key.imgPressed : key.imgNormal
+        source: key.currentlyPressed ? key.imgPressed : key.imgNormal
     }
 
     /// label of the key
@@ -133,6 +143,10 @@ Item {
         anchors.fill: key
 
         onPressAndHold: {
+            if (overridePressArea) {
+                key.pressAndHold();
+                return;
+            }
             if (activeExtendedModel != undefined) {
                 magnifier.shown = false
                 extendedKeysSelector.enabled = true
@@ -154,6 +168,10 @@ Item {
         }
 
         onReleased: {
+            if (overridePressArea) {
+                key.released();
+                return;
+            }
             if (extendedKeysShown) {
                 if (currentExtendedKey) {
                     currentExtendedKey.commit();
@@ -185,6 +203,10 @@ Item {
         }
 
         onPressed: {
+            if (overridePressArea) {
+                key.pressed();
+                return;
+            }
             magnifier.currentlyAssignedKey = key
             magnifier.shown = !noMagnifier
 
@@ -197,6 +219,13 @@ Item {
             // Quick workaround to fix initial autocaps - not beautiful, but works
             panel.autoCapsTriggered = false;
             event_handler.onKeyPressed(valueToSubmit, action);
+        }
+
+        onDoubleClicked: {
+            if (overridePressArea) {
+                key.doubleClicked();
+                return;
+            }
         }
 
         // Determine which extended key we're underneath when swiping,
