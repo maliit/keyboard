@@ -84,7 +84,7 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight + units.gu(UI.bottom_margin);
+            height: panel.keyHeight + units.gu(UI.bottom_margin*2);
 
             // note FIXME: full list of tld:
             // [".ma", ".dz", ".ly", ".tn", ".iq", ".lb", ".ps", ".jo", ".ye", ".bh", ".dj", ".kw", ".km", ".mr‎", ".om", ".qa", ".sa", ".sy", ".so‎", ".sd", ".ae"]
