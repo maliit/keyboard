@@ -143,7 +143,7 @@ Item {
                         anchors.bottom: keyboardComp.top
                         width: parent.width;
 
-                        height: canvas.wordribbon_visible ? UI.wordribbonHeight : 0
+                        height: canvas.wordribbon_visible ? units.gu(UI.wordribbonHeight) : 0
                         onHeightChanged: calculateSize();
                     }
 
