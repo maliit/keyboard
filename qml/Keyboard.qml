@@ -220,26 +220,25 @@ Item {
             states: [
                 State {
                     name: "SHOWN"
-                    PropertyChanges { target: canvas; y: 0; }
+                    PropertyChanges { target: keyboardSurface; y: 0; }
                     when: maliit_geometry.shown === true
                 },
 
                 State {
                     name: "HIDDEN"
-                    PropertyChanges { target: canvas; y: height; }
+                    PropertyChanges { target: keyboardSurface; y: canvas.height; }
                     onCompleted: {
                         canvas.languageMenuShown = false;
-                        keyboardSurface.y = 0;
                         keypad.closeExtendedKeys();
                         keypad.activeKeypadState = "NORMAL";
                         keypad.state = "CHARACTERS";
-                        maliit_input_method.hide();
+                        maliit_input_method.close();
                     }
                     when: maliit_geometry.shown === false
                 }
             ]
             transitions: Transition {
-                PropertyAnimation { target: canvas; properties: "y"; easing.type: Easing.InOutQuad }
+                UbuntuNumberAnimation { target: keyboardSurface; properties: "y"; }
             }
 
             Connections {
@@ -269,20 +268,16 @@ Item {
         reportKeyboardVisibleRect();
     }
 
-    // calculates the size of the visible keyboard to report to the window system
-    // FIXME get the correct size for enabled extended keys instead of that big area
     function reportKeyboardVisibleRect() {
 
         var vx = 0;
         var vy = wordRibbon.y;
         var vwidth = keyboardSurface.width;
         var vheight = keyboardComp.height + wordRibbon.height;
-        if (!canvas.wordribbon_visible && keypad.popoverEnabled) {
-            vy = 0;
-            vheight = keyboardSurface.height;
-        }
 
         var obj = mapFromItem(keyboardSurface, vx, vy, vwidth, vheight);
+        // Report visible height of the keyboard to support anchorToKeyboard
+        obj.height = fullScreenItem.height - obj.y;
         maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
     }
 
