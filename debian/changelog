@@ -1,3 +1,20 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140820-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Make word ribbon sizing display independent and trim word ribbon
+    margins.
+  * Restore animations when showing and hiding the keyboard and fix
+    reporting of size for anchorToKeyboard property.
+  * Extend the touch area of the bottom row of keys to reach the very
+    bottom of the keyboard whilst still maintaining the same visual
+    appearance.
+  * Add haptic feedback when user performs a long press.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 20 Aug 2014 14:32:55 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140815-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
