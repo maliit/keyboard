@@ -143,6 +143,9 @@ Item {
 
         onPressAndHold: {
             if (activeExtendedModel != undefined) {
+                if (maliit_input_method.useHapticFeedback)
+                    pressEffect.start();
+
                 magnifier.shown = false
                 extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
