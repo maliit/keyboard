@@ -86,7 +86,7 @@ Item {
         if (languageId == "zh")         return i18n.tr("Chinese - Pinyin");
 
         // fallback
-        return i18n.tr("language " + languageId);
+        return i18n.tr("Language: ") + languageId;
     }
 
 }
