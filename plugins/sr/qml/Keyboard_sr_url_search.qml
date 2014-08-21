@@ -88,7 +88,7 @@ KeyPad {
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
             LanguageKey    { id: languageMenuButton; anchors.left: symShiftKey.right; }
             SpaceKey       { id: spaceKey;                               anchors.left: languageMenuButton.right; anchors.right: urlKey.left; noMagnifier: true }
-            UrlKey         { id: urlKey; label: ".срб"; extended: [".пр.срб", ".орг.срб", ".обр.срб", ".од.срб", ".ак.срб", ".упр.срб"]; anchors.right: enterKey.left; }
+            UrlKey         { id: urlKey; label: ".срб"; extended: [".пр.срб", ".орг.срб", ".од.срб" ]; extendedShifted: [".ак.срб", ".упр.срб", ".обр.срб" ]; anchors.right: enterKey.left; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right }
         }
     } // column
