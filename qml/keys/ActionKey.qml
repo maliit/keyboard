@@ -41,15 +41,24 @@ CharKey {
     property color colorShifted: "transparent"
     property color colorCapsLock: "transparent"
 
-    Icon {
-        id: iconImage
-        name: actionKeyRoot.iconNormal
-        color: actionKeyRoot.colorNormal
-        anchors.centerIn: parent
-        visible: (label == "")
-        width: units.gu(2.5)
-        height: units.gu(2.5)
+    // Make it possible for the visible area of the key to differ from the
+    // actual key size. This allows us to extend the touch area of the bottom
+    // row of keys all the way to the bottom of the keyboard, whilst
+    // maintaining the same visual appearance.
+    Item {
+        anchors.top: parent.top
+        height: panel.keyHeight
+        width: parent.width
 
+        Icon {
+            id: iconImage
+            name: actionKeyRoot.iconNormal
+            color: actionKeyRoot.colorNormal
+            anchors.centerIn: parent
+            visible: (label == "")
+            width: units.gu(2.5)
+            height: units.gu(2.5)
+        }
     }
 
     // make sure the icon changes even if the property icon* change on runtime
