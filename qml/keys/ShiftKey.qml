@@ -50,6 +50,9 @@ ActionKey {
 
         onPressAndHold: {
             panel.activeKeypadState = "CAPSLOCK"
+
+            if (maliit_input_method.useHapticFeedback)
+                    pressEffect.start();
         }
 
         onDoubleClicked: {
