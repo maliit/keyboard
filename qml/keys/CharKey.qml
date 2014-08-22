@@ -86,54 +86,66 @@ Item {
         }
     }
 
-    BorderImage {
-        id: buttonImage
-        anchors.centerIn: parent
-        anchors.fill: key
-        anchors.margins: units.dp( UI.keyMargins );
-        source: key.pressed ? key.imgPressed : key.imgNormal
-    }
-
-    /// label of the key
-    //  the label is also the value subitted to the app
-
-    Text {
-        id: keyLabel
-        text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
-        font.family: UI.fontFamily
-        font.pixelSize: fontSize
-        font.bold: UI.fontBold
-        color: UI.fontColor
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.margins: units.gu( UI.annotationMargins )
-        horizontalAlignment: Text.AlignHCenter
-        elide: Text.ElideRight
-    }
-
-    /// shows an annotation
-    // used e.g. for indicating the existence of extended keys
-
-    Text {
-        id: annotationLabel
-        text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
-
-        anchors.right: parent.right
+    // Make it possible for the visible area of the key to differ from the
+    // actual key size. This allows us to extend the touch area of the bottom
+    // row of keys all the way to the bottom of the keyboard, whilst 
+    // maintaining the same visual appearance.
+    Item {
         anchors.top: parent.top
-        anchors.margins: units.gu( UI.annotationMargins )
+        height: panel.keyHeight
+        width: parent.width
 
-        font.pixelSize: units.gu( UI.annotationFontSize )
-        font.bold: false
-        color: UI.annotationFontColor
+        BorderImage {
+            id: buttonImage
+            anchors.fill: parent
+            anchors.margins: units.dp( UI.keyMargins );
+            source: key.pressed ? key.imgPressed : key.imgNormal
+        }
+    
+        /// label of the key
+        //  the label is also the value subitted to the app
+    
+        Text {
+            id: keyLabel
+            text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
+            font.family: UI.fontFamily
+            font.pixelSize: fontSize
+            font.bold: UI.fontBold
+            color: UI.fontColor
+            anchors.right: parent.right
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.margins: units.gu( UI.annotationMargins )
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
+        }
+    
+        /// shows an annotation
+        // used e.g. for indicating the existence of extended keys
+    
+        Text {
+            id: annotationLabel
+            text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
+    
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.margins: units.gu( UI.annotationMargins )
+    
+            font.pixelSize: units.gu( UI.annotationFontSize )
+            font.bold: false
+            color: UI.annotationFontColor
+        }
     }
 
     PressArea {
         id: keyMouseArea
-        anchors.fill: key
+        anchors.fill: parent
 
         onPressAndHold: {
             if (activeExtendedModel != undefined) {
+                if (maliit_input_method.useHapticFeedback)
+                    pressEffect.start();
+
                 magnifier.shown = false
                 extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
