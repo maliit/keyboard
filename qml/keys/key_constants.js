@@ -59,7 +59,7 @@ var emailLayoutUrlKeyPadding = 1.5; // gu
 var languageMenuListViewPadding = 2.22; // gu
 
 
-var wordribbonHeight = 72;
+var wordribbonHeight = 3; // gu
 
 var phoneKeyboardHeightPortrait = 0.365;
 var phoneKeyboardHeightLandscape = 0.50;
