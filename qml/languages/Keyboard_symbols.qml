@@ -83,13 +83,13 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight;
+            height: panel.keyHeight + units.gu(UI.bottom_margin*2);
 
-            SymbolShiftKey { id: symShiftKey; label: "ABC"; shifted: "ABC"; anchors.left: parent.left; }
-            CharKey        { id: commaKey;    label: ","; shifted: "/";     anchors.left: symShiftKey.right; }
-            SpaceKey       { id: spaceKey;                                  anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
-            CharKey        { id: dotKey;      label: "."; shifted: ".";     anchors.right: enterKey.left; }
-            ReturnKey      { id: enterKey;                                  anchors.right: parent.right }
+            SymbolShiftKey { id: symShiftKey; label: "ABC"; shifted: "ABC"; anchors.left: parent.left; height: parent.height; }
+            CharKey        { id: commaKey;    label: ","; shifted: "/";     anchors.left: symShiftKey.right; height: parent.height; }
+            SpaceKey       { id: spaceKey;                                  anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true; height: parent.height }
+            CharKey        { id: dotKey;      label: "."; shifted: ".";     anchors.right: enterKey.left; height: parent.height; }
+            ReturnKey      { id: enterKey;                                  anchors.right: parent.right; height: parent.height; }
         }
     } // column
 }
