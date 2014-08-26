@@ -25,24 +25,15 @@ ActionKey {
 
     visible: maliit_input_method.enabledLanguages.length > 1 ? true : false
     width: visible ? panel.keyWidth : 0
+    overridePressArea: true
 
-    MouseArea {
-        anchors.fill: parent
-        preventStealing: true
-        onReleased: {
-            if (maliit_input_method.useAudioFeedback)
-                audioFeedback.play();
+    onPressed: {
+        if (maliit_input_method.useAudioFeedback)
+            audioFeedback.play();
 
-            if (maliit_input_method.useHapticFeedback)
-                 pressEffect.start();
+        if (maliit_input_method.useHapticFeedback)
+            pressEffect.start();
 
-            canvas.languageMenuShown = true
-        }
-        onPressAndHold: {
-            if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
-
-            canvas.languageMenuShown = true
-        }
-    }
+        canvas.languageMenuShown = true
+    }   
 }
