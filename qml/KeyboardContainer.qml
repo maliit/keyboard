@@ -121,6 +121,7 @@ Item {
                 "pl",
                 "pt",
                 "ru",
+                "sr",
                 "sv",
                 "zh",
             ];
@@ -167,6 +168,8 @@ Item {
                 return "lib/pt/Keyboard_pt.qml";
             if (language === "ru")
                 return "lib/ru/Keyboard_ru.qml";
+            if (language === "sr")
+                return "lib/sr/Keyboard_sr.qml";
             if (language === "sv")
                 return "lib/sv/Keyboard_sv.qml";
             if (language === "zh")
