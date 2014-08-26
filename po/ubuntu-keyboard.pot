@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Canonical Ltd. 
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-21 12:49+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../qml/keys/LanguageMenu.qml:59
+msgid "Settings"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:70
+msgid "Arabic"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:71
+msgid "Czech"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:72
+msgid "Danish"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:73
+msgid "German"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:74
+msgid "English"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:75
+msgid "Spanish"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:76
+msgid "Finnish"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:77
+msgid "French"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:78
+msgid "Hebrew"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:79
+msgid "Hungarian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:80
+msgid "Italian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "Dutch"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:82
+msgid "Polish"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:83
+msgid "Portuguese"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:84
+msgid "Russian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:85
+msgid "Swedish"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:86
+msgid "Chinese - Pinyin"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:89
+msgid "Language: "
+msgstr ""
