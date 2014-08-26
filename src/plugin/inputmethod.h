@@ -75,7 +75,6 @@ public:
     //! \reimp
     virtual void show();
     Q_SLOT virtual void hide();
-    Q_SLOT virtual void close();
     virtual void setPreedit(const QString &preedit,
                             int cursor_position);
     virtual void switchContext(Maliit::SwitchDirection direction,
@@ -114,6 +113,8 @@ public:
     bool useHapticFeedback() const;
 
     QObject* actionKeyOverride() const;
+
+    Q_SLOT void close();
 
 Q_SIGNALS:
     void contentTypeChanged(TextContentType contentType);
