@@ -1,3 +1,25 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140826-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Allow ActionKeys to override default CharKey PressArea behaviour
+    instead of creating their own overlapping MouseAreas.
+  * Add translation template generation. (LP: #1357616)
+  * Place the default extended key in the center of the extended keys
+    pop up, making it the initially selected option.
+  * Display the correct character in the magnifier when the keyboard is
+    in shifted mode.
+  * Update haptic effect values to match those used in AbstractButton.
+  * Fix keyboard show/hide animation when maliit has first started. (LP:
+    #1361312)
+
+  [ Danilo Šegan ]
+  * Implement a basic Serbian keyboard layout with diacritics.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 26 Aug 2014 17:27:04 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140820-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
