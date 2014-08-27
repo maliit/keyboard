@@ -35,8 +35,12 @@ MultiPointTouchArea {
     property alias mouseX: point.x
     property alias mouseY: point.y
 
+    property bool acceptDoubleClick: false
+
     /// Same as MouseArea pressAndHold()
     signal pressAndHold()
+
+    signal doubleClicked()
 
     /// Cancels the current pressed state of the mouse are
     function cancelPress() {
@@ -93,11 +97,22 @@ MultiPointTouchArea {
         }
     }
 
+    Timer {
+        id: doubleClickTimer
+        interval: 400 // Default Qt double click interval
+    }
+
     onPressed: {
         pressed = true;
         held = false;
         swipedOut = false;
         holdTimer.restart();
+        if (doubleClickTimer.running) {
+            doubleClicked();
+        }
+        if (acceptDoubleClick) {
+            doubleClickTimer.restart();
+        }
     }
 
     onReleased: {

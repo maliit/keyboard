@@ -216,6 +216,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Russian
  Data files for the Ubuntu virtual keyboard - Russian
 
+Package: ubuntu-keyboard-serbian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         hunspell-sr,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Serbian
+ Data files for the Ubuntu virtual keyboard - Serbian
+
 Package: ubuntu-keyboard-spanish
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),

@@ -73,10 +73,10 @@ Item {
     HapticsEffect {
         id: pressEffect
         attackIntensity: 0.0
-        attackTime: 30
-        intensity: 0.3
-        duration: 25
-        fadeTime: 30
+        attackTime: 50
+        intensity: 1.0
+        duration: 10
+        fadeTime: 50
         fadeIntensity: 0.0
     }
 
@@ -121,6 +121,7 @@ Item {
                 "pl",
                 "pt",
                 "ru",
+                "sr",
                 "sv",
                 "zh",
             ];
@@ -167,6 +168,8 @@ Item {
                 return "lib/pt/Keyboard_pt.qml";
             if (language === "ru")
                 return "lib/ru/Keyboard_ru.qml";
+            if (language === "sr")
+                return "lib/sr/Keyboard_sr.qml";
             if (language === "sv")
                 return "lib/sv/Keyboard_sv.qml";
             if (language === "zh")

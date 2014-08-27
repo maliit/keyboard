@@ -36,6 +36,20 @@ KeyPopover {
     property int __width: 0
     property string __commitStr: ""
 
+    onExtendedKeysModelChanged: {
+        if (extendedKeysModel && extendedKeysModel.length > 1) {
+            // Place the first key in the middle of the model so that it gets
+            // selected by default
+            var middleKey = Math.floor(extendedKeysModel.length / 2);
+            var reorderedModel = extendedKeysModel;
+            reorderedModel.splice(extendedKeysModel.length % 2 == 0 ? middleKey : middleKey + 1, 0, extendedKeysModel[0]);
+            reorderedModel.shift();
+            keyRepeater.model = reorderedModel;
+        } else {
+            keyRepeater.model = extendedKeysModel
+        }
+    }
+
     onEnabledChanged: {
         canvas.extendedKeysShown = enabled
     }

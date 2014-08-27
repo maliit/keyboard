@@ -226,7 +226,7 @@ Item {
 
                 State {
                     name: "HIDDEN"
-                    PropertyChanges { target: keyboardSurface; y: canvas.height; }
+                    PropertyChanges { target: keyboardSurface; y: canvas.height > 0 ? canvas.height : orientationHelper.height; }
                     onCompleted: {
                         canvas.languageMenuShown = false;
                         keypad.closeExtendedKeys();

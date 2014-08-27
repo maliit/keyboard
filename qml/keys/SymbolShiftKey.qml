@@ -25,20 +25,18 @@ ActionKey {
 
     fontSize: units.gu(UI.symbolShiftKeyFontSize);
 
-    MouseArea {
-        anchors.fill: parent
-        preventStealing: true
-        onClicked: {
-            if (maliit_input_method.useAudioFeedback)
-                audioFeedback.play();
+    overridePressArea: true;
 
-            if (maliit_input_method.useHapticFeedback)
-                 pressEffect.start();
+    onPressed: {
+        if (maliit_input_method.useAudioFeedback)
+            audioFeedback.play();
 
-            if (panel.state == "CHARACTERS")
-                panel.state = "SYMBOLS";
-            else
-                panel.state = "CHARACTERS";
-        }
+        if (maliit_input_method.useHapticFeedback)
+            pressEffect.start();
+
+        if (panel.state == "CHARACTERS")
+            panel.state = "SYMBOLS";
+        else
+            panel.state = "CHARACTERS";
     }
 }

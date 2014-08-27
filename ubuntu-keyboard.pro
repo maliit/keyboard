@@ -95,6 +95,7 @@ SUBDIRS = \
     qml \
 #    benchmark \
     plugins \
+    po \
 
 !notests {
     SUBDIRS += tests
