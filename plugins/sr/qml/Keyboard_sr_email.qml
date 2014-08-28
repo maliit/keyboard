@@ -84,12 +84,13 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight;
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            LanguageKey    { id: languageMenuButton; anchors.left: symShiftKey.right; }
-            SpaceKey       { id: spaceKey;                               anchors.left: languageMenuButton.right; anchors.right: urlKey.left; noMagnifier: true }
-            UrlKey         { id: urlKey; label: ".срб"; extended: [".пр.срб", ".орг.срб", ".од.срб" ]; extendedShifted: [".ак.срб", ".упр.срб", ".обр.срб" ]; anchors.right: enterKey.left; }
-            ReturnKey      { id: enterKey;                               anchors.right: parent.right }
+            height: panel.keyHeight + units.gu(UI.bottom_margin*2);
+
+            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
+            LanguageKey    { id: languageMenuButton; anchors.left: symShiftKey.right; height: parent.height; }
+            SpaceKey       { id: spaceKey;                               anchors.left: languageMenuButton.right; anchors.right: urlKey.left; noMagnifier: true; height: parent.height; }
+            UrlKey         { id: urlKey; label: ".срб"; extended: [".пр.срб", ".орг.срб", ".од.срб" ]; extendedShifted: [".ак.срб", ".упр.срб", ".обр.срб" ]; anchors.right: enterKey.left; height: parent.height; }
+            ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column
 }
