@@ -43,6 +43,7 @@ Item {
     property string action
     property bool noMagnifier: false
     property bool skipAutoCaps: false
+    property bool switchBackFromSymbols: false
 
     /* design */
     property string imgNormal: UI.imageCharKey
@@ -203,7 +204,10 @@ Item {
                 }
                 else if (!skipAutoCaps) {
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
-                        panel.activeKeypadState = "NORMAL"
+                        panel.activeKeypadState = "NORMAL";
+                }
+                if (switchBackFromSymbols && panel.state === "SYMBOLS") {
+                    panel.state = "CHARACTERS";
                 }
             }
         }

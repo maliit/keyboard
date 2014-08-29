@@ -244,9 +244,12 @@ Item {
             Connections {
                 target: input_method
                 onActivateAutocaps: {
-                    keypad.state = "CHARACTERS";
-                    keypad.activeKeypadState = "SHIFTED";
-                    keypad.autoCapsTriggered = true;
+                    if (keypad.state == "CHARACTERS") {
+                        keypad.activeKeypadState = "SHIFTED";
+                        keypad.autoCapsTriggered = true;
+                    } else {
+                        keypad.delayedAutoCaps = true;
+                    }
                 }
             }
 

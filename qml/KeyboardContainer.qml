@@ -29,6 +29,7 @@ Item {
     property int keyHeight: 0
 
     property bool autoCapsTriggered: false
+    property bool delayedAutoCaps: false
 
     property string activeKeypadState: "NORMAL"
     property alias popoverEnabled: extendedKeysSelector.enabled
@@ -46,7 +47,14 @@ Item {
         anchors.fill: parent
         asynchronous: false
         source: panel.state === "CHARACTERS" ? internal.characterKeypadSource : internal.symbolKeypadSource
-        onLoaded: activeKeypadState = "NORMAL"
+        onLoaded: {
+            if (delayedAutoCaps) {
+                activeKeypadState = "SHIFTED";
+                delayedAutoCaps = false;
+            } else {
+                activeKeypadState = "NORMAL";
+            }
+        }
     }
 
     ExtendedKeysSelector {
