@@ -1,3 +1,15 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140902.1-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * enable spell checking, word prediction and auto-completion by
+    default (LP: #1364351)
+
+  [ Michael Sheldon ]
+  * Wait until the first show operation has given components their
+    correct sizes before allowing hiding.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 02 Sep 2014 19:41:04 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140826-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
