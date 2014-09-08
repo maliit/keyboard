@@ -1027,7 +1027,7 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
             lastChar = text()->surrounding().at(currentOffset-1);
         }
         if(!QRegExp("\\W+").exactMatch(lastChar) && !d->word_engine->languageFeature()->isSymbol(lastChar)) {
-            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("\\W+"));
+            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("[\\W\\d]+"));
             int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
             if(leftWords.last().isEmpty()) {
                 // If removed char was punctuation trimming will result in an empty entry
