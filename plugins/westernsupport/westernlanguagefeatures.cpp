@@ -77,13 +77,28 @@ QString WesternLanguageFeatures::appendixForReplacedPreedit(const QString &preed
 
 bool WesternLanguageFeatures::isSeparator(const QString &text) const
 {
-    static const QString separators = QString::fromUtf8(",.!?\r\n");
+    static const QString separators = QString::fromUtf8(",.!?:;\r\n");
 
     if (text.isEmpty()) {
         return false;
     }
 
     if (separators.contains(text.right(1))) {
+        return true;
+    }
+
+    return false;
+}
+
+bool WesternLanguageFeatures::isSymbol(const QString &text) const
+{
+    static const QString symbols = QString::fromUtf8("*#+=()@~/\\€£$¥₹%<>[]`^|_§{}¡¿«»\"“”„&0123456789");
+
+    if (text.isEmpty()) {
+        return false;
+    }
+
+    if (symbols.contains(text.right(1))) {
         return true;
     }
 

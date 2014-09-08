@@ -436,27 +436,34 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         bool alreadyAppended = false;
         bool auto_caps_activated = false;
         const bool isSeparator = d->word_engine->languageFeature()->isSeparator(text);
+        const bool isSymbol = d->word_engine->languageFeature()->isSymbol(text);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
-                    not d->text->preedit().isEmpty() && isSeparator;
+                    not d->text->preedit().isEmpty() && (isSeparator || isSymbol);
 
         if (d->preedit_enabled) {
             if (replace_preedit) {
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
-                d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-                d->text->appendToPreedit(d->appendix_for_previous_preedit);
+                if(isSeparator) {
+                    d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+                    d->text->appendToPreedit(d->appendix_for_previous_preedit);
+                }
                 commitPreedit();
                 auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
                 alreadyAppended = true;
             }
-            else if (d->auto_correct_enabled && isSeparator) {
-                // remove all whitespaces before the separator, then add a whitespace after it
-                removeTrailingWhitespaces();
+            else if (d->auto_correct_enabled && (isSeparator || isSymbol)) {
+                if(isSeparator) {
+                    // remove all whitespaces before the separator, then add a whitespace after it
+                    removeTrailingWhitespaces();
+                }
 
                 d->text->appendToPreedit(text);
                 auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-                d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
+                if(isSeparator) {
+                    d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
+                }
                 commitPreedit();
                 alreadyAppended = true;
             }
