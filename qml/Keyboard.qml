@@ -85,6 +85,8 @@ Item {
             property bool languageMenuShown: false
             property bool extendedKeysShown: false
 
+            property bool firstShow: true
+
             onXChanged: fullScreenItem.reportKeyboardVisibleRect();
             onYChanged: fullScreenItem.reportKeyboardVisibleRect();
             onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
@@ -221,12 +223,15 @@ Item {
                 State {
                     name: "SHOWN"
                     PropertyChanges { target: keyboardSurface; y: 0; }
+                    onCompleted: {
+                        canvas.firstShow = false;
+                    }
                     when: maliit_geometry.shown === true
                 },
 
                 State {
                     name: "HIDDEN"
-                    PropertyChanges { target: keyboardSurface; y: canvas.height > 0 ? canvas.height : orientationHelper.height; }
+                    PropertyChanges { target: keyboardSurface; y: canvas.height }
                     onCompleted: {
                         canvas.languageMenuShown = false;
                         keypad.closeExtendedKeys();
@@ -234,7 +239,10 @@ Item {
                         keypad.state = "CHARACTERS";
                         maliit_input_method.close();
                     }
-                    when: maliit_geometry.shown === false
+                    // Wait for the first show operation to complete before
+                    // allowing hiding, as the conditions when the keyboard
+                    // has never been visible can trigger a hide operation
+                    when: maliit_geometry.shown === false && canvas.firstShow === false
                 }
             ]
             transitions: Transition {
