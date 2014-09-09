@@ -438,17 +438,15 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const bool isSeparator = d->word_engine->languageFeature()->isSeparator(text);
         const bool isSymbol = d->word_engine->languageFeature()->isSymbol(text);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
-                    not d->text->preedit().isEmpty() && (isSeparator || isSymbol);
+                    not d->text->preedit().isEmpty() && isSeparator;
 
         if (d->preedit_enabled) {
             if (replace_preedit) {
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
-                if(isSeparator) {
-                    d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-                    d->text->appendToPreedit(d->appendix_for_previous_preedit);
-                }
+                d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+                d->text->appendToPreedit(d->appendix_for_previous_preedit);
                 commitPreedit();
                 auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
                 alreadyAppended = true;
