@@ -289,6 +289,7 @@ public:
     bool double_space_full_stop_enabled;
     QString appendix_for_previous_preedit;
     int backspace_word_acceleration;
+    QString keyboardState;
 
     explicit AbstractTextEditorPrivate(const EditorOptions &new_options,
                                        Model::Text *new_text,
@@ -314,6 +315,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , double_space_full_stop_enabled(false)
     , appendix_for_previous_preedit()
     , backspace_word_acceleration(0)
+    , keyboardState("CHARACTERS")
 {
     auto_repeat_backspace_timer.setSingleShot(true);
     (void) valid();
@@ -445,21 +447,23 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
-                d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-                d->text->appendToPreedit(d->appendix_for_previous_preedit);
+                if (d->keyboardState == "CHARACTERS") {
+                    d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+                    d->text->appendToPreedit(d->appendix_for_previous_preedit);
+                }
                 commitPreedit();
                 auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
                 alreadyAppended = true;
             }
             else if (d->auto_correct_enabled && (isSeparator || isSymbol)) {
-                if(isSeparator) {
+                if(isSeparator && d->keyboardState == "CHARACTERS") {
                     // remove all whitespaces before the separator, then add a whitespace after it
                     removeTrailingWhitespaces();
                 }
 
                 d->text->appendToPreedit(text);
                 auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-                if(isSeparator) {
+                if(isSeparator && d->keyboardState == "CHARACTERS") {
                     d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
                 }
                 commitPreedit();
@@ -976,6 +980,12 @@ void AbstractTextEditor::onCursorPositionChanged(int cursor_position,
         d->ignore_next_cursor_position = r.start;
         d->ignore_next_surrounding_text = QString(surrounding_text).remove(r.start, r.length);
     }
+}
+
+void AbstractTextEditor::onKeyboardStateChanged(QString state) {
+    Q_D(AbstractTextEditor);
+
+    d->keyboardState = state;
 }
 
 void AbstractTextEditor::sendKeyPressAndReleaseEvents(

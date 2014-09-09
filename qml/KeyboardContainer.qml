@@ -97,6 +97,10 @@ Item {
         }
     ]
 
+    onStateChanged: {
+        maliit_input_method.keyboardState = state
+    }
+
     QtObject {
         id: internal
 

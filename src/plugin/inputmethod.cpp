@@ -102,6 +102,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
+    connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
     d->registerAudioFeedbackSoundSetting();
     d->registerAudioFeedbackSetting();
@@ -504,6 +505,19 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
 
     qDebug() << "in inputMethod.cpp setActiveLanguage() emitting activeLanguageChanged to" << d->activeLanguage;
     Q_EMIT activeLanguageChanged(d->activeLanguage);
+}
+
+const QString InputMethod::keyboardState() const
+{
+    Q_D(const InputMethod);
+    return d->keyboardState;
+}
+
+void InputMethod::setKeyboardState(const QString &state)
+{
+    Q_D(InputMethod);
+    d->keyboardState = state;
+    Q_EMIT keyboardStateChanged(d->keyboardState);
 }
 
 void InputMethod::onVisibleRectChanged()

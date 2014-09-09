@@ -56,6 +56,7 @@ public:
     QString activeLanguage;
     QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
+    QString keyboardState;
 
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
@@ -78,6 +79,7 @@ public:
         , activeLanguage("en")
         , enabledLanguages(activeLanguage)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
+        , keyboardState("CHARACTERS")
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , wordRibbon(new WordRibbon)
