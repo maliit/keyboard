@@ -684,9 +684,11 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
 //! \brief Clears preedit.
 void AbstractTextEditor::clearPreedit()
 {
-    replacePreedit("");
-
     Q_D(AbstractTextEditor);
+
+    replacePreedit("");
+    text()->setSurrounding("");
+    text()->setSurroundingOffset(0);
 
     if (not d->valid()) {
         return;
