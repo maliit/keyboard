@@ -31,5 +31,6 @@ ActionKey {
     iconCapsLock: iconNormal
 
     action: "return"
+    switchBackFromSymbols: true
     // TODO: input_method.actionKeyOverride.highlighted
 }
