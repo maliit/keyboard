@@ -1,3 +1,132 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140902.1-0ubuntu1) utopic; urgency=low
+
+  [ Bill Filler ]
+  * enable spell checking, word prediction and auto-completion by
+    default (LP: #1364351)
+
+  [ Michael Sheldon ]
+  * Wait until the first show operation has given components their
+    correct sizes before allowing hiding.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 02 Sep 2014 19:41:04 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140826-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Allow ActionKeys to override default CharKey PressArea behaviour
+    instead of creating their own overlapping MouseAreas.
+  * Add translation template generation. (LP: #1357616)
+  * Place the default extended key in the center of the extended keys
+    pop up, making it the initially selected option.
+  * Display the correct character in the magnifier when the keyboard is
+    in shifted mode.
+  * Update haptic effect values to match those used in AbstractButton.
+  * Fix keyboard show/hide animation when maliit has first started. (LP:
+    #1361312)
+
+  [ Danilo Šegan ]
+  * Implement a basic Serbian keyboard layout with diacritics.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 26 Aug 2014 17:27:04 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140820-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Make word ribbon sizing display independent and trim word ribbon
+    margins.
+  * Restore animations when showing and hiding the keyboard and fix
+    reporting of size for anchorToKeyboard property.
+  * Extend the touch area of the bottom row of keys to reach the very
+    bottom of the keyboard whilst still maintaining the same visual
+    appearance.
+  * Add haptic feedback when user performs a long press.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 20 Aug 2014 14:32:55 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140815-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Allow the user to dismiss the keyboard with a quick downward swipe
+    over the main key area. (LP: #1347790)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 15 Aug 2014 02:18:24 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140812.1-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Reduces start up memory usage from 60MB to 35MB by refactoring spell
+    check and prediction to reduce the number of hunspell instances in
+    different threads, and reduces memory usage when keyboard is in use
+    by 5MB by implementing a single shared magnifier element (instead of
+    each key having its own). (LP: #1350193)
+  * Add missing dictionary dependencies to their respective keyboard
+    plugins.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 12 Aug 2014 20:11:56 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140811-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Merge user input and primary prediction when they match, highlight
+    auto-completion word instead of user input. (LP: #1347792)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 11 Aug 2014 08:38:34 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140730.1-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Modify the pre-edit style to just underline text instead of making
+    it bold and blue. (LP: #1347490)
+  * Re-enter pre-edit after changing focus whilst still in a word (e.g.
+    after swiping keyboard down and then tapping back in text field) or
+    deleting punctuation characters and fix the pre-edit offset when
+    deleting by holding backspace. (LP: #1347492)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Jul 2014 20:53:18 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140722-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Fix autocaps when entering punctuation via extended keys and make
+    spacing for the top row of extended keys consistent with other rows.
+  * Control double space full stops via a gsettings key
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 22 Jul 2014 15:10:54 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140718-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Enable the language menu when single pressing the language switcher
+    button and add a settings item to the bottom of the language
+    switcher.
+  * Add numbers to the extended keys in the top row and extra
+    punctuation on existing punctuation keys. Also adds the new sheqel
+    symbol to the Hebrew keyboard and ensures that the Hebrew keyboard
+    still displays keys when in capital mode. (LP: #1233578)
+  * Fix incorrect Russian characters and layout (LP: #1321908)
+  * Implement swiping behaviour for the selection of extended keys and
+    fix popover position when selecting the same extended key after
+    changing orientation.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 16:27:52 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140714-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Allow languages to override word suggestion settings when they're
+    critical to the layout (e.g. Pinyin)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 14 Jul 2014 20:42:14 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140701-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]

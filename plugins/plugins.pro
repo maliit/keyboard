@@ -17,6 +17,7 @@ SUBDIRS = \
     pl \
     pt \
     ru \
+    sr \
     sv \
     pinyin \
 

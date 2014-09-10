@@ -31,7 +31,7 @@ Rectangle {
     ListView {
         id: listView
         objectName: "wordListView"
-        anchors.fill: parent;
+        anchors.fill: parent
 
         model: maliit_wordribbon
 
@@ -44,21 +44,28 @@ Rectangle {
         id: wordCandidateDelegate
         Item {
             id: wordCandidateItem
-            width: wordItem.width + units.gu(2);
+            width: wordItem.width + units.gu(2)
             height: wordRibbonCanvas.height
+            anchors.margins: 0
             property alias word_text: wordItem // For testing in Autopilot
 
             Item {
                 anchors.fill: parent
-                anchors.margins: units.gu(1);
+                anchors.margins: {
+                    top: units.gu(0)
+                    bottom: units.gu(0)
+                    left: units.gu(1)
+                    right: units.gu(1)
+                }
 
                 Text {
                     id: wordItem
-                    font.pixelSize: units.gu(2);
+                    font.pixelSize: units.gu(1.9)
                     font.family: "Ubuntu Medium"
                     color: "#999999"
-                    font.bold: isUserInput
+                    font.bold: isPrimaryCandidate
                     text: word;
+                    anchors.centerIn: parent
                 }
             }
 

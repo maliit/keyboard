@@ -16,6 +16,7 @@
 
 import QtQuick 2.0
 import "../../keys"
+import "../../keys/key_constants.js" as UI
 
 KeyPad {
     anchors.fill: parent
@@ -32,17 +33,18 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "й"; shifted: "Й"; }
-            CharKey { label: "ц"; shifted: "Ц"; }
-            CharKey { label: "у"; shifted: "Y"; extended: ["ў"]; extendedShifted: ["Ў"] }
-            CharKey { label: "к"; shifted: "К"; }
-            CharKey { label: "e"; shifted: "E"; extended: ["ë", "€"]; extendedShifted: ["Ë", "€"] }
-            CharKey { label: "н"; shifted: "Н"; }
-            CharKey { label: "г"; shifted: "Г"; }
-            CharKey { label: "ш"; shifted: "Ш"; }
-            CharKey { label: "щ"; shifted: "Щ"; }
-            CharKey { label: "з"; shifted: "З"; }
+            CharKey { label: "й"; shifted: "Й"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "ц"; shifted: "Ц"; extended: ["2"]; extendedShifted: ["2"] }
+            CharKey { label: "у"; shifted: "У"; extended: ["3", "ў"]; extendedShifted: ["3", "Ў"] }
+            CharKey { label: "к"; shifted: "К"; extended: ["4"]; extendedShifted: ["4"] }
+            CharKey { label: "е"; shifted: "Е"; extended: ["5", "ё", "€"]; extendedShifted: ["5", "Ё", "€"] }
+            CharKey { label: "н"; shifted: "Н"; extended: ["6"]; extendedShifted: ["6"] }
+            CharKey { label: "г"; shifted: "Г"; extended: ["7"]; extendedShifted: ["7"] }
+            CharKey { label: "ш"; shifted: "Ш"; extended: ["8"]; extendedShifted: ["8"] }
+            CharKey { label: "щ"; shifted: "Щ"; extended: ["9"]; extendedShifted: ["9"] }
+            CharKey { label: "з"; shifted: "З"; extended: ["0"]; extendedShifted: ["0"] }
             CharKey { label: "х"; shifted: "Х"; }
+            CharKey { label: "ъ"; shifted: "Ъ"; }
         }
 
         Row {
@@ -52,7 +54,7 @@ KeyPad {
             CharKey { label: "ф"; shifted: "Ф"; }
             CharKey { label: "ы"; shifted: "Ы"; }
             CharKey { label: "в"; shifted: "В"; }
-            CharKey { label: "a"; shifted: "A"; }
+            CharKey { label: "а"; shifted: "А"; }
             CharKey { label: "п"; shifted: "П"; }
             CharKey { label: "р"; shifted: "Р"; }
             CharKey { label: "о"; shifted: "О"; }
@@ -66,33 +68,31 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            ShiftKey { padding: 0 }
+            ShiftKey { padding: 0; width: symShiftKey.width }
             CharKey { label: "я"; shifted: "Я"; }
             CharKey { label: "ч"; shifted: "Ч"; }
             CharKey { label: "с"; shifted: "С"; }
             CharKey { label: "м"; shifted: "М"; }
-            CharKey { label: "і"; shifted: "І"; }
-            CharKey { label: "и"; shifted: "И"; }
+            CharKey { label: "и"; shifted: "И"; extended: ["і", "І"]; }
             CharKey { label: "т"; shifted: "Т"; }
             CharKey { label: "ь"; shifted: "Ь"; }
             CharKey { label: "б"; shifted: "Б"; }
             CharKey { label: "ю"; shifted: "Ю"; }
-            BackspaceKey { padding: 0 }
+            BackspaceKey { padding: 0; width: enterKey.width }
         }
 
         Item {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight;
+            height: panel.keyHeight + units.gu(UI.bottom_margin*2);
 
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
-            CharKey        { id: commaKey;    label: ","; shifted: "/";  anchors.left: languageMenuButton.right; }
-            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
-            CharKey        { id: dotKey;       label: "."; shifted: "."; anchors.right: extraCharKey.left; }
-            CharKey        { id: extraCharKey; label: "ъ"; shifted: "Ъ"; anchors.right: enterKey.left; }
-            ReturnKey      { id: enterKey;                               anchors.right: parent.right }
+            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
+            CharKey        { id: commaKey;    label: ","; shifted: "/"; extended: ["'", ";", ":"]; anchors.left: languageMenuButton.right; height: parent.height; }
+            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true; height: parent.height; }
+            CharKey        { id: dotKey;       label: "."; shifted: "."; extended: ["?", "!"]; extendedShifted: ["?", "!"]; anchors.right: enterKey.left; height: parent.height; }
+            ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column
 }

@@ -83,6 +83,9 @@ Item {
             onWordribbon_visibleChanged: calculateSize();
 
             property bool languageMenuShown: false
+            property bool extendedKeysShown: false
+
+            property bool firstShow: true
 
             onXChanged: fullScreenItem.reportKeyboardVisibleRect();
             onYChanged: fullScreenItem.reportKeyboardVisibleRect();
@@ -98,7 +101,7 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
                 height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
-                borderTop.height + units.gu(UI.top_margin) * 3
+                borderTop.height + units.gu(UI.top_margin)
 
                 drag.target: keyboardSurface
                 drag.axis: Drag.YAxis;
@@ -107,6 +110,8 @@ Item {
                 //fix for lp:1277186
                 //only filter children when wordRibbon visible
                 drag.filterChildren: wordRibbon.visible
+                // Avoid conflict with extended key swipe selection
+                enabled: !canvas.extendedKeysShown
 
                 onReleased: {
                     if (keyboardSurface.y > jumpBackThreshold) {
@@ -140,7 +145,7 @@ Item {
                         anchors.bottom: keyboardComp.top
                         width: parent.width;
 
-                        height: canvas.wordribbon_visible ? UI.wordribbonHeight : 0
+                        height: canvas.wordribbon_visible ? units.gu(UI.wordribbonHeight) : 0
                         onHeightChanged: calculateSize();
                     }
 
@@ -217,26 +222,31 @@ Item {
             states: [
                 State {
                     name: "SHOWN"
-                    PropertyChanges { target: canvas; y: 0; }
+                    PropertyChanges { target: keyboardSurface; y: 0; }
+                    onCompleted: {
+                        canvas.firstShow = false;
+                    }
                     when: maliit_geometry.shown === true
                 },
 
                 State {
                     name: "HIDDEN"
-                    PropertyChanges { target: canvas; y: height; }
+                    PropertyChanges { target: keyboardSurface; y: canvas.height }
                     onCompleted: {
                         canvas.languageMenuShown = false;
-                        keyboardSurface.y = 0;
                         keypad.closeExtendedKeys();
                         keypad.activeKeypadState = "NORMAL";
                         keypad.state = "CHARACTERS";
-                        maliit_input_method.hide();
+                        maliit_input_method.close();
                     }
-                    when: maliit_geometry.shown === false
+                    // Wait for the first show operation to complete before
+                    // allowing hiding, as the conditions when the keyboard
+                    // has never been visible can trigger a hide operation
+                    when: maliit_geometry.shown === false && canvas.firstShow === false
                 }
             ]
             transitions: Transition {
-                PropertyAnimation { target: canvas; properties: "y"; easing.type: Easing.InOutQuad }
+                UbuntuNumberAnimation { target: keyboardSurface; properties: "y"; }
             }
 
             Connections {
@@ -272,20 +282,16 @@ Item {
         reportKeyboardVisibleRect();
     }
 
-    // calculates the size of the visible keyboard to report to the window system
-    // FIXME get the correct size for enabled extended keys instead of that big area
     function reportKeyboardVisibleRect() {
 
         var vx = 0;
         var vy = wordRibbon.y;
         var vwidth = keyboardSurface.width;
         var vheight = keyboardComp.height + wordRibbon.height;
-        if (!canvas.wordribbon_visible && keypad.popoverEnabled) {
-            vy = 0;
-            vheight = keyboardSurface.height;
-        }
 
         var obj = mapFromItem(keyboardSurface, vx, vy, vwidth, vheight);
+        // Report visible height of the keyboard to support anchorToKeyboard
+        obj.height = fullScreenItem.height - obj.y;
         maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
     }
 

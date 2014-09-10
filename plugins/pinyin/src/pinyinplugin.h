@@ -27,15 +27,12 @@ public:
     virtual AbstractLanguageFeatures* languageFeature();
 
     //! spell checker
-    virtual bool spellCheckerEnabled() { return false; }
-    virtual bool setSpellCheckerEnabled(bool enabled) { Q_UNUSED(enabled); return false; }
-    virtual bool spell(const QString& word) { Q_UNUSED(word); return false; }
     virtual void spellCheckerSuggest(const QString& word, int limit) { Q_UNUSED(word); Q_UNUSED(limit); }
     virtual void addToSpellCheckerUserWordList(const QString& word) { Q_UNUSED(word); }
-    virtual bool setSpellCheckerLanguage(const QString& languageId) { Q_UNUSED(languageId); return false; }
+    virtual bool setLanguage(const QString& languageId) { Q_UNUSED(languageId); return false; }
 
 signals:
-    void newPredictionSuggestions(QStringList suggestions);
+    void newPredictionSuggestions(QString word, QStringList suggestions);
     
 public slots:
     

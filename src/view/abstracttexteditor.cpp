@@ -286,6 +286,7 @@ public:
     int ignore_next_cursor_position;
     QString ignore_next_surrounding_text;
     bool look_for_a_double_space;
+    bool double_space_full_stop_enabled;
     QString appendix_for_previous_preedit;
     int backspace_word_acceleration;
 
@@ -310,6 +311,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , ignore_next_cursor_position(-1)
     , ignore_next_surrounding_text()
     , look_for_a_double_space(false)
+    , double_space_full_stop_enabled(false)
     , appendix_for_previous_preedit()
     , backspace_word_acceleration(0)
 {
@@ -358,6 +360,9 @@ AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
 
     connect(word_engine, SIGNAL(primaryCandidateChanged(QString)),
             this,        SLOT(setPrimaryCandidate(QString)));
+    
+    connect(this,        SIGNAL(autoCorrectEnabledChanged(bool)),
+            word_engine, SLOT(setAutoCorrectEnabled(bool)));
 
     setPreeditEnabled(word_engine->isEnabled());
 }
@@ -484,12 +489,13 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionBackspace: {
         if (not d->backspace_sent) {
             singleBackspace();
+            checkPreeditReentry(true);
+        } else {
+            checkPreeditReentry(false);
         }
 
         d->auto_repeat_backspace_timer.stop();
         d->repeating_backspace = false;
-        checkPreeditReentry();
-        d->word_engine->computeCandidates(d->text.data());
     } break;
 
     case Key::ActionSpace: {
@@ -500,7 +506,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
 
         // every double-space character inputs one-after-another force a full-stop, so trigger it if needed
-        if (d->preedit_enabled && d->auto_correct_enabled && not look_for_a_double_space) {
+        if (d->double_space_full_stop_enabled && not look_for_a_double_space) {
             d->look_for_a_double_space = true;
         }
 
@@ -743,6 +749,27 @@ void AbstractTextEditor::setAutoCapsEnabled(bool enabled)
     }
 }
 
+//! \brief Returns whether double space full-stop is enabled
+//! \sa doubleSpaceFullStopEnabled
+bool AbstractTextEditor::isDoubleSpaceFullStopEnabled() const
+{
+    Q_D(const AbstractTextEditor);
+    return d->double_space_full_stop_enabled;
+}
+
+//! \brief Sets whether the double space full-stop functionality is enabled.
+//! \param enabled \c true to enable double space full-stop functionality.
+//! \sa doubleSpaceFullStopEnabled
+void AbstractTextEditor::setDoubleSpaceFullStopEnabled(bool enabled)
+{
+    Q_D(AbstractTextEditor);
+
+    if (d->double_space_full_stop_enabled != enabled) {
+        d->double_space_full_stop_enabled = enabled;
+        Q_EMIT doubleSpaceFullStopEnabledChanged(d->double_space_full_stop_enabled);
+    }
+}
+
 //! \brief Commits current preedit.
 void AbstractTextEditor::commitPreedit()
 {
@@ -878,12 +905,8 @@ void AbstractTextEditor::singleBackspace()
         d->text->removeFromPreedit(1);
         textOnLeft += d->text->preedit();
         
-        // Don't find word candidates if the user is holding down backspace
-        if(!d->repeating_backspace) {
-            d->word_engine->computeCandidates(d->text.data());
-        } else {
-            Q_EMIT wordCandidatesChanged(WordCandidateList());
-        }
+        // Clear previous word candidates
+        Q_EMIT wordCandidatesChanged(WordCandidateList());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                           Replacement());
 
@@ -980,26 +1003,44 @@ void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 }
 
 //! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should
-//! place a word back in to pre-edit after a character has been deleted
-void AbstractTextEditor::checkPreeditReentry()
+//! place a word back in to pre-edit after a character has been deleted or focus
+//! has changed
+void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 {
-    if(!text()->preedit().isEmpty() || !isPreeditEnabled()) {
+    Q_D(AbstractTextEditor);
+
+    if(!isPreeditEnabled()) {
+        return;
+    }
+
+    if(!text()->preedit().isEmpty()) {
+        d->word_engine->computeCandidates(d->text.data());
         return;
     }
 
     int currentOffset = text()->surroundingOffset();
     if(currentOffset > 1 && !text()->surrounding().isEmpty()) {
-        // -2 for just deleted character that hasn't been committed and to reach character before cursor
-        QString lastChar = text()->surrounding().at(currentOffset-2);
+        QString lastChar;
+        if(uncommittedDelete) {
+            // -2 for just deleted character that hasn't been committed and to reach character before cursor
+            lastChar = text()->surrounding().at(currentOffset-2);
+        } else {
+            lastChar = text()->surrounding().at(currentOffset-1);
+        }
         if(!QRegExp("\\W+").exactMatch(lastChar)) {
             QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("\\W+"));
             int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
+            if(leftWords.last().isEmpty()) {
+                // If removed char was punctuation trimming will result in an empty entry
+                leftWords.removeLast();
+                trimDiff += 1;
+            }
             if(!text()->surroundingRight().trimmed().isEmpty()) {
                 // We don't currently handle reentering preedit in the middle of the text
                 return;
             }
             QString recreatedPreedit = leftWords.last();
-            if(trimDiff == 0) {
+            if(trimDiff == 0 && uncommittedDelete) {
                 // Remove the last character from the word if we weren't just deleting a space
                 // as the last backspace hasn't been committed yet.
                 recreatedPreedit.chop(1);
@@ -1017,6 +1058,8 @@ void AbstractTextEditor::checkPreeditReentry()
         }
 
     }
+
+    d->word_engine->computeCandidates(d->text.data());
 }
 
 

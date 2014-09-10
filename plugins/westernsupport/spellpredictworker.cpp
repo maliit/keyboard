@@ -25,26 +25,34 @@
  *
  */
 
-#include "predictivetextworker.h"
+#include "spellpredictworker.h"
 
 #include <QDebug>
 
-PredictiveTextWorker::PredictiveTextWorker(QObject *parent)
+SpellPredictWorker::SpellPredictWorker(QObject *parent)
     : QObject(parent)
     , m_candidatesContext()
     , m_presageCandidates(CandidatesCallback(m_candidatesContext))
     , m_presage(&m_presageCandidates)
     , m_spellChecker()
+    , m_word()
+    , m_limit(5)
+    , m_processingWords(false)
 {
     m_presage.config("Presage.Selector.SUGGESTIONS", "6");
     m_presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
 }
 
-void PredictiveTextWorker::parsePredictionText(const QString& surroundingLeft, const QString& preedit)
+void SpellPredictWorker::parsePredictionText(const QString& surroundingLeft, const QString& preedit)
 {
     m_candidatesContext = (surroundingLeft.toStdString() + preedit.toStdString());
 
     QStringList list;
+
+    // If the user input is spelt correctly add it to the start of the predictions
+    if(m_spellChecker.spell(preedit)) {
+        list << preedit;
+    }
 
     try {
         const std::vector<std::string> predictions = m_presage.predict();
@@ -66,10 +74,10 @@ void PredictiveTextWorker::parsePredictionText(const QString& surroundingLeft, c
         qWarning() << "An exception was thrown in libpresage when calling predict(), exception nr: " << error;
     }
 
-    Q_EMIT newSuggestions(list);
+    Q_EMIT newPredictionSuggestions(preedit, list);
 }
 
-void PredictiveTextWorker::setPredictionLanguage(QString locale)
+void SpellPredictWorker::setLanguage(QString locale)
 {
     QString dbFileName = "database_"+locale+".db";
     QString fullPath("/usr/share/maliit/plugins/com/ubuntu/lib/"+locale+"/");
@@ -84,7 +92,42 @@ void PredictiveTextWorker::setPredictionLanguage(QString locale)
     }
 }
 
-void PredictiveTextWorker::updateSpellCheckWord(QString word)
+void SpellPredictWorker::suggest(const QString& word, int limit)
 {
-    m_spellChecker.updateWord(word);
+    if(!m_spellChecker.spell(word)) {
+        QStringList suggestions = m_spellChecker.suggest(word, limit);
+        Q_EMIT newSpellingSuggestions(word, suggestions);
+    }
 }
+
+void SpellPredictWorker::newSpellCheckWord(QString word)
+{
+    // Run through all the words queued in the event loop
+    // so we only fetch suggestions for the latest word
+    bool setProcessingWords = false;
+    if(m_processingWords == false) {
+        setProcessingWords = true;
+        m_processingWords = true;
+    }
+    QCoreApplication::processEvents();
+    if(setProcessingWords == true) {
+        m_processingWords = false;
+    }
+
+    m_word = word;
+
+    if(!m_processingWords) {
+        suggest(m_word, m_limit);
+    }
+}
+
+void SpellPredictWorker::addToUserWordList(const QString& word)
+{
+    m_spellChecker.addToUserWordList(word);
+}
+
+void SpellPredictWorker::setSpellCheckLimit(int limit)
+{
+    m_limit = limit;
+}
+

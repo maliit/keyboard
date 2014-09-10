@@ -42,6 +42,7 @@ WordRibbon::WordRibbon(QObject* parent)
 {
     m_roles.insert(WordRole, "word");
     m_roles.insert(IsUserInputRole, "isUserInput");
+    m_roles.insert(IsPrimaryCandidateRole, "isPrimaryCandidate");
 }
 
 bool WordRibbon::valid() const
@@ -127,6 +128,9 @@ QVariant WordRibbon::data(const QModelIndex &index, int role) const
         break;
     case WordRibbon::IsUserInputRole:
         return m_candidates.at(index.row()).source() == WordCandidate::SourceUser;
+        break;
+    case WordRibbon::IsPrimaryCandidateRole:
+        return m_candidates.at(index.row()).primary();
         break;
     default:
         break;

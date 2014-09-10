@@ -27,40 +27,45 @@ ActionKey {
 
     action: "shift"
 
-    MouseArea {
-        anchors.fill: parent
-        preventStealing: true
+    overridePressArea: true
+    acceptDoubleClick: true
 
-        onClicked: {
-            if (maliit_input_method.useAudioFeedback)
-                audioFeedback.play();
+    property bool doubleClick: false;
 
-            if (maliit_input_method.useHapticFeedback)
-                 pressEffect.start();
-
-            if (panel.activeKeypadState == "NORMAL")
-                panel.activeKeypadState = "SHIFTED";
-
-            else if (panel.activeKeypadState == "SHIFTED")
-                panel.activeKeypadState = "NORMAL"
-
-            else if (panel.activeKeypadState == "CAPSLOCK")
-                panel.activeKeypadState = "NORMAL"
+    onPressed: {
+        if (doubleClick) {
+            doubleClick = false;
+            return;
         }
+        if (maliit_input_method.useAudioFeedback)
+            audioFeedback.play();
 
-        onPressAndHold: {
-            panel.activeKeypadState = "CAPSLOCK"
-        }
+        if (maliit_input_method.useHapticFeedback)
+            pressEffect.start();
 
-        onDoubleClicked: {
-            if (maliit_input_method.useAudioFeedback)
-                audioFeedback.play();
+        if (panel.activeKeypadState == "NORMAL")
+            panel.activeKeypadState = "SHIFTED";
+        else if (panel.activeKeypadState == "SHIFTED")
+            panel.activeKeypadState = "NORMAL"
+        else if (panel.activeKeypadState == "CAPSLOCK")
+            panel.activeKeypadState = "NORMAL"
+    }
 
-            if (maliit_input_method.useHapticFeedback)
-                 pressEffect.start();
+    onPressAndHold: {
+        if (maliit_input_method.useHapticFeedback)
+            pressEffect.start();
 
-            if (panel.activeKeypadState == "SHIFTED")
-                panel.activeKeypadState = "CAPSLOCK"
-        }
+        panel.activeKeypadState = "CAPSLOCK"
+    }
+
+    onDoubleClicked: {
+        if (maliit_input_method.useAudioFeedback)
+            audioFeedback.play();
+
+        if (maliit_input_method.useHapticFeedback)
+            pressEffect.start();
+
+        panel.activeKeypadState = "CAPSLOCK"
+        doubleClick = true;
     }
 }

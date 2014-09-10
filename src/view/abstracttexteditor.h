@@ -109,6 +109,8 @@ public:
     Model::Text * text() const;
     Logic::AbstractWordEngine * wordEngine() const;
 
+    void checkPreeditReentry(bool uncommittedDelete);
+
     Q_SLOT void onKeyPressed(const Key &key);
     Q_SLOT void onKeyReleased(const Key &key);
     Q_SLOT void onKeyEntered(const Key &key);
@@ -131,6 +133,10 @@ public:
     bool isAutoCapsEnabled() const;
     Q_SLOT void setAutoCapsEnabled(bool enabled);
     Q_SIGNAL void autoCapsEnabledChanged(bool enabled);
+
+    bool isDoubleSpaceFullStopEnabled() const;
+    Q_SLOT void setDoubleSpaceFullStopEnabled(bool enabled);
+    Q_SIGNAL void doubleSpaceFullStopEnabledChanged(bool enabled);
 
     Q_SLOT void addToUserDictionary(const QString &word);
 
@@ -167,8 +173,6 @@ private:
 
     void sendKeyPressAndReleaseEvents(int key, Qt::KeyboardModifiers modifiers,
                                       const QString& text = QString());
-
-    void checkPreeditReentry();
 };
 
 } // namespace MaliitKeyboard

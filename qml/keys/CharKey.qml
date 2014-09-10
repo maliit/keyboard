@@ -34,8 +34,11 @@ Item {
     property string shifted: ""
     property var extended; // list of extended keys
     property var extendedShifted; // list of extended keys in shifted state
+    property var currentExtendedKey; // The currently highlighted extended key
 
     property alias valueToSubmit: keyLabel.text
+
+    property alias acceptDoubleClick: keyMouseArea.acceptDoubleClick
 
     property string action
     property bool noMagnifier: false
@@ -53,7 +56,7 @@ Item {
     property string annotation: ""
 
     /*! indicates if te key is currently pressed/down*/
-    property alias pressed: keyMouseArea.pressed
+    property alias currentlyPressed: keyMouseArea.pressed
 
     /* internal */
     property string __annotationLabelNormal
@@ -73,6 +76,14 @@ Item {
     property string oskState: panel.activeKeypadState
     property var activeExtendedModel: (panel.activeKeypadState === "NORMAL") ? extended : extendedShifted
 
+    // Allow action keys to override the standard key behaviour
+    property bool overridePressArea: false
+
+    signal pressed()
+    signal released()
+    signal pressAndHold()
+    signal doubleClicked()
+
     Component.onCompleted: {
         if (annotation) {
             __annotationLabelNormal = annotation
@@ -85,63 +96,107 @@ Item {
         }
     }
 
-    BorderImage {
-        id: buttonImage
-        anchors.centerIn: parent
-        anchors.fill: key
-        anchors.margins: units.dp( UI.keyMargins );
-        source: key.pressed ? key.imgPressed : key.imgNormal
-    }
-
-    /// label of the key
-    //  the label is also the value subitted to the app
-
-    Text {
-        id: keyLabel
-        text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
-        font.family: UI.fontFamily
-        font.pixelSize: fontSize
-        font.bold: UI.fontBold
-        color: UI.fontColor
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.margins: units.gu( UI.annotationMargins )
-        horizontalAlignment: Text.AlignHCenter
-        elide: Text.ElideRight
-    }
-
-    /// shows an annotation
-    // used e.g. for indicating the existence of extended keys
-
-    Text {
-        id: annotationLabel
-        text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
-
-        anchors.right: parent.right
+    // Make it possible for the visible area of the key to differ from the
+    // actual key size. This allows us to extend the touch area of the bottom
+    // row of keys all the way to the bottom of the keyboard, whilst 
+    // maintaining the same visual appearance.
+    Item {
         anchors.top: parent.top
-        anchors.margins: units.gu( UI.annotationMargins )
+        height: panel.keyHeight
+        width: parent.width
 
-        font.pixelSize: units.gu( UI.annotationFontSize )
-        font.bold: false
-        color: UI.annotationFontColor
+        BorderImage {
+            id: buttonImage
+            anchors.fill: parent
+            anchors.margins: units.dp( UI.keyMargins );
+            source: key.currentlyPressed ? key.imgPressed : key.imgNormal
+        }
+    
+        /// label of the key
+        //  the label is also the value subitted to the app
+    
+        Text {
+            id: keyLabel
+            text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
+            font.family: UI.fontFamily
+            font.pixelSize: fontSize
+            font.bold: UI.fontBold
+            color: UI.fontColor
+            anchors.right: parent.right
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.margins: units.gu( UI.annotationMargins )
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
+        }
+    
+        /// shows an annotation
+        // used e.g. for indicating the existence of extended keys
+    
+        Text {
+            id: annotationLabel
+            text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
+    
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.margins: units.gu( UI.annotationMargins )
+    
+            font.pixelSize: units.gu( UI.annotationFontSize )
+            font.bold: false
+            color: UI.annotationFontColor
+        }
     }
 
     PressArea {
         id: keyMouseArea
-        anchors.fill: key
+        anchors.fill: parent
 
         onPressAndHold: {
+            if (overridePressArea) {
+                key.pressAndHold();
+                return;
+            }
             if (activeExtendedModel != undefined) {
+                if (maliit_input_method.useHapticFeedback)
+                    pressEffect.start();
+
+                magnifier.shown = false
                 extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
+                var extendedKeys = extendedKeysSelector.keys;
+                var middleKey = extendedKeys.length > 1 ? Math.floor(extendedKeys.length / 2) - 1 : 0;
+                extendedKeys[middleKey].highlight = true;
+                currentExtendedKey = extendedKeys[middleKey];
             }
         }
 
+        onMouseXChanged: {
+            evaluateSelectorSwipe();
+        }
+
+        onMouseYChanged: {
+            evaluateSelectorSwipe();
+        }
+
         onReleased: {
-            if (!extendedKeysShown) {
+            if (overridePressArea) {
+                key.released();
+                return;
+            }
+            if (extendedKeysShown) {
+                if (currentExtendedKey) {
+                    currentExtendedKey.commit();
+                    currentExtendedKey = null;
+                } else {
+                    extendedKeysSelector.closePopover(); 
+                }
+            } else if(!swipedOut) {
                 event_handler.onKeyReleased(valueToSubmit, action);
+
+                if (magnifier.currentlyAssignedKey == key) {
+                    magnifier.shown = false;
+                }
 
                 if (panel.autoCapsTriggered) {
                     panel.autoCapsTriggered = false;
@@ -152,7 +207,21 @@ Item {
                 }
             }
         }
+
+        onSwipedOutChanged: {
+            if(swipedOut && magnifier.currentlyAssignedKey == key) {
+                magnifier.shown = false;
+            }
+        }
+
         onPressed: {
+            if (overridePressArea) {
+                key.pressed();
+                return;
+            }
+            magnifier.currentlyAssignedKey = key
+            magnifier.shown = !noMagnifier
+
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();
             
@@ -163,6 +232,40 @@ Item {
             panel.autoCapsTriggered = false;
             event_handler.onKeyPressed(valueToSubmit, action);
         }
+
+        onDoubleClicked: {
+            if (overridePressArea) {
+                key.doubleClicked();
+                return;
+            }
+        }
+
+        // Determine which extended key we're underneath when swiping,
+        // highlight it and set it as the currentExtendedKey (to be committed
+        // when press is released)
+        function evaluateSelectorSwipe() {
+            if (extendedKeysSelector.enabled) {
+                var extendedKeys = extendedKeysSelector.keys;
+                currentExtendedKey = null;
+                var keyMapping = extendedKeysSelector.mapToItem(key, extendedKeysSelector.rowX, extendedKeysSelector.rowY);
+                var mx = mouseX - keyMapping.x;
+                var my = mouseY - keyMapping.y;
+                for(var i = 0; i < extendedKeys.length; i++) {
+                    var posX = extendedKeys[i].x;
+                    var posY = extendedKeys[i].y;
+                    if(mx > posX && mx < (posX + extendedKeys[i].width)
+                       && my > posY && my < (posY + extendedKeys[i].height * 2.5)) {
+                        if(!extendedKeys[i].highlight && maliit_input_method.useHapticFeedback) {
+                            pressEffect.start();
+                        }
+                        extendedKeys[i].highlight = true;
+                        currentExtendedKey = extendedKeys[i];
+                    } else if('highlight' in extendedKeys[i]) {
+                        extendedKeys[i].highlight = false;
+                    }
+                }
+            }
+        }
     }
 
     Connections {
@@ -171,14 +274,5 @@ Item {
             if (swipeArea.drag.active)
                 keyMouseArea.cancelPress();
         }
-    }
-
-    Magnifier {
-        anchors.horizontalCenter: buttonImage.horizontalCenter
-        anchors.bottom: buttonImage.top
-        width: key.width + units.gu(UI.magnifierHorizontalPadding)
-        height: key.height + units.gu(UI.magnifierVerticalPadding)
-        text: keyLabel.text
-        shown: key.pressed && !noMagnifier && !extendedKeysShown
     }
 }

@@ -16,6 +16,7 @@
 
 import QtQuick 2.0
 import "../../keys"
+import "../../keys/key_constants.js" as UI
 
 KeyPad {
     anchors.fill: parent
@@ -32,16 +33,16 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; }
-            CharKey { label: "w"; shifted: "W"; }
-            CharKey { label: "e"; shifted: "E"; extended: ["ę","é","ě","€"]; extendedShifted: ["Ę","É","Ě","€"] }
-            CharKey { label: "r"; shifted: "R"; extended: ["ŕ","ř"]; extendedShifted: ["Ŕ","Ř"] }
-            CharKey { label: "t"; shifted: "T"; extended: ["ţ","ť"]; extendedShifted: ["Ţ","Ť"] }
-            CharKey { label: "y"; shifted: "Y"; extended: ["¥"]; extendedShifted: ["¥"] }
-            CharKey { label: "u"; shifted: "U"; extended: ["ü","ú","ů","ű"]; extendedShifted: ["Ü","Ú","Ů","Ű"] }
-            CharKey { label: "i"; shifted: "I"; extended: ["í","î"]; extendedShifted: ["Í","Î"] }
-            CharKey { label: "o"; shifted: "O"; extended: ["ó","ö","ô","ő"]; extendedShifted: ["Ó","Ö","Ô","Ő"] }
-            CharKey { label: "p"; shifted: "P"; }
+            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "w"; shifted: "W"; extended: ["2"]; extendedShifted: ["2"] }
+            CharKey { label: "e"; shifted: "E"; extended: ["3", "ę","é","ě","€"]; extendedShifted: ["3", "Ę","É","Ě","€"] }
+            CharKey { label: "r"; shifted: "R"; extended: ["4", "ŕ","ř"]; extendedShifted: ["4", "Ŕ","Ř"] }
+            CharKey { label: "t"; shifted: "T"; extended: ["5", "ţ","ť"]; extendedShifted: ["5", "Ţ","Ť"] }
+            CharKey { label: "y"; shifted: "Y"; extended: ["6", "¥"]; extendedShifted: ["6", "¥"] }
+            CharKey { label: "u"; shifted: "U"; extended: ["7", "ü","ú","ů","ű"]; extendedShifted: ["7", "Ü","Ú","Ů","Ű"] }
+            CharKey { label: "i"; shifted: "I"; extended: ["8", "í","î"]; extendedShifted: ["8", "Í","Î"] }
+            CharKey { label: "o"; shifted: "O"; extended: ["9", "ó","ö","ô","ő"]; extendedShifted: ["9", "Ó","Ö","Ô","Ő"] }
+            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"] }
             CharKey { label: "ż"; shifted: "Ż"; }
         }
 
@@ -82,14 +83,14 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight;
+            height: panel.keyHeight + units.gu(UI.bottom_margin*2);
 
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; }
-            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; }
-            CharKey        { id: commaKey;    label: ","; shifted: "/";  anchors.left: languageMenuButton.right; }
-            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true }
-            CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; }
-            ReturnKey      { id: enterKey;                               anchors.right: parent.right }
+            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
+            CharKey        { id: commaKey;    label: ","; shifted: "/"; extended: ["'", ";", ":"]; anchors.left: languageMenuButton.right; height: parent.height; }
+            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true; height: parent.height; }
+            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "!"]; extendedShifted: ["?", "!"]; anchors.right: enterKey.left; height: parent.height; }
+            ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column
 }
