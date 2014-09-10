@@ -137,6 +137,7 @@ public:
     Q_SIGNAL void keyboardClosed();
     Q_SIGNAL void wordCandidatesChanged(const WordCandidateList &word_candidates);
     Q_SIGNAL void autoCapsActivated();
+    Q_SIGNAL void autoCapsDeactivated();
     Q_SIGNAL void leftLayoutSelected();
     Q_SIGNAL void rightLayoutSelected();
 

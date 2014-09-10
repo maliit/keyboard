@@ -246,6 +246,12 @@ Item {
                     keypad.activeKeypadState = "SHIFTED";
                     keypad.autoCapsTriggered = true;
                 }
+                onDeactivateAutocaps: {
+                    if(keypad.autoCapsTriggered) {
+                        keypad.activeKeypadState = "NORMAL";
+                        keypad.autoCapsTriggered = false;
+                    }
+                }
             }
 
         } // canvas

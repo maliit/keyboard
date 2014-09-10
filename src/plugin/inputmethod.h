@@ -117,6 +117,7 @@ public:
 Q_SIGNALS:
     void contentTypeChanged(TextContentType contentType);
     void activateAutocaps();
+    void deactivateAutocaps();
     void enabledLanguagesChanged(QStringList languages);
     void activeLanguageChanged(QString language);
     void useAudioFeedbackChanged();
