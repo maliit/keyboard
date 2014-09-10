@@ -1,3 +1,18 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140910-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Only switch back automatically from the symbol page if the user
+    presses space or apostrophe and make pre-edit behaviour when
+    entering symbols more consistent. (LP: #1359404)
+  * Update Serbian layout to account for changes in POT generation and
+    extended bottom row layout.
+  * Clear the surrounding text buffer when clearing the preedit buffer.
+    (LP: #1361732)
+  * Deactivate autocaps if re-entering a field that already has text in
+    it. (LP: #1366779)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 10 Sep 2014 14:58:09 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140902.1-0ubuntu1) utopic; urgency=low
 
   [ Bill Filler ]
