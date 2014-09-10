@@ -263,6 +263,12 @@ Item {
                 onKeyboardReset: {
                     keypad.state = "CHARACTERS"
                 }
+                onDeactivateAutocaps: {
+                    if(keypad.autoCapsTriggered) {
+                        keypad.activeKeypadState = "NORMAL";
+                        keypad.autoCapsTriggered = false;
+                    }
+                }
             }
 
         } // canvas

@@ -676,8 +676,12 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
     }
     commitPreedit();
 
-    if (auto_caps_activated && d->auto_caps_enabled) {
-        Q_EMIT autoCapsActivated();
+    if (d->auto_caps_enabled) {
+        if (auto_caps_activated) {
+            Q_EMIT autoCapsActivated();
+        } else {
+            Q_EMIT autoCapsDeactivated();
+        }
     }
 }
 
@@ -931,8 +935,12 @@ void AbstractTextEditor::singleBackspace()
     textOnLeft = textOnLeft.trimmed();
 
     const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
-    if (auto_caps_activated && d->auto_caps_enabled) {
-        Q_EMIT autoCapsActivated();
+    if (d->auto_caps_enabled) {
+        if (auto_caps_activated) {
+            Q_EMIT autoCapsActivated();
+        } else {
+            Q_EMIT autoCapsDeactivated();
+        }
     }
 
     d->backspace_sent = true;

@@ -99,6 +99,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     // FIXME: Reconnect feedback instance.
     Setup::connectAll(&d->event_handler, &d->editor);
     connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SIGNAL(activateAutocaps()));
+    connect(&d->editor,  SIGNAL(autoCapsDeactivated()), this, SIGNAL(deactivateAutocaps()));
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
@@ -369,12 +370,7 @@ void InputMethod::update()
         d->editor.text()->setSurroundingOffset(position);
 
         updateAutoCaps();
-
-        // If we're at the beginning of a text field (e.g. because it's been cleared,
-        // or the cursor has been moved) then re-evaluate initial autocaps
-        if (position == 0 && position != d->previous_position) {
-            checkInitialAutocaps();
-        }
+        checkInitialAutocaps();
         d->previous_position = position;
     }
 }
@@ -426,8 +422,13 @@ void InputMethod::checkInitialAutocaps()
         QString text;
         int position;
         bool ok = d->host->surroundingText(text, position);
-        if (ok && text.isEmpty() && position == 0)
+        if (ok && text.isEmpty() && d->editor.text()->preedit().isEmpty() && position == 0) {
             Q_EMIT activateAutocaps();
+        } else {
+            // Clear autocaps if it has been set by us previously being in an
+            // empty field
+            Q_EMIT deactivateAutocaps();
+        }
     }
 }
 
