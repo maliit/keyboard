@@ -259,6 +259,10 @@ Item {
                         keypad.delayedAutoCaps = true;
                     }
                 }
+
+                onKeyboardReset: {
+                    keypad.state = "CHARACTERS"
+                }
             }
 
         } // canvas

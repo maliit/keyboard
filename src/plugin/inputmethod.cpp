@@ -163,6 +163,7 @@ void InputMethod::reset()
     Q_D(InputMethod);
     d->editor.clearPreedit();
     d->previous_position = -1;
+    Q_EMIT keyboardReset(); 
 }
 
 void InputMethod::setPreedit(const QString &preedit,

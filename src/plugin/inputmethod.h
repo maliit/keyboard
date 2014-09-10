@@ -133,6 +133,7 @@ Q_SIGNALS:
     void windowGeometryRectChanged(QRect rect);
     void actionKeyOverrideChanged();
     void keyboardStateChanged(QString state);
+    void keyboardReset();
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();
