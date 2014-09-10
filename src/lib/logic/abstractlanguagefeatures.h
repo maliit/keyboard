@@ -47,6 +47,7 @@ public:
     virtual QString appendixForReplacedPreedit(const QString &preedit) const = 0;
     virtual bool isSeparator(const QString &text) const { Q_UNUSED(text); return false; }
     virtual QString fullStopSequence() const { return QString(); }
+    virtual bool isSymbol(const QString &text) const { Q_UNUSED(text); return false; }
 };
 
 #endif // MALIIT_KEYBOARD_ABSTRACTLANGUAGEFEATURES_H

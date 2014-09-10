@@ -73,7 +73,7 @@ KeyPad {
             CharKey { label: "~"; shifted: "»"; }
             CharKey { label: "/"; shifted: "\""; }
             CharKey { label: "\\"; shifted: "“"; }
-            CharKey { label: "'"; shifted: "”"; }
+            CharKey { label: "'"; shifted: "”"; switchBackFromSymbols: true; }
             CharKey { label: ";"; shifted: "„"; }
             CharKey { label: ":"; shifted: "&"; }
             BackspaceKey {}

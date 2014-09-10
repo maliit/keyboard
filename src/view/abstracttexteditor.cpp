@@ -289,6 +289,7 @@ public:
     bool double_space_full_stop_enabled;
     QString appendix_for_previous_preedit;
     int backspace_word_acceleration;
+    QString keyboardState;
 
     explicit AbstractTextEditorPrivate(const EditorOptions &new_options,
                                        Model::Text *new_text,
@@ -314,6 +315,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , double_space_full_stop_enabled(false)
     , appendix_for_previous_preedit()
     , backspace_word_acceleration(0)
+    , keyboardState("CHARACTERS")
 {
     auto_repeat_backspace_timer.setSingleShot(true);
     (void) valid();
@@ -436,6 +438,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         bool alreadyAppended = false;
         bool auto_caps_activated = false;
         const bool isSeparator = d->word_engine->languageFeature()->isSeparator(text);
+        const bool isSymbol = d->word_engine->languageFeature()->isSymbol(text);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
                     not d->text->preedit().isEmpty() && isSeparator;
 
@@ -444,19 +447,25 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
-                d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-                d->text->appendToPreedit(d->appendix_for_previous_preedit);
+                if (d->keyboardState == "CHARACTERS") {
+                    d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+                    d->text->appendToPreedit(d->appendix_for_previous_preedit);
+                }
                 commitPreedit();
                 auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
                 alreadyAppended = true;
             }
-            else if (d->auto_correct_enabled && isSeparator) {
-                // remove all whitespaces before the separator, then add a whitespace after it
-                removeTrailingWhitespaces();
+            else if (d->auto_correct_enabled && (isSeparator || isSymbol)) {
+                if(isSeparator && d->keyboardState == "CHARACTERS") {
+                    // remove all whitespaces before the separator, then add a whitespace after it
+                    removeTrailingWhitespaces();
+                }
 
                 d->text->appendToPreedit(text);
                 auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-                d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
+                if(isSeparator && d->keyboardState == "CHARACTERS") {
+                    d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
+                }
                 commitPreedit();
                 alreadyAppended = true;
             }
@@ -973,6 +982,12 @@ void AbstractTextEditor::onCursorPositionChanged(int cursor_position,
     }
 }
 
+void AbstractTextEditor::onKeyboardStateChanged(QString state) {
+    Q_D(AbstractTextEditor);
+
+    d->keyboardState = state;
+}
+
 void AbstractTextEditor::sendKeyPressAndReleaseEvents(
     int key, Qt::KeyboardModifiers modifiers, const QString& text) {
     QKeyEvent press(QEvent::KeyPress, key, modifiers, text);
@@ -1019,8 +1034,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
         } else {
             lastChar = text()->surrounding().at(currentOffset-1);
         }
-        if(!QRegExp("\\W+").exactMatch(lastChar)) {
-            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("\\W+"));
+        if(!QRegExp("\\W+").exactMatch(lastChar) && !d->word_engine->languageFeature()->isSymbol(lastChar)) {
+            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("[\\W\\d]+"));
             int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
             if(leftWords.last().isEmpty()) {
                 // If removed char was punctuation trimming will result in an empty entry
