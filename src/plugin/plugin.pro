@@ -14,9 +14,9 @@ INCLUDEPATH += ../lib ../
 DEFINES += MALIIT_DEFAULT_PROFILE=\\\"$$MALIIT_DEFAULT_PROFILE\\\"
 
 contains(QT_MAJOR_VERSION, 4) {
-    QT = core gui
+    QT = core gui dbus
 } else {
-    QT = core gui widgets quick qml
+    QT = core gui widgets quick qml dbus
 }
 
 CONFIG += \
@@ -27,6 +27,7 @@ HEADERS += \
     inputmethod.h \
     inputmethod_p.h \
     editor.h \
+    greeterstatus.h \
     keyboardgeometry.h \
     keyboardsettings.h \
 #    updatenotifier.h \
@@ -36,6 +37,7 @@ SOURCES += \
     plugin.cpp \
     inputmethod.cpp \
     editor.cpp \
+    greeterstatus.cpp \
     keyboardgeometry.cpp \
     keyboardsettings.cpp \
 #    updatenotifier.cpp \
