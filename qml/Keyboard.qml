@@ -164,10 +164,7 @@ Item {
 
                             anchors.fill: parent
 
-                            gradient: Gradient {
-                                GradientStop { position: 0.0; color: "#f1f1f1" }
-                                GradientStop { position: 1.0; color: "#e4e4e4" }
-                            }
+                            color: UI.backgroundColor
                         }
 
                         Image {
@@ -177,18 +174,11 @@ Item {
                             anchors.top: parent.top.bottom
                         }
 
-                        Image {
-                            id: borderBottom
-                            source: "styles/ubuntu/images/border_bottom.png"
-                            width: parent.width
-                            anchors.bottom: background.bottom
-                        }
-
                         KeyboardContainer {
                             id: keypad
 
                             anchors.top: borderTop.bottom
-                            anchors.bottom: borderBottom.top
+                            anchors.bottom: background.bottom
                             anchors.topMargin: units.gu( UI.top_margin )
                             anchors.bottomMargin: units.gu( UI.bottom_margin )
                             width: parent.width

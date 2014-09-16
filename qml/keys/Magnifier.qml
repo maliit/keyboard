@@ -45,13 +45,14 @@ KeyPopover {
         }
     }
 
-    Image {
+    BorderImage {
         id: popper
 
         width: parent.width
         height: parent.height
 
         anchors.centerIn: anchorItem
+        anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
 
         // this property is used to synchronize scale and opacity animation
         property real animationStep: 0
@@ -59,7 +60,21 @@ KeyPopover {
         transformOrigin: Item.Bottom
         opacity: animationStep
 
-        source: Qt.resolvedUrl("../styles/ubuntu/images/keyboard_popover.png")
+        source: Qt.resolvedUrl("../images/magnified_key.sci")
+
+        onXChanged: {
+            if (x < UI.popoverEdgeMargin) {
+                anchorItem.x += Math.abs(x) + UI.popoverEdgeMargin;
+                return;
+            }
+
+            var rightEdge = (x + width);
+            if ( rightEdge > (panel.width - UI.popoverEdgeMargin)) {
+                var diff = rightEdge - panel.width;
+                anchorItem.x -= diff + UI.popoverEdgeMargin;
+            }
+        }
+
 
         Text {
             id: label

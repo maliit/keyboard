@@ -109,42 +109,52 @@ Item {
         BorderImage {
             id: buttonImage
             anchors.fill: parent
-            anchors.margins: units.dp( UI.keyMargins );
-            source: key.currentlyPressed ? key.imgPressed : key.imgNormal
-        }
-    
-        /// label of the key
-        //  the label is also the value subitted to the app
-    
-        Text {
-            id: keyLabel
-            text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
-            font.family: UI.fontFamily
-            font.pixelSize: fontSize
-            font.bold: UI.fontBold
-            color: UI.fontColor
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: units.gu( UI.annotationMargins )
-            horizontalAlignment: Text.AlignHCenter
-            elide: Text.ElideRight
-        }
-    
-        /// shows an annotation
-        // used e.g. for indicating the existence of extended keys
-    
-        Text {
-            id: annotationLabel
-            text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
-    
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.margins: units.gu( UI.annotationMargins )
-    
-            font.pixelSize: units.gu( UI.annotationFontSize )
-            font.bold: false
-            color: UI.annotationFontColor
+            anchors.leftMargin: units.dp( UI.keyMargins );
+            anchors.rightMargin: units.dp( UI.keyMargins );
+            anchors.bottomMargin: orientationHelper.orientationAngle == 0 || orientationHelper.orientationAngle == 180 ? units.gu(UI.row_margin) : units.dp( UI.keyMargins ) * 2;
+            source: key.imgNormal
+
+            BorderImage {
+                anchors.fill: parent
+                visible: key.currentlyPressed
+                source: key.imgPressed    
+            }
+
+            /// label of the key
+            //  the label is also the value subitted to the app
+        
+            Text {
+                id: keyLabel
+                text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
+                font.family: UI.fontFamily
+                font.pixelSize: fontSize
+                font.bold: UI.fontBold
+                color: UI.fontColor
+                anchors.right: parent.right
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter 
+                anchors.verticalCenterOffset: -units.gu(0.15)
+                horizontalAlignment: Text.AlignHCenter
+                elide: Text.ElideRight
+            }
+        
+            /// shows an annotation
+            // used e.g. for indicating the existence of extended keys
+        
+            Text {
+                id: annotationLabel
+                text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
+        
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.topMargin: units.gu(UI.annotationTopMargin)
+                anchors.rightMargin: units.gu(UI.annotationRightMargin)
+        
+                font.pixelSize: units.gu( UI.annotationFontSize )
+                font.bold: false
+                color: UI.annotationFontColor
+            }
+
         }
     }
 
