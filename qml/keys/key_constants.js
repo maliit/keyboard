@@ -25,7 +25,7 @@ var fontBold    =   false
 
 var backgroundColor = "#f1f1f1"
 
-var annotationFontSize = 0.7; // gu
+var annotationFontSize = 0.85; // gu
 var annotationTopMargin = 0.35; // gu
 var annotationRightMargin = 0.65; // gu
 var annotationFontColor = "#5d5d5d"
