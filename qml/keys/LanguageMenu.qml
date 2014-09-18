@@ -53,16 +53,20 @@ Item {
                 maliit_input_method.activeLanguage = modelData
                 canvas.languageMenuShown = false;
             }
-         }
+        }
 
-        footer: ListItem.Standard {
-            text: i18n.tr("Settings")
-            onClicked: {
-                Qt.openUrlExternally("settings:///system/language")
-                canvas.languageMenuShown = false;
-                maliit_input_method.hide();
+        Component {
+            id: settingsItem
+                ListItem.Standard {
+                text: i18n.tr("Settings")
+                onClicked: {
+                    Qt.openUrlExternally("settings:///system/language")
+                    canvas.languageMenuShown = false;
+                    maliit_input_method.hide();
+                }
             }
-         }
+        }
+        footer: greeter_status.greeterActive ? null : settingsItem
     }
 
     function languageIdToName(languageId)

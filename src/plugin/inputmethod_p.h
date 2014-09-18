@@ -3,6 +3,7 @@
 
 #include "logic/layoutupdater.h"
 #include "editor.h"
+#include "greeterstatus.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
 
@@ -60,6 +61,7 @@ public:
 
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
+    GreeterStatus *m_greeterStatus;
 
     WordRibbon* wordRibbon;
 
@@ -82,6 +84,7 @@ public:
         , keyboardState("CHARACTERS")
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
+        , m_greeterStatus(new GreeterStatus())
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {
@@ -174,6 +177,7 @@ public:
         qml_context->setContextProperty("maliit_event_handler", &event_handler);
         qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
         qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
+        qml_context->setContextProperty("greeter_status", m_greeterStatus);
     }
 
 
