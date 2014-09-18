@@ -17,18 +17,21 @@
 .pragma library
 
 var keyMargins  =   1.8;    // dp
-var fontSize    =   2;    // gu
-var fontSizeMagnified   =   2; // gu
+var fontSize    =   2.5;    // gu
+var fontSizeMagnified   =   4; // gu
 var fontFamily  =   "Ubuntu Medium";
-var fontColor   =   "#666666"
-var fontBold    =   true
+var fontColor   =   "#5d5d5d"
+var fontBold    =   false
+
+var backgroundColor = "#f1f1f1"
 
 var annotationFontSize = 0.85; // gu
-var annotationMargins = 0.7; // gu
-var annotationFontColor = "#88666666"
+var annotationTopMargin = 0.35; // gu
+var annotationRightMargin = 0.65; // gu
+var annotationFontColor = "#5d5d5d"
 
 /* magnifier */
-var magnifierHorizontalPadding = 1; // gu, stretch the magnifier a little bit in x-axis
+var magnifierHorizontalPadding = 1.8; // gu, stretch the magnifier a little bit in x-axis
 var magnifierVerticalPadding = 1; // gu, stretch the magnifier a little bit in y-axis
 
 /* special keys */
@@ -42,15 +45,15 @@ var popoverTopMargin   = 10; // dp
 var popoverEdgeMargin = 2.2; // gu
 var popoverSquat      = 3; // gu, when no wordribbon, avoid click-through above input trap
 
-var imageCharKey        = "../images/key_bg.sci"
-var imageCharKeyPressed = "../images/keybg_action_active.sci"
+var imageCharKey        = "../images/white_key.sci"
+var imageCharKeyPressed = "../images/grey_key.sci"
 
-var imageActionKey        = "../images/action_key_bg.sci"
-var imageActionKeyPressed = "../images/keybg_action_active.sci"
+var imageActionKey        = "../images/action_key.sci"
+var imageActionKeyPressed = "../images/grey_key.sci"
 
 var top_margin = 1.35;  // gu
-var bottom_margin = 1.00; // gu
-
+var bottom_margin = 0; // gu
+var row_margin = 1.5; // gu
 
 var urlLayoutLeftSpacerSize = 5; // gu
 var emailLayoutUrlKeyPadding = 1.5; // gu
@@ -58,10 +61,9 @@ var emailLayoutUrlKeyPadding = 1.5; // gu
 /* language menu */
 var languageMenuListViewPadding = 2.22; // gu
 
-
 var wordribbonHeight = 3; // gu
 
-var phoneKeyboardHeightPortrait = 0.365;
+var phoneKeyboardHeightPortrait = 0.41;
 var phoneKeyboardHeightLandscape = 0.50;
 
 var tabletKeyboardHeightPortrait = 0.28;
