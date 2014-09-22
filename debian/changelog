@@ -1,3 +1,15 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140918-0ubuntu1) utopic; urgency=low
+
+  [ Michael Sheldon ]
+  * Hide the settings option in the keyboard's language menu when the
+    phone is locked. (LP: #1358224)
+  * Implement new keyboard design (LP: #1323852)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 18 Sep 2014 15:26:35 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140910-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]
