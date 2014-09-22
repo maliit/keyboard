@@ -1069,9 +1069,7 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
                 singleBackspace();
             }
 
-            text()->setSurrounding(surroundWithoutPreedit);
-            text()->setSurroundingOffset(position);
-            replaceTextWithPreedit(recreatedPreedit, 0, recreatedPreedit.size(), recreatedPreedit.size());
+            replaceTextWithPreedit(recreatedPreedit, 0, 0, recreatedPreedit.size());
         }
 
     }
