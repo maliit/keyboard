@@ -938,7 +938,7 @@ void AbstractTextEditor::singleBackspace()
     if (d->auto_caps_enabled) {
         if (auto_caps_activated) {
             Q_EMIT autoCapsActivated();
-        } else {
+        } else if(!textOnLeft.isEmpty()) {
             Q_EMIT autoCapsDeactivated();
         }
     }
