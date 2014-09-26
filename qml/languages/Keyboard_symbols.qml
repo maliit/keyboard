@@ -35,7 +35,7 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "1"; shifted: "€"; }
+            CharKey { label: "1"; shifted: "€"; leftSide: true; }
             CharKey { label: "2"; shifted: "£"; }
             CharKey { label: "3"; shifted: "$"; }
             CharKey { label: "4"; shifted: "¥"; }
@@ -44,7 +44,7 @@ KeyPad {
             CharKey { label: "7"; shifted: "<"; }
             CharKey { label: "8"; shifted: ">"; }
             CharKey { label: "9"; shifted: "["; }
-            CharKey { label: "0"; shifted: "]"; }
+            CharKey { label: "0"; shifted: "]"; rightSide: true; }
         }
 
         Row {
@@ -52,7 +52,7 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "*"; shifted: "`"; }
+            CharKey { label: "*"; shifted: "`"; leftSide: true; }
             CharKey { label: "#"; shifted: "^"; }
             CharKey { label: "+"; shifted: "|"; }
             CharKey { label: "-"; shifted: "_"; }
@@ -60,7 +60,7 @@ KeyPad {
             CharKey { label: "("; shifted: "{"; }
             CharKey { label: ")"; shifted: "}"; }
             CharKey { label: "!"; shifted: "¡"; }
-            CharKey { label: "?"; shifted: "¿"; }
+            CharKey { label: "?"; shifted: "¿"; rightSide: true; }
         }
 
         Row {
