@@ -209,7 +209,7 @@ Item {
                     magnifier.shown = false;
                 }
 
-                if (panel.autoCapsTriggered) {
+                if (panel.autoCapsTriggered && action != "backspace") {
                     panel.autoCapsTriggered = false;
                 }
                 else if (!skipAutoCaps) {
@@ -243,7 +243,9 @@ Item {
                  pressEffect.start();
 
             // Quick workaround to fix initial autocaps - not beautiful, but works
-            panel.autoCapsTriggered = false;
+            if(action != "backspace") {
+                panel.autoCapsTriggered = false;
+            }
             event_handler.onKeyPressed(valueToSubmit, action);
         }
 
