@@ -42,7 +42,7 @@ KeyPad {
             CharKey { label: "u"; shifted: "U"; extended: ["7", "û","ù","ü","ú"]; extendedShifted: ["7", "Û","Ù","Ü","Ú"] }
             CharKey { label: "i"; shifted: "I"; extended: ["8", "ï","î","ì","í"]; extendedShifted: ["8", "Ï","Î","Ì","Í"] }
             CharKey { label: "o"; shifted: "O"; extended: ["9", "ô","ò","ö","ó","õ"]; extendedShifted: ["9", "Ô","Ò","Ö","Ó","Õ"] }
-            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"] rightSide: true;}
+            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"]; rightSide: true;}
         }
 
         Row {
