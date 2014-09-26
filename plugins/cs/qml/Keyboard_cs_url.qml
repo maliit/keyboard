@@ -33,7 +33,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "w"; shifted: "W"; extended: ["2"]; extendedShifted: ["2"] }
             CharKey { label: "e"; shifted: "E"; extended: ["3", "ě","é","ę","€"]; extendedShifted: ["3", "Ě","É","Ę","€"] }
             CharKey { label: "r"; shifted: "R"; extended: ["4", "ř","ŕ"]; extendedShifted: ["4", "Ř","Ŕ"] }
@@ -42,14 +42,14 @@ KeyPad {
             CharKey { label: "u"; shifted: "U"; extended: ["7", "ů","ú","ü","ű","ù","û"]; extendedShifted: ["7", "Û","Ú","Ü","Ű","Ù","Û"] }
             CharKey { label: "i"; shifted: "I"; extended: ["8", "í","î"]; extendedShifted: ["8", "Í","Î"] }
             CharKey { label: "o"; shifted: "O"; extended: ["9", "ó","ö","ő","ô"]; extendedShifted: ["9", "Ó","Ö","Ő","Ô"] }
-            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"] }
+            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"]; rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; extended: ["á","ä","ă","â","ą"]; extendedShifted: ["Á","Ä","Ă","Â","Ą"] }
+            CharKey { label: "a"; shifted: "A"; extended: ["á","ä","ă","â","ą"]; extendedShifted: ["Á","Ä","Ă","Â","Ą"]; leftSide: true; }
             CharKey { label: "s"; shifted: "S"; extended: ["š","ß","ś","ş","$"]; extendedShifted: ["Š","Ś","Ş","$"] }
             CharKey { label: "d"; shifted: "D"; extended: ["ď","đ"]; extendedShifted: ["Ď","Đ"] }
             CharKey { label: "f"; shifted: "F"; }
@@ -57,7 +57,7 @@ KeyPad {
             CharKey { label: "h"; shifted: "H"; }
             CharKey { label: "j"; shifted: "J"; }
             CharKey { label: "k"; shifted: "K"; }
-            CharKey { label: "l"; shifted: "L"; extended: ["ľ","ĺ","ł"]; extendedShifted: ["Ľ","Ĺ","Ł"] }
+            CharKey { label: "l"; shifted: "L"; extended: ["ľ","ĺ","ł"]; extendedShifted: ["Ľ","Ĺ","Ł"]; rightSide: true; }
             // CharKey { label: "´"; } TODO dead keys
         }
 

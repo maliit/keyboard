@@ -33,7 +33,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "w"; shifted: "W"; extended: ["2"]; extendedShifted: ["2"] }
             CharKey { label: "e"; shifted: "E"; extended: ["3", "ę","é","ě","€"]; extendedShifted: ["3", "Ę","É","Ě","€"] }
             CharKey { label: "r"; shifted: "R"; extended: ["4", "ŕ","ř"]; extendedShifted: ["4", "Ŕ","Ř"] }
@@ -43,14 +43,14 @@ KeyPad {
             CharKey { label: "i"; shifted: "I"; extended: ["8", "í","î"]; extendedShifted: ["8", "Í","Î"] }
             CharKey { label: "o"; shifted: "O"; extended: ["9", "ó","ö","ô","ő"]; extendedShifted: ["9", "Ó","Ö","Ô","Ő"] }
             CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"] }
-            CharKey { label: "ż"; shifted: "Ż"; }
+            CharKey { label: "ż"; shifted: "Ż"; rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; extended: ["ą","ä","á","â","ă"]; extendedShifted: ["Ą","Ä","Á","Â","Ă"] }
+            CharKey { label: "a"; shifted: "A"; extended: ["ą","ä","á","â","ă"]; extendedShifted: ["Ą","Ä","Á","Â","Ă"]; leftSide: true; }
             CharKey { label: "s"; shifted: "S"; extended: ["ś","ß","ş","š","$"]; extendedShifted: ["Ś","Ş","Š","$"] }
             CharKey { label: "d"; shifted: "D"; extended: ["ď","đ"]; extendedShifted: ["Ď","Đ"] }
             CharKey { label: "f"; shifted: "F"; }
@@ -60,7 +60,7 @@ KeyPad {
             CharKey { label: "k"; shifted: "K"; }
             CharKey { label: "l"; shifted: "L"; extended: ["ł","ľ","ĺ"]; extendedShifted: ["Ł","Ľ","Ĺ"] }
             CharKey { label: "ł"; shifted: "Ł"; }
-            CharKey { label: "ą"; shifted: "Ą"; }
+            CharKey { label: "ą"; shifted: "Ą"; rightSide: true; }
         }
 
         Row {

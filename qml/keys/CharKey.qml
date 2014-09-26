@@ -26,7 +26,7 @@ Item {
 
     property int padding: 0
 
-    width: panel.keyWidth
+    width: leftSide || rightSide ? panel.keyWidth * 2 : panel.keyWidth
     height: panel.keyHeight
 
     /* to be set in keyboard layouts */
@@ -44,6 +44,9 @@ Item {
     property bool noMagnifier: false
     property bool skipAutoCaps: false
     property bool switchBackFromSymbols: false
+
+    property bool leftSide: false
+    property bool rightSide: false
 
     /* design */
     property string imgNormal: UI.imageCharKey
@@ -109,8 +112,8 @@ Item {
         BorderImage {
             id: buttonImage
             anchors.fill: parent
-            anchors.leftMargin: units.dp( UI.keyMargins );
-            anchors.rightMargin: units.dp( UI.keyMargins );
+            anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
+            anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
             anchors.bottomMargin: orientationHelper.orientationAngle == 0 || orientationHelper.orientationAngle == 180 ? units.gu(UI.row_margin) : units.dp( UI.keyMargins ) * 2;
             source: key.imgNormal
 
