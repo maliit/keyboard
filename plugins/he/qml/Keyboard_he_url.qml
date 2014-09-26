@@ -63,7 +63,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ז"; shifted: ""; leftSide; true; }
+            CharKey { label: "ז"; shifted: ""; }
             CharKey { label: "ס"; shifted: ""; }
             CharKey { label: "ב"; shifted: ""; }
             CharKey { label: "ה"; shifted: ""; }
