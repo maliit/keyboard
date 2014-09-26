@@ -26,73 +26,77 @@ msgid "Arabic"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:71
-msgid "Czech"
+msgid "Azerbaijani"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:72
-msgid "Danish"
+msgid "Czech"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:73
-msgid "German"
+msgid "Danish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:74
-msgid "English"
+msgid "German"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:75
-msgid "Spanish"
+msgid "English"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:76
-msgid "Finnish"
+msgid "Spanish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:77
-msgid "French"
+msgid "Finnish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:78
-msgid "Hebrew"
+msgid "French"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:79
-msgid "Hungarian"
+msgid "Hebrew"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:80
-msgid "Italian"
+msgid "Hungarian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:81
-msgid "Dutch"
+msgid "Italian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:82
-msgid "Polish"
+msgid "Dutch"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:83
-msgid "Portuguese"
+msgid "Polish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:84
-msgid "Russian"
+msgid "Portuguese"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:85
-msgid "Serbian"
+msgid "Russian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:86
-msgid "Swedish"
+msgid "Serbian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:87
+msgid "Swedish"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:88
 msgid "Chinese - Pinyin"
 msgstr ""
 
-#: ../qml/keys/LanguageMenu.qml:90
+#: ../qml/keys/LanguageMenu.qml:91
 msgid "Language: "
 msgstr ""
