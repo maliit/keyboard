@@ -443,7 +443,12 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                     not d->text->preedit().isEmpty() && isSeparator;
 
         if (d->preedit_enabled) {
-            if (replace_preedit) {
+            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]"))) {
+                // We're editing in the middle of a word, so just insert characters directly
+                d->text->appendToPreedit(text);
+                commitPreedit();
+                alreadyAppended = true;
+            } else if (replace_preedit) {
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
@@ -1052,8 +1057,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
                 leftWords.removeLast();
                 trimDiff += 1;
             }
-            if(!text()->surroundingRight().trimmed().isEmpty()) {
-                // We don't currently handle reentering preedit in the middle of the text
+            if(d->text->surroundingRight().left(1).contains(QRegExp("[\\w]"))) {
+                // Don't enter pre-edit in the middle of a word
                 return;
             }
             QString recreatedPreedit = leftWords.last();
@@ -1062,8 +1067,6 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
                 // as the last backspace hasn't been committed yet.
                 recreatedPreedit.chop(1);
             }
-            int position = currentOffset - recreatedPreedit.size();
-            QString surroundWithoutPreedit = text()->surrounding().remove(position, recreatedPreedit.size());
 
             for(int i = 0; i < recreatedPreedit.size(); i++) {
                 singleBackspace();
