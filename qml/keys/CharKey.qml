@@ -206,8 +206,8 @@ Item {
                     extendedKeysSelector.closePopover(); 
                 }
             } else if(!swipedOut) {
-                event_handler.onKeyReleased(valueToSubmit, action);
-
+                // Read this prior to altering autocaps
+                var keyToSend = valueToSubmit; 
                 if (magnifier.currentlyAssignedKey == key) {
                     magnifier.shown = false;
                 }
@@ -222,6 +222,7 @@ Item {
                 if (switchBackFromSymbols && panel.state === "SYMBOLS") {
                     panel.state = "CHARACTERS";
                 }
+                event_handler.onKeyReleased(keyToSend, action);
             }
         }
 
