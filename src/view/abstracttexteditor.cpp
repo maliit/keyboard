@@ -287,6 +287,7 @@ public:
     QString ignore_next_surrounding_text;
     bool look_for_a_double_space;
     bool double_space_full_stop_enabled;
+    bool editing_middle_of_text;
     QString appendix_for_previous_preedit;
     int backspace_word_acceleration;
     QString keyboardState;
@@ -313,6 +314,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , ignore_next_surrounding_text()
     , look_for_a_double_space(false)
     , double_space_full_stop_enabled(false)
+    , editing_middle_of_text(false)
     , appendix_for_previous_preedit()
     , backspace_word_acceleration(0)
     , keyboardState("CHARACTERS")
@@ -526,10 +528,11 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         }
 
         if (replace_preedit) {
-            if (!textOnRight.isEmpty()) {
-                // Only insert a space if we're not replacing a pre-edit word in the middle of a sentence
+            if (!textOnRight.isEmpty() && d->editing_middle_of_text) {
+                // Don't insert a space if we are correcting a word in the middle of a sentence
                 space = "";
                 d->look_for_a_double_space = false;
+                d->editing_middle_of_text = false;
             } else {
                 space = d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
             }
@@ -951,6 +954,9 @@ void AbstractTextEditor::singleBackspace()
         }
     }
 
+    if(!d->text->surroundingRight().trimmed().isEmpty()) {
+        d->editing_middle_of_text = true;
+    }
     d->backspace_sent = true;
 }
 
