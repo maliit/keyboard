@@ -515,6 +515,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionSpace: {
         QString space = " ";
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+        QString textOnRight = d->text->surroundingRight().trimmed();
         bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
@@ -525,7 +526,13 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         }
 
         if (replace_preedit) {
-            space = d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+            if (!textOnRight.isEmpty()) {
+                // Only insert a space if we're not replacing a pre-edit word in the middle of a sentence
+                space = "";
+                d->look_for_a_double_space = false;
+            } else {
+                space = d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+            }
             d->text->setPreedit(d->text->primaryCandidate());
         }
         else if (look_for_a_double_space && not stopSequence.isEmpty()) {
