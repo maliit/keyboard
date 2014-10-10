@@ -683,6 +683,11 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
     const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->preedit());
     d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
     if (d->auto_correct_enabled) {
+        if (!d->text->surroundingRight().trimmed().isEmpty() && d->editing_middle_of_text) {
+            // Don't insert a space if we are correcting a word in the middle of a sentence
+            d->appendix_for_previous_preedit = "";
+            d->editing_middle_of_text = false;
+        }
         d->text->appendToPreedit(d->appendix_for_previous_preedit);
     }
     commitPreedit();
