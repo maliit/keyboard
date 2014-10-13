@@ -337,6 +337,11 @@ void InputMethod::update()
 {
     Q_D(InputMethod);
 
+    if (!d->m_geometry->shown()) {
+        // Don't update if we're in the process of hiding
+        return;
+    }
+
     bool valid;
 
     bool emitPredictionEnabled = false;
