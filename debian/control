@@ -92,6 +92,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Arabic
  Data files for the Ubuntu virtual keyboard - Arabic
 
+Package: ubuntu-keyboard-catalan
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-ca,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Catalan
+ Data files for the Ubuntu virtual keyboard - Catalan
+
 Package: ubuntu-keyboard-chinese-pinyin
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
