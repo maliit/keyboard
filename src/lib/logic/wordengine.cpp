@@ -286,7 +286,7 @@ void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions)
     suggestionMutex.lock();
 
     Q_FOREACH(const QString &correction, suggestions) {
-        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+        appendToCandidates(d->candidates, WordCandidate::SourcePrediction, correction);
     }
 
     calculatePrimaryCandidate();
