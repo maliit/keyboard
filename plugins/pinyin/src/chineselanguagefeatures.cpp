@@ -83,3 +83,8 @@ bool ChineseLanguageFeatures::isSymbol(const QString &text) const
 
     return false;
 }
+
+bool ChineseLanguageFeatures::ignoreSimilarity() const
+{
+    return true;
+}
