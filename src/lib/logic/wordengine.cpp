@@ -331,6 +331,13 @@ void WordEngine::calculatePrimaryCandidate()
         primary.setPrimary(true);
         d->candidates->replace(0, primary);
         Q_EMIT primaryCandidateChanged(primary.word());
+    } else if (!similarWords(d->candidates->at(0).word(), d->candidates->at(1).word())) {
+        // The prediction is too different to the user input, so the user input 
+        // becomes the primary candidate
+        WordCandidate primary = d->candidates->value(0);
+        primary.setPrimary(true);
+        d->candidates->replace(0, primary);
+        Q_EMIT primaryCandidateChanged(primary.word());
     } else {
         // The first prediction is the primary candidate
         WordCandidate primary = d->candidates->value(1);
@@ -404,6 +411,46 @@ AbstractLanguageFeatures* WordEngine::languageFeature()
 {
     Q_D(WordEngine);
     return d->languagePlugin->languageFeature();
+}
+
+bool WordEngine::similarWords(QString word1, QString word2) {
+    // Calculate the Levenshtein distance between the first word and the 
+    // beginning of the second word. If the distance is too great then word2
+    // is not considered to be a suitable prediction for word1.
+    word2 = word2.left(word1.size());
+    if (word1 == word2) {
+        return true;
+    }
+
+    int *v0 = (int *) malloc(sizeof(int) * word1.size() + 1);
+    int *v1 = (int *) malloc(sizeof(int) * word1.size() + 1);
+
+    for (int i = 0; i < word2.size() + 1; i++) {
+        v0[i] = i;
+        v1[i] = 0;
+    }
+
+    for (int i = 0; i < word1.size(); i++) {
+        v1[0] = i + 1;
+
+        for (int j = 0; j < word2.size(); j++) {
+            int cost = (word1[i] == word2[i]) ? 0 : 1;
+            v1[j + 1] = std::min(v1[j] + 1, v0[j + 1] + 1);
+            v1[j + 1] = std::min(v1[j] + 1, v0[j] + cost);
+        }
+
+        for (int j = 0; j < word1.size() + 1; j++) {
+            v0[j] = v1[j];
+        }
+    }
+
+    double threshold = std::max(word1.size() / 3.0, 3.0);
+    int distance = v1[word2.size()];
+
+    free(v0);
+    free(v1);
+
+    return distance <= threshold;
 }
 
 }} // namespace Logic, MaliitKeyboard

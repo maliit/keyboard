@@ -81,6 +81,7 @@ private:
     virtual void fetchCandidates(Model::Text *text);
     //! \reimp_end
     void calculatePrimaryCandidate();
+    bool similarWords(QString word1, QString word2);
 
     const QScopedPointer<WordEnginePrivate> d_ptr;
 
