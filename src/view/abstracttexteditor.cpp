@@ -437,7 +437,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         textOnLeft.chop(1);
     }
     QStringList leftHandWords = textOnLeft.split(" ");
-    if (!leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
+    if (!d->word_engine->languageFeature()->alwaysShowSuggestions() && !leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
         email_detected = true;
     }
 
