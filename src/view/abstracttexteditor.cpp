@@ -429,6 +429,17 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
     bool look_for_a_double_space = d->look_for_a_double_space;
+    bool email_detected = false;
+
+    // Detect if the user is entering an email address and avoid spacing, autocaps and autocomplete changes
+    QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+    if (key.action() == Key::ActionBackspace) {
+        textOnLeft.chop(1);
+    }
+    QStringList leftHandWords = textOnLeft.split(" ");
+    if (!leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
+        email_detected = true;
+    }
 
     if (look_for_a_double_space) {
         // we reset the flag here so that we won't have to add boilerplate code later
@@ -439,23 +450,14 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionInsert: {
         bool alreadyAppended = false;
         bool auto_caps_activated = false;
-        bool email_detected = false;
         const bool isSeparator = d->word_engine->languageFeature()->isSeparator(text);
         const bool isSymbol = d->word_engine->languageFeature()->isSymbol(text);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
                     not d->text->preedit().isEmpty() && isSeparator;
 
-        // Detect if the user is entering an email address and avoid spacing/autocaps changes
-        if (text == ".") {
-            QStringList leftHandWords = (d->text->surroundingLeft() + d->text->preedit()).split(" ");
-            if (!leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
-                email_detected = true;
-            }    
-        }
-
         if (d->preedit_enabled) {
-            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]"))) {
-                // We're editing in the middle of a word, so just insert characters directly
+            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]")) || email_detected) {
+                // We're editing in the middle of a word or entering an email address, so just insert characters directly
                 d->text->appendToPreedit(text);
                 commitPreedit();
                 alreadyAppended = true;
@@ -518,8 +520,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionBackspace: {
         if (not d->backspace_sent) {
             singleBackspace();
-            checkPreeditReentry(true);
-        } else {
+            if (!email_detected) {
+                checkPreeditReentry(true);
+            }
+        } else if (!email_detected) {
             checkPreeditReentry(false);
         }
 
