@@ -6,8 +6,8 @@ include($${TOP_SRCDIR}/config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-lang_sr.path = "$${UBUNTU_KEYBOARD_LIB_DIR}/bs/"
-lang_sr.files = *.qml *.js
+lang_bs.path = "$${UBUNTU_KEYBOARD_LIB_DIR}/bs/"
+lang_bs.files = *.qml *.js
 
 INSTALLS += lang_bs
 
