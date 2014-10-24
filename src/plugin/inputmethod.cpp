@@ -274,7 +274,7 @@ void InputMethod::updateAutoCaps()
 void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
-    d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
+    d->enabledLanguages = d->m_settings.enabledLanguages();
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
 
