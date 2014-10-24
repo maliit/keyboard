@@ -33,6 +33,7 @@ Item {
 
     property string activeKeypadState: "NORMAL"
     property alias popoverEnabled: extendedKeysSelector.enabled
+    property string previousLanguage
 
     state: "CHARACTERS"
 
