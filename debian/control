@@ -127,6 +127,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Dutch
  Data files for the Ubuntu virtual keyboard - Dutch
 
+Package: ubuntu-keyboard-emoji
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Emoji
+ Data files for the Ubuntu virtual keyboard - Emoji
+
 Package: ubuntu-keyboard-english
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),

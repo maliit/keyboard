@@ -122,6 +122,7 @@ Item {
                 "cs",
                 "da",
                 "de",
+                "emoji",
                 "en",
                 "es",
                 "fi",
@@ -163,6 +164,8 @@ Item {
                 return "lib/da/Keyboard_da.qml";
             if (language === "de")
                 return "lib/de/Keyboard_de.qml";
+            if (language === "emoji")
+                return "lib/emoji/Keyboard_emoji.qml";
             if (language === "en")
                 return "lib/en/Keyboard_en.qml";
             if (language === "es")

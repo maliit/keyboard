@@ -363,6 +363,8 @@ void WordEngine::onLanguageChanged(const QString &languageId)
         d->loadPlugin("libdanishplugin.so", "da");
     else if (languageId == "de")
         d->loadPlugin("libgermanplugin.so", "de");
+    else if (languageId == "emoji")
+        d->loadPlugin("libemojiplugin.so", "emoji");
     else if (languageId == "en")
         d->loadPlugin("libenglishplugin.so", "en");
     else if (languageId == "es")

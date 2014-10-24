@@ -75,6 +75,7 @@ Item {
         if (languageId == "cs")         return i18n.tr("Czech");
         if (languageId == "da")         return i18n.tr("Danish");
         if (languageId == "de")         return i18n.tr("German");
+        if (languageId == "emoji")         return i18n.tr("Emoji");
         if (languageId == "en")         return i18n.tr("English");
         if (languageId == "es")         return i18n.tr("Spanish");
         if (languageId == "fi")         return i18n.tr("Finnish");
