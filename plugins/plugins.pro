@@ -11,6 +11,7 @@ SUBDIRS = \
     fi \
     fr \
     he \
+    hr \
     hu \
     it \
     nl \

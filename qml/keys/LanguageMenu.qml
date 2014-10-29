@@ -80,6 +80,7 @@ Item {
         if (languageId == "fi")         return i18n.tr("Finnish");
         if (languageId == "fr")         return i18n.tr("French");
         if (languageId == "he")         return i18n.tr("Hebrew");
+        if (languageId == "hr")         return i18n.tr("Croatian");
         if (languageId == "hu")         return i18n.tr("Hungarian");
         if (languageId == "it")         return i18n.tr("Italian");
         if (languageId == "nl")         return i18n.tr("Dutch");

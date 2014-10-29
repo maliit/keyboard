@@ -127,6 +127,7 @@ Item {
                 "fi",
                 "fr",
                 "he",
+                "hr",
                 "hu",
                 "it",
                 "nl",
@@ -168,6 +169,8 @@ Item {
                 return "lib/fr/Keyboard_fr.qml";
             if (language === "he")
                 return "lib/he/Keyboard_he.qml";
+            if (language === "hr")
+                return "lib/hr/Keyboard_hr.qml";
             if (language === "hu")
                 return "lib/hu/Keyboard_hu.qml";
             if (language === "it")
