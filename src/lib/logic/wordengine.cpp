@@ -357,6 +357,8 @@ void WordEngine::onLanguageChanged(const QString &languageId)
 
     if (languageId == "ar")
         d->loadPlugin("libarabicplugin.so", "ar");
+    else if (languageId == "ca")
+        d->loadPlugin("libcatalanplugin.so", "ca");
     else if (languageId == "cs")
         d->loadPlugin("libczechplugin.so", "cs");
     else if (languageId == "da")
