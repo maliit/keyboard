@@ -119,7 +119,7 @@ Item {
         {
             var supportedLocales = [
                 "ar",
-		"az",
+                "az",
                 "cs",
                 "da",
                 "de",
@@ -153,8 +153,8 @@ Item {
 
             if (language === "ar")
                 return "lib/ar/Keyboard_ar.qml";
-	    if (language === "az")
-                return "lib/az/Keyboard_az.qml";
+            if (language === "az")
+                return "lib/cs/Keyboard_az.qml";
             if (language === "cs")
                 return "lib/cs/Keyboard_cs.qml";
             if (language === "da")
