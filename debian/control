@@ -95,7 +95,6 @@ Description: Ubuntu on-screen keyboard data files - Arabic
 Package: ubuntu-keyboard-azerbaijani
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
-         hunspell-ar,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Azerbaijani

@@ -370,7 +370,7 @@ void InputMethod::update()
         d->editor.text()->setSurroundingOffset(position);
 
         updateAutoCaps();
-        checkInitialAutocaps();
+        checkAutocaps();
         d->previous_position = position;
     }
 }
@@ -412,9 +412,9 @@ void InputMethod::setContentType(TextContentType contentType)
     updateAutoCaps();
 }
 
-//! \brief InputMethod::checkInitialAutocaps  Checks if the keyboard should be
-//! set to uppercase, because the auto caps is enabled and the text is empty.
-void InputMethod::checkInitialAutocaps()
+//! \brief InputMethod::checkAutocaps  Checks if the keyboard should be
+//! set to uppercase after the cursor position has been changed.
+void InputMethod::checkAutocaps()
 {
     Q_D(InputMethod);
 
@@ -422,11 +422,12 @@ void InputMethod::checkInitialAutocaps()
         QString text;
         int position;
         bool ok = d->host->surroundingText(text, position);
-        if (ok && text.isEmpty() && d->editor.text()->preedit().isEmpty() && position == 0) {
+        QString textOnLeft = d->editor.text()->surroundingLeft() + d->editor.text()->preedit();
+        if (ok && ((text.isEmpty() && d->editor.text()->preedit().isEmpty() && position == 0) 
+                || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft)
+                || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft.trimmed()))) {
             Q_EMIT activateAutocaps();
         } else {
-            // Clear autocaps if it has been set by us previously being in an
-            // empty field
             Q_EMIT deactivateAutocaps();
         }
     }

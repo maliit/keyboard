@@ -33,7 +33,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ﺽ"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "ﺽ"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "ﺹ"; extended: ["2"]; extendedShifted: ["2"] }
             CharKey { label: "ﺙ"; extended: ["3"]; extendedShifted: ["3"] }
             CharKey { label: "ﻕ"; extended: ["4"]; extendedShifted: ["4"] }
@@ -43,14 +43,14 @@ KeyPad {
             CharKey { label: "ﻩ"; extended: ["8"]; extendedShifted: ["8"] }
             CharKey { label: "ﺥ"; extended: ["9"]; extendedShifted: ["9"] }
             CharKey { label: "ﺡ"; extended: ["0"]; extendedShifted: ["0"] }
-            CharKey { label: "ﺝ";}
+            CharKey { label: "ﺝ"; rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ش"; }
+            CharKey { label: "ش"; leftSide: true; }
             CharKey { label: "س"; }
             CharKey { label: "ي"; }
             CharKey { label: "ب"; }
@@ -60,7 +60,7 @@ KeyPad {
             CharKey { label: "ن"; }
             CharKey { label: "م"; }
             CharKey { label: "ك"; }
-            CharKey { label: "د"; }
+            CharKey { label: "د"; rightSide: true; }
         }
 
         Row {

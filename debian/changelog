@@ -1,3 +1,28 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20141010-0ubuntu1) 14.09; urgency=low
+
+  [ Michael Sheldon ]
+  * Fix re-entry of preedit when in the middle of a sentence, disable
+    preedit when editing in the middle of a word and re-evaluate
+    autocaps whenever the cursor position changes. (LP: #1375951)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 10 Oct 2014 13:51:14 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140926.1-0ubuntu1) 14.09; urgency=low
+
+  [ Michael Sheldon ]
+  * Disable autocaps when the user deletes beyond a full stop character.
+  * Allow buttons at the edges of rows to be extended to the left/right
+    so that blank areas can receive touch events for nearby keys. (LP:
+    #1365014)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 26 Sep 2014 17:42:03 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20140923-0ubuntu1) utopic; urgency=low
 
   [ Michael Sheldon ]

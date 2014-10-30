@@ -287,6 +287,7 @@ public:
     QString ignore_next_surrounding_text;
     bool look_for_a_double_space;
     bool double_space_full_stop_enabled;
+    bool editing_middle_of_text;
     QString appendix_for_previous_preedit;
     int backspace_word_acceleration;
     QString keyboardState;
@@ -313,6 +314,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , ignore_next_surrounding_text()
     , look_for_a_double_space(false)
     , double_space_full_stop_enabled(false)
+    , editing_middle_of_text(false)
     , appendix_for_previous_preedit()
     , backspace_word_acceleration(0)
     , keyboardState("CHARACTERS")
@@ -443,7 +445,12 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                     not d->text->preedit().isEmpty() && isSeparator;
 
         if (d->preedit_enabled) {
-            if (replace_preedit) {
+            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]"))) {
+                // We're editing in the middle of a word, so just insert characters directly
+                d->text->appendToPreedit(text);
+                commitPreedit();
+                alreadyAppended = true;
+            } else if (replace_preedit) {
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
@@ -510,6 +517,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionSpace: {
         QString space = " ";
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+        QString textOnRight = d->text->surroundingRight().trimmed();
         bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
@@ -520,7 +528,14 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         }
 
         if (replace_preedit) {
-            space = d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+            if (!textOnRight.isEmpty() && d->editing_middle_of_text) {
+                // Don't insert a space if we are correcting a word in the middle of a sentence
+                space = "";
+                d->look_for_a_double_space = false;
+                d->editing_middle_of_text = false;
+            } else {
+                space = d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
+            }
             d->text->setPreedit(d->text->primaryCandidate());
         }
         else if (look_for_a_double_space && not stopSequence.isEmpty()) {
@@ -543,10 +558,6 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionReturn: {
         event_key = Qt::Key_Return;
         keyText = QString("\r");
-
-        if (d->word_engine->languageFeature()->activateAutoCaps(keyText) && d->auto_caps_enabled) {
-            Q_EMIT autoCapsActivated();
-        }
     } break;
 
     case Key::ActionClose:
@@ -672,6 +683,11 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
     const bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->preedit());
     d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
     if (d->auto_correct_enabled) {
+        if (!d->text->surroundingRight().trimmed().isEmpty() && d->editing_middle_of_text) {
+            // Don't insert a space if we are correcting a word in the middle of a sentence
+            d->appendix_for_previous_preedit = "";
+            d->editing_middle_of_text = false;
+        }
         d->text->appendToPreedit(d->appendix_for_previous_preedit);
     }
     commitPreedit();
@@ -938,11 +954,14 @@ void AbstractTextEditor::singleBackspace()
     if (d->auto_caps_enabled) {
         if (auto_caps_activated) {
             Q_EMIT autoCapsActivated();
-        } else {
+        } else if(!textOnLeft.isEmpty()) {
             Q_EMIT autoCapsDeactivated();
         }
     }
 
+    if(!d->text->surroundingRight().trimmed().isEmpty()) {
+        d->editing_middle_of_text = true;
+    }
     d->backspace_sent = true;
 }
 
@@ -1052,8 +1071,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
                 leftWords.removeLast();
                 trimDiff += 1;
             }
-            if(!text()->surroundingRight().trimmed().isEmpty()) {
-                // We don't currently handle reentering preedit in the middle of the text
+            if(d->text->surroundingRight().left(1).contains(QRegExp("[\\w]"))) {
+                // Don't enter pre-edit in the middle of a word
                 return;
             }
             QString recreatedPreedit = leftWords.last();
@@ -1062,8 +1081,6 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
                 // as the last backspace hasn't been committed yet.
                 recreatedPreedit.chop(1);
             }
-            int position = currentOffset - recreatedPreedit.size();
-            QString surroundWithoutPreedit = text()->surrounding().remove(position, recreatedPreedit.size());
 
             for(int i = 0; i < recreatedPreedit.size(); i++) {
                 singleBackspace();
