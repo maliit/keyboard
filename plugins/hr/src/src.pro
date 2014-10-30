@@ -24,9 +24,9 @@ PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/hr/
 
 lang_db_hr.commands += \
   rm -f $$PWD/database_hr.db && \
-  text2ngram -n 1 -l -f sqlite -o $$PWD/database_hr.db $$PWD/free_ebook.txt && \
-  text2ngram -n 2 -l -f sqlite -o $$PWD/database_hr.db $$PWD/free_ebook.txt && \
-  text2ngram -n 3 -l -f sqlite -o $$PWD/database_hr.db $$PWD/free_ebook.txt
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_hr.db $$PWD/knjiga.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_hr.db $$PWD/knjiga.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_hr.db $$PWD/knjiga.txt
 lang_db_hr.files += $$PWD/database_hr.db
 
 lang_db_hr_install.files += $$PWD/database_hr.db
