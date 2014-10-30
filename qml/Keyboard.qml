@@ -40,6 +40,8 @@ Item {
     id: fullScreenItem
     objectName: "fullScreenItem"
 
+    property bool landscape: width > height
+
     property variant input_method: maliit_input_method
     property variant event_handler: maliit_event_handler
 
@@ -265,15 +267,20 @@ Item {
     } // OrientationHelper
 
     function calculateSize() {
-        // TODO tablet
         if (orientationHelper.orientationAngle == 270 ||
             orientationHelper.orientationAngle == 90) {
-            canvas.height = (fullScreenItem.width * UI.phoneKeyboardHeightLandscape) + wordRibbon.height
-        } else if (orientationHelper.orientationAngle == 0 ||
-                   orientationHelper.orientationAngle == 180) {
-            canvas.height = (fullScreenItem.height * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
-        } else { // fallback
-            canvas.height = (fullScreenItem.height * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
+
+            if (fullScreenItem.landscape) {
+                canvas.height = (fullScreenItem.width * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
+            } else {
+                canvas.height = (fullScreenItem.width * UI.phoneKeyboardHeightLandscape) + wordRibbon.height
+            }
+        } else {
+            if (fullScreenItem.landscape) {
+                canvas.height = (fullScreenItem.height * UI.phoneKeyboardHeightLandscape) + wordRibbon.height
+            } else {
+                canvas.height = (fullScreenItem.height * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
+            }
         }
 
         reportKeyboardVisibleRect();
