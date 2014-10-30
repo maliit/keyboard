@@ -517,7 +517,11 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionSpace: {
         QString space = " ";
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
-        QString textOnRight = d->text->surroundingRight().trimmed();
+        QStringList textOnRightList = d->text->surroundingRight().split("\n");
+        QString textOnRight;
+        if (!textOnRightList.isEmpty()) {
+            textOnRight = textOnRightList.first().trimmed();
+        }
         bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
