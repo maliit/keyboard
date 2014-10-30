@@ -72,6 +72,7 @@ Item {
     function languageIdToName(languageId)
     {
         if (languageId == "ar")         return i18n.tr("Arabic");
+        if (languageId == "az")         return i18n.tr("Azerbaijani");
         if (languageId == "cs")         return i18n.tr("Czech");
         if (languageId == "da")         return i18n.tr("Danish");
         if (languageId == "de")         return i18n.tr("German");
