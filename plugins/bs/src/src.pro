@@ -24,9 +24,9 @@ PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/bs/
 
 lang_db_bs.commands += \
   rm -f $$PWD/database_bs.db && \
-  text2ngram -n 1 -l -f sqlite -o $$PWD/database_bs.db $$PWD/free_ebook.txt && \
-  text2ngram -n 2 -l -f sqlite -o $$PWD/database_bs.db $$PWD/free_ebook.txt && \
-  text2ngram -n 3 -l -f sqlite -o $$PWD/database_bs.db $$PWD/free_ebook.txt
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_bs.db $$PWD/u-registraturi.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_bs.db $$PWD/u-registraturi.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_bs.db $$PWD/u-registraturi.txt
 lang_db_bs.files += $$PWD/database_bs.db
 
 lang_db_bs_install.files += $$PWD/database_bs.db
