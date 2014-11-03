@@ -59,6 +59,8 @@ void SpellPredictWorker::parsePredictionText(const QString& surroundingLeft, con
     // If the user input is spelt correctly add it to the start of the predictions
     if(m_spellChecker.spell(preedit)) {
         list << preedit;
+        // Emit the user's input/override corrections instantly so they're always up-to-date
+        Q_EMIT newPredictionSuggestions(origPreedit, list);
     }
 
     try {
