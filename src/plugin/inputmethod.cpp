@@ -362,6 +362,8 @@ void InputMethod::update()
         updateWordEngine();
     }
 
+    updateAutoCaps();
+
     QString text;
     int position;
     bool ok = d->host->surroundingText(text, position);
@@ -369,7 +371,6 @@ void InputMethod::update()
         d->editor.text()->setSurrounding(text);
         d->editor.text()->setSurroundingOffset(position);
 
-        updateAutoCaps();
         checkAutocaps();
         d->previous_position = position;
     }
