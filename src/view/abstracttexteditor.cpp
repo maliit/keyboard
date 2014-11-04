@@ -429,6 +429,17 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
     bool look_for_a_double_space = d->look_for_a_double_space;
+    bool email_detected = false;
+
+    // Detect if the user is entering an email address and avoid spacing, autocaps and autocomplete changes
+    QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+    if (key.action() == Key::ActionBackspace) {
+        textOnLeft.chop(1);
+    }
+    QStringList leftHandWords = textOnLeft.split(" ");
+    if (!d->word_engine->languageFeature()->alwaysShowSuggestions() && !leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
+        email_detected = true;
+    }
 
     if (look_for_a_double_space) {
         // we reset the flag here so that we won't have to add boilerplate code later
@@ -445,8 +456,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                     not d->text->preedit().isEmpty() && isSeparator;
 
         if (d->preedit_enabled) {
-            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]"))) {
-                // We're editing in the middle of a word, so just insert characters directly
+            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]")) || email_detected) {
+                // We're editing in the middle of a word or entering an email address, so just insert characters directly
                 d->text->appendToPreedit(text);
                 commitPreedit();
                 alreadyAppended = true;
@@ -454,24 +465,28 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
-                if (d->keyboardState == "CHARACTERS") {
+                if (d->keyboardState == "CHARACTERS" && !email_detected) {
                     d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
                     d->text->appendToPreedit(d->appendix_for_previous_preedit);
                 }
                 commitPreedit();
-                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
+                if (!email_detected) {
+                    auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
+                }
                 alreadyAppended = true;
             }
             else if (d->auto_correct_enabled && (isSeparator || isSymbol)) {
-                if(isSeparator && d->keyboardState == "CHARACTERS") {
+                if(isSeparator && d->keyboardState == "CHARACTERS" && !email_detected) {
                     // remove all whitespaces before the separator, then add a whitespace after it
                     removeTrailingWhitespaces();
                 }
 
                 d->text->appendToPreedit(text);
-                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-                if(isSeparator && d->keyboardState == "CHARACTERS") {
-                    d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
+                if (!email_detected) {
+                    auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
+                    if(isSeparator && d->keyboardState == "CHARACTERS") {
+                        d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
+                    }
                 }
                 commitPreedit();
                 alreadyAppended = true;
@@ -505,8 +520,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionBackspace: {
         if (not d->backspace_sent) {
             singleBackspace();
-            checkPreeditReentry(true);
-        } else {
+            if (!email_detected) {
+                checkPreeditReentry(true);
+            }
+        } else if (!email_detected) {
             checkPreeditReentry(false);
         }
 
