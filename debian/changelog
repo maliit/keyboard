@@ -1,3 +1,30 @@
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20141104~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Michael Sheldon ]
+  * Enable launchpad translation imports. (LP: #1389274)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Mike Sheldon ]
+  * Change URL key in Brazilian Portuguese layout to ".com.br" (LP:
+    #1384787)
+  * Reduce extended keys hold timer to more closely match timing from
+    other platform's keyboards (LP: #1384781)
+  * Detect if the user is entering an email address whilst in a field
+    that supports predictions and suppress predictions, auto-caps and
+    auto-spacing unless the input method requires predictions for
+    standard character input (e.g. pinyin). (LP: #1384770)
+  * Don't show word candidates arriving after a word has been committed
+    and allow candidates to remain on the word ribbon until a new set
+    has been calculated prior to commit. (LP: #1384806)
+  * Only consider the current line when evaluating whether we're in the
+    middle of a piece of text. (LP: #1387714)
+  * Fix ImhNoAutoUppercase hint behaviour when switching between apps
+    with autocaps and without. (LP: #1370071)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Nov 2014 20:18:18 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20141010-0ubuntu1) 14.09; urgency=low
 
   [ Michael Sheldon ]
