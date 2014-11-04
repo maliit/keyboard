@@ -66,7 +66,7 @@ public:
     Q_SLOT virtual void setSpellcheckerEnabled(bool on);
     Q_SLOT virtual void setAutoCorrectEnabled(bool on);
 
-    void clearCandidates();
+    virtual void clearCandidates();
     void computeCandidates(Model::Text *text);
     Q_SIGNAL void candidatesChanged(const WordCandidateList &candidates);
 
