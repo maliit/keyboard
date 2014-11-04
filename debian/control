@@ -30,6 +30,7 @@ Homepage: https://launchpad.net/ubuntu-keyboard
 # If you aren't a member of ~phablet-team but need to upload packaging changes,
 # just go ahead.  ~phablet-team will notice and sync up the code again.
 Vcs-Bzr: https://code.launchpad.net/~phablet-team/ubuntu-keyboard/trunk
+X-Ubuntu-Use-Langpack: yes
 
 Package: ubuntu-keyboard
 Architecture: any
