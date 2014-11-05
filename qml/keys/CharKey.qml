@@ -114,7 +114,7 @@ Item {
             anchors.fill: parent
             anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
             anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
-            anchors.bottomMargin: orientationHelper.orientationAngle == 0 || orientationHelper.orientationAngle == 180 ? units.gu(UI.row_margin) : units.dp( UI.keyMargins ) * 2;
+            anchors.bottomMargin: fullScreenItem.landscape ? units.dp( UI.keyMargins ) * 2 : units.gu(UI.row_margin);
             source: key.imgNormal
 
             BorderImage {

@@ -527,10 +527,7 @@ void InputMethod::onVisibleRectChanged()
 {
     Q_D(InputMethod);
 
-    QRect visibleRect = qGuiApp->primaryScreen()->mapBetween(
-                            d->m_geometry->orientation(),
-                            qGuiApp->primaryScreen()->primaryOrientation(),
-                            d->m_geometry->visibleRect().toRect());
+    QRect visibleRect = d->m_geometry->visibleRect().toRect();
 
     inputMethodHost()->setScreenRegion(QRegion(visibleRect));
     inputMethodHost()->setInputMethodArea(visibleRect, d->view);

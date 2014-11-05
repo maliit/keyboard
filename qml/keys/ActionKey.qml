@@ -55,7 +55,7 @@ CharKey {
             name: actionKeyRoot.iconNormal
             color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: orientationHelper.orientationAngle == 0 || orientationHelper.orientationAngle == 180 ? -units.gu(UI.row_margin/2) - units.gu(0.15) : -units.dp( UI.keyMargins )
+            anchors.verticalCenterOffset: fullScreenItem.landscape ? -units.dp( UI.keyMargins ) : -units.gu(UI.row_margin/2) - units.gu(0.15)
 
             visible: (label == "")
             width: units.gu(2.5)
