@@ -114,6 +114,7 @@ WordEnginePrivate::WordEnginePrivate()
     , calculated_primary_candidate(false)
     , clear_candidates_on_incoming(false)
     , languagePlugin(0)
+    , currentText(0)
 {
     loadPlugin(DEFAULT_PLUGIN);
     candidates = new WordCandidateList();
