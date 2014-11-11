@@ -247,6 +247,7 @@ Item {
                     keypad.activeKeypadState = "NORMAL";
                     keypad.autoCapsTriggered = false;
                 }
+                keypad.delayedAutoCaps = false;
             }
         }
 
