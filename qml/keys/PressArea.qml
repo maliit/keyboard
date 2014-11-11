@@ -88,7 +88,7 @@ MultiPointTouchArea {
 
     Timer {
         id: holdTimer
-        interval: 1000
+        interval: 300
         onTriggered: {
             if (root.pressed) {
                 root.pressAndHold();

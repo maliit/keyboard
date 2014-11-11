@@ -368,6 +368,8 @@ void InputMethod::update()
         updateWordEngine();
     }
 
+    updateAutoCaps();
+
     QString text;
     int position;
     bool ok = d->host->surroundingText(text, position);
@@ -375,7 +377,6 @@ void InputMethod::update()
         d->editor.text()->setSurrounding(text);
         d->editor.text()->setSurroundingOffset(position);
 
-        updateAutoCaps();
         checkAutocaps();
         d->previous_position = position;
     }
@@ -429,7 +430,12 @@ void InputMethod::checkAutocaps()
         int position;
         bool ok = d->host->surroundingText(text, position);
         QString textOnLeft = d->editor.text()->surroundingLeft() + d->editor.text()->preedit();
-        if (ok && ((text.isEmpty() && d->editor.text()->preedit().isEmpty() && position == 0) 
+        QStringList leftHandWords = textOnLeft.split(" ");
+        bool email_detected = false;
+        if (!leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
+            email_detected = true;
+        }
+        if (ok && !email_detected && ((text.isEmpty() && d->editor.text()->preedit().isEmpty() && position == 0) 
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft)
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft.trimmed()))) {
             Q_EMIT activateAutocaps();

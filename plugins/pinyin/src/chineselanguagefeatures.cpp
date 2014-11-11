@@ -56,7 +56,7 @@ QString ChineseLanguageFeatures::appendixForReplacedPreedit(const QString &preed
 
 bool ChineseLanguageFeatures::isSeparator(const QString &text) const
 {
-    static const QString separators = QString::fromUtf8("。、,!?:;\r\n");
+    static const QString separators = QString::fromUtf8("。、,!?:;.\r\n");
 
     if (text.isEmpty()) {
         return false;
