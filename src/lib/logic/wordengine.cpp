@@ -58,13 +58,15 @@ public:
 
     bool calculated_primary_candidate;
 
+    bool clear_candidates_on_incoming;
+
     LanguagePluginInterface* languagePlugin;
 
     QPluginLoader pluginLoader;
 
     WordCandidateList* candidates;
 
-    QString currentPreedit;
+    Model::Text *currentText;
 
     explicit WordEnginePrivate();
 
@@ -110,7 +112,9 @@ WordEnginePrivate::WordEnginePrivate()
     , is_preedit_capitalized(false)
     , auto_correct_enabled(false)
     , calculated_primary_candidate(false)
+    , clear_candidates_on_incoming(false)
     , languagePlugin(0)
+    , currentText(0)
 {
     loadPlugin(DEFAULT_PLUGIN);
     candidates = new WordCandidateList();
@@ -226,14 +230,14 @@ void WordEngine::fetchCandidates(Model::Text *text)
 
     d->calculated_primary_candidate = false;
 
-    d->currentPreedit = text->preedit();
+    // Allow the current candidates to remain on the word ribbon until
+    // a new set have been calculated.
+    d->clear_candidates_on_incoming = true;
 
-    d->candidates = new WordCandidateList();
+    d->currentText = text;
+
     const QString &preedit(text->preedit());
     d->is_preedit_capitalized = not preedit.isEmpty() && preedit.at(0).isUpper();
-
-    WordCandidate userCandidate(WordCandidate::SourceUser, preedit); 
-    d->candidates->append(userCandidate);
 
     Q_EMIT candidatesChanged(*d->candidates);
 
@@ -252,7 +256,7 @@ void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions)
 {
     Q_D(WordEngine);
 
-    if (word != d->currentPreedit) {
+    if (d->currentText && word != d->currentText->preedit()) {
         // Don't add suggestions coming in for a previous word
         return;
     }
@@ -260,6 +264,11 @@ void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions)
     // Spelling and prediction suggestions arrive asynchronously
     // So we need to ensure only one primary candidate is selected
     suggestionMutex.lock();
+
+    if (d->clear_candidates_on_incoming) {
+        clearCandidates();
+        d->clear_candidates_on_incoming = false;
+    }
 
     Q_FOREACH(const QString &correction, suggestions) {
         appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
@@ -276,7 +285,7 @@ void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions)
 {
     Q_D(WordEngine);
 
-    if (word != d->currentPreedit) {
+    if (d->currentText && word != d->currentText->preedit()) {
         // Don't add suggestions coming in for a previous word
         return;
     }
@@ -285,8 +294,13 @@ void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions)
     // So we need to ensure only one primary candidate is selected
     suggestionMutex.lock();
 
+    if (d->clear_candidates_on_incoming) {
+        clearCandidates();
+        d->clear_candidates_on_incoming = false;
+    }
+
     Q_FOREACH(const QString &correction, suggestions) {
-        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+        appendToCandidates(d->candidates, WordCandidate::SourcePrediction, correction);
     }
 
     calculatePrimaryCandidate();
@@ -452,6 +466,19 @@ bool WordEngine::similarWords(QString word1, QString word2) {
     free(v1);
 
     return distance <= threshold;
+}
+
+void WordEngine::clearCandidates()
+{
+    Q_D(WordEngine);
+    if(isEnabled()) {
+        d->candidates = new WordCandidateList();
+        if (d->currentText) {
+            WordCandidate userCandidate(WordCandidate::SourceUser, d->currentText->preedit()); 
+            d->candidates->append(userCandidate);
+        }
+        Q_EMIT candidatesChanged(*d->candidates);
+    }
 }
 
 }} // namespace Logic, MaliitKeyboard

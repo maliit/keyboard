@@ -63,6 +63,7 @@ public:
     virtual void addToUserDictionary(const QString &word);
     virtual void setSpellcheckerEnabled(bool enabled);
     virtual void setAutoCorrectEnabled(bool enabled);
+    virtual void clearCandidates();
     //! \reimp_end
 
     void appendToCandidates(WordCandidateList *candidates,
