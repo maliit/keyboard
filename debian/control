@@ -100,6 +100,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Bosnian
  Data files for the Ubuntu virtual keyboard - Bosnian
 
+Package: ubuntu-keyboard-catalan
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         myspell-ca,
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Catalan
+ Data files for the Ubuntu virtual keyboard - Catalan
+
 Package: ubuntu-keyboard-chinese-pinyin
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),

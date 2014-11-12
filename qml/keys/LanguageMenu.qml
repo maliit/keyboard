@@ -73,6 +73,7 @@ Item {
     {
         if (languageId == "ar")         return i18n.tr("Arabic");
         if (languageId == "bs")         return i18n.tr("Bosnian");
+        if (languageId == "ca")         return i18n.tr("Catalan");
         if (languageId == "cs")         return i18n.tr("Czech");
         if (languageId == "da")         return i18n.tr("Danish");
         if (languageId == "de")         return i18n.tr("German");
