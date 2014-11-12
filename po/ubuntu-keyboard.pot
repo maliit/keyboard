@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-17 12:28+0200\n"
+"POT-Creation-Date: 2014-11-12 15:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,77 +26,89 @@ msgid "Arabic"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:75
-msgid "Catalan"
+msgid "Azerbaijani"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:76
-msgid "Czech"
+msgid "Bosnian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:77
-msgid "Danish"
+msgid "Catalan"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:78
-msgid "German"
+msgid "Czech"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:79
-msgid "English"
+msgid "Danish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:80
-msgid "Spanish"
+msgid "German"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:81
-msgid "Finnish"
+msgid "English"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:82
-msgid "French"
+msgid "Spanish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:83
-msgid "Hebrew"
+msgid "Finnish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:84
-msgid "Hungarian"
+msgid "French"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:85
-msgid "Italian"
+msgid "Hebrew"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:86
-msgid "Dutch"
+msgid "Croatian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:87
-msgid "Polish"
+msgid "Hungarian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:88
-msgid "Portuguese"
+msgid "Italian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:89
-msgid "Russian"
+msgid "Dutch"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:90
-msgid "Serbian"
+msgid "Polish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:91
-msgid "Swedish"
+msgid "Portuguese"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:92
-msgid "Chinese - Pinyin"
+msgid "Russian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:93
+msgid "Serbian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:94
+msgid "Swedish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:95
+msgid "Chinese - Pinyin"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:98
 msgid "Language: "
 msgstr ""

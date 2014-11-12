@@ -92,6 +92,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Arabic
  Data files for the Ubuntu virtual keyboard - Arabic
 
+Package: ubuntu-keyboard-azerbaijani
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Azerbaijani
+ Data files for the Ubuntu virtual keyboard - Azerbaijani
+
 Package: ubuntu-keyboard-bosnian
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
