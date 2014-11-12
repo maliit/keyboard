@@ -54,13 +54,13 @@ void SpellPredictWorker::parsePredictionText(const QString& surroundingLeft, con
     // Allow plugins to override certain words such as ('i' -> 'I')
     if(m_overrides.contains(preedit)) {
         preedit = m_overrides[preedit];
-    }
-
-    // If the user input is spelt correctly add it to the start of the predictions
-    if(m_spellChecker.spell(preedit)) {
         list << preedit;
-        // Emit the user's input/override corrections instantly so they're always up-to-date
+        // Emit the override corrections instantly so they're always up-to-date
+        // as they're often used for short words like 'I'
         Q_EMIT newPredictionSuggestions(origPreedit, list);
+    } else if(m_spellChecker.spell(preedit)) {
+        // If the user input is spelt correctly add it to the start of the predictions
+        list << preedit;
     }
 
     try {
