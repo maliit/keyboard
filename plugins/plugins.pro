@@ -3,6 +3,7 @@ TEMPLATE = subdirs
 SUBDIRS = \
     westernsupport \
     ar \
+    bs \
     cs \
     da \
     de \
