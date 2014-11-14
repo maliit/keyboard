@@ -33,7 +33,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "ü"; shifted: "Ü"; extended: ["2", "w"]; extendedShifted: ["2", "W"] }
             CharKey { label: "e"; shifted: "E"; extended: ["3", "è", "é", "ê", "ë", "€"]; extendedShifted: ["3", "È","É", "Ê", "Ë", "€"] }
             CharKey { label: "r"; shifted: "R"; extended: ["4"]; extendedShifted: ["4"] }
@@ -44,14 +44,14 @@ KeyPad {
             CharKey { label: "o"; shifted: "O"; extended: ["9", "ô","ò","ó"]; extendedShifted: ["9", "Ô","Ò","Ó"] }
             CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"] }
             CharKey { label: "ö"; shifted: "Ö"; }
-            CharKey { label: "ğ"; shifted: "Ğ"; }
+            CharKey { label: "ğ"; shifted: "Ğ"; rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","ª","á","å", "æ"]; extendedShifted: ["Ä","À","Â","ª","Á","Å","Æ"] }
+            CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","ª","á","å", "æ"]; extendedShifted: ["Ä","À","Â","ª","Á","Å","Æ"]; leftSide: true; }
             CharKey { label: "s"; shifted: "S"; extended: ["ß","$"]; extendedShifted: ["$"] }
             CharKey { label: "d"; shifted: "D"; extended: ["ð"]; extendedShifted: ["Ð"] }
             CharKey { label: "f"; shifted: "F"; }
@@ -61,7 +61,7 @@ KeyPad {
             CharKey { label: "k"; shifted: "K"; }
             CharKey { label: "l"; shifted: "L"; }
             CharKey { label: "ı"; shifted: "I"; }
-            CharKey { label: "ə"; shifted: "Ə"; }
+            CharKey { label: "ə"; shifted: "Ə"; rightSide: true; }
         }
 
         Row {
