@@ -412,6 +412,7 @@ void WordEngine::onLanguageChanged(const QString &languageId)
 
     connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SLOT(newSpellingSuggestions(QString, QStringList)));
     connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SLOT(newPredictionSuggestions(QString, QStringList)));
+    Q_EMIT pluginChanged();
 }
 
 AbstractLanguageFeatures* WordEngine::languageFeature()
