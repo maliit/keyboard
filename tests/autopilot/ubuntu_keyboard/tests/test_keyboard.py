@@ -45,94 +45,24 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def _stop_unity8():
-    status = process_helpers._get_unity_status()
-    if "start/" in status:
-        try:
-            logger.debug("Stopping unity8")
-            subprocess.check_call(['initctl', 'stop', 'unity8'])
-        except subprocess.CalledProcessError as e:
-            e.args += ("Unable to stop unity8",)
-            raise
-    else:
-        logger.debug("No need to stop unity.")
-
-
-def _start_unity8():
-    status = process_helpers._get_unity_status()
-    if "stop/" in status:
-        try:
-            logger.debug("Starting unity8")
-            subprocess.check_call(['initctl', 'start', 'unity8'])
-        except subprocess.CalledProcessError as e:
-            e.args += ("Unable to start unity8",)
-            raise
-    else:
-        raise RuntimeError(
-            "Unable to start unity8: server is currently running."
-        )
-
-
-def _assertUnityReady():
-        unity_pid = process_helpers._get_unity_pid()
-        unity = get_proxy_object_for_existing_process(
-            pid=unity_pid,
-            emulator_base=UnityEmulatorBase,
-        )
-        dash = unity.wait_select_single(Dash)
-        home_scope = dash.get_scope('home')
-
-        home_scope.isLoaded.wait_for(True)
-        home_scope.isCurrent.wait_for(True)
-
-
-def _restart_unity8():
-    _stop_unity8()
-    _start_unity8()
-
-
 class UbuntuKeyboardTests(AutopilotTestCase):
-    maliit_override_file = os.path.expanduser(
-        "~/.config/upstart/maliit-server.override"
-    )
 
     @classmethod
     def setUpClass(cls):
-        try:
-            logger.debug("Creating the override file.")
-            with open(
-                UbuntuKeyboardTests.maliit_override_file, 'w'
-            ) as override_file:
-                override_file.write("exec maliit-server -testability")
+        testEnv = os.environ.copy()
+        testEnv["QT_LOAD_TESTABILITY"] = "1"
+        maliitRestart = subprocess.Popen(['/sbin/restart', 'maliit-server'], env=testEnv)
+        maliitRestart.wait()
+        #### FIXME: This is a work around re: lp:1238417 ####
+        if model() != "Desktop":
+            from autopilot.input import _uinput
+            _uinput._touch_device = _uinput.create_touch_device()
+        ####
 
-            process_helpers.restart_unity_with_testability()
-            _assertUnityReady()
-            #### FIXME: This is a work around re: lp:1238417 ####
-            if model() != "Desktop":
-                from autopilot.input import _uinput
-                _uinput._touch_device = _uinput.create_touch_device()
-            ####
-
-            #### FIXME: Workaround re: lp:1248902 and lp:1248913
-            logger.debug("Waiting for maliit-server to be ready")
-            sleep(10)
-            ####
-
-        except IOError as e:
-            e.args += (
-                "Failed attempting to write override file to {file}".format(
-                    file=UbuntuKeyboardTests.maliit_override_file
-                ),
-            )
-            raise
-
-    @classmethod
-    def tearDownClass(cls):
-        try:
-            os.remove(UbuntuKeyboardTests.maliit_override_file)
-        except OSError:
-            logger.warning("Attempted to remove non-existent override file")
-        _restart_unity8()
+        #### FIXME: Workaround re: lp:1248902 and lp:1248913
+        logger.debug("Waiting for maliit-server to be ready")
+        sleep(10)
+        ####
 
     def setUp(self):
         if model() == "Desktop":
