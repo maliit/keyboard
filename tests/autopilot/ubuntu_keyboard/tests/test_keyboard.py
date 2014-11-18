@@ -344,7 +344,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type(
-            'abc gone\b\b &  \bABC (123)'
+            'abc gone\b\b & \b ABC (123)'
         )
 
         expected = "abc go & ABC (123)"
