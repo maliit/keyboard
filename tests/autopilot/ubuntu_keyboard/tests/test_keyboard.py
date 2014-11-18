@@ -88,7 +88,9 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         open(qml_path, 'w').write(script_contents)
         self.addCleanup(os.remove, qml_path)
 
-        desktop_file = self._write_test_desktop_file()
+        # Use desktop file from an unconfined app so that Mir allows us
+        # to connect with our test QML apps
+        desktop_file = "/usr/share/applications/webbrowser-app.desktop"
         return self.launch_test_application(
             base.get_qmlscene_launch_command(),
             qml_path,
