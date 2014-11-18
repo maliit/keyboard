@@ -31,9 +31,6 @@ from autopilot.input import Pointer, Touch
 from autopilot.introspection import get_proxy_object_for_existing_process
 from autopilot.matchers import Eventually
 from autopilot.platform import model
-from unity8 import process_helpers
-from unity8.shell.emulators.dash import Dash
-from unity8.shell.emulators import UnityEmulatorBase
 from ubuntuuitoolkit import base
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard

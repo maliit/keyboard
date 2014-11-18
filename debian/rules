@@ -4,7 +4,7 @@
 export DPKG_GENSYMBOLS_CHECK_LEVEL=4
 
 %:
-	dh $@ --fail-missing --with python2
+	dh $@ --fail-missing --with python3
 
 override_dh_auto_configure:
 	dh_auto_configure -- -recursive \
@@ -29,9 +29,7 @@ override_dh_clean:
 override_dh_install:
 	# install autopilot tests
 	cd tests/autopilot; \
-	set -ex; for python in $(shell pyversions -r); do \
-	    $$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
-	done; \
+	python3 setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
 	cd $(CURDIR)
 	# Don't install the other tests
 	rm debian/tmp/usr/bin/ut_*
