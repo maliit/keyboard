@@ -17,6 +17,7 @@ public:
     explicit EnglishPlugin(QObject* parent = 0)
         : WesternLanguagesPlugin(parent)
     {
+        addOverride("i", "I");
     }
 
     virtual ~EnglishPlugin()
