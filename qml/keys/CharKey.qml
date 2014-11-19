@@ -223,6 +223,12 @@ Item {
                     panel.state = "CHARACTERS";
                 }
                 event_handler.onKeyReleased(keyToSend, action);
+            } else if (action == "backspace") {
+                // Send release from backspace if we're swiped out since
+                // backspace activates on press and deactivates on release
+                // to allow for repeated backspaces, unlike normal keys
+                // which activate on release.
+                event_handler.onKeyReleased(valueToSubmit, action);
             }
         }
 
