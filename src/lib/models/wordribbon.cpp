@@ -163,10 +163,9 @@ void WordRibbon::setEnabled(bool enabled)
 
 void WordRibbon::onWordCandidatePressed(const WordCandidate &candidate)
 {
-    appendCandidate(candidate);
+    Q_UNUSED(candidate);
 }
 
-//! \todo implement WordRibbon::onWordCandidateReleased()
 void WordRibbon::onWordCandidateReleased(const WordCandidate &candidate)
 {
     if (candidate.source() == WordCandidate::SourcePrediction
