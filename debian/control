@@ -93,6 +93,31 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Arabic
  Data files for the Ubuntu virtual keyboard - Arabic
 
+Package: ubuntu-keyboard-azerbaijani
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Azerbaijani
+ Data files for the Ubuntu virtual keyboard - Azerbaijani
+
+Package: ubuntu-keyboard-bosnian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Bosnian
+ Data files for the Ubuntu virtual keyboard - Bosnian
+
+Package: ubuntu-keyboard-catalan
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         myspell-ca,
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Catalan
+ Data files for the Ubuntu virtual keyboard - Catalan
+
 Package: ubuntu-keyboard-chinese-pinyin
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
@@ -100,6 +125,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Chinese Pinyin
  Data files for the Ubuntu virtual keyboard - Chinese Pinyin
+
+Package: ubuntu-keyboard-croatian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+	 myspell-hr
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Croatian
+ Data files for the Ubuntu virtual keyboard - Croatian
 
 Package: ubuntu-keyboard-czech
 Architecture: any

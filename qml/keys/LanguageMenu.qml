@@ -72,6 +72,9 @@ Item {
     function languageIdToName(languageId)
     {
         if (languageId == "ar")         return i18n.tr("Arabic");
+        if (languageId == "az")         return i18n.tr("Azerbaijani");
+        if (languageId == "bs")         return i18n.tr("Bosnian");
+        if (languageId == "ca")         return i18n.tr("Catalan");
         if (languageId == "cs")         return i18n.tr("Czech");
         if (languageId == "da")         return i18n.tr("Danish");
         if (languageId == "de")         return i18n.tr("German");
@@ -80,6 +83,7 @@ Item {
         if (languageId == "fi")         return i18n.tr("Finnish");
         if (languageId == "fr")         return i18n.tr("French");
         if (languageId == "he")         return i18n.tr("Hebrew");
+        if (languageId == "hr")         return i18n.tr("Croatian");
         if (languageId == "hu")         return i18n.tr("Hungarian");
         if (languageId == "it")         return i18n.tr("Italian");
         if (languageId == "nl")         return i18n.tr("Dutch");
