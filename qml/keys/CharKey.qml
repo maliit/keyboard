@@ -135,6 +135,8 @@ Item {
                 color: UI.fontColor
                 anchors.right: parent.right
                 anchors.left: parent.left
+                anchors.leftMargin: units.gu(0.2)
+                anchors.rightMargin: units.gu(0.2)
                 anchors.verticalCenter: parent.verticalCenter 
                 anchors.verticalCenterOffset: -units.gu(0.15)
                 horizontalAlignment: Text.AlignHCenter
