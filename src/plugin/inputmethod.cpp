@@ -133,8 +133,9 @@ void InputMethod::show()
 {
     Q_D(InputMethod);
 
-    d->view->setVisible(true);
     d->m_geometry->setShown(true);
+    update();
+    d->view->setVisible(true);
     d->editor.checkPreeditReentry(false);
 }
 
@@ -336,6 +337,11 @@ void InputMethod::deviceOrientationChanged(Qt::ScreenOrientation orientation)
 void InputMethod::update()
 {
     Q_D(InputMethod);
+
+    if (!d->m_geometry->shown()) {
+        // Don't update if we're in the process of hiding
+        return;
+    }
 
     bool valid;
 
