@@ -1,3 +1,39 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141119-0ubuntu1) vivid; urgency=low
+
+  [ Michael Sheldon ]
+  * Send release signal for backspace if the user has swiped out of the
+    key before releasing (LP: #1385518)
+  * Calculate the similarity between the current user's input and the
+    prediction candidate, if they differ too much make the user input
+    the primary candidate for auto-completion. (LP: #1347796)
+  * Stop the keyboard from updating IME hints whilst it hides (LP:
+    #1370609)
+  * Allow western language plugins to provide special corrections
+    outside of the standard auto-correct engine (e.g. 'i' -> 'I'). (LP:
+    #1372948)
+  * Add Azerbaijani, Bosnian, Catalan and Croatian layouts
+  * Reset the keyboard when the language plugin changes. (LP: #1335002)
+  * Don't add duplicate candidates to the word ribbon when a candidate
+    is pressed. (LP: #1393487)
+  * Scale custom return key labels so that more characters fit and set
+    correct default font size (LP: #1384810)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Dinko Osmankovic dinko.metalac@gmail.com ]
+  * Add Azerbaijani, Bosnian, Catalan and Croatian layouts
+
+  [ Mike Sheldon ]
+  * Calculate the similarity between the current user's input and the
+    prediction candidate, if they differ too much make the user input
+    the primary candidate for auto-completion. (LP: #1347796)
+  * Allow western language plugins to provide special corrections
+    outside of the standard auto-correct engine (e.g. 'i' -> 'I'). (LP:
+    #1372948)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 19 Nov 2014 15:40:20 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141107.1-0ubuntu1) vivid; urgency=low
 
   [ Michael Sheldon ]
