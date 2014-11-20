@@ -192,11 +192,13 @@ Item {
         {
             //            if (contentType === InputMethod.NumberContentType) {
             if (contentType === 1) {
+                canvas.layoutId = "number";
                 return "languages/Keyboard_numbers.qml";
             }
 
             //            if (contentType === InputMethod.PhoneNumberContentType) {
             if (contentType === 2) {
+                canvas.layoutId = "telephone";
                 return "languages/Keyboard_telephone.qml";
             }
 
@@ -208,15 +210,18 @@ Item {
 
             //            if (contentType === InputMethod.EmailContentType) {
             if (contentType === 3) {
+                canvas.layoutId = "email";
                 return "lib/"+locale+"/Keyboard_"+locale+"_email.qml";
             }
 
             //            if (contentType === InputMethod.UrlContentType) {
             if (contentType === 4) {
+                canvas.layoutId = "url";
                 return "lib/"+locale+"/Keyboard_"+locale+"_url_search.qml";
             }
 
             // FreeTextContentType used as fallback
+            canvas.layoutId = "freetext";
             return freeTextLanguageKeyboard(activeLanguage);
         }
     }

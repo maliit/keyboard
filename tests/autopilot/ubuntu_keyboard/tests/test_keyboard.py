@@ -383,7 +383,6 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
     ]
 
     # Note: based on UX design doc
-    @skip("Unable to determine LayoutId re: bug lp:1248796")
     def test_keyboard_layout(self):
         """The Keyboard must respond to the input type and change to be the
         correct state.
