@@ -251,10 +251,6 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         until the shift key is clicked again.
 
         """
-        self.skip(
-            "Skipping due to bug in emulator: lp:1237846"
-        )
-
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
@@ -264,7 +260,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         # Bug lp:1229003 and lp:1229001
         sleep(.2)
         keyboard.press_key('shift')
-        keyboard.press_key('shift')
+        keyboard.press_key('shift', True)
 
         self.assertThat(
             keyboard.active_keypad_state,

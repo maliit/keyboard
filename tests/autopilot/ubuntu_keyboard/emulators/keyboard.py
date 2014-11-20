@@ -161,7 +161,7 @@ class Keyboard(object):
         except AssertionError:
             return False
 
-    def press_key(self, key):
+    def press_key(self, key, capslock_switch=False):
         """Tap on the key with the internal pointer
 
         :params key: String containing the text of the key to tap.
@@ -177,7 +177,10 @@ class Keyboard(object):
         key = self._translate_key(key)
 
         req_keypad = KeyboardState.character
-        req_key_state = self._keypad_contains_key(req_keypad, key)
+        if capslock_switch:
+            req_key_state = "CAPSLOCK"
+        else:
+            req_key_state = self._keypad_contains_key(req_keypad, key)
         if req_key_state is None:
             req_keypad = KeyboardState.symbol
             req_key_state = self._keypad_contains_key(req_keypad, key)
