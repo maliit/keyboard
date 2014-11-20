@@ -103,6 +103,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
+    connect(d->editor.wordEngine(), SIGNAL(pluginChanged()), this, SLOT(onWordEnginePluginChanged()));
     connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
     d->registerAudioFeedbackSoundSetting();
@@ -133,8 +134,9 @@ void InputMethod::show()
 {
     Q_D(InputMethod);
 
-    d->view->setVisible(true);
     d->m_geometry->setShown(true);
+    update();
+    d->view->setVisible(true);
     d->editor.checkPreeditReentry(false);
 }
 
@@ -337,6 +339,11 @@ void InputMethod::update()
 {
     Q_D(InputMethod);
 
+    if (!d->m_geometry->shown()) {
+        // Don't update if we're in the process of hiding
+        return;
+    }
+
     bool valid;
 
     bool emitPredictionEnabled = false;
@@ -514,6 +521,12 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
 
     qDebug() << "in inputMethod.cpp setActiveLanguage() emitting activeLanguageChanged to" << d->activeLanguage;
     Q_EMIT activeLanguageChanged(d->activeLanguage);
+}
+
+void InputMethod::onWordEnginePluginChanged()
+{
+    reset();
+    update();
 }
 
 const QString InputMethod::keyboardState() const

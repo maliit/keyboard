@@ -34,6 +34,7 @@
 
 #include <QObject>
 #include <QStringList>
+#include <QMap>
 
 class CandidatesCallback;
 
@@ -51,6 +52,7 @@ public slots:
     void setLanguage(QString language);
     void setSpellCheckLimit(int limit);
     void addToUserWordList(const QString& word);
+    void addOverride(const QString& orig, const QString& overriden);
 
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions);
@@ -64,7 +66,7 @@ private:
     QString m_word;
     int m_limit;
     bool m_processingWords;
-
+    QMap<QString, QString> m_overrides;
 };
 
 #endif // SPELLPREDICTWORKER_H

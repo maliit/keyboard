@@ -135,6 +135,8 @@ Item {
                 color: UI.fontColor
                 anchors.right: parent.right
                 anchors.left: parent.left
+                anchors.leftMargin: units.gu(0.2)
+                anchors.rightMargin: units.gu(0.2)
                 anchors.verticalCenter: parent.verticalCenter 
                 anchors.verticalCenterOffset: -units.gu(0.15)
                 horizontalAlignment: Text.AlignHCenter
@@ -223,6 +225,12 @@ Item {
                     panel.state = "CHARACTERS";
                 }
                 event_handler.onKeyReleased(keyToSend, action);
+            } else if (action == "backspace") {
+                // Send release from backspace if we're swiped out since
+                // backspace activates on press and deactivates on release
+                // to allow for repeated backspaces, unlike normal keys
+                // which activate on release.
+                event_handler.onKeyReleased(valueToSubmit, action);
             }
         }
 

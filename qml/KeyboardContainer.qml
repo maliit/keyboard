@@ -119,6 +119,9 @@ Item {
         {
             var supportedLocales = [
                 "ar",
+                "az",
+                "bs",
+                "ca",
                 "cs",
                 "da",
                 "de",
@@ -127,6 +130,7 @@ Item {
                 "fi",
                 "fr",
                 "he",
+                "hr",
                 "hu",
                 "it",
                 "nl",
@@ -152,6 +156,12 @@ Item {
 
             if (language === "ar")
                 return "lib/ar/Keyboard_ar.qml";
+            if (language === "az")
+                return "lib/az/Keyboard_az.qml";
+            if (language === "bs")
+                return "lib/bs/Keyboard_bs.qml";
+            if (language === "ca")
+                return "lib/ca/Keyboard_ca.qml";
             if (language === "cs")
                 return "lib/cs/Keyboard_cs.qml";
             if (language === "da")
@@ -168,6 +178,8 @@ Item {
                 return "lib/fr/Keyboard_fr.qml";
             if (language === "he")
                 return "lib/he/Keyboard_he.qml";
+            if (language === "hr")
+                return "lib/hr/Keyboard_hr.qml";
             if (language === "hu")
                 return "lib/hu/Keyboard_hu.qml";
             if (language === "it")

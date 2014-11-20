@@ -104,3 +104,8 @@ bool WesternLanguageFeatures::isSymbol(const QString &text) const
 
     return false;
 }
+
+bool WesternLanguageFeatures::ignoreSimilarity() const
+{
+    return false;
+}

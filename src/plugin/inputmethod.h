@@ -147,6 +147,8 @@ private:
     Q_SLOT void onLayoutWidthChanged(int width);
     Q_SLOT void onLayoutHeightChanged(int height);
 
+    Q_SLOT void onWordEnginePluginChanged();
+
     void checkAutocaps();
 
     const QScopedPointer<InputMethodPrivate> d_ptr;
