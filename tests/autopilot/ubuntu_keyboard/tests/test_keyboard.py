@@ -227,17 +227,11 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
 
 class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
-    # Note: this is a failing test due to bug lp:1214695
-    # Note: based on UX design doc
     def test_keyboard_layout_starts_shifted(self):
         """When first launched the keyboard state must be
         shifted/capitalised.
 
         """
-        self.skip(
-            "Skipping as feature hasn't landed yet, refer to bug lp:1214695"
-        )
-
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
@@ -303,16 +297,11 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
         self.assertThat(text_area.text, Eventually(Equals('abcA')))
 
-    # Note: this is a failing test due to bug lp:1214695
-    # Note: Based on UX design doc.
     def test_shift_state_entered_after_fullstop(self):
         """After typing a fullstop the keyboard state must automatically
         enter the shifted state.
 
         """
-        self.skip(
-            "Skipping as feature hasn't landed yet, refer to bug lp:1214695"
-        )
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
