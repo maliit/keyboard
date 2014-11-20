@@ -405,3 +405,24 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             keyboard.keyboard.layoutId,
             Eventually(Equals(self.expected_activeview))
         )
+
+
+class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
+
+    def test_double_space_fullstop(self):
+        """After tapping space twice a fullstop should be entered.
+
+        """
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('This is a test  ')
+
+        expected = "This is a test. "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
