@@ -122,9 +122,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         )
 
     def _launch_simple_input(self, label="", input_hints=None):
-        if input_hints is None:
-            extra_script = "Qt.ImhNoPredictiveText"
-        else:
+        if input_hints is not None:
             extra_script = "|".join(input_hints)
 
         simple_script = dedent("""
@@ -170,7 +168,7 @@ class UbuntuKeyboardTestsAccess(UbuntuKeyboardTests):
     def test_keyboard_is_available(self):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
-        app = self._launch_simple_input()
+        app = self._launch_simple_input(input_hints=['Qt.ImhNoPredictiveText'])
         text_rectangle = app.select_single("QQuickTextInput")
 
         self.pointer.click_object(text_rectangle)
@@ -214,7 +212,7 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
     ]
 
     def test_can_type_string(self):
-        text_area = self.launch_test_input_area(label=self.label)
+        text_area = self.launch_test_input_area(label=self.label, input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -230,7 +228,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         shifted/capitalised.
 
         """
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -249,7 +247,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         until the shift key is clicked again.
 
         """
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -271,7 +269,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         shift the keyboard back into the default state.
 
         """
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -296,7 +294,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         enter the shifted state.
 
         """
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -317,7 +315,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         """After deleting a fullstop the keyboard should return to the normal
         state.
         """
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -339,7 +337,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         spaces and backspaces.
 
         """
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
