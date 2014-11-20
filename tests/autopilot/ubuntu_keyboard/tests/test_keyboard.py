@@ -46,10 +46,8 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
     @classmethod
     def setUpClass(cls):
-        testEnv = os.environ.copy()
-        testEnv["QT_LOAD_TESTABILITY"] = "1"
-        maliitRestart = subprocess.Popen(['/sbin/restart', 'maliit-server'], env=testEnv)
-        maliitRestart.wait()
+        subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
+        subprocess.check_call(['restart', 'maliit-server'])
         #### FIXME: This is a work around re: lp:1238417 ####
         if model() != "Desktop":
             from autopilot.input import _uinput
