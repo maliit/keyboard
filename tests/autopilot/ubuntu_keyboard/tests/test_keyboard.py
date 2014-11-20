@@ -313,6 +313,27 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
             Eventually(Equals(KeyPadState.SHIFTED))
         )
 
+    def test_shift_state_left_after_deleting_fullstop(self):
+        """After deleting a fullstop the keyboard should return to the normal
+        state.
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type("Hello my friend.\b")
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals("Hello my friend"))
+        )
+
+        self.assertThat(
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.NORMAL))
+        )
+
     def test_switching_between_states(self):
         """The user must be able to type many different characters including
         spaces and backspaces.
