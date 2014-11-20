@@ -356,11 +356,6 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
 
 class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
-    """Note: these tests are currently failing due to bug lp:1214694 (the
-    activeView detail isn't exposed correctly nor is it updated as expected
-    (i.e. when the view changes.))
-
-    """
 
     scenarios = [
         (
