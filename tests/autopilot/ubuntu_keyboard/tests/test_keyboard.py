@@ -87,7 +87,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
         # Use desktop file from an unconfined app so that Mir allows us
         # to connect with our test QML apps
-        desktop_file = "/usr/share/applications/webbrowser-app.desktop"
+        desktop_file = "/usr/share/applications/ubuntu-keyboard-tester.desktop"
         return self.launch_test_application(
             base.get_qmlscene_launch_command(),
             qml_path,
