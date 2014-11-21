@@ -36,6 +36,8 @@ from ubuntuuitoolkit import base
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
 
+from gi.repository import Gio
+
 import logging
 
 
@@ -63,7 +65,18 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         if model() == "Desktop":
             self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
+        self.set_test_settings()
         self.pointer = Pointer(Touch.create())
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "en")
+        gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh"])
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
 
     def launch_test_input_area(self, label="", input_hints=None):
         self.app = self._launch_simple_input(label, input_hints)
