@@ -122,6 +122,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         )
 
     def _launch_simple_input(self, label="", input_hints=None):
+        extra_script = "undefined"
         if input_hints is not None:
             extra_script = "|".join(input_hints)
 
@@ -421,6 +422,24 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard.type('This is a test  ')
 
         expected = "This is a test. "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_autocomplete(self):
+        """Tapping space in a field that supports auto-complete should
+           complete a word.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Hel ')
+
+        expected = "Hello "
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
