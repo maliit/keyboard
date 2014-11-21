@@ -136,9 +136,8 @@ class Keyboard(object):
         if self.is_available():
             x, y, h, w = self._keyboard_container.globalRect
             x_pos = int(w / 2)
-            # start_y: just inside the keyboard, must be a better way than +1px
-            start_y = y - 10
-            end_y = y + int(h / 2)
+            start_y = y + int(h / 2)
+            end_y = y + h
             self.pointer.drag(x_pos, start_y, x_pos, end_y)
 
             self.keyboard.state.wait_for("HIDDEN")
