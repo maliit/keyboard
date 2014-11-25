@@ -387,8 +387,11 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
-    if (d->contentType != FreeTextContentType)
+    if (d->contentType != FreeTextContentType
+        && !(d->editor.wordEngine()->languageFeature()->alwaysShowSuggestions()
+             && (d->contentType == UrlContentType || d->contentType == EmailContentType))) {
         d->wordEngineEnabled = false;
+    }
 
     d->editor.clearPreedit();
     d->editor.wordEngine()->setEnabled( d->wordEngineEnabled );
@@ -412,6 +415,8 @@ void InputMethod::setContentType(TextContentType contentType)
         return;
 
     setActiveLanguage(d->activeLanguage);
+
+    d->editor.wordEngine()->languageFeature()->setContentType(static_cast<Maliit::TextContentType>(contentType));
 
     d->contentType = contentType;
     Q_EMIT contentTypeChanged(contentType);
