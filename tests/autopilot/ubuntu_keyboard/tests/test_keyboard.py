@@ -31,13 +31,12 @@ from autopilot.input import Pointer, Touch
 from autopilot.introspection import get_proxy_object_for_existing_process
 from autopilot.matchers import Eventually
 from autopilot.platform import model
-from unity8 import process_helpers
-from unity8.shell.emulators.dash import Dash
-from unity8.shell.emulators import UnityEmulatorBase
 from ubuntuuitoolkit import base
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
+
+from gi.repository import Gio
 
 import logging
 
@@ -45,100 +44,39 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def _stop_unity8():
-    status = process_helpers._get_unity_status()
-    if "start/" in status:
-        try:
-            logger.debug("Stopping unity8")
-            subprocess.check_call(['initctl', 'stop', 'unity8'])
-        except subprocess.CalledProcessError as e:
-            e.args += ("Unable to stop unity8",)
-            raise
-    else:
-        logger.debug("No need to stop unity.")
-
-
-def _start_unity8():
-    status = process_helpers._get_unity_status()
-    if "stop/" in status:
-        try:
-            logger.debug("Starting unity8")
-            subprocess.check_call(['initctl', 'start', 'unity8'])
-        except subprocess.CalledProcessError as e:
-            e.args += ("Unable to start unity8",)
-            raise
-    else:
-        raise RuntimeError(
-            "Unable to start unity8: server is currently running."
-        )
-
-
-def _assertUnityReady():
-        unity_pid = process_helpers._get_unity_pid()
-        unity = get_proxy_object_for_existing_process(
-            pid=unity_pid,
-            emulator_base=UnityEmulatorBase,
-        )
-        dash = unity.wait_select_single(Dash)
-        home_scope = dash.get_scope('home')
-
-        home_scope.isLoaded.wait_for(True)
-        home_scope.isCurrent.wait_for(True)
-
-
-def _restart_unity8():
-    _stop_unity8()
-    _start_unity8()
-
-
 class UbuntuKeyboardTests(AutopilotTestCase):
-    maliit_override_file = os.path.expanduser(
-        "~/.config/upstart/maliit-server.override"
-    )
 
     @classmethod
     def setUpClass(cls):
-        try:
-            logger.debug("Creating the override file.")
-            with open(
-                UbuntuKeyboardTests.maliit_override_file, 'w'
-            ) as override_file:
-                override_file.write("exec maliit-server -testability")
+        subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
+        subprocess.check_call(['restart', 'maliit-server'])
+        #### FIXME: This is a work around re: lp:1238417 ####
+        if model() != "Desktop":
+            from autopilot.input import _uinput
+            _uinput._touch_device = _uinput.create_touch_device()
+        ####
 
-            process_helpers.restart_unity_with_testability()
-            _assertUnityReady()
-            #### FIXME: This is a work around re: lp:1238417 ####
-            if model() != "Desktop":
-                from autopilot.input import _uinput
-                _uinput._touch_device = _uinput.create_touch_device()
-            ####
-
-            #### FIXME: Workaround re: lp:1248902 and lp:1248913
-            logger.debug("Waiting for maliit-server to be ready")
-            sleep(10)
-            ####
-
-        except IOError as e:
-            e.args += (
-                "Failed attempting to write override file to {file}".format(
-                    file=UbuntuKeyboardTests.maliit_override_file
-                ),
-            )
-            raise
-
-    @classmethod
-    def tearDownClass(cls):
-        try:
-            os.remove(UbuntuKeyboardTests.maliit_override_file)
-        except OSError:
-            logger.warning("Attempted to remove non-existent override file")
-        _restart_unity8()
+        #### FIXME: Workaround re: lp:1248902 and lp:1248913
+        logger.debug("Waiting for maliit-server to be ready")
+        sleep(10)
+        ####
 
     def setUp(self):
         if model() == "Desktop":
             self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
+        self.set_test_settings()
         self.pointer = Pointer(Touch.create())
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "en")
+        gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh"])
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
 
     def launch_test_input_area(self, label="", input_hints=None):
         self.app = self._launch_simple_input(label, input_hints)
@@ -158,7 +96,9 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         open(qml_path, 'w').write(script_contents)
         self.addCleanup(os.remove, qml_path)
 
-        desktop_file = self._write_test_desktop_file()
+        # Use installed desktop file so that Mir allows us to connect with
+        # our test QML apps
+        desktop_file = "/usr/share/applications/ubuntu-keyboard-tester.desktop"
         return self.launch_test_application(
             base.get_qmlscene_launch_command(),
             qml_path,
@@ -195,9 +135,8 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         )
 
     def _launch_simple_input(self, label="", input_hints=None):
-        if input_hints is None:
-            extra_script = "Qt.ImhNoPredictiveText"
-        else:
+        extra_script = "undefined"
+        if input_hints is not None:
             extra_script = "|".join(input_hints)
 
         simple_script = dedent("""
@@ -243,7 +182,7 @@ class UbuntuKeyboardTestsAccess(UbuntuKeyboardTests):
     def test_keyboard_is_available(self):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
-        app = self._launch_simple_input()
+        app = self._launch_simple_input(input_hints=['Qt.ImhNoPredictiveText'])
         text_rectangle = app.select_single("QQuickTextInput")
 
         self.pointer.click_object(text_rectangle)
@@ -287,7 +226,7 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
     ]
 
     def test_can_type_string(self):
-        text_area = self.launch_test_input_area(label=self.label)
+        text_area = self.launch_test_input_area(label=self.label, input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -298,18 +237,12 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
 
 class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
-    # Note: this is a failing test due to bug lp:1214695
-    # Note: based on UX design doc
     def test_keyboard_layout_starts_shifted(self):
         """When first launched the keyboard state must be
         shifted/capitalised.
 
         """
-        self.skip(
-            "Skipping as feature hasn't landed yet, refer to bug lp:1214695"
-        )
-
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -328,11 +261,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         until the shift key is clicked again.
 
         """
-        self.skip(
-            "Skipping due to bug in emulator: lp:1237846"
-        )
-
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -341,7 +270,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         # Bug lp:1229003 and lp:1229001
         sleep(.2)
         keyboard.press_key('shift')
-        keyboard.press_key('shift')
+        keyboard.press_key('shift', True)
 
         self.assertThat(
             keyboard.active_keypad_state,
@@ -354,7 +283,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         shift the keyboard back into the default state.
 
         """
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -374,17 +303,12 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
         self.assertThat(text_area.text, Eventually(Equals('abcA')))
 
-    # Note: this is a failing test due to bug lp:1214695
-    # Note: Based on UX design doc.
     def test_shift_state_entered_after_fullstop(self):
         """After typing a fullstop the keyboard state must automatically
         enter the shifted state.
 
         """
-        self.skip(
-            "Skipping as feature hasn't landed yet, refer to bug lp:1214695"
-        )
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -401,18 +325,39 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
             Eventually(Equals(KeyPadState.SHIFTED))
         )
 
+    def test_shift_state_left_after_deleting_fullstop(self):
+        """After deleting a fullstop the keyboard should return to the normal
+        state.
+        """
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type("Hello my friend.\b")
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals("Hello my friend"))
+        )
+
+        self.assertThat(
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.NORMAL))
+        )
+
     def test_switching_between_states(self):
         """The user must be able to type many different characters including
         spaces and backspaces.
 
         """
-        text_area = self.launch_test_input_area()
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type(
-            'abc gone\b\b &  \bABC (123)'
+            'abc gone\b\b & \b ABC (123)'
         )
 
         expected = "abc go & ABC (123)"
@@ -423,11 +368,6 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
 
 class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
-    """Note: these tests are currently failing due to bug lp:1214694 (the
-    activeView detail isn't exposed correctly nor is it updated as expected
-    (i.e. when the view changes.))
-
-    """
 
     scenarios = [
         (
@@ -465,7 +405,6 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
     ]
 
     # Note: based on UX design doc
-    @skip("Unable to determine LayoutId re: bug lp:1248796")
     def test_keyboard_layout(self):
         """The Keyboard must respond to the input type and change to be the
         correct state.
@@ -480,3 +419,42 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             keyboard.keyboard.layoutId,
             Eventually(Equals(self.expected_activeview))
         )
+
+
+class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
+
+    def test_double_space_fullstop(self):
+        """After tapping space twice a fullstop should be entered.
+
+        """
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('This is a test  ')
+
+        expected = "This is a test. "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_autocomplete(self):
+        """Tapping space in a field that supports auto-complete should
+           complete a word.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Hel ')
+
+        expected = "Hello "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
