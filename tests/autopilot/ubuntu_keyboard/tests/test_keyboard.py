@@ -458,3 +458,85 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+
+class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
+
+    scenarios = [
+        (   
+            "Url",
+            dict(
+                label="Url",
+                hints=['Qt.ImhUrlCharactersOnly'],
+                expected_activeview="url"
+            )
+        ),
+        (   
+            "Email",
+            dict(
+                label="Email",
+                hints=['Qt.ImhEmailCharactersOnly'],
+                expected_activeview="email"
+            )
+        ),
+        (
+            "FreeText",
+            dict(
+                label="FreeText",
+                hints=None,
+                expected_activeview="freetext"
+            )
+        ),
+        (
+            "NoPredictiveText",
+            dict(
+                label="NoPredictiveText",
+                hints=['Qt.ImhNoPredictveText'],
+                expected_activeview="freetext"
+            )
+        ),
+    ]
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "zh")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_pinyin(self):
+        """Switching to Chinese should result in pinyin characters being entered
+           via autocomplete regardless of layout or prediction being disabled.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('pinyin ')
+
+        expected = "品以"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_fullstop(self):
+        """Full stop shouldn't have space added after it in pinyin mode.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('pinyin.cn ')
+
+        expected = "品以.cn"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
