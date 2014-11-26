@@ -103,6 +103,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
+    connect(this, SIGNAL(hasSelectionChanged(bool)), &d->editor, SLOT(onHasSelectionChanged(bool)));
     connect(d->editor.wordEngine(), SIGNAL(pluginChanged()), this, SLOT(onWordEnginePluginChanged()));
     connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
@@ -344,6 +345,13 @@ void InputMethod::update()
     }
 
     bool valid;
+ 
+    bool hasSelection = d->host->hasSelection(valid);
+
+    if (valid && hasSelection != d->hasSelection) {
+        d->hasSelection = hasSelection;
+        Q_EMIT hasSelectionChanged(d->hasSelection);
+    }
 
     bool emitPredictionEnabled = false;
 
@@ -544,6 +552,12 @@ void InputMethod::setKeyboardState(const QString &state)
     Q_D(InputMethod);
     d->keyboardState = state;
     Q_EMIT keyboardStateChanged(d->keyboardState);
+}
+
+bool InputMethod::hasSelection() const
+{
+    Q_D(const InputMethod);
+    return d->hasSelection;
 }
 
 void InputMethod::onVisibleRectChanged()

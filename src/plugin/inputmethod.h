@@ -56,6 +56,7 @@ class InputMethod
     Q_PROPERTY(QObject* actionKeyOverride READ actionKeyOverride NOTIFY actionKeyOverrideChanged)
     Q_PROPERTY(bool useHapticFeedback READ useHapticFeedback NOTIFY useHapticFeedbackChanged)
     Q_PROPERTY(QString keyboardState READ keyboardState WRITE setKeyboardState NOTIFY keyboardStateChanged)
+    Q_PROPERTY(bool hasSelection READ hasSelection NOTIFY hasSelectionChanged)
 
     Q_ENUMS(TextContentType)
 
@@ -116,6 +117,8 @@ public:
     const QString keyboardState() const;
     Q_SLOT void setKeyboardState(const QString& state);
 
+    bool hasSelection() const;
+
     QObject* actionKeyOverride() const;
 
     Q_SLOT void close();
@@ -135,6 +138,7 @@ Q_SIGNALS:
     void actionKeyOverrideChanged();
     void keyboardStateChanged(QString state);
     void keyboardReset();
+    void hasSelectionChanged(bool hasSelection);
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();

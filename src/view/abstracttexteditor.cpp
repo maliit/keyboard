@@ -1065,7 +1065,7 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 {
     Q_D(AbstractTextEditor);
 
-    if(!isPreeditEnabled()) {
+    if(!isPreeditEnabled() || m_hasSelection) {
         return;
     }
 
@@ -1114,5 +1114,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
     d->word_engine->computeCandidates(d->text.data());
 }
 
+void AbstractTextEditor::onHasSelectionChanged(bool hasSelection) {
+    m_hasSelection = hasSelection;
+}
 
 } // namespace MaliitKeyboard
