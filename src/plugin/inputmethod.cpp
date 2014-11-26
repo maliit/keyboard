@@ -137,7 +137,6 @@ void InputMethod::show()
     d->m_geometry->setShown(true);
     update();
     d->view->setVisible(true);
-    d->editor.checkPreeditReentry(false);
 }
 
 //! \brief InputMethod::hide
