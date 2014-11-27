@@ -31,7 +31,7 @@ from autopilot.input import Pointer, Touch
 from autopilot.introspection import get_proxy_object_for_existing_process
 from autopilot.matchers import Eventually
 from autopilot.platform import model
-from ubuntuuitoolkit import base, popups
+from ubuntuuitoolkit import base
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
