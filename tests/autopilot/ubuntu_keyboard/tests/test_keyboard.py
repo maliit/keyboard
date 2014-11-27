@@ -31,7 +31,7 @@ from autopilot.input import Pointer, Touch
 from autopilot.introspection import get_proxy_object_for_existing_process
 from autopilot.matchers import Eventually
 from autopilot.platform import model
-from ubuntuuitoolkit import base
+from ubuntuuitoolkit import base, popups
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
@@ -535,6 +535,57 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         keyboard.type('pinyin.cn ')
 
         expected = "品以.cn"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
+class UbuntuKeyboardSelection(UbuntuKeyboardTests):
+
+    def test_delete_selection(self):
+        """Selecting all text and then pressing delete should delete all text.
+        
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Testing selection deletion')
+
+        # Double tap to select a word
+        self.pointer.click_object(text_area)
+        self.pointer.click_object(text_area)
+
+        keyboard.type('\b')
+
+        expected = 'Testing  deletion'
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_selection_focus(self):
+        """Focusing on a field with selected text should leave the text unchanged.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('This is a test')
+
+        # Double tap to select a word
+        self.pointer.click_object(text_area)
+        self.pointer.click_object(text_area)
+
+        keyboard.dismiss()
+
+        self.ensure_focus_on_input(text_area)
+
+        expected = 'This is a test'
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
