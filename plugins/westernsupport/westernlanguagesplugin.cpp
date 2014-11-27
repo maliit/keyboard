@@ -20,6 +20,7 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
     connect(this, SIGNAL(setSpellCheckLimit(int)), spellPredictWorker, SLOT(setSpellCheckLimit(int)));
     connect(this, SIGNAL(parsePredictionText(QString, QString)), spellPredictWorker, SLOT(parsePredictionText(QString, QString)));
     connect(this, SIGNAL(addToUserWordList(QString)), spellPredictWorker, SLOT(addToUserWordList(QString)));
+    connect(this, SIGNAL(addOverride(QString, QString)), spellPredictWorker, SLOT(addOverride(QString, QString)));
     m_spellPredictThread->start();
 }
 
@@ -58,4 +59,9 @@ bool WesternLanguagesPlugin::setLanguage(const QString& languageId)
 {
     Q_EMIT setSpellPredictLanguage(languageId);
     return true;
+}
+
+void WesternLanguagesPlugin::addSpellingOverride(const QString& orig, const QString& overriden)
+{
+    Q_EMIT addOverride(orig, overriden);
 }
