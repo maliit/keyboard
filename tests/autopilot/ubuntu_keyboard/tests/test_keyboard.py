@@ -544,7 +544,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 class UbuntuKeyboardSelection(UbuntuKeyboardTests):
 
     def test_delete_selection(self):
-        """Selecting all text and then pressing delete should delete all text.
+        """Selecting a word and then pressing backspace should delete the world.
         
         """
         text_area = self.launch_test_input_area()
