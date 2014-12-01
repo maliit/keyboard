@@ -76,6 +76,7 @@ Architecture: all
 Depends: libautopilot-qt (>= 1.4),
          ${misc:Depends},
          ${python:Depends},
+         python3-evdev,
          ubuntu-keyboard (>= ${source:Version}),
          ubuntu-ui-toolkit-autopilot
 Description: Tests and emulators package for ubuntu-keyboard
