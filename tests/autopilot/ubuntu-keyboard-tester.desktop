@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Ubuntu Keyboard Tester
+GenericName=Ubuntu Keyboard Tester
+Comment=Test application for Ubuntu Keyboard autopilot tests
+Type=Application
+Terminal=false
+X-Ubuntu-Touch=true
+X-Ubuntu-Single-Instance=true

@@ -87,6 +87,8 @@ Item {
 
             property bool firstShow: true
 
+            property string layoutId: "freetext"
+
             onXChanged: fullScreenItem.reportKeyboardVisibleRect();
             onYChanged: fullScreenItem.reportKeyboardVisibleRect();
             onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
