@@ -17,7 +17,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import os
+import os, os.path
+import shutil
 import subprocess
 
 from testtools import skip
@@ -48,6 +49,10 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
     @classmethod
     def setUpClass(cls):
+        # Clear away any learnt predictions
+        presagedir = os.path.expanduser("~/.presage")
+        if os.path.exists(presagedir):
+            os.rename(presagedir, presagedir + ".bak")
         subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
         subprocess.check_call(['restart', 'maliit-server'])
         #### FIXME: This is a work around re: lp:1238417 ####
@@ -60,6 +65,13 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         logger.debug("Waiting for maliit-server to be ready")
         sleep(10)
         ####
+
+    @classmethod
+    def tearDownClass(cls):
+        presagedir = os.path.expanduser("~/.presage")
+        if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
+            shutil.rmtree(presagedir)
+            os.rename(presagedir + ".bak", presagedir)
 
     def setUp(self):
         if model() == "Desktop":
@@ -450,9 +462,9 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('Hel ')
+        keyboard.type('Pic ')
 
-        expected = "Hello "
+        expected = "Picture "
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
