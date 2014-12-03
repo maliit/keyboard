@@ -264,6 +264,8 @@ bool extractWordBoundariesAtCursor(const QString& surrounding_text,
 EditorOptions::EditorOptions()
     : backspace_auto_repeat_delay(500)
     , backspace_auto_repeat_interval(200)
+    , backspace_auto_repeat_acceleration_rate(10)
+    , backspace_auto_repeat_min_interval(50)
     , backspace_word_delay(3000)
     , backspace_word_interval(400)
     , backspace_word_acceleration_rate(10)
@@ -289,6 +291,7 @@ public:
     bool double_space_full_stop_enabled;
     bool editing_middle_of_text;
     QString appendix_for_previous_preedit;
+    int backspace_acceleration;
     int backspace_word_acceleration;
     QString keyboardState;
 
@@ -316,6 +319,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , double_space_full_stop_enabled(false)
     , editing_middle_of_text(false)
     , appendix_for_previous_preedit()
+    , backspace_acceleration(0)
     , backspace_word_acceleration(0)
     , keyboardState("CHARACTERS")
 {
@@ -865,10 +869,16 @@ void AbstractTextEditor::autoRepeatBackspace()
 
     if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
         singleBackspace();
+
+        // Gradually speed up single letter deletion
+        if(d->options.backspace_auto_repeat_interval - d->backspace_acceleration > d->options.backspace_auto_repeat_min_interval) {
+            d->backspace_acceleration += d->options.backspace_auto_repeat_acceleration_rate;
+        }
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
         d->backspace_word_acceleration = 0;
     } else {
         autoRepeatWordBackspace();
+        d->backspace_acceleration = 0;
     }
 }
 
