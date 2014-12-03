@@ -17,6 +17,7 @@
 import QtQuick 2.0
 import "../../keys"
 import "../../keys/key_constants.js" as UI
+import "emoji.js" as Emoji
 
 KeyPad {
     anchors.fill: parent
@@ -32,22 +33,22 @@ KeyPad {
         spacing: 0
 
         Row {
-            anchors.horizontalCenter: parent.horizontalCenter;
+            anchors.horizontalCenter: parent.horizontalCenter
             spacing: 0
 
             Repeater {
                 model: 10
                 CharKey {
-                    label: String.fromCharCode(startChar.charCodeAt(0), startChar.charCodeAt(1) + index + offset);
+                    label: String.fromCharCode(startChar.charCodeAt(0), startChar.charCodeAt(1) + index + offset)
                     shifted: label
-                    leftSide: index == 0;
-                    rightSide: index == 9;
+                    leftSide: index == 0
+                    rightSide: index == 9
                 }
             }
         }
 
         Row {
-            anchors.horizontalCenter: parent.horizontalCenter;
+            anchors.horizontalCenter: parent.horizontalCenter
             spacing: 0
 
             ActionKey {
@@ -56,14 +57,32 @@ KeyPad {
                 iconCapsLock: "go-previous"
                 overridePressArea: true
                 onPressed: {
-                    offset -= 18
+                    var start;
+                    var end;
+                    // Determine which block we're in
+                    if (startChar.charCodeAt(0) == Emoji.start[0][0]) {
+                        start = Emoji.start[0];
+                        end = Emoji.end[1];
+                    } else {
+                        start = Emoji.start[1];
+                        end = Emoji.end[0];
+                    }
+                    if (startChar.charCodeAt(1) + offset == start[1]) {
+                        // Wrap around
+                        startChar = String.fromCharCode(end[0], end[1])
+                        offset = -18
+                    } else if (startChar.charCodeAt(1) + (offset - 18) < start[1]) {
+                        offset -= startChar.charCodeAt(1) + offset - start[1];
+                    } else {
+                        offset -= 18;
+                    }
                 }
             }
 
             Repeater {
                 model: 8
                 CharKey {
-                    label: String.fromCharCode(startChar.charCodeAt(0), startChar.charCodeAt(1) + 10 + index + offset);
+                    label: String.fromCharCode(startChar.charCodeAt(0), startChar.charCodeAt(1) + 10 + index + offset)
                     shifted: label
                 }
             }
@@ -74,13 +93,31 @@ KeyPad {
                 iconCapsLock: "go-next"
                 overridePressArea: true
                 onPressed: {
-                    offset += 18
+                    var start;
+                    var end;
+                    // Determine which block we're in
+                    if (startChar.charCodeAt(0) == Emoji.end[0][0]) {
+                        start = Emoji.start[1];
+                        end = Emoji.end[0];
+                    } else {
+                        start = Emoji.start[0];
+                        end = Emoji.end[1];
+                    }
+                    if (startChar.charCodeAt(1) + offset + 18 == end[1]) {
+                        // Wrap around
+                        startChar = String.fromCharCode(start[0], start[1])
+                        offset = 0
+                    } else if (startChar.charCodeAt(1) + offset + 18 > end[1]) {
+                        offset = end[1] - 18 - startChar.charCodeAt(1);
+                    } else {
+                        offset += 18
+                    }
                 }
             }
         }
 
         Row {
-            anchors.horizontalCenter: parent.horizontalCenter;
+            anchors.horizontalCenter: parent.horizontalCenter
             spacing: 0
 
             ActionKey {
