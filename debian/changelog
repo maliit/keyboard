@@ -1,3 +1,17 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141202-0ubuntu1) vivid; urgency=low
+
+  [ Michael Sheldon ]
+  * Fix old autopilot tests and implement some new ones.
+  * Allow Pinyin to be used in URL and email fields and fix text
+    selection issues. (LP: #1393492, #1335007)
+  * Add ".com" as extended key on URL and email layouts for all language
+    that don't have it as their primary URL key (LP: #1369510)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 02 Dec 2014 19:25:25 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141119-0ubuntu1) vivid; urgency=low
 
   [ Michael Sheldon ]

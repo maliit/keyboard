@@ -1060,13 +1060,12 @@ void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 }
 
 //! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should
-//! place a word back in to pre-edit after a character has been deleted or focus
-//! has changed
+//! place a word back in to pre-edit after a character has been deleted
 void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 {
     Q_D(AbstractTextEditor);
 
-    if(!isPreeditEnabled()) {
+    if(!isPreeditEnabled() || m_hasSelection) {
         return;
     }
 
@@ -1115,5 +1114,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
     d->word_engine->computeCandidates(d->text.data());
 }
 
+void AbstractTextEditor::onHasSelectionChanged(bool hasSelection) {
+    m_hasSelection = hasSelection;
+}
 
 } // namespace MaliitKeyboard
