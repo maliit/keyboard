@@ -31,6 +31,7 @@ public:
     virtual void spellCheckerSuggest(const QString& word, int limit);
     virtual void addToSpellCheckerUserWordList(const QString& word);
     virtual bool setLanguage(const QString& languageId);
+    virtual void addSpellingOverride(const QString& orig, const QString& overriden);
 
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions);
@@ -41,6 +42,7 @@ signals:
     void parsePredictionText(QString surroundingLeft, QString preedit);
     void setPredictionLanguage(QString language);
     void addToUserWordList(const QString& word);
+    void addOverride(const QString& orig, const QString& overriden);
 
 public slots:
 

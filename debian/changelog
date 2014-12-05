@@ -1,3 +1,90 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141202-0ubuntu1) vivid; urgency=low
+
+  [ Michael Sheldon ]
+  * Fix old autopilot tests and implement some new ones.
+  * Allow Pinyin to be used in URL and email fields and fix text
+    selection issues. (LP: #1393492, #1335007)
+  * Add ".com" as extended key on URL and email layouts for all language
+    that don't have it as their primary URL key (LP: #1369510)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 02 Dec 2014 19:25:25 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141119-0ubuntu1) vivid; urgency=low
+
+  [ Michael Sheldon ]
+  * Send release signal for backspace if the user has swiped out of the
+    key before releasing (LP: #1385518)
+  * Calculate the similarity between the current user's input and the
+    prediction candidate, if they differ too much make the user input
+    the primary candidate for auto-completion. (LP: #1347796)
+  * Stop the keyboard from updating IME hints whilst it hides (LP:
+    #1370609)
+  * Allow western language plugins to provide special corrections
+    outside of the standard auto-correct engine (e.g. 'i' -> 'I'). (LP:
+    #1372948)
+  * Add Azerbaijani, Bosnian, Catalan and Croatian layouts
+  * Reset the keyboard when the language plugin changes. (LP: #1335002)
+  * Don't add duplicate candidates to the word ribbon when a candidate
+    is pressed. (LP: #1393487)
+  * Scale custom return key labels so that more characters fit and set
+    correct default font size (LP: #1384810)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Dinko Osmankovic dinko.metalac@gmail.com ]
+  * Add Azerbaijani, Bosnian, Catalan and Croatian layouts
+
+  [ Mike Sheldon ]
+  * Calculate the similarity between the current user's input and the
+    prediction candidate, if they differ too much make the user input
+    the primary candidate for auto-completion. (LP: #1347796)
+  * Allow western language plugins to provide special corrections
+    outside of the standard auto-correct engine (e.g. 'i' -> 'I'). (LP:
+    #1372948)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 19 Nov 2014 15:40:20 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141107.1-0ubuntu1) vivid; urgency=low
+
+  [ Michael Sheldon ]
+  * Fix uninitialised pointer. (LP: #1390395)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 07 Nov 2014 17:28:06 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+14.10.20141104~rtm-0ubuntu1) 14.09; urgency=low
+
+  [ Michael Sheldon ]
+  * Enable launchpad translation imports. (LP: #1389274)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Mike Sheldon ]
+  * Change URL key in Brazilian Portuguese layout to ".com.br" (LP:
+    #1384787)
+  * Reduce extended keys hold timer to more closely match timing from
+    other platform's keyboards (LP: #1384781)
+  * Detect if the user is entering an email address whilst in a field
+    that supports predictions and suppress predictions, auto-caps and
+    auto-spacing unless the input method requires predictions for
+    standard character input (e.g. pinyin). (LP: #1384770)
+  * Don't show word candidates arriving after a word has been committed
+    and allow candidates to remain on the word ribbon until a new set
+    has been calculated prior to commit. (LP: #1384806)
+  * Only consider the current line when evaluating whether we're in the
+    middle of a piece of text. (LP: #1387714)
+  * Fix ImhNoAutoUppercase hint behaviour when switching between apps
+    with autocaps and without. (LP: #1370071)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Nov 2014 20:18:18 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+14.10.20141010-0ubuntu1) 14.09; urgency=low
 
   [ Michael Sheldon ]

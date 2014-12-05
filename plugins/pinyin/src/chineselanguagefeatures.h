@@ -33,6 +33,7 @@ public:
     virtual QString appendixForReplacedPreedit(const QString &preedit) const;
     virtual bool isSeparator(const QString &text) const;
     virtual bool isSymbol(const QString &text) const;
+    virtual bool ignoreSimilarity() const;
 };
 
 #endif // CHINESELANGUAGEFEATURES_H

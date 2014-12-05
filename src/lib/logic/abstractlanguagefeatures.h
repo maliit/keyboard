@@ -33,6 +33,7 @@
 #define MALIIT_KEYBOARD_ABSTRACTLANGUAGEFEATURES_H
 
 #include <QObject>
+#include <maliit/plugins/abstractinputmethod.h>
 
 class QObject;
 class AbstractLanguageFeatures
@@ -48,6 +49,16 @@ public:
     virtual bool isSeparator(const QString &text) const { Q_UNUSED(text); return false; }
     virtual QString fullStopSequence() const { return QString(); }
     virtual bool isSymbol(const QString &text) const { Q_UNUSED(text); return false; }
+    // Typically we disable auto-correct if the predicted word isn't similar
+    // to the user's input. However for input methods such as pinyin this
+    // can be disabled by implementing this method to return true.
+    virtual bool ignoreSimilarity() const { return false; }
+
+    Maliit::TextContentType contentType() const { return m_contentType; }
+    void setContentType(Maliit::TextContentType contentType) { m_contentType = contentType; }
+
+private:
+    Maliit::TextContentType m_contentType;
 };
 
 #endif // MALIIT_KEYBOARD_ABSTRACTLANGUAGEFEATURES_H

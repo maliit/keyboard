@@ -87,6 +87,8 @@ Item {
 
             property bool firstShow: true
 
+            property string layoutId: "freetext"
+
             onXChanged: fullScreenItem.reportKeyboardVisibleRect();
             onYChanged: fullScreenItem.reportKeyboardVisibleRect();
             onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
@@ -258,6 +260,7 @@ Item {
                         keypad.activeKeypadState = "NORMAL";
                         keypad.autoCapsTriggered = false;
                     }
+                    keypad.delayedAutoCaps = false;
                 }
             }
 

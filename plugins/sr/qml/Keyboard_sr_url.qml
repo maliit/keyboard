@@ -90,7 +90,7 @@ KeyPad {
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton; anchors.left: symShiftKey.right; height: parent.height; }
             SpaceKey       { id: spaceKey;                               anchors.left: languageMenuButton.right; anchors.right: urlKey.left; noMagnifier: true; height: parent.height; }
-            UrlKey         { id: urlKey; label: ".срб"; extended: [".пр.срб", ".орг.срб", ".од.срб" ]; extendedShifted: [".ак.срб", ".упр.срб", ".обр.срб" ]; anchors.right: enterKey.left; height: parent.height; }
+            UrlKey         { id: urlKey; label: ".срб"; extended: [".com", ".пр.срб", ".орг.срб", ".од.срб" ]; extendedShifted: [".ак.срб", ".упр.срб", ".обр.срб" ]; anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column
