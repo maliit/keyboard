@@ -1,25 +1,29 @@
-﻿#ifndef EMOJIPLUGIN_H
+#ifndef EMOJIPLUGIN_H
 #define EMOJIPLUGIN_H
 
 #include <QObject>
+#include <QStringList>
 #include "languageplugininterface.h"
-#include "westernlanguagesplugin.h"
+#include "abstractlanguageplugin.h"
 
-class EmojiPlugin : public WesternLanguagesPlugin
+#include <iostream>
+
+class EmojiLanguageFeatures;
+
+class EmojiPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
-    Q_INTERFACES(LanguagePluginInterface)
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.EmojiPlugin" FILE "emojiplugin.json")
+    Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    explicit EmojiPlugin(QObject* parent = 0)
-        : WesternLanguagesPlugin(parent)
-    {
-    }
+    explicit EmojiPlugin(QObject *parent = 0);
+    virtual ~EmojiPlugin();
+    
+    virtual AbstractLanguageFeatures* languageFeature();
 
-    virtual ~EmojiPlugin()
-    {
-    }
+private:
+    EmojiLanguageFeatures* m_emojiLanguageFeatures;
 };
 
 #endif // EMOJIPLUGIN_H

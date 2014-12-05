@@ -8,39 +8,25 @@ CONFIG         += plugin
 QT             += widgets
 INCLUDEPATH    += \
     $${TOP_SRCDIR}/src/ \
-    $${TOP_SRCDIR}/src/lib/ \
-    $${TOP_SRCDIR}/src/lib/logic/
-    $${TOP_SRCDIR}/plugins/westernsupport
+    $${TOP_SRCDIR}/src/lib/logic
 
 HEADERS         = \
-    emojiplugin.h
+                  emojiplugin.h \
+                  emojilanguagefeatures.h \
+                  $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.h
+
+SOURCES         = \
+                  emojiplugin.cpp \
+                  emojilanguagefeatures.cpp \
+                  $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.cpp
 
 TARGET          = $$qtLibraryTarget(emojiplugin)
 
 EXAMPLE_FILES = emojiplugin.json
 
-# generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/emoji/
-
-lang_db_emoji.commands += \
-  rm -f $$PWD/database_emoji.db && \
-  text2ngram -n 1 -l -f sqlite -o $$PWD/database_emoji.db $$PWD/free_ebook.txt && \
-  text2ngram -n 2 -l -f sqlite -o $$PWD/database_emoji.db $$PWD/free_ebook.txt && \
-  text2ngram -n 3 -l -f sqlite -o $$PWD/database_emoji.db $$PWD/free_ebook.txt
-lang_db_emoji.files += $$PWD/database_emoji.db
-lang_db_emoji_install.path = $$PLUGIN_INSTALL_PATH
-lang_db_emoji_install.files += $$PWD/database_emoji.db
-
-QMAKE_EXTRA_TARGETS += lang_db_emoji lang_db_emoji_install
-
-target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_emoji_install
+# install
+target.path = $${UBUNTU_KEYBOARD_LIB_DIR}/emoji/
+INSTALLS += target
 
 OTHER_FILES += \
-    emojiplugin.json \
-    free_ebook.txt
-
-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
-
-INCLUDEPATH += $$PWD/../../westernsupport
-DEPENDPATH += $$PWD/../../westernsupport
+    emojiplugin.json
