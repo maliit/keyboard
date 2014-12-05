@@ -24,8 +24,22 @@ KeyPad {
 
     content: c1
     symbols: "languages/Keyboard_symbols.qml"
-    property string startChar: "😁"
-    property int offset: 0
+    property int offset: 740
+    property var chars: calculateChars()
+
+    function calculateChars() {
+        var totalSkips = 0;
+        var c = [];
+        for (var block = 0; block < Emoji.start.length; block++) {
+            for (var i = Emoji.start[block][1]; i < Emoji.end[block][1]; i++) {
+                while (Emoji.skip[block].indexOf(i) != -1) {
+                    i++;
+                }
+                c.push(String.fromCharCode(Emoji.start[block][0], i));
+            }
+        }
+        return c;
+    }
 
     Column {
         id: c1
@@ -39,7 +53,7 @@ KeyPad {
             Repeater {
                 model: 10
                 CharKey {
-                    label: String.fromCharCode(startChar.charCodeAt(0), startChar.charCodeAt(1) + index + offset)
+                    label: chars[offset + index]
                     shifted: label
                     leftSide: index == 0
                     rightSide: index == 9
@@ -57,22 +71,11 @@ KeyPad {
                 iconCapsLock: "go-previous"
                 overridePressArea: true
                 onPressed: {
-                    var start;
-                    var end;
-                    // Determine which block we're in
-                    if (startChar.charCodeAt(0) == Emoji.start[0][0]) {
-                        start = Emoji.start[0];
-                        end = Emoji.end[1];
-                    } else {
-                        start = Emoji.start[1];
-                        end = Emoji.end[0];
-                    }
-                    if (startChar.charCodeAt(1) + offset == start[1]) {
+                    if (offset == 0) {
                         // Wrap around
-                        startChar = String.fromCharCode(end[0], end[1])
-                        offset = -18
-                    } else if (startChar.charCodeAt(1) + (offset - 18) < start[1]) {
-                        offset -= startChar.charCodeAt(1) + offset - start[1];
+                        offset = chars.length - 18
+                    } else if (offset - 18 < 0) {
+                        offset = 0
                     } else {
                         offset -= 18;
                     }
@@ -82,7 +85,7 @@ KeyPad {
             Repeater {
                 model: 8
                 CharKey {
-                    label: String.fromCharCode(startChar.charCodeAt(0), startChar.charCodeAt(1) + 10 + index + offset)
+                    label: chars[10 + offset + index]
                     shifted: label
                 }
             }
@@ -93,22 +96,11 @@ KeyPad {
                 iconCapsLock: "go-next"
                 overridePressArea: true
                 onPressed: {
-                    var start;
-                    var end;
-                    // Determine which block we're in
-                    if (startChar.charCodeAt(0) == Emoji.end[0][0]) {
-                        start = Emoji.start[1];
-                        end = Emoji.end[0];
-                    } else {
-                        start = Emoji.start[0];
-                        end = Emoji.end[1];
-                    }
-                    if (startChar.charCodeAt(1) + offset + 18 == end[1]) {
+                    if (offset + 18 == chars.length) {
                         // Wrap around
-                        startChar = String.fromCharCode(start[0], start[1])
                         offset = 0
-                    } else if (startChar.charCodeAt(1) + offset + 18 > end[1]) {
-                        offset = end[1] - 18 - startChar.charCodeAt(1);
+                    } else if (offset + 36 >= chars.length) {
+                        offset = chars.length - 18
                     } else {
                         offset += 18
                     }
@@ -121,12 +113,11 @@ KeyPad {
             spacing: 0
 
             ActionKey {
-                label: "😁"
+                label: "😀"
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    startChar = label
-                    offset = 0
+                    offset = 740
                 }
             }
 
@@ -135,8 +126,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    startChar = label
-                    offset = 0
+                    offset = 865
                 }
             }
 
@@ -145,8 +135,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    startChar = label
-                    offset = 0
+                    offset = 569
                 }
             }
 
@@ -155,8 +144,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    startChar = label
-                    offset = 0
+                    offset = 237
                 }
             }
 
@@ -165,8 +153,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    startChar = label
-                    offset = 0
+                    offset = 214
                 }
             }
 
@@ -175,8 +162,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    startChar = label
-                    offset = 0
+                    offset = 14
                 }     
             }
 
