@@ -1,0 +1,114 @@
+# Ukrainian translation for ubuntu-keyboard
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-11-12 15:18+0000\n"
+"PO-Revision-Date: 2014-12-05 19:17+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-12-06 06:40+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
+
+#: ../qml/keys/LanguageMenu.qml:61
+msgid "Settings"
+msgstr "Параметри"
+
+#: ../qml/keys/LanguageMenu.qml:74
+msgid "Arabic"
+msgstr "Арабська"
+
+#: ../qml/keys/LanguageMenu.qml:75
+msgid "Azerbaijani"
+msgstr "Азербайджанська"
+
+#: ../qml/keys/LanguageMenu.qml:76
+msgid "Bosnian"
+msgstr "Боснійська"
+
+#: ../qml/keys/LanguageMenu.qml:77
+msgid "Catalan"
+msgstr "Каталонська"
+
+#: ../qml/keys/LanguageMenu.qml:78
+msgid "Czech"
+msgstr "Чеська"
+
+#: ../qml/keys/LanguageMenu.qml:79
+msgid "Danish"
+msgstr "Данська"
+
+#: ../qml/keys/LanguageMenu.qml:80
+msgid "German"
+msgstr "Німецька"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "English"
+msgstr "Англійська"
+
+#: ../qml/keys/LanguageMenu.qml:82
+msgid "Spanish"
+msgstr "Іспанська"
+
+#: ../qml/keys/LanguageMenu.qml:83
+msgid "Finnish"
+msgstr "Фінська"
+
+#: ../qml/keys/LanguageMenu.qml:84
+msgid "French"
+msgstr "Французька"
+
+#: ../qml/keys/LanguageMenu.qml:85
+msgid "Hebrew"
+msgstr "Іврит"
+
+#: ../qml/keys/LanguageMenu.qml:86
+msgid "Croatian"
+msgstr "Хорватська"
+
+#: ../qml/keys/LanguageMenu.qml:87
+msgid "Hungarian"
+msgstr "Угорська"
+
+#: ../qml/keys/LanguageMenu.qml:88
+msgid "Italian"
+msgstr "Італійська"
+
+#: ../qml/keys/LanguageMenu.qml:89
+msgid "Dutch"
+msgstr "Голландська"
+
+#: ../qml/keys/LanguageMenu.qml:90
+msgid "Polish"
+msgstr "Польська"
+
+#: ../qml/keys/LanguageMenu.qml:91
+msgid "Portuguese"
+msgstr "Португальська"
+
+#: ../qml/keys/LanguageMenu.qml:92
+msgid "Russian"
+msgstr "Російська"
+
+#: ../qml/keys/LanguageMenu.qml:93
+msgid "Serbian"
+msgstr "Сербська"
+
+#: ../qml/keys/LanguageMenu.qml:94
+msgid "Swedish"
+msgstr "Шведська"
+
+#: ../qml/keys/LanguageMenu.qml:95
+msgid "Chinese - Pinyin"
+msgstr "Китайська — піньїн"
+
+#: ../qml/keys/LanguageMenu.qml:98
+msgid "Language: "
+msgstr "Мова: "
