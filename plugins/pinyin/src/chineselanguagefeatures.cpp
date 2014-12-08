@@ -88,3 +88,8 @@ bool ChineseLanguageFeatures::ignoreSimilarity() const
 {
     return true;
 }
+
+bool ChineseLanguageFeatures::wordEngineAvailable() const
+{
+    return true;
+}

@@ -141,7 +141,8 @@ bool WordEngine::isEnabled() const
 {
     Q_D(const WordEngine);
     return (AbstractWordEngine::isEnabled() &&
-            (d->use_predictive_text || d->use_spell_checker));
+            (d->use_predictive_text || d->use_spell_checker) &&
+            d->languagePlugin->languageFeature()->wordEngineAvailable());
 }
 
 void WordEngine::appendToCandidates(WordCandidateList *candidates,
@@ -427,6 +428,8 @@ void WordEngine::onLanguageChanged(const QString &languageId)
     setWordPredictionEnabled(d->requested_prediction_state);
 
     d->languagePlugin->setLanguage(languageId);
+
+    Q_EMIT enabledChanged(isEnabled());
 
     connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SLOT(newSpellingSuggestions(QString, QStringList)));
     connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SLOT(newPredictionSuggestions(QString, QStringList)));
