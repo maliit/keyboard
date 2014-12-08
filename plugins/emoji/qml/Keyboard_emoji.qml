@@ -24,21 +24,25 @@ KeyPad {
 
     content: c1
     symbols: "languages/Keyboard_symbols.qml"
-    property int offset: 740
-    property var chars: calculateChars()
 
-    function calculateChars() {
-        var totalSkips = 0;
-        var c = [];
-        for (var block = 0; block < Emoji.start.length; block++) {
-            for (var i = Emoji.start[block][1]; i < Emoji.end[block][1]; i++) {
-                while (Emoji.skip[block].indexOf(i) != -1) {
-                    i++;
+    QtObject {
+        id: internal
+        property int offset: 740
+        property var chars: calculateChars()
+
+        function calculateChars() {
+            var totalSkips = 0;
+            var c = [];
+            for (var block = 0; block < Emoji.start.length; block++) {
+                for (var i = Emoji.start[block][1]; i < Emoji.end[block][1]; i++) {
+                    while (Emoji.skip[block].indexOf(i) != -1) {
+                        i++;
+                    }
+                    c.push(String.fromCharCode(Emoji.start[block][0], i));
                 }
-                c.push(String.fromCharCode(Emoji.start[block][0], i));
             }
+            return c;
         }
-        return c;
     }
 
     Column {
@@ -53,7 +57,7 @@ KeyPad {
             Repeater {
                 model: 10
                 CharKey {
-                    label: chars[offset + index]
+                    label: internal.chars[internal.offset + index]
                     shifted: label
                     leftSide: index == 0
                     rightSide: index == 9
@@ -71,13 +75,13 @@ KeyPad {
                 iconCapsLock: "go-previous"
                 overridePressArea: true
                 onPressed: {
-                    if (offset == 0) {
+                    if (internal.offset == 0) {
                         // Wrap around
-                        offset = chars.length - 18
-                    } else if (offset - 18 < 0) {
-                        offset = 0
+                        internal.offset = internal.chars.length - 18
+                    } else if (internal.offset - 18 < 0) {
+                        internal.offset = 0
                     } else {
-                        offset -= 18;
+                        internal.offset -= 18;
                     }
                 }
             }
@@ -85,7 +89,7 @@ KeyPad {
             Repeater {
                 model: 8
                 CharKey {
-                    label: chars[10 + offset + index]
+                    label: internal.chars[10 + internal.offset + index]
                     shifted: label
                 }
             }
@@ -96,13 +100,13 @@ KeyPad {
                 iconCapsLock: "go-next"
                 overridePressArea: true
                 onPressed: {
-                    if (offset + 18 == chars.length) {
+                    if (internal.offset + 18 == internal.chars.length) {
                         // Wrap around
-                        offset = 0
-                    } else if (offset + 36 >= chars.length) {
-                        offset = chars.length - 18
+                        internal.offset = 0
+                    } else if (internal.offset + 36 >= internal.chars.length) {
+                        internal.offset = internal.chars.length - 18
                     } else {
-                        offset += 18
+                        internal.offset += 18
                     }
                 }
             }
@@ -117,7 +121,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    offset = 740
+                    internal.offset = 740
                 }
             }
 
@@ -126,7 +130,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    offset = 865
+                    internal.offset = 865
                 }
             }
 
@@ -135,7 +139,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    offset = 569
+                    internal.offset = 569
                 }
             }
 
@@ -144,7 +148,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    offset = 237
+                    internal.offset = 237
                 }
             }
 
@@ -153,7 +157,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    offset = 214
+                    internal.offset = 214
                 }
             }
 
@@ -162,7 +166,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    offset = 14
+                    internal.offset = 14
                 }     
             }
 
