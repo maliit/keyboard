@@ -297,6 +297,11 @@ class Keyboard(object):
             self._current_keypad_name,
             "shift"
         )
+
+        if key_pos == None:
+            # Not all layouts have a shift key
+            return
+
         self._tap_key(key_pos)
         self._keyboard_container.activeKeypadState.wait_for(state)
         self.active_keypad.opacity.wait_for(1.0)
