@@ -316,8 +316,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         self.assertThat(text_area.text, Eventually(Equals('abcA')))
 
     def test_shift_state_entered_after_fullstop(self):
-        """After typing a fullstop the keyboard state must automatically
-        enter the shifted state.
+        """After typing a fullstop followed by a space the keyboard state must
+        automatically enter the shifted state.
 
         """
         text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
@@ -325,11 +325,11 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type("abc.")
+        keyboard.type("abc. ")
 
         self.assertThat(
             text_area.text,
-            Eventually(Equals("abc."))
+            Eventually(Equals("abc. "))
         )
 
         self.assertThat(
@@ -346,7 +346,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type("Hello my friend.\b")
+        keyboard.type("Hello my friend. \b\b")
 
         self.assertThat(
             text_area.text,
