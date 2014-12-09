@@ -1,3 +1,15 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141209-0ubuntu1) vivid; urgency=low
+
+  [ Michael Sheldon ]
+  * Disables automatic insertion of space characters after punctuation
+    except when punctuation has been added by double space. (LP:
+    #1398503)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 09 Dec 2014 15:37:46 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141202-0ubuntu1) vivid; urgency=low
 
   [ Michael Sheldon ]
