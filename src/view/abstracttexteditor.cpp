@@ -465,10 +465,6 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
-                if (d->keyboardState == "CHARACTERS" && !email_detected) {
-                    d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-                    d->text->appendToPreedit(d->appendix_for_previous_preedit);
-                }
                 commitPreedit();
                 if (!email_detected) {
                     auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
@@ -484,9 +480,6 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->text->appendToPreedit(text);
                 if (!email_detected) {
                     auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-                    if(isSeparator && d->keyboardState == "CHARACTERS") {
-                        d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
-                    }
                 }
                 commitPreedit();
                 alreadyAppended = true;
