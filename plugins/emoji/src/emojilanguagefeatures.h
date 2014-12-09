@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2014 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,18 +14,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CHINESELANGUAGEFEATURES_H
-#define CHINESELANGUAGEFEATURES_H
+#ifndef EMOJILANGUAGEFEATURES_H
+#define EMOJILANGUAGEFEATURES_H
 
 #include "abstractlanguagefeatures.h"
 #include <QObject>
 
-class ChineseLanguageFeatures : public QObject, public AbstractLanguageFeatures
+class EmojiLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {
     Q_OBJECT
 public:
-    explicit ChineseLanguageFeatures(QObject *parent = 0);
-    virtual ~ChineseLanguageFeatures();
+    explicit EmojiLanguageFeatures(QObject *parent = 0);
+    virtual ~EmojiLanguageFeatures();
 
     virtual bool alwaysShowSuggestions() const;
     virtual bool autoCapsAvailable() const;
@@ -34,7 +34,6 @@ public:
     virtual bool isSeparator(const QString &text) const;
     virtual bool isSymbol(const QString &text) const;
     virtual bool ignoreSimilarity() const;
-    virtual bool wordEngineAvailable() const;
 };
 
-#endif // CHINESELANGUAGEFEATURES_H
+#endif // EMOJILANGUAGEFEATURES_H

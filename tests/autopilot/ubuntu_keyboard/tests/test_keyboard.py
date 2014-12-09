@@ -83,7 +83,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
         gsettings.set_string("active-language", "en")
-        gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh"])
+        gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh", "emoji"])
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
         gsettings.set_boolean("predictive-text", True)
@@ -598,6 +598,50 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
         self.ensure_focus_on_input(text_area)
 
         expected = 'This is a test'
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
+class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "emoji")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_emoji_input(self):
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('😁😆😃😏')
+
+        expected = "😁😆😃😏"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_emoji_deletion(self):
+        """Emoji characters should be deleted completely, despite being made up
+           of multiple bytes.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('😁😆😃😏\b')
+
+        expected = "😁😆😃"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))

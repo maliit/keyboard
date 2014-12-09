@@ -109,3 +109,8 @@ bool WesternLanguageFeatures::ignoreSimilarity() const
 {
     return false;
 }
+
+bool WesternLanguageFeatures::wordEngineAvailable() const
+{
+    return true;
+}
