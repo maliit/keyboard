@@ -276,7 +276,7 @@ void InputMethod::updateAutoCaps()
 void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
-    d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
+    d->enabledLanguages = d->m_settings.enabledLanguages();
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
 
@@ -516,11 +516,6 @@ const QString InputMethod::audioFeedbackSound() const
 void InputMethod::setActiveLanguage(const QString &newLanguage)
 {
     Q_D(InputMethod);
-
-    if (newLanguage.length() != 2) {
-        qWarning() << Q_FUNC_INFO << "newLanguage is not valid:" << newLanguage;
-        return;
-    }
 
     qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
 

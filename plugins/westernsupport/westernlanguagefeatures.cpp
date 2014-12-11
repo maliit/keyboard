@@ -60,7 +60,7 @@ bool WesternLanguageFeatures::activateAutoCaps(const QString &preedit) const
         return false;
     }
 
-    if (sentenceBreak.contains(preedit.right(1))) {
+    if (sentenceBreak.contains(preedit.mid(preedit.length() - 2, 1)) && preedit.right(1) == " ") {
         return true;
     }
 
@@ -108,4 +108,9 @@ bool WesternLanguageFeatures::isSymbol(const QString &text) const
 bool WesternLanguageFeatures::ignoreSimilarity() const
 {
     return false;
+}
+
+bool WesternLanguageFeatures::wordEngineAvailable() const
+{
+    return true;
 }

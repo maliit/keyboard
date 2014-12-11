@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2014 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,47 +14,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "chineselanguagefeatures.h"
+#include "emojilanguagefeatures.h"
 
-ChineseLanguageFeatures::ChineseLanguageFeatures(QObject *parent) :
+EmojiLanguageFeatures::EmojiLanguageFeatures(QObject *parent) :
     QObject(parent)
 {
 }
 
-ChineseLanguageFeatures::~ChineseLanguageFeatures()
+EmojiLanguageFeatures::~EmojiLanguageFeatures()
 {
 }
 
-bool ChineseLanguageFeatures::alwaysShowSuggestions() const
+bool EmojiLanguageFeatures::alwaysShowSuggestions() const
 {
-    // Pinyin characters can only be entered via suggestions, so we ignore
-    // hints that would otherwise disable them.
-    return true;
-}
-
-bool ChineseLanguageFeatures::autoCapsAvailable() const
-{
-    // Automatic switching to capital letters doen't make sense when 
-    // inputting Pinyin
     return false;
 }
 
-bool ChineseLanguageFeatures::activateAutoCaps(const QString &preedit) const
+bool EmojiLanguageFeatures::autoCapsAvailable() const
+{
+    return false;
+}
+
+bool EmojiLanguageFeatures::activateAutoCaps(const QString &preedit) const
 {
     Q_UNUSED(preedit)
     return false;
 }
 
-QString ChineseLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
+QString EmojiLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
-    if (isSeparator(preedit.right(1)) && contentType() != Maliit::EmailContentType && contentType() != Maliit::UrlContentType) {
-        return QString(" ");
-    }
-
+    Q_UNUSED(preedit)
     return QString("");
 }
 
-bool ChineseLanguageFeatures::isSeparator(const QString &text) const
+bool EmojiLanguageFeatures::isSeparator(const QString &text) const
 {
     static const QString separators = QString::fromUtf8("。、,!?:;.\r\n");
 
@@ -69,7 +62,7 @@ bool ChineseLanguageFeatures::isSeparator(const QString &text) const
     return false;
 }
 
-bool ChineseLanguageFeatures::isSymbol(const QString &text) const
+bool EmojiLanguageFeatures::isSymbol(const QString &text) const
 {
     static const QString symbols = QString::fromUtf8("*#+=()@~/\\€£$¥₹%<>[]`^|_§{}¡¿«»\"“”„&0123456789");
 
@@ -84,12 +77,7 @@ bool ChineseLanguageFeatures::isSymbol(const QString &text) const
     return false;
 }
 
-bool ChineseLanguageFeatures::ignoreSimilarity() const
-{
-    return true;
-}
-
-bool ChineseLanguageFeatures::wordEngineAvailable() const
+bool EmojiLanguageFeatures::ignoreSimilarity() const
 {
     return true;
 }
