@@ -65,7 +65,7 @@ KeyPad {
             anchors.margins: 50;
             spacing: 0
 
-            CharKey { label: "+"; annotation: "+*#"; extended: ["*", "#", "(", ")"]; noMagnifier: true; }
+            CharKey { label: "+"; annotation: "*#"; extended: ["*", "#"]; noMagnifier: true; }
             CharKey { label: "0"; noMagnifier: true; }
             BackspaceKey { padding: 0; }
         }
