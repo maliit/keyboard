@@ -72,6 +72,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
             shutil.rmtree(presagedir)
             os.rename(presagedir + ".bak", presagedir)
+        subprocess.check_call(['restart', 'maliit-server'])
 
     def setUp(self):
         if model() == "Desktop":
