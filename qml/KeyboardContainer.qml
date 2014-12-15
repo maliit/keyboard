@@ -33,6 +33,7 @@ Item {
 
     property string activeKeypadState: "NORMAL"
     property alias popoverEnabled: extendedKeysSelector.enabled
+    property string previousLanguage
 
     state: "CHARACTERS"
 
@@ -125,6 +126,7 @@ Item {
                 "cs",
                 "da",
                 "de",
+                "emoji",
                 "en",
                 "es",
                 "fi",
@@ -147,7 +149,12 @@ Item {
         /// Returns the relative path to the keyboard QML file for a given language for free text
         function freeTextLanguageKeyboard(language)
         {
-            language = language .slice(0,2).toLowerCase();
+            language = language.toLowerCase();
+            if (!languageIsSupported(language)) {
+                // If we don't have a layout for this specific locale 
+                // check more generic locale
+                language = language.slice(0,2);
+            }
 
             if (!languageIsSupported(language)) {
                 console.log("Language '"+language+"' not supported - using 'en' instead");
@@ -168,6 +175,8 @@ Item {
                 return "lib/da/Keyboard_da.qml";
             if (language === "de")
                 return "lib/de/Keyboard_de.qml";
+            if (language === "emoji")
+                return "lib/emoji/Keyboard_emoji.qml";
             if (language === "en")
                 return "lib/en/Keyboard_en.qml";
             if (language === "es")
@@ -214,7 +223,10 @@ Item {
                 return "languages/Keyboard_telephone.qml";
             }
 
-            var locale = activeLanguage.slice(0,2).toLowerCase();
+            var locale = activeLanguage.toLowerCase();
+            if (!languageIsSupported(locale)) {
+                locale = locale.slice(0,2);
+            }
             if (!languageIsSupported(locale)) {
                 console.log("System language '"+locale+"' can't be used in OSK - using 'en' instead")
                 locale = "en"

@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141209.1-0ubuntu1) vivid; urgency=low
+
+  [ Michael Sheldon ]
+  * Fix building and packaging of translation files
+  * Add emoji layout (LP: #1340598)
+
+  [ Mike Sheldon ]
+  * Add emoji layout (LP: #1340598)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 09 Dec 2014 20:43:08 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141209-0ubuntu1) vivid; urgency=low
 
   [ Michael Sheldon ]
