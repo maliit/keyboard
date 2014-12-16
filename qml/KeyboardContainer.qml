@@ -141,6 +141,7 @@ Item {
                 "ru",
                 "sr",
                 "sv",
+                "uk",
                 "zh",
             ];
             return (supportedLocales.indexOf( locale ) > -1);
@@ -205,6 +206,8 @@ Item {
                 return "lib/sr/Keyboard_sr.qml";
             if (language === "sv")
                 return "lib/sv/Keyboard_sv.qml";
+            if (language === "uk")
+                return "lib/uk/Keyboard_uk.qml";
             if (language === "zh")
                 return "lib/zh/Keyboard_zh_cn_pinyin.qml";
         }

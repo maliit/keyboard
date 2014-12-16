@@ -24,6 +24,7 @@ SUBDIRS = \
     ru \
     sr \
     sv \
+    uk \
     pinyin \
 
 QMAKE_EXTRA_TARGETS += check
