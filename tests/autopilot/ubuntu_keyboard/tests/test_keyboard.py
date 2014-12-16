@@ -437,7 +437,12 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             Eventually(Equals(self.expected_activeview))
         )
 
-        keyboard.type(self.text)
+        if self.text[-4:] == ".com":
+            keyboard.type(self.text[:-4])
+            keyboard.press_key(".com")
+        else:
+            keyboard.type(self.text)
+        
         self.assertThat(
             text_area.text,
             Eventually(Equals(self.text))
