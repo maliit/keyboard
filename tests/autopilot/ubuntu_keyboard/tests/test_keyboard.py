@@ -486,6 +486,24 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_long_press(self):
+        """Long pressing a key should enter the default extended character.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.press_key('t', long_press=True)
+
+        expected = "5"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
 
 class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 

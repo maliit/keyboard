@@ -160,7 +160,7 @@ class Keyboard(object):
         except AssertionError:
             return False
 
-    def press_key(self, key, capslock_switch=False):
+    def press_key(self, key, capslock_switch=False, long_press=False):
         """Tap on the key with the internal pointer
 
         :params key: String containing the text of the key to tap.
@@ -191,7 +191,10 @@ class Keyboard(object):
         self._show_keypad(req_keypad)
         self._change_keypad_to_state(req_key_state)
 
-        self._tap_key(key_pos)
+        if long_press:
+            self._long_press_key(key_pos)
+        else:
+            self._tap_key(key_pos)
 
     def type(self, string, delay=0.1):
         """Type the string *string* with a delay of *delay* between each key
@@ -310,6 +313,14 @@ class Keyboard(object):
         if pointer is None:
             pointer = Pointer(Touch.create())
         pointer.click_object(key_rect)
+
+    def _long_press_key(self, key_rect, pointer=None):
+        if pointer is None:
+            pointer = Pointer(Touch.create())
+        pointer.move(key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0)
+        pointer.press()
+        sleep(1)
+        pointer.release()
 
     def _keyboard_details_changed(self):
         return self._orientation_changed()
