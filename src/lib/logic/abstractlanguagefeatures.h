@@ -53,6 +53,7 @@ public:
     // to the user's input. However for input methods such as pinyin this
     // can be disabled by implementing this method to return true.
     virtual bool ignoreSimilarity() const { return false; }
+    virtual bool wordEngineAvailable() const { return false; }
 
     Maliit::TextContentType contentType() const { return m_contentType; }
     void setContentType(Maliit::TextContentType contentType) { m_contentType = contentType; }

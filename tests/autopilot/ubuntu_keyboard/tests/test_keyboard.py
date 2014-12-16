@@ -83,7 +83,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
         gsettings.set_string("active-language", "en")
-        gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh"])
+        gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh", "emoji"])
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
         gsettings.set_boolean("predictive-text", True)
@@ -316,8 +316,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         self.assertThat(text_area.text, Eventually(Equals('abcA')))
 
     def test_shift_state_entered_after_fullstop(self):
-        """After typing a fullstop the keyboard state must automatically
-        enter the shifted state.
+        """After typing a fullstop followed by a space the keyboard state must
+        automatically enter the shifted state.
 
         """
         text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
@@ -325,11 +325,11 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type("abc.")
+        keyboard.type("abc. ")
 
         self.assertThat(
             text_area.text,
-            Eventually(Equals("abc."))
+            Eventually(Equals("abc. "))
         )
 
         self.assertThat(
@@ -346,7 +346,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type("Hello my friend.\b")
+        keyboard.type("Hello my friend. \b\b")
 
         self.assertThat(
             text_area.text,
@@ -529,7 +529,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 
         keyboard.type('pinyin ')
 
-        expected = "品以"
+        expected = "拼音"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
@@ -546,7 +546,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 
         keyboard.type('pinyin.cn ')
 
-        expected = "品以.cn"
+        expected = "拼音.cn"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
@@ -598,6 +598,50 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
         self.ensure_focus_on_input(text_area)
 
         expected = 'This is a test'
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
+class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "emoji")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_emoji_input(self):
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('😁😆😃😏')
+
+        expected = "😁😆😃😏"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_emoji_deletion(self):
+        """Emoji characters should be deleted completely, despite being made up
+           of multiple bytes.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('😁😆😃😏\b')
+
+        expected = "😁😆😃"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))

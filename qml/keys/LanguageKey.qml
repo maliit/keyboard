@@ -17,6 +17,8 @@
 import QtQuick 2.0
 
 ActionKey {
+    property bool switchBack: false // Switch back to previous layout without showing menu
+
     iconNormal: "language-chooser";
     iconShifted: "language-chooser";
     iconCapsLock: "language-chooser";
@@ -34,6 +36,11 @@ ActionKey {
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
 
-        canvas.languageMenuShown = true
+        if (switchBack && panel.previousLanguage) {
+            maliit_input_method.activeLanguage = panel.previousLanguage
+        } else {
+            panel.previousLanguage = maliit_input_method.activeLanguage
+            canvas.languageMenuShown = true
+        }
     }   
 }
