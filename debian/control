@@ -225,6 +225,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Serbian
  Data files for the Ubuntu virtual keyboard - Serbian
 
+Package: ubuntu-keyboard-scottish-gaelic
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         hunspell-gd,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Scottish Gaelic
+ Data files for the Ubuntu virtual keyboard - Scottish Gaelic
+
 Package: ubuntu-keyboard-spanish
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
