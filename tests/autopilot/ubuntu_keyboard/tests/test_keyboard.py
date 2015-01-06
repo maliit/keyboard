@@ -378,6 +378,47 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_visibility_reporting(self):
+        """The keyboard should only report visibility changes once.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.0
+        import Ubuntu.Components 0.1
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            TextField {
+                id: input;
+                objectName: "input"
+                property int visibilityChangeCount: 0
+            }
+
+            Connections {
+                target: Qt.inputMethod
+                onVisibleChanged: {
+                    input.visibilityChangeCount++;
+                    console.log("Visibility: " + Qt.inputMethod.visible);
+                    console.log("Change count: " + input.visibilityChangeCount);
+                }
+            }
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        text_area = app.select_single(objectName='input')
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        keyboard.dismiss()
+
+        self.assertThat(
+            text_area.visibilityChangeCount,
+            Eventually(Equals(2))
+        )        
+
 
 class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
 
