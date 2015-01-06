@@ -29,4 +29,7 @@ setup(
     url='https://launchpad.net/ubuntu-keyboard',
     license='GPLv3',
     packages=find_packages(),
+    data_files=[
+        ('share/applications', ['ubuntu-keyboard-tester.desktop'])
+    ]
 )

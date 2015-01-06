@@ -47,7 +47,7 @@ bool ChineseLanguageFeatures::activateAutoCaps(const QString &preedit) const
 
 QString ChineseLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
-    if (isSeparator(preedit.right(1))) {
+    if (isSeparator(preedit.right(1)) && contentType() != Maliit::EmailContentType && contentType() != Maliit::UrlContentType) {
         return QString(" ");
     }
 
@@ -85,6 +85,11 @@ bool ChineseLanguageFeatures::isSymbol(const QString &text) const
 }
 
 bool ChineseLanguageFeatures::ignoreSimilarity() const
+{
+    return true;
+}
+
+bool ChineseLanguageFeatures::wordEngineAvailable() const
 {
     return true;
 }

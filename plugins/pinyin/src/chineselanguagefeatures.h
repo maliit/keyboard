@@ -34,6 +34,7 @@ public:
     virtual bool isSeparator(const QString &text) const;
     virtual bool isSymbol(const QString &text) const;
     virtual bool ignoreSimilarity() const;
+    virtual bool wordEngineAvailable() const;
 };
 
 #endif // CHINESELANGUAGEFEATURES_H

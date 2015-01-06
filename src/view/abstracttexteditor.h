@@ -120,6 +120,7 @@ public:
     Q_SLOT void onCursorPositionChanged(int cursor_position,
                                         const QString &surrounding_text);
     Q_SLOT void onKeyboardStateChanged(QString state);
+    Q_SLOT void onHasSelectionChanged(bool hasSelection);
     Q_SLOT void replacePreedit(const QString &replacement);
     Q_SLOT void replaceTextWithPreedit(const QString &replacement, int start, int len, int pos);
     Q_SLOT void replaceAndCommitPreedit(const QString &replacement);
@@ -176,6 +177,8 @@ private:
 
     void sendKeyPressAndReleaseEvents(int key, Qt::KeyboardModifiers modifiers,
                                       const QString& text = QString());
+
+    bool m_hasSelection;
 };
 
 } // namespace MaliitKeyboard

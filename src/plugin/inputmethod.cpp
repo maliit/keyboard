@@ -103,6 +103,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
+    connect(this, SIGNAL(hasSelectionChanged(bool)), &d->editor, SLOT(onHasSelectionChanged(bool)));
     connect(d->editor.wordEngine(), SIGNAL(pluginChanged()), this, SLOT(onWordEnginePluginChanged()));
     connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
@@ -137,7 +138,6 @@ void InputMethod::show()
     d->m_geometry->setShown(true);
     update();
     d->view->setVisible(true);
-    d->editor.checkPreeditReentry(false);
 }
 
 //! \brief InputMethod::hide
@@ -276,7 +276,7 @@ void InputMethod::updateAutoCaps()
 void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
-    d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
+    d->enabledLanguages = d->m_settings.enabledLanguages();
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
 
@@ -345,6 +345,13 @@ void InputMethod::update()
     }
 
     bool valid;
+ 
+    bool hasSelection = d->host->hasSelection(valid);
+
+    if (valid && hasSelection != d->hasSelection) {
+        d->hasSelection = hasSelection;
+        Q_EMIT hasSelectionChanged(d->hasSelection);
+    }
 
     bool emitPredictionEnabled = false;
 
@@ -387,8 +394,11 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
-    if (d->contentType != FreeTextContentType)
+    if (d->contentType != FreeTextContentType
+        && !(d->editor.wordEngine()->languageFeature()->alwaysShowSuggestions()
+             && (d->contentType == UrlContentType || d->contentType == EmailContentType))) {
         d->wordEngineEnabled = false;
+    }
 
     d->editor.clearPreedit();
     d->editor.wordEngine()->setEnabled( d->wordEngineEnabled );
@@ -412,6 +422,8 @@ void InputMethod::setContentType(TextContentType contentType)
         return;
 
     setActiveLanguage(d->activeLanguage);
+
+    d->editor.wordEngine()->languageFeature()->setContentType(static_cast<Maliit::TextContentType>(contentType));
 
     d->contentType = contentType;
     Q_EMIT contentTypeChanged(contentType);
@@ -505,11 +517,6 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
 {
     Q_D(InputMethod);
 
-    if (newLanguage.length() != 2) {
-        qWarning() << Q_FUNC_INFO << "newLanguage is not valid:" << newLanguage;
-        return;
-    }
-
     qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
 
     if (d->activeLanguage == newLanguage)
@@ -540,6 +547,12 @@ void InputMethod::setKeyboardState(const QString &state)
     Q_D(InputMethod);
     d->keyboardState = state;
     Q_EMIT keyboardStateChanged(d->keyboardState);
+}
+
+bool InputMethod::hasSelection() const
+{
+    Q_D(const InputMethod);
+    return d->hasSelection;
 }
 
 void InputMethod::onVisibleRectChanged()

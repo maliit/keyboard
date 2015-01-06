@@ -469,10 +469,6 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
-                if (d->keyboardState == "CHARACTERS" && !email_detected) {
-                    d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-                    d->text->appendToPreedit(d->appendix_for_previous_preedit);
-                }
                 commitPreedit();
                 if (!email_detected) {
                     auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
@@ -488,9 +484,6 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->text->appendToPreedit(text);
                 if (!email_detected) {
                     auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-                    if(isSeparator && d->keyboardState == "CHARACTERS") {
-                        d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
-                    }
                 }
                 commitPreedit();
                 alreadyAppended = true;
@@ -1070,13 +1063,12 @@ void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 }
 
 //! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should
-//! place a word back in to pre-edit after a character has been deleted or focus
-//! has changed
+//! place a word back in to pre-edit after a character has been deleted
 void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 {
     Q_D(AbstractTextEditor);
 
-    if(!isPreeditEnabled()) {
+    if(!isPreeditEnabled() || m_hasSelection) {
         return;
     }
 
@@ -1125,5 +1117,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
     d->word_engine->computeCandidates(d->text.data());
 }
 
+void AbstractTextEditor::onHasSelectionChanged(bool hasSelection) {
+    m_hasSelection = hasSelection;
+}
 
 } // namespace MaliitKeyboard
