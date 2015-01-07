@@ -1,3 +1,17 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150105-0ubuntu1) vivid; urgency=low
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Michael Sheldon ]
+  * Check candidates provided by libpinyin are valid before using them
+    (LP: #1407584)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 05 Jan 2015 19:05:53 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141212-0ubuntu1) vivid; urgency=low
 
   [ Michael Sheldon ]
