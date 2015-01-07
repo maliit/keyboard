@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141212-0ubuntu1) vivid; urgency=low
+
+  [ Michael Sheldon ]
+  * Change extended keys on phone layout to '*#' (LP: #1372548)
+  * Improve the quality of pinyin suggestions (LP: #1401559)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 12 Dec 2014 20:31:07 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20141209.1-0ubuntu1) vivid; urgency=low
 
   [ Michael Sheldon ]

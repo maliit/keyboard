@@ -563,7 +563,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 
         keyboard.type('pinyin ')
 
-        expected = "品以"
+        expected = "拼音"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
@@ -580,7 +580,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 
         keyboard.type('pinyin.cn ')
 
-        expected = "品以.cn"
+        expected = "拼音.cn"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))

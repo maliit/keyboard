@@ -1,4 +1,4 @@
-# Finnish translation for ubuntu-keyboard
+# Polish translation for ubuntu-keyboard
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the ubuntu-keyboard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,107 +8,107 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-11-12 15:18+0000\n"
-"PO-Revision-Date: 2014-12-14 19:56+0000\n"
-"Last-Translator: Jiri Grönroos <Unknown>\n"
-"Language-Team: Finnish <fi@li.org>\n"
+"PO-Revision-Date: 2014-12-19 22:53+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-16 07:34+0000\n"
+"X-Launchpad-Export-Date: 2014-12-20 06:38+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: ../qml/keys/LanguageMenu.qml:61
 msgid "Settings"
-msgstr "Asetukset"
+msgstr "Ustawienia"
 
 #: ../qml/keys/LanguageMenu.qml:74
 msgid "Arabic"
-msgstr "arabia"
+msgstr "Arabski"
 
 #: ../qml/keys/LanguageMenu.qml:75
 msgid "Azerbaijani"
-msgstr "azeri"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:76
 msgid "Bosnian"
-msgstr "bosnia"
+msgstr "Bośniacki"
 
 #: ../qml/keys/LanguageMenu.qml:77
 msgid "Catalan"
-msgstr "katalaani"
+msgstr "Kataloński"
 
 #: ../qml/keys/LanguageMenu.qml:78
 msgid "Czech"
-msgstr "tšekki"
+msgstr "Czeski"
 
 #: ../qml/keys/LanguageMenu.qml:79
 msgid "Danish"
-msgstr "tanska"
+msgstr "Duński"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "German"
-msgstr "saksa"
+msgstr "Niemiecki"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "English"
-msgstr "englanti"
+msgstr "Angielski"
 
 #: ../qml/keys/LanguageMenu.qml:82
 msgid "Spanish"
-msgstr "espanja"
+msgstr "Hiszpański"
 
 #: ../qml/keys/LanguageMenu.qml:83
 msgid "Finnish"
-msgstr "suomi"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:84
 msgid "French"
-msgstr "ranska"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:85
 msgid "Hebrew"
-msgstr "heprea"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:86
 msgid "Croatian"
-msgstr "kroatia"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:87
 msgid "Hungarian"
-msgstr "unkari"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:88
 msgid "Italian"
-msgstr "italia"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:89
 msgid "Dutch"
-msgstr "hollanti"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:90
 msgid "Polish"
-msgstr "puola"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:91
 msgid "Portuguese"
-msgstr "portugali"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:92
 msgid "Russian"
-msgstr "venäjä"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:93
 msgid "Serbian"
-msgstr "serbia"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:94
 msgid "Swedish"
-msgstr "ruotsi"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:95
 msgid "Chinese - Pinyin"
-msgstr "kiina - pinyin"
+msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:98
 msgid "Language: "
-msgstr "Kieli: "
+msgstr ""

@@ -57,11 +57,6 @@ void PinyinAdapter::parse(const QString& string)
 
     pinyin_guess_candidates(m_instance, 0);
 
-    pinyin_guess_sentence(m_instance);
-
-    char* sentence = NULL;
-    pinyin_get_sentence(m_instance, &sentence);
-
     candidates.clear();
     guint len = 0;
     pinyin_get_n_candidate(m_instance, &len);
@@ -79,7 +74,6 @@ void PinyinAdapter::parse(const QString& string)
         }
     }
 
-    g_free(sentence);
 }
 
 QStringList PinyinAdapter::getWordCandidates() const
