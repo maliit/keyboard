@@ -266,7 +266,7 @@ EditorOptions::EditorOptions()
     , backspace_auto_repeat_interval(200)
     , backspace_auto_repeat_acceleration_rate(10)
     , backspace_auto_repeat_min_interval(50)
-    , backspace_word_delay(3000)
+    , backspace_word_switch_threshold(3)
     , backspace_word_interval(400)
     , backspace_word_acceleration_rate(10)
     , backspace_word_min_interval(50)
@@ -276,7 +276,6 @@ class AbstractTextEditorPrivate
 {
 public:
     QTimer auto_repeat_backspace_timer;
-    QElapsedTimer backspace_hold_timer;
     bool backspace_sent;
     bool repeating_backspace;
     EditorOptions options;
@@ -293,6 +292,7 @@ public:
     QString appendix_for_previous_preedit;
     int backspace_acceleration;
     int backspace_word_acceleration;
+    int deleted_words;
     QString keyboardState;
 
     explicit AbstractTextEditorPrivate(const EditorOptions &new_options,
@@ -321,6 +321,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , appendix_for_previous_preedit()
     , backspace_acceleration(0)
     , backspace_word_acceleration(0)
+    , deleted_words(0)
     , keyboardState("CHARACTERS")
 {
     auto_repeat_backspace_timer.setSingleShot(true);
@@ -409,7 +410,7 @@ void AbstractTextEditor::onKeyPressed(const Key &key)
     if (key.action() == Key::ActionBackspace) {
         d->backspace_sent = false;
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_delay);
-        d->backspace_hold_timer.restart();
+        d->deleted_words = 0;
     }
 }
 
@@ -860,7 +861,7 @@ void AbstractTextEditor::autoRepeatBackspace()
 
     d->repeating_backspace = true;
 
-    if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
+    if (d->deleted_words < d->options.backspace_word_switch_threshold) {
         singleBackspace();
 
         // Gradually speed up single letter deletion
@@ -944,15 +945,17 @@ void AbstractTextEditor::sendPreeditString(const QString &preedit,
 void AbstractTextEditor::singleBackspace()
 {
     Q_D(AbstractTextEditor);
-
+    bool in_word = false;
     QString textOnLeft = d->text->surroundingLeft();
 
     if (d->text->preedit().isEmpty()) {
+        in_word = textOnLeft.right(1) != " ";
         sendKeyPressAndReleaseEvents(Qt::Key_Backspace, Qt::NoModifier);
         // Deletion of surrounding text isn't updated in the model until later
         // Update it locally here for autocaps detection
         textOnLeft.chop(1);
     } else {
+        in_word = true;
         d->text->removeFromPreedit(1);
         textOnLeft += d->text->preedit();
         
@@ -970,6 +973,11 @@ void AbstractTextEditor::singleBackspace()
             //  to happen
             sendCommitString("");
         }
+    }
+
+    if (in_word && textOnLeft.right(1) == " ") {
+        // We were in a word, but now we're not, so we've just finished deleting a word
+        d->deleted_words++;
     }
 
     textOnLeft = textOnLeft.trimmed();
