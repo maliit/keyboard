@@ -1,5 +1,5 @@
 TEMPLATE = lib
-QT += qml quick
+QT += qml quick gui
 CONFIG += qt plugin no_keywords
 TARGET = ubuntu-keyboard-qml
 
