@@ -527,6 +527,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
         d->auto_repeat_backspace_timer.stop();
         d->repeating_backspace = false;
+        d->backspace_acceleration = 0;
     } break;
 
     case Key::ActionSpace: {
@@ -868,7 +869,7 @@ void AbstractTextEditor::autoRepeatBackspace()
         if(d->options.backspace_auto_repeat_interval - d->backspace_acceleration > d->options.backspace_auto_repeat_min_interval) {
             d->backspace_acceleration += d->options.backspace_auto_repeat_acceleration_rate;
         }
-        d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
+        d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval - d->backspace_acceleration);
         d->backspace_word_acceleration = 0;
     } else {
         autoRepeatWordBackspace();
