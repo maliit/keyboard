@@ -35,6 +35,7 @@ Item {
     property var extended; // list of extended keys
     property var extendedShifted; // list of extended keys in shifted state
     property var currentExtendedKey; // The currently highlighted extended key
+    property bool highlight: false;
 
     property alias valueToSubmit: keyLabel.text
 
@@ -119,7 +120,7 @@ Item {
 
             BorderImage {
                 anchors.fill: parent
-                visible: key.currentlyPressed
+                visible: key.currentlyPressed || key.highlight
                 source: key.imgPressed    
             }
 
