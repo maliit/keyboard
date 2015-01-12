@@ -32,7 +32,7 @@ KeyPad {
 
     QtObject {
         id: internal
-        property int offset: 536
+        property int offset: 528
         property var chars: calculateChars()
 
         function calculateChars() {
@@ -125,9 +125,9 @@ KeyPad {
                 label: "😀"
                 shifted: label
                 overridePressArea: true
-                highlight: internal.offset >= 536 && internal.offset < 613
+                highlight: internal.offset >= 528 && internal.offset < 603
                 onPressed: {
-                    internal.offset = 536
+                    internal.offset = 528
                 }
             }
 
@@ -135,9 +135,9 @@ KeyPad {
                 label: "🚀"
                 shifted: label
                 overridePressArea: true
-                highlight: internal.offset >= 613
+                highlight: internal.offset >= 603
                 onPressed: {
-                    internal.offset = 613
+                    internal.offset = 603
                 }
             }
 
@@ -145,7 +145,7 @@ KeyPad {
                 label: "🌍"
                 shifted: label
                 overridePressArea: true
-                highlight: internal.offset >= 0 && internal.offset < 173
+                highlight: internal.offset >= 0 && internal.offset < 170
                 onPressed: {
                     internal.offset = 13
                 }
@@ -155,9 +155,9 @@ KeyPad {
                 label: "🏠"
                 shifted: label
                 overridePressArea: true
-                highlight: internal.offset >= 173 && internal.offset < 191
+                highlight: internal.offset >= 170 && internal.offset < 188
                 onPressed: {
-                    internal.offset = 173
+                    internal.offset = 170
                 }
             }
 
@@ -165,9 +165,9 @@ KeyPad {
                 label: "🐀"
                 shifted: label
                 overridePressArea: true
-                highlight: internal.offset >= 191 && internal.offset < 508
+                highlight: internal.offset >= 188 && internal.offset < 500
                 onPressed: {
-                    internal.offset = 191
+                    internal.offset = 188
                 }
             }
 
@@ -175,9 +175,9 @@ KeyPad {
                 label: "🕜"
                 shifted: label
                 overridePressArea: true
-                highlight: internal.offset >= 508 && internal.offset < 536
+                highlight: internal.offset >= 500 && internal.offset < 528
                 onPressed: {
-                    internal.offset = 508
+                    internal.offset = 500
                 }
             }
 
