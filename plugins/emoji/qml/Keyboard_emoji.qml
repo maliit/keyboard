@@ -25,6 +25,10 @@ KeyPad {
     content: c1
     symbols: "languages/Keyboard_symbols.qml"
 
+    Component.onCompleted: {
+        panel.switchBack = true;
+    }
+
     QtObject {
         id: internal
         property int offset: 536
@@ -180,7 +184,7 @@ KeyPad {
             height: panel.keyHeight + units.gu(UI.row_margin);
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
-            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; switchBack: true }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
             SpaceKey       { id: spaceKey;                               anchors.left: languageMenuButton.right; anchors.right: enterKey.left; noMagnifier: true; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
