@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.0
+import Ubuntu.Components 1.1
 import "../../keys"
 import "../../keys/key_constants.js" as UI
 import "emoji.js" as Emoji
@@ -124,6 +125,7 @@ KeyPad {
                 label: "😀"
                 shifted: label
                 overridePressArea: true
+                highlight: internal.offset >= 536 && internal.offset < 613
                 onPressed: {
                     internal.offset = 536
                 }
@@ -133,35 +135,9 @@ KeyPad {
                 label: "🚀"
                 shifted: label
                 overridePressArea: true
+                highlight: internal.offset >= 613
                 onPressed: {
                     internal.offset = 613
-                }
-            }
-
-            ActionKey {
-                label: "🕜"
-                shifted: label
-                overridePressArea: true
-                onPressed: {
-                    internal.offset = 508
-                }
-            }
-
-            ActionKey {
-                label: "🐀"
-                shifted: label
-                overridePressArea: true
-                onPressed: {
-                    internal.offset = 191
-                }
-            }
-
-            ActionKey {
-                label: "🏠"
-                shifted: label
-                overridePressArea: true
-                onPressed: {
-                    internal.offset = 173
                 }
             }
 
@@ -169,8 +145,39 @@ KeyPad {
                 label: "🌍"
                 shifted: label
                 overridePressArea: true
+                highlight: internal.offset >= 0 && internal.offset < 173
                 onPressed: {
                     internal.offset = 13
+                }
+            }
+
+            ActionKey {
+                label: "🏠"
+                shifted: label
+                overridePressArea: true
+                highlight: internal.offset >= 173 && internal.offset < 191
+                onPressed: {
+                    internal.offset = 173
+                }
+            }
+
+            ActionKey {
+                label: "🐀"
+                shifted: label
+                overridePressArea: true
+                highlight: internal.offset >= 191 && internal.offset < 508
+                onPressed: {
+                    internal.offset = 191
+                }
+            }
+
+            ActionKey {
+                label: "🕜"
+                shifted: label
+                overridePressArea: true
+                highlight: internal.offset >= 508 && internal.offset < 536
+                onPressed: {
+                    internal.offset = 508
                 }
             }
 
