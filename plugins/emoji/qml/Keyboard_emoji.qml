@@ -27,7 +27,7 @@ KeyPad {
 
     QtObject {
         id: internal
-        property int offset: 740
+        property int offset: 536
         property var chars: calculateChars()
 
         function calculateChars() {
@@ -121,7 +121,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    internal.offset = 740
+                    internal.offset = 536
                 }
             }
 
@@ -130,7 +130,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    internal.offset = 865
+                    internal.offset = 613
                 }
             }
 
@@ -139,7 +139,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    internal.offset = 569
+                    internal.offset = 508
                 }
             }
 
@@ -148,7 +148,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    internal.offset = 237
+                    internal.offset = 191
                 }
             }
 
@@ -157,7 +157,7 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    internal.offset = 214
+                    internal.offset = 173
                 }
             }
 
@@ -166,8 +166,8 @@ KeyPad {
                 shifted: label
                 overridePressArea: true
                 onPressed: {
-                    internal.offset = 14
-                }     
+                    internal.offset = 13
+                }
             }
 
             BackspaceKey { padding: 0; width: enterKey.width }
