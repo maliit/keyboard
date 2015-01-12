@@ -86,6 +86,7 @@ Item {
             property bool extendedKeysShown: false
 
             property bool firstShow: true
+            property bool hidingComplete: true
 
             property string layoutId: "freetext"
 
@@ -217,6 +218,7 @@ Item {
                     PropertyChanges { target: keyboardSurface; y: 0; }
                     onCompleted: {
                         canvas.firstShow = false;
+                        canvas.hidingComplete = false;
                     }
                     when: maliit_geometry.shown === true
                 },
@@ -234,6 +236,8 @@ Item {
                             maliit_input_method.activeLanguage = keypad.previousLanguage;
                         }
                         maliit_input_method.close();
+                        canvas.hidingComplete = true;
+                        reportKeyboardVisibleRect();
                     }
                     // Wait for the first show operation to complete before
                     // allowing hiding, as the conditions when the keyboard
@@ -296,6 +300,15 @@ Item {
         var obj = mapFromItem(keyboardSurface, vx, vy, vwidth, vheight);
         // Report visible height of the keyboard to support anchorToKeyboard
         obj.height = fullScreenItem.height - obj.y;
+        
+        // Work around QT bug: https://bugreports.qt-project.org/browse/QTBUG-20435
+        // which results in a 0 height being reported incorrectly immediately prior
+        // to the keyboard closing animation starting, which causes us to report
+        // an extra visibility change for the keyboard.
+        if (obj.height <= 0 && !canvas.hidingComplete) {
+            return;
+        }
+
         maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
     }
 

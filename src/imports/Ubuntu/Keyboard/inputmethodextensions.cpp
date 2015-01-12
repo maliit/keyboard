@@ -30,6 +30,7 @@
 #include "inputmethodextensions.h"
 
 #include <QtCore>
+#include <QtGui>
 
 namespace Ubuntu {
 namespace Keyboard {
@@ -83,6 +84,7 @@ void InputMethodExtension::setInputMethodExtensions(const QVariantMap &map)
         m_extensions = map;
         if (m_inputText) {
             m_inputText->setProperty("__inputMethodExtensions", m_extensions);
+            qApp->inputMethod()->update(Qt::ImPlatformData);
         }
         Q_EMIT inputMethodExtensionsChanged();
     }

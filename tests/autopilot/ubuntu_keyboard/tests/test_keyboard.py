@@ -72,6 +72,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
             shutil.rmtree(presagedir)
             os.rename(presagedir + ".bak", presagedir)
+        subprocess.check_call(['restart', 'maliit-server'])
 
     def setUp(self):
         if model() == "Desktop":
@@ -378,6 +379,47 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_visibility_reporting(self):
+        """The keyboard should only report visibility changes once.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.0
+        import Ubuntu.Components 0.1
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            TextField {
+                id: input;
+                objectName: "input"
+                property int visibilityChangeCount: 0
+            }
+
+            Connections {
+                target: Qt.inputMethod
+                onVisibleChanged: {
+                    input.visibilityChangeCount++;
+                    console.log("Visibility: " + Qt.inputMethod.visible);
+                    console.log("Change count: " + input.visibilityChangeCount);
+                }
+            }
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        text_area = app.select_single(objectName='input')
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        keyboard.dismiss()
+
+        self.assertThat(
+            text_area.visibilityChangeCount,
+            Eventually(Equals(2))
+        )        
+
 
 class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
 
@@ -387,7 +429,8 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             dict(
                 label="Url",
                 hints=['Qt.ImhUrlCharactersOnly'],
-                expected_activeview="url"
+                expected_activeview="url",
+                text="google.com"
             )
         ),
         (
@@ -395,7 +438,8 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             dict(
                 label="Email",
                 hints=['Qt.ImhEmailCharactersOnly'],
-                expected_activeview="email"
+                expected_activeview="email",
+                text="test.user@example.com"
             )
         ),
         (
@@ -403,7 +447,8 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             dict(
                 label="Number",
                 hints=['Qt.ImhFormattedNumbersOnly'],
-                expected_activeview="number"
+                expected_activeview="number",
+                text="3.14159"
             )
         ),
         (
@@ -411,7 +456,8 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             dict(
                 label="Telephone",
                 hints=['Qt.ImhDigitsOnly'],
-                expected_activeview="number"
+                expected_activeview="number",
+                text="01189998819991197253"
             )
         ),
     ]
@@ -430,6 +476,17 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
         self.assertThat(
             keyboard.keyboard.layoutId,
             Eventually(Equals(self.expected_activeview))
+        )
+
+        if self.text[-4:] == ".com":
+            keyboard.type(self.text[:-4])
+            keyboard.press_key(".com")
+        else:
+            keyboard.type(self.text)
+        
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(self.text))
         )
 
 
@@ -465,6 +522,24 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard.type('Pic ')
 
         expected = "Picture "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_long_press(self):
+        """Long pressing a key should enter the default extended character.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.press_key('t', long_press=True)
+
+        expected = "5"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))

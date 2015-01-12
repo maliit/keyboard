@@ -1,3 +1,26 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150108-0ubuntu1) vivid; urgency=low
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Renato Araujo Oliveira Filho ]
+  * Make sure that changes on "InputMethod.extensions" property get
+    propagated to maliit. (LP: #1384278)
+
+  [ Michael Sheldon ]
+  * Fix keyboard visibility reporting (LP: #1404309)
+  * Extend existing autopilot tests to more thoroughly test each layout,
+    add new tests for extended keys and ".com" key and fix crash when
+    using keyboard after autopilot tests have been run.
+  * Speed up individual backspaces and switch between individual and
+    word backspace based on 3 words having been deleted instead of 3
+    seconds having passed. (LP: #1347488)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 08 Jan 2015 18:07:56 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150105-0ubuntu1) vivid; urgency=low
 
   [ CI Train Bot ]
