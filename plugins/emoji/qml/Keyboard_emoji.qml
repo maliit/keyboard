@@ -25,9 +25,13 @@ KeyPad {
     content: c1
     symbols: "languages/Keyboard_symbols.qml"
 
+    Component.onCompleted: {
+        panel.switchBack = true;
+    }
+
     QtObject {
         id: internal
-        property int offset: 740
+        property int offset: 528
         property var chars: calculateChars()
 
         function calculateChars() {
@@ -120,8 +124,9 @@ KeyPad {
                 label: "😀"
                 shifted: label
                 overridePressArea: true
+                highlight: internal.offset >= 528 && internal.offset < 603
                 onPressed: {
-                    internal.offset = 740
+                    internal.offset = 528
                 }
             }
 
@@ -129,35 +134,9 @@ KeyPad {
                 label: "🚀"
                 shifted: label
                 overridePressArea: true
+                highlight: internal.offset >= 603
                 onPressed: {
-                    internal.offset = 865
-                }
-            }
-
-            ActionKey {
-                label: "🕜"
-                shifted: label
-                overridePressArea: true
-                onPressed: {
-                    internal.offset = 569
-                }
-            }
-
-            ActionKey {
-                label: "🐀"
-                shifted: label
-                overridePressArea: true
-                onPressed: {
-                    internal.offset = 237
-                }
-            }
-
-            ActionKey {
-                label: "🏠"
-                shifted: label
-                overridePressArea: true
-                onPressed: {
-                    internal.offset = 214
+                    internal.offset = 603
                 }
             }
 
@@ -165,9 +144,40 @@ KeyPad {
                 label: "🌍"
                 shifted: label
                 overridePressArea: true
+                highlight: internal.offset >= 0 && internal.offset < 170
                 onPressed: {
-                    internal.offset = 14
-                }     
+                    internal.offset = 13
+                }
+            }
+
+            ActionKey {
+                label: "🏠"
+                shifted: label
+                overridePressArea: true
+                highlight: internal.offset >= 170 && internal.offset < 188
+                onPressed: {
+                    internal.offset = 170
+                }
+            }
+
+            ActionKey {
+                label: "🐀"
+                shifted: label
+                overridePressArea: true
+                highlight: internal.offset >= 188 && internal.offset < 500
+                onPressed: {
+                    internal.offset = 188
+                }
+            }
+
+            ActionKey {
+                label: "🕜"
+                shifted: label
+                overridePressArea: true
+                highlight: internal.offset >= 500 && internal.offset < 528
+                onPressed: {
+                    internal.offset = 500
+                }
             }
 
             BackspaceKey { padding: 0; width: enterKey.width }
@@ -180,7 +190,7 @@ KeyPad {
             height: panel.keyHeight + units.gu(UI.row_margin);
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
-            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; switchBack: true }
+            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
             SpaceKey       { id: spaceKey;                               anchors.left: languageMenuButton.right; anchors.right: enterKey.left; noMagnifier: true; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }

@@ -1,3 +1,18 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150112-0ubuntu1) vivid; urgency=low
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Michael Sheldon ]
+  * Skip Emoji characters that iOS and Android can't display, show which
+    category of Emoji the user is currently viewing and switch back to
+    the previous layout when the keyboard is hidden.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 12 Jan 2015 18:47:48 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150108-0ubuntu1) vivid; urgency=low
 
   [ CI Train Bot ]
