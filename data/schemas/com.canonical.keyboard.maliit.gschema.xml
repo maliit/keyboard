@@ -56,5 +56,10 @@
       <description>Insert a full-stop when space is pressed twice.</description>
       <default>true</default>
     </key>
+    <key name="stay-hidden" type="b">
+      <summary>Stay hidden</summary>
+      <description>Never show the keyboard (e.g. because a hardware keyboard has been connected.)</description>
+      <default>false</default>
+    </key>
   </schema>
 </schemalist>
