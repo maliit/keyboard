@@ -194,4 +194,17 @@ void Text::setCursorPosition(int cursor_position)
     m_cursor_position = cursor_position;
 }
 
+//! Indicates if the preedit has been restored by the user pressing backspace
+bool Text::restoredPreedit() const
+{
+    return m_restored_preedit;
+}
+
+//! Sets whether the preedit has been recently restored
+//! \param restored Preedit restoration state
+void Text::setRestoredPreedit(bool restored)
+{
+    m_restored_preedit = restored;
+}
+
 }} // namespace Model, MaliitKeyboard
