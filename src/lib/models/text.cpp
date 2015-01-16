@@ -47,6 +47,7 @@ Text::Text()
     , m_surrounding_offset(0)
     , m_face(PreeditDefault)
     , m_cursor_position(0)
+    , m_restored_preedit(false)
 {}
 
 //! Returns current preedit.
