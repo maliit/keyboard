@@ -268,6 +268,9 @@ void InputMethod::updateAutoCaps()
     if (enabled != d->autocapsEnabled) {
         d->autocapsEnabled = enabled;
         d->editor.setAutoCapsEnabled(enabled);
+        if (!enabled) {
+            Q_EMIT deactivateAutocaps();
+        }
     }
 }
 
