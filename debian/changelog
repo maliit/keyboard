@@ -1,3 +1,13 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150119-0ubuntu1) vivid; urgency=low
+
+  [ Michael Sheldon ]
+  * Deactivate autocaps if we receive find out we're in a field that
+    doesn't support it after having already entered the field (LP:
+    #1412460)
+  * Add dependencies for any keyboard layouts used in autopilot tests
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 19 Jan 2015 16:21:41 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150112-0ubuntu1) vivid; urgency=low
 
   [ CI Train Bot ]
