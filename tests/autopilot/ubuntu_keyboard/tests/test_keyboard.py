@@ -627,6 +627,26 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_auto_punctuation(self):
+        """A chinese full-stop character should be entered after space has
+        been pressed three times (once to complete the character, once more
+        to insert a space and then again to produce a full-stop.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('pinyin   ')
+
+        expected = "拼音。 "
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
 
 class UbuntuKeyboardSelection(UbuntuKeyboardTests):
 
