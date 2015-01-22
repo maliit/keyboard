@@ -93,3 +93,8 @@ bool ChineseLanguageFeatures::wordEngineAvailable() const
 {
     return true;
 }
+
+QString ChineseLanguageFeatures::fullStopSequence() const
+{
+    return QString("。");
+}

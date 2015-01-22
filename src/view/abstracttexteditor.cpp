@@ -446,7 +446,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         email_detected = true;
     }
 
-    if (look_for_a_double_space) {
+    if (look_for_a_double_space && textOnLeft.right(1) != " ") {
         // we reset the flag here so that we won't have to add boilerplate code later
         d->look_for_a_double_space = false;
     }
@@ -544,7 +544,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
         // every double-space character inputs one-after-another force a full-stop, so trigger it if needed
         if (d->double_space_full_stop_enabled && not look_for_a_double_space) {
-            d->look_for_a_double_space = true;
+            // Only enable if the language plugin inserts spaces after word completion (e.g. pinyin doesn't)
+            if (d->text->preedit().isEmpty() || d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()) == " ") {
+                d->look_for_a_double_space = true;
+            }
         }
 
         if (replace_preedit) {
@@ -558,9 +561,9 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             }
             d->text->setPreedit(d->text->primaryCandidate());
         }
-        else if (look_for_a_double_space && not stopSequence.isEmpty()) {
+        else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.right(1) == " ") {
             removeTrailingWhitespaces();
-            d->text->appendToPreedit(d->word_engine->languageFeature()->fullStopSequence());
+            d->text->appendToPreedit(stopSequence);
 
             // we need to re-evaluate autocaps after our changes to the preedit
             textOnLeft = d->text->surroundingLeft() + d->text->preedit();
