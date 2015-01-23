@@ -446,7 +446,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         email_detected = true;
     }
 
-    if (look_for_a_double_space && textOnLeft.right(1) != " ") {
+    if (look_for_a_double_space) {
         // we reset the flag here so that we won't have to add boilerplate code later
         d->look_for_a_double_space = false;
     }
