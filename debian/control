@@ -300,6 +300,16 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Swedish
  Data files for the Ubuntu virtual keyboard - Swedish
 
+Package: ubuntu-keyboard-ukrainian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-uk,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Ukrainian
+ Data files for the Ubuntu virtual keyboard - Ukrainian
+
+
 Package: qtdeclarative5-ubuntu-keyboard-extensions0.1
 Architecture: any
 Depends: ${misc:Depends},
