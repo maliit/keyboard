@@ -16,8 +16,8 @@ Build-Depends: debhelper (>= 9),
                libxml2-utils,
                maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
                pkg-config,
-               python:any (>= 2.7),
-               python-setuptools,
+               python3,
+               python3-setuptools,
                qt5-default,
                qtbase5-dev,
                qtdeclarative5-dev,
@@ -30,6 +30,7 @@ Homepage: https://launchpad.net/ubuntu-keyboard
 # If you aren't a member of ~phablet-team but need to upload packaging changes,
 # just go ahead.  ~phablet-team will notice and sync up the code again.
 Vcs-Bzr: https://code.launchpad.net/~phablet-team/ubuntu-keyboard/trunk
+X-Ubuntu-Use-Langpack: yes
 
 Package: ubuntu-keyboard
 Architecture: any
@@ -75,9 +76,14 @@ Architecture: all
 Depends: libautopilot-qt (>= 1.4),
          ${misc:Depends},
          ${python:Depends},
+         python3-evdev,
          ubuntu-keyboard (>= ${source:Version}),
-         ubuntu-ui-toolkit-autopilot,
-         unity8-autopilot,
+         ubuntu-keyboard-chinese-pinyin (>= ${source:Version}),
+         ubuntu-keyboard-emoji (>= ${source:Version}),
+         ubuntu-keyboard-english (>= ${source:Version}),
+         ubuntu-keyboard-german (>= ${source:Version}),
+         ubuntu-keyboard-spanish (>= ${source:Version}),
+         ubuntu-ui-toolkit-autopilot
 Description: Tests and emulators package for ubuntu-keyboard
  Autopilot tests for the ubuntu-keyboard package
 
@@ -92,6 +98,31 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Arabic
  Data files for the Ubuntu virtual keyboard - Arabic
 
+Package: ubuntu-keyboard-azerbaijani
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Azerbaijani
+ Data files for the Ubuntu virtual keyboard - Azerbaijani
+
+Package: ubuntu-keyboard-bosnian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Bosnian
+ Data files for the Ubuntu virtual keyboard - Bosnian
+
+Package: ubuntu-keyboard-catalan
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         myspell-ca,
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Catalan
+ Data files for the Ubuntu virtual keyboard - Catalan
+
 Package: ubuntu-keyboard-chinese-pinyin
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
@@ -99,6 +130,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Chinese Pinyin
  Data files for the Ubuntu virtual keyboard - Chinese Pinyin
+
+Package: ubuntu-keyboard-croatian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+	 myspell-hr
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Croatian
+ Data files for the Ubuntu virtual keyboard - Croatian
 
 Package: ubuntu-keyboard-czech
 Architecture: any
@@ -126,6 +166,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Dutch
  Data files for the Ubuntu virtual keyboard - Dutch
+
+Package: ubuntu-keyboard-emoji
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Emoji
+ Data files for the Ubuntu virtual keyboard - Emoji
 
 Package: ubuntu-keyboard-english
 Architecture: any

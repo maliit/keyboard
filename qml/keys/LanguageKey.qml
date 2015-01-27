@@ -34,6 +34,12 @@ ActionKey {
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
 
-        canvas.languageMenuShown = true
+        if (panel.switchBack && panel.previousLanguage) {
+            panel.switchBack = false;
+            maliit_input_method.activeLanguage = panel.previousLanguage
+        } else {
+            panel.previousLanguage = maliit_input_method.activeLanguage
+            canvas.languageMenuShown = true
+        }
     }   
 }

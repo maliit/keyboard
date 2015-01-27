@@ -33,11 +33,15 @@
 #include "inputmethod.h"
 
 #include <QtQml>
+#include <libintl.h>
 
 MaliitKeyboardPlugin::MaliitKeyboardPlugin(QObject *parent)
     : QObject(parent)
     , Maliit::Plugins::InputMethodPlugin()
 {
+    bindtextdomain("ubuntu-keyboard", NULL);
+    textdomain("ubuntu-keyboard");
+
     qmlRegisterUncreatableType<InputMethod>("UbuntuKeyboard", 1, 0, "InputMethod",
                                             QString("InputMethod can't be created in QML"));
 }

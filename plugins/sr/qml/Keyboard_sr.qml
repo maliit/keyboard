@@ -16,6 +16,7 @@
 
 import QtQuick 2.0
 import "../../keys"
+import "../../keys/key_constants.js" as UI
 
 KeyPad {
     anchors.fill: parent
@@ -31,7 +32,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "љ"; shifted: "Љ"; extended: ["1"]; extendedShifted: ["1"]}
+            CharKey { label: "љ"; shifted: "Љ"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "њ"; shifted: "Њ"; extended: ["2"]; extendedShifted: ["2"] }
             CharKey { label: "е"; shifted: "Е"; extended: ["3", "е́", "е̑", "ѐ", "е̏", "е̄", "€"]; extendedShifted: ["3", "Е́", "Е̑", "Ѐ", "Е̏", "Е̄", "€"] }
             CharKey { label: "р"; shifted: "Р"; extended: ["4"]; extendedShifted: ["4"] }
@@ -42,14 +43,14 @@ KeyPad {
             CharKey { label: "о"; shifted: "О"; extended: ["9", "о́", "о̑", "о̀", "о̏", "о̄"]; extendedShifted: ["9", "О́", "О̑", "О̀", "О̏", "О̄"] }
             CharKey { label: "п"; shifted: "П"; extended: ["0"]; extendedShifted: ["0"] }
             CharKey { label: "ш"; shifted: "Ш"; }
-            CharKey { label: "ђ"; shifted: "Ђ"; }
+            CharKey { label: "ђ"; shifted: "Ђ"; rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "а"; shifted: "А"; extended: ["а́", "а̑", "а̀", "а̏", "а̄"]; extendedShifted: ["А́", "А̑", "А̀", "А̏", "А̄"]}
+            CharKey { label: "а"; shifted: "А"; extended: ["а́", "а̑", "а̀", "а̏", "а̄"]; extendedShifted: ["А́", "А̑", "А̀", "А̏", "А̄"]; leftSide: true; }
             CharKey { label: "с"; shifted: "С"; }
             CharKey { label: "д"; shifted: "Д"; }
             CharKey { label: "ф"; shifted: "Ф"; }
@@ -59,7 +60,7 @@ KeyPad {
             CharKey { label: "к"; shifted: "К"; }
             CharKey { label: "л"; shifted: "Л"; }
             CharKey { label: "ч"; shifted: "Ч"; }
-            CharKey { label: "ћ"; shifted: "Ћ"; }
+            CharKey { label: "ћ"; shifted: "Ћ"; rightSide: true; }
         }
 
         Row {
@@ -83,12 +84,12 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight;
+            height: panel.keyHeight + units.gu(UI.row_margin);
 
-            SymbolShiftKey { id: symShiftKey;        anchors.left: parent.left; }
-            LanguageKey    { id: languageMenuButton; anchors.left: symShiftKey.right; }
-            SpaceKey       { id: spaceKey;           anchors.left: languageMenuButton.right; anchors.right: enterKey.left; noMagnifier: true }
-            ReturnKey      { id: enterKey;           anchors.right: parent.right }
+            SymbolShiftKey { id: symShiftKey;        anchors.left: parent.left; height: parent.height; }
+            LanguageKey    { id: languageMenuButton; anchors.left: symShiftKey.right; height: parent.height;  }
+            SpaceKey       { id: spaceKey;           anchors.left: languageMenuButton.right; anchors.right: enterKey.left; noMagnifier: true; height: parent.height; }
+            ReturnKey      { id: enterKey;           anchors.right: parent.right; height: parent.height; }
         }
     } // column
 }

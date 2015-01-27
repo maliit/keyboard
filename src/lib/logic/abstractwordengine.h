@@ -66,7 +66,7 @@ public:
     Q_SLOT virtual void setSpellcheckerEnabled(bool on);
     Q_SLOT virtual void setAutoCorrectEnabled(bool on);
 
-    void clearCandidates();
+    virtual void clearCandidates();
     void computeCandidates(Model::Text *text);
     Q_SIGNAL void candidatesChanged(const WordCandidateList &candidates);
 
@@ -77,6 +77,7 @@ public:
 signals:
     void preeditFaceChanged(Model::Text::PreeditFace face);
     void primaryCandidateChanged(QString candidate);
+    void pluginChanged();
 
 private:
     virtual void fetchCandidates(Model::Text *text) = 0;

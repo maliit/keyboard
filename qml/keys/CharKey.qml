@@ -26,7 +26,7 @@ Item {
 
     property int padding: 0
 
-    width: panel.keyWidth
+    width: leftSide || rightSide ? panel.keyWidth * 2 : panel.keyWidth
     height: panel.keyHeight
 
     /* to be set in keyboard layouts */
@@ -35,6 +35,7 @@ Item {
     property var extended; // list of extended keys
     property var extendedShifted; // list of extended keys in shifted state
     property var currentExtendedKey; // The currently highlighted extended key
+    property bool highlight: false;
 
     property alias valueToSubmit: keyLabel.text
 
@@ -43,6 +44,10 @@ Item {
     property string action
     property bool noMagnifier: false
     property bool skipAutoCaps: false
+    property bool switchBackFromSymbols: false
+
+    property bool leftSide: false
+    property bool rightSide: false
 
     /* design */
     property string imgNormal: UI.imageCharKey
@@ -108,42 +113,54 @@ Item {
         BorderImage {
             id: buttonImage
             anchors.fill: parent
-            anchors.margins: units.dp( UI.keyMargins );
-            source: key.currentlyPressed ? key.imgPressed : key.imgNormal
-        }
-    
-        /// label of the key
-        //  the label is also the value subitted to the app
-    
-        Text {
-            id: keyLabel
-            text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
-            font.family: UI.fontFamily
-            font.pixelSize: fontSize
-            font.bold: UI.fontBold
-            color: UI.fontColor
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: units.gu( UI.annotationMargins )
-            horizontalAlignment: Text.AlignHCenter
-            elide: Text.ElideRight
-        }
-    
-        /// shows an annotation
-        // used e.g. for indicating the existence of extended keys
-    
-        Text {
-            id: annotationLabel
-            text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
-    
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.margins: units.gu( UI.annotationMargins )
-    
-            font.pixelSize: units.gu( UI.annotationFontSize )
-            font.bold: false
-            color: UI.annotationFontColor
+            anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
+            anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
+            anchors.bottomMargin: orientationHelper.orientationAngle == 0 || orientationHelper.orientationAngle == 180 ? units.gu(UI.row_margin) : units.dp( UI.keyMargins ) * 2;
+            source: key.imgNormal
+
+            BorderImage {
+                anchors.fill: parent
+                visible: key.currentlyPressed || key.highlight
+                source: key.imgPressed    
+            }
+
+            /// label of the key
+            //  the label is also the value subitted to the app
+        
+            Text {
+                id: keyLabel
+                text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
+                font.family: UI.fontFamily
+                font.pixelSize: fontSize
+                font.bold: UI.fontBold
+                color: UI.fontColor
+                anchors.right: parent.right
+                anchors.left: parent.left
+                anchors.leftMargin: units.gu(0.2)
+                anchors.rightMargin: units.gu(0.2)
+                anchors.verticalCenter: parent.verticalCenter 
+                anchors.verticalCenterOffset: -units.gu(0.15)
+                horizontalAlignment: Text.AlignHCenter
+                elide: Text.ElideRight
+            }
+        
+            /// shows an annotation
+            // used e.g. for indicating the existence of extended keys
+        
+            Text {
+                id: annotationLabel
+                text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
+        
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.topMargin: units.gu(UI.annotationTopMargin)
+                anchors.rightMargin: units.gu(UI.annotationRightMargin)
+        
+                font.pixelSize: units.gu( UI.annotationFontSize )
+                font.bold: false
+                color: UI.annotationFontColor
+            }
+
         }
     }
 
@@ -192,19 +209,29 @@ Item {
                     extendedKeysSelector.closePopover(); 
                 }
             } else if(!swipedOut) {
-                event_handler.onKeyReleased(valueToSubmit, action);
-
+                // Read this prior to altering autocaps
+                var keyToSend = valueToSubmit; 
                 if (magnifier.currentlyAssignedKey == key) {
                     magnifier.shown = false;
                 }
 
-                if (panel.autoCapsTriggered) {
+                if (panel.autoCapsTriggered && action != "backspace") {
                     panel.autoCapsTriggered = false;
                 }
                 else if (!skipAutoCaps) {
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
-                        panel.activeKeypadState = "NORMAL"
+                        panel.activeKeypadState = "NORMAL";
                 }
+                if (switchBackFromSymbols && panel.state === "SYMBOLS") {
+                    panel.state = "CHARACTERS";
+                }
+                event_handler.onKeyReleased(keyToSend, action);
+            } else if (action == "backspace") {
+                // Send release from backspace if we're swiped out since
+                // backspace activates on press and deactivates on release
+                // to allow for repeated backspaces, unlike normal keys
+                // which activate on release.
+                event_handler.onKeyReleased(valueToSubmit, action);
             }
         }
 
@@ -229,7 +256,9 @@ Item {
                  pressEffect.start();
 
             // Quick workaround to fix initial autocaps - not beautiful, but works
-            panel.autoCapsTriggered = false;
+            if(action != "backspace") {
+                panel.autoCapsTriggered = false;
+            }
             event_handler.onKeyPressed(valueToSubmit, action);
         }
 

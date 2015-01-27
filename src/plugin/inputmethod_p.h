@@ -3,6 +3,7 @@
 
 #include "logic/layoutupdater.h"
 #include "editor.h"
+#include "greeterstatus.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
 
@@ -56,9 +57,12 @@ public:
     QString activeLanguage;
     QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
+    QString keyboardState;
+    bool hasSelection;
 
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
+    GreeterStatus *m_greeterStatus;
 
     WordRibbon* wordRibbon;
 
@@ -78,8 +82,11 @@ public:
         , activeLanguage("en")
         , enabledLanguages(activeLanguage)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
+        , keyboardState("CHARACTERS")
+        , hasSelection(false)
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
+        , m_greeterStatus(new GreeterStatus())
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {
@@ -172,6 +179,7 @@ public:
         qml_context->setContextProperty("maliit_event_handler", &event_handler);
         qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
         qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
+        qml_context->setContextProperty("greeter_status", m_greeterStatus);
     }
 
 
@@ -261,14 +269,5 @@ public:
         view->setVisible(false);
 
         applicationApiWrapper->reportOSKInvisible();
-    }
-
-    void truncateEnabledLanguageLocales(QStringList locales)
-    {
-        enabledLanguages.clear();
-        foreach (QString locale, locales) {
-            locale.truncate(2);
-            enabledLanguages << locale;
-        }
     }
 };

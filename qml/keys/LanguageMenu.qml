@@ -53,29 +53,38 @@ Item {
                 maliit_input_method.activeLanguage = modelData
                 canvas.languageMenuShown = false;
             }
-         }
+        }
 
-        footer: ListItem.Standard {
-            text: i18n.tr("Settings")
-            onClicked: {
-                Qt.openUrlExternally("settings:///system/language")
-                canvas.languageMenuShown = false;
-                maliit_input_method.hide();
+        Component {
+            id: settingsItem
+                ListItem.Standard {
+                text: i18n.tr("Settings")
+                onClicked: {
+                    Qt.openUrlExternally("settings:///system/language")
+                    canvas.languageMenuShown = false;
+                    maliit_input_method.hide();
+                }
             }
-         }
+        }
+        footer: greeter_status.greeterActive ? null : settingsItem
     }
 
     function languageIdToName(languageId)
     {
         if (languageId == "ar")         return i18n.tr("Arabic");
+        if (languageId == "az")         return i18n.tr("Azerbaijani");
+        if (languageId == "bs")         return i18n.tr("Bosnian");
+        if (languageId == "ca")         return i18n.tr("Catalan");
         if (languageId == "cs")         return i18n.tr("Czech");
         if (languageId == "da")         return i18n.tr("Danish");
         if (languageId == "de")         return i18n.tr("German");
+        if (languageId == "emoji")      return i18n.tr("Emoji");
         if (languageId == "en")         return i18n.tr("English");
         if (languageId == "es")         return i18n.tr("Spanish");
         if (languageId == "fi")         return i18n.tr("Finnish");
         if (languageId == "fr")         return i18n.tr("French");
         if (languageId == "he")         return i18n.tr("Hebrew");
+        if (languageId == "hr")         return i18n.tr("Croatian");
         if (languageId == "hu")         return i18n.tr("Hungarian");
         if (languageId == "it")         return i18n.tr("Italian");
         if (languageId == "nl")         return i18n.tr("Dutch");

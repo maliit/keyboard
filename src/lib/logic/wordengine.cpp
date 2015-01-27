@@ -58,13 +58,15 @@ public:
 
     bool calculated_primary_candidate;
 
+    bool clear_candidates_on_incoming;
+
     LanguagePluginInterface* languagePlugin;
 
     QPluginLoader pluginLoader;
 
     WordCandidateList* candidates;
 
-    QString currentPreedit;
+    Model::Text *currentText;
 
     explicit WordEnginePrivate();
 
@@ -110,7 +112,9 @@ WordEnginePrivate::WordEnginePrivate()
     , is_preedit_capitalized(false)
     , auto_correct_enabled(false)
     , calculated_primary_candidate(false)
+    , clear_candidates_on_incoming(false)
     , languagePlugin(0)
+    , currentText(0)
 {
     loadPlugin(DEFAULT_PLUGIN);
     candidates = new WordCandidateList();
@@ -137,7 +141,8 @@ bool WordEngine::isEnabled() const
 {
     Q_D(const WordEngine);
     return (AbstractWordEngine::isEnabled() &&
-            (d->use_predictive_text || d->use_spell_checker));
+            (d->use_predictive_text || d->use_spell_checker) &&
+            d->languagePlugin->languageFeature()->wordEngineAvailable());
 }
 
 void WordEngine::appendToCandidates(WordCandidateList *candidates,
@@ -226,14 +231,14 @@ void WordEngine::fetchCandidates(Model::Text *text)
 
     d->calculated_primary_candidate = false;
 
-    d->currentPreedit = text->preedit();
+    // Allow the current candidates to remain on the word ribbon until
+    // a new set have been calculated.
+    d->clear_candidates_on_incoming = true;
 
-    d->candidates = new WordCandidateList();
+    d->currentText = text;
+
     const QString &preedit(text->preedit());
     d->is_preedit_capitalized = not preedit.isEmpty() && preedit.at(0).isUpper();
-
-    WordCandidate userCandidate(WordCandidate::SourceUser, preedit); 
-    d->candidates->append(userCandidate);
 
     Q_EMIT candidatesChanged(*d->candidates);
 
@@ -252,7 +257,7 @@ void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions)
 {
     Q_D(WordEngine);
 
-    if (word != d->currentPreedit) {
+    if (d->currentText && word != d->currentText->preedit()) {
         // Don't add suggestions coming in for a previous word
         return;
     }
@@ -260,6 +265,11 @@ void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions)
     // Spelling and prediction suggestions arrive asynchronously
     // So we need to ensure only one primary candidate is selected
     suggestionMutex.lock();
+
+    if (d->clear_candidates_on_incoming) {
+        clearCandidates();
+        d->clear_candidates_on_incoming = false;
+    }
 
     Q_FOREACH(const QString &correction, suggestions) {
         appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
@@ -276,7 +286,7 @@ void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions)
 {
     Q_D(WordEngine);
 
-    if (word != d->currentPreedit) {
+    if (d->currentText && word != d->currentText->preedit()) {
         // Don't add suggestions coming in for a previous word
         return;
     }
@@ -285,8 +295,13 @@ void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions)
     // So we need to ensure only one primary candidate is selected
     suggestionMutex.lock();
 
+    if (d->clear_candidates_on_incoming) {
+        clearCandidates();
+        d->clear_candidates_on_incoming = false;
+    }
+
     Q_FOREACH(const QString &correction, suggestions) {
-        appendToCandidates(d->candidates, WordCandidate::SourceSpellChecking, correction);
+        appendToCandidates(d->candidates, WordCandidate::SourcePrediction, correction);
     }
 
     calculatePrimaryCandidate();
@@ -331,6 +346,14 @@ void WordEngine::calculatePrimaryCandidate()
         primary.setPrimary(true);
         d->candidates->replace(0, primary);
         Q_EMIT primaryCandidateChanged(primary.word());
+    } else if (!d->languagePlugin->languageFeature()->ignoreSimilarity()
+               && !similarWords(d->candidates->at(0).word(), d->candidates->at(1).word())) {
+        // The prediction is too different to the user input, so the user input 
+        // becomes the primary candidate
+        WordCandidate primary = d->candidates->value(0);
+        primary.setPrimary(true);
+        d->candidates->replace(0, primary);
+        Q_EMIT primaryCandidateChanged(primary.word());
     } else {
         // The first prediction is the primary candidate
         WordCandidate primary = d->candidates->value(1);
@@ -357,12 +380,20 @@ void WordEngine::onLanguageChanged(const QString &languageId)
 
     if (languageId == "ar")
         d->loadPlugin("libarabicplugin.so", "ar");
+    else if (languageId == "az")
+        d->loadPlugin("libazerbaijaniplugin.so", "az");
+    else if (languageId == "bs")
+        d->loadPlugin("libbosnianplugin.so", "bs");
+    else if (languageId == "ca")
+        d->loadPlugin("libcatalanplugin.so", "ca");
     else if (languageId == "cs")
         d->loadPlugin("libczechplugin.so", "cs");
     else if (languageId == "da")
         d->loadPlugin("libdanishplugin.so", "da");
     else if (languageId == "de")
         d->loadPlugin("libgermanplugin.so", "de");
+    else if (languageId == "emoji")
+        d->loadPlugin("libemojiplugin.so", "emoji");
     else if (languageId == "en")
         d->loadPlugin("libenglishplugin.so", "en");
     else if (languageId == "es")
@@ -373,6 +404,8 @@ void WordEngine::onLanguageChanged(const QString &languageId)
         d->loadPlugin("libfrenchplugin.so", "fr");
     else if (languageId == "he")
         d->loadPlugin("libhebrewplugin.so", "he");
+    else if (languageId == "hr")
+        d->loadPlugin("libcroatianplugin.so", "hr");
     else if (languageId == "hu")
         d->loadPlugin("libhungarianplugin.so", "hu");
     else if (languageId == "it")
@@ -396,14 +429,70 @@ void WordEngine::onLanguageChanged(const QString &languageId)
 
     d->languagePlugin->setLanguage(languageId);
 
+    Q_EMIT enabledChanged(isEnabled());
+
     connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SLOT(newSpellingSuggestions(QString, QStringList)));
     connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SLOT(newPredictionSuggestions(QString, QStringList)));
+    Q_EMIT pluginChanged();
 }
 
 AbstractLanguageFeatures* WordEngine::languageFeature()
 {
     Q_D(WordEngine);
     return d->languagePlugin->languageFeature();
+}
+
+bool WordEngine::similarWords(QString word1, QString word2) {
+    // Calculate the Levenshtein distance between the first word and the 
+    // beginning of the second word. If the distance is too great then word2
+    // is not considered to be a suitable prediction for word1.
+    word2 = word2.left(word1.size());
+    if (word1 == word2) {
+        return true;
+    }
+
+    int *v0 = (int *) malloc(sizeof(int) * word1.size() + 1);
+    int *v1 = (int *) malloc(sizeof(int) * word1.size() + 1);
+
+    for (int i = 0; i < word2.size() + 1; i++) {
+        v0[i] = i;
+        v1[i] = 0;
+    }
+
+    for (int i = 0; i < word1.size(); i++) {
+        v1[0] = i + 1;
+
+        for (int j = 0; j < word2.size(); j++) {
+            int cost = (word1[i] == word2[i]) ? 0 : 1;
+            v1[j + 1] = std::min(v1[j] + 1, v0[j + 1] + 1);
+            v1[j + 1] = std::min(v1[j] + 1, v0[j] + cost);
+        }
+
+        for (int j = 0; j < word1.size() + 1; j++) {
+            v0[j] = v1[j];
+        }
+    }
+
+    double threshold = std::max(word1.size() / 3.0, 3.0);
+    int distance = v1[word2.size()];
+
+    free(v0);
+    free(v1);
+
+    return distance <= threshold;
+}
+
+void WordEngine::clearCandidates()
+{
+    Q_D(WordEngine);
+    if(isEnabled()) {
+        d->candidates = new WordCandidateList();
+        if (d->currentText) {
+            WordCandidate userCandidate(WordCandidate::SourceUser, d->currentText->preedit()); 
+            d->candidates->append(userCandidate);
+        }
+        Q_EMIT candidatesChanged(*d->candidates);
+    }
 }
 
 }} // namespace Logic, MaliitKeyboard

@@ -86,6 +86,9 @@ Item {
             property bool extendedKeysShown: false
 
             property bool firstShow: true
+            property bool hidingComplete: true
+
+            property string layoutId: "freetext"
 
             onXChanged: fullScreenItem.reportKeyboardVisibleRect();
             onYChanged: fullScreenItem.reportKeyboardVisibleRect();
@@ -164,10 +167,7 @@ Item {
 
                             anchors.fill: parent
 
-                            gradient: Gradient {
-                                GradientStop { position: 0.0; color: "#f1f1f1" }
-                                GradientStop { position: 1.0; color: "#e4e4e4" }
-                            }
+                            color: UI.backgroundColor
                         }
 
                         Image {
@@ -177,18 +177,11 @@ Item {
                             anchors.top: parent.top.bottom
                         }
 
-                        Image {
-                            id: borderBottom
-                            source: "styles/ubuntu/images/border_bottom.png"
-                            width: parent.width
-                            anchors.bottom: background.bottom
-                        }
-
                         KeyboardContainer {
                             id: keypad
 
                             anchors.top: borderTop.bottom
-                            anchors.bottom: borderBottom.top
+                            anchors.bottom: background.bottom
                             anchors.topMargin: units.gu( UI.top_margin )
                             anchors.bottomMargin: units.gu( UI.bottom_margin )
                             width: parent.width
@@ -225,6 +218,7 @@ Item {
                     PropertyChanges { target: keyboardSurface; y: 0; }
                     onCompleted: {
                         canvas.firstShow = false;
+                        canvas.hidingComplete = false;
                     }
                     when: maliit_geometry.shown === true
                 },
@@ -237,7 +231,13 @@ Item {
                         keypad.closeExtendedKeys();
                         keypad.activeKeypadState = "NORMAL";
                         keypad.state = "CHARACTERS";
+                        if (keypad.switchBack && keypad.previousLanguage) {
+                            keypad.switchBack = false;
+                            maliit_input_method.activeLanguage = keypad.previousLanguage;
+                        }
                         maliit_input_method.close();
+                        canvas.hidingComplete = true;
+                        reportKeyboardVisibleRect();
                     }
                     // Wait for the first show operation to complete before
                     // allowing hiding, as the conditions when the keyboard
@@ -252,9 +252,23 @@ Item {
             Connections {
                 target: input_method
                 onActivateAutocaps: {
-                    keypad.state = "CHARACTERS";
-                    keypad.activeKeypadState = "SHIFTED";
-                    keypad.autoCapsTriggered = true;
+                    if (keypad.state == "CHARACTERS") {
+                        keypad.activeKeypadState = "SHIFTED";
+                        keypad.autoCapsTriggered = true;
+                    } else {
+                        keypad.delayedAutoCaps = true;
+                    }
+                }
+
+                onKeyboardReset: {
+                    keypad.state = "CHARACTERS"
+                }
+                onDeactivateAutocaps: {
+                    if(keypad.autoCapsTriggered) {
+                        keypad.activeKeypadState = "NORMAL";
+                        keypad.autoCapsTriggered = false;
+                    }
+                    keypad.delayedAutoCaps = false;
                 }
             }
 
@@ -286,6 +300,15 @@ Item {
         var obj = mapFromItem(keyboardSurface, vx, vy, vwidth, vheight);
         // Report visible height of the keyboard to support anchorToKeyboard
         obj.height = fullScreenItem.height - obj.y;
+        
+        // Work around QT bug: https://bugreports.qt-project.org/browse/QTBUG-20435
+        // which results in a 0 height being reported incorrectly immediately prior
+        // to the keyboard closing animation starting, which causes us to report
+        // an extra visibility change for the keyboard.
+        if (obj.height <= 0 && !canvas.hidingComplete) {
+            return;
+        }
+
         maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
     }
 

@@ -33,7 +33,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ض"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "ض"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "ص"; extended: ["2"]; extendedShifted: ["2"] }
             CharKey { label: "ث"; extended: ["3"]; extendedShifted: ["3"] }
             CharKey { label: "ق"; extended: ["4"]; extendedShifted: ["4"] }
@@ -43,14 +43,14 @@ KeyPad {
             CharKey { label: "ه"; extended: ["8"]; extendedShifted: ["8"] }
             CharKey { label: "خ"; extended: ["9"]; extendedShifted: ["9"] }
             CharKey { label: "ح"; extended: ["0"]; extendedShifted: ["0"] }
-            CharKey { label: "ج";}
+            CharKey { label: "ج"; rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ش"; }
+            CharKey { label: "ش"; leftSide: true; }
             CharKey { label: "س"; }
             CharKey { label: "ي"; }
             CharKey { label: "ب"; }
@@ -60,7 +60,7 @@ KeyPad {
             CharKey { label: "ن"; }
             CharKey { label: "م"; }
             CharKey { label: "ك"; }
-            CharKey { label: "د"; }
+            CharKey { label: "د"; rightSide: true; }
         }
 
         Row {
@@ -84,7 +84,7 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight + units.gu(UI.bottom_margin*2);
+            height: panel.keyHeight + units.gu(UI.row_margin);
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }

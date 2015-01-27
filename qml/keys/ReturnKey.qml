@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.0
+import "key_constants.js" as UI
 
 ActionKey {
     property var actionKeyOverride: maliit_input_method.actionKeyOverride
@@ -24,6 +25,8 @@ ActionKey {
     enabled: actionKeyOverride ? actionKeyOverride.enabled : true
     // overrideIcon has high priority over label
     label: overrideIconName == "" ? overrideLabel : ""
+    // Scale the font so the label fits if a long word is set
+    fontSize: units.gu(UI.symbolShiftKeyFontSize) * (4 / (label.length >= 4 ? (label.length <= 6 ? label.length : 6) : 4));
     shifted: label
 
     iconNormal: (overrideIconName == "") && (overrideLabel == "") ? "keyboard-return" : overrideIconName
@@ -31,5 +34,6 @@ ActionKey {
     iconCapsLock: iconNormal
 
     action: "return"
+    switchBackFromSymbols: true
     // TODO: input_method.actionKeyOverride.highlighted
 }

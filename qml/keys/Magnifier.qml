@@ -25,7 +25,9 @@ import "key_constants.js" as UI
 KeyPopover {
     id: root
 
-    width: currentlyAssignedKey ? currentlyAssignedKey.width + units.gu(UI.magnifierHorizontalPadding) : 0
+    width: currentlyAssignedKey ? (panel.keyWidth > label.width ? 
+                                  panel.keyWidth + units.gu(UI.magnifierHorizontalPadding)
+                                  : label.width + units.gu(UI.magnifierHorizontalPadding)) : 0
     // Use visible key height instead of real key height to allow for bottom
     // row touch area to be extended
     height: currentlyAssignedKey ? panel.keyHeight + units.gu(UI.magnifierVerticalPadding) : 0
@@ -45,13 +47,14 @@ KeyPopover {
         }
     }
 
-    Image {
+    BorderImage {
         id: popper
 
         width: parent.width
         height: parent.height
 
         anchors.centerIn: anchorItem
+        anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
 
         // this property is used to synchronize scale and opacity animation
         property real animationStep: 0
@@ -59,7 +62,21 @@ KeyPopover {
         transformOrigin: Item.Bottom
         opacity: animationStep
 
-        source: Qt.resolvedUrl("../styles/ubuntu/images/keyboard_popover.png")
+        source: Qt.resolvedUrl("../images/magnified_key.sci")
+
+        onXChanged: {
+            if (x < UI.popoverEdgeMargin) {
+                anchorItem.x += Math.abs(x) + UI.popoverEdgeMargin;
+                return;
+            }
+
+            var rightEdge = (x + width);
+            if ( rightEdge > (panel.width - UI.popoverEdgeMargin)) {
+                var diff = rightEdge - panel.width;
+                anchorItem.x -= diff + UI.popoverEdgeMargin;
+            }
+        }
+
 
         Text {
             id: label

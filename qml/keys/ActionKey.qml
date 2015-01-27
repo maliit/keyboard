@@ -37,9 +37,9 @@ CharKey {
     imgPressed: UI.imageActionKeyPressed
 
     // can be overwritten by keys
-    property color colorNormal: "transparent"
-    property color colorShifted: "transparent"
-    property color colorCapsLock: "transparent"
+    property color colorNormal: UI.fontColor
+    property color colorShifted: UI.fontColor
+    property color colorCapsLock: UI.fontColor
 
     // Make it possible for the visible area of the key to differ from the
     // actual key size. This allows us to extend the touch area of the bottom
@@ -55,6 +55,8 @@ CharKey {
             name: actionKeyRoot.iconNormal
             color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
+            anchors.verticalCenterOffset: orientationHelper.orientationAngle == 0 || orientationHelper.orientationAngle == 180 ? -units.gu(UI.row_margin/2) - units.gu(0.15) : -units.dp( UI.keyMargins )
+
             visible: (label == "")
             width: units.gu(2.5)
             height: units.gu(2.5)

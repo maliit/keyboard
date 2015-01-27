@@ -33,21 +33,21 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ק"; shifted: "ק"; extended: ["1"]; extendedShifted: ["1"] }
+            CharKey { label: "ק"; shifted: "ק"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "ר"; shifted: "ר"; extended: ["2"]; extendedShifted: ["2"] }
             CharKey { label: "א"; shifted: "א"; extended: ["3"]; extendedShifted: ["3"] }
             CharKey { label: "ט"; shifted: "ט"; extended: ["4"]; extendedShifted: ["4"] }
             CharKey { label: "ו"; shifted: "ו"; extended: ["5"]; extendedShifted: ["5"] }
             CharKey { label: "ן"; shifted: "ן"; extended: ["6"]; extendedShifted: ["6"] }
             CharKey { label: "ם"; shifted: "ם"; extended: ["7"]; extendedShifted: ["7"] }
-            CharKey { label: "פ"; shifted: "פ"; extended: ["8"]; extendedShifted: ["8"] }
+            CharKey { label: "פ"; shifted: "פ"; extended: ["8"]; extendedShifted: ["8"]; rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ש"; shifted: "ש"; extended: ["₪"]; extendedShifted: ["₪"] }
+            CharKey { label: "ש"; shifted: "ש"; extended: ["₪"]; extendedShifted: ["₪"]; leftSide: true; }
             CharKey { label: "ד"; shifted: "ד"; }
             CharKey { label: "ג"; shifted: "ג"; }
             CharKey { label: "כ"; shifted: "כ"; }
@@ -56,7 +56,7 @@ KeyPad {
             CharKey { label: "ח"; shifted: "ח"; }
             CharKey { label: "ל"; shifted: "ל"; }
             CharKey { label: "ך"; shifted: "ך"; extended: ["9"]; extendedShifted: ["9"] }
-            CharKey { label: "ף"; shifted: "ף"; extended: ["0"]; extendedShifted: ["0"] }
+            CharKey { label: "ף"; shifted: "ף"; extended: ["0"]; extendedShifted: ["0"]; rightSide: true; }
         }
 
         Row {
@@ -79,12 +79,12 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight + units.gu(UI.bottom_margin*2);
+            height: panel.keyHeight + units.gu(UI.row_margin);
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
             CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: languageMenuButton.right; height: parent.height; }
-            UrlKey         { id: urlKey; label: ".il";                   anchors.right: dotKey.left; height: parent.height; }
+            UrlKey         { id: urlKey; label: ".il"; extended: [".com"]; anchors.right: dotKey.left; height: parent.height; }
             CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "!", "־"]; extendedShifted: ["?", "!", "־"]; anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }

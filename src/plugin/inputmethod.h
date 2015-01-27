@@ -55,6 +55,8 @@ class InputMethod
     Q_PROPERTY(QString audioFeedbackSound READ audioFeedbackSound NOTIFY audioFeedbackSoundChanged)
     Q_PROPERTY(QObject* actionKeyOverride READ actionKeyOverride NOTIFY actionKeyOverrideChanged)
     Q_PROPERTY(bool useHapticFeedback READ useHapticFeedback NOTIFY useHapticFeedbackChanged)
+    Q_PROPERTY(QString keyboardState READ keyboardState WRITE setKeyboardState NOTIFY keyboardStateChanged)
+    Q_PROPERTY(bool hasSelection READ hasSelection NOTIFY hasSelectionChanged)
 
     Q_ENUMS(TextContentType)
 
@@ -112,6 +114,11 @@ public:
     const QString audioFeedbackSound() const;
     bool useHapticFeedback() const;
 
+    const QString keyboardState() const;
+    Q_SLOT void setKeyboardState(const QString& state);
+
+    bool hasSelection() const;
+
     QObject* actionKeyOverride() const;
 
     Q_SLOT void close();
@@ -119,6 +126,7 @@ public:
 Q_SIGNALS:
     void contentTypeChanged(TextContentType contentType);
     void activateAutocaps();
+    void deactivateAutocaps();
     void enabledLanguagesChanged(QStringList languages);
     void activeLanguageChanged(QString language);
     void useAudioFeedbackChanged();
@@ -128,6 +136,9 @@ Q_SIGNALS:
     void wordRibbonEnabledChanged(bool wordRibbonEnabled);
     void windowGeometryRectChanged(QRect rect);
     void actionKeyOverrideChanged();
+    void keyboardStateChanged(QString state);
+    void keyboardReset();
+    void hasSelectionChanged(bool hasSelection);
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();
@@ -140,7 +151,9 @@ private:
     Q_SLOT void onLayoutWidthChanged(int width);
     Q_SLOT void onLayoutHeightChanged(int height);
 
-    void checkInitialAutocaps();
+    Q_SLOT void onWordEnginePluginChanged();
+
+    void checkAutocaps();
 
     const QScopedPointer<InputMethodPrivate> d_ptr;
 };

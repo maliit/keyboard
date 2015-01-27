@@ -29,9 +29,12 @@ Item {
     property int keyHeight: 0
 
     property bool autoCapsTriggered: false
+    property bool delayedAutoCaps: false
 
     property string activeKeypadState: "NORMAL"
     property alias popoverEnabled: extendedKeysSelector.enabled
+    property string previousLanguage
+    property bool switchBack: false // Switch back to the previous layout without showing the language menu
 
     state: "CHARACTERS"
 
@@ -46,7 +49,14 @@ Item {
         anchors.fill: parent
         asynchronous: false
         source: panel.state === "CHARACTERS" ? internal.characterKeypadSource : internal.symbolKeypadSource
-        onLoaded: activeKeypadState = "NORMAL"
+        onLoaded: {
+            if (delayedAutoCaps) {
+                activeKeypadState = "SHIFTED";
+                delayedAutoCaps = false;
+            } else {
+                activeKeypadState = "NORMAL";
+            }
+        }
     }
 
     ExtendedKeysSelector {
@@ -89,6 +99,10 @@ Item {
         }
     ]
 
+    onStateChanged: {
+        maliit_input_method.keyboardState = state
+    }
+
     QtObject {
         id: internal
 
@@ -107,14 +121,19 @@ Item {
         {
             var supportedLocales = [
                 "ar",
+                "az",
+                "bs",
+                "ca",
                 "cs",
                 "da",
                 "de",
+                "emoji",
                 "en",
                 "es",
                 "fi",
                 "fr",
                 "he",
+                "hr",
                 "hu",
                 "it",
                 "nl",
@@ -131,7 +150,12 @@ Item {
         /// Returns the relative path to the keyboard QML file for a given language for free text
         function freeTextLanguageKeyboard(language)
         {
-            language = language .slice(0,2).toLowerCase();
+            language = language.toLowerCase();
+            if (!languageIsSupported(language)) {
+                // If we don't have a layout for this specific locale 
+                // check more generic locale
+                language = language.slice(0,2);
+            }
 
             if (!languageIsSupported(language)) {
                 console.log("Language '"+language+"' not supported - using 'en' instead");
@@ -140,12 +164,20 @@ Item {
 
             if (language === "ar")
                 return "lib/ar/Keyboard_ar.qml";
+            if (language === "az")
+                return "lib/az/Keyboard_az.qml";
+            if (language === "bs")
+                return "lib/bs/Keyboard_bs.qml";
+            if (language === "ca")
+                return "lib/ca/Keyboard_ca.qml";
             if (language === "cs")
                 return "lib/cs/Keyboard_cs.qml";
             if (language === "da")
                 return "lib/da/Keyboard_da.qml";
             if (language === "de")
                 return "lib/de/Keyboard_de.qml";
+            if (language === "emoji")
+                return "lib/emoji/Keyboard_emoji.qml";
             if (language === "en")
                 return "lib/en/Keyboard_en.qml";
             if (language === "es")
@@ -156,6 +188,8 @@ Item {
                 return "lib/fr/Keyboard_fr.qml";
             if (language === "he")
                 return "lib/he/Keyboard_he.qml";
+            if (language === "hr")
+                return "lib/hr/Keyboard_hr.qml";
             if (language === "hu")
                 return "lib/hu/Keyboard_hu.qml";
             if (language === "it")
@@ -180,15 +214,20 @@ Item {
         {
             //            if (contentType === InputMethod.NumberContentType) {
             if (contentType === 1) {
+                canvas.layoutId = "number";
                 return "languages/Keyboard_numbers.qml";
             }
 
             //            if (contentType === InputMethod.PhoneNumberContentType) {
             if (contentType === 2) {
+                canvas.layoutId = "telephone";
                 return "languages/Keyboard_telephone.qml";
             }
 
-            var locale = activeLanguage.slice(0,2).toLowerCase();
+            var locale = activeLanguage.toLowerCase();
+            if (!languageIsSupported(locale)) {
+                locale = locale.slice(0,2);
+            }
             if (!languageIsSupported(locale)) {
                 console.log("System language '"+locale+"' can't be used in OSK - using 'en' instead")
                 locale = "en"
@@ -196,15 +235,18 @@ Item {
 
             //            if (contentType === InputMethod.EmailContentType) {
             if (contentType === 3) {
+                canvas.layoutId = "email";
                 return "lib/"+locale+"/Keyboard_"+locale+"_email.qml";
             }
 
             //            if (contentType === InputMethod.UrlContentType) {
             if (contentType === 4) {
+                canvas.layoutId = "url";
                 return "lib/"+locale+"/Keyboard_"+locale+"_url_search.qml";
             }
 
             // FreeTextContentType used as fallback
+            canvas.layoutId = "freetext";
             return freeTextLanguageKeyboard(activeLanguage);
         }
     }

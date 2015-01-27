@@ -26,4 +26,5 @@ ActionKey {
     imgPressed: UI.imageCharKeyPressed
 
     action: "space"
+    switchBackFromSymbols: true
 }
