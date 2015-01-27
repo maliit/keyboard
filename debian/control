@@ -276,7 +276,7 @@ Description: Ubuntu on-screen keyboard data files - Serbian
 Package: ubuntu-keyboard-scottish-gaelic
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
-         hunspell-gd,
+         myspell-gd,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Scottish Gaelic
