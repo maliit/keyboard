@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-12 15:18+0000\n"
+"POT-Creation-Date: 2015-01-28 14:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,65 +50,77 @@ msgid "German"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:81
-msgid "English"
+msgid "Emoji"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:82
-msgid "Spanish"
+msgid "English"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:83
-msgid "Finnish"
+msgid "Spanish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:84
-msgid "French"
+msgid "Finnish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:85
-msgid "Hebrew"
+msgid "French"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:86
-msgid "Croatian"
+msgid "Scottish Gaelic"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:87
-msgid "Hungarian"
+msgid "Hebrew"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:88
-msgid "Italian"
+msgid "Croatian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:89
-msgid "Dutch"
+msgid "Hungarian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:90
-msgid "Polish"
+msgid "Italian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:91
-msgid "Portuguese"
+msgid "Dutch"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:92
-msgid "Russian"
+msgid "Polish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:93
-msgid "Serbian"
+msgid "Portuguese"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:94
-msgid "Swedish"
+msgid "Russian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:95
-msgid "Chinese - Pinyin"
+msgid "Serbian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:96
+msgid "Swedish"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:97
+msgid "Ukrainian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:98
+msgid "Chinese - Pinyin"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:101
 msgid "Language: "
 msgstr ""
