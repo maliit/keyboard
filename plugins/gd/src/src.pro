@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(gaelicplugin)
 EXAMPLE_FILES = gaelicplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/fr/
+PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/gd/
 
 lang_db_gd.commands += \
   rm -f $$PWD/database_gd.db && \
