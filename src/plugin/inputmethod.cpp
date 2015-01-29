@@ -103,6 +103,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
+    connect(&d->event_handler, SIGNAL(qmlCandidateChanged(QStringList)), d->editor.wordEngine(), SLOT(updateQmlCandidates(QStringList)));
     connect(this, SIGNAL(hasSelectionChanged(bool)), &d->editor, SLOT(onHasSelectionChanged(bool)));
     connect(d->editor.wordEngine(), SIGNAL(pluginChanged()), this, SLOT(onWordEnginePluginChanged()));
     connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
