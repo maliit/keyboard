@@ -47,6 +47,7 @@ Text::Text()
     , m_surrounding_offset(0)
     , m_face(PreeditDefault)
     , m_cursor_position(0)
+    , m_restored_preedit(false)
 {}
 
 //! Returns current preedit.
@@ -192,6 +193,19 @@ int Text::cursorPosition() const
 void Text::setCursorPosition(int cursor_position)
 {
     m_cursor_position = cursor_position;
+}
+
+//! Indicates if the preedit has been restored by the user pressing backspace
+bool Text::restoredPreedit() const
+{
+    return m_restored_preedit;
+}
+
+//! Sets whether the preedit has been recently restored
+//! \param restored Preedit restoration state
+void Text::setRestoredPreedit(bool restored)
+{
+    m_restored_preedit = restored;
 }
 
 }} // namespace Model, MaliitKeyboard

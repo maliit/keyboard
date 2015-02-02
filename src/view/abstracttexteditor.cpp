@@ -294,6 +294,8 @@ public:
     int backspace_word_acceleration;
     int deleted_words;
     QString keyboardState;
+    QString previous_preedit;
+    int previous_preedit_position;
 
     explicit AbstractTextEditorPrivate(const EditorOptions &new_options,
                                        Model::Text *new_text,
@@ -323,6 +325,8 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , backspace_word_acceleration(0)
     , deleted_words(0)
     , keyboardState("CHARACTERS")
+    , previous_preedit("")
+    , previous_preedit_position(0)
 {
     auto_repeat_backspace_timer.setSingleShot(true);
     (void) valid();
@@ -460,6 +464,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
                     not d->text->preedit().isEmpty() && isSeparator;
 
+        d->previous_preedit = "";
+
         if (d->preedit_enabled) {
             if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]")) || email_detected) {
                 // We're editing in the middle of a word or entering an email address, so just insert characters directly
@@ -559,6 +565,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             } else {
                 space = d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
             }
+            d->previous_preedit = d->text->preedit();
+            d->previous_preedit_position = d->text->surroundingOffset();
             d->text->setPreedit(d->text->primaryCandidate());
         }
         else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.right(1) == " ") {
@@ -1119,6 +1127,15 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 
             for(int i = 0; i < recreatedPreedit.size(); i++) {
                 singleBackspace();
+            }
+
+            if (!d->previous_preedit.isEmpty()) {
+                int deletePos = d->text->surroundingOffset() - d->previous_preedit_position - recreatedPreedit.size();
+                if (deletePos == 0 || deletePos == 1) {
+                    recreatedPreedit = d->previous_preedit;
+                    text()->setRestoredPreedit(true);
+                }
+                d->previous_preedit = "";
             }
 
             replaceTextWithPreedit(recreatedPreedit, 0, 0, recreatedPreedit.size());

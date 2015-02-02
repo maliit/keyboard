@@ -543,6 +543,33 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_restore_preedit(self):
+        """Pressing delete after autocompleting a word should restore
+           the original preedit state.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Helfn ')
+
+        expected = "Helen "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+        keyboard.type('\b ')
+
+        expected = "Helfn "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+        
+
     def test_long_press(self):
         """Long pressing a key should enter the default extended character.
 

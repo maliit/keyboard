@@ -346,6 +346,14 @@ void WordEngine::calculatePrimaryCandidate()
         primary.setPrimary(true);
         d->candidates->replace(0, primary);
         Q_EMIT primaryCandidateChanged(primary.word());
+    } else if (d->currentText && d->currentText->restoredPreedit()) {
+        // The pre-edit has just been restored by the user pressing backspace after
+        // auto-completing a word, so the user input should be the primary candidate
+        WordCandidate primary = d->candidates->value(0);
+        primary.setPrimary(true);
+        d->candidates->replace(0, primary);
+        Q_EMIT primaryCandidateChanged(primary.word());
+        d->currentText->setRestoredPreedit(false);
     } else if (!d->languagePlugin->languageFeature()->ignoreSimilarity()
                && !similarWords(d->candidates->at(0).word(), d->candidates->at(1).word())) {
         // The prediction is too different to the user input, so the user input 
