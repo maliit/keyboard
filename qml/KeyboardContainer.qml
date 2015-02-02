@@ -35,6 +35,7 @@ Item {
     property alias popoverEnabled: extendedKeysSelector.enabled
     property string previousLanguage
     property bool switchBack: false // Switch back to the previous layout without showing the language menu
+    property bool justChangedLanguage: true // Don't switch back languages during language switch process
 
     state: "CHARACTERS"
 

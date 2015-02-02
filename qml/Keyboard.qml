@@ -231,10 +231,6 @@ Item {
                         keypad.closeExtendedKeys();
                         keypad.activeKeypadState = "NORMAL";
                         keypad.state = "CHARACTERS";
-                        if (keypad.switchBack && keypad.previousLanguage) {
-                            keypad.switchBack = false;
-                            maliit_input_method.activeLanguage = keypad.previousLanguage;
-                        }
                         maliit_input_method.close();
                         canvas.hidingComplete = true;
                         reportKeyboardVisibleRect();
@@ -260,8 +256,16 @@ Item {
                     }
                 }
 
+                onActiveLanguageChanged: {
+                    keypad.justChangedLanguage = true
+                }
                 onKeyboardReset: {
                     keypad.state = "CHARACTERS"
+                    if (keypad.switchBack && keypad.previousLanguage && !keypad.justChangedLanguage) {
+                        keypad.switchBack = false;
+                        maliit_input_method.activeLanguage = keypad.previousLanguage;
+                    }
+                    keypad.justChangedLanguage = false;
                 }
                 onDeactivateAutocaps: {
                     if(keypad.autoCapsTriggered) {
