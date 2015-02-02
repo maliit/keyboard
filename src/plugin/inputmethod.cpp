@@ -116,6 +116,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerActiveLanguage();
     d->registerEnabledLanguages();
     d->registerDoubleSpaceFullStop();
+    d->registerStayHidden();
 
     //fire signal so all listeners know what active language is
     Q_EMIT activeLanguageChanged(d->activeLanguage);
@@ -135,9 +136,11 @@ void InputMethod::show()
 {
     Q_D(InputMethod);
 
-    d->m_geometry->setShown(true);
-    update();
-    d->view->setVisible(true);
+    if(!d->m_settings.stayHidden()) {
+        d->m_geometry->setShown(true);
+        update();
+        d->view->setVisible(true);
+    }
 }
 
 //! \brief InputMethod::hide
