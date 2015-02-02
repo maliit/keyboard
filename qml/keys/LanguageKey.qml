@@ -23,8 +23,7 @@ ActionKey {
 
     padding: 0
 
-    visible: maliit_input_method.enabledLanguages.length > 1 ? true : false
-    width: visible ? panel.keyWidth : 0
+    width: panel.keyWidth
     overridePressArea: true
 
     onPressed: {
