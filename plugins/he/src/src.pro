@@ -32,10 +32,13 @@ lang_db_he.files += $$PWD/database_he.db
 lang_db_he_files.files += $$PWD/database_he.db
 lang_db_he_files.path = $$PLUGIN_INSTALL_PATH
 
+overrides.files += $$PWD/overrides.csv
+overrides.path += $$PLUGIN_INSTALL_PATH
+
 QMAKE_EXTRA_TARGETS += lang_db_he lang_db_he_files
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_he_files
+INSTALLS += target lang_db_he_files overrides
 
 OTHER_FILES += \
     hebrewplugin.json \

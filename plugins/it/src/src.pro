@@ -32,10 +32,13 @@ lang_db_it.files += $$PWD/database_it.db
 lang_db_it_install.files += $$PWD/database_it.db
 lang_db_it_install.path = $$PLUGIN_INSTALL_PATH
 
+overrides.files += $$PWD/overrides.csv
+overrides.path += $$PLUGIN_INSTALL_PATH
+
 QMAKE_EXTRA_TARGETS += lang_db_it lang_db_it_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_it_install
+INSTALLS += target lang_db_it_install overrides
 
 OTHER_FILES += \
     italianplugin.json \
