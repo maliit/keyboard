@@ -509,6 +509,42 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_override(self):
+        """After typing 'i' followed by a space it should get auto-corrected to 'I'
+        via the override mechanism.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('i i i ')
+
+        expected = "I I I "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_double_space_single_character(self):
+        """Spaces should be auto-inserted after double pressing space following
+        a single character.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Test i  ')
+
+        expected = "Test I. "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
     def test_autocomplete(self):
         """Tapping space in a field that supports auto-complete should
            complete a word.
@@ -622,6 +658,26 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         keyboard.type('pinyin.cn ')
 
         expected = "拼音.cn"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_auto_punctuation(self):
+        """A chinese full-stop character should be entered after space has
+        been pressed three times (once to complete the character, once more
+        to insert a space and then again to produce a full-stop.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('pinyin   ')
+
+        expected = "拼音。 "
+
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
