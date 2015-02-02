@@ -20,6 +20,7 @@
 import os, os.path
 import shutil
 import subprocess
+import atexit
 
 from testtools import skip
 from testtools.matchers import Equals
@@ -49,30 +50,11 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
     @classmethod
     def setUpClass(cls):
-        # Clear away any learnt predictions
-        presagedir = os.path.expanduser("~/.presage")
-        if os.path.exists(presagedir):
-            os.rename(presagedir, presagedir + ".bak")
-        subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
-        subprocess.check_call(['restart', 'maliit-server'])
         #### FIXME: This is a work around re: lp:1238417 ####
         if model() != "Desktop":
             from autopilot.input import _uinput
             _uinput._touch_device = _uinput.create_touch_device()
         ####
-
-        #### FIXME: Workaround re: lp:1248902 and lp:1248913
-        logger.debug("Waiting for maliit-server to be ready")
-        sleep(10)
-        ####
-
-    @classmethod
-    def tearDownClass(cls):
-        presagedir = os.path.expanduser("~/.presage")
-        if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
-            shutil.rmtree(presagedir)
-            os.rename(presagedir + ".bak", presagedir)
-        subprocess.check_call(['restart', 'maliit-server'])
 
     def setUp(self):
         if model() == "Desktop":
@@ -402,8 +384,6 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
                 target: Qt.inputMethod
                 onVisibleChanged: {
                     input.visibilityChangeCount++;
-                    console.log("Visibility: " + Qt.inputMethod.visible);
-                    console.log("Change count: " + input.visibilityChangeCount);
                 }
             }
         }
@@ -778,3 +758,24 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+
+def maliit_cleanup():
+    presagedir = os.path.expanduser("~/.presage")
+    if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
+        shutil.rmtree(presagedir)
+        os.rename(presagedir + ".bak", presagedir)
+    subprocess.check_call(['restart', 'maliit-server'])
+
+# Clear away any learnt predictions
+presagedir = os.path.expanduser("~/.presage")
+if os.path.exists(presagedir):
+    os.rename(presagedir, presagedir + ".bak")
+subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
+subprocess.check_call(['restart', 'maliit-server'])
+
+atexit.register(maliit_cleanup)
+
+#### FIXME: Workaround re: lp:1248902 and lp:1248913
+logger.debug("Waiting for maliit-server to be ready")
+sleep(10)
+####
