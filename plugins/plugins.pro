@@ -3,14 +3,19 @@ TEMPLATE = subdirs
 SUBDIRS = \
     westernsupport \
     ar \
+    az \
+    bs \
+    ca \
     cs \
     da \
     de \
+    emoji \
     en \
     es \
     fi \
     fr \
     he \
+    hr \
     hu \
     it \
     nl \

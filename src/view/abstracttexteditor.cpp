@@ -264,7 +264,9 @@ bool extractWordBoundariesAtCursor(const QString& surrounding_text,
 EditorOptions::EditorOptions()
     : backspace_auto_repeat_delay(500)
     , backspace_auto_repeat_interval(200)
-    , backspace_word_delay(3000)
+    , backspace_auto_repeat_acceleration_rate(10)
+    , backspace_auto_repeat_min_interval(50)
+    , backspace_word_switch_threshold(3)
     , backspace_word_interval(400)
     , backspace_word_acceleration_rate(10)
     , backspace_word_min_interval(50)
@@ -274,7 +276,6 @@ class AbstractTextEditorPrivate
 {
 public:
     QTimer auto_repeat_backspace_timer;
-    QElapsedTimer backspace_hold_timer;
     bool backspace_sent;
     bool repeating_backspace;
     EditorOptions options;
@@ -289,7 +290,9 @@ public:
     bool double_space_full_stop_enabled;
     bool editing_middle_of_text;
     QString appendix_for_previous_preedit;
+    int backspace_acceleration;
     int backspace_word_acceleration;
+    int deleted_words;
     QString keyboardState;
 
     explicit AbstractTextEditorPrivate(const EditorOptions &new_options,
@@ -316,7 +319,9 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , double_space_full_stop_enabled(false)
     , editing_middle_of_text(false)
     , appendix_for_previous_preedit()
+    , backspace_acceleration(0)
     , backspace_word_acceleration(0)
+    , deleted_words(0)
     , keyboardState("CHARACTERS")
 {
     auto_repeat_backspace_timer.setSingleShot(true);
@@ -405,7 +410,7 @@ void AbstractTextEditor::onKeyPressed(const Key &key)
     if (key.action() == Key::ActionBackspace) {
         d->backspace_sent = false;
         d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_delay);
-        d->backspace_hold_timer.restart();
+        d->deleted_words = 0;
     }
 }
 
@@ -429,6 +434,17 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
     bool look_for_a_double_space = d->look_for_a_double_space;
+    bool email_detected = false;
+
+    // Detect if the user is entering an email address and avoid spacing, autocaps and autocomplete changes
+    QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+    if (key.action() == Key::ActionBackspace) {
+        textOnLeft.chop(1);
+    }
+    QStringList leftHandWords = textOnLeft.split(" ");
+    if (!d->word_engine->languageFeature()->alwaysShowSuggestions() && !leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
+        email_detected = true;
+    }
 
     if (look_for_a_double_space) {
         // we reset the flag here so that we won't have to add boilerplate code later
@@ -445,8 +461,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                     not d->text->preedit().isEmpty() && isSeparator;
 
         if (d->preedit_enabled) {
-            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]"))) {
-                // We're editing in the middle of a word, so just insert characters directly
+            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]")) || email_detected) {
+                // We're editing in the middle of a word or entering an email address, so just insert characters directly
                 d->text->appendToPreedit(text);
                 commitPreedit();
                 alreadyAppended = true;
@@ -454,24 +470,21 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 // this means we should commit the candidate, add the separator and whitespace
                 d->text->setPreedit(d->text->primaryCandidate());
                 d->text->appendToPreedit(text);
-                if (d->keyboardState == "CHARACTERS") {
-                    d->appendix_for_previous_preedit = d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit());
-                    d->text->appendToPreedit(d->appendix_for_previous_preedit);
-                }
                 commitPreedit();
-                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
+                if (!email_detected) {
+                    auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit() + text);
+                }
                 alreadyAppended = true;
             }
             else if (d->auto_correct_enabled && (isSeparator || isSymbol)) {
-                if(isSeparator && d->keyboardState == "CHARACTERS") {
+                if(isSeparator && d->keyboardState == "CHARACTERS" && !email_detected) {
                     // remove all whitespaces before the separator, then add a whitespace after it
                     removeTrailingWhitespaces();
                 }
 
                 d->text->appendToPreedit(text);
-                auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
-                if(isSeparator && d->keyboardState == "CHARACTERS") {
-                    d->text->appendToPreedit(d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()));
+                if (!email_detected) {
+                    auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(d->text->surroundingLeft() + d->text->preedit());
                 }
                 commitPreedit();
                 alreadyAppended = true;
@@ -505,19 +518,26 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionBackspace: {
         if (not d->backspace_sent) {
             singleBackspace();
-            checkPreeditReentry(true);
-        } else {
+            if (!email_detected) {
+                checkPreeditReentry(true);
+            }
+        } else if (!email_detected) {
             checkPreeditReentry(false);
         }
 
         d->auto_repeat_backspace_timer.stop();
         d->repeating_backspace = false;
+        d->backspace_acceleration = 0;
     } break;
 
     case Key::ActionSpace: {
         QString space = " ";
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
-        QString textOnRight = d->text->surroundingRight().trimmed();
+        QStringList textOnRightList = d->text->surroundingRight().split("\n");
+        QString textOnRight;
+        if (!textOnRightList.isEmpty()) {
+            textOnRight = textOnRightList.first().trimmed();
+        }
         bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
@@ -842,12 +862,18 @@ void AbstractTextEditor::autoRepeatBackspace()
 
     d->repeating_backspace = true;
 
-    if (d->backspace_hold_timer.elapsed() < d->options.backspace_word_delay) {
+    if (d->deleted_words < d->options.backspace_word_switch_threshold) {
         singleBackspace();
-        d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval);
+
+        // Gradually speed up single letter deletion
+        if(d->options.backspace_auto_repeat_interval - d->backspace_acceleration > d->options.backspace_auto_repeat_min_interval) {
+            d->backspace_acceleration += d->options.backspace_auto_repeat_acceleration_rate;
+        }
+        d->auto_repeat_backspace_timer.start(d->options.backspace_auto_repeat_interval - d->backspace_acceleration);
         d->backspace_word_acceleration = 0;
     } else {
         autoRepeatWordBackspace();
+        d->backspace_acceleration = 0;
     }
 }
 
@@ -920,15 +946,17 @@ void AbstractTextEditor::sendPreeditString(const QString &preedit,
 void AbstractTextEditor::singleBackspace()
 {
     Q_D(AbstractTextEditor);
-
+    bool in_word = false;
     QString textOnLeft = d->text->surroundingLeft();
 
     if (d->text->preedit().isEmpty()) {
+        in_word = textOnLeft.right(1) != " ";
         sendKeyPressAndReleaseEvents(Qt::Key_Backspace, Qt::NoModifier);
         // Deletion of surrounding text isn't updated in the model until later
         // Update it locally here for autocaps detection
         textOnLeft.chop(1);
     } else {
+        in_word = true;
         d->text->removeFromPreedit(1);
         textOnLeft += d->text->preedit();
         
@@ -946,6 +974,11 @@ void AbstractTextEditor::singleBackspace()
             //  to happen
             sendCommitString("");
         }
+    }
+
+    if (in_word && textOnLeft.right(1) == " ") {
+        // We were in a word, but now we're not, so we've just finished deleting a word
+        d->deleted_words++;
     }
 
     textOnLeft = textOnLeft.trimmed();
@@ -1039,13 +1072,12 @@ void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 }
 
 //! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should
-//! place a word back in to pre-edit after a character has been deleted or focus
-//! has changed
+//! place a word back in to pre-edit after a character has been deleted
 void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 {
     Q_D(AbstractTextEditor);
 
-    if(!isPreeditEnabled()) {
+    if(!isPreeditEnabled() || m_hasSelection) {
         return;
     }
 
@@ -1094,5 +1126,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
     d->word_engine->computeCandidates(d->text.data());
 }
 
+void AbstractTextEditor::onHasSelectionChanged(bool hasSelection) {
+    m_hasSelection = hasSelection;
+}
 
 } // namespace MaliitKeyboard

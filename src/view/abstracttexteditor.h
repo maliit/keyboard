@@ -48,7 +48,9 @@ struct EditorOptions
     // all delays are in milliseconds
     int backspace_auto_repeat_delay; // delay before first automatically repeated key
     int backspace_auto_repeat_interval; // interval between automatically repeated keys
-    int backspace_word_delay; // delay before first automatically delete whole words
+    int backspace_auto_repeat_acceleration_rate; // rate at which to accelerate key repetition
+    int backspace_auto_repeat_min_interval; // minimum interval between repeating keys
+    int backspace_word_switch_threshold; // switch to deleting whole words after we've deleted a certain number of words via single backspaces
     int backspace_word_interval; // interval between deleting word on while pressing the backspace
     int backspace_word_acceleration_rate; // rate at which to accelerate word deletion
     int backspace_word_min_interval; // minimum interval between deleting words after acceleration
@@ -118,6 +120,7 @@ public:
     Q_SLOT void onCursorPositionChanged(int cursor_position,
                                         const QString &surrounding_text);
     Q_SLOT void onKeyboardStateChanged(QString state);
+    Q_SLOT void onHasSelectionChanged(bool hasSelection);
     Q_SLOT void replacePreedit(const QString &replacement);
     Q_SLOT void replaceTextWithPreedit(const QString &replacement, int start, int len, int pos);
     Q_SLOT void replaceAndCommitPreedit(const QString &replacement);
@@ -174,6 +177,8 @@ private:
 
     void sendKeyPressAndReleaseEvents(int key, Qt::KeyboardModifiers modifiers,
                                       const QString& text = QString());
+
+    bool m_hasSelection;
 };
 
 } // namespace MaliitKeyboard

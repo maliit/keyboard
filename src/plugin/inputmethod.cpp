@@ -103,6 +103,8 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
     connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
+    connect(this, SIGNAL(hasSelectionChanged(bool)), &d->editor, SLOT(onHasSelectionChanged(bool)));
+    connect(d->editor.wordEngine(), SIGNAL(pluginChanged()), this, SLOT(onWordEnginePluginChanged()));
     connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
     d->registerAudioFeedbackSoundSetting();
@@ -133,9 +135,9 @@ void InputMethod::show()
 {
     Q_D(InputMethod);
 
-    d->view->setVisible(true);
     d->m_geometry->setShown(true);
-    d->editor.checkPreeditReentry(false);
+    update();
+    d->view->setVisible(true);
 }
 
 //! \brief InputMethod::hide
@@ -266,6 +268,9 @@ void InputMethod::updateAutoCaps()
     if (enabled != d->autocapsEnabled) {
         d->autocapsEnabled = enabled;
         d->editor.setAutoCapsEnabled(enabled);
+        if (!enabled) {
+            Q_EMIT deactivateAutocaps();
+        }
     }
 }
 
@@ -274,7 +279,7 @@ void InputMethod::updateAutoCaps()
 void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
-    d->truncateEnabledLanguageLocales(d->m_settings.enabledLanguages());
+    d->enabledLanguages = d->m_settings.enabledLanguages();
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
 
@@ -337,7 +342,19 @@ void InputMethod::update()
 {
     Q_D(InputMethod);
 
+    if (!d->m_geometry->shown()) {
+        // Don't update if we're in the process of hiding
+        return;
+    }
+
     bool valid;
+ 
+    bool hasSelection = d->host->hasSelection(valid);
+
+    if (valid && hasSelection != d->hasSelection) {
+        d->hasSelection = hasSelection;
+        Q_EMIT hasSelectionChanged(d->hasSelection);
+    }
 
     bool emitPredictionEnabled = false;
 
@@ -362,6 +379,8 @@ void InputMethod::update()
         updateWordEngine();
     }
 
+    updateAutoCaps();
+
     QString text;
     int position;
     bool ok = d->host->surroundingText(text, position);
@@ -369,7 +388,6 @@ void InputMethod::update()
         d->editor.text()->setSurrounding(text);
         d->editor.text()->setSurroundingOffset(position);
 
-        updateAutoCaps();
         checkAutocaps();
         d->previous_position = position;
     }
@@ -379,8 +397,11 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
-    if (d->contentType != FreeTextContentType)
+    if (d->contentType != FreeTextContentType
+        && !(d->editor.wordEngine()->languageFeature()->alwaysShowSuggestions()
+             && (d->contentType == UrlContentType || d->contentType == EmailContentType))) {
         d->wordEngineEnabled = false;
+    }
 
     d->editor.clearPreedit();
     d->editor.wordEngine()->setEnabled( d->wordEngineEnabled );
@@ -405,6 +426,8 @@ void InputMethod::setContentType(TextContentType contentType)
 
     setActiveLanguage(d->activeLanguage);
 
+    d->editor.wordEngine()->languageFeature()->setContentType(static_cast<Maliit::TextContentType>(contentType));
+
     d->contentType = contentType;
     Q_EMIT contentTypeChanged(contentType);
 
@@ -423,7 +446,12 @@ void InputMethod::checkAutocaps()
         int position;
         bool ok = d->host->surroundingText(text, position);
         QString textOnLeft = d->editor.text()->surroundingLeft() + d->editor.text()->preedit();
-        if (ok && ((text.isEmpty() && d->editor.text()->preedit().isEmpty() && position == 0) 
+        QStringList leftHandWords = textOnLeft.split(" ");
+        bool email_detected = false;
+        if (!leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
+            email_detected = true;
+        }
+        if (ok && !email_detected && ((text.isEmpty() && d->editor.text()->preedit().isEmpty() && position == 0) 
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft)
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft.trimmed()))) {
             Q_EMIT activateAutocaps();
@@ -492,11 +520,6 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
 {
     Q_D(InputMethod);
 
-    if (newLanguage.length() != 2) {
-        qWarning() << Q_FUNC_INFO << "newLanguage is not valid:" << newLanguage;
-        return;
-    }
-
     qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
 
     if (d->activeLanguage == newLanguage)
@@ -510,6 +533,12 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
     Q_EMIT activeLanguageChanged(d->activeLanguage);
 }
 
+void InputMethod::onWordEnginePluginChanged()
+{
+    reset();
+    update();
+}
+
 const QString InputMethod::keyboardState() const
 {
     Q_D(const InputMethod);
@@ -521,6 +550,12 @@ void InputMethod::setKeyboardState(const QString &state)
     Q_D(InputMethod);
     d->keyboardState = state;
     Q_EMIT keyboardStateChanged(d->keyboardState);
+}
+
+bool InputMethod::hasSelection() const
+{
+    Q_D(const InputMethod);
+    return d->hasSelection;
 }
 
 void InputMethod::onVisibleRectChanged()

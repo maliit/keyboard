@@ -85,7 +85,7 @@ KeyPad {
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
             CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: languageMenuButton.right; height: parent.height; }
-            UrlKey         { id: urlKey; label: ".cn"; extended: [".中國", ".中国", ".hk", ".香港", ".mo", ".tw", ".台灣", ".台湾"]; anchors.right: dotKey.left; height: parent.height; }
+            UrlKey         { id: urlKey; label: ".cn"; extended: [".com", ".中國", ".中国", ".hk", ".香港"]; extendedShifted: [".mo", ".tw", ".台灣", ".台湾"]; anchors.right: dotKey.left; height: parent.height; }
             CharKey        { id: dotKey;      label: "."; shifted: ".";  anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }

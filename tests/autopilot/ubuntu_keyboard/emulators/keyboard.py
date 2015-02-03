@@ -136,9 +136,8 @@ class Keyboard(object):
         if self.is_available():
             x, y, h, w = self._keyboard_container.globalRect
             x_pos = int(w / 2)
-            # start_y: just inside the keyboard, must be a better way than +1px
-            start_y = y - 10
-            end_y = y + int(h / 2)
+            start_y = y + int(h / 2)
+            end_y = y + h
             self.pointer.drag(x_pos, start_y, x_pos, end_y)
 
             self.keyboard.state.wait_for("HIDDEN")
@@ -161,7 +160,7 @@ class Keyboard(object):
         except AssertionError:
             return False
 
-    def press_key(self, key):
+    def press_key(self, key, capslock_switch=False, long_press=False):
         """Tap on the key with the internal pointer
 
         :params key: String containing the text of the key to tap.
@@ -177,7 +176,10 @@ class Keyboard(object):
         key = self._translate_key(key)
 
         req_keypad = KeyboardState.character
-        req_key_state = self._keypad_contains_key(req_keypad, key)
+        if capslock_switch:
+            req_key_state = "CAPSLOCK"
+        else:
+            req_key_state = self._keypad_contains_key(req_keypad, key)
         if req_key_state is None:
             req_keypad = KeyboardState.symbol
             req_key_state = self._keypad_contains_key(req_keypad, key)
@@ -189,7 +191,10 @@ class Keyboard(object):
         self._show_keypad(req_keypad)
         self._change_keypad_to_state(req_key_state)
 
-        self._tap_key(key_pos)
+        if long_press:
+            self._long_press_key(key_pos)
+        else:
+            self._tap_key(key_pos)
 
     def type(self, string, delay=0.1):
         """Type the string *string* with a delay of *delay* between each key
@@ -295,6 +300,11 @@ class Keyboard(object):
             self._current_keypad_name,
             "shift"
         )
+
+        if key_pos == None:
+            # Not all layouts have a shift key
+            return
+
         self._tap_key(key_pos)
         self._keyboard_container.activeKeypadState.wait_for(state)
         self.active_keypad.opacity.wait_for(1.0)
@@ -303,6 +313,14 @@ class Keyboard(object):
         if pointer is None:
             pointer = Pointer(Touch.create())
         pointer.click_object(key_rect)
+
+    def _long_press_key(self, key_rect, pointer=None):
+        if pointer is None:
+            pointer = Pointer(Touch.create())
+        pointer.move(key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0)
+        pointer.press()
+        sleep(1)
+        pointer.release()
 
     def _keyboard_details_changed(self):
         return self._orientation_changed()

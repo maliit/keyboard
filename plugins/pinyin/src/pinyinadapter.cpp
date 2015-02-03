@@ -57,11 +57,6 @@ void PinyinAdapter::parse(const QString& string)
 
     pinyin_guess_candidates(m_instance, 0);
 
-    pinyin_guess_sentence(m_instance);
-
-    char* sentence = NULL;
-    pinyin_get_sentence(m_instance, &sentence);
-
     candidates.clear();
     guint len = 0;
     pinyin_get_n_candidate(m_instance, &len);
@@ -69,17 +64,16 @@ void PinyinAdapter::parse(const QString& string)
     {
         lookup_candidate_t * candidate = NULL;
 
-        pinyin_get_candidate(m_instance, i, &candidate);
-
-        const char* word = NULL;
-        pinyin_get_candidate_string(m_instance, candidate, &word);
-        // Translate the token to utf-8 phrase.
-        if (word) {
-            candidates.append(QString(word));
+        if (pinyin_get_candidate(m_instance, i, &candidate)) {
+            const char* word = NULL;
+            pinyin_get_candidate_string(m_instance, candidate, &word);
+            // Translate the token to utf-8 phrase.
+            if (word) {
+                candidates.append(QString(word));
+            }
         }
     }
 
-    g_free(sentence);
 }
 
 QStringList PinyinAdapter::getWordCandidates() const
@@ -92,8 +86,9 @@ void PinyinAdapter::wordCandidateSelected(const QString& word)
     Q_UNUSED(word)
 
     lookup_candidate_t * candidate = NULL;
-    pinyin_get_candidate(m_instance, 1, &candidate);
-    pinyin_choose_candidate(m_instance, 0, candidate);
+    if (pinyin_get_candidate(m_instance, 1, &candidate)) {
+        pinyin_choose_candidate(m_instance, 0, candidate);
+    }
 }
 
 void PinyinAdapter::reset()

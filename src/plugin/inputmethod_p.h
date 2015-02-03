@@ -58,6 +58,7 @@ public:
     QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
     QString keyboardState;
+    bool hasSelection;
 
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
@@ -82,6 +83,7 @@ public:
         , enabledLanguages(activeLanguage)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , keyboardState("CHARACTERS")
+        , hasSelection(false)
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , m_greeterStatus(new GreeterStatus())
@@ -267,14 +269,5 @@ public:
         view->setVisible(false);
 
         applicationApiWrapper->reportOSKInvisible();
-    }
-
-    void truncateEnabledLanguageLocales(QStringList locales)
-    {
-        enabledLanguages.clear();
-        foreach (QString locale, locales) {
-            locale.truncate(2);
-            enabledLanguages << locale;
-        }
     }
 };
