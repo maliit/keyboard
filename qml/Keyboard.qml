@@ -261,7 +261,7 @@ Item {
                 }
                 onKeyboardReset: {
                     keypad.state = "CHARACTERS"
-                    if (keypad.switchBack && maliit_input_method.previousLanguage) {
+                    if (keypad.switchBack && maliit_input_method.previousLanguage && !keypad.justChangedLanguage) {
                         keypad.switchBack = false;
                         maliit_input_method.activeLanguage = maliit_input_method.previousLanguage;
                     }
