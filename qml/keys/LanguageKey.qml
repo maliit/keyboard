@@ -26,19 +26,37 @@ ActionKey {
     width: panel.keyWidth
     overridePressArea: true
 
+    annotation: "…"
+
     onPressed: {
         if (maliit_input_method.useAudioFeedback)
             audioFeedback.play();
 
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
+    }
 
-        if (panel.switchBack && panel.previousLanguage) {
-            panel.switchBack = false;
-            maliit_input_method.activeLanguage = panel.previousLanguage
+    onReleased: {
+        panel.switchBack = false;
+
+        if (maliit_input_method.previousLanguage && maliit_input_method.previousLanguage != maliit_input_method.activeLanguage) {
+            var currentLanguage = maliit_input_method.activeLanguage
+            maliit_input_method.activeLanguage = maliit_input_method.previousLanguage
+            maliit_input_method.previousLanguage = currentLanguage
         } else {
-            panel.previousLanguage = maliit_input_method.activeLanguage
+            maliit_input_method.previousLanguage = maliit_input_method.activeLanguage
             canvas.languageMenuShown = true
         }
-    }   
+    }
+
+    onPressAndHold: {
+        if (maliit_input_method.useAudioFeedback)
+            audioFeedback.play();
+
+        if (maliit_input_method.useHapticFeedback)
+            pressEffect.start();
+
+        maliit_input_method.previousLanguage = maliit_input_method.activeLanguage
+        canvas.languageMenuShown = true
+    }
 }

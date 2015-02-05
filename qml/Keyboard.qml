@@ -231,9 +231,9 @@ Item {
                         keypad.closeExtendedKeys();
                         keypad.activeKeypadState = "NORMAL";
                         keypad.state = "CHARACTERS";
-                        if (keypad.switchBack && keypad.previousLanguage) {
+                        if (keypad.switchBack && maliit_input_method.previousLanguage) {
                             keypad.switchBack = false;
-                            maliit_input_method.activeLanguage = keypad.previousLanguage;
+                            maliit_input_method.activeLanguage = maliit_input_method.previousLanguage;
                         }
                         maliit_input_method.close();
                         canvas.hidingComplete = true;

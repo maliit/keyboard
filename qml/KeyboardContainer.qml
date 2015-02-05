@@ -33,8 +33,7 @@ Item {
 
     property string activeKeypadState: "NORMAL"
     property alias popoverEnabled: extendedKeysSelector.enabled
-    property string previousLanguage
-    property bool switchBack: false // Switch back to the previous layout without showing the language menu
+    property bool switchBack: false // Switch back to the previous layout when changing fields
 
     state: "CHARACTERS"
 
