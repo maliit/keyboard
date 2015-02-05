@@ -117,6 +117,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerPreviousLanguage();
     d->registerEnabledLanguages();
     d->registerDoubleSpaceFullStop();
+    d->registerStayHidden();
 
     //fire signal so all listeners know what active language is
     Q_EMIT activeLanguageChanged(d->activeLanguage);
@@ -136,9 +137,11 @@ void InputMethod::show()
 {
     Q_D(InputMethod);
 
-    d->m_geometry->setShown(true);
-    update();
-    d->view->setVisible(true);
+    if(!d->m_settings.stayHidden()) {
+        d->m_geometry->setShown(true);
+        update();
+        d->view->setVisible(true);
+    }
 }
 
 //! \brief InputMethod::hide
@@ -447,12 +450,15 @@ void InputMethod::checkAutocaps()
         int position;
         bool ok = d->host->surroundingText(text, position);
         QString textOnLeft = d->editor.text()->surroundingLeft() + d->editor.text()->preedit();
+        if (textOnLeft.contains("\n")) {
+            textOnLeft = textOnLeft.split("\n").last();
+        }
         QStringList leftHandWords = textOnLeft.split(" ");
         bool email_detected = false;
         if (!leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
             email_detected = true;
         }
-        if (ok && !email_detected && ((text.isEmpty() && d->editor.text()->preedit().isEmpty() && position == 0) 
+        if (ok && !email_detected && ((textOnLeft.isEmpty() && d->editor.text()->preedit().isEmpty()) 
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft)
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft.trimmed()))) {
             Q_EMIT activateAutocaps();

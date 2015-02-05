@@ -56,6 +56,7 @@ public:
     QString keyPressAudioFeedbackSound() const;
     bool keyPressHapticFeedback() const;
     bool doubleSpaceFullStop() const;
+    bool stayHidden() const;
 
 Q_SIGNALS:
     void activeLanguageChanged(QString);
@@ -69,6 +70,7 @@ Q_SIGNALS:
     void keyPressAudioFeedbackSoundChanged(QString);
     void keyPressHapticFeedbackChanged(bool);
     void doubleSpaceFullStopChanged(bool);
+    void stayHiddenChanged(bool);
 
 private:
     Q_SLOT void settingUpdated(const QString &key);

@@ -266,6 +266,12 @@ public:
         editor.setDoubleSpaceFullStopEnabled(m_settings.doubleSpaceFullStop());
     }
 
+    void registerStayHidden()
+    {
+        QObject::connect(&m_settings, SIGNAL(stayHiddenChanged(bool)),
+                         q, SLOT(hide()));
+    } 
+
     void closeOskWindow()
     {
         if (!view->isVisible())

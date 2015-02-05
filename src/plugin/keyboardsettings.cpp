@@ -45,6 +45,7 @@ const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_KEY = QLatin1String("keyPressFeedba
 const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY = QLatin1String("keyPressFeedbackSound");
 const QLatin1String KEY_PRESS_HAPTIC_FEEDBACK_KEY = QLatin1String("keyPressHapticFeedback");
 const QLatin1String DOUBLE_SPACE_FULL_STOP = QLatin1String("doubleSpaceFullStop");
+const QLatin1String STAY_HIDDEN = QLatin1String("stayHidden");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -180,6 +181,15 @@ bool KeyboardSettings::doubleSpaceFullStop() const
 }
 
 /*!
+ * \brief KeyboardSettings:stayHidden returns true if the keyboard should
+ * always remain hidden (e.g. if a hardware keyboard has been connected).
+ */
+bool KeyboardSettings::stayHidden() const
+{
+    return m_settings->get(STAY_HIDDEN).toBool();
+}
+
+/*!
  * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
  * \param key
@@ -219,6 +229,8 @@ void KeyboardSettings::settingUpdated(const QString &key)
     } else if (key == DOUBLE_SPACE_FULL_STOP) {
         Q_EMIT doubleSpaceFullStopChanged(doubleSpaceFullStop());
         return;
+    } else if (key == STAY_HIDDEN) {
+        Q_EMIT stayHiddenChanged(stayHidden());
     }
 
     qWarning() << Q_FUNC_INFO << "unknown settings key:" << key;
