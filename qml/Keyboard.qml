@@ -191,6 +191,7 @@ Item {
 
                         LanguageMenu {
                             id: languageMenu
+                            objectName: "languageMenu"
                             anchors.centerIn: parent
                             width: 400;
                             height: keypad.height;

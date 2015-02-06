@@ -28,6 +28,8 @@ ActionKey {
 
     annotation: "…"
 
+    action: "language"
+
     onPressed: {
         if (maliit_input_method.useAudioFeedback)
             audioFeedback.play();

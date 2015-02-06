@@ -66,6 +66,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
         gsettings.set_string("active-language", "en")
+        gsettings.set_string("previous-language", "es")
         gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh", "emoji"])
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
@@ -785,6 +786,63 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
             text_area.text,
             Eventually(Equals(expected))
         )
+
+
+class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
+
+    def test_tapping(self):
+        """Tapping the language menu key should switch to the previously
+        used language.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals('en')
+        )
+
+        keyboard.press_key("language")
+
+        sleep(5)
+
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals('es')
+        )
+
+    def test_long_press(self):
+        """Holding down the language menu key should switch display the
+        language switcher menu.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals('en')
+        )
+
+        keyboard.press_key("language", long_press=True)
+
+        menu = keyboard.maliit.select_single("LanguageMenu")
+
+        self.assertThat(
+            menu.visible,
+            Eventually(Equals(True))
+        )
+
+        keyboard.press_key("language")
 
 
 def maliit_cleanup():
