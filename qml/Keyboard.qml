@@ -264,7 +264,9 @@ Item {
                     keypad.state = "CHARACTERS"
                     if (keypad.switchBack && maliit_input_method.previousLanguage && !keypad.justChangedLanguage) {
                         keypad.switchBack = false;
+                        var currentLanguage = maliit_input_method.activeLanguage;
                         maliit_input_method.activeLanguage = maliit_input_method.previousLanguage;
+                        maliit_input_method.previousLanguage = currentLanguage;
                     }
                     keypad.justChangedLanguage = false;
                 }
