@@ -21,6 +21,8 @@ ActionKey {
     iconShifted: "language-chooser";
     iconCapsLock: "language-chooser";
 
+    property bool held: false;
+
     padding: 0
 
     width: panel.keyWidth
@@ -34,17 +36,19 @@ ActionKey {
 
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
+        
+        held = false;
     }
 
     onReleased: {
         panel.switchBack = false;
+        if (held) {
+            return;
+        }
 
         if (maliit_input_method.previousLanguage && maliit_input_method.previousLanguage != maliit_input_method.activeLanguage) {
-            var currentLanguage = maliit_input_method.activeLanguage
             maliit_input_method.activeLanguage = maliit_input_method.previousLanguage
-            maliit_input_method.previousLanguage = currentLanguage
         } else {
-            maliit_input_method.previousLanguage = maliit_input_method.activeLanguage
             canvas.languageMenuShown = true
         }
     }
@@ -56,7 +60,7 @@ ActionKey {
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
 
-        maliit_input_method.previousLanguage = maliit_input_method.activeLanguage
         canvas.languageMenuShown = true
+        held = true;
     }
 }
