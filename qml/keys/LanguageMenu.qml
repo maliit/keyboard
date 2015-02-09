@@ -51,6 +51,7 @@ Item {
 
         delegate: ListItem.Standard {
             text: languageIdToName(modelData)
+            showDivider: modelData != maliit_input_method.enabledLanguages[maliit_input_method.enabledLanguages.length - 1]
             control: CheckBox {
                 checked: maliit_input_method.activeLanguage == modelData
                 onVisibleChanged: {
@@ -68,17 +69,25 @@ Item {
         }
 
         Component {
-            id: settingsItem
+            id: settingsComp
+            Column {
+                width: parent.width
+                height: settingsItem.height + settingsDiv.height * 2
+                ListItem.ThinDivider { id: settingsDiv }
+                ListItem.ThinDivider { }
                 ListItem.Standard {
-                text: i18n.tr("Settings")
-                onClicked: {
-                    Qt.openUrlExternally("settings:///system/language")
-                    canvas.languageMenuShown = false;
-                    maliit_input_method.hide();
+                    id: settingsItem
+                    text: i18n.tr("Settings") + "…"
+                    showDivider: false
+                    onClicked: {
+                        Qt.openUrlExternally("settings:///system/language")
+                        canvas.languageMenuShown = false;
+                        maliit_input_method.hide();
+                    }
                 }
             }
         }
-        footer: greeter_status.greeterActive ? null : settingsItem
+        footer: greeter_status.greeterActive ? null : settingsComp
     }
 
     function languageIdToName(languageId)
