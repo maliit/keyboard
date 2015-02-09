@@ -35,6 +35,7 @@
 using namespace MaliitKeyboard;
 
 const QLatin1String ACTIVE_LANGUAGE_KEY = QLatin1String("activeLanguage");
+const QLatin1String PREVIOUS_LANGUAGE_KEY = QLatin1String("previousLanguage");
 const QLatin1String ENABLED_LANGUAGES_KEY = QLatin1String("enabledLanguages");
 const QLatin1String AUTO_CAPITALIZATION_KEY = QLatin1String("autoCapitalization");
 const QLatin1String AUTO_COMPLETION_KEY = QLatin1String("autoCompletion");
@@ -73,6 +74,22 @@ QString KeyboardSettings::activeLanguage() const
 void KeyboardSettings::setActiveLanguage(const QString& id)
 {
     m_settings->set(ACTIVE_LANGUAGE_KEY, QVariant(id));
+}
+
+/*!
+ * \brief KeyboardSettings::previousLanguage returns the language that was 
+ * active immediately before the current one.
+ * \return previously language
+ */
+
+QString KeyboardSettings::previousLanguage() const
+{
+    return m_settings->get(PREVIOUS_LANGUAGE_KEY).toString();
+}
+
+void KeyboardSettings::setPreviousLanguage(const QString& id)
+{
+    m_settings->set(PREVIOUS_LANGUAGE_KEY, QVariant(id));
 }
 
 /*!
@@ -181,6 +198,9 @@ void KeyboardSettings::settingUpdated(const QString &key)
 {
     if (key == ACTIVE_LANGUAGE_KEY) {
         Q_EMIT activeLanguageChanged(activeLanguage());
+        return;
+    } else if (key == PREVIOUS_LANGUAGE_KEY) {
+        Q_EMIT previousLanguageChanged(previousLanguage());
         return;
     } else if (key == ENABLED_LANGUAGES_KEY) {
         Q_EMIT enabledLanguagesChanged(enabledLanguages());

@@ -115,6 +115,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
     d->registerActiveLanguage();
+    d->registerPreviousLanguage();
     d->registerEnabledLanguages();
     d->registerDoubleSpaceFullStop();
     d->registerStayHidden();
@@ -284,6 +285,9 @@ void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
     d->enabledLanguages = d->m_settings.enabledLanguages();
+    if (!d->enabledLanguages.contains(d->previousLanguage)) {
+        setPreviousLanguage("");
+    }
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
 
@@ -483,6 +487,14 @@ const QString &InputMethod::activeLanguage() const
     return d->activeLanguage;
 }
 
+//! \brief InputMethod::previousLanguage returns the language that was used
+//! immediately prior to the current activeLanguage
+const QString &InputMethod::previousLanguage() const
+{
+    Q_D(const InputMethod);
+    return d->previousLanguage;
+}
+
 //! \brief InputMethod::useAudioFeedback is true, when keys should play a audio
 //! feedback when pressed
 //! \return
@@ -532,6 +544,7 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
     if (d->activeLanguage == newLanguage)
         return;
 
+    setPreviousLanguage(d->activeLanguage);
     d->activeLanguage = newLanguage;
     d->host->setLanguage(newLanguage);
     d->m_settings.setActiveLanguage(newLanguage);
@@ -539,6 +552,23 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
     qDebug() << "in inputMethod.cpp setActiveLanguage() emitting activeLanguageChanged to" << d->activeLanguage;
     Q_EMIT activeLanguageChanged(d->activeLanguage);
 }
+
+//! \brief InputMethod::setPreviousLanguage
+//! Set the language used immediately prior to the current active language.
+//! \param prevLanguage id the previous language used. e.g. "en" or "emoji"
+void InputMethod::setPreviousLanguage(const QString &prevLanguage)
+{
+    Q_D(InputMethod);
+
+    if (d->previousLanguage == prevLanguage)
+        return;
+
+    d->previousLanguage = prevLanguage;
+    d->m_settings.setPreviousLanguage(prevLanguage);
+
+    Q_EMIT previousLanguageChanged(d->previousLanguage);
+}
+
 
 void InputMethod::onWordEnginePluginChanged()
 {
