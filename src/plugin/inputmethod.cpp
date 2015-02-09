@@ -284,6 +284,9 @@ void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
     d->enabledLanguages = d->m_settings.enabledLanguages();
+    if (!d->enabledLanguages.contains(d->previousLanguage)) {
+        setPreviousLanguage("");
+    }
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
 
