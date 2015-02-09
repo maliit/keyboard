@@ -193,10 +193,10 @@ Item {
                             id: languageMenu
                             objectName: "languageMenu"
                             anchors.centerIn: parent
-                            width: 400;
+                            width: units.gu(30);
                             height: keypad.height;
                             enabled: canvas.languageMenuShown
-                            opacity: canvas.languageMenuShown ? 1.0 : 0.0
+                            visible: canvas.languageMenuShown
                         }
                     } // keyboardComp
                 }

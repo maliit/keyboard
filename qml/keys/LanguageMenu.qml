@@ -49,6 +49,16 @@ Item {
 
         delegate: ListItem.Standard {
             text: languageIdToName(modelData)
+            control: CheckBox {
+                checked: maliit_input_method.activeLanguage == modelData
+                onVisibleChanged: {
+                    checked = maliit_input_method.activeLanguage == modelData
+                }
+                onClicked: {
+                    maliit_input_method.activeLanguage = modelData
+                    canvas.languageMenuShown = false;
+                }
+            }
             onClicked: {
                 maliit_input_method.activeLanguage = modelData
                 canvas.languageMenuShown = false;
