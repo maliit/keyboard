@@ -32,10 +32,13 @@ lang_db_pt.files += $$PWD/database_pt.db
 lang_db_pt_install.files += $$PWD/database_pt.db
 lang_db_pt_install.path = $$PLUGIN_INSTALL_PATH
 
+overrides.files += $$PWD/overrides.csv
+overrides.path += $$PLUGIN_INSTALL_PATH
+
 QMAKE_EXTRA_TARGETS += lang_db_pt lang_db_pt_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_pt_install
+INSTALLS += target lang_db_pt_install overrides
 
 OTHER_FILES += \
     portugueseplugin.json \
