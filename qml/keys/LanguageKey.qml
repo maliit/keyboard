@@ -26,8 +26,6 @@ ActionKey {
     width: panel.keyWidth
     overridePressArea: true
 
-    annotation: "…"
-
     action: "language"
 
     onPressed: {
