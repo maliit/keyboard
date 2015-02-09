@@ -22,6 +22,8 @@ import "key_constants.js" as UI
 
 Item {
 
+    property double contentHeight: menuList.contentHeight + units.gu(UI.languageMenuListViewPadding);
+
     MouseArea {
         width: fullScreenItem.width
         height: fullScreenItem.height

@@ -193,8 +193,8 @@ Item {
                             id: languageMenu
                             objectName: "languageMenu"
                             anchors.centerIn: parent
+                            height: contentHeight > keypad.height ? keypad.height : contentHeight
                             width: units.gu(30);
-                            height: keypad.height;
                             enabled: canvas.languageMenuShown
                             visible: canvas.languageMenuShown
                         }
