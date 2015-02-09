@@ -61,6 +61,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
             self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
         self.set_test_settings()
+        sleep(1) # Have to give time for gsettings change to propogate
         self.pointer = Pointer(Touch.create())
 
     def set_test_settings(self):
