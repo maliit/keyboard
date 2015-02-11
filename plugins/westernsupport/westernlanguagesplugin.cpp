@@ -10,23 +10,25 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
   , m_spellCheckEnabled(false)
 {
     m_spellPredictThread = new QThread();
-    SpellPredictWorker *spellPredictWorker = new SpellPredictWorker();
-    spellPredictWorker->moveToThread(m_spellPredictThread);
+    m_spellPredictWorker = new SpellPredictWorker();
+    m_spellPredictWorker->moveToThread(m_spellPredictThread);
 
-    connect(spellPredictWorker, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SIGNAL(newSpellingSuggestions(QString, QStringList)));
-    connect(spellPredictWorker, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SIGNAL(newPredictionSuggestions(QString, QStringList)));
-    connect(this, SIGNAL(newSpellCheckWord(QString)), spellPredictWorker, SLOT(newSpellCheckWord(QString)));
-    connect(this, SIGNAL(setSpellPredictLanguage(QString)), spellPredictWorker, SLOT(setLanguage(QString)));
-    connect(this, SIGNAL(setSpellCheckLimit(int)), spellPredictWorker, SLOT(setSpellCheckLimit(int)));
-    connect(this, SIGNAL(parsePredictionText(QString, QString)), spellPredictWorker, SLOT(parsePredictionText(QString, QString)));
-    connect(this, SIGNAL(addToUserWordList(QString)), spellPredictWorker, SLOT(addToUserWordList(QString)));
-    connect(this, SIGNAL(addOverride(QString, QString)), spellPredictWorker, SLOT(addOverride(QString, QString)));
+    connect(m_spellPredictWorker, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SIGNAL(newSpellingSuggestions(QString, QStringList)));
+    connect(m_spellPredictWorker, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SIGNAL(newPredictionSuggestions(QString, QStringList)));
+    connect(this, SIGNAL(newSpellCheckWord(QString)), m_spellPredictWorker, SLOT(newSpellCheckWord(QString)));
+    connect(this, SIGNAL(setSpellPredictLanguage(QString)), m_spellPredictWorker, SLOT(setLanguage(QString)));
+    connect(this, SIGNAL(setSpellCheckLimit(int)), m_spellPredictWorker, SLOT(setSpellCheckLimit(int)));
+    connect(this, SIGNAL(parsePredictionText(QString, QString)), m_spellPredictWorker, SLOT(parsePredictionText(QString, QString)));
+    connect(this, SIGNAL(addToUserWordList(QString)), m_spellPredictWorker, SLOT(addToUserWordList(QString)));
+    connect(this, SIGNAL(addOverride(QString, QString)), m_spellPredictWorker, SLOT(addOverride(QString, QString)));
     m_spellPredictThread->start();
 }
 
 WesternLanguagesPlugin::~WesternLanguagesPlugin()
 {
+    m_spellPredictWorker->deleteLater();
     m_spellPredictThread->quit();
+    m_spellPredictThread->wait();
 }
 
 void WesternLanguagesPlugin::predict(const QString& surroundingLeft, const QString& preedit)

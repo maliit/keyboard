@@ -76,6 +76,7 @@ public:
         if (pluginName == currentPlugin)
             return;
 
+        delete languagePlugin;
         pluginLoader.unload();
 
         // to avoid hickups in libpresage, libpinyin
