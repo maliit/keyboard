@@ -61,12 +61,14 @@ class UbuntuKeyboardTests(AutopilotTestCase):
             self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
         self.set_test_settings()
+        sleep(1) # Have to give time for gsettings change to propogate
         self.pointer = Pointer(Touch.create())
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
-        gsettings.set_string("active-language", "en")
         gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh", "emoji"])
+        gsettings.set_string("active-language", "en")
+        gsettings.set_string("previous-language", "es")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
         gsettings.set_boolean("predictive-text", True)
@@ -746,6 +748,8 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_strv("enabled-languages", ["en", "emoji"])
+        gsettings.set_string("previous-language", "emoji")
         gsettings.set_string("active-language", "emoji")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
@@ -758,6 +762,12 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
+
+        keyboard.press_key("language")
+
+        sleep(1)
+
+        keyboard = Keyboard()
 
         keyboard.type('😁😆😃😏')
 
@@ -777,6 +787,12 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
+        keyboard.press_key("language")
+
+        sleep(1)
+
+        keyboard = Keyboard()
+
         keyboard.type('😁😆😃😏\b')
 
         expected = "😁😆😃"
@@ -784,6 +800,63 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
             text_area.text,
             Eventually(Equals(expected))
         )
+
+
+class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
+
+    def test_tapping(self):
+        """Tapping the language menu key should switch to the previously
+        used language.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals('en')
+        )
+
+        keyboard.press_key("language")
+
+        sleep(5)
+
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals('es')
+        )
+
+    def test_long_press(self):
+        """Holding down the language menu key should switch display the
+        language switcher menu.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals('en')
+        )
+
+        keyboard.press_key("language", long_press=True)
+
+        menu = keyboard.maliit.select_single("LanguageMenu")
+
+        self.assertThat(
+            menu.visible,
+            Eventually(Equals(True))
+        )
+
+        keyboard.press_key("language")
 
 
 def maliit_cleanup():

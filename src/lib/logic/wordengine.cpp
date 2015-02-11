@@ -226,6 +226,15 @@ void WordEngine::onWordCandidateSelected(QString word)
     d->languagePlugin->wordCandidateSelected(word);
 }
 
+void WordEngine::updateQmlCandidates(QStringList qmlCandidates) 
+{
+    WordCandidateList candidates;
+    Q_FOREACH(const QString &qmlCandidate, qmlCandidates) {
+        appendToCandidates(&candidates, WordCandidate::SourcePrediction, qmlCandidate);
+    }
+    Q_EMIT candidatesChanged(candidates);
+}
+
 void WordEngine::fetchCandidates(Model::Text *text)
 {
     Q_D(WordEngine);

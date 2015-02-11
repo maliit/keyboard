@@ -6,10 +6,15 @@
       <description>Currently active language, selected by user in the keyboard language menu</description>
       <default>'en'</default>
     </key>
+    <key name="previous-language" type="s">
+      <summary>Previous language</summary>
+      <description>Language which was in use immediately prior to the current active language</description>
+      <default>''</default>
+    </key>
     <key name="enabled-languages" type="as">
       <summary>Enabled languages</summary>
       <description>User-defined list of activatable languages.</description>
-      <default>[]</default>
+      <default>['en', 'emoji']</default>
     </key>
     <key name="auto-capitalization" type="b">
       <summary>Auto-capitalization</summary>

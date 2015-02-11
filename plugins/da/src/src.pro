@@ -32,10 +32,13 @@ lang_db_da.files += $$PWD/database_da.db
 lang_db_da_install.files += $$PWD/database_da.db
 lang_db_da_install.path = $$PLUGIN_INSTALL_PATH
 
+overrides.files += $$PWD/overrides.csv
+overrides.path += $$PLUGIN_INSTALL_PATH
+
 QMAKE_EXTRA_TARGETS += lang_db_da lang_db_da_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_da_install
+INSTALLS += target lang_db_da_install overrides
 
 OTHER_FILES += \
     danishplugin.json \

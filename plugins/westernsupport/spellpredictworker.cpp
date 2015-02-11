@@ -52,8 +52,8 @@ void SpellPredictWorker::parsePredictionText(const QString& surroundingLeft, con
     QString preedit = origPreedit;
 
     // Allow plugins to override certain words such as ('i' -> 'I')
-    if(m_overrides.contains(preedit)) {
-        preedit = m_overrides[preedit];
+    if(m_overrides.contains(preedit.toLower())) {
+        preedit = m_overrides[preedit.toLower()];
         list << preedit;
         // Emit the override corrections instantly so they're always up-to-date
         // as they're often used for short words like 'I'

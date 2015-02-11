@@ -1,3 +1,38 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150209-0ubuntu1) vivid; urgency=medium
+
+  [ Michael Sheldon ]
+  * Add contractions as overrides (I've, you've, I'm, etc.). (LP:
+    #1416020)
+  * Recreate prediction databases with apostrophe support and remove
+    Gutenberg license text from sample data. (LP: #1384800)
+  * Always display the language button, even when only one language is
+    enabled (so settings is easily accessible) and modify language
+    button behaviour to toggle between most recently used layouts when
+    tapped and to only show the menu when long pressed. (LP: #1417048,
+    #1416037, #1416157)
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+  [ Michael Terry ]
+  * Add em dash, en dash, and the bullet as extended hyphen options.
+    (LP: #1414763)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Bill Filler ]
+  * enable emoji by default (LP: #1416036)
+
+  [ Penk Chen ]
+  * Add mechanism for pure QML layouts to provide suggestion candidates.
+
+  [ Mike Sheldon ]
+  * Recreate prediction databases with apostrophe support and remove
+    Gutenberg license text from sample data. (LP: #1384800)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 09 Feb 2015 21:15:02 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150202-0ubuntu1) vivid; urgency=medium
 
   [ Michael Sheldon ]

@@ -34,8 +34,11 @@ lang_db_fr_install.path = $$PLUGIN_INSTALL_PATH
 
 QMAKE_EXTRA_TARGETS += lang_db_fr lang_db_fr_install
 
+overrides.files += $$PWD/overrides.csv
+overrides.path += $$PLUGIN_INSTALL_PATH
+
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_fr_install
+INSTALLS += target lang_db_fr_install overrides
 
 
 OTHER_FILES += \

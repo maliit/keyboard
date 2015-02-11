@@ -21,11 +21,14 @@ ActionKey {
     iconShifted: "language-chooser";
     iconCapsLock: "language-chooser";
 
+    property bool held: false;
+
     padding: 0
 
-    visible: maliit_input_method.enabledLanguages.length > 1 ? true : false
-    width: visible ? panel.keyWidth : 0
+    width: panel.keyWidth
     overridePressArea: true
+
+    action: "language"
 
     onPressed: {
         if (maliit_input_method.useAudioFeedback)
@@ -33,13 +36,31 @@ ActionKey {
 
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
+        
+        held = false;
+    }
 
-        if (panel.switchBack && panel.previousLanguage) {
-            panel.switchBack = false;
-            maliit_input_method.activeLanguage = panel.previousLanguage
+    onReleased: {
+        panel.switchBack = false;
+        if (held) {
+            return;
+        }
+
+        if (maliit_input_method.previousLanguage && maliit_input_method.previousLanguage != maliit_input_method.activeLanguage) {
+            maliit_input_method.activeLanguage = maliit_input_method.previousLanguage
         } else {
-            panel.previousLanguage = maliit_input_method.activeLanguage
             canvas.languageMenuShown = true
         }
-    }   
+    }
+
+    onPressAndHold: {
+        if (maliit_input_method.useAudioFeedback)
+            audioFeedback.play();
+
+        if (maliit_input_method.useHapticFeedback)
+            pressEffect.start();
+
+        canvas.languageMenuShown = true
+        held = true;
+    }
 }

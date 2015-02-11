@@ -31,10 +31,14 @@ lang_db_nl.files += $$PWD/database_nl.db
 
 lang_db_nl_install.files += $$PWD/database_nl.db
 lang_db_nl_install.path = $$PLUGIN_INSTALL_PATH
+
+overrides.files += $$PWD/overrides.csv
+overrides.path += $$PLUGIN_INSTALL_PATH
+
 QMAKE_EXTRA_TARGETS += lang_db_nl lang_db_nl_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_nl_install
+INSTALLS += target lang_db_nl_install overrides
 
 OTHER_FILES += \
     dutchplugin.json \

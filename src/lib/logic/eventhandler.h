@@ -61,6 +61,7 @@ public:
     Q_INVOKABLE void onWordCandidateReleased(QString word, bool userInput);
     Q_INVOKABLE void onKeyPressed(QString label, QString action = QString());
     Q_INVOKABLE void onKeyReleased(QString label, QString action = QString());
+    Q_INVOKABLE void onQmlCandidateChanged(QStringList words);
 
     // Key signals:
     Q_SIGNAL void keyPressed(const Key &key);
@@ -69,6 +70,7 @@ public:
     Q_SIGNAL void wordCandidateReleased(const WordCandidate &candidate);
 
     Q_SIGNAL void languageChangeRequested(QString languageId);
+    Q_SIGNAL void qmlCandidateChanged(QStringList words);
 };
 
 }} // namespace Logic, MaliitKeyboard

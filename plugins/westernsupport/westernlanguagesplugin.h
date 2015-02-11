@@ -33,6 +33,7 @@ public:
     virtual void addToSpellCheckerUserWordList(const QString& word);
     virtual bool setLanguage(const QString& languageId);
     virtual void addSpellingOverride(const QString& orig, const QString& overriden);
+    virtual void loadOverrides(const QString& languageId);
 
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions);
