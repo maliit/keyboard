@@ -67,25 +67,28 @@ private:
         QTest::addColumn<int>("feedbackSpyCount");
         QTest::addColumn<int>("feedbackSoundSpyCount");
         QTest::addColumn<int>("doubleSpaceFullStopSpyCount");
+        QTest::addColumn<int>("stayHiddenSpyCount");
 
         QTest::newRow("languages changed") << QString("enabledLanguages")
-                                           << 1 << 0 << 0 << 0 << 0 << 0 << 0 << 0;
+                                           << 1 << 0 << 0 << 0 << 0 << 0 << 0 << 0 << 0;
         QTest::newRow("capitalization changed") << QString("autoCapitalization")
-                                                << 0 << 1 << 0 << 0 << 0 << 0 << 0 << 0;
+                                                << 0 << 1 << 0 << 0 << 0 << 0 << 0 << 0 << 0;
         QTest::newRow("completion changed") << QString("autoCompletion")
-                                            << 0 << 0 << 1 << 0 << 0 << 0 << 0 << 0;
+                                            << 0 << 0 << 1 << 0 << 0 << 0 << 0 << 0 << 0;
         QTest::newRow("predict changed") << QString("predictiveText")
-                                         << 0 << 0 << 0 << 1 << 0 << 0 << 0 << 0;
+                                         << 0 << 0 << 0 << 1 << 0 << 0 << 0 << 0 << 0;
         QTest::newRow("spellcheck changed") << QString("spellChecking")
-                                         << 0 << 0 << 0 << 0 << 1 << 0 << 0 << 0;
+                                         << 0 << 0 << 0 << 0 << 1 << 0 << 0 << 0 << 0;
         QTest::newRow("feedback changed") << QString("keyPressFeedback")
-                                          << 0 << 0 << 0 << 0 << 0 << 1 << 0 << 0;
+                                          << 0 << 0 << 0 << 0 << 0 << 1 << 0 << 0 << 0;
         QTest::newRow("feedback sound changed") << QString("keyPressFeedbackSound")
-                                          << 0 << 0 << 0 << 0 << 0 << 0 << 1 << 0;
+                                          << 0 << 0 << 0 << 0 << 0 << 0 << 1 << 0 << 0;
         QTest::newRow("doule space full-stop changed") << QString("doubleSpaceFullStop")
-                                          << 0 << 0 << 0 << 0 << 0 << 0 << 0 << 1;
+                                          << 0 << 0 << 0 << 0 << 0 << 0 << 0 << 1 << 0;
+        QTest::newRow("stay hidden changed") << QString("stayHidden")
+                                          << 0 << 0 << 0 << 0 << 0 << 0 << 0 << 0 << 1;
         QTest::newRow("unknown changed") << QString("unknownKey")
-                                         << 0 << 0 << 0 << 0 << 0 << 0 << 0 << 0;
+                                         << 0 << 0 << 0 << 0 << 0 << 0 << 0 << 0 << 0;
     }
 
     Q_SLOT void testSettingUpdated()
@@ -99,6 +102,7 @@ private:
         QFETCH(int, feedbackSpyCount);
         QFETCH(int, feedbackSoundSpyCount);
         QFETCH(int, doubleSpaceFullStopSpyCount);
+        QFETCH(int, stayHiddenSpyCount);
 
         QSignalSpy languagesSpy(m_settings, SIGNAL(enabledLanguagesChanged(QStringList)));
         QSignalSpy capitalSpy(m_settings, SIGNAL(autoCapitalizationChanged(bool)));
@@ -108,6 +112,7 @@ private:
         QSignalSpy feedbackSpy(m_settings, SIGNAL(keyPressAudioFeedbackChanged(bool)));
         QSignalSpy feedbackSoundSpy(m_settings, SIGNAL(keyPressAudioFeedbackSoundChanged(QString)));
         QSignalSpy doubleSpaceFullStopSpy(m_settings, SIGNAL(doubleSpaceFullStopChanged(bool)));
+        QSignalSpy stayHiddenSpy(m_settings, SIGNAL(stayHiddenChanged(bool)));
 
         m_settings->settingUpdated(key);
 
@@ -119,6 +124,7 @@ private:
         QCOMPARE(feedbackSpy.count(), feedbackSpyCount);
         QCOMPARE(feedbackSoundSpy.count(), feedbackSoundSpyCount);
         QCOMPARE(doubleSpaceFullStopSpy.count(), doubleSpaceFullStopSpyCount);
+        QCOMPARE(stayHiddenSpy.count(), stayHiddenSpyCount);
     }
 };
 

@@ -58,10 +58,25 @@ void WesternLanguagesPlugin::addToSpellCheckerUserWordList(const QString& word)
 bool WesternLanguagesPlugin::setLanguage(const QString& languageId)
 {
     Q_EMIT setSpellPredictLanguage(languageId);
+    loadOverrides(languageId);
     return true;
 }
 
 void WesternLanguagesPlugin::addSpellingOverride(const QString& orig, const QString& overriden)
 {
     Q_EMIT addOverride(orig, overriden);
+}
+
+void WesternLanguagesPlugin::loadOverrides(const QString& languageId) {
+    QFile overrideFile("/usr/share/maliit/plugins/com/ubuntu/lib/" + languageId + "/overrides.csv");
+    if (overrideFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream overrideStream(&overrideFile);
+        while (!overrideStream.atEnd()) {
+            QString line = overrideStream.readLine();
+            QStringList components = line.split(",");
+            if (components.length() == 2) {
+                addSpellingOverride(components.first(), components.last());
+            }
+        }
+    }
 }

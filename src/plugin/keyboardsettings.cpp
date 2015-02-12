@@ -35,6 +35,7 @@
 using namespace MaliitKeyboard;
 
 const QLatin1String ACTIVE_LANGUAGE_KEY = QLatin1String("activeLanguage");
+const QLatin1String PREVIOUS_LANGUAGE_KEY = QLatin1String("previousLanguage");
 const QLatin1String ENABLED_LANGUAGES_KEY = QLatin1String("enabledLanguages");
 const QLatin1String AUTO_CAPITALIZATION_KEY = QLatin1String("autoCapitalization");
 const QLatin1String AUTO_COMPLETION_KEY = QLatin1String("autoCompletion");
@@ -44,6 +45,7 @@ const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_KEY = QLatin1String("keyPressFeedba
 const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY = QLatin1String("keyPressFeedbackSound");
 const QLatin1String KEY_PRESS_HAPTIC_FEEDBACK_KEY = QLatin1String("keyPressHapticFeedback");
 const QLatin1String DOUBLE_SPACE_FULL_STOP = QLatin1String("doubleSpaceFullStop");
+const QLatin1String STAY_HIDDEN = QLatin1String("stayHidden");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -72,6 +74,22 @@ QString KeyboardSettings::activeLanguage() const
 void KeyboardSettings::setActiveLanguage(const QString& id)
 {
     m_settings->set(ACTIVE_LANGUAGE_KEY, QVariant(id));
+}
+
+/*!
+ * \brief KeyboardSettings::previousLanguage returns the language that was 
+ * active immediately before the current one.
+ * \return previously language
+ */
+
+QString KeyboardSettings::previousLanguage() const
+{
+    return m_settings->get(PREVIOUS_LANGUAGE_KEY).toString();
+}
+
+void KeyboardSettings::setPreviousLanguage(const QString& id)
+{
+    m_settings->set(PREVIOUS_LANGUAGE_KEY, QVariant(id));
 }
 
 /*!
@@ -163,6 +181,15 @@ bool KeyboardSettings::doubleSpaceFullStop() const
 }
 
 /*!
+ * \brief KeyboardSettings:stayHidden returns true if the keyboard should
+ * always remain hidden (e.g. if a hardware keyboard has been connected).
+ */
+bool KeyboardSettings::stayHidden() const
+{
+    return m_settings->get(STAY_HIDDEN).toBool();
+}
+
+/*!
  * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
  * \param key
@@ -171,6 +198,9 @@ void KeyboardSettings::settingUpdated(const QString &key)
 {
     if (key == ACTIVE_LANGUAGE_KEY) {
         Q_EMIT activeLanguageChanged(activeLanguage());
+        return;
+    } else if (key == PREVIOUS_LANGUAGE_KEY) {
+        Q_EMIT previousLanguageChanged(previousLanguage());
         return;
     } else if (key == ENABLED_LANGUAGES_KEY) {
         Q_EMIT enabledLanguagesChanged(enabledLanguages());
@@ -199,6 +229,8 @@ void KeyboardSettings::settingUpdated(const QString &key)
     } else if (key == DOUBLE_SPACE_FULL_STOP) {
         Q_EMIT doubleSpaceFullStopChanged(doubleSpaceFullStop());
         return;
+    } else if (key == STAY_HIDDEN) {
+        Q_EMIT stayHiddenChanged(stayHidden());
     }
 
     qWarning() << Q_FUNC_INFO << "unknown settings key:" << key;

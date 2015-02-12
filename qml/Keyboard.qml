@@ -180,11 +180,12 @@ Item {
 
                     LanguageMenu {
                         id: languageMenu
+                        objectName: "languageMenu"
                         anchors.centerIn: parent
-                        width: 400;
-                        height: keypad.height;
+                        height: contentHeight > keypad.height ? keypad.height : contentHeight
+                        width: units.gu(30);
                         enabled: canvas.languageMenuShown
-                        opacity: canvas.languageMenuShown ? 1.0 : 0.0
+                        visible: canvas.languageMenuShown
                     }
                 } // keyboardComp
             }
@@ -220,10 +221,6 @@ Item {
                     keypad.closeExtendedKeys();
                     keypad.activeKeypadState = "NORMAL";
                     keypad.state = "CHARACTERS";
-                    if (keypad.switchBack && keypad.previousLanguage) {
-                        keypad.switchBack = false;
-                        maliit_input_method.activeLanguage = keypad.previousLanguage;
-                    }
                     maliit_input_method.close();
                     canvas.hidingComplete = true;
                     reportKeyboardVisibleRect();
@@ -249,8 +246,16 @@ Item {
                 }
             }
 
+            onActiveLanguageChanged: {
+                keypad.justChangedLanguage = true
+            }
             onKeyboardReset: {
                 keypad.state = "CHARACTERS"
+                if (keypad.switchBack && maliit_input_method.previousLanguage && !keypad.justChangedLanguage) {
+                    keypad.switchBack = false;
+                    maliit_input_method.activeLanguage = maliit_input_method.previousLanguage;
+                }
+                keypad.justChangedLanguage = false;
             }
             onDeactivateAutocaps: {
                 if(keypad.autoCapsTriggered) {

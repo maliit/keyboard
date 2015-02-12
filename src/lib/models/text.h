@@ -55,6 +55,7 @@ private:
     uint m_surrounding_offset; //!< offset of cursor position in surrounding text.
     PreeditFace m_face; //!< face of preedit.
     int m_cursor_position; //!< position of cursor in preedit string.
+    bool m_restored_preedit; //!< indicates that the preedit has just been restored by the user pressing backspace
 
 public:
     explicit Text();
@@ -82,6 +83,9 @@ public:
 
     int cursorPosition() const;
     void setCursorPosition(int cursor_position);
+
+    bool restoredPreedit() const;
+    void setRestoredPreedit(bool restored);
 };
 
 }} // namespace Model, MaliitKeyboard

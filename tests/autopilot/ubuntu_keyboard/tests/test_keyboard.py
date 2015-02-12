@@ -20,6 +20,7 @@
 import os, os.path
 import shutil
 import subprocess
+import atexit
 
 from testtools import skip
 from testtools.matchers import Equals
@@ -49,42 +50,25 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
     @classmethod
     def setUpClass(cls):
-        # Clear away any learnt predictions
-        presagedir = os.path.expanduser("~/.presage")
-        if os.path.exists(presagedir):
-            os.rename(presagedir, presagedir + ".bak")
-        subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
-        subprocess.check_call(['restart', 'maliit-server'])
         #### FIXME: This is a work around re: lp:1238417 ####
         if model() != "Desktop":
             from autopilot.input import _uinput
             _uinput._touch_device = _uinput.create_touch_device()
         ####
 
-        #### FIXME: Workaround re: lp:1248902 and lp:1248913
-        logger.debug("Waiting for maliit-server to be ready")
-        sleep(10)
-        ####
-
-    @classmethod
-    def tearDownClass(cls):
-        presagedir = os.path.expanduser("~/.presage")
-        if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
-            shutil.rmtree(presagedir)
-            os.rename(presagedir + ".bak", presagedir)
-        subprocess.check_call(['restart', 'maliit-server'])
-
     def setUp(self):
         if model() == "Desktop":
             self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
         self.set_test_settings()
+        sleep(1) # Have to give time for gsettings change to propogate
         self.pointer = Pointer(Touch.create())
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
-        gsettings.set_string("active-language", "en")
         gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh", "emoji"])
+        gsettings.set_string("active-language", "en")
+        gsettings.set_string("previous-language", "es")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
         gsettings.set_boolean("predictive-text", True)
@@ -402,8 +386,6 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
                 target: Qt.inputMethod
                 onVisibleChanged: {
                     input.visibilityChangeCount++;
-                    console.log("Visibility: " + Qt.inputMethod.visible);
-                    console.log("Change count: " + input.visibilityChangeCount);
                 }
             }
         }
@@ -509,6 +491,42 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_override(self):
+        """After typing 'i' followed by a space it should get auto-corrected to 'I'
+        via the override mechanism.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('i i i ')
+
+        expected = "I I I "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_double_space_single_character(self):
+        """Spaces should be auto-inserted after double pressing space following
+        a single character.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Test i  ')
+
+        expected = "Test I. "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
     def test_autocomplete(self):
         """Tapping space in a field that supports auto-complete should
            complete a word.
@@ -526,6 +544,33 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
             text_area.text,
             Eventually(Equals(expected))
         )
+
+    def test_restore_preedit(self):
+        """Pressing delete after autocompleting a word should restore
+           the original preedit state.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Helfn ')
+
+        expected = "Helen "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+        keyboard.type('\b ')
+
+        expected = "Helfn "
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+        
 
     def test_long_press(self):
         """Long pressing a key should enter the default extended character.
@@ -627,6 +672,26 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_auto_punctuation(self):
+        """A chinese full-stop character should be entered after space has
+        been pressed three times (once to complete the character, once more
+        to insert a space and then again to produce a full-stop.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('pinyin   ')
+
+        expected = "拼音。 "
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
 
 class UbuntuKeyboardSelection(UbuntuKeyboardTests):
 
@@ -683,6 +748,8 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_strv("enabled-languages", ["en", "emoji"])
+        gsettings.set_string("previous-language", "emoji")
         gsettings.set_string("active-language", "emoji")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
@@ -695,6 +762,12 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
+
+        keyboard.press_key("language")
+
+        sleep(1)
+
+        keyboard = Keyboard()
 
         keyboard.type('😁😆😃😏')
 
@@ -714,6 +787,12 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
+        keyboard.press_key("language")
+
+        sleep(1)
+
+        keyboard = Keyboard()
+
         keyboard.type('😁😆😃😏\b')
 
         expected = "😁😆😃"
@@ -722,3 +801,81 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+
+class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
+
+    def test_tapping(self):
+        """Tapping the language menu key should switch to the previously
+        used language.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals('en')
+        )
+
+        keyboard.press_key("language")
+
+        sleep(5)
+
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals('es')
+        )
+
+    def test_long_press(self):
+        """Holding down the language menu key should switch display the
+        language switcher menu.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals('en')
+        )
+
+        keyboard.press_key("language", long_press=True)
+
+        menu = keyboard.maliit.select_single("LanguageMenu")
+
+        self.assertThat(
+            menu.visible,
+            Eventually(Equals(True))
+        )
+
+        keyboard.press_key("language")
+
+
+def maliit_cleanup():
+    presagedir = os.path.expanduser("~/.presage")
+    if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
+        shutil.rmtree(presagedir)
+        os.rename(presagedir + ".bak", presagedir)
+    subprocess.check_call(['restart', 'maliit-server'])
+
+# Clear away any learnt predictions
+presagedir = os.path.expanduser("~/.presage")
+if os.path.exists(presagedir):
+    os.rename(presagedir, presagedir + ".bak")
+subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
+subprocess.check_call(['restart', 'maliit-server'])
+
+atexit.register(maliit_cleanup)
+
+#### FIXME: Workaround re: lp:1248902 and lp:1248913
+logger.debug("Waiting for maliit-server to be ready")
+sleep(10)
+####
