@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150213.2-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Add a brief delay before evaluating swipes (LP: #1421742)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 13 Feb 2015 20:33:15 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150213-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
