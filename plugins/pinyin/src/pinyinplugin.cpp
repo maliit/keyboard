@@ -12,6 +12,7 @@ PinyinPlugin::PinyinPlugin(QObject *parent) :
 
 PinyinPlugin::~PinyinPlugin()
 {
+    delete pinyinAdapter;
 }
 
 void PinyinPlugin::predict(const QString& surroundingLeft, const QString& preedit)
