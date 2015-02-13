@@ -305,7 +305,7 @@ Item {
 
     Timer {
         id: swipeTimer
-        interval: 500
+        interval: 750
         onTriggered: {
             swipeReady = true;
             keyMouseArea.evaluateSelectorSwipe();
