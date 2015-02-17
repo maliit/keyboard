@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QStringList>
+#include <QThread>
 #include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
@@ -33,11 +34,13 @@ public:
 
 signals:
     void newPredictionSuggestions(QString word, QStringList suggestions);
+    void parsePredictionText(QString preedit);
+    void candidateSelected(QString word);
     
 public slots:
     
 private:
-    PinyinAdapter* pinyinAdapter;
+    QThread *m_pinyinThread;
     ChineseLanguageFeatures* m_chineseLanguageFeatures;
 };
 

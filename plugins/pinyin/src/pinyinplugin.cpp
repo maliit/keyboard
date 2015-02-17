@@ -5,9 +5,16 @@
 
 PinyinPlugin::PinyinPlugin(QObject *parent) :
     AbstractLanguagePlugin(parent)
-  , pinyinAdapter(new PinyinAdapter)
   , m_chineseLanguageFeatures(new ChineseLanguageFeatures)
 {
+    m_pinyinThread = new QThread();
+    PinyinAdapter *pinyinAdapter = new PinyinAdapter();
+    pinyinAdapter->moveToThread(m_pinyinThread);
+
+    connect(pinyinAdapter, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SIGNAL(newPredictionSuggestions(QString, QStringList)));
+    connect(this, SIGNAL(parsePredictionText(QString)), pinyinAdapter, SLOT(parse(QString)));
+    connect(this, SIGNAL(candidateSelected(QString)), pinyinAdapter, SLOT(wordCandidateSelected(QString)));
+    m_pinyinThread->start();
 }
 
 PinyinPlugin::~PinyinPlugin()
@@ -17,13 +24,12 @@ PinyinPlugin::~PinyinPlugin()
 void PinyinPlugin::predict(const QString& surroundingLeft, const QString& preedit)
 {
     Q_UNUSED(surroundingLeft);
-    pinyinAdapter->parse(preedit);
-    Q_EMIT newPredictionSuggestions(preedit, pinyinAdapter->getWordCandidates());
+    Q_EMIT parsePredictionText(preedit);
 }
 
 void PinyinPlugin::wordCandidateSelected(QString word)
 {
-    return pinyinAdapter->wordCandidateSelected(word);
+    Q_EMIT candidateSelected(word);
 }
 
 AbstractLanguageFeatures* PinyinPlugin::languageFeature()
