@@ -41,6 +41,7 @@ public slots:
     
 private:
     QThread *m_pinyinThread;
+    PinyinAdapter *m_pinyinAdapter;
     ChineseLanguageFeatures* m_chineseLanguageFeatures;
 };
 

@@ -8,18 +8,20 @@ PinyinPlugin::PinyinPlugin(QObject *parent) :
   , m_chineseLanguageFeatures(new ChineseLanguageFeatures)
 {
     m_pinyinThread = new QThread();
-    PinyinAdapter *pinyinAdapter = new PinyinAdapter();
-    pinyinAdapter->moveToThread(m_pinyinThread);
+    m_pinyinAdapter = new PinyinAdapter();
+    m_pinyinAdapter->moveToThread(m_pinyinThread);
 
-    connect(pinyinAdapter, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SIGNAL(newPredictionSuggestions(QString, QStringList)));
-    connect(this, SIGNAL(parsePredictionText(QString)), pinyinAdapter, SLOT(parse(QString)));
-    connect(this, SIGNAL(candidateSelected(QString)), pinyinAdapter, SLOT(wordCandidateSelected(QString)));
+    connect(m_pinyinAdapter, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SIGNAL(newPredictionSuggestions(QString, QStringList)));
+    connect(this, SIGNAL(parsePredictionText(QString)), m_pinyinAdapter, SLOT(parse(QString)));
+    connect(this, SIGNAL(candidateSelected(QString)), m_pinyinAdapter, SLOT(wordCandidateSelected(QString)));
     m_pinyinThread->start();
 }
 
 PinyinPlugin::~PinyinPlugin()
 {
-    delete pinyinAdapter;
+    m_pinyinAdapter->deleteLater();
+    m_pinyinThread->quit();
+    m_pinyinThread->wait();
 }
 
 void PinyinPlugin::predict(const QString& surroundingLeft, const QString& preedit)
