@@ -1,114 +1,114 @@
-# Portuguese translation for ubuntu-keyboard
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# Punjabi translation for ubuntu-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the ubuntu-keyboard package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-11-12 15:18+0000\n"
-"PO-Revision-Date: 2015-02-13 00:56+0000\n"
-"Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
-"Language-Team: Portuguese <pt@li.org>\n"
+"PO-Revision-Date: 2015-02-15 05:18+0000\n"
+"Last-Translator: Gursharnjit_Singh <ubuntuser13@gmail.com>\n"
+"Language-Team: Punjabi <pa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-14 06:34+0000\n"
+"X-Launchpad-Export-Date: 2015-02-16 06:52+0000\n"
 "X-Generator: Launchpad (build 17341)\n"
 
 #: ../qml/keys/LanguageMenu.qml:61
 msgid "Settings"
-msgstr "Definições"
+msgstr "ਸੈਟਿੰਗ"
 
 #: ../qml/keys/LanguageMenu.qml:74
 msgid "Arabic"
-msgstr "Árabe"
+msgstr "ਅਰਬੀ"
 
 #: ../qml/keys/LanguageMenu.qml:75
 msgid "Azerbaijani"
-msgstr "Azerbaijano"
+msgstr "ਅਜ਼ਰਬਾਈਜਾਨ"
 
 #: ../qml/keys/LanguageMenu.qml:76
 msgid "Bosnian"
-msgstr "Bósnio"
+msgstr "ਬੋਸਨੀਆਈ"
 
 #: ../qml/keys/LanguageMenu.qml:77
 msgid "Catalan"
-msgstr "Catalão"
+msgstr "ਕੇਟੇਲਨ"
 
 #: ../qml/keys/LanguageMenu.qml:78
 msgid "Czech"
-msgstr "Checo"
+msgstr "ਚੈੱਕ"
 
 #: ../qml/keys/LanguageMenu.qml:79
 msgid "Danish"
-msgstr "Dinamarquês"
+msgstr "ਡੈਨਿਸ਼"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "German"
-msgstr "Alemão"
+msgstr "ਜਰਮਨ"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "English"
-msgstr "Inglês"
+msgstr "ਅੰਗਰੇਜ਼"
 
 #: ../qml/keys/LanguageMenu.qml:82
 msgid "Spanish"
-msgstr "Espanhol"
+msgstr "ਸਪੈਨਿਸ਼"
 
 #: ../qml/keys/LanguageMenu.qml:83
 msgid "Finnish"
-msgstr "Finlandês"
+msgstr "ਫੈਨਿਸ਼"
 
 #: ../qml/keys/LanguageMenu.qml:84
 msgid "French"
-msgstr "Francês"
+msgstr "ਫਰਾਂਸੀਸੀ"
 
 #: ../qml/keys/LanguageMenu.qml:85
 msgid "Hebrew"
-msgstr "Hebraico"
+msgstr "ਹੈਬਰਿਊ"
 
 #: ../qml/keys/LanguageMenu.qml:86
 msgid "Croatian"
-msgstr "Croata"
+msgstr "ਕਰੋਸ਼ੀਅਨ"
 
 #: ../qml/keys/LanguageMenu.qml:87
 msgid "Hungarian"
-msgstr "Húngaro"
+msgstr "ਹੰਗਰੀਆਈ"
 
 #: ../qml/keys/LanguageMenu.qml:88
 msgid "Italian"
-msgstr "Italiano"
+msgstr "ਇਤਾਲਵੀ"
 
 #: ../qml/keys/LanguageMenu.qml:89
 msgid "Dutch"
-msgstr "Holandês"
+msgstr "ਡੱਚ"
 
 #: ../qml/keys/LanguageMenu.qml:90
 msgid "Polish"
-msgstr "Polaco"
+msgstr "ਪੋਲੈਂਡੀ"
 
 #: ../qml/keys/LanguageMenu.qml:91
 msgid "Portuguese"
-msgstr "Português"
+msgstr "ਪੁਰਤਗਾਲੀ"
 
 #: ../qml/keys/LanguageMenu.qml:92
 msgid "Russian"
-msgstr "Russo"
+msgstr "ਰੂਸੀ"
 
 #: ../qml/keys/LanguageMenu.qml:93
 msgid "Serbian"
-msgstr "Sérvio"
+msgstr "ਸਰਬੀਆਈ"
 
 #: ../qml/keys/LanguageMenu.qml:94
 msgid "Swedish"
-msgstr "Sueco"
+msgstr "ਸਵੀਡਸ਼"
 
 #: ../qml/keys/LanguageMenu.qml:95
 msgid "Chinese - Pinyin"
-msgstr "Chinês - Pinyin"
+msgstr "ਚੀਨੀ - ਪਿਨਯਿਨ"
 
 #: ../qml/keys/LanguageMenu.qml:98
 msgid "Language: "
-msgstr "Idioma: "
+msgstr "ਭਾਸ਼ਾ "

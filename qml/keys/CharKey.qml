@@ -84,6 +84,10 @@ Item {
     // Allow action keys to override the standard key behaviour
     property bool overridePressArea: false
 
+    // Don't detect swipe changes until the swipeTimer has expired to prevent
+    // accidentally selecting something other than the default extended key
+    property bool swipeReady: false
+
     signal pressed()
     signal released()
     signal pressAndHold()
@@ -177,6 +181,8 @@ Item {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
 
+                swipeReady = false;
+                swipeTimer.restart();
                 magnifier.shown = false
                 extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
@@ -273,7 +279,7 @@ Item {
         // highlight it and set it as the currentExtendedKey (to be committed
         // when press is released)
         function evaluateSelectorSwipe() {
-            if (extendedKeysSelector.enabled) {
+            if (extendedKeysSelector.enabled && swipeReady) {
                 var extendedKeys = extendedKeysSelector.keys;
                 currentExtendedKey = null;
                 var keyMapping = extendedKeysSelector.mapToItem(key, extendedKeysSelector.rowX, extendedKeysSelector.rowY);
@@ -294,6 +300,15 @@ Item {
                     }
                 }
             }
+        }
+    }
+
+    Timer {
+        id: swipeTimer
+        interval: 750
+        onTriggered: {
+            swipeReady = true;
+            keyMouseArea.evaluateSelectorSwipe();
         }
     }
 
