@@ -31,7 +31,6 @@ class PinyinAdapter : public QObject
     pinyin_context_t*  m_context;
     pinyin_instance_t* m_instance;
 
-    GArray* m_array;
     bool m_processingWords;
 
 public:
