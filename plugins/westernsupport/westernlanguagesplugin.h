@@ -6,6 +6,7 @@
 #include "westernlanguagefeatures.h"
 #include "spellchecker.h"
 #include "abstractlanguageplugin.h"
+#include "spellpredictworker.h"
 
 #include <presage.h>
 
@@ -49,6 +50,7 @@ public slots:
 
 private:
     WesternLanguageFeatures* m_languageFeatures;
+    SpellPredictWorker *m_spellPredictWorker;
     QThread *m_spellPredictThread;
     bool m_spellCheckEnabled;
 };

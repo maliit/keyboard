@@ -319,7 +319,7 @@ class Keyboard(object):
             pointer = Pointer(Touch.create())
         pointer.move(key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0)
         pointer.press()
-        sleep(1)
+        sleep(0.5)
         pointer.release()
 
     def _keyboard_details_changed(self):

@@ -1,114 +1,114 @@
-# Portuguese translation for ubuntu-keyboard
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# Norwegian Bokmal translation for ubuntu-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the ubuntu-keyboard package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-11-12 15:18+0000\n"
-"PO-Revision-Date: 2015-02-13 00:56+0000\n"
-"Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
-"Language-Team: Portuguese <pt@li.org>\n"
+"PO-Revision-Date: 2015-02-12 09:25+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-14 06:34+0000\n"
-"X-Generator: Launchpad (build 17341)\n"
+"X-Launchpad-Export-Date: 2015-02-13 06:54+0000\n"
+"X-Generator: Launchpad (build 17336)\n"
 
 #: ../qml/keys/LanguageMenu.qml:61
 msgid "Settings"
-msgstr "Definições"
+msgstr "Innstillinger"
 
 #: ../qml/keys/LanguageMenu.qml:74
 msgid "Arabic"
-msgstr "Árabe"
+msgstr "Arabisk"
 
 #: ../qml/keys/LanguageMenu.qml:75
 msgid "Azerbaijani"
-msgstr "Azerbaijano"
+msgstr "Aserbadjansk"
 
 #: ../qml/keys/LanguageMenu.qml:76
 msgid "Bosnian"
-msgstr "Bósnio"
+msgstr "Bosnisk"
 
 #: ../qml/keys/LanguageMenu.qml:77
 msgid "Catalan"
-msgstr "Catalão"
+msgstr "Katalansk"
 
 #: ../qml/keys/LanguageMenu.qml:78
 msgid "Czech"
-msgstr "Checo"
+msgstr "Tsjekkisk"
 
 #: ../qml/keys/LanguageMenu.qml:79
 msgid "Danish"
-msgstr "Dinamarquês"
+msgstr "Dansk"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "German"
-msgstr "Alemão"
+msgstr "Tysk"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "English"
-msgstr "Inglês"
+msgstr "Engelsk"
 
 #: ../qml/keys/LanguageMenu.qml:82
 msgid "Spanish"
-msgstr "Espanhol"
+msgstr "Spansk"
 
 #: ../qml/keys/LanguageMenu.qml:83
 msgid "Finnish"
-msgstr "Finlandês"
+msgstr "Finsk"
 
 #: ../qml/keys/LanguageMenu.qml:84
 msgid "French"
-msgstr "Francês"
+msgstr "Fransk"
 
 #: ../qml/keys/LanguageMenu.qml:85
 msgid "Hebrew"
-msgstr "Hebraico"
+msgstr "Hebraisk"
 
 #: ../qml/keys/LanguageMenu.qml:86
 msgid "Croatian"
-msgstr "Croata"
+msgstr "Kroatisk"
 
 #: ../qml/keys/LanguageMenu.qml:87
 msgid "Hungarian"
-msgstr "Húngaro"
+msgstr "Ungarsk"
 
 #: ../qml/keys/LanguageMenu.qml:88
 msgid "Italian"
-msgstr "Italiano"
+msgstr "Italiensk"
 
 #: ../qml/keys/LanguageMenu.qml:89
 msgid "Dutch"
-msgstr "Holandês"
+msgstr "Nederlansk"
 
 #: ../qml/keys/LanguageMenu.qml:90
 msgid "Polish"
-msgstr "Polaco"
+msgstr "Polsk"
 
 #: ../qml/keys/LanguageMenu.qml:91
 msgid "Portuguese"
-msgstr "Português"
+msgstr "Portugisisk"
 
 #: ../qml/keys/LanguageMenu.qml:92
 msgid "Russian"
-msgstr "Russo"
+msgstr "Russisk"
 
 #: ../qml/keys/LanguageMenu.qml:93
 msgid "Serbian"
-msgstr "Sérvio"
+msgstr "Serbisk"
 
 #: ../qml/keys/LanguageMenu.qml:94
 msgid "Swedish"
-msgstr "Sueco"
+msgstr "Svensk"
 
 #: ../qml/keys/LanguageMenu.qml:95
 msgid "Chinese - Pinyin"
-msgstr "Chinês - Pinyin"
+msgstr "Kinesisk - Pinyin"
 
 #: ../qml/keys/LanguageMenu.qml:98
 msgid "Language: "
-msgstr "Idioma: "
+msgstr "Språk: "
