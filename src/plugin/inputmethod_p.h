@@ -55,6 +55,7 @@ public:
     bool wordEngineEnabled;
     InputMethod::TextContentType contentType;
     QString activeLanguage;
+    QString previousLanguage;
     QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
     QString keyboardState;
@@ -80,6 +81,7 @@ public:
         , wordEngineEnabled(false)
         , contentType(InputMethod::FreeTextContentType)
         , activeLanguage("en")
+        , previousLanguage("")
         , enabledLanguages(activeLanguage)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , keyboardState("CHARACTERS")
@@ -238,6 +240,15 @@ public:
         q->setActiveLanguage(activeLanguage);
     }
 
+    void registerPreviousLanguage()
+    {
+        QObject::connect(&m_settings, SIGNAL(previousLanguageChanged(QString)),
+                         q, SLOT(setPreviousLanguage(QString)));
+
+        previousLanguage = m_settings.previousLanguage();
+        q->setPreviousLanguage(previousLanguage);
+    }
+
     void registerEnabledLanguages()
     {
         QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged(QStringList)),
@@ -254,6 +265,12 @@ public:
                          q, SLOT(onDoubleSpaceSettingChanged()));
         editor.setDoubleSpaceFullStopEnabled(m_settings.doubleSpaceFullStop());
     }
+
+    void registerStayHidden()
+    {
+        QObject::connect(&m_settings, SIGNAL(stayHiddenChanged(bool)),
+                         q, SLOT(hide()));
+    } 
 
     void closeOskWindow()
     {

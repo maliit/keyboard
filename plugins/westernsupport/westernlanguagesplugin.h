@@ -6,6 +6,7 @@
 #include "westernlanguagefeatures.h"
 #include "spellchecker.h"
 #include "abstractlanguageplugin.h"
+#include "spellpredictworker.h"
 
 #include <presage.h>
 
@@ -32,6 +33,7 @@ public:
     virtual void addToSpellCheckerUserWordList(const QString& word);
     virtual bool setLanguage(const QString& languageId);
     virtual void addSpellingOverride(const QString& orig, const QString& overriden);
+    virtual void loadOverrides(const QString& languageId);
 
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions);
@@ -48,6 +50,7 @@ public slots:
 
 private:
     WesternLanguageFeatures* m_languageFeatures;
+    SpellPredictWorker *m_spellPredictWorker;
     QThread *m_spellPredictThread;
     bool m_spellCheckEnabled;
 };

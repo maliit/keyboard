@@ -35,7 +35,6 @@ PinyinAdapter::PinyinAdapter(QObject *parent) :
 
 PinyinAdapter::~PinyinAdapter()
 {
-    g_array_free(m_array, TRUE);
     pinyin_free_instance(m_instance);
     pinyin_fini(m_context);
 }

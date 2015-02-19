@@ -61,6 +61,11 @@ void EventHandler::onWordCandidateReleased(QString word, bool userInput)
     Q_EMIT wordCandidateReleased(candidate);
 }
 
+void EventHandler::onQmlCandidateChanged(QStringList words)
+{
+    Q_EMIT qmlCandidateChanged(words);
+}
+
 void EventHandler::onKeyPressed(QString label, QString action)
 {
     Key key;

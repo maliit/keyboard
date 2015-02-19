@@ -1,3 +1,81 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150213.2-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Add a brief delay before evaluating swipes (LP: #1421742)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 13 Feb 2015 20:33:15 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150213-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Fix memory leak when unloading word engines (LP: #1420891)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 13 Feb 2015 04:09:03 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150209-0ubuntu1) vivid; urgency=medium
+
+  [ Michael Sheldon ]
+  * Add contractions as overrides (I've, you've, I'm, etc.). (LP:
+    #1416020)
+  * Recreate prediction databases with apostrophe support and remove
+    Gutenberg license text from sample data. (LP: #1384800)
+  * Always display the language button, even when only one language is
+    enabled (so settings is easily accessible) and modify language
+    button behaviour to toggle between most recently used layouts when
+    tapped and to only show the menu when long pressed. (LP: #1417048,
+    #1416037, #1416157)
+
+  [ CI Train Bot ]
+  * Resync trunk
+
+  [ Michael Terry ]
+  * Add em dash, en dash, and the bullet as extended hyphen options.
+    (LP: #1414763)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Bill Filler ]
+  * enable emoji by default (LP: #1416036)
+
+  [ Penk Chen ]
+  * Add mechanism for pure QML layouts to provide suggestion candidates.
+
+  [ Mike Sheldon ]
+  * Recreate prediction databases with apostrophe support and remove
+    Gutenberg license text from sample data. (LP: #1384800)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 09 Feb 2015 21:15:02 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150202-0ubuntu1) vivid; urgency=medium
+
+  [ Michael Sheldon ]
+  * Enable auto-punctuation for Pinyin input. (LP: #1407588)
+  * Speed up autopilot tests by only restarting maliit-server at the
+    beginning and end of all tests
+  * Restore a user's original input if they press backspace immediately
+    after auto-completing a word. (LP: #1411645)
+  * Allow Emoji keyboard to be shown for URL and email field types and
+    switch out of Emoji layout when changing fields. (LP: #1415129,
+    #1415127)
+  * Adds a setting to allow the keyboard to remain hidden at all times
+    (e.g. when a hardware keyboard is connected) (LP: #1415126)
+  * Fix autocaps for clients that send multiline surrounding text (LP:
+    #1415881)
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 02 Feb 2015 18:18:25 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150119-0ubuntu1) vivid; urgency=low
 
   [ Michael Sheldon ]
