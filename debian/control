@@ -309,7 +309,6 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Ukrainian
  Data files for the Ubuntu virtual keyboard - Ukrainian
 
-
 Package: qtdeclarative5-ubuntu-keyboard-extensions0.1
 Architecture: any
 Depends: ${misc:Depends},
