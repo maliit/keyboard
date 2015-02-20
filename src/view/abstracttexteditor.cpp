@@ -477,7 +477,17 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             }
             d->previous_preedit = d->text->preedit();
             d->previous_preedit_position = d->text->surroundingOffset();
-            d->text->setPreedit(d->text->primaryCandidate());
+            if (d->text->preedit().right(1) == "'") {
+                // If the user has added an apostrophe to the end of the word
+                // we should preserve this, as it may be user as a single quote
+                // or the plural form of certain names (but would otherwise be
+                // replaced by auto-correct as it's treated as a normal 
+                // character for use inside words).
+                d->text->setPreedit(d->text->primaryCandidate() + "'");
+                d->previous_preedit_position -= 1;
+            } else {
+                d->text->setPreedit(d->text->primaryCandidate());
+            }
         }
         else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.right(1) == " ") {
             removeTrailingWhitespaces();
