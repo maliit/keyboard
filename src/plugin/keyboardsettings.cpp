@@ -46,6 +46,7 @@ const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY = QLatin1String("keyPress
 const QLatin1String KEY_PRESS_HAPTIC_FEEDBACK_KEY = QLatin1String("keyPressHapticFeedback");
 const QLatin1String DOUBLE_SPACE_FULL_STOP = QLatin1String("doubleSpaceFullStop");
 const QLatin1String STAY_HIDDEN = QLatin1String("stayHidden");
+const QLatin1String DISABLE_HEIGHT = QLatin1String("disableHeight");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -189,6 +190,11 @@ bool KeyboardSettings::stayHidden() const
     return m_settings->get(STAY_HIDDEN).toBool();
 }
 
+bool KeyboardSettings::disableHeight() const
+{
+    return m_settings->get(DISABLE_HEIGHT).toBool();
+}
+
 /*!
  * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
@@ -231,6 +237,10 @@ void KeyboardSettings::settingUpdated(const QString &key)
         return;
     } else if (key == STAY_HIDDEN) {
         Q_EMIT stayHiddenChanged(stayHidden());
+        return;
+    } else if (key == DISABLE_HEIGHT) {
+        Q_EMIT disableHeightChanged(disableHeight());
+        return;
     }
 
     qWarning() << Q_FUNC_INFO << "unknown settings key:" << key;
