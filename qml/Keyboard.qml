@@ -304,7 +304,11 @@ Item {
 
         var obj = mapFromItem(keyboardSurface, vx, vy, vwidth, vheight);
         // Report visible height of the keyboard to support anchorToKeyboard
-        obj.height = fullScreenItem.height - obj.y;
+        if (canvas.contentOrientation == Qt.InvertedPortraitOrientation) {
+            obj.height += obj.y
+        } else {
+            obj.height = fullScreenItem.height - obj.y;
+        }
         
         // Work around QT bug: https://bugreports.qt-project.org/browse/QTBUG-20435
         // which results in a 0 height being reported incorrectly immediately prior
