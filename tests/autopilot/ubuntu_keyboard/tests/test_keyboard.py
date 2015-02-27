@@ -664,9 +664,9 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('pinyin.cn ')
+        keyboard.type('pinyin.pinyin ')
 
-        expected = "拼音.cn"
+        expected = "拼音.拼音"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))

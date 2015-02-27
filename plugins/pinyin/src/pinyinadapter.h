@@ -31,14 +31,17 @@ class PinyinAdapter : public QObject
     pinyin_context_t*  m_context;
     pinyin_instance_t* m_instance;
 
-    GArray* m_array;
+    bool m_processingWords;
 
 public:
     explicit PinyinAdapter(QObject *parent = 0);
     ~PinyinAdapter();
 
+signals:
+    void newPredictionSuggestions(QString, QStringList);
+
+public slots:
     void parse(const QString& string);
-    QStringList getWordCandidates() const;
     void wordCandidateSelected(const QString& word);
     void reset();
 };
