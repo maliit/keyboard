@@ -160,11 +160,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
             TextField {
                 id: input;
                 objectName: "input"
-                anchors {
-                    top: inputLabel.bottom
-                    horizontalCenter: parent.horizontalCenter
-                    topMargin: 10
-                }
+                anchors.centerIn: parent
                 inputMethodHints: %(input_method)s
             }
         }
@@ -379,6 +375,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
             TextField {
                 id: input;
                 objectName: "input"
+                anchors.centerIn: parent
                 property int visibilityChangeCount: 0
             }
 
@@ -664,9 +661,9 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('pinyin.cn ')
+        keyboard.type('pinyin.pinyin ')
 
-        expected = "拼音.cn"
+        expected = "拼音.拼音"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
