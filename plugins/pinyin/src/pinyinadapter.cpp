@@ -23,14 +23,18 @@
 #include <string.h>
 
 #include <QDebug>
+#include <QCoreApplication>
+
+#define MAX_SUGGESTIONS 100
 
 PinyinAdapter::PinyinAdapter(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_processingWords(false)
 {
     m_context = pinyin_init(PINYIN_DATA_DIR, ".");
     m_instance = pinyin_alloc_instance(m_context);
 
-    pinyin_set_options(m_context, IS_PINYIN | USE_DIVIDED_TABLE | USE_RESPLIT_TABLE);
+    pinyin_set_options(m_context, IS_PINYIN | PINYIN_INCOMPLETE | USE_DIVIDED_TABLE | USE_RESPLIT_TABLE);
 }
 
 PinyinAdapter::~PinyinAdapter()
@@ -41,6 +45,22 @@ PinyinAdapter::~PinyinAdapter()
 
 void PinyinAdapter::parse(const QString& string)
 {
+    // Run through all the words queued in the event loop
+    // so we only fetch suggestions for the latest word
+    bool setProcessingWords = false;
+    if(m_processingWords == false) {
+        setProcessingWords = true;
+        m_processingWords = true;
+    }
+    QCoreApplication::processEvents();
+    if(setProcessingWords == true) {
+        m_processingWords = false;
+    }
+
+    if(m_processingWords) {
+        return;
+    }
+
     pinyin_parse_more_full_pinyins(m_instance, string.toLatin1().data());
 
 #ifdef PINYIN_DEBUG
@@ -59,6 +79,7 @@ void PinyinAdapter::parse(const QString& string)
     candidates.clear();
     guint len = 0;
     pinyin_get_n_candidate(m_instance, &len);
+    len = len > MAX_SUGGESTIONS ? MAX_SUGGESTIONS : len;
     for (unsigned int i = 0 ; i < len; i ++ )
     {
         lookup_candidate_t * candidate = NULL;
@@ -73,11 +94,7 @@ void PinyinAdapter::parse(const QString& string)
         }
     }
 
-}
-
-QStringList PinyinAdapter::getWordCandidates() const
-{
-    return candidates;
+    Q_EMIT newPredictionSuggestions(string, candidates);
 }
 
 void PinyinAdapter::wordCandidateSelected(const QString& word)
