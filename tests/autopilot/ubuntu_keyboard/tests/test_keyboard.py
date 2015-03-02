@@ -600,9 +600,9 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type("'here' ")
+        keyboard.type("'here' 'to' ")
 
-        expected = "'here' "
+        expected = "'here' 'to' "
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
