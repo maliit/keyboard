@@ -49,6 +49,11 @@ Item {
     property bool leftSide: false
     property bool rightSide: false
 
+    // These properties are used by autopilot to determine the visible 
+    // portion of the key to press
+    readonly property double leftOffset: buttonImage.anchors.leftMargin
+    readonly property double rightOffset: buttonImage.anchors.rightMargin
+
     /* design */
     property string imgNormal: UI.imageCharKey
     property string imgPressed: UI.imageCharKeyPressed
