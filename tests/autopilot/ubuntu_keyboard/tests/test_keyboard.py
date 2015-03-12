@@ -61,7 +61,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
             self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
         self.set_test_settings()
-        sleep(1) # Have to give time for gsettings change to propogate
+        sleep(5) # Have to give time for gsettings change to propogate
         self.pointer = Pointer(Touch.create())
 
     def set_test_settings(self):
@@ -609,6 +609,47 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_extended_punctuation(self):
+        """The characters ?!-_+%#/ and '";:@&() should be available as
+        extended keys from the . and , keys.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        gu = float(os.environ.get('GRID_UNIT_PX', 8))
+
+        # The extended key positions aren't accessible until the
+        # drag has already started, so we need to provide their
+        # offsets manually based on the known extended key cell
+        # width
+        keyboard.press_key('.', slide_offset=-17.5 * gu)
+        keyboard.press_key('.', slide_offset=-14 * gu)
+        keyboard.press_key('.', slide_offset=-10.5 * gu)
+        keyboard.press_key('.', slide_offset=-7.5 * gu)
+        keyboard.press_key('.', slide_offset=-3.5 * gu)
+        keyboard.press_key('.', slide_offset=1)
+        keyboard.press_key('.', slide_offset=3.5 * gu)
+        keyboard.press_key('.', slide_offset=7 * gu)
+        
+        keyboard.press_key(',', slide_offset=-10.5 * gu)
+        keyboard.press_key(',', slide_offset=-7 * gu)
+        keyboard.press_key(',', slide_offset=-3.5 * gu)
+        keyboard.press_key(',', slide_offset=-1 * gu)
+        keyboard.press_key(',', slide_offset=3.5 * gu)
+        keyboard.press_key(',', slide_offset=7 * gu)
+        keyboard.press_key(',', slide_offset=10.5 * gu)
+        keyboard.press_key(',', slide_offset=14 * gu)
+
+        expected = "!-_?+%#/\";:'@&()"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
 
 class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 
@@ -784,7 +825,7 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
 
         keyboard.press_key("language")
 
-        sleep(1)
+        sleep(5)
 
         keyboard = Keyboard()
 
@@ -808,7 +849,7 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
 
         keyboard.press_key("language")
 
-        sleep(1)
+        sleep(5)
 
         keyboard = Keyboard()
 
