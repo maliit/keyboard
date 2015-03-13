@@ -610,7 +610,7 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         )
 
     def test_extended_punctuation(self):
-        """The characters ?!-_+%#/ and '";:@&() should be available as
+        """The characters -_!?+%#/ and ";:'@&() should be available as
         extended keys from the . and , keys.
 
         """
@@ -644,7 +644,7 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard.press_key(',', slide_offset=10.5 * gu)
         keyboard.press_key(',', slide_offset=14 * gu)
 
-        expected = "!-_?+%#/\";:'@&()"
+        expected = "-_!?+%#/\";:'@&()"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
