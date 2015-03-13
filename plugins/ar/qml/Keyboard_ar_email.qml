@@ -91,7 +91,7 @@ KeyPad {
             CharKey        { id: atKey;    label: "@"; shifted: "@";     anchors.left: languageMenuButton.right; height: parent.height; }
             SpaceKey       { id: spaceKey;                               anchors.left: atKey.right; anchors.right: urlKey.left; noMagnifier: true; height: parent.height; }
             UrlKey         { id: urlKey; label: ".eg"; extended: [".com", ".iq", ".lb", ".sa", ".sy", ".jo", ".ye"]; anchors.right: dotKey.left; height: parent.height; }
-            CharKey        { id: dotKey;      label: "."; shifted: "ذ"; extended: ["?", "!", "-", "_", "+", "%","#","/"]; extendedShifted: ["?", "!", "-", "_", "+", "%","#","/"]; anchors.right: specialChar.left; height: parent.height; }
+            CharKey        { id: dotKey;      label: "."; shifted: "ذ"; extended: ["?", "-", "_", "!", "+", "%","#","/"]; extendedShifted: ["?", "-", "_", "!", "+", "%","#","/"]; anchors.right: specialChar.left; height: parent.height; }
             CharKey        { id: specialChar; label: "ط";                anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
