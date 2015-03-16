@@ -87,7 +87,7 @@ KeyPad {
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
             CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: languageMenuButton.right; height: parent.height; }
             UrlKey         { id: urlKey; label: ".de"; extended: [".com", ".at", ".ch"]; anchors.right: dotKey.left; height: parent.height; }
-            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "!"]; extendedShifted: ["?", "!"]; anchors.right: umlaut.left; height: parent.height; }
+            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "-", "_", "!", "+", "%","#","/"]; extendedShifted: ["?", "-", "_", "!", "+", "%","#","/"]; anchors.right: umlaut.left; height: parent.height; }
             CharKey        { id: umlaut;      label: "ö"; shifted: "Ö";  anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
