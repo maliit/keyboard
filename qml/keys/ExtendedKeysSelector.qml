@@ -41,7 +41,7 @@ KeyPopover {
             // Place the first key in the middle of the model so that it gets
             // selected by default
             var middleKey = Math.floor(extendedKeysModel.length / 2);
-            var reorderedModel = extendedKeysModel;
+            var reorderedModel = extendedKeysModel.slice(0); // Ensure the array is cloned
             reorderedModel.splice(extendedKeysModel.length % 2 == 0 ? middleKey : middleKey + 1, 0, extendedKeysModel[0]);
             reorderedModel.shift();
             keyRepeater.model = reorderedModel;

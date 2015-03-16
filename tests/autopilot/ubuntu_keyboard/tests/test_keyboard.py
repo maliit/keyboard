@@ -567,7 +567,6 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
             text_area.text,
             Eventually(Equals(expected))
         )
-        
 
     def test_long_press(self):
         """Long pressing a key should enter the default extended character.
@@ -581,6 +580,26 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard.press_key('t', long_press=True)
 
         expected = "5"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_repeated_long_press(self):
+        """The default key should stay in the middle after each long press.
+
+        """
+
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.press_key('u', long_press=True)
+        keyboard.press_key('u', long_press=True)
+        keyboard.press_key('u', long_press=True)
+
+        expected = "777"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
