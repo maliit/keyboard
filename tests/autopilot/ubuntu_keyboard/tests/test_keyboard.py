@@ -933,6 +933,26 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
 
         keyboard.press_key("language")
 
+    def test_switching_with_preedit(self):
+        """Switching languages whilst text is in preedit should result in
+        that text being committed.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Hello')
+
+        keyboard.press_key("language")
+
+        expected = 'Hello'
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+        
 
 def maliit_cleanup():
     presagedir = os.path.expanduser("~/.presage")

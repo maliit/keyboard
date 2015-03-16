@@ -112,6 +112,7 @@ public:
     Logic::AbstractWordEngine * wordEngine() const;
 
     void checkPreeditReentry(bool uncommittedDelete);
+    void commitPreedit();
 
     Q_SLOT void onKeyPressed(const Key &key);
     Q_SLOT void onKeyReleased(const Key &key);
@@ -167,7 +168,6 @@ private:
 
     virtual void singleBackspace();
 
-    void commitPreedit();
     void removeTrailingWhitespaces();
     Q_SLOT void autoRepeatBackspace();
     void autoRepeatWordBackspace();
