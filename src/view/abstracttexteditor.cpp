@@ -171,96 +171,6 @@ namespace MaliitKeyboard {
 //! \var AbstractTextEditor::Replacement::cursor_position
 //! \brief New cursor position relative to the beginning of preedit.
 
-namespace {
-
-//! \brief Checks whether given \a c is a word separator.
-//! \param c Char to test.
-//!
-//! Other way to do checks would be using isLetterOrNumber() + some
-//! other methods. But UTF is so crazy that I am not sure whether
-//! other strange categories are parts of the word or not. It is
-//! easier to specify punctuations and whitespaces.
-inline bool isSeparator(const QChar &c)
-{
-    return (c.isPunct() or c.isSpace());
-}
-
-//! \brief Extracts a word boundaries at cursor position.
-//! \param surrounding_text Text from which extraction will happen.
-//! \param cursor_position Position of cursor within \a surrounding_text.
-//! \param replacement Place where replacement data will be stored.
-//!
-//! \return whether surrounding text was valid (not empty).
-//!
-//! If cursor is placed right after the word, boundaries of this word
-//! are extracted.  Otherwise if cursor is placed right before the
-//! word, then no word boundaries are stored - instead invalid
-//! replacement is stored. It might happen that cursor position is
-//! outside the string, so \a replacement will have fixed position.
-bool extractWordBoundariesAtCursor(const QString& surrounding_text,
-                                   int cursor_position,
-                                   AbstractTextEditor::Replacement *replacement)
-{
-    const int text_length(surrounding_text.length());
-
-    if (text_length == 0) {
-        return false;
-    }
-
-    // just in case - if cursor is far after last char in surrounding
-    // text we place it right after last char.
-    cursor_position = qBound(0, cursor_position, text_length);
-
-    // cursor might be placed in after last char (that is to say - its
-    // index might be the one of string terminator) - for simplifying
-    // the algorithm below we fake it as cursor is put on delimiter:
-    // "abc" - surrounding text
-    //     | - cursor placement
-    // "abc " - fake surrounding text
-    const QString fake_surrounding_text(surrounding_text + " ");
-    const QChar *const fake_data(fake_surrounding_text.constData());
-    // begin is index of first char in a word
-    int begin(-1);
-    // end is index of a char after last char in a word.
-    // -2, because -2 - (-1) = -1 and we would like to
-    // have -1 as invalid length.
-    int end(-2);
-
-    for (int iter(cursor_position); iter >= 0; --iter) {
-        const QChar &c(fake_data[iter]);
-
-        if (isSeparator(c)) {
-            if (iter != cursor_position) {
-                break;
-            }
-        } else {
-            begin = iter;
-        }
-    }
-
-    if (begin >= 0) {
-        // take note that fake_data's last QChar is always a space.
-        for (int iter(cursor_position); iter <= text_length; ++iter) {
-            const QChar &c(fake_data[iter]);
-
-            end = iter;
-            if (isSeparator(c)) {
-                break;
-            }
-        }
-    }
-
-    if (replacement) {
-        replacement->start = begin;
-        replacement->length = end - begin;
-        replacement->cursor_position = cursor_position;
-    }
-
-    return true;
-}
-
-} // unnamed namespace
-
 EditorOptions::EditorOptions()
     : backspace_auto_repeat_delay(500)
     , backspace_auto_repeat_interval(200)
@@ -568,6 +478,20 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             d->previous_preedit = d->text->preedit();
             d->previous_preedit_position = d->text->surroundingOffset();
             d->text->setPreedit(d->text->primaryCandidate());
+            if (d->previous_preedit.right(1) == "'" && d->text->preedit().right(1) != "'") {
+                // If the user has added an apostrophe to the end of the word
+                // we should preserve this, as it may be user as a single quote
+                // or the plural form of certain names (but would otherwise be
+                // replaced by auto-correct as it's treated as a normal 
+                // character for use inside words).
+                d->text->setPreedit(d->text->preedit() + "'");
+                d->previous_preedit_position -= 1;
+            }
+            if (d->previous_preedit.left(1) == "'" &&  d->text->preedit().left(1) != "'") {
+                // Same for apostrophes at the beginning of the word
+                d->text->setPreedit("'" + d->text->preedit());
+                d->previous_preedit_position -= 1;
+            }
         }
         else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.right(1) == " ") {
             removeTrailingWhitespaces();
@@ -923,7 +847,7 @@ QString AbstractTextEditor::wordLeftOfCursor() const
 
     const QString leftSurrounding = d->text->surroundingLeft();
     int idx = leftSurrounding.length() - 1;
-    while (idx >= 0 && !isSeparator(leftSurrounding.at(idx))) {
+    while (idx >= 0 && !d->word_engine->languageFeature()->isSeparator(leftSurrounding.at(idx))) {
         --idx;
     }
     int length = d->text->surroundingOffset() - idx;
@@ -1009,52 +933,6 @@ void AbstractTextEditor::singleBackspace()
     d->backspace_sent = true;
 }
 
-//! \brief Reacts to cursor position change in application's text
-//! field.
-//! \param cursor_position new cursor position
-//! \param surrounding_text surrounding text of a preedit
-//!
-//! Extract words with the cursor inside and replaces it with a preedit.
-//! This is called preedit activation.
-void AbstractTextEditor::onCursorPositionChanged(int cursor_position,
-                                                 const QString &surrounding_text)
-{
-    Q_D(AbstractTextEditor);
-    Replacement r;
-
-    if (not extractWordBoundariesAtCursor(surrounding_text, cursor_position, &r)) {
-        return;
-    }
-
-    if (r.start < 0 or r.length < 0) {
-        if (d->ignore_next_surrounding_text == surrounding_text and
-            d->ignore_next_cursor_position == cursor_position) {
-            d->ignore_next_surrounding_text.clear();
-            d->ignore_next_cursor_position = -1;
-        } else {
-            d->text->setPreedit("");
-            d->text->setCursorPosition(0);
-        }
-    } else {
-        const int cursor_pos_relative_word_begin(r.start - r.cursor_position);
-        const int word_begin_relative_cursor_pos(r.cursor_position - r.start);
-        const QString word(surrounding_text.mid(r.start, r.length));
-        Replacement word_r(cursor_pos_relative_word_begin, r.length,
-                           word_begin_relative_cursor_pos);
-
-        d->text->setPreedit(word, word_begin_relative_cursor_pos);
-        // computeCandidates can change preedit face, so needs to happen
-        // before sending preedit:
-        d->word_engine->computeCandidates(d->text.data());
-        sendPreeditString(d->text->preedit(), d->text->preeditFace(), word_r);
-        // Qt is going to send us an event with cursor position places
-        // at the beginning of replaced word and surrounding text
-        // without the replaced word. We want to ignore it.
-        d->ignore_next_cursor_position = r.start;
-        d->ignore_next_surrounding_text = QString(surrounding_text).remove(r.start, r.length);
-    }
-}
-
 void AbstractTextEditor::onKeyboardStateChanged(QString state) {
     Q_D(AbstractTextEditor);
 
@@ -1107,7 +985,7 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
             lastChar = text()->surrounding().at(currentOffset-1);
         }
         if(!QRegExp("\\W+").exactMatch(lastChar) && !d->word_engine->languageFeature()->isSymbol(lastChar)) {
-            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("[\\W\\d]+"));
+            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("[\\s\\d]+"));
             int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
             if(leftWords.last().isEmpty()) {
                 // If removed char was punctuation trimming will result in an empty entry

@@ -573,7 +573,6 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         """Long pressing a key should enter the default extended character.
 
         """
-
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
@@ -582,6 +581,25 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard.press_key('t', long_press=True)
 
         expected = "5"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
+    def test_single_quotes(self):
+        """Single quotes placed around a word shouldn't get removed by 
+        autocomplete.
+
+        """
+        text_area = self.launch_test_input_area()
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type("'here' 'to' ")
+
+        expected = "'here' 'to' "
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))

@@ -174,10 +174,6 @@ struct BasicSetupTest
     {
         editor.setHost(&host);
         editor.wordEngine()->setEnabled(enable_word_engine);
-
-        QObject::connect(&notifier, SIGNAL(cursorPositionChanged(int, QString)),
-                         &editor,   SLOT(onCursorPositionChanged(int, QString)));
-
     }
 
     Editor editor;
