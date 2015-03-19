@@ -77,7 +77,7 @@ KeyPad {
             CharKey { label: "н"; shifted: "Н"; }
             CharKey { label: "м"; shifted: "М"; }
             CharKey { label: "ж"; shifted: "Ж"; }
-            CharKey { label: "."; shifted: "."; }
+            CharKey { label: "."; shifted: "."; extended: ["?", "-", "_", "!", "+", "%","#","/"];  extendedShifted: ["?", "-", "_", "!", "+", "%","#","/"]; }
             BackspaceKey { }
         }
 
