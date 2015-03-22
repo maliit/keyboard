@@ -210,6 +210,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - German
  Data files for the Ubuntu virtual keyboard - German
 
+Package: ubuntu-keyboard-greek
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Greek
+ Data files for the Ubuntu virtual keyboard - Greek
+
 Package: ubuntu-keyboard-hebrew
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
