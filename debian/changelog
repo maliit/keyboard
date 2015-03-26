@@ -1,3 +1,18 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150326-0ubuntu1) vivid; urgency=medium
+
+  [ Bill Filler ]
+  * change fontFamily to Ubuntu to work around disappearing "h" key (LP:
+    #1421812)
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Avoid reporting false visibility signal during startup (LP:
+    #1436076, #1419814)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 26 Mar 2015 21:40:49 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150316-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
