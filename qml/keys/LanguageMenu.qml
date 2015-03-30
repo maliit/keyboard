@@ -111,6 +111,7 @@ Item {
         if (languageId == "nl")         return i18n.tr("Dutch");
         if (languageId == "pl")         return i18n.tr("Polish");
         if (languageId == "pt")         return i18n.tr("Portuguese");
+        if (languageId == "ro")         return i18n.tr("Romanian");
         if (languageId == "ru")         return i18n.tr("Russian");
         if (languageId == "sr")         return i18n.tr("Serbian");
         if (languageId == "sv")         return i18n.tr("Swedish");
