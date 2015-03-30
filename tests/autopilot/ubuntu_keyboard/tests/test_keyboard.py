@@ -468,6 +468,56 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             Eventually(Equals(self.text))
         )
 
+    def test_oxide_layout(self):
+        """Test that keyboard layouts change apppropriately when receiving 
+        input hints from oxide.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.0
+        import Ubuntu.Components 1.1
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("<html><body><input id='input' type='%s' onkeyup=\\\"document.title=document.getElementById('input').value;\\\" style='width: 100%%; height: 100%%;'></textarea></body></html>");
+                }
+            }
+            
+        }
+
+        """) % (self.expected_activeview)
+
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        self.assertThat(
+            keyboard.keyboard.layoutId,
+            Eventually(Equals(self.expected_activeview))
+        )
+
+        if self.text[-4:] == ".com":
+            keyboard.type(self.text[:-4])
+            keyboard.press_key(".com")
+        else:
+            keyboard.type(self.text)
+
+        self.assertThat(
+            webview.title,
+            Eventually(Equals(self.text))
+        )
+
 
 class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
 
@@ -952,7 +1002,47 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
             text_area.text,
             Eventually(Equals(expected))
         )
-        
+
+
+class UbuntuKeyboardOxide(UbuntuKeyboardTests):
+
+    def test_autocomplete(self):
+        qml = dedent("""
+        import QtQuick 2.0
+        import Ubuntu.Components 1.1
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("<html><body><textarea id='textarea' onkeyup=\\\"document.title=document.getElementById('textarea').value;\\\" style='width: 100%; height: 100%;'></textarea></body></html>");
+                }
+            }
+            
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Pic ')
+
+        expected = 'Picture'
+        self.assertThat(
+            webview.title,
+            Eventually(Equals(expected))
+        )
+
 
 def maliit_cleanup():
     presagedir = os.path.expanduser("~/.presage")
