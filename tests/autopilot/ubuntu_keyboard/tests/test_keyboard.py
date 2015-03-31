@@ -487,7 +487,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
                 anchors.fill: parent
                 objectName: "webview"
                 Component.onCompleted: {
-                    loadHtml("<html><body><input id='input' type='%s' onkeyup=\\\"document.title=document.getElementById('input').value;\\\" style='width: 100%%; height: 100%%;'></textarea></body></html>");
+                    loadHtml("<html><body><input id='input' type='%s' onkeyup=\\\"document.title=document.getElementById('input').value;\\\" style='width: 100%%; height: 100%%;' /></body></html>");
                 }
             }
             
