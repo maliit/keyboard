@@ -61,5 +61,6 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         _iter_keys("ActionKey", lambda x: x.action)
         _iter_keys("ShiftKey", lambda x: x.action)
         _iter_keys("LanguageKey", lambda x: x.action)
+        _iter_keys("ReturnKey", lambda x: x.action)
 
         return (contained_keys, key_positions)
