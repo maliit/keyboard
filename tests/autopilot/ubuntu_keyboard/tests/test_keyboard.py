@@ -363,6 +363,12 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         """The keyboard should only report visibility changes once.
 
         """
+
+        # Test bug #1436076 which only occurs after maliit is restarted
+        subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
+        subprocess.check_call(['restart', 'maliit-server'])
+        sleep(10)
+
         qml = dedent("""
         import QtQuick 2.0
         import Ubuntu.Components 0.1

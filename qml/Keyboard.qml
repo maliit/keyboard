@@ -86,7 +86,7 @@ Item {
             property bool extendedKeysShown: false
 
             property bool firstShow: true
-            property bool hidingComplete: true
+            property bool hidingComplete: false
 
             property string layoutId: "freetext"
 
