@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-13 07:06+0000\n"
-"X-Generator: Launchpad (build 17298)\n"
+"X-Launchpad-Export-Date: 2015-04-03 05:47+0000\n"
+"X-Generator: Launchpad (build 17413)\n"
 
 #: ../qml/keys/LanguageMenu.qml:61
 msgid "Settings"
@@ -23,92 +23,92 @@ msgstr "Impostazioni"
 
 #: ../qml/keys/LanguageMenu.qml:74
 msgid "Arabic"
-msgstr ""
+msgstr "Arabo"
 
 #: ../qml/keys/LanguageMenu.qml:75
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azero"
 
 #: ../qml/keys/LanguageMenu.qml:76
 msgid "Bosnian"
-msgstr ""
+msgstr "Bosniaco"
 
 #: ../qml/keys/LanguageMenu.qml:77
 msgid "Catalan"
-msgstr ""
+msgstr "Catalano"
 
 #: ../qml/keys/LanguageMenu.qml:78
 msgid "Czech"
-msgstr ""
+msgstr "Ceco"
 
 #: ../qml/keys/LanguageMenu.qml:79
 msgid "Danish"
-msgstr ""
+msgstr "Danese"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "German"
-msgstr ""
+msgstr "Tedesco"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "English"
-msgstr ""
+msgstr "Inglese"
 
 #: ../qml/keys/LanguageMenu.qml:82
 msgid "Spanish"
-msgstr ""
+msgstr "Spagnolo"
 
 #: ../qml/keys/LanguageMenu.qml:83
 msgid "Finnish"
-msgstr ""
+msgstr "Finlandese"
 
 #: ../qml/keys/LanguageMenu.qml:84
 msgid "French"
-msgstr ""
+msgstr "Francese"
 
 #: ../qml/keys/LanguageMenu.qml:85
 msgid "Hebrew"
-msgstr ""
+msgstr "Ebraico"
 
 #: ../qml/keys/LanguageMenu.qml:86
 msgid "Croatian"
-msgstr ""
+msgstr "Croato"
 
 #: ../qml/keys/LanguageMenu.qml:87
 msgid "Hungarian"
-msgstr ""
+msgstr "Ungherese"
 
 #: ../qml/keys/LanguageMenu.qml:88
 msgid "Italian"
-msgstr ""
+msgstr "Italiano"
 
 #: ../qml/keys/LanguageMenu.qml:89
 msgid "Dutch"
-msgstr ""
+msgstr "Olandese"
 
 #: ../qml/keys/LanguageMenu.qml:90
 msgid "Polish"
-msgstr ""
+msgstr "Polacco"
 
 #: ../qml/keys/LanguageMenu.qml:91
 msgid "Portuguese"
-msgstr ""
+msgstr "Portoghese"
 
 #: ../qml/keys/LanguageMenu.qml:92
 msgid "Russian"
-msgstr ""
+msgstr "Russo"
 
 #: ../qml/keys/LanguageMenu.qml:93
 msgid "Serbian"
-msgstr ""
+msgstr "Serbo"
 
 #: ../qml/keys/LanguageMenu.qml:94
 msgid "Swedish"
-msgstr ""
+msgstr "Svedese"
 
 #: ../qml/keys/LanguageMenu.qml:95
 msgid "Chinese - Pinyin"
-msgstr ""
+msgstr "Cinese - Pinyn"
 
 #: ../qml/keys/LanguageMenu.qml:98
 msgid "Language: "
-msgstr ""
+msgstr "Lingua: "
