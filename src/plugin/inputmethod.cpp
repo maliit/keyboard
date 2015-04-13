@@ -102,7 +102,8 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(&d->editor,  SIGNAL(autoCapsDeactivated()), this, SIGNAL(deactivateAutocaps()));
 
     connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
-    connect(this, SIGNAL(activeLanguageChanged(QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString)));
+    connect(this, SIGNAL(activeLanguageChanged(QString)), this, SLOT(onLanguageChanged(QString)));
+    connect(this, SIGNAL(languagePluginChanged(QString, QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString, QString)));
     connect(&d->event_handler, SIGNAL(qmlCandidateChanged(QStringList)), d->editor.wordEngine(), SLOT(updateQmlCandidates(QStringList)));
     connect(this, SIGNAL(hasSelectionChanged(bool)), &d->editor, SLOT(onHasSelectionChanged(bool)));
     connect(d->editor.wordEngine(), SIGNAL(pluginChanged()), this, SLOT(onWordEnginePluginChanged()));
@@ -541,6 +542,14 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
 
     qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
 
+    foreach(QString pluginPath, d->pluginPaths) {
+        QDir testDir(pluginPath + QDir::separator() + newLanguage);
+        if (testDir.exists()) {
+            d->currentPluginPath = testDir.absolutePath();
+            break;
+        }
+    }
+
     if (d->activeLanguage == newLanguage)
         return;
 
@@ -622,4 +631,34 @@ void InputMethod::onVisibleRectChanged()
                 visibleRect.width(),
                 visibleRect.height()
                 );
+}
+
+const QString InputMethod::currentPluginPath() const
+{
+    Q_D(const InputMethod);
+    return d->currentPluginPath;
+}
+
+bool InputMethod::languageIsSupported(const QString plugin) {
+    Q_D(const InputMethod);
+    foreach(QString pluginPath, d->pluginPaths) {
+        QDir testDir(pluginPath + QDir::separator() + plugin);
+        if (testDir.exists()) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void InputMethod::onLanguageChanged(const QString &language) {
+    Q_D(InputMethod);
+    foreach(QString pluginPath, d->pluginPaths) {
+        QFile testFile(pluginPath + QDir::separator() + language + QDir::separator() + "lib" + language + "plugin.so");
+        if (testFile.exists()) {
+            Q_EMIT languagePluginChanged(testFile.fileName(), language);
+            return;
+        }
+    }
+    qCritical() << "Couldn't find word engine plugin for " << language;
 }

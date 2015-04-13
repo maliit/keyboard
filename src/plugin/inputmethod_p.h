@@ -69,6 +69,9 @@ public:
 
     int previous_position;
 
+    QStringList pluginPaths;
+    QString currentPluginPath;
+
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
@@ -133,9 +136,13 @@ public:
 
         view->setVisible(false);
 
+        pluginPaths.append(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+        pluginPaths.append(m_settings.pluginPaths());
+
         // TODO: Figure out whether two views can share one engine.
         QQmlEngine *const engine(view->engine());
         engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
+        engine->addImportPath(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
         setContextProperties(engine->rootContext());
 
         // following used to help shell identify the OSK surface

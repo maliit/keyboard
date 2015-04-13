@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     hungarianplugin.h
 
-TARGET          = $$qtLibraryTarget(hungarianplugin)
+TARGET          = $$qtLibraryTarget(huplugin)
 
 EXAMPLE_FILES = hungarianplugin.json
 

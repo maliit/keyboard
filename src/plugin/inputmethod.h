@@ -58,6 +58,7 @@ class InputMethod
     Q_PROPERTY(bool useHapticFeedback READ useHapticFeedback NOTIFY useHapticFeedbackChanged)
     Q_PROPERTY(QString keyboardState READ keyboardState WRITE setKeyboardState NOTIFY keyboardStateChanged)
     Q_PROPERTY(bool hasSelection READ hasSelection NOTIFY hasSelectionChanged)
+    Q_PROPERTY(QString currentPluginPath READ currentPluginPath NOTIFY currentPluginPathChanged)
 
     Q_ENUMS(TextContentType)
 
@@ -123,9 +124,14 @@ public:
 
     bool hasSelection() const;
 
+    const QString currentPluginPath() const;
+
     QObject* actionKeyOverride() const;
 
     Q_SLOT void close();
+
+    Q_INVOKABLE bool languageIsSupported(const QString plugin);
+    Q_SLOT void onLanguageChanged(const QString& language);
 
 Q_SIGNALS:
     void contentTypeChanged(TextContentType contentType);
@@ -144,6 +150,8 @@ Q_SIGNALS:
     void keyboardStateChanged(QString state);
     void keyboardReset();
     void hasSelectionChanged(bool hasSelection);
+    void currentPluginPathChanged(QString currentPluginPath);
+    void languagePluginChanged(QString pluginPath, QString languageId);
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();

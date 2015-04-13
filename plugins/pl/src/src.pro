@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     polishplugin.h
 
-TARGET          = $$qtLibraryTarget(polishplugin)
+TARGET          = $$qtLibraryTarget(plplugin)
 
 EXAMPLE_FILES = polishplugin.json
 
