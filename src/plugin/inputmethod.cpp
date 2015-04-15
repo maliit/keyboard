@@ -120,6 +120,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerEnabledLanguages();
     d->registerDoubleSpaceFullStop();
     d->registerStayHidden();
+    d->registerPluginPaths();
 
     //fire signal so all listeners know what active language is
     Q_EMIT activeLanguageChanged(d->activeLanguage);
@@ -661,4 +662,11 @@ void InputMethod::onLanguageChanged(const QString &language) {
         }
     }
     qCritical() << "Couldn't find word engine plugin for " << language;
+}
+
+void InputMethod::onPluginPathsChanged(const QStringList& pluginPaths) {
+    Q_D(InputMethod);
+    Q_UNUSED(pluginPaths);
+
+    d->updatePluginPaths();
 }

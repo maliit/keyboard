@@ -133,6 +133,8 @@ public:
     Q_INVOKABLE bool languageIsSupported(const QString plugin);
     Q_SLOT void onLanguageChanged(const QString& language);
 
+    Q_SLOT void onPluginPathsChanged(const QStringList& pluginPaths);
+
 Q_SIGNALS:
     void contentTypeChanged(TextContentType contentType);
     void activateAutocaps();

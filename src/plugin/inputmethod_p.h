@@ -136,8 +136,7 @@ public:
 
         view->setVisible(false);
 
-        pluginPaths.append(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
-        pluginPaths.append(m_settings.pluginPaths());
+        updatePluginPaths();
 
         // TODO: Figure out whether two views can share one engine.
         QQmlEngine *const engine(view->engine());
@@ -191,6 +190,12 @@ public:
         qml_context->setContextProperty("greeter_status", m_greeterStatus);
     }
 
+    void updatePluginPaths()
+    {
+        pluginPaths.clear();
+        pluginPaths.append(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+        pluginPaths.append(m_settings.pluginPaths());
+    }
 
     /*
      * register settings
@@ -278,6 +283,12 @@ public:
         QObject::connect(&m_settings, SIGNAL(stayHiddenChanged(bool)),
                          q, SLOT(hide()));
     } 
+
+    void registerPluginPaths()
+    {
+        QObject::connect(&m_settings, SIGNAL(pluginPathsChanged(QStringList)),
+                        q, SLOT(onPluginPathsChanged(QStringList)));
+    }
 
     void closeOskWindow()
     {
