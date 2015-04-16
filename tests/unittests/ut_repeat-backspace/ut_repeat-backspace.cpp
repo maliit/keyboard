@@ -207,6 +207,38 @@ private:
         QCOMPARE(host->keyEventCount(), 4);
     }
 
+    Q_SLOT void testInvalidSurroundingText_data()
+    {   
+        QTest::addColumn<Method>("initiate");
+        Method release = &Editor::onKeyReleased;
+
+        QTest::newRow("release") << release;
+    }
+
+    /*
+     * Verifies that the keyboard doesn't crash when pressing backspace with
+     * invalid surrounding text data.
+     */
+    Q_SLOT void testInvalidSurroundingText()
+    {
+        QFETCH(Method, initiate);
+
+        editor->wordEngine()->setEnabled(true);
+        editor->setPreeditEnabled(true);
+        editor->onHasSelectionChanged(false);
+        editor->text()->setSurrounding("123");
+        editor->text()->setSurroundingOffset(9);
+
+        Key backspace;
+        backspace.setAction(Key::ActionBackspace);
+
+        (editor.data()->*initiate)(backspace);
+        editor->onKeyReleased(backspace);
+        editor->checkPreeditReentry(true);
+        QCOMPARE(host->keyEventCount(), 2);
+    }
+
+
 };
 
 QTEST_MAIN(TestRepeatBackspace)
