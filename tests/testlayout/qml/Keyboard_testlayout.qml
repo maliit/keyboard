@@ -33,6 +33,7 @@ KeyPad {
             spacing: 0
 
             CharKey { label: "Test"; shifted: "Test"; }
+            LanguageKey { }
         }
 
     } // column
