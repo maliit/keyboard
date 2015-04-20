@@ -958,7 +958,40 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
             text_area.text,
             Eventually(Equals(expected))
         )
+
         
+class UbuntuKeyboardPluginPaths(UbuntuKeyboardTests):
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_strv("plugin-paths", ["/custom/share/maliit/plugins/com/ubuntu/lib", "/usr/share/maliit/tests/ubuntu-keyboard/"])
+        gsettings.set_strv("enabled-languages", ["en", "testlayout"])
+        gsettings.set_string("previous-language", "testlayout")
+        gsettings.set_string("active-language", "testlayout")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_typing(self):
+        """Test that typing works using a plugin loaded from a custom location.
+
+        """
+        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        # The test layout has a single key that enters the word 'Test'
+        keyboard.press_key("Test")
+
+        expected = "Test"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
 
 def maliit_cleanup():
     presagedir = os.path.expanduser("~/.presage")

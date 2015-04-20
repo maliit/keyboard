@@ -86,11 +86,10 @@ void SpellPredictWorker::parsePredictionText(const QString& surroundingLeft, con
     Q_EMIT newPredictionSuggestions(origPreedit, list);
 }
 
-void SpellPredictWorker::setLanguage(QString locale)
+void SpellPredictWorker::setLanguage(QString locale, QString pluginPath)
 {
     QString dbFileName = "database_"+locale+".db";
-    QString fullPath("/usr/share/maliit/plugins/com/ubuntu/lib/"+locale+"/");
-    fullPath.append(dbFileName);
+    QString fullPath(pluginPath + QDir::separator() + dbFileName);
     m_spellChecker.setLanguage(locale);
     m_spellChecker.setEnabled(true);
 

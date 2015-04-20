@@ -49,7 +49,7 @@ public:
 public slots:
     void parsePredictionText(const QString& surroundingLeft, const QString& preedit);
     void newSpellCheckWord(QString word);
-    void setLanguage(QString language);
+    void setLanguage(QString language, QString pluginPath);
     void setSpellCheckLimit(int limit);
     void addToUserWordList(const QString& word);
     void addOverride(const QString& orig, const QString& overriden);

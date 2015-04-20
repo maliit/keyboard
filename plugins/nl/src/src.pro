@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     dutchplugin.h
 
-TARGET          = $$qtLibraryTarget(dutchplugin)
+TARGET          = $$qtLibraryTarget(nlplugin)
 
 EXAMPLE_FILES = dutchplugin.json
 

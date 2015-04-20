@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     finnishplugin.h
 
-TARGET          = $$qtLibraryTarget(finnishplugin)
+TARGET          = $$qtLibraryTarget(fiplugin)
 
 EXAMPLE_FILES = finnishplugin.json
 

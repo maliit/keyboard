@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     czechplugin.h
 
-TARGET          = $$qtLibraryTarget(czechplugin)
+TARGET          = $$qtLibraryTarget(csplugin)
 
 EXAMPLE_FILES = czechplugin.json
 
