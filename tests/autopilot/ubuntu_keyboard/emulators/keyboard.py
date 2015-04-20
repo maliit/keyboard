@@ -24,6 +24,7 @@ from ubuntu_keyboard.emulators.keypad import KeyPad
 
 from time import sleep
 import logging
+import os
 
 from autopilot.input import Pointer, Touch
 from autopilot.introspection import (
@@ -160,7 +161,7 @@ class Keyboard(object):
         except AssertionError:
             return False
 
-    def press_key(self, key, capslock_switch=False, long_press=False):
+    def press_key(self, key, capslock_switch=False, long_press=False, slide_offset=None):
         """Tap on the key with the internal pointer
 
         :params key: String containing the text of the key to tap.
@@ -191,7 +192,9 @@ class Keyboard(object):
         self._show_keypad(req_keypad)
         self._change_keypad_to_state(req_key_state)
 
-        if long_press:
+        if slide_offset != None:
+            self._select_extended_key(key_pos, slide_offset)
+        elif long_press:
             self._long_press_key(key_pos)
         else:
             self._tap_key(key_pos)
@@ -321,6 +324,16 @@ class Keyboard(object):
         pointer.press()
         sleep(0.5)
         pointer.release()
+
+    def _select_extended_key(self, key_rect, offset, pointer=None):
+        if pointer is None:
+            pointer = Pointer(Touch.create())
+
+        gu = float(os.environ.get('GRID_UNIT_PX', 8))        
+
+        pointer.drag(key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0,
+                     key_rect.x + key_rect.w / 2.0 + offset, key_rect.y + key_rect.h / 2.0, 
+                     rate=2.77 * gu, time_between_events=2)
 
     def _keyboard_details_changed(self):
         return self._orientation_changed()
