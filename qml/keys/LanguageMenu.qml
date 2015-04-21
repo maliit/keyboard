@@ -100,6 +100,7 @@ Item {
         if (languageId == "da")         return i18n.tr("Danish");
         if (languageId == "de")         return i18n.tr("German");
         if (languageId == "emoji")      return i18n.tr("Emoji");
+        if (languageId == "el")         return i18n.tr("Greek");
         if (languageId == "en")         return i18n.tr("English");
         if (languageId == "es")         return i18n.tr("Spanish");
         if (languageId == "fi")         return i18n.tr("Finnish");

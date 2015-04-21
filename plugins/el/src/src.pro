@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     greekplugin.h
 
-TARGET          = $$qtLibraryTarget(greekplugin)
+TARGET          = $$qtLibraryTarget(elplugin)
 
 EXAMPLE_FILES = greekplugin.json
 
