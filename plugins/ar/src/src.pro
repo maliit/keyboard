@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     arabicplugin.h
 
-TARGET          = $$qtLibraryTarget(arabicplugin)
+TARGET          = $$qtLibraryTarget(arplugin)
 
 EXAMPLE_FILES = arabicplugin.json
 

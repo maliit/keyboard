@@ -7,7 +7,7 @@ qml.path = $$UBUNTU_KEYBOARD_DATA_DIR
 qml.files = *.qml *.js
 
 qml_keys.path = "$$UBUNTU_KEYBOARD_DATA_DIR/keys"
-qml_keys.files = keys/*.qml keys/*.js
+qml_keys.files = keys/*.qml keys/*.js keys/qmldir
 
 qml_languages.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages"
 qml_languages.files = languages/*.qml languages/*.js
@@ -45,6 +45,7 @@ OTHER_FILES += \
     keys/Spacer.qml \
     keys/SymbolShiftKey.qml \
     keys/UrlKey.qml \
+    keys/qmldir \
     languages/Keyboard_numbers.qml \
     languages/Keyboard_symbols.qml \
     languages/Keyboard_telephone.qml \

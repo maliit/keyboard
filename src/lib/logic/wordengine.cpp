@@ -35,7 +35,7 @@
 namespace MaliitKeyboard {
 namespace Logic {
 
-#define DEFAULT_PLUGIN "libenglishplugin.so"
+#define DEFAULT_PLUGIN "/usr/share/maliit/plugins/com/ubuntu/lib/en/libenplugin.so"
 
 //! \class WordEngine
 //! \brief Provides error correction (based on Hunspell) and word
@@ -71,9 +71,9 @@ public:
     explicit WordEnginePrivate();
 
     QString currentPlugin;
-    void loadPlugin(QString pluginName, QString subfolder="en")
+    void loadPlugin(QString pluginPath)
     {
-        if (pluginName == currentPlugin)
+        if (pluginPath == currentPlugin)
             return;
 
         delete languagePlugin;
@@ -83,22 +83,20 @@ public:
         QLocale::setDefault(QLocale::c());
         setlocale(LC_NUMERIC, "C");
 
-        QDir pluginsDir("/usr/share/maliit/plugins/com/ubuntu/lib/"+subfolder);
-
-        pluginLoader.setFileName(pluginsDir.absoluteFilePath(pluginName));
+        pluginLoader.setFileName(pluginPath);
         QObject *plugin = pluginLoader.instance();
 
         if (plugin) {
             languagePlugin = qobject_cast<LanguagePluginInterface *>(plugin);
             if (!languagePlugin) {
-                qCritical() << "wordengine.cpp - loading plugin failed: " + pluginName;
+                qCritical() << "wordengine.cpp - loading plugin failed: " + pluginPath;
 
                 // fallback
-                if (pluginName != DEFAULT_PLUGIN)
+                if (pluginPath != DEFAULT_PLUGIN)
                     loadPlugin(DEFAULT_PLUGIN);
             } else {
-                qDebug() << "wordengine.cpp plugin" << pluginName << "loaded";
-                currentPlugin = pluginName;
+                qDebug() << "wordengine.cpp plugin" << pluginPath << "loaded";
+                currentPlugin = pluginPath;
             }
         } else {
             qCritical() << __PRETTY_FUNCTION__ << " Loading plugin failed: " << pluginLoader.errorString();
@@ -392,60 +390,15 @@ void WordEngine::addToUserDictionary(const QString &word)
     d->languagePlugin->addToSpellCheckerUserWordList(word);
 }
 
-void WordEngine::onLanguageChanged(const QString &languageId)
+void WordEngine::onLanguageChanged(const QString &pluginPath, const QString &languageId)
 {
     Q_D(WordEngine);
 
-    if (languageId == "ar")
-        d->loadPlugin("libarabicplugin.so", "ar");
-    else if (languageId == "az")
-        d->loadPlugin("libazerbaijaniplugin.so", "az");
-    else if (languageId == "bs")
-        d->loadPlugin("libbosnianplugin.so", "bs");
-    else if (languageId == "ca")
-        d->loadPlugin("libcatalanplugin.so", "ca");
-    else if (languageId == "cs")
-        d->loadPlugin("libczechplugin.so", "cs");
-    else if (languageId == "da")
-        d->loadPlugin("libdanishplugin.so", "da");
-    else if (languageId == "de")
-        d->loadPlugin("libgermanplugin.so", "de");
-    else if (languageId == "emoji")
-        d->loadPlugin("libemojiplugin.so", "emoji");
-    else if (languageId == "en")
-        d->loadPlugin("libenglishplugin.so", "en");
-    else if (languageId == "es")
-        d->loadPlugin("libspanishplugin.so", "es");
-    else if (languageId == "fi")
-        d->loadPlugin("libfinnishplugin.so", "fi");
-    else if (languageId == "fr")
-        d->loadPlugin("libfrenchplugin.so", "fr");
-    else if (languageId == "he")
-        d->loadPlugin("libhebrewplugin.so", "he");
-    else if (languageId == "hr")
-        d->loadPlugin("libcroatianplugin.so", "hr");
-    else if (languageId == "hu")
-        d->loadPlugin("libhungarianplugin.so", "hu");
-    else if (languageId == "it")
-        d->loadPlugin("libitalianplugin.so", "it");
-    else if (languageId == "nl")
-        d->loadPlugin("libdutchplugin.so", "nl");
-    else if (languageId == "pl")
-        d->loadPlugin("libpolishplugin.so", "pl");
-    else if (languageId == "pt")
-        d->loadPlugin("libportugueseplugin.so", "pt");
-    else if (languageId == "ru")
-        d->loadPlugin("librussianplugin.so", "ru");
-    else if (languageId == "sv")
-        d->loadPlugin("libswedishplugin.so", "sv");
-    else if (languageId == "zh")
-        d->loadPlugin("libpinyinplugin.so", "zh");
-    else
-        d->loadPlugin(DEFAULT_PLUGIN);
+    d->loadPlugin(pluginPath);
 
     setWordPredictionEnabled(d->requested_prediction_state);
 
-    d->languagePlugin->setLanguage(languageId);
+    d->languagePlugin->setLanguage(languageId, QFileInfo(pluginPath).absolutePath());
 
     Q_EMIT enabledChanged(isEnabled());
 

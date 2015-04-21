@@ -44,8 +44,9 @@ const QLatin1String SPELL_CHECKING_KEY = QLatin1String("spellChecking");
 const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_KEY = QLatin1String("keyPressFeedback");
 const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY = QLatin1String("keyPressFeedbackSound");
 const QLatin1String KEY_PRESS_HAPTIC_FEEDBACK_KEY = QLatin1String("keyPressHapticFeedback");
-const QLatin1String DOUBLE_SPACE_FULL_STOP = QLatin1String("doubleSpaceFullStop");
-const QLatin1String STAY_HIDDEN = QLatin1String("stayHidden");
+const QLatin1String DOUBLE_SPACE_FULL_STOP_KEY = QLatin1String("doubleSpaceFullStop");
+const QLatin1String STAY_HIDDEN_KEY = QLatin1String("stayHidden");
+const QLatin1String PLUGIN_PATHS_KEY = QLatin1String("pluginPaths");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -177,7 +178,7 @@ QString KeyboardSettings::keyPressAudioFeedbackSound() const
  */
 bool KeyboardSettings::doubleSpaceFullStop() const
 {
-    return m_settings->get(DOUBLE_SPACE_FULL_STOP).toBool();
+    return m_settings->get(DOUBLE_SPACE_FULL_STOP_KEY).toBool();
 }
 
 /*!
@@ -186,7 +187,16 @@ bool KeyboardSettings::doubleSpaceFullStop() const
  */
 bool KeyboardSettings::stayHidden() const
 {
-    return m_settings->get(STAY_HIDDEN).toBool();
+    return m_settings->get(STAY_HIDDEN_KEY).toBool();
+}
+
+/*!
+ * \brief KeyboardSettings::pluginPaths returns a list of paths containing
+ * ubuntu-keyboard layout plugins
+ */
+QStringList KeyboardSettings::pluginPaths() const
+{
+    return m_settings->get(PLUGIN_PATHS_KEY).toStringList();
 }
 
 /*!
@@ -226,11 +236,13 @@ void KeyboardSettings::settingUpdated(const QString &key)
     } else if (key == KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY) {
         Q_EMIT keyPressAudioFeedbackSoundChanged(keyPressAudioFeedbackSound());
         return;
-    } else if (key == DOUBLE_SPACE_FULL_STOP) {
+    } else if (key == DOUBLE_SPACE_FULL_STOP_KEY) {
         Q_EMIT doubleSpaceFullStopChanged(doubleSpaceFullStop());
         return;
-    } else if (key == STAY_HIDDEN) {
+    } else if (key == STAY_HIDDEN_KEY) {
         Q_EMIT stayHiddenChanged(stayHidden());
+    } else if (key == PLUGIN_PATHS_KEY) {
+        Q_EMIT pluginPathsChanged(pluginPaths());
     }
 
     qWarning() << Q_FUNC_INFO << "unknown settings key:" << key;
