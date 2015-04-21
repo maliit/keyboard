@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     gaelicplugin.h
 
-TARGET          = $$qtLibraryTarget(gaelicplugin)
+TARGET          = $$qtLibraryTarget(gdplugin)
 
 EXAMPLE_FILES = gaelicplugin.json
 
