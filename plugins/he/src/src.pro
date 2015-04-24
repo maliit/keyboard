@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     hebrewplugin.h
 
-TARGET          = $$qtLibraryTarget(hebrewplugin)
+TARGET          = $$qtLibraryTarget(heplugin)
 
 EXAMPLE_FILES = hebrewplugin.json
 

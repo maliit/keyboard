@@ -1,0 +1,114 @@
+# Asturian translation for ubuntu-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-11-12 15:18+0000\n"
+"PO-Revision-Date: 2015-04-03 16:20+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Asturian <ast@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2015-04-04 05:46+0000\n"
+"X-Generator: Launchpad (build 17413)\n"
+
+#: ../qml/keys/LanguageMenu.qml:61
+msgid "Settings"
+msgstr "Axustes"
+
+#: ../qml/keys/LanguageMenu.qml:74
+msgid "Arabic"
+msgstr "Árabe"
+
+#: ../qml/keys/LanguageMenu.qml:75
+msgid "Azerbaijani"
+msgstr "Azerbaixanu"
+
+#: ../qml/keys/LanguageMenu.qml:76
+msgid "Bosnian"
+msgstr "Bosniu"
+
+#: ../qml/keys/LanguageMenu.qml:77
+msgid "Catalan"
+msgstr "Catalán"
+
+#: ../qml/keys/LanguageMenu.qml:78
+msgid "Czech"
+msgstr "Checu"
+
+#: ../qml/keys/LanguageMenu.qml:79
+msgid "Danish"
+msgstr "Danés"
+
+#: ../qml/keys/LanguageMenu.qml:80
+msgid "German"
+msgstr "Alemán"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "English"
+msgstr "Inglés"
+
+#: ../qml/keys/LanguageMenu.qml:82
+msgid "Spanish"
+msgstr "Castellán"
+
+#: ../qml/keys/LanguageMenu.qml:83
+msgid "Finnish"
+msgstr "Finés"
+
+#: ../qml/keys/LanguageMenu.qml:84
+msgid "French"
+msgstr "Francés"
+
+#: ../qml/keys/LanguageMenu.qml:85
+msgid "Hebrew"
+msgstr "Hebréu"
+
+#: ../qml/keys/LanguageMenu.qml:86
+msgid "Croatian"
+msgstr "Croata"
+
+#: ../qml/keys/LanguageMenu.qml:87
+msgid "Hungarian"
+msgstr "Húngaru"
+
+#: ../qml/keys/LanguageMenu.qml:88
+msgid "Italian"
+msgstr "Italianu"
+
+#: ../qml/keys/LanguageMenu.qml:89
+msgid "Dutch"
+msgstr "Holandés"
+
+#: ../qml/keys/LanguageMenu.qml:90
+msgid "Polish"
+msgstr "Polacu"
+
+#: ../qml/keys/LanguageMenu.qml:91
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: ../qml/keys/LanguageMenu.qml:92
+msgid "Russian"
+msgstr "Rusu"
+
+#: ../qml/keys/LanguageMenu.qml:93
+msgid "Serbian"
+msgstr "Serbiu"
+
+#: ../qml/keys/LanguageMenu.qml:94
+msgid "Swedish"
+msgstr "Suecu"
+
+#: ../qml/keys/LanguageMenu.qml:95
+msgid "Chinese - Pinyin"
+msgstr "Chinu - Pinyin"
+
+#: ../qml/keys/LanguageMenu.qml:98
+msgid "Language: "
+msgstr "Llingua: "

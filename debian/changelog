@@ -1,3 +1,67 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150421-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Allow the keyboard to load plugins from additional paths specified
+    via gsettings. (LP: #1445532)
+  * Fix crash if the client sends invalid surrounding text/offset data.
+    (LP: #1444947)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 21 Apr 2015 15:07:39 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150326-0ubuntu1) vivid; urgency=medium
+
+  [ Bill Filler ]
+  * change fontFamily to Ubuntu to work around disappearing "h" key (LP:
+    #1421812)
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Avoid reporting false visibility signal during startup (LP:
+    #1436076, #1419814)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 26 Mar 2015 21:40:49 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150316-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Account for keys at the side of the keyboard being extended in size
+    when calculating autopilot key positions (LP: #1428584)
+  * Add punctuation to extended keys and make comma key more consistent
+    across shift states
+  * Ensure that extended key selector array is cloned (LP: #1424668)
+  * Fix preedit commit when changing layout (LP: #1430744)
+  * Fix the placing of apostrophes back into pre-edit and the use of
+    apsostrophes/single quotes at the end of words. (LP: #1416018,
+    #1417532)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 16 Mar 2015 13:06:47 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150227-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ David Planella ]
+  * Changed Catalan keyboard's ldot symbol after recommendation from
+    keyboard experts.
+
+  [ Michael Sheldon ]
+  * Enable predictions from incomplete pinyin entry (LP: #1401735)
+  * Fix reporting of keyboard height when in inverted portrait
+    orientation (LP: #1423164)
+  * re-merge to fix AP tests as not all of the changes got merged
+    previously (LP: #1417048, #1416037, #1416157)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 27 Feb 2015 14:12:53 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150213.2-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]

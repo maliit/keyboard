@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     italianplugin.h
 
-TARGET          = $$qtLibraryTarget(italianplugin)
+TARGET          = $$qtLibraryTarget(itplugin)
 
 EXAMPLE_FILES = italianplugin.json
 

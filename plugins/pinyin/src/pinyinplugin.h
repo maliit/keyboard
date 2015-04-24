@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QStringList>
+#include <QThread>
 #include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
@@ -29,15 +30,18 @@ public:
     //! spell checker
     virtual void spellCheckerSuggest(const QString& word, int limit) { Q_UNUSED(word); Q_UNUSED(limit); }
     virtual void addToSpellCheckerUserWordList(const QString& word) { Q_UNUSED(word); }
-    virtual bool setLanguage(const QString& languageId) { Q_UNUSED(languageId); return false; }
+    virtual bool setLanguage(const QString& languageId, const QString& pluginPath) { Q_UNUSED(languageId); Q_UNUSED(pluginPath); return false; }
 
 signals:
     void newPredictionSuggestions(QString word, QStringList suggestions);
+    void parsePredictionText(QString preedit);
+    void candidateSelected(QString word);
     
 public slots:
     
 private:
-    PinyinAdapter* pinyinAdapter;
+    QThread *m_pinyinThread;
+    PinyinAdapter *m_pinyinAdapter;
     ChineseLanguageFeatures* m_chineseLanguageFeatures;
 };
 

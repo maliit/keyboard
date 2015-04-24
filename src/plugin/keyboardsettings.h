@@ -58,6 +58,7 @@ public:
     bool doubleSpaceFullStop() const;
     bool stayHidden() const;
     bool disableHeight() const;
+    QStringList pluginPaths() const;
 
 Q_SIGNALS:
     void activeLanguageChanged(QString);
@@ -73,6 +74,7 @@ Q_SIGNALS:
     void doubleSpaceFullStopChanged(bool);
     void stayHiddenChanged(bool);
     void disableHeightChanged(bool);
+    void pluginPathsChanged(QStringList);
 
 private:
     Q_SLOT void settingUpdated(const QString &key);

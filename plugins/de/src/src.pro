@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     germanplugin.h
 
-TARGET          = $$qtLibraryTarget(germanplugin)
+TARGET          = $$qtLibraryTarget(deplugin)
 
 EXAMPLE_FILES = germanplugin.json
 

@@ -70,6 +70,10 @@
       <summary>Disable height reporting</summary>
       <description>Always report a height of 0</description>
       <default>false</default>
+    <key name="plugin-paths" type="as">
+      <summary>Plugin paths</summary>
+      <description>A list of locations to search for keyboard layout plugins in addition to the keyboard data directory.</description>
+      <default>['/custom/share/maliit/plugins/com/ubuntu/lib/']</default>
     </key>
   </schema>
 </schemalist>

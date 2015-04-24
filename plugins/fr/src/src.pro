@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     frenchplugin.h
 
-TARGET          = $$qtLibraryTarget(frenchplugin)
+TARGET          = $$qtLibraryTarget(frplugin)
 
 EXAMPLE_FILES = frenchplugin.json
 
