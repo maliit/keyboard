@@ -103,31 +103,18 @@ void SpellPredictWorker::setLanguage(QString locale)
 
 void SpellPredictWorker::suggest(const QString& word, int limit)
 {
+    QStringList suggestions;
     if(!m_spellChecker.spell(word)) {
-        QStringList suggestions = m_spellChecker.suggest(word, limit);
-        Q_EMIT newSpellingSuggestions(word, suggestions);
+        suggestions = m_spellChecker.suggest(word, limit);
     }
+    // If spelt correctly still send empty suggestions so the plugin knows we
+    // have finished processing.
+    Q_EMIT newSpellingSuggestions(word, suggestions);
 }
 
 void SpellPredictWorker::newSpellCheckWord(QString word)
 {
-    // Run through all the words queued in the event loop
-    // so we only fetch suggestions for the latest word
-    bool setProcessingWords = false;
-    if(m_processingWords == false) {
-        setProcessingWords = true;
-        m_processingWords = true;
-    }
-    QCoreApplication::processEvents();
-    if(setProcessingWords == true) {
-        m_processingWords = false;
-    }
-
-    m_word = word;
-
-    if(!m_processingWords) {
-        suggest(m_word, m_limit);
-    }
+    suggest(word, m_limit);
 }
 
 void SpellPredictWorker::addToUserWordList(const QString& word)
