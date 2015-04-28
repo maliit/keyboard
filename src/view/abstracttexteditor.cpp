@@ -976,7 +976,7 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
     }
 
     int currentOffset = text()->surroundingOffset();
-    if(currentOffset > 1 && !text()->surrounding().isEmpty()) {
+    if(currentOffset > 1 && currentOffset <= text()->surrounding().size()) {
         QString lastChar;
         if(uncommittedDelete) {
             // -2 for just deleted character that hasn't been committed and to reach character before cursor

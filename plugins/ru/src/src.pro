@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     russianplugin.h
 
-TARGET          = $$qtLibraryTarget(russianplugin)
+TARGET          = $$qtLibraryTarget(ruplugin)
 
 EXAMPLE_FILES = russianplugin.json
 

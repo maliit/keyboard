@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     swedishplugin.h
 
-TARGET          = $$qtLibraryTarget(swedishplugin)
+TARGET          = $$qtLibraryTarget(svplugin)
 
 EXAMPLE_FILES = swedishplugin.json
 

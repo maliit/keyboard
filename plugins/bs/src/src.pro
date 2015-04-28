@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     bosnianplugin.h
 
-TARGET          = $$qtLibraryTarget(bosnianplugin)
+TARGET          = $$qtLibraryTarget(bsplugin)
 
 EXAMPLE_FILES = bosnianplugin.json
 

@@ -1,3 +1,16 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150421-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Allow the keyboard to load plugins from additional paths specified
+    via gsettings. (LP: #1445532)
+  * Fix crash if the client sends invalid surrounding text/offset data.
+    (LP: #1444947)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 21 Apr 2015 15:07:39 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150326-0ubuntu1) vivid; urgency=medium
 
   [ Bill Filler ]

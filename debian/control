@@ -83,6 +83,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-english (>= ${source:Version}),
          ubuntu-keyboard-german (>= ${source:Version}),
          ubuntu-keyboard-spanish (>= ${source:Version}),
+         ubuntu-keyboard-tests (>= ${source:Version}),
          ubuntu-ui-toolkit-autopilot
 Description: Tests and emulators package for ubuntu-keyboard
  Autopilot tests for the ubuntu-keyboard package

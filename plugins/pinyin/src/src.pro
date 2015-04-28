@@ -25,7 +25,7 @@ SOURCES         = \
                   chineselanguagefeatures.cpp \
                   $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.cpp
 
-TARGET          = $$qtLibraryTarget(pinyinplugin)
+TARGET          = $$qtLibraryTarget(zhplugin)
 
 EXAMPLE_FILES = pinyinplugin.json
 

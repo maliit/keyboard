@@ -57,6 +57,7 @@ public:
     bool keyPressHapticFeedback() const;
     bool doubleSpaceFullStop() const;
     bool stayHidden() const;
+    QStringList pluginPaths() const;
 
 Q_SIGNALS:
     void activeLanguageChanged(QString);
@@ -71,6 +72,7 @@ Q_SIGNALS:
     void keyPressHapticFeedbackChanged(bool);
     void doubleSpaceFullStopChanged(bool);
     void stayHiddenChanged(bool);
+    void pluginPathsChanged(QStringList);
 
 private:
     Q_SLOT void settingUpdated(const QString &key);

@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     catalanplugin.h
 
-TARGET          = $$qtLibraryTarget(catalanplugin)
+TARGET          = $$qtLibraryTarget(caplugin)
 
 EXAMPLE_FILES = catalanplugin.json
 
