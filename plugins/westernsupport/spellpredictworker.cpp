@@ -35,9 +35,7 @@ SpellPredictWorker::SpellPredictWorker(QObject *parent)
     , m_presageCandidates(CandidatesCallback(m_candidatesContext))
     , m_presage(&m_presageCandidates)
     , m_spellChecker()
-    , m_word()
     , m_limit(5)
-    , m_processingWords(false)
 {
     m_presage.config("Presage.Selector.SUGGESTIONS", "6");
     m_presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
