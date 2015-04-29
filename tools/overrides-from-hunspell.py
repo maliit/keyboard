@@ -4,7 +4,9 @@ import hunspell
 import sys
 
 if len(sys.argv) != 3:
-    print("Usage: ./overrides-from-hunspell /usr/share/hunspell/en_US.dic /usr/share/hunspell/en_US.aff")
+    print(
+        "Usage: ./overrides-from-hunspell /usr/share/hunspell/en_US.dic "
+        "/usr/share/hunspell/en_US.aff")
     sys.exit(1)
 
 hun = hunspell.HunSpell(sys.argv[1], sys.argv[2])
