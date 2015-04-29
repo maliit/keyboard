@@ -1,3 +1,12 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150429-0ubuntu1) vivid; urgency=medium
+
+  [ Michael Sheldon ]
+  * Discard spellcheck words that arrive whilst still processing outside
+    of the spellcheck worker thread instead of as part of that thread
+    (LP: #1448019)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 29 Apr 2015 18:49:02 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150421-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
