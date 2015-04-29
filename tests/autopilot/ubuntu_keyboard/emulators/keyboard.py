@@ -329,10 +329,10 @@ class Keyboard(object):
         if pointer is None:
             pointer = Pointer(Touch.create())
 
-        gu = float(os.environ.get('GRID_UNIT_PX', 8))
+        gu = float(os.environ.get('GRID_UNIT_PX', 8))        
 
         pointer.drag(key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0,
-                     key_rect.x + key_rect.w / 2.0 + offset, key_rect.y + key_rect.h / 2.0,
+                     key_rect.x + key_rect.w / 2.0 + offset, key_rect.y + key_rect.h / 2.0, 
                      rate=2.77 * gu, time_between_events=2)
 
     def _keyboard_details_changed(self):
