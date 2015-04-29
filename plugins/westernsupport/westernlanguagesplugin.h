@@ -47,12 +47,15 @@ signals:
     void addOverride(const QString& orig, const QString& overriden);
 
 public slots:
+    void spellCheckFinishedProcessing(QString word, QStringList suggestions);
 
 private:
     WesternLanguageFeatures* m_languageFeatures;
     SpellPredictWorker *m_spellPredictWorker;
     QThread *m_spellPredictThread;
     bool m_spellCheckEnabled;
+    QString m_nextSpellWord;
+    bool m_processingSpelling;
 };
 
 #endif // WESTERNLANGUAGESPLUGIN_H

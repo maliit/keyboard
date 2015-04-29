@@ -38,11 +38,14 @@ signals:
     void candidateSelected(QString word);
     
 public slots:
+    void finishedProcessing(QString word, QStringList suggestions);
     
 private:
     QThread *m_pinyinThread;
     PinyinAdapter *m_pinyinAdapter;
     ChineseLanguageFeatures* m_chineseLanguageFeatures;
+    QString m_nextWord;
+    bool m_processingWord;
 };
 
 #endif // PINYINPLUGIN_H

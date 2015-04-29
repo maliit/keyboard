@@ -63,9 +63,7 @@ private:
     CandidatesCallback m_presageCandidates;
     Presage m_presage;
     SpellChecker m_spellChecker;
-    QString m_word;
     int m_limit;
-    bool m_processingWords;
     QMap<QString, QString> m_overrides;
 };
 
