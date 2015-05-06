@@ -268,7 +268,7 @@ Description: Ubuntu on-screen keyboard data files - Portuguese
 Package: ubuntu-keyboard-romanian
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
-         myspell-ro,
+         hunspell-ro,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Romanian
