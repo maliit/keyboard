@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     norwegianplugin.h
 
-TARGET          = $$qtLibraryTarget(norwegianplugin)
+TARGET          = $$qtLibraryTarget(noplugin)
 
 EXAMPLE_FILES = norwegianplugin.json
 
