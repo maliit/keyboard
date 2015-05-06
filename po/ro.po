@@ -1,0 +1,122 @@
+# Romanian translation for ubuntu-keyboard.
+# Copyright (C) 2015 Canonical Ltd.
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-30 18:32+0300\n"
+"PO-Revision-Date: 2015-03-30 19:24+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: Romanian\n"
+
+#: ../qml/keys/LanguageMenu.qml:80
+msgid "Settings"
+msgstr "Setări"
+
+#: ../qml/keys/LanguageMenu.qml:95
+msgid "Arabic"
+msgstr "arabă"
+
+#: ../qml/keys/LanguageMenu.qml:96
+msgid "Azerbaijani"
+msgstr "azeră"
+
+#: ../qml/keys/LanguageMenu.qml:97
+msgid "Bosnian"
+msgstr "bosniacă"
+
+#: ../qml/keys/LanguageMenu.qml:98
+msgid "Catalan"
+msgstr "catalană"
+
+#: ../qml/keys/LanguageMenu.qml:99
+msgid "Czech"
+msgstr "cehă"
+
+#: ../qml/keys/LanguageMenu.qml:100
+msgid "Danish"
+msgstr "daneză"
+
+#: ../qml/keys/LanguageMenu.qml:101
+msgid "German"
+msgstr "germană"
+
+#: ../qml/keys/LanguageMenu.qml:102
+msgid "Emoji"
+msgstr "emoji"
+
+#: ../qml/keys/LanguageMenu.qml:103
+msgid "English"
+msgstr "engleză"
+
+#: ../qml/keys/LanguageMenu.qml:104
+msgid "Spanish"
+msgstr "spaniolă"
+
+#: ../qml/keys/LanguageMenu.qml:105
+msgid "Finnish"
+msgstr "finlandeză"
+
+#: ../qml/keys/LanguageMenu.qml:106
+msgid "French"
+msgstr "franceză"
+
+#: ../qml/keys/LanguageMenu.qml:107
+msgid "Hebrew"
+msgstr "ebraică"
+
+#: ../qml/keys/LanguageMenu.qml:108
+msgid "Croatian"
+msgstr "croată"
+
+#: ../qml/keys/LanguageMenu.qml:109
+msgid "Hungarian"
+msgstr "maghiară"
+
+#: ../qml/keys/LanguageMenu.qml:110
+msgid "Italian"
+msgstr "italiană"
+
+#: ../qml/keys/LanguageMenu.qml:111
+msgid "Dutch"
+msgstr "olandeză"
+
+#: ../qml/keys/LanguageMenu.qml:112
+msgid "Polish"
+msgstr "poloneză"
+
+#: ../qml/keys/LanguageMenu.qml:113
+msgid "Portuguese"
+msgstr "portugheză"
+
+#: ../qml/keys/LanguageMenu.qml:114
+msgid "Romanian"
+msgstr "română"
+
+#: ../qml/keys/LanguageMenu.qml:115
+msgid "Russian"
+msgstr "rusă"
+
+#: ../qml/keys/LanguageMenu.qml:116
+msgid "Serbian"
+msgstr "sârbă"
+
+#: ../qml/keys/LanguageMenu.qml:117
+msgid "Swedish"
+msgstr "suedeză"
+
+#: ../qml/keys/LanguageMenu.qml:118
+msgid "Chinese - Pinyin"
+msgstr "chineză - pinyin"
+
+#: ../qml/keys/LanguageMenu.qml:121
+msgid "Language: "
+msgstr "Limba:"

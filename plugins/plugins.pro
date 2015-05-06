@@ -23,6 +23,7 @@ SUBDIRS = \
     nl \
     pl \
     pt \
+    ro \
     ru \
     sr \
     sv \

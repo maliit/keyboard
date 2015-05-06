@@ -265,6 +265,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Portuguese
  Data files for the Ubuntu virtual keyboard - Portuguese
 
+Package: ubuntu-keyboard-romanian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-ro,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Romanian
+ Data files for the Ubuntu virtual keyboard - Romanian
+
 Package: ubuntu-keyboard-russian
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
