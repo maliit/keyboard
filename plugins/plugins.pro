@@ -20,6 +20,7 @@ SUBDIRS = \
     hr \
     hu \
     it \
+    nb \
     nl \
     pl \
     pt \

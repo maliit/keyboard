@@ -15,27 +15,27 @@ INCLUDEPATH    += \
 HEADERS         = \
     norwegianplugin.h
 
-TARGET          = $$qtLibraryTarget(noplugin)
+TARGET          = $$qtLibraryTarget(nbplugin)
 
 EXAMPLE_FILES = norwegianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/no/
+PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/nb/
 
-lang_db_no.commands += \
-  rm -f $$PWD/database_no.db && \
-  text2ngram -n 1 -l -f sqlite -o $$PWD/database_no.db $$PWD/free_ebook.txt && \
-  text2ngram -n 2 -l -f sqlite -o $$PWD/database_no.db $$PWD/free_ebook.txt && \
-  text2ngram -n 3 -l -f sqlite -o $$PWD/database_no.db $$PWD/free_ebook.txt
-lang_db_no.files += $$PWD/database_no.db
+lang_db_nb.commands += \
+  rm -f $$PWD/database_nb.db && \
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_nb.db $$PWD/free_ebook.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_nb.db $$PWD/free_ebook.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_nb.db $$PWD/free_ebook.txt
+lang_db_nb.files += $$PWD/database_nb.db
 
-lang_db_no_install.files += $$PWD/database_no.db
-lang_db_no_install.path = $$PLUGIN_INSTALL_PATH
+lang_db_nb_install.files += $$PWD/database_nb.db
+lang_db_nb_install.path = $$PLUGIN_INSTALL_PATH
 
-QMAKE_EXTRA_TARGETS += lang_db_no lang_db_no_install
+QMAKE_EXTRA_TARGETS += lang_db_nb lang_db_nb_install
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_no_install
+INSTALLS += target lang_db_nb_install
 
 OTHER_FILES += \
     norwegianplugin.json \

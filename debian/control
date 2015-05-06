@@ -247,6 +247,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Italian
  Data files for the Ubuntu virtual keyboard - Italian
 
+Package: ubuntu-keyboard-norwegian-bokmal
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-nb
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Norwegian Bokmål
+ Data files for the Ubuntu virtual keyboard - Norwegian Bokmål
+
 Package: ubuntu-keyboard-polish
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
