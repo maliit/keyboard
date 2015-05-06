@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     romanianplugin.h
 
-TARGET          = $$qtLibraryTarget(romanianplugin)
+TARGET          = $$qtLibraryTarget(roplugin)
 
 EXAMPLE_FILES = romanianplugin.json
 
