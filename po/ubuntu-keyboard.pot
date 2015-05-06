@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-06 11:32+0100\n"
+"POT-Creation-Date: 2015-05-06 13:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,33 +98,37 @@ msgid "Dutch"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:114
-msgid "Polish"
+msgid "Norwegian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:115
-msgid "Portuguese"
+msgid "Polish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:116
-msgid "Romanian"
+msgid "Portuguese"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:117
-msgid "Russian"
+msgid "Romanian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:118
-msgid "Serbian"
+msgid "Russian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:119
-msgid "Swedish"
+msgid "Serbian"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:120
-msgid "Ukrainian"
+msgid "Swedish"
 msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:121
+msgid "Ukrainian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:122
 msgid "Chinese - Pinyin"
 msgstr ""
