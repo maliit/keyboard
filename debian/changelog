@@ -1,3 +1,25 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150429-0ubuntu1) vivid; urgency=medium
+
+  [ Michael Sheldon ]
+  * Discard spellcheck words that arrive whilst still processing outside
+    of the spellcheck worker thread instead of as part of that thread
+    (LP: #1448019)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 29 Apr 2015 18:49:02 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150421-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Allow the keyboard to load plugins from additional paths specified
+    via gsettings. (LP: #1445532)
+  * Fix crash if the client sends invalid surrounding text/offset data.
+    (LP: #1444947)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 21 Apr 2015 15:07:39 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150326-0ubuntu1) vivid; urgency=medium
 
   [ Bill Filler ]
