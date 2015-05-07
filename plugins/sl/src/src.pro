@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     slovenianplugin.h
 
-TARGET          = $$qtLibraryTarget(slovenianplugin)
+TARGET          = $$qtLibraryTarget(slplugin)
 
 EXAMPLE_FILES = slovenianplugin.json
 
