@@ -24,9 +24,9 @@ PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/sl/
 
 lang_db_sl.commands += \
   rm -f $$PWD/database_sl.db && \
-  text2ngram -n 1 -l -f sqlite -o $$PWD/database_sl.db $$PWD/knjiga.txt && \
-  text2ngram -n 2 -l -f sqlite -o $$PWD/database_sl.db $$PWD/knjiga.txt && \
-  text2ngram -n 3 -l -f sqlite -o $$PWD/database_sl.db $$PWD/knjiga.txt
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_sl.db $$PWD/free_ebook.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_sl.db $$PWD/free_ebook.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_sl.db $$PWD/free_ebook.txt
 lang_db_sl.files += $$PWD/database_sl.db
 
 lang_db_sl_install.files += $$PWD/database_sl.db
