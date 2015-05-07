@@ -6,15 +6,15 @@ include($${TOP_SRCDIR}/config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-lang_hr.path = "$${UBUNTU_KEYBOARD_LIB_DIR}/hr/"
-lang_hr.files = *.qml *.js
+lang_sl.path = "$${UBUNTU_KEYBOARD_LIB_DIR}/sl/"
+lang_sl.files = *.qml *.js
 
 INSTALLS += lang_hr
 
 # for QtCreator
 OTHER_FILES += \
-    Keyboard_hr.qml \
-    Keyboard_hr_email.qml \
-    Keyboard_hr_url.qml \
-    Keyboard_hr_url_search.qml
+    Keyboard_sl.qml \
+    Keyboard_sl_email.qml \
+    Keyboard_sl_url.qml \
+    Keyboard_sl_url_search.qml
 
