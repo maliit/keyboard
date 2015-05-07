@@ -9,7 +9,7 @@ TEMPLATE = lib
 lang_sl.path = "$${UBUNTU_KEYBOARD_LIB_DIR}/sl/"
 lang_sl.files = *.qml *.js
 
-INSTALLS += lang_hr
+INSTALLS += lang_sl
 
 # for QtCreator
 OTHER_FILES += \
