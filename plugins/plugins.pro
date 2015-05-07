@@ -26,6 +26,7 @@ SUBDIRS = \
     pt \
     ro \
     ru \
+    sl \
     sr \
     sv \
     uk \
