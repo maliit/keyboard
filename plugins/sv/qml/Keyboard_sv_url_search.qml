@@ -74,7 +74,6 @@ KeyPad {
             CharKey { label: "b"; shifted: "B"; }
             CharKey { label: "n"; shifted: "N"; extended: ["ñ"]; extendedShifted: ["Ñ"] }
             CharKey { label: "m"; shifted: "M"; }
-            CharKey { label: "ä"; shifted: "Ä"; extended: ["æ"]; extendedShifted: ["Æ"] }
             BackspaceKey { padding: 0; width: panel.keyWidth * 2 }
         }
 
