@@ -239,6 +239,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Hungarian
  Data files for the Ubuntu virtual keyboard - Hungarian
 
+Package: ubuntu-keyboard-icelandic
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Icelandic
+ Data files for the Ubuntu virtual keyboard - Icelandic
+
 Package: ubuntu-keyboard-italian
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
