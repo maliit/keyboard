@@ -109,6 +109,7 @@ Item {
         if (languageId == "he")         return i18n.tr("Hebrew");
         if (languageId == "hr")         return i18n.tr("Croatian");
         if (languageId == "hu")         return i18n.tr("Hungarian");
+        if (languageId == "is")         return i18n.tr("Icelandic");
         if (languageId == "it")         return i18n.tr("Italian");
         if (languageId == "nl")         return i18n.tr("Dutch");
         if (languageId == "nb")         return i18n.tr("Norwegian");
