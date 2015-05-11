@@ -1030,6 +1030,7 @@ class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
             ("he", ".il", "מבחן"),
             ("hr", ".com", "test"),
             ("hu", ".hu", "test"),
+            ("is", ".is", "tæst"),
             ("it", ".it", "test"),
             ("nb", ".no", "bokmål"),
             ("nl", ".nl", "test"),
