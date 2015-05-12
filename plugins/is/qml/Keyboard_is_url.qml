@@ -64,7 +64,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            ShiftKey { width: parent.keyWidth; leftSide: true; }
+            ShiftKey { width: panel.keyWidth; }
             CharKey { label: "b"; shifted: "B"; }
             CharKey { label: "h"; shifted: "H"; }
             CharKey { label: "ð"; shifted: "Ð"; }
@@ -73,23 +73,9 @@ KeyPad {
             CharKey { label: "n"; shifted: "N"; }
             CharKey { label: "þ"; shifted: "Þ"; }
             CharKey { label: "ö"; shifted: "Ö"; extended: ["ø"]; extendedShifted: ["Ø"]}
-            BackspaceKey { width: parent.keyWidth; rightSide: true; }
+            BackspaceKey { width: panel.keyWidth; }
         }
 
-        Item {
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            height: panel.keyHeight + units.gu(UI.row_margin);
-
-            SymbolShiftKey { id: symShiftKey; anchors.left: parent.left; height: parent.height; }
-            LanguageKey    { id: languageMenuButton; anchors.left: symShiftKey.right; height: parent.height; }
-            CharKey        { id: atKey; label: "@"; shifted: "@"; anchors.left: languageMenuButton.right; height: parent.height; }
-            SpaceKey       { id: spaceKey; anchors.left: atKey.right; anchors.right: urlKey.left; noMagnifier: true; height: parent.height; }
-            UrlKey         { id: urlKey; label: ".is"; extended: [".com", ".org", ".net"]; anchors.right: dotKey.left; height: parent.height; }
-            CharKey        { id: dotKey; label: "."; shifted: "."; extended: ["_"]; extendedShifted: ["_"]; anchors.right: enterKey.left; height: parent.height; }
-            ReturnKey      { id: enterKey; anchors.right: parent.right; height: parent.height; }
-        }
         Item {
             anchors.left: parent.left
             anchors.right: parent.right
@@ -99,6 +85,7 @@ KeyPad {
             SymbolShiftKey { id: symShiftKey; anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton; anchors.left: symShiftKey.right; height: parent.height; }
             CharKey        { id: slashKey; label: "/"; shifted: "/"; extended: ["_"]; extendedShifted: ["_"]; anchors.left: languageMenuButton.right; height: parent.height; }
+            SpaceKey       { id: spaceKey;                               anchors.left: slashKey.right; anchors.right: urlKey.left; noMagnifier: true; height: parent.height; }
             UrlKey         { id: urlKey; label: ".is"; extended: [".com", ".org", ".net"]; anchors.right: dotKey.left; height: parent.height; }
             CharKey        { id: dotKey; label: "."; shifted: "."; extended: ["?", "#"]; extendedShifted: ["?", "#"]; anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey; anchors.right: parent.right; height: parent.height; }

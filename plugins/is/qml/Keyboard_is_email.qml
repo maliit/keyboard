@@ -64,7 +64,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            ShiftKey { width: parent.keyWidth; leftSide: true; }
+            ShiftKey { width: panel.keyWidth; }
             CharKey { label: "b"; shifted: "B"; }
             CharKey { label: "h"; shifted: "H"; }
             CharKey { label: "ð"; shifted: "Ð"; }
@@ -73,7 +73,7 @@ KeyPad {
             CharKey { label: "n"; shifted: "N"; }
             CharKey { label: "þ"; shifted: "Þ"; }
             CharKey { label: "ö"; shifted: "Ö"; extended: ["ø"]; extendedShifted: ["Ø"]}
-            BackspaceKey { width: parent.keyWidth; rightSide: true; }
+            BackspaceKey { width: panel.keyWidth; }
         }
 
         Item {
