@@ -1,7 +1,7 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # Ubuntu Keyboard Test Suite
-# Copyright (C) 2013 Canonical
+# Copyright (C) 2013, 2015 Canonical
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,15 +17,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from ubuntu_keyboard.emulators import UbuntuKeyboardEmulatorBase
-
-from collections import namedtuple
 import logging
+from collections import namedtuple
+
+import ubuntuuitoolkit
 
 logger = logging.getLogger(__name__)
 
 
-class Key(UbuntuKeyboardEmulatorBase):
+class Key(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     """An emulator that encapsulates details of a keyboard key (i.e. extended
     characters).
 

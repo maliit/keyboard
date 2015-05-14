@@ -1,7 +1,7 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # Ubuntu Keyboard Test Suite
-# Copyright (C) 2013 Canonical
+# Copyright (C) 2013, 2015 Canonical
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
 
 from collections import defaultdict
 
-from ubuntu_keyboard.emulators import UbuntuKeyboardEmulatorBase
 from ubuntu_keyboard.emulators.keypad import KeyPad
 
 from time import sleep
 import logging
 import os
 
+import ubuntuuitoolkit as toolkit
 from autopilot.input import Pointer, Touch
 from autopilot.introspection import (
     get_proxy_object_for_existing_process,
@@ -114,7 +114,7 @@ class Keyboard(object):
             try:
                 Keyboard.__maliit = get_proxy_object_for_existing_process(
                     connection_name='org.maliit.server',
-                    emulator_base=UbuntuKeyboardEmulatorBase
+                    emulator_base=toolkit.UbuntuUIToolkitCustomProxyObjectBase
                 )
 
                 if Keyboard.__maliit is None:
