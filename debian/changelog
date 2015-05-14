@@ -1,3 +1,16 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150514-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk. added: po/ro.po
+
+  [ Leo Arias ]
+  * Fixed the static errors reported by flake8. Added the check to the
+    debian build tests. Added python3-flake8 as a build dependency. (LP:
+    #1444170)
+  * Use the base class from the toolkit in autopilot tests.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 14 May 2015 16:56:34 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150429-0ubuntu1) vivid; urgency=medium
 
   [ Michael Sheldon ]
