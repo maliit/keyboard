@@ -971,7 +971,7 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
 class UbuntuKeyboardOxide(UbuntuKeyboardTests):
 
     def test_autocomplete(self):
-        """Test that words are auto-completed when entered into an oxide text 
+        """Test that words are auto-completed when entered into an oxide text
         field.
 
         """
@@ -989,10 +989,15 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
                 anchors.fill: parent
                 objectName: "webview"
                 Component.onCompleted: {
-                    loadHtml("<html><body><textarea id='textarea' onkeyup=\\\"document.title=document.getElementById('textarea').value;\\\" style='width: 100%; height: 100%;'></textarea></body></html>");
+                    loadHtml("
+                        <html><body><textarea id='textarea'
+                        onkeyup=\\\"document.title=
+                        document.getElementById('textarea').value;\\\"
+                        style='width: 100%; height: 100%;'>
+                        </textarea></body></html>"
+                    );
                 }
             }
-            
         }
 
         """)
@@ -1012,7 +1017,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
         )
 
     def test_hiding(self):
-        """Verify that the keyboard remains hidden after being dismissed from 
+        """Verify that the keyboard remains hidden after being dismissed from
         a field that is no longer enabled.
 
         """
@@ -1030,11 +1035,18 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
                 anchors.fill: parent
                 objectName: "webview"
                 Component.onCompleted: {
-                    loadHtml("<html><body><div id='scroll' style='width: 100%; height: 200%; position: absolute; background: green; visibility: hidden;'></div><input id='input' type='text' onkeyup=\\\"if (event.keyCode == 13) {document.getElementById('input').disabled=true; document.getElementByI
-d('scroll').style.visibility='visible';}\\\" style='width: 100%%; height: 100%%;' /></body></html>");
+                    loadHtml("
+                        <html><body><div id='scroll' style='width: 100%;
+                        height: 200%; position: absolute; background: green;
+                        visibility: hidden;'></div><input id='input'
+                        type='text'
+                        onkeyup=\\\"if (event.keyCode == 13)
+                        {document.getElementById('input').disabled=true;
+                        document.getElementById('scroll').style.visibility=
+                        'visible';}\\\" style='width: 100%%;
+                        height: 100%%;' /></body></html>");
                 }
             }
-            
         }
 
         """)
@@ -1050,7 +1062,12 @@ d('scroll').style.visibility='visible';}\\\" style='width: 100%%; height: 100%%;
         keyboard.dismiss()
 
         pointer = Pointer(Touch.create())
-        pointer.drag(webview.width / 2.0, webview.height / 2.0, webview.width / 2.0, webview.height / 2.0 + 100)
+        pointer.drag(
+            webview.width / 2.0,
+            webview.height / 2.0,
+            webview.width / 2.0,
+            webview.height / 2.0 + 100
+        )
 
         self.assertThat(
             keyboard.is_available,
