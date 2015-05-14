@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     serbianplugin.h
 
-TARGET          = $$qtLibraryTarget(serbianplugin)
+TARGET          = $$qtLibraryTarget(srplugin)
 
 EXAMPLE_FILES = serbianplugin.json
 

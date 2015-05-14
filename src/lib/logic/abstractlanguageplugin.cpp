@@ -61,9 +61,10 @@ void AbstractLanguagePlugin::addToSpellCheckerUserWordList(const QString& word)
     Q_UNUSED(word)
 }
 
-bool AbstractLanguagePlugin::setLanguage(const QString& languageId)
+bool AbstractLanguagePlugin::setLanguage(const QString& languageId, const QString& pluginPath)
 {
     Q_UNUSED(languageId)
+    Q_UNUSED(pluginPath)
     return false;
 }
 

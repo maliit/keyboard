@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     danishplugin.h
 
-TARGET          = $$qtLibraryTarget(danishplugin)
+TARGET          = $$qtLibraryTarget(daplugin)
 
 EXAMPLE_FILES = danishplugin.json
 

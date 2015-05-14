@@ -1,0 +1,114 @@
+# Uyghur translation for ubuntu-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-11-12 15:18+0000\n"
+"PO-Revision-Date: 2015-04-11 15:33+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Uyghur <ug@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2015-04-12 06:01+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
+
+#: ../qml/keys/LanguageMenu.qml:61
+msgid "Settings"
+msgstr "تەڭشەكلەر"
+
+#: ../qml/keys/LanguageMenu.qml:74
+msgid "Arabic"
+msgstr "ئەرەبچە"
+
+#: ../qml/keys/LanguageMenu.qml:75
+msgid "Azerbaijani"
+msgstr "ئەزەربەيجانچە"
+
+#: ../qml/keys/LanguageMenu.qml:76
+msgid "Bosnian"
+msgstr "بوسنىيەچە"
+
+#: ../qml/keys/LanguageMenu.qml:77
+msgid "Catalan"
+msgstr "كاتالانچە"
+
+#: ../qml/keys/LanguageMenu.qml:78
+msgid "Czech"
+msgstr "چېخچە"
+
+#: ../qml/keys/LanguageMenu.qml:79
+msgid "Danish"
+msgstr "دانىشچە"
+
+#: ../qml/keys/LanguageMenu.qml:80
+msgid "German"
+msgstr "گېرمانچە"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "English"
+msgstr "ئىنگلىزچە"
+
+#: ../qml/keys/LanguageMenu.qml:82
+msgid "Spanish"
+msgstr "ئىسپانچە"
+
+#: ../qml/keys/LanguageMenu.qml:83
+msgid "Finnish"
+msgstr "فىنچە"
+
+#: ../qml/keys/LanguageMenu.qml:84
+msgid "French"
+msgstr "فىرانسۇزچە"
+
+#: ../qml/keys/LanguageMenu.qml:85
+msgid "Hebrew"
+msgstr "ئىبرانىچە"
+
+#: ../qml/keys/LanguageMenu.qml:86
+msgid "Croatian"
+msgstr "خورۋاتچە"
+
+#: ../qml/keys/LanguageMenu.qml:87
+msgid "Hungarian"
+msgstr "ھونگىرچە"
+
+#: ../qml/keys/LanguageMenu.qml:88
+msgid "Italian"
+msgstr "ئىتالىيانچە"
+
+#: ../qml/keys/LanguageMenu.qml:89
+msgid "Dutch"
+msgstr "گوللاندىيەچە"
+
+#: ../qml/keys/LanguageMenu.qml:90
+msgid "Polish"
+msgstr "پولەكچە"
+
+#: ../qml/keys/LanguageMenu.qml:91
+msgid "Portuguese"
+msgstr "پورتۇگالچە"
+
+#: ../qml/keys/LanguageMenu.qml:92
+msgid "Russian"
+msgstr "رۇسچە"
+
+#: ../qml/keys/LanguageMenu.qml:93
+msgid "Serbian"
+msgstr "سېربچە"
+
+#: ../qml/keys/LanguageMenu.qml:94
+msgid "Swedish"
+msgstr "شۋېدچە"
+
+#: ../qml/keys/LanguageMenu.qml:95
+msgid "Chinese - Pinyin"
+msgstr "خەنچەـپىنيىن"
+
+#: ../qml/keys/LanguageMenu.qml:98
+msgid "Language: "
+msgstr "تىل "

@@ -115,139 +115,47 @@ Item {
             panel.state = "CHARACTERS";
         }
 
-        /// Returns if the given language is supported
-        /// FIXME the possible languages should be checked in C++
-        function languageIsSupported(locale)
+        function loadLayout(contentType, activeLanguage)
         {
-            var supportedLocales = [
-                "ar",
-                "az",
-                "bs",
-                "ca",
-                "cs",
-                "da",
-                "de",
-                "emoji",
-                "en",
-                "es",
-                "fi",
-                "fr",
-                "he",
-                "hr",
-                "hu",
-                "it",
-                "nl",
-                "pl",
-                "pt",
-                "ru",
-                "sr",
-                "sv",
-                "zh",
-            ];
-            return (supportedLocales.indexOf( locale ) > -1);
-        }
-
-        /// Returns the relative path to the keyboard QML file for a given language for free text
-        function freeTextLanguageKeyboard(language)
-        {
-            language = language.toLowerCase();
-            if (!languageIsSupported(language)) {
+            var language = activeLanguage.toLowerCase();
+            if (!maliit_input_method.languageIsSupported(language)) {
                 // If we don't have a layout for this specific locale 
                 // check more generic locale
                 language = language.slice(0,2);
             }
 
-            if (!languageIsSupported(language)) {
-                console.log("Language '"+language+"' not supported - using 'en' instead");
+            if (!maliit_input_method.languageIsSupported(language)) {
+                console.log("Language '" + language + "' not supported - using 'en' instead");
                 language = "en";
             }
 
-            if (language === "ar")
-                return "lib/ar/Keyboard_ar.qml";
-            if (language === "az")
-                return "lib/az/Keyboard_az.qml";
-            if (language === "bs")
-                return "lib/bs/Keyboard_bs.qml";
-            if (language === "ca")
-                return "lib/ca/Keyboard_ca.qml";
-            if (language === "cs")
-                return "lib/cs/Keyboard_cs.qml";
-            if (language === "da")
-                return "lib/da/Keyboard_da.qml";
-            if (language === "de")
-                return "lib/de/Keyboard_de.qml";
-            if (language === "emoji")
-                return "lib/emoji/Keyboard_emoji.qml";
-            if (language === "en")
-                return "lib/en/Keyboard_en.qml";
-            if (language === "es")
-                return "lib/es/Keyboard_es.qml";
-            if (language === "fi")
-                return "lib/fi/Keyboard_fi.qml";
-            if (language === "fr")
-                return "lib/fr/Keyboard_fr.qml";
-            if (language === "he")
-                return "lib/he/Keyboard_he.qml";
-            if (language === "hr")
-                return "lib/hr/Keyboard_hr.qml";
-            if (language === "hu")
-                return "lib/hu/Keyboard_hu.qml";
-            if (language === "it")
-                return "lib/it/Keyboard_it.qml";
-            if (language === "nl")
-                return "lib/nl/Keyboard_nl.qml";
-            if (language === "pl")
-                return "lib/pl/Keyboard_pl.qml";
-            if (language === "pt")
-                return "lib/pt/Keyboard_pt.qml";
-            if (language === "ru")
-                return "lib/ru/Keyboard_ru.qml";
-            if (language === "sr")
-                return "lib/sr/Keyboard_sr.qml";
-            if (language === "sv")
-                return "lib/sv/Keyboard_sv.qml";
-            if (language === "zh")
-                return "lib/zh/Keyboard_zh_cn_pinyin.qml";
-        }
-
-        function loadLayout(contentType, activeLanguage)
-        {
-            //            if (contentType === InputMethod.NumberContentType) {
+            // NumberContentType
             if (contentType === 1) {
                 canvas.layoutId = "number";
                 return "languages/Keyboard_numbers.qml";
             }
 
-            //            if (contentType === InputMethod.PhoneNumberContentType) {
+            // PhoneNumberContentType
             if (contentType === 2) {
                 canvas.layoutId = "telephone";
                 return "languages/Keyboard_telephone.qml";
             }
 
-            var locale = activeLanguage.toLowerCase();
-            if (!languageIsSupported(locale)) {
-                locale = locale.slice(0,2);
-            }
-            if (!languageIsSupported(locale)) {
-                console.log("System language '"+locale+"' can't be used in OSK - using 'en' instead")
-                locale = "en"
-            }
-
-            //            if (contentType === InputMethod.EmailContentType) {
+            // EmailContentType
             if (contentType === 3) {
                 canvas.layoutId = "email";
-                return "lib/"+locale+"/Keyboard_"+locale+"_email.qml";
+                return maliit_input_method.currentPluginPath + "/Keyboard_" + language + "_email.qml";
             }
 
-            //            if (contentType === InputMethod.UrlContentType) {
+            // UrlContentType
             if (contentType === 4) {
                 canvas.layoutId = "url";
-                return "lib/"+locale+"/Keyboard_"+locale+"_url_search.qml";
+                return maliit_input_method.currentPluginPath + "/Keyboard_" + language + "_url_search.qml";
             }
 
             // FreeTextContentType used as fallback
             canvas.layoutId = "freetext";
-            return freeTextLanguageKeyboard(activeLanguage);
+            return maliit_input_method.currentPluginPath + "/Keyboard_" + language + ".qml";
         }
     }
 }

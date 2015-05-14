@@ -17,6 +17,7 @@ Build-Depends: debhelper (>= 9),
                maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
                pkg-config,
                python3,
+               python3-flake8,
                python3-setuptools,
                qt5-default,
                qtbase5-dev,
@@ -83,6 +84,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-english (>= ${source:Version}),
          ubuntu-keyboard-german (>= ${source:Version}),
          ubuntu-keyboard-spanish (>= ${source:Version}),
+         ubuntu-keyboard-tests (>= ${source:Version}),
          ubuntu-ui-toolkit-autopilot
 Description: Tests and emulators package for ubuntu-keyboard
  Autopilot tests for the ubuntu-keyboard package
