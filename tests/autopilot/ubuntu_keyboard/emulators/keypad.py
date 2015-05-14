@@ -47,9 +47,17 @@ class KeyPad(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 with key.no_automatic_refreshing():
                     rect = key.globalRect
                     if key.leftSide:
-                        rect = (key.globalRect[0] + key.leftOffset, key.globalRect[1], key.globalRect[2] - key.leftOffset, key.globalRect[3])
+                        rect = (
+                            key.globalRect[0] + key.leftOffset,
+                            key.globalRect[1],
+                            key.globalRect[2] - key.leftOffset,
+                            key.globalRect[3])
                     elif key.rightSide:
-                        rect = (key.globalRect[0], key.globalRect[1], key.globalRect[2] - key.rightOffset, key.globalRect[3])
+                        rect = (
+                            key.globalRect[0],
+                            key.globalRect[1],
+                            key.globalRect[2] - key.rightOffset,
+                            key.globalRect[3])
                     key_pos = Key.Pos(*rect)
                     label = label_fn(key)
                     if label != '':

@@ -161,7 +161,8 @@ class Keyboard(object):
         except AssertionError:
             return False
 
-    def press_key(self, key, capslock_switch=False, long_press=False, slide_offset=None):
+    def press_key(self, key, capslock_switch=False, long_press=False,
+                  slide_offset=None):
         """Tap on the key with the internal pointer
 
         :params key: String containing the text of the key to tap.
@@ -192,7 +193,7 @@ class Keyboard(object):
         self._show_keypad(req_keypad)
         self._change_keypad_to_state(req_key_state)
 
-        if slide_offset != None:
+        if slide_offset is not None:
             self._select_extended_key(key_pos, slide_offset)
         elif long_press:
             self._long_press_key(key_pos)
@@ -304,7 +305,7 @@ class Keyboard(object):
             "shift"
         )
 
-        if key_pos == None:
+        if key_pos is None:
             # Not all layouts have a shift key
             return
 
@@ -320,7 +321,8 @@ class Keyboard(object):
     def _long_press_key(self, key_rect, pointer=None):
         if pointer is None:
             pointer = Pointer(Touch.create())
-        pointer.move(key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0)
+        pointer.move(
+            key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0)
         pointer.press()
         sleep(0.5)
         pointer.release()
@@ -329,11 +331,14 @@ class Keyboard(object):
         if pointer is None:
             pointer = Pointer(Touch.create())
 
-        gu = float(os.environ.get('GRID_UNIT_PX', 8))        
+        gu = float(os.environ.get('GRID_UNIT_PX', 8))
 
-        pointer.drag(key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0,
-                     key_rect.x + key_rect.w / 2.0 + offset, key_rect.y + key_rect.h / 2.0, 
-                     rate=2.77 * gu, time_between_events=2)
+        pointer.drag(
+            key_rect.x + key_rect.w / 2.0,
+            key_rect.y + key_rect.h / 2.0,
+            key_rect.x + key_rect.w / 2.0 + offset,
+            key_rect.y + key_rect.h / 2.0,
+            rate=2.77 * gu, time_between_events=2)
 
     def _keyboard_details_changed(self):
         return self._orientation_changed()
