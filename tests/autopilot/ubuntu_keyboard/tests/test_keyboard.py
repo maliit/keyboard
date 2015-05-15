@@ -1096,6 +1096,8 @@ class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
             Equals(self.layout)
         )
 
+        sleep(5)
+
         if self.text[-len(self.tld):] == self.tld:
             keyboard.type(self.text[:-len(self.tld)])
             keyboard.press_key(self.tld)
