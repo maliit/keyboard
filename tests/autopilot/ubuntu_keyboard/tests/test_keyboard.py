@@ -1100,7 +1100,7 @@ class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
             Equals(self.layout)
         )
 
-        sleep(5)
+        sleep(2)
 
         if self.text[-len(self.tld):] == self.tld:
             keyboard.type(self.text[:-len(self.tld)])
