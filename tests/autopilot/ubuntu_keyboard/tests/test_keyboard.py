@@ -564,7 +564,11 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('Helfn ')
+        keyboard.type('Helfn')
+
+        sleep(1)
+
+        keyboard.type(' ')
 
         expected = "Helen "
         self.assertThat(
