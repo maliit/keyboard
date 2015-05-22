@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-03 05:47+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-05-22 05:10+0000\n"
+"X-Generator: Launchpad (build 17514)\n"
 
 #: ../qml/keys/LanguageMenu.qml:61
 msgid "Settings"
@@ -27,15 +27,15 @@ msgstr "阿拉伯文"
 
 #: ../qml/keys/LanguageMenu.qml:75
 msgid "Azerbaijani"
-msgstr ""
+msgstr "亞塞拜然文"
 
 #: ../qml/keys/LanguageMenu.qml:76
 msgid "Bosnian"
-msgstr ""
+msgstr "波士尼亞文"
 
 #: ../qml/keys/LanguageMenu.qml:77
 msgid "Catalan"
-msgstr ""
+msgstr "加泰隆文"
 
 #: ../qml/keys/LanguageMenu.qml:78
 msgid "Czech"
@@ -71,7 +71,7 @@ msgstr "希伯來文"
 
 #: ../qml/keys/LanguageMenu.qml:86
 msgid "Croatian"
-msgstr ""
+msgstr "克羅埃西亞文"
 
 #: ../qml/keys/LanguageMenu.qml:87
 msgid "Hungarian"

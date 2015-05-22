@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-03 05:47+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-05-22 05:09+0000\n"
+"X-Generator: Launchpad (build 17514)\n"
 
 #: ../qml/keys/LanguageMenu.qml:61
 msgid "Settings"
@@ -23,15 +23,15 @@ msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:74
 msgid "Arabic"
-msgstr ""
+msgstr "アラビア語"
 
 #: ../qml/keys/LanguageMenu.qml:75
 msgid "Azerbaijani"
-msgstr ""
+msgstr "アゼルバイジャン語"
 
 #: ../qml/keys/LanguageMenu.qml:76
 msgid "Bosnian"
-msgstr ""
+msgstr "ボスニア語"
 
 #: ../qml/keys/LanguageMenu.qml:77
 msgid "Catalan"
@@ -39,23 +39,23 @@ msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:78
 msgid "Czech"
-msgstr ""
+msgstr "チェコ語"
 
 #: ../qml/keys/LanguageMenu.qml:79
 msgid "Danish"
-msgstr ""
+msgstr "デンマーク語"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "German"
-msgstr ""
+msgstr "ドイツ語"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "English"
-msgstr ""
+msgstr "英語"
 
 #: ../qml/keys/LanguageMenu.qml:82
 msgid "Spanish"
-msgstr ""
+msgstr "スペイン語"
 
 #: ../qml/keys/LanguageMenu.qml:83
 msgid "Finnish"
