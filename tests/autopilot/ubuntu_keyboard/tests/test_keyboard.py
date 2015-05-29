@@ -564,7 +564,11 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('Helfn ')
+        keyboard.type('Helfn')
+
+        sleep(1)
+
+        keyboard.type(' ')
 
         expected = "Helen "
         self.assertThat(
@@ -1110,6 +1114,110 @@ class UbuntuKeyboardPluginPaths(UbuntuKeyboardTests):
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
+        )
+
+
+class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
+
+    scenarios = []
+
+    @classmethod
+    def setUpClass(cls):
+        # Layout, TLD, Text
+        test_data = [
+            ("ar", ".eg", "ازتبار"),
+            ("az", ".com", "çheck"),
+            ("bs", ".com", "test"),
+            ("ca", ".com", "çheck"),
+            ("cs", ".cz", "test"),
+            ("da", ".dk", "tæst"),
+            ("de", ".de", "triäl"),
+            ("el", ".gr", "δοκιμη"),
+            ("en", ".com", "test"),
+            ("es", ".es", "testiñg"),
+            ("fi", ".fi", "triäl"),
+            ("fr", ".fr", "çheck"),
+            ("gd", ".co.uk", "test"),
+            ("he", ".il", "מבחן"),
+            ("hr", ".com", "test"),
+            ("hu", ".hu", "test"),
+            ("is", ".is", "tæst"),
+            ("it", ".it", "test"),
+            ("nb", ".no", "bokmål"),
+            ("nl", ".nl", "test"),
+            ("pl", ".pl", "tęst"),
+            ("pt", ".com.br", "çheck"),
+            ("ro", ".com", "test"),
+            ("ru", ".ru", "тест"),
+            ("sl", ".com", "test"),
+            ("sr", ".срб", "тест"),
+            ("sv", ".se", "triäl"),
+            ("uk", ".укр", "тест")
+        ]
+
+        for entry in test_data:
+            cls.scenarios.append((
+                "%s_free" % entry[0],
+                dict(
+                    layout=entry[0],
+                    hints=['Qt.ImhNoPredictiveText'],
+                    expected_activeview="freetext",
+                    tld=entry[1],
+                    text=entry[2]
+                )
+            ))
+            cls.scenarios.append((
+                "%s_url" % entry[0],
+                dict(
+                    layout=entry[0],
+                    hints=['Qt.ImhUrlCharactersOnly'],
+                    expected_activeview="url",
+                    tld=entry[1],
+                    text=entry[2] + entry[1]
+                )
+            ))
+            cls.scenarios.append((
+                "%s_email" % entry[0],
+                dict(
+                    layout=entry[0],
+                    hints=['Qt.ImhEmailCharactersOnly'],
+                    expected_activeview="email",
+                    tld=entry[1],
+                    text=entry[2] + "@" + entry[2] + entry[1]
+                )
+            ))
+
+    def test_layouts(self):
+        """Test all layout plugins in freetext, url and email mode.
+
+        """
+        text_area = self.launch_test_input_area(
+            self.layout + " - " + self.expected_activeview,
+            self.hints
+        )
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", self.layout)
+
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals(self.layout)
+        )
+
+        sleep(2)
+
+        if self.text[-len(self.tld):] == self.tld:
+            keyboard.type(self.text[:-len(self.tld)])
+            keyboard.press_key(self.tld)
+        else:
+            keyboard.type(self.text)
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(self.text))
         )
 
 

@@ -58,8 +58,8 @@ KeyPad {
             CharKey { label: "j"; shifted: "J"; }
             CharKey { label: "k"; shifted: "K"; }
             CharKey { label: "l"; shifted: "L"; }
-            CharKey { label: "ä"; shifted: "Ä"; extended: ["æ"]; extendedShifted: ["Æ"] }
-            CharKey { label: "ö"; shifted: "Ö"; extended: ["ø"]; extendedShifted: ["Ø"]; rightSide: true; }
+            CharKey { label: "ö"; shifted: "Ö"; extended: ["ø"]; extendedShifted: ["Ø"] }
+            CharKey { label: "ä"; shifted: "Ä"; extended: ["æ"]; extendedShifted: ["Æ"]; rightSide: true; }
         }
 
         Row {
