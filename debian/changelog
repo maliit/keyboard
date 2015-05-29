@@ -1,3 +1,32 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150529-0ubuntu1) wily; urgency=medium
+
+  [ Bernard Banko ]
+  * Add new keyboard layouts for Romanian, Scottish Gaelic, Greek,
+    Norwegian, Ukrainian, Slovenian and Icelandic and fix incorrect
+    layouts in Swedish and Croatian. (LP: #1367210, #1395402, #1436045,
+    #1452719, #1363376, #1440722, #1452723, #1454206, #1440959)
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ GunChleoc ]
+  * Add new keyboard layouts for Romanian, Scottish Gaelic, Greek,
+    Norwegian, Ukrainian, Slovenian and Icelandic and fix incorrect
+    layouts in Swedish and Croatian. (LP: #1367210, #1395402, #1436045,
+    #1452719, #1363376, #1440722, #1452723, #1454206, #1440959)
+
+  [ Michael Sheldon ]
+  * Add new keyboard layouts for Romanian, Scottish Gaelic, Greek,
+    Norwegian, Ukrainian, Slovenian and Icelandic and fix incorrect
+    layouts in Swedish and Croatian. (LP: #1367210, #1395402, #1436045,
+    #1452719, #1363376, #1440722, #1452723, #1454206, #1440959)
+  * Add test for the keyboard remaining dismissed when scrolling in
+    Oxide.
+  * Allow the keyboard's height reporting to be disabled when the system
+    is in windowed mode. (LP: #1457116)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 29 May 2015 12:24:02 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.04.20150514-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
