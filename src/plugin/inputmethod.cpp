@@ -109,6 +109,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(d->editor.wordEngine(), SIGNAL(pluginChanged()), this, SLOT(onWordEnginePluginChanged()));
     connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
+    connect(&d->m_settings, SIGNAL(disableHeightChanged(bool)), this, SLOT(onVisibleRectChanged()));
     d->registerAudioFeedbackSoundSetting();
     d->registerAudioFeedbackSetting();
     d->registerHapticFeedbackSetting();
@@ -616,6 +617,17 @@ void InputMethod::onVisibleRectChanged()
                             qGuiApp->primaryScreen()->primaryOrientation(),
                             d->m_geometry->visibleRect().toRect());
 
+    d->applicationApiWrapper->reportOSKVisible(
+                visibleRect.x(),
+                visibleRect.y(),
+                visibleRect.width(),
+                visibleRect.height()
+                );
+
+    if (d->m_settings.disableHeight()) {
+        visibleRect.setHeight(0);
+    }
+
     inputMethodHost()->setScreenRegion(QRegion(visibleRect));
     inputMethodHost()->setInputMethodArea(visibleRect, d->view);
 
@@ -626,12 +638,6 @@ void InputMethod::onVisibleRectChanged()
                 << visibleRect.height()
                 << "> to the app manager.";
 
-    d->applicationApiWrapper->reportOSKVisible(
-                visibleRect.x(),
-                visibleRect.y(),
-                visibleRect.width(),
-                visibleRect.height()
-                );
 }
 
 const QString InputMethod::currentPluginPath() const

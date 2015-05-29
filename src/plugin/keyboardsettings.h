@@ -57,6 +57,7 @@ public:
     bool keyPressHapticFeedback() const;
     bool doubleSpaceFullStop() const;
     bool stayHidden() const;
+    bool disableHeight() const;
     QStringList pluginPaths() const;
 
 Q_SIGNALS:
@@ -72,6 +73,7 @@ Q_SIGNALS:
     void keyPressHapticFeedbackChanged(bool);
     void doubleSpaceFullStopChanged(bool);
     void stayHiddenChanged(bool);
+    void disableHeightChanged(bool);
     void pluginPathsChanged(QStringList);
 
 private:

@@ -46,6 +46,7 @@ const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY = QLatin1String("keyPress
 const QLatin1String KEY_PRESS_HAPTIC_FEEDBACK_KEY = QLatin1String("keyPressHapticFeedback");
 const QLatin1String DOUBLE_SPACE_FULL_STOP_KEY = QLatin1String("doubleSpaceFullStop");
 const QLatin1String STAY_HIDDEN_KEY = QLatin1String("stayHidden");
+const QLatin1String DISABLE_HEIGHT_KEY = QLatin1String("disableHeight");
 const QLatin1String PLUGIN_PATHS_KEY = QLatin1String("pluginPaths");
 
 /*!
@@ -199,6 +200,11 @@ QStringList KeyboardSettings::pluginPaths() const
     return m_settings->get(PLUGIN_PATHS_KEY).toStringList();
 }
 
+bool KeyboardSettings::disableHeight() const
+{
+    return m_settings->get(DISABLE_HEIGHT_KEY).toBool();
+}
+
 /*!
  * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
@@ -241,6 +247,10 @@ void KeyboardSettings::settingUpdated(const QString &key)
         return;
     } else if (key == STAY_HIDDEN_KEY) {
         Q_EMIT stayHiddenChanged(stayHidden());
+        return;
+    } else if (key == DISABLE_HEIGHT_KEY) {
+        Q_EMIT disableHeightChanged(disableHeight());
+        return;
     } else if (key == PLUGIN_PATHS_KEY) {
         Q_EMIT pluginPathsChanged(pluginPaths());
     }
