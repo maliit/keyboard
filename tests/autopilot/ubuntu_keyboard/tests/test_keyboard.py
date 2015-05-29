@@ -968,6 +968,113 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
         )
 
 
+class UbuntuKeyboardOxide(UbuntuKeyboardTests):
+
+    def test_autocomplete(self):
+        """Test that words are auto-completed when entered into an oxide text
+        field.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.0
+        import Ubuntu.Components 1.1
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><textarea id='textarea'
+                        onkeyup=\\\"document.title=
+                        document.getElementById('textarea').value;\\\"
+                        style='width: 100%; height: 100%;'>
+                        </textarea></body></html>"
+                    );
+                }
+            }
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Pic ')
+
+        expected = 'Picture'
+        self.assertThat(
+            webview.title,
+            Eventually(Equals(expected))
+        )
+
+    def test_hiding(self):
+        """Verify that the keyboard remains hidden after being dismissed from
+        a field that is no longer enabled.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.0
+        import Ubuntu.Components 1.1
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><div id='scroll' style='width: 100%;
+                        height: 200%; position: absolute; background: green;
+                        visibility: hidden;'></div><input id='input'
+                        type='text'
+                        onkeyup=\\\"if (event.keyCode == 13)
+                        {document.getElementById('input').disabled=true;
+                        document.getElementById('scroll').style.visibility=
+                        'visible';}\\\" style='width: 100%%;
+                        height: 100%%;' /></body></html>");
+                }
+            }
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Test\n')
+
+        keyboard.dismiss()
+
+        pointer = Pointer(Touch.create())
+        pointer.drag(
+            webview.width / 2.0,
+            webview.height / 2.0,
+            webview.width / 2.0,
+            webview.height / 2.0 + 100
+        )
+
+        self.assertThat(
+            keyboard.is_available,
+            Eventually(Equals(False))
+        )
+
+
 class UbuntuKeyboardPluginPaths(UbuntuKeyboardTests):
 
     def set_test_settings(self):
