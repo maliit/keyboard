@@ -45,22 +45,6 @@ PinyinAdapter::~PinyinAdapter()
 
 void PinyinAdapter::parse(const QString& string)
 {
-    // Run through all the words queued in the event loop
-    // so we only fetch suggestions for the latest word
-    bool setProcessingWords = false;
-    if(m_processingWords == false) {
-        setProcessingWords = true;
-        m_processingWords = true;
-    }
-    QCoreApplication::processEvents();
-    if(setProcessingWords == true) {
-        m_processingWords = false;
-    }
-
-    if(m_processingWords) {
-        return;
-    }
-
     pinyin_parse_more_full_pinyins(m_instance, string.toLatin1().data());
 
 #ifdef PINYIN_DEBUG

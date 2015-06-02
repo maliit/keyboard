@@ -1,6 +1,7 @@
 TEMPLATE = subdirs
 SUBDIRS = \
     qmltests \
+    testlayout \
     unittests \
 
 CONFIG += ordered

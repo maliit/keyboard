@@ -1,7 +1,7 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # Ubuntu Keyboard Test Suite
-# Copyright (C) 2013 Canonical
+# Copyright (C) 2013, 2015 Canonical
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,12 +17,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import os, os.path
+import os
 import shutil
 import subprocess
 import atexit
 
-from testtools import skip
 from testtools.matchers import Equals
 import tempfile
 from textwrap import dedent
@@ -30,7 +29,6 @@ from time import sleep
 
 from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
-from autopilot.introspection import get_proxy_object_for_existing_process
 from autopilot.matchers import Eventually
 from autopilot.platform import model
 from ubuntuuitoolkit import base
@@ -50,23 +48,23 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
     @classmethod
     def setUpClass(cls):
-        #### FIXME: This is a work around re: lp:1238417 ####
+        # FIXME: This is a work around re: lp:1238417 ####
         if model() != "Desktop":
             from autopilot.input import _uinput
             _uinput._touch_device = _uinput.create_touch_device()
-        ####
 
     def setUp(self):
         if model() == "Desktop":
             self.skipTest("Ubuntu Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
         self.set_test_settings()
-        sleep(5) # Have to give time for gsettings change to propogate
+        sleep(5)  # Have to give time for gsettings change to propogate
         self.pointer = Pointer(Touch.create())
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
-        gsettings.set_strv("enabled-languages", ["en", "es", "de", "zh", "emoji"])
+        gsettings.set_strv(
+            "enabled-languages", ["en", "es", "de", "zh", "emoji"])
         gsettings.set_string("active-language", "en")
         gsettings.set_string("previous-language", "es")
         gsettings.set_boolean("auto-capitalization", True)
@@ -219,7 +217,8 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
     ]
 
     def test_can_type_string(self):
-        text_area = self.launch_test_input_area(label=self.label, input_hints=['Qt.ImhNoPredictiveText'])
+        text_area = self.launch_test_input_area(
+            label=self.label, input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -235,7 +234,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         shifted/capitalised.
 
         """
-        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -254,7 +254,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         until the shift key is clicked again.
 
         """
-        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -276,7 +277,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         shift the keyboard back into the default state.
 
         """
-        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -301,7 +303,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         automatically enter the shifted state.
 
         """
-        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -322,7 +325,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         """After deleting a fullstop the keyboard should return to the normal
         state.
         """
-        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -344,7 +348,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         spaces and backspaces.
 
         """
-        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -403,7 +408,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         self.assertThat(
             text_area.visibilityChangeCount,
             Eventually(Equals(2))
-        )        
+        )
 
 
 class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
@@ -468,7 +473,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
             keyboard.press_key(".com")
         else:
             keyboard.type(self.text)
-        
+
         self.assertThat(
             text_area.text,
             Eventually(Equals(self.text))
@@ -481,7 +486,8 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         """After tapping space twice a fullstop should be entered.
 
         """
-        text_area = self.launch_test_input_area(input_hints=['Qt.ImhNoPredictiveText'])
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
@@ -495,8 +501,8 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         )
 
     def test_override(self):
-        """After typing 'i' followed by a space it should get auto-corrected to 'I'
-        via the override mechanism.
+        """After typing 'i' followed by a space it should get auto-corrected
+        to 'I' via the override mechanism.
 
         """
         text_area = self.launch_test_input_area()
@@ -558,7 +564,11 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('Helfn ')
+        keyboard.type('Helfn')
+
+        sleep(1)
+
+        keyboard.type(' ')
 
         expected = "Helen "
         self.assertThat(
@@ -636,7 +646,7 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard.press_key('.', slide_offset=1)
         keyboard.press_key('.', slide_offset=3.5 * gu)
         keyboard.press_key('.', slide_offset=7 * gu)
-        
+
         keyboard.press_key(',', slide_offset=-10.5 * gu)
         keyboard.press_key(',', slide_offset=-7 * gu)
         keyboard.press_key(',', slide_offset=-3.5 * gu)
@@ -652,9 +662,8 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
-
     def test_single_quotes(self):
-        """Single quotes placed around a word shouldn't get removed by 
+        """Single quotes placed around a word shouldn't get removed by
         autocomplete.
 
         """
@@ -675,7 +684,7 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
 class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 
     scenarios = [
-        (   
+        (
             "Url",
             dict(
                 label="Url",
@@ -683,7 +692,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
                 expected_activeview="url"
             )
         ),
-        (   
+        (
             "Email",
             dict(
                 label="Email",
@@ -719,8 +728,9 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         gsettings.set_boolean("double-space-full-stop", True)
 
     def test_pinyin(self):
-        """Switching to Chinese should result in pinyin characters being entered
-           via autocomplete regardless of layout or prediction being disabled.
+        """Switching to Chinese should result in pinyin characters being
+        entered via autocomplete regardless of layout or prediction being
+        disabled.
 
         """
         text_area = self.launch_test_input_area(self.label, self.hints)
@@ -777,8 +787,9 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 class UbuntuKeyboardSelection(UbuntuKeyboardTests):
 
     def test_delete_selection(self):
-        """Selecting a word and then pressing backspace should delete the world.
-        
+        """Selecting a word and then pressing backspace should delete the
+        world.
+
         """
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
@@ -800,7 +811,8 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
         )
 
     def test_selection_focus(self):
-        """Focusing on a field with selected text should leave the text unchanged.
+        """Focusing on a field with selected text should leave the text
+        unchanged.
 
         """
         text_area = self.launch_test_input_area()
@@ -958,7 +970,256 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
             text_area.text,
             Eventually(Equals(expected))
         )
-        
+
+
+class UbuntuKeyboardOxide(UbuntuKeyboardTests):
+
+    def test_autocomplete(self):
+        """Test that words are auto-completed when entered into an oxide text
+        field.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.0
+        import Ubuntu.Components 1.1
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><textarea id='textarea'
+                        onkeyup=\\\"document.title=
+                        document.getElementById('textarea').value;\\\"
+                        style='width: 100%; height: 100%;'>
+                        </textarea></body></html>"
+                    );
+                }
+            }
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Pic ')
+
+        expected = 'Picture'
+        self.assertThat(
+            webview.title,
+            Eventually(Equals(expected))
+        )
+
+    def test_hiding(self):
+        """Verify that the keyboard remains hidden after being dismissed from
+        a field that is no longer enabled.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.0
+        import Ubuntu.Components 1.1
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><div id='scroll' style='width: 100%;
+                        height: 200%; position: absolute; background: green;
+                        visibility: hidden;'></div><input id='input'
+                        type='text'
+                        onkeyup=\\\"if (event.keyCode == 13)
+                        {document.getElementById('input').disabled=true;
+                        document.getElementById('scroll').style.visibility=
+                        'visible';}\\\" style='width: 100%%;
+                        height: 100%%;' /></body></html>");
+                }
+            }
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('Test\n')
+
+        keyboard.dismiss()
+
+        pointer = Pointer(Touch.create())
+        pointer.drag(
+            webview.width / 2.0,
+            webview.height / 2.0,
+            webview.width / 2.0,
+            webview.height / 2.0 + 100
+        )
+
+        self.assertThat(
+            keyboard.is_available,
+            Eventually(Equals(False))
+        )
+
+
+class UbuntuKeyboardPluginPaths(UbuntuKeyboardTests):
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_strv(
+            "plugin-paths", [
+                "/custom/share/maliit/plugins/com/ubuntu/lib",
+                "/usr/share/maliit/tests/ubuntu-keyboard/"
+            ])
+        gsettings.set_strv("enabled-languages", ["en", "testlayout"])
+        gsettings.set_string("previous-language", "testlayout")
+        gsettings.set_string("active-language", "testlayout")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_typing(self):
+        """Test that typing works using a plugin loaded from a custom location.
+
+        """
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        # The test layout has a single key that enters the word 'Test'
+        keyboard.press_key("Test")
+
+        expected = "Test"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
+class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
+
+    scenarios = []
+
+    @classmethod
+    def setUpClass(cls):
+        # Layout, TLD, Text
+        test_data = [
+            ("ar", ".eg", "ازتبار"),
+            ("az", ".com", "çheck"),
+            ("bs", ".com", "test"),
+            ("ca", ".com", "çheck"),
+            ("cs", ".cz", "test"),
+            ("da", ".dk", "tæst"),
+            ("de", ".de", "triäl"),
+            ("el", ".gr", "δοκιμη"),
+            ("en", ".com", "test"),
+            ("es", ".es", "testiñg"),
+            ("fi", ".fi", "triäl"),
+            ("fr", ".fr", "çheck"),
+            ("gd", ".co.uk", "test"),
+            ("he", ".il", "מבחן"),
+            ("hr", ".com", "test"),
+            ("hu", ".hu", "test"),
+            ("is", ".is", "tæst"),
+            ("it", ".it", "test"),
+            ("nb", ".no", "bokmål"),
+            ("nl", ".nl", "test"),
+            ("pl", ".pl", "tęst"),
+            ("pt", ".com.br", "çheck"),
+            ("ro", ".com", "test"),
+            ("ru", ".ru", "тест"),
+            ("sl", ".com", "test"),
+            ("sr", ".срб", "тест"),
+            ("sv", ".se", "triäl"),
+            ("uk", ".укр", "тест")
+        ]
+
+        for entry in test_data:
+            cls.scenarios.append((
+                "%s_free" % entry[0],
+                dict(
+                    layout=entry[0],
+                    hints=['Qt.ImhNoPredictiveText'],
+                    expected_activeview="freetext",
+                    tld=entry[1],
+                    text=entry[2]
+                )
+            ))
+            cls.scenarios.append((
+                "%s_url" % entry[0],
+                dict(
+                    layout=entry[0],
+                    hints=['Qt.ImhUrlCharactersOnly'],
+                    expected_activeview="url",
+                    tld=entry[1],
+                    text=entry[2] + entry[1]
+                )
+            ))
+            cls.scenarios.append((
+                "%s_email" % entry[0],
+                dict(
+                    layout=entry[0],
+                    hints=['Qt.ImhEmailCharactersOnly'],
+                    expected_activeview="email",
+                    tld=entry[1],
+                    text=entry[2] + "@" + entry[2] + entry[1]
+                )
+            ))
+
+    def test_layouts(self):
+        """Test all layout plugins in freetext, url and email mode.
+
+        """
+        text_area = self.launch_test_input_area(
+            self.layout + " - " + self.expected_activeview,
+            self.hints
+        )
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", self.layout)
+
+        self.assertThat(
+            gsettings.get_string("active-language"),
+            Equals(self.layout)
+        )
+
+        sleep(2)
+
+        if self.text[-len(self.tld):] == self.tld:
+            keyboard.type(self.text[:-len(self.tld)])
+            keyboard.press_key(self.tld)
+        else:
+            keyboard.type(self.text)
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(self.text))
+        )
+
 
 def maliit_cleanup():
     presagedir = os.path.expanduser("~/.presage")
@@ -976,7 +1237,6 @@ subprocess.check_call(['restart', 'maliit-server'])
 
 atexit.register(maliit_cleanup)
 
-#### FIXME: Workaround re: lp:1248902 and lp:1248913
+# FIXME: Workaround re: lp:1248902 and lp:1248913
 logger.debug("Waiting for maliit-server to be ready")
 sleep(10)
-####

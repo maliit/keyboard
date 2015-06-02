@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     azerbaijaniplugin.h
 
-TARGET          = $$qtLibraryTarget(azerbaijaniplugin)
+TARGET          = $$qtLibraryTarget(azplugin)
 
 EXAMPLE_FILES = azerbaijaniplugin.json
 

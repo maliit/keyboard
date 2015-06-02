@@ -35,9 +35,7 @@ SpellPredictWorker::SpellPredictWorker(QObject *parent)
     , m_presageCandidates(CandidatesCallback(m_candidatesContext))
     , m_presage(&m_presageCandidates)
     , m_spellChecker()
-    , m_word()
     , m_limit(5)
-    , m_processingWords(false)
 {
     m_presage.config("Presage.Selector.SUGGESTIONS", "6");
     m_presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
@@ -86,11 +84,10 @@ void SpellPredictWorker::parsePredictionText(const QString& surroundingLeft, con
     Q_EMIT newPredictionSuggestions(origPreedit, list);
 }
 
-void SpellPredictWorker::setLanguage(QString locale)
+void SpellPredictWorker::setLanguage(QString locale, QString pluginPath)
 {
     QString dbFileName = "database_"+locale+".db";
-    QString fullPath("/usr/share/maliit/plugins/com/ubuntu/lib/"+locale+"/");
-    fullPath.append(dbFileName);
+    QString fullPath(pluginPath + QDir::separator() + dbFileName);
     m_spellChecker.setLanguage(locale);
     m_spellChecker.setEnabled(true);
 
@@ -103,31 +100,18 @@ void SpellPredictWorker::setLanguage(QString locale)
 
 void SpellPredictWorker::suggest(const QString& word, int limit)
 {
+    QStringList suggestions;
     if(!m_spellChecker.spell(word)) {
-        QStringList suggestions = m_spellChecker.suggest(word, limit);
-        Q_EMIT newSpellingSuggestions(word, suggestions);
+        suggestions = m_spellChecker.suggest(word, limit);
     }
+    // If spelt correctly still send empty suggestions so the plugin knows we
+    // have finished processing.
+    Q_EMIT newSpellingSuggestions(word, suggestions);
 }
 
 void SpellPredictWorker::newSpellCheckWord(QString word)
 {
-    // Run through all the words queued in the event loop
-    // so we only fetch suggestions for the latest word
-    bool setProcessingWords = false;
-    if(m_processingWords == false) {
-        setProcessingWords = true;
-        m_processingWords = true;
-    }
-    QCoreApplication::processEvents();
-    if(setProcessingWords == true) {
-        m_processingWords = false;
-    }
-
-    m_word = word;
-
-    if(!m_processingWords) {
-        suggest(m_word, m_limit);
-    }
+    suggest(word, m_limit);
 }
 
 void SpellPredictWorker::addToUserWordList(const QString& word)

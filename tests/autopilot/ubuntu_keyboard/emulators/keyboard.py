@@ -1,7 +1,7 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # Ubuntu Keyboard Test Suite
-# Copyright (C) 2013 Canonical
+# Copyright (C) 2013, 2015 Canonical
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
 
 from collections import defaultdict
 
-from ubuntu_keyboard.emulators import UbuntuKeyboardEmulatorBase
 from ubuntu_keyboard.emulators.keypad import KeyPad
 
 from time import sleep
 import logging
 import os
 
+import ubuntuuitoolkit as toolkit
 from autopilot.input import Pointer, Touch
 from autopilot.introspection import (
     get_proxy_object_for_existing_process,
@@ -99,7 +99,7 @@ class Keyboard(object):
             try:
                 Keyboard.__maliit = get_proxy_object_for_existing_process(
                     connection_name='org.maliit.server',
-                    emulator_base=UbuntuKeyboardEmulatorBase
+                    emulator_base=toolkit.UbuntuUIToolkitCustomProxyObjectBase
                 )
 
                 if Keyboard.__maliit is None:
@@ -146,7 +146,8 @@ class Keyboard(object):
         except AssertionError:
             return False
 
-    def press_key(self, key, capslock_switch=False, long_press=False, slide_offset=None):
+    def press_key(self, key, capslock_switch=False, long_press=False,
+                  slide_offset=None):
         """Tap on the key with the internal pointer
 
         :params key: String containing the text of the key to tap.
@@ -177,7 +178,7 @@ class Keyboard(object):
         self._show_keypad(req_keypad)
         self._change_keypad_to_state(req_key_state)
 
-        if slide_offset != None:
+        if slide_offset is not None:
             self._select_extended_key(key_pos, slide_offset)
         elif long_press:
             self._long_press_key(key_pos)
@@ -288,7 +289,7 @@ class Keyboard(object):
             "shift"
         )
 
-        if key_pos == None:
+        if key_pos is None:
             # Not all layouts have a shift key
             return
 
@@ -304,7 +305,8 @@ class Keyboard(object):
     def _long_press_key(self, key_rect, pointer=None):
         if pointer is None:
             pointer = Pointer(Touch.create())
-        pointer.move(key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0)
+        pointer.move(
+            key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0)
         pointer.press()
         sleep(0.5)
         pointer.release()
@@ -313,11 +315,14 @@ class Keyboard(object):
         if pointer is None:
             pointer = Pointer(Touch.create())
 
-        gu = float(os.environ.get('GRID_UNIT_PX', 8))        
+        gu = float(os.environ.get('GRID_UNIT_PX', 8))
 
-        pointer.drag(key_rect.x + key_rect.w / 2.0, key_rect.y + key_rect.h / 2.0,
-                     key_rect.x + key_rect.w / 2.0 + offset, key_rect.y + key_rect.h / 2.0, 
-                     rate=2.77 * gu, time_between_events=2)
+        pointer.drag(
+            key_rect.x + key_rect.w / 2.0,
+            key_rect.y + key_rect.h / 2.0,
+            key_rect.x + key_rect.w / 2.0 + offset,
+            key_rect.y + key_rect.h / 2.0,
+            rate=2.77 * gu, time_between_events=2)
 
     def _keypad_details_expired(self, keypad_name):
         return (

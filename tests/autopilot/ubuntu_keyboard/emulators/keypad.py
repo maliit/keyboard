@@ -1,7 +1,7 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
 # Ubuntu Keyboard Test Suite
-# Copyright (C) 2013 Canonical
+# Copyright (C) 2013, 2015 Canonical
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,10 +17,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from ubuntu_keyboard.emulators import UbuntuKeyboardEmulatorBase
+import logging
+
+import ubuntuuitoolkit
+
 from ubuntu_keyboard.emulators.key import Key
 
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +33,7 @@ class KeyPadState:
     CAPSLOCK = "CAPSLOCK"
 
 
-class KeyPad(UbuntuKeyboardEmulatorBase):
+class KeyPad(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     """A basic emulator that provides the details of the keys contained within.
 
     """
@@ -45,9 +47,17 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
                 with key.no_automatic_refreshing():
                     rect = key.globalRect
                     if key.leftSide:
-                        rect = (key.globalRect[0] + key.leftOffset, key.globalRect[1], key.globalRect[2] - key.leftOffset, key.globalRect[3])
+                        rect = (
+                            key.globalRect[0] + key.leftOffset,
+                            key.globalRect[1],
+                            key.globalRect[2] - key.leftOffset,
+                            key.globalRect[3])
                     elif key.rightSide:
-                        rect = (key.globalRect[0], key.globalRect[1], key.globalRect[2] - key.rightOffset, key.globalRect[3])
+                        rect = (
+                            key.globalRect[0],
+                            key.globalRect[1],
+                            key.globalRect[2] - key.rightOffset,
+                            key.globalRect[3])
                     key_pos = Key.Pos(*rect)
                     label = label_fn(key)
                     if label != '':
@@ -61,5 +71,6 @@ class KeyPad(UbuntuKeyboardEmulatorBase):
         _iter_keys("ActionKey", lambda x: x.action)
         _iter_keys("ShiftKey", lambda x: x.action)
         _iter_keys("LanguageKey", lambda x: x.action)
+        _iter_keys("ReturnKey", lambda x: x.action)
 
         return (contained_keys, key_positions)

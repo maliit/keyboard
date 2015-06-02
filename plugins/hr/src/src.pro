@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     croatianplugin.h
 
-TARGET          = $$qtLibraryTarget(croatianplugin)
+TARGET          = $$qtLibraryTarget(hrplugin)
 
 EXAMPLE_FILES = croatianplugin.json
 

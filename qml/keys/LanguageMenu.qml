@@ -100,24 +100,31 @@ Item {
         if (languageId == "da")         return i18n.tr("Danish");
         if (languageId == "de")         return i18n.tr("German");
         if (languageId == "emoji")      return i18n.tr("Emoji");
+        if (languageId == "el")         return i18n.tr("Greek");
         if (languageId == "en")         return i18n.tr("English");
         if (languageId == "es")         return i18n.tr("Spanish");
         if (languageId == "fi")         return i18n.tr("Finnish");
         if (languageId == "fr")         return i18n.tr("French");
+        if (languageId == "gd")         return i18n.tr("Scottish Gaelic");
         if (languageId == "he")         return i18n.tr("Hebrew");
         if (languageId == "hr")         return i18n.tr("Croatian");
         if (languageId == "hu")         return i18n.tr("Hungarian");
+        if (languageId == "is")         return i18n.tr("Icelandic");
         if (languageId == "it")         return i18n.tr("Italian");
         if (languageId == "nl")         return i18n.tr("Dutch");
+        if (languageId == "nb")         return i18n.tr("Norwegian");
         if (languageId == "pl")         return i18n.tr("Polish");
         if (languageId == "pt")         return i18n.tr("Portuguese");
+        if (languageId == "ro")         return i18n.tr("Romanian");
         if (languageId == "ru")         return i18n.tr("Russian");
+        if (languageId == "sl")         return i18n.tr("Slovenian");
         if (languageId == "sr")         return i18n.tr("Serbian");
         if (languageId == "sv")         return i18n.tr("Swedish");
+        if (languageId == "uk")         return i18n.tr("Ukrainian");
         if (languageId == "zh")         return i18n.tr("Chinese - Pinyin");
 
         // fallback
-        return i18n.tr("Language: ") + languageId;
+        return languageId.charAt(0).toUpperCase() + languageId.slice(1);
     }
 
 }

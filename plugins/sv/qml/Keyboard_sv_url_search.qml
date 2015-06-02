@@ -15,8 +15,7 @@
  */
 
 import QtQuick 2.0
-import "../../keys"
-import "../../keys/key_constants.js" as UI
+import keys 1.0
 
 KeyPad {
     anchors.fill: parent
@@ -59,8 +58,8 @@ KeyPad {
             CharKey { label: "j"; shifted: "J"; }
             CharKey { label: "k"; shifted: "K"; }
             CharKey { label: "l"; shifted: "L"; }
-            CharKey { label: "ä"; shifted: "Ä"; extended: ["æ"]; extendedShifted: ["Æ"] }
-            CharKey { label: "ö"; shifted: "Ö";  extended: ["ø"]; extendedShifted: ["Ø"]; rightSide: true; }
+            CharKey { label: "ö"; shifted: "Ö";  extended: ["ø"]; extendedShifted: ["Ø"] }
+            CharKey { label: "ä"; shifted: "Ä"; extended: ["æ"]; extendedShifted: ["Æ"]; rightSide: true; }
         }
 
         Row {
@@ -75,7 +74,6 @@ KeyPad {
             CharKey { label: "b"; shifted: "B"; }
             CharKey { label: "n"; shifted: "N"; extended: ["ñ"]; extendedShifted: ["Ñ"] }
             CharKey { label: "m"; shifted: "M"; }
-            CharKey { label: "ä"; shifted: "Ä"; extended: ["æ"]; extendedShifted: ["Æ"] }
             BackspaceKey { padding: 0; width: panel.keyWidth * 2 }
         }
 

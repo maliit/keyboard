@@ -8,15 +8,16 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
     AbstractLanguagePlugin(parent)
   , m_languageFeatures(new WesternLanguageFeatures)
   , m_spellCheckEnabled(false)
+  , m_processingSpelling(false)
 {
     m_spellPredictThread = new QThread();
     m_spellPredictWorker = new SpellPredictWorker();
     m_spellPredictWorker->moveToThread(m_spellPredictThread);
 
-    connect(m_spellPredictWorker, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SIGNAL(newSpellingSuggestions(QString, QStringList)));
+    connect(m_spellPredictWorker, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SLOT(spellCheckFinishedProcessing(QString, QStringList)));
     connect(m_spellPredictWorker, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SIGNAL(newPredictionSuggestions(QString, QStringList)));
     connect(this, SIGNAL(newSpellCheckWord(QString)), m_spellPredictWorker, SLOT(newSpellCheckWord(QString)));
-    connect(this, SIGNAL(setSpellPredictLanguage(QString)), m_spellPredictWorker, SLOT(setLanguage(QString)));
+    connect(this, SIGNAL(setSpellPredictLanguage(QString, QString)), m_spellPredictWorker, SLOT(setLanguage(QString, QString)));
     connect(this, SIGNAL(setSpellCheckLimit(int)), m_spellPredictWorker, SLOT(setSpellCheckLimit(int)));
     connect(this, SIGNAL(parsePredictionText(QString, QString)), m_spellPredictWorker, SLOT(parsePredictionText(QString, QString)));
     connect(this, SIGNAL(addToUserWordList(QString)), m_spellPredictWorker, SLOT(addToUserWordList(QString)));
@@ -48,8 +49,14 @@ AbstractLanguageFeatures* WesternLanguagesPlugin::languageFeature()
 
 void WesternLanguagesPlugin::spellCheckerSuggest(const QString& word, int limit)
 {
-    Q_EMIT setSpellCheckLimit(limit);
-    Q_EMIT newSpellCheckWord(word);
+    m_nextSpellWord = word;
+    // Don't accept new words whilst we're processing, so we only process the
+    // most recent input once the current processing has completed
+    if (!m_processingSpelling) {
+        m_processingSpelling = true;
+        Q_EMIT setSpellCheckLimit(limit);
+        Q_EMIT newSpellCheckWord(word);
+    }
 }
 
 void WesternLanguagesPlugin::addToSpellCheckerUserWordList(const QString& word)
@@ -57,10 +64,10 @@ void WesternLanguagesPlugin::addToSpellCheckerUserWordList(const QString& word)
     Q_EMIT addToUserWordList(word);
 }
 
-bool WesternLanguagesPlugin::setLanguage(const QString& languageId)
+bool WesternLanguagesPlugin::setLanguage(const QString& languageId, const QString& pluginPath)
 {
-    Q_EMIT setSpellPredictLanguage(languageId);
-    loadOverrides(languageId);
+    Q_EMIT setSpellPredictLanguage(languageId, pluginPath);
+    loadOverrides(pluginPath);
     return true;
 }
 
@@ -69,8 +76,8 @@ void WesternLanguagesPlugin::addSpellingOverride(const QString& orig, const QStr
     Q_EMIT addOverride(orig, overriden);
 }
 
-void WesternLanguagesPlugin::loadOverrides(const QString& languageId) {
-    QFile overrideFile("/usr/share/maliit/plugins/com/ubuntu/lib/" + languageId + "/overrides.csv");
+void WesternLanguagesPlugin::loadOverrides(const QString& pluginPath) {
+    QFile overrideFile(pluginPath + QDir::separator() + "overrides.csv");
     if (overrideFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream overrideStream(&overrideFile);
         while (!overrideStream.atEnd()) {
@@ -80,5 +87,14 @@ void WesternLanguagesPlugin::loadOverrides(const QString& languageId) {
                 addSpellingOverride(components.first(), components.last());
             }
         }
+    }
+}
+
+void WesternLanguagesPlugin::spellCheckFinishedProcessing(QString word, QStringList suggestions) {
+    Q_EMIT newSpellingSuggestions(word, suggestions);
+    if (word != m_nextSpellWord) {
+        Q_EMIT newSpellCheckWord(m_nextSpellWord);
+    } else {
+        m_processingSpelling = false;
     }
 }

@@ -17,6 +17,7 @@ Build-Depends: debhelper (>= 9),
                maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
                pkg-config,
                python3,
+               python3-flake8,
                python3-setuptools,
                qt5-default,
                qtbase5-dev,
@@ -78,11 +79,36 @@ Depends: libautopilot-qt (>= 1.4),
          ${python:Depends},
          python3-evdev,
          ubuntu-keyboard (>= ${source:Version}),
+         ubuntu-keyboard-arabic (>= ${source:Version}),
+         ubuntu-keyboard-azerbaijani (>= ${source:Version}),
+         ubuntu-keyboard-bosnian (>= ${source:Version}),
+         ubuntu-keyboard-catalan (>= ${source:Version}),
          ubuntu-keyboard-chinese-pinyin (>= ${source:Version}),
+         ubuntu-keyboard-croatian (>= ${source:Version}),
+         ubuntu-keyboard-czech (>= ${source:Version}),
+         ubuntu-keyboard-danish (>= ${source:Version}),
+         ubuntu-keyboard-dutch (>= ${source:Version}),
          ubuntu-keyboard-emoji (>= ${source:Version}),
          ubuntu-keyboard-english (>= ${source:Version}),
+         ubuntu-keyboard-finnish (>= ${source:Version}),
+         ubuntu-keyboard-french (>= ${source:Version}),
          ubuntu-keyboard-german (>= ${source:Version}),
+         ubuntu-keyboard-greek (>= ${source:Version}),
+         ubuntu-keyboard-hebrew (>= ${source:Version}),
+         ubuntu-keyboard-hungarian (>= ${source:Version}),
+         ubuntu-keyboard-icelandic (>= ${source:Version}),
+         ubuntu-keyboard-italian (>= ${source:Version}),
+         ubuntu-keyboard-norwegian-bokmal (>= ${source:Version}),
+         ubuntu-keyboard-polish (>= ${source:Version}),
+         ubuntu-keyboard-portuguese (>= ${source:Version}),
+         ubuntu-keyboard-romanian (>= ${source:Version}),
+         ubuntu-keyboard-russian (>= ${source:Version}),
+         ubuntu-keyboard-scottish-gaelic (>= ${source:Version}),
+         ubuntu-keyboard-serbian (>= ${source:Version}),
+         ubuntu-keyboard-slovenian (>= ${source:Version}),
          ubuntu-keyboard-spanish (>= ${source:Version}),
+         ubuntu-keyboard-ukrainian (>= ${source:Version}),
+         ubuntu-keyboard-tests (>= ${source:Version}),
          ubuntu-ui-toolkit-autopilot
 Description: Tests and emulators package for ubuntu-keyboard
  Autopilot tests for the ubuntu-keyboard package
@@ -210,6 +236,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - German
  Data files for the Ubuntu virtual keyboard - German
 
+Package: ubuntu-keyboard-greek
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-el-gr,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Greek
+ Data files for the Ubuntu virtual keyboard - Greek
+
 Package: ubuntu-keyboard-hebrew
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
@@ -228,6 +263,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Hungarian
  Data files for the Ubuntu virtual keyboard - Hungarian
 
+Package: ubuntu-keyboard-icelandic
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Icelandic
+ Data files for the Ubuntu virtual keyboard - Icelandic
+
 Package: ubuntu-keyboard-italian
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
@@ -236,6 +279,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Italian
  Data files for the Ubuntu virtual keyboard - Italian
+
+Package: ubuntu-keyboard-norwegian-bokmal
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-nb
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Norwegian Bokmål
+ Data files for the Ubuntu virtual keyboard - Norwegian Bokmål
 
 Package: ubuntu-keyboard-polish
 Architecture: any
@@ -255,6 +307,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Portuguese
  Data files for the Ubuntu virtual keyboard - Portuguese
 
+Package: ubuntu-keyboard-romanian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         hunspell-ro,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Romanian
+ Data files for the Ubuntu virtual keyboard - Romanian
+
 Package: ubuntu-keyboard-russian
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
@@ -264,6 +325,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Russian
  Data files for the Ubuntu virtual keyboard - Russian
 
+Package: ubuntu-keyboard-slovenian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-sl,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Slovenian
+ Data files for the Ubuntu virtual keyboard - Slovenian
+
 Package: ubuntu-keyboard-serbian
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
@@ -272,6 +342,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Serbian
  Data files for the Ubuntu virtual keyboard - Serbian
+
+Package: ubuntu-keyboard-scottish-gaelic
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-gd,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Scottish Gaelic
+ Data files for the Ubuntu virtual keyboard - Scottish Gaelic
 
 Package: ubuntu-keyboard-spanish
 Architecture: any
@@ -290,6 +369,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Swedish
  Data files for the Ubuntu virtual keyboard - Swedish
+
+Package: ubuntu-keyboard-ukrainian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-uk,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Ukrainian
+ Data files for the Ubuntu virtual keyboard - Ukrainian
 
 Package: qtdeclarative5-ubuntu-keyboard-extensions0.1
 Architecture: any

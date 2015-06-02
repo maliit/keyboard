@@ -1,0 +1,145 @@
+# Interlingua translation for ubuntu-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-05-11 12:50+0100\n"
+"PO-Revision-Date: 2015-04-28 19:00+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Interlingua <ia@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2015-06-02 05:37+0000\n"
+"X-Generator: Launchpad (build 17532)\n"
+
+#: ../qml/keys/LanguageMenu.qml:80
+msgid "Settings"
+msgstr "Configurationes"
+
+#: ../qml/keys/LanguageMenu.qml:95
+msgid "Arabic"
+msgstr "Arabic"
+
+#: ../qml/keys/LanguageMenu.qml:96
+msgid "Azerbaijani"
+msgstr "Azerbaijano"
+
+#: ../qml/keys/LanguageMenu.qml:97
+msgid "Bosnian"
+msgstr "Bosniano"
+
+#: ../qml/keys/LanguageMenu.qml:98
+msgid "Catalan"
+msgstr "Catalano"
+
+#: ../qml/keys/LanguageMenu.qml:99
+msgid "Czech"
+msgstr "Checo"
+
+#: ../qml/keys/LanguageMenu.qml:100
+msgid "Danish"
+msgstr "Danese"
+
+#: ../qml/keys/LanguageMenu.qml:101
+msgid "German"
+msgstr "Germano"
+
+#: ../qml/keys/LanguageMenu.qml:102
+msgid "Emoji"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:103
+msgid "Greek"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:104
+msgid "English"
+msgstr "Anglese"
+
+#: ../qml/keys/LanguageMenu.qml:105
+msgid "Spanish"
+msgstr "Espaniol"
+
+#: ../qml/keys/LanguageMenu.qml:106
+msgid "Finnish"
+msgstr "Finnese"
+
+#: ../qml/keys/LanguageMenu.qml:107
+msgid "French"
+msgstr "Francese"
+
+#: ../qml/keys/LanguageMenu.qml:108
+msgid "Scottish Gaelic"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:109
+msgid "Hebrew"
+msgstr "Hebreo"
+
+#: ../qml/keys/LanguageMenu.qml:110
+msgid "Croatian"
+msgstr "Croate"
+
+#: ../qml/keys/LanguageMenu.qml:111
+msgid "Hungarian"
+msgstr "Hungaro"
+
+#: ../qml/keys/LanguageMenu.qml:112
+msgid "Icelandic"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:113
+msgid "Italian"
+msgstr "Italiano"
+
+#: ../qml/keys/LanguageMenu.qml:114
+msgid "Dutch"
+msgstr "Nederlandese"
+
+#: ../qml/keys/LanguageMenu.qml:115
+msgid "Norwegian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:116
+msgid "Polish"
+msgstr "Polonese"
+
+#: ../qml/keys/LanguageMenu.qml:117
+msgid "Portuguese"
+msgstr "Portugese"
+
+#: ../qml/keys/LanguageMenu.qml:118
+msgid "Romanian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:119
+msgid "Russian"
+msgstr "Russo"
+
+#: ../qml/keys/LanguageMenu.qml:120
+msgid "Slovenian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:121
+msgid "Serbian"
+msgstr "Serbo"
+
+#: ../qml/keys/LanguageMenu.qml:122
+msgid "Swedish"
+msgstr "Svedo"
+
+#: ../qml/keys/LanguageMenu.qml:123
+msgid "Ukrainian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:124
+msgid "Chinese - Pinyin"
+msgstr "Chinese - pinyin"
+
+#~ msgid "Language: "
+#~ msgstr "Lingua: "
