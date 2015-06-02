@@ -7,108 +7,139 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-12 15:18+0000\n"
+"POT-Creation-Date: 2015-05-11 12:50+0100\n"
 "PO-Revision-Date: 2015-02-22 16:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-22 05:09+0000\n"
-"X-Generator: Launchpad (build 17514)\n"
+"X-Launchpad-Export-Date: 2015-06-02 05:37+0000\n"
+"X-Generator: Launchpad (build 17532)\n"
 
-#: ../qml/keys/LanguageMenu.qml:61
+#: ../qml/keys/LanguageMenu.qml:80
 msgid "Settings"
 msgstr "ማሰናጃዎች"
 
-#: ../qml/keys/LanguageMenu.qml:74
+#: ../qml/keys/LanguageMenu.qml:95
 msgid "Arabic"
 msgstr "አረብኛ"
 
-#: ../qml/keys/LanguageMenu.qml:75
+#: ../qml/keys/LanguageMenu.qml:96
 msgid "Azerbaijani"
 msgstr "አዘርባጃኒኛ"
 
-#: ../qml/keys/LanguageMenu.qml:76
+#: ../qml/keys/LanguageMenu.qml:97
 msgid "Bosnian"
 msgstr "ቦስኒያንኛ"
 
-#: ../qml/keys/LanguageMenu.qml:77
+#: ../qml/keys/LanguageMenu.qml:98
 msgid "Catalan"
 msgstr "ካታላንኛ"
 
-#: ../qml/keys/LanguageMenu.qml:78
+#: ../qml/keys/LanguageMenu.qml:99
 msgid "Czech"
 msgstr "ቼክኛ"
 
-#: ../qml/keys/LanguageMenu.qml:79
+#: ../qml/keys/LanguageMenu.qml:100
 msgid "Danish"
 msgstr "ዳኒሽኛ"
 
-#: ../qml/keys/LanguageMenu.qml:80
+#: ../qml/keys/LanguageMenu.qml:101
 msgid "German"
 msgstr "ጀርመንኛ"
 
-#: ../qml/keys/LanguageMenu.qml:81
+#: ../qml/keys/LanguageMenu.qml:102
+msgid "Emoji"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:103
+msgid "Greek"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:104
 msgid "English"
 msgstr "እንግሊዝኛ"
 
-#: ../qml/keys/LanguageMenu.qml:82
+#: ../qml/keys/LanguageMenu.qml:105
 msgid "Spanish"
 msgstr "ስፓኒሽኛ"
 
-#: ../qml/keys/LanguageMenu.qml:83
+#: ../qml/keys/LanguageMenu.qml:106
 msgid "Finnish"
 msgstr "ፊኒሽኛ"
 
-#: ../qml/keys/LanguageMenu.qml:84
+#: ../qml/keys/LanguageMenu.qml:107
 msgid "French"
 msgstr "ፈረንሳይኛ"
 
-#: ../qml/keys/LanguageMenu.qml:85
+#: ../qml/keys/LanguageMenu.qml:108
+msgid "Scottish Gaelic"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:109
 msgid "Hebrew"
 msgstr "ሂብሩ"
 
-#: ../qml/keys/LanguageMenu.qml:86
+#: ../qml/keys/LanguageMenu.qml:110
 msgid "Croatian"
 msgstr "ክሮሽያንኛ"
 
-#: ../qml/keys/LanguageMenu.qml:87
+#: ../qml/keys/LanguageMenu.qml:111
 msgid "Hungarian"
 msgstr "ሀንጋሪኛ"
 
-#: ../qml/keys/LanguageMenu.qml:88
+#: ../qml/keys/LanguageMenu.qml:112
+msgid "Icelandic"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:113
 msgid "Italian"
 msgstr "ጣሊያንኛ"
 
-#: ../qml/keys/LanguageMenu.qml:89
+#: ../qml/keys/LanguageMenu.qml:114
 msgid "Dutch"
 msgstr "ደች"
 
-#: ../qml/keys/LanguageMenu.qml:90
+#: ../qml/keys/LanguageMenu.qml:115
+msgid "Norwegian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:116
 msgid "Polish"
 msgstr "ፖሊሽኛ"
 
-#: ../qml/keys/LanguageMenu.qml:91
+#: ../qml/keys/LanguageMenu.qml:117
 msgid "Portuguese"
 msgstr "ፖርቱጋሊኛ"
 
-#: ../qml/keys/LanguageMenu.qml:92
+#: ../qml/keys/LanguageMenu.qml:118
+msgid "Romanian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:119
 msgid "Russian"
 msgstr "ራሺያንኛ"
 
-#: ../qml/keys/LanguageMenu.qml:93
+#: ../qml/keys/LanguageMenu.qml:120
+msgid "Slovenian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:121
 msgid "Serbian"
 msgstr "ሰርቢኛ"
 
-#: ../qml/keys/LanguageMenu.qml:94
+#: ../qml/keys/LanguageMenu.qml:122
 msgid "Swedish"
 msgstr "ስዊድንኛ"
 
-#: ../qml/keys/LanguageMenu.qml:95
+#: ../qml/keys/LanguageMenu.qml:123
+msgid "Ukrainian"
+msgstr ""
+
+#: ../qml/keys/LanguageMenu.qml:124
 msgid "Chinese - Pinyin"
 msgstr "ቻይንኛ - ፒንዪን"
 
-#: ../qml/keys/LanguageMenu.qml:98
-msgid "Language: "
-msgstr "ቋንቋ: "
+#~ msgid "Language: "
+#~ msgstr "ቋንቋ: "
