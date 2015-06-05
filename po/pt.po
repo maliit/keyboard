@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-05-11 12:50+0100\n"
-"PO-Revision-Date: 2015-02-13 00:56+0000\n"
+"PO-Revision-Date: 2015-06-04 12:16+0000\n"
 "Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-03 05:50+0000\n"
-"X-Generator: Launchpad (build 17532)\n"
+"X-Launchpad-Export-Date: 2015-06-05 05:59+0000\n"
+"X-Generator: Launchpad (build 17540)\n"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "Settings"
@@ -51,11 +51,11 @@ msgstr "Alemão"
 
 #: ../qml/keys/LanguageMenu.qml:102
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #: ../qml/keys/LanguageMenu.qml:103
 msgid "Greek"
-msgstr ""
+msgstr "Grego"
 
 #: ../qml/keys/LanguageMenu.qml:104
 msgid "English"
@@ -75,7 +75,7 @@ msgstr "Francês"
 
 #: ../qml/keys/LanguageMenu.qml:108
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "Galaico Escocês"
 
 #: ../qml/keys/LanguageMenu.qml:109
 msgid "Hebrew"
@@ -91,7 +91,7 @@ msgstr "Húngaro"
 
 #: ../qml/keys/LanguageMenu.qml:112
 msgid "Icelandic"
-msgstr ""
+msgstr "Islandês"
 
 #: ../qml/keys/LanguageMenu.qml:113
 msgid "Italian"
@@ -103,7 +103,7 @@ msgstr "Holandês"
 
 #: ../qml/keys/LanguageMenu.qml:115
 msgid "Norwegian"
-msgstr ""
+msgstr "Norueguês"
 
 #: ../qml/keys/LanguageMenu.qml:116
 msgid "Polish"
@@ -115,7 +115,7 @@ msgstr "Português"
 
 #: ../qml/keys/LanguageMenu.qml:118
 msgid "Romanian"
-msgstr ""
+msgstr "Romeno"
 
 #: ../qml/keys/LanguageMenu.qml:119
 msgid "Russian"
@@ -123,7 +123,7 @@ msgstr "Russo"
 
 #: ../qml/keys/LanguageMenu.qml:120
 msgid "Slovenian"
-msgstr ""
+msgstr "Esloveno"
 
 #: ../qml/keys/LanguageMenu.qml:121
 msgid "Serbian"
@@ -135,7 +135,7 @@ msgstr "Sueco"
 
 #: ../qml/keys/LanguageMenu.qml:123
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ucraniano"
 
 #: ../qml/keys/LanguageMenu.qml:124
 msgid "Chinese - Pinyin"
