@@ -58,19 +58,6 @@ class Keyboard(object):
 
     def __init__(self, pointer=None):
         try:
-            self.orientation = self.maliit.select_single(
-                "OrientationHelper"
-            )
-        except ValueError as e:
-            e.args += (
-                "More than one OrientationHelper object was found, aborting.",
-            )
-            raise
-        except StateNotFoundError:
-            logger.error("Unable to find the Orientation Helper, aborting.")
-            raise
-
-        try:
             self.keyboard = self.maliit.select_single(
                 "QQuickItem",
                 objectName="ubuntuKeyboard"
@@ -96,8 +83,6 @@ class Keyboard(object):
 
         self._keys_position = defaultdict(dict)
         self._keys_contained = defaultdict(dict)
-
-        self._store_current_orientation()
 
         if pointer is None:
             self.pointer = Pointer(Touch.create())
@@ -240,7 +225,6 @@ class Keyboard(object):
         if (
             need_to_update
             or self._stored_active_keypad_name != self._current_keypad_name
-            or self._keyboard_details_changed()
         ):
             self._stored_active_keypad_name = self._current_keypad_name
             loader = self.maliit.select_single(
@@ -340,24 +324,10 @@ class Keyboard(object):
             key_rect.y + key_rect.h / 2.0,
             rate=2.77 * gu, time_between_events=2)
 
-    def _keyboard_details_changed(self):
-        return self._orientation_changed()
-
     def _keypad_details_expired(self, keypad_name):
         return (
             self._keys_contained.get(keypad_name) is None
-            or self._keyboard_details_changed()
         )
-
-    def _orientation_changed(self):
-        if self._stored_orientation != self.orientation.orientationAngle:
-            self._store_current_orientation()
-            return True
-        else:
-            return False
-
-    def _store_current_orientation(self):
-        self._stored_orientation = self.orientation.orientationAngle
 
     def _translate_key(self, label):
         """Get the label for a 'special key' (i.e. space) so that it can be

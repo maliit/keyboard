@@ -7,3 +7,4 @@ Type=Application
 Terminal=false
 X-Ubuntu-Touch=true
 X-Ubuntu-Single-Instance=true
+X-Ubuntu-Supported-Orientations=primary

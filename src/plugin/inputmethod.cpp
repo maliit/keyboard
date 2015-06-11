@@ -612,10 +612,7 @@ void InputMethod::onVisibleRectChanged()
 {
     Q_D(InputMethod);
 
-    QRect visibleRect = qGuiApp->primaryScreen()->mapBetween(
-                            d->m_geometry->orientation(),
-                            qGuiApp->primaryScreen()->primaryOrientation(),
-                            d->m_geometry->visibleRect().toRect());
+    QRect visibleRect = d->m_geometry->visibleRect().toRect();
 
     d->applicationApiWrapper->reportOSKVisible(
                 visibleRect.x(),
