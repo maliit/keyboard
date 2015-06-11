@@ -1,3 +1,19 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150611-0ubuntu1) wily; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * rotation support for keyboard
+
+  [ Michael Sheldon ]
+  * rotation support for keyboard
+
+  [ Michael Zanetti ]
+  * rotation support for keyboard
+
+  [ Mike Sheldon ]
+  * rotation support for keyboard
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 11 Jun 2015 09:11:43 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150529-0ubuntu1) wily; urgency=medium
 
   [ Bernard Banko ]
