@@ -52,6 +52,10 @@ class Keyboard(object):
         '?123': 'symbols',
         ' ': 'space',
         '\n': 'return',
+        'Enter': 'return',
+        'Backspace': 'backspace',
+        'Space': 'space',
+        'Shift': 'shift',
     }
 
     __maliit = None
