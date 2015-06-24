@@ -1025,6 +1025,16 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
 
 class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
 
+    def setUp(self):
+        super().setUp()
+        self.gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+
+    def _set_keyboard_language(self, language):
+        self.gsettings.set_string("active-language", language)
+
+    def _get_keyboard_language(self):
+        return self.gsettings.get_string("active-language")
+
     def test_tapping(self):
         """Tapping the language menu key should switch to the previously
         used language.
@@ -1036,20 +1046,16 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
-        self.assertThat(
-            gsettings.get_string("active-language"),
-            Equals('en')
-        )
-
+        # Make sure the previous language is es and the current language is en
+        self._set_keyboard_language("es")
+        self.assertThat(self._get_keyboard_language(), Equals("es"))
+        sleep(1)
+        self._set_keyboard_language("en")
+        self.assertThat(self._get_keyboard_language(), Equals("en"))
+        sleep(1)
         keyboard.press_key("language")
-
-        sleep(5)
-
-        self.assertThat(
-            gsettings.get_string("active-language"),
-            Equals('es')
-        )
+        sleep(1)
+        self.assertThat(self._get_keyboard_language(), Equals("es"))
 
     def test_long_press(self):
         """Holding down the language menu key should switch display the
@@ -1062,11 +1068,7 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
-        self.assertThat(
-            gsettings.get_string("active-language"),
-            Equals('en')
-        )
+        self.assertThat(self._get_keyboard_language(), Equals("en"))
 
         keyboard.press_key("language", long_press=True)
 
