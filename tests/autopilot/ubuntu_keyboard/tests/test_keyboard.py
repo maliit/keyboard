@@ -160,6 +160,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
                 objectName: "input"
                 anchors.centerIn: parent
                 inputMethodHints: %(input_method)s
+                autoSize: true
             }
         }
 
