@@ -1035,12 +1035,16 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
     def _get_keyboard_language(self):
         return self.gsettings.get_string("active-language")
 
+    def _get_plugin_path(self, language):
+        path = ("file:///usr/share/maliit/plugins/com/ubuntu/lib/{lang}/"
+                "Keyboard_{lang}.qml")
+        return path.format(lang=language)
+
     def test_tapping(self):
         """Tapping the language menu key should switch to the previously
         used language.
 
         """
-
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
@@ -1048,14 +1052,20 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
 
         # Make sure the previous language is es and the current language is en
         self._set_keyboard_language("es")
-        self.assertThat(self._get_keyboard_language(), Equals("es"))
-        sleep(1)
+        self.assertThat(
+            keyboard._plugin_source,
+            Eventually(Equals(self._get_plugin_path("es"))))
+
         self._set_keyboard_language("en")
-        self.assertThat(self._get_keyboard_language(), Equals("en"))
-        sleep(1)
+        self.assertThat(
+            keyboard._plugin_source,
+            Eventually(Equals(self._get_plugin_path("en"))))
+
         keyboard.press_key("language")
-        sleep(1)
-        self.assertThat(self._get_keyboard_language(), Equals("es"))
+
+        self.assertThat(
+            keyboard._plugin_source,
+            Eventually(Equals(self._get_plugin_path("es"))))
 
     def test_long_press(self):
         """Holding down the language menu key should switch display the

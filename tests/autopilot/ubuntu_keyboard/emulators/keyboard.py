@@ -231,13 +231,18 @@ class Keyboard(object):
             or self._stored_active_keypad_name != self._current_keypad_name
         ):
             self._stored_active_keypad_name = self._current_keypad_name
-            loader = self.maliit.select_single(
-                "QQuickLoader",
-                objectName='characterKeyPadLoader'
-            )
             logger.debug("Keypad lookup")
-            self._active_keypad = loader.select_single(KeyPad)
+            self._active_keypad = self._keypad_loader.select_single(KeyPad)
         return self._active_keypad
+
+    @property
+    def _keypad_loader(self):
+        return self.maliit.select_single(
+            "QQuickLoader", objectName='characterKeyPadLoader')
+
+    @property
+    def _plugin_source(self):
+        return self._keypad_loader.source
 
     @property
     def _current_keypad_name(self):
