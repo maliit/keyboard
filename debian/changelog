@@ -1,3 +1,11 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150629-0ubuntu1) wily; urgency=medium
+
+  [ Richard Huddie ]
+  * Add additional aliases for the action keys of the OSK used by the
+    autopilot helpers. (LP: #1467449)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 29 Jun 2015 15:45:12 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150611-0ubuntu1) wily; urgency=medium
 
   [ Daniel d'Andrada ]
