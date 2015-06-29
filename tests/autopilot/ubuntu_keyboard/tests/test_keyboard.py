@@ -75,7 +75,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
     def launch_test_input_area(self, label="", input_hints=None):
         self.app = self._launch_simple_input(label, input_hints)
-        text_area = self.app.select_single("QQuickTextInput")
+        text_area = self.app.select_single("TextArea")
 
         return text_area
 
@@ -155,11 +155,12 @@ class UbuntuKeyboardTests(AutopilotTestCase):
                 }
             }
 
-            TextField {
+            TextArea {
                 id: input;
                 objectName: "input"
                 anchors.centerIn: parent
                 inputMethodHints: %(input_method)s
+                autoSize: true
             }
         }
 
@@ -174,7 +175,7 @@ class UbuntuKeyboardTestsAccess(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
         app = self._launch_simple_input(input_hints=['Qt.ImhNoPredictiveText'])
-        text_rectangle = app.select_single("QQuickTextInput")
+        text_rectangle = app.select_single("TextArea")
 
         self.pointer.click_object(text_rectangle)
 
@@ -225,6 +226,133 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
 
         keyboard.type(self.input)
         self.assertThat(text_area.text, Eventually(Equals(self.input)))
+
+
+class UbuntuKeyboardKeyMappingTests(UbuntuKeyboardTests):
+
+    scenarios = [
+        (
+            'backspace',
+            dict(
+                starting_text='Start text',
+                input_sequence=['Backspace', '\b', 'backspace'],
+                expected_text=['Start tex', 'Start te', 'Start t']
+            )
+        ),
+        (
+            'space',
+            dict(
+                starting_text='',
+                input_sequence=['Space', ' ', 'space'],
+                expected_text=[' ', '  ', '   ']
+            )
+        ),
+        (
+            'return',
+            dict(
+                starting_text='',
+                input_sequence=['Enter', '\n', 'return'],
+                expected_text=['\n', '\n\n', '\n\n\n']
+            )
+        )
+    ]
+
+    def setUp(self):
+        super().setUp()
+        self._disable_double_space_full_stop()
+
+    def _disable_double_space_full_stop(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_boolean("double-space-full-stop", False)
+
+    def test_can_type_using_key_mapping(self):
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type(self.starting_text)
+        for key, result in zip(self.input_sequence, self.expected_text):
+            keyboard.press_key(key)
+            self.assertThat(text_area.text, Eventually(Equals(result)))
+
+
+class UbuntuKeyboardStateKeyMappingTests(UbuntuKeyboardTests):
+
+    scenarios = [
+        (
+            'Shift',
+            dict(
+                key='Shift',
+                expected_state=KeyPadState.SHIFTED,
+                expected_keypad_name='CHARACTERS'
+            )
+        ),
+        (
+            'SHIFT',
+            dict(
+                key='SHIFT',
+                expected_state=KeyPadState.SHIFTED,
+                expected_keypad_name='CHARACTERS'
+            )
+        ),
+        (
+            'shift',
+            dict(
+                key='shift',
+                expected_state=KeyPadState.SHIFTED,
+                expected_keypad_name='CHARACTERS'
+            )
+        ),
+        (
+            'ABC',
+            dict(
+                key='ABC',
+                expected_state=KeyPadState.NORMAL,
+                expected_keypad_name='SYMBOLS'
+            )
+        ),
+        (
+            '?123',
+            dict(
+                key='?123',
+                expected_state=KeyPadState.NORMAL,
+                expected_keypad_name='SYMBOLS'
+            )
+        ),
+        (
+            'symbols',
+            dict(
+                key='symbols',
+                expected_state=KeyPadState.NORMAL,
+                expected_keypad_name='SYMBOLS'
+            )
+        )
+    ]
+
+    def _assert_keypad_name_and_state(self, keyboard, name, state):
+        self.assertThat(
+            keyboard._current_keypad_name,
+            Eventually(Equals(name))
+        )
+        self.assertThat(
+            keyboard.active_keypad_state,
+            Eventually(Equals(state))
+        )
+
+    def test_can_type_using_state_key_mapping(self):
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText', 'Qt.ImhNoAutoUppercase'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+        self._assert_keypad_name_and_state(keyboard,
+                                           'CHARACTERS', KeyPadState.NORMAL)
+        keyboard.press_key(self.key)
+        self._assert_keypad_name_and_state(keyboard,
+                                           self.expected_keypad_name,
+                                           self.expected_state)
 
 
 class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
@@ -897,31 +1025,47 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
 
 class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
 
+    def setUp(self):
+        super().setUp()
+        self.gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+
+    def _set_keyboard_language(self, language):
+        self.gsettings.set_string("active-language", language)
+
+    def _get_keyboard_language(self):
+        return self.gsettings.get_string("active-language")
+
+    def _get_plugin_path(self, language):
+        path = ("file:///usr/share/maliit/plugins/com/ubuntu/lib/{lang}/"
+                "Keyboard_{lang}.qml")
+        return path.format(lang=language)
+
     def test_tapping(self):
         """Tapping the language menu key should switch to the previously
         used language.
 
         """
-
         text_area = self.launch_test_input_area()
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        # Make sure the previous language is es and the current language is en
+        self._set_keyboard_language("es")
         self.assertThat(
-            gsettings.get_string("active-language"),
-            Equals('en')
-        )
+            keyboard._plugin_source,
+            Eventually(Equals(self._get_plugin_path("es"))))
+
+        self._set_keyboard_language("en")
+        self.assertThat(
+            keyboard._plugin_source,
+            Eventually(Equals(self._get_plugin_path("en"))))
 
         keyboard.press_key("language")
 
-        sleep(5)
-
         self.assertThat(
-            gsettings.get_string("active-language"),
-            Equals('es')
-        )
+            keyboard._plugin_source,
+            Eventually(Equals(self._get_plugin_path("es"))))
 
     def test_long_press(self):
         """Holding down the language menu key should switch display the
@@ -934,11 +1078,7 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
-        self.assertThat(
-            gsettings.get_string("active-language"),
-            Equals('en')
-        )
+        self.assertThat(self._get_keyboard_language(), Equals("en"))
 
         keyboard.press_key("language", long_press=True)
 
