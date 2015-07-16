@@ -90,6 +90,18 @@ void EventHandler::onKeyReleased(QString label, QString action)
         key.setAction(Key::ActionSpace);
     else if (action == "shift")
         key.setAction(Key::ActionShift);
+    else if (action == "left")
+        key.setAction(Key::ActionLeft);
+    else if (action == "right")
+        key.setAction(Key::ActionRight);
+    else if (action == "up")
+        key.setAction(Key::ActionUp);
+    else if (action == "down")
+        key.setAction(Key::ActionDown);
+    else if (action == "home")
+        key.setAction(Key::ActionHome);
+    else if (action == "end")
+        key.setAction(Key::ActionEnd);
     else
         key.setAction(Key::ActionInsert);
 

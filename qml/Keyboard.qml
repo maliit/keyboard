@@ -287,4 +287,25 @@ Item {
         maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
     }
 
+    // Autopilot needs to be able to move the cursor even when the layout
+    // doesn't provide arrow keys (e.g. in phone mode)
+    function sendLeftKey() {
+        event_handler.onKeyReleased("", "left");
+    }
+    function sendRightKey() {
+        event_handler.onKeyReleased("", "right");
+    }
+    function sendUpKey() {
+        event_handler.onKeyReleased("", "up");
+    }
+    function sendDownKey() {
+        event_handler.onKeyReleased("", "down");
+    }
+    function sendHomeKey() {
+        event_handler.onKeyReleased("", "home");
+    }
+    function sendEndKey() {
+        event_handler.onKeyReleased("", "end");
+    }
+
 } // fullScreenItem

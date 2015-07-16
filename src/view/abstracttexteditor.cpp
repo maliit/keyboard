@@ -546,6 +546,14 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         Q_EMIT rightLayoutSelected();
         break;
 
+    case Key::ActionHome:
+        event_key = Qt::Key_Home;
+        break;
+
+    case Key::ActionEnd:
+        event_key = Qt::Key_End;
+        break;
+
     default:
         break;
     }
