@@ -69,6 +69,8 @@ public:
         ActionDead, //!< Switches keyboard to deadkey variation, using key's label as lookup.
         ActionLeftLayout, //!< Switch to left/previous language layout.
         ActionRightLayout, //!< Switch to right/next language layout.
+        ActionHome, //!< Key moves cursor to beginning of text.
+        ActionEnd, //!< Key moves cursor to end of text.
         NumActions
     };
 

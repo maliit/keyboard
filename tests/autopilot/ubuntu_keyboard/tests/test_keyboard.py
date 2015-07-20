@@ -1361,6 +1361,35 @@ class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
         )
 
 
+class UbuntuKeyboardCursorTests(UbuntuKeyboardTests):
+
+    def test_cursor_movement(self):
+        """Test that autopilot is able to move the cursor
+
+        """
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type("Cursor Test")
+
+        keyboard.send_home_key()
+        keyboard.send_right_key()
+        keyboard.send_right_key()
+        keyboard.type("\b")
+        keyboard.send_end_key()
+        keyboard.send_left_key()
+        keyboard.type("\b")
+
+        expected = "Crsor Tet"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
 def maliit_cleanup():
     presagedir = os.path.expanduser("~/.presage")
     if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):

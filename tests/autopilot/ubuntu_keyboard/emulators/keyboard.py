@@ -235,6 +235,24 @@ class Keyboard(object):
             self._active_keypad = self._keypad_loader.select_single(KeyPad)
         return self._active_keypad
 
+    def send_left_key(self):
+        self.maliit.select_single('Keyboard').slots.sendLeftKey()
+
+    def send_right_key(self):
+        self.maliit.select_single('Keyboard').slots.sendRightKey()
+
+    def send_up_key(self):
+        self.maliit.select_single('Keyboard').slots.sendUpKey()
+
+    def send_down_key(self):
+        self.maliit.select_single('Keyboard').slots.sendDownKey()
+
+    def send_home_key(self):
+        self.maliit.select_single('Keyboard').slots.sendHomeKey()
+
+    def send_end_key(self):
+        self.maliit.select_single('Keyboard').slots.sendEndKey()
+
     @property
     def _keypad_loader(self):
         return self.maliit.select_single(
