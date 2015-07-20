@@ -19,12 +19,6 @@
 // FIXME: this is hacky way of deciding if running on Touch platform or not
 #include <QtCore/qconfig.h>
 
-#ifdef QT_OPENGL_ES_2
-#include <ubuntu/ui/ubuntu_ui_session_service.h>
-#include <ubuntu/application/ui/window_properties.h>
-  #define HAVE_UBUNTU_PLATFORM_API
-#endif
-
 #include <QByteArray>
 #include <QDir>
 #include <QFile>
@@ -95,11 +89,7 @@ void UbuntuApplicationApiWrapper::reportOSKInvisible()
 
 int UbuntuApplicationApiWrapper::oskWindowRole() const
 {
-#ifdef HAVE_UBUNTU_PLATFORM_API
-    return static_cast<int>(U_ON_SCREEN_KEYBOARD_ROLE);
-#else
     return 7;
-#endif
 }
 
 void UbuntuApplicationApiWrapper::sendInfoToClientConnection()
