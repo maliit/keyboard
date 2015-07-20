@@ -1,3 +1,15 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150720-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk. added: po/ta.po
+
+  [ Michael Sheldon ]
+  * Allow autopilot to perform cursor movement via maliit (LP: #1476251)
+  * Allow the keyboard to build with new version of platform-api (LP:
+    #1475611)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 20 Jul 2015 18:05:22 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150629-0ubuntu1) wily; urgency=medium
 
   [ Richard Huddie ]
