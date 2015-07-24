@@ -107,11 +107,21 @@ MultiPointTouchArea {
         held = false;
         swipedOut = false;
         holdTimer.restart();
+
+        // We keep a global view of whether any other keys have been
+        // pressed in between the first tap on this key and the second
+        // one, so that quickly tapping one key, then tapping another,
+        // then tapping the first again doesn't trigger a double click.
+
         if (doubleClickTimer.running) {
-            doubleClicked();
-        }
-        if (acceptDoubleClick) {
-            doubleClickTimer.restart();
+            if (panel.lastKeyPressed == root) {
+                doubleClicked();
+            }
+        } else {
+            if (acceptDoubleClick) {
+                doubleClickTimer.restart();
+            }
+            panel.lastKeyPressed = root
         }
     }
 
