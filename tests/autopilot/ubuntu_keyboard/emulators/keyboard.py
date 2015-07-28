@@ -180,7 +180,12 @@ class Keyboard(object):
 
         key_pos = self._get_key_pos_from_keypad(req_keypad, key)
         self._show_keypad(req_keypad)
-        self._change_keypad_to_state(req_key_state)
+
+        # Don't attempt to automatically switch to a requested state if the
+        # test is manually pressing the shift key, as this will also change
+        # state.
+        if key != "shift":
+            self._change_keypad_to_state(req_key_state)
 
         if slide_offset is not None:
             self._select_extended_key(key_pos, slide_offset)
