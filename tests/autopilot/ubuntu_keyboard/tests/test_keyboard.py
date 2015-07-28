@@ -389,8 +389,6 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         keyboard.type('abc')
-        # Bug lp:1229003 and lp:1229001
-        sleep(.2)
         keyboard.press_key('shift')
         keyboard.press_key('shift', True)
 
