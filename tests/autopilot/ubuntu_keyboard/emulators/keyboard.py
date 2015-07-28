@@ -275,8 +275,9 @@ class Keyboard(object):
         self._show_keypad(keypad_name)
 
         contained, positions = self.active_keypad.get_key_details()
-        self._keys_contained[self._keyboard_container.state] = contained
-        self._keys_position[self._keyboard_container.state] = positions
+        layout_state = self.keyboard.layoutId + self._keyboard_container.state
+        self._keys_contained[layout_state] = contained
+        self._keys_position[layout_state] = positions
 
     def _keypad_contains_key(self, keypad_name, key):
         """Returns the keypad state that key is found in.
@@ -288,7 +289,8 @@ class Keyboard(object):
         if self._keypad_details_expired(keypad_name):
             self._update_details_for_keypad(keypad_name)
 
-        return self._keys_contained[keypad_name].get(key, None)
+        layout_state = self.keyboard.layoutId + keypad_name
+        return self._keys_contained[layout_state].get(key, None)
 
     def _get_key_pos_from_keypad(self, keypad_name, key):
         """Returns the position of the key if it is found on that keypad or
@@ -298,7 +300,8 @@ class Keyboard(object):
         if self._keypad_details_expired(keypad_name):
             self._update_details_for_keypad(keypad_name)
 
-        return self._keys_position[keypad_name].get(key, None)
+        layout_state = self.keyboard.layoutId + keypad_name
+        return self._keys_position[layout_state].get(key, None)
 
     def _show_keypad(self, keypad_name):
         if self._current_keypad_name == keypad_name:
@@ -357,8 +360,9 @@ class Keyboard(object):
             rate=2.77 * gu, time_between_events=2)
 
     def _keypad_details_expired(self, keypad_name):
+        layout_state = self.keyboard.layoutId + keypad_name
         return (
-            self._keys_contained.get(keypad_name) is None
+            self._keys_contained.get(layout_state) is None
         )
 
     def _translate_key(self, label):
