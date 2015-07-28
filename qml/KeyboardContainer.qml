@@ -36,6 +36,8 @@ Item {
     property bool switchBack: false // Switch back to the previous layout when changing fields
     property bool justChangedLanguage: true // Don't switch back languages during language switch process
 
+    property Item lastKeyPressed // Used for determining double click validity in PressArea
+
     state: "CHARACTERS"
 
     function closeExtendedKeys()
