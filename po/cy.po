@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-05-11 12:50+0100\n"
-"PO-Revision-Date: 2015-07-21 19:15+0000\n"
+"PO-Revision-Date: 2015-07-31 11:57+0000\n"
 "Last-Translator: Owen Llywelyn <owen.llywelyn@gmail.com>\n"
 "Language-Team: Welsh <cy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-25 05:39+0000\n"
-"X-Generator: Launchpad (build 17628)\n"
+"X-Launchpad-Export-Date: 2015-08-01 05:46+0000\n"
+"X-Generator: Launchpad (build 17656)\n"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "Settings"
@@ -23,23 +23,23 @@ msgstr "Gosodiadau"
 
 #: ../qml/keys/LanguageMenu.qml:95
 msgid "Arabic"
-msgstr ""
+msgstr "Arabeg"
 
 #: ../qml/keys/LanguageMenu.qml:96
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbaijaneg"
 
 #: ../qml/keys/LanguageMenu.qml:97
 msgid "Bosnian"
-msgstr ""
+msgstr "Bosneg"
 
 #: ../qml/keys/LanguageMenu.qml:98
 msgid "Catalan"
-msgstr ""
+msgstr "Catalaneg"
 
 #: ../qml/keys/LanguageMenu.qml:99
 msgid "Czech"
-msgstr ""
+msgstr "Tsiec"
 
 #: ../qml/keys/LanguageMenu.qml:100
 msgid "Danish"
@@ -47,96 +47,96 @@ msgstr ""
 
 #: ../qml/keys/LanguageMenu.qml:101
 msgid "German"
-msgstr ""
+msgstr "Almaeneg"
 
 #: ../qml/keys/LanguageMenu.qml:102
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #: ../qml/keys/LanguageMenu.qml:103
 msgid "Greek"
-msgstr ""
+msgstr "Groeg"
 
 #: ../qml/keys/LanguageMenu.qml:104
 msgid "English"
-msgstr ""
+msgstr "Saesneg"
 
 #: ../qml/keys/LanguageMenu.qml:105
 msgid "Spanish"
-msgstr ""
+msgstr "Sbaeneg"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Finnish"
-msgstr ""
+msgstr "Ffineg"
 
 #: ../qml/keys/LanguageMenu.qml:107
 msgid "French"
-msgstr ""
+msgstr "Ffrangeg"
 
 #: ../qml/keys/LanguageMenu.qml:108
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "Gaeleg yr Alban"
 
 #: ../qml/keys/LanguageMenu.qml:109
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebraeg"
 
 #: ../qml/keys/LanguageMenu.qml:110
 msgid "Croatian"
-msgstr ""
+msgstr "Croateg"
 
 #: ../qml/keys/LanguageMenu.qml:111
 msgid "Hungarian"
-msgstr ""
+msgstr "Hwngareg"
 
 #: ../qml/keys/LanguageMenu.qml:112
 msgid "Icelandic"
-msgstr ""
+msgstr "Eislandeg"
 
 #: ../qml/keys/LanguageMenu.qml:113
 msgid "Italian"
-msgstr ""
+msgstr "Eidaleg"
 
 #: ../qml/keys/LanguageMenu.qml:114
 msgid "Dutch"
-msgstr ""
+msgstr "Iseldireg"
 
 #: ../qml/keys/LanguageMenu.qml:115
 msgid "Norwegian"
-msgstr ""
+msgstr "Norwyeg"
 
 #: ../qml/keys/LanguageMenu.qml:116
 msgid "Polish"
-msgstr ""
+msgstr "Pwyleg"
 
 #: ../qml/keys/LanguageMenu.qml:117
 msgid "Portuguese"
-msgstr ""
+msgstr "Portiwgaleg"
 
 #: ../qml/keys/LanguageMenu.qml:118
 msgid "Romanian"
-msgstr ""
+msgstr "Romaneg"
 
 #: ../qml/keys/LanguageMenu.qml:119
 msgid "Russian"
-msgstr ""
+msgstr "Rwsieg"
 
 #: ../qml/keys/LanguageMenu.qml:120
 msgid "Slovenian"
-msgstr ""
+msgstr "Slofeneg"
 
 #: ../qml/keys/LanguageMenu.qml:121
 msgid "Serbian"
-msgstr ""
+msgstr "Serbeg"
 
 #: ../qml/keys/LanguageMenu.qml:122
 msgid "Swedish"
-msgstr ""
+msgstr "Swedeg"
 
 #: ../qml/keys/LanguageMenu.qml:123
 msgid "Ukrainian"
-msgstr ""
+msgstr "Wcraneg"
 
 #: ../qml/keys/LanguageMenu.qml:124
 msgid "Chinese - Pinyin"
-msgstr ""
+msgstr "Tsieinieg - Pinyin"
