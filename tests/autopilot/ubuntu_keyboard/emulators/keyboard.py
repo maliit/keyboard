@@ -211,6 +211,17 @@ class Keyboard(object):
             self.press_key(char)
             sleep(delay)
 
+    def reset(self):
+        """Reconnect to the maliit process. This should be called by any tests
+        which restart unity8 (thus causing the maliit-server process to also
+        be restarted).
+        """
+        Keyboard.__maliit = None
+        self.maliit
+        self._keyboard_container = self.keyboard.select_single(
+            "KeyboardContainer"
+        )
+
     @property
     def current_state(self):
         return self.keyboard.state
