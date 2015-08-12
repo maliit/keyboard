@@ -1,3 +1,9 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150728-0ubuntu2~gcc5.1) wily; urgency=medium
+
+  * No-change test rebuild for g++5 ABI transition
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Thu, 30 Jul 2015 21:38:42 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150728-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
