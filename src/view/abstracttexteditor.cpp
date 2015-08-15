@@ -126,6 +126,14 @@ namespace MaliitKeyboard {
 //! \brief Emitted when preedit setting changes.
 //! \param enabled New setting.
 
+//! \fn void AbstractTextEditor::preeditChanged(const QString &preedit)
+//! \brief Emitted when preedit string changes.
+//! \param enabled New string.
+
+//! \fn void AbstractTextEditor::cursorPositionChanged(int pos)
+//! \brief Emitted when preedit cusor position changes.
+//! \param enabled New position.
+
 //! \fn void AbstractTextEditor::wordCandidatesChanged(const WordCandidateList &word_candidates)
 //! \brief Emitted when new word candidates are generated.
 //! \param word_candidates New word candidates.
@@ -373,11 +381,13 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const bool isSymbol = d->word_engine->languageFeature()->isSymbol(text);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
                     not d->text->preedit().isEmpty() && isSeparator;
+        const bool enablePreeditAtInsertion = d->word_engine->languageFeature()->wordEngineAvailable();
 
         d->previous_preedit = "";
 
         if (d->preedit_enabled) {
-            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]")) || email_detected) {
+            if (!enablePreeditAtInsertion &&
+                    (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]")) || email_detected)) {
                 // We're editing in the middle of a word or entering an email address, so just insert characters directly
                 d->text->appendToPreedit(text);
                 commitPreedit();
@@ -429,6 +439,9 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             // standard input (like certain separators, e.g. '.' in western languages) can also trigger autoCaps
             Q_EMIT autoCapsActivated();
         }
+
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
     } break;
 
     case Key::ActionBackspace: {
@@ -505,6 +518,9 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         d->text->appendToPreedit(space);
         commitPreedit();
 
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
+
         if (auto_caps_activated && d->auto_caps_enabled) {
             Q_EMIT autoCapsActivated();
         }
@@ -513,6 +529,13 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionReturn: {
         event_key = Qt::Key_Return;
         keyText = QString("\r");
+    } break;
+
+    case Key::ActionCommit: {
+        commitPreedit();
+
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
     } break;
 
     case Key::ActionClose:
@@ -561,6 +584,9 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     if (event_key != Qt::Key_unknown) {
         commitPreedit();
         sendKeyPressAndReleaseEvents(event_key, Qt::NoModifier, keyText);
+
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
     }
 }
 
@@ -614,6 +640,9 @@ void AbstractTextEditor::replacePreedit(const QString &replacement)
     // before sending preedit:
     d->word_engine->computeCandidates(d->text.data());
     sendPreeditString(d->text->preedit(), d->text->preeditFace());
+
+    Q_EMIT preeditChanged(d->text->preedit());
+    Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 }
 
 void AbstractTextEditor::replaceTextWithPreedit(const QString &replacement, int start, int len, int pos)
@@ -629,6 +658,9 @@ void AbstractTextEditor::replaceTextWithPreedit(const QString &replacement, int 
     Replacement word_r(start, len, pos);
     sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                       word_r);
+
+    Q_EMIT preeditChanged(d->text->preedit());
+    Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 }
 
 //! \brief Replaces current preedit with given replacement and then
@@ -662,6 +694,9 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
             Q_EMIT autoCapsDeactivated();
         }
     }
+
+    Q_EMIT preeditChanged(d->text->preedit());
+    Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 }
 
 //! \brief Clears preedit.
@@ -700,6 +735,23 @@ void AbstractTextEditor::setPreeditEnabled(bool enabled)
         d->preedit_enabled = enabled;
         Q_EMIT preeditEnabledChanged(d->preedit_enabled);
     }
+}
+
+//! \brief Set cursor position of preedit.
+void AbstractTextEditor::setCursorPosition(int pos)
+{
+    Q_D(AbstractTextEditor);
+
+    if (not d->valid()) {
+        return;
+    }
+
+    if (pos == d->text->cursorPosition()) {
+        return;
+    }
+
+    d->text->setCursorPosition(pos);
+    Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 }
 
 //! \brief Returns whether auto-correct functionality is enabled.
@@ -908,6 +960,9 @@ void AbstractTextEditor::singleBackspace()
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                           Replacement());
 
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
+
         if (d->text->preedit().isEmpty()) {
             d->word_engine->clearCandidates();
             d->text->commitPreedit();
@@ -983,6 +1038,10 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
         return;
     }
 
+    if(!d->word_engine->languageFeature()->restorePreedit()) {
+        return;
+    }
+
     int currentOffset = text()->surroundingOffset();
     if(currentOffset > 1 && currentOffset <= text()->surrounding().size()) {
         QString lastChar;
@@ -1026,7 +1085,6 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 
             replaceTextWithPreedit(recreatedPreedit, 0, 0, recreatedPreedit.size());
         }
-
     }
 
     d->word_engine->computeCandidates(d->text.data());
