@@ -217,8 +217,8 @@ class Keyboard(object):
         be restarted).
         """
         Keyboard.__maliit = None
-        # self.maliit is a dynamic property (using the @property decorator), 
-        # so this is actually a function call to the maliit() function, 
+        # self.maliit is a dynamic property (using the @property decorator),
+        # so this is actually a function call to the maliit() function,
         # which triggers the maliit reconnection.
         self.maliit
         self._keyboard_container = self.keyboard.select_single(
