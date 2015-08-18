@@ -246,8 +246,8 @@ class Keyboard(object):
                 need_to_update = True
 
         if (
-            need_to_update
-            or self._stored_active_keypad_name != self._current_keypad_name
+            need_to_update or
+            self._stored_active_keypad_name != self._current_keypad_name
         ):
             self._stored_active_keypad_name = self._current_keypad_name
             logger.debug("Keypad lookup")
