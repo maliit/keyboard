@@ -16,7 +16,7 @@
 
 import QtQuick 2.0
 import "key_constants.js" as UI
-import "../../../keys"
+import keys 1.0
 
 ActionKey {
     label: action == "left" ? "⬅" : "➡";
