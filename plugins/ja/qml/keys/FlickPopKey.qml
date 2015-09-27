@@ -23,6 +23,7 @@ Rectangle {
 
     property string labelChar
     property color labelColor: UI.fontColor
+    property real labelOpacity: 1.0
     visible: labelChar ? true : false
 
     border.width: units.gu(UI.flickBorderWidth)
@@ -36,5 +37,6 @@ Rectangle {
         font.pixelSize: units.gu(UI.fontSize)
         font.bold: UI.fontBold
         color: parent.labelColor
+        opacity: parent.labelOpacity
     }
 }
