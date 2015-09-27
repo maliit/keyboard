@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Canonical Ltd.
+ * Copyright 2015 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,13 @@
 
 .pragma library
 
+/*
+ * Modified character map for ModifierKey
+ *
+ * ModifierKey modify a charcter by left/right/up swipe. This is character map
+ * and swipe direction.
+ *   map[ORIGIN KEY] = [NO MODIFY, LEFT, UP, RIGHT]
+ */
 var map = {}
 map["あ"] = ["あ", "", "ぁ", ""]
 map["い"] = ["い", "", "ぃ", ""]
@@ -52,6 +59,11 @@ map["ー"] = ["ー", "＝", "～", "＋"]
 map["、"] = ["、", "・", "…", "＠"]
 map["。"] = ["。", "：", "；", "♪"]
 
+/*
+ * Reverse map for ModifierKey map
+ *
+ * This map is reverse map for modified characters.
+ */
 var normalize = {}
 normalize["ぁ"] = "あ"
 normalize["ぃ"] = "い"
