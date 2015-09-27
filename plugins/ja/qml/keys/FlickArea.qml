@@ -38,6 +38,7 @@ MultiPointTouchArea {
     }
 
     property int index: 0   // 0:center, 1:left, 2:top, 3:right, 4:bottom
+    property int old_index: 0
     property real posX: point.x - parent.width / 2
     property real posY: point.y - parent.height / 2
     property real rad: 0
@@ -66,6 +67,13 @@ MultiPointTouchArea {
             } else {
                 index = 3
             }
+        }
+
+        if (old_index != index) {
+            old_index = index
+
+            if (maliit_input_method.useHapticFeedback)
+                pressEffect.start();
         }
     }
 }

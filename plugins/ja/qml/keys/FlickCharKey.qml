@@ -161,7 +161,7 @@ Item {
                 audioFeedback.play();
 
             if (maliit_input_method.useHapticFeedback)
-                 pressEffect.start();
+                pressEffect.start();
 
             event_handler.onKeyPressed(leaves[index], action);
         }
