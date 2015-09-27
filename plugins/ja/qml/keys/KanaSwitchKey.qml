@@ -31,6 +31,7 @@ FlickCharKey {
     overridePressArea: true
 
     property bool isPreedit: maliit_input_method.preedit.length > 0
+    property string default_state: "kana"
 
     state: kana.state
 
@@ -38,7 +39,7 @@ FlickCharKey {
         id: kana
         property string label: "あ/A"
 
-        state: "kana";
+        state: parent.default_state;
         states: [
             State {
                 name: "kana"

@@ -15,79 +15,107 @@
  */
 
 import QtQuick 2.0
+import "keys/"
 import keys 1.0
 
 KeyPad {
     anchors.fill: parent
 
     content: c1
-    symbols: "languages/Keyboard_symbols.qml"
 
     Column {
         id: c1
         anchors.fill: parent
-
         spacing: 0
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
-            CharKey { label: "w"; shifted: "W"; extended: ["2"]; extendedShifted: ["2"] }
-            CharKey { label: "e"; shifted: "E"; extended: ["3", "è", "é", "ê", "ë", "€"]; extendedShifted: ["3", "È","É", "Ê", "Ë", "€"] }
-            CharKey { label: "r"; shifted: "R"; extended: ["4"]; extendedShifted: ["4"] }
-            CharKey { label: "t"; shifted: "T"; extended: ["5", "þ"]; extendedShifted: ["5", "Þ"] }
-            CharKey { label: "y"; shifted: "Y"; extended: ["6", "ý", "¥"]; extendedShifted: ["6", "Ý", "¥"] }
-            CharKey { label: "u"; shifted: "U"; extended: ["7", "û","ù","ú","ü"]; extendedShifted: ["7", "Û","Ù","Ú","Ü"] }
-            CharKey { label: "i"; shifted: "I"; extended: ["8", "î","ï","ì","í"]; extendedShifted: ["8", "Î","Ï","Ì","Í"] }
-            CharKey { label: "o"; shifted: "O"; extended: ["9", "ö","ô","ò","ó"]; extendedShifted: ["9", "Ö","Ô","Ò","Ó"] }
-            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"]; rightSide: true; }
+            UndoKey { leftSide: true; }
+            FlickCharKey {
+                label: layout.state == "kana" ? "あ" : "@ / : _";
+                leaves: layout.state == "kana" ? ["あ", "い", "う", "え", "お"] : ["@", "/", ":", "_", "1"];
+                annotation: layout.state == "kana" ? "" : "1";
+            }
+            FlickCharKey {
+                label: layout.state == "kana" ? "か" : "ABC";
+                leaves: layout.state == "kana" ? ["か", "き", "く", "け", "こ"] : ["a", "b", "c", "#", "2"];
+                annotation: layout.state == "kana" ? "" : "2#";
+            }
+            FlickCharKey {
+                label: layout.state == "kana" ? "さ" : "DEF";
+                leaves: layout.state == "kana" ? ["さ", "し", "す", "せ", "そ"] : ["d", "e", "f", "$", "3"];
+                annotation: layout.state == "kana" ? "" : "3$";
+            }
+            BackspaceKey { rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","á","ã","å"]; extendedShifted: ["Ä","À","Â","Á","Ã","Å"]; leftSide: true; }
-            CharKey { label: "s"; shifted: "S"; extended: ["ß","$"]; extendedShifted: ["$"] }
-            CharKey { label: "d"; shifted: "D"; extended: ["ð"]; extendedShifted: ["Ð"] }
-            CharKey { label: "f"; shifted: "F"; }
-            CharKey { label: "g"; shifted: "G"; }
-            CharKey { label: "h"; shifted: "H"; }
-            CharKey { label: "j"; shifted: "J"; }
-            CharKey { label: "k"; shifted: "K"; }
-            CharKey { label: "l"; shifted: "L"; rightSide: true; }
+            CursorKey { action: "left"; }
+            FlickCharKey {
+                label: layout.state == "kana" ? "た" : "GHI";
+                leaves: layout.state == "kana" ? ["た", "ち", "つ", "て", "と"] : ["g", "h", "i", "(", "4"];
+                annotation: layout.state == "kana" ? "" : "4(";
+            }
+            FlickCharKey {
+                label: layout.state == "kana" ? "な" : "JKL";
+                leaves: layout.state == "kana" ? ["な", "に", "ぬ", "ね", "の"] : ["j", "k", "l", "\"", "5"];
+                annotation: layout.state == "kana" ? "" : "5\"";
+            }
+            FlickCharKey {
+                label: layout.state == "kana" ? "は" : "MNO";
+                leaves: layout.state == "kana" ? ["は", "ひ", "ふ", "へ", "ほ"] : ["m", "n", "o", ")", "6"];
+                annotation: layout.state == "kana" ? "" : "6)";
+            }
+            CursorKey { action: "right"; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            ShiftKey {}
-            CharKey { label: "z"; shifted: "Z"; }
-            CharKey { label: "x"; shifted: "X"; }
-            CharKey { label: "c"; shifted: "C"; extended: ["ç"]; extendedShifted: ["Ç"] }
-            CharKey { label: "v"; shifted: "V"; }
-            CharKey { label: "b"; shifted: "B"; }
-            CharKey { label: "n"; shifted: "N"; extended: ["ñ"]; extendedShifted: ["Ñ"] }
-            CharKey { label: "m"; shifted: "M"; }
-            BackspaceKey {}
+            LanguageKey    { id: languageMenuButton; height: parent.height; }
+            FlickCharKey {
+                label: layout.state == "kana" ? "ま" : "PQRS"
+                leaves: layout.state == "kana" ? ["ま", "み", "む", "め", "も"] : ["p", "q", "r", "s", "7"]
+                annotation: layout.state == "kana" ? "" : "7"
+            }
+            FlickCharKey {
+                label: layout.state == "kana" ? "や" : "TUV"
+                leaves: layout.state == "kana" ? ["や", "（", "ゆ", "）", "よ"] : ["t", "u", "v", "'", "8"]
+                annotation: layout.state == "kana" ? "" : "8'"
+            }
+            FlickCharKey {
+                label: layout.state == "kana" ? "ら" : "WXYZ"
+                leaves: layout.state == "kana" ? ["ら", "り", "る", "れ", "ろ"] : ["w", "x", "y", "z", "9"]
+                annotation: layout.state == "kana" ? "" : "9"
+            }
+            ActionKey { label: "記号"; action: "symbol"; width: panel.keyWidth; }
         }
 
-        Item {
-            anchors.left: parent.left
-            anchors.right: parent.right
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter;
+            spacing: 0
 
-            height: panel.keyHeight + units.gu(UI.row_margin);
-
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
-            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
-            CharKey        { id: slashKey;    label: "/"; shifted: "/";  anchors.left: languageMenuButton.right; height: parent.height; }
-            SpaceKey       { id: spaceKey;                               anchors.left: slashKey.right; anchors.right: urlKey.left; noMagnifier: true; height: parent.height; }
-            UrlKey         { id: urlKey; label: ".com"; extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"]; anchors.right: dotKey.left; height: parent.height; }
-            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "-", "_", "!", "+", "%","#","/"]; extendedShifted: ["?", "-", "_", "!", "+", "%","#","/"]; anchors.right: enterKey.left; height: parent.height; }
-            ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
+            KanaSwitchKey { id: layout; default_state: "alnum" }
+            ModifierKey { layoutState: layout.state; }
+            FlickCharKey {
+                label: layout.state == "kana" ? "わ" : "- + *"
+                leaves: layout.state == "kana" ? ["わ", "を", "ん", "ー"] : ["-", "+", "0", "*"];
+                annotation: layout.state == "kana" ? "" : "0";
+            }
+            DomainKey {
+                label: layout.state == "kana" ? "、。" : ", .";
+                leaves: layout.state == "kana" ? ["、", "。", "！", "？"] :
+                    [",", ".", "<font size=\"1\">.com</font>", "<font size=\"1\">.jp</font>"];
+                unstyledLeaves: layout.state == "kana" ? ["、", "。", "！", "？"] : [",", ".", ".com", ".jp"];
+                annotation: layout.state == "kana" ? "" : ".com .jp"
+            }
+            CommitKey    { id: enterKey; width: panel.keyWidth; }
         }
     } // column
 }
