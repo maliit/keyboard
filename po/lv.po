@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-05-11 12:50+0100\n"
-"PO-Revision-Date: 2015-03-01 07:38+0000\n"
+"PO-Revision-Date: 2015-11-22 08:11+0000\n"
 "Last-Translator: Rūdolfs Mazurs <Unknown>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-20 06:01+0000\n"
-"X-Generator: Launchpad (build 17690)\n"
+"X-Launchpad-Export-Date: 2015-11-23 05:29+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
 "Language: lv\n"
 
 #: ../qml/keys/LanguageMenu.qml:80
@@ -53,11 +53,11 @@ msgstr "Vācu"
 
 #: ../qml/keys/LanguageMenu.qml:102
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #: ../qml/keys/LanguageMenu.qml:103
 msgid "Greek"
-msgstr ""
+msgstr "Grieķu"
 
 #: ../qml/keys/LanguageMenu.qml:104
 msgid "English"
@@ -77,7 +77,7 @@ msgstr "Franču"
 
 #: ../qml/keys/LanguageMenu.qml:108
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "Skotu gēlu"
 
 #: ../qml/keys/LanguageMenu.qml:109
 msgid "Hebrew"
@@ -93,7 +93,7 @@ msgstr "Ungāru"
 
 #: ../qml/keys/LanguageMenu.qml:112
 msgid "Icelandic"
-msgstr ""
+msgstr "Islandiešu"
 
 #: ../qml/keys/LanguageMenu.qml:113
 msgid "Italian"
@@ -105,7 +105,7 @@ msgstr "Nīderlandiešu"
 
 #: ../qml/keys/LanguageMenu.qml:115
 msgid "Norwegian"
-msgstr ""
+msgstr "Norvēģu"
 
 #: ../qml/keys/LanguageMenu.qml:116
 msgid "Polish"
@@ -117,7 +117,7 @@ msgstr "Portugāļu"
 
 #: ../qml/keys/LanguageMenu.qml:118
 msgid "Romanian"
-msgstr ""
+msgstr "Rumāņu"
 
 #: ../qml/keys/LanguageMenu.qml:119
 msgid "Russian"
@@ -125,7 +125,7 @@ msgstr "Krievu"
 
 #: ../qml/keys/LanguageMenu.qml:120
 msgid "Slovenian"
-msgstr ""
+msgstr "Slovēņu"
 
 #: ../qml/keys/LanguageMenu.qml:121
 msgid "Serbian"
@@ -137,7 +137,7 @@ msgstr "Zviedru"
 
 #: ../qml/keys/LanguageMenu.qml:123
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukraiņu"
 
 #: ../qml/keys/LanguageMenu.qml:124
 msgid "Chinese - Pinyin"
