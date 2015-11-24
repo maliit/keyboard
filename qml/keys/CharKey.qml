@@ -208,6 +208,10 @@ Item {
         }
 
         onReleased: {
+            // Work around QT bug: https://bugreports.qt.io/browse/QTBUG-44370
+            if (invalidReleaseFromMouse) {
+                return;
+            }
             if (overridePressArea) {
                 key.released();
                 return;
