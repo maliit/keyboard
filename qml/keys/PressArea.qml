@@ -110,7 +110,7 @@ MultiPointTouchArea {
         pressed = true;
         held = false;
         swipedOut = false;
-	startY = point.y;
+        startY = point.y;
         holdTimer.restart();
 
         // We keep a global view of whether any other keys have been
