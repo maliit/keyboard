@@ -1180,8 +1180,8 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
                     loadHtml("
                         <html><body><div id='scroll' style='width: 100%;
                         height: 200%; position: absolute; background: green;
-                        visibility: hidden;'></div><input id='input'
-                        type='text'
+                        visibility: hidden;'></div><input id='input' 
+			style='height: 50%; width: 100%' type='text'
                         onkeyup=\\\"if (event.keyCode == 13)
                         {document.getElementById('input').disabled=true;
                         document.getElementById('scroll').style.visibility=
