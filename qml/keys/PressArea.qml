@@ -26,6 +26,7 @@ MultiPointTouchArea {
 
     /// Is true while the area is touched, and the finger did not yet lift
     property bool pressed: false
+    property bool ongoingTouch: false
     property bool invalidReleaseFromMouse: false
     // Track whether we've swiped out of a key press to dismiss the keyboard
     property bool swipedOut: false
@@ -79,7 +80,7 @@ MultiPointTouchArea {
                     // This works around issues with devices with touch buttons
                     // below the screen preventing release events when swiped
                     // over
-                    if(point.sceneY > fullScreenItem.height - units.gu(4) && point.y > point.startY + units.gu(8) && !held) {
+                    if(point.sceneY > fullScreenItem.height - units.gu(4) && point.y > startY + units.gu(8) && !held) {
                         maliit_input_method.hide();
                     }
                 } else {
@@ -106,6 +107,7 @@ MultiPointTouchArea {
     }
 
     onPressed: {
+        ongoingTouch = true;
         invalidReleaseFromMouse = false;
         pressed = true;
         held = false;
@@ -132,7 +134,7 @@ MultiPointTouchArea {
 
     onReleased: {
         // Work around QT bug: https://bugreports.qt.io/browse/QTBUG-44370
-        if(!pressed) {
+        if(!ongoingTouch) {
             invalidReleaseFromMouse = true;
             return;
         }
