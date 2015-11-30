@@ -1,3 +1,27 @@
+ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150903-0ubuntu1) wily; urgency=medium
+
+  [ Michael Sheldon ]
+  * Fix header ordering to build with Qt 5.5. (LP: #1474313, #1447190)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 03 Sep 2015 13:46:06 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150818.1-0ubuntu1) wily; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Add reset function to autopilot emulator so that maliit can be
+    reconnected after a unity8 restart. (LP: #1481770)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 18 Aug 2015 11:48:27 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150728-0ubuntu2~gcc5.1) wily; urgency=medium
+
+  * No-change test rebuild for g++5 ABI transition
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Thu, 30 Jul 2015 21:38:42 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150728-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]

@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-03 05:50+0000\n"
-"X-Generator: Launchpad (build 17532)\n"
+"X-Launchpad-Export-Date: 2015-08-20 06:01+0000\n"
+"X-Generator: Launchpad (build 17690)\n"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "Settings"
@@ -51,11 +51,11 @@ msgstr "ጀርመንኛ"
 
 #: ../qml/keys/LanguageMenu.qml:102
 msgid "Emoji"
-msgstr ""
+msgstr "ኢሞጂ"
 
 #: ../qml/keys/LanguageMenu.qml:103
 msgid "Greek"
-msgstr ""
+msgstr "ግሪክኛ"
 
 #: ../qml/keys/LanguageMenu.qml:104
 msgid "English"
@@ -75,7 +75,7 @@ msgstr "ፈረንሳይኛ"
 
 #: ../qml/keys/LanguageMenu.qml:108
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "ስኮቲሽ ጋሌኪኛ"
 
 #: ../qml/keys/LanguageMenu.qml:109
 msgid "Hebrew"
@@ -91,7 +91,7 @@ msgstr "ሀንጋሪኛ"
 
 #: ../qml/keys/LanguageMenu.qml:112
 msgid "Icelandic"
-msgstr ""
+msgstr "አይስላንድኛ"
 
 #: ../qml/keys/LanguageMenu.qml:113
 msgid "Italian"
@@ -103,7 +103,7 @@ msgstr "ደች"
 
 #: ../qml/keys/LanguageMenu.qml:115
 msgid "Norwegian"
-msgstr ""
+msgstr "ኖርዌጂያንኛ"
 
 #: ../qml/keys/LanguageMenu.qml:116
 msgid "Polish"
@@ -115,7 +115,7 @@ msgstr "ፖርቱጋሊኛ"
 
 #: ../qml/keys/LanguageMenu.qml:118
 msgid "Romanian"
-msgstr ""
+msgstr "ሮማንያንኛ"
 
 #: ../qml/keys/LanguageMenu.qml:119
 msgid "Russian"
@@ -123,7 +123,7 @@ msgstr "ራሺያንኛ"
 
 #: ../qml/keys/LanguageMenu.qml:120
 msgid "Slovenian"
-msgstr ""
+msgstr "ስሎቬኒያንኛ"
 
 #: ../qml/keys/LanguageMenu.qml:121
 msgid "Serbian"
@@ -135,7 +135,7 @@ msgstr "ስዊድንኛ"
 
 #: ../qml/keys/LanguageMenu.qml:123
 msgid "Ukrainian"
-msgstr ""
+msgstr "ዩክሬኒያንኛ"
 
 #: ../qml/keys/LanguageMenu.qml:124
 msgid "Chinese - Pinyin"

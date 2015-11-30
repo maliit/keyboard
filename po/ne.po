@@ -1,4 +1,4 @@
-# Chinese (Simplified) translation for ubuntu-keyboard
+# Nepali translation for ubuntu-keyboard
 # Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the ubuntu-keyboard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
@@ -8,135 +8,135 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-05-11 12:50+0100\n"
-"PO-Revision-Date: 2015-04-10 06:33+0000\n"
+"PO-Revision-Date: 2015-11-05 08:33+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"Language-Team: Nepali <ne@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-20 06:01+0000\n"
-"X-Generator: Launchpad (build 17690)\n"
+"X-Launchpad-Export-Date: 2015-11-06 05:38+0000\n"
+"X-Generator: Launchpad (build 17838)\n"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "Settings"
-msgstr ""
+msgstr "सेटिङ"
 
 #: ../qml/keys/LanguageMenu.qml:95
 msgid "Arabic"
-msgstr ""
+msgstr "अरबी"
 
 #: ../qml/keys/LanguageMenu.qml:96
 msgid "Azerbaijani"
-msgstr ""
+msgstr "अजरबैजानी"
 
 #: ../qml/keys/LanguageMenu.qml:97
 msgid "Bosnian"
-msgstr ""
+msgstr "बोस्नियाली"
 
 #: ../qml/keys/LanguageMenu.qml:98
 msgid "Catalan"
-msgstr ""
+msgstr "क्यातालान"
 
 #: ../qml/keys/LanguageMenu.qml:99
 msgid "Czech"
-msgstr ""
+msgstr "चेक"
 
 #: ../qml/keys/LanguageMenu.qml:100
 msgid "Danish"
-msgstr ""
+msgstr "डेनिस"
 
 #: ../qml/keys/LanguageMenu.qml:101
 msgid "German"
-msgstr ""
+msgstr "जर्मन"
 
 #: ../qml/keys/LanguageMenu.qml:102
 msgid "Emoji"
-msgstr ""
+msgstr "भावचिन्ह"
 
 #: ../qml/keys/LanguageMenu.qml:103
 msgid "Greek"
-msgstr ""
+msgstr "ग्रिक"
 
 #: ../qml/keys/LanguageMenu.qml:104
 msgid "English"
-msgstr ""
+msgstr "अंग्रेजी"
 
 #: ../qml/keys/LanguageMenu.qml:105
 msgid "Spanish"
-msgstr ""
+msgstr "स्पेनिस"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Finnish"
-msgstr ""
+msgstr "फिनीस"
 
 #: ../qml/keys/LanguageMenu.qml:107
 msgid "French"
-msgstr ""
+msgstr "फ्रान्सेली"
 
 #: ../qml/keys/LanguageMenu.qml:108
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "स्टकिस गेअलिक"
 
 #: ../qml/keys/LanguageMenu.qml:109
 msgid "Hebrew"
-msgstr ""
+msgstr "हिब्रु"
 
 #: ../qml/keys/LanguageMenu.qml:110
 msgid "Croatian"
-msgstr ""
+msgstr "क्रोएसियाली"
 
 #: ../qml/keys/LanguageMenu.qml:111
 msgid "Hungarian"
-msgstr ""
+msgstr "हङ्गेरियाली"
 
 #: ../qml/keys/LanguageMenu.qml:112
 msgid "Icelandic"
-msgstr ""
+msgstr "आइसल्यान्डिक"
 
 #: ../qml/keys/LanguageMenu.qml:113
 msgid "Italian"
-msgstr ""
+msgstr "ईटालियन"
 
 #: ../qml/keys/LanguageMenu.qml:114
 msgid "Dutch"
-msgstr ""
+msgstr "डच"
 
 #: ../qml/keys/LanguageMenu.qml:115
 msgid "Norwegian"
-msgstr ""
+msgstr "नर्वेली"
 
 #: ../qml/keys/LanguageMenu.qml:116
 msgid "Polish"
-msgstr ""
+msgstr "पोलिस"
 
 #: ../qml/keys/LanguageMenu.qml:117
 msgid "Portuguese"
-msgstr ""
+msgstr "पोर्तुगाली"
 
 #: ../qml/keys/LanguageMenu.qml:118
 msgid "Romanian"
-msgstr ""
+msgstr "रोमनियाली"
 
 #: ../qml/keys/LanguageMenu.qml:119
 msgid "Russian"
-msgstr ""
+msgstr "रसियाली"
 
 #: ../qml/keys/LanguageMenu.qml:120
 msgid "Slovenian"
-msgstr ""
+msgstr "स्लोभेनियाली"
 
 #: ../qml/keys/LanguageMenu.qml:121
 msgid "Serbian"
-msgstr ""
+msgstr "सर्बियाली"
 
 #: ../qml/keys/LanguageMenu.qml:122
 msgid "Swedish"
-msgstr ""
+msgstr "स्विडेनी"
 
 #: ../qml/keys/LanguageMenu.qml:123
 msgid "Ukrainian"
-msgstr ""
+msgstr "युक्रेनियाली"
 
 #: ../qml/keys/LanguageMenu.qml:124
 msgid "Chinese - Pinyin"
-msgstr ""
+msgstr "चिनियाँ - पिनयिन"
