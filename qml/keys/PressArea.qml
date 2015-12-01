@@ -145,6 +145,7 @@ MultiPointTouchArea {
             bounceBackAnimation.from = keyboardSurface.y;
             bounceBackAnimation.start();
         }
+        ongoingTouch = false;
         pressed = false;
         held = false;
         holdTimer.stop();
