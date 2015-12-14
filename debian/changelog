@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20151214-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk. added: po/aa.po
+
+  [ Michael Sheldon ]
+  * Remove workaround for Qt bug 44370 as this is now fixed in Qt (LP:
+    #44370)
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Mon, 14 Dec 2015 09:09:16 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+16.04.20151201.1-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
