@@ -713,7 +713,7 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
 
         keyboard.type('Helfn')
 
-        sleep(1)
+        sleep(2)
 
         keyboard.type(' ')
 
