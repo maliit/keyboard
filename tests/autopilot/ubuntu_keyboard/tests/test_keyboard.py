@@ -397,6 +397,27 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
             Eventually(Equals(KeyPadState.CAPSLOCK))
         )
 
+    def test_capslock_stays_on(self):
+        """Capslock should remain on when typing text.
+
+        """
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.press_key('shift')
+        keyboard.press_key('shift', True)
+        keyboard.press_key('A', True)
+        keyboard.press_key('B', True)
+        keyboard.press_key('C', True)
+
+        self.assertThat(
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.CAPSLOCK))
+        )
+
     # Note: based on UX design doc
     def test_shift_state_returns_to_default_after_letter_typed(self):
         """Pushing shift and then typing an uppercase letter must automatically

@@ -235,7 +235,7 @@ Item {
         Connections {
             target: input_method
             onActivateAutocaps: {
-                if (keypad.state == "CHARACTERS") {
+                if (keypad.state == "CHARACTERS" && keypad.activeKeypadState != "CAPSLOCK") {
                     keypad.activeKeypadState = "SHIFTED";
                     keypad.autoCapsTriggered = true;
                 } else {
