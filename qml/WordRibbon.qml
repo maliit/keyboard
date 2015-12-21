@@ -48,6 +48,7 @@ Rectangle {
             height: wordRibbonCanvas.height
             anchors.margins: 0
             property alias word_text: wordItem // For testing in Autopilot
+            property alias textBold: wordItem.font.bold // Exposed for autopilot
 
             Item {
                 anchors.fill: parent
