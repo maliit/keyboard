@@ -1,3 +1,12 @@
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20151221-0ubuntu1) xenial; urgency=medium
+
+  * Fix keyboard shifting out of capslock when in fields without preedit
+    (LP: #1521803)
+  * Make user input bold if there aren't any suggestions and expose bold
+    property to autopilot (LP: #1526795, #1526796)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Mon, 21 Dec 2015 11:52:18 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+16.04.20151214-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
