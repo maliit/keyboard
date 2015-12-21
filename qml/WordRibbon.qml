@@ -63,7 +63,7 @@ Rectangle {
                     font.pixelSize: units.gu(1.9)
                     font.family: "Ubuntu Medium"
                     color: "#999999"
-                    font.bold: isPrimaryCandidate
+                    font.bold: isPrimaryCandidate || listView.count == 1
                     text: word;
                     anchors.centerIn: parent
                 }
