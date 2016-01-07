@@ -29,12 +29,11 @@
  *
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import "constants.js" as Const
 import "keys/"
 import "keys/key_constants.js" as UI
-import Ubuntu.Components 0.1
-import QtQuick.Window 2.0
+import Ubuntu.Components 1.3
 
 Item {
     id: fullScreenItem

@@ -1,7 +1,6 @@
-
-import QtQuick 2.0
+import QtQuick 2.4
 import QtTest 1.0 // for TestCase
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.3
 import MaliitTestSupport 1.0
 
 /*
