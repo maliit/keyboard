@@ -22,8 +22,7 @@ ActionKey {
     label: "?123";
     shifted: "?123";
     action: "symbols";
-
-    fontSize: units.gu(UI.symbolShiftKeyFontSize);
+    anchors.leftMargin: units.gu(UI.keyMargins)
 
     overridePressArea: true;
 

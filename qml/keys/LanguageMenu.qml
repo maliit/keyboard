@@ -19,6 +19,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 import "key_constants.js" as UI
+import "languages.js" as Languages
 
 Item {
 
@@ -50,7 +51,7 @@ Item {
         model: maliit_input_method.enabledLanguages
 
         delegate: ListItem.Standard {
-            text: languageIdToName(modelData)
+            text: Languages.languageIdToName(modelData)
             showDivider: modelData != maliit_input_method.enabledLanguages[maliit_input_method.enabledLanguages.length - 1]
             control: CheckBox {
                 checked: maliit_input_method.activeLanguage == modelData
@@ -88,43 +89,6 @@ Item {
             }
         }
         footer: greeter_status.greeterActive ? null : settingsComp
-    }
-
-    function languageIdToName(languageId)
-    {
-        if (languageId == "ar")         return i18n.tr("Arabic");
-        if (languageId == "az")         return i18n.tr("Azerbaijani");
-        if (languageId == "bs")         return i18n.tr("Bosnian");
-        if (languageId == "ca")         return i18n.tr("Catalan");
-        if (languageId == "cs")         return i18n.tr("Czech");
-        if (languageId == "da")         return i18n.tr("Danish");
-        if (languageId == "de")         return i18n.tr("German");
-        if (languageId == "emoji")      return i18n.tr("Emoji");
-        if (languageId == "el")         return i18n.tr("Greek");
-        if (languageId == "en")         return i18n.tr("English");
-        if (languageId == "es")         return i18n.tr("Spanish");
-        if (languageId == "fi")         return i18n.tr("Finnish");
-        if (languageId == "fr")         return i18n.tr("French");
-        if (languageId == "gd")         return i18n.tr("Scottish Gaelic");
-        if (languageId == "he")         return i18n.tr("Hebrew");
-        if (languageId == "hr")         return i18n.tr("Croatian");
-        if (languageId == "hu")         return i18n.tr("Hungarian");
-        if (languageId == "is")         return i18n.tr("Icelandic");
-        if (languageId == "it")         return i18n.tr("Italian");
-        if (languageId == "nl")         return i18n.tr("Dutch");
-        if (languageId == "nb")         return i18n.tr("Norwegian");
-        if (languageId == "pl")         return i18n.tr("Polish");
-        if (languageId == "pt")         return i18n.tr("Portuguese");
-        if (languageId == "ro")         return i18n.tr("Romanian");
-        if (languageId == "ru")         return i18n.tr("Russian");
-        if (languageId == "sl")         return i18n.tr("Slovenian");
-        if (languageId == "sr")         return i18n.tr("Serbian");
-        if (languageId == "sv")         return i18n.tr("Swedish");
-        if (languageId == "uk")         return i18n.tr("Ukrainian");
-        if (languageId == "zh")         return i18n.tr("Chinese - Pinyin");
-
-        // fallback
-        return languageId.charAt(0).toUpperCase() + languageId.slice(1);
     }
 
 }

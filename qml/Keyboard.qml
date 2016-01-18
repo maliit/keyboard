@@ -41,6 +41,7 @@ Item {
     objectName: "fullScreenItem"
 
     property bool landscape: width > height
+    readonly property bool tablet: width >= units.gu(90)
 
     property variant input_method: maliit_input_method
     property variant event_handler: maliit_event_handler
@@ -58,8 +59,11 @@ Item {
         anchors.left: parent.left
 
         width: parent.width
-        height: fullScreenItem.landscape ? (fullScreenItem.height * UI.phoneKeyboardHeightLandscape) + wordRibbon.height
-                                         : (fullScreenItem.height * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
+        height: (fullScreenItem.landscape ? units.gu(fullScreenItem.tablet ? UI.tabletKeyboardHeightLandscape 
+                                                                           : UI.phoneKeyboardHeightLandscape)
+                                          : units.gu(fullScreenItem.tablet ? UI.tabletKeyboardHeightPortrait 
+                                                                           : UI.phoneKeyboardHeightPortrait)
+                ) + wordRibbon.height
 
         property int keypadHeight: height;
 
@@ -90,7 +94,7 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.top
             height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
-            borderTop.height + units.gu(UI.top_margin)
+                    units.gu(UI.top_margin)
 
             drag.target: keyboardSurface
             drag.axis: Drag.YAxis;
@@ -125,6 +129,13 @@ Item {
                 onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
                 onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
 
+                Rectangle {
+                    width: parent.width
+                    height: units.dp(1)
+                    color: UI.dividerColor
+                    anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
+                }
+
                 WordRibbon {
                     id: wordRibbon
                     objectName: "wordRibbon"
@@ -156,17 +167,10 @@ Item {
                         color: UI.backgroundColor
                     }
 
-                    Image {
-                        id: borderTop
-                        source: "styles/ubuntu/images/border_top.png"
-                        width: parent.width
-                        anchors.top: parent.top.bottom
-                    }
-
                     KeyboardContainer {
                         id: keypad
 
-                        anchors.top: borderTop.bottom
+                        anchors.top: parent.top
                         anchors.bottom: background.bottom
                         anchors.topMargin: units.gu( UI.top_margin )
                         anchors.bottomMargin: units.gu( UI.bottom_margin )

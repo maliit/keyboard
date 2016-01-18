@@ -15,16 +15,27 @@
  */
 
 import QtQuick 2.0
+import Ubuntu.Components 1.3
 
 import "key_constants.js" as UI
+import "languages.js" as Languages
 
 ActionKey {
     label: " ";
     shifted: " ";
 
-    imgNormal: UI.imageCharKey
-    imgPressed: UI.imageCharKeyPressed
+    normalColor: UI.charKeyColor
+    pressedColor: UI.charKeyPressedColor
 
     action: "space"
     switchBackFromSymbols: true
+
+    Label {
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: -height / 2
+        font.family: UI.spaceFontFamily
+        fontSize: UI.spaceFontSize
+        opacity: UI.spaceOpacity
+        text: Languages.languageIdToName(maliit_input_method.activeLanguage)
+    }
 }

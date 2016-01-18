@@ -51,14 +51,14 @@ Item {
 
     // These properties are used by autopilot to determine the visible 
     // portion of the key to press
-    readonly property double leftOffset: buttonImage.anchors.leftMargin
-    readonly property double rightOffset: buttonImage.anchors.rightMargin
+    readonly property double leftOffset: buttonRect.anchors.leftMargin
+    readonly property double rightOffset: buttonRect.anchors.rightMargin
 
     /* design */
-    property string imgNormal: UI.imageCharKey
-    property string imgPressed: UI.imageCharKeyPressed
+    property string normalColor: UI.charKeyColor
+    property string pressedColor: UI.charKeyPressedColor
     // fontSize can be overwritten when using the component, e.g. SymbolShiftKey uses smaller fontSize
-    property int fontSize: units.gu( UI.fontSize );
+    property int fontSize: height / 3.0;
 
     /// annotation shows a small label in the upper right corner
     // if the annotiation property is set, it will be used. If not, the first position in extended[] list or extendedShifted[] list will
@@ -119,19 +119,14 @@ Item {
         height: panel.keyHeight
         width: parent.width
 
-        BorderImage {
-            id: buttonImage
+        Rectangle {
+            id: buttonRect
+            color: key.currentlyPressed || key.highlight ? pressedColor : normalColor
             anchors.fill: parent
-            anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
-            anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
-            anchors.bottomMargin: fullScreenItem.landscape ? units.dp( UI.keyMargins ) * 2 : units.gu(UI.row_margin);
-            source: key.imgNormal
-
-            BorderImage {
-                anchors.fill: parent
-                visible: key.currentlyPressed || key.highlight
-                source: key.imgPressed    
-            }
+            anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + units.gu(UI.keyMargins) :  units.gu(UI.keyMargins)
+            anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + units.gu(UI.keyMargins) :  units.gu(UI.keyMargins)
+            anchors.bottomMargin: fullScreenItem.landscape ? units.gu(UI.row_margin) : units.gu(UI.row_margin) * 2
+            radius: 5
 
             /// label of the key
             //  the label is also the value subitted to the app
@@ -156,7 +151,7 @@ Item {
             /// shows an annotation
             // used e.g. for indicating the existence of extended keys
         
-            Text {
+            Label {
                 id: annotationLabel
                 text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
         
@@ -164,9 +159,8 @@ Item {
                 anchors.top: parent.top
                 anchors.topMargin: units.gu(UI.annotationTopMargin)
                 anchors.rightMargin: units.gu(UI.annotationRightMargin)
-        
-                font.pixelSize: units.gu( UI.annotationFontSize )
-                font.bold: false
+                font.family: "Ubuntu light"
+                fontSize: "medium"
                 color: UI.annotationFontColor
             }
 

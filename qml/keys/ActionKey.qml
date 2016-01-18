@@ -33,8 +33,8 @@ CharKey {
     // action keys are a bit wider
     width: panel.keyWidth + units.gu( padding )
 
-    imgNormal: UI.imageActionKey
-    imgPressed: UI.imageActionKeyPressed
+    normalColor: UI.actionKeyColor
+    pressedColor: UI.actionKeyPressedColor
 
     // can be overwritten by keys
     property color colorNormal: UI.fontColor
@@ -55,11 +55,11 @@ CharKey {
             name: actionKeyRoot.iconNormal
             color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: fullScreenItem.landscape ? -units.dp( UI.keyMargins ) : -units.gu(UI.row_margin/2) - units.gu(0.15)
+            anchors.verticalCenterOffset: fullScreenItem.landscape ? -units.gu(UI.keyMargins) : -units.gu(UI.row_margin/2) - units.gu(0.15)
 
             visible: (label == "")
-            width: units.gu(2.5)
-            height: units.gu(2.5)
+            height: actionKeyRoot.fontSize
+            width: height
         }
     }
 

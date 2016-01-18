@@ -16,19 +16,25 @@
 
 .pragma library
 
-var keyMargins  =   1.8;    // dp
+var keyMargins  =   0.5;    // gu
 var fontSize    =   2.5;    // gu
 var fontSizeMagnified   =   4; // gu
-var fontFamily  =   "Ubuntu";
-var fontColor   =   "#5d5d5d"
-var fontBold    =   false
+var fontFamily  =   "Ubuntu light";
+var fontColor   =   "#333333";
+var fontBold    =   false;
 
-var backgroundColor = "#f1f1f1"
+var backgroundColor = "#f7f7f7";
+var dividerColor = "#cdcdcd";
 
 var annotationFontSize = 0.85; // gu
 var annotationTopMargin = 0.35; // gu
 var annotationRightMargin = 0.65; // gu
-var annotationFontColor = "#5d5d5d"
+var annotationFontColor = "#333333";
+
+
+var spaceFontFamily = "Ubuntu light";
+var spaceFontSize = "large";
+var spaceOpacity = 0.33;
 
 /* magnifier */
 var magnifierHorizontalPadding = 1.8; // gu, stretch the magnifier a little bit in x-axis
@@ -45,15 +51,15 @@ var popoverTopMargin   = 10; // dp
 var popoverEdgeMargin = 2.2; // gu
 var popoverSquat      = 3; // gu, when no wordribbon, avoid click-through above input trap
 
-var imageCharKey        = "../images/white_key.sci"
-var imageCharKeyPressed = "../images/grey_key.sci"
+var charKeyColor          = "white"
+var charKeyPressedColor   = "#d9d9d9"
 
-var imageActionKey        = "../images/action_key.sci"
-var imageActionKeyPressed = "../images/grey_key.sci"
+var actionKeyColor        = "#cdcdcd"
+var actionKeyPressedColor = "#aeaeae"
 
 var top_margin = 1.35;  // gu
 var bottom_margin = 0; // gu
-var row_margin = 1.5; // gu
+var row_margin = 1; // gu
 
 var urlLayoutLeftSpacerSize = 5; // gu
 var emailLayoutUrlKeyPadding = 1.5; // gu
@@ -61,10 +67,10 @@ var emailLayoutUrlKeyPadding = 1.5; // gu
 /* language menu */
 var languageMenuListViewPadding = 2.22; // gu
 
-var wordribbonHeight = 3; // gu
+var wordribbonHeight = 6; // gu
 
-var phoneKeyboardHeightPortrait = 0.41;
-var phoneKeyboardHeightLandscape = 0.50;
+var phoneKeyboardHeightPortrait = 25; // gu
+var phoneKeyboardHeightLandscape = 18; // gu
 
-var tabletKeyboardHeightPortrait = 0.28;
-var tabletKeyboardHeightLandscape = 0.38;
+var tabletKeyboardHeightPortrait = 57; // gu
+var tabletKeyboardHeightLandscape = 41; // gu

@@ -16,6 +16,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import "keys/key_constants.js" as UI
 
 Rectangle {
 
@@ -25,7 +26,7 @@ Rectangle {
 
     Rectangle {
         anchors.fill: parent
-        color: "#f1f1f1"
+        color: UI.backgroundColor
     }
 
     ListView {
@@ -55,18 +56,18 @@ Rectangle {
                 anchors.margins: {
                     top: units.gu(0)
                     bottom: units.gu(0)
-                    left: units.gu(1)
-                    right: units.gu(1)
+                    left: units.gu(2)
+                    right: units.gu(2)
                 }
 
-                Text {
+                Label {
                     id: wordItem
-                    font.pixelSize: units.gu(1.9)
-                    font.family: "Ubuntu Medium"
-                    color: "#999999"
-                    font.bold: isPrimaryCandidate || listView.count == 1
+                    fontSize: "large"
+                    font.family: isPrimaryCandidate || listView.count == 1 ? "Ubuntu Light" : "Ubuntu Regular"
+                    color: "#333333"
                     text: word;
                     anchors.centerIn: parent
+                    anchors.verticalCenterOffset: units.gu(UI.top_margin) / 2.0
                 }
             }
 
