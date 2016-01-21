@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20160107-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Michael Sheldon ]
+  * Fix the Icelandic keyboard layout (LP: #1522157)
+  * Switch to Ubuntu.Components 1.3 and QtQuick 2.4 (LP: #1531907)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Thu, 07 Jan 2016 16:14:02 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+16.04.20151221-0ubuntu1) xenial; urgency=medium
 
   * Fix keyboard shifting out of capslock when in fields without preedit
