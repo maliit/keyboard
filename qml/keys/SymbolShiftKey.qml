@@ -22,7 +22,7 @@ ActionKey {
     label: "?123";
     shifted: "?123";
     action: "symbols";
-    anchors.leftMargin: units.gu(UI.keyMargins)
+    anchors.leftMargin: keyMargin / 2
 
     overridePressArea: true;
 

@@ -72,7 +72,7 @@ Item {
         Component {
             id: settingsComp
             Column {
-                width: parent.width
+                width: menuList.width
                 height: settingsItem.height + settingsDiv.height * 2
                 ListItem.ThinDivider { id: settingsDiv }
                 ListItem.ThinDivider { }

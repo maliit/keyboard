@@ -16,7 +16,8 @@
 
 .pragma library
 
-var keyMargins  =   0.5;    // gu
+var tabletKeyMargins  =   0.5;    // gu
+var phoneKeyMargins = 0.25 // gu
 var fontSize    =   2.5;    // gu
 var fontSizeMagnified   =   4; // gu
 var fontFamily  =   "Ubuntu light";
@@ -26,14 +27,16 @@ var fontBold    =   false;
 var backgroundColor = "#f7f7f7";
 var dividerColor = "#cdcdcd";
 
-var annotationFontSize = 0.85; // gu
+var tabletAnnotationFontSize = 14; // dp
+var phoneAnnotationFontSize = 6; // dp
 var annotationTopMargin = 0.35; // gu
 var annotationRightMargin = 0.65; // gu
 var annotationFontColor = "#333333";
-
+var annotationFont = "Ubuntu light";
 
 var spaceFontFamily = "Ubuntu light";
-var spaceFontSize = "large";
+var tabletSpaceFontSize = "large";
+var phoneSpaceFontSize = "small";
 var spaceOpacity = 0.33;
 
 /* magnifier */
@@ -57,9 +60,11 @@ var charKeyPressedColor   = "#d9d9d9"
 var actionKeyColor        = "#cdcdcd"
 var actionKeyPressedColor = "#aeaeae"
 
-var top_margin = 1.35;  // gu
+var top_margin = 1;  // gu
 var bottom_margin = 0; // gu
-var row_margin = 1; // gu
+var tabletRowMargin = 1; // gu
+var phoneRowMarginLandscape = 4; // dp
+var phoneRowMarginPortrait = 7; // dp
 
 var urlLayoutLeftSpacerSize = 5; // gu
 var emailLayoutUrlKeyPadding = 1.5; // gu
@@ -67,10 +72,13 @@ var emailLayoutUrlKeyPadding = 1.5; // gu
 /* language menu */
 var languageMenuListViewPadding = 2.22; // gu
 
-var wordribbonHeight = 6; // gu
+var tabletWordribbonHeight = 6; // gu
+var phoneWordribbonHeight = 3.5; // gu
+var tabletWordRibbonFontSize = "large"
+var phoneWordRibbonFontSize = "small"
 
-var phoneKeyboardHeightPortrait = 25; // gu
-var phoneKeyboardHeightLandscape = 18; // gu
+var phoneKeyboardHeightPortrait = 25.85; // gu
+var phoneKeyboardHeightLandscape = 19.85; // gu
 
-var tabletKeyboardHeightPortrait = 57; // gu
-var tabletKeyboardHeightLandscape = 41; // gu
+var tabletKeyboardHeightPortrait = 58.35; // gu
+var tabletKeyboardHeightLandscape = 42.35; // gu

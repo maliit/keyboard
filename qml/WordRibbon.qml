@@ -49,7 +49,7 @@ Rectangle {
             height: wordRibbonCanvas.height
             anchors.margins: 0
             property alias word_text: wordItem // For testing in Autopilot
-            property alias textBold: wordItem.font.bold // Exposed for autopilot
+            property bool textBold: isPrimaryCandidate || listView.count == 1 // Exposed for autopilot
 
             Item {
                 anchors.fill: parent
@@ -62,12 +62,12 @@ Rectangle {
 
                 Label {
                     id: wordItem
-                    fontSize: "large"
-                    font.family: isPrimaryCandidate || listView.count == 1 ? "Ubuntu Light" : "Ubuntu Regular"
+                    fontSize: fullScreenItem.tablet ? UI.tabletWordRibbonFontSize : UI.phoneWordRibbonFontSize
+                    font.family: textBold ? "Ubuntu Regular" : "Ubuntu Light"
                     color: "#333333"
                     text: word;
                     anchors.centerIn: parent
-                    anchors.verticalCenterOffset: units.gu(UI.top_margin) / 2.0
+                    anchors.verticalCenterOffset: textBold ? 2 : 0 // Adjust for change in font base between Regular and Light
                 }
             }
 

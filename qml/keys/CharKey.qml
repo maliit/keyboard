@@ -49,6 +49,12 @@ Item {
     property bool leftSide: false
     property bool rightSide: false
 
+    property double rowMargin: fullScreenItem.tablet ? units.gu(UI.tabletRowMargin)
+                                                     : (fullScreenItem.landscape ? units.dp(UI.phoneRowMarginLandscape)
+                                                                                 : units.dp(UI.phoneRowMarginPortrait))
+    property double keyMargin: fullScreenItem.tablet ? units.gu(UI.tabletKeyMargins)
+                                                     : units.gu(UI.phoneKeyMargins)
+
     // These properties are used by autopilot to determine the visible 
     // portion of the key to press
     readonly property double leftOffset: buttonRect.anchors.leftMargin
@@ -57,8 +63,8 @@ Item {
     /* design */
     property string normalColor: UI.charKeyColor
     property string pressedColor: UI.charKeyPressedColor
-    // fontSize can be overwritten when using the component, e.g. SymbolShiftKey uses smaller fontSize
-    property int fontSize: height / 3.0;
+    // Scale the font so the label fits if a long word is set
+    property int fontSize: (height / 2.8) * (4 / (label.length >= 2 ? (label.length <= 6 ? label.length + 2 : 8) : 4));
 
     /// annotation shows a small label in the upper right corner
     // if the annotiation property is set, it will be used. If not, the first position in extended[] list or extendedShifted[] list will
@@ -123,10 +129,10 @@ Item {
             id: buttonRect
             color: key.currentlyPressed || key.highlight ? pressedColor : normalColor
             anchors.fill: parent
-            anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + units.gu(UI.keyMargins) :  units.gu(UI.keyMargins)
-            anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + units.gu(UI.keyMargins) :  units.gu(UI.keyMargins)
-            anchors.bottomMargin: fullScreenItem.landscape ? units.gu(UI.row_margin) : units.gu(UI.row_margin) * 2
-            radius: 5
+            anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
+            anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
+            anchors.bottomMargin: key.rowMargin
+            radius: units.dp(4)
 
             /// label of the key
             //  the label is also the value subitted to the app
@@ -151,7 +157,7 @@ Item {
             /// shows an annotation
             // used e.g. for indicating the existence of extended keys
         
-            Label {
+            Text {
                 id: annotationLabel
                 text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
         
@@ -159,8 +165,8 @@ Item {
                 anchors.top: parent.top
                 anchors.topMargin: units.gu(UI.annotationTopMargin)
                 anchors.rightMargin: units.gu(UI.annotationRightMargin)
-                font.family: "Ubuntu light"
-                fontSize: "medium"
+                font.family: UI.annotationFont
+                font.pixelSize: fullScreenItem.tablet ? units.dp(UI.tabletAnnotationFontSize) : units.dp(UI.phoneAnnotationFontSize)
                 color: UI.annotationFontColor
             }
 

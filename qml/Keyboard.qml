@@ -94,7 +94,7 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.top
             height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
-                    units.gu(UI.top_margin)
+                    keypad.anchors.topMargin
 
             drag.target: keyboardSurface
             drag.axis: Drag.YAxis;
@@ -145,7 +145,9 @@ Item {
                     anchors.bottom: keyboardComp.top
                     width: parent.width;
 
-                    height: canvas.wordribbon_visible ? units.gu(UI.wordribbonHeight) : 0
+                    height: canvas.wordribbon_visible ? (fullScreenItem.tablet ? units.gu(UI.tabletWordribbonHeight)
+                                                                               : units.gu(UI.phoneWordribbonHeight))
+                                                      : 0
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
 
@@ -153,7 +155,7 @@ Item {
                     id: keyboardComp
                     objectName: "keyboardComp"
 
-                    height: canvas.keypadHeight - wordRibbon.height
+                    height: canvas.keypadHeight - wordRibbon.height + keypad.anchors.topMargin
                     width: parent.width
                     anchors.bottom: parent.bottom
 
@@ -172,8 +174,8 @@ Item {
 
                         anchors.top: parent.top
                         anchors.bottom: background.bottom
-                        anchors.topMargin: units.gu( UI.top_margin )
-                        anchors.bottomMargin: units.gu( UI.bottom_margin )
+                        anchors.topMargin: wordRibbon.visible ? 0 : units.gu(UI.top_margin)
+                        anchors.bottomMargin: units.gu(UI.bottom_margin)
                         width: parent.width
 
                         onPopoverEnabledChanged: fullScreenItem.reportKeyboardVisibleRect();

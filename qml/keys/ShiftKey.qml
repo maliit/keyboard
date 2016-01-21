@@ -18,9 +18,9 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 
 ActionKey {
-    iconNormal: "keyboard-caps"
-    iconShifted: "keyboard-caps-active"
-    iconCapsLock: "keyboard-caps-lock"
+    iconNormal: "keyboard-caps-disabled"
+    iconShifted: "keyboard-caps-enabled"
+    iconCapsLock: "keyboard-caps-active"
 
     // XXX: Disabled due to problems with coloring - see LP: #1251285 for details
     // colorShifted: UbuntuColors.orange
