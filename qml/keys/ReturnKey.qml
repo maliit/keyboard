@@ -28,7 +28,7 @@ ActionKey {
     label: overrideIconName == "" ? overrideLabel : ""
     shifted: label
 
-    iconNormal: (overrideIconName == "") && (overrideLabel == "") ? "keyboard-return" : overrideIconName
+    iconNormal: (overrideIconName == "") && (overrideLabel == "") ? "keyboard-enter" : overrideIconName
     iconShifted: iconNormal
     iconCapsLock: iconNormal
 
