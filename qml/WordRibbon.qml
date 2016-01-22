@@ -62,12 +62,11 @@ Rectangle {
 
                 Label {
                     id: wordItem
-                    fontSize: fullScreenItem.tablet ? UI.tabletWordRibbonFontSize : UI.phoneWordRibbonFontSize
-                    font.family: textBold ? "Ubuntu Regular" : "Ubuntu Light"
-                    color: "#333333"
+                    font.pixelSize: units.dp(fullScreenItem.tablet ? UI.tabletWordRibbonFontSize : UI.phoneWordRibbonFontSize)
+                    font.family: "Ubuntu light"
+                    font.bold: textBold
                     text: word;
                     anchors.centerIn: parent
-                    anchors.verticalCenterOffset: textBold ? 2 : 0 // Adjust for change in font base between Regular and Light
                 }
             }
 
