@@ -27,7 +27,7 @@ var fontBold    =   false;
 var backgroundColor = "#f7f7f7";
 var dividerColor = "#cdcdcd";
 
-var tabletAnnotationFontSize = 14; // dp
+var tabletAnnotationFontSize = 10; // dp
 var phoneAnnotationFontSize = 6; // dp
 var annotationTopMargin = 0.35; // gu
 var annotationRightMargin = 0.65; // gu
@@ -77,8 +77,8 @@ var phoneWordribbonHeight = 3.5; // gu
 var tabletWordRibbonFontSize = "large"
 var phoneWordRibbonFontSize = "small"
 
-var phoneKeyboardHeightPortrait = 25.85; // gu
-var phoneKeyboardHeightLandscape = 19.85; // gu
+var phoneKeyboardHeightPortrait = 0.35; // percent of screen
+var phoneKeyboardHeightLandscape = 0.43; // percent of screen
 
-var tabletKeyboardHeightPortrait = 58.35; // gu
-var tabletKeyboardHeightLandscape = 42.35; // gu
+var tabletKeyboardHeightPortrait = 0.39; // percent of screen
+var tabletKeyboardHeightLandscape = 0.42; // percent of screen

@@ -40,7 +40,8 @@ Item {
     objectName: "fullScreenItem"
 
     property bool landscape: width > height
-    readonly property bool tablet: width >= units.gu(90)
+    readonly property bool tablet: landscape ? width >= units.gu(90) : height >= units.gu(90)
+
 
     property variant input_method: maliit_input_method
     property variant event_handler: maliit_event_handler
@@ -58,11 +59,11 @@ Item {
         anchors.left: parent.left
 
         width: parent.width
-        height: (fullScreenItem.landscape ? units.gu(fullScreenItem.tablet ? UI.tabletKeyboardHeightLandscape 
-                                                                           : UI.phoneKeyboardHeightLandscape)
-                                          : units.gu(fullScreenItem.tablet ? UI.tabletKeyboardHeightPortrait 
-                                                                           : UI.phoneKeyboardHeightPortrait)
-                ) + wordRibbon.height
+        height: fullScreenItem.height * (fullScreenItem.landscape ? fullScreenItem.tablet ? UI.tabletKeyboardHeightLandscape 
+                                                                                          : UI.phoneKeyboardHeightLandscape
+                                                                  : fullScreenItem.tablet ? UI.tabletKeyboardHeightPortrait 
+                                                                                          : UI.phoneKeyboardHeightPortrait)
+                                      + wordRibbon.height
 
         property int keypadHeight: height;
 
