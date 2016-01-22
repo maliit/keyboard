@@ -75,10 +75,10 @@ var languageMenuListViewPadding = 2.22; // gu
 var tabletWordribbonHeight = 6; // gu
 var phoneWordribbonHeight = 3.5; // gu
 var tabletWordRibbonFontSize = 17 // dp
-var phoneWordRibbonFontSize = 10 // dp
+var phoneWordRibbonFontSize = 13 // dp
 
-var phoneKeyboardHeightPortrait = 0.35; // percent of screen
-var phoneKeyboardHeightLandscape = 0.43; // percent of screen
+var phoneKeyboardHeightPortrait = 0.40; // percent of screen
+var phoneKeyboardHeightLandscape = 0.49; // percent of screen
 
 var tabletKeyboardHeightPortrait = 0.39; // percent of screen
 var tabletKeyboardHeightLandscape = 0.42; // percent of screen
