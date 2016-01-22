@@ -21,7 +21,6 @@ ActionKey {
     property var actionKeyOverride: maliit_input_method.actionKeyOverride
     property string overrideIconName: actionKeyOverride && actionKeyOverride.icon ? actionKeyOverride.icon : ""
     property string overrideLabel: actionKeyOverride && actionKeyOverride.label ? actionKeyOverride.label : ""
-    anchors.rightMargin: keyMargin / 2
 
     enabled: actionKeyOverride ? actionKeyOverride.enabled : true
     // overrideIcon has high priority over label
