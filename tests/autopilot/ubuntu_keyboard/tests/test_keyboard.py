@@ -943,7 +943,7 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('Testing selection deletion')
+        keyboard.type('Testing the selection deletion')
 
         # Double tap to select a word
         self.pointer.click_object(text_area)
@@ -951,7 +951,7 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
 
         keyboard.type('\b')
 
-        expected = 'Testing  deletion'
+        expected = 'Testing the  deletion'
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
