@@ -23,5 +23,4 @@ CharKey {
     label: ".com";
     shifted: label
     extendedShifted: extended
-    fontSize: units.gu(UI.smallFontSize);
 }
