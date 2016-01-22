@@ -64,7 +64,8 @@ Item {
     property string normalColor: UI.charKeyColor
     property string pressedColor: UI.charKeyPressedColor
     // Scale the font so the label fits if a long word is set
-    property int fontSize: (height / 2.8) * (4 / (label.length >= 2 ? (label.length <= 6 ? label.length + 2 : 8) : 4));
+    property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8)) 
+                           * (4 / (label.length >= 2 ? (label.length <= 6 ? label.length + 2 : 8) : 4));
 
     /// annotation shows a small label in the upper right corner
     // if the annotiation property is set, it will be used. If not, the first position in extended[] list or extendedShifted[] list will
