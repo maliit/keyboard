@@ -28,7 +28,7 @@ var backgroundColor = "#f7f7f7";
 var dividerColor = "#cdcdcd";
 
 var tabletAnnotationFontSize = 10; // dp
-var phoneAnnotationFontSize = 6; // dp
+var phoneAnnotationFontSize = 7; // dp
 var annotationTopMargin = 0.35; // gu
 var annotationRightMargin = 0.65; // gu
 var annotationFontColor = "#333333";
