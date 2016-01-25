@@ -26,6 +26,10 @@ CharKey {
     property string iconShifted: ""
     property string iconCapsLock: ""
 
+    property string iconSourceNormal: ""
+    property string iconSourceShifted: ""
+    property string iconSourceCapsLock: ""
+
     noMagnifier: true
     skipAutoCaps: true
     property int padding: UI.actionKeyPadding
@@ -52,7 +56,9 @@ CharKey {
 
         Icon {
             id: iconImage
-            name: actionKeyRoot.iconNormal
+            source: iconSourceNormal !== "" ? iconSourceNormal
+                                            : iconNormal ? "image://theme/%1".arg(iconNormal)
+                                                         : ""
             color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - units.gu(0.15)
@@ -69,7 +75,9 @@ CharKey {
             name: "SHIFTED"
             PropertyChanges {
                 target: iconImage
-                name: actionKeyRoot.iconShifted
+                source: iconSourceShifted !== "" ? iconSourceShifted 
+                                                 : iconShifted ? "image://theme/%1".arg(iconShifted)
+                                                               : ""
                 color: actionKeyRoot.colorShifted
             }
         },
@@ -77,7 +85,9 @@ CharKey {
             name: "CAPSLOCK"
             PropertyChanges {
                 target: iconImage
-                name: actionKeyRoot.iconCapsLock
+                source: iconSourceCapsLock !== "" ? iconSourceCapsLock
+                                                  : iconCapsLock ? "image://theme/%1".arg(iconCapsLock)
+                                                                : ""
                 color: actionKeyRoot.colorCapsLock
             }
         }
