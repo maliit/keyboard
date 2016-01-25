@@ -42,7 +42,6 @@ Item {
     property bool landscape: width > height
     readonly property bool tablet: landscape ? width >= units.gu(90) : height >= units.gu(90)
 
-
     property variant input_method: maliit_input_method
     property variant event_handler: maliit_event_handler
 
