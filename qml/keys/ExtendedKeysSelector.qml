@@ -116,7 +116,7 @@ KeyPopover {
                     text: modelData
                     font.family: UI.fontFamily
                     font.pixelSize: text.length > 2 ? units.gu( UI.smallFontSize ) : units.gu( UI.fontSize )
-                    font.bold: UI.fontBold
+                    font.weight: Font.Light
                     color: key.highlight ? UI.selectionColor : UI.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }

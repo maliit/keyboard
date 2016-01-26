@@ -34,6 +34,7 @@ ActionKey {
         anchors.centerIn: parent
         anchors.verticalCenterOffset: -parent.rowMargin / 2 - units.gu(0.15)
         font.family: UI.spaceFontFamily
+        font.weight: Font.Light
         fontSize: fullScreenItem.tablet ? UI.tabletSpaceFontSize : UI.phoneSpaceFontSize
         opacity: UI.spaceOpacity
         text: Languages.languageIdToName(maliit_input_method.activeLanguage)

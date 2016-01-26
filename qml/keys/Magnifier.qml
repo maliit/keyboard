@@ -83,8 +83,8 @@ KeyPopover {
             anchors.centerIn: parent
             text: currentlyAssignedKey ? currentlyAssignedKey.valueToSubmit : ""
             font.family: UI.fontFamily
+            font.weight: Font.Light
             font.pixelSize: units.gu( UI.fontSizeMagnified )
-            font.bold: UI.fontBold
             color: UI.fontColor
         }
 

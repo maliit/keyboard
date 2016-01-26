@@ -143,7 +143,7 @@ Item {
                 text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
                 font.family: UI.fontFamily
                 font.pixelSize: fontSize
-                font.bold: UI.fontBold
+                font.weight: Font.Light
                 color: UI.fontColor
                 anchors.right: parent.right
                 anchors.left: parent.left
@@ -168,6 +168,7 @@ Item {
                 anchors.rightMargin: units.gu(UI.annotationRightMargin)
                 font.family: UI.annotationFont
                 font.pixelSize: fullScreenItem.tablet ? units.dp(UI.tabletAnnotationFontSize) : units.dp(UI.phoneAnnotationFontSize)
+                font.weight: Font.Light
                 color: UI.annotationFontColor
             }
 
