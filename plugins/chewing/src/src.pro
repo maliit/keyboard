@@ -3,9 +3,6 @@ TOP_SRCDIR = $$PWD/../../..
 
 include($${TOP_SRCDIR}/config.pri)
 
-PINYIN_DATA_DIR = "$$system(pkg-config --variable pkgdatadir libpinyin)/data"
-DEFINES += PINYIN_DATA_DIR=\\\"$${PINYIN_DATA_DIR}\\\"
-
 TEMPLATE        = lib
 CONFIG         += plugin
 QT             += widgets
@@ -14,28 +11,28 @@ INCLUDEPATH    += \
     $${TOP_SRCDIR}/src/lib/logic
 
 HEADERS         = \
-                  pinyinadapter.h \
-                  pinyinplugin.h \
-                  chineselanguagefeatures.h \
+                  chewingadapter.h \
+                  chewingplugin.h \
+                  $${TOP_SRCDIR}/src/plugins/pinyin/src/chineselanguagefeatures.h \
                   $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.h
 
 SOURCES         = \
-                  pinyinadapter.cpp \
-                  pinyinplugin.cpp \
-                  chineselanguagefeatures.cpp \
+                  chewingadapter.cpp \
+                  chewingplugin.cpp \
+                  $${TOP_SRCDIR}/src/plugins/pinyin/src/chineselanguagefeatures.cpp \
                   $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.cpp
 
 TARGET          = $$qtLibraryTarget(zhplugin)
 
-EXAMPLE_FILES = pinyinplugin.json
+EXAMPLE_FILES = chewingplugin.json
 
 # install
 target.path = $${UBUNTU_KEYBOARD_LIB_DIR}/zh-Hans/
 INSTALLS += target
 
 OTHER_FILES += \
-    pinyinplugin.json
+    chewingplugin.json
 
 CONFIG += link_pkgconfig
 PKGCONFIG += glib-2.0
-PKGCONFIG += libpinyin
+PKGCONFIG += libchewing
