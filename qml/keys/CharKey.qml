@@ -152,7 +152,8 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter 
                 anchors.verticalCenterOffset: -units.gu(0.15)
                 horizontalAlignment: Text.AlignHCenter
-                elide: Text.ElideRight
+                // Avoid eliding characters that are slightly too wide (e.g. some emoji)
+                elide: text.length <= 2 ? Text.ElideNone : Text.ElideRight
             }
         
             /// shows an annotation
