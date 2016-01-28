@@ -1,3 +1,16 @@
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20160128-0ubuntu1) xenial; urgency=medium
+
+  [ Aron Xu ]
+  * Transition from libpinyin4 to libpinyin7, no actual code change
+    required.
+
+  [ Michael Sheldon ]
+  * Fix selection deletion autopilot test
+  * Update keyboard visuals to match new design spec (LP: #1428146,
+    #1321603, #1385431)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Thu, 28 Jan 2016 19:08:52 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+16.04.20160107-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
