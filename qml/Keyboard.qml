@@ -62,7 +62,7 @@ Item {
                                                                                           : UI.phoneKeyboardHeightLandscape
                                                                   : fullScreenItem.tablet ? UI.tabletKeyboardHeightPortrait 
                                                                                           : UI.phoneKeyboardHeightPortrait)
-                                      + wordRibbon.height
+                                      + wordRibbon.height + borderTop.height
 
         property int keypadHeight: height;
 
@@ -93,7 +93,7 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.top
             height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
-                    keypad.anchors.topMargin
+                    borderTop.height
 
             drag.target: keyboardSurface
             drag.axis: Drag.YAxis;
@@ -167,13 +167,20 @@ Item {
 
                         color: UI.backgroundColor
                     }
+                
+                    Rectangle {
+                        id: borderTop
+                        color: UI.backgroundColor
+                        width: parent.width
+                        anchors.top: parent.top.bottom
+                        height: wordRibbon.visible ? 0 : units.gu(UI.top_margin)
+                    }
 
                     KeyboardContainer {
                         id: keypad
 
-                        anchors.top: parent.top
+                        anchors.top: borderTop.bottom
                         anchors.bottom: background.bottom
-                        anchors.topMargin: wordRibbon.visible ? 0 : units.gu(UI.top_margin)
                         anchors.bottomMargin: units.gu(UI.bottom_margin)
                         width: parent.width
 
