@@ -17,13 +17,12 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 
-ActionKey {
-    iconNormal: "keyboard-caps"
-    iconShifted: "keyboard-caps-active"
-    iconCapsLock: "keyboard-caps-lock"
+import "key_constants.js" as UI
 
-    // XXX: Disabled due to problems with coloring - see LP: #1251285 for details
-    // colorShifted: UbuntuColors.orange
+ActionKey {
+    iconSourceNormal: "../images/keyboard-caps-disabled.svg"
+    iconSourceShifted: "../images/keyboard-caps-enabled.svg"
+    iconSourceCapsLock: "../images/keyboard-caps-locked.svg"
 
     action: "shift"
 

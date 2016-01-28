@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import "key_constants.js" as UI
 
 /*!
@@ -83,8 +83,8 @@ KeyPopover {
             anchors.centerIn: parent
             text: currentlyAssignedKey ? currentlyAssignedKey.valueToSubmit : ""
             font.family: UI.fontFamily
+            font.weight: Font.Light
             font.pixelSize: units.gu( UI.fontSizeMagnified )
-            font.bold: UI.fontBold
             color: UI.fontColor
         }
 

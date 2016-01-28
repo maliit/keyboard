@@ -15,26 +15,20 @@
  */
 
 import QtQuick 2.4
+import Ubuntu.Components 1.3
 
 import "key_constants.js" as UI
+import "languages.js" as Languages
 
 ActionKey {
-    label: "?123";
-    shifted: "?123";
-    action: "symbols";
+    normalColor: UI.charKeyColor
+    pressedColor: UI.charKeyPressedColor
 
-    overridePressArea: true;
-
-    onPressed: {
-        if (maliit_input_method.useAudioFeedback)
-            audioFeedback.play();
-
-        if (maliit_input_method.useHapticFeedback)
-            pressEffect.start();
-
-        if (panel.state == "CHARACTERS")
-            panel.state = "SYMBOLS";
-        else
-            panel.state = "CHARACTERS";
+    Image {
+        anchors.centerIn: parent
+        source: "../images/keyboard_spacebar.png"
     }
+
+    action: "space"
+    switchBackFromSymbols: true
 }

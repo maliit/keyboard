@@ -14,9 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.3
 
 import "key_constants.js" as UI
 
@@ -26,6 +26,10 @@ CharKey {
     property string iconShifted: ""
     property string iconCapsLock: ""
 
+    property string iconSourceNormal: ""
+    property string iconSourceShifted: ""
+    property string iconSourceCapsLock: ""
+
     noMagnifier: true
     skipAutoCaps: true
     property int padding: UI.actionKeyPadding
@@ -33,8 +37,8 @@ CharKey {
     // action keys are a bit wider
     width: panel.keyWidth + units.gu( padding )
 
-    imgNormal: UI.imageActionKey
-    imgPressed: UI.imageActionKeyPressed
+    normalColor: UI.actionKeyColor
+    pressedColor: UI.actionKeyPressedColor
 
     // can be overwritten by keys
     property color colorNormal: UI.fontColor
@@ -52,14 +56,15 @@ CharKey {
 
         Icon {
             id: iconImage
-            name: actionKeyRoot.iconNormal
+            source: iconSourceNormal !== "" ? iconSourceNormal
+                                            : iconNormal ? "image://theme/%1".arg(iconNormal)
+                                                         : ""
             color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: fullScreenItem.landscape ? -units.dp( UI.keyMargins ) : -units.gu(UI.row_margin/2) - units.gu(0.15)
-
+            anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - units.gu(0.15)
             visible: (label == "")
-            width: units.gu(2.5)
-            height: units.gu(2.5)
+            height: actionKeyRoot.fontSize
+            width: height
         }
     }
 
@@ -70,7 +75,9 @@ CharKey {
             name: "SHIFTED"
             PropertyChanges {
                 target: iconImage
-                name: actionKeyRoot.iconShifted
+                source: iconSourceShifted !== "" ? iconSourceShifted 
+                                                 : iconShifted ? "image://theme/%1".arg(iconShifted)
+                                                               : ""
                 color: actionKeyRoot.colorShifted
             }
         },
@@ -78,7 +85,9 @@ CharKey {
             name: "CAPSLOCK"
             PropertyChanges {
                 target: iconImage
-                name: actionKeyRoot.iconCapsLock
+                source: iconSourceCapsLock !== "" ? iconSourceCapsLock
+                                                  : iconCapsLock ? "image://theme/%1".arg(iconCapsLock)
+                                                                : ""
                 color: actionKeyRoot.colorCapsLock
             }
         }

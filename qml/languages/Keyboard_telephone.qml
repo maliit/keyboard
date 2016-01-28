@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import "../keys"
 
 KeyPad {
@@ -26,48 +26,53 @@ KeyPad {
     Column {
         id: c1
         anchors.fill: parent
-        anchors.margins: 0;
+        anchors.leftMargin: units.gu(1);
+        anchors.rightMargin: units.gu(1);
+        anchors.bottomMargin: units.gu(1);
 
-        spacing: 0
+        property double numKeyWidth: panel.keyWidth - units.gu(0.75);
+        property double numKeyHeight: panel.keyHeight - units.gu(1);
+
+        spacing: units.gu(1);
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
-            spacing: 0
+            spacing: units.gu(0.5);
 
-            CharKey { label: "1"; noMagnifier: true; }
-            CharKey { label: "2"; noMagnifier: true; }
-            CharKey { label: "3"; noMagnifier: true; }
+            CharKey { label: "1"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "2"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "3"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "#"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
-            spacing: 0
+            spacing: units.gu(0.5);
 
-            CharKey { label: "4"; noMagnifier: true; }
-            CharKey { label: "5"; noMagnifier: true; }
-            CharKey { label: "6"; noMagnifier: true; }
+            CharKey { label: "4"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "5"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "6"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "*"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
-            spacing: 0
+            spacing: units.gu(0.5);
 
-            CharKey { label: "7"; noMagnifier: true; }
-            CharKey { label: "8"; noMagnifier: true; }
-            CharKey { label: "9"; noMagnifier: true; }
+            CharKey { label: "7"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "8"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "9"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            BackspaceKey { padding: 0; width: c1.numKeyWidth; height: c1.numKeyHeight; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            anchors.margins: 50;
-            spacing: 0
+            spacing: units.gu(0.5);
 
-            CharKey { label: "+"; annotation: "*#"; extended: ["*", "#"]; noMagnifier: true; }
-            CharKey { label: "0"; noMagnifier: true; }
-            BackspaceKey { padding: 0; }
+            CharKey { label: "+"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "0"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: ""; enabled: false; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            ReturnKey { padding: 0; width: c1.numKeyWidth; height: c1.numKeyHeight; }
         }
     } // column
 }

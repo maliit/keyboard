@@ -40,6 +40,7 @@ Item {
     objectName: "fullScreenItem"
 
     property bool landscape: width > height
+    readonly property bool tablet: landscape ? width >= units.gu(90) : height >= units.gu(90)
 
     property variant input_method: maliit_input_method
     property variant event_handler: maliit_event_handler
@@ -57,8 +58,11 @@ Item {
         anchors.left: parent.left
 
         width: parent.width
-        height: fullScreenItem.landscape ? (fullScreenItem.height * UI.phoneKeyboardHeightLandscape) + wordRibbon.height
-                                         : (fullScreenItem.height * UI.phoneKeyboardHeightPortrait) + wordRibbon.height
+        height: fullScreenItem.height * (fullScreenItem.landscape ? fullScreenItem.tablet ? UI.tabletKeyboardHeightLandscape 
+                                                                                          : UI.phoneKeyboardHeightLandscape
+                                                                  : fullScreenItem.tablet ? UI.tabletKeyboardHeightPortrait 
+                                                                                          : UI.phoneKeyboardHeightPortrait)
+                                      + wordRibbon.height + borderTop.height
 
         property int keypadHeight: height;
 
@@ -89,7 +93,7 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.top
             height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
-            borderTop.height + units.gu(UI.top_margin)
+                    borderTop.height
 
             drag.target: keyboardSurface
             drag.axis: Drag.YAxis;
@@ -124,6 +128,13 @@ Item {
                 onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
                 onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
 
+                Rectangle {
+                    width: parent.width
+                    height: units.dp(1)
+                    color: UI.dividerColor
+                    anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
+                }
+
                 WordRibbon {
                     id: wordRibbon
                     objectName: "wordRibbon"
@@ -133,7 +144,9 @@ Item {
                     anchors.bottom: keyboardComp.top
                     width: parent.width;
 
-                    height: canvas.wordribbon_visible ? units.gu(UI.wordribbonHeight) : 0
+                    height: canvas.wordribbon_visible ? (fullScreenItem.tablet ? units.gu(UI.tabletWordribbonHeight)
+                                                                               : units.gu(UI.phoneWordribbonHeight))
+                                                      : 0
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
 
@@ -141,7 +154,7 @@ Item {
                     id: keyboardComp
                     objectName: "keyboardComp"
 
-                    height: canvas.keypadHeight - wordRibbon.height
+                    height: canvas.keypadHeight - wordRibbon.height + keypad.anchors.topMargin
                     width: parent.width
                     anchors.bottom: parent.bottom
 
@@ -154,12 +167,13 @@ Item {
 
                         color: UI.backgroundColor
                     }
-
-                    Image {
+                
+                    Rectangle {
                         id: borderTop
-                        source: "styles/ubuntu/images/border_top.png"
+                        color: UI.backgroundColor
                         width: parent.width
                         anchors.top: parent.top.bottom
+                        height: wordRibbon.visible ? 0 : units.gu(UI.top_margin)
                     }
 
                     KeyboardContainer {
@@ -167,8 +181,7 @@ Item {
 
                         anchors.top: borderTop.bottom
                         anchors.bottom: background.bottom
-                        anchors.topMargin: units.gu( UI.top_margin )
-                        anchors.bottomMargin: units.gu( UI.bottom_margin )
+                        anchors.bottomMargin: units.gu(UI.bottom_margin)
                         width: parent.width
 
                         onPopoverEnabledChanged: fullScreenItem.reportKeyboardVisibleRect();
