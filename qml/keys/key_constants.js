@@ -74,7 +74,7 @@ var emailLayoutUrlKeyPadding = 1.5; // gu
 var languageMenuListViewPadding = 2.22; // gu
 
 var tabletWordribbonHeight = 6; // gu
-var phoneWordribbonHeight = 4.2; // gu
+var phoneWordribbonHeight = 4; // gu
 var tabletWordRibbonFontSize = 17 // dp
 var phoneWordRibbonFontSize = 14 // dp
 
