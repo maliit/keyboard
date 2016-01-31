@@ -126,7 +126,7 @@ class Keyboard(object):
         if self.is_available():
             x, y, h, w = self._keyboard_container.globalRect
             x_pos = int(w / 2)
-            start_y = y + int(h / 2)
+            start_y = y + int(h / 2.5)
             end_y = y + h
             self.pointer.drag(x_pos, start_y, x_pos, end_y)
 
@@ -211,6 +211,20 @@ class Keyboard(object):
             self.press_key(char)
             sleep(delay)
 
+    def reset(self):
+        """Reconnect to the maliit process. This should be called by any tests
+        which restart unity8 (thus causing the maliit-server process to also
+        be restarted).
+        """
+        Keyboard.__maliit = None
+        # self.maliit is a dynamic property (using the @property decorator),
+        # so this is actually a function call to the maliit() function,
+        # which triggers the maliit reconnection.
+        self.maliit
+        self._keyboard_container = self.keyboard.select_single(
+            "KeyboardContainer"
+        )
+
     @property
     def current_state(self):
         return self.keyboard.state
@@ -232,8 +246,8 @@ class Keyboard(object):
                 need_to_update = True
 
         if (
-            need_to_update
-            or self._stored_active_keypad_name != self._current_keypad_name
+            need_to_update or
+            self._stored_active_keypad_name != self._current_keypad_name
         ):
             self._stored_active_keypad_name = self._current_keypad_name
             logger.debug("Keypad lookup")

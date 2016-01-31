@@ -28,9 +28,9 @@
 #ifndef ABSTRACTLANGUAGEPLUGIN_H
 #define ABSTRACTLANGUAGEPLUGIN_H
 
-#include "languageplugininterface.h"
-
 #include <QObject>
+
+#include "languageplugininterface.h"
 
 class AbstractLanguagePlugin : public QObject, public LanguagePluginInterface
 {

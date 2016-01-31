@@ -1,0 +1,145 @@
+# Gaelic; Scottish translation for ubuntu-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-05-11 12:50+0100\n"
+"PO-Revision-Date: 2016-01-26 23:20+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2016-01-27 05:31+0000\n"
+"X-Generator: Launchpad (build 17902)\n"
+
+#: ../qml/keys/LanguageMenu.qml:80
+msgid "Settings"
+msgstr "Roghainnean"
+
+#: ../qml/keys/LanguageMenu.qml:95
+msgid "Arabic"
+msgstr "Arabais"
+
+#: ../qml/keys/LanguageMenu.qml:96
+msgid "Azerbaijani"
+msgstr "Asarbaideànais"
+
+#: ../qml/keys/LanguageMenu.qml:97
+msgid "Bosnian"
+msgstr "Bosnais"
+
+#: ../qml/keys/LanguageMenu.qml:98
+msgid "Catalan"
+msgstr "Catalanais"
+
+#: ../qml/keys/LanguageMenu.qml:99
+msgid "Czech"
+msgstr "Seicis"
+
+#: ../qml/keys/LanguageMenu.qml:100
+msgid "Danish"
+msgstr "Danmhairgis"
+
+#: ../qml/keys/LanguageMenu.qml:101
+msgid "German"
+msgstr "Gearmailtis"
+
+#: ../qml/keys/LanguageMenu.qml:102
+msgid "Emoji"
+msgstr "Emoji"
+
+#: ../qml/keys/LanguageMenu.qml:103
+msgid "Greek"
+msgstr "Greugais"
+
+#: ../qml/keys/LanguageMenu.qml:104
+msgid "English"
+msgstr "Beurla"
+
+#: ../qml/keys/LanguageMenu.qml:105
+msgid "Spanish"
+msgstr "Spàinntis"
+
+#: ../qml/keys/LanguageMenu.qml:106
+msgid "Finnish"
+msgstr "Fionnlainnis"
+
+#: ../qml/keys/LanguageMenu.qml:107
+msgid "French"
+msgstr "Fraingis"
+
+#: ../qml/keys/LanguageMenu.qml:108
+msgid "Scottish Gaelic"
+msgstr "Gàidhlig"
+
+#: ../qml/keys/LanguageMenu.qml:109
+msgid "Hebrew"
+msgstr "Eabhra"
+
+#: ../qml/keys/LanguageMenu.qml:110
+msgid "Croatian"
+msgstr "Cròthaisis"
+
+#: ../qml/keys/LanguageMenu.qml:111
+msgid "Hungarian"
+msgstr "Ungairis"
+
+#: ../qml/keys/LanguageMenu.qml:112
+msgid "Icelandic"
+msgstr "Innis Tìlis"
+
+#: ../qml/keys/LanguageMenu.qml:113
+msgid "Italian"
+msgstr "Eadailtis"
+
+#: ../qml/keys/LanguageMenu.qml:114
+msgid "Dutch"
+msgstr "Duitsis"
+
+#: ../qml/keys/LanguageMenu.qml:115
+msgid "Norwegian"
+msgstr "Nirribhis"
+
+#: ../qml/keys/LanguageMenu.qml:116
+msgid "Polish"
+msgstr "Pòlainnis"
+
+#: ../qml/keys/LanguageMenu.qml:117
+msgid "Portuguese"
+msgstr "Portagailis"
+
+#: ../qml/keys/LanguageMenu.qml:118
+msgid "Romanian"
+msgstr "Romàinis"
+
+#: ../qml/keys/LanguageMenu.qml:119
+msgid "Russian"
+msgstr "Ruisis"
+
+#: ../qml/keys/LanguageMenu.qml:120
+msgid "Slovenian"
+msgstr "Slòbhainis"
+
+#: ../qml/keys/LanguageMenu.qml:121
+msgid "Serbian"
+msgstr "Sèirbis"
+
+#: ../qml/keys/LanguageMenu.qml:122
+msgid "Swedish"
+msgstr "Suainis"
+
+#: ../qml/keys/LanguageMenu.qml:123
+msgid "Ukrainian"
+msgstr "Ucràinis"
+
+#: ../qml/keys/LanguageMenu.qml:124
+msgid "Chinese - Pinyin"
+msgstr "Sìnis - Pinyin"
+
+#~ msgid "Language: "
+#~ msgstr "Cànan: "

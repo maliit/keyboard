@@ -8,135 +8,138 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-05-11 12:50+0100\n"
-"PO-Revision-Date: 2015-04-27 12:30+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-09-06 15:03+0000\n"
+"Last-Translator: Милош Станковић <stankovic.milos@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-03 05:50+0000\n"
-"X-Generator: Launchpad (build 17532)\n"
+"X-Launchpad-Export-Date: 2015-12-24 05:37+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "Settings"
-msgstr ""
+msgstr "Подешавања"
 
 #: ../qml/keys/LanguageMenu.qml:95
 msgid "Arabic"
-msgstr ""
+msgstr "Арапски"
 
 #: ../qml/keys/LanguageMenu.qml:96
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Азербејџански"
 
 #: ../qml/keys/LanguageMenu.qml:97
 msgid "Bosnian"
-msgstr ""
+msgstr "Босански"
 
 #: ../qml/keys/LanguageMenu.qml:98
 msgid "Catalan"
-msgstr ""
+msgstr "Каталонски"
 
 #: ../qml/keys/LanguageMenu.qml:99
 msgid "Czech"
-msgstr ""
+msgstr "Чешки"
 
 #: ../qml/keys/LanguageMenu.qml:100
 msgid "Danish"
-msgstr ""
+msgstr "Дански"
 
 #: ../qml/keys/LanguageMenu.qml:101
 msgid "German"
-msgstr ""
+msgstr "Немачки"
 
 #: ../qml/keys/LanguageMenu.qml:102
 msgid "Emoji"
-msgstr ""
+msgstr "Емођи"
 
 #: ../qml/keys/LanguageMenu.qml:103
 msgid "Greek"
-msgstr ""
+msgstr "Грчки"
 
 #: ../qml/keys/LanguageMenu.qml:104
 msgid "English"
-msgstr ""
+msgstr "Енглески"
 
 #: ../qml/keys/LanguageMenu.qml:105
 msgid "Spanish"
-msgstr ""
+msgstr "Шпански"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Finnish"
-msgstr ""
+msgstr "Фински"
 
 #: ../qml/keys/LanguageMenu.qml:107
 msgid "French"
-msgstr ""
+msgstr "Француски"
 
 #: ../qml/keys/LanguageMenu.qml:108
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "Шкотски галски"
 
 #: ../qml/keys/LanguageMenu.qml:109
 msgid "Hebrew"
-msgstr ""
+msgstr "Хебрејски"
 
 #: ../qml/keys/LanguageMenu.qml:110
 msgid "Croatian"
-msgstr ""
+msgstr "Хрватски"
 
 #: ../qml/keys/LanguageMenu.qml:111
 msgid "Hungarian"
-msgstr ""
+msgstr "Мађарски"
 
 #: ../qml/keys/LanguageMenu.qml:112
 msgid "Icelandic"
-msgstr ""
+msgstr "Исландски"
 
 #: ../qml/keys/LanguageMenu.qml:113
 msgid "Italian"
-msgstr ""
+msgstr "Италијански"
 
 #: ../qml/keys/LanguageMenu.qml:114
 msgid "Dutch"
-msgstr ""
+msgstr "Холандски"
 
 #: ../qml/keys/LanguageMenu.qml:115
 msgid "Norwegian"
-msgstr ""
+msgstr "Норвешки"
 
 #: ../qml/keys/LanguageMenu.qml:116
 msgid "Polish"
-msgstr ""
+msgstr "Пољски"
 
 #: ../qml/keys/LanguageMenu.qml:117
 msgid "Portuguese"
-msgstr ""
+msgstr "Португалски"
 
 #: ../qml/keys/LanguageMenu.qml:118
 msgid "Romanian"
-msgstr ""
+msgstr "Румунски"
 
 #: ../qml/keys/LanguageMenu.qml:119
 msgid "Russian"
-msgstr ""
+msgstr "Руски"
 
 #: ../qml/keys/LanguageMenu.qml:120
 msgid "Slovenian"
-msgstr ""
+msgstr "Словеначки"
 
 #: ../qml/keys/LanguageMenu.qml:121
 msgid "Serbian"
-msgstr ""
+msgstr "Српски"
 
 #: ../qml/keys/LanguageMenu.qml:122
 msgid "Swedish"
-msgstr ""
+msgstr "Шведски"
 
 #: ../qml/keys/LanguageMenu.qml:123
 msgid "Ukrainian"
-msgstr ""
+msgstr "Украјински"
 
 #: ../qml/keys/LanguageMenu.qml:124
 msgid "Chinese - Pinyin"
-msgstr ""
+msgstr "Кинески - Пинјин"
+
+#~ msgid "Language: "
+#~ msgstr "Језик: "
