@@ -14,10 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import QtMultimedia 5.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.Popups 0.1
+import Ubuntu.Components 1.3
+import Ubuntu.Components.Popups 1.3
 
 import "key_constants.js" as UI
 
@@ -43,16 +43,21 @@ Item {
     property bool leftSide: false
     property bool rightSide: false
 
+    property double rowMargin: fullScreenItem.tablet ? units.gu(UI.tabletRowMargin)
+                                                     : (fullScreenItem.landscape ? units.dp(UI.phoneRowMarginLandscape)
+                                                                                 : units.dp(UI.phoneRowMarginPortrait))
+    property double keyMargin: fullScreenItem.tablet ? units.gu(UI.tabletKeyMargins)
+                                                     : units.gu(UI.phoneKeyMargins)
+
     // These properties are used by autopilot to determine the visible
     // portion of the key to press
-    readonly property double leftOffset: buttonImage.anchors.leftMargin
-    readonly property double rightOffset: buttonImage.anchors.rightMargin
+    readonly property double leftOffset: buttonRect.anchors.leftMargin
+    readonly property double rightOffset: buttonRect.anchors.rightMargin
 
     /* design */
-    property string imgNormal: UI.imageCharKey
-    property string imgPressed: UI.imageCharKeyPressed
-    // fontSize can be overwritten when using the component, e.g. SymbolShiftKey uses smaller fontSize
-    property int fontSize: units.gu( UI.fontSize );
+    property string normalColor: UI.charKeyColor
+    property string pressedColor: UI.charKeyPressedColor
+    property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8));
 
     /// annotation shows a small label in the upper right corner
     // if the annotiation property is set, it will be used. If not, the first position in extended[] list or extendedShifted[] list will
@@ -79,19 +84,14 @@ Item {
         height: panel.keyHeight
         width: parent.width
 
-        BorderImage {
-            id: buttonImage
+        Rectangle {
+            id: buttonRect
+            color: key.currentlyPressed || key.highlight ? pressedColor : normalColor
             anchors.fill: parent
-            anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
-            anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + units.dp(UI.keyMargins) :  units.dp(UI.keyMargins)
-            anchors.bottomMargin: fullScreenItem.landscape ? units.dp( UI.keyMargins ) * 2 : units.gu(UI.row_margin);
-            source: key.imgNormal
-
-            BorderImage {
-                anchors.fill: parent
-                visible: key.currentlyPressed || key.highlight
-                source: key.imgPressed
-            }
+            anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
+            anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
+            anchors.bottomMargin: key.rowMargin
+            radius: units.dp(4)
 
             /// label of the key
             //  the label is also the value subitted to the app
@@ -106,7 +106,7 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.family: UI.fontFamily
                     font.pixelSize: fontSize
-                    font.bold: UI.fontBold
+                    font.weight: Font.Light
                     color: UI.fontColor
                     textFormat: Text.StyledText
                 }
@@ -118,8 +118,9 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottomMargin: units.gu( UI.annotationMargins )
 
-                    font.pixelSize: units.gu( UI.annotationFontSize )
-                    font.bold: false
+                    font.family: UI.annotationFont
+                    font.pixelSize: fullScreenItem.tablet ? units.dp(UI.tabletAnnotationFontSize) : units.dp(UI.phoneAnnotationFontSize)
+                    font.weight: Font.Light
                     color: UI.annotationFontColor
                     visible: annotation != ""
                 }
@@ -127,8 +128,8 @@ Item {
         }
 
         FlickPop {
-            anchors.horizontalCenter: buttonImage.horizontalCenter
-            anchors.bottom: buttonImage.top
+            anchors.horizontalCenter: buttonRect.horizontalCenter
+            anchors.bottom: buttonRect.top
             anchors.bottomMargin: key.height * 0.5
             width: units.gu((UI.fontSize + UI.flickMargin) * 3)
             height: units.gu((UI.fontSize + UI.flickMargin) * 3)
