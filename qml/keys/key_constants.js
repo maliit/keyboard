@@ -16,19 +16,29 @@
 
 .pragma library
 
-var keyMargins  =   1.8;    // dp
+var tabletKeyMargins  =   0.5;    // gu
+var phoneKeyMargins = 0.25 // gu
 var fontSize    =   2.5;    // gu
 var fontSizeMagnified   =   4; // gu
 var fontFamily  =   "Ubuntu";
-var fontColor   =   "#5d5d5d"
-var fontBold    =   false
+var fontColor   =   "#333333";
+var fontBold    =   false;
+var selectionColor = "#19B6EE";
 
-var backgroundColor = "#f1f1f1"
+var backgroundColor = "#f7f7f7";
+var dividerColor = "#cdcdcd";
 
-var annotationFontSize = 0.85; // gu
+var tabletAnnotationFontSize = 10; // dp
+var phoneAnnotationFontSize = 10; // dp
 var annotationTopMargin = 0.35; // gu
 var annotationRightMargin = 0.65; // gu
-var annotationFontColor = "#5d5d5d"
+var annotationFontColor = "#333333";
+var annotationFont = "Ubuntu";
+
+var spaceFontFamily = "Ubuntu";
+var tabletSpaceFontSize = "large";
+var phoneSpaceFontSize = "small";
+var spaceOpacity = 0.33;
 
 /* magnifier */
 var magnifierHorizontalPadding = 1.8; // gu, stretch the magnifier a little bit in x-axis
@@ -45,15 +55,17 @@ var popoverTopMargin   = 10; // dp
 var popoverEdgeMargin = 2.2; // gu
 var popoverSquat      = 3; // gu, when no wordribbon, avoid click-through above input trap
 
-var imageCharKey        = "../images/white_key.sci"
-var imageCharKeyPressed = "../images/grey_key.sci"
+var charKeyColor          = "white"
+var charKeyPressedColor   = "#d9d9d9"
 
-var imageActionKey        = "../images/action_key.sci"
-var imageActionKeyPressed = "../images/grey_key.sci"
+var actionKeyColor        = "#cdcdcd"
+var actionKeyPressedColor = "#aeaeae"
 
-var top_margin = 1.35;  // gu
+var top_margin = 1;  // gu
 var bottom_margin = 0; // gu
-var row_margin = 1.5; // gu
+var tabletRowMargin = 1; // gu
+var phoneRowMarginLandscape = 4; // dp
+var phoneRowMarginPortrait = 7; // dp
 
 var urlLayoutLeftSpacerSize = 5; // gu
 var emailLayoutUrlKeyPadding = 1.5; // gu
@@ -61,10 +73,13 @@ var emailLayoutUrlKeyPadding = 1.5; // gu
 /* language menu */
 var languageMenuListViewPadding = 2.22; // gu
 
-var wordribbonHeight = 3; // gu
+var tabletWordribbonHeight = 6; // gu
+var phoneWordribbonHeight = 4; // gu
+var tabletWordRibbonFontSize = 17 // dp
+var phoneWordRibbonFontSize = 14 // dp
 
-var phoneKeyboardHeightPortrait = 0.41;
-var phoneKeyboardHeightLandscape = 0.50;
+var phoneKeyboardHeightPortrait = 0.40; // percent of screen
+var phoneKeyboardHeightLandscape = 0.49; // percent of screen
 
-var tabletKeyboardHeightPortrait = 0.28;
-var tabletKeyboardHeightLandscape = 0.38;
+var tabletKeyboardHeightPortrait = 0.39; // percent of screen
+var tabletKeyboardHeightLandscape = 0.42; // percent of screen

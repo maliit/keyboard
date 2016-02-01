@@ -943,7 +943,7 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('Testing selection deletion')
+        keyboard.type('Testing the selection deletion')
 
         # Double tap to select a word
         self.pointer.click_object(text_area)
@@ -951,7 +951,7 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
 
         keyboard.type('\b')
 
-        expected = 'Testing  deletion'
+        expected = 'Testing the  deletion'
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
@@ -1185,7 +1185,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
 
         """
         qml = dedent("""
-        import QtQuick 2.0
+        import QtQuick 2.4
         import Ubuntu.Components 1.1
         import Ubuntu.Web 0.2
 
