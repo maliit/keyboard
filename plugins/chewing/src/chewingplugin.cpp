@@ -1,5 +1,5 @@
 #include "chewingplugin.h"
-#include "chineselanguagefeatures.h"
+#include "../../pinyin/src/chineselanguagefeatures.h"
 
 #include <QDebug>
 

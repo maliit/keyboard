@@ -35,14 +35,12 @@ ChewingAdapter::ChewingAdapter(QObject *parent) :
 
 ChewingAdapter::~ChewingAdapter()
 {
-    chewing_free_instance(m_instance);
-    chewing_fini(m_context);
 }
 
 void ChewingAdapter::parse(const QString& string)
 {
     m_candidates.clear();
-    Q_EMIT newPredictionSuggestions(string, candidates);
+    Q_EMIT newPredictionSuggestions(string, m_candidates);
 }
 
 void ChewingAdapter::wordCandidateSelected(const QString& word)
