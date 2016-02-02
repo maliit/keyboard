@@ -48,7 +48,8 @@ ActionKey {
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
 
-        event_handler.onKeyPressed("", action);
+        if (!isPreedit)
+            event_handler.onKeyPressed("", action);
     }
 
     onPressAndHold: {
