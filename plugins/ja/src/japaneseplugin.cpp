@@ -51,7 +51,7 @@ void JapanesePlugin::finishedProcessing(QString word, QStringList suggestions)
 {
     Q_EMIT newPredictionSuggestions(word, suggestions);
     if (word != m_nextWord) {
-        Q_EMIT parsePredictionText(word);
+        Q_EMIT parsePredictionText(m_nextWord);
     } else {
         m_processingWord = false;
     }
