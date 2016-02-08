@@ -14,17 +14,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
+import Ubuntu.Components 1.3
 
 import "key_constants.js" as UI
+import "languages.js" as Languages
 
 ActionKey {
     label: " ";
     shifted: " ";
 
-    imgNormal: UI.imageCharKey
-    imgPressed: UI.imageCharKeyPressed
+    normalColor: UI.charKeyColor
+    pressedColor: UI.charKeyPressedColor
 
     action: "space"
     switchBackFromSymbols: true
+
+    Label {
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: -parent.rowMargin / 2 - units.gu(0.15)
+        font.family: UI.spaceFontFamily
+        font.weight: Font.Light
+        fontSize: fullScreenItem.tablet ? UI.tabletSpaceFontSize : UI.phoneSpaceFontSize
+        opacity: UI.spaceOpacity
+        text: Languages.languageIdToName(maliit_input_method.activeLanguage)
+    }
 }

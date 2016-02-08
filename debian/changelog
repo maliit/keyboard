@@ -1,3 +1,58 @@
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20160128-0ubuntu1) xenial; urgency=medium
+
+  [ Aron Xu ]
+  * Transition from libpinyin4 to libpinyin7, no actual code change
+    required.
+
+  [ Michael Sheldon ]
+  * Fix selection deletion autopilot test
+  * Update keyboard visuals to match new design spec (LP: #1428146,
+    #1321603, #1385431)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Thu, 28 Jan 2016 19:08:52 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20160107-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Michael Sheldon ]
+  * Fix the Icelandic keyboard layout (LP: #1522157)
+  * Switch to Ubuntu.Components 1.3 and QtQuick 2.4 (LP: #1531907)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Thu, 07 Jan 2016 16:14:02 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20151221-0ubuntu1) xenial; urgency=medium
+
+  * Fix keyboard shifting out of capslock when in fields without preedit
+    (LP: #1521803)
+  * Make user input bold if there aren't any suggestions and expose bold
+    property to autopilot (LP: #1526795, #1526796)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Mon, 21 Dec 2015 11:52:18 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20151214-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk. added: po/aa.po
+
+  [ Michael Sheldon ]
+  * Remove workaround for Qt bug 44370 as this is now fixed in Qt (LP:
+    #44370)
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Mon, 14 Dec 2015 09:09:16 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20151201.1-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michael Sheldon ]
+  * Work around upstream QT bugs 41692 and 44370 which cause incorrect
+    touch point events when using a mouse (LP: #1451554)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Tue, 01 Dec 2015 15:42:37 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+15.10.20150903-0ubuntu1) wily; urgency=medium
 
   [ Michael Sheldon ]

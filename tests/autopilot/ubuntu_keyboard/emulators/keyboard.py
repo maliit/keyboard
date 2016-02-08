@@ -126,7 +126,7 @@ class Keyboard(object):
         if self.is_available():
             x, y, h, w = self._keyboard_container.globalRect
             x_pos = int(w / 2)
-            start_y = y + int(h / 2)
+            start_y = y + int(h / 2.5)
             end_y = y + h
             self.pointer.drag(x_pos, start_y, x_pos, end_y)
 

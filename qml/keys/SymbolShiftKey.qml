@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 
 import "key_constants.js" as UI
 
@@ -22,8 +22,6 @@ ActionKey {
     label: "?123";
     shifted: "?123";
     action: "symbols";
-
-    fontSize: units.gu(UI.symbolShiftKeyFontSize);
 
     overridePressArea: true;
 

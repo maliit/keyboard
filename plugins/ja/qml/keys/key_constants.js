@@ -25,12 +25,6 @@ var undoFontSize = 2;
 var annotationFontSize = 1.5; // gu
 var annotationMargins = 0.3; // gu
 
-var imageCharKey        = "../../../images/white_key.sci"
-var imageCharKeyPressed = "../../../images/grey_key.sci"
-
-var imageActionKey        = "../../../images/action_key.sci"
-var imageActionKeyPressed = "../../../images/grey_key.sci"
-
 /* FlickPop layout */
 var flickMargin = 1.5 // gu
 var flickBorderWidth = 0.1 // gu

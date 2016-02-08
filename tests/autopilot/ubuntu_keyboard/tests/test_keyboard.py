@@ -135,8 +135,8 @@ class UbuntuKeyboardTests(AutopilotTestCase):
             extra_script = "|".join(input_hints)
 
         simple_script = dedent("""
-        import QtQuick 2.0
-        import Ubuntu.Components 0.1
+        import QtQuick 2.4
+        import Ubuntu.Components 1.3
 
         Rectangle {
             id: window
@@ -397,6 +397,27 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
             Eventually(Equals(KeyPadState.CAPSLOCK))
         )
 
+    def test_capslock_stays_on(self):
+        """Capslock should remain on when typing text.
+
+        """
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.press_key('shift')
+        keyboard.press_key('shift', True)
+        keyboard.press_key('A', True)
+        keyboard.press_key('B', True)
+        keyboard.press_key('C', True)
+
+        self.assertThat(
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.CAPSLOCK))
+        )
+
     # Note: based on UX design doc
     def test_shift_state_returns_to_default_after_letter_typed(self):
         """Pushing shift and then typing an uppercase letter must automatically
@@ -501,8 +522,8 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         sleep(10)
 
         qml = dedent("""
-        import QtQuick 2.0
-        import Ubuntu.Components 0.1
+        import QtQuick 2.4
+        import Ubuntu.Components 1.3
 
         Rectangle {
             id: window
@@ -692,7 +713,7 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
 
         keyboard.type('Helfn')
 
-        sleep(1)
+        sleep(2)
 
         keyboard.type(' ')
 
@@ -922,7 +943,7 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('Testing selection deletion')
+        keyboard.type('Testing the selection deletion')
 
         # Double tap to select a word
         self.pointer.click_object(text_area)
@@ -930,7 +951,7 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
 
         keyboard.type('\b')
 
-        expected = 'Testing  deletion'
+        expected = 'Testing the  deletion'
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
@@ -1118,8 +1139,8 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
 
         """
         qml = dedent("""
-        import QtQuick 2.0
-        import Ubuntu.Components 1.1
+        import QtQuick 2.4
+        import Ubuntu.Components 1.3
         import Ubuntu.Web 0.2
 
         Rectangle {
@@ -1164,7 +1185,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
 
         """
         qml = dedent("""
-        import QtQuick 2.0
+        import QtQuick 2.4
         import Ubuntu.Components 1.1
         import Ubuntu.Web 0.2
 
@@ -1181,7 +1202,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
                         <html><body><div id='scroll' style='width: 100%;
                         height: 200%; position: absolute; background: green;
                         visibility: hidden;'></div><input id='input'
-                        type='text'
+                        style='height: 50%; width: 100%' type='text'
                         onkeyup=\\\"if (event.keyCode == 13)
                         {document.getElementById('input').disabled=true;
                         document.getElementById('scroll').style.visibility=

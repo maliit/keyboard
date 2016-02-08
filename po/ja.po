@@ -14,12 +14,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-20 06:01+0000\n"
-"X-Generator: Launchpad (build 17690)\n"
+"X-Launchpad-Export-Date: 2015-12-24 05:37+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 
 #: ../qml/keys/LanguageMenu.qml:80
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: ../qml/keys/LanguageMenu.qml:95
 msgid "Arabic"
@@ -35,7 +35,7 @@ msgstr "ボスニア語"
 
 #: ../qml/keys/LanguageMenu.qml:98
 msgid "Catalan"
-msgstr ""
+msgstr "カタルーニャ語"
 
 #: ../qml/keys/LanguageMenu.qml:99
 msgid "Czech"
@@ -51,11 +51,11 @@ msgstr "ドイツ語"
 
 #: ../qml/keys/LanguageMenu.qml:102
 msgid "Emoji"
-msgstr ""
+msgstr "絵文字"
 
 #: ../qml/keys/LanguageMenu.qml:103
 msgid "Greek"
-msgstr ""
+msgstr "ギリシャ語"
 
 #: ../qml/keys/LanguageMenu.qml:104
 msgid "English"
@@ -67,76 +67,76 @@ msgstr "スペイン語"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Finnish"
-msgstr ""
+msgstr "フィンランド語"
 
 #: ../qml/keys/LanguageMenu.qml:107
 msgid "French"
-msgstr ""
+msgstr "フランス語"
 
 #: ../qml/keys/LanguageMenu.qml:108
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "スコットランド・ゲール語"
 
 #: ../qml/keys/LanguageMenu.qml:109
 msgid "Hebrew"
-msgstr ""
+msgstr "ヘブライ語"
 
 #: ../qml/keys/LanguageMenu.qml:110
 msgid "Croatian"
-msgstr ""
+msgstr "クロアチア語"
 
 #: ../qml/keys/LanguageMenu.qml:111
 msgid "Hungarian"
-msgstr ""
+msgstr "ハンガリー語"
 
 #: ../qml/keys/LanguageMenu.qml:112
 msgid "Icelandic"
-msgstr ""
+msgstr "アイスランド語"
 
 #: ../qml/keys/LanguageMenu.qml:113
 msgid "Italian"
-msgstr ""
+msgstr "イタリア語"
 
 #: ../qml/keys/LanguageMenu.qml:114
 msgid "Dutch"
-msgstr ""
+msgstr "オランダ語"
 
 #: ../qml/keys/LanguageMenu.qml:115
 msgid "Norwegian"
-msgstr ""
+msgstr "ノルウェー語"
 
 #: ../qml/keys/LanguageMenu.qml:116
 msgid "Polish"
-msgstr ""
+msgstr "ポーランド語"
 
 #: ../qml/keys/LanguageMenu.qml:117
 msgid "Portuguese"
-msgstr ""
+msgstr "ポルトガル語"
 
 #: ../qml/keys/LanguageMenu.qml:118
 msgid "Romanian"
-msgstr ""
+msgstr "ルーマニア語"
 
 #: ../qml/keys/LanguageMenu.qml:119
 msgid "Russian"
-msgstr ""
+msgstr "ロシア語"
 
 #: ../qml/keys/LanguageMenu.qml:120
 msgid "Slovenian"
-msgstr ""
+msgstr "スロベニア語"
 
 #: ../qml/keys/LanguageMenu.qml:121
 msgid "Serbian"
-msgstr ""
+msgstr "セルビア語"
 
 #: ../qml/keys/LanguageMenu.qml:122
 msgid "Swedish"
-msgstr ""
+msgstr "スウェーデン語"
 
 #: ../qml/keys/LanguageMenu.qml:123
 msgid "Ukrainian"
-msgstr ""
+msgstr "ウクライナ語"
 
 #: ../qml/keys/LanguageMenu.qml:124
 msgid "Chinese - Pinyin"
-msgstr ""
+msgstr "中国語 - ピンイン"

@@ -751,6 +751,10 @@ void AbstractTextEditor::setCursorPosition(int pos)
     }
 
     d->text->setCursorPosition(pos);
+
+    sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                      Replacement(d->text->cursorPosition()));
+    Q_EMIT preeditChanged(d->text->preedit());
     Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 }
 
@@ -958,7 +962,7 @@ void AbstractTextEditor::singleBackspace()
         // Clear previous word candidates
         Q_EMIT wordCandidatesChanged(WordCandidateList());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
-                          Replacement());
+                          Replacement(d->text->cursorPosition()));
 
         Q_EMIT preeditChanged(d->text->preedit());
         Q_EMIT cursorPositionChanged(d->text->cursorPosition());

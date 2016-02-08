@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import "key_constants.js" as UI
 import keys 1.0
 
@@ -48,7 +48,8 @@ ActionKey {
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
 
-        event_handler.onKeyPressed("", action);
+        if (!isPreedit)
+            event_handler.onKeyPressed("", action);
     }
 
     onPressAndHold: {

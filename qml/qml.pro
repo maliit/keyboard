@@ -14,7 +14,7 @@ qml_languages.files = languages/*.qml languages/*.js
 
 
 images.path = "$$UBUNTU_KEYBOARD_DATA_DIR/images"
-images.files = images/*.png images/*.sci
+images.files = images/*.png images/*.sci images/*.svg
 
 INSTALLS += qml qml_keys qml_languages images
 
