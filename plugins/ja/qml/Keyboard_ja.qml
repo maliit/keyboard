@@ -78,7 +78,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            LanguageKey    { id: languageMenuButton; height: parent.height; }
+            LanguageKey    { id: languageMenuButton; height: panel.keyHeight; }
             FlickCharKey {
                 label: layout.state == "kana" ? "ま" : "PQRS"
                 leaves: layout.state == "kana" ? ["ま", "み", "む", "め", "も"] : ["p", "q", "r", "s", "7"]
