@@ -109,8 +109,8 @@ KeyPad {
                 annotation: layout.state == "kana" ? "" : "0";
             }
             FlickCharKey {
-                label: layout.state == "kana" ? "、。" : ", . ! ?";
-                leaves: layout.state == "kana" ? ["、", "。", "！", "？"] : [",", ".", "!", "?"];
+                label: layout.state == "kana" ? "、。" : ". , ! ?";
+                leaves: layout.state == "kana" ? ["、", "。", "！", "？"] : [".", ",", "!", "?"];
             }
             CommitKey    { id: enterKey; width: panel.keyWidth; }
         }

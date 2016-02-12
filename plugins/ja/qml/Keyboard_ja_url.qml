@@ -109,10 +109,10 @@ KeyPad {
                 annotation: layout.state == "kana" ? "" : "0";
             }
             DomainKey {
-                label: layout.state == "kana" ? "、。" : ", .";
+                label: layout.state == "kana" ? "、。" : ". ,";
                 leaves: layout.state == "kana" ? ["、", "。", "！", "？"] :
-                    [",", ".", "<font size=\"1\">.com</font>", "<font size=\"1\">.jp</font>"];
-                unstyledLeaves: layout.state == "kana" ? ["、", "。", "！", "？"] : [",", ".", ".com", ".jp"];
+                    [".", ",", "<font size=\"1\">.com</font>", "<font size=\"1\">.jp</font>"];
+                unstyledLeaves: layout.state == "kana" ? ["、", "。", "！", "？"] : [".", ",", ".com", ".jp"];
                 annotation: layout.state == "kana" ? "" : ".com .jp"
             }
             CommitKey    { id: enterKey; width: panel.keyWidth; }
