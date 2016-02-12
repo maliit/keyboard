@@ -32,7 +32,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            UndoKey { leftSide: true; }
+            UndoKey { leftSide: true; width: panel.keyWidth; }
             FlickCharKey {
                 label: layout.state == "kana" ? "あ" : "@ / : _";
                 leaves: layout.state == "kana" ? ["あ", "い", "う", "え", "お"] : ["@", "/", ":", "_", "1"];
@@ -48,7 +48,7 @@ KeyPad {
                 leaves: layout.state == "kana" ? ["さ", "し", "す", "せ", "そ"] : ["d", "e", "f", "$", "3"];
                 annotation: layout.state == "kana" ? "" : "3$";
             }
-            BackspaceKey { rightSide: true; }
+            BackspaceKey { rightSide: true; width: panel.keyWidth; }
         }
 
         Row {
