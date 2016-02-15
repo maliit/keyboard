@@ -89,6 +89,7 @@ void AnthyAdapter::parse(const QString& string)
 
     /* Create candidate list for 1st segment */
     candidates.clear();
+    candidates.append(string);
     for (int i = 0; i < ss.nr_candidate; ++i) {
         if (anthy_get_segment(m_context, 0, i, NULL, 0) > CANDIDATE_SIZE - 1) {
             qCritical() << "[anthy] buffer overflow: " << string;
