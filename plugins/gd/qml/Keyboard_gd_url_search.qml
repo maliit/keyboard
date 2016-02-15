@@ -48,7 +48,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; extended: ["1", "à", "á", "â", "ä", "å", "ã", "ā", "æ"]; extendedShifted: ["1", "À", "Á", "Â", "Ä", "Å", "Ã", "Ā", "Æ"]; leftSide: true; }
+            CharKey { label: "a"; shifted: "A"; extended: ["à", "á", "â", "ä", "å", "ã", "ā", "æ"]; extendedShifted: ["À", "Á", "Â", "Ä", "Å", "Ã", "Ā", "Æ"]; leftSide: true; }
             CharKey { label: "s"; shifted: "S"; extended: ["ṡ", "ß", "ś", "š", "$"]; extendedShifted: ["Ṡ", "Ś", "Š", "$"] }
             CharKey { label: "d"; shifted: "D"; extended: ["ḋ"]; extendedShifted: ["Ḋ"] }
             CharKey { label: "f"; shifted: "F"; extended: ["ḟ"]; extendedShifted: ["Ḟ"] }
