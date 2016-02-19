@@ -381,7 +381,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const bool isSymbol = d->word_engine->languageFeature()->isSymbol(text);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
                     not d->text->preedit().isEmpty() && isSeparator;
-        const bool enablePreeditAtInsertion = d->word_engine->languageFeature()->wordEngineAvailable();
+        const bool enablePreeditAtInsertion = d->word_engine->languageFeature()->enablePreeditAtInsertion();
 
         d->previous_preedit = "";
 
@@ -1086,7 +1086,6 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
                 }
                 d->previous_preedit = "";
             }
-
             replaceTextWithPreedit(recreatedPreedit, 0, 0, recreatedPreedit.size());
         }
     }
