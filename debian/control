@@ -5,6 +5,7 @@ Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Michael Hasselmann <michaelh@openismus.com>
 Build-Depends: debhelper (>= 9),
                doxygen,
+               libanthy-dev,
                libgl1-mesa-dev | libgl-dev,
                libgles2-mesa-dev,
                libglib2.0-dev,
@@ -98,6 +99,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-hungarian (>= ${source:Version}),
          ubuntu-keyboard-icelandic (>= ${source:Version}),
          ubuntu-keyboard-italian (>= ${source:Version}),
+         ubuntu-keyboard-japanese (>= ${source:Version}),
          ubuntu-keyboard-norwegian-bokmal (>= ${source:Version}),
          ubuntu-keyboard-polish (>= ${source:Version}),
          ubuntu-keyboard-portuguese (>= ${source:Version}),
@@ -279,6 +281,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Italian
  Data files for the Ubuntu virtual keyboard - Italian
+
+Package: ubuntu-keyboard-japanese
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         anthy,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Japanese
+ Data files for the Ubuntu virtual keyboard - Japanese
 
 Package: ubuntu-keyboard-norwegian-bokmal
 Architecture: any

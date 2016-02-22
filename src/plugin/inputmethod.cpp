@@ -110,6 +110,10 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
     connect(&d->m_settings, SIGNAL(disableHeightChanged(bool)), this, SLOT(onVisibleRectChanged()));
+
+    connect(&d->editor, SIGNAL(preeditChanged(QString)), this, SIGNAL(preeditChanged(QString)));
+    connect(&d->editor, SIGNAL(cursorPositionChanged(int)), this, SIGNAL(cursorPositionChanged(int)));
+
     d->registerAudioFeedbackSoundSetting();
     d->registerAudioFeedbackSetting();
     d->registerHapticFeedbackSetting();
@@ -641,6 +645,31 @@ const QString InputMethod::currentPluginPath() const
 {
     Q_D(const InputMethod);
     return d->currentPluginPath;
+}
+
+const QString &InputMethod::preedit()
+{
+    Q_D(InputMethod);
+    d->preedit = d->editor.text()->preedit();
+    return d->preedit;
+}
+
+int InputMethod::cursorPosition() const
+{
+    Q_D(const InputMethod);
+    return d->editor.text()->cursorPosition();
+}
+
+void InputMethod::replacePreedit(const QString &preedit)
+{
+    Q_D(InputMethod);
+    d->editor.replacePreedit(preedit);
+}
+
+void InputMethod::setCursorPosition(const int pos)
+{
+    Q_D(InputMethod);
+    d->editor.setCursorPosition(pos);
 }
 
 bool InputMethod::languageIsSupported(const QString plugin) {
