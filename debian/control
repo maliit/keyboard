@@ -54,7 +54,7 @@ Description: Ubuntu on-screen keyboard
 
 Package: ubuntu-keyboard-data
 Architecture: all
-Depends: fonts-droid,
+Depends: fonts-droid-fallback | fonts-droid,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files
