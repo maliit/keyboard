@@ -1,11 +1,11 @@
 #include "chewingplugin.h"
-#include "../../pinyin/src/chineselanguagefeatures.h"
+#include "chewinglanguagefeatures.h"
 
 #include <QDebug>
 
 ChewingPlugin::ChewingPlugin(QObject *parent) :
     AbstractLanguagePlugin(parent)
-  , m_chineseLanguageFeatures(new ChineseLanguageFeatures)
+  , m_chewingLanguageFeatures(new ChewingLanguageFeatures)
   , m_processingWord(false)
 {
     m_chewingThread = new QThread();
@@ -42,7 +42,7 @@ void ChewingPlugin::wordCandidateSelected(QString word)
 
 AbstractLanguageFeatures* ChewingPlugin::languageFeature()
 {
-    return m_chineseLanguageFeatures;
+    return m_chewingLanguageFeatures;
 }
 
 void ChewingPlugin::finishedProcessing(QString word, QStringList suggestions)

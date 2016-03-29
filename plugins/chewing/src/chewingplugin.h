@@ -10,7 +10,7 @@
 #include "chewingadapter.h"
 #include <iostream>
 
-class ChineseLanguageFeatures;
+class ChewingLanguageFeatures;
 
 class ChewingPlugin : public AbstractLanguagePlugin
 {
@@ -43,7 +43,7 @@ public slots:
 private:
     QThread *m_chewingThread;
     ChewingAdapter *m_chewingAdapter;
-    ChineseLanguageFeatures* m_chineseLanguageFeatures;
+    ChewingLanguageFeatures* m_chewingLanguageFeatures;
     QString m_nextWord;
     bool m_processingWord;
 };

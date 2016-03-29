@@ -13,21 +13,21 @@ INCLUDEPATH    += \
 HEADERS         = \
                   chewingadapter.h \
                   chewingplugin.h \
-                  $${TOP_SRCDIR}/src/plugins/pinyin/src/chineselanguagefeatures.h \
+                  chewinglanguagefeatures.h \
                   $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.h
 
 SOURCES         = \
                   chewingadapter.cpp \
                   chewingplugin.cpp \
-                  $${TOP_SRCDIR}/src/plugins/pinyin/src/chineselanguagefeatures.cpp \
+                  chewinglanguagefeatures.cpp \
                   $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.cpp
 
-TARGET          = $$qtLibraryTarget(zhplugin)
+TARGET          = $$qtLibraryTarget(zh-hantplugin)
 
 EXAMPLE_FILES = chewingplugin.json
 
 # install
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}/zh-Hans/
+target.path = $${UBUNTU_KEYBOARD_LIB_DIR}/zh-hant/
 INSTALLS += target
 
 OTHER_FILES += \

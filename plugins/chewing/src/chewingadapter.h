@@ -28,6 +28,7 @@ class ChewingAdapter : public QObject
 
     QStringList m_candidates;
     bool m_processingWords;
+    ChewingContext *m_chewingContext;
 
 public:
     explicit ChewingAdapter(QObject *parent = 0);

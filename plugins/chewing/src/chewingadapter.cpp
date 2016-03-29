@@ -22,24 +22,48 @@
 #include <string>
 #include <string.h>
 
-#include <QDebug>
+#include <QChar>
 #include <QCoreApplication>
-
-#define MAX_SUGGESTIONS 100
 
 ChewingAdapter::ChewingAdapter(QObject *parent) :
     QObject(parent),
     m_processingWords(false)
 {
+    
+    m_chewingContext = chewing_new();
 }
 
 ChewingAdapter::~ChewingAdapter()
 {
+    chewing_delete(m_chewingContext);
 }
 
 void ChewingAdapter::parse(const QString& string)
 {
     m_candidates.clear();
+    chewing_clean_preedit_buf(m_chewingContext);
+
+    const QChar *c = string.data();
+    while (!c->isNull()) {
+        chewing_handle_Default(m_chewingContext, c->toLatin1());
+        c++;
+    }
+
+    chewing_cand_open(m_chewingContext);
+
+    if (!chewing_cand_CheckDone(m_chewingContext)) {
+        //get candidate word
+        chewing_cand_Enumerate(m_chewingContext);
+        while (chewing_cand_hasNext(m_chewingContext)) {
+            char *chewingCand = chewing_cand_String(m_chewingContext);
+            QString candidate(chewingCand);
+            m_candidates.append(candidate);
+            chewing_free(chewingCand);
+        }
+    }
+
+    chewing_cand_close(m_chewingContext);
+
     Q_EMIT newPredictionSuggestions(string, m_candidates);
 }
 
