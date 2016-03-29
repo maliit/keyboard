@@ -84,6 +84,8 @@ void EventHandler::onKeyReleased(QString label, QString action)
 
     if (action == "return")
         key.setAction(Key::ActionReturn);
+    else if (action == "commit")
+        key.setAction(Key::ActionCommit);
     else if (action == "backspace")
         key.setAction(Key::ActionBackspace);
     else if (action == "space")

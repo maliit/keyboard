@@ -61,6 +61,8 @@ public:
     QString keyboardState;
     bool hasSelection;
 
+    QString preedit;
+
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
     GreeterStatus *m_greeterStatus;
@@ -89,6 +91,7 @@ public:
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , keyboardState("CHARACTERS")
         , hasSelection(false)
+        , preedit("")
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , m_greeterStatus(new GreeterStatus())
