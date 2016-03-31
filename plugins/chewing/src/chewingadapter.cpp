@@ -29,7 +29,6 @@ ChewingAdapter::ChewingAdapter(QObject *parent) :
     QObject(parent),
     m_processingWords(false)
 {
-    
     m_chewingContext = chewing_new();
 }
 
@@ -60,6 +59,10 @@ void ChewingAdapter::parse(const QString& string)
             m_candidates.append(candidate);
             chewing_free(chewingCand);
         }
+    }
+
+    if (m_candidates.isEmpty()) {
+        m_candidates.append(QString(chewing_bopomofo_String_static(m_chewingContext)));
     }
 
     chewing_cand_close(m_chewingContext);
