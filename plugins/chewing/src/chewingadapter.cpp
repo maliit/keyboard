@@ -40,7 +40,7 @@ ChewingAdapter::~ChewingAdapter()
 void ChewingAdapter::parse(const QString& string)
 {
     m_candidates.clear();
-    chewing_clean_preedit_buf(m_chewingContext);
+    clearChewingPreedit();
 
     const QChar *c = string.data();
     while (!c->isNull()) {
@@ -70,6 +70,17 @@ void ChewingAdapter::parse(const QString& string)
     Q_EMIT newPredictionSuggestions(string, m_candidates);
 }
 
+void ChewingAdapter::clearChewingPreedit()
+{
+    int origState = chewing_get_escCleanAllBuf(m_chewingContext);
+    /* Send a false event, then clean it to wipe the commit  */
+    chewing_handle_Default(m_chewingContext, '1');
+    chewing_set_escCleanAllBuf(m_chewingContext, 1);
+    chewing_handle_Esc(m_chewingContext);
+    chewing_set_escCleanAllBuf(m_chewingContext, origState);
+    chewing_clean_preedit_buf(m_chewingContext);
+}
+
 void ChewingAdapter::wordCandidateSelected(const QString& word)
 {
     Q_UNUSED(word)
@@ -77,5 +88,6 @@ void ChewingAdapter::wordCandidateSelected(const QString& word)
 
 void ChewingAdapter::reset()
 {
+    clearChewingPreedit();
 }
 

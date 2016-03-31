@@ -39,6 +39,7 @@ signals:
 
 public slots:
     void parse(const QString& string);
+    void clearChewingPreedit();
     void wordCandidateSelected(const QString& word);
     void reset();
 };
