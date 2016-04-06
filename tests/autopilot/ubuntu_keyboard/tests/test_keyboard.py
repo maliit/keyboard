@@ -877,7 +877,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 
     def test_pinyin(self):
         """Switching to simplified Chinese should result in pinyin characters
-        being entered via autocomplete regardless of layout or prediction 
+        being entered via autocomplete regardless of layout or prediction
         being disabled.
 
         """
@@ -935,7 +935,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 class UbuntuKeyboardChewing(UbuntuKeyboardTests):
 
     scenarios = [
-        (   
+        (
             "Url",
             dict(
                 label="Url",
@@ -943,7 +943,7 @@ class UbuntuKeyboardChewing(UbuntuKeyboardTests):
                 expected_activeview="url"
             )
         ),
-        (   
+        (
             "Email",
             dict(
                 label="Email",
@@ -951,7 +951,7 @@ class UbuntuKeyboardChewing(UbuntuKeyboardTests):
                 expected_activeview="email"
             )
         ),
-        (   
+        (
             "FreeText",
             dict(
                 label="FreeText",
@@ -959,7 +959,7 @@ class UbuntuKeyboardChewing(UbuntuKeyboardTests):
                 expected_activeview="freetext"
             )
         ),
-        (   
+        (
             "NoPredictiveText",
             dict(
                 label="NoPredictiveText",
@@ -980,7 +980,7 @@ class UbuntuKeyboardChewing(UbuntuKeyboardTests):
 
     def test_chewing(self):
         """Switching to traditional Chinese should result in chewing characters
-        being entered via autocomplete regardless of layout or prediction 
+        being entered via autocomplete regardless of layout or prediction
         being disabled.
 
         """
