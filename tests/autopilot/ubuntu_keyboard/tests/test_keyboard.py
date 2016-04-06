@@ -64,7 +64,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
         gsettings.set_strv(
-            "enabled-languages", ["en", "es", "de", "zh", "emoji"])
+            "enabled-languages", ["en", "es", "de", "zh-hans", "zh-hant", "emoji"])
         gsettings.set_string("active-language", "en")
         gsettings.set_string("previous-language", "es")
         gsettings.set_boolean("auto-capitalization", True)
@@ -867,7 +867,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
-        gsettings.set_string("active-language", "zh")
+        gsettings.set_string("active-language", "zh-hans")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
         gsettings.set_boolean("predictive-text", True)
@@ -875,9 +875,9 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         gsettings.set_boolean("double-space-full-stop", True)
 
     def test_pinyin(self):
-        """Switching to Chinese should result in pinyin characters being
-        entered via autocomplete regardless of layout or prediction being
-        disabled.
+        """Switching to simplified Chinese should result in pinyin characters
+        being entered via autocomplete regardless of layout or prediction 
+        being disabled.
 
         """
         text_area = self.launch_test_input_area(self.label, self.hints)
@@ -924,6 +924,126 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         keyboard.type('pinyin   ')
 
         expected = "拼音。 "
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
+class UbuntuKeyboardChewing(UbuntuKeyboardTests):
+
+    scenarios = [
+        (   
+            "Url",
+            dict(
+                label="Url",
+                hints=['Qt.ImhUrlCharactersOnly'],
+                expected_activeview="url"
+            )
+        ),
+        (   
+            "Email",
+            dict(
+                label="Email",
+                hints=['Qt.ImhEmailCharactersOnly'],
+                expected_activeview="email"
+            )
+        ),
+        (   
+            "FreeText",
+            dict(
+                label="FreeText",
+                hints=None,
+                expected_activeview="freetext"
+            )
+        ),
+        (   
+            "NoPredictiveText",
+            dict(
+                label="NoPredictiveText",
+                hints=['Qt.ImhNoPredictveText'],
+                expected_activeview="freetext"
+            )
+        ),
+    ]
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "zh-hant")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_chewing(self):
+        """Switching to traditional Chinese should result in chewing characters
+        being entered via autocomplete regardless of layout or prediction 
+        being disabled.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('hk4 ')
+
+        expected = "冊"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_bopomofo(self):
+        """Individual characters should enter phonetic input (bopomofo)
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('a b c ')
+
+        expected = "ㄇㄖㄏ"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_fullstop(self):
+        """Full stop shouldn't have space added after it in chewing mode.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('hk4.hk4 ')
+
+        expected = "冊.冊"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_auto_punctuation(self):
+        """A chinese full-stop character should be entered after space has
+        been pressed three times (once to complete the character, once more
+        to insert a space and then again to produce a full-stop.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('hk4   ')
+
+        expected = "冊。 "
 
         self.assertThat(
             text_area.text,
