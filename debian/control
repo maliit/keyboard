@@ -100,6 +100,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-icelandic (>= ${source:Version}),
          ubuntu-keyboard-italian (>= ${source:Version}),
          ubuntu-keyboard-japanese (>= ${source:Version}),
+         ubuntu-keyboard-korean (>= ${source:Version}),
          ubuntu-keyboard-norwegian-bokmal (>= ${source:Version}),
          ubuntu-keyboard-polish (>= ${source:Version}),
          ubuntu-keyboard-portuguese (>= ${source:Version}),
@@ -290,6 +291,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Japanese
  Data files for the Ubuntu virtual keyboard - Japanese
+
+Package: ubuntu-keyboard-korean
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Korean
+ Data files for the Ubuntu virtual keyboard - Korean
 
 Package: ubuntu-keyboard-norwegian-bokmal
 Architecture: any

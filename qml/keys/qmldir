@@ -18,3 +18,5 @@ PressArea 1.0 PressArea.qml
 SpaceKey 1.0 SpaceKey.qml
 UrlKey 1.0 UrlKey.qml
 UI 1.0 key_constants.js
+HCharKey 1.0 HCharKey.qml
+Parser 1.0 parser.js
