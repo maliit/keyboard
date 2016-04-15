@@ -51,7 +51,7 @@ KeyPad {
 
             CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","ª","á","å", "æ"]; extendedShifted: ["Ä","À","Â","ª","Á","Å","Æ"]; leftSide: true; }
             CharKey { label: "s"; shifted: "S"; extended: ["š","ß","$"]; extendedShifted: ["Š","$"] }
-            CharKey { label: "d"; shifted: "D"; extended: ["ð"]; extendedShifted: ["Ð"] }
+            CharKey { label: "d"; shifted: "D"; extended: ["đ"]; extendedShifted: ["Ð"] }
             CharKey { label: "f"; shifted: "F"; }
             CharKey { label: "g"; shifted: "G"; }
             CharKey { label: "h"; shifted: "H"; }
