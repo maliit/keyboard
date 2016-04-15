@@ -9,12 +9,16 @@ TEMPLATE = lib
 lang_ko.path = "$$UBUNTU_KEYBOARD_LIB_DIR/ko/"
 lang_ko.files = *.qml *.js
 
-INSTALLS += lang_ko
+lang_ko_keys.path = "$$UBUNTU_KEYBOARD_LIB_DIR/ko/keys"
+lang_ko_keys.files = keys/*.qml keys/*.js
+
+INSTALLS += lang_ko lang_ko_keys
 
 # for QtCreator
 OTHER_FILES += \
     Keyboard_ko.qml \
     Keyboard_ko_email.qml \
     Keyboard_ko_url.qml \
-    Keyboard_ko_url_search.qml
+    Keyboard_ko_url_search.qml \
+    keys/HCharKey.qml 
 

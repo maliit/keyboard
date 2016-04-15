@@ -43,8 +43,10 @@ bool KoreanLanguageFeatures::activateAutoCaps(const QString &preedit) const
 
 QString KoreanLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
-    Q_UNUSED(preedit)
-    return QString("");
+    if (preedit.isEmpty())
+        return QString("");
+
+    return QString(" ");
 }
 
 bool KoreanLanguageFeatures::isSeparator(const QString &text) const

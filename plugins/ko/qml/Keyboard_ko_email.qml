@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.4
+import "keys/"
 import keys 1.0
 
 KeyPad {
@@ -48,7 +49,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            HCharKey { label: "ㅁ"; shifted: "ㅁ"; }
+            HCharKey { label: "ㅁ"; shifted: "ㅁ"; leftSide: true; }
             HCharKey { label: "ㄴ"; shifted: "ㄴ"; }
             HCharKey { label: "ㅇ"; shifted: "ㅇ"; }
             HCharKey { label: "ㄹ"; shifted: "ㄹ"; }

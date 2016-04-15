@@ -182,7 +182,7 @@ Item {
         }
     }
 
-    PressArea {
+    HPressArea {
         id: keyMouseArea
         anchors.fill: parent
 
@@ -218,6 +218,7 @@ Item {
 
         onReleased: {
 
+
             if (overridePressArea) {
                 key.released();
                 return;
@@ -248,7 +249,7 @@ Item {
                 }
                 if (panel.state === "CHARACTERS") {
 
-                      if (!Parser.is_jamo(keyToSend)){
+                    if (!Parser.is_jamo(keyToSend)){
                         maliit_input_method.preedit = preedit + keyToSend;
                         event_handler.onKeyReleased("", "commit");
                     } else {

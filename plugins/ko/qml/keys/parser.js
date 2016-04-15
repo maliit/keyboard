@@ -122,6 +122,8 @@ function get_base(str) {
     return -1;
 }
 
+
+
 // merge jamo into a syllable block
 function join(lead, vowel, trail) {
     if (is_jamo(lead))
@@ -169,6 +171,7 @@ function add_jamo(str, jamo) {
     // make sure merging is actually a valid option
     if (is_jamo(jamo) && is_hangul(str)) {
         
+
         // merge jamo with jamo
         if (is_jamo(str)) {
             var lead = get_component(str, LEAD);
@@ -176,7 +179,7 @@ function add_jamo(str, jamo) {
             
             if ((get_base(lead) === _JAMO_LEAD) && (get_base(vowel) === _JAMO_VOWEL))
                 return join(lead, vowel, '');
-        
+
         // merge syllable with jamo
         } else {
             var buffer = split(str);
