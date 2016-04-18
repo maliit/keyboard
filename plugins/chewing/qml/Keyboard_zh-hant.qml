@@ -22,6 +22,7 @@ KeyPad {
 
     content: c1
     symbols: "languages/Keyboard_symbols.qml"
+    property double offset: units.gu(0.3)
 
     Column {
         id: c1
@@ -32,46 +33,64 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
-            CharKey { label: "w"; shifted: "W"; extended: ["2"]; extendedShifted: ["2"] }
-            CharKey { label: "e"; shifted: "E"; extended: ["3", "è", "é", "ê", "ë", "€"]; extendedShifted: ["3", "È", "É", "Ê", "Ë", "€"] }
-            CharKey { label: "r"; shifted: "R"; extended: ["4"]; extendedShifted: ["4"] }
-            CharKey { label: "t"; shifted: "T"; extended: ["5", "þ"]; extendedShifted: ["5", "Þ"] }
-            CharKey { label: "y"; shifted: "Y"; extended: ["6", "ý", "¥"]; extendedShifted: ["6", "Ý", "¥"] }
-            CharKey { label: "u"; shifted: "U"; extended: ["7","û","ù","ú","ü"]; extendedShifted: ["7","Û","Ù","Ú","Ü"] }
-            CharKey { label: "i"; shifted: "I"; extended: ["8", "î","ï","ì","í"]; extendedShifted: ["8","Î","Ï","Ì","Í"] }
-            CharKey { label: "o"; shifted: "O"; extended: ["9", "ö","ô","ò","ó"]; extendedShifted: ["9","Ö","Ô","Ò","Ó"] }
-            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"]; rightSide: true; }
+            CharKey { valueToSubmit: "1"; annotation: valueToSubmit; label: "ㄅ"; shifted: "1"; leftSide: true; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "2"; annotation: valueToSubmit; label: "ㄉ"; shifted: "2"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "3"; annotation: valueToSubmit; label: "ˇ"; shifted: "3"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "4"; annotation: valueToSubmit; label: "ˋ"; shifted: "4"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "5"; annotation: valueToSubmit; label: "ㄓ"; shifted: "5"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "6"; annotation: valueToSubmit; label: "ˊ"; shifted: "6"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "7"; annotation: valueToSubmit; label: "˙"; shifted: "7"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "8"; annotation: valueToSubmit; label: "ㄚ"; shifted: "8"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "9"; annotation: valueToSubmit; label: "ㄞ"; shifted: "9"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "0"; annotation: valueToSubmit; label: "ㄢ"; shifted: "0"; rightSide: true; textCenterOffset: offset; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; leftSide: true; }
-            CharKey { label: "s"; shifted: "S"; }
-            CharKey { label: "d"; shifted: "D"; }
-            CharKey { label: "f"; shifted: "F"; }
-            CharKey { label: "g"; shifted: "G"; }
-            CharKey { label: "h"; shifted: "H"; }
-            CharKey { label: "j"; shifted: "J"; }
-            CharKey { label: "k"; shifted: "K"; }
-            CharKey { label: "l"; shifted: "L"; rightSide: true; }
+            CharKey { valueToSubmit: "q"; annotation: valueToSubmit; label: "ㄆ"; shifted: "q"; leftSide: true; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "w"; annotation: valueToSubmit; label: "ㄊ"; shifted: "w"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "e"; annotation: valueToSubmit; label: "ㄍ"; shifted: "e"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "r"; annotation: valueToSubmit; label: "ㄐ"; shifted: "r"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "t"; annotation: valueToSubmit; label: "ㄔ"; shifted: "t"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "y"; annotation: valueToSubmit; label: "ㄗ"; shifted: "y"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "u"; annotation: valueToSubmit; label: "ㄧ"; shifted: "u"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "i"; annotation: valueToSubmit; label: "ㄛ"; shifted: "i"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "o"; annotation: valueToSubmit; label: "ㄟ"; shifted: "o"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "p"; annotation: valueToSubmit; label: "ㄣ"; shifted: "p"; rightSide: true; textCenterOffset: offset; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            ShiftKey {}
-            CharKey { label: "z"; shifted: "Z"; }
-            CharKey { label: "x"; shifted: "X"; }
-            CharKey { label: "c"; shifted: "C"; }
-            CharKey { label: "v"; shifted: "V"; }
-            CharKey { label: "b"; shifted: "B"; }
-            CharKey { label: "n"; shifted: "N"; }
-            CharKey { label: "m"; shifted: "M"; }
-            BackspaceKey {}
+            CharKey { valueToSubmit: "a"; annotation: valueToSubmit; label: "ㄇ"; shifted: "a"; leftSide: true; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "s"; annotation: valueToSubmit; label: "ㄋ"; shifted: "s"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "d"; annotation: valueToSubmit; label: "ㄎ"; shifted: "d"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "f"; annotation: valueToSubmit; label: "ㄑ"; shifted: "f"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "g"; annotation: valueToSubmit; label: "ㄕ"; shifted: "g"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "h"; annotation: valueToSubmit; label: "ㄘ"; shifted: "h"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "j"; annotation: valueToSubmit; label: "ㄨ"; shifted: "j"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "k"; annotation: valueToSubmit; label: "ㄜ"; shifted: "k"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "l"; annotation: valueToSubmit; label: "ㄠ"; shifted: "l"; textCenterOffset: offset; }
+            CharKey { label: "ㄤ"; shifted: "ㄤ"; rightSide: true; textCenterOffset: offset; }
+        }
+
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter;
+            spacing: 0
+
+            CharKey { valueToSubmit: "z"; annotation: valueToSubmit; label: "ㄈ"; shifted: "z"; leftSide: true; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "x"; annotation: valueToSubmit; label: "ㄌ"; shifted: "x"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "c"; annotation: valueToSubmit; label: "ㄏ"; shifted: "c"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "v"; annotation: valueToSubmit; label: "ㄒ"; shifted: "v"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "b"; annotation: valueToSubmit; label: "ㄖ"; shifted: "b"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "n"; annotation: valueToSubmit; label: "ㄙ"; shifted: "n"; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "m"; annotation: valueToSubmit; label: "ㄩ"; shifted: "m"; textCenterOffset: offset; }
+            CharKey { label: "ㄝ"; shifted: "ㄝ"; textCenterOffset: offset; }
+            CharKey { label: "ㄡ"; shifted: "ㄡ"; textCenterOffset: offset; }
+            CharKey { label: "ㄥ"; shifted: "ㄥ"; rightSide: true; textCenterOffset: offset; }
         }
 
         Item {
@@ -80,11 +99,12 @@ KeyPad {
 
             height: panel.keyHeight + units.gu(UI.row_margin);
 
-            SymbolShiftKey { id: symShiftKey; label: "符号";              anchors.left: parent.left; height: parent.height; }
+            SymbolShiftKey { id: symShiftKey; label: "符号";             anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
-            CharKey        { id: commaKey;    label: ","; shifted: "，";  anchors.left: languageMenuButton.right; height: parent.height; }
-            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true; height: parent.height; }
-            CharKey        { id: dotKey;      label: "。"; shifted: "。"; anchors.right: enterKey.left; height: parent.height; }
+            CharKey        { id: dotKey;      label: "。"; extended: [",", "，"]; extendedShifted: [",", "，"]; shifted: "。"; anchors.left: languageMenuButton.right; height: parent.height; }
+            SpaceKey       { id: spaceKey;                               anchors.left: dotKey.right; anchors.right: csymKey.left; noMagnifier: true; height: parent.height; }
+            CharKey        { id: csymKey; label: "ㄦ"; shifted: "ㄦ";    anchors.right: backspaceKey.left; }
+            BackspaceKey   { id: backspaceKey; anchors.right: enterKey.left; width: languageMenuButton.width; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column

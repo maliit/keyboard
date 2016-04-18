@@ -38,5 +38,6 @@ ActionKey {
         fontSize: fullScreenItem.tablet ? UI.tabletSpaceFontSize : UI.phoneSpaceFontSize
         opacity: UI.spaceOpacity
         text: Languages.languageIdToName(maliit_input_method.activeLanguage)
+        horizontalAlignment: Text.AlignHCenter
     }
 }
