@@ -103,6 +103,8 @@ Item {
 
     property string preedit: maliit_input_method.preedit
     property string m_preedit: ""
+    property string syllable_preedit: ""
+    property string last_preedit: ""
 
 
 
@@ -253,12 +255,13 @@ Item {
                         maliit_input_method.preedit = preedit + keyToSend;
                         event_handler.onKeyReleased("", "commit");
                     } else {
-                        m_preedit = Parser.add_jamo(preedit, keyToSend);
-                        if (m_preedit.length > 1) {
-                            maliit_input_method.preedit = m_preedit[0];
-                            event_handler.onKeyReleased("", "commit");
-                            maliit_input_method.preedit = m_preedit[1];
+                        if (preedit.length > 1){ /* at least 2 length */
+                            syllable_preedit = preedit.substring(0,preedit.length - 1);
+                            last_preedit = preedit[preedit.length - 1]; /* last word*/
+                            m_preedit = Parser.add_jamo(last_preedit, keyToSend);
+                            maliit_input_method.preedit = syllable_preedit + m_preedit;
                         } else {
+                            m_preedit = Parser.add_jamo(preedit, keyToSend);
                             maliit_input_method.preedit = m_preedit;
                         }
                     }

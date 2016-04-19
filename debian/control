@@ -295,6 +295,7 @@ Description: Ubuntu on-screen keyboard data files - Japanese
 Package: ubuntu-keyboard-korean
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
+         hunspell-ko,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Korean

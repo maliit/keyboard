@@ -72,7 +72,7 @@ KeyPad {
             HCharKey { label: "ㅠ"; shifted: "ㅠ"; }
             HCharKey { label: "ㅜ"; shifted: "ㅜ"; }
             HCharKey { label: "ㅡ"; shifted: "ㅡ"; }
-            BackspaceKey {}
+            HBackspaceKey {}
         }
 
         Item {

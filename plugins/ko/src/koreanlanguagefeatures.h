@@ -35,6 +35,7 @@ public:
     virtual QString fullStopSequence() const { return QString("."); }
     virtual bool isSymbol(const QString &text) const;
     virtual bool ignoreSimilarity() const;
+    virtual bool wordEngineAvailable() const;
 };
 
 #endif // KOREANLANGUAGEFEATURES_H

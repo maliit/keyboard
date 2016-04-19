@@ -83,3 +83,7 @@ bool KoreanLanguageFeatures::ignoreSimilarity() const
 {
     return true;
 }
+bool KoreanLanguageFeatures::wordEngineAvailable() const
+{
+    return true;
+}
