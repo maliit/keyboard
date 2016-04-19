@@ -19,6 +19,7 @@ import QtMultimedia 5.0
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 
+import keys 1.0
 import "key_constants.js" as UI
 import "parser.js" as Parser
 
@@ -184,7 +185,7 @@ Item {
         }
     }
 
-    HPressArea {
+    PressArea {
         id: keyMouseArea
         anchors.fill: parent
 
