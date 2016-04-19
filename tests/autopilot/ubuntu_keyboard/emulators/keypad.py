@@ -74,5 +74,6 @@ class KeyPad(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         _iter_keys("LanguageKey", lambda x: x.action)
         _iter_keys("ReturnKey", lambda x: x.action)
         _iter_keys("CommitKey", lambda x: x.action)
+        _iter_keys("HCharKey", lambda x: x.label)
 
         return (contained_keys, key_positions)

@@ -64,7 +64,8 @@ class UbuntuKeyboardTests(AutopilotTestCase):
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
         gsettings.set_strv(
-            "enabled-languages", ["en", "es", "de", "zh", "emoji"])
+            "enabled-languages", ["en", "es", "de",
+                                  "zh", "ko", "emoji"])
         gsettings.set_string("active-language", "en")
         gsettings.set_string("previous-language", "es")
         gsettings.set_boolean("auto-capitalization", True)
@@ -1456,6 +1457,41 @@ class UbuntuKeyboardJapaneseTests(UbuntuKeyboardTests):
         keyboard.press_key('\n')
 
         expected = "えい"
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
+class UbuntuKeyboardKoreanTests(UbuntuKeyboardTests):
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "ko")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_korean_input(self):
+        """Test keys on Korean layout.
+
+        """
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.pointer.click_object(text_area)
+        keyboard = Keyboard()
+        self.assertThat(keyboard.is_available, Eventually(Equals(True)))
+
+        expected = "한글"
+        keyboard.press_key('ㅎ')
+        keyboard.press_key('ㅏ')
+        keyboard.press_key('ㄴ')
+        keyboard.press_key('ㄱ')
+        keyboard.press_key('ㅡ')
+        keyboard.press_key('ㄹ')
 
         self.assertThat(
             text_area.text,
