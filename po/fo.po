@@ -1,0 +1,142 @@
+# Faroese translation for ubuntu-keyboard
+# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-05-11 12:50+0100\n"
+"PO-Revision-Date: 2016-04-19 12:41+0000\n"
+"Last-Translator: Angutivik Casper Rúnur Tausen Hansen <Unknown>\n"
+"Language-Team: Faroese <fo@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2016-04-20 05:23+0000\n"
+"X-Generator: Launchpad (build 17995)\n"
+
+#: ../qml/keys/LanguageMenu.qml:80
+msgid "Settings"
+msgstr "Stillingar"
+
+#: ../qml/keys/LanguageMenu.qml:95
+msgid "Arabic"
+msgstr "Arabiskt"
+
+#: ../qml/keys/LanguageMenu.qml:96
+msgid "Azerbaijani"
+msgstr "Aserbaijanskt"
+
+#: ../qml/keys/LanguageMenu.qml:97
+msgid "Bosnian"
+msgstr "Bosniskt"
+
+#: ../qml/keys/LanguageMenu.qml:98
+msgid "Catalan"
+msgstr "Katalanskt"
+
+#: ../qml/keys/LanguageMenu.qml:99
+msgid "Czech"
+msgstr "Kjekkiskt"
+
+#: ../qml/keys/LanguageMenu.qml:100
+msgid "Danish"
+msgstr "Danskt"
+
+#: ../qml/keys/LanguageMenu.qml:101
+msgid "German"
+msgstr "Týskt"
+
+#: ../qml/keys/LanguageMenu.qml:102
+msgid "Emoji"
+msgstr "Kensl"
+
+#: ../qml/keys/LanguageMenu.qml:103
+msgid "Greek"
+msgstr "Grikskt"
+
+#: ../qml/keys/LanguageMenu.qml:104
+msgid "English"
+msgstr "Enskt"
+
+#: ../qml/keys/LanguageMenu.qml:105
+msgid "Spanish"
+msgstr "Spanskt"
+
+#: ../qml/keys/LanguageMenu.qml:106
+msgid "Finnish"
+msgstr "Finskt"
+
+#: ../qml/keys/LanguageMenu.qml:107
+msgid "French"
+msgstr "Franskt"
+
+#: ../qml/keys/LanguageMenu.qml:108
+msgid "Scottish Gaelic"
+msgstr "Skotsk gæliskt"
+
+#: ../qml/keys/LanguageMenu.qml:109
+msgid "Hebrew"
+msgstr "Hebraiskt"
+
+#: ../qml/keys/LanguageMenu.qml:110
+msgid "Croatian"
+msgstr "Kroatiskt"
+
+#: ../qml/keys/LanguageMenu.qml:111
+msgid "Hungarian"
+msgstr "Ungarskt"
+
+#: ../qml/keys/LanguageMenu.qml:112
+msgid "Icelandic"
+msgstr "Íslendskt"
+
+#: ../qml/keys/LanguageMenu.qml:113
+msgid "Italian"
+msgstr "Italskt"
+
+#: ../qml/keys/LanguageMenu.qml:114
+msgid "Dutch"
+msgstr "Hollendskt"
+
+#: ../qml/keys/LanguageMenu.qml:115
+msgid "Norwegian"
+msgstr "Norskt"
+
+#: ../qml/keys/LanguageMenu.qml:116
+msgid "Polish"
+msgstr "Polskt"
+
+#: ../qml/keys/LanguageMenu.qml:117
+msgid "Portuguese"
+msgstr "Portugisiskt"
+
+#: ../qml/keys/LanguageMenu.qml:118
+msgid "Romanian"
+msgstr "Rumenskt"
+
+#: ../qml/keys/LanguageMenu.qml:119
+msgid "Russian"
+msgstr "Russiskt"
+
+#: ../qml/keys/LanguageMenu.qml:120
+msgid "Slovenian"
+msgstr "Slovenskt"
+
+#: ../qml/keys/LanguageMenu.qml:121
+msgid "Serbian"
+msgstr "Serbiskt"
+
+#: ../qml/keys/LanguageMenu.qml:122
+msgid "Swedish"
+msgstr "Svenskt"
+
+#: ../qml/keys/LanguageMenu.qml:123
+msgid "Ukrainian"
+msgstr "Ukrainskt"
+
+#: ../qml/keys/LanguageMenu.qml:124
+msgid "Chinese - Pinyin"
+msgstr "Kinesiskt - Pinyin"
