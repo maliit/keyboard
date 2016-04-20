@@ -250,7 +250,7 @@ Item {
                 if (switchBackFromSymbols && panel.state === "SYMBOLS") {
                     panel.state = "CHARACTERS";
                 }
-                if (panel.state === "CHARACTERS") {
+ 
 
                     if (!Parser.is_jamo(keyToSend)){
                         maliit_input_method.preedit = preedit + keyToSend;
@@ -266,10 +266,7 @@ Item {
                             maliit_input_method.preedit = m_preedit;
                         }
                     }
-                } else {
-                 maliit_input_handler.preedit = preedit + keyToSend;
-                 event_handler.onKeyReleased("", "commit");
-                }
+ 
             } else if (action == "backspace") {
                 // Send release from backspace if we're swiped out since
                 // backspace activates on press and deactivates on release

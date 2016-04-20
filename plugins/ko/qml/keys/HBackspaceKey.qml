@@ -37,19 +37,24 @@ ActionKey {
         if (isPreedit) {
             if (preedit.length > 1){ /* at least 2 length */
                 syllable_preedit = preedit.substring(0,preedit.length - 1);
-                last_preedit = preedit[preedit.length - 1]; /* last word*/
+                last_preedit = preedit[preedit.length - 1]; /* last jamo or syllable */
+
                 m_preedit = Parser.erase_jamo(last_preedit);
-                if (m_preedit != ""){
-                  maliit_input_method.preedit = syllable_preedit + m_preedit;
+                if (m_preedit != ""){ /* exsit jamo */
+                    maliit_input_method.preedit = syllable_preedit + m_preedit;
                 } else {
-                  maliit_input_method.preedit = syllable_preedit;
+                    maliit_input_method.preedit = syllable_preedit;
                 }
             } else {
-                m_preedit = Parser.erase_jamo(preedit);
-                maliit_input_method.preedit = m_preedit;
+                  if (Parser.is_syllable(preedit)){ /* preedit is one syllable */
+                    m_preedit = Parser.erase_jamo(preedit);
+                    maliit_input_method.preedit = m_preedit;
+                  } else { /* it is only jamo like "ㄱ" or "ㅏ" */
+                     event_handler.onKeyReleased("", action);
+                  }
             }
         } else {
-            event_handler.onKeyReleased("", action);
+             event_handler.onKeyReleased("", action);
         }
     }
 
@@ -60,8 +65,12 @@ ActionKey {
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
 
-        if (!isPreedit)
+        if (!isPreedit) {
             event_handler.onKeyPressed("", action);
+        } else {
+            if (preedit.length == 1 && !Parser.is_syllable(preedit)) /* fixed erase action repeat */
+                event_handler.onKeyPressed("", action);
+        }
     }
 
     onPressAndHold: {
