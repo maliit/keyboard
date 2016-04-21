@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -251,21 +251,20 @@ Item {
                     panel.state = "CHARACTERS";
                 }
  
-
-                    if (!Parser.is_jamo(keyToSend)){
-                        maliit_input_method.preedit = preedit + keyToSend;
-                        event_handler.onKeyReleased("", "commit");
+                if (!Parser.is_hangul(keyToSend)){ /* if key is not hangul, could not compose syllable */
+                    maliit_input_method.preedit = preedit + keyToSend;
+                    event_handler.onKeyReleased("", "commit"); /* do commit current preedit string */
+                } else {
+                    if (preedit.length > 1){ /* at least 2 length */
+                        syllable_preedit = preedit.substring(0,preedit.length - 1);
+                        last_preedit = preedit[preedit.length - 1]; /* last word*/
+                        m_preedit = Parser.add_jamo(last_preedit, keyToSend);
+                        maliit_input_method.preedit = syllable_preedit + m_preedit;
                     } else {
-                        if (preedit.length > 1){ /* at least 2 length */
-                            syllable_preedit = preedit.substring(0,preedit.length - 1);
-                            last_preedit = preedit[preedit.length - 1]; /* last word*/
-                            m_preedit = Parser.add_jamo(last_preedit, keyToSend);
-                            maliit_input_method.preedit = syllable_preedit + m_preedit;
-                        } else {
-                            m_preedit = Parser.add_jamo(preedit, keyToSend);
-                            maliit_input_method.preedit = m_preedit;
-                        }
+                        m_preedit = Parser.add_jamo(preedit, keyToSend);
+                        maliit_input_method.preedit = m_preedit;
                     }
+                }
  
             } else if (action == "backspace") {
                 // Send release from backspace if we're swiped out since
