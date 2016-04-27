@@ -555,6 +555,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionReturn: {
         event_key = Qt::Key_Return;
         keyText = QString("\r");
+        if (d->word_engine->languageFeature()->showPrimaryInPreedit()) {
+            d->text->setPreedit(d->text->primaryCandidate());
+            commitPreedit();
+        }
     } break;
 
     case Key::ActionCommit: {
