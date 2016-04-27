@@ -47,16 +47,15 @@ bool ChewingLanguageFeatures::activateAutoCaps(const QString &preedit) const
 
 QString ChewingLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
-    if (isSeparator(preedit.right(1)) && contentType() != Maliit::EmailContentType && contentType() != Maliit::UrlContentType) {
-        return QString(" ");
-    }
+    if (preedit.isEmpty())
+        return QString("");
 
-    return QString("");
+    return QString(" ");
 }
 
 bool ChewingLanguageFeatures::isSeparator(const QString &text) const
 {
-    static const QString separators = QString::fromUtf8("。、,!?:;.\r\n");
+    static const QString separators = QString::fromUtf8("。、!?:\r\n");
 
     if (text.isEmpty()) {
         return false;
@@ -71,7 +70,7 @@ bool ChewingLanguageFeatures::isSeparator(const QString &text) const
 
 bool ChewingLanguageFeatures::isSymbol(const QString &text) const
 {
-    static const QString symbols = QString::fromUtf8("*#+=()@~/\\€£$¥₹%<>[]`^|_—–•§{}¡¿«»\"“”„&");
+    static const QString symbols = QString::fromUtf8("*#+=()@~\\€£$¥₹%<>[]`^|_—–•§{}¡¿«»\"“”„&");
 
     if (text.isEmpty()) {
         return false;
@@ -98,3 +97,19 @@ QString ChewingLanguageFeatures::fullStopSequence() const
 {
     return QString("。");
 }
+
+bool ChewingLanguageFeatures::restorePreedit() const
+{
+    return false;
+}
+
+bool ChewingLanguageFeatures::commitOnSpace() const
+{
+    return false;
+}
+
+bool ChewingLanguageFeatures::showPrimaryInPreedit() const
+{
+    return true;
+}
+

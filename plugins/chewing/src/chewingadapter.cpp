@@ -25,11 +25,16 @@
 #include <QChar>
 #include <QCoreApplication>
 
+#define CHEWING_MAX_LEN 32
+
 ChewingAdapter::ChewingAdapter(QObject *parent) :
     QObject(parent),
     m_processingWords(false)
 {
     m_chewingContext = chewing_new();
+    chewing_set_easySymbolInput(m_chewingContext, 0);
+    chewing_set_maxChiSymbolLen(m_chewingContext, CHEWING_MAX_LEN);
+    chewing_set_spaceAsSelection(m_chewingContext, 0);
 }
 
 ChewingAdapter::~ChewingAdapter()
@@ -44,25 +49,36 @@ void ChewingAdapter::parse(const QString& string)
 
     const QChar *c = string.data();
     while (!c->isNull()) {
-        chewing_handle_Default(m_chewingContext, c->toLatin1());
+        if (c->isSpace()) {
+            chewing_handle_Space(m_chewingContext);
+        } else {
+            chewing_handle_Default(m_chewingContext, c->toLatin1());
+        }
         c++;
     }
 
+    char * buf_str = chewing_buffer_String(m_chewingContext);
+    QString buffer(buf_str);
+    QString choppedBuffer = buffer;
+    choppedBuffer.chop(1);
+    chewing_free(buf_str);
+    
     chewing_cand_open(m_chewingContext);
 
     if (!chewing_cand_CheckDone(m_chewingContext)) {
-        //get candidate word
+        // Get candidate words
         chewing_cand_Enumerate(m_chewingContext);
         while (chewing_cand_hasNext(m_chewingContext)) {
             char *chewingCand = chewing_cand_String(m_chewingContext);
             QString candidate(chewingCand);
-            m_candidates.append(candidate);
+            m_candidates.append(choppedBuffer + candidate);
             chewing_free(chewingCand);
         }
     }
 
-    if (m_candidates.isEmpty()) {
-        m_candidates.append(QString(chewing_bopomofo_String_static(m_chewingContext)));
+    if (chewing_buffer_Len(m_chewingContext) <= chewing_cursor_Current(m_chewingContext)) {    
+        // Insert bopomofo string
+        m_candidates.prepend(buffer + QString(chewing_bopomofo_String_static(m_chewingContext)));
     }
 
     chewing_cand_close(m_chewingContext);
@@ -73,7 +89,7 @@ void ChewingAdapter::parse(const QString& string)
 void ChewingAdapter::clearChewingPreedit()
 {
     int origState = chewing_get_escCleanAllBuf(m_chewingContext);
-    /* Send a false event, then clean it to wipe the commit  */
+    // Send a false event, then clean it to wipe the commit
     chewing_handle_Default(m_chewingContext, '1');
     chewing_set_escCleanAllBuf(m_chewingContext, 1);
     chewing_handle_Esc(m_chewingContext);

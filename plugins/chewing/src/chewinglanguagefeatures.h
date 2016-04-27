@@ -36,6 +36,9 @@ public:
     virtual bool ignoreSimilarity() const;
     virtual bool wordEngineAvailable() const;
     virtual QString fullStopSequence() const;
+    virtual bool restorePreedit() const;
+    virtual bool commitOnSpace() const;
+    virtual bool showPrimaryInPreedit() const;
 };
 
 #endif // CHINESELANGUAGEFEATURES_H

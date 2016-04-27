@@ -74,7 +74,7 @@ KeyPad {
             CharKey { valueToSubmit: "j"; annotation: valueToSubmit; label: "ㄨ"; shifted: "j"; textCenterOffset: offset; }
             CharKey { valueToSubmit: "k"; annotation: valueToSubmit; label: "ㄜ"; shifted: "k"; textCenterOffset: offset; }
             CharKey { valueToSubmit: "l"; annotation: valueToSubmit; label: "ㄠ"; shifted: "l"; textCenterOffset: offset; }
-            CharKey { label: "ㄤ"; shifted: "ㄤ"; rightSide: true; textCenterOffset: offset; }
+            CharKey { valueToSubmit: ";"; annotation: valueToSubmit; label: "ㄤ"; shifted: ";"; rightSide: true; textCenterOffset: offset; }
         }
 
         Row {
@@ -88,9 +88,9 @@ KeyPad {
             CharKey { valueToSubmit: "b"; annotation: valueToSubmit; label: "ㄖ"; shifted: "b"; textCenterOffset: offset; }
             CharKey { valueToSubmit: "n"; annotation: valueToSubmit; label: "ㄙ"; shifted: "n"; textCenterOffset: offset; }
             CharKey { valueToSubmit: "m"; annotation: valueToSubmit; label: "ㄩ"; shifted: "m"; textCenterOffset: offset; }
-            CharKey { label: "ㄝ"; shifted: "ㄝ"; textCenterOffset: offset; }
-            CharKey { label: "ㄡ"; shifted: "ㄡ"; textCenterOffset: offset; }
-            CharKey { label: "ㄥ"; shifted: "ㄥ"; rightSide: true; textCenterOffset: offset; }
+            CharKey { valueToSubmit: ","; annotation: valueToSubmit; label: "ㄝ"; shifted: ","; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "."; annotation: valueToSubmit; label: "ㄡ"; shifted: "."; textCenterOffset: offset; }
+            CharKey { valueToSubmit: "/"; annotation: valueToSubmit; label: "ㄥ"; shifted: "/"; rightSide: true; textCenterOffset: offset; }
         }
 
         Item {
@@ -103,7 +103,7 @@ KeyPad {
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
             CharKey        { id: dotKey;      label: "。"; extended: [",", "，"]; extendedShifted: [",", "，"]; shifted: "。"; anchors.left: languageMenuButton.right; height: parent.height; }
             SpaceKey       { id: spaceKey;                               anchors.left: dotKey.right; anchors.right: csymKey.left; noMagnifier: true; height: parent.height; }
-            CharKey        { id: csymKey; label: "ㄦ"; shifted: "ㄦ";    anchors.right: backspaceKey.left; }
+            CharKey        { id: csymKey; valueToSubmit: "-"; annotation: valueToSubmit; label: "ㄦ"; shifted: "-";    anchors.right: backspaceKey.left; }
             BackspaceKey   { id: backspaceKey; anchors.right: enterKey.left; width: languageMenuButton.width; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
