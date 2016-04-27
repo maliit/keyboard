@@ -989,9 +989,9 @@ class UbuntuKeyboardChewing(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('hk4 ')
+        keyboard.type('hk4\n')
 
-        expected = "冊"
+        expected = "冊\n"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
@@ -1006,26 +1006,9 @@ class UbuntuKeyboardChewing(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('a b c ')
+        keyboard.type('a\n')
 
-        expected = "ㄇㄖㄏ"
-        self.assertThat(
-            text_area.text,
-            Eventually(Equals(expected))
-        )
-
-    def test_fullstop(self):
-        """Full stop shouldn't have space added after it in chewing mode.
-
-        """
-        text_area = self.launch_test_input_area(self.label, self.hints)
-        self.ensure_focus_on_input(text_area)
-        keyboard = Keyboard()
-        self.addCleanup(keyboard.dismiss)
-
-        keyboard.type('hk4.hk4 ')
-
-        expected = "冊.冊"
+        expected = "ㄇ\n"
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
@@ -1033,8 +1016,7 @@ class UbuntuKeyboardChewing(UbuntuKeyboardTests):
 
     def test_auto_punctuation(self):
         """A chinese full-stop character should be entered after space has
-        been pressed three times (once to complete the character, once more
-        to insert a space and then again to produce a full-stop.
+        been pressed twice.
 
         """
         text_area = self.launch_test_input_area(self.label, self.hints)
@@ -1042,9 +1024,28 @@ class UbuntuKeyboardChewing(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type('hk4   ')
+        keyboard.type('hk4  ')
 
         expected = "冊。 "
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_phrases(self):
+        """It should be possible to type an entire phrase with chewing,
+        and only commit at the end of the phrase.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('2j6gj cjo4y94w961o3\n')
+
+        expected = "讀書會在台北\n"
 
         self.assertThat(
             text_area.text,

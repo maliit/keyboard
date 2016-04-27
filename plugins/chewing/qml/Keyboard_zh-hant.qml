@@ -22,12 +22,12 @@ KeyPad {
 
     content: c1
     symbols: "languages/Keyboard_symbols.qml"
-    property double offset: units.gu(0.3)
 
     Column {
         id: c1
         anchors.fill: parent
         spacing: 0
+        property double offset: units.gu(0.3)
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
