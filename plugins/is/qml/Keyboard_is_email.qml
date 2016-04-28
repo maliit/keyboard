@@ -56,6 +56,7 @@ KeyPad {
             CharKey { label: "g"; shifted: "G"; }
             CharKey { label: "h"; shifted: "H"; }
             CharKey { label: "j"; shifted: "J"; }
+            CharKey { label: "k"; shifted: "K"; }
             CharKey { label: "l"; shifted: "L"; }
             CharKey { label: "æ"; shifted: "Æ"; }
             CharKey { label: "ö"; shifted: "Ö"; rightSide: true; }
