@@ -6,6 +6,7 @@ XSBC-Original-Maintainer: Michael Hasselmann <michaelh@openismus.com>
 Build-Depends: debhelper (>= 9),
                doxygen,
                libanthy-dev,
+               libchewing3-dev,
                libgl1-mesa-dev | libgl-dev,
                libgles2-mesa-dev,
                libglib2.0-dev,
@@ -84,6 +85,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-azerbaijani (>= ${source:Version}),
          ubuntu-keyboard-bosnian (>= ${source:Version}),
          ubuntu-keyboard-catalan (>= ${source:Version}),
+         ubuntu-keyboard-chinese-chewing (>= ${source:Version}),
          ubuntu-keyboard-chinese-pinyin (>= ${source:Version}),
          ubuntu-keyboard-croatian (>= ${source:Version}),
          ubuntu-keyboard-czech (>= ${source:Version}),
@@ -150,6 +152,13 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Catalan
  Data files for the Ubuntu virtual keyboard - Catalan
+
+Package: ubuntu-keyboard-chinese-chewing
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Chinese Chewing
 
 Package: ubuntu-keyboard-chinese-pinyin
 Architecture: any

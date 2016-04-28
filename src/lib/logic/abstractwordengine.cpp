@@ -137,8 +137,7 @@ void AbstractWordEngine::computeCandidates(Model::Text *text)
 
     if (not isEnabled()
         || not text
-        || text->preedit().isEmpty()
-        || not text->preedit().at(text->preedit().length() - 1).isLetterOrNumber()) {
+        || text->preedit().isEmpty()) {
         // FIXME: We should here set some special preedit face in text
         // model (say Disabled or None) which would be interpreted by
         // editor to send no formatting informations along with
