@@ -27,15 +27,15 @@ ChewingLanguageFeatures::~ChewingLanguageFeatures()
 
 bool ChewingLanguageFeatures::alwaysShowSuggestions() const
 {
-    // Pinyin characters can only be entered via suggestions, so we ignore
+    // Chewing characters can only be entered via suggestions, so we ignore
     // hints that would otherwise disable them.
     return true;
 }
 
 bool ChewingLanguageFeatures::autoCapsAvailable() const
 {
-    // Automatic switching to capital letters doen't make sense when 
-    // inputting Pinyin
+    // Automatic switching to capital letters doesn't make sense when 
+    // inputting Chewing
     return false;
 }
 

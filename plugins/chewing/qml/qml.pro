@@ -13,7 +13,7 @@ INSTALLS += lang_zh
 
 # for QtCreator
 OTHER_FILES += \
-    Keyboard_zh-hant_cn_pinyin.qml \
+    Keyboard_zh-hant.qml \
     Keyboard_zh-hant_email.qml \
     Keyboard_zh-hant_url.qml \
     Keyboard_zh-hant_url_search.qml
