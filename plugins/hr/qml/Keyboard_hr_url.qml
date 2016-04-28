@@ -34,13 +34,13 @@ KeyPad {
 
             CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "w"; shifted: "W"; extended: ["2"]; extendedShifted: ["2"] }
-            CharKey { label: "e"; shifted: "E"; extended: ["3", "è", "é", "ê", "ë", "€"]; extendedShifted: ["3", "È","É", "Ê", "Ë", "€"] }
+            CharKey { label: "e"; shifted: "E"; extended: ["3", "€"]; extendedShifted: ["3", "€"] }
             CharKey { label: "r"; shifted: "R"; extended: ["4"]; extendedShifted: ["4"] }
-            CharKey { label: "t"; shifted: "T"; extended: ["5", "þ"]; extendedShifted: ["5", "Þ"] }
+            CharKey { label: "t"; shifted: "T"; extended: ["5"]; extendedShifted: ["5"] }
             CharKey { label: "z"; shifted: "Z"; extended: ["6", "ž"]; extendedShifted: ["6", "Ž"]}
-            CharKey { label: "u"; shifted: "U"; extended: ["7", "û","ù","ú","ü"]; extendedShifted: ["7", "Û","Ù","Ú","Ü"] }
-            CharKey { label: "i"; shifted: "I"; extended: ["8", "î","ï","ì","í"]; extendedShifted: ["8", "Î","Ï","Ì","Í"] }
-            CharKey { label: "o"; shifted: "O"; extended: ["9", "ö","ô","ò","ó"]; extendedShifted: ["9", "Ö","Ô","Ò","Ó"] }
+            CharKey { label: "u"; shifted: "U"; extended: ["7"]; extendedShifted: ["7"] }
+            CharKey { label: "i"; shifted: "I"; extended: ["8"]; extendedShifted: ["8"] }
+            CharKey { label: "o"; shifted: "O"; extended: ["9"]; extendedShifted: ["9"] }
             CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"]; rightSide: true; }
         }
 
@@ -48,9 +48,9 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","ª","á","å", "æ"]; extendedShifted: ["Ä","À","Â","ª","Á","Å","Æ"]; leftSide: true; }
-            CharKey { label: "s"; shifted: "S"; extended: ["š","ß","$"]; extendedShifted: ["Š","$"] }
-            CharKey { label: "d"; shifted: "D"; extended: ["ð"]; extendedShifted: ["Ð"] }
+            CharKey { label: "a"; shifted: "A"; leftSide: true; }
+            CharKey { label: "s"; shifted: "S"; extended: ["š","$"]; extendedShifted: ["Š","$"] }
+            CharKey { label: "d"; shifted: "D"; extended: ["đ"]; extendedShifted: ["Ð"] }
             CharKey { label: "f"; shifted: "F"; }
             CharKey { label: "g"; shifted: "G"; }
             CharKey { label: "h"; shifted: "H"; }
@@ -64,12 +64,12 @@ KeyPad {
             spacing: 0
 
             ShiftKey {}
-            CharKey { label: "y"; shifted: "Y"; extended: ["ý", "¥"]; extendedShifted: ["Ý", "¥"] }
+            CharKey { label: "y"; shifted: "Y"; extended: ["¥"]; extendedShifted: ["¥"] }
             CharKey { label: "x"; shifted: "X"; }
-            CharKey { label: "c"; shifted: "C"; extended: ["č","ć","ç"]; extendedShifted: ["Č","Ć","Ç"] }
+            CharKey { label: "c"; shifted: "C"; extended: ["č","ć"]; extendedShifted: ["Č","Ć"] }
             CharKey { label: "v"; shifted: "V"; }
             CharKey { label: "b"; shifted: "B"; }
-            CharKey { label: "n"; shifted: "N"; extended: ["ñ"]; extendedShifted: ["Ñ"] }
+            CharKey { label: "n"; shifted: "N"; }
             CharKey { label: "m"; shifted: "M"; }
             BackspaceKey {}
         }
