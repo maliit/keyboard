@@ -8,147 +8,151 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-04-28 11:45+0000\n"
-"PO-Revision-Date: 2015-08-25 08:41+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2016-05-04 08:39+0000\n"
+"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-30 05:38+0000\n"
+"X-Launchpad-Export-Date: 2016-05-05 05:39+0000\n"
 "X-Generator: Launchpad (build 17995)\n"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "Settings"
-msgstr ""
+msgstr "הגדרות"
 
 #: ../qml/keys/languages.js:19
 msgid "Arabic"
-msgstr ""
+msgstr "ערבית"
 
 #: ../qml/keys/languages.js:20
 msgid "Azerbaijani"
-msgstr ""
+msgstr "אזרית"
 
 #: ../qml/keys/languages.js:21
 msgid "Bosnian"
-msgstr ""
+msgstr "בוסנית"
 
 #: ../qml/keys/languages.js:22
 msgid "Catalan"
-msgstr ""
+msgstr "קטלאנית"
 
 #: ../qml/keys/languages.js:23
 msgid "Czech"
-msgstr ""
+msgstr "צ׳כית"
 
 #: ../qml/keys/languages.js:24
 msgid "Danish"
-msgstr ""
+msgstr "דנית"
 
 #: ../qml/keys/languages.js:25
 msgid "German"
-msgstr ""
+msgstr "גרמנית"
 
 #: ../qml/keys/languages.js:26
 msgid "Emoji"
-msgstr ""
+msgstr "אימוג׳י"
 
 #: ../qml/keys/languages.js:27
 msgid "Greek"
-msgstr ""
+msgstr "יוונית"
 
 #: ../qml/keys/languages.js:28
 msgid "English"
-msgstr ""
+msgstr "אנגלית"
 
 #: ../qml/keys/languages.js:29
 msgid "Spanish"
-msgstr ""
+msgstr "ספרדית"
 
 #: ../qml/keys/languages.js:30
 msgid "Finnish"
-msgstr ""
+msgstr "פינית"
 
 #: ../qml/keys/languages.js:31
 msgid "French"
-msgstr ""
+msgstr "צרפתית"
 
 #: ../qml/keys/languages.js:32
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "גאלית סקוטית"
 
 #: ../qml/keys/languages.js:33
 msgid "Hebrew"
-msgstr ""
+msgstr "עברית"
 
 #: ../qml/keys/languages.js:34
 msgid "Croatian"
-msgstr ""
+msgstr "קרואטית"
 
 #: ../qml/keys/languages.js:35
 msgid "Hungarian"
-msgstr ""
+msgstr "הונגרית"
 
 #: ../qml/keys/languages.js:36
 msgid "Icelandic"
-msgstr ""
+msgstr "איסלנדית"
 
 #: ../qml/keys/languages.js:37
 msgid "Italian"
-msgstr ""
+msgstr "איטלקית"
 
 #: ../qml/keys/languages.js:38
 msgid "Japanese"
-msgstr ""
+msgstr "יפנית"
 
 #: ../qml/keys/languages.js:39
 msgid "Dutch"
-msgstr ""
+msgstr "הולנדית"
 
 #: ../qml/keys/languages.js:40
 msgid "Norwegian"
-msgstr ""
+msgstr "נורבגית"
 
 #: ../qml/keys/languages.js:41
 msgid "Polish"
-msgstr ""
+msgstr "פולנית"
 
 #: ../qml/keys/languages.js:42
 msgid "Portuguese"
-msgstr ""
+msgstr "פורטוגלית"
 
 #: ../qml/keys/languages.js:43
 msgid "Romanian"
-msgstr ""
+msgstr "רומנית"
 
 #: ../qml/keys/languages.js:44
 msgid "Russian"
-msgstr ""
+msgstr "רוסית"
 
 #: ../qml/keys/languages.js:45
 msgid "Slovenian"
-msgstr ""
+msgstr "סלובנית"
 
 #: ../qml/keys/languages.js:46
 msgid "Serbian"
-msgstr ""
+msgstr "סרבית"
 
 #: ../qml/keys/languages.js:47
 msgid "Swedish"
-msgstr ""
+msgstr "שבדית"
 
 #: ../qml/keys/languages.js:48
 msgid "Ukrainian"
-msgstr ""
+msgstr "אוקראינית"
 
 #: ../qml/keys/languages.js:49
 msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
+"סינית\n"
+"(פִּין-יִין)"
 
 #: ../qml/keys/languages.js:50
 msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
+"סינית\n"
+"(צ׳ואינג)"
