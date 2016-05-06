@@ -384,7 +384,7 @@ Description: Ubuntu on-screen keyboard data files - Spanish
 Package: ubuntu-keyboard-swedish
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
-         hunspell-sv-se,
+         hunspell-sv | hunspell-sv-se,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Swedish
