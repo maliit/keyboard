@@ -84,7 +84,7 @@ KeyPad {
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
             HCharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: languageMenuButton.right; height: parent.height; }
-            UrlKey         { id: urlKey; label: ".com"; extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"]; anchors.right: dotKey.left; height: parent.height; }
+            UrlKey         { id: urlKey; label: ".com"; extended: [".co.kr", ".or.kr", ".go.kr", ".ac.kr", ".kr"]; anchors.right: dotKey.left; height: parent.height; }
             HCharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "-", "_", "!", "+", "%","#","/"]; extendedShifted: ["?", "-", "_", "!", "+", "%","#","/"]; anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }

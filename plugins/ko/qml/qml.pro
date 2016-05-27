@@ -19,6 +19,6 @@ OTHER_FILES += \
     Keyboard_ko.qml \
     Keyboard_ko_email.qml \
     Keyboard_ko_url.qml \
-    Keyboard_ko_url_search.qml \
-    keys/HCharKey.qml 
+    Keyboard_ko_url_search.qml 
+
 
