@@ -1485,13 +1485,14 @@ class UbuntuKeyboardKoreanTests(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.assertThat(keyboard.is_available, Eventually(Equals(True)))
 
-        expected = "한글"
+        expected = "한글 "
         keyboard.press_key('ㅎ')
         keyboard.press_key('ㅏ')
         keyboard.press_key('ㄴ')
         keyboard.press_key('ㄱ')
         keyboard.press_key('ㅡ')
         keyboard.press_key('ㄹ')
+        keyboard.press_key(' ')
 
         self.assertThat(
             text_area.text,
