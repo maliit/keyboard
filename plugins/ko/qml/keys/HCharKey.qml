@@ -23,334 +23,36 @@ import keys 1.0
 import "key_constants.js" as UI
 import "parser.js" as Parser
 
-Item {
-    id: key
+CharKey {
 
-    property int padding: 0
+    allowPreeditHandler: true
+    preeditHandler: handler
 
-    width: leftSide || rightSide ? panel.keyWidth * 2 : panel.keyWidth
-    height: panel.keyHeight
-
-    /* to be set in keyboard layouts */
-    property string label: ""
-    property string shifted: ""
-    property var extended; // list of extended keys
-    property var extendedShifted; // list of extended keys in shifted state
-    property var currentExtendedKey; // The currently highlighted extended key
-    property bool highlight: false;
-
-    property alias valueToSubmit: keyLabel.text
-
-    property alias acceptDoubleClick: keyMouseArea.acceptDoubleClick
-
-    property string action
-    property bool noMagnifier: false
-    property bool skipAutoCaps: false
-    property bool switchBackFromSymbols: false
-
-    property bool leftSide: false
-    property bool rightSide: false
-
-    property double rowMargin: fullScreenItem.tablet ? units.gu(UI.tabletRowMargin)
-                                                     : (fullScreenItem.landscape ? units.dp(UI.phoneRowMarginLandscape)
-                                                                                 : units.dp(UI.phoneRowMarginPortrait))
-    property double keyMargin: fullScreenItem.tablet ? units.gu(UI.tabletKeyMargins)
-                                                     : units.gu(UI.phoneKeyMargins)
-
-    // These properties are used by autopilot to determine the visible 
-    // portion of the key to press
-    readonly property double leftOffset: buttonRect.anchors.leftMargin
-    readonly property double rightOffset: buttonRect.anchors.rightMargin
-
-    /* design */
-    property string normalColor: UI.charKeyColor
-    property string pressedColor: UI.charKeyPressedColor
-    // Scale the font so the label fits if a long word is set
-    property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8)) 
-                           * (4 / (label.length >= 2 ? (label.length <= 6 ? label.length + 2 : 8) : 4));
-
-    /// annotation shows a small label in the upper right corner
-    // if the annotiation property is set, it will be used. If not, the first position in extended[] list or extendedShifted[] list will
-    // be used, depending on the state. If no extended/extendedShifted arrays exist, no annotation is shown
-    property string annotation: ""
-
-    /*! indicates if te key is currently pressed/down*/
-    property alias currentlyPressed: keyMouseArea.pressed
-
-    /* internal */
-    property string __annotationLabelNormal
-    property string __annotationLabelShifted
-
-    /**
-     * this property specifies if the key can submit its value or not (e.g. when the popover is shown, it does not commit its value)
-     */
-
-    property bool extendedKeysShown: extendedKeysSelector.enabled
-
-    /*
-     * label changes when keyboard is in shifted mode
-     * extended keys change as well when shifting keyboard, typically lower-uppercase: ê vs Ê
-     */
-
-    property string oskState: panel.activeKeypadState
-    property var activeExtendedModel: (panel.activeKeypadState === "NORMAL") ? extended : extendedShifted
-
-    // Allow action keys to override the standard key behaviour
-    property bool overridePressArea: false
-
-    // Don't detect swipe changes until the swipeTimer has expired to prevent
-    // accidentally selecting something other than the default extended key
-    property bool swipeReady: false
-
-    property string preedit: maliit_input_method.preedit
-    property string m_preedit: ""
-    property string syllable_preedit: ""
-    property string last_preedit: ""
-
-
-
-    signal pressed()
-    signal released()
-    signal pressAndHold()
-    signal doubleClicked()
-
-    Component.onCompleted: {
-        if (annotation) {
-            __annotationLabelNormal = annotation
-            __annotationLabelShifted = annotation
-        } else {
-            if (extended)
-                __annotationLabelNormal = extended[0]
-            if (extendedShifted)
-                __annotationLabelShifted = extendedShifted[0]
-        }
-    }
-
-    // Make it possible for the visible area of the key to differ from the
-    // actual key size. This allows us to extend the touch area of the bottom
-    // row of keys all the way to the bottom of the keyboard, whilst 
-    // maintaining the same visual appearance.
     Item {
-        anchors.top: parent.top
-        height: panel.keyHeight
-        width: parent.width
+        id: handler
 
-        Rectangle {
-            id: buttonRect
-            color: key.currentlyPressed || key.highlight ? pressedColor : normalColor
-            anchors.fill: parent
-            anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
-            anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
-            anchors.bottomMargin: key.rowMargin
-            radius: units.dp(4)
+        //Each Hangul represents one syllable. The Hangul are composed of jamo. 
+        //It need to manipulate preedit until compose one syllable. 
 
-            /// label of the key
-            //  the label is also the value subitted to the app
-        
-            Text {
-                id: keyLabel
-                text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
-                font.family: UI.fontFamily
-                font.pixelSize: fontSize
-                font.weight: Font.Light
-                color: UI.fontColor
-                anchors.right: parent.right
-                anchors.left: parent.left
-                anchors.leftMargin: units.gu(0.2)
-                anchors.rightMargin: units.gu(0.2)
-                anchors.verticalCenter: parent.verticalCenter 
-                anchors.verticalCenterOffset: -units.gu(0.15)
-                horizontalAlignment: Text.AlignHCenter
-                // Avoid eliding characters that are slightly too wide (e.g. some emoji)
-                elide: text.length <= 2 ? Text.ElideNone : Text.ElideRight
-            }
-        
-            /// shows an annotation
-            // used e.g. for indicating the existence of extended keys
-        
-            Text {
-                id: annotationLabel
-                text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
-        
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.topMargin: units.gu(UI.annotationTopMargin)
-                anchors.rightMargin: units.gu(UI.annotationRightMargin)
-                font.family: UI.annotationFont
-                font.pixelSize: fullScreenItem.tablet ? units.dp(UI.tabletAnnotationFontSize) : units.dp(UI.phoneAnnotationFontSize)
-                font.weight: Font.Light
-                color: UI.annotationFontColor
-            }
+        function onKeyReleased(keyString, action) {
+            // get previous preedit string
+            var preedit = maliit_input_method.preedit;
 
-        }
-    }
-
-    PressArea {
-        id: keyMouseArea
-        anchors.fill: parent
-
-        onPressAndHold: {
-            if (overridePressArea) {
-                key.pressAndHold();
-                return;
-            }
-            if (activeExtendedModel != undefined) {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
-
-                swipeReady = false;
-                swipeTimer.restart();
-                magnifier.shown = false
-                extendedKeysSelector.enabled = true
-                extendedKeysSelector.extendedKeysModel = activeExtendedModel
-                extendedKeysSelector.currentlyAssignedKey = key
-                var extendedKeys = extendedKeysSelector.keys;
-                var middleKey = extendedKeys.length > 1 ? Math.floor(extendedKeys.length / 2) - 1 : 0;
-                extendedKeys[middleKey].highlight = true;
-                currentExtendedKey = extendedKeys[middleKey];
-            }
-        }
-
-        onMouseXChanged: {
-            evaluateSelectorSwipe();
-        }
-
-        onMouseYChanged: {
-            evaluateSelectorSwipe();
-        }
-
-        onReleased: {
-
-
-            if (overridePressArea) {
-                key.released();
-                return;
-            }
-            if (extendedKeysShown) {
-                if (currentExtendedKey) {
-                    currentExtendedKey.commit();
-                    currentExtendedKey = null;
+            if (Parser.is_hangul(keyString)) {
+                // parsing preedit until compose one syllable. 
+                if (preedit.length > 1) { 
+                    var syllableString = preedit.substring(0,preedit.length - 1);
+                    var preeditString = preedit[preedit.length - 1];
+                    maliit_input_method.preedit = syllableString + Parser.add_jamo(preeditString, keyString);
                 } else {
-                    extendedKeysSelector.closePopover(); 
-                }
-            } else if(!swipedOut) {
-                // Read this prior to altering autocaps
-                var keyToSend = valueToSubmit; 
-                if (magnifier.currentlyAssignedKey == key) {
-                    magnifier.shown = false;
+                    maliit_input_method.preedit = Parser.add_jamo(preedit, keyString);
                 }
 
-                if (panel.autoCapsTriggered && action != "backspace") {
-                    panel.autoCapsTriggered = false;
-                }
-                else if (!skipAutoCaps) {
-                    if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
-                        panel.activeKeypadState = "NORMAL";
-                }
-                if (switchBackFromSymbols && panel.state === "SYMBOLS") {
-                    panel.state = "CHARACTERS";
-                }
- 
-                if (!Parser.is_hangul(keyToSend)){ /* if key is not hangul, could not compose syllable */
-                    maliit_input_method.preedit = preedit + keyToSend;
-                    event_handler.onKeyReleased("", "commit"); /* do commit current preedit string */
-                } else {
-                    if (preedit.length > 1){ /* at least 2 length */
-                        syllable_preedit = preedit.substring(0,preedit.length - 1);
-                        last_preedit = preedit[preedit.length - 1]; /* last word*/
-                        m_preedit = Parser.add_jamo(last_preedit, keyToSend);
-                        maliit_input_method.preedit = syllable_preedit + m_preedit;
-                    } else {
-                        m_preedit = Parser.add_jamo(preedit, keyToSend);
-                        maliit_input_method.preedit = m_preedit;
-                    }
-                }
- 
-            } else if (action == "backspace") {
-                // Send release from backspace if we're swiped out since
-                // backspace activates on press and deactivates on release
-                // to allow for repeated backspaces, unlike normal keys
-                // which activate on release.
-                event_handler.onKeyReleased(valueToSubmit, action);
-            }
-        }
-
-        onSwipedOutChanged: {
-            if(swipedOut && magnifier.currentlyAssignedKey == key) {
-                magnifier.shown = false;
-            }
-        }
-
-        onPressed: {
-            if (overridePressArea) {
-                key.pressed();
                 return;
             }
-            magnifier.currentlyAssignedKey = key
-            magnifier.shown = !noMagnifier
 
-            if (maliit_input_method.useAudioFeedback)
-                audioFeedback.play();
-            
-            if (maliit_input_method.useHapticFeedback)
-                 pressEffect.start();
-
-            // Quick workaround to fix initial autocaps - not beautiful, but works
-            if(action != "backspace") {
-                panel.autoCapsTriggered = false;
-            }
-            event_handler.onKeyPressed(valueToSubmit, action);
-        }
-
-        onDoubleClicked: {
-            if (overridePressArea) {
-                key.doubleClicked();
-                return;
-            }
-        }
-
-        // Determine which extended key we're underneath when swiping,
-        // highlight it and set it as the currentExtendedKey (to be committed
-        // when press is released)
-        function evaluateSelectorSwipe() {
-            if (extendedKeysSelector.enabled && swipeReady) {
-                var extendedKeys = extendedKeysSelector.keys;
-                currentExtendedKey = null;
-                var keyMapping = extendedKeysSelector.mapToItem(key, extendedKeysSelector.rowX, extendedKeysSelector.rowY);
-                var mx = mouseX - keyMapping.x;
-                var my = mouseY - keyMapping.y;
-                for(var i = 0; i < extendedKeys.length; i++) {
-                    var posX = extendedKeys[i].x;
-                    var posY = extendedKeys[i].y;
-                    if(mx > posX && mx < (posX + extendedKeys[i].width)
-                       && my > posY && my < (posY + extendedKeys[i].height * 2.5)) {
-                        if(!extendedKeys[i].highlight && maliit_input_method.useHapticFeedback) {
-                            pressEffect.start();
-                        }
-                        extendedKeys[i].highlight = true;
-                        currentExtendedKey = extendedKeys[i];
-                    } else if('highlight' in extendedKeys[i]) {
-                        extendedKeys[i].highlight = false;
-                    }
-                }
-            }
-        }
-    }
-
-    Timer {
-        id: swipeTimer
-        interval: 750
-        onTriggered: {
-            swipeReady = true;
-            keyMouseArea.evaluateSelectorSwipe();
-        }
-    }
-
-    Connections {
-        target: swipeArea.drag
-        onActiveChanged: {
-            if (swipeArea.drag.active)
-                keyMouseArea.cancelPress();
+            maliit_input_method.preedit = preedit + keyString;
+            event_handler.onKeyReleased("", "commit");
         }
     }
 }
