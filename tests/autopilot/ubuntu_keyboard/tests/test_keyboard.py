@@ -65,7 +65,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
         gsettings.set_strv(
             "enabled-languages", ["en", "es", "de",
-                                  "zh", "ko", "emoji"])
+                                  "zh-hans", "zh-hant", "emoji", "ko"])
         gsettings.set_string("active-language", "en")
         gsettings.set_string("previous-language", "es")
         gsettings.set_boolean("auto-capitalization", True)
