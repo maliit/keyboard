@@ -300,6 +300,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Japanese
  Data files for the Ubuntu virtual keyboard - Japanese
 
+Package: ubuntu-keyboard-latvian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-lv,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Latvian
+ Data files for the Ubuntu virtual keyboard - Latvian
+
 Package: ubuntu-keyboard-norwegian-bokmal
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
