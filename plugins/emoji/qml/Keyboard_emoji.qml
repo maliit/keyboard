@@ -58,12 +58,27 @@ KeyPad {
             spacing: 0
 
             Repeater {
-                model: 10
+                model: 12
                 CharKey {
                     label: internal.chars[internal.offset + index]
                     shifted: label
                     leftSide: index == 0
-                    rightSide: index == 9
+                    rightSide: index == 11
+                }
+            }
+        }
+
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 0
+
+            Repeater {  
+                model: 12
+                CharKey {
+                    label: internal.chars[11 + internal.offset + index]
+                    shifted: label
+                    leftSide: index == 0
+                    rightSide: index == 11
                 }
             }
         }
@@ -77,22 +92,23 @@ KeyPad {
                 iconShifted: "go-previous"
                 iconCapsLock: "go-previous"
                 overridePressArea: true
+                width: panel.keyWidth * 1.5
                 onPressed: {
                     if (internal.offset == 0) {
                         // Wrap around
-                        internal.offset = internal.chars.length - 18
-                    } else if (internal.offset - 18 < 0) {
+                        internal.offset = internal.chars.length - 33
+                    } else if (internal.offset - 33 < 0) {
                         internal.offset = 0
                     } else {
-                        internal.offset -= 18;
+                        internal.offset -= 33;
                     }
                 }
             }
 
             Repeater {
-                model: 8
+                model: 9
                 CharKey {
-                    label: internal.chars[10 + internal.offset + index]
+                    label: internal.chars[24 + internal.offset + index]
                     shifted: label
                 }
             }
@@ -102,14 +118,15 @@ KeyPad {
                 iconShifted: "go-next"
                 iconCapsLock: "go-next"
                 overridePressArea: true
+                width: panel.keyWidth * 1.5
                 onPressed: {
-                    if (internal.offset + 18 == internal.chars.length) {
+                    if (internal.offset + 33 == internal.chars.length) {
                         // Wrap around
                         internal.offset = 0
-                    } else if (internal.offset + 36 >= internal.chars.length) {
-                        internal.offset = internal.chars.length - 18
+                    } else if (internal.offset + 65 >= internal.chars.length) {
+                        internal.offset = internal.chars.length - 33
                     } else {
-                        internal.offset += 18
+                        internal.offset += 33
                     }
                 }
             }
