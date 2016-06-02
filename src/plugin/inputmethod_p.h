@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2013-2016 Canonical, Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "inputmethod.h"
 
@@ -9,8 +24,6 @@
 
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
-
-#include "ubuntuapplicationapiwrapper.h"
 
 #include <maliit/plugins/abstractinputmethodhost.h>
 #include <maliit/plugins/abstractpluginsetting.h>
@@ -49,7 +62,6 @@ public:
     Logic::EventHandler event_handler;
     MAbstractInputMethodHost* host;
     QQuickView* view;
-    UbuntuApplicationApiWrapper* applicationApiWrapper;
 
     bool autocapsEnabled;
     bool wordEngineEnabled;
@@ -81,7 +93,6 @@ public:
         , event_handler()
         , host(host)
         , view(0)
-        , applicationApiWrapper(new UbuntuApplicationApiWrapper)
         , autocapsEnabled(false)
         , wordEngineEnabled(false)
         , contentType(InputMethod::FreeTextContentType)
@@ -98,8 +109,6 @@ public:
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {
-        applicationApiWrapper->setGeometryItem(m_geometry);
-
         view = createWindow(host);
 
         editor.setHost(host);
@@ -148,7 +157,7 @@ public:
         setContextProperties(engine->rootContext());
 
         // following used to help shell identify the OSK surface
-        view->setProperty("role", applicationApiWrapper->oskWindowRole());
+        view->setProperty("role", 7 /* OSK window role */);
         view->setTitle("MaliitOnScreenKeyboard");
 
         // workaround: resizeMode not working in current qpa imlementation
@@ -158,7 +167,6 @@ public:
 
     ~InputMethodPrivate()
     {
-        delete applicationApiWrapper;
     }
 
     Logic::LayoutHelper::Orientation screenToMaliitOrientation(Qt::ScreenOrientation screenOrientation) const
@@ -285,7 +293,7 @@ public:
     {
         QObject::connect(&m_settings, SIGNAL(stayHiddenChanged(bool)),
                          q, SLOT(hide()));
-    } 
+    }
 
     void registerPluginPaths()
     {
@@ -305,7 +313,5 @@ public:
         editor.clearPreedit();
 
         view->setVisible(false);
-
-        applicationApiWrapper->reportOSKInvisible();
     }
 };

@@ -31,7 +31,6 @@ HEADERS += \
     keyboardgeometry.h \
     keyboardsettings.h \
 #    updatenotifier.h \
-    ubuntuapplicationapiwrapper.h \
 
 SOURCES += \
     plugin.cpp \
@@ -41,7 +40,6 @@ SOURCES += \
     keyboardgeometry.cpp \
     keyboardsettings.cpp \
 #    updatenotifier.cpp \
-    ubuntuapplicationapiwrapper.cpp \
 
 target.path += $${MALIIT_PLUGINS_DIR}
 INSTALLS += target
