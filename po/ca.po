@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-04-28 11:45+0000\n"
-"PO-Revision-Date: 2015-02-02 12:07+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
+"PO-Revision-Date: 2016-06-02 12:56+0000\n"
+"Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-30 05:38+0000\n"
-"X-Generator: Launchpad (build 17995)\n"
+"X-Launchpad-Export-Date: 2016-06-03 06:17+0000\n"
+"X-Generator: Launchpad (build 18086)\n"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "Settings"
@@ -55,7 +55,7 @@ msgstr "Emoji"
 
 #: ../qml/keys/languages.js:27
 msgid "Greek"
-msgstr ""
+msgstr "Grec"
 
 #: ../qml/keys/languages.js:28
 msgid "English"
@@ -99,7 +99,7 @@ msgstr "Italià"
 
 #: ../qml/keys/languages.js:38
 msgid "Japanese"
-msgstr ""
+msgstr "japonès"
 
 #: ../qml/keys/languages.js:39
 msgid "Dutch"
@@ -107,7 +107,7 @@ msgstr "Holandès"
 
 #: ../qml/keys/languages.js:40
 msgid "Norwegian"
-msgstr ""
+msgstr "Noruec"
 
 #: ../qml/keys/languages.js:41
 msgid "Polish"
@@ -119,7 +119,7 @@ msgstr "Portuguès"
 
 #: ../qml/keys/languages.js:43
 msgid "Romanian"
-msgstr ""
+msgstr "Romanès"
 
 #: ../qml/keys/languages.js:44
 msgid "Russian"
@@ -127,7 +127,7 @@ msgstr "Rus"
 
 #: ../qml/keys/languages.js:45
 msgid "Slovenian"
-msgstr ""
+msgstr "Eslovè"
 
 #: ../qml/keys/languages.js:46
 msgid "Serbian"
@@ -139,19 +139,23 @@ msgstr "Suec"
 
 #: ../qml/keys/languages.js:48
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ucraïnès"
 
 #: ../qml/keys/languages.js:49
 msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
+"Xinès\n"
+"(Pinyin)"
 
 #: ../qml/keys/languages.js:50
 msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
+"Xinès\n"
+"(Chewing)"
 
 #~ msgid "Chinese - Pinyin"
 #~ msgstr "Xinès, pinyin"
