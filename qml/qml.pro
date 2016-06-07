@@ -45,8 +45,6 @@ OTHER_FILES += \
     keys/Spacer.qml \
     keys/SymbolShiftKey.qml \
     keys/UrlKey.qml \
-    keys/HCharKey.qml \
-    keys/parser.js \
     keys/qmldir \
     languages/Keyboard_numbers.qml \
     languages/Keyboard_symbols.qml \
