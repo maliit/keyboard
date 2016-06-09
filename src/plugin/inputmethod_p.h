@@ -21,6 +21,7 @@
 #include "greeterstatus.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
+#include "mirinputregionupdater.h"
 
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
@@ -85,6 +86,8 @@ public:
 
     QStringList pluginPaths;
     QString currentPluginPath;
+
+    MirInputRegionUpdater *mirInputRegionUpdater;
 
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
@@ -163,10 +166,13 @@ public:
         // workaround: resizeMode not working in current qpa imlementation
         // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
         view->setResizeMode(QQuickView::SizeRootObjectToView);
+
+        mirInputRegionUpdater = new MirInputRegionUpdater(view, m_geometry);
     }
 
     ~InputMethodPrivate()
     {
+        delete mirInputRegionUpdater;
     }
 
     Logic::LayoutHelper::Orientation screenToMaliitOrientation(Qt::ScreenOrientation screenOrientation) const
