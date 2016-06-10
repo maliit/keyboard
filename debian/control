@@ -24,6 +24,12 @@ Build-Depends: debhelper (>= 9),
                qt5-default,
                qtbase5-dev,
                qtbase5-private-dev,
+# start of deps brought by qtbase5-private-dev
+               libfontconfig1-dev,
+               libfreetype6-dev,
+               libudev-dev,
+               libmtdev-dev,
+# end of deps brought by qtbase5-private-dev
                qtdeclarative5-dev,
                qtdeclarative5-private-dev,
                qtdeclarative5-ubuntu-ui-toolkit-plugin,
