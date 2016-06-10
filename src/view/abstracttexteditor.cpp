@@ -464,6 +464,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionSpace: {
         QString space = " ";
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+        QString textOnLeftTrimmed = textOnLeft.trimmed();
         QStringList textOnRightList = d->text->surroundingRight().split("\n");
         QString textOnRight;
         if (!textOnRightList.isEmpty()) {
@@ -512,7 +513,16 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->previous_preedit_position -= 1;
             }
         }
-        else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.at(textOnLeft.count() - 1).isSpace()) {
+        // Only insert a full stop after double space if there isn't already
+        // a separator, and there isn't a separator immediately prior to a ')'
+        else if (look_for_a_double_space
+                 && not stopSequence.isEmpty()
+                 && textOnLeft.at(textOnLeft.count() - 1).isSpace()
+                 && textOnLeftTrimmed.count() > 0
+                 && !d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 1))
+                 && !(textOnLeftTrimmed.endsWith(")") 
+                      && textOnLeftTrimmed.count() > 1
+                      && d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 2)))) {
             removeTrailingWhitespaces();
             if (!d->word_engine->languageFeature()->commitOnSpace()) {
                 // Commit when inserting a fullstop if we don't insert on spaces
