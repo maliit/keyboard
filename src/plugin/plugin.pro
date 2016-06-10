@@ -7,7 +7,6 @@ TEMPLATE = lib
 LIBS += \
     $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_VIEW_LIB} \
     $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB} \
-    -lubuntu_application_api \
     -lgsettings-qt
 PRE_TARGETDEPS += $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_VIEW_LIB} $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB}
 INCLUDEPATH += ../lib ../
