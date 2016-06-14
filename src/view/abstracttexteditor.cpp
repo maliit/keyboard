@@ -420,7 +420,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         // if we had modified the preedit already because of a separator entry, there is no need to perform all the
         // steps like appending the input or computing candidates - as all we needed was already done in the previous part
         if (not alreadyAppended) {
-            d->text->appendToPreedit(text);     
+            d->text->appendToPreedit(text);
 
             // computeCandidates can change preedit face, so needs to happen
             // before sending preedit:
@@ -428,8 +428,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->word_engine->computeCandidates(d->text.data());
             }
 
-            sendPreeditString(d->text->preedit(), d->text->preeditFace(),
-                              Replacement(d->text->cursorPosition()));
+            if (!d->word_engine->languageFeature()->showPrimaryInPreedit()) {
+                sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                                  Replacement(d->text->cursorPosition()));
+            }
         }
 
         if (not d->preedit_enabled) {
@@ -468,8 +470,12 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             textOnRight = textOnRightList.first().trimmed();
         }
         bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
-        const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
+        const bool replace_preedit = d->auto_correct_enabled
+                                     && not d->text->primaryCandidate().isEmpty()
+                                     && not d->text->preedit().isEmpty()
+                                     && d->word_engine->languageFeature()->commitOnSpace();
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
+        bool full_stop_inserted = false;
 
         // every double-space character inputs one-after-another force a full-stop, so trigger it if needed
         if (d->double_space_full_stop_enabled && not look_for_a_double_space) {
@@ -508,15 +514,35 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         }
         else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.right(1) == " ") {
             removeTrailingWhitespaces();
-            d->text->appendToPreedit(stopSequence);
+            if (!d->word_engine->languageFeature()->commitOnSpace()) {
+                // Commit when inserting a fullstop if we don't insert on spaces
+                d->previous_preedit = d->text->preedit();
+                d->previous_preedit_position = d->text->surroundingOffset();
+                d->text->setPreedit(d->text->primaryCandidate().trimmed());
+                d->text->appendToPreedit(stopSequence);
+                commitPreedit();
+            } else {
+                d->text->appendToPreedit(stopSequence);
+            }
 
             // we need to re-evaluate autocaps after our changes to the preedit
             textOnLeft = d->text->surroundingLeft() + d->text->preedit();
             auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
+            full_stop_inserted = true;
         }
 
         d->text->appendToPreedit(space);
-        commitPreedit();
+
+        if (d->word_engine->languageFeature()->commitOnSpace() || full_stop_inserted) {
+            commitPreedit();
+        } else {
+            if (d->preedit_enabled) {
+                d->word_engine->computeCandidates(d->text.data());
+            }
+
+            sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                              Replacement(d->text->cursorPosition()));
+        }
 
         Q_EMIT preeditChanged(d->text->preedit());
         Q_EMIT cursorPositionChanged(d->text->cursorPosition());
@@ -529,6 +555,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionReturn: {
         event_key = Qt::Key_Return;
         keyText = QString("\r");
+        if (d->word_engine->languageFeature()->showPrimaryInPreedit()) {
+            d->text->setPreedit(d->text->primaryCandidate());
+            commitPreedit();
+        }
     } break;
 
     case Key::ActionCommit: {
@@ -1024,7 +1054,12 @@ void AbstractTextEditor::setPreeditFace(Model::Text::PreeditFace face)
 
 void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 {
+    Q_D(AbstractTextEditor);
     text()->setPrimaryCandidate(candidate);
+
+    if (d->word_engine->languageFeature()->showPrimaryInPreedit()) {
+        sendPreeditString(candidate, d->text->preeditFace());
+    }
 }
 
 //! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should

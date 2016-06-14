@@ -1,3 +1,19 @@
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20160506-0ubuntu1) xenial; urgency=medium
+
+  * Update dependency on hunspell-sv (LP: #1579115)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Fri, 06 May 2016 15:42:21 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+16.04.20160428.3-0ubuntu1) xenial; urgency=medium
+
+  * Add traditional Chinese input support and differentiate between
+    traditional and simplified Chinese (LP: #1502311)
+  * Fix incorrect letters and URL key on Croatian layout (LP: #1477274,
+    #1491885)
+  * Fix missing character on Icelandic layout (LP: #1522157)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Thu, 28 Apr 2016 12:18:42 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+16.04.20160226.1-0ubuntu1) xenial; urgency=medium
 
   * Depend on fonts-droid or fonts-droid-fallback, to allow for fonts-

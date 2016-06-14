@@ -36,8 +36,9 @@ Item {
     property var extendedShifted; // list of extended keys in shifted state
     property var currentExtendedKey; // The currently highlighted extended key
     property bool highlight: false;
+    property double textCenterOffset: units.gu(-0.15)
 
-    property alias valueToSubmit: keyLabel.text
+    property string valueToSubmit: keyLabel.text
 
     property alias acceptDoubleClick: keyMouseArea.acceptDoubleClick
 
@@ -155,7 +156,7 @@ Item {
                 anchors.leftMargin: units.gu(0.2)
                 anchors.rightMargin: units.gu(0.2)
                 anchors.verticalCenter: parent.verticalCenter 
-                anchors.verticalCenterOffset: -units.gu(0.15)
+                anchors.verticalCenterOffset: key.textCenterOffset
                 horizontalAlignment: Text.AlignHCenter
                 // Avoid eliding characters that are slightly too wide (e.g. some emoji)
                 elide: text.length <= 2 ? Text.ElideNone : Text.ElideRight
