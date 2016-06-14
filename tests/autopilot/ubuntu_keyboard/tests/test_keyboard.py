@@ -1359,6 +1359,55 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
             Eventually(Equals(False))
         )
 
+    def test_double_caps(self):
+        """Ensure that we switch back to lowercase after typing a letter in
+        Oxide.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.4
+        import Ubuntu.Components 1.3
+        import Ubuntu.Web 0.2
+
+        Rectangle { 
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><textarea id='textarea'
+                        style='width: 100%; height: 100%;'></textarea>
+                        </body></html>"
+                    );
+                }
+            }
+        }
+
+        """)
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", False)
+        gsettings.set_boolean("predictive-text", False)
+        gsettings.set_boolean("spell-checking", False)
+
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('H')
+
+        self.assertThat(
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.NORMAL))
+        )
+
 
 class UbuntuKeyboardPluginPaths(UbuntuKeyboardTests):
 
