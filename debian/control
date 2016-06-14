@@ -49,7 +49,7 @@ Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
          qtdeclarative5-window-plugin,
 # Because of native interface features used by MirInputRegionUpdater which only
 # newer qtubuntu implements
-         qtubuntu-desktop (>= 0.63) | qtubuntu (>= 0.63),
+         qtubuntu-desktop (>= 0.63) | qtubuntu-android (>= 0.63),
          ubuntu-keyboard-data (>= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
