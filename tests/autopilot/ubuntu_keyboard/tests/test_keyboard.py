@@ -1369,7 +1369,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
         import Ubuntu.Components 1.3
         import Ubuntu.Web 0.2
 
-        Rectangle { 
+        Rectangle {
             id: window
             objectName: "windowRectangle"
             color: "lightgrey"
