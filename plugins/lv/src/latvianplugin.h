@@ -1,5 +1,5 @@
-﻿#ifndef ARABICPLUGIN_H
-#define ARABICPLUGIN_H
+﻿#ifndef LATVIANPLUGIN_H
+#define LATVIANPLUGIN_H
 
 #include <QObject>
 #include "languageplugininterface.h"
@@ -22,4 +22,4 @@ public:
     }
 };
 
-#endif // ARABICPLUGIN_H
+#endif // LATVIANPLUGIN_H
