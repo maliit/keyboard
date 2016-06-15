@@ -66,7 +66,7 @@ Item {
     property string pressedColor: UI.charKeyPressedColor
     // Scale the font so the label fits if a long word is set
     property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8)) 
-                           * (4 / (label.length >= 2 ? (label.length <= 6 ? label.length + 2 : 8) : 4));
+                           * (4 / (label.length >= 2 ? (label.length <= 6 ? label.length + 2.5 : 8) : 4));
 
     /// annotation shows a small label in the upper right corner
     // if the annotiation property is set, it will be used. If not, the first position in extended[] list or extendedShifted[] list will
@@ -153,8 +153,8 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter 
                 anchors.verticalCenterOffset: key.textCenterOffset
                 horizontalAlignment: Text.AlignHCenter
-                // Avoid eliding characters that are slightly too wide (e.g. some emoji)
-                elide: text.length <= 2 ? Text.ElideNone : Text.ElideRight
+                // Avoid eliding characters that are slightly too wide (e.g. some emoji and chinese characters)
+                elide: text.length <= 3 ? Text.ElideNone : Text.ElideRight
             }
         
             /// shows an annotation
