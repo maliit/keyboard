@@ -22,6 +22,7 @@ SUBDIRS = \
     is \
     it \
     ja \
+    lv \
     nb \
     nl \
     pl \
