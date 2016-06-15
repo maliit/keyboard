@@ -1125,10 +1125,6 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.press_key("language")
-
-        sleep(5)
-
         keyboard = Keyboard()
 
         keyboard.type('😁😆😃😏')
@@ -1148,10 +1144,6 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
-
-        keyboard.press_key("language")
-
-        sleep(5)
 
         keyboard = Keyboard()
 
