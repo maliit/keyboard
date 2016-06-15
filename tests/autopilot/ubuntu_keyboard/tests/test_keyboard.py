@@ -1112,7 +1112,7 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
         gsettings.set_strv("enabled-languages", ["en", "emoji"])
         gsettings.set_string("previous-language", "emoji")
-        gsettings.set_string("active-language", "emoji")
+        gsettings.set_string("active-language", "en")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
         gsettings.set_boolean("predictive-text", True)
