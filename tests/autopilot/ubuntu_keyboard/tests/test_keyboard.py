@@ -1301,6 +1301,54 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_double_space(self):
+        """Test that double space still inserts a full-stop and replaces all
+        white spaces characters, even if they're non breaking spaces.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.4
+        import Ubuntu.Components 1.3
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><textarea id='textarea'
+                        onkeyup=\\\"document.title=
+                        document.getElementById('textarea').value;\\\"
+                        style='width: 100%; height: 100%;'>&nbsp;</textarea>
+                        </body></html>"
+                    );
+                }
+            }
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('  ')
+
+        # The page title trims white space, so we just look for the
+        # full-stop, rather than '. '
+        expected = "."
+        self.assertThat(
+            webview.title,
+            Eventually(Equals(expected))
+        )
+
     def test_hiding(self):
         """Verify that the keyboard remains hidden after being dismissed from
         a field that is no longer enabled.

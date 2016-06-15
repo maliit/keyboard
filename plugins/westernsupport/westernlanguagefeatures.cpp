@@ -60,7 +60,7 @@ bool WesternLanguageFeatures::activateAutoCaps(const QString &preedit) const
         return false;
     }
 
-    if (sentenceBreak.contains(preedit.mid(preedit.length() - 2, 1)) && preedit.right(1) == " ") {
+    if (sentenceBreak.contains(preedit.mid(preedit.length() - 2, 1)) && preedit.at(preedit.count() - 1).isSpace()) {
         return true;
     }
 
