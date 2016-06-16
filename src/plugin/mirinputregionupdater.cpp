@@ -48,14 +48,14 @@ MirInputRegionUpdater::MirInputRegionUpdater(QWindow *window, KeyboardGeometry *
     , m_surface(0)
     , m_lastRectangle(0)
 {
-    if (QGuiApplication::platformName() == "ubuntumirclient") {
-        connect(geometry, &KeyboardGeometry::visibleRectChanged, this, &MirInputRegionUpdater::update);
-
-        QPlatformNativeInterface *platform = QGuiApplication::platformNativeInterface();
-        m_mirConnection = reinterpret_cast<MirConnection*>(platform->nativeResourceForIntegration("MirConnection"));
-    } else {
-        qCritical("MirInputRegionUpdater: Platform is not ubuntumirclient. Inoperative.");
+    if (QGuiApplication::platformName() != "ubuntumirclient") {
+        qFatal("MirInputRegionUpdater: Platform is not ubuntumirclient.");
     }
+
+    connect(geometry, &KeyboardGeometry::visibleRectChanged, this, &MirInputRegionUpdater::update);
+
+    QPlatformNativeInterface *platform = QGuiApplication::platformNativeInterface();
+    m_mirConnection = reinterpret_cast<MirConnection*>(platform->nativeResourceForIntegration("MirConnection"));
 }
 
 MirInputRegionUpdater::~MirInputRegionUpdater()

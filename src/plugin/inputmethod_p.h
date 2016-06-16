@@ -33,6 +33,7 @@
 #include <QStringList>
 #include <qglobal.h>
 #include <QDebug>
+#include <qpa/qplatformnativeinterface.h>
 
 using namespace MaliitKeyboard;
 
@@ -111,6 +112,7 @@ public:
         , m_greeterStatus(new GreeterStatus())
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
+        , mirInputRegionUpdater(0)
     {
         view = createWindow(host);
 
@@ -167,7 +169,9 @@ public:
         // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
         view->setResizeMode(QQuickView::SizeRootObjectToView);
 
-        mirInputRegionUpdater = new MirInputRegionUpdater(view, m_geometry);
+        if (QGuiApplication::platformName() == "ubuntumirclient") {
+            mirInputRegionUpdater = new MirInputRegionUpdater(view, m_geometry);
+        }
     }
 
     ~InputMethodPrivate()
