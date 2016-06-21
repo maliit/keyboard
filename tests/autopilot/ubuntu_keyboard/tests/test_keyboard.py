@@ -1125,10 +1125,6 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.press_key("language")
-
-        sleep(5)
-
         keyboard = Keyboard()
 
         keyboard.type('😁😆😃😏')
@@ -1148,10 +1144,6 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         self.ensure_focus_on_input(text_area)
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
-
-        keyboard.press_key("language")
-
-        sleep(5)
 
         keyboard = Keyboard()
 
@@ -1301,6 +1293,54 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_double_space(self):
+        """Test that double space still inserts a full-stop and replaces all
+        white spaces characters, even if they're non breaking spaces.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.4
+        import Ubuntu.Components 1.3
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><textarea id='textarea'
+                        onkeyup=\\\"document.title=
+                        document.getElementById('textarea').value;\\\"
+                        style='width: 100%; height: 100%;'>&nbsp;</textarea>
+                        </body></html>"
+                    );
+                }
+            }
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('  ')
+
+        # The page title trims white space, so we just look for the
+        # full-stop, rather than '. '
+        expected = "."
+        self.assertThat(
+            webview.title,
+            Eventually(Equals(expected))
+        )
+
     def test_hiding(self):
         """Verify that the keyboard remains hidden after being dismissed from
         a field that is no longer enabled.
@@ -1357,6 +1397,55 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
         self.assertThat(
             keyboard.is_available,
             Eventually(Equals(False))
+        )
+
+    def test_double_caps(self):
+        """Ensure that we switch back to lowercase after typing a letter in
+        Oxide.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.4
+        import Ubuntu.Components 1.3
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><textarea id='textarea'
+                        style='width: 100%; height: 100%;'></textarea>
+                        </body></html>"
+                    );
+                }
+            }
+        }
+
+        """)
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", False)
+        gsettings.set_boolean("predictive-text", False)
+        gsettings.set_boolean("spell-checking", False)
+
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('H')
+
+        self.assertThat(
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.NORMAL))
         )
 
 
@@ -1424,6 +1513,7 @@ class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
             ("hu", ".hu", "test"),
             ("is", ".is", "tæst"),
             ("it", ".it", "test"),
+            ("lv", ".lv", "test"),
             ("nb", ".no", "bokmål"),
             ("nl", ".nl", "test"),
             ("pl", ".pl", "tęst"),

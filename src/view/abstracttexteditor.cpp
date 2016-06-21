@@ -428,7 +428,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->word_engine->computeCandidates(d->text.data());
             }
 
-            if (!d->word_engine->languageFeature()->showPrimaryInPreedit()) {
+            if (!d->word_engine->languageFeature()->showPrimaryInPreedit() && d->preedit_enabled) {
                 sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                                   Replacement(d->text->cursorPosition()));
             }
@@ -512,7 +512,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->previous_preedit_position -= 1;
             }
         }
-        else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.right(1) == " ") {
+        else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.at(textOnLeft.count() - 1).isSpace()) {
             removeTrailingWhitespaces();
             if (!d->word_engine->languageFeature()->commitOnSpace()) {
                 // Commit when inserting a fullstop if we don't insert on spaces
@@ -535,10 +535,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
         if (d->word_engine->languageFeature()->commitOnSpace() || full_stop_inserted) {
             commitPreedit();
-        } else {
-            if (d->preedit_enabled) {
-                d->word_engine->computeCandidates(d->text.data());
-            }
+        } else if (d->preedit_enabled) {
+            d->word_engine->computeCandidates(d->text.data());
 
             sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                               Replacement(d->text->cursorPosition()));
@@ -870,7 +868,7 @@ void AbstractTextEditor::removeTrailingWhitespaces()
     QString::const_iterator i = textOnLeft.cend();
     while (i != begin) {
         --i;
-        if (*i != ' ') break;
+        if (!i->isSpace()) break;
         singleBackspace();
     }
 }
