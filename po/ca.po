@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-04-28 11:45+0000\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
 "PO-Revision-Date: 2016-06-02 12:56+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-06-03 06:17+0000\n"
-"X-Generator: Launchpad (build 18086)\n"
+"X-Launchpad-Export-Date: 2016-06-21 05:59+0000\n"
+"X-Generator: Launchpad (build 18097)\n"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "Settings"
@@ -102,46 +102,50 @@ msgid "Japanese"
 msgstr "japonès"
 
 #: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr ""
+
+#: ../qml/keys/languages.js:40
 msgid "Dutch"
 msgstr "Holandès"
 
-#: ../qml/keys/languages.js:40
+#: ../qml/keys/languages.js:41
 msgid "Norwegian"
 msgstr "Noruec"
 
-#: ../qml/keys/languages.js:41
+#: ../qml/keys/languages.js:42
 msgid "Polish"
 msgstr "Polonès"
 
-#: ../qml/keys/languages.js:42
+#: ../qml/keys/languages.js:43
 msgid "Portuguese"
 msgstr "Portuguès"
 
-#: ../qml/keys/languages.js:43
+#: ../qml/keys/languages.js:44
 msgid "Romanian"
 msgstr "Romanès"
 
-#: ../qml/keys/languages.js:44
+#: ../qml/keys/languages.js:45
 msgid "Russian"
 msgstr "Rus"
 
-#: ../qml/keys/languages.js:45
+#: ../qml/keys/languages.js:46
 msgid "Slovenian"
 msgstr "Eslovè"
 
-#: ../qml/keys/languages.js:46
+#: ../qml/keys/languages.js:47
 msgid "Serbian"
 msgstr "Serbi"
 
-#: ../qml/keys/languages.js:47
+#: ../qml/keys/languages.js:48
 msgid "Swedish"
 msgstr "Suec"
 
-#: ../qml/keys/languages.js:48
+#: ../qml/keys/languages.js:49
 msgid "Ukrainian"
 msgstr "Ucraïnès"
 
-#: ../qml/keys/languages.js:49
+#: ../qml/keys/languages.js:50
 msgid ""
 "Chinese\n"
 "(Pinyin)"
@@ -149,7 +153,7 @@ msgstr ""
 "Xinès\n"
 "(Pinyin)"
 
-#: ../qml/keys/languages.js:50
+#: ../qml/keys/languages.js:51
 msgid ""
 "Chinese\n"
 "(Chewing)"
