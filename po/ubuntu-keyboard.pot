@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Canonical Ltd. 
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the ubuntu-keyboard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 11:45+0000\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,52 +102,56 @@ msgid "Japanese"
 msgstr ""
 
 #: ../qml/keys/languages.js:39
-msgid "Dutch"
+msgid "Latvian"
 msgstr ""
 
 #: ../qml/keys/languages.js:40
-msgid "Norwegian"
+msgid "Dutch"
 msgstr ""
 
 #: ../qml/keys/languages.js:41
-msgid "Polish"
+msgid "Norwegian"
 msgstr ""
 
 #: ../qml/keys/languages.js:42
-msgid "Portuguese"
+msgid "Polish"
 msgstr ""
 
 #: ../qml/keys/languages.js:43
-msgid "Romanian"
+msgid "Portuguese"
 msgstr ""
 
 #: ../qml/keys/languages.js:44
-msgid "Russian"
+msgid "Romanian"
 msgstr ""
 
 #: ../qml/keys/languages.js:45
-msgid "Slovenian"
+msgid "Russian"
 msgstr ""
 
 #: ../qml/keys/languages.js:46
-msgid "Serbian"
+msgid "Slovenian"
 msgstr ""
 
 #: ../qml/keys/languages.js:47
-msgid "Swedish"
+msgid "Serbian"
 msgstr ""
 
 #: ../qml/keys/languages.js:48
-msgid "Ukrainian"
+msgid "Swedish"
 msgstr ""
 
 #: ../qml/keys/languages.js:49
+msgid "Ukrainian"
+msgstr ""
+
+#: ../qml/keys/languages.js:50
 msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
 
-#: ../qml/keys/languages.js:50
+#: ../qml/keys/languages.js:51
 msgid ""
 "Chinese\n"
 "(Chewing)"

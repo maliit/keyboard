@@ -33,7 +33,7 @@ Build-Depends: debhelper (>= 9),
 # end of deps brought by qtbase5-private-dev
                qtdeclarative5-dev,
                qtdeclarative5-private-dev,
-               qtdeclarative5-ubuntu-ui-toolkit-plugin,
+               qml-module-ubuntu-components,
                xvfb,
                presage,
 Standards-Version: 3.9.5
@@ -46,7 +46,7 @@ X-Ubuntu-Use-Langpack: yes
 Package: ubuntu-keyboard
 Architecture: any
 Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
-         qtdeclarative5-window-plugin,
+         qml-module-qtquick-window2,
 # Because of native interface features used by MirInputRegionUpdater which only
 # newer qtubuntu implements
          qtubuntu-desktop (>= 0.63) | qtubuntu-android (>= 0.63),
@@ -67,7 +67,7 @@ Description: Ubuntu on-screen keyboard
 Package: ubuntu-keyboard-data
 Architecture: all
 Depends: fonts-droid-fallback | fonts-droid,
-         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         qml-module-ubuntu-components,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files
  Data files for the Ubuntu virtual keyboard
@@ -113,6 +113,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-icelandic (>= ${source:Version}),
          ubuntu-keyboard-italian (>= ${source:Version}),
          ubuntu-keyboard-japanese (>= ${source:Version}),
+         ubuntu-keyboard-latvian (>= ${source:Version}),
          ubuntu-keyboard-norwegian-bokmal (>= ${source:Version}),
          ubuntu-keyboard-polish (>= ${source:Version}),
          ubuntu-keyboard-portuguese (>= ${source:Version}),
@@ -310,6 +311,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Japanese
  Data files for the Ubuntu virtual keyboard - Japanese
+
+Package: ubuntu-keyboard-latvian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-lv,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Latvian
+ Data files for the Ubuntu virtual keyboard - Latvian
 
 Package: ubuntu-keyboard-norwegian-bokmal
 Architecture: any
