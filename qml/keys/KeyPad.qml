@@ -47,7 +47,8 @@ Item {
         var width = panel.width;
 
         var maxNrOfKeys = 0;
-        for (var i = 0; i < numberOfRows(); ++i) {
+        // Don't look at the final row when calculating size, as this is a special case
+        for (var i = 0; i < numberOfRows() - 1; ++i) {
             if (content.children[i].children.length > maxNrOfKeys)
                 maxNrOfKeys = content.children[i].children.length;
         }

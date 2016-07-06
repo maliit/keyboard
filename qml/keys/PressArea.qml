@@ -28,6 +28,7 @@ MultiPointTouchArea {
     property bool pressed: false
     // Track whether we've swiped out of a key press to dismiss the keyboard
     property bool swipedOut: false
+    property bool horizontalSwipe: false
     property bool held: false
     property alias mouseX: point.x
     property alias mouseY: point.y
@@ -44,6 +45,9 @@ MultiPointTouchArea {
 
     signal doubleClicked()
 
+    signal swipeLeft()
+    signal swipeRight()
+
     /// Cancels the current pressed state of the mouse are
     function cancelPress() {
         pressed = false;
@@ -54,7 +58,15 @@ MultiPointTouchArea {
         TouchPoint { 
             id: point
             property double lastY
-            property double lastChange
+            property double lastYChange
+            property bool swipeSent: false
+
+            // Only send horizontal swipes once per press
+            onPressedChanged: swipeSent = false
+
+            // Dragging implemented here rather than in higher level
+            // mouse area to avoid conflict with swipe selection
+            // of extended keys
             onYChanged: {
                 if (point.y > root.y + root.height) {
                     if (!swipedOut) {
@@ -63,16 +75,17 @@ MultiPointTouchArea {
                         cancelPress();
                     }
 
-                    // Dragging implemented here rather than in higher level
-                    // mouse area to avoid conflict with swipe selection
-                    // of extended keys
+                    if (swipeSent) {
+                        return;
+                    }
+
                     var distance = point.y - lastY;
                     // If changing direction wait until movement passes 1 gu
                     // to avoid jitter
-                    if ((lastChange * distance > 0 || Math.abs(distance) > units.gu(1)) && !held) {
+                    if ((lastYChange * distance > 0 || Math.abs(distance) > units.gu(1)) && !held) {
                         keyboardSurface.y += distance;
                         lastY = point.y;
-                        lastChange = distance;
+                        lastYChange = distance;
                     }
                     // Hide if we get close to the bottom of the screen
                     // This works around issues with devices with touch buttons
@@ -83,6 +96,26 @@ MultiPointTouchArea {
                     }
                 } else {
                     lastY = point.y;
+                }
+            }
+
+            onXChanged: {
+                if (root.horizontalSwipe && (point.x > root.x + root.width * 2 || point.x < root.x - root.width)) {
+                    if (!swipedOut) {
+                        // We've swiped out of the key
+                        swipedOut = true;
+                        cancelPress();
+                    }
+
+                    var distance = point.x - point.startX;
+                    if (!held && !swipeSent) {
+                        if (distance > units.gu(1)) {
+                            swipeRight();
+                        } else if (distance < units.gu(-1)) {
+                            swipeLeft();
+                        }
+                        swipeSent = true;
+                    }
                 }
             }
         }

@@ -41,6 +41,7 @@ Item {
     property string valueToSubmit: keyLabel.text
 
     property alias acceptDoubleClick: keyMouseArea.acceptDoubleClick
+    property alias horizontalSwipe: keyMouseArea.horizontalSwipe
 
     property string action
     property bool noMagnifier: false
@@ -105,6 +106,8 @@ Item {
     signal released()
     signal pressAndHold()
     signal doubleClicked()
+    signal swipeLeft()
+    signal swipeRight()
 
     Component.onCompleted: {
         if (annotation) {
@@ -154,7 +157,7 @@ Item {
                 anchors.verticalCenterOffset: key.textCenterOffset
                 horizontalAlignment: Text.AlignHCenter
                 // Avoid eliding characters that are slightly too wide (e.g. some emoji)
-                elide: text.length <= 2 ? Text.ElideNone : Text.ElideRight
+                elide: text.length <= 4 ? Text.ElideNone : Text.ElideRight
             }
         
             /// shows an annotation
@@ -180,6 +183,14 @@ Item {
     PressArea {
         id: keyMouseArea
         anchors.fill: parent
+
+        onSwipeLeft: {
+            key.swipeLeft();
+        }
+
+        onSwipeRight: {
+            key.swipeRight();
+        }
 
         onPressAndHold: {
             if (overridePressArea) {

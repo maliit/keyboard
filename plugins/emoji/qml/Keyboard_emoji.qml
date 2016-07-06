@@ -30,8 +30,22 @@ KeyPad {
 
     QtObject {
         id: internal
-        property int offset: 0
-        property var chars: Emoji.emoji
+        property int offset: 528
+        property var chars: calculateChars()
+
+        function calculateChars() {
+            var totalSkips = 0;
+            var c = [];
+            for (var block = 0; block < Emoji.start.length; block++) {
+                for (var i = Emoji.start[block][1]; i < Emoji.end[block][1]; i++) {
+                    while (Emoji.skip[block].indexOf(i) != -1) {
+                        i++;
+                    }
+                    c.push(String.fromCharCode(Emoji.start[block][0], i));
+                }
+            }
+            return c;
+        }
     }
 
     Column {
@@ -126,59 +140,19 @@ KeyPad {
                 label: "😀"
                 shifted: label
                 overridePressArea: true
-                highlight: internal.offset >= 0 && internal.offset < 540
+                highlight: internal.offset >= 528 && internal.offset < 603
                 onPressed: {
-                    internal.offset = 0
+                    internal.offset = 528
                 }
             }
 
             ActionKey {
-                label: "🐶"
+                label: "🚀"
                 shifted: label
                 overridePressArea: true
-                highlight: internal.offset >= 540 && internal.offset < 701
+                highlight: internal.offset >= 603
                 onPressed: {
-                    internal.offset = 540
-                }
-            }
-
-            ActionKey {
-                label: "🍏"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 701 && internal.offset < 786
-                onPressed: {
-                    internal.offset = 701
-                }
-            }
-
-            ActionKey {
-                label: "⚽"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 786 && internal.offset < 1050
-                onPressed: {
-                    internal.offset = 786
-                }
-            }
-
-            ActionKey {
-                label: "💡"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 1050 && internal.offset < 1230
-                onPressed: {
-                    internal.offset = 1050
-                }
-            }
-
-            ActionKey {
-                label: "❤"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 1230 && internal.offset < 1514
-                onPressed: {
-                    internal.offset = 1230
+                    internal.offset = 603
                 }
             }
 
@@ -186,9 +160,39 @@ KeyPad {
                 label: "🌍"
                 shifted: label
                 overridePressArea: true
-                highlight: internal.offset >= 1514
+                highlight: internal.offset >= 0 && internal.offset < 170
                 onPressed: {
-                    internal.offset = 1514
+                    internal.offset = 13
+                }
+            }
+
+            ActionKey {
+                label: "🏠"
+                shifted: label
+                overridePressArea: true
+                highlight: internal.offset >= 170 && internal.offset < 188
+                onPressed: {
+                    internal.offset = 170
+                }
+            }
+
+            ActionKey {
+                label: "🐀"
+                shifted: label
+                overridePressArea: true
+                highlight: internal.offset >= 188 && internal.offset < 500
+                onPressed: {
+                    internal.offset = 188
+                }
+            }
+
+            ActionKey {
+                label: "🕜"
+                shifted: label
+                overridePressArea: true
+                highlight: internal.offset >= 500 && internal.offset < 528
+                onPressed: {
+                    internal.offset = 500
                 }
             }
 
