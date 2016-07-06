@@ -2,6 +2,10 @@
 # -*- makefile -*-
 
 export DPKG_GENSYMBOLS_CHECK_LEVEL=4
+ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+export QT_SELECT=qt5-$(DEB_BUILD_MULTIARCH)-$(DEB_HOST_MULTIARCH)
+export PKG_CONFIG_PATH=/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig
+endif
 
 %:
 	dh $@ --fail-missing --with python3
