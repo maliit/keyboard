@@ -30,22 +30,8 @@ KeyPad {
 
     QtObject {
         id: internal
-        property int offset: 528
-        property var chars: calculateChars()
-
-        function calculateChars() {
-            var totalSkips = 0;
-            var c = [];
-            for (var block = 0; block < Emoji.start.length; block++) {
-                for (var i = Emoji.start[block][1]; i < Emoji.end[block][1]; i++) {
-                    while (Emoji.skip[block].indexOf(i) != -1) {
-                        i++;
-                    }
-                    c.push(String.fromCharCode(Emoji.start[block][0], i));
-                }
-            }
-            return c;
-        }
+        property int offset: 0
+        property var chars: Emoji.emoji
     }
 
     Column {
@@ -64,6 +50,11 @@ KeyPad {
                     shifted: label
                     leftSide: index == 0
                     rightSide: index == 11
+                    normalColor: UI.backgroundColor
+                    fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
+                    horizontalSwipe: true
+                    onSwipeLeft: c1.pageRight()
+                    onSwipeRight: c1.pageLeft()
                 }
             }
         }
@@ -79,6 +70,11 @@ KeyPad {
                     shifted: label
                     leftSide: index == 0
                     rightSide: index == 11
+                    normalColor: UI.backgroundColor
+                    fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
+                    horizontalSwipe: true
+                    onSwipeLeft: c1.pageRight()
+                    onSwipeRight: c1.pageLeft()
                 }
             }
         }
@@ -87,47 +83,18 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 0
 
-            ActionKey {
-                iconNormal: "go-previous"
-                iconShifted: "go-previous"
-                iconCapsLock: "go-previous"
-                overridePressArea: true
-                width: panel.keyWidth * 1.5
-                onPressed: {
-                    if (internal.offset == 0) {
-                        // Wrap around
-                        internal.offset = internal.chars.length - 33
-                    } else if (internal.offset - 33 < 0) {
-                        internal.offset = 0
-                    } else {
-                        internal.offset -= 33;
-                    }
-                }
-            }
-
             Repeater {
-                model: 9
+                model: 12
                 CharKey {
                     label: internal.chars[24 + internal.offset + index]
                     shifted: label
-                }
-            }
-
-            ActionKey {
-                iconNormal: "go-next"
-                iconShifted: "go-next"
-                iconCapsLock: "go-next"
-                overridePressArea: true
-                width: panel.keyWidth * 1.5
-                onPressed: {
-                    if (internal.offset + 33 == internal.chars.length) {
-                        // Wrap around
-                        internal.offset = 0
-                    } else if (internal.offset + 65 >= internal.chars.length) {
-                        internal.offset = internal.chars.length - 33
-                    } else {
-                        internal.offset += 33
-                    }
+                    leftSide: index == 0
+                    rightSide: index == 11
+                    normalColor: UI.backgroundColor
+                    fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
+                    horizontalSwipe: true
+                    onSwipeLeft: c1.pageRight()
+                    onSwipeRight: c1.pageLeft()
                 }
             }
         }
@@ -136,79 +103,116 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 0
 
-            ActionKey {
+            Repeater {
+                model: 12
+                CharKey {
+                    label: internal.chars[36 + internal.offset + index]
+                    shifted: label
+                    leftSide: index == 0
+                    rightSide: index == 11
+                    normalColor: UI.backgroundColor
+                    fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
+                    horizontalSwipe: true
+                    onSwipeLeft: c1.pageRight()
+                    onSwipeRight: c1.pageLeft()
+                }
+            }
+        }
+
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 0
+
+            LanguageKey    { id: languageMenuButton; width: panel.keyWidth * 2 }
+
+            CategoryKey {
+                label: "🕒"
+                highlight: false
+                onPressed: {
+
+                }
+            }           
+ 
+            CategoryKey {
                 label: "😀"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 528 && internal.offset < 603
+                highlight: internal.offset >= 0 && internal.offset < 540
                 onPressed: {
-                    internal.offset = 528
+                    internal.offset = 0
                 }
             }
 
-            ActionKey {
-                label: "🚀"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 603
+            CategoryKey {
+                label: "🐶"
+                highlight: internal.offset >= 540 && internal.offset < 701
                 onPressed: {
-                    internal.offset = 603
+                    internal.offset = 540
                 }
             }
 
-            ActionKey {
+            CategoryKey {
+                label: "🍏"
+                highlight: internal.offset >= 701 && internal.offset < 786
+                onPressed: {
+                    internal.offset = 701
+                }
+            }
+
+            CategoryKey {
+                label: "⚽"
+                highlight: internal.offset >= 786 && internal.offset < 1050
+                onPressed: {
+                    internal.offset = 786
+                }
+            }
+
+            CategoryKey {
+                label: "💡"
+                highlight: internal.offset >= 1050 && internal.offset < 1230
+                onPressed: {
+                    internal.offset = 1050
+                }
+            }
+
+            CategoryKey {
+                label: "❤"
+                highlight: internal.offset >= 1230 && internal.offset < 1514
+                onPressed: {
+                    internal.offset = 1230
+                }
+            }
+
+            CategoryKey {
                 label: "🌍"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 0 && internal.offset < 170
+                highlight: internal.offset >= 1514
                 onPressed: {
-                    internal.offset = 13
+                    internal.offset = 1514
                 }
             }
 
-            ActionKey {
-                label: "🏠"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 170 && internal.offset < 188
-                onPressed: {
-                    internal.offset = 170
-                }
-            }
-
-            ActionKey {
-                label: "🐀"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 188 && internal.offset < 500
-                onPressed: {
-                    internal.offset = 188
-                }
-            }
-
-            ActionKey {
-                label: "🕜"
-                shifted: label
-                overridePressArea: true
-                highlight: internal.offset >= 500 && internal.offset < 528
-                onPressed: {
-                    internal.offset = 500
-                }
-            }
-
-            BackspaceKey { padding: 0; width: enterKey.width }
+            BackspaceKey { padding: 0; width: panel.keyWidth * 2 }
         }
 
-        Item {
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            height: panel.keyHeight + units.gu(UI.row_margin);
-
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
-            LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
-            SpaceKey       { id: spaceKey;                               anchors.left: languageMenuButton.right; anchors.right: enterKey.left; noMagnifier: true; height: parent.height; }
-            ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
+        function pageLeft() {
+            if (internal.offset == 0) {
+                // Wrap around
+                internal.offset = internal.chars.length - 48
+            } else if (internal.offset - 48 < 0) {
+                internal.offset = 0
+            } else {
+                internal.offset -= 48;
+            }
         }
+
+        function pageRight() {
+            if (internal.offset + 48 == internal.chars.length) {
+                // Wrap around
+                internal.offset = 0
+            } else if (internal.offset + 96 >= internal.chars.length) {
+                internal.offset = internal.chars.length - 48
+            } else {
+                internal.offset += 48
+            }
+        }
+
     } // column
 }
