@@ -45,9 +45,6 @@ MultiPointTouchArea {
 
     signal doubleClicked()
 
-    signal swipeLeft()
-    signal swipeRight()
-
     /// Cancels the current pressed state of the mouse are
     function cancelPress() {
         pressed = false;
@@ -59,10 +56,6 @@ MultiPointTouchArea {
             id: point
             property double lastY
             property double lastYChange
-            property bool swipeSent: false
-
-            // Only send horizontal swipes once per press
-            onPressedChanged: swipeSent = false
 
             // Dragging implemented here rather than in higher level
             // mouse area to avoid conflict with swipe selection
@@ -73,10 +66,6 @@ MultiPointTouchArea {
                         // We've swiped out of the key
                         swipedOut = true;
                         cancelPress();
-                    }
-
-                    if (swipeSent) {
-                        return;
                     }
 
                     var distance = point.y - lastY;
@@ -96,26 +85,6 @@ MultiPointTouchArea {
                     }
                 } else {
                     lastY = point.y;
-                }
-            }
-
-            onXChanged: {
-                if (root.horizontalSwipe && (point.x > root.x + root.width * 2 || point.x < root.x - root.width)) {
-                    if (!swipedOut) {
-                        // We've swiped out of the key
-                        swipedOut = true;
-                        cancelPress();
-                    }
-
-                    var distance = point.x - point.startX;
-                    if (!held && !swipeSent) {
-                        if (distance > units.gu(1)) {
-                            swipeRight();
-                        } else if (distance < units.gu(-1)) {
-                            swipeLeft();
-                        }
-                        swipeSent = true;
-                    }
                 }
             }
         }

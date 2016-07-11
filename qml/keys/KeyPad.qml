@@ -39,18 +39,27 @@ Item {
     onHeightChanged: calculateKeyHeight();
 
     function numberOfRows() {
+        if (typeof(content.numberOfRows) != 'undefined') {
+            // Allow layouts to calculate this themselves if they're not using
+            // a column/row layout
+            return content.numberOfRows;
+        }
         return content.children.length;
     }
 
     // we don´t use a QML layout, because we want all keys to be equally sized
     function calculateKeyWidth() {
-        var width = panel.width;
-
         var maxNrOfKeys = 0;
-        // Don't look at the final row when calculating size, as this is a special case
-        for (var i = 0; i < numberOfRows() - 1; ++i) {
-            if (content.children[i].children.length > maxNrOfKeys)
-                maxNrOfKeys = content.children[i].children.length;
+        var width = panel.width;
+        
+        if (typeof(content.maxNrOfKeys) != 'undefined') {
+            maxNrOfKeys = content.maxNrOfKeys;
+        } else {
+            // Don't look at the final row when calculating size, as this is a special case
+            for (var i = 0; i < numberOfRows() - 1; ++i) {
+                if (content.children[i].children.length > maxNrOfKeys)
+                    maxNrOfKeys = content.children[i].children.length;
+            }
         }
 
         var maxSpaceForKeys = panel.width / maxNrOfKeys;

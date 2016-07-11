@@ -34,185 +34,147 @@ KeyPad {
         property var chars: Emoji.emoji
     }
 
-    Column {
+    GridView {
         id: c1
-        anchors.fill: parent
-        spacing: 0
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 0
-
-            Repeater {
-                model: 12
-                CharKey {
-                    label: internal.chars[internal.offset + index]
-                    shifted: label
-                    leftSide: index == 0
-                    rightSide: index == 11
-                    normalColor: UI.backgroundColor
-                    fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
-                    horizontalSwipe: true
-                    onSwipeLeft: c1.pageRight()
-                    onSwipeRight: c1.pageLeft()
-                }
-            }
+        objectName: "emojiGrid"
+        property int lastVisibleIndex: indexAt(contentX + width - cellWidth, contentY + height - cellHeight);
+        property int numberOfRows: 5
+        property int maxNrOfKeys: 10
+        anchors.top: parent.top
+        anchors.bottom: categories.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        model: Emoji.emoji
+        flow: GridView.FlowTopToBottom
+        flickDeceleration: units.gu(500)
+        snapMode: GridView.SnapToRow
+        cellWidth: panel.keyWidth
+        cellHeight: panel.keyHeight
+        cacheBuffer: 1000
+        onMovingHorizontallyChanged: {
+            magnifier.shown = false;
+            magnifier.currentlyAssignedKey = null;
+        }
+        delegate: CharKey {
+            label: modelData
+            shifted: label
+            normalColor: UI.backgroundColor
+            pressedColor: UI.backgroundColor
+            fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
         }
 
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
+     }
+
+     Row {
+            id: categories
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: panel.keyHeight
+
             spacing: 0
 
-            Repeater {  
-                model: 12
-                CharKey {
-                    label: internal.chars[11 + internal.offset + index]
-                    shifted: label
-                    leftSide: index == 0
-                    rightSide: index == 11
-                    normalColor: UI.backgroundColor
-                    fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
-                    horizontalSwipe: true
-                    onSwipeLeft: c1.pageRight()
-                    onSwipeRight: c1.pageLeft()
-                }
+            LanguageKey {
+                id: languageMenuButton
+                label: "ABC"
+                shifted: label
+                normalColor: UI.backgroundColor
+                pressedColor: UI.backgroundColor
             }
-        }
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 0
-
-            Repeater {
-                model: 12
-                CharKey {
-                    label: internal.chars[24 + internal.offset + index]
-                    shifted: label
-                    leftSide: index == 0
-                    rightSide: index == 11
-                    normalColor: UI.backgroundColor
-                    fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
-                    horizontalSwipe: true
-                    onSwipeLeft: c1.pageRight()
-                    onSwipeRight: c1.pageLeft()
-                }
-            }
-        }
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 0
-
-            Repeater {
-                model: 12
-                CharKey {
-                    label: internal.chars[36 + internal.offset + index]
-                    shifted: label
-                    leftSide: index == 0
-                    rightSide: index == 11
-                    normalColor: UI.backgroundColor
-                    fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
-                    horizontalSwipe: true
-                    onSwipeLeft: c1.pageRight()
-                    onSwipeRight: c1.pageLeft()
-                }
-            }
-        }
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 0
-
-            LanguageKey    { id: languageMenuButton; width: panel.keyWidth * 2 }
 
             CategoryKey {
                 label: "🕒"
                 highlight: false
                 onPressed: {
-
+                    if (maliit_input_method.useHapticFeedback)
+                        pressEffect.start();
                 }
             }           
  
             CategoryKey {
                 label: "😀"
-                highlight: internal.offset >= 0 && internal.offset < 540
+                highlight: c1.lastVisibleIndex < 540
                 onPressed: {
-                    internal.offset = 0
+                    if (maliit_input_method.useHapticFeedback)
+                        pressEffect.start();
+                    c1.positionViewAtIndex(0, GridView.Beginning)
                 }
             }
 
             CategoryKey {
                 label: "🐶"
-                highlight: internal.offset >= 540 && internal.offset < 701
+                highlight: c1.lastVisibleIndex >= 540 && c1.lastVisibleIndex < 701
                 onPressed: {
-                    internal.offset = 540
+                    if (maliit_input_method.useHapticFeedback)
+                        pressEffect.start();
+                    c1.positionViewAtIndex(540, GridView.Beginning)
                 }
             }
 
             CategoryKey {
                 label: "🍏"
-                highlight: internal.offset >= 701 && internal.offset < 786
+                highlight: c1.lastVisibleIndex >= 701 && c1.lastVisibleIndex < 786
                 onPressed: {
-                    internal.offset = 701
+                    if (maliit_input_method.useHapticFeedback)
+                        pressEffect.start();
+                    c1.positionViewAtIndex(701, GridView.Beginning)
                 }
             }
 
             CategoryKey {
-                label: "⚽"
-                highlight: internal.offset >= 786 && internal.offset < 1050
+                label: "🎾"
+                highlight: c1.lastVisibleIndex >= 786 && c1.lastVisibleIndex < 931
                 onPressed: {
-                    internal.offset = 786
+                    if (maliit_input_method.useHapticFeedback)
+                        pressEffect.start();
+                    c1.positionViewAtIndex(786, GridView.Beginning)
+                }
+            }
+
+            CategoryKey {
+                label: "🚗"
+                highlight: c1.lastVisibleIndex >= 931 && c1.lastVisibleIndex < 1050
+                onPressed: {
+                    if (maliit_input_method.useHapticFeedback)
+                        pressEffect.start();
+                    c1.positionViewAtIndex(931, GridView.Beginning)
                 }
             }
 
             CategoryKey {
                 label: "💡"
-                highlight: internal.offset >= 1050 && internal.offset < 1230
+                highlight: c1.lastVisibleIndex >= 1050 && c1.lastVisibleIndex < 1230
                 onPressed: {
-                    internal.offset = 1050
+                    if (maliit_input_method.useHapticFeedback)
+                        pressEffect.start();
+                    c1.positionViewAtIndex(1050, GridView.Beginning)
                 }
             }
 
             CategoryKey {
                 label: "❤"
-                highlight: internal.offset >= 1230 && internal.offset < 1514
+                highlight: c1.lastVisibleIndex >= 1230 && c1.lastVisibleIndex < 1514
                 onPressed: {
-                    internal.offset = 1230
+                    if (maliit_input_method.useHapticFeedback)
+                        pressEffect.start();
+                    c1.positionViewAtIndex(1230, GridView.Beginning)
                 }
             }
 
             CategoryKey {
                 label: "🌍"
-                highlight: internal.offset >= 1514
+                highlight: c1.lastVisibleIndex >= 1514
                 onPressed: {
-                    internal.offset = 1514
+                    if (maliit_input_method.useHapticFeedback)
+                        pressEffect.start();
+                    c1.positionViewAtIndex(1514, GridView.Beginning)
                 }
             }
 
-            BackspaceKey { padding: 0; width: panel.keyWidth * 2 }
-        }
-
-        function pageLeft() {
-            if (internal.offset == 0) {
-                // Wrap around
-                internal.offset = internal.chars.length - 48
-            } else if (internal.offset - 48 < 0) {
-                internal.offset = 0
-            } else {
-                internal.offset -= 48;
+            BackspaceKey {
+                padding: 0
+                normalColor: UI.backgroundColor
+                pressedColor: UI.backgroundColor
             }
         }
-
-        function pageRight() {
-            if (internal.offset + 48 == internal.chars.length) {
-                // Wrap around
-                internal.offset = 0
-            } else if (internal.offset + 96 >= internal.chars.length) {
-                internal.offset = internal.chars.length - 48
-            } else {
-                internal.offset += 48
-            }
-        }
-
-    } // column
 }

@@ -20,6 +20,7 @@ import keys 1.0
 CharKey {
     shifted: label
     overridePressArea: true
+    width: panel.keyWidth * 0.89
     normalColor: UI.backgroundColor
     pressedColor: normalColor
     fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5

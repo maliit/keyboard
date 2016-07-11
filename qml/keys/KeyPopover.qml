@@ -30,9 +30,9 @@ Item {
     property Item currentlyAssignedKey
     property alias anchorItem: __anchorItem
 
-    property int currentlyAssignedKeyParentY: currentlyAssignedKey ? currentlyAssignedKey.parent.y : 0
-    property int currentlyAssignedKeyX: currentlyAssignedKey ? currentlyAssignedKey.x : 0
-    property int currentlyAssignedKeyY: currentlyAssignedKey ? currentlyAssignedKey.y : 0
+    property int currentlyAssignedKeyParentY: currentlyAssignedKey != null ? currentlyAssignedKey.parent.y : 0
+    property int currentlyAssignedKeyX: currentlyAssignedKey != null ? currentlyAssignedKey.x : 0
+    property int currentlyAssignedKeyY: currentlyAssignedKey != null ? currentlyAssignedKey.y : 0
 
     onCurrentlyAssignedKeyXChanged: __repositionPopoverTo(currentlyAssignedKey)
     onCurrentlyAssignedKeyYChanged: __repositionPopoverTo(currentlyAssignedKey)
@@ -58,12 +58,15 @@ Item {
     function __repositionPopoverTo(item)
     {
         if(item) {
-            // item.parent is a row
-            var row = item.parent;
-            var point = popover.mapFromItem(item, item.x, item.y)
-
-            __anchorItem.x = item.x + row.x
-            __anchorItem.y = point.y - panel.keyHeight;
+            __anchorItem.x = item.x + item.parent.x
+            if (item.parent.parent.objectName == "emojiGrid") {
+                // The emoji layout uses a GridView, which requires
+                // a different location calculation
+                __anchorItem.y = item.y - panel.keyHeight;
+            } else { 
+                var point = popover.mapFromItem(item, item.x, item.y)
+                __anchorItem.y = point.y - panel.keyHeight;
+            }
         }
     }
 }

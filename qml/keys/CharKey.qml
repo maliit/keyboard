@@ -106,8 +106,6 @@ Item {
     signal released()
     signal pressAndHold()
     signal doubleClicked()
-    signal swipeLeft()
-    signal swipeRight()
 
     Component.onCompleted: {
         if (annotation) {
@@ -183,14 +181,6 @@ Item {
     PressArea {
         id: keyMouseArea
         anchors.fill: parent
-
-        onSwipeLeft: {
-            key.swipeLeft();
-        }
-
-        onSwipeRight: {
-            key.swipeRight();
-        }
 
         onPressAndHold: {
             if (overridePressArea) {
