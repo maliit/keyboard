@@ -1,8 +1,9 @@
-ubuntu-keyboard (0.100) UNRELEASED; urgency=medium
+ubuntu-keyboard (0.100+16.10.20160712-0ubuntu1) yakkety; urgency=medium
 
+  [ Daniel d'Andrada ]
   * Use mir input regions instead of the DBus hack
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Tue, 12 Jul 2016 08:27:05 -0300
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Tue, 12 Jul 2016 11:56:10 +0000
 
 ubuntu-keyboard (0.99.trunk.phablet2+16.10.20160615.1-0ubuntu1) yakkety; urgency=medium
 
