@@ -37,7 +37,7 @@ KeyPad {
     GridView {
         id: c1
         objectName: "emojiGrid"
-        property int lastVisibleIndex: indexAt(contentX + width - cellWidth, contentY + height - cellHeight);
+        property int lastVisibleIndex: indexAt(contentX + (width / 2), 0);
         property int numberOfRows: 5
         property int maxNrOfKeys: 10
         anchors.top: parent.top
@@ -51,7 +51,7 @@ KeyPad {
         cellWidth: panel.keyWidth
         cellHeight: panel.keyHeight
         cacheBuffer: 1000
-        onMovingHorizontallyChanged: {
+        onContentXChanged: {
             magnifier.shown = false;
             magnifier.currentlyAssignedKey = null;
         }
