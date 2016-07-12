@@ -1,3 +1,9 @@
+ubuntu-keyboard (0.100) UNRELEASED; urgency=medium
+
+  * Use mir input regions instead of the DBus hack
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Tue, 12 Jul 2016 08:27:05 -0300
+
 ubuntu-keyboard (0.99.trunk.phablet2+16.10.20160615.1-0ubuntu1) yakkety; urgency=medium
 
   [ Michael Sheldon ]
@@ -1263,7 +1269,7 @@ ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130930.2-0ubuntu1) saucy; urgency=l
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 30 Sep 2013 18:38:51 +0000
 
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130926-0ubuntu1) saucy; urgency=low
-  
+
   [ Ubuntu daily release ]
   * New rebuild forced from rev 45
 
