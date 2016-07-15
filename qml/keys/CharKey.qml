@@ -213,8 +213,8 @@ Item {
         }
 
         onReleased: {
+            key.released();
             if (overridePressArea) {
-                key.released();
                 return;
             }
             if (extendedKeysShown) {
@@ -258,8 +258,8 @@ Item {
         }
 
         onPressed: {
+            key.pressed();
             if (overridePressArea) {
-                key.pressed();
                 return;
             }
             magnifier.currentlyAssignedKey = key
@@ -279,8 +279,8 @@ Item {
         }
 
         onDoubleClicked: {
+            key.doubleClicked();
             if (overridePressArea) {
-                key.doubleClicked();
                 return;
             }
         }
