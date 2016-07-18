@@ -110,7 +110,7 @@ KeyPad {
                     if (position != -1) {
                         c1.model.move(position, 0, 1);
                     } else {
-                        c1.model.move(maxRecent, 0, 1);
+                        c1.model.move(maxRecent - 1, 0, 1);
                         c1.model.setProperty(0, "char", emoji);
                     }
                     tx.executeSql('DELETE FROM Recent WHERE emoji = ?', emoji);
