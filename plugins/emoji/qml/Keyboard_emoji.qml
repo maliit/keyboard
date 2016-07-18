@@ -94,6 +94,9 @@ KeyPad {
         }
 
         function updateRecent(emoji) {
+            // Hide the magnifier before we reposition the key
+            magnifier.shown = false;
+            magnifier.currentlyAssignedKey = null;
             db.transaction(
                 function(tx) {
                     // If this emoji is already in the recent list we just
@@ -106,7 +109,6 @@ KeyPad {
                             break;
                         }
                     }
-                    console.log("position: " + position);
                     if (position != -1) {
                         c1.model.move(position, 0, 1);
                     } else {
