@@ -33,6 +33,7 @@ KeyPad {
         id: internal
         property int offset: 0
         property int maxRecent: 40
+        property var recentEmoji: []
         property var chars
         property var db
         
@@ -45,7 +46,6 @@ KeyPad {
                     tx.executeSql('CREATE TABLE IF NOT EXISTS Recent(emoji VARCHAR(16), time TIMESTAMP DEFAULT CURRENT_TIMESTAMP)');
                     tx.executeSql('CREATE TABLE IF NOT EXISTS State(contentX INTEGER)');
 
-                    var recentEmoji = [];
                     var rs = tx.executeSql('SELECT emoji FROM Recent ORDER BY time ASC');
                     if (rs.rows.length == 0) {
                         // Pre-populate recent list with the most popular emoji
@@ -97,24 +97,22 @@ KeyPad {
             // Hide the magnifier before we reposition the key
             magnifier.shown = false;
             magnifier.currentlyAssignedKey = null;
+            // If this emoji is already in the recent list we just
+            // move it to the top of the list, otherwise we add it
+            // to the start and delete the oldest one
+            var position = recentEmoji.indexOf(emoji);
+            if (position == -1) {
+                position = maxRecent - 1;
+            }
+            recentEmoji.splice(position, 1);
+            recentEmoji.unshift(emoji);
+            // We then update the char properties in the model
+            // (Moving items in the model results in content position shifting)
+            for (var i = 0; i < recentEmoji.length; i++) {
+                c1.model.setProperty(i, "char", recentEmoji[i]);
+            }
             db.transaction(
                 function(tx) {
-                    // If this emoji is already in the recent list we just
-                    // move it to the top of the list, otherwise we add it
-                    // to the start and delete the oldest one
-                    var position = -1;
-                    for (var i = 0; i < maxRecent; i++) {
-                        if (c1.model.get(i).char == emoji) {
-                            position = i;
-                            break;
-                        }
-                    }
-                    if (position != -1) {
-                        c1.model.move(position, 0, 1);
-                    } else {
-                        c1.model.move(maxRecent - 1, 0, 1);
-                        c1.model.setProperty(0, "char", emoji);
-                    }
                     tx.executeSql('DELETE FROM Recent WHERE emoji = ?', emoji);
                     tx.executeSql('INSERT INTO Recent(emoji) VALUES(?)', emoji);
                     var rs = tx.executeSql('SELECT COUNT(emoji) as totalRecent FROM Recent');
