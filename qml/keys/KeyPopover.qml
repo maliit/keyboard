@@ -58,15 +58,15 @@ Item {
     function __repositionPopoverTo(item)
     {
         if(item) {
-            __anchorItem.x = item.x + item.parent.x
-            if (item.parent.parent.objectName == "emojiGrid") {
+            var point = popover.mapFromItem(item, item.x, item.y)
+            if (item.parent.parent.parent.objectName == "emojiGrid") {
                 // The emoji layout uses a GridView, which requires
                 // a different location calculation
-                __anchorItem.y = item.y - panel.keyHeight;
+                __anchorItem.x = point.x;
             } else { 
-                var point = popover.mapFromItem(item, item.x, item.y)
-                __anchorItem.y = point.y - panel.keyHeight;
+                __anchorItem.x = item.x + item.parent.x
             }
+            __anchorItem.y = point.y - panel.keyHeight;
         }
     }
 }

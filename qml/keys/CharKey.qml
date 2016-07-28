@@ -106,6 +106,7 @@ Item {
     signal released()
     signal pressAndHold()
     signal doubleClicked()
+    signal keySent(string key)
 
     Component.onCompleted: {
         if (annotation) {
@@ -242,12 +243,14 @@ Item {
                     panel.state = "CHARACTERS";
                 }
                 event_handler.onKeyReleased(keyToSend, action);
+                keySent(keyToSend);
             } else if (action == "backspace") {
                 // Send release from backspace if we're swiped out since
                 // backspace activates on press and deactivates on release
                 // to allow for repeated backspaces, unlike normal keys
                 // which activate on release.
                 event_handler.onKeyReleased(valueToSubmit, action);
+                keySent(valueToSubmit);
             }
         }
 
