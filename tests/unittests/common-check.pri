@@ -9,7 +9,7 @@ CONFIG += maliit-plugins
 DATA_DIR = $$PWD/../../data
 PLUGIN_BUILD_DIR = $$OUT_PWD/../../../src/plugin
 
-check.commands = \
+check.commands = env \
     MALIIT_PLUGINS_DATADIR=$$DATA_DIR \
     MALIIT_KEYBOARD_DATADIR=$$DATA_DIR \
     LD_LIBRARY_PATH=$$PLUGIN_BUILD_DIR:$$MALIIT_INSTALL_LIBS:$$[QT_INSTALL_LIBS]:$(LD_LIBRARY_PATH)
