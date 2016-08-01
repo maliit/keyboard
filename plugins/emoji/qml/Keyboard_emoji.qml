@@ -94,17 +94,18 @@ KeyPad {
             // Hide the magnifier before we reposition the key
             magnifier.shown = false;
             magnifier.currentlyAssignedKey = null;
-            // If this emoji is already in the recent list we just
-            // move it to the top of the list, otherwise we add it
-            // to the start and delete the oldest one
             var originalLength = recentEmoji.length;
             var position = recentEmoji.indexOf(emoji);
             c1.positionBeforeInsertion = c1.contentX;
-            if (position == -1 && (recentEmoji.length == maxRecent || recentEmoji[recentEmoji.length - 1] == "")) {
-                recentEmoji.splice(recentEmoji.length - 1, 1);
-            } else if (position != -1) {
-                recentEmoji.splice(position, 1);
+            // If this emoji is already in the recent list we leave it alone
+            if (position != -1) {
+                return;
             }
+
+            // If the list is full remove the last emoji before inserting
+            if (recentEmoji.length == maxRecent || recentEmoji[recentEmoji.length - 1] == "") {
+                recentEmoji.splice(recentEmoji.length - 1, 1);
+            } 
 
             recentEmoji.unshift(emoji);
 
@@ -219,8 +220,10 @@ KeyPad {
         }
 
         CategoryKey {
+            id: recentCat
             label: "⏱"
-            highlight: c1.lastVisibleIndex < internal.recentEmoji.length
+            highlight: (c1.lastVisibleIndex < internal.recentEmoji.length && c1.lastVisibleIndex > 0)
+                       || (c1.contentX == 0 && internal.recentEmoji.length > 0)
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
@@ -230,7 +233,10 @@ KeyPad {
  
         CategoryKey {
             label: "😀"
-            highlight: c1.lastVisibleIndex >= internal.recentEmoji.length && c1.lastVisibleIndex < 540 + internal.recentEmoji.length
+            highlight: (c1.lastVisibleIndex >= internal.recentEmoji.length 
+                        && c1.lastVisibleIndex < 540 + internal.recentEmoji.length
+                        && !recentCat.highlight)
+                       || c1.lastVisibleIndex == -1
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
