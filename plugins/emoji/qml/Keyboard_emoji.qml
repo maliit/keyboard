@@ -38,7 +38,7 @@ KeyPad {
         property var chars
         property var db
         property bool changingCategory: true
-        
+
         Component.onCompleted: {
             db = LocalStorage.openDatabaseSync("Emoji", "1.0", "Storage for emoji keyboard layout", 1000000);
 
@@ -64,6 +64,7 @@ KeyPad {
                     rs = tx.executeSql('SELECT contentX FROM State');
                     if (rs.rows.length > 0) {
                         c1.contentX = rs.rows.item(0).contentX;
+                        changingCategory = true;
                     } else {
                         tx.executeSql('INSERT INTO State VALUES(0)');
                         // Start on the smiley page
