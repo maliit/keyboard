@@ -1127,6 +1127,8 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
 
         keyboard = Keyboard()
 
+        sleep(2)
+
         keyboard.type('😁😆😃😏')
 
         expected = "😁😆😃😏"
@@ -1146,6 +1148,8 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         keyboard = Keyboard()
+
+        sleep(2)
 
         keyboard.type('😁😆😃😏\b')
 
@@ -1680,12 +1684,19 @@ def maliit_cleanup():
     if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
         shutil.rmtree(presagedir)
         os.rename(presagedir + ".bak", presagedir)
+    maliitdir = os.path.expanduser("~/.local/share/maliit-server")
+    if os.path.exists(maliitdir + ".bak") and os.path.exists(maliitdir):
+        shutil.rmtree(maliitdir)
+        os.rename(maliitdir + ".bak", maliitdir)
     subprocess.check_call(['restart', 'maliit-server'])
 
-# Clear away any learnt predictions
+# Clear away any learnt predictions and recent emoji
 presagedir = os.path.expanduser("~/.presage")
 if os.path.exists(presagedir):
     os.rename(presagedir, presagedir + ".bak")
+maliitdir = os.path.expanduser("~/.local/share/maliit-server")
+if os.path.exists(maliitdir):
+    os.rename(maliitdir, maliitdir + ".bak")
 subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
 subprocess.check_call(['restart', 'maliit-server'])
 
