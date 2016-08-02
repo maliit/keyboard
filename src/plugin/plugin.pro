@@ -7,7 +7,6 @@ TEMPLATE = lib
 LIBS += \
     $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_VIEW_LIB} \
     $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB} \
-    -lubuntu_application_api \
     -lgsettings-qt
 PRE_TARGETDEPS += $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_VIEW_LIB} $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB}
 INCLUDEPATH += ../lib ../
@@ -18,6 +17,11 @@ contains(QT_MAJOR_VERSION, 4) {
 } else {
     QT = core gui widgets quick qml dbus
 }
+
+QT += platformsupport-private
+
+CONFIG += link_pkgconfig
+PKGCONFIG += mirclient
 
 CONFIG += \
     plugin \
@@ -30,8 +34,8 @@ HEADERS += \
     greeterstatus.h \
     keyboardgeometry.h \
     keyboardsettings.h \
+    mirinputregionupdater.h \
 #    updatenotifier.h \
-    ubuntuapplicationapiwrapper.h \
 
 SOURCES += \
     plugin.cpp \
@@ -40,8 +44,8 @@ SOURCES += \
     greeterstatus.cpp \
     keyboardgeometry.cpp \
     keyboardsettings.cpp \
+    mirinputregionupdater.cpp \
 #    updatenotifier.cpp \
-    ubuntuapplicationapiwrapper.cpp \
 
 target.path += $${MALIIT_PLUGINS_DIR}
 INSTALLS += target

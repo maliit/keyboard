@@ -11,9 +11,9 @@ Build-Depends: debhelper (>= 9),
                libgles2-mesa-dev,
                libglib2.0-dev,
                libgsettings-qt-dev,
+               libmirclient-dev (>= 0.22.0),
                libhunspell-dev,
                libpinyin7-dev,
-               libplatform-api1-dev,
                libpresage-dev,
                libxml2-utils,
                maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
@@ -23,6 +23,14 @@ Build-Depends: debhelper (>= 9),
                python3-setuptools,
                qt5-default,
                qtbase5-dev,
+               qtbase5-private-dev,
+# start of deps brought by qtbase5-private-dev
+               libfontconfig1-dev,
+               libfreetype6-dev,
+               libudev-dev,
+               libmtdev-dev,
+               libxrender-dev,
+# end of deps brought by qtbase5-private-dev
                qtdeclarative5-dev,
                qtdeclarative5-private-dev,
                qml-module-ubuntu-components,
@@ -39,9 +47,13 @@ Package: ubuntu-keyboard
 Architecture: any
 Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
          qml-module-qtquick-window2,
+# Because of native interface features used by MirInputRegionUpdater which only
+# newer qtubuntu implements
+         qtubuntu-desktop (>= 0.63) | qtubuntu-android (>= 0.63) | libqt5gui5 | libqt5gui5-gles,
          ubuntu-keyboard-data (>= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
+Breaks: unity8 (<< 8.13),
 Description: Ubuntu on-screen keyboard
  Ubuntu Keyboard based on Maliit-Keyboard
  .
