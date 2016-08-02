@@ -292,7 +292,7 @@ KeyPad {
 
         CategoryKey {
             label: "💡"
-            highlight: c1.midVisibleIndex >= 1050 + internal.recentEmoji.length && c1.midVisibleIndex < 1230 + internal.recentEmoji.length
+            highlight: c1.midVisibleIndex >= 1050 + internal.recentEmoji.length && c1.midVisibleIndex < 1229 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
@@ -302,21 +302,21 @@ KeyPad {
 
         CategoryKey {
             label: "❤"
-            highlight: c1.midVisibleIndex >= 1230 + internal.recentEmoji.length && c1.midVisibleIndex < 1514 + internal.recentEmoji.length
+            highlight: c1.midVisibleIndex >= 1229 + internal.recentEmoji.length && c1.midVisibleIndex < 1512 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
-                internal.jumpTo(1230 + internal.recentEmoji.length);
+                internal.jumpTo(1229 + internal.recentEmoji.length);
             }
         }
 
         CategoryKey {
             label: "🌍"
-            highlight: c1.midVisibleIndex >= 1514 + internal.recentEmoji.length
+            highlight: c1.midVisibleIndex >= 1512 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
-                internal.jumpTo(1514 + internal.recentEmoji.length);
+                internal.jumpTo(1512 + internal.recentEmoji.length);
             }
         }
 
