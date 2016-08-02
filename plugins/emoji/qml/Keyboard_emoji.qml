@@ -34,6 +34,7 @@ KeyPad {
         property int offset: 0
         property bool loading: true
         property int maxRecent: 40
+        property int oldVisibleIndex: -1
         property var recentEmoji: []
         property var chars
         property var db
@@ -46,7 +47,7 @@ KeyPad {
                 function(tx) {
                     // Create the database if it doesn't already exist
                     tx.executeSql('CREATE TABLE IF NOT EXISTS Recent(emoji VARCHAR(16), time TIMESTAMP DEFAULT CURRENT_TIMESTAMP)');
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS State(contentX INTEGER)');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS State(contentX INTEGER, visibleIndex INTEGER)');
 
                     var rs = tx.executeSql('SELECT emoji FROM Recent ORDER BY time ASC');
                     for (var i = 0; i < rs.rows.length; i++) {
@@ -61,12 +62,13 @@ KeyPad {
                         c1.model.append({char: chars[i]});                        
                     }
 
-                    rs = tx.executeSql('SELECT contentX FROM State');
+                    rs = tx.executeSql('SELECT contentX, visibleIndex FROM State');
                     if (rs.rows.length > 0) {
+                        internal.oldVisibleIndex = rs.rows.item(0).visibleIndex;
                         c1.contentX = rs.rows.item(0).contentX;
                         changingCategory = true;
                     } else {
-                        tx.executeSql('INSERT INTO State VALUES(0)');
+                        tx.executeSql('INSERT INTO State VALUES(0, 0)');
                         // Start on the smiley page
                         c1.positionViewAtIndex(recentEmoji.length, GridView.Beginning)
                         updatePositionDb();
@@ -85,7 +87,7 @@ KeyPad {
         function updatePositionDb() {
             db.transaction(
                 function(tx) {
-                    tx.executeSql('UPDATE State SET contentX=?', c1.contentX);
+                    tx.executeSql('UPDATE State SET contentX=?, visibleIndex=?', [c1.contentX, c1.midVisibleIndex]);
                 }
             );
         }
@@ -140,7 +142,7 @@ KeyPad {
     GridView {
         id: c1
         objectName: "emojiGrid"
-        property int lastVisibleIndex: indexAt(contentX + (width / 2), 0);
+        property int midVisibleIndex: indexAt(contentX + (width / 2), 0) == -1 ? internal.oldVisibleIndex : indexAt(contentX + (width / 2), 0);
         property int numberOfRows: 5
         property int maxNrOfKeys: 10
         property int oldWidth: 0
@@ -223,7 +225,7 @@ KeyPad {
         CategoryKey {
             id: recentCat
             label: "⏱"
-            highlight: (c1.lastVisibleIndex < internal.recentEmoji.length && c1.lastVisibleIndex > 0)
+            highlight: (c1.midVisibleIndex < internal.recentEmoji.length && c1.midVisibleIndex > 0)
                        || (c1.contentX == 0 && internal.recentEmoji.length > 0)
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
@@ -234,15 +236,15 @@ KeyPad {
  
         CategoryKey {
             label: "😀"
-            highlight: (c1.lastVisibleIndex >= internal.recentEmoji.length 
-                        && c1.lastVisibleIndex < 540 + internal.recentEmoji.length
+            highlight: (c1.midVisibleIndex >= internal.recentEmoji.length 
+                        && c1.midVisibleIndex < 540 + internal.recentEmoji.length
                         && !recentCat.highlight)
-                       || c1.lastVisibleIndex == -1
+                       || c1.midVisibleIndex == -1
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
                 internal.jumpTo(internal.recentEmoji.length);
-                if (internal.recentEmoji.length == 0) {
+                if (internal.recentEmoji.length < internal.maxRecent) {
                     c1.startingPosition = true;
                 }
             }
@@ -250,7 +252,7 @@ KeyPad {
 
         CategoryKey {
             label: "🐶"
-            highlight: c1.lastVisibleIndex >= 540 + internal.recentEmoji.length && c1.lastVisibleIndex < 701 + internal.recentEmoji.length
+            highlight: c1.midVisibleIndex >= 540 + internal.recentEmoji.length && c1.midVisibleIndex < 701 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
@@ -260,7 +262,7 @@ KeyPad {
 
         CategoryKey {
             label: "🍏"
-            highlight: c1.lastVisibleIndex >= 701 + internal.recentEmoji.length && c1.lastVisibleIndex < 786 + internal.recentEmoji.length
+            highlight: c1.midVisibleIndex >= 701 + internal.recentEmoji.length && c1.midVisibleIndex < 786 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
@@ -270,7 +272,7 @@ KeyPad {
 
         CategoryKey {
             label: "🎾"
-            highlight: c1.lastVisibleIndex >= 786 + internal.recentEmoji.length && c1.lastVisibleIndex < 931 + internal.recentEmoji.length
+            highlight: c1.midVisibleIndex >= 786 + internal.recentEmoji.length && c1.midVisibleIndex < 931 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
@@ -280,7 +282,7 @@ KeyPad {
 
         CategoryKey {
             label: "🚗"
-             highlight: c1.lastVisibleIndex >= 931 + internal.recentEmoji.length && c1.lastVisibleIndex < 1050 + internal.recentEmoji.length
+             highlight: c1.midVisibleIndex >= 931 + internal.recentEmoji.length && c1.midVisibleIndex < 1050 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
@@ -290,7 +292,7 @@ KeyPad {
 
         CategoryKey {
             label: "💡"
-            highlight: c1.lastVisibleIndex >= 1050 + internal.recentEmoji.length && c1.lastVisibleIndex < 1230 + internal.recentEmoji.length
+            highlight: c1.midVisibleIndex >= 1050 + internal.recentEmoji.length && c1.midVisibleIndex < 1230 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
@@ -300,7 +302,7 @@ KeyPad {
 
         CategoryKey {
             label: "❤"
-            highlight: c1.lastVisibleIndex >= 1230 + internal.recentEmoji.length && c1.lastVisibleIndex < 1514 + internal.recentEmoji.length
+            highlight: c1.midVisibleIndex >= 1230 + internal.recentEmoji.length && c1.midVisibleIndex < 1514 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
@@ -310,7 +312,7 @@ KeyPad {
 
         CategoryKey {
             label: "🌍"
-            highlight: c1.lastVisibleIndex >= 1514 + internal.recentEmoji.length
+            highlight: c1.midVisibleIndex >= 1514 + internal.recentEmoji.length
             onPressed: {
                 if (maliit_input_method.useHapticFeedback)
                     pressEffect.start();
