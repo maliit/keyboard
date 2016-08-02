@@ -156,9 +156,9 @@ KeyPad {
         flow: GridView.FlowTopToBottom
         flickDeceleration: units.gu(500)
         snapMode: GridView.SnapToRow
-        cellWidth: panel.keyWidth
+        cellWidth: fullScreenItem.landscape ? panel.keyWidth * 0.75 : panel.keyWidth
         cellHeight: panel.keyHeight
-        cacheBuffer: 1000
+        cacheBuffer: units.gu(50)
         onContentXChanged: {
             magnifier.shown = false;
             magnifier.currentlyAssignedKey = null;
