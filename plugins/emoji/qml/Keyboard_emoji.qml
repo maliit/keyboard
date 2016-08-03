@@ -33,7 +33,7 @@ KeyPad {
         id: internal
         property int offset: 0
         property bool loading: true
-        property int maxRecent: 40
+        property int maxRecent: (c1.numberOfRows - 1) * c1.maxNrOfKeys
         property int oldVisibleIndex: -1
         property var recentEmoji: []
         property var chars
@@ -53,7 +53,7 @@ KeyPad {
                     for (var i = 0; i < rs.rows.length; i++) {
                         recentEmoji.push(rs.rows.item(i).emoji);
                     }
-                    for (var i = 0; i < recentEmoji.length % 4; i++) {
+                    for (var i = 0; i < recentEmoji.length % (c1.numberOfRows - 1); i++) {
                         recentEmoji.push("");
                     }
                     chars = recentEmoji.concat(Emoji.emoji);
@@ -113,7 +113,7 @@ KeyPad {
             recentEmoji.unshift(emoji);
 
             // Always append a column at a time
-            for (var i = 0; i < recentEmoji.length % 4; i++) {
+            for (var i = 0; i < recentEmoji.length % (c1.numberOfRows - 1); i++) {
                 recentEmoji.push("");
             }
 
@@ -143,8 +143,8 @@ KeyPad {
         id: c1
         objectName: "emojiGrid"
         property int midVisibleIndex: indexAt(contentX + (width / 2), 0) == -1 ? internal.oldVisibleIndex : indexAt(contentX + (width / 2), 0);
-        property int numberOfRows: 5
-        property int maxNrOfKeys: 10
+        property int numberOfRows: fullScreenItem.tablet ? 6 : 5
+        property int maxNrOfKeys: fullScreenItem.tablet ? 15 : 10
         property int oldWidth: 0
         property int positionBeforeInsertion: 0
         property bool startingPosition: true
@@ -156,7 +156,7 @@ KeyPad {
         flow: GridView.FlowTopToBottom
         flickDeceleration: units.gu(500)
         snapMode: GridView.SnapToRow
-        cellWidth: fullScreenItem.landscape ? panel.keyWidth * 0.75 : panel.keyWidth
+        cellWidth: fullScreenItem.landscape ? panel.keyWidth * 0.7 : panel.keyWidth
         cellHeight: panel.keyHeight
         cacheBuffer: units.gu(30)
         onContentXChanged: {
@@ -188,7 +188,7 @@ KeyPad {
                 shifted: label
                 normalColor: UI.backgroundColor
                 pressedColor: UI.backgroundColor
-                fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
+                fontSize: units.gu(2.5)
                 onKeySent: {
                     internal.updateRecent(key);
                 }
@@ -212,7 +212,7 @@ KeyPad {
         anchors.right: parent.right
         height: panel.keyHeight
 
-        spacing: 0
+        spacing: fullScreenItem.tablet ? panel.keyWidth / 2 : 0
 
         LanguageKey {
             id: languageMenuButton
