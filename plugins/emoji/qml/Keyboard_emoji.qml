@@ -38,7 +38,6 @@ KeyPad {
         property var recentEmoji: []
         property var chars
         property var db
-        property bool changingCategory: true
 
         Component.onCompleted: {
             db = LocalStorage.openDatabaseSync("Emoji", "1.0", "Storage for emoji keyboard layout", 1000000);
@@ -66,7 +65,6 @@ KeyPad {
                     if (rs.rows.length > 0) {
                         internal.oldVisibleIndex = rs.rows.item(0).visibleIndex;
                         c1.contentX = rs.rows.item(0).contentX;
-                        changingCategory = true;
                     } else {
                         tx.executeSql('INSERT INTO State VALUES(0, 0)');
                         // Start on the smiley page
@@ -78,7 +76,6 @@ KeyPad {
         }
 
         function jumpTo(position) {
-            internal.changingCategory = true;
             c1.positionViewAtIndex(position, GridView.Beginning);
             c1.startingPosition = false;
             internal.updatePositionDb();
@@ -162,7 +159,6 @@ KeyPad {
         onContentXChanged: {
             magnifier.shown = false;
             magnifier.currentlyAssignedKey = null;
-            internal.changingCategory = false;
         }
         onContentWidthChanged: {
             // Shift view to compensate for new emoji being added
@@ -196,7 +192,9 @@ KeyPad {
         }
 
         delegate: Loader {
-            asynchronous: internal.changingCategory
+            // Don't load asynchronously if the user is flicking through the
+            // grid, otherwise loading looks messy
+            asynchronous: !c1.movingHorizontally
             sourceComponent: charDelegate
             onLoaded: {
                 item.emoji = model;
