@@ -98,6 +98,11 @@ Item {
     // Allow action keys to override the standard key behaviour
     property bool overridePressArea: false
 
+    // Allow to manipulate preedit if it need.
+    // if allowPreeditHandler is enabled should be assigned preeditHandler.
+    property bool allowPreeditHandler: false
+    property var preeditHandler: null
+
     // Don't detect swipe changes until the swipeTimer has expired to prevent
     // accidentally selecting something other than the default extended key
     property bool swipeReady: false
@@ -242,6 +247,12 @@ Item {
                 if (switchBackFromSymbols && panel.state === "SYMBOLS") {
                     panel.state = "CHARACTERS";
                 }
+
+                if (allowPreeditHandler && preeditHandler) {
+                    preeditHandler.onKeyReleased(keyToSend, action);
+                    return;
+                }
+
                 event_handler.onKeyReleased(keyToSend, action);
                 keySent(keyToSend);
             } else if (action == "backspace") {
