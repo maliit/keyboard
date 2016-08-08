@@ -428,7 +428,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->word_engine->computeCandidates(d->text.data());
             }
 
-            if (!d->word_engine->languageFeature()->showPrimaryInPreedit()) {
+            if (!d->word_engine->languageFeature()->showPrimaryInPreedit() && d->preedit_enabled) {
                 sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                                   Replacement(d->text->cursorPosition()));
             }
@@ -545,10 +545,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
         if (d->word_engine->languageFeature()->commitOnSpace() || full_stop_inserted) {
             commitPreedit();
-        } else {
-            if (d->preedit_enabled) {
-                d->word_engine->computeCandidates(d->text.data());
-            }
+        } else if (d->preedit_enabled) {
+            d->word_engine->computeCandidates(d->text.data());
 
             sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                               Replacement(d->text->cursorPosition()));

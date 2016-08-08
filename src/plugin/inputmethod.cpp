@@ -178,7 +178,7 @@ void InputMethod::reset()
     Q_D(InputMethod);
     d->editor.clearPreedit();
     d->previous_position = -1;
-    Q_EMIT keyboardReset(); 
+    Q_EMIT keyboardReset();
 }
 
 void InputMethod::setPreedit(const QString &preedit,
@@ -363,7 +363,7 @@ void InputMethod::update()
     }
 
     bool valid;
- 
+
     bool hasSelection = d->host->hasSelection(valid);
 
     if (valid && hasSelection != d->hasSelection) {
@@ -469,7 +469,7 @@ void InputMethod::checkAutocaps()
         if (!leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
             email_detected = true;
         }
-        if (ok && !email_detected && ((textOnLeft.isEmpty() && d->editor.text()->preedit().isEmpty()) 
+        if (ok && !email_detected && ((textOnLeft.isEmpty() && d->editor.text()->preedit().isEmpty())
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft)
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft.trimmed()))) {
             Q_EMIT activateAutocaps();
@@ -617,13 +617,6 @@ void InputMethod::onVisibleRectChanged()
     Q_D(InputMethod);
 
     QRect visibleRect = d->m_geometry->visibleRect().toRect();
-
-    d->applicationApiWrapper->reportOSKVisible(
-                visibleRect.x(),
-                visibleRect.y(),
-                visibleRect.width(),
-                visibleRect.height()
-                );
 
     if (d->m_settings.disableHeight()) {
         visibleRect.setHeight(0);

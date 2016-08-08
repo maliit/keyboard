@@ -1,3 +1,28 @@
+ubuntu-keyboard (0.100+16.10.20160712-0ubuntu1) yakkety; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Use mir input regions instead of the DBus hack
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Tue, 12 Jul 2016 11:56:10 +0000
+
+ubuntu-keyboard (0.99.trunk.phablet2+16.10.20160615.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Michael Sheldon ]
+  * Add support for Latvian keyboard layout (LP: #1539121)
+  * Don't send preedit events when preedit is disabled (LP: #1448145)
+  * Support all types of space character when checking for autocaps and
+    double space full-stop insertion
+  * Add icon to keyboard autopilot test application to avoid bug
+    #1591192
+  * Ensure wide characters (e.g. Chinese) fit on 'Next' key (LP:
+    #1588635)
+  * Fix emoji autopilot tests
+
+  [ Timo Jyrinki ]
+  * Stop depending on transitional packages. (LP: #1583079)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Wed, 15 Jun 2016 12:45:56 +0000
+
 ubuntu-keyboard (0.99.trunk.phablet2+16.04.20160506-0ubuntu1) xenial; urgency=medium
 
   * Update dependency on hunspell-sv (LP: #1579115)
@@ -1245,7 +1270,7 @@ ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130930.2-0ubuntu1) saucy; urgency=l
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 30 Sep 2013 18:38:51 +0000
 
 ubuntu-keyboard (0.99.trunk.phablet2+13.10.20130926-0ubuntu1) saucy; urgency=low
-  
+
   [ Ubuntu daily release ]
   * New rebuild forced from rev 45
 
