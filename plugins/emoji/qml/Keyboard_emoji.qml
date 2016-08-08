@@ -210,7 +210,7 @@ KeyPad {
         anchors.right: parent.right
         height: panel.keyHeight
 
-        spacing: fullScreenItem.tablet ? panel.keyWidth / 2 : 0
+        spacing: fullScreenItem.tablet ? panel.keyWidth / 5 : 0
 
         LanguageKey {
             id: languageMenuButton
