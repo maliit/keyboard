@@ -233,6 +233,12 @@ Item {
                     maliit_input_method.close();
                     canvas.hidingComplete = true;
                     reportKeyboardVisibleRect();
+                    // Switch back to the previous layout if we're in
+                    // in a layout like emoji that requests switchBack
+                    if (keypad.switchBack && maliit_input_method.previousLanguage) {
+                        keypad.switchBack = false;
+                        maliit_input_method.activeLanguage = maliit_input_method.previousLanguage;
+                    }
                 }
                 // Wait for the first show operation to complete before
                 // allowing hiding, as the conditions when the keyboard
@@ -255,16 +261,8 @@ Item {
                 }
             }
 
-            onActiveLanguageChanged: {
-                keypad.justChangedLanguage = true
-            }
             onKeyboardReset: {
                 keypad.state = "CHARACTERS"
-                if (keypad.switchBack && maliit_input_method.previousLanguage && !keypad.justChangedLanguage) {
-                    keypad.switchBack = false;
-                    maliit_input_method.activeLanguage = maliit_input_method.previousLanguage;
-                }
-                keypad.justChangedLanguage = false;
             }
             onDeactivateAutocaps: {
                 if(keypad.autoCapsTriggered) {
