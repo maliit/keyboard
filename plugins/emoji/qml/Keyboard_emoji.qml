@@ -103,7 +103,7 @@ KeyPad {
             }
 
             // If the list is full remove the last emoji before inserting
-            if (recentEmoji.length == maxRecent || recentEmoji[recentEmoji.length - 1] == "") {
+            if (recentEmoji.length >= maxRecent || recentEmoji[recentEmoji.length - 1] == "") {
                 recentEmoji.splice(recentEmoji.length - 1, 1);
             } 
 
@@ -140,8 +140,8 @@ KeyPad {
         id: c1
         objectName: "emojiGrid"
         property int midVisibleIndex: indexAt(contentX + (width / 2), 0) == -1 ? internal.oldVisibleIndex : indexAt(contentX + (width / 2), 0);
-        property int numberOfRows: fullScreenItem.tablet ? 6 : 5
-        property int maxNrOfKeys: fullScreenItem.tablet ? 15 : 10
+        property int numberOfRows: 5
+        property int maxNrOfKeys: fullScreenItem.tablet ? 12 : 10
         property int oldWidth: 0
         property int positionBeforeInsertion: 0
         property bool startingPosition: true
