@@ -16,7 +16,7 @@ override_dh_auto_configure:
 	                     CONFIG+=enable-pinyin
 
 override_dh_auto_test:
-	python3 -m flake8.run .
+	python3 -m flake8 .
 	# Tests write $HOME/.presage/lm.db, make sure $HOME is
 	# writable.
 	rm -rf $(CURDIR)/debian/test-home
