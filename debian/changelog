@@ -1,3 +1,21 @@
+ubuntu-keyboard (0.100+16.10.20160808.1-0ubuntu1) yakkety; urgency=medium
+
+  [ Chero Jeong, chero jeong ]
+  * Add Korean layout
+
+  [ Florian Boucault ]
+  * Fixes for crossbuilding.
+
+  [ Lukáš Tinkl ]
+  * Fix uppercase variant of "ů" -> "Ů" in the Czech layout
+
+  [ Michael Sheldon ]
+  * Switch to scrollable GridView for Emoji layout (LP: #1441337,
+    #1539554, #1603194, #1607672)
+  * Fix building against Qt 5.6.1
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Mon, 08 Aug 2016 16:58:30 +0000
+
 ubuntu-keyboard (0.100+16.10.20160712-0ubuntu1) yakkety; urgency=medium
 
   [ Daniel d'Andrada ]

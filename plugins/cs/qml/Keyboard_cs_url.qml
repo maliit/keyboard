@@ -38,7 +38,7 @@ KeyPad {
             CharKey { label: "r"; shifted: "R"; extended: ["4", "ř","ŕ"]; extendedShifted: ["4", "Ř","Ŕ"] }
             CharKey { label: "t"; shifted: "T"; extended: ["5", "ť","ţ"]; extendedShifted: ["5", "Ť","Ţ"] }
             CharKey { label: "z"; shifted: "Z"; extended: ["6", "ž","ź","ż"]; extendedShifted: ["6", "Ž","Ź","Ż"] }
-            CharKey { label: "u"; shifted: "U"; extended: ["7", "ů","ú","ü","ű","ù","û"]; extendedShifted: ["7", "Û","Ú","Ü","Ű","Ù","Û"] }
+            CharKey { label: "u"; shifted: "U"; extended: ["7", "ů","ú","ü","ű","ù","û"]; extendedShifted: ["7", "Ů","Ú","Ü","Ű","Ù","Û"] }
             CharKey { label: "i"; shifted: "I"; extended: ["8", "í","î"]; extendedShifted: ["8", "Í","Î"] }
             CharKey { label: "o"; shifted: "O"; extended: ["9", "ó","ö","ő","ô"]; extendedShifted: ["9", "Ó","Ö","Ő","Ô"] }
             CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"]; rightSide: true; }

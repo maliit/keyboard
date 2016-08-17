@@ -41,6 +41,7 @@ Item {
     property string valueToSubmit: keyLabel.text
 
     property alias acceptDoubleClick: keyMouseArea.acceptDoubleClick
+    property alias horizontalSwipe: keyMouseArea.horizontalSwipe
 
     property string action
     property bool noMagnifier: false
@@ -97,6 +98,11 @@ Item {
     // Allow action keys to override the standard key behaviour
     property bool overridePressArea: false
 
+    // Allow to manipulate preedit if it need.
+    // if allowPreeditHandler is enabled should be assigned preeditHandler.
+    property bool allowPreeditHandler: false
+    property var preeditHandler: null
+
     // Don't detect swipe changes until the swipeTimer has expired to prevent
     // accidentally selecting something other than the default extended key
     property bool swipeReady: false
@@ -105,6 +111,7 @@ Item {
     signal released()
     signal pressAndHold()
     signal doubleClicked()
+    signal keySent(string key)
 
     Component.onCompleted: {
         if (annotation) {
@@ -154,7 +161,7 @@ Item {
                 anchors.verticalCenterOffset: key.textCenterOffset
                 horizontalAlignment: Text.AlignHCenter
                 // Avoid eliding characters that are slightly too wide (e.g. some emoji and chinese characters)
-                elide: text.length <= 3 ? Text.ElideNone : Text.ElideRight
+                elide: text.length <= 4 ? Text.ElideNone : Text.ElideRight
             }
         
             /// shows an annotation
@@ -212,8 +219,8 @@ Item {
         }
 
         onReleased: {
+            key.released();
             if (overridePressArea) {
-                key.released();
                 return;
             }
             if (extendedKeysShown) {
@@ -240,13 +247,21 @@ Item {
                 if (switchBackFromSymbols && panel.state === "SYMBOLS") {
                     panel.state = "CHARACTERS";
                 }
+
+                if (allowPreeditHandler && preeditHandler) {
+                    preeditHandler.onKeyReleased(keyToSend, action);
+                    return;
+                }
+
                 event_handler.onKeyReleased(keyToSend, action);
+                keySent(keyToSend);
             } else if (action == "backspace") {
                 // Send release from backspace if we're swiped out since
                 // backspace activates on press and deactivates on release
                 // to allow for repeated backspaces, unlike normal keys
                 // which activate on release.
                 event_handler.onKeyReleased(valueToSubmit, action);
+                keySent(valueToSubmit);
             }
         }
 
@@ -257,8 +272,8 @@ Item {
         }
 
         onPressed: {
+            key.pressed();
             if (overridePressArea) {
-                key.pressed();
                 return;
             }
             magnifier.currentlyAssignedKey = key
@@ -278,8 +293,8 @@ Item {
         }
 
         onDoubleClicked: {
+            key.doubleClicked();
             if (overridePressArea) {
-                key.doubleClicked();
                 return;
             }
         }

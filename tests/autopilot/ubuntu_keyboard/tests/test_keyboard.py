@@ -1127,6 +1127,8 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
 
         keyboard = Keyboard()
 
+        sleep(2)
+
         keyboard.type('😁😆😃😏')
 
         expected = "😁😆😃😏"
@@ -1146,6 +1148,8 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         self.addCleanup(keyboard.dismiss)
 
         keyboard = Keyboard()
+
+        sleep(2)
 
         keyboard.type('😁😆😃😏\b')
 
@@ -1675,17 +1679,60 @@ class UbuntuKeyboardJapaneseTests(UbuntuKeyboardTests):
         )
 
 
+class UbuntuKeyboardKoreanTests(UbuntuKeyboardTests):
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "ko")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_korean_input(self):
+        """Test keys on Korean layout.
+
+        """
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.pointer.click_object(text_area)
+        keyboard = Keyboard()
+        self.assertThat(keyboard.is_available, Eventually(Equals(True)))
+
+        expected = "한글 "
+        keyboard.press_key('ㅎ')
+        keyboard.press_key('ㅏ')
+        keyboard.press_key('ㄴ')
+        keyboard.press_key('ㄱ')
+        keyboard.press_key('ㅡ')
+        keyboard.press_key('ㄹ')
+        keyboard.press_key(' ')
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
 def maliit_cleanup():
     presagedir = os.path.expanduser("~/.presage")
     if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
         shutil.rmtree(presagedir)
         os.rename(presagedir + ".bak", presagedir)
+    maliitdir = os.path.expanduser("~/.local/share/maliit-server")
+    if os.path.exists(maliitdir + ".bak") and os.path.exists(maliitdir):
+        shutil.rmtree(maliitdir)
+        os.rename(maliitdir + ".bak", maliitdir)
     subprocess.check_call(['restart', 'maliit-server'])
 
-# Clear away any learnt predictions
+# Clear away any learnt predictions and recent emoji
 presagedir = os.path.expanduser("~/.presage")
 if os.path.exists(presagedir):
     os.rename(presagedir, presagedir + ".bak")
+maliitdir = os.path.expanduser("~/.local/share/maliit-server")
+if os.path.exists(maliitdir):
+    os.rename(maliitdir, maliitdir + ".bak")
 subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
 subprocess.check_call(['restart', 'maliit-server'])
 

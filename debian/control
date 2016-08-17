@@ -18,8 +18,8 @@ Build-Depends: debhelper (>= 9),
                libxml2-utils,
                maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
                pkg-config,
-               python3,
-               python3-flake8,
+               python3:any,
+               python3-flake8 (>= 2.2.2-1ubuntu4) | python3-flake8:native,
                python3-setuptools,
                qt5-default,
                qtbase5-dev,
@@ -115,6 +115,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-italian (>= ${source:Version}),
          ubuntu-keyboard-japanese (>= ${source:Version}),
          ubuntu-keyboard-latvian (>= ${source:Version}),
+         ubuntu-keyboard-korean (>= ${source:Version}),
          ubuntu-keyboard-norwegian-bokmal (>= ${source:Version}),
          ubuntu-keyboard-polish (>= ${source:Version}),
          ubuntu-keyboard-portuguese (>= ${source:Version}),
@@ -318,9 +319,18 @@ Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
          myspell-lv,
          ${misc:Depends},
-         ${shlibs:Depends},
+         ${shlibs:Depends},	 
 Description: Ubuntu on-screen keyboard data files - Latvian
  Data files for the Ubuntu virtual keyboard - Latvian
+
+Package: ubuntu-keyboard-korean
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         hunspell-ko,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Korean
+ Data files for the Ubuntu virtual keyboard - Korean
 
 Package: ubuntu-keyboard-norwegian-bokmal
 Architecture: any
