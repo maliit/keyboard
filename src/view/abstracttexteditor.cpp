@@ -205,6 +205,7 @@ public:
     int ignore_next_cursor_position;
     QString ignore_next_surrounding_text;
     bool look_for_a_double_space;
+    bool look_for_a_triple_space;
     bool double_space_full_stop_enabled;
     bool editing_middle_of_text;
     QString appendix_for_previous_preedit;
@@ -236,6 +237,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , ignore_next_cursor_position(-1)
     , ignore_next_surrounding_text()
     , look_for_a_double_space(false)
+    , look_for_a_triple_space(false)
     , double_space_full_stop_enabled(false)
     , editing_middle_of_text(false)
     , appendix_for_previous_preedit()
@@ -356,6 +358,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
     bool look_for_a_double_space = d->look_for_a_double_space;
+    bool look_for_a_triple_space = d->look_for_a_triple_space;
     bool email_detected = false;
 
     // Detect if the user is entering an email address and avoid spacing, autocaps and autocomplete changes
@@ -368,8 +371,11 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         email_detected = true;
     }
 
+    // we reset the flags here so that we won't have to add boilerplate code later
+    if (d->look_for_a_triple_space) {
+        d->look_for_a_triple_space = false;
+    }
     if (look_for_a_double_space) {
-        // we reset the flag here so that we won't have to add boilerplate code later
         d->look_for_a_double_space = false;
     }
 
@@ -486,6 +492,12 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             }
         }
 
+        if (look_for_a_triple_space) {
+            singleBackspace();
+            singleBackspace();
+            d->text->appendToPreedit("  ");
+        }
+
         if (replace_preedit) {
             if (!textOnRight.isEmpty() && d->editing_middle_of_text) {
                 // Don't insert a space if we are correcting a word in the middle of a sentence
@@ -517,7 +529,9 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         // a separator, and there isn't a separator immediately prior to a ')'
         else if (look_for_a_double_space
                  && not stopSequence.isEmpty()
+                 && textOnLeft.count() >= 2
                  && textOnLeft.at(textOnLeft.count() - 1).isSpace()
+                 && !textOnLeft.at(textOnLeft.count() - 2).isSpace()
                  && textOnLeftTrimmed.count() > 0
                  && !d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 1))
                  && !(textOnLeftTrimmed.endsWith(")") 
@@ -539,6 +553,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             textOnLeft = d->text->surroundingLeft() + d->text->preedit();
             auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
             full_stop_inserted = true;
+            d->look_for_a_triple_space = true;
         }
 
         d->text->appendToPreedit(space);
