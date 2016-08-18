@@ -51,6 +51,7 @@ Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
 # newer qtubuntu implements
          qtubuntu-desktop (>= 0.63) | qtubuntu-android (>= 0.63) | libqt5gui5 | libqt5gui5-gles,
          ubuntu-keyboard-data (>= ${source:Version}),
+         ubuntu-keyboard-english (>= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
 Breaks: unity8 (<< 8.13),
