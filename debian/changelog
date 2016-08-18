@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.100+16.10.20160818-0ubuntu1) yakkety; urgency=medium
+
+  * Make ubuntu-keyboard depend on ubuntu-keyboard-english as it's used
+    as a fallback when other plugins are unavailable (LP: #1606512)
+  * Add missing qml-module-qtmultimedia dependency (LP: #1594822)
+  * Improve double space punctuation insertion behaviour (LP: #1579083)
+  * Make flake8 usage compatible with flake8 3.x
+  * Add optional dependency on fonts-noto
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Thu, 18 Aug 2016 13:53:57 +0000
+
 ubuntu-keyboard (0.100+16.10.20160808.1-0ubuntu1) yakkety; urgency=medium
 
   [ Chero Jeong, chero jeong ]
