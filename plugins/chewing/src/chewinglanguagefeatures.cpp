@@ -55,7 +55,7 @@ QString ChewingLanguageFeatures::appendixForReplacedPreedit(const QString &preed
 
 bool ChewingLanguageFeatures::isSeparator(const QString &text) const
 {
-    static const QString separators = QString::fromUtf8("。、!?:\r\n");
+    static const QString separators = QString::fromUtf8("。、!?:…\r\n");
 
     if (text.isEmpty()) {
         return false;

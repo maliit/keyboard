@@ -205,6 +205,7 @@ public:
     int ignore_next_cursor_position;
     QString ignore_next_surrounding_text;
     bool look_for_a_double_space;
+    bool look_for_a_triple_space;
     bool double_space_full_stop_enabled;
     bool editing_middle_of_text;
     QString appendix_for_previous_preedit;
@@ -236,6 +237,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , ignore_next_cursor_position(-1)
     , ignore_next_surrounding_text()
     , look_for_a_double_space(false)
+    , look_for_a_triple_space(false)
     , double_space_full_stop_enabled(false)
     , editing_middle_of_text(false)
     , appendix_for_previous_preedit()
@@ -356,6 +358,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
     bool look_for_a_double_space = d->look_for_a_double_space;
+    bool look_for_a_triple_space = d->look_for_a_triple_space;
     bool email_detected = false;
 
     // Detect if the user is entering an email address and avoid spacing, autocaps and autocomplete changes
@@ -368,8 +371,11 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         email_detected = true;
     }
 
+    // we reset the flags here so that we won't have to add boilerplate code later
+    if (d->look_for_a_triple_space) {
+        d->look_for_a_triple_space = false;
+    }
     if (look_for_a_double_space) {
-        // we reset the flag here so that we won't have to add boilerplate code later
         d->look_for_a_double_space = false;
     }
 
@@ -464,6 +470,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionSpace: {
         QString space = " ";
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+        QString textOnLeftTrimmed = textOnLeft.trimmed();
         QStringList textOnRightList = d->text->surroundingRight().split("\n");
         QString textOnRight;
         if (!textOnRightList.isEmpty()) {
@@ -483,6 +490,14 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             if (d->text->preedit().isEmpty() || d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()) == " ") {
                 d->look_for_a_double_space = true;
             }
+        }
+
+        // Delete automatically inserted full stop if the user continues 
+        // pressing space after a double space.
+        if (look_for_a_triple_space) {
+            singleBackspace();
+            singleBackspace();
+            d->text->appendToPreedit("  ");
         }
 
         if (replace_preedit) {
@@ -512,7 +527,18 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->previous_preedit_position -= 1;
             }
         }
-        else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.at(textOnLeft.count() - 1).isSpace()) {
+        // Only insert a full stop after double space if there isn't already
+        // a separator, and there isn't a separator immediately prior to a ')'
+        else if (look_for_a_double_space
+                 && not stopSequence.isEmpty()
+                 && textOnLeft.count() >= 2
+                 && textOnLeft.at(textOnLeft.count() - 1).isSpace()
+                 && !textOnLeft.at(textOnLeft.count() - 2).isSpace()
+                 && textOnLeftTrimmed.count() > 0
+                 && !d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 1))
+                 && !(textOnLeftTrimmed.endsWith(")") 
+                      && textOnLeftTrimmed.count() > 1
+                      && d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 2)))) {
             removeTrailingWhitespaces();
             if (!d->word_engine->languageFeature()->commitOnSpace()) {
                 // Commit when inserting a fullstop if we don't insert on spaces
@@ -529,6 +555,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             textOnLeft = d->text->surroundingLeft() + d->text->preedit();
             auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
             full_stop_inserted = true;
+            d->look_for_a_triple_space = true;
         }
 
         d->text->appendToPreedit(space);
