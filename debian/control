@@ -33,6 +33,7 @@ Build-Depends: debhelper (>= 9),
 # end of deps brought by qtbase5-private-dev
                qtdeclarative5-dev,
                qtdeclarative5-private-dev,
+               qml-module-qtmultimedia,
                qml-module-ubuntu-components,
                xvfb,
                presage,
