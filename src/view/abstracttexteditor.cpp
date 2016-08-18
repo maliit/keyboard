@@ -492,6 +492,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             }
         }
 
+        // Delete automatically inserted full stop if the user continues 
+        // pressing space after a double space.
         if (look_for_a_triple_space) {
             singleBackspace();
             singleBackspace();
