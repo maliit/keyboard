@@ -35,6 +35,9 @@ function languageIdToName(languageId)
     if (languageId == "hu")         return i18n.tr("Hungarian");
     if (languageId == "is")         return i18n.tr("Icelandic");
     if (languageId == "it")         return i18n.tr("Italian");
+    if (languageId == "ja")         return i18n.tr("Japanese");
+    if (languageId == "lv")         return i18n.tr("Latvian");
+    if (languageId == "ko")         return i18n.tr("Korean");
     if (languageId == "nl")         return i18n.tr("Dutch");
     if (languageId == "nb")         return i18n.tr("Norwegian");
     if (languageId == "pl")         return i18n.tr("Polish");
@@ -45,7 +48,8 @@ function languageIdToName(languageId)
     if (languageId == "sr")         return i18n.tr("Serbian");
     if (languageId == "sv")         return i18n.tr("Swedish");
     if (languageId == "uk")         return i18n.tr("Ukrainian");
-    if (languageId == "zh")         return i18n.tr("Chinese - Pinyin");
+    if (languageId == "zh-hans")         return i18n.tr("Chinese\n(Pinyin)");
+    if (languageId == "zh-hant")         return i18n.tr("Chinese\n(Chewing)");
 
     // fallback
     return languageId.charAt(0).toUpperCase() + languageId.slice(1);

@@ -63,14 +63,17 @@ class KeyPad(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                     if label != '':
                         contained_keys[label] = KeyPadState.NORMAL
                         key_positions[label] = key_pos
-                    if key.shifted != '':
+                    if hasattr(key, "shifted") and key.shifted != '':
                         contained_keys[key.shifted] = KeyPadState.SHIFTED
                         key_positions[key.shifted] = key_pos
 
         _iter_keys("CharKey", lambda x: x.label)
+        _iter_keys("FlickCharKey", lambda x: x.label)
         _iter_keys("ActionKey", lambda x: x.action)
         _iter_keys("ShiftKey", lambda x: x.action)
         _iter_keys("LanguageKey", lambda x: x.action)
         _iter_keys("ReturnKey", lambda x: x.action)
+        _iter_keys("CommitKey", lambda x: x.action)
+        _iter_keys("HCharKey", lambda x: x.label)
 
         return (contained_keys, key_positions)

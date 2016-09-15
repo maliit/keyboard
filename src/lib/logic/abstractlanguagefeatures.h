@@ -54,6 +54,10 @@ public:
     // can be disabled by implementing this method to return true.
     virtual bool ignoreSimilarity() const { return false; }
     virtual bool wordEngineAvailable() const { return false; }
+    virtual bool enablePreeditAtInsertion() const { return false; }
+    virtual bool restorePreedit() const { return true; }
+    virtual bool commitOnSpace() const { return true; }
+    virtual bool showPrimaryInPreedit() const { return false; }
 
     Maliit::TextContentType contentType() const { return m_contentType; }
     void setContentType(Maliit::TextContentType contentType) { m_contentType = contentType; }

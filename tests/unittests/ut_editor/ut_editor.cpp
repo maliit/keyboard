@@ -118,7 +118,17 @@ private:
         QTest::newRow("auto-correct enabled, commit with separators, check separators")
                 << true << "Hel. Wor." << "Hello. World.";
         QTest::newRow("auto-correct enabled, check if two spaces are full-stop")
-                << true << "Hel  " << "Hello . ";      
+                << true << "Hel  " << "Hello . ";
+        QTest::newRow("auto-correct enabled, check two spaces don't insert full-stop after .")
+                << true << "Hello.  " << "Hello.  ";
+        QTest::newRow("auto-correct enabled, check two spaces don't insert full-stop after !")
+                << true << "Hello!  " << "Hello!  ";
+        QTest::newRow("auto-correct enabled, check two spaces don't insert full-stop after ?")
+                << true << "Hello?  " << "Hello?  ";
+        QTest::newRow("auto-correct enabled, check two spaces don't insert full-stop after ...")
+                << true << "Hello...  " << "Hello...  ";
+        QTest::newRow("auto-correct enabled, check two spaces does insert full-stop after )")
+                << true << "(Hello)  " << "(Hello) . ";
         //QTest::newRow("auto-correct enabled, check removal of unnecessary whitespaces")
         //        << true << "Hello.       . " << "Hello.. ";
     }

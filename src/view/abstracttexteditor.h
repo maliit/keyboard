@@ -129,6 +129,10 @@ public:
     Q_SLOT void setPreeditEnabled(bool enabled);
     Q_SIGNAL void preeditEnabledChanged(bool enabled);
 
+    Q_SIGNAL void preeditChanged(const QString &preedit);
+    Q_SLOT void setCursorPosition(int pos);
+    Q_SIGNAL void cursorPositionChanged(int pos);
+
     bool isAutoCorrectEnabled() const;
     Q_SLOT void setAutoCorrectEnabled(bool enabled);
     Q_SIGNAL void autoCorrectEnabledChanged(bool enabled);

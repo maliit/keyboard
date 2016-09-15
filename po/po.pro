@@ -3,8 +3,9 @@ TEMPLATE = subdirs
 PROJECTNAME = ubuntu-keyboard
 
 SOURCECODE = ../qml/*.qml \
-             ../qml/keys/*.qml
-             ../qml/languages/*.qml
+             ../qml/keys/*.qml \ 
+             ../qml/keys/languages.js \
+             ../qml/languages/*.qml \
              ../plugins/*/qml/*.qml
 
 message("")

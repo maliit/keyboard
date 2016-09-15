@@ -25,12 +25,12 @@ SOURCES         = \
                   chineselanguagefeatures.cpp \
                   $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.cpp
 
-TARGET          = $$qtLibraryTarget(zhplugin)
+TARGET          = $$qtLibraryTarget(zh-hansplugin)
 
 EXAMPLE_FILES = pinyinplugin.json
 
 # install
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}/zh/
+target.path = $${UBUNTU_KEYBOARD_LIB_DIR}/zh-hans/
 INSTALLS += target
 
 OTHER_FILES += \

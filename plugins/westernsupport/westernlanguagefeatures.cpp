@@ -60,7 +60,7 @@ bool WesternLanguageFeatures::activateAutoCaps(const QString &preedit) const
         return false;
     }
 
-    if (sentenceBreak.contains(preedit.mid(preedit.length() - 2, 1)) && preedit.right(1) == " ") {
+    if (sentenceBreak.contains(preedit.mid(preedit.length() - 2, 1)) && preedit.at(preedit.count() - 1).isSpace()) {
         return true;
     }
 
@@ -77,7 +77,7 @@ QString WesternLanguageFeatures::appendixForReplacedPreedit(const QString &preed
 
 bool WesternLanguageFeatures::isSeparator(const QString &text) const
 {
-    static const QString separators = QString::fromUtf8(",.!?:;\r\n");
+    static const QString separators = QString::fromUtf8(",.!?:;…\r\n");
 
     if (text.isEmpty()) {
         return false;

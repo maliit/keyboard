@@ -126,6 +126,14 @@ namespace MaliitKeyboard {
 //! \brief Emitted when preedit setting changes.
 //! \param enabled New setting.
 
+//! \fn void AbstractTextEditor::preeditChanged(const QString &preedit)
+//! \brief Emitted when preedit string changes.
+//! \param enabled New string.
+
+//! \fn void AbstractTextEditor::cursorPositionChanged(int pos)
+//! \brief Emitted when preedit cusor position changes.
+//! \param enabled New position.
+
 //! \fn void AbstractTextEditor::wordCandidatesChanged(const WordCandidateList &word_candidates)
 //! \brief Emitted when new word candidates are generated.
 //! \param word_candidates New word candidates.
@@ -197,6 +205,7 @@ public:
     int ignore_next_cursor_position;
     QString ignore_next_surrounding_text;
     bool look_for_a_double_space;
+    bool look_for_a_triple_space;
     bool double_space_full_stop_enabled;
     bool editing_middle_of_text;
     QString appendix_for_previous_preedit;
@@ -228,6 +237,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , ignore_next_cursor_position(-1)
     , ignore_next_surrounding_text()
     , look_for_a_double_space(false)
+    , look_for_a_triple_space(false)
     , double_space_full_stop_enabled(false)
     , editing_middle_of_text(false)
     , appendix_for_previous_preedit()
@@ -348,6 +358,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     QString keyText = QString("");
     Qt::Key event_key = Qt::Key_unknown;
     bool look_for_a_double_space = d->look_for_a_double_space;
+    bool look_for_a_triple_space = d->look_for_a_triple_space;
     bool email_detected = false;
 
     // Detect if the user is entering an email address and avoid spacing, autocaps and autocomplete changes
@@ -360,8 +371,11 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         email_detected = true;
     }
 
+    // we reset the flags here so that we won't have to add boilerplate code later
+    if (d->look_for_a_triple_space) {
+        d->look_for_a_triple_space = false;
+    }
     if (look_for_a_double_space) {
-        // we reset the flag here so that we won't have to add boilerplate code later
         d->look_for_a_double_space = false;
     }
 
@@ -373,11 +387,13 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         const bool isSymbol = d->word_engine->languageFeature()->isSymbol(text);
         const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
                     not d->text->preedit().isEmpty() && isSeparator;
+        const bool enablePreeditAtInsertion = d->word_engine->languageFeature()->enablePreeditAtInsertion();
 
         d->previous_preedit = "";
 
         if (d->preedit_enabled) {
-            if (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]")) || email_detected) {
+            if (!enablePreeditAtInsertion &&
+                    (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]")) || email_detected)) {
                 // We're editing in the middle of a word or entering an email address, so just insert characters directly
                 d->text->appendToPreedit(text);
                 commitPreedit();
@@ -410,7 +426,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         // if we had modified the preedit already because of a separator entry, there is no need to perform all the
         // steps like appending the input or computing candidates - as all we needed was already done in the previous part
         if (not alreadyAppended) {
-            d->text->appendToPreedit(text);     
+            d->text->appendToPreedit(text);
 
             // computeCandidates can change preedit face, so needs to happen
             // before sending preedit:
@@ -418,8 +434,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->word_engine->computeCandidates(d->text.data());
             }
 
-            sendPreeditString(d->text->preedit(), d->text->preeditFace(),
-                              Replacement(d->text->cursorPosition()));
+            if (!d->word_engine->languageFeature()->showPrimaryInPreedit() && d->preedit_enabled) {
+                sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                                  Replacement(d->text->cursorPosition()));
+            }
         }
 
         if (not d->preedit_enabled) {
@@ -429,6 +447,9 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             // standard input (like certain separators, e.g. '.' in western languages) can also trigger autoCaps
             Q_EMIT autoCapsActivated();
         }
+
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
     } break;
 
     case Key::ActionBackspace: {
@@ -449,14 +470,19 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionSpace: {
         QString space = " ";
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
+        QString textOnLeftTrimmed = textOnLeft.trimmed();
         QStringList textOnRightList = d->text->surroundingRight().split("\n");
         QString textOnRight;
         if (!textOnRightList.isEmpty()) {
             textOnRight = textOnRightList.first().trimmed();
         }
         bool auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
-        const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && not d->text->preedit().isEmpty();
+        const bool replace_preedit = d->auto_correct_enabled
+                                     && not d->text->primaryCandidate().isEmpty()
+                                     && not d->text->preedit().isEmpty()
+                                     && d->word_engine->languageFeature()->commitOnSpace();
         const QString stopSequence = d->word_engine->languageFeature()->fullStopSequence();
+        bool full_stop_inserted = false;
 
         // every double-space character inputs one-after-another force a full-stop, so trigger it if needed
         if (d->double_space_full_stop_enabled && not look_for_a_double_space) {
@@ -464,6 +490,14 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             if (d->text->preedit().isEmpty() || d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()) == " ") {
                 d->look_for_a_double_space = true;
             }
+        }
+
+        // Delete automatically inserted full stop if the user continues 
+        // pressing space after a double space.
+        if (look_for_a_triple_space) {
+            singleBackspace();
+            singleBackspace();
+            d->text->appendToPreedit("  ");
         }
 
         if (replace_preedit) {
@@ -493,17 +527,50 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->previous_preedit_position -= 1;
             }
         }
-        else if (look_for_a_double_space && not stopSequence.isEmpty() && textOnLeft.right(1) == " ") {
+        // Only insert a full stop after double space if there isn't already
+        // a separator, and there isn't a separator immediately prior to a ')'
+        else if (look_for_a_double_space
+                 && not stopSequence.isEmpty()
+                 && textOnLeft.count() >= 2
+                 && textOnLeft.at(textOnLeft.count() - 1).isSpace()
+                 && !textOnLeft.at(textOnLeft.count() - 2).isSpace()
+                 && textOnLeftTrimmed.count() > 0
+                 && !d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 1))
+                 && !(textOnLeftTrimmed.endsWith(")") 
+                      && textOnLeftTrimmed.count() > 1
+                      && d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 2)))) {
             removeTrailingWhitespaces();
-            d->text->appendToPreedit(stopSequence);
+            if (!d->word_engine->languageFeature()->commitOnSpace()) {
+                // Commit when inserting a fullstop if we don't insert on spaces
+                d->previous_preedit = d->text->preedit();
+                d->previous_preedit_position = d->text->surroundingOffset();
+                d->text->setPreedit(d->text->primaryCandidate().trimmed());
+                d->text->appendToPreedit(stopSequence);
+                commitPreedit();
+            } else {
+                d->text->appendToPreedit(stopSequence);
+            }
 
             // we need to re-evaluate autocaps after our changes to the preedit
             textOnLeft = d->text->surroundingLeft() + d->text->preedit();
             auto_caps_activated = d->word_engine->languageFeature()->activateAutoCaps(textOnLeft);
+            full_stop_inserted = true;
+            d->look_for_a_triple_space = true;
         }
 
         d->text->appendToPreedit(space);
-        commitPreedit();
+
+        if (d->word_engine->languageFeature()->commitOnSpace() || full_stop_inserted) {
+            commitPreedit();
+        } else if (d->preedit_enabled) {
+            d->word_engine->computeCandidates(d->text.data());
+
+            sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                              Replacement(d->text->cursorPosition()));
+        }
+
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 
         if (auto_caps_activated && d->auto_caps_enabled) {
             Q_EMIT autoCapsActivated();
@@ -513,6 +580,17 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionReturn: {
         event_key = Qt::Key_Return;
         keyText = QString("\r");
+        if (d->word_engine->languageFeature()->showPrimaryInPreedit()) {
+            d->text->setPreedit(d->text->primaryCandidate());
+            commitPreedit();
+        }
+    } break;
+
+    case Key::ActionCommit: {
+        commitPreedit();
+
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
     } break;
 
     case Key::ActionClose:
@@ -561,6 +639,9 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     if (event_key != Qt::Key_unknown) {
         commitPreedit();
         sendKeyPressAndReleaseEvents(event_key, Qt::NoModifier, keyText);
+
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
     }
 }
 
@@ -614,6 +695,9 @@ void AbstractTextEditor::replacePreedit(const QString &replacement)
     // before sending preedit:
     d->word_engine->computeCandidates(d->text.data());
     sendPreeditString(d->text->preedit(), d->text->preeditFace());
+
+    Q_EMIT preeditChanged(d->text->preedit());
+    Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 }
 
 void AbstractTextEditor::replaceTextWithPreedit(const QString &replacement, int start, int len, int pos)
@@ -629,6 +713,9 @@ void AbstractTextEditor::replaceTextWithPreedit(const QString &replacement, int 
     Replacement word_r(start, len, pos);
     sendPreeditString(d->text->preedit(), d->text->preeditFace(),
                       word_r);
+
+    Q_EMIT preeditChanged(d->text->preedit());
+    Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 }
 
 //! \brief Replaces current preedit with given replacement and then
@@ -662,6 +749,9 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
             Q_EMIT autoCapsDeactivated();
         }
     }
+
+    Q_EMIT preeditChanged(d->text->preedit());
+    Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 }
 
 //! \brief Clears preedit.
@@ -700,6 +790,27 @@ void AbstractTextEditor::setPreeditEnabled(bool enabled)
         d->preedit_enabled = enabled;
         Q_EMIT preeditEnabledChanged(d->preedit_enabled);
     }
+}
+
+//! \brief Set cursor position of preedit.
+void AbstractTextEditor::setCursorPosition(int pos)
+{
+    Q_D(AbstractTextEditor);
+
+    if (not d->valid()) {
+        return;
+    }
+
+    if (pos == d->text->cursorPosition()) {
+        return;
+    }
+
+    d->text->setCursorPosition(pos);
+
+    sendPreeditString(d->text->preedit(), d->text->preeditFace(),
+                      Replacement(d->text->cursorPosition()));
+    Q_EMIT preeditChanged(d->text->preedit());
+    Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 }
 
 //! \brief Returns whether auto-correct functionality is enabled.
@@ -784,7 +895,7 @@ void AbstractTextEditor::removeTrailingWhitespaces()
     QString::const_iterator i = textOnLeft.cend();
     while (i != begin) {
         --i;
-        if (*i != ' ') break;
+        if (!i->isSpace()) break;
         singleBackspace();
     }
 }
@@ -906,7 +1017,10 @@ void AbstractTextEditor::singleBackspace()
         // Clear previous word candidates
         Q_EMIT wordCandidatesChanged(WordCandidateList());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),
-                          Replacement());
+                          Replacement(d->text->cursorPosition()));
+
+        Q_EMIT preeditChanged(d->text->preedit());
+        Q_EMIT cursorPositionChanged(d->text->cursorPosition());
 
         if (d->text->preedit().isEmpty()) {
             d->word_engine->clearCandidates();
@@ -965,7 +1079,12 @@ void AbstractTextEditor::setPreeditFace(Model::Text::PreeditFace face)
 
 void AbstractTextEditor::setPrimaryCandidate(QString candidate)
 {
+    Q_D(AbstractTextEditor);
     text()->setPrimaryCandidate(candidate);
+
+    if (d->word_engine->languageFeature()->showPrimaryInPreedit()) {
+        sendPreeditString(candidate, d->text->preeditFace());
+    }
 }
 
 //! \brief AbstractTextEditor::checkPreeditReentry  Checks to see whether we should
@@ -980,6 +1099,10 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
 
     if(!text()->preedit().isEmpty()) {
         d->word_engine->computeCandidates(d->text.data());
+        return;
+    }
+
+    if(!d->word_engine->languageFeature()->restorePreedit()) {
         return;
     }
 
@@ -1023,10 +1146,8 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
                 }
                 d->previous_preedit = "";
             }
-
             replaceTextWithPreedit(recreatedPreedit, 0, 0, recreatedPreedit.size());
         }
-
     }
 
     d->word_engine->computeCandidates(d->text.data());

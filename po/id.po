@@ -7,139 +7,158 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-05-11 12:50+0100\n"
-"PO-Revision-Date: 2014-12-25 12:17+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
+"PO-Revision-Date: 2016-05-05 03:45+0000\n"
+"Last-Translator: Pratomo Asta Nugraha <pratomoasta@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-05 06:29+0000\n"
-"X-Generator: Launchpad (build 17908)\n"
+"X-Launchpad-Export-Date: 2016-08-26 05:54+0000\n"
+"X-Generator: Launchpad (build 18179)\n"
 
-#: ../qml/keys/LanguageMenu.qml:80
+#: ../qml/keys/LanguageMenu.qml:81
 msgid "Settings"
 msgstr "Pengaturan"
 
-#: ../qml/keys/LanguageMenu.qml:95
+#: ../qml/keys/languages.js:19
 msgid "Arabic"
 msgstr "Arab"
 
-#: ../qml/keys/LanguageMenu.qml:96
+#: ../qml/keys/languages.js:20
 msgid "Azerbaijani"
 msgstr "Azerbaijan"
 
-#: ../qml/keys/LanguageMenu.qml:97
+#: ../qml/keys/languages.js:21
 msgid "Bosnian"
 msgstr "Bosnia"
 
-#: ../qml/keys/LanguageMenu.qml:98
+#: ../qml/keys/languages.js:22
 msgid "Catalan"
 msgstr "Katala"
 
-#: ../qml/keys/LanguageMenu.qml:99
+#: ../qml/keys/languages.js:23
 msgid "Czech"
 msgstr "Ceko"
 
-#: ../qml/keys/LanguageMenu.qml:100
+#: ../qml/keys/languages.js:24
 msgid "Danish"
 msgstr "Denmark"
 
-#: ../qml/keys/LanguageMenu.qml:101
+#: ../qml/keys/languages.js:25
 msgid "German"
 msgstr "Jerman"
 
-#: ../qml/keys/LanguageMenu.qml:102
+#: ../qml/keys/languages.js:26
 msgid "Emoji"
 msgstr "Emoji"
 
-#: ../qml/keys/LanguageMenu.qml:103
+#: ../qml/keys/languages.js:27
 msgid "Greek"
 msgstr "Yunani"
 
-#: ../qml/keys/LanguageMenu.qml:104
+#: ../qml/keys/languages.js:28
 msgid "English"
 msgstr "Inggris"
 
-#: ../qml/keys/LanguageMenu.qml:105
+#: ../qml/keys/languages.js:29
 msgid "Spanish"
 msgstr "Spanyol"
 
-#: ../qml/keys/LanguageMenu.qml:106
+#: ../qml/keys/languages.js:30
 msgid "Finnish"
 msgstr "Finlandia"
 
-#: ../qml/keys/LanguageMenu.qml:107
+#: ../qml/keys/languages.js:31
 msgid "French"
 msgstr "Perancis"
 
-#: ../qml/keys/LanguageMenu.qml:108
+#: ../qml/keys/languages.js:32
 msgid "Scottish Gaelic"
 msgstr "Gaelic Skotlandia"
 
-#: ../qml/keys/LanguageMenu.qml:109
+#: ../qml/keys/languages.js:33
 msgid "Hebrew"
 msgstr "Ibrani"
 
-#: ../qml/keys/LanguageMenu.qml:110
+#: ../qml/keys/languages.js:34
 msgid "Croatian"
 msgstr "Kroasia"
 
-#: ../qml/keys/LanguageMenu.qml:111
+#: ../qml/keys/languages.js:35
 msgid "Hungarian"
 msgstr "Hungaria"
 
-#: ../qml/keys/LanguageMenu.qml:112
+#: ../qml/keys/languages.js:36
 msgid "Icelandic"
 msgstr "Islandia"
 
-#: ../qml/keys/LanguageMenu.qml:113
+#: ../qml/keys/languages.js:37
 msgid "Italian"
 msgstr "Italia"
 
-#: ../qml/keys/LanguageMenu.qml:114
+#: ../qml/keys/languages.js:38
+msgid "Japanese"
+msgstr "Jepang"
+
+#: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr ""
+
+#: ../qml/keys/languages.js:40
 msgid "Dutch"
 msgstr "Belanda"
 
-#: ../qml/keys/LanguageMenu.qml:115
+#: ../qml/keys/languages.js:41
 msgid "Norwegian"
 msgstr "Norwegia"
 
-#: ../qml/keys/LanguageMenu.qml:116
+#: ../qml/keys/languages.js:42
 msgid "Polish"
 msgstr "Polandia"
 
-#: ../qml/keys/LanguageMenu.qml:117
+#: ../qml/keys/languages.js:43
 msgid "Portuguese"
 msgstr "Portugis"
 
-#: ../qml/keys/LanguageMenu.qml:118
+#: ../qml/keys/languages.js:44
 msgid "Romanian"
 msgstr "Rumania"
 
-#: ../qml/keys/LanguageMenu.qml:119
+#: ../qml/keys/languages.js:45
 msgid "Russian"
 msgstr "Rusia"
 
-#: ../qml/keys/LanguageMenu.qml:120
+#: ../qml/keys/languages.js:46
 msgid "Slovenian"
 msgstr "Slovenia"
 
-#: ../qml/keys/LanguageMenu.qml:121
+#: ../qml/keys/languages.js:47
 msgid "Serbian"
 msgstr "Serbia"
 
-#: ../qml/keys/LanguageMenu.qml:122
+#: ../qml/keys/languages.js:48
 msgid "Swedish"
 msgstr "Swedia"
 
-#: ../qml/keys/LanguageMenu.qml:123
+#: ../qml/keys/languages.js:49
 msgid "Ukrainian"
 msgstr "Ukraina"
 
-#: ../qml/keys/LanguageMenu.qml:124
-msgid "Chinese - Pinyin"
-msgstr "Cina - Pinyin"
+#: ../qml/keys/languages.js:50
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr "Cina (Pinyin)"
+
+#: ../qml/keys/languages.js:51
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr "Cina (Chewing)"
 
 #~ msgid "Language: "
 #~ msgstr "Bahasa: "
+
+#~ msgid "Chinese - Pinyin"
+#~ msgstr "Cina - Pinyin"

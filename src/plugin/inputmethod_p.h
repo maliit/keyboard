@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2013-2016 Canonical, Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; version 3.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "inputmethod.h"
 
@@ -6,11 +21,10 @@
 #include "greeterstatus.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
+#include "mirinputregionupdater.h"
 
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
-
-#include "ubuntuapplicationapiwrapper.h"
 
 #include <maliit/plugins/abstractinputmethodhost.h>
 #include <maliit/plugins/abstractpluginsetting.h>
@@ -19,6 +33,7 @@
 #include <QStringList>
 #include <qglobal.h>
 #include <QDebug>
+#include <qpa/qplatformnativeinterface.h>
 
 using namespace MaliitKeyboard;
 
@@ -49,7 +64,6 @@ public:
     Logic::EventHandler event_handler;
     MAbstractInputMethodHost* host;
     QQuickView* view;
-    UbuntuApplicationApiWrapper* applicationApiWrapper;
 
     bool autocapsEnabled;
     bool wordEngineEnabled;
@@ -60,6 +74,8 @@ public:
     Qt::ScreenOrientation appsCurrentOrientation;
     QString keyboardState;
     bool hasSelection;
+
+    QString preedit;
 
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
@@ -72,6 +88,8 @@ public:
     QStringList pluginPaths;
     QString currentPluginPath;
 
+    MirInputRegionUpdater *mirInputRegionUpdater;
+
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
@@ -79,7 +97,6 @@ public:
         , event_handler()
         , host(host)
         , view(0)
-        , applicationApiWrapper(new UbuntuApplicationApiWrapper)
         , autocapsEnabled(false)
         , wordEngineEnabled(false)
         , contentType(InputMethod::FreeTextContentType)
@@ -89,14 +106,14 @@ public:
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , keyboardState("CHARACTERS")
         , hasSelection(false)
+        , preedit("")
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , m_greeterStatus(new GreeterStatus())
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
+        , mirInputRegionUpdater(0)
     {
-        applicationApiWrapper->setGeometryItem(m_geometry);
-
         view = createWindow(host);
 
         editor.setHost(host);
@@ -145,17 +162,21 @@ public:
         setContextProperties(engine->rootContext());
 
         // following used to help shell identify the OSK surface
-        view->setProperty("role", applicationApiWrapper->oskWindowRole());
+        view->setProperty("role", 7 /* OSK window role */);
         view->setTitle("MaliitOnScreenKeyboard");
 
         // workaround: resizeMode not working in current qpa imlementation
         // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
         view->setResizeMode(QQuickView::SizeRootObjectToView);
+
+        if (QGuiApplication::platformName() == "ubuntumirclient") {
+            mirInputRegionUpdater = new MirInputRegionUpdater(view, m_geometry);
+        }
     }
 
     ~InputMethodPrivate()
     {
-        delete applicationApiWrapper;
+        delete mirInputRegionUpdater;
     }
 
     Logic::LayoutHelper::Orientation screenToMaliitOrientation(Qt::ScreenOrientation screenOrientation) const
@@ -282,7 +303,7 @@ public:
     {
         QObject::connect(&m_settings, SIGNAL(stayHiddenChanged(bool)),
                          q, SLOT(hide()));
-    } 
+    }
 
     void registerPluginPaths()
     {
@@ -302,7 +323,5 @@ public:
         editor.clearPreedit();
 
         view->setVisible(false);
-
-        applicationApiWrapper->reportOSKInvisible();
     }
 };

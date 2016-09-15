@@ -110,6 +110,10 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
     connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
     connect(&d->m_settings, SIGNAL(disableHeightChanged(bool)), this, SLOT(onVisibleRectChanged()));
+
+    connect(&d->editor, SIGNAL(preeditChanged(QString)), this, SIGNAL(preeditChanged(QString)));
+    connect(&d->editor, SIGNAL(cursorPositionChanged(int)), this, SIGNAL(cursorPositionChanged(int)));
+
     d->registerAudioFeedbackSoundSetting();
     d->registerAudioFeedbackSetting();
     d->registerHapticFeedbackSetting();
@@ -174,7 +178,7 @@ void InputMethod::reset()
     Q_D(InputMethod);
     d->editor.clearPreedit();
     d->previous_position = -1;
-    Q_EMIT keyboardReset(); 
+    Q_EMIT keyboardReset();
 }
 
 void InputMethod::setPreedit(const QString &preedit,
@@ -359,7 +363,7 @@ void InputMethod::update()
     }
 
     bool valid;
- 
+
     bool hasSelection = d->host->hasSelection(valid);
 
     if (valid && hasSelection != d->hasSelection) {
@@ -465,7 +469,7 @@ void InputMethod::checkAutocaps()
         if (!leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
             email_detected = true;
         }
-        if (ok && !email_detected && ((textOnLeft.isEmpty() && d->editor.text()->preedit().isEmpty()) 
+        if (ok && !email_detected && ((textOnLeft.isEmpty() && d->editor.text()->preedit().isEmpty())
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft)
                 || d->editor.wordEngine()->languageFeature()->activateAutoCaps(textOnLeft.trimmed()))) {
             Q_EMIT activateAutocaps();
@@ -614,13 +618,6 @@ void InputMethod::onVisibleRectChanged()
 
     QRect visibleRect = d->m_geometry->visibleRect().toRect();
 
-    d->applicationApiWrapper->reportOSKVisible(
-                visibleRect.x(),
-                visibleRect.y(),
-                visibleRect.width(),
-                visibleRect.height()
-                );
-
     if (d->m_settings.disableHeight()) {
         visibleRect.setHeight(0);
     }
@@ -641,6 +638,31 @@ const QString InputMethod::currentPluginPath() const
 {
     Q_D(const InputMethod);
     return d->currentPluginPath;
+}
+
+const QString &InputMethod::preedit()
+{
+    Q_D(InputMethod);
+    d->preedit = d->editor.text()->preedit();
+    return d->preedit;
+}
+
+int InputMethod::cursorPosition() const
+{
+    Q_D(const InputMethod);
+    return d->editor.text()->cursorPosition();
+}
+
+void InputMethod::replacePreedit(const QString &preedit)
+{
+    Q_D(InputMethod);
+    d->editor.replacePreedit(preedit);
+}
+
+void InputMethod::setCursorPosition(const int pos)
+{
+    Q_D(InputMethod);
+    d->editor.setCursorPosition(pos);
 }
 
 bool InputMethod::languageIsSupported(const QString plugin) {

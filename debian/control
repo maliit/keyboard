@@ -5,25 +5,36 @@ Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Michael Hasselmann <michaelh@openismus.com>
 Build-Depends: debhelper (>= 9),
                doxygen,
+               libanthy-dev,
+               libchewing3-dev,
                libgl1-mesa-dev | libgl-dev,
                libgles2-mesa-dev,
                libglib2.0-dev,
                libgsettings-qt-dev,
+               libmirclient-dev (>= 0.22.0),
                libhunspell-dev,
                libpinyin7-dev,
-               libplatform-api1-dev,
                libpresage-dev,
                libxml2-utils,
                maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
                pkg-config,
-               python3,
-               python3-flake8,
+               python3:any,
+               python3-flake8 (>= 2.2.2-1ubuntu4) | python3-flake8:native,
                python3-setuptools,
                qt5-default,
                qtbase5-dev,
+               qtbase5-private-dev,
+# start of deps brought by qtbase5-private-dev
+               libfontconfig1-dev,
+               libfreetype6-dev,
+               libudev-dev,
+               libmtdev-dev,
+               libxrender-dev,
+# end of deps brought by qtbase5-private-dev
                qtdeclarative5-dev,
                qtdeclarative5-private-dev,
-               qtdeclarative5-ubuntu-ui-toolkit-plugin,
+               qml-module-qtmultimedia,
+               qml-module-ubuntu-components,
                xvfb,
                presage,
 Standards-Version: 3.9.5
@@ -36,10 +47,15 @@ X-Ubuntu-Use-Langpack: yes
 Package: ubuntu-keyboard
 Architecture: any
 Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
-         qtdeclarative5-window-plugin,
+         qml-module-qtquick-window2,
+# Because of native interface features used by MirInputRegionUpdater which only
+# newer qtubuntu implements
+         qtubuntu-desktop (>= 0.63) | qtubuntu-android (>= 0.63) | libqt5gui5 | libqt5gui5-gles,
          ubuntu-keyboard-data (>= ${source:Version}),
+         ubuntu-keyboard-english (>= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
+Breaks: unity8 (<< 8.13),
 Description: Ubuntu on-screen keyboard
  Ubuntu Keyboard based on Maliit-Keyboard
  .
@@ -53,8 +69,8 @@ Description: Ubuntu on-screen keyboard
 
 Package: ubuntu-keyboard-data
 Architecture: all
-Depends: fonts-droid,
-         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+Depends: fonts-droid-fallback | fonts-droid | fonts-noto,
+         qml-module-ubuntu-components,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files
  Data files for the Ubuntu virtual keyboard
@@ -83,6 +99,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-azerbaijani (>= ${source:Version}),
          ubuntu-keyboard-bosnian (>= ${source:Version}),
          ubuntu-keyboard-catalan (>= ${source:Version}),
+         ubuntu-keyboard-chinese-chewing (>= ${source:Version}),
          ubuntu-keyboard-chinese-pinyin (>= ${source:Version}),
          ubuntu-keyboard-croatian (>= ${source:Version}),
          ubuntu-keyboard-czech (>= ${source:Version}),
@@ -98,6 +115,9 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-hungarian (>= ${source:Version}),
          ubuntu-keyboard-icelandic (>= ${source:Version}),
          ubuntu-keyboard-italian (>= ${source:Version}),
+         ubuntu-keyboard-japanese (>= ${source:Version}),
+         ubuntu-keyboard-latvian (>= ${source:Version}),
+         ubuntu-keyboard-korean (>= ${source:Version}),
          ubuntu-keyboard-norwegian-bokmal (>= ${source:Version}),
          ubuntu-keyboard-polish (>= ${source:Version}),
          ubuntu-keyboard-portuguese (>= ${source:Version}),
@@ -148,6 +168,13 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Catalan
  Data files for the Ubuntu virtual keyboard - Catalan
+
+Package: ubuntu-keyboard-chinese-chewing
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Chinese Chewing
 
 Package: ubuntu-keyboard-chinese-pinyin
 Architecture: any
@@ -280,6 +307,33 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Italian
  Data files for the Ubuntu virtual keyboard - Italian
 
+Package: ubuntu-keyboard-japanese
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         anthy,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Japanese
+ Data files for the Ubuntu virtual keyboard - Japanese
+
+Package: ubuntu-keyboard-latvian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-lv,
+         ${misc:Depends},
+         ${shlibs:Depends},	 
+Description: Ubuntu on-screen keyboard data files - Latvian
+ Data files for the Ubuntu virtual keyboard - Latvian
+
+Package: ubuntu-keyboard-korean
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         hunspell-ko,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Korean
+ Data files for the Ubuntu virtual keyboard - Korean
+
 Package: ubuntu-keyboard-norwegian-bokmal
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
@@ -364,7 +418,7 @@ Description: Ubuntu on-screen keyboard data files - Spanish
 Package: ubuntu-keyboard-swedish
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
-         hunspell-sv-se,
+         hunspell-sv | hunspell-sv-se,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Swedish

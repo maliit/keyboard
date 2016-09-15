@@ -64,7 +64,8 @@ class UbuntuKeyboardTests(AutopilotTestCase):
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
         gsettings.set_strv(
-            "enabled-languages", ["en", "es", "de", "zh", "emoji"])
+            "enabled-languages", ["en", "es", "de",
+                                  "zh-hans", "zh-hant", "emoji"])
         gsettings.set_string("active-language", "en")
         gsettings.set_string("previous-language", "es")
         gsettings.set_boolean("auto-capitalization", True)
@@ -819,9 +820,9 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.type("'here' 'to' ")
+        keyboard.type("'hello' 'there' ")
 
-        expected = "'here' 'to' "
+        expected = "'hello' 'there' "
         self.assertThat(
             text_area.text,
             Eventually(Equals(expected))
@@ -867,7 +868,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
-        gsettings.set_string("active-language", "zh")
+        gsettings.set_string("active-language", "zh-hans")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
         gsettings.set_boolean("predictive-text", True)
@@ -875,9 +876,9 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         gsettings.set_boolean("double-space-full-stop", True)
 
     def test_pinyin(self):
-        """Switching to Chinese should result in pinyin characters being
-        entered via autocomplete regardless of layout or prediction being
-        disabled.
+        """Switching to simplified Chinese should result in pinyin characters
+        being entered via autocomplete regardless of layout or prediction
+        being disabled.
 
         """
         text_area = self.launch_test_input_area(self.label, self.hints)
@@ -924,6 +925,127 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         keyboard.type('pinyin   ')
 
         expected = "拼音。 "
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
+class UbuntuKeyboardChewing(UbuntuKeyboardTests):
+
+    scenarios = [
+        (
+            "Url",
+            dict(
+                label="Url",
+                hints=['Qt.ImhUrlCharactersOnly'],
+                expected_activeview="url"
+            )
+        ),
+        (
+            "Email",
+            dict(
+                label="Email",
+                hints=['Qt.ImhEmailCharactersOnly'],
+                expected_activeview="email"
+            )
+        ),
+        (
+            "FreeText",
+            dict(
+                label="FreeText",
+                hints=None,
+                expected_activeview="freetext"
+            )
+        ),
+        (
+            "NoPredictiveText",
+            dict(
+                label="NoPredictiveText",
+                hints=['Qt.ImhNoPredictveText'],
+                expected_activeview="freetext"
+            )
+        ),
+    ]
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "zh-hant")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_chewing(self):
+        """Switching to traditional Chinese should result in chewing characters
+        being entered via autocomplete regardless of layout or prediction
+        being disabled.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('hk4\n')
+
+        expected = "冊\n"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_bopomofo(self):
+        """Individual characters should enter phonetic input (bopomofo)
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('a\n')
+
+        expected = "ㄇ\n"
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_auto_punctuation(self):
+        """A chinese full-stop character should be entered after space has
+        been pressed twice.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('hk4  ')
+
+        expected = "冊。 "
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+    def test_phrases(self):
+        """It should be possible to type an entire phrase with chewing,
+        and only commit at the end of the phrase.
+
+        """
+        text_area = self.launch_test_input_area(self.label, self.hints)
+        self.ensure_focus_on_input(text_area)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('2j6gj cjo4y94w961o3\n')
+
+        expected = "讀書會在台北\n"
 
         self.assertThat(
             text_area.text,
@@ -1003,11 +1125,9 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.press_key("language")
-
-        sleep(5)
-
         keyboard = Keyboard()
+
+        sleep(2)
 
         keyboard.type('😁😆😃😏')
 
@@ -1027,11 +1147,9 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        keyboard.press_key("language")
-
-        sleep(5)
-
         keyboard = Keyboard()
+
+        sleep(2)
 
         keyboard.type('😁😆😃😏\b')
 
@@ -1179,6 +1297,54 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
             Eventually(Equals(expected))
         )
 
+    def test_double_space(self):
+        """Test that double space still inserts a full-stop and replaces all
+        white spaces characters, even if they're non breaking spaces.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.4
+        import Ubuntu.Components 1.3
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><textarea id='textarea'
+                        onkeyup=\\\"document.title=
+                        document.getElementById('textarea').value;\\\"
+                        style='width: 100%; height: 100%;'>&nbsp;</textarea>
+                        </body></html>"
+                    );
+                }
+            }
+        }
+
+        """)
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('  ')
+
+        # The page title trims white space, so we just look for the
+        # full-stop, rather than '. '
+        expected = "."
+        self.assertThat(
+            webview.title,
+            Eventually(Equals(expected))
+        )
+
     def test_hiding(self):
         """Verify that the keyboard remains hidden after being dismissed from
         a field that is no longer enabled.
@@ -1235,6 +1401,55 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
         self.assertThat(
             keyboard.is_available,
             Eventually(Equals(False))
+        )
+
+    def test_double_caps(self):
+        """Ensure that we switch back to lowercase after typing a letter in
+        Oxide.
+
+        """
+        qml = dedent("""
+        import QtQuick 2.4
+        import Ubuntu.Components 1.3
+        import Ubuntu.Web 0.2
+
+        Rectangle {
+            id: window
+            objectName: "windowRectangle"
+            color: "lightgrey"
+
+            WebView {
+                anchors.fill: parent
+                objectName: "webview"
+                Component.onCompleted: {
+                    loadHtml("
+                        <html><body><textarea id='textarea'
+                        style='width: 100%; height: 100%;'></textarea>
+                        </body></html>"
+                    );
+                }
+            }
+        }
+
+        """)
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", False)
+        gsettings.set_boolean("predictive-text", False)
+        gsettings.set_boolean("spell-checking", False)
+
+        app = self._start_qml_script(qml)
+        webview = app.select_single(objectName='webview')
+
+        self.ensure_focus_on_input(webview)
+        keyboard = Keyboard()
+        self.addCleanup(keyboard.dismiss)
+
+        keyboard.type('H')
+
+        self.assertThat(
+            keyboard.active_keypad_state,
+            Eventually(Equals(KeyPadState.NORMAL))
         )
 
 
@@ -1302,6 +1517,7 @@ class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
             ("hu", ".hu", "test"),
             ("is", ".is", "tæst"),
             ("it", ".it", "test"),
+            ("lv", ".lv", "test"),
             ("nb", ".no", "bokmål"),
             ("nl", ".nl", "test"),
             ("pl", ".pl", "tęst"),
@@ -1409,17 +1625,114 @@ class UbuntuKeyboardCursorTests(UbuntuKeyboardTests):
         )
 
 
+class UbuntuKeyboardJapaneseTests(UbuntuKeyboardTests):
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "ja")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_japanese_input(self):
+        """Test top level keys on Japanese layout.
+
+        """
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.pointer.click_object(text_area)
+        keyboard = Keyboard()
+        self.assertThat(keyboard.is_available, Eventually(Equals(True)))
+
+        text = "あかさたなはまやら"
+        keyboard.type(text)
+        keyboard.press_key('\n')
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(text))
+        )
+
+    def test_japanese_flick(self):
+        """Test pop-up flick input characters.
+
+        """
+        # centre: あ, up: う, down: お, left: い, right: え
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.pointer.click_object(text_area)
+        keyboard = Keyboard()
+        self.assertThat(keyboard.is_available, Eventually(Equals(True)))
+
+        gu = float(os.environ.get('GRID_UNIT_PX', 8))
+        keyboard.press_key('あ', slide_offset=4 * gu)
+        keyboard.press_key('あ', slide_offset=-4 * gu)
+        keyboard.press_key('\n')
+
+        expected = "えい"
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
+class UbuntuKeyboardKoreanTests(UbuntuKeyboardTests):
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "ko")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_korean_input(self):
+        """Test keys on Korean layout.
+
+        """
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.pointer.click_object(text_area)
+        keyboard = Keyboard()
+        self.assertThat(keyboard.is_available, Eventually(Equals(True)))
+
+        expected = "한글 "
+        keyboard.press_key('ㅎ')
+        keyboard.press_key('ㅏ')
+        keyboard.press_key('ㄴ')
+        keyboard.press_key('ㄱ')
+        keyboard.press_key('ㅡ')
+        keyboard.press_key('ㄹ')
+        keyboard.press_key(' ')
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
 def maliit_cleanup():
     presagedir = os.path.expanduser("~/.presage")
     if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
         shutil.rmtree(presagedir)
         os.rename(presagedir + ".bak", presagedir)
+    maliitdir = os.path.expanduser("~/.local/share/maliit-server")
+    if os.path.exists(maliitdir + ".bak") and os.path.exists(maliitdir):
+        shutil.rmtree(maliitdir)
+        os.rename(maliitdir + ".bak", maliitdir)
     subprocess.check_call(['restart', 'maliit-server'])
 
-# Clear away any learnt predictions
+# Clear away any learnt predictions and recent emoji
 presagedir = os.path.expanduser("~/.presage")
 if os.path.exists(presagedir):
     os.rename(presagedir, presagedir + ".bak")
+maliitdir = os.path.expanduser("~/.local/share/maliit-server")
+if os.path.exists(maliitdir):
+    os.rename(maliitdir, maliitdir + ".bak")
 subprocess.check_call(['initctl', 'set-env', 'QT_LOAD_TESTABILITY=1'])
 subprocess.check_call(['restart', 'maliit-server'])
 
