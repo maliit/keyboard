@@ -69,7 +69,7 @@ Description: Ubuntu on-screen keyboard
 
 Package: ubuntu-keyboard-data
 Architecture: all
-Depends: fonts-droid-fallback | fonts-droid | fonts-noto,
+Depends: fonts-droid-fallback | fonts-droid | fonts-noto-cjk,
          qml-module-ubuntu-components,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files
