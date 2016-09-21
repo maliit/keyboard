@@ -1,3 +1,9 @@
+ubuntu-keyboard (0.100+16.10.20160921-0ubuntu1) yakkety; urgency=medium
+
+  * Replace fonts-noto with fonts-noto-cjk
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Wed, 21 Sep 2016 13:02:50 +0000
+
 ubuntu-keyboard (0.100+16.10.20160818-0ubuntu1) yakkety; urgency=medium
 
   * Make ubuntu-keyboard depend on ubuntu-keyboard-english as it's used
