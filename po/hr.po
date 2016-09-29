@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-26 05:54+0000\n"
-"X-Generator: Launchpad (build 18179)\n"
+"X-Launchpad-Export-Date: 2016-09-29 06:46+0000\n"
+"X-Generator: Launchpad (build 18204)\n"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "Settings"
@@ -99,11 +99,11 @@ msgstr "Talijanski"
 
 #: ../qml/keys/languages.js:38
 msgid "Japanese"
-msgstr ""
+msgstr "Japanski"
 
 #: ../qml/keys/languages.js:39
 msgid "Latvian"
-msgstr ""
+msgstr "Letonski"
 
 #: ../qml/keys/languages.js:40
 msgid "Dutch"
@@ -150,12 +150,16 @@ msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
+"Kineski\n"
+"(Pinyin)"
 
 #: ../qml/keys/languages.js:51
 msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
+"Kineski\n"
+"(Chewing)"
 
 #~ msgid "Language: "
 #~ msgstr "Jezik: "
