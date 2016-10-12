@@ -15,6 +15,7 @@
  */
 
 #include "inputmethod.h"
+#include "coreutils.h"
 
 #include "logic/layoutupdater.h"
 #include "editor.h"
@@ -157,8 +158,16 @@ public:
 
         // TODO: Figure out whether two views can share one engine.
         QQmlEngine *const engine(view->engine());
-        engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
-        engine->addImportPath(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
+
+        QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
+        if (!prefix.isEmpty()) {
+            engine->addImportPath(prefix + QDir::separator() + UBUNTU_KEYBOARD_DATA_DIR);
+            engine->addImportPath(prefix + QDir::separator() + QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
+        } else {
+            engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
+            engine->addImportPath(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
+        }
+
         setContextProperties(engine->rootContext());
 
         // following used to help shell identify the OSK surface
@@ -214,7 +223,12 @@ public:
     void updatePluginPaths()
     {
         pluginPaths.clear();
-        pluginPaths.append(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+        QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
+        if (!prefix.isEmpty()) {
+            pluginPaths.append(prefix + QDir::separator() + QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+        } else {
+            pluginPaths.append(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+        }
         pluginPaths.append(m_settings.pluginPaths());
     }
 

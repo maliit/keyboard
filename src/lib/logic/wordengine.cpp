@@ -83,6 +83,11 @@ public:
         QLocale::setDefault(QLocale::c());
         setlocale(LC_NUMERIC, "C");
 
+        QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
+        if (!prefix.isEmpty()) {
+            pluginPath = prefix + QDir::separator() + pluginPath;
+        }
+
         pluginLoader.setFileName(pluginPath);
         QObject *plugin = pluginLoader.instance();
 
@@ -398,7 +403,7 @@ void WordEngine::onLanguageChanged(const QString &pluginPath, const QString &lan
 
     setWordPredictionEnabled(d->requested_prediction_state);
 
-    d->languagePlugin->setLanguage(languageId, QFileInfo(pluginPath).absolutePath());
+    d->languagePlugin->setLanguage(languageId, QFileInfo(d->currentPlugin).absolutePath());
 
     Q_EMIT enabledChanged(isEnabled());
 
