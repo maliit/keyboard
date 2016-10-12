@@ -623,7 +623,7 @@ void InputMethod::onVisibleRectChanged()
 
     QRect visibleRect = d->m_geometry->visibleRect().toRect();
 
-    if (d->m_settings.disableHeight()) {
+    if (d->m_settings.disableHeight() && QGuiApplication::platformName() == "ubuntumirclient") {
         visibleRect.setHeight(0);
     }
 
