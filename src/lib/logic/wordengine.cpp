@@ -83,9 +83,11 @@ public:
         QLocale::setDefault(QLocale::c());
         setlocale(LC_NUMERIC, "C");
 
-        QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
-        if (!prefix.isEmpty()) {
-            pluginPath = prefix + QDir::separator() + pluginPath;
+        if (pluginPath == DEFAULT_PLUGIN) {
+            QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
+            if (!prefix.isEmpty()) {
+                pluginPath = prefix + QDir::separator() + pluginPath;
+            }
         }
 
         pluginLoader.setFileName(pluginPath);
@@ -105,6 +107,9 @@ public:
             }
         } else {
             qCritical() << __PRETTY_FUNCTION__ << " Loading plugin failed: " << pluginLoader.errorString();
+            // fallback
+            if (pluginPath != DEFAULT_PLUGIN)
+                loadPlugin(DEFAULT_PLUGIN);
         }
     }
 };
