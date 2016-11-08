@@ -1,0 +1,106 @@
+name: ubuntu-keyboard
+version: 0.100
+summary: Ubuntu Keyboard
+description: Ubuntu on-screen keyboard.
+confinement: devmode
+
+apps:
+    ubuntu-keyboard:
+        command: desktop-launch ubuntu-keyboard-wrapper.sh
+        plugs: [unity7, x11, opengl, network, pulseaudio, gsettings]
+
+parts:
+    ubuntu-keyboard:
+        source: .
+        plugin: qmake
+        options: ["CONFIG+=notests"]
+        qt-version: qt5
+        build-packages:
+            - build-essential
+            - cmake
+            - dbus
+            - pkg-config
+            - qtdeclarative5-dev-tools
+            - qt5-default
+            - qtbase5-dev
+            - qtdeclarative5-dev
+            - doxygen
+            - libanthy-dev
+            - libchewing3-dev
+            - libgl1-mesa-dev
+            - libgles2-mesa-dev
+            - libglib2.0-dev
+            - libgsettings-qt-dev
+            - libmirclient-dev
+            - libhunspell-dev
+            - libpinyin7-dev
+            - libpresage1v5
+            - libpresage-dev
+            - libxml2-utils
+            - maliit-framework-dev
+            - qtbase5-private-dev
+            - libfontconfig1-dev
+            - libfreetype6-dev
+            - libudev-dev
+            - libmtdev-dev
+            - libxrender-dev
+            - qtdeclarative5-private-dev
+            - qml-module-ubuntu-components
+            - xvfb
+            - presage
+        stage-packages:
+            - anthy
+            - qtbase5-dev
+            - qml-module-qtmultimedia
+            - qml-module-qt-labs-settings
+            - qml-module-qtquick-localstorage
+            - qml-module-ubuntu-connectivity
+            - qtdeclarative5-gsettings1.0
+            - qtdeclarative5-qtquick2-plugin
+            - qtdeclarative5-ubuntu-ui-toolkit-plugin
+            - ubuntu-sdk-libs
+            - ubuntu-ui-toolkit-theme
+            - maliit-framework
+            - mir-graphics-drivers-desktop
+            - hunspell-ar
+            - myspell-ca
+            - myspell-hr
+            - myspell-cs
+            - hunspell-da
+            - myspell-nl
+            - hunspell-en-us
+            - hunspell-fr
+            - hunspell-de-de
+            - myspell-el-gr
+            - myspell-he
+            - hunspell-hu
+            - myspell-it
+            - myspell-lv
+            - hunspell-ko
+            - myspell-nb
+            - myspell-pl
+            - myspell-pt
+            - hunspell-ro
+            - hunspell-ru
+            - myspell-sl
+            - hunspell-sr
+            - myspell-gd
+            - myspell-es
+            - hunspell-sv
+            - myspell-uk
+            - coreutils
+            - libanthy0
+            - libchewing3
+            - libpinyin7
+            - libpresage-data
+            - libpresage1v5
+            - qtubuntu-desktop
+        stage: [ -usr/share/pkgconfig/xkeyboard-config.pc ]
+        after: [desktop/gtk3] # gtk3 instead of qt5 for GSettings support
+
+    launcher:
+        plugin: dump
+        source: .
+        organize:
+            ubuntu-keyboard-wrapper.sh: bin/ubuntu-keyboard-wrapper.sh
+            snappy-qt5.conf: etc/xdg/qtchooser/snappy-qt5.conf

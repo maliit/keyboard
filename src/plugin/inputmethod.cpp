@@ -134,7 +134,12 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     // settings to be initialized first:
     d->setLayoutOrientation(d->appsCurrentOrientation);
 
-    d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
+    QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
+    if (!prefix.isEmpty()) {
+        d->view->setSource(QUrl::fromLocalFile(prefix + QDir::separator() + g_maliit_keyboard_qml));
+    } else {
+        d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
+    }
     d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
 }
 
@@ -618,7 +623,7 @@ void InputMethod::onVisibleRectChanged()
 
     QRect visibleRect = d->m_geometry->visibleRect().toRect();
 
-    if (d->m_settings.disableHeight()) {
+    if (d->m_settings.disableHeight() && QGuiApplication::platformName() == "ubuntumirclient") {
         visibleRect.setHeight(0);
     }
 
