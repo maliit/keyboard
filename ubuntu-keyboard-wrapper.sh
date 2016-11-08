@@ -26,7 +26,5 @@ export PRESAGE_PREFIX_PATH=$SNAP
 export KEYBOARD_PREFIX_PATH=$SNAP
 export MALIIT_PLUGIN_PATH=$SNAP/usr/lib/maliit/plugins/ 
 
-echo $MALIIT_PLUGINS_DATADIR
-
 export PATH=$SNAP/usr/bin/:$PATH
 exec maliit-server
