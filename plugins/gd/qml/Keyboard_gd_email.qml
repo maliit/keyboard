@@ -70,7 +70,7 @@ KeyPad {
             CharKey { label: "v"; shifted: "V"; }
             CharKey { label: "b"; shifted: "B"; extended: ["ḃ"]; extendedShifted: ["Ḃ"] }
             CharKey { label: "n"; shifted: "N"; extended: ["ñ", "ń"]; extendedShifted: ["Ñ", "Ń"] }
-            CharKey { label: "m"; shifted: "M"; extended: ["ṁ"]; extendedShifted: ["Ṁ"]; rightSide: true }
+            CharKey { label: "m"; shifted: "M"; extended: ["ṁ"]; extendedShifted: ["Ṁ"] }
             BackspaceKey {}
         }
 
