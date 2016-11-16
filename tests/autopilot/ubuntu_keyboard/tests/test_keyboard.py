@@ -1726,6 +1726,7 @@ def maliit_cleanup():
         os.rename(maliitdir + ".bak", maliitdir)
     subprocess.check_call(['restart', 'maliit-server'])
 
+
 # Clear away any learnt predictions and recent emoji
 presagedir = os.path.expanduser("~/.presage")
 if os.path.exists(presagedir):
