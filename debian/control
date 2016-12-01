@@ -223,6 +223,7 @@ Description: Ubuntu on-screen keyboard data files - Dutch
 Package: ubuntu-keyboard-emoji
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
+         qml-module-qtquick-localstorage,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Emoji
