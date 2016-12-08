@@ -1715,6 +1715,40 @@ class UbuntuKeyboardKoreanTests(UbuntuKeyboardTests):
         )
 
 
+class UbuntuKeyboardEsperantoTests(UbuntuKeyboardTests):
+
+    def set_test_settings(self):
+        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings.set_string("active-language", "eo")
+        gsettings.set_boolean("auto-capitalization", True)
+        gsettings.set_boolean("auto-completion", True)
+        gsettings.set_boolean("predictive-text", True)
+        gsettings.set_boolean("spell-checking", True)
+        gsettings.set_boolean("double-space-full-stop", True)
+
+    def test_korean_input(self):
+        """Test keys on Esperanto layout.
+
+        """
+        text_area = self.launch_test_input_area(
+            input_hints=['Qt.ImhNoPredictiveText'])
+        self.pointer.click_object(text_area)
+        keyboard = Keyboard()
+        self.assertThat(keyboard.is_available, Eventually(Equals(True)))
+
+        expected = "ŝĝŭĵĉ"
+        keyboard.press_key('ŝ')
+        keyboard.press_key('ĝ')
+        keyboard.press_key('ŭ')
+        keyboard.press_key('ĵ')
+        keyboard.press_key('ĉ')
+
+        self.assertThat(
+            text_area.text,
+            Eventually(Equals(expected))
+        )
+
+
 def maliit_cleanup():
     presagedir = os.path.expanduser("~/.presage")
     if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
