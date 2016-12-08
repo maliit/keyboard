@@ -1726,7 +1726,7 @@ class UbuntuKeyboardEsperantoTests(UbuntuKeyboardTests):
         gsettings.set_boolean("spell-checking", True)
         gsettings.set_boolean("double-space-full-stop", True)
 
-    def test_korean_input(self):
+    def test_esperanto_input(self):
         """Test keys on Esperanto layout.
 
         """
