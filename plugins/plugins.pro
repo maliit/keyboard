@@ -13,6 +13,7 @@ SUBDIRS = \
     el \
     en \
     es \
+    fa \
     fi \
     fr \
     gd \
