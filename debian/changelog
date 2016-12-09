@@ -1,3 +1,20 @@
+ubuntu-keyboard (0.100+17.04.20161116-0ubuntu1) zesty; urgency=medium
+
+  [ GunChleoc ]
+  * Changed gd keyboard layout to QWERTY and added a-, h-, n- and t- to
+    extensions in main gd keyboard.
+
+  [ Michael Sheldon ]
+  * Fix flake8 tests on zesty
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Wed, 16 Nov 2016 15:14:46 +0000
+
+ubuntu-keyboard (0.100+17.04.20161108-0ubuntu1) zesty; urgency=medium
+
+  * Add support for building as a snap (LP: #1572653, #1629009)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Tue, 08 Nov 2016 11:24:43 +0000
+
 ubuntu-keyboard (0.100+16.10.20160921-0ubuntu1) yakkety; urgency=medium
 
   * Replace fonts-noto with fonts-noto-cjk

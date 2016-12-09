@@ -322,5 +322,10 @@ bool SpellChecker::setLanguage(const QString &language)
 // static
 QString SpellChecker::dictPath()
 {
-    return QString(HUNSPELL_DICT_PATH);
+    QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
+    if (!prefix.isEmpty()) {
+        return prefix + QDir::separator() + HUNSPELL_DICT_PATH;
+    } else {
+        return QString(HUNSPELL_DICT_PATH);
+    }
 }
