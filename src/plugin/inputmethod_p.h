@@ -325,6 +325,12 @@ public:
                         q, SLOT(onPluginPathsChanged(QStringList)));
     }
 
+    void registerOpacity()
+    {
+        QObject::connect(&m_settings, SIGNAL(opacityChanged(double)),
+                        q, SIGNAL(opacityChanged(double)));
+    }
+
     void closeOskWindow()
     {
         if (!view->isVisible())

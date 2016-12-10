@@ -84,6 +84,8 @@ Item {
         onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
         onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
 
+        opacity: maliit_input_method.opacity
+
         MouseArea {
             id: swipeArea
 
@@ -168,9 +170,8 @@ Item {
                         color: UI.backgroundColor
                     }
                 
-                    Rectangle {
+                    Item {
                         id: borderTop
-                        color: UI.backgroundColor
                         width: parent.width
                         anchors.top: parent.top.bottom
                         height: wordRibbon.visible ? 0 : units.gu(UI.top_margin)
