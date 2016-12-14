@@ -1,3 +1,9 @@
+ubuntu-keyboard (0.100+17.04.20161214.1-0ubuntu1) zesty; urgency=medium
+
+  * Add custom opacity setting (LP: #1647603)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Wed, 14 Dec 2016 15:10:52 +0000
+
 ubuntu-keyboard (0.100+17.04.20161116-0ubuntu1) zesty; urgency=medium
 
   [ GunChleoc ]
