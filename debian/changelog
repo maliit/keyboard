@@ -1,3 +1,10 @@
+ubuntu-keyboard (0.100+17.04.20161223-0ubuntu1) zesty; urgency=medium
+
+  [ Leo Arias ]
+  * Add the Esperanto layout
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Fri, 23 Dec 2016 17:31:57 +0000
+
 ubuntu-keyboard (0.100+17.04.20161214.1-0ubuntu1) zesty; urgency=medium
 
   * Add custom opacity setting (LP: #1647603)
