@@ -1,4 +1,4 @@
-ubuntu-keyboard (0.100+17.04.20161116-0ubuntu1) zesty; urgency=medium
+ubuntu-keyboard (0.100+15.04.20161116-0ubuntu1) vivid; urgency=medium
 
   [ GunChleoc ]
   * Changed gd keyboard layout to QWERTY and added a-, h-, n- and t- to
