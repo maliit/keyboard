@@ -670,6 +670,18 @@ void InputMethod::setCursorPosition(const int pos)
     d->editor.setCursorPosition(pos);
 }
 
+QString InputMethod::surroundingLeft()
+{
+    Q_D(InputMethod);
+    return d->editor.text()->surroundingLeft();
+}
+
+QString InputMethod::surroundingRight()
+{
+    Q_D(InputMethod);
+    return d->editor.text()->surroundingRight();
+}
+
 bool InputMethod::languageIsSupported(const QString plugin) {
     Q_D(const InputMethod);
     foreach(QString pluginPath, d->pluginPaths) {

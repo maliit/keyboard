@@ -30,6 +30,8 @@ ActionKey {
     action: "space"
     switchBackFromSymbols: true
 
+    overridePressArea: true
+
     Label {
         anchors.centerIn: parent
         anchors.verticalCenterOffset: -parent.rowMargin / 2 - units.gu(0.15)
@@ -40,4 +42,37 @@ ActionKey {
         text: Languages.languageIdToName(maliit_input_method.activeLanguage)
         horizontalAlignment: Text.AlignHCenter
     }
+
+    MouseArea {
+        id: swipeArea
+        anchors.fill: parent
+
+        onPressAndHold: {
+            fullScreenItem.cursorSwipe = true
+            spaceKey.currentlyPressed = false
+        }
+
+        onPressed: {
+            spaceKey.currentlyPressed = true
+            fullScreenItem.timerSwipe.stop()
+        }
+        onReleased: {
+            if (fullScreenItem.cursorSwipe) {
+                fullScreenItem.timerSwipe.restart()
+            } else {
+                spaceKey.currentlyPressed = false
+                event_handler.onKeyReleased("", "space")
+                if (switchBackFromSymbols && panel.state === "SYMBOLS") {
+                    panel.state = "CHARACTERS"
+                }
+            }
+        }
+
+        onMouseXChanged: {
+            if (fullScreenItem.cursorSwipe) {
+                fullScreenItem.processSwipe(mouseX, mouseY);
+            }
+        }
+    }
+
 }
