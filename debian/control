@@ -237,6 +237,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - English
  Data files for the Ubuntu virtual keyboard - English
 
+Package: ubuntu-keyboard-esperanto
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-eo,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Esperanto
+ Data files for the Ubuntu virtual keyboard - Esperanto
+
 Package: ubuntu-keyboard-finnish
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
@@ -321,7 +330,7 @@ Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
          myspell-lv,
          ${misc:Depends},
-         ${shlibs:Depends},	 
+         ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Latvian
  Data files for the Ubuntu virtual keyboard - Latvian
 
