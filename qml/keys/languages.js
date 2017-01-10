@@ -27,6 +27,7 @@ function languageIdToName(languageId)
     if (languageId == "el")         return i18n.tr("Greek");
     if (languageId == "en")         return i18n.tr("English");
     if (languageId == "es")         return i18n.tr("Spanish");
+    if (languageId == "fa")         return i18n.tr("Persian");
     if (languageId == "fi")         return i18n.tr("Finnish");
     if (languageId == "fr")         return i18n.tr("French");
     if (languageId == "gd")         return i18n.tr("Scottish Gaelic");

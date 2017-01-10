@@ -21,7 +21,7 @@ KeyPad {
     anchors.fill: parent
 
     content: c1
-    symbols: "languages/Keyboard_symbols.qml"
+    symbols: "lib/fa/Keyboard_symbols_fa.qml"
 
     Column {
         id: c1
@@ -33,8 +33,8 @@ KeyPad {
             spacing: 0
 
             CharKey { label: "ض"; extended: ["۱","1"]; shifted: "ض"; extendedShifted: ["۱","1"]; leftSide: true; }
-            CharKey { label: "ص"; extended: ["۲","2"]; shifted: "ص"; extendedShifted: ["۲","2"]; }
-            CharKey { label: "ق"; extended: ["۳","3"]; shifted: "ق"; extendedShifted: ["۳","3"]; }
+            CharKey { label: "ص"; extended: ["۲","2","٬"]; shifted: "ص"; extendedShifted: ["۲","2","٬"]; }
+            CharKey { label: "ق"; extended: ["۳","3","٫"]; shifted: "ق"; extendedShifted: ["۳","3","٫"]; }
             CharKey { label: "ف"; extended: ["۴","4"]; shifted: "ف"; extendedShifted: ["۴","4"]; }
             CharKey { label: "غ"; extended: ["۵","5"]; shifted: "غ"; extendedShifted: ["۵","5"]; }
             CharKey { label: "ع"; extended: ["۶","6"]; shifted: "ع"; extendedShifted: ["۶","6"]; }
@@ -50,7 +50,7 @@ KeyPad {
 
             CharKey { label: "ش"; shifted: "ش"; leftSide: true; }
             CharKey { label: "س"; shifted: "س"; }
-            CharKey { label: "ی"; extended: ["ٔ","ي","ئ"]; shifted: "ی"; extendedShifted: ["ٔ","ي","ئ"]; }
+            CharKey { label: "ی"; extended: ["ٔ","ئ","ء","ي"]; shifted: "ی"; extendedShifted: ["ٔ","ئ","ء","ي"]; }
             CharKey { label: "ب"; shifted: "ب"; }
             CharKey { label: "ل"; shifted: "ل"; }
             CharKey { label: "ا"; extended: ["آ","أ","إ","ء"]; shifted: "ا"; extendedShifted: ["آ","أ","إ","ء"]; }
@@ -63,13 +63,13 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ط"; extended: ["ظ"]; shifted: "ط"; extendedShifted: ["ظ"]; }
+            CharKey { label: "ط"; extended: ["ظ","ك"]; shifted: "ط"; extendedShifted: ["ظ","ك"]; }
             CharKey { label: "ز"; extended: ["ژ"]; shifted: "ز"; extendedShifted: ["ژ"]; }
             CharKey { label: "ر"; shifted: "ر"; }
             CharKey { label: "د"; extended: ["ذ"]; shifted: "د"; extendedShifted: ["ذ"]; }
             CharKey { label: "پ"; shifted: "پ"; }
             CharKey { label: "و"; extended: ["ؤ"]; shifted: "و"; extendedShifted: ["ؤ"]; }
-            CharKey { label: "ک"; extended: ["ك"]; shifted: "ک"; extendedShifted: ["ك"]; }
+            CharKey { label: "ک"; shifted: "ک"; }
             CharKey { label: "گ"; shifted: "گ"; }
             CharKey { label: "چ"; shifted: "چ"; }
             BackspaceKey { padding: 0 }
@@ -81,12 +81,12 @@ KeyPad {
 
             height: panel.keyHeight + units.gu(UI.row_margin);
 
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
+            SymbolShiftKey { id: symShiftKey; label: "۱۲۳؟"; shifted: "۱۲۳؟";  anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
-            CharKey        { id: commaKey;    label: "،"; extended: ["‏«‏", "‏»‏", "‏(‏", "‏)‏", "َ", "ِ", "ُ", "ً", "ٍ", "ٌ", "ّ", "ْ"]; shifted: "،"; extendedShifted: ["‏«‏", "‏»‏", "‏(‏", "‏)‏", "َ", "ِ", "ُ", "ً", "ٍ", "ٌ", "ّ", "ْ"]; anchors.left: languageMenuButton.right; height: parent.height; }
-            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: specialChar.left; noMagnifier: true; height: parent.height; }
-            CharKey        { id: specialChar; label: "‌"; shifted: "‌";                anchors.right: dotKey.left; height: parent.height; }
-            CharKey        { id: dotKey;      label: "."; extended: ["؟", "!", ":", "؛","/"];  shifted: "."; extendedShifted: ["؟", "!", ":", "؛","/"];  anchors.right: enterKey.left; height: parent.height; }
+            CharKey        { id: commaKey;    label: "،"; extended: ["«‏", "ْ", "ّ", ")‏", "(‏", "»‏", "ُ", "ِ", "َ", "ٌ", "ٍ", "ً"]; shifted: "،"; extendedShifted: ["«‏", "ْ", "ّ", ")‏", "(‏", "»‏", "ُ", "ِ", "َ", "ٌ", "ٍ", "ً"]; anchors.left: languageMenuButton.right; height: parent.height; }
+            SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: zwnj.left; noMagnifier: true; height: parent.height; }
+            CharKey        { id: zwnj; label: "🢐⸽🢒"; shifted: "🢐⸽🢒"; valueToSubmit: "‌"; anchors.right: dotKey.left; height: parent.height; }
+            CharKey        { id: dotKey;      label: "."; extended: ["؟", "٪", ":", "؛", "!","/","ـ"];  shifted: "."; extendedShifted: ["؟", "٪", ":", "!", "؛","/","ـ"];  anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column

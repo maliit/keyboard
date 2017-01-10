@@ -16,5 +16,6 @@ OTHER_FILES += \
     Keyboard_fa.qml \
     Keyboard_fa_email.qml \
     Keyboard_fa_url.qml \
-    Keyboard_fa_url_search.qml
+    Keyboard_fa_url_search.qml \
+    Keyboard_symbols_fa.qml
 
