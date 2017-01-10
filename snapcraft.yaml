@@ -1,5 +1,5 @@
 name: ubuntu-keyboard
-version: 0.100+17.04.20161223-0ubuntu1
+version: 0.100+17.04.20170110-0ubuntu1
 summary: Ubuntu Keyboard
 description: Ubuntu on-screen keyboard.
 confinement: devmode
