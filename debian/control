@@ -250,6 +250,7 @@ Description: Ubuntu on-screen keyboard data files - Esperanto
 Package: ubuntu-keyboard-persian
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-fa,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Persian
