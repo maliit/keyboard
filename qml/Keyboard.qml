@@ -297,6 +297,8 @@ Item {
             }
 
             onPressed: {
+                prevSwipePositionX = mouseX
+                prevSwipePositionY = mouseY
                 fullScreenItem.timerSwipe.stop()
             }
 
