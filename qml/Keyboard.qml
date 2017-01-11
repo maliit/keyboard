@@ -45,7 +45,7 @@ Item {
     property bool cursorSwipe: false
     property int prevSwipePositionX
     property int prevSwipePositionY
-    property int cursorSwipeDuration: 700
+    property int cursorSwipeDuration: 400
     property var timerSwipe: swipeTimer
     
     property variant input_method: maliit_input_method
