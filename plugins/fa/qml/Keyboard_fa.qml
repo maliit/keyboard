@@ -86,7 +86,7 @@ KeyPad {
             CharKey        { id: commaKey;    label: "،"; extended: ["«‏", "ْ", "ّ", ")‏", "(‏", "»‏", "ُ", "ِ", "َ", "ٌ", "ٍ", "ً"]; shifted: "،"; extendedShifted: ["«‏", "ْ", "ّ", ")‏", "(‏", "»‏", "ُ", "ِ", "َ", "ٌ", "ٍ", "ً"]; anchors.left: languageMenuButton.right; height: parent.height; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: zwnj.left; noMagnifier: true; height: parent.height; }
             CharKey        { id: zwnj; label: "🢐⸽🢒"; shifted: "🢐⸽🢒"; valueToSubmit: "‌"; anchors.right: dotKey.left; height: parent.height; }
-            CharKey        { id: dotKey;      label: "."; extended: ["؟", "٪", ":", "؛", "!","/","ـ"];  shifted: "."; extendedShifted: ["؟", "٪", ":", "!", "؛","/","ـ"];  anchors.right: enterKey.left; height: parent.height; }
+            CharKey        { id: dotKey;      label: "."; extended: ["؟", "٪", ":", "؛", "!","/","ـ"];  shifted: "."; extendedShifted: ["؟", "٪", ":", "؛", "!","/","ـ"];  anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column
