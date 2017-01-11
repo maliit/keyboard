@@ -21,7 +21,7 @@ KeyPad {
     anchors.fill: parent
 
     content: c1
-    symbols: "languages/Keyboard_symbols.qml"
+    symbols: "lib/fa/Keyboard_symbols_fa.qml"
 
     Column {
         id: c1
@@ -32,47 +32,46 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ض"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
-            CharKey { label: "ص"; extended: ["2"]; extendedShifted: ["2"] }
-            CharKey { label: "ق"; extended: ["4"]; extendedShifted: ["4"] }
-            CharKey { label: "ف"; extended: ["5"]; extendedShifted: ["5"] }
-            CharKey { label: "غ"; shifted: "إ"; extended: ["6"]; extendedShifted: ["6"] }
-            CharKey { label: "ع"; extended: ["7"]; extendedShifted: ["7"] }
-            CharKey { label: "ه"; extended: ["8"]; extendedShifted: ["8"] }
-            CharKey { label: "خ"; extended: ["9"]; extendedShifted: ["9"] }
-            CharKey { label: "ح"; extended: ["0"]; extendedShifted: ["0"] }
-            CharKey { label: "ج"; rightSide: true; }
+            CharKey { label: "ض"; extended: ["۱","1"]; shifted: "ض"; extendedShifted: ["۱","1"]; leftSide: true; }
+            CharKey { label: "ص"; extended: ["۲","2","٬"]; shifted: "ص"; extendedShifted: ["۲","2","٬"]; }
+            CharKey { label: "ق"; extended: ["۳","3","٫"]; shifted: "ق"; extendedShifted: ["۳","3","٫"]; }
+            CharKey { label: "ف"; extended: ["۴","4"]; shifted: "ف"; extendedShifted: ["۴","4"]; }
+            CharKey { label: "غ"; extended: ["۵","5"]; shifted: "غ"; extendedShifted: ["۵","5"]; }
+            CharKey { label: "ع"; extended: ["۶","6"]; shifted: "ع"; extendedShifted: ["۶","6"]; }
+            CharKey { label: "ه"; extended: ["۷","7","ه‍","ة"]; shifted: "ه"; extendedShifted: ["۷","7","ه‍","ة"]; }
+            CharKey { label: "خ"; extended: ["۸","8"]; shifted: "خ"; extendedShifted: ["۸","8"]; }
+            CharKey { label: "ح"; extended: ["۹","9"]; shifted: "ح"; extendedShifted: ["۹","9"]; }
+            CharKey { label: "ج"; extended: ["۰","0"]; shifted: "ج"; extendedShifted: ["۰","0"]; rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ش"; leftSide: true; }
-            CharKey { label: "س"; }
-            CharKey { label: "ی"; }
-            CharKey { label: "ب"; }
-            CharKey { label: "ل"; }
-            CharKey { label: "ا"; shifted: "آ" }
-            CharKey { label: "ت"; shifted: "ث" }
-            CharKey { label: "ن"; }
-            CharKey { label: "م"; }
-            CharKey { label: "چ"; rightSide: true; }
+            CharKey { label: "ش"; shifted: "ش"; leftSide: true; }
+            CharKey { label: "س"; shifted: "س"; }
+            CharKey { label: "ی"; extended: ["ٔ","ئ","ء","ي"]; shifted: "ی"; extendedShifted: ["ٔ","ئ","ء","ي"]; }
+            CharKey { label: "ب"; shifted: "ب"; }
+            CharKey { label: "ل"; shifted: "ل"; }
+            CharKey { label: "ا"; extended: ["آ","أ","إ","ء"]; shifted: "ا"; extendedShifted: ["آ","أ","إ","ء"]; }
+            CharKey { label: "ت"; extended: ["ث","ة"]; shifted: "ت"; extendedShifted: ["ث","ة"]; }
+            CharKey { label: "ن"; shifted: "ن"; }
+            CharKey { label: "م"; shifted: "م"; rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "ظ"; }
-            CharKey { label: "ط"; }
-            CharKey { label: "ز"; }
-            CharKey { label: "ر"; }
-            CharKey { label: "د"; shifted: "ذ" }
-            CharKey { label: "پ"; }
-            CharKey { label: "و"; }
-            CharKey { label: "ک"; }
-            CharKey { label: "گ"; }
+            CharKey { label: "ط"; extended: ["ظ","ك"]; shifted: "ط"; extendedShifted: ["ظ","ك"]; }
+            CharKey { label: "ز"; extended: ["ژ"]; shifted: "ز"; extendedShifted: ["ژ"]; }
+            CharKey { label: "ر"; shifted: "ر"; }
+            CharKey { label: "د"; extended: ["ذ"]; shifted: "د"; extendedShifted: ["ذ"]; }
+            CharKey { label: "پ"; shifted: "پ"; }
+            CharKey { label: "و"; extended: ["ؤ"]; shifted: "و"; extendedShifted: ["ؤ"]; }
+            CharKey { label: "ک"; shifted: "ک"; }
+            CharKey { label: "گ"; shifted: "گ"; }
+            CharKey { label: "چ"; shifted: "چ"; }
             BackspaceKey { padding: 0 }
         }
 
@@ -82,11 +81,11 @@ KeyPad {
 
             height: panel.keyHeight + units.gu(UI.row_margin);
 
-            SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
+            SymbolShiftKey { id: symShiftKey; label: "۱۲۳؟"; shifted: "۱۲۳؟";  anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
-            CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: languageMenuButton.right; height: parent.height; }
-            UrlKey         { id: urlKey; label: ".com"; extended: [".co.uk", ".net", ".org", ".edu", ".gov", ".ac.uk"]; anchors.right: dotKey.left; height: parent.height; }
-            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "-", "_", "!", "+", "%","#","/"]; extendedShifted: ["?", "-", "_", "!", "+", "%","#","/"]; anchors.right: enterKey.left; height: parent.height; }
+            CharKey        { id: slashKey; label: "/"; shifted: "/";  anchors.left: languageMenuButton.right; height: parent.height; }
+            UrlKey         { id: urlKey; label: ".com"; extended: [".ir", ".net", ".org", ".edu", ".gov.ir", ".ac.ir"]; anchors.right: dotKey.left; height: parent.height; }
+            CharKey        { id: dotKey;      label: "."; extended: ["؟", "٪", ":", "؛", "!","/","ـ"];  shifted: "."; extendedShifted: ["؟", "٪", ":", "؛", "!","/","ـ"];  anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column
