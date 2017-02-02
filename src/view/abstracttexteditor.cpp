@@ -501,8 +501,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         }
 
         if (replace_preedit) {
-            if (!textOnRight.isEmpty() && d->editing_middle_of_text) {
-                // Don't insert a space if we are correcting a word in the middle of a sentence
+            if ((!textOnRight.isEmpty() && d->editing_middle_of_text) || d->word_engine->languageFeature()->contentType() == Maliit::UrlContentType) {
+                // Don't insert a space if we are correcting a word in the middle of a sentence or if we're in URL mode
                 space = "";
                 d->look_for_a_double_space = false;
                 d->editing_middle_of_text = false;

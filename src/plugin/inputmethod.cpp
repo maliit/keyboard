@@ -418,9 +418,9 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
-    if (d->contentType != FreeTextContentType
+    if (d->contentType != FreeTextContentType && d->contentType != UrlContentType
         && !(d->editor.wordEngine()->languageFeature()->alwaysShowSuggestions()
-             && (d->contentType == UrlContentType || d->contentType == EmailContentType))) {
+             && d->contentType == EmailContentType)) {
         d->wordEngineEnabled = false;
     }
 
