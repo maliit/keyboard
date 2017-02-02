@@ -26,9 +26,10 @@
 class MirConnection;
 class MirRectangle;
 class MirSurface;
+typedef struct MirSurface MirWindow;
 
 /*
-  Updates the input region of the mir surface backing up the given QWindow
+  Updates the input region of the mir window backing up the given QWindow
   according to the visible rect of the given KeyboardGeometry
  */
 class MirInputRegionUpdater : public QObject
@@ -46,7 +47,7 @@ private:
     QPointer<QWindow> m_window;
     QPointer<KeyboardGeometry> m_kbdGeometry;
     MirConnection *m_mirConnection;
-    MirSurface *m_surface;
+    MirWindow *m_mirWindow;
     MirRectangle *m_lastRectangle;
 };
 
