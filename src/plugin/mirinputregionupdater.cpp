@@ -16,7 +16,7 @@
 
 #include "mirinputregionupdater.h"
 
-#include <mir_toolkit/mir_surface.h>
+#include <mir_toolkit/mir_window.h>
 
 #include <QGuiApplication>
 #include <qpa/qplatformnativeinterface.h>
@@ -45,7 +45,7 @@ MirInputRegionUpdater::MirInputRegionUpdater(QWindow *window, KeyboardGeometry *
     : QObject(0)
     , m_window(window)
     , m_kbdGeometry(geometry)
-    , m_surface(0)
+    , m_mirWindow(0)
     , m_lastRectangle(0)
 {
     if (QGuiApplication::platformName() != "ubuntumirclient") {
@@ -69,13 +69,13 @@ void MirInputRegionUpdater::update()
         return;
     }
 
-    if (!m_surface) {
+    if (!m_mirWindow) {
         QPlatformNativeInterface *platform = QGuiApplication::platformNativeInterface();
-        m_surface = reinterpret_cast<MirSurface*>(platform->nativeResourceForWindow("MirSurface", m_window));
+        m_mirWindow = reinterpret_cast<MirWindow*>(platform->nativeResourceForWindow("MirWindow", m_window));
     }
 
-    if (!m_surface) {
-        // Most likely the backing QPlatformSurface wasn't created yet.
+    if (!m_mirWindow) {
+        // Most likely the backing QPlatformWindow wasn't created yet.
         return;
     }
 
@@ -87,10 +87,10 @@ void MirInputRegionUpdater::update()
         return;
     }
 
-    MirSurfaceSpec* spec = mir_connection_create_spec_for_changes(m_mirConnection);
-    mir_surface_spec_set_input_shape(spec, &rect, 1 /* n_rects */);
-    mir_surface_apply_spec(m_surface, spec);
-    mir_surface_spec_release(spec);
+    MirWindowSpec* spec = mir_create_input_method_window_spec(m_mirConnection, rect.width, rect.height);
+    mir_window_spec_set_input_shape(spec, &rect, 1 /* n_rects */);
+    mir_window_apply_spec(m_mirWindow, spec);
+    mir_window_spec_release(spec);
 
     if (!m_lastRectangle) {
         m_lastRectangle = new MirRectangle;
