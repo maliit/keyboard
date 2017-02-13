@@ -190,6 +190,7 @@ Item {
                         anchors.bottom: background.bottom
                         anchors.bottomMargin: units.gu(UI.bottom_margin)
                         width: parent.width
+                        hideKeyLabels: fullScreenItem.cursorSwipe
 
                         onPopoverEnabledChanged: fullScreenItem.reportKeyboardVisibleRect();
                     }
