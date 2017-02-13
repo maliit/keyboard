@@ -261,7 +261,7 @@ Item {
         Connections {
             target: input_method
             onActivateAutocaps: {
-                if (keypad.state == "CHARACTERS" && keypad.activeKeypadState != "CAPSLOCK") {
+                if (keypad.state == "CHARACTERS" && keypad.activeKeypadState != "CAPSLOCK" && !cursorSwipe) {
                     keypad.activeKeypadState = "SHIFTED";
                     keypad.autoCapsTriggered = true;
                 } else {
@@ -298,6 +298,8 @@ Item {
             }
 
             onPressed: {
+                prevSwipePositionX = mouseX
+                prevSwipePositionY = mouseY
                 fullScreenItem.timerSwipe.stop()
             }
 
@@ -314,6 +316,13 @@ Item {
         running: false
         onTriggered: {
             fullScreenItem.cursorSwipe = false
+            // We only enable autocaps after cursor movement has stopped
+            if (keypad.delayedAutoCaps) {
+                keypad.activeKeypadState = "SHIFTED"
+                keypad.delayedAutoCaps = false
+            } else {
+                keypad.activeKeypadState = "NORMAL"
+            }
         }
     }
 
