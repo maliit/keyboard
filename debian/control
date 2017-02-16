@@ -56,8 +56,8 @@ Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
          ${misc:Depends},
          ${shlibs:Depends},
 Replaces: ubuntu-touch-session (<< 0.109),
-Breaks: unity8 (<< 8.13),
-        ubuntu-touch-session (<< 0.109),
+Breaks: ubuntu-touch-session (<< 0.109),
+        unity8 (<< 8.13),
 Description: Ubuntu on-screen keyboard
  Ubuntu Keyboard based on Maliit-Keyboard
  .
