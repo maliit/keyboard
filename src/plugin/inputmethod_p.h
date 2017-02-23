@@ -35,9 +35,12 @@
 #include <QDebug>
 
 
+namespace
+{
 // Qt::WindowType enum has no option for an Input Method window type. This is a magic value
 // used by ubuntumirclient QPA for special clients to request input method windows from Mir.
-#define InputMethodType static_cast<Qt::WindowType>(0x00000080)
+const Qt::WindowType InputMethodWindowType = (Qt::WindowType)0x00000080;
+}
 
 using namespace MaliitKeyboard;
 
@@ -147,12 +150,10 @@ public:
     #endif
         view->setWindowState(Qt::WindowNoState);
 
-        QSurfaceFormat format;
+        QSurfaceFormat format = view->format();
         format.setAlphaBufferSize(8);
         view->setFormat(format);
         view->setColor(QColor(Qt::transparent));
-
-        view->setVisible(false);
 
         updatePluginPaths();
 
@@ -175,7 +176,7 @@ public:
         view->setResizeMode(QQuickView::SizeRootObjectToView);
 
         if (QGuiApplication::platformName() == "ubuntumirclient") {
-            view->setFlags(InputMethodType); /* Mir-only OSK window type */
+            view->setFlags(InputMethodWindowType); /* Mir-only OSK window type */
 
             // When keyboard geometry changes, update the window's input mask
             QObject::connect(m_geometry, &KeyboardGeometry::visibleRectChanged, view, [this]() {
