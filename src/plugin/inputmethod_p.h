@@ -39,7 +39,7 @@ namespace
 {
 // Qt::WindowType enum has no option for an Input Method window type. This is a magic value
 // used by ubuntumirclient QPA for special clients to request input method windows from Mir.
-const Qt::WindowType InputMethodWindowType = (Qt::WindowType)0x00000080;
+const Qt::WindowType InputMethodWindowType = (Qt::WindowType)(0x00000080 | Qt::WindowType::Window);
 }
 
 using namespace MaliitKeyboard;
