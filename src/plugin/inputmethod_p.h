@@ -22,7 +22,6 @@
 #include "greeterstatus.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
-#include "mirinputregionupdater.h"
 
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
@@ -34,7 +33,11 @@
 #include <QStringList>
 #include <qglobal.h>
 #include <QDebug>
-#include <qpa/qplatformnativeinterface.h>
+
+
+// Qt::WindowType enum has no option for an Input Method window type. This is a magic value
+// used by ubuntumirclient QPA for special clients to request input method windows from Mir.
+#define InputMethodType static_cast<Qt::WindowType>(0x00000080)
 
 using namespace MaliitKeyboard;
 
@@ -89,8 +92,6 @@ public:
     QStringList pluginPaths;
     QString currentPluginPath;
 
-    MirInputRegionUpdater *mirInputRegionUpdater;
-
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
@@ -113,7 +114,6 @@ public:
         , m_greeterStatus(new GreeterStatus())
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
-        , mirInputRegionUpdater(0)
     {
         view = createWindow(host);
 
@@ -170,22 +170,18 @@ public:
 
         setContextProperties(engine->rootContext());
 
-        // following used to help shell identify the OSK surface
-        view->setProperty("role", 7 /* OSK window role */);
-        view->setTitle("MaliitOnScreenKeyboard");
-
         // workaround: resizeMode not working in current qpa imlementation
         // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
         view->setResizeMode(QQuickView::SizeRootObjectToView);
 
         if (QGuiApplication::platformName() == "ubuntumirclient") {
-            mirInputRegionUpdater = new MirInputRegionUpdater(view, m_geometry);
-        }
-    }
+            view->setFlags(InputMethodType); /* Mir-only OSK window type */
 
-    ~InputMethodPrivate()
-    {
-        delete mirInputRegionUpdater;
+            // When keyboard geometry changes, update the window's input mask
+            QObject::connect(m_geometry, &KeyboardGeometry::visibleRectChanged, view, [this]() {
+                view->setMask(m_geometry->visibleRect().toRect());
+            });
+        }
     }
 
     Logic::LayoutHelper::Orientation screenToMaliitOrientation(Qt::ScreenOrientation screenOrientation) const
