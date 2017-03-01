@@ -1,3 +1,14 @@
+ubuntu-keyboard (0.100+17.04.20170301-0ubuntu1) zesty; urgency=medium
+
+  [ Gerry Boland ]
+  * Remove all build-time mir dependence
+
+  [ Michael Sheldon ]
+  * Update to new Mir API
+  * Add maliit upstart job (LP: #1659388)
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Wed, 01 Mar 2017 13:42:41 +0000
+
 ubuntu-keyboard (0.100+17.04.20170110-0ubuntu1) zesty; urgency=medium
 
   * Add dependency on qml-module-qtquick-localstorage for emoji layout
