@@ -81,5 +81,5 @@ var phoneWordRibbonFontSize = 14 // dp
 var phoneKeyboardHeightPortrait = 0.40; // percent of screen
 var phoneKeyboardHeightLandscape = 0.49; // percent of screen
 
-var tabletKeyboardHeightPortrait = 0.39; // percent of screen
-var tabletKeyboardHeightLandscape = 0.42; // percent of screen
+var tabletKeyboardHeightPortrait = 0.31; // percent of screen
+var tabletKeyboardHeightLandscape = 0.34; // percent of screen
