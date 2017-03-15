@@ -54,7 +54,6 @@ KeyPopover {
         height: parent.height
 
         anchors.centerIn: anchorItem
-        anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
 
         // this property is used to synchronize scale and opacity animation
         property real animationStep: 0
@@ -81,10 +80,12 @@ KeyPopover {
         Text {
             id: label
             anchors.centerIn: parent
+            anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
             text: currentlyAssignedKey ? currentlyAssignedKey.valueToSubmit : ""
             font.family: UI.fontFamily
             font.weight: Font.Light
-            font.pixelSize: units.gu( UI.fontSizeMagnified )
+            font.pixelSize: panel.keyHeight
+
             color: UI.fontColor
         }
 

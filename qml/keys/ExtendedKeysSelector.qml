@@ -92,7 +92,7 @@ KeyPopover {
     Row {
         id: rowOfKeys
         anchors.centerIn: anchorItem
-        anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
+        anchors.verticalCenterOffset: units.dp(UI.popoverTopMargin)
 
         Component.onCompleted: __width = 0
 
@@ -113,9 +113,11 @@ KeyPopover {
                 Text {
                     id: textCell
                     anchors.centerIn: parent;
+                    height: parent.height
                     text: modelData
                     font.family: UI.fontFamily
-                    font.pixelSize: text.length > 2 ? units.gu( UI.smallFontSize ) : units.gu( UI.fontSize )
+                    font.pixelSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8))
+                           * (4 / (text.length >= 2 ? (text.length <= 6 ? text.length + 2.5 : 8) : 4)); 
                     font.weight: Font.Light
                     color: key.highlight ? UI.selectionColor : UI.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));

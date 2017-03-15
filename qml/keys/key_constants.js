@@ -19,7 +19,6 @@
 var tabletKeyMargins  =   0.5;    // gu
 var phoneKeyMargins = 0.25 // gu
 var fontSize    =   2.5;    // gu
-var fontSizeMagnified   =   4; // gu
 var fontFamily  =   "Ubuntu";
 var fontColor   =   "#333333";
 var fontBold    =   false;
@@ -35,9 +34,6 @@ var annotationRightMargin = 0.65; // gu
 var annotationFontColor = "#333333";
 var annotationFont = "Ubuntu";
 
-var spaceFontFamily = "Ubuntu";
-var tabletSpaceFontSize = "large";
-var phoneSpaceFontSize = "small";
 var spaceOpacity = 0.33;
 
 /* magnifier */
