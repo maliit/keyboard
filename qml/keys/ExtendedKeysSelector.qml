@@ -30,6 +30,7 @@ KeyPopover {
     property alias keys: rowOfKeys.children
     property alias rowX: rowOfKeys.x
     property alias rowY: rowOfKeys.y
+    property int fontSize: 0
 
     property int __width: 0
     property string __commitStr: ""
@@ -44,7 +45,19 @@ KeyPopover {
             reorderedModel.shift();
             keyRepeater.model = reorderedModel;
         } else {
-            keyRepeater.model = extendedKeysModel
+            keyRepeater.model = extendedKeysModel;
+        }
+
+        var longestKey = 1;
+        // Calculate font size based on longest key
+        if (extendedKeysModel != null) {
+            for(var i = 0; i < extendedKeysModel.length; i++) {
+                if (extendedKeysModel[i].length > longestKey) {
+                    longestKey = extendedKeysModel[i].length;
+                }
+            }
+            fontSize = (fullScreenItem.landscape ? (panel.keyHeight / 2) : (panel.keyHeight / 2.8))
+                       * (4 / (longestKey >= 2 ? (longestKey <= 6 ? longestKey + 2.5 : 8) : 4));
         }
     }
 
@@ -92,7 +105,7 @@ KeyPopover {
     Row {
         id: rowOfKeys
         anchors.centerIn: anchorItem
-        anchors.verticalCenterOffset: units.dp(UI.popoverTopMargin)
+        anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
 
         Component.onCompleted: __width = 0
 
@@ -113,11 +126,9 @@ KeyPopover {
                 Text {
                     id: textCell
                     anchors.centerIn: parent;
-                    height: parent.height
                     text: modelData
                     font.family: UI.fontFamily
-                    font.pixelSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8))
-                           * (4 / (text.length >= 2 ? (text.length <= 6 ? text.length + 2.5 : 8) : 4)); 
+                    font.pixelSize: fontSize
                     font.weight: Font.Light
                     color: key.highlight ? UI.selectionColor : UI.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));

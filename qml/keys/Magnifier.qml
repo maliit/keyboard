@@ -84,7 +84,7 @@ KeyPopover {
             text: currentlyAssignedKey ? currentlyAssignedKey.valueToSubmit : ""
             font.family: UI.fontFamily
             font.weight: Font.Light
-            font.pixelSize: panel.keyHeight
+            font.pixelSize: panel.keyHeight * 0.6
 
             color: UI.fontColor
         }
