@@ -80,11 +80,12 @@ KeyPopover {
         Text {
             id: label
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
+            height: parent.height
             text: currentlyAssignedKey ? currentlyAssignedKey.valueToSubmit : ""
             font.family: UI.fontFamily
             font.weight: Font.Light
             font.pixelSize: panel.keyHeight * 0.6
+            verticalAlignment: Text.AlignVCenter
 
             color: UI.fontColor
         }
