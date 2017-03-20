@@ -35,9 +35,9 @@ ActionKey {
     Label {
         anchors.centerIn: parent
         anchors.verticalCenterOffset: -parent.rowMargin / 2 - units.gu(0.15)
-        font.family: UI.spaceFontFamily
+        font.family: UI.fontFamily
         font.weight: Font.Light
-        fontSize: fullScreenItem.tablet ? UI.tabletSpaceFontSize : UI.phoneSpaceFontSize
+        font.pixelSize: parent.fontSize * 0.6
         opacity: UI.spaceOpacity
         text: Languages.languageIdToName(maliit_input_method.activeLanguage)
         horizontalAlignment: Text.AlignHCenter
