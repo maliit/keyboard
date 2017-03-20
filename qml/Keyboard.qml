@@ -42,6 +42,12 @@ Item {
     property bool landscape: width > height
     readonly property bool tablet: landscape ? width >= units.gu(90) : height >= units.gu(90)
 
+    property bool cursorSwipe: false
+    property int prevSwipePositionX
+    property int prevSwipePositionY
+    property int cursorSwipeDuration: 400
+    property var timerSwipe: swipeTimer
+    
     property variant input_method: maliit_input_method
     property variant event_handler: maliit_event_handler
 
@@ -184,6 +190,7 @@ Item {
                         anchors.bottom: background.bottom
                         anchors.bottomMargin: units.gu(UI.bottom_margin)
                         width: parent.width
+                        hideKeyLabels: fullScreenItem.cursorSwipe
 
                         onPopoverEnabledChanged: fullScreenItem.reportKeyboardVisibleRect();
                     }
@@ -254,7 +261,7 @@ Item {
         Connections {
             target: input_method
             onActivateAutocaps: {
-                if (keypad.state == "CHARACTERS" && keypad.activeKeypadState != "CAPSLOCK") {
+                if (keypad.state == "CHARACTERS" && keypad.activeKeypadState != "CAPSLOCK" && !cursorSwipe) {
                     keypad.activeKeypadState = "SHIFTED";
                     keypad.autoCapsTriggered = true;
                 } else {
@@ -274,7 +281,50 @@ Item {
             }
         }
 
+        MouseArea {
+            id: cursorSwipeArea
+            anchors.fill: parent
+            enabled: cursorSwipe
+
+            Rectangle {
+                anchors.fill: parent
+                visible: parent.enabled
+                color: UI.charKeyPressedColor
+                opacity: 0.5
+            }
+
+            onMouseXChanged: {
+                processSwipe(mouseX, mouseY)
+            }
+
+            onPressed: {
+                prevSwipePositionX = mouseX
+                prevSwipePositionY = mouseY
+                fullScreenItem.timerSwipe.stop()
+            }
+
+            onReleased: {
+                fullScreenItem.timerSwipe.restart()
+            }
+        }
+
     } // canvas
+
+    Timer {
+        id: swipeTimer
+        interval: cursorSwipeDuration
+        running: false
+        onTriggered: {
+            fullScreenItem.cursorSwipe = false
+            // We only enable autocaps after cursor movement has stopped
+            if (keypad.delayedAutoCaps) {
+                keypad.activeKeypadState = "SHIFTED"
+                keypad.delayedAutoCaps = false
+            } else {
+                keypad.activeKeypadState = "NORMAL"
+            }
+        }
+    }
 
     function reportKeyboardVisibleRect() {
 
@@ -317,6 +367,23 @@ Item {
     }
     function sendEndKey() {
         event_handler.onKeyReleased("", "end");
+    }
+
+    function processSwipe(positionX, positionY) {
+        if (positionX < prevSwipePositionX - units.gu(1) && input_method.surroundingLeft != "") {
+            sendLeftKey();
+            prevSwipePositionX = positionX
+        } else if (positionX > prevSwipePositionX + units.gu(1) && input_method.surroundingRight != "") {
+            sendRightKey();
+            prevSwipePositionX = positionX
+        }
+        if (positionY < prevSwipePositionY - units.gu(4)) {
+            sendUpKey();
+            prevSwipePositionY = positionY
+        } else if (positionY > prevSwipePositionY + units.gu(4)) {
+            sendDownKey();
+            prevSwipePositionY = positionY
+        }
     }
 
 } // fullScreenItem

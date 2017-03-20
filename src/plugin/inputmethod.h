@@ -62,6 +62,8 @@ class InputMethod
     Q_PROPERTY(QString preedit READ preedit WRITE replacePreedit NOTIFY preeditChanged)
     Q_PROPERTY(int cursorPosition READ cursorPosition WRITE setCursorPosition NOTIFY cursorPositionChanged)
     Q_PROPERTY(double opacity READ opacity NOTIFY opacityChanged)
+    Q_PROPERTY(QString surroundingLeft READ surroundingLeft)
+    Q_PROPERTY(QString surroundingRight READ surroundingRight)
 
     Q_ENUMS(TextContentType)
 
@@ -136,6 +138,9 @@ public:
     double opacity() const;
 
     QObject* actionKeyOverride() const;
+
+    QString surroundingLeft();
+    QString surroundingRight();
 
     Q_SLOT void close();
 
