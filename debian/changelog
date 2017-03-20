@@ -1,3 +1,17 @@
+ubuntu-keyboard (0.100+17.04.20170320-0ubuntu1) zesty; urgency=medium
+
+  [ Masoud Abkenar ]
+  * Persian layout
+
+  [ Michael Sheldon ]
+  * Implement swipe based cursor movement after long pressing on the
+    space key (LP: #1566172)
+  * Allow predictive text in URL mode (but disable automatic space
+    insertion) (LP: #1661283)
+  * Tweak sizes for desktop use
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Mon, 20 Mar 2017 12:58:05 +0000
+
 ubuntu-keyboard (0.100+17.04.20170301-0ubuntu1) zesty; urgency=medium
 
   [ Gerry Boland ]
