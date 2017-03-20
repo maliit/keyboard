@@ -100,6 +100,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-dutch (>= ${source:Version}),
          ubuntu-keyboard-emoji (>= ${source:Version}),
          ubuntu-keyboard-english (>= ${source:Version}),
+         ubuntu-keyboard-persian (>= ${source:Version}),
          ubuntu-keyboard-finnish (>= ${source:Version}),
          ubuntu-keyboard-french (>= ${source:Version}),
          ubuntu-keyboard-german (>= ${source:Version}),
@@ -239,6 +240,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Esperanto
  Data files for the Ubuntu virtual keyboard - Esperanto
+
+Package: ubuntu-keyboard-persian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-fa,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Persian
+ Data files for the Ubuntu virtual keyboard - Persian
 
 Package: ubuntu-keyboard-finnish
 Architecture: any
