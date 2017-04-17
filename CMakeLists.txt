@@ -45,6 +45,8 @@ find_package(GIO REQUIRED)
 
 find_package(Qt5DBus)
 
+find_package(Anthy)
+
 set(MALIIT_KEYBOARD_SOURCES
         src/lib/logic/abstractlanguagefeatures.h
         src/lib/logic/abstractlanguageplugin.cpp
@@ -306,6 +308,13 @@ language_plugin(sv swedish free_ebook.txt src/overrides.csv)
 language_plugin(uk ukrainian free_ebook.txt)
 
 abstract_language_plugin(emoji emoji ABSTRACT_LANGUAGE_PLUGIN FILES qml/CategoryKey.qml qml/emoji.js)
+if(ANTHY_FOUND)
+    abstract_language_plugin(ja japanese ABSTRACT_LANGUAGE_PLUGIN
+            SOURCES anthyadapter.cpp anthyadapter.h
+            LIBRARIES ${ANTHY_LIBRARIES}
+            INCLUDE_DIRS ${ANTHY_INCLUDE_DIRS}
+            DIRECTORY qml/keys)
+endif()
 
 #language_plugin(ko)
 # TODO build and ko plugins
