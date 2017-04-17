@@ -81,6 +81,19 @@ set(UBUNTU_KEYBOARD_SOURCES
         src/lib/coreutils.cpp
         src/lib/coreutils.h)
 
+set(WESTERNSUPPORT_SOURCES
+        plugins/westernsupport/spellchecker.cpp
+        plugins/westernsupport/spellchecker.h
+        plugins/westernsupport/westernlanguagefeatures.cpp
+        plugins/westernsupport/westernlanguagefeatures.h
+        plugins/westernsupport/westernlanguagesplugin.cpp
+        plugins/westernsupport/westernlanguagesplugin.h
+        plugins/westernsupport/westernsupport.cpp
+        plugins/westernsupport/westernsupport.h
+        plugins/westernsupport/westernsupport_global.h
+        src/lib/logic/abstractlanguageplugin.cpp
+        src/lib/logic/abstractlanguageplugin.h)
+
 # TODO install logic/languageplugininterface.h and logic/abstractplugininterface.h as HEADERS
 
 set(ubuntu-keyboard-libraries Qt5::Core)
@@ -92,10 +105,17 @@ set(ubuntu-keyboard-include-dirs)
 
 if(enable-presage)
     find_package(Presage REQUIRED)
+
     if(PRESAGE_FOUND)
         list(APPEND ubuntu-keyboard-definitions HAVE_PRESAGE)
         list(APPEND ubuntu-keyboard-libraries ${PRESAGE_LIBRARIES})
         list(APPEND ubuntu-keyboard-include-dirs ${PRESAGE_INCLUDE_DIRS})
+
+        list(APPEND WESTERNSUPPORT_SOURCES
+                plugins/westernsupport/candidatescallback.cpp
+                plugins/westernsupport/candidatescallback.h
+                plugins/westernsupport/spellpredictworker.cpp
+                plugins/westernsupport/spellpredictworker.h)
     endif()
 endif()
 
@@ -107,9 +127,8 @@ if(enable-hunspell)
 endif()
 
 add_library(ubuntu-keyboard STATIC ${UBUNTU_KEYBOARD_SOURCES})
-target_link_libraries(ubuntu-keyboard ${ubuntu-keyboard-libraries} Maliit::Plugins)
+target_link_libraries(ubuntu-keyboard Qt5::Core Maliit::Plugins)
 target_include_directories(ubuntu-keyboard PUBLIC src/lib)
-target_include_directories(ubuntu-keyboard PRIVATE ${ubuntu-keyboard-include-dirs})
 target_compile_definitions(ubuntu-keyboard PRIVATE ${ubuntu-keyboard-definitions})
 
 set(UBUNTU_KEYBOARD_VIEW_SOURCES
@@ -160,35 +179,22 @@ add_library(ubuntu-keyboard-plugin MODULE ${UBUNTU_KEYBOARD_PLUGIN_SOURCES})
 target_link_libraries(ubuntu-keyboard-plugin Qt5::DBus Maliit::Plugins ubuntu-keyboard ubuntu-keyboard-view gsettings-qt)
 target_compile_definitions(ubuntu-keyboard-plugin PRIVATE ${ubuntu-keyboard-definitions})
 
-set(WESTERNSUPPORT_SOURCES
-        plugins/westernsupport/candidatescallback.cpp
-        plugins/westernsupport/candidatescallback.h
-        plugins/westernsupport/spellchecker.cpp
-        plugins/westernsupport/spellchecker.h
-        plugins/westernsupport/spellpredictworker.cpp
-        plugins/westernsupport/spellpredictworker.h
-        plugins/westernsupport/westernlanguagefeatures.cpp
-        plugins/westernsupport/westernlanguagefeatures.h
-        plugins/westernsupport/westernlanguagesplugin.cpp
-        plugins/westernsupport/westernlanguagesplugin.h
-        plugins/westernsupport/westernsupport.cpp
-        plugins/westernsupport/westernsupport.h
-        plugins/westernsupport/westernsupport_global.h
-        src/lib/logic/abstractlanguageplugin.cpp
-        src/lib/logic/abstractlanguageplugin.h)
-
 # TODO install westernlanguagesplugin.h into "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/include"
 
 add_library(westernsupport STATIC ${WESTERNSUPPORT_SOURCES})
-target_link_libraries(westernsupport Qt5::Core Maliit::Plugins ${PRESAGE_LIBRARIES})
-target_include_directories(westernsupport PUBLIC src/lib/logic plugins/westernsupport)
-target_compile_definitions(westernsupport PRIVATE -DHUNSPELL_DICT_PATH="${HUNSPELL_DICT_PATH}")
+target_link_libraries(westernsupport ${ubuntu-keyboard-libraries} Maliit::Plugins)
+target_include_directories(westernsupport PUBLIC src/lib/logic plugins/westernsupport ${ubuntu-keyboard-include-dirs})
+target_compile_definitions(westernsupport PRIVATE ${ubuntu-keyboard-definitions})
 
 function(language_plugin _language _full_language _ebook)
-    add_ngram(TEXT plugins/${_language}/src/${_ebook} DATABASE database_${_language}.db)
-    add_library(${_language}plugin MODULE plugins/${_language}/src/${_full_language}plugin.h
-            database_${_language}.db
+    set(PLUGIN_SOURCES
+            plugins/${_language}/src/${_full_language}plugin.h
             plugins/${_language}/src/${_full_language}plugin.json)
+if(enable-presage)
+    add_ngram(TEXT plugins/${_language}/src/${_ebook} DATABASE database_${_language}.db)
+    list(APPEND PLUGIN_SOURCES database_${_language}.db)
+endif()
+    add_library(${_language}plugin MODULE ${PLUGIN_SOURCES})
     target_link_libraries(${_language}plugin westernsupport)
     install(FILES plugins/${_language}/qml/Keyboard_${_language}.qml
             plugins/${_language}/qml/Keyboard_${_language}_email.qml
@@ -197,8 +203,10 @@ function(language_plugin _language _full_language _ebook)
             DESTINATION ${UBUNTU_KEYBOARD_LIB_DIR}/${_language})
     install(TARGETS ${_language}plugin
             LIBRARY DESTINATION ${UBUNTU_KEYBOARD_LIB_DIR}/${_language})
+if(enable-presage)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/database_${_language}.db
             DESTINATION ${UBUNTU_KEYBOARD_LIB_DIR}/${_language})
+endif()
     foreach(_file IN LISTS ARGN)
         install(FILES plugins/${_language}/${_file}
                 DESTINATION ${UBUNTU_KEYBOARD_LIB_DIR}/${_language})
