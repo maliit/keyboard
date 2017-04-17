@@ -204,7 +204,10 @@ QList<MAbstractInputMethod::MInputMethodSubView>
 InputMethod::subViews(Maliit::HandlerState state) const
 {
     Q_UNUSED(state)
+    Q_D(const InputMethod);
+
     QList<MInputMethodSubView> views;
+    views << MInputMethodSubView{ d->activeLanguage, d->activeLanguage };
     return views;
 }
 
