@@ -16,7 +16,7 @@
 
 import QtQuick 2.4
 
-import Ubuntu.Components 1.3
+import QtQuick.Controls 2.1
 
 import "key_constants.js" as UI
 
@@ -54,12 +54,12 @@ CharKey {
         height: panel.keyHeight
         width: parent.width
 
-        Icon {
+        Image {
             id: iconImage
             source: iconSourceNormal !== "" ? iconSourceNormal
                                             : iconNormal ? "image://theme/%1".arg(iconNormal)
                                                          : ""
-            color: actionKeyRoot.colorNormal
+//            color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - units.gu(0.15)
             visible: (label == "" && !panel.hideKeyLabels)
@@ -78,7 +78,7 @@ CharKey {
                 source: iconSourceShifted !== "" ? iconSourceShifted 
                                                  : iconShifted ? "image://theme/%1".arg(iconShifted)
                                                                : ""
-                color: actionKeyRoot.colorShifted
+//                color: actionKeyRoot.colorShifted
             }
         },
         State {
@@ -88,7 +88,7 @@ CharKey {
                 source: iconSourceCapsLock !== "" ? iconSourceCapsLock
                                                   : iconCapsLock ? "image://theme/%1".arg(iconCapsLock)
                                                                 : ""
-                color: actionKeyRoot.colorCapsLock
+//                color: actionKeyRoot.colorCapsLock
             }
         }
     ]

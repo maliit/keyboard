@@ -15,8 +15,8 @@
  */
 
 import QtQuick 2.4
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+
+import QtQuick.Controls 2.1
 
 import "key_constants.js" as UI
 import "languages.js" as Languages
@@ -50,19 +50,12 @@ Item {
 
         model: maliit_input_method.enabledLanguages
 
-        delegate: ListItem.Standard {
+        delegate: RadioDelegate {
+            anchors.left: parent.left
+            anchors.right: parent.right
             text: Languages.languageIdToName(modelData)
-            showDivider: modelData != maliit_input_method.enabledLanguages[maliit_input_method.enabledLanguages.length - 1]
-            control: CheckBox {
-                checked: maliit_input_method.activeLanguage == modelData
-                onVisibleChanged: {
-                    checked = maliit_input_method.activeLanguage == modelData
-                }
-                onClicked: {
-                    maliit_input_method.activeLanguage = modelData
-                    canvas.languageMenuShown = false;
-                }
-            }
+//            showDivider: modelData != maliit_input_method.enabledLanguages[maliit_input_method.enabledLanguages.length - 1]
+            checked: maliit_input_method.activeLanguage == modelData
             onClicked: {
                 maliit_input_method.activeLanguage = modelData
                 canvas.languageMenuShown = false;
@@ -73,13 +66,13 @@ Item {
             id: settingsComp
             Column {
                 width: menuList.width
-                height: settingsItem.height + settingsDiv.height * 2
-                ListItem.ThinDivider { id: settingsDiv }
-                ListItem.ThinDivider { }
-                ListItem.Standard {
+                height: settingsItem.height // + settingsDiv.height * 2
+//                ListItem.ThinDivider { id: settingsDiv }
+//                ListItem.ThinDivider { }
+                ItemDelegate {
                     id: settingsItem
-                    text: i18n.tr("Settings") + "…"
-                    showDivider: false
+                    text: qsTr("Settings") + "…"
+//                    showDivider: false
                     onClicked: {
                         Qt.openUrlExternally("settings:///system/language")
                         canvas.languageMenuShown = false;

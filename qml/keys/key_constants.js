@@ -60,6 +60,7 @@ var actionKeyPressedColor = "#aeaeae"
 var top_margin = 1;  // gu
 var bottom_margin = 0; // gu
 var tabletRowMargin = 1; // gu
+var row_margin = 0; // gu
 var phoneRowMarginLandscape = 4; // dp
 var phoneRowMarginPortrait = 7; // dp
 

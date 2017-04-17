@@ -33,7 +33,6 @@ import QtQuick 2.4
 import "constants.js" as Const
 import "keys/"
 import "keys/key_constants.js" as UI
-import Ubuntu.Components 1.3
 
 Item {
     id: fullScreenItem
@@ -255,7 +254,7 @@ Item {
             }
         ]
         transitions: Transition {
-            UbuntuNumberAnimation { target: keyboardSurface; properties: "y"; }
+            NumberAnimation { target: keyboardSurface; properties: "y"; duration: 165}
         }
 
         Connections {
