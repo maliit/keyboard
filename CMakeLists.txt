@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(ubuntu-keyboard VERSION 0.1)
+project(maliit-keyboard VERSION 1.9)
 
 option(enable-presage "Use presage to calculate word candidates (maliit-keyboard-plugin only)" ON)
 option(enable-hunspell "Use hunspell for error correction (maliit-keyboard-plugin only)" ON)
@@ -30,8 +30,8 @@ endif()
 
 set(HUNSPELL_DICT_PATH "/usr/share/myspell" CACHE PATH "Directory containing hunspell dictionary files")
 set(MALIIT_PLUGINS_DATA_DIR "${SHARE_INSTALL_PREFIX}/maliit/plugins" CACHE PATH "Directory containing maliit-plugins data")
-set(UBUNTU_KEYBOARD_DATA_DIR "${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu" CACHE PATH "Directory containing ubuntu-keyboard data")
-set(UBUNTU_KEYBOARD_LIB_DIR "${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/lib" CACHE PATH "Directory containing ubuntu-keyboard data")
+set(MALIIT_KEYBOARD_DATA_DIR "${MALIIT_PLUGINS_DATA_DIR}/org/maliit" CACHE PATH "Directory containing maliit-keyboard data")
+set(MALIIT_KEYBOARD_LIB_DIR "${MALIIT_PLUGINS_DATA_DIR}/org/maliit/lib" CACHE PATH "Directory containing maliit-keyboard data")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -45,7 +45,7 @@ find_package(GIO REQUIRED)
 
 find_package(Qt5DBus)
 
-set(UBUNTU_KEYBOARD_SOURCES
+set(MALIIT_KEYBOARD_SOURCES
         src/lib/logic/abstractlanguagefeatures.h
         src/lib/logic/abstractlanguageplugin.cpp
         src/lib/logic/abstractlanguageplugin.h
@@ -96,20 +96,20 @@ set(WESTERNSUPPORT_SOURCES
 
 # TODO install logic/languageplugininterface.h and logic/abstractplugininterface.h as HEADERS
 
-set(ubuntu-keyboard-libraries Qt5::Core)
-set(ubuntu-keyboard-definitions HUNSPELL_DICT_PATH="${HUNSPELL_DICT_PATH}"
+set(maliit-keyboard-libraries Qt5::Core)
+set(maliit-keyboard-definitions HUNSPELL_DICT_PATH="${HUNSPELL_DICT_PATH}"
         MALIIT_PLUGINS_DATA_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_PLUGINS_DATA_DIR}"
-        UBUNTU_KEYBOARD_DATA_DIR="${CMAKE_INSTALL_PREFIX}/${UBUNTU_KEYBOARD_DATA_DIR}"
-        UBUNTU_KEYBOARD_LIB_DIR="${CMAKE_INSTALL_PREFIX}/${UBUNTU_KEYBOARD_LIB_DIR}")
-set(ubuntu-keyboard-include-dirs)
+        MALIIT_KEYBOARD_DATA_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_KEYBOARD_DATA_DIR}"
+        MALIIT_KEYBOARD_LIB_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_KEYBOARD_LIB_DIR}")
+set(maliit-keyboard-include-dirs)
 
 if(enable-presage)
     find_package(Presage REQUIRED)
 
     if(PRESAGE_FOUND)
-        list(APPEND ubuntu-keyboard-definitions HAVE_PRESAGE)
-        list(APPEND ubuntu-keyboard-libraries ${PRESAGE_LIBRARIES})
-        list(APPEND ubuntu-keyboard-include-dirs ${PRESAGE_INCLUDE_DIRS})
+        list(APPEND maliit-keyboard-definitions HAVE_PRESAGE)
+        list(APPEND maliit-keyboard-libraries ${PRESAGE_LIBRARIES})
+        list(APPEND maliit-keyboard-include-dirs ${PRESAGE_INCLUDE_DIRS})
 
         list(APPEND WESTERNSUPPORT_SOURCES
                 plugins/westernsupport/candidatescallback.cpp
@@ -121,25 +121,25 @@ endif()
 
 if(enable-hunspell)
     find_package(Hunspell REQUIRED)
-    list(APPEND ubuntu-keyboard-definitions HAVE_HUNSPELL)
-    list(APPEND ubuntu-keyboard-libraries ${HUNSPELL_LIBRARIES})
-    list(APPEND ubuntu-keyboard-include-dirs ${HUNSPELL_INCLUDE_DIRS})
+    list(APPEND maliit-keyboard-definitions HAVE_HUNSPELL)
+    list(APPEND maliit-keyboard-libraries ${HUNSPELL_LIBRARIES})
+    list(APPEND maliit-keyboard-include-dirs ${HUNSPELL_INCLUDE_DIRS})
 endif()
 
-add_library(ubuntu-keyboard STATIC ${UBUNTU_KEYBOARD_SOURCES})
-target_link_libraries(ubuntu-keyboard Qt5::Core Maliit::Plugins)
-target_include_directories(ubuntu-keyboard PUBLIC src/lib)
-target_compile_definitions(ubuntu-keyboard PRIVATE ${ubuntu-keyboard-definitions})
+add_library(maliit-keyboard STATIC ${MALIIT_KEYBOARD_SOURCES})
+target_link_libraries(maliit-keyboard Qt5::Core Maliit::Plugins)
+target_include_directories(maliit-keyboard PUBLIC src/lib)
+target_compile_definitions(maliit-keyboard PRIVATE ${maliit-keyboard-definitions})
 
-set(UBUNTU_KEYBOARD_VIEW_SOURCES
+set(MALIIT_KEYBOARD_VIEW_SOURCES
         src/view/abstracttexteditor.cpp
         src/view/abstracttexteditor.h
         src/view/setup.cpp
         src/view/setup.h)
 
-add_library(ubuntu-keyboard-view STATIC ${UBUNTU_KEYBOARD_VIEW_SOURCES})
-target_link_libraries(ubuntu-keyboard-view Maliit::Plugins ubuntu-keyboard)
-target_include_directories(ubuntu-keyboard-view PUBLIC src)
+add_library(maliit-keyboard-view STATIC ${MALIIT_KEYBOARD_VIEW_SOURCES})
+target_link_libraries(maliit-keyboard-view Maliit::Plugins maliit-keyboard)
+target_include_directories(maliit-keyboard-view PUBLIC src)
 
 set(QGSETTINGS_SOURCES
         src/3rdparty/QGSettings/qconftypes.cpp
@@ -155,7 +155,7 @@ target_link_libraries(gsettings-qt Qt5::Core ${GIO_LIBRARIES})
 target_include_directories(gsettings-qt PUBLIC ${GIO_INCLUDE_DIRS} src/3rdparty)
 target_compile_definitions(gsettings-qt PRIVATE -DQT_NO_KEYWORDS)
 
-set(UBUNTU_KEYBOARD_PLUGIN_SOURCES
+set(MALIIT_KEYBOARD_PLUGIN_SOURCES
         src/plugin/editor.cpp
         src/plugin/editor.h
         src/plugin/greeterstatus.cpp
@@ -175,16 +175,16 @@ set(UBUNTU_KEYBOARD_PLUGIN_SOURCES
         src/plugin/units.h
         src/plugin/plugin.json)
 
-add_library(ubuntu-keyboard-plugin MODULE ${UBUNTU_KEYBOARD_PLUGIN_SOURCES})
-target_link_libraries(ubuntu-keyboard-plugin Qt5::DBus Maliit::Plugins ubuntu-keyboard ubuntu-keyboard-view gsettings-qt)
-target_compile_definitions(ubuntu-keyboard-plugin PRIVATE ${ubuntu-keyboard-definitions})
+add_library(maliit-keyboard-plugin MODULE ${MALIIT_KEYBOARD_PLUGIN_SOURCES})
+target_link_libraries(maliit-keyboard-plugin Qt5::DBus Maliit::Plugins maliit-keyboard maliit-keyboard-view gsettings-qt)
+target_compile_definitions(maliit-keyboard-plugin PRIVATE ${maliit-keyboard-definitions})
 
 # TODO install westernlanguagesplugin.h into "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/include"
 
 add_library(westernsupport STATIC ${WESTERNSUPPORT_SOURCES})
-target_link_libraries(westernsupport ${ubuntu-keyboard-libraries} Maliit::Plugins)
-target_include_directories(westernsupport PUBLIC src/lib/logic plugins/westernsupport ${ubuntu-keyboard-include-dirs})
-target_compile_definitions(westernsupport PRIVATE ${ubuntu-keyboard-definitions})
+target_link_libraries(westernsupport ${maliit-keyboard-libraries} Maliit::Plugins)
+target_include_directories(westernsupport PUBLIC src/lib/logic plugins/westernsupport ${maliit-keyboard-include-dirs})
+target_compile_definitions(westernsupport PRIVATE ${maliit-keyboard-definitions})
 
 function(language_plugin _language _full_language _ebook)
     set(PLUGIN_SOURCES
@@ -200,16 +200,16 @@ endif()
             plugins/${_language}/qml/Keyboard_${_language}_email.qml
             plugins/${_language}/qml/Keyboard_${_language}_url.qml
             plugins/${_language}/qml/Keyboard_${_language}_url_search.qml
-            DESTINATION ${UBUNTU_KEYBOARD_LIB_DIR}/${_language})
+            DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
     install(TARGETS ${_language}plugin
-            LIBRARY DESTINATION ${UBUNTU_KEYBOARD_LIB_DIR}/${_language})
+            LIBRARY DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
 if(enable-presage)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/database_${_language}.db
-            DESTINATION ${UBUNTU_KEYBOARD_LIB_DIR}/${_language})
+            DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
 endif()
     foreach(_file IN LISTS ARGN)
         install(FILES plugins/${_language}/${_file}
-                DESTINATION ${UBUNTU_KEYBOARD_LIB_DIR}/${_language})
+                DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
     endforeach()
 endfunction()
 
@@ -256,20 +256,20 @@ language_plugin(uk ukrainian free_ebook.txt)
 
 # Installation
 
-install(FILES COPYING COPYING.BSD COPYING.CC-BY README
-        DESTINATION ${SHARE_INSTALL_PREFIX}/doc/ubuntu-keyboard)
+install(FILES COPYING COPYING.BSD COPYING.CC-BY README.md
+        DESTINATION ${SHARE_INSTALL_PREFIX}/doc/maliit-keyboard)
 
-install(TARGETS ubuntu-keyboard-plugin
+install(TARGETS maliit-keyboard-plugin
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}/maliit/plugins)
 
 install(DIRECTORY qml/images qml/keys qml/languages
-        DESTINATION ${UBUNTU_KEYBOARD_DATA_DIR})
+        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(FILES qml/constants.js qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
-        DESTINATION ${UBUNTU_KEYBOARD_DATA_DIR})
+        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 
 install(DIRECTORY data/styles
-        DESTINATION ${UBUNTU_KEYBOARD_DATA_DIR})
-install(FILES data/schemas/com.canonical.keyboard.maliit.gschema.xml
+        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
+install(FILES data/schemas/org.maliit.keyboard.maliit.gschema.xml
         DESTINATION share/glib-2.0/schemas/)
 
 # TODO add all tests
@@ -286,7 +286,7 @@ if(enable-tests)
             tests/unittests/common/utils.h)
 
     target_link_libraries(test-utils PUBLIC Qt5::Core Qt5::Gui Qt5::Test)
-    target_include_directories(test-utils INTERFACE tests/common tests ubuntu-keyboard)
+    target_include_directories(test-utils INTERFACE tests/common tests maliit-keyboard)
 
     function(create_test name)
         set(_extra_sources ${ARGV})

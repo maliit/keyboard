@@ -57,8 +57,8 @@ const QLatin1String OPACITY_KEY = QLatin1String("opacity");
  */
 KeyboardSettings::KeyboardSettings(QObject *parent) :
     QObject(parent)
-  , m_settings(new QGSettings("com.canonical.keyboard.maliit",
-                              "/com/canonical/keyboard/maliit/", this))
+  , m_settings(new QGSettings("org.maliit.keyboard.maliit",
+                              "/org/maliit/keyboard/maliit/", this))
 {
     QObject::connect(m_settings, SIGNAL(changed(QString)),
                      this, SLOT(settingUpdated(QString)));

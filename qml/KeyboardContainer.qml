@@ -19,7 +19,7 @@ import QtMultimedia 5.0
 import QtQuick.Window 2.0
 import "languages/"
 import "keys/"
-import UbuntuKeyboard 1.0
+import MaliitKeyboard 1.0
 import QtFeedback 5.0
 
 Item {

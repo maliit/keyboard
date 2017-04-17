@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema id="com.canonical.keyboard.maliit" path="/com/canonical/keyboard/maliit/">
+  <schema id="org.maliit.keyboard.maliit" path="/org/maliit/keyboard/maliit/">
     <key name="active-language" type="s">
       <summary>Active language</summary>
       <description>Currently active language, selected by user in the keyboard language menu</description>
@@ -39,7 +39,7 @@
     <key name="key-press-feedback-sound" type="s">
       <summary>Key press feedback sound</summary>
       <description>Path to the key press feedback sound.</description>
-      <default>'/usr/share/maliit/plugins/com/ubuntu/styles/ubuntu/sounds/key_tick2_quiet.wav'</default>
+      <default>'/usr/share/maliit/plugins/org/maliit/styles/ubuntu/sounds/key_tick2_quiet.wav'</default>
     </key>
     <key name="key-press-haptic-feedback" type="b">
       <summary>Key press haptic feedback</summary>
@@ -74,7 +74,7 @@
     <key name="plugin-paths" type="as">
       <summary>Plugin paths</summary>
       <description>A list of locations to search for keyboard layout plugins in addition to the keyboard data directory.</description>
-      <default>['/custom/share/maliit/plugins/com/ubuntu/lib/']</default>
+      <default>['/custom/share/maliit/plugins/org/maliit/lib/']</default>
     </key>
     <key name="opacity" type="d">
       <summary>Opacity</summary>

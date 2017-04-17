@@ -57,7 +57,7 @@ Item {
 
     Item {
         id: canvas
-        objectName: "ubuntuKeyboard" // Allow us to specify a specific keyboard within autopilot.
+        objectName: "MaliitKeyboard" // Allow us to specify a specific keyboard within autopilot.
 
         anchors.bottom: parent.bottom
         anchors.left: parent.left

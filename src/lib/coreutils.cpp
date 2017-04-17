@@ -13,9 +13,9 @@ const char *const g_action_key_id = "actionKey";
 
 const QString &pluginLanguageDirectory()
 {
-    static const QByteArray env_data_directory = qgetenv("UBUNTU_KEYBOARD_DATA_DIR");
+    static const QByteArray env_data_directory = qgetenv("MALIIT_KEYBOARD_DATA_DIR");
     static QString language_directory = QString::fromUtf8(env_data_directory.isEmpty()
-                                                            ? UBUNTU_KEYBOARD_DATA_DIR
+                                                            ? MALIIT_KEYBOARD_DATA_DIR
                                                             : env_data_directory);
 
     return language_directory;
@@ -35,7 +35,7 @@ const QString &maliitKeyboardDataDirectory()
 {
     static const QByteArray env_data_directory = qgetenv("MALIIT_KEYBOARD_DATADIR");
     static const QString data_directory = QString::fromUtf8(env_data_directory.isEmpty()
-                                                            ? UBUNTU_KEYBOARD_DATA_DIR
+                                                            ? MALIIT_KEYBOARD_DATA_DIR
                                                             : env_data_directory);
 
     return data_directory;

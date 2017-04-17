@@ -23,8 +23,8 @@
  * SOFTWARE.
  */
 
-#ifndef UBUNTU_KEYBOARD_UNITS_H
-#define UBUNTU_KEYBOARD_UNITS_H
+#ifndef MALIIT2_KEYBOARD_UNITS_H
+#define MALIIT2_KEYBOARD_UNITS_H
 
 #include <QObject>
 
@@ -39,4 +39,4 @@ public:
 };
 
 
-#endif //UBUNTU_KEYBOARD_UNITS_H
+#endif //MALIIT2_KEYBOARD_UNITS_H
