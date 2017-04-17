@@ -15,9 +15,6 @@
  */
 
 import QtQuick 2.4
-import QtMultimedia 5.0
-import Ubuntu.Components 1.3
-import Ubuntu.Components.Popups 1.3
 
 import "key_constants.js" as UI
 
@@ -45,7 +42,7 @@ FlickCharKey {
                 name: "kana"
                 PropertyChanges {
                     target: kana;
-                    label: "<font color=\"" + UbuntuColors.orange + "\">あ</font>/A";
+                    label: "<font color=\"" + UI.orangeColor + "\">あ</font>/A";
                     state: "kana";
                 }
             },
@@ -53,7 +50,7 @@ FlickCharKey {
                 name: "alnum"
                 PropertyChanges {
                     target: kana;
-                    label: "あ/<font color=\"" + UbuntuColors.orange + "\">A</font>";
+                    label: "あ/<font color=\"" + UI.orangeColor + "\">A</font>";
                     state: "alnum";
                 }
             }

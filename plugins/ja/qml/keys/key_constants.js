@@ -29,3 +29,6 @@ var annotationMargins = 0.3; // gu
 var flickMargin = 1.5 // gu
 var flickBorderWidth = 0.1 // gu
 var flickBorderColor = "#999999"
+
+/* Orange */
+var orangeColor = "#FF9800"
