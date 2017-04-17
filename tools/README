@@ -1,7 +1,0 @@
-gen-class: A simple code generator for Qt/C++ classes. Takes a class name and
-           an output directory as parameters.
-
-get-test: A simple code generator for tests. Takes a test name and an output
-          directory as parameters.
-
-update-langfile.pl: A language files converter. Takes XML files as parameters.
