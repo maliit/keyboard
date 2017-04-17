@@ -315,9 +315,14 @@ if(ANTHY_FOUND)
             INCLUDE_DIRS ${ANTHY_INCLUDE_DIRS}
             DIRECTORY qml/keys)
 endif()
+if(enable-presage)
+    abstract_language_plugin(ko korean
+            NGRAM_DATABASE korean.txt
+            SOURCES database_ko.db
+            LIBRARIES westernsupport
+            DIRECTORY qml/keys)
+endif()
 
-#language_plugin(ko)
-# TODO build and ko plugins
 #language_plugin(pinyin)
 # TODO build pinyin plugin
 
