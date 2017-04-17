@@ -22,6 +22,7 @@
 #include "greeterstatus.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
+#include "units.h"
 
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
@@ -87,6 +88,7 @@ public:
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
     GreeterStatus *m_greeterStatus;
+    Units *m_units;
 
     WordRibbon* wordRibbon;
 
@@ -115,6 +117,7 @@ public:
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , m_greeterStatus(new GreeterStatus())
+        , m_units(new Units(q))
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {
@@ -215,6 +218,7 @@ public:
         qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
         qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
         qml_context->setContextProperty("greeter_status", m_greeterStatus);
+        qml_context->setContextProperty("units", m_units);
     }
 
     void updatePluginPaths()
