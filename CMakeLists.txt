@@ -46,6 +46,8 @@ find_package(GIO REQUIRED)
 find_package(Qt5DBus)
 
 find_package(Anthy)
+find_package(Pinyin)
+find_package(Chewing)
 
 set(MALIIT_KEYBOARD_SOURCES
         src/lib/logic/abstractlanguagefeatures.h
@@ -322,9 +324,22 @@ if(enable-presage)
             LIBRARIES westernsupport
             DIRECTORY qml/keys)
 endif()
-
-#language_plugin(pinyin)
-# TODO build pinyin plugin
+if(PINYIN_FOUND)
+    abstract_language_plugin(zh-hans pinyin ABSTRACT_LANGUAGE_PLUGIN
+            PLUGIN_DIR pinyin
+            LANGUAGE_FEATURES chinese
+            SOURCES pinyinadapter.cpp pinyinadapter.h
+            LIBRARIES ${PINYIN_LIBRARIES}
+            INCLUDE_DIRS ${PINYIN_INCLUDE_DIRS}
+            DEFINITIONS PINYIN_DATA_DIR="${PINYIN_DATA_DIR}")
+endif()
+if(CHEWING_FOUND)
+    abstract_language_plugin(zh-hant chewing ABSTRACT_LANGUAGE_PLUGIN
+            PLUGIN_DIR chewing
+            SOURCES chewingadapter.cpp chewingadapter.h
+            LIBRARIES ${CHEWING_LIBRARIES}
+            INCLUDE_DIRS ${CHEWING_INCLUDE_DIRS})
+endif()
 
 # Installation
 
