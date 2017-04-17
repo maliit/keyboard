@@ -213,18 +213,74 @@ endif()
     endforeach()
 endfunction()
 
+function(abstract_language_plugin _language _full_language)
+    set(options ABSTRACT_LANGUAGE_PLUGIN)
+    set(oneValueArgs NGRAM_DATABASE PLUGIN_DIR LANGUAGE_FEATURES)
+    set(multiValueArgs SOURCES LIBRARIES INCLUDE_DIRS DEFINITIONS FILES DIRECTORY)
+    cmake_parse_arguments(abstract_language_plugin "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    set(_plugindir ${_language})
+    if(NOT ${abstract_language_plugin_PLUGIN_DIR} EQUAL "")
+        set(_plugindir ${abstract_language_plugin_PLUGIN_DIR})
+    endif()
+    set(PLUGIN_SOURCES
+            plugins/${_plugindir}/src/${_full_language}plugin.cpp
+            plugins/${_plugindir}/src/${_full_language}plugin.h
+            plugins/${_plugindir}/src/${_full_language}plugin.json)
+    if(NOT ${abstract_language_plugin_LANGUAGE_FEATURES} EQUAL "")
+        list(APPEND PLUGIN_SOURCES
+                plugins/${_plugindir}/src/${abstract_language_plugin_LANGUAGE_FEATURES}languagefeatures.cpp
+                plugins/${_plugindir}/src/${abstract_language_plugin_LANGUAGE_FEATURES}languagefeatures.h)
+    else()
+        list(APPEND PLUGIN_SOURCES
+                plugins/${_plugindir}/src/${_full_language}languagefeatures.cpp
+                plugins/${_plugindir}/src/${_full_language}languagefeatures.h)
+    endif()
+    if(abstract_language_plugin_ABSTRACT_LANGUAGE_PLUGIN)
+        list(APPEND PLUGIN_SOURCES
+                src/lib/logic/abstractlanguageplugin.cpp
+                src/lib/logic/abstractlanguageplugin.h)
+    endif()
+    foreach(_s IN LISTS abstract_language_plugin_SOURCES)
+        list(APPEND PLUGIN_SOURCES plugins/${_plugindir}/src/${_s})
+    endforeach()
+    if(enable-presage AND (NOT ${abstract_language_plugin_NGRAM_DATABASE} EQUAL ""))
+        add_ngram(TEXT plugins/${_plugindir}/src/${abstract_language_plugin_NGRAM_DATABASE} DATABASE database_${_language}.db)
+        list(APPEND PLUGIN_SOURCES database_${_language}.db)
+    endif()
+    add_library(${_language}plugin MODULE ${PLUGIN_SOURCES})
+    target_link_libraries(${_language}plugin Qt5::Core Maliit::Plugins ${abstract_language_plugin_LIBRARIES})
+    target_include_directories(${_language}plugin PRIVATE src/lib/logic ${abstract_language_plugin_INCLUDE_DIRS})
+    target_compile_definitions(${_language}plugin PRIVATE ${abstract_language_plugin_DEFINITIONS})
+    install(TARGETS ${_language}plugin
+            LIBRARY DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+    install(FILES plugins/${_plugindir}/qml/Keyboard_${_language}.qml
+            plugins/${_plugindir}/qml/Keyboard_${_language}_email.qml
+            plugins/${_plugindir}/qml/Keyboard_${_language}_url.qml
+            plugins/${_plugindir}/qml/Keyboard_${_language}_url_search.qml
+            DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+    foreach(_file IN LISTS abstract_language_plugin_FILES)
+        install(FILES plugins/${_plugindir}/${_file}
+                DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+    endforeach()
+    foreach(_dir IN LISTS abstract_language_plugin_DIRECTORY)
+        install(DIRECTORY plugins/${_plugindir}/${_dir}
+                DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+    endforeach()
+    if(enable-presage AND (NOT ${abstract_language_plugin_NGRAM_DATABASE} EQUAL ""))
+        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/database_${_language}.db
+                DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+    endif()
+endfunction()
+
 language_plugin(ar arabic free_ebook.txt)
 language_plugin(az azerbaijani free_ebook.txt)
 language_plugin(bs bosnian free_ebook.txt)
 language_plugin(ca catalan paulina_buxareu.txt src/overrides.csv)
-#language_plugin(chewing)
-# TODO build chewing plugin
 language_plugin(cs czech free_ebook.txt)
 language_plugin(da danish free_ebook.txt src/overrides.csv)
 language_plugin(de german buddenbrooks.txt)
 language_plugin(el greek grazia_deledda-christos_alexandridis.txt)
-#language_plugin(emoji)
-# TODO build emoji plugin
 language_plugin(en english the_picture_of_dorian_gray.txt src/overrides.csv)
 language_plugin(eo esperanto alicio_en_mirlando.txt)
 language_plugin(es spanish el_quijote.txt)
@@ -237,14 +293,9 @@ language_plugin(hr croatian knjiga.txt)
 language_plugin(hu hungarian free_ebook.txt)
 language_plugin(is icelandic althingi_umraedur_2004_2005.txt)
 language_plugin(it italian la_francia_dal_primo_impero.txt src/overrides.csv)
-#language_plugin(ja)
-#language_plugin(ko)
-# TODO build ja and ko plugins
 language_plugin(lv latvian free_ebook.txt)
 language_plugin(nb norwegian free_ebook.txt)
 language_plugin(nl dutch free_ebook.txt src/overrides.csv)
-#language_plugin(pinyin)
-# TODO build pinyin plugin
 language_plugin(pl polish ziemia_obiecana_tom_pierwszy_4.txt)
 language_plugin(pt portuguese historias_sem_data.txt src/overrides.csv)
 language_plugin(ro romanian amintiri_din_copilarie.txt)
@@ -253,6 +304,13 @@ language_plugin(sl slovenian free_ebook.txt)
 language_plugin(sr serbian free_ebook.txt)
 language_plugin(sv swedish free_ebook.txt src/overrides.csv)
 language_plugin(uk ukrainian free_ebook.txt)
+
+abstract_language_plugin(emoji emoji ABSTRACT_LANGUAGE_PLUGIN FILES qml/CategoryKey.qml qml/emoji.js)
+
+#language_plugin(ko)
+# TODO build and ko plugins
+#language_plugin(pinyin)
+# TODO build pinyin plugin
 
 # Installation
 
