@@ -35,14 +35,17 @@
 #include <QtCore>
 #include <maliit/plugins/keyoverride.h>
 
-#include "logic/layouthelper.h"
-
 class MImUpdateEvent;
 
 namespace MaliitKeyboard {
+class Key;
+
+namespace Logic
+{
+typedef QMap<QString, Key> KeyOverrides;
+}
 
 class UpdateNotifierPrivate;
-class Key;
 
 class UpdateNotifier
     : public QObject

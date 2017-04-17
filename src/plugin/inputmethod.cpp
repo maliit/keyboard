@@ -38,8 +38,6 @@
 #include "models/layout.h"
 
 #include "logic/abstractlanguagefeatures.h"
-// #include "logic/layouthelper.h"
-//#include "logic/style.h"
 
 #include "view/setup.h"
 

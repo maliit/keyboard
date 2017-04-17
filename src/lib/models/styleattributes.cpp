@@ -143,14 +143,14 @@ QMargins fromByteArray(const QByteArray &data)
 //! @param style_name The style name, maps to INI file sections.
 //! @param attribute_name The attribute name that we want to look up.
 //! @returns A key. String won't be empty, even if key is invalid.
-QByteArray buildKey(Logic::LayoutHelper::Orientation orientation,
+QByteArray buildKey(Qt::ScreenOrientation orientation,
                     const QByteArray &style_name,
                     const QByteArray &attribute_name)
 {
     QByteArray result;
     result.append(style_name);
     result.append('/');
-    result.append(orientation == Logic::LayoutHelper::Landscape ? "landscape" : "portrait");
+    result.append((orientation == Qt::LandscapeOrientation) || (orientation == Qt::InvertedLandscapeOrientation) ? "landscape" : "portrait");
     result.append('/');
     result.append(attribute_name);
 
@@ -165,7 +165,7 @@ QByteArray buildKey(Logic::LayoutHelper::Orientation orientation,
 //! @param attribute_name The attribute name we want to look up.
 //! @returns A value. QVariant can be invalid.
 QVariant lookup(const QScopedPointer<const QSettings> &store,
-                Logic::LayoutHelper::Orientation orientation,
+                Qt::ScreenOrientation orientation,
                 const QByteArray &style_name,
                 const QByteArray &attribute_name)
 {
@@ -317,7 +317,7 @@ QByteArray StyleAttributes::customIcon(const QString &icon_name) const
 //! \param orientation The layout orientation (landscape or portrait).
 //! \returns Value of "${style}\${orientation}\font-name" or "Nokia
 //! Pure" if there was no such value in style.ini.
-QByteArray StyleAttributes::fontName(Logic::LayoutHelper::Orientation orientation) const
+QByteArray StyleAttributes::fontName(Qt::ScreenOrientation orientation) const
 {
     const QByteArray font_name(lookup(m_store, orientation,
                                       m_style_name.toLocal8Bit(),
@@ -343,7 +343,7 @@ QStringList StyleAttributes::fontFiles() const
 //! \brief Looks up the font color used for key labels.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\font-color".
-QByteArray StyleAttributes::fontColor(Logic::LayoutHelper::Orientation orientation) const
+QByteArray StyleAttributes::fontColor(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -354,7 +354,7 @@ QByteArray StyleAttributes::fontColor(Logic::LayoutHelper::Orientation orientati
 //! \brief Looks up the font size used for key labels.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\font-size".
-qreal StyleAttributes::fontSize(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::fontSize(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -365,7 +365,7 @@ qreal StyleAttributes::fontSize(Logic::LayoutHelper::Orientation orientation) co
 //! \brief Looks up the small font size used for key labels.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\small-font-size".
-qreal StyleAttributes::smallFontSize(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::smallFontSize(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -376,7 +376,7 @@ qreal StyleAttributes::smallFontSize(Logic::LayoutHelper::Orientation orientatio
 //! \brief Looks up the font size used for word candidates.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\candidates-font-size".
-qreal StyleAttributes::candidateFontSize(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::candidateFontSize(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -387,7 +387,7 @@ qreal StyleAttributes::candidateFontSize(Logic::LayoutHelper::Orientation orient
 //! \brief Looks up the font size used for the key magnifier.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\magnifier-font-size".
-qreal StyleAttributes::magnifierFontSize(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::magnifierFontSize(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -402,7 +402,7 @@ qreal StyleAttributes::magnifierFontSize(Logic::LayoutHelper::Orientation orient
 //! longer (or more) word candidates that would otherwise have to be cut off.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\candidate-font-stretch".
-qreal StyleAttributes::candidateFontStretch(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::candidateFontStretch(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -413,7 +413,7 @@ qreal StyleAttributes::candidateFontStretch(Logic::LayoutHelper::Orientation ori
 //! \brief Looks up the word ribbon height.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\word-ribbon-height".
-qreal StyleAttributes::wordRibbonHeight(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::wordRibbonHeight(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -424,7 +424,7 @@ qreal StyleAttributes::wordRibbonHeight(Logic::LayoutHelper::Orientation orienta
 //! \brief Looks up the magnifier key height.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\magnifier-key-height".
-qreal StyleAttributes::magnifierKeyHeight(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::magnifierKeyHeight(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -435,7 +435,7 @@ qreal StyleAttributes::magnifierKeyHeight(Logic::LayoutHelper::Orientation orien
 //! \brief Looks up the key height.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\key-height".
-qreal StyleAttributes::keyHeight(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::keyHeight(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -446,7 +446,7 @@ qreal StyleAttributes::keyHeight(Logic::LayoutHelper::Orientation orientation) c
 //! \brief Looks up the magnifier key width.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\magnifier-key-width".
-qreal StyleAttributes::magnifierKeyWidth(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::magnifierKeyWidth(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -458,7 +458,7 @@ qreal StyleAttributes::magnifierKeyWidth(Logic::LayoutHelper::Orientation orient
 //! @param orientation The layout orientation (landscape or portrait).
 //! @param width The key width type.
 //! @returns Value of "${style}\${orientation}\key-width-${width}".
-qreal StyleAttributes::keyWidth(Logic::LayoutHelper::Orientation orientation,
+qreal StyleAttributes::keyWidth(Qt::ScreenOrientation orientation,
                                 KeyDescription::Width width) const
 {
     return lookup(m_store, orientation,
@@ -470,7 +470,7 @@ qreal StyleAttributes::keyWidth(Logic::LayoutHelper::Orientation orientation,
 //! \brief Looks up the key area width.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\key-area-width".
-qreal StyleAttributes::keyAreaWidth(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::keyAreaWidth(Qt::ScreenOrientation orientation) const
 {
     QVariant result(lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -498,7 +498,7 @@ qreal StyleAttributes::keyAreaWidth(Logic::LayoutHelper::Orientation orientation
 //! areas for the keys.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\key-margins".
-qreal StyleAttributes::keyMargin(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::keyMargin(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -513,7 +513,7 @@ qreal StyleAttributes::keyMargin(Logic::LayoutHelper::Orientation orientation) c
 //! same rules apply to the right-most key and the right key area border.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\key-area-paddings".
-qreal StyleAttributes::keyAreaPadding(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::keyAreaPadding(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -527,7 +527,7 @@ qreal StyleAttributes::keyAreaPadding(Logic::LayoutHelper::Orientation orientati
 //! key.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\vertical-offset".
-qreal StyleAttributes::verticalOffset(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::verticalOffset(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -538,7 +538,7 @@ qreal StyleAttributes::verticalOffset(Logic::LayoutHelper::Orientation orientati
 //! \brief Looks up the vertical offset to position label inside magnifier key.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\magnifier-key-label-vertical-offset".
-qreal StyleAttributes::magnifierKeyLabelVerticalOffset(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::magnifierKeyLabelVerticalOffset(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -552,7 +552,7 @@ qreal StyleAttributes::magnifierKeyLabelVerticalOffset(Logic::LayoutHelper::Orie
 //! which are aded (substracted) from the left and right key area borders.
 //! @param orientation The layout orientation (landscape or portrait).
 //! @returns Value of "${style}\${orientation}\safety-margin".
-qreal StyleAttributes::safetyMargin(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::safetyMargin(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
@@ -591,21 +591,21 @@ QByteArray StyleAttributes::keyboardHideSound() const
     return m_store->value("sound/keyboard-hide").toByteArray();
 }
 
-qreal StyleAttributes::keyboardTotalHeight(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::keyboardTotalHeight(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
                   QByteArray("keyboard-total-height")).toReal();
 }
 
-qreal StyleAttributes::keyboardVisibleHeight(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::keyboardVisibleHeight(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),
                   QByteArray("keyboard-visible-height")).toReal();
 }
 
-qreal StyleAttributes::topMargin(Logic::LayoutHelper::Orientation orientation) const
+qreal StyleAttributes::topMargin(Qt::ScreenOrientation orientation) const
 {
     return lookup(m_store, orientation,
                   m_style_name.toLocal8Bit(),

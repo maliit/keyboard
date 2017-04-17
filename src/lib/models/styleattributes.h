@@ -32,8 +32,8 @@
 #ifndef MALIIT_KEYBOARD_STYLEATTRIBUTES_H
 #define MALIIT_KEYBOARD_STYLEATTRIBUTES_H
 
+#include "models/key.h"
 #include "models/keydescription.h"
-#include "logic/layouthelper.h"
 
 #include <QtCore>
 
@@ -68,38 +68,38 @@ public:
 
     QStringList fontFiles() const;
 
-    QByteArray fontName(Logic::LayoutHelper::Orientation orientation) const;
-    QByteArray fontColor(Logic::LayoutHelper::Orientation orientation) const;
-    qreal fontSize(Logic::LayoutHelper::Orientation orientation) const;
-    qreal smallFontSize(Logic::LayoutHelper::Orientation orientation) const;
-    qreal candidateFontSize(Logic::LayoutHelper::Orientation orientation) const;
-    qreal magnifierFontSize(Logic::LayoutHelper::Orientation orientation) const;
-    qreal candidateFontStretch(Logic::LayoutHelper::Orientation orientation) const;
+    QByteArray fontName(Qt::ScreenOrientation orientation) const;
+    QByteArray fontColor(Qt::ScreenOrientation orientation) const;
+    qreal fontSize(Qt::ScreenOrientation orientation) const;
+    qreal smallFontSize(Qt::ScreenOrientation orientation) const;
+    qreal candidateFontSize(Qt::ScreenOrientation orientation) const;
+    qreal magnifierFontSize(Qt::ScreenOrientation orientation) const;
+    qreal candidateFontStretch(Qt::ScreenOrientation orientation) const;
 
-    qreal wordRibbonHeight(Logic::LayoutHelper::Orientation orientation) const;
-    qreal magnifierKeyHeight(Logic::LayoutHelper::Orientation orientation) const;
-    qreal keyHeight(Logic::LayoutHelper::Orientation orientation) const;
+    qreal wordRibbonHeight(Qt::ScreenOrientation orientation) const;
+    qreal magnifierKeyHeight(Qt::ScreenOrientation orientation) const;
+    qreal keyHeight(Qt::ScreenOrientation orientation) const;
 
-    qreal magnifierKeyWidth(Logic::LayoutHelper::Orientation orientation) const;
-    qreal keyWidth(Logic::LayoutHelper::Orientation orientation,
+    qreal magnifierKeyWidth(Qt::ScreenOrientation orientation) const;
+    qreal keyWidth(Qt::ScreenOrientation orientation,
                    KeyDescription::Width width) const;
-    qreal keyAreaWidth(Logic::LayoutHelper::Orientation orientation) const;
+    qreal keyAreaWidth(Qt::ScreenOrientation orientation) const;
 
-    qreal keyMargin(Logic::LayoutHelper::Orientation orientation) const;
-    qreal keyAreaPadding(Logic::LayoutHelper::Orientation orienation) const;
+    qreal keyMargin(Qt::ScreenOrientation orientation) const;
+    qreal keyAreaPadding(Qt::ScreenOrientation orienation) const;
 
-    qreal verticalOffset(Logic::LayoutHelper::Orientation orientation) const;
-    qreal magnifierKeyLabelVerticalOffset(Logic::LayoutHelper::Orientation orientation) const;
-    qreal safetyMargin(Logic::LayoutHelper::Orientation orientation) const;
+    qreal verticalOffset(Qt::ScreenOrientation orientation) const;
+    qreal magnifierKeyLabelVerticalOffset(Qt::ScreenOrientation orientation) const;
+    qreal safetyMargin(Qt::ScreenOrientation orientation) const;
 
     QByteArray keyPressSound() const;
     QByteArray keyReleaseSound() const;
     QByteArray layoutChangeSound() const;
     QByteArray keyboardHideSound() const;
 
-    qreal keyboardTotalHeight(Logic::LayoutHelper::Orientation orientation) const;
-    qreal keyboardVisibleHeight(Logic::LayoutHelper::Orientation orientation) const;
-    qreal topMargin(Logic::LayoutHelper::Orientation orientation) const;
+    qreal keyboardTotalHeight(Qt::ScreenOrientation orientation) const;
+    qreal keyboardVisibleHeight(Qt::ScreenOrientation orientation) const;
+    qreal topMargin(Qt::ScreenOrientation orientation) const;
 };
 
 } // namespace MaliitKeyboard

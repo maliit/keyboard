@@ -17,13 +17,13 @@
 #include "inputmethod.h"
 #include "coreutils.h"
 
-#include "logic/layoutupdater.h"
 #include "editor.h"
 #include "greeterstatus.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
 #include "units.h"
 
+#include "models/wordribbon.h"
 #include "logic/eventhandler.h"
 #include "logic/wordengine.h"
 
@@ -186,23 +186,6 @@ public:
                 view->setMask(m_geometry->visibleRect().toRect());
             });
         }
-    }
-
-    Logic::LayoutHelper::Orientation screenToMaliitOrientation(Qt::ScreenOrientation screenOrientation) const
-    {
-        switch (screenOrientation) {
-        case Qt::LandscapeOrientation:
-        case Qt::InvertedLandscapeOrientation:
-            return Logic::LayoutHelper::Landscape;
-            break;
-        case Qt::PortraitOrientation:
-        case Qt::InvertedPortraitOrientation:
-        case Qt::PrimaryOrientation:
-        default:
-            return Logic::LayoutHelper::Portrait;
-        }
-
-        return Logic::LayoutHelper::Portrait;
     }
 
     void setLayoutOrientation(Qt::ScreenOrientation screenOrientation)

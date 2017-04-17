@@ -30,7 +30,6 @@
  */
 
 #include "eventhandler.h"
-#include "layoutupdater.h"
 #include "models/layout.h"
 
 namespace MaliitKeyboard {

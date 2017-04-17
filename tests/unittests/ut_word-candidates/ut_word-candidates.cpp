@@ -36,9 +36,7 @@
 #include "plugin/editor.h"
 #include "models/key.h"
 #include "models/text.h"
-//#include "logic/layouthelper.h"
 #include "logic/layoutupdater.h"
-//#include "logic/style.h"
 #include "view/setup.h"
 
 #include <QtCore>
