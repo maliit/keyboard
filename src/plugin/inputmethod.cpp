@@ -47,9 +47,7 @@
 #include <maliit/plugins/updateevent.h>
 #include <maliit/namespace.h>
 
-#include <QApplication>
-#include <QWidget>
-#include <QDesktopWidget>
+#include <QGuiApplication>
 
 
 class MImUpdateEvent;
