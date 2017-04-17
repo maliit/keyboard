@@ -35,7 +35,7 @@
 namespace MaliitKeyboard {
 namespace Logic {
 
-#define DEFAULT_PLUGIN "/usr/share/maliit/plugins/com/ubuntu/lib/en/libenplugin.so"
+#define DEFAULT_PLUGIN UBUNTU_KEYBOARD_LIB_DIR "/en/libenplugin.so"
 
 //! \class WordEngine
 //! \brief Provides error correction (based on Hunspell) and word
