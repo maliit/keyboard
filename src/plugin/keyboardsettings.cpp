@@ -62,17 +62,6 @@ KeyboardSettings::KeyboardSettings(QObject *parent) :
 {
     QObject::connect(m_settings, SIGNAL(changed(QString)),
                      this, SLOT(settingUpdated(QString)));
-
-    // Migrate from supporting one chinese plugin ('zh') to multiple
-    // ('zh-hans' and 'zh-hant')
-    if (activeLanguage() == "zh") {
-        setActiveLanguage("zh-hans");
-    }
-    QStringList enabled = enabledLanguages();
-    if (enabled.contains("zh")) {
-        enabled.replace(enabled.indexOf("zh"), "zh-hans");
-        m_settings->set(ENABLED_LANGUAGES_KEY, QVariant(enabled));
-    }
 }
 
 /*!
