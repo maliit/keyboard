@@ -23,8 +23,8 @@
  * SOFTWARE.
  */
 
-#ifndef MALIIT2_KEYBOARD_UNITS_H
-#define MALIIT2_KEYBOARD_UNITS_H
+#ifndef MALIIT_KEYBOARD_UNITS_H
+#define MALIIT_KEYBOARD_UNITS_H
 
 #include <QObject>
 
@@ -38,5 +38,4 @@ public:
     Q_INVOKABLE float dp(float value) const;
 };
 
-
-#endif //MALIIT2_KEYBOARD_UNITS_H
+#endif //MALIIT_KEYBOARD_UNITS_H
