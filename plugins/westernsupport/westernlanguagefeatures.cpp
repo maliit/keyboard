@@ -38,9 +38,7 @@ WesternLanguageFeatures::WesternLanguageFeatures(QObject *parent) :
 {
 }
 
-WesternLanguageFeatures::~WesternLanguageFeatures()
-{
-}
+WesternLanguageFeatures::~WesternLanguageFeatures() = default;
 
 bool WesternLanguageFeatures::alwaysShowSuggestions() const
 {

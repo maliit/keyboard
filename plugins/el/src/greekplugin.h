@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~GreekPlugin()
-    {
-    }
+    virtual ~GreekPlugin() = default;
 };
 
 #endif // GREEKPLUGIN_H

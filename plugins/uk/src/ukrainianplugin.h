@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~UkrainianPlugin()
-    {
-    }
+    virtual ~UkrainianPlugin() = default;
 };
 
 #endif // UKRAINIANPLUGIN_H

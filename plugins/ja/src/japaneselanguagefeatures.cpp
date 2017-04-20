@@ -21,9 +21,7 @@ JapaneseLanguageFeatures::JapaneseLanguageFeatures(QObject *parent) :
 {
 }
 
-JapaneseLanguageFeatures::~JapaneseLanguageFeatures()
-{
-}
+JapaneseLanguageFeatures::~JapaneseLanguageFeatures() = default;
 
 bool JapaneseLanguageFeatures::alwaysShowSuggestions() const
 {

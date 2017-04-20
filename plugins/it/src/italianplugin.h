@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~ItalianPlugin()
-    {
-    }
+    virtual ~ItalianPlugin() = default;
 };
 
 #endif // ITALIANPLUGIN_H

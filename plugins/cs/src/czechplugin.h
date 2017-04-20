@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~CzechPlugin()
-    {
-    }
+    virtual ~CzechPlugin() = default;
 };
 
 #endif // CZECHPLUGIN_H

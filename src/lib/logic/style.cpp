@@ -79,8 +79,7 @@ Style::Style(QObject *parent)
 {}
 
 
-Style::~Style()
-{}
+Style::~Style() = default;
 
 
 //! \brief Sets the style profile.

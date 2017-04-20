@@ -97,8 +97,7 @@ Layout::Layout(QObject *parent)
 {}
 
 
-Layout::~Layout()
-{}
+Layout::~Layout() = default;
 
 
 void Layout::setTitle(const QString &title)

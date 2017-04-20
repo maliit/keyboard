@@ -21,9 +21,7 @@ EmojiLanguageFeatures::EmojiLanguageFeatures(QObject *parent) :
 {
 }
 
-EmojiLanguageFeatures::~EmojiLanguageFeatures()
-{
-}
+EmojiLanguageFeatures::~EmojiLanguageFeatures() = default;
 
 bool EmojiLanguageFeatures::alwaysShowSuggestions() const
 {

@@ -301,8 +301,7 @@ AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
 }
 
 //! \brief Destructor.
-AbstractTextEditor::~AbstractTextEditor()
-{}
+AbstractTextEditor::~AbstractTextEditor() = default;
 
 //! \brief Gets editor's text model.
 Model::Text * AbstractTextEditor::text() const

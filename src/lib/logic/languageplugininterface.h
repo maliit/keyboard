@@ -9,7 +9,7 @@ class AbstractLanguageFeatures;
 class LanguagePluginInterface
 {
 public:
-    virtual ~LanguagePluginInterface() {}
+    virtual ~LanguagePluginInterface() = default;
 
     virtual void predict(const QString& surroundingLeft, const QString& preedit) = 0;
     virtual void wordCandidateSelected(QString word) = 0;

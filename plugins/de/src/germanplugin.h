@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~GermanPlugin()
-    {
-    }
+    virtual ~GermanPlugin() = default;
 };
 
 #endif // GERMANPLUGIN_H

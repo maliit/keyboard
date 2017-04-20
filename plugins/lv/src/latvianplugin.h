@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~LatvianPlugin()
-    {
-    }
+    virtual ~LatvianPlugin() = default;
 };
 
 #endif // LATVIANPLUGIN_H

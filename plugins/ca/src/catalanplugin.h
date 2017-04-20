@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~CatalanPlugin()
-    {
-    }
+    virtual ~CatalanPlugin() = default;
 };
 
 #endif // CATALANPLUGIN_H

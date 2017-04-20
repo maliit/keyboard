@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~FinnishPlugin()
-    {
-    }
+    virtual ~FinnishPlugin() = default;
 };
 
 #endif // FINNISHPLUGIN_H

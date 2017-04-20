@@ -124,8 +124,7 @@ void SpellCheckerPrivate::clear()
     dic_file.clear();
 }
 
-SpellChecker::~SpellChecker()
-{}
+SpellChecker::~SpellChecker() = default;
 
 //! \brief SpellChecker::enabled returns if the spechchecking is active
 //! \return

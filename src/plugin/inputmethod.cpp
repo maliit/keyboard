@@ -141,8 +141,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
 }
 
-InputMethod::~InputMethod()
-{}
+InputMethod::~InputMethod() = default;
 
 void InputMethod::show()
 {

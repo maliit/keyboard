@@ -83,8 +83,7 @@ AbstractWordEngine::AbstractWordEngine(QObject *parent)
 //! \brief Destructor.
 //!
 //! Needs to be implemented in derived classes.
-AbstractWordEngine::~AbstractWordEngine()
-{}
+AbstractWordEngine::~AbstractWordEngine() = default;
 
 
 //! \brief Returns whether the word engine is enabled.

@@ -9,9 +9,7 @@ EmojiPlugin::EmojiPlugin(QObject *parent) :
 {
 }
 
-EmojiPlugin::~EmojiPlugin()
-{
-}
+EmojiPlugin::~EmojiPlugin() = default;
 
 AbstractLanguageFeatures* EmojiPlugin::languageFeature()
 {

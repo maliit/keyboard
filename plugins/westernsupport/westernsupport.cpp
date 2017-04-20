@@ -1,6 +1,4 @@
 #include "westernsupport.h"
 
 
-Westernsupport::Westernsupport()
-{
-}
+Westernsupport::Westernsupport() = default;

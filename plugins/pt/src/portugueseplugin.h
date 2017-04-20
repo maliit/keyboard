@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~PortuguesePlugin()
-    {
-    }
+    virtual ~PortuguesePlugin() = default;
 };
 
 #endif // PORTUGUESEPPLUGIN_H

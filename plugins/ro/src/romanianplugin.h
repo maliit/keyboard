@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~RomanianPlugin()
-    {
-    }
+    virtual ~RomanianPlugin() = default;
 };
 
 #endif // ROMANIANPLUGIN_H

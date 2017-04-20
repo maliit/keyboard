@@ -31,8 +31,7 @@ AbstractLanguagePlugin::AbstractLanguagePlugin(QObject *parent)
     : QObject(parent)
 {}
 
-AbstractLanguagePlugin::~AbstractLanguagePlugin()
-{}
+AbstractLanguagePlugin::~AbstractLanguagePlugin() = default;
 
 void AbstractLanguagePlugin::predict(const QString& surroundingLeft, const QString& preedit) 
 {

@@ -43,8 +43,7 @@ EventHandler::EventHandler(QObject *parent)
 {}
 
 
-EventHandler::~EventHandler()
-{}
+EventHandler::~EventHandler() = default;
 
 void EventHandler::onWordCandidatePressed(QString word, bool userInput)
 {

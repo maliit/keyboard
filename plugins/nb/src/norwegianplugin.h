@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~NorwegianPlugin()
-    {
-    }
+    virtual ~NorwegianPlugin() = default;
 };
 
 #endif // NORWEGIANPLUGIN_H

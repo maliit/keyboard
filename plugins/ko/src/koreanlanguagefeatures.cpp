@@ -21,9 +21,7 @@ KoreanLanguageFeatures::KoreanLanguageFeatures(QObject *parent) :
 {
 }
 
-KoreanLanguageFeatures::~KoreanLanguageFeatures()
-{
-}
+KoreanLanguageFeatures::~KoreanLanguageFeatures() = default;
 
 bool KoreanLanguageFeatures::alwaysShowSuggestions() const
 {

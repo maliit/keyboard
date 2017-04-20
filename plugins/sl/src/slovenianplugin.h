@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~SlovenianPlugin()
-    {
-    }
+    virtual ~SlovenianPlugin() = default;
 };
 
 #endif // SLOVENIANPLUGIN_H

@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~DanishPlugin()
-    {
-    }
+    virtual ~DanishPlugin() = default;
 };
 
 #endif // DANISHPLUGIN_H

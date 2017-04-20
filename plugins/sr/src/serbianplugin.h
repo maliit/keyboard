@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~SerbianPlugin()
-    {
-    }
+    virtual ~SerbianPlugin() = default;
 };
 
 #endif // SERBIANPLUGIN_H

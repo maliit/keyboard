@@ -21,9 +21,7 @@ ChineseLanguageFeatures::ChineseLanguageFeatures(QObject *parent) :
 {
 }
 
-ChineseLanguageFeatures::~ChineseLanguageFeatures()
-{
-}
+ChineseLanguageFeatures::~ChineseLanguageFeatures() = default;
 
 bool ChineseLanguageFeatures::alwaysShowSuggestions() const
 {

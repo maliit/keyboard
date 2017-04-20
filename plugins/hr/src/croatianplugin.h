@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~CroatianPlugin()
-    {
-    }
+    virtual ~CroatianPlugin() = default;
 };
 
 #endif // CROATIANPLUGIN_H

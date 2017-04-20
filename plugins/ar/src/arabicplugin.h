@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~ArabicPlugin()
-    {
-    }
+    virtual ~ArabicPlugin() = default;
 };
 
 #endif // ARABICPLUGIN_H

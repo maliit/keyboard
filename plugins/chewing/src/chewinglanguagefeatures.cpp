@@ -21,9 +21,7 @@ ChewingLanguageFeatures::ChewingLanguageFeatures(QObject *parent) :
 {
 }
 
-ChewingLanguageFeatures::~ChewingLanguageFeatures()
-{
-}
+ChewingLanguageFeatures::~ChewingLanguageFeatures() = default;
 
 bool ChewingLanguageFeatures::alwaysShowSuggestions() const
 {

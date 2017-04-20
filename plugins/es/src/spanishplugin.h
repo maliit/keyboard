@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~SpanishPlugin()
-    {
-    }
+    virtual ~SpanishPlugin() = default;
 };
 
 #endif // SPANISHPLUGIN_H

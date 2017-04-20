@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~HebrewPlugin()
-    {
-    }
+    virtual ~HebrewPlugin() = default;
 };
 
 #endif // HEBREWPLUGIN_H

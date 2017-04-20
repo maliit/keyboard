@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~RussianPlugin()
-    {
-    }
+    virtual ~RussianPlugin() = default;
 };
 
 #endif // RUSSIANPLUGIN_H

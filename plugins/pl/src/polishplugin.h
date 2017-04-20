@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~PolishPlugin()
-    {
-    }
+    virtual ~PolishPlugin() = default;
 };
 
 #endif // POLISHPLUGIN_H

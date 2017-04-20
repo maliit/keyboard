@@ -46,8 +46,7 @@ Editor::Editor(const EditorOptions &options,
     , m_host(0)
 {}
 
-Editor::~Editor()
-{}
+Editor::~Editor() = default;
 
 void Editor::setHost(MAbstractInputMethodHost *host)
 {

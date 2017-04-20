@@ -17,9 +17,7 @@ public:
     {
     }
 
-    virtual ~SwedishPlugin()
-    {
-    }
+    virtual ~SwedishPlugin() = default;
 };
 
 #endif // SWEDISHPLUGIN_H

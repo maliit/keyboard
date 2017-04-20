@@ -141,8 +141,7 @@ WordEngine::WordEngine(QObject *parent)
 }
 
 //! \brief Destructor.
-WordEngine::~WordEngine()
-{}
+WordEngine::~WordEngine() = default;
 
 //! \brief WordEngine::isEnabled returns if the word engine is functional and enabled
 //! \return

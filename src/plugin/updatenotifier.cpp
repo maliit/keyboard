@@ -62,8 +62,7 @@ UpdateNotifier::UpdateNotifier(QObject *parent)
     , d_ptr(new UpdateNotifierPrivate)
 {}
 
-UpdateNotifier::~UpdateNotifier()
-{}
+UpdateNotifier::~UpdateNotifier() = default;
 
 void UpdateNotifier::notify(MImUpdateEvent* event)
 {
