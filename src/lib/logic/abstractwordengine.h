@@ -74,6 +74,11 @@ public:
 
     virtual AbstractLanguageFeatures* languageFeature() = 0;
 
+public Q_SLOTS:
+    virtual void onWordCandidateSelected(QString word) = 0;
+    virtual void onLanguageChanged(const QString& pluginPath, const QString& languageId) = 0;
+    virtual void updateQmlCandidates(QStringList qmlCandidates) = 0;
+
 signals:
     void preeditFaceChanged(Model::Text::PreeditFace face);
     void primaryCandidateChanged(QString candidate);
