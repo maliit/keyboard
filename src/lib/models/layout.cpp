@@ -249,7 +249,7 @@ void Layout::setImageDirectory(const QString &directory)
         d->image_directory = directory;
         // TODO: Make sure we don't accidentially invalidate the whole model twice
         beginResetModel();
-        backgroundChanged(background());
+        Q_EMIT backgroundChanged(background());
         endResetModel();
     }
 }
