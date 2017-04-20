@@ -12,9 +12,9 @@ JapanesePlugin::JapanesePlugin(QObject *parent) :
     m_anthyAdapter = new AnthyAdapter();
     m_anthyAdapter->moveToThread(m_anthyThread);
 
-    connect(m_anthyAdapter, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SLOT(finishedProcessing(QString, QStringList)));
-    connect(this, SIGNAL(parsePredictionText(QString)), m_anthyAdapter, SLOT(parse(const QString&)));
-    connect(this, SIGNAL(candidateSelected(QString)), m_anthyAdapter, SLOT(wordCandidateSelected(const QString&)));
+    connect(m_anthyAdapter, &AnthyAdapter::newPredictionSuggestions, this, &JapanesePlugin::finishedProcessing);
+    connect(this, &JapanesePlugin::parsePredictionText, m_anthyAdapter, &AnthyAdapter::parse);
+    connect(this, &JapanesePlugin::candidateSelected, m_anthyAdapter, &AnthyAdapter::wordCandidateSelected);
 
     m_anthyThread->start();
 }

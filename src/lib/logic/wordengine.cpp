@@ -412,8 +412,8 @@ void WordEngine::onLanguageChanged(const QString &pluginPath, const QString &lan
 
     Q_EMIT enabledChanged(isEnabled());
 
-    connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SLOT(newSpellingSuggestions(QString, QStringList)));
-    connect((AbstractLanguagePlugin *) d->languagePlugin, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SLOT(newPredictionSuggestions(QString, QStringList)));
+    connect((AbstractLanguagePlugin *) d->languagePlugin, &AbstractLanguagePlugin::newSpellingSuggestions, this, &WordEngine::newSpellingSuggestions);
+    connect((AbstractLanguagePlugin *) d->languagePlugin, &AbstractLanguagePlugin::newPredictionSuggestions, this, &WordEngine::newPredictionSuggestions);
     Q_EMIT pluginChanged();
 }
 

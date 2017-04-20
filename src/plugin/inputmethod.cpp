@@ -94,21 +94,22 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
 
     // FIXME: Reconnect feedback instance.
     Setup::connectAll(&d->event_handler, &d->editor);
-    connect(&d->editor,  SIGNAL(autoCapsActivated()), this, SIGNAL(activateAutocaps()));
-    connect(&d->editor,  SIGNAL(autoCapsDeactivated()), this, SIGNAL(deactivateAutocaps()));
+    connect(&d->editor,  &AbstractTextEditor::autoCapsActivated, this, &InputMethod::activateAutocaps);
+    connect(&d->editor,  &AbstractTextEditor::autoCapsDeactivated, this, &InputMethod::deactivateAutocaps);
 
-    connect(this, SIGNAL(contentTypeChanged(TextContentType)), this, SLOT(setContentType(TextContentType)));
-    connect(this, SIGNAL(activeLanguageChanged(QString)), this, SLOT(onLanguageChanged(QString)));
-    connect(this, SIGNAL(languagePluginChanged(QString, QString)), d->editor.wordEngine(), SLOT(onLanguageChanged(QString, QString)));
-    connect(&d->event_handler, SIGNAL(qmlCandidateChanged(QStringList)), d->editor.wordEngine(), SLOT(updateQmlCandidates(QStringList)));
-    connect(this, SIGNAL(hasSelectionChanged(bool)), &d->editor, SLOT(onHasSelectionChanged(bool)));
-    connect(d->editor.wordEngine(), SIGNAL(pluginChanged()), this, SLOT(onWordEnginePluginChanged()));
-    connect(this, SIGNAL(keyboardStateChanged(QString)), &d->editor, SLOT(onKeyboardStateChanged(QString)));
-    connect(d->m_geometry, SIGNAL(visibleRectChanged()), this, SLOT(onVisibleRectChanged()));
-    connect(&d->m_settings, SIGNAL(disableHeightChanged(bool)), this, SLOT(onVisibleRectChanged()));
+    connect(this, &InputMethod::contentTypeChanged, this, &InputMethod::setContentType);
+    connect(this, &InputMethod::activeLanguageChanged, this, &InputMethod::onLanguageChanged);
+    connect(this, &InputMethod::languagePluginChanged, d->editor.wordEngine(), &Logic::AbstractWordEngine::onLanguageChanged);
+    connect(&d->event_handler, &Logic::EventHandler::qmlCandidateChanged,
+            d->editor.wordEngine(), &Logic::AbstractWordEngine::updateQmlCandidates);
+    connect(this, &InputMethod::hasSelectionChanged, &d->editor, &AbstractTextEditor::onHasSelectionChanged);
+    connect(d->editor.wordEngine(), &Logic::AbstractWordEngine::pluginChanged, this, &InputMethod::onWordEnginePluginChanged);
+    connect(this, &InputMethod::keyboardStateChanged, &d->editor, &AbstractTextEditor::onKeyboardStateChanged);
+    connect(d->m_geometry, &KeyboardGeometry::visibleRectChanged, this, &InputMethod::onVisibleRectChanged);
+    connect(&d->m_settings, &KeyboardSettings::disableHeightChanged, this, &InputMethod::onVisibleRectChanged);
 
-    connect(&d->editor, SIGNAL(preeditChanged(QString)), this, SIGNAL(preeditChanged(QString)));
-    connect(&d->editor, SIGNAL(cursorPositionChanged(int)), this, SIGNAL(cursorPositionChanged(int)));
+    connect(&d->editor, &AbstractTextEditor::preeditChanged, this, &InputMethod::preeditChanged);
+    connect(&d->editor, &AbstractTextEditor::cursorPositionChanged, this, &InputMethod::cursorPositionChanged);
 
     d->registerAudioFeedbackSoundSetting();
     d->registerAudioFeedbackSetting();
@@ -312,8 +313,8 @@ void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverrid
     bool actionKeyChanged = false;
 
     if (d->actionKeyOverrider) {
-        disconnect(d->actionKeyOverrider.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
-                   this, SIGNAL(actionKeyOverrideChanged()));
+        disconnect(d->actionKeyOverrider.data(), &MKeyOverride::keyAttributesChanged,
+                   this, &InputMethod::actionKeyOverrideChanged);
         d->actionKeyOverrider.clear();
         actionKeyChanged = true;
     }
@@ -323,8 +324,8 @@ void InputMethod::setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverrid
 
         if (actionKeyOverrider) {
             d->actionKeyOverrider = actionKeyOverrider;
-            connect(d->actionKeyOverrider.data(), SIGNAL(keyAttributesChanged(const QString &, const MKeyOverride::KeyOverrideAttributes)),
-                    this, SIGNAL(actionKeyOverrideChanged()));
+            connect(d->actionKeyOverrider.data(), &MKeyOverride::keyAttributesChanged,
+                    this, &InputMethod::actionKeyOverrideChanged);
         }
         actionKeyChanged = true;
     }

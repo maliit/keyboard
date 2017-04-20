@@ -60,8 +60,8 @@ KeyboardSettings::KeyboardSettings(QObject *parent) :
   , m_settings(new QGSettings("org.maliit.keyboard.maliit",
                               "/org/maliit/keyboard/maliit/", this))
 {
-    QObject::connect(m_settings, SIGNAL(changed(QString)),
-                     this, SLOT(settingUpdated(QString)));
+    QObject::connect(m_settings, &QGSettings::changed,
+                     this, &KeyboardSettings::settingUpdated);
 }
 
 /*!

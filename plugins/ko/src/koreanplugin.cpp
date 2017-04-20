@@ -14,14 +14,14 @@ KoreanPlugin::KoreanPlugin(QObject *parent) :
     m_spellPredictWorker = new SpellPredictWorker();
     m_spellPredictWorker->moveToThread(m_spellPredictThread);
 
-    connect(m_spellPredictWorker, SIGNAL(newSpellingSuggestions(QString, QStringList)), this, SLOT(spellCheckFinishedProcessing(QString, QStringList)));
-    connect(m_spellPredictWorker, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SIGNAL(newPredictionSuggestions(QString, QStringList)));
-    connect(this, SIGNAL(newSpellCheckWord(QString)), m_spellPredictWorker, SLOT(newSpellCheckWord(QString)));
-    connect(this, SIGNAL(setSpellPredictLanguage(QString, QString)), m_spellPredictWorker, SLOT(setLanguage(QString, QString)));
-    connect(this, SIGNAL(setSpellCheckLimit(int)), m_spellPredictWorker, SLOT(setSpellCheckLimit(int)));
-    connect(this, SIGNAL(parsePredictionText(QString, QString)), m_spellPredictWorker, SLOT(parsePredictionText(QString, QString)));
-    connect(this, SIGNAL(addToUserWordList(QString)), m_spellPredictWorker, SLOT(addToUserWordList(QString)));
-    connect(this, SIGNAL(addOverride(QString, QString)), m_spellPredictWorker, SLOT(addOverride(QString, QString)));
+    connect(m_spellPredictWorker, &SpellPredictWorker::newSpellingSuggestions, this, &KoreanPlugin::spellCheckFinishedProcessing);
+    connect(m_spellPredictWorker, &SpellPredictWorker::newPredictionSuggestions, this, &KoreanPlugin::newPredictionSuggestions);
+    connect(this, &KoreanPlugin::newSpellCheckWord, m_spellPredictWorker, &SpellPredictWorker::newSpellCheckWord);
+    connect(this, &KoreanPlugin::setSpellPredictLanguage, m_spellPredictWorker, &SpellPredictWorker::setLanguage);
+    connect(this, &KoreanPlugin::setSpellCheckLimit, m_spellPredictWorker, &SpellPredictWorker::setSpellCheckLimit);
+    connect(this, &KoreanPlugin::parsePredictionText, m_spellPredictWorker, &SpellPredictWorker::parsePredictionText);
+    connect(this, &KoreanPlugin::addToUserWordList, m_spellPredictWorker, &SpellPredictWorker::addToUserWordList);
+    connect(this, &KoreanPlugin::addOverride, m_spellPredictWorker, &SpellPredictWorker::addOverride);
     m_spellPredictThread->start();
 
 }

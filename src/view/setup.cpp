@@ -51,10 +51,10 @@ void connectAll(Logic::EventHandler *event_handler,
 void connectEventHandlerToTextEditor(Logic::EventHandler *event_handler,
                                      AbstractTextEditor *editor)
 {
-    QObject::connect(event_handler, SIGNAL(keyPressed(Key)),
-                     editor,        SLOT(onKeyPressed(Key)));
+    QObject::connect(event_handler, &Logic::EventHandler::keyPressed,
+                     editor,        &AbstractTextEditor::onKeyPressed);
 
-    QObject::connect(event_handler, SIGNAL(keyReleased(Key)),
-                     editor,        SLOT(onKeyReleased(Key)));
+    QObject::connect(event_handler, &Logic::EventHandler::keyReleased,
+                     editor,        &AbstractTextEditor::onKeyReleased);
 }
 }} // namespace Setup, MaliitKeyboard

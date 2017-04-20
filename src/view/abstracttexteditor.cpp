@@ -279,23 +279,23 @@ AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
     : QObject(parent)
     , d_ptr(new AbstractTextEditorPrivate(options, text, word_engine))
 {
-    connect(&d_ptr->auto_repeat_backspace_timer, SIGNAL(timeout()),
-            this,                                SLOT(autoRepeatBackspace()));
+    connect(&d_ptr->auto_repeat_backspace_timer, &QTimer::timeout,
+            this,                                &AbstractTextEditor::autoRepeatBackspace);
 
-    connect(word_engine, SIGNAL(enabledChanged(bool)),
-            this,        SLOT(setPreeditEnabled(bool)));
+    connect(word_engine, &Logic::AbstractWordEngine::enabledChanged,
+            this,        &AbstractTextEditor::setPreeditEnabled);
 
-    connect(word_engine, SIGNAL(candidatesChanged(WordCandidateList)),
-            this,        SIGNAL(wordCandidatesChanged(WordCandidateList)));
+    connect(word_engine, &Logic::AbstractWordEngine::candidatesChanged,
+            this,        &AbstractTextEditor::wordCandidatesChanged);
 
-    connect(word_engine, SIGNAL(preeditFaceChanged(Model::Text::PreeditFace)),
-            this,        SLOT(setPreeditFace(Model::Text::PreeditFace)));
+    connect(word_engine, &Logic::AbstractWordEngine::preeditFaceChanged,
+            this,        &AbstractTextEditor::setPreeditFace);
 
-    connect(word_engine, SIGNAL(primaryCandidateChanged(QString)),
-            this,        SLOT(setPrimaryCandidate(QString)));
+    connect(word_engine, &Logic::AbstractWordEngine::primaryCandidateChanged,
+            this,        &AbstractTextEditor::setPrimaryCandidate);
     
-    connect(this,        SIGNAL(autoCorrectEnabledChanged(bool)),
-            word_engine, SLOT(setAutoCorrectEnabled(bool)));
+    connect(this,        &AbstractTextEditor::autoCorrectEnabledChanged,
+            word_engine, &Logic::AbstractWordEngine::setAutoCorrectEnabled);
 
     setPreeditEnabled(word_engine->isEnabled());
 }

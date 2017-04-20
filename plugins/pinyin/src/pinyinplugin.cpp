@@ -12,9 +12,9 @@ PinyinPlugin::PinyinPlugin(QObject *parent) :
     m_pinyinAdapter = new PinyinAdapter();
     m_pinyinAdapter->moveToThread(m_pinyinThread);
 
-    connect(m_pinyinAdapter, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SLOT(finishedProcessing(QString, QStringList)));
-    connect(this, SIGNAL(parsePredictionText(QString)), m_pinyinAdapter, SLOT(parse(QString)));
-    connect(this, SIGNAL(candidateSelected(QString)), m_pinyinAdapter, SLOT(wordCandidateSelected(QString)));
+    connect(m_pinyinAdapter, &PinyinAdapter::newPredictionSuggestions, this, &PinyinPlugin::finishedProcessing);
+    connect(this, &PinyinPlugin::parsePredictionText, m_pinyinAdapter, &PinyinAdapter::parse);
+    connect(this, &PinyinPlugin::candidateSelected, m_pinyinAdapter, &PinyinAdapter::wordCandidateSelected);
     m_pinyinThread->start();
 }
 

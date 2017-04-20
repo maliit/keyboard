@@ -126,26 +126,26 @@ public:
         editor.setHost(host);
 
         //! connect wordRibbon
-        QObject::connect(&event_handler, SIGNAL(wordCandidatePressed(WordCandidate)),
-                         wordRibbon, SLOT( onWordCandidatePressed(WordCandidate) ));
+        QObject::connect(&event_handler, &MaliitKeyboard::Logic::EventHandler::wordCandidatePressed,
+                         wordRibbon, &MaliitKeyboard::WordRibbon::onWordCandidatePressed);
 
-        QObject::connect(&event_handler, SIGNAL(wordCandidateReleased(WordCandidate)),
-                         wordRibbon, SLOT( onWordCandidateReleased(WordCandidate) ));
+        QObject::connect(&event_handler, &MaliitKeyboard::Logic::EventHandler::wordCandidateReleased,
+                         wordRibbon, &MaliitKeyboard::WordRibbon::onWordCandidateReleased);
 
-        QObject::connect(&editor,  SIGNAL(wordCandidatesChanged(WordCandidateList)),
-                         wordRibbon, SLOT(onWordCandidatesChanged(WordCandidateList)));
+        QObject::connect(&editor,  &MaliitKeyboard::AbstractTextEditor::wordCandidatesChanged,
+                         wordRibbon, &MaliitKeyboard::WordRibbon::onWordCandidatesChanged);
 
-        QObject::connect(wordRibbon, SIGNAL(wordCandidateSelected(QString)),
-                         &editor,  SLOT(replaceAndCommitPreedit(QString)));
+        QObject::connect(wordRibbon, &MaliitKeyboard::WordRibbon::wordCandidateSelected,
+                         &editor,  &MaliitKeyboard::AbstractTextEditor::replaceAndCommitPreedit);
 
-        QObject::connect(wordRibbon, SIGNAL(userCandidateSelected(QString)),
-                         &editor,  SLOT(addToUserDictionary(QString)));
+        QObject::connect(wordRibbon, &MaliitKeyboard::WordRibbon::userCandidateSelected,
+                         &editor,  &MaliitKeyboard::AbstractTextEditor::addToUserDictionary);
 
-        QObject::connect(&editor,  SIGNAL(preeditEnabledChanged(bool)),
-                         wordRibbon, SLOT(setWordRibbonVisible(bool)));
+        QObject::connect(&editor,  &MaliitKeyboard::AbstractTextEditor::preeditEnabledChanged,
+                         wordRibbon, &MaliitKeyboard::WordRibbon::setWordRibbonVisible);
 
-        QObject::connect(wordRibbon, SIGNAL(wordCandidateSelected(QString)),
-                         editor.wordEngine(),  SLOT(onWordCandidateSelected(QString)));
+        QObject::connect(wordRibbon, &MaliitKeyboard::WordRibbon::wordCandidateSelected,
+                         editor.wordEngine(), &MaliitKeyboard::Logic::AbstractWordEngine::onWordCandidateSelected);
 
     #ifdef DISABLED_FLAGS_FROM_SURFACE
         view->setFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
@@ -221,50 +221,50 @@ public:
      */
     void registerAudioFeedbackSoundSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(keyPressAudioFeedbackSoundChanged(QString)),
-                         q, SIGNAL(audioFeedbackSoundChanged(QString)));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::keyPressAudioFeedbackSoundChanged,
+                         q, &InputMethod::audioFeedbackSoundChanged);
     }
 
     void registerAudioFeedbackSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(keyPressAudioFeedbackChanged(bool)),
-                         q, SIGNAL(useAudioFeedbackChanged()));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::keyPressAudioFeedbackChanged,
+                         q, &InputMethod::useAudioFeedbackChanged);
     }
 
     void registerHapticFeedbackSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(keyPressHapticFeedbackChanged(bool)),
-                         q, SIGNAL(useHapticFeedbackChanged()));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::keyPressHapticFeedbackChanged,
+                         q, &InputMethod::useHapticFeedbackChanged);
     }
 
     void registerAutoCorrectSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(autoCompletionChanged(bool)),
-                         q, SLOT(onAutoCorrectSettingChanged()));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::autoCompletionChanged,
+                         q, &InputMethod::onAutoCorrectSettingChanged);
         editor.setAutoCorrectEnabled(m_settings.autoCompletion());
     }
 
     void registerAutoCapsSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(autoCapitalizationChanged(bool)),
-                         q, SLOT(updateAutoCaps()));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::autoCapitalizationChanged,
+                         q, &InputMethod::updateAutoCaps);
     }
 
     void registerWordEngineSetting()
     {
-        QObject::connect(&m_settings, SIGNAL(predictiveTextChanged(bool)),
-                         editor.wordEngine(), SLOT(setWordPredictionEnabled(bool)));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::predictiveTextChanged,
+                         editor.wordEngine(), &MaliitKeyboard::Logic::AbstractWordEngine::setWordPredictionEnabled);
         editor.wordEngine()->setWordPredictionEnabled(m_settings.predictiveText());
 
-        QObject::connect(&m_settings, SIGNAL(spellCheckingChanged(bool)),
-                         editor.wordEngine(), SLOT(setSpellcheckerEnabled(bool)));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::spellCheckingChanged,
+                         editor.wordEngine(), &MaliitKeyboard::Logic::AbstractWordEngine::setSpellcheckerEnabled);
         editor.wordEngine()->setSpellcheckerEnabled(m_settings.spellchecking());
     }
 
     void registerActiveLanguage()
     {
-        QObject::connect(&m_settings, SIGNAL(activeLanguageChanged(QString)),
-                         q, SLOT(setActiveLanguage(QString)));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::activeLanguageChanged,
+                         q, &InputMethod::setActiveLanguage);
 
         activeLanguage = m_settings.activeLanguage();
         qDebug() << "inputmethod_p.h registerActiveLanguage(): activeLanguage is:" << activeLanguage;
@@ -273,8 +273,8 @@ public:
 
     void registerPreviousLanguage()
     {
-        QObject::connect(&m_settings, SIGNAL(previousLanguageChanged(QString)),
-                         q, SLOT(setPreviousLanguage(QString)));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::previousLanguageChanged,
+                         q, &InputMethod::setPreviousLanguage);
 
         previousLanguage = m_settings.previousLanguage();
         q->setPreviousLanguage(previousLanguage);
@@ -282,8 +282,8 @@ public:
 
     void registerEnabledLanguages()
     {
-        QObject::connect(&m_settings, SIGNAL(enabledLanguagesChanged(QStringList)),
-                         q, SLOT(onEnabledLanguageSettingsChanged()));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::enabledLanguagesChanged,
+                         q, &InputMethod::onEnabledLanguageSettingsChanged);
         q->onEnabledLanguageSettingsChanged();
 
         //registerSystemLanguage();
@@ -292,27 +292,27 @@ public:
 
     void registerDoubleSpaceFullStop()
     {
-        QObject::connect(&m_settings, SIGNAL(doubleSpaceFullStopChanged(bool)),
-                         q, SLOT(onDoubleSpaceSettingChanged()));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::doubleSpaceFullStopChanged,
+                         q, &InputMethod::onDoubleSpaceSettingChanged);
         editor.setDoubleSpaceFullStopEnabled(m_settings.doubleSpaceFullStop());
     }
 
     void registerStayHidden()
     {
-        QObject::connect(&m_settings, SIGNAL(stayHiddenChanged(bool)),
-                         q, SLOT(hide()));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::stayHiddenChanged,
+                         q, &InputMethod::hide);
     }
 
     void registerPluginPaths()
     {
-        QObject::connect(&m_settings, SIGNAL(pluginPathsChanged(QStringList)),
-                        q, SLOT(onPluginPathsChanged(QStringList)));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::pluginPathsChanged,
+                        q, &InputMethod::onPluginPathsChanged);
     }
 
     void registerOpacity()
     {
-        QObject::connect(&m_settings, SIGNAL(opacityChanged(double)),
-                        q, SIGNAL(opacityChanged(double)));
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::opacityChanged,
+                        q, &InputMethod::opacityChanged);
     }
 
     void closeOskWindow()

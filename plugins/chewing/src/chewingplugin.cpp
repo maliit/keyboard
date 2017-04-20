@@ -12,9 +12,9 @@ ChewingPlugin::ChewingPlugin(QObject *parent) :
     m_chewingAdapter = new ChewingAdapter();
     m_chewingAdapter->moveToThread(m_chewingThread);
 
-    connect(m_chewingAdapter, SIGNAL(newPredictionSuggestions(QString, QStringList)), this, SLOT(finishedProcessing(QString, QStringList)));
-    connect(this, SIGNAL(parsePredictionText(QString)), m_chewingAdapter, SLOT(parse(QString)));
-    connect(this, SIGNAL(candidateSelected(QString)), m_chewingAdapter, SLOT(wordCandidateSelected(QString)));
+    connect(m_chewingAdapter, &ChewingAdapter::newPredictionSuggestions, this, &ChewingPlugin::finishedProcessing);
+    connect(this, &ChewingPlugin::parsePredictionText, m_chewingAdapter, &ChewingAdapter::parse);
+    connect(this, &ChewingPlugin::candidateSelected, m_chewingAdapter, &ChewingAdapter::wordCandidateSelected);
     m_chewingThread->start();
 }
 
