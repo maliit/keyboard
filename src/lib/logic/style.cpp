@@ -96,17 +96,11 @@ void Style::setProfile(const QString &profile)
     StyleAttributes *extended_keys_attributes = nullptr;
 
     if (not d->profile.isEmpty()) {
-        const QString main_file_name(g_main_fn_format
-                                     .arg(CoreUtils::maliitKeyboardStyleProfilesDirectory())
-                                     .arg(profile));
-        const QString extended_keys_file_name(g_extended_keys_fn_format
-                                              .arg(CoreUtils::maliitKeyboardStyleProfilesDirectory())
-                                              .arg(profile));
+        const QString main_file_name(g_main_fn_format.arg(CoreUtils::maliitKeyboardStyleProfilesDirectory(), profile));
+        const QString extended_keys_file_name(g_extended_keys_fn_format.arg(CoreUtils::maliitKeyboardStyleProfilesDirectory(), profile));
 
-        attributes =  new StyleAttributes(
-            new QSettings(main_file_name, QSettings::IniFormat));
-        extended_keys_attributes = new StyleAttributes(
-            new QSettings(extended_keys_file_name, QSettings::IniFormat));
+        attributes =  new StyleAttributes(new QSettings(main_file_name, QSettings::IniFormat));
+        extended_keys_attributes = new StyleAttributes(new QSettings(extended_keys_file_name, QSettings::IniFormat));
     }
 
     d->attributes.reset(attributes);
@@ -146,19 +140,13 @@ QString Style::directory(Directory directory) const
 
     switch (directory) {
     case Images:
-        return g_profile_image_directory_path_format
-                .arg(CoreUtils::maliitKeyboardStyleProfilesDirectory())
-                .arg(d->profile);
+        return g_profile_image_directory_path_format.arg(CoreUtils::maliitKeyboardStyleProfilesDirectory(), d->profile);
 
     case Sounds:
-        return g_profile_sounds_directory_path_format
-                .arg(CoreUtils::maliitKeyboardStyleProfilesDirectory())
-                .arg(d->profile);
+        return g_profile_sounds_directory_path_format.arg(CoreUtils::maliitKeyboardStyleProfilesDirectory(), d->profile);
 
     case Fonts:
-        return g_profile_fonts_directory_path_format
-                .arg(CoreUtils::maliitKeyboardStyleProfilesDirectory())
-                .arg(d->profile);
+        return g_profile_fonts_directory_path_format.arg(CoreUtils::maliitKeyboardStyleProfilesDirectory(), d->profile);
     }
 
     return QString();
