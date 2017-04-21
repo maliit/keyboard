@@ -69,7 +69,7 @@ void EventHandler::onKeyPressed(QString label, QString action)
     Key key;
     key.setLabel(label);
 
-    if (action == "backspace")
+    if (action == QLatin1String("backspace"))
         key.setAction(Key::ActionBackspace);
 
     Q_EMIT keyPressed(key);
@@ -80,27 +80,27 @@ void EventHandler::onKeyReleased(QString label, QString action)
     Key key;
     key.setLabel(label);
 
-    if (action == "return")
+    if (action == QLatin1String("return"))
         key.setAction(Key::ActionReturn);
-    else if (action == "commit")
+    else if (action == QLatin1String("commit"))
         key.setAction(Key::ActionCommit);
-    else if (action == "backspace")
+    else if (action == QLatin1String("backspace"))
         key.setAction(Key::ActionBackspace);
-    else if (action == "space")
+    else if (action == QLatin1String("space"))
         key.setAction(Key::ActionSpace);
-    else if (action == "shift")
+    else if (action == QLatin1String("shift"))
         key.setAction(Key::ActionShift);
-    else if (action == "left")
+    else if (action == QLatin1String("left"))
         key.setAction(Key::ActionLeft);
-    else if (action == "right")
+    else if (action == QLatin1String("right"))
         key.setAction(Key::ActionRight);
-    else if (action == "up")
+    else if (action == QLatin1String("up"))
         key.setAction(Key::ActionUp);
-    else if (action == "down")
+    else if (action == QLatin1String("down"))
         key.setAction(Key::ActionDown);
-    else if (action == "home")
+    else if (action == QLatin1String("home"))
         key.setAction(Key::ActionHome);
-    else if (action == "end")
+    else if (action == QLatin1String("end"))
         key.setAction(Key::ActionEnd);
     else
         key.setAction(Key::ActionInsert);

@@ -51,7 +51,7 @@ WordCandidate::WordCandidate(Source source, const QString &word)
     , m_primary(false)
 {
     if (source == WordCandidate::SourceUser) {
-        m_label = QString(QT_TR_NOOP("Add '%1' to user dictionary")).arg(word);
+        m_label = QStringLiteral(QT_TR_NOOP("Add '%1' to user dictionary")).arg(word);
     } else {
         m_label = word;
     }

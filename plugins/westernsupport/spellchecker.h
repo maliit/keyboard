@@ -43,7 +43,7 @@ class SpellChecker
 public:
     // FIXME: Find better way to discover default dictionaries.
     // FIXME: Allow changing languages in between.
-    explicit SpellChecker(const QString &user_dictionary = QString("%1/.config/maliit/userwords.txt").arg(QDir::homePath()));
+    explicit SpellChecker(const QString &user_dictionary = QStringLiteral("%1/.config/maliit/userwords.txt").arg(QDir::homePath()));
 
     ~SpellChecker();
 

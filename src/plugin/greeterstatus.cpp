@@ -22,15 +22,15 @@
 GreeterStatus::GreeterStatus(QObject *parent) : QObject(parent)
 {
     QDBusConnection connection = QDBusConnection::sessionBus();
-    QDBusInterface greeterPropsIface("com.canonical.UnityGreeter",
-                                     "/",
-                                     "org.freedesktop.DBus.Properties");
-    QDBusReply<QVariant> reply = greeterPropsIface.call("Get", "com.canonical.UnityGreeter", "IsActive");
+    QDBusInterface greeterPropsIface(QStringLiteral("com.canonical.UnityGreeter"),
+                                     QStringLiteral("/"),
+                                     QStringLiteral("org.freedesktop.DBus.Properties"));
+    QDBusReply<QVariant> reply = greeterPropsIface.call(QStringLiteral("Get"), "com.canonical.UnityGreeter", "IsActive");
     m_greeterActive = reply.isValid() && reply.value().toBool();
-    connection.connect("com.canonical.UnityGreeter",
-                       "/",
-                       "org.freedesktop.DBus.Properties",
-                       "PropertiesChanged",
+    connection.connect(QStringLiteral("com.canonical.UnityGreeter"),
+                       QStringLiteral("/"),
+                       QStringLiteral("org.freedesktop.DBus.Properties"),
+                       QStringLiteral("PropertiesChanged"),
                        this,
                        SLOT(greeterPropertiesChanged(QString, QVariantMap, QStringList)));
 }
@@ -44,9 +44,9 @@ void GreeterStatus::greeterPropertiesChanged(const QString &interface, const QVa
 {
     Q_UNUSED(invalidated);
 
-    if (interface == "com.canonical.UnityGreeter") {
-        if (changed.contains("IsActive")) {
-            m_greeterActive = changed.value("IsActive").toBool();
+    if (interface == QLatin1String("com.canonical.UnityGreeter")) {
+        if (changed.contains(QStringLiteral("IsActive"))) {
+            m_greeterActive = changed.value(QStringLiteral("IsActive")).toBool();
             Q_EMIT greeterActiveChanged();
         }
     }

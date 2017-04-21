@@ -32,7 +32,7 @@ public:
     bool activateAutoCaps(const QString &preedit) const override;
     QString appendixForReplacedPreedit(const QString &preedit) const override;
     bool isSeparator(const QString &text) const override;
-    QString fullStopSequence() const override { return QString("."); }
+    QString fullStopSequence() const override { return QStringLiteral("."); }
     bool isSymbol(const QString &text) const override;
     bool ignoreSimilarity() const override;
     bool wordEngineAvailable() const override;

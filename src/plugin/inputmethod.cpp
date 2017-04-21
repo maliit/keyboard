@@ -298,7 +298,7 @@ void InputMethod::onEnabledLanguageSettingsChanged()
     Q_D(InputMethod);
     d->enabledLanguages = d->m_settings.enabledLanguages();
     if (!d->enabledLanguages.contains(d->previousLanguage)) {
-        setPreviousLanguage("");
+        setPreviousLanguage(QLatin1String(""));
     }
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
@@ -466,12 +466,12 @@ void InputMethod::checkAutocaps()
         int position;
         bool ok = d->host->surroundingText(text, position);
         QString textOnLeft = d->editor.text()->surroundingLeft() + d->editor.text()->preedit();
-        if (textOnLeft.contains("\n")) {
-            textOnLeft = textOnLeft.split("\n").last();
+        if (textOnLeft.contains(QLatin1String("\n"))) {
+            textOnLeft = textOnLeft.split(QStringLiteral("\n")).last();
         }
-        QStringList leftHandWords = textOnLeft.split(" ");
+        QStringList leftHandWords = textOnLeft.split(QStringLiteral(" "));
         bool email_detected = false;
-        if (!leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
+        if (!leftHandWords.isEmpty() && leftHandWords.last().contains(QLatin1String("@"))) {
             email_detected = true;
         }
         if (ok && !email_detected && ((textOnLeft.isEmpty() && d->editor.text()->preedit().isEmpty())
@@ -623,7 +623,7 @@ void InputMethod::onVisibleRectChanged()
 
     QRect visibleRect = d->m_geometry->visibleRect().toRect();
 
-    if (d->m_settings.disableHeight() && QGuiApplication::platformName() == "ubuntumirclient") {
+    if (d->m_settings.disableHeight() && QGuiApplication::platformName() == QLatin1String("ubuntumirclient")) {
         visibleRect.setHeight(0);
     }
 

@@ -42,14 +42,14 @@ bool KoreanLanguageFeatures::activateAutoCaps(const QString &preedit) const
 QString KoreanLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
     if (preedit.isEmpty())
-        return QString("");
+        return QLatin1String("");
 
-    return QString(" ");
+    return QStringLiteral(" ");
 }
 
 bool KoreanLanguageFeatures::isSeparator(const QString &text) const
 {
-    static const QString separators = QString::fromUtf8("。、,!?:;.\r\n");
+    static const QString separators = QStringLiteral("。、,!?:;.\r\n");
 
     if (text.isEmpty()) {
         return false;
@@ -64,7 +64,7 @@ bool KoreanLanguageFeatures::isSeparator(const QString &text) const
 
 bool KoreanLanguageFeatures::isSymbol(const QString &text) const
 {
-    static const QString symbols = QString::fromUtf8(R"(*#+=()@~/\€£$¥₹%<>[]`^|_§{}¡¿«»"“”„&0123456789)");
+    static const QString symbols = QStringLiteral(R"(*#+=()@~/\€£$¥₹%<>[]`^|_§{}¡¿«»"“”„&0123456789)");
 
     if (text.isEmpty()) {
         return false;

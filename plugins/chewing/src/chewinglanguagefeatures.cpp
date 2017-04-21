@@ -46,14 +46,14 @@ bool ChewingLanguageFeatures::activateAutoCaps(const QString &preedit) const
 QString ChewingLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
     if (preedit.isEmpty())
-        return QString("");
+        return QLatin1String("");
 
-    return QString(" ");
+    return QStringLiteral(" ");
 }
 
 bool ChewingLanguageFeatures::isSeparator(const QString &text) const
 {
-    static const QString separators = QString::fromUtf8("。、!?:…\r\n");
+    static const QString separators = QStringLiteral("。、!?:…\r\n");
 
     if (text.isEmpty()) {
         return false;
@@ -68,7 +68,7 @@ bool ChewingLanguageFeatures::isSeparator(const QString &text) const
 
 bool ChewingLanguageFeatures::isSymbol(const QString &text) const
 {
-    static const QString symbols = QString::fromUtf8(R"(*#+=()@~\€£$¥₹%<>[]`^|_—–•§{}¡¿«»"“”„&)");
+    static const QString symbols = QStringLiteral(R"(*#+=()@~\€£$¥₹%<>[]`^|_—–•§{}¡¿«»"“”„&)");
 
     if (text.isEmpty()) {
         return false;
@@ -93,7 +93,7 @@ bool ChewingLanguageFeatures::wordEngineAvailable() const
 
 QString ChewingLanguageFeatures::fullStopSequence() const
 {
-    return QString("。");
+    return QStringLiteral("。");
 }
 
 bool ChewingLanguageFeatures::restorePreedit() const

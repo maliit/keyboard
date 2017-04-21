@@ -325,6 +325,6 @@ QString SpellChecker::dictPath()
     if (!prefix.isEmpty()) {
         return prefix + QDir::separator() + HUNSPELL_DICT_PATH;
     } else {
-        return QString(HUNSPELL_DICT_PATH);
+        return QStringLiteral(HUNSPELL_DICT_PATH);
     }
 }

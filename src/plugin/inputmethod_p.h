@@ -107,13 +107,13 @@ public:
         , autocapsEnabled(false)
         , wordEngineEnabled(false)
         , contentType(InputMethod::FreeTextContentType)
-        , activeLanguage("en")
-        , previousLanguage("")
+        , activeLanguage(QStringLiteral("en"))
+        , previousLanguage(QLatin1String(""))
         , enabledLanguages(activeLanguage)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
-        , keyboardState("CHARACTERS")
+        , keyboardState(QStringLiteral("CHARACTERS"))
         , hasSelection(false)
-        , preedit("")
+        , preedit(QLatin1String(""))
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , m_greeterStatus(new GreeterStatus())
@@ -166,10 +166,10 @@ public:
         QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
         if (!prefix.isEmpty()) {
             engine->addImportPath(prefix + QDir::separator() + MALIIT_KEYBOARD_DATA_DIR);
-            engine->addImportPath(prefix + QDir::separator() + QString(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
+            engine->addImportPath(prefix + QDir::separator() + QStringLiteral(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
         } else {
             engine->addImportPath(MALIIT_KEYBOARD_DATA_DIR);
-            engine->addImportPath(QString(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
+            engine->addImportPath(QStringLiteral(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
         }
 
         setContextProperties(engine->rootContext());
@@ -178,7 +178,7 @@ public:
         // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
         view->setResizeMode(QQuickView::SizeRootObjectToView);
 
-        if (QGuiApplication::platformName() == "ubuntumirclient") {
+        if (QGuiApplication::platformName() == QLatin1String("ubuntumirclient")) {
             view->setFlags(InputMethodWindowType); /* Mir-only OSK window type */
 
             // When keyboard geometry changes, update the window's input mask
@@ -195,13 +195,13 @@ public:
 
     void setContextProperties(QQmlContext *qml_context)
     {
-        qml_context->setContextProperty("maliit_input_method", q);
-        qml_context->setContextProperty("maliit_geometry", m_geometry);
-        qml_context->setContextProperty("maliit_event_handler", &event_handler);
-        qml_context->setContextProperty("maliit_wordribbon", wordRibbon);
-        qml_context->setContextProperty("maliit_word_engine", editor.wordEngine());
-        qml_context->setContextProperty("greeter_status", m_greeterStatus);
-        qml_context->setContextProperty("units", m_units);
+        qml_context->setContextProperty(QStringLiteral("maliit_input_method"), q);
+        qml_context->setContextProperty(QStringLiteral("maliit_geometry"), m_geometry);
+        qml_context->setContextProperty(QStringLiteral("maliit_event_handler"), &event_handler);
+        qml_context->setContextProperty(QStringLiteral("maliit_wordribbon"), wordRibbon);
+        qml_context->setContextProperty(QStringLiteral("maliit_word_engine"), editor.wordEngine());
+        qml_context->setContextProperty(QStringLiteral("greeter_status"), m_greeterStatus);
+        qml_context->setContextProperty(QStringLiteral("units"), m_units);
     }
 
     void updatePluginPaths()
@@ -209,9 +209,9 @@ public:
         pluginPaths.clear();
         QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
         if (!prefix.isEmpty()) {
-            pluginPaths.append(prefix + QDir::separator() + QString(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+            pluginPaths.append(prefix + QDir::separator() + QStringLiteral(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
         } else {
-            pluginPaths.append(QString(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+            pluginPaths.append(QStringLiteral(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
         }
         pluginPaths.append(m_settings.pluginPaths());
     }

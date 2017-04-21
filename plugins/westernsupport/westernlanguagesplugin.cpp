@@ -91,7 +91,7 @@ void WesternLanguagesPlugin::loadOverrides(const QString& pluginPath) {
         QTextStream overrideStream(&overrideFile);
         while (!overrideStream.atEnd()) {
             QString line = overrideStream.readLine();
-            QStringList components = line.split(",");
+            QStringList components = line.split(QStringLiteral(","));
             if (components.length() == 2) {
                 addSpellingOverride(components.first(), components.last());
             }

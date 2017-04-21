@@ -46,15 +46,15 @@ bool ChineseLanguageFeatures::activateAutoCaps(const QString &preedit) const
 QString ChineseLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
     if (isSeparator(preedit.right(1)) && contentType() != Maliit::EmailContentType && contentType() != Maliit::UrlContentType) {
-        return QString(" ");
+        return QStringLiteral(" ");
     }
 
-    return QString("");
+    return QLatin1String("");
 }
 
 bool ChineseLanguageFeatures::isSeparator(const QString &text) const
 {
-    static const QString separators = QString::fromUtf8("。、,!?:;.…\r\n");
+    static const QString separators = QStringLiteral("。、,!?:;.…\r\n");
 
     if (text.isEmpty()) {
         return false;
@@ -69,7 +69,7 @@ bool ChineseLanguageFeatures::isSeparator(const QString &text) const
 
 bool ChineseLanguageFeatures::isSymbol(const QString &text) const
 {
-    static const QString symbols = QString::fromUtf8(R"(*#+=()@~/\€£$¥₹%<>[]`^|_—–•§{}¡¿«»"“”„&0123456789)");
+    static const QString symbols = QStringLiteral(R"(*#+=()@~/\€£$¥₹%<>[]`^|_—–•§{}¡¿«»"“”„&0123456789)");
 
     if (text.isEmpty()) {
         return false;
@@ -94,5 +94,5 @@ bool ChineseLanguageFeatures::wordEngineAvailable() const
 
 QString ChineseLanguageFeatures::fullStopSequence() const
 {
-    return QString("。");
+    return QStringLiteral("。");
 }

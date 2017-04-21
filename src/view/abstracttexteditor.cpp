@@ -244,8 +244,8 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , backspace_acceleration(0)
     , backspace_word_acceleration(0)
     , deleted_words(0)
-    , keyboardState("CHARACTERS")
-    , previous_preedit("")
+    , keyboardState(QStringLiteral("CHARACTERS"))
+    , previous_preedit(QLatin1String(""))
     , previous_preedit_position(0)
 {
     auto_repeat_backspace_timer.setSingleShot(true);
@@ -354,7 +354,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     }
 
     const QString text = key.label();
-    QString keyText = QString("");
+    QString keyText = QLatin1String("");
     Qt::Key event_key = Qt::Key_unknown;
     bool look_for_a_double_space = d->look_for_a_double_space;
     bool look_for_a_triple_space = d->look_for_a_triple_space;
@@ -365,8 +365,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     if (key.action() == Key::ActionBackspace) {
         textOnLeft.chop(1);
     }
-    QStringList leftHandWords = textOnLeft.split(" ");
-    if (!d->word_engine->languageFeature()->alwaysShowSuggestions() && !leftHandWords.isEmpty() && leftHandWords.last().contains("@")) {
+    QStringList leftHandWords = textOnLeft.split(QStringLiteral(" "));
+    if (!d->word_engine->languageFeature()->alwaysShowSuggestions() && !leftHandWords.isEmpty() && leftHandWords.last().contains(QLatin1String("@"))) {
         email_detected = true;
     }
 
@@ -388,7 +388,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                     not d->text->preedit().isEmpty() && isSeparator;
         const bool enablePreeditAtInsertion = d->word_engine->languageFeature()->enablePreeditAtInsertion();
 
-        d->previous_preedit = "";
+        d->previous_preedit = QLatin1String("");
 
         if (d->preedit_enabled) {
             if (!enablePreeditAtInsertion &&
@@ -408,7 +408,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 alreadyAppended = true;
             }
             else if (d->auto_correct_enabled && (isSeparator || isSymbol)) {
-                if(isSeparator && d->keyboardState == "CHARACTERS" && !email_detected) {
+                if(isSeparator && d->keyboardState == QLatin1String("CHARACTERS") && !email_detected) {
                     // remove all whitespaces before the separator, then add a whitespace after it
                     removeTrailingWhitespaces();
                 }
@@ -467,10 +467,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     } break;
 
     case Key::ActionSpace: {
-        QString space = " ";
+        QString space = QStringLiteral(" ");
         QString textOnLeft = d->text->surroundingLeft() + d->text->preedit();
         QString textOnLeftTrimmed = textOnLeft.trimmed();
-        QStringList textOnRightList = d->text->surroundingRight().split("\n");
+        QStringList textOnRightList = d->text->surroundingRight().split(QStringLiteral("\n"));
         QString textOnRight;
         if (!textOnRightList.isEmpty()) {
             textOnRight = textOnRightList.first().trimmed();
@@ -486,7 +486,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         // every double-space character inputs one-after-another force a full-stop, so trigger it if needed
         if (d->double_space_full_stop_enabled && not look_for_a_double_space) {
             // Only enable if the language plugin inserts spaces after word completion (e.g. pinyin doesn't)
-            if (d->text->preedit().isEmpty() || d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()) == " ") {
+            if (d->text->preedit().isEmpty() || d->word_engine->languageFeature()->appendixForReplacedPreedit(d->text->preedit()) == QLatin1String(" ")) {
                 d->look_for_a_double_space = true;
             }
         }
@@ -496,13 +496,13 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         if (look_for_a_triple_space) {
             singleBackspace();
             singleBackspace();
-            d->text->appendToPreedit("  ");
+            d->text->appendToPreedit(QStringLiteral("  "));
         }
 
         if (replace_preedit) {
             if (!textOnRight.isEmpty() && d->editing_middle_of_text) {
                 // Don't insert a space if we are correcting a word in the middle of a sentence
-                space = "";
+                space = QLatin1String("");
                 d->look_for_a_double_space = false;
                 d->editing_middle_of_text = false;
             } else {
@@ -511,7 +511,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             d->previous_preedit = d->text->preedit();
             d->previous_preedit_position = d->text->surroundingOffset();
             d->text->setPreedit(d->text->primaryCandidate());
-            if (d->previous_preedit.right(1) == "'" && d->text->preedit().right(1) != "'") {
+            if (d->previous_preedit.right(1) == QLatin1String("'") && d->text->preedit().right(1) != QLatin1String("'")) {
                 // If the user has added an apostrophe to the end of the word
                 // we should preserve this, as it may be user as a single quote
                 // or the plural form of certain names (but would otherwise be
@@ -520,7 +520,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 d->text->setPreedit(d->text->preedit() + "'");
                 d->previous_preedit_position -= 1;
             }
-            if (d->previous_preedit.left(1) == "'" &&  d->text->preedit().left(1) != "'") {
+            if (d->previous_preedit.left(1) == QLatin1String("'") &&  d->text->preedit().left(1) != QLatin1String("'")) {
                 // Same for apostrophes at the beginning of the word
                 d->text->setPreedit("'" + d->text->preedit());
                 d->previous_preedit_position -= 1;
@@ -535,7 +535,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                  && !textOnLeft.at(textOnLeft.count() - 2).isSpace()
                  && textOnLeftTrimmed.count() > 0
                  && !d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 1))
-                 && !(textOnLeftTrimmed.endsWith(")") 
+                 && !(textOnLeftTrimmed.endsWith(QLatin1String(")")) 
                       && textOnLeftTrimmed.count() > 1
                       && d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 2)))) {
             removeTrailingWhitespaces();
@@ -578,7 +578,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     case Key::ActionReturn: {
         event_key = Qt::Key_Return;
-        keyText = QString("\r");
+        keyText = QStringLiteral("\r");
         if (d->word_engine->languageFeature()->showPrimaryInPreedit()) {
             d->text->setPreedit(d->text->primaryCandidate());
             commitPreedit();
@@ -734,7 +734,7 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
     if (d->auto_correct_enabled) {
         if ((!d->text->surroundingRight().trimmed().isEmpty() && d->editing_middle_of_text) || d->word_engine->languageFeature()->contentType() == Maliit::UrlContentType) {
             // Don't insert a space if we are correcting a word in the middle of a sentence or if we're in a Url field
-            d->appendix_for_previous_preedit = "";
+            d->appendix_for_previous_preedit = QLatin1String("");
             d->editing_middle_of_text = false;
         }
         d->text->appendToPreedit(d->appendix_for_previous_preedit);
@@ -758,8 +758,8 @@ void AbstractTextEditor::clearPreedit()
 {
     Q_D(AbstractTextEditor);
 
-    replacePreedit("");
-    text()->setSurrounding("");
+    replacePreedit(QLatin1String(""));
+    text()->setSurrounding(QLatin1String(""));
     text()->setSurroundingOffset(0);
 
     if (not d->valid()) {
@@ -1003,7 +1003,7 @@ void AbstractTextEditor::singleBackspace()
     QString textOnLeft = d->text->surroundingLeft();
 
     if (d->text->preedit().isEmpty()) {
-        in_word = textOnLeft.right(1) != " ";
+        in_word = textOnLeft.right(1) != QLatin1String(" ");
         sendKeyPressAndReleaseEvents(Qt::Key_Backspace, Qt::NoModifier);
         // Deletion of surrounding text isn't updated in the model until later
         // Update it locally here for autocaps detection
@@ -1028,11 +1028,11 @@ void AbstractTextEditor::singleBackspace()
             //  When preedit is cleared, for Qt not reporting it as inputMethodComposing all the time we need
             //  to flush out all the TextFormat attributes - so we actually need to commit anything for that
             //  to happen
-            sendCommitString("");
+            sendCommitString(QLatin1String(""));
         }
     }
 
-    if (in_word && textOnLeft.right(1) == " ") {
+    if (in_word && textOnLeft.right(1) == QLatin1String(" ")) {
         // We were in a word, but now we're not, so we've just finished deleting a word
         d->deleted_words++;
     }
@@ -1143,7 +1143,7 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
                     recreatedPreedit = d->previous_preedit;
                     text()->setRestoredPreedit(true);
                 }
-                d->previous_preedit = "";
+                d->previous_preedit = QLatin1String("");
             }
             replaceTextWithPreedit(recreatedPreedit, 0, 0, recreatedPreedit.size());
         }

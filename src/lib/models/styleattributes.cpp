@@ -217,7 +217,7 @@ void StyleAttributes::setStyleName(const QString &name)
 //! @returns Value of "background\word-ribbon".
 QByteArray StyleAttributes::wordRibbonBackground() const
 {
-    return m_store->value("background/word-ribbon").toByteArray();
+    return m_store->value(QStringLiteral("background/word-ribbon")).toByteArray();
 }
 
 
@@ -225,7 +225,7 @@ QByteArray StyleAttributes::wordRibbonBackground() const
 //! @returns Value of "background\key-area".
 QByteArray StyleAttributes::keyAreaBackground() const
 {
-    return m_store->value("background/key-area").toByteArray();
+    return m_store->value(QStringLiteral("background/key-area")).toByteArray();
 }
 
 
@@ -233,7 +233,7 @@ QByteArray StyleAttributes::keyAreaBackground() const
 //! @returns Value of "background\magnifier-key"
 QByteArray StyleAttributes::magnifierKeyBackground() const
 {
-    return m_store->value("background/magnifier-key").toByteArray();
+    return m_store->value(QStringLiteral("background/magnifier-key")).toByteArray();
 }
 
 
@@ -257,7 +257,7 @@ QByteArray StyleAttributes::keyBackground(Key::Style style,
 //! @returns Value of "background\word-ribbon-borders".
 QMargins StyleAttributes::wordRibbonBackgroundBorders() const
 {
-    return fromByteArray(m_store->value("background/word-ribbon-borders").toByteArray());
+    return fromByteArray(m_store->value(QStringLiteral("background/word-ribbon-borders")).toByteArray());
 }
 
 
@@ -265,7 +265,7 @@ QMargins StyleAttributes::wordRibbonBackgroundBorders() const
 //! @returns Value of "background\key-area-borders".
 QMargins StyleAttributes::keyAreaBackgroundBorders() const
 {
-    return fromByteArray(m_store->value("background/key-area-borders").toByteArray());
+    return fromByteArray(m_store->value(QStringLiteral("background/key-area-borders")).toByteArray());
 }
 
 
@@ -273,7 +273,7 @@ QMargins StyleAttributes::keyAreaBackgroundBorders() const
 //! @returns Value of "background\magnifier-key-borders".
 QMargins StyleAttributes::magnifierKeyBackgroundBorders() const
 {
-    return fromByteArray(m_store->value("background/magnifier-key-borders").toByteArray());
+    return fromByteArray(m_store->value(QStringLiteral("background/magnifier-key-borders")).toByteArray());
 }
 
 
@@ -281,7 +281,7 @@ QMargins StyleAttributes::magnifierKeyBackgroundBorders() const
 //! @returns Value of "background\key-borders".
 QMargins StyleAttributes::keyBackgroundBorders() const
 {
-    return fromByteArray(m_store->value("background/key-borders").toByteArray());
+    return fromByteArray(m_store->value(QStringLiteral("background/key-borders")).toByteArray());
 }
 
 
@@ -335,7 +335,7 @@ QByteArray StyleAttributes::fontName(Qt::ScreenOrientation orientation) const
 //! \returns Value of "font\font-files"
 QStringList StyleAttributes::fontFiles() const
 {
-    return m_store->value("font/font-files").toStringList();
+    return m_store->value(QStringLiteral("font/font-files")).toStringList();
 }
 
 
@@ -477,7 +477,7 @@ qreal StyleAttributes::keyAreaWidth(Qt::ScreenOrientation orientation) const
 
     qreal resultAsReal = 0.0; // ToDo should be cached
 
-    if(result.toString().contains("%")) {
+    if(result.toString().contains(QLatin1String("%"))) {
         resultAsReal =
                   0.01
                 * result.toString().remove('%').toDouble()
@@ -563,7 +563,7 @@ qreal StyleAttributes::safetyMargin(Qt::ScreenOrientation orientation) const
 //! @returns Value of "sound/key-press".
 QByteArray StyleAttributes::keyPressSound() const
 {
-    return m_store->value("sound/key-press").toByteArray();
+    return m_store->value(QStringLiteral("sound/key-press")).toByteArray();
 }
 
 
@@ -571,7 +571,7 @@ QByteArray StyleAttributes::keyPressSound() const
 //! @returns Value of "sound/key-release".
 QByteArray StyleAttributes::keyReleaseSound() const
 {
-    return m_store->value("sound/key-release").toByteArray();
+    return m_store->value(QStringLiteral("sound/key-release")).toByteArray();
 }
 
 
@@ -579,7 +579,7 @@ QByteArray StyleAttributes::keyReleaseSound() const
 //! @returns Value of "sound/layout-change".
 QByteArray StyleAttributes::layoutChangeSound() const
 {
-    return m_store->value("sound/layout-change").toByteArray();
+    return m_store->value(QStringLiteral("sound/layout-change")).toByteArray();
 }
 
 
@@ -587,7 +587,7 @@ QByteArray StyleAttributes::layoutChangeSound() const
 //! @returns Value of "sound/keyboard-hide".
 QByteArray StyleAttributes::keyboardHideSound() const
 {
-    return m_store->value("sound/keyboard-hide").toByteArray();
+    return m_store->value(QStringLiteral("sound/keyboard-hide")).toByteArray();
 }
 
 qreal StyleAttributes::keyboardTotalHeight(Qt::ScreenOrientation orientation) const

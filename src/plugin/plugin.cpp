@@ -40,12 +40,12 @@ MaliitKeyboardPlugin::MaliitKeyboardPlugin(QObject *parent)
     , Maliit::Plugins::InputMethodPlugin()
 {
     qmlRegisterUncreatableType<InputMethod>("MaliitKeyboard", 1, 0, "InputMethod",
-                                            QString("InputMethod can't be created in QML"));
+                                            QStringLiteral("InputMethod can't be created in QML"));
 }
 
 QString MaliitKeyboardPlugin::name() const
 {
-    return QString("Maliit Keyboard");
+    return QStringLiteral("Maliit Keyboard");
 }
 
 MAbstractInputMethod * MaliitKeyboardPlugin::createInputMethod(MAbstractInputMethodHost *host)

@@ -44,11 +44,11 @@ namespace MaliitKeyboard {
 //! This class is uncopyable; use SharedStyle instead.
 
 namespace {
-const QString g_main_fn_format("%1/%2/main.ini");
-const QString g_extended_keys_fn_format("%1/%2/extended-keys.ini");
-const QString g_profile_image_directory_path_format("%1/%2/images");
-const QString g_profile_sounds_directory_path_format("%1/%2/sounds");
-const QString g_profile_fonts_directory_path_format("%1/%2/fonts");
+const QString g_main_fn_format(QStringLiteral("%1/%2/main.ini"));
+const QString g_extended_keys_fn_format(QStringLiteral("%1/%2/extended-keys.ini"));
+const QString g_profile_image_directory_path_format(QStringLiteral("%1/%2/images"));
+const QString g_profile_sounds_directory_path_format(QStringLiteral("%1/%2/sounds"));
+const QString g_profile_fonts_directory_path_format(QStringLiteral("%1/%2/fonts"));
 
 } // unnamed namespace
 
