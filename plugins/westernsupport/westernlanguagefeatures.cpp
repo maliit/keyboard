@@ -90,7 +90,7 @@ bool WesternLanguageFeatures::isSeparator(const QString &text) const
 
 bool WesternLanguageFeatures::isSymbol(const QString &text) const
 {
-    static const QString symbols = QString::fromUtf8("*#+=()@~/\\€£$¥₹%<>[]`^|_—–•§{}¡¿«»\"“”„&0123456789");
+    static const QString symbols = QString::fromUtf8(R"(*#+=()@~/\€£$¥₹%<>[]`^|_—–•§{}¡¿«»"“”„&0123456789)");
 
     if (text.isEmpty()) {
         return false;

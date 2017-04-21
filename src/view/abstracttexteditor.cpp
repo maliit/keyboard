@@ -392,7 +392,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
         if (d->preedit_enabled) {
             if (!enablePreeditAtInsertion &&
-                    (d->text->surroundingRight().left(1).contains(QRegExp("[\\w]")) || email_detected)) {
+                    (d->text->surroundingRight().left(1).contains(QRegExp(R"([\w])")) || email_detected)) {
                 // We're editing in the middle of a word or entering an email address, so just insert characters directly
                 d->text->appendToPreedit(text);
                 commitPreedit();
@@ -1114,15 +1114,15 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
         } else {
             lastChar = text()->surrounding().at(currentOffset-1);
         }
-        if(!QRegExp("\\W+").exactMatch(lastChar) && !d->word_engine->languageFeature()->isSymbol(lastChar)) {
-            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp("[\\s\\d]+"));
+        if(!QRegExp(R"(\W+)").exactMatch(lastChar) && !d->word_engine->languageFeature()->isSymbol(lastChar)) {
+            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp(R"([\s\d]+)"));
             int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
             if(leftWords.last().isEmpty()) {
                 // If removed char was punctuation trimming will result in an empty entry
                 leftWords.removeLast();
                 trimDiff += 1;
             }
-            if(d->text->surroundingRight().left(1).contains(QRegExp("[\\w]"))) {
+            if(d->text->surroundingRight().left(1).contains(QRegExp(R"([\w])"))) {
                 // Don't enter pre-edit in the middle of a word
                 return;
             }

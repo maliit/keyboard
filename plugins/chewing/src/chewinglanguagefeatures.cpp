@@ -68,7 +68,7 @@ bool ChewingLanguageFeatures::isSeparator(const QString &text) const
 
 bool ChewingLanguageFeatures::isSymbol(const QString &text) const
 {
-    static const QString symbols = QString::fromUtf8("*#+=()@~\\€£$¥₹%<>[]`^|_—–•§{}¡¿«»\"“”„&");
+    static const QString symbols = QString::fromUtf8(R"(*#+=()@~\€£$¥₹%<>[]`^|_—–•§{}¡¿«»"“”„&)");
 
     if (text.isEmpty()) {
         return false;
