@@ -12,7 +12,7 @@ class EsperantoPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.EsperantoPlugin" FILE "esperantoplugin.json")
 
 public:
-    explicit EsperantoPlugin(QObject* parent = 0)
+    explicit EsperantoPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

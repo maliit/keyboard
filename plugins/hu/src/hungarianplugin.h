@@ -12,7 +12,7 @@ class HungarianPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.HungarianPlugin" FILE "hungarianplugin.json")
 
 public:
-    explicit HungarianPlugin(QObject* parent = 0)
+    explicit HungarianPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

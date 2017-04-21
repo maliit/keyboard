@@ -17,7 +17,7 @@ class JapanesePlugin : public AbstractLanguagePlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.JapanesePlugin" FILE "japaneseplugin.json")
 
 public:
-    explicit JapanesePlugin(QObject* parent = 0);
+    explicit JapanesePlugin(QObject* parent = nullptr);
     virtual ~JapanesePlugin();
     virtual AbstractLanguageFeatures* languageFeature();
 

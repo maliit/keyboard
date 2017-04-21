@@ -12,7 +12,7 @@ class RomanianPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.RomanianPlugin" FILE "romanianplugin.json")
 
 public:
-    explicit RomanianPlugin(QObject* parent = 0)
+    explicit RomanianPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

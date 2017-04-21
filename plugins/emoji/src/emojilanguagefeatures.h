@@ -24,7 +24,7 @@ class EmojiLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {
     Q_OBJECT
 public:
-    explicit EmojiLanguageFeatures(QObject *parent = 0);
+    explicit EmojiLanguageFeatures(QObject *parent = nullptr);
     virtual ~EmojiLanguageFeatures();
 
     virtual bool alwaysShowSuggestions() const;

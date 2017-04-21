@@ -39,7 +39,7 @@ public:
      * @param schema_id The id of the schema
      * @param path If non-empty, specifies the path for a relocatable schema
      */
-    QGSettings(const QByteArray &schema_id, const QByteArray &path = QByteArray(), QObject *parent = NULL);
+    QGSettings(const QByteArray &schema_id, const QByteArray &path = QByteArray(), QObject *parent = nullptr);
 
     ~QGSettings();
 

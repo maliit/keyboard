@@ -12,7 +12,7 @@ class SlovenianPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.SlovenianPlugin" FILE "slovenianplugin.json")
 
 public:
-    explicit SlovenianPlugin(QObject* parent = 0)
+    explicit SlovenianPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

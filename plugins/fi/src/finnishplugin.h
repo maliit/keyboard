@@ -12,7 +12,7 @@ class FinnishPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.FinnishPlugin" FILE "finnishplugin.json")
 
 public:
-    explicit FinnishPlugin(QObject* parent = 0)
+    explicit FinnishPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

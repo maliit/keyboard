@@ -38,7 +38,7 @@ class AbstractLanguagePlugin : public QObject, public LanguagePluginInterface
     Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    AbstractLanguagePlugin(QObject *parent = 0);
+    AbstractLanguagePlugin(QObject *parent = nullptr);
     virtual ~AbstractLanguagePlugin();
 
     virtual void predict(const QString& surroundingLeft, const QString& preedit);

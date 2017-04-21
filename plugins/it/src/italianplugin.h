@@ -12,7 +12,7 @@ class ItalianPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.ItalianPlugin" FILE "italianplugin.json")
 
 public:
-    explicit ItalianPlugin(QObject* parent = 0)
+    explicit ItalianPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

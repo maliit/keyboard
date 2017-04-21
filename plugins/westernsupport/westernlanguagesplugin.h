@@ -22,7 +22,7 @@ class WesternLanguagesPlugin : public AbstractLanguagePlugin
     Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    explicit WesternLanguagesPlugin(QObject *parent = 0);
+    explicit WesternLanguagesPlugin(QObject *parent = nullptr);
     virtual ~WesternLanguagesPlugin();
 
     virtual void predict(const QString& surroundingLeft, const QString& preedit);

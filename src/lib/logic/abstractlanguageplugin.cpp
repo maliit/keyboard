@@ -46,7 +46,7 @@ void AbstractLanguagePlugin::wordCandidateSelected(QString word)
 
 AbstractLanguageFeatures* AbstractLanguagePlugin::languageFeature()
 {
-    return NULL;
+    return nullptr;
 }
 
 void AbstractLanguagePlugin::spellCheckerSuggest(const QString& word, int limit)

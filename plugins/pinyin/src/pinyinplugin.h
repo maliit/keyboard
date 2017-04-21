@@ -19,7 +19,7 @@ class PinyinPlugin : public AbstractLanguagePlugin
     Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    explicit PinyinPlugin(QObject *parent = 0);
+    explicit PinyinPlugin(QObject *parent = nullptr);
     virtual ~PinyinPlugin();
     
     virtual void predict(const QString& surroundingLeft, const QString& preedit);

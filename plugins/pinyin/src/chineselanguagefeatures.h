@@ -24,7 +24,7 @@ class ChineseLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {
     Q_OBJECT
 public:
-    explicit ChineseLanguageFeatures(QObject *parent = 0);
+    explicit ChineseLanguageFeatures(QObject *parent = nullptr);
     virtual ~ChineseLanguageFeatures();
 
     virtual bool alwaysShowSuggestions() const;

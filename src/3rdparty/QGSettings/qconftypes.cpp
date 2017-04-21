@@ -147,7 +147,7 @@ QVariant qconf_types_to_qvariant(GVariant *value)
         return QVariant(g_variant_get_double(value));
 
     case G_VARIANT_CLASS_STRING:
-        return QVariant(g_variant_get_string(value, NULL));
+        return QVariant(g_variant_get_string(value, nullptr));
 
     case G_VARIANT_CLASS_ARRAY:
         if (g_variant_is_of_type(value, G_VARIANT_TYPE_STRING_ARRAY)) {
@@ -249,7 +249,7 @@ GVariant *qconf_types_collect_from_variant(const GVariantType *gtype, const QVar
 
         // fall through
     default:
-        return NULL;
+        return nullptr;
   }
 }
 

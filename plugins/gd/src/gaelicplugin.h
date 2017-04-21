@@ -14,7 +14,7 @@ class GaelicPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.GaelicPlugin" FILE "gaelicplugin.json")
 
 public:
-    explicit GaelicPlugin(QObject* parent = 0)
+    explicit GaelicPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

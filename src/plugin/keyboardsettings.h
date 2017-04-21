@@ -41,7 +41,7 @@ class KeyboardSettings : public QObject
 {
     Q_OBJECT
 public:
-    explicit KeyboardSettings(QObject *parent = 0);
+    explicit KeyboardSettings(QObject *parent = nullptr);
     
     QString activeLanguage() const;
     void setActiveLanguage(const QString& id);

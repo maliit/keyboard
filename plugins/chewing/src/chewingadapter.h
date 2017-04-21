@@ -31,7 +31,7 @@ class ChewingAdapter : public QObject
     ChewingContext *m_chewingContext;
 
 public:
-    explicit ChewingAdapter(QObject *parent = 0);
+    explicit ChewingAdapter(QObject *parent = nullptr);
     ~ChewingAdapter();
 
 signals:

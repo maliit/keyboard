@@ -54,7 +54,7 @@ public:
     explicit Editor(const EditorOptions &options,
                     Model::Text *text,
                     Logic::AbstractWordEngine *word_engine,
-                    QObject *parent = 0);
+                    QObject *parent = nullptr);
     virtual ~Editor();
 
     void setHost(MAbstractInputMethodHost *host);

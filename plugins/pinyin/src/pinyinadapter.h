@@ -34,7 +34,7 @@ class PinyinAdapter : public QObject
     bool m_processingWords;
 
 public:
-    explicit PinyinAdapter(QObject *parent = 0);
+    explicit PinyinAdapter(QObject *parent = nullptr);
     ~PinyinAdapter();
 
 signals:

@@ -24,7 +24,7 @@ class JapaneseLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {
     Q_OBJECT
 public:
-    explicit JapaneseLanguageFeatures(QObject *parent = 0);
+    explicit JapaneseLanguageFeatures(QObject *parent = nullptr);
     virtual ~JapaneseLanguageFeatures();
 
     virtual bool alwaysShowSuggestions() const;

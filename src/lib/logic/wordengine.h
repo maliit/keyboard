@@ -53,7 +53,7 @@ class WordEngine
     Q_DECLARE_PRIVATE(WordEngine)
 
 public:
-    explicit WordEngine(QObject *parent = 0);
+    explicit WordEngine(QObject *parent = nullptr);
     virtual ~WordEngine();
 
     //! \reimp

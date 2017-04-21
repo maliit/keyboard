@@ -27,7 +27,7 @@ class AnthyAdapter : public QObject
     Q_OBJECT
 
 public:
-    explicit AnthyAdapter(QObject *parent = 0);
+    explicit AnthyAdapter(QObject *parent = nullptr);
     ~AnthyAdapter();
 
     QStringList candidates;

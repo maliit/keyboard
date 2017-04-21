@@ -58,7 +58,7 @@ gchar * unqtify_name(const QString &name)
     GString *str;
 
     bytes = name.toUtf8();
-    str = g_string_new (NULL);
+    str = g_string_new (nullptr);
 
     for (p = bytes.constData(); *p; p++) {
         const QChar c(*p);

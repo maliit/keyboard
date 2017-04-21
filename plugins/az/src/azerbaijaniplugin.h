@@ -14,7 +14,7 @@ class AzerbaijaniPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.AzerbaijaniPlugin" FILE "azerbaijaniplugin.json")
 
 public:
-    explicit AzerbaijaniPlugin(QObject* parent = 0)
+    explicit AzerbaijaniPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

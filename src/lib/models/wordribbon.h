@@ -54,7 +54,7 @@ class WordRibbon : public QAbstractListModel
     bool m_enabled;
 
 public:
-    explicit WordRibbon(QObject* parent = 0);
+    explicit WordRibbon(QObject* parent = nullptr);
 
     enum WordRibbonRoles {
              WordRole = Qt::UserRole + 1,

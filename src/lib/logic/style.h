@@ -58,7 +58,7 @@ public:
         Fonts   //!< used to query fonts directoryPath().
     };
 
-    explicit Style(QObject *parent = 0);
+    explicit Style(QObject *parent = nullptr);
     virtual ~Style();
 
     void setProfile(const QString &profile);

@@ -12,7 +12,7 @@ class NorwegianPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.NorwegianPlugin" FILE "norwegianplugin.json")
 
 public:
-    explicit NorwegianPlugin(QObject* parent = 0)
+    explicit NorwegianPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

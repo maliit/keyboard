@@ -55,7 +55,7 @@ class UpdateNotifier
     Q_DECLARE_PRIVATE(UpdateNotifier)
 
 public:
-    explicit UpdateNotifier(QObject *parent = 0);
+    explicit UpdateNotifier(QObject *parent = nullptr);
     virtual ~UpdateNotifier();
 
     void notify(MImUpdateEvent *event);

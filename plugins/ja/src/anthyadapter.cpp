@@ -37,7 +37,7 @@ AnthyAdapter::AnthyAdapter(QObject *parent) :
         qCritical() << "[anthy] failed to init.";
 
     m_context = anthy_create_context();
-    if (m_context == 0)
+    if (m_context == nullptr)
         qCritical() << "[anthy] failed to create anthy context.";
 
     anthy_context_set_encoding(m_context, ANTHY_UTF8_ENCODING);
@@ -73,7 +73,7 @@ void AnthyAdapter::parse(const QString& string)
     /* Nth segment (N > 0) use only first candidate */
     if (cs.nr_segment > 1) {
         for (int i = 1; i < cs.nr_segment; ++i) {
-            if (anthy_get_segment(m_context, i, 0, NULL, 0) > CANDIDATE_SIZE - 1) {
+            if (anthy_get_segment(m_context, i, 0, nullptr, 0) > CANDIDATE_SIZE - 1) {
                 qCritical() << "[anthy] buffer overflow: " << string;
                 continue;
             }
@@ -91,7 +91,7 @@ void AnthyAdapter::parse(const QString& string)
     candidates.clear();
     candidates.append(string);
     for (int i = 0; i < ss.nr_candidate; ++i) {
-        if (anthy_get_segment(m_context, 0, i, NULL, 0) > CANDIDATE_SIZE - 1) {
+        if (anthy_get_segment(m_context, 0, i, nullptr, 0) > CANDIDATE_SIZE - 1) {
             qCritical() << "[anthy] buffer overflow: " << string;
             continue;
         }

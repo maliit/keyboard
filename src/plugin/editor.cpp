@@ -43,7 +43,7 @@ Editor::Editor(const EditorOptions &options,
                Logic::AbstractWordEngine *word_engine,
                QObject *parent)
     : AbstractTextEditor(options, text, word_engine, parent)
-    , m_host(0)
+    , m_host(nullptr)
 {}
 
 Editor::~Editor() = default;

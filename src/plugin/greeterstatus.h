@@ -25,7 +25,7 @@ class GreeterStatus : public QObject
     Q_PROPERTY(bool greeterActive READ greeterActive NOTIFY greeterActiveChanged)
 
 public:
-    GreeterStatus(QObject *parent = 0);
+    GreeterStatus(QObject *parent = nullptr);
     bool greeterActive() const;
 
 Q_SIGNALS:

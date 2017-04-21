@@ -82,8 +82,8 @@ struct SpellCheckerPrivate
 
 SpellCheckerPrivate::SpellCheckerPrivate(const QString &user_dictionary)
     // XXX: toUtf8? toLatin1? toAscii? toLocal8Bit?
-    : hunspell(0)
-    , codec(0)
+    : hunspell(nullptr)
+    , codec(nullptr)
     , ignored_words()
     , user_dictionary_file(user_dictionary)
     , aff_file()
@@ -119,7 +119,7 @@ void SpellCheckerPrivate::addUserDictionary(const QString &user_dictionary)
 void SpellCheckerPrivate::clear()
 {
     delete(hunspell);
-    hunspell = 0;
+    hunspell = nullptr;
     aff_file.clear();
     dic_file.clear();
 }
@@ -131,7 +131,7 @@ SpellChecker::~SpellChecker() = default;
 bool SpellChecker::enabled() const
 {
     Q_D(const SpellChecker);
-    return (d->hunspell != 0);
+    return (d->hunspell != nullptr);
 }
 
 //! \brief SpellChecker::setEnabled
@@ -145,7 +145,7 @@ bool SpellChecker::setEnabled(bool on)
         return true;
 
     delete(d->hunspell);
-    d->hunspell = 0;
+    d->hunspell = nullptr;
 
     if (not on) {
         return true;
@@ -207,7 +207,7 @@ QStringList SpellChecker::suggest(const QString &word,
         return QStringList();
     }
 
-    char** suggestions = NULL;
+    char** suggestions = nullptr;
     const int suggestions_count = d->hunspell->suggest(&suggestions, d->codec->fromUnicode(word));
 
     // Less than zero means some error.

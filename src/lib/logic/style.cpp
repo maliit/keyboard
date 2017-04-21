@@ -92,8 +92,8 @@ void Style::setProfile(const QString &profile)
     Q_D(Style);
     d->profile = profile;
 
-    StyleAttributes *attributes = 0;
-    StyleAttributes *extended_keys_attributes = 0;
+    StyleAttributes *attributes = nullptr;
+    StyleAttributes *extended_keys_attributes = nullptr;
 
     if (not d->profile.isEmpty()) {
         const QString main_file_name(g_main_fn_format

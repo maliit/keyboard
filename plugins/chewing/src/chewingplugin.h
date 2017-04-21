@@ -19,7 +19,7 @@ class ChewingPlugin : public AbstractLanguagePlugin
     Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    explicit ChewingPlugin(QObject *parent = 0);
+    explicit ChewingPlugin(QObject *parent = nullptr);
     virtual ~ChewingPlugin();
     
     virtual void predict(const QString& surroundingLeft, const QString& preedit);

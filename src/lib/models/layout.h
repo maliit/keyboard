@@ -105,7 +105,7 @@ public:
         RoleKeyAction   // Extra introspection detail for testing.
     };
 
-    explicit Layout(QObject *parent = 0);
+    explicit Layout(QObject *parent = nullptr);
     virtual ~Layout();
 
     Q_SLOT void setTitle(const QString &title);

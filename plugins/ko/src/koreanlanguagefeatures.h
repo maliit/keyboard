@@ -24,7 +24,7 @@ class KoreanLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {
     Q_OBJECT
 public:
-    explicit KoreanLanguageFeatures(QObject *parent = 0);
+    explicit KoreanLanguageFeatures(QObject *parent = nullptr);
     virtual ~KoreanLanguageFeatures();
 
     virtual bool alwaysShowSuggestions() const;

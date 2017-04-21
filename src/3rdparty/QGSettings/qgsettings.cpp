@@ -121,7 +121,7 @@ QVariantList QGSettings::choices(const QString &qkey) const
     g_settings_schema_key_unref (schema_key);
     g_free(key);
 
-    if (range == NULL)
+    if (range == nullptr)
         return QVariantList();
 
     const gchar *type;

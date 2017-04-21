@@ -21,7 +21,7 @@ class KoreanPlugin : public AbstractLanguagePlugin
     Q_INTERFACES(LanguagePluginInterface)
 
 public:
-    explicit KoreanPlugin(QObject *parent = 0);
+    explicit KoreanPlugin(QObject *parent = nullptr);
     virtual ~KoreanPlugin();
 
     virtual void predict(const QString& surroundingLeft, const QString& preedit);

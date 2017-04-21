@@ -66,10 +66,10 @@ void PinyinAdapter::parse(const QString& string)
     len = len > MAX_SUGGESTIONS ? MAX_SUGGESTIONS : len;
     for (unsigned int i = 0 ; i < len; i ++ )
     {
-        lookup_candidate_t * candidate = NULL;
+        lookup_candidate_t * candidate = nullptr;
 
         if (pinyin_get_candidate(m_instance, i, &candidate)) {
-            const char* word = NULL;
+            const char* word = nullptr;
             pinyin_get_candidate_string(m_instance, candidate, &word);
             // Translate the token to utf-8 phrase.
             if (word) {
@@ -85,7 +85,7 @@ void PinyinAdapter::wordCandidateSelected(const QString& word)
 {
     Q_UNUSED(word)
 
-    lookup_candidate_t * candidate = NULL;
+    lookup_candidate_t * candidate = nullptr;
     if (pinyin_get_candidate(m_instance, 1, &candidate)) {
         pinyin_choose_candidate(m_instance, 0, candidate);
     }

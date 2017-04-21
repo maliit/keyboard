@@ -47,7 +47,7 @@ class MaliitKeyboardPlugin
 #endif
 
 public:
-    explicit MaliitKeyboardPlugin(QObject *parent = 0);
+    explicit MaliitKeyboardPlugin(QObject *parent = nullptr);
 
     //! \reimp
     virtual QString name() const;

@@ -12,7 +12,7 @@ class UkrainianPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.UkrainianPlugin" FILE "ukrainianplugin.json")
 
 public:
-    explicit UkrainianPlugin(QObject* parent = 0)
+    explicit UkrainianPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

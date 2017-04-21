@@ -43,7 +43,7 @@ class KeyboardGeometry : public QObject
     Q_PROPERTY(bool shown READ shown WRITE setShown NOTIFY shownChanged)
 
 public:
-    explicit KeyboardGeometry(QObject *parent = 0);
+    explicit KeyboardGeometry(QObject *parent = nullptr);
 
     int keypadHeight() const;
     void setKeypadHeight(int height);

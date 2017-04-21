@@ -122,8 +122,8 @@ WordEnginePrivate::WordEnginePrivate()
     , auto_correct_enabled(false)
     , calculated_primary_candidate(false)
     , clear_candidates_on_incoming(false)
-    , languagePlugin(0)
-    , currentText(0)
+    , languagePlugin(nullptr)
+    , currentText(nullptr)
 {
     loadPlugin(DEFAULT_PLUGIN);
     candidates = new WordCandidateList();

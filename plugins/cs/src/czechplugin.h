@@ -12,7 +12,7 @@ class CzechPlugin : public WesternLanguagesPlugin
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.CzechPlugin" FILE "czechplugin.json")
 
 public:
-    explicit CzechPlugin(QObject* parent = 0)
+    explicit CzechPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)
     {
     }

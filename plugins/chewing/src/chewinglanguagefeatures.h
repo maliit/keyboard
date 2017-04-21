@@ -24,7 +24,7 @@ class ChewingLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {
     Q_OBJECT
 public:
-    explicit ChewingLanguageFeatures(QObject *parent = 0);
+    explicit ChewingLanguageFeatures(QObject *parent = nullptr);
     virtual ~ChewingLanguageFeatures();
 
     virtual bool alwaysShowSuggestions() const;
