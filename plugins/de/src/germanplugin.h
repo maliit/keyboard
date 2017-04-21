@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~GermanPlugin() = default;
+    ~GermanPlugin() override = default;
 };
 
 #endif // GERMANPLUGIN_H

@@ -19,7 +19,7 @@ public:
     {
     }
 
-    virtual ~GaelicPlugin() = default;
+    ~GaelicPlugin() override = default;
 };
 
 #endif // GAELICPLUGIN_H

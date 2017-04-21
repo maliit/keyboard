@@ -18,11 +18,11 @@ class JapanesePlugin : public AbstractLanguagePlugin
 
 public:
     explicit JapanesePlugin(QObject* parent = nullptr);
-    virtual ~JapanesePlugin();
-    virtual AbstractLanguageFeatures* languageFeature();
+    ~JapanesePlugin() override;
+    AbstractLanguageFeatures* languageFeature() override;
 
-    virtual void predict(const QString& surroundingLeft, const QString& preedit);
-    virtual void wordCandidateSelected(QString word);
+    void predict(const QString& surroundingLeft, const QString& preedit) override;
+    void wordCandidateSelected(QString word) override;
 
 signals:
     void newPredictionSuggestions(QString word, QStringList suggestions);

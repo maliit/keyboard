@@ -59,7 +59,7 @@ public:
     };
 
     explicit Style(QObject *parent = nullptr);
-    virtual ~Style();
+    ~Style() override;
 
     void setProfile(const QString &profile);
     QString profile() const;

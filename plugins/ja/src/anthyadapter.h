@@ -28,7 +28,7 @@ class AnthyAdapter : public QObject
 
 public:
     explicit AnthyAdapter(QObject *parent = nullptr);
-    ~AnthyAdapter();
+    ~AnthyAdapter() override;
 
     QStringList candidates;
 

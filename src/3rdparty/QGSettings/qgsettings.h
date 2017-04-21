@@ -41,7 +41,7 @@ public:
      */
     QGSettings(const QByteArray &schema_id, const QByteArray &path = QByteArray(), QObject *parent = nullptr);
 
-    ~QGSettings();
+    ~QGSettings() override;
 
     /**
      * @brief Gets the value that is stored at key

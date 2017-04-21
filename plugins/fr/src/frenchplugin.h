@@ -19,7 +19,7 @@ public:
     {
     }
 
-    virtual ~FrenchPlugin() = default;
+    ~FrenchPlugin() override = default;
 };
 
 #endif // FRENCHPLUGIN_H

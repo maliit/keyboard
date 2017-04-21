@@ -55,7 +55,7 @@ class EventHandler
 
 public:
     explicit EventHandler(QObject *parent = nullptr);
-    virtual ~EventHandler();
+    ~EventHandler() override;
 
     Q_INVOKABLE void onWordCandidatePressed(QString word, bool userInput);
     Q_INVOKABLE void onWordCandidateReleased(QString word, bool userInput);

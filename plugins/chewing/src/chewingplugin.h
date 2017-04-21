@@ -20,17 +20,17 @@ class ChewingPlugin : public AbstractLanguagePlugin
 
 public:
     explicit ChewingPlugin(QObject *parent = nullptr);
-    virtual ~ChewingPlugin();
+    ~ChewingPlugin() override;
     
-    virtual void predict(const QString& surroundingLeft, const QString& preedit);
-    virtual void wordCandidateSelected(QString word);
+    void predict(const QString& surroundingLeft, const QString& preedit) override;
+    void wordCandidateSelected(QString word) override;
 
-    virtual AbstractLanguageFeatures* languageFeature();
+    AbstractLanguageFeatures* languageFeature() override;
 
     //! spell checker
-    virtual void spellCheckerSuggest(const QString& word, int limit) { Q_UNUSED(word); Q_UNUSED(limit); }
-    virtual void addToSpellCheckerUserWordList(const QString& word) { Q_UNUSED(word); }
-    virtual bool setLanguage(const QString& languageId, const QString& pluginPath) { Q_UNUSED(languageId); Q_UNUSED(pluginPath); return false; }
+    void spellCheckerSuggest(const QString& word, int limit) override { Q_UNUSED(word); Q_UNUSED(limit); }
+    void addToSpellCheckerUserWordList(const QString& word) override { Q_UNUSED(word); }
+    bool setLanguage(const QString& languageId, const QString& pluginPath) override { Q_UNUSED(languageId); Q_UNUSED(pluginPath); return false; }
 
 signals:
     void newPredictionSuggestions(QString word, QStringList suggestions);

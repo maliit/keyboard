@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~BosnianPlugin() = default;
+    ~BosnianPlugin() override = default;
 };
 
 #endif // BOSNIANPLUGIN_H

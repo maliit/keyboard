@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~LatvianPlugin() = default;
+    ~LatvianPlugin() override = default;
 };
 
 #endif // LATVIANPLUGIN_H

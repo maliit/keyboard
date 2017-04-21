@@ -106,7 +106,7 @@ public:
                                 Model::Text *text,
                                 Logic::AbstractWordEngine *word_engine,
                                 QObject *parent = nullptr);
-    virtual ~AbstractTextEditor() = 0;
+    ~AbstractTextEditor() override = 0;
 
     Model::Text * text() const;
     Logic::AbstractWordEngine * wordEngine() const;

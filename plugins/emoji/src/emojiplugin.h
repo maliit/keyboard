@@ -18,9 +18,9 @@ class EmojiPlugin : public AbstractLanguagePlugin
 
 public:
     explicit EmojiPlugin(QObject *parent = nullptr);
-    virtual ~EmojiPlugin();
+    ~EmojiPlugin() override;
     
-    virtual AbstractLanguageFeatures* languageFeature();
+    AbstractLanguageFeatures* languageFeature() override;
 
 private:
     EmojiLanguageFeatures* m_emojiLanguageFeatures;

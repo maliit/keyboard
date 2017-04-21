@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~PersianPlugin() = default;
+    ~PersianPlugin() override = default;
 };
 
 #endif // PERSIANPLUGIN_H

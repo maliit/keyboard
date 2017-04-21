@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~EsperantoPlugin() = default;
+    ~EsperantoPlugin() override = default;
 };
 
 #endif // ESPERANTOPLUGIN_H

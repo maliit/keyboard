@@ -56,7 +56,7 @@ class UpdateNotifier
 
 public:
     explicit UpdateNotifier(QObject *parent = nullptr);
-    virtual ~UpdateNotifier();
+    ~UpdateNotifier() override;
 
     void notify(MImUpdateEvent *event);
     void notifyOverride(const Logic::KeyOverrides &overriden_keys,

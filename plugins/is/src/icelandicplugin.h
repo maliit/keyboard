@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~IcelandicPlugin() = default;
+    ~IcelandicPlugin() override = default;
 };
 
 #endif // ICELANDICPLUGIN_H

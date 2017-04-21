@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~NorwegianPlugin() = default;
+    ~NorwegianPlugin() override = default;
 };
 
 #endif // NORWEGIANPLUGIN_H

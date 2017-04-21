@@ -32,7 +32,7 @@ class ChewingAdapter : public QObject
 
 public:
     explicit ChewingAdapter(QObject *parent = nullptr);
-    ~ChewingAdapter();
+    ~ChewingAdapter() override;
 
 signals:
     void newPredictionSuggestions(QString, QStringList);

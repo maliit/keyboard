@@ -39,16 +39,16 @@ class AbstractLanguagePlugin : public QObject, public LanguagePluginInterface
 
 public:
     AbstractLanguagePlugin(QObject *parent = nullptr);
-    virtual ~AbstractLanguagePlugin();
+    ~AbstractLanguagePlugin() override;
 
-    virtual void predict(const QString& surroundingLeft, const QString& preedit);
-    virtual void wordCandidateSelected(QString word);
-    virtual AbstractLanguageFeatures* languageFeature();
+    void predict(const QString& surroundingLeft, const QString& preedit) override;
+    void wordCandidateSelected(QString word) override;
+    AbstractLanguageFeatures* languageFeature() override;
 
     //! spell checker
-    virtual void spellCheckerSuggest(const QString& word, int limit);
-    virtual void addToSpellCheckerUserWordList(const QString& word);
-    virtual bool setLanguage(const QString& languageId, const QString& pluginPath);
+    void spellCheckerSuggest(const QString& word, int limit) override;
+    void addToSpellCheckerUserWordList(const QString& word) override;
+    bool setLanguage(const QString& languageId, const QString& pluginPath) override;
 
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions);

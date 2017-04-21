@@ -35,7 +35,7 @@ class PinyinAdapter : public QObject
 
 public:
     explicit PinyinAdapter(QObject *parent = nullptr);
-    ~PinyinAdapter();
+    ~PinyinAdapter() override;
 
 signals:
     void newPredictionSuggestions(QString, QStringList);

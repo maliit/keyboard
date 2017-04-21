@@ -25,18 +25,18 @@ class JapaneseLanguageFeatures : public QObject, public AbstractLanguageFeatures
     Q_OBJECT
 public:
     explicit JapaneseLanguageFeatures(QObject *parent = nullptr);
-    virtual ~JapaneseLanguageFeatures();
+    ~JapaneseLanguageFeatures() override;
 
-    virtual bool alwaysShowSuggestions() const;
-    virtual bool autoCapsAvailable() const;
-    virtual bool activateAutoCaps(const QString &preedit) const;
-    virtual QString appendixForReplacedPreedit(const QString &preedit) const;
-    virtual bool isSeparator(const QString &text) const;
-    virtual bool isSymbol(const QString &text) const;
-    virtual bool ignoreSimilarity() const;
-    virtual bool wordEngineAvailable() const;
-    virtual bool enablePreeditAtInsertion() const;
-    virtual bool restorePreedit() const;
+    bool alwaysShowSuggestions() const override;
+    bool autoCapsAvailable() const override;
+    bool activateAutoCaps(const QString &preedit) const override;
+    QString appendixForReplacedPreedit(const QString &preedit) const override;
+    bool isSeparator(const QString &text) const override;
+    bool isSymbol(const QString &text) const override;
+    bool ignoreSimilarity() const override;
+    bool wordEngineAvailable() const override;
+    bool enablePreeditAtInsertion() const override;
+    bool restorePreedit() const override;
 };
 
 #endif // JAPANESELANGUAGEFEATURES_H

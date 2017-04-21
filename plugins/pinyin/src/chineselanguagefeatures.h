@@ -25,17 +25,17 @@ class ChineseLanguageFeatures : public QObject, public AbstractLanguageFeatures
     Q_OBJECT
 public:
     explicit ChineseLanguageFeatures(QObject *parent = nullptr);
-    virtual ~ChineseLanguageFeatures();
+    ~ChineseLanguageFeatures() override;
 
-    virtual bool alwaysShowSuggestions() const;
-    virtual bool autoCapsAvailable() const;
-    virtual bool activateAutoCaps(const QString &preedit) const;
-    virtual QString appendixForReplacedPreedit(const QString &preedit) const;
-    virtual bool isSeparator(const QString &text) const;
-    virtual bool isSymbol(const QString &text) const;
-    virtual bool ignoreSimilarity() const;
-    virtual bool wordEngineAvailable() const;
-    virtual QString fullStopSequence() const;
+    bool alwaysShowSuggestions() const override;
+    bool autoCapsAvailable() const override;
+    bool activateAutoCaps(const QString &preedit) const override;
+    QString appendixForReplacedPreedit(const QString &preedit) const override;
+    bool isSeparator(const QString &text) const override;
+    bool isSymbol(const QString &text) const override;
+    bool ignoreSimilarity() const override;
+    bool wordEngineAvailable() const override;
+    QString fullStopSequence() const override;
 };
 
 #endif // CHINESELANGUAGEFEATURES_H

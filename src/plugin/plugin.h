@@ -50,9 +50,9 @@ public:
     explicit MaliitKeyboardPlugin(QObject *parent = nullptr);
 
     //! \reimp
-    virtual QString name() const;
-    virtual MAbstractInputMethod * createInputMethod(MAbstractInputMethodHost *host);
-    virtual QSet<Maliit::HandlerState> supportedStates() const;
+    QString name() const override;
+    MAbstractInputMethod * createInputMethod(MAbstractInputMethodHost *host) override;
+    QSet<Maliit::HandlerState> supportedStates() const override;
     //! \reimp_end
 };
 

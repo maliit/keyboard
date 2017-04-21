@@ -54,33 +54,33 @@ class WordEngine
 
 public:
     explicit WordEngine(QObject *parent = nullptr);
-    virtual ~WordEngine();
+    ~WordEngine() override;
 
     //! \reimp
-    virtual bool isEnabled() const;
-    virtual void setWordPredictionEnabled(bool enabled);
+    bool isEnabled() const override;
+    void setWordPredictionEnabled(bool enabled) override;
 
-    virtual void addToUserDictionary(const QString &word);
-    virtual void setSpellcheckerEnabled(bool enabled);
-    virtual void setAutoCorrectEnabled(bool enabled);
-    virtual void clearCandidates();
+    void addToUserDictionary(const QString &word) override;
+    void setSpellcheckerEnabled(bool enabled) override;
+    void setAutoCorrectEnabled(bool enabled) override;
+    void clearCandidates() override;
     //! \reimp_end
 
     void appendToCandidates(WordCandidateList *candidates,
                                         WordCandidate::Source source,
                                         const QString &candidate);
 
-    Q_SLOT void onWordCandidateSelected(QString word);
-    Q_SLOT void onLanguageChanged(const QString& pluginPath, const QString& languageId);
-    Q_SLOT void updateQmlCandidates(QStringList qmlCandidates);
+    Q_SLOT void onWordCandidateSelected(QString word) override;
+    Q_SLOT void onLanguageChanged(const QString& pluginPath, const QString& languageId) override;
+    Q_SLOT void updateQmlCandidates(QStringList qmlCandidates) override;
     Q_SLOT void newSpellingSuggestions(QString word, QStringList suggestions);
     Q_SLOT void newPredictionSuggestions(QString word, QStringList suggestions);
 
-    virtual AbstractLanguageFeatures* languageFeature();
+    AbstractLanguageFeatures* languageFeature() override;
 
 private:
     //! \reimp
-    virtual void fetchCandidates(Model::Text *text);
+    void fetchCandidates(Model::Text *text) override;
     //! \reimp_end
     void calculatePrimaryCandidate();
     bool similarWords(QString word1, QString word2);

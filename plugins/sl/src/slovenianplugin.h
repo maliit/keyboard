@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~SlovenianPlugin() = default;
+    ~SlovenianPlugin() override = default;
 };
 
 #endif // SLOVENIANPLUGIN_H

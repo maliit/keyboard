@@ -19,7 +19,7 @@ public:
     {
     }
 
-    virtual ~EnglishPlugin() = default;
+    ~EnglishPlugin() override = default;
 };
 
 #endif // ENGLISHPLUGIN_H

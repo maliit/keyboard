@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~HungarianPlugin() = default;
+    ~HungarianPlugin() override = default;
 };
 
 #endif // HUNGARIANPLUGIN_H

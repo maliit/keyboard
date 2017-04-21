@@ -22,16 +22,16 @@ class KoreanPlugin : public AbstractLanguagePlugin
 
 public:
     explicit KoreanPlugin(QObject *parent = nullptr);
-    virtual ~KoreanPlugin();
+    ~KoreanPlugin() override;
 
-    virtual void predict(const QString& surroundingLeft, const QString& preedit);
-    virtual void wordCandidateSelected(QString word);
-    virtual AbstractLanguageFeatures* languageFeature();
+    void predict(const QString& surroundingLeft, const QString& preedit) override;
+    void wordCandidateSelected(QString word) override;
+    AbstractLanguageFeatures* languageFeature() override;
 
     //! spell checker
-    virtual void spellCheckerSuggest(const QString& word, int limit);
-    virtual void addToSpellCheckerUserWordList(const QString& word);
-    virtual bool setLanguage(const QString& languageId, const QString& pluginPath);
+    void spellCheckerSuggest(const QString& word, int limit) override;
+    void addToSpellCheckerUserWordList(const QString& word) override;
+    bool setLanguage(const QString& languageId, const QString& pluginPath) override;
     virtual void addSpellingOverride(const QString& orig, const QString& overriden);
     virtual void loadOverrides(const QString& pluginPath);
 

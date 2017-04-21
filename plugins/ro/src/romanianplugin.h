@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~RomanianPlugin() = default;
+    ~RomanianPlugin() override = default;
 };
 
 #endif // ROMANIANPLUGIN_H

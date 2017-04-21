@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~GreekPlugin() = default;
+    ~GreekPlugin() override = default;
 };
 
 #endif // GREEKPLUGIN_H

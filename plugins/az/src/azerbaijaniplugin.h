@@ -19,7 +19,7 @@ public:
     {
     }
 
-    virtual ~AzerbaijaniPlugin() = default;
+    ~AzerbaijaniPlugin() override = default;
 };
 
 #endif // AZERBAIJANIPLUGIN_H

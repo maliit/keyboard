@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual ~DutchPlugin() = default;
+    ~DutchPlugin() override = default;
 };
 
 #endif // DUTCHPLUGIN_H
