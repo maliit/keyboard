@@ -32,7 +32,7 @@ Units::Units(QObject *parent)
 
 float Units::gu(float value) const
 {
-    return 8.0 * value;
+    return 8.0f * value;
 }
 
 float Units::dp(float value) const
