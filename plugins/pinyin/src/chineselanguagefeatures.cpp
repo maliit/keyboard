@@ -49,7 +49,7 @@ QString ChineseLanguageFeatures::appendixForReplacedPreedit(const QString &preed
         return QStringLiteral(" ");
     }
 
-    return QLatin1String("");
+    return QString();
 }
 
 bool ChineseLanguageFeatures::isSeparator(const QString &text) const

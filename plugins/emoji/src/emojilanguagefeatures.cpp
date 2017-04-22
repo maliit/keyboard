@@ -42,7 +42,7 @@ bool EmojiLanguageFeatures::activateAutoCaps(const QString &preedit) const
 QString EmojiLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
     Q_UNUSED(preedit)
-    return QLatin1String("");
+    return QString();
 }
 
 bool EmojiLanguageFeatures::isSeparator(const QString &text) const

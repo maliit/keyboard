@@ -44,7 +44,7 @@ QString JapaneseLanguageFeatures::appendixForReplacedPreedit(const QString &pree
 {
     Q_UNUSED(preedit)
     // auto add a character in any event?
-    return QLatin1String("");
+    return QString();
 }
 
 bool JapaneseLanguageFeatures::isSeparator(const QString &text) const

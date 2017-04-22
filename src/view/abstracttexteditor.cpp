@@ -245,7 +245,7 @@ AbstractTextEditorPrivate::AbstractTextEditorPrivate(const EditorOptions &new_op
     , backspace_word_acceleration(0)
     , deleted_words(0)
     , keyboardState(QStringLiteral("CHARACTERS"))
-    , previous_preedit(QLatin1String(""))
+    , previous_preedit()
     , previous_preedit_position(0)
 {
     auto_repeat_backspace_timer.setSingleShot(true);
@@ -354,7 +354,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     }
 
     const QString text = key.label();
-    QString keyText = QLatin1String("");
+    QString keyText = QString();
     Qt::Key event_key = Qt::Key_unknown;
     bool look_for_a_double_space = d->look_for_a_double_space;
     bool look_for_a_triple_space = d->look_for_a_triple_space;
@@ -388,7 +388,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                     not d->text->preedit().isEmpty() && isSeparator;
         const bool enablePreeditAtInsertion = d->word_engine->languageFeature()->enablePreeditAtInsertion();
 
-        d->previous_preedit = QLatin1String("");
+        d->previous_preedit = QString();
 
         if (d->preedit_enabled) {
             if (!enablePreeditAtInsertion &&
@@ -502,7 +502,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         if (replace_preedit) {
             if (!textOnRight.isEmpty() && d->editing_middle_of_text) {
                 // Don't insert a space if we are correcting a word in the middle of a sentence
-                space = QLatin1String("");
+                space = QString();
                 d->look_for_a_double_space = false;
                 d->editing_middle_of_text = false;
             } else {
@@ -734,7 +734,7 @@ void AbstractTextEditor::replaceAndCommitPreedit(const QString &replacement)
     if (d->auto_correct_enabled) {
         if ((!d->text->surroundingRight().trimmed().isEmpty() && d->editing_middle_of_text) || d->word_engine->languageFeature()->contentType() == Maliit::UrlContentType) {
             // Don't insert a space if we are correcting a word in the middle of a sentence or if we're in a Url field
-            d->appendix_for_previous_preedit = QLatin1String("");
+            d->appendix_for_previous_preedit = QString();
             d->editing_middle_of_text = false;
         }
         d->text->appendToPreedit(d->appendix_for_previous_preedit);
@@ -758,8 +758,8 @@ void AbstractTextEditor::clearPreedit()
 {
     Q_D(AbstractTextEditor);
 
-    replacePreedit(QLatin1String(""));
-    text()->setSurrounding(QLatin1String(""));
+    replacePreedit(QString());
+    text()->setSurrounding(QString());
     text()->setSurroundingOffset(0);
 
     if (not d->valid()) {
@@ -1028,7 +1028,7 @@ void AbstractTextEditor::singleBackspace()
             //  When preedit is cleared, for Qt not reporting it as inputMethodComposing all the time we need
             //  to flush out all the TextFormat attributes - so we actually need to commit anything for that
             //  to happen
-            sendCommitString(QLatin1String(""));
+            sendCommitString(QString());
         }
     }
 
@@ -1143,7 +1143,7 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
                     recreatedPreedit = d->previous_preedit;
                     text()->setRestoredPreedit(true);
                 }
-                d->previous_preedit = QLatin1String("");
+                d->previous_preedit = QString();
             }
             replaceTextWithPreedit(recreatedPreedit, 0, 0, recreatedPreedit.size());
         }

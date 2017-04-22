@@ -42,7 +42,7 @@ bool KoreanLanguageFeatures::activateAutoCaps(const QString &preedit) const
 QString KoreanLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
     if (preedit.isEmpty())
-        return QLatin1String("");
+        return QString();
 
     return QStringLiteral(" ");
 }

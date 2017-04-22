@@ -68,7 +68,7 @@ bool WesternLanguageFeatures::activateAutoCaps(const QString &preedit) const
 QString WesternLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
     if (preedit.isEmpty())
-        return QLatin1String("");
+        return QString();
 
     return QStringLiteral(" ");
 }

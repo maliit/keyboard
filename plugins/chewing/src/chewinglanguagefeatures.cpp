@@ -46,7 +46,7 @@ bool ChewingLanguageFeatures::activateAutoCaps(const QString &preedit) const
 QString ChewingLanguageFeatures::appendixForReplacedPreedit(const QString &preedit) const
 {
     if (preedit.isEmpty())
-        return QLatin1String("");
+        return QString();
 
     return QStringLiteral(" ");
 }
