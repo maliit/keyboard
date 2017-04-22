@@ -55,10 +55,7 @@
 #include <QtTest>
 #include <QtCore>
 #include <QtGui>
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
 #include <QtWidgets>
-#endif
 
 using namespace MaliitKeyboard;
 Q_DECLARE_METATYPE(Logic::LayoutHelper::Orientation)

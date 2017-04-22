@@ -41,10 +41,8 @@ class MaliitKeyboardPlugin
 {
     Q_OBJECT
     Q_INTERFACES(Maliit::Plugins::InputMethodPlugin)
-#if QT_VERSION >= 0x050000
     Q_PLUGIN_METADATA(IID  "org.maliit.plugin.keyboard"
                       FILE "plugin.json")
-#endif
 
 public:
     explicit MaliitKeyboardPlugin(QObject *parent = nullptr);
