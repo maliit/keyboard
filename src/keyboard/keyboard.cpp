@@ -1,5 +1,5 @@
 /* 
- * Copyright (c) 2017 jan.petersen
+ * Copyright (c) 2017 Jan Arne Petersen
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,3 +23,18 @@
  * SOFTWARE.
  */
 
+#include <QGuiApplication>
+
+#include <maliit/standaloneinputmethod.h>
+#include <src/plugin/plugin.h>
+
+int main(int argc, char **argv) {
+    setenv("QT_IM_MODULE", "none", true);
+
+    QGuiApplication app(argc, argv);
+
+    MaliitKeyboardPlugin plugin;
+    Maliit::StandaloneInputMethod inputMethod(&plugin);
+
+    return app.exec();
+}

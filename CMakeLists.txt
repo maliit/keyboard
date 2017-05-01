@@ -37,7 +37,7 @@ find_package(Anthy)
 find_package(Pinyin)
 find_package(Chewing)
 
-set(MALIIT_KEYBOARD_SOURCES
+set(MALIIT_KEYBOARD_LIB_SOURCES
         src/lib/logic/abstractlanguagefeatures.h
         src/lib/logic/abstractlanguageplugin.cpp
         src/lib/logic/abstractlanguageplugin.h
@@ -118,10 +118,10 @@ if(enable-hunspell)
     list(APPEND maliit-keyboard-include-dirs ${HUNSPELL_INCLUDE_DIRS})
 endif()
 
-add_library(maliit-keyboard STATIC ${MALIIT_KEYBOARD_SOURCES})
-target_link_libraries(maliit-keyboard Qt5::Core Maliit::Plugins)
-target_include_directories(maliit-keyboard PUBLIC src/lib)
-target_compile_definitions(maliit-keyboard PRIVATE ${maliit-keyboard-definitions})
+add_library(maliit-keyboard-lib STATIC ${MALIIT_KEYBOARD_LIB_SOURCES})
+target_link_libraries(maliit-keyboard-lib Qt5::Core Maliit::Plugins)
+target_include_directories(maliit-keyboard-lib PUBLIC src/lib)
+target_compile_definitions(maliit-keyboard-lib PRIVATE ${maliit-keyboard-definitions})
 
 set(MALIIT_KEYBOARD_VIEW_SOURCES
         src/view/abstracttexteditor.cpp
@@ -130,7 +130,7 @@ set(MALIIT_KEYBOARD_VIEW_SOURCES
         src/view/setup.h)
 
 add_library(maliit-keyboard-view STATIC ${MALIIT_KEYBOARD_VIEW_SOURCES})
-target_link_libraries(maliit-keyboard-view Maliit::Plugins maliit-keyboard)
+target_link_libraries(maliit-keyboard-view Maliit::Plugins maliit-keyboard-lib)
 target_include_directories(maliit-keyboard-view PUBLIC src)
 
 set(QGSETTINGS_SOURCES
@@ -147,7 +147,7 @@ target_link_libraries(gsettings-qt Qt5::Core ${GIO_LIBRARIES})
 target_include_directories(gsettings-qt PUBLIC ${GIO_INCLUDE_DIRS} src/3rdparty)
 target_compile_definitions(gsettings-qt PRIVATE -DQT_NO_KEYWORDS)
 
-set(MALIIT_KEYBOARD_PLUGIN_SOURCES
+set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/editor.cpp
         src/plugin/editor.h
         src/plugin/greeterstatus.cpp
@@ -161,15 +161,30 @@ set(MALIIT_KEYBOARD_PLUGIN_SOURCES
         src/plugin/keyboardgeometry.h
         src/plugin/keyboardsettings.cpp
         src/plugin/keyboardsettings.h
+        src/plugin/units.cpp
+        src/plugin/units.h)
+
+add_library(maliit-keyboard-common STATIC ${MALIIT_KEYBOARD_COMMON_SOURCES})
+target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt)
+target_compile_definitions(maliit-keyboard-common PRIVATE ${maliit-keyboard-definitions})
+
+set(MALIIT_KEYBOARD_PLUGIN_SOURCES
         src/plugin/plugin.cpp
         src/plugin/plugin.h
-        src/plugin/units.cpp
-        src/plugin/units.h
         src/plugin/plugin.json)
 
 add_library(maliit-keyboard-plugin MODULE ${MALIIT_KEYBOARD_PLUGIN_SOURCES})
-target_link_libraries(maliit-keyboard-plugin Qt5::DBus Maliit::Plugins maliit-keyboard maliit-keyboard-view gsettings-qt)
+target_link_libraries(maliit-keyboard-plugin maliit-keyboard-common)
 target_compile_definitions(maliit-keyboard-plugin PRIVATE ${maliit-keyboard-definitions})
+
+set(MALIIT_KEYBOARD_SOURCES
+        src/plugin/plugin.cpp
+        src/plugin/plugin.h
+        src/keyboard/keyboard.cpp)
+
+add_executable(maliit-keyboard ${MALIIT_KEYBOARD_SOURCES})
+target_link_libraries(maliit-keyboard maliit-keyboard-common)
+target_compile_definitions(maliit-keyboard PRIVATE ${maliit-keyboard-definitions})
 
 # TODO install westernlanguagesplugin.h into "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/include"
 
@@ -334,8 +349,9 @@ endif()
 install(FILES COPYING COPYING.BSD COPYING.CC-BY README.md
         DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/maliit-keyboard)
 
-install(TARGETS maliit-keyboard-plugin
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/maliit/plugins)
+install(TARGETS maliit-keyboard-plugin maliit-keyboard
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/maliit/plugins
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(DIRECTORY qml/images qml/keys qml/languages
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
