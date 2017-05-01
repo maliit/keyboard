@@ -8,20 +8,8 @@ option(enable-tests "Build tests" OFF)
 
 set(MALIIT_DEFAULT_PROFILE "ubuntu" CACHE STRING "Default keyboard style")
 
-if(NOT DEFINED INCLUDE_INSTALL_DIR)
-    set(INCLUDE_INSTALL_DIR "include" CACHE PATH
-            "Installation directory for C/C++ header files [CMAKE_INSTALL_PREFIX/include]")
-endif()
-
-if(NOT DEFINED LIB_INSTALL_DIR)
-    set(LIB_INSTALL_DIR "lib" CACHE PATH
-            "Installation directory for object code libraries [CMAKE_INSTALL_PREFIX/lib]")
-endif()
-
-if(NOT DEFINED SHARE_INSTALL_PREFIX)
-    set(SHARE_INSTALL_PREFIX "share" CACHE PATH
-            "Installation directory for read-only architecture-independent data [CMAKE_INSTALL_PREFIX/share]")
-endif()
+# Install paths
+include(GNUInstallDirs)
 
 if(NOT DEFINED QT5_QML_INSTALL_DIR)
     set(QT5_QML_INSTALL_DIR "${LIB_INSTALL_DIR}/qt5/qml" CACHE PATH
@@ -29,7 +17,7 @@ if(NOT DEFINED QT5_QML_INSTALL_DIR)
 endif()
 
 set(HUNSPELL_DICT_PATH "/usr/share/myspell" CACHE PATH "Directory containing hunspell dictionary files")
-set(MALIIT_PLUGINS_DATA_DIR "${SHARE_INSTALL_PREFIX}/maliit/plugins" CACHE PATH "Directory containing maliit-plugins data")
+set(MALIIT_PLUGINS_DATA_DIR "${CMAKE_INSTALL_DATADIR}/maliit/plugins" CACHE PATH "Directory containing maliit-plugins data")
 set(MALIIT_KEYBOARD_DATA_DIR "${MALIIT_PLUGINS_DATA_DIR}/org/maliit" CACHE PATH "Directory containing maliit-keyboard data")
 set(MALIIT_KEYBOARD_LIB_DIR "${MALIIT_PLUGINS_DATA_DIR}/org/maliit/lib" CACHE PATH "Directory containing maliit-keyboard data")
 
@@ -344,10 +332,10 @@ endif()
 # Installation
 
 install(FILES COPYING COPYING.BSD COPYING.CC-BY README.md
-        DESTINATION ${SHARE_INSTALL_PREFIX}/doc/maliit-keyboard)
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/maliit-keyboard)
 
 install(TARGETS maliit-keyboard-plugin
-        LIBRARY DESTINATION ${LIB_INSTALL_DIR}/maliit/plugins)
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/maliit/plugins)
 
 install(DIRECTORY qml/images qml/keys qml/languages
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
