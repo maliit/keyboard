@@ -37,8 +37,6 @@ public:
     virtual void loadOverrides(const QString& pluginPath);
 
 signals:
-    void newSpellingSuggestions(QString word, QStringList suggestions);
-    void newPredictionSuggestions(QString word, QStringList suggestions);
     void newSpellCheckWord(QString word);
     void setSpellCheckLimit(int limit);
     void setSpellPredictLanguage(QString language, QString pluginPath);

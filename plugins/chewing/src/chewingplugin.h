@@ -33,7 +33,6 @@ public:
     bool setLanguage(const QString& languageId, const QString& pluginPath) override { Q_UNUSED(languageId); Q_UNUSED(pluginPath); return false; }
 
 signals:
-    void newPredictionSuggestions(QString word, QStringList suggestions);
     void parsePredictionText(QString preedit);
     void candidateSelected(QString word);
     

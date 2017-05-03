@@ -25,7 +25,6 @@ public:
     void wordCandidateSelected(QString word) override;
 
 signals:
-    void newPredictionSuggestions(QString word, QStringList suggestions);
     void parsePredictionText(QString preedit);
     void candidateSelected(QString word);
 
