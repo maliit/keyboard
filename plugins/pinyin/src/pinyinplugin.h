@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QStringList>
 #include <QThread>
-#include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
 #include "pinyinadapter.h"
@@ -16,7 +15,6 @@ class PinyinPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.PinyinPlugin" FILE "pinyinplugin.json")
-    Q_INTERFACES(LanguagePluginInterface)
 
 public:
     explicit PinyinPlugin(QObject *parent = nullptr);

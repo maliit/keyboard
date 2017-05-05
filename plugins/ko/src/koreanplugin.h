@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QStringList>
-#include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 #include "candidatescallback.h"
 #include "spellchecker.h"
@@ -18,7 +17,6 @@ class KoreanPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.KoreanPlugin" FILE "koreanplugin.json")
-    Q_INTERFACES(LanguagePluginInterface)
 
 public:
     explicit KoreanPlugin(QObject *parent = nullptr);

@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QThread>
-#include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
 #include "anthyadapter.h"
@@ -13,7 +12,6 @@ class JapaneseLanguageFeatures;
 class JapanesePlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
-    Q_INTERFACES(LanguagePluginInterface)
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.JapanesePlugin" FILE "japaneseplugin.json")
 
 public:

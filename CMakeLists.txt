@@ -45,12 +45,10 @@ set(MALIIT_KEYBOARD_LIB_SOURCES
         src/lib/logic/abstractwordengine.h
         src/lib/logic/eventhandler.cpp
         src/lib/logic/eventhandler.h
-        src/lib/logic/languageplugininterface.h
         src/lib/logic/style.cpp
         src/lib/logic/style.h
         src/lib/logic/wordengine.cpp
         src/lib/logic/wordengine.h
-
         src/lib/models/area.cpp
         src/lib/models/area.h
         src/lib/models/key.cpp
@@ -69,7 +67,6 @@ set(MALIIT_KEYBOARD_LIB_SOURCES
         src/lib/models/wordcandidate.h
         src/lib/models/wordribbon.cpp
         src/lib/models/wordribbon.h
-
         src/lib/coreutils.cpp
         src/lib/coreutils.h)
 
@@ -86,7 +83,7 @@ set(WESTERNSUPPORT_SOURCES
         src/lib/logic/abstractlanguageplugin.cpp
         src/lib/logic/abstractlanguageplugin.h)
 
-# TODO install logic/languageplugininterface.h and logic/abstractplugininterface.h as HEADERS
+# TODO install logic/abstractplugininterface.h as HEADERS
 
 set(maliit-keyboard-libraries Qt5::Core)
 set(maliit-keyboard-definitions HUNSPELL_DICT_PATH="${HUNSPELL_DICT_PATH}"

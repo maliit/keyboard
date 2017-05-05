@@ -30,25 +30,24 @@
 
 #include <QObject>
 
-#include "languageplugininterface.h"
+class AbstractLanguageFeatures;
 
-class AbstractLanguagePlugin : public QObject, public LanguagePluginInterface
+class AbstractLanguagePlugin : public QObject
 {
     Q_OBJECT
-    Q_INTERFACES(LanguagePluginInterface)
 
 public:
     AbstractLanguagePlugin(QObject *parent = nullptr);
     ~AbstractLanguagePlugin() override;
 
-    void predict(const QString& surroundingLeft, const QString& preedit) override;
-    void wordCandidateSelected(QString word) override;
-    AbstractLanguageFeatures* languageFeature() override;
+    virtual void predict(const QString& surroundingLeft, const QString& preedit);
+    virtual void wordCandidateSelected(QString word);
+    virtual AbstractLanguageFeatures* languageFeature();
 
     //! spell checker
-    void spellCheckerSuggest(const QString& word, int limit) override;
-    void addToSpellCheckerUserWordList(const QString& word) override;
-    bool setLanguage(const QString& languageId, const QString& pluginPath) override;
+    virtual void spellCheckerSuggest(const QString& word, int limit);
+    virtual void addToSpellCheckerUserWordList(const QString& word);
+    virtual bool setLanguage(const QString& languageId, const QString& pluginPath);
 
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions);

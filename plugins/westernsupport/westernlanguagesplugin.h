@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-#include "languageplugininterface.h"
 #include "westernlanguagefeatures.h"
 #include "spellchecker.h"
 #include "abstractlanguageplugin.h"
@@ -19,7 +18,6 @@ class SpellPredictWorker;
 class WesternLanguagesPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
-    Q_INTERFACES(LanguagePluginInterface)
 
 public:
     explicit WesternLanguagesPlugin(QObject *parent = nullptr);
