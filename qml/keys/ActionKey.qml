@@ -17,6 +17,7 @@
 import QtQuick 2.4
 
 import QtQuick.Controls 2.1
+import QtGraphicalEffects 1.0
 
 import "key_constants.js" as UI
 
@@ -59,12 +60,19 @@ CharKey {
             source: iconSourceNormal !== "" ? iconSourceNormal
                                             : iconNormal ? "../icons/%1.png".arg(iconNormal)
                                                          : ""
-//            color: actionKeyRoot.colorNormal
+            property color color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - units.gu(0.15)
-            visible: (label == "" && !panel.hideKeyLabels)
             height: actionKeyRoot.fontSize
             fillMode: Image.PreserveAspectFit
+            visible: false
+        }
+        ColorOverlay {
+            cached: true
+            anchors.fill: iconImage
+            source: iconImage
+            color: iconImage.color
+            visible: (label == "" && !panel.hideKeyLabels)
         }
     }
 
@@ -78,7 +86,7 @@ CharKey {
                 source: iconSourceShifted !== "" ? iconSourceShifted 
                                                  : iconShifted ? "../icons/%1.png".arg(iconShifted)
                                                                : ""
-//                color: actionKeyRoot.colorShifted
+                color: actionKeyRoot.colorShifted
             }
         },
         State {
@@ -88,7 +96,7 @@ CharKey {
                 source: iconSourceCapsLock !== "" ? iconSourceCapsLock
                                                   : iconCapsLock ? "../icons/%1.png".arg(iconCapsLock)
                                                                 : ""
-//                color: actionKeyRoot.colorCapsLock
+                color: actionKeyRoot.colorCapsLock
             }
         }
     ]
