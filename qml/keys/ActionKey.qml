@@ -57,14 +57,14 @@ CharKey {
         Image {
             id: iconImage
             source: iconSourceNormal !== "" ? iconSourceNormal
-                                            : iconNormal ? "image://theme/%1".arg(iconNormal)
+                                            : iconNormal ? "../icons/%1.png".arg(iconNormal)
                                                          : ""
 //            color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - units.gu(0.15)
             visible: (label == "" && !panel.hideKeyLabels)
             height: actionKeyRoot.fontSize
-            width: height
+            fillMode: Image.PreserveAspectFit
         }
     }
 
@@ -76,7 +76,7 @@ CharKey {
             PropertyChanges {
                 target: iconImage
                 source: iconSourceShifted !== "" ? iconSourceShifted 
-                                                 : iconShifted ? "image://theme/%1".arg(iconShifted)
+                                                 : iconShifted ? "../icons/%1.png".arg(iconShifted)
                                                                : ""
 //                color: actionKeyRoot.colorShifted
             }
@@ -86,7 +86,7 @@ CharKey {
             PropertyChanges {
                 target: iconImage
                 source: iconSourceCapsLock !== "" ? iconSourceCapsLock
-                                                  : iconCapsLock ? "image://theme/%1".arg(iconCapsLock)
+                                                  : iconCapsLock ? "../icons/%1.png".arg(iconCapsLock)
                                                                 : ""
 //                color: actionKeyRoot.colorCapsLock
             }

@@ -357,6 +357,15 @@ install(FILES qml/constants.js qml/Keyboard.qml qml/KeyboardContainer.qml qml/Wo
 
 install(DIRECTORY data/styles
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
+install(FILES data/styles/ubuntu/images/icon_backspace18.png
+        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
+        RENAME erase.png)
+install(FILES data/styles/ubuntu/images/icon_enter@18.png
+        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
+        RENAME keyboard-enter.png)
+install(FILES data/styles/ubuntu/images/language-icon.png
+        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
+        RENAME language-chooser.png)
 install(FILES data/schemas/org.maliit.keyboard.maliit.gschema.xml
         DESTINATION share/glib-2.0/schemas/)
 
