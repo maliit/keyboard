@@ -251,9 +251,40 @@ void InputMethod::handleClientChange()
 
 bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
 {
+    Q_D(InputMethod);
+
     if (not event or event->type() != MImExtensionEvent::Update) {
         return false;
     }
+
+    auto enterKeyType = inputMethodHost()->inputMethodQuery(Qt::ImEnterKeyType).value<Qt::EnterKeyType>();
+
+    d->actionKeyOverrider.reset(new MKeyOverride(actionKeyName));
+    switch (enterKeyType) {
+        case Qt::EnterKeyDefault:
+        case Qt::EnterKeyReturn:
+            d->actionKeyOverrider->setLabel(QString());
+            break;
+        case Qt::EnterKeyDone:
+            d->actionKeyOverrider->setLabel(tr("Done"));
+            break;
+        case Qt::EnterKeyGo:
+            d->actionKeyOverrider->setLabel(tr("Go"));
+            break;
+        case Qt::EnterKeySend:
+            d->actionKeyOverrider->setLabel(tr("Send"));
+            break;
+        case Qt::EnterKeySearch:
+            d->actionKeyOverrider->setLabel(tr("Search"));
+            break;
+        case Qt::EnterKeyNext:
+            d->actionKeyOverrider->setLabel(tr("Next"));
+            break;
+        case Qt::EnterKeyPrevious:
+            d->actionKeyOverrider->setLabel(tr("Previous"));
+            break;
+    }
+    emit actionKeyOverrideChanged();
     return true;
 }
 
