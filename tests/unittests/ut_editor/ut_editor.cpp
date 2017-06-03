@@ -257,6 +257,29 @@ private:
         Q_UNUSED(expected_auto_caps_activated_count)
         QCOMPARE(auto_caps_activated_spy.count(), expected_auto_caps_activated_count);
     }
+
+    Q_SLOT void testRegressionIssue2()
+    {
+        Logic::WordEngineProbe *word_engine = new Logic::WordEngineProbe;
+        Editor editor(EditorOptions(), new Model::Text, word_engine);
+        QSignalSpy auto_caps_activated_spy(&editor, SIGNAL(autoCapsActivated()));
+
+        InputMethodHostProbe host;
+        editor.setHost(&host);
+
+        initializeWordEngine(word_engine);
+
+        editor.wordEngine()->setWordPredictionEnabled(true);
+        editor.wordEngine()->setEnabled(true);
+        editor.setAutoCorrectEnabled(false);
+        editor.setPreeditEnabled(true);
+        editor.setAutoCapsEnabled(true);
+
+        appendInput(&editor, "Yesterday (th");
+        editor.replaceAndCommitPreedit("the");
+
+        QCOMPARE(host.commitStringHistory(), QString("Yesterday (the"));
+    }
 };
 
 QTEST_MAIN(TestEditor)
