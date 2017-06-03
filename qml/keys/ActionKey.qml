@@ -62,7 +62,7 @@ CharKey {
             color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - units.gu(0.15)
-            visible: (label == "")
+            visible: (label == "" && !panel.hideKeyLabels)
             height: actionKeyRoot.fontSize
             width: height
         }

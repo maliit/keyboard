@@ -162,6 +162,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 // Avoid eliding characters that are slightly too wide (e.g. some emoji and chinese characters)
                 elide: text.length <= 4 ? Text.ElideNone : Text.ElideRight
+                visible: !panel.hideKeyLabels
             }
         
             /// shows an annotation
@@ -179,6 +180,7 @@ Item {
                 font.pixelSize: fullScreenItem.tablet ? units.dp(UI.tabletAnnotationFontSize) : units.dp(UI.phoneAnnotationFontSize)
                 font.weight: Font.Light
                 color: UI.annotationFontColor
+                visible: !panel.hideKeyLabels
             }
 
         }
