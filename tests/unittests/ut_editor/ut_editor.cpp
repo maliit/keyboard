@@ -162,52 +162,76 @@ private:
     Q_SLOT void testAutoCaps_data()
     {
         QTest::addColumn<bool>("enable_auto_correct");
+        QTest::addColumn<bool>("enable_auto_caps");
         QTest::addColumn<QString>("input");
         QTest::addColumn<QString>("expected_commit_history");
         QTest::addColumn<int>("expected_auto_caps_activated_count");
 
-        QTest::newRow("auto-correct disabled, no punctation")
-                << false << "Helol Wordl " << "Helol Wordl " << 0;
+        QTest::newRow("auto-correct and autocaps disabled, no punctation")
+                << false << false << "Helol Wordl " << "Helol Wordl " << 0;
 //        QTest::newRow("auto-correct enabled, no punctation")
 //                << true << "Helol Wordl " << "Hello World " << 0;
-        QTest::newRow("auto-correct disabled, dot")
-                << false << "Helol Wordl. " << "Helol Wordl. " << 1;
+        QTest::newRow("auto-correct and autocaps disabled, dot")
+                << false << false << "Helol Wordl. " << "Helol Wordl. " << 0;
 //        QTest::newRow("auto-correct enabled, dot")
 //                << true << "Helol Wordl. " << "Hello World. " << 1;
-        QTest::newRow("auto-correct disabled, excalamation mark")
-                << false << "Helol Wordl! " << "Helol Wordl! " << 1;
+        QTest::newRow("auto-correct and autocaps disabled, excalamation mark")
+                << false << false << "Helol Wordl! " << "Helol Wordl! " << 0;
 //        QTest::newRow("auto-correct enabled, excalamation mark")
 //                << true << "Helol Wordl! " << "Hello World! " << 1;
-        QTest::newRow("auto-correct disabled, multiple dots")
-                << false << "Helol Wordl... " << "Helol Wordl... " << 1;
+        QTest::newRow("auto-correct and autocaps disabled, multiple dots")
+                << false << false << "Helol Wordl... " << "Helol Wordl... " << 0;
 //        QTest::newRow("auto-correct enabled, multiple dots")
 //                << true << "Helol Wordl... " << "Hello World... " << 1;
-        QTest::newRow("auto-correct disabled, comma")
-                << false << "Helol Wordl, " << "Helol Wordl, " << 0;
+        QTest::newRow("auto-correct and autocaps disabled, comma")
+                << false << false << "Helol Wordl, " << "Helol Wordl, " << 0;
 //        QTest::newRow("auto-correct enabled, comma")
 //                << true << "Helol Wordl, " << "Hello World, " << 0;
-        QTest::newRow("auto-correct disabled, quotation mark")
-                << false << "Helol Wordl\" " << "Helol Wordl\" " << 0;
+        QTest::newRow("auto-correct and autocaps disabled, quotation mark")
+                << false << false << "Helol Wordl\" " << "Helol Wordl\" " << 0;
 //        QTest::newRow("auto-correct enabled, quotation mark")
 //                << true << "Helol Wordl\" " << "Hello World\" " << 0;
-        QTest::newRow("auto-correct disabled, multiple sentences with mixed punctation")
-                << false << "This is a \"first sentence\". And a second, one! "
-                << "This is a \"first sentence\". And a second, one! " << 2;
-        QTest::newRow("auto-correct disabled, multiple sentences with dots")
-                << false << "First sentence. Second one. And Third. "
-                << "First sentence. Second one. And Third. " << 3;
+        QTest::newRow("auto-correct and autocaps disabled, multiple sentences with mixed punctation")
+                << false << false << "This is a \"first sentence\". And a second, one! "
+                << "This is a \"first sentence\". And a second, one! " << 0;
+        QTest::newRow("auto-correct and autocaps disabled, multiple sentences with dots")
+                << false << false << "First sentence. Second one. And Third. "
+                << "First sentence. Second one. And Third. " << 0;
+
+        QTest::newRow("auto-correct disabled, autocaps, no punctation")
+                << false << true << "Helol Wordl " << "Helol Wordl " << 0;
+        QTest::newRow("auto-correct disabled, autocaps, dot")
+                << false << true << "Helol Wordl. " << "Helol Wordl. " << 2;
+        QTest::newRow("auto-correct disabled, autocaps, excalamation mark")
+                << false << true << "Helol Wordl! " << "Helol Wordl! " << 2;
+        QTest::newRow("auto-correct disabled, autocaps, multiple dots")
+                << false << true << "Helol Wordl... " << "Helol Wordl... " << 4;
+        QTest::newRow("auto-correct disabled, autocaps, comma")
+                << false << true << "Helol Wordl, " << "Helol Wordl, " << 0;
+        QTest::newRow("auto-correct disabled, autocaps, quotation mark")
+                << false << true << "Helol Wordl\" " << "Helol Wordl\" " << 0;
+        QTest::newRow("auto-correct disabled, autocaps, multiple sentences with mixed punctation")
+                << false << true << "This is a \"first sentence\". And a second, one! "
+                << "This is a \"first sentence\". And a second, one! " << 4;
+        QTest::newRow("auto-correct disabled, autocaps, multiple sentences with dots")
+                << false << true << "First sentence. Second one. And Third. "
+                << "First sentence. Second one. And Third. " << 6;
 
         // Tests for the auto-correct and autocaps separator functionality
         // FIXME: In the current testing infra, we cannot really test this properly, as we are using the 'backspace' character
         //  a lot during auto-correction, which is currently not handled too well here.
-        QTest::newRow("auto-correct enabled, autocaps after separator auto-correction")
-                << true << "Hello Wor . This should be autocapsed "
+        QTest::newRow("auto-correct enabled, autocaps disabled, after separator auto-correction")
+                << true << false << "Hello Wor . This should be autocapsed "
+                << "Hello World . This should be autocapsed " << 0;
+        QTest::newRow("auto-correct and autocaps enabled, autocaps after separator auto-correction")
+                << true << true << "Hello Wor . This should be autocapsed "
                 << "Hello World . This should be autocapsed " << 2;
     }
 
     Q_SLOT void testAutoCaps()
     {
         QFETCH(bool, enable_auto_correct);
+        QFETCH(bool, enable_auto_caps);
         QFETCH(QString, input);
         QFETCH(QString, expected_commit_history);
         QFETCH(int, expected_auto_caps_activated_count);
@@ -225,7 +249,7 @@ private:
         editor.wordEngine()->setEnabled(true);
         editor.setAutoCorrectEnabled(enable_auto_correct);
         editor.setPreeditEnabled(true);
-        editor.setAutoCapsEnabled(true);
+        editor.setAutoCapsEnabled(enable_auto_caps);
 
         appendInput(&editor, input);
 

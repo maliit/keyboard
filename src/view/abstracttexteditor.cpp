@@ -408,8 +408,8 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 }
                 alreadyAppended = true;
             }
-            else if (d->auto_correct_enabled && (isSeparator || isSymbol)) {
-                if(isSeparator && d->keyboardState == "CHARACTERS" && !email_detected) {
+            else if (isSeparator || isSymbol) {
+                if(d->auto_correct_enabled && isSeparator && d->keyboardState == "CHARACTERS" && !email_detected) {
                     // remove all whitespaces before the separator, then add a whitespace after it
                     removeTrailingWhitespaces();
                 }
