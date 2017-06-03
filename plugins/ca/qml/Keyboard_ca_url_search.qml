@@ -49,7 +49,7 @@ KeyPad {
             spacing: 0
 
             CharKey { label: "a"; shifted: "A"; extended: ["ä","à","â","á","ã","å","ª","æ"]; extendedShifted: ["Ä","À","Â","Á","Ã","Å","ª","Æ"]; leftSide: true; }
-            CharKey { label: "s"; shifted: "S"; extended: ["ß","$"]; extendedShifted: ["$"] }
+            CharKey { label: "s"; shifted: "S"; extended: ["ß","$"]; extendedShifted: ["ẞ","$"] }
             CharKey { label: "d"; shifted: "D"; }
             CharKey { label: "f"; shifted: "F"; }
             CharKey { label: "g"; shifted: "G"; }
@@ -86,7 +86,7 @@ KeyPad {
             CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: languageMenuButton.right; height: parent.height; }
             SpaceKey       { id: spaceKey;                               anchors.left: slashKey.right; anchors.right: urlKey.left; noMagnifier: true; height: parent.height; }
             UrlKey         { id: urlKey; label: ".com"; extended: [".cat", ".ad", ".es"]; anchors.right: dotKey.left; height: parent.height; }
-            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?",'"',"(",")","!","«","»", "·", "¿", "¡"];  extendedShifted: ["?",'"',"(",")","!","«","»", "·", "¿", "¡"]; anchors.right: enterKey.left; height: parent.height; }
+            CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "-", "_", "+", "%", "!", "#", "/", "·", "¿", "¡"];  extendedShifted: ["?", "-", "_", "+", "%", "!", "#", "/", "·", "¿", "¡"]; anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column
