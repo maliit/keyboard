@@ -454,9 +454,10 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     case Key::ActionBackspace: {
         if (not d->backspace_sent) {
+            bool uncommittedDelete = d->text->preedit().isEmpty();
             singleBackspace();
             if (!email_detected) {
-                checkPreeditReentry(true);
+                checkPreeditReentry(uncommittedDelete);
             }
         } else if (!email_detected) {
             checkPreeditReentry(false);
