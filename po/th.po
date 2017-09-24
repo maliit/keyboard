@@ -14,149 +14,145 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
+"X-Launchpad-Export-Date: 2016-11-16 06:16+0000\n"
+"X-Generator: Launchpad (build 18269)\n"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "Settings"
-msgstr "การตั้งค่า"
+msgstr ""
 
 #: ../qml/keys/languages.js:19
 msgid "Arabic"
-msgstr "อาหรับ"
+msgstr ""
 
 #: ../qml/keys/languages.js:20
 msgid "Azerbaijani"
-msgstr "อาเซอร์ไบจาน"
+msgstr ""
 
 #: ../qml/keys/languages.js:21
 msgid "Bosnian"
-msgstr "บอสเนีย"
+msgstr ""
 
 #: ../qml/keys/languages.js:22
 msgid "Catalan"
-msgstr "คาตาลัน"
+msgstr ""
 
 #: ../qml/keys/languages.js:23
 msgid "Czech"
-msgstr "เช็ก"
+msgstr ""
 
 #: ../qml/keys/languages.js:24
 msgid "Danish"
-msgstr "เดนมาร์ก"
+msgstr ""
 
 #: ../qml/keys/languages.js:25
 msgid "German"
-msgstr "เยอรมัน"
+msgstr ""
 
 #: ../qml/keys/languages.js:26
 msgid "Emoji"
-msgstr "อีโมจิ"
+msgstr ""
 
 #: ../qml/keys/languages.js:27
 msgid "Greek"
-msgstr "กรีก"
+msgstr ""
 
 #: ../qml/keys/languages.js:28
 msgid "English"
-msgstr "อังกฤษ"
+msgstr ""
 
 #: ../qml/keys/languages.js:29
 msgid "Spanish"
-msgstr "สเปน"
+msgstr ""
 
 #: ../qml/keys/languages.js:30
 msgid "Finnish"
-msgstr "ฟินแลนด์"
+msgstr ""
 
 #: ../qml/keys/languages.js:31
 msgid "French"
-msgstr "ฝรั่งเศส"
+msgstr ""
 
 #: ../qml/keys/languages.js:32
 msgid "Scottish Gaelic"
-msgstr "เกลิกสกอต"
+msgstr ""
 
 #: ../qml/keys/languages.js:33
 msgid "Hebrew"
-msgstr "ฮีบรู"
+msgstr ""
 
 #: ../qml/keys/languages.js:34
 msgid "Croatian"
-msgstr "โครเอเชีย"
+msgstr ""
 
 #: ../qml/keys/languages.js:35
 msgid "Hungarian"
-msgstr "ฮังการี"
+msgstr ""
 
 #: ../qml/keys/languages.js:36
 msgid "Icelandic"
-msgstr "ไอซ์แลนด์"
+msgstr ""
 
 #: ../qml/keys/languages.js:37
 msgid "Italian"
-msgstr "อิตาลี"
+msgstr ""
 
 #: ../qml/keys/languages.js:38
 msgid "Japanese"
-msgstr "ญี่ปุ่น"
+msgstr ""
 
 #: ../qml/keys/languages.js:39
 msgid "Latvian"
-msgstr "ลัตเวีย"
+msgstr ""
 
 #: ../qml/keys/languages.js:40
 msgid "Dutch"
-msgstr "ดัตช์"
+msgstr ""
 
 #: ../qml/keys/languages.js:41
 msgid "Norwegian"
-msgstr "นอร์เวย์"
+msgstr ""
 
 #: ../qml/keys/languages.js:42
 msgid "Polish"
-msgstr "โปแลนด์"
+msgstr ""
 
 #: ../qml/keys/languages.js:43
 msgid "Portuguese"
-msgstr "โปรตุเกส"
+msgstr ""
 
 #: ../qml/keys/languages.js:44
 msgid "Romanian"
-msgstr "โรมาเนีย"
+msgstr ""
 
 #: ../qml/keys/languages.js:45
 msgid "Russian"
-msgstr "รัสเซีย"
+msgstr ""
 
 #: ../qml/keys/languages.js:46
 msgid "Slovenian"
-msgstr "สโลเวเนีย"
+msgstr ""
 
 #: ../qml/keys/languages.js:47
 msgid "Serbian"
-msgstr "เซอร์เบีย"
+msgstr ""
 
 #: ../qml/keys/languages.js:48
 msgid "Swedish"
-msgstr "สวีเดน"
+msgstr ""
 
 #: ../qml/keys/languages.js:49
 msgid "Ukrainian"
-msgstr "ยูเครน"
+msgstr ""
 
 #: ../qml/keys/languages.js:50
 msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
-"จีน\n"
-"(พินอิน)"
 
 #: ../qml/keys/languages.js:51
 msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
-"จีน\n"
-"(Chewing)"

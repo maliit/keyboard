@@ -48,7 +48,6 @@ const QLatin1String DOUBLE_SPACE_FULL_STOP_KEY = QLatin1String("doubleSpaceFullS
 const QLatin1String STAY_HIDDEN_KEY = QLatin1String("stayHidden");
 const QLatin1String DISABLE_HEIGHT_KEY = QLatin1String("disableHeight");
 const QLatin1String PLUGIN_PATHS_KEY = QLatin1String("pluginPaths");
-const QLatin1String OPACITY_KEY = QLatin1String("opacity");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -218,15 +217,6 @@ bool KeyboardSettings::disableHeight() const
 }
 
 /*!
- * \brief KeyboardSettings::opacity returns the transparency value for the
- * keyboard between 0 and 1
- */
-double KeyboardSettings::opacity() const
-{
-    return m_settings->get(OPACITY_KEY).toDouble();
-}
-
-/*!
  * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
  * \param key
@@ -274,8 +264,6 @@ void KeyboardSettings::settingUpdated(const QString &key)
         return;
     } else if (key == PLUGIN_PATHS_KEY) {
         Q_EMIT pluginPathsChanged(pluginPaths());
-    } else if (key == OPACITY_KEY) {
-        Q_EMIT opacityChanged(opacity());
     }
 
     qWarning() << Q_FUNC_INFO << "unknown settings key:" << key;

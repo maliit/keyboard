@@ -14,24 +14,24 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
+"X-Launchpad-Export-Date: 2016-11-16 06:15+0000\n"
+"X-Generator: Launchpad (build 18269)\n"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "Settings"
-msgstr "Seaded"
+msgstr ""
 
 #: ../qml/keys/languages.js:19
 msgid "Arabic"
-msgstr "Araabia"
+msgstr ""
 
 #: ../qml/keys/languages.js:20
 msgid "Azerbaijani"
-msgstr "Ažerbaidžaani"
+msgstr ""
 
 #: ../qml/keys/languages.js:21
 msgid "Bosnian"
-msgstr "Bosnia"
+msgstr ""
 
 #: ../qml/keys/languages.js:22
 msgid "Catalan"
@@ -39,15 +39,15 @@ msgstr ""
 
 #: ../qml/keys/languages.js:23
 msgid "Czech"
-msgstr "Tšehhi"
+msgstr ""
 
 #: ../qml/keys/languages.js:24
 msgid "Danish"
-msgstr "Taani"
+msgstr ""
 
 #: ../qml/keys/languages.js:25
 msgid "German"
-msgstr "Saksa"
+msgstr ""
 
 #: ../qml/keys/languages.js:26
 msgid "Emoji"
@@ -55,23 +55,23 @@ msgstr ""
 
 #: ../qml/keys/languages.js:27
 msgid "Greek"
-msgstr "Kreeka"
+msgstr ""
 
 #: ../qml/keys/languages.js:28
 msgid "English"
-msgstr "Inglise"
+msgstr ""
 
 #: ../qml/keys/languages.js:29
 msgid "Spanish"
-msgstr "Hispaania"
+msgstr ""
 
 #: ../qml/keys/languages.js:30
 msgid "Finnish"
-msgstr "Soome"
+msgstr ""
 
 #: ../qml/keys/languages.js:31
 msgid "French"
-msgstr "Prantsuse"
+msgstr ""
 
 #: ../qml/keys/languages.js:32
 msgid "Scottish Gaelic"
@@ -87,7 +87,7 @@ msgstr ""
 
 #: ../qml/keys/languages.js:35
 msgid "Hungarian"
-msgstr "Ungari"
+msgstr ""
 
 #: ../qml/keys/languages.js:36
 msgid "Icelandic"
@@ -95,7 +95,7 @@ msgstr ""
 
 #: ../qml/keys/languages.js:37
 msgid "Italian"
-msgstr "Itaalia"
+msgstr ""
 
 #: ../qml/keys/languages.js:38
 msgid "Japanese"
@@ -115,23 +115,23 @@ msgstr ""
 
 #: ../qml/keys/languages.js:42
 msgid "Polish"
-msgstr "Poola"
+msgstr ""
 
 #: ../qml/keys/languages.js:43
 msgid "Portuguese"
-msgstr "Portugali"
+msgstr ""
 
 #: ../qml/keys/languages.js:44
 msgid "Romanian"
-msgstr "Rumeenia"
+msgstr ""
 
 #: ../qml/keys/languages.js:45
 msgid "Russian"
-msgstr "Vene"
+msgstr ""
 
 #: ../qml/keys/languages.js:46
 msgid "Slovenian"
-msgstr "Sloveenia"
+msgstr ""
 
 #: ../qml/keys/languages.js:47
 msgid "Serbian"
@@ -143,7 +143,7 @@ msgstr ""
 
 #: ../qml/keys/languages.js:49
 msgid "Ukrainian"
-msgstr "Ukraina"
+msgstr ""
 
 #: ../qml/keys/languages.js:50
 msgid ""

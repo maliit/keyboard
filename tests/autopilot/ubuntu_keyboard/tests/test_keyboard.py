@@ -1508,7 +1508,6 @@ class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
             ("de", ".de", "triäl"),
             ("el", ".gr", "δοκιμη"),
             ("en", ".com", "test"),
-            ("eo", ".edu", "ŝĝŭĵĉ"),
             ("es", ".es", "testiñg"),
             ("fi", ".fi", "triäl"),
             ("fr", ".fr", "çheck"),

@@ -18,6 +18,11 @@ contains(QT_MAJOR_VERSION, 4) {
     QT = core gui widgets quick qml dbus
 }
 
+QT += platformsupport-private
+
+CONFIG += link_pkgconfig
+PKGCONFIG += mirclient
+
 CONFIG += \
     plugin \
 
@@ -29,6 +34,7 @@ HEADERS += \
     greeterstatus.h \
     keyboardgeometry.h \
     keyboardsettings.h \
+    mirinputregionupdater.h \
 #    updatenotifier.h \
 
 SOURCES += \
@@ -38,6 +44,7 @@ SOURCES += \
     greeterstatus.cpp \
     keyboardgeometry.cpp \
     keyboardsettings.cpp \
+    mirinputregionupdater.cpp \
 #    updatenotifier.cpp \
 
 target.path += $${MALIIT_PLUGINS_DIR}

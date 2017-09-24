@@ -59,7 +59,6 @@ public:
     bool stayHidden() const;
     bool disableHeight() const;
     QStringList pluginPaths() const;
-    double opacity() const;
 
 Q_SIGNALS:
     void activeLanguageChanged(QString);
@@ -76,7 +75,6 @@ Q_SIGNALS:
     void stayHiddenChanged(bool);
     void disableHeightChanged(bool);
     void pluginPathsChanged(QStringList);
-    void opacityChanged(double);
 
 private:
     Q_SLOT void settingUpdated(const QString &key);

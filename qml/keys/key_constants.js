@@ -19,6 +19,7 @@
 var tabletKeyMargins  =   0.5;    // gu
 var phoneKeyMargins = 0.25 // gu
 var fontSize    =   2.5;    // gu
+var fontSizeMagnified   =   4; // gu
 var fontFamily  =   "Ubuntu";
 var fontColor   =   "#333333";
 var fontBold    =   false;
@@ -34,6 +35,9 @@ var annotationRightMargin = 0.65; // gu
 var annotationFontColor = "#333333";
 var annotationFont = "Ubuntu";
 
+var spaceFontFamily = "Ubuntu";
+var tabletSpaceFontSize = "large";
+var phoneSpaceFontSize = "small";
 var spaceOpacity = 0.33;
 
 /* magnifier */
@@ -77,5 +81,5 @@ var phoneWordRibbonFontSize = 14 // dp
 var phoneKeyboardHeightPortrait = 0.40; // percent of screen
 var phoneKeyboardHeightLandscape = 0.49; // percent of screen
 
-var tabletKeyboardHeightPortrait = 0.31; // percent of screen
-var tabletKeyboardHeightLandscape = 0.34; // percent of screen
+var tabletKeyboardHeightPortrait = 0.39; // percent of screen
+var tabletKeyboardHeightLandscape = 0.42; // percent of screen

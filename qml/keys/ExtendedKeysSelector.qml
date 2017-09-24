@@ -30,7 +30,6 @@ KeyPopover {
     property alias keys: rowOfKeys.children
     property alias rowX: rowOfKeys.x
     property alias rowY: rowOfKeys.y
-    property int fontSize: 0
 
     property int __width: 0
     property string __commitStr: ""
@@ -45,19 +44,7 @@ KeyPopover {
             reorderedModel.shift();
             keyRepeater.model = reorderedModel;
         } else {
-            keyRepeater.model = extendedKeysModel;
-        }
-
-        var longestKey = 1;
-        // Calculate font size based on longest key
-        if (extendedKeysModel != null) {
-            for(var i = 0; i < extendedKeysModel.length; i++) {
-                if (extendedKeysModel[i].length > longestKey) {
-                    longestKey = extendedKeysModel[i].length;
-                }
-            }
-            fontSize = (fullScreenItem.landscape ? (panel.keyHeight / 2) : (panel.keyHeight / 2.8))
-                       * (4 / (longestKey >= 2 ? (longestKey <= 6 ? longestKey + 2.5 : 8) : 4));
+            keyRepeater.model = extendedKeysModel
         }
     }
 
@@ -128,7 +115,7 @@ KeyPopover {
                     anchors.centerIn: parent;
                     text: modelData
                     font.family: UI.fontFamily
-                    font.pixelSize: fontSize
+                    font.pixelSize: text.length > 2 ? units.gu( UI.smallFontSize ) : units.gu( UI.fontSize )
                     font.weight: Font.Light
                     color: key.highlight ? UI.selectionColor : UI.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
