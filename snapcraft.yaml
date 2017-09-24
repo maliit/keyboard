@@ -1,5 +1,5 @@
 name: ubuntu-keyboard
-version: 0.100+17.04.20161116-0ubuntu1
+version: 0.100+17.04.20170320-0ubuntu1
 summary: Ubuntu Keyboard
 description: Ubuntu on-screen keyboard.
 confinement: devmode
@@ -31,19 +31,12 @@ parts:
             - libgles2-mesa-dev
             - libglib2.0-dev
             - libgsettings-qt-dev
-            - libmirclient-dev
             - libhunspell-dev
             - libpinyin7-dev
             - libpresage1v5
             - libpresage-dev
             - libxml2-utils
             - maliit-framework-dev
-            - qtbase5-private-dev
-            - libfontconfig1-dev
-            - libfreetype6-dev
-            - libudev-dev
-            - libmtdev-dev
-            - libxrender-dev
             - qtdeclarative5-private-dev
             - qml-module-ubuntu-components
             - xvfb

@@ -1,4 +1,48 @@
-ubuntu-keyboard (0.100+15.04.20161116-0ubuntu1) vivid; urgency=medium
+ubuntu-keyboard (0.100+15.04+ubports) vivid; urgency=medium
+
+  [ Masoud Abkenar ]
+  * Persian layout
+
+  [ Michael Sheldon ]
+  * Implement swipe based cursor movement after long pressing on the
+    space key (LP: #1566172)
+  * Allow predictive text in URL mode (but disable automatic space
+    insertion) (LP: #1661283)
+  * Tweak sizes for desktop use
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Mon, 20 Mar 2017 12:58:05 +0000
+
+ubuntu-keyboard (0.100+17.04.20170301-0ubuntu1) zesty; urgency=medium
+
+  [ Gerry Boland ]
+  * Remove all build-time mir dependence
+
+  [ Michael Sheldon ]
+  * Update to new Mir API
+  * Add maliit upstart job (LP: #1659388)
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Wed, 01 Mar 2017 13:42:41 +0000
+
+ubuntu-keyboard (0.100+17.04.20170110-0ubuntu1) zesty; urgency=medium
+
+  * Add dependency on qml-module-qtquick-localstorage for emoji layout
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Tue, 10 Jan 2017 15:28:39 +0000
+
+ubuntu-keyboard (0.100+17.04.20161223-0ubuntu1) zesty; urgency=medium
+
+  [ Leo Arias ]
+  * Add the Esperanto layout
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Fri, 23 Dec 2016 17:31:57 +0000
+
+ubuntu-keyboard (0.100+17.04.20161214.1-0ubuntu1) zesty; urgency=medium
+
+  * Add custom opacity setting (LP: #1647603)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Wed, 14 Dec 2016 15:10:52 +0000
+
+ubuntu-keyboard (0.100+17.04.20161116-0ubuntu1) zesty; urgency=medium
 
   [ GunChleoc ]
   * Changed gd keyboard layout to QWERTY and added a-, h-, n- and t- to
