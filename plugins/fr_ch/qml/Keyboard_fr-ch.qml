@@ -48,17 +48,17 @@ KeyPad {
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
-            CharKey { label: "a"; shifted: ["A"; à","â","æ","á","ã","ā"]; extendedShifted: ["1", "À","Â","Æ","Á","Ã","Ā"]; leftSide: true; }
-            CharKey { label: "s"; shifted: "S"; }
-            CharKey { label: "d"; shifted: "D"; }
-            CharKey { label: "f"; shifted: "F"; }
-            CharKey { label: "g"; shifted: "G"; }
-            CharKey { label: "h"; shifted: "H"; }
-            CharKey { label: "j"; shifted: "J"; }
-            CharKey { label: "k"; shifted: "K"; }
-            CharKey { label: "l"; shifted: "L"; }
-            CharKey { label: "é"; shifted: "É"; extended: ["ö"]; extendedShifted: ["Ö"]; }
-            CharKey { label: "à"; shifted: "À"; extended: ["ä"]; extendedShifted: ["Ä"]; rightSide: true; }
+            CharKey { label: "a"; shifted: ["A"; à","â","æ","á","ã","ā"]; extendedShifted: ["1", "À","Â","Æ","Á","Ã","Ā"]; leftSide: true }
+            CharKey { label: "s"; shifted: "S" }
+            CharKey { label: "d"; shifted: "D" }
+            CharKey { label: "f"; shifted: "F" }
+            CharKey { label: "g"; shifted: "G" }
+            CharKey { label: "h"; shifted: "H" }
+            CharKey { label: "j"; shifted: "J" }
+            CharKey { label: "k"; shifted: "K" }
+            CharKey { label: "l"; shifted: "L" }
+            CharKey { label: "é"; shifted: "É"; extended: ["ö"]; extendedShifted: ["Ö"] }
+            CharKey { label: "à"; shifted: "À"; extended: ["ä"]; extendedShifted: ["Ä"]; rightSide: true }
         }
 
         Row {
