@@ -1,4 +1,4 @@
-ubuntu-keyboard (0.100+15.04+ubports) vivid; urgency=medium
+ubuntu-keyboard (0.100+15.04+ubports) xenial; urgency=medium
 
   [ GunChleoc ]
   * Changed gd keyboard layout to QWERTY and added a-, h-, n- and t- to
