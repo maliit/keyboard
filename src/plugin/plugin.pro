@@ -18,7 +18,7 @@ contains(QT_MAJOR_VERSION, 4) {
     QT = core gui widgets quick qml dbus
 }
 
-QT += platformsupport-private
+QT += eventdispatcher_support_private
 
 CONFIG += link_pkgconfig
 PKGCONFIG += mirclient
