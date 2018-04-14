@@ -154,6 +154,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Bosnian
  Data files for the Ubuntu virtual keyboard - Bosnian
 
+Package: ubuntu-keyboard-bulgarian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         hunspell-bg,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Bulgarian
+ Data files for the Ubuntu virtual keyboard - Bulgarian
+
 Package: ubuntu-keyboard-catalan
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),

@@ -4,6 +4,7 @@ SUBDIRS = \
     westernsupport \
     ar \
     az \
+    bg \
     bs \
     ca \
     cs \
