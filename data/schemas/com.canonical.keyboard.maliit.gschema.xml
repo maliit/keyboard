@@ -76,5 +76,11 @@
       <description>A list of locations to search for keyboard layout plugins in addition to the keyboard data directory.</description>
       <default>['/custom/share/maliit/plugins/com/ubuntu/lib/']</default>
     </key>
+    <key name="opacity" type="d">
+      <summary>Opacity</summary>
+      <description>Specifies how much transparency to apply to the keyboard</description>
+      <range min="0.5" max="1.0"/>
+      <default>1.0</default>
+    </key>
   </schema>
 </schemalist>

@@ -12,7 +12,9 @@ SUBDIRS = \
     emoji \
     el \
     en \
+    eo \
     es \
+    fa \
     fi \
     fr \
     gd \

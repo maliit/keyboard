@@ -1,0 +1,4352 @@
+﻿Project Gutenberg's La Aventuroj de Alicio en Mirlando, by Lewis Carroll
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.org
+
+
+Title: La Aventuroj de Alicio en Mirlando
+
+Author: Lewis Carroll
+
+Illustrator: Brinsley Le Fanu
+
+Translator: E. L. Kearney
+
+Release Date: January 9, 2006 [EBook #17482]
+
+Language: Esperanto
+
+Character set encoding: UTF-8
+
+*** START OF THIS PROJECT GUTENBERG EBOOK LA AVENTUROJ DE ALICIO EN MIRLANDO ***
+
+
+
+
+Produced by David Starner, William Patterson and the Online
+Distributed Proofreading Team at http://www.pgdp.net
+
+
+
+
+
+
+
+
+
+                  LA AVENTUROJ DE ALICIO EN MIRLANDO
+
+                                  DE
+                            LEWIS CARROLL
+
+
+                             TRADUKITA DE
+                          E.L. KEARNEY, M.A.
+
+
+           ILUSTRITA (LAŬ AFABLA PERMESO DE L' ELDONISTO DE
+             _STEAD'S PROSE CLASSICS_) PER DEK BILDOJ DE
+                           BRINSLEY LE FANU
+
+
+                    BRITISH ESPERANTO ASSOCIATION
+                            (INCORPORATED)
+                       MUSEUM STATION BUILDINGS
+                     133-136 HIGH HOLBORN, LONDON
+                                 1910
+
+
+
+
+                     ANTAŬPAROLO DE L' TRADUKINTO
+
+
+De ĉi tiu humoraĵo, unue aperinta en la jaro 1865a, vendiĝis ĝis
+nun pli ol ses cent mil ekzempleroj en la angla lingvo krom kelkaj
+miloj en la tradukoj franca, germana, kaj itala. Ĉi tiu verko havas
+tre altan rangon, eble la plej altan rangon inter la literaturaj
+trezoroj de la angla infanaro.
+
+Sesjara infano volas avide aŭskulti ĝin, vigle proponas demandojn
+kaj kritikojn pri la diversaj Aventuroj. Sed la intereso ĉiam kreskas
+laŭ la kresko de la posedanto: ĉe ĉiu denova tralego la junaj
+legantoj pli komprenas, pli kunligas, kaj pli retenas en la memoro.
+Mi konis infanojn kiuj fine posedis la tutan libron tiel ke ili povus
+parkere citi ĉiun agon kaj diron de Alicio, de la Muso, la _Ĉeŝŝr_
+Kato, efektive de ĉiuj partoprenantoj en la stranga historio. Sed oni
+ne supozu ke la libro taŭgas _nur_ por la vartejo kaj infanlernejo:
+ĉar la kapablo ĉe ĉiu tralego trovi pli da signifo daŭras eĉ dum
+la maturaĝaj jaroj. Inter la fervoraj amikoj de _Alicio_ troviĝas
+eĉ sesdekjaraj profesoroj kiuj de tempo al tempo volas klarigi iun
+profundan principon kiun ili ĵus eligis el la diroj ekzemple de la
+Raŭpo aŭ la Falsa Kelonio.
+
+Sed ni lasu la parolon al la Sonĝbestoj mem.
+
+Prezentante ĉi tiun libron al la Esperantistoj, mi volas esprimi mian
+danksenton al ĉiuj miaj helpintoj. Apartajn dankojn mi ŝuldas al
+Kapitano C.P. Cubitt, kiu zorge tralegis kaj detale korektis por mi
+ĉiujn presprovaĵojn. Kaj al l' eldonisto de Stead's 'Prose Classics'
+mi dankas la permeson uzi kelkajn ilustraĵojn de Brinsley de Fanu
+unue aperintajn en ilia konata 'Books for the Bairns' (infanlibra)
+eldono de 'Alicio en Mirlando.'
+
+Tiu eldono enhavas pli ol kvindek bildojn kaj kostas nur tri pencojn
+(12.5 sd.). Do, komparante la tradukon kun la originalo, ne-anglaj
+esperantistoj povos je tre malkara prezo pliperfektigi sin en la angla
+lingvo; angloj ne-esperantistaj povos facile lerni la komunan lingvon
+de la homaro; kaj ĉiu, kiu bone konas ambaŭ lingvojn, povos tre
+facile fari siajn kritikojn, kaj plendi pri eraroj de
+
+                                                        La Tradukinto.
+
+
+
+                                ENHAVO
+
+
+      ĈAPITRO                                              PAĜO
+
+         I.  MIRINDA FALEGO!    .    .    .    .    .    .    1
+
+        II.  LAGETO FARITA EL LARMOJ .    .    .    .    .   11
+
+       III.  POST STRANGA VETKURO SEKVAS STRANGA MUS-TEJLO   20
+
+        IV.  ĈEFE PRI UNU LACERTO NOMATA BIL   .    .    .   29
+
+         V.  ALICIO RICEVAS ADMONON DE LA RAŬPO     .    .   40
+
+        VI.  PRI LA PORKINFANO  .    .    .    .    .    .   50
+
+       VII.  TETRINKADO ĈE FRENEZULOJ     .    .    .    .   63
+
+      VIII.  KROKETLUDO ĈE LA KERA DAMO   .    .    .    .   76
+
+        IX.  VIV-HISTORIO DE LA FALSA KELONIO  .    .    .   88
+
+         X.  LA OMARA KVADRILO  .    .    .    .    .    .  101
+
+        XI.  KIU FORŜTELIS LA TORTOJN?    .    .    .    .  112
+
+       XII.  ALICIO ATESTANTO   .    .    .    .    .    .  122
+
+
+
+
+                              ILUSTRAĴOJ
+
+
+                                                           PAĜO
+
+          DE UNU EL LA BRETOJ, ALICIO, FALANTE TRA
+             LA ŜAKTO, DEPRENIS MARMELADUJON   .    .    .    3
+
+          LA DODO SOLENE PREZENTAS AL ALICIO ŜIAN
+             PROPRAN FINGROINGON     .    .    .    .    .   24
+
+          LA KUNIKLO FALAS EN SIAN KUKUMEJON   .    .    .   33
+
+          LA DUKINA KUIREJO     .    .    .    .    .    .   53
+
+          DOMO DE LA MARTLEPORO .    .    .    .    .    .   62
+
+          LA GLIRO ESTAS ENIGATA EN LA TEKRUĈON     .    .   74
+
+          LA VITRA TABLO   .    .    .    .    .    .    .   78
+
+          LA GEREĜOJ ARGUMENTAS KUN LA EKZEKUTISTO
+             PRI EKZEKUTO DE LA SENKORPA KATKAPO    .    .   86
+
+          LA GRIFO PROFUNDE DORMIS   .    .    .    .    .   94
+
+          LA KUIRISTINO RIFUZAS ATESTI    .    .    .    .  120
+
+
+
+
+                      ANTAŬPAROLO DE LA AŬTORO.
+
+
+                                  I
+
+                    En somerbril' ni glitas kvar:
+                      Du fuŝe uzas remon,
+                    Fuŝregas tria knabinet'
+                      Boatan la vagemon.
+                    La kvara (nejunulo) celas
+                      Indulgi la revemon.
+
+
+                                  II
+
+                    "Kruela Tri'!  Ĉu volas vi
+                      En tia hor'—rakonton?
+                    Se pri la astmo scius vi,
+                      Vi eble sentus honton!"
+                    —Protesto senutila! Venkas
+                      Trivoĉa kri', "Rakonton!"
+
+
+                                 III
+
+                    _Unua_ per komanda voĉo
+                      Ordonas ekrakonti,
+                    Kaj pli ĝentile _Dua_ petas
+                      "Jes, nepre _mir_-rakonti."
+                    Rakonton petolrompas _Tria_
+                      (Ne scias _ŝi_ ja honti!)
+
+
+                                  IV
+
+                    Silento falas!  De nun ĉiu
+                      Aŭskultas plenkredulo
+                    Pri l' _Sonĝinfano_ kiu vivas
+                      Kun bird' kaj best' kunulo,
+                    Kunul', jen kiel arbo alta,
+                      Jen eta kiel kulo.
+
+
+                                  V
+
+                    Tre ofte volus la laculo
+                      La Sonĝon maldaŭrigi,
+                    Promesas je sekvanta fojo
+                      Ĝin iom plilongigi.
+                    "Jam venis la sekvanta fojo,
+                      Nin volu kontentigi!"
+
+
+                                  VI
+
+                    Do kreskis plu la Mirlandaĵoj
+                      Iom post iom, grade:
+                    Naskiĝis ĉiuj en boato
+                      Dum vagis ni remade.
+                    —Subiras sun', do hejmen gaje
+                      Ni remas babilade.
+
+
+                                 VII
+
+                    Jen _Alici'_.  Akceptu ŝin
+                      Kaj gardu en memoro:
+                    Al pilgrimint' ja kara estas
+                      El malproksim' la floro;
+                    Velkinte ĝi memorojn vekas
+                      Valorajn pli ol oro.
+
+
+
+
+                  LA AVENTUROJ DE ALICIO EN MIRLANDO
+
+
+
+
+                              ĈAPITRO I
+
+                           MIRINDA FALEGO!
+
+
+Alicio, jam longan tempon sidinte apud sia fratino sur la deklivo,
+tre enuiĝis pro senokupo. Unu, du foje ŝi prove rigardis en la
+libron kiun la fratino legas, sed povis vidi en ĝi nek desegnojn nek
+konversaciojn, kaj "por kio utilas libro," pensis ŝi, "enhavanta nek
+desegnojn nek konversaciojn?" Ŝi do ekpripensis—ne tre vigle ĉar
+la tago estis varma, kaj ŝi sentis sin tre dormema—ĉu la plezuro
+fari ĉenon el lekantetoj valorus la laboron sin levi kaj kolekti
+lekantetojn, kiam tutapude preterkuris Blanka kuniklo kun paleruĝaj
+okuloj.
+
+Tio ja ne estis _tre_ mirinda, ankaŭ ne ŝajnis al Alicio _tre_
+eksterordinare aŭdi la kuniklon diranta al si:—
+
+"Ho, ve! mi malfruos!"
+
+(Kiam poste ŝi pripensadis la aferon, ŝajnis al ŝi, ke tio estis
+efektive mirinda, sed en la momento mem, ĝi ŝajnis al ŝi tute
+ordinara.)
+
+Tamen, kiam la kuniklo el sia veŝta poŝo eligis poŝhorloĝon, kaj,
+rigardinte ĝin, tuj plirapidis, Alicio eksaltis sur la piedojn, ĉar
+subite frapis ŝin la ideo, ke neniam antaŭe ŝi vidis kuniklon kiu
+havas veŝtpoŝon kaj poŝhorloĝon. La scivolemo en ŝi ekflamiĝis!
+Tuj ŝi ekkuris post ĝi trans la kampon, kaj alvenis al tuneleto sub
+la kreskaĵa barilo ĝustatempe por vidi la kuniklon malaperi en ĝin.
+
+Ne konsiderinte eĉ unu momenton, kiamaniere ŝi reeliĝos, Alicio
+postkuris ĝin en la tuneleton.
+
+La tunelo, ĉe la unuaj paŝoj, kondukis rekte antaŭen, same kiel
+fervoja tunelo, sed poste dekliniĝis malsupren kaj fariĝis kruta.
+Tio okazis tiel subite ke Alicio, ne havinte tempon por malakceliĝi,
+trovis sin vole nevole defalanta tre profundan ŝakton.
+
+Mi ĵus diris "tre profundan." Nu, aŭ la ŝakto estis efektive tre
+profunda, aŭ ŝi falis tre malrapide; ĉar dum la daŭro de tiu
+stranga defalo, ne mankis al ŝi tempo por trankvile ĉirkaŭrigardi
+kaj por konjekti pri kio estas okazonta. Unue, ŝi klopodis rigardi
+malsupren por esplori al kio ŝi alvenas; sed klopodis vane, ĉar
+estis tie tro mallume. Tiam ŝi ekobservis la murojn de la ŝakto,
+kaj rimarkis ke ili estas plenaj de ŝrankoj kaj librobretoj; ankaŭ,
+tie ĉi kaj tie, ŝi preterfalis landkartojn kaj bildojn pendigitajn
+de najloj. Poste ŝi, preterpasante, deprenis de apuda breto unu
+fruktaĵujon; sur ĝi per grandaj literoj estas skribita MARMELADO.
+Sed jen por ŝi granda ĉagreno; ĉar, enrigardante, la avidaj okuloj
+vidis—nur blankan malplenon! Ŝi ne volis lasi fali la fajencaĵon,
+pro la timo mortigi per ĝi iun subulon, sed sukcesis post kelkaj
+momentoj remeti ĝin, preterpasante, en ŝrankon.
+
+               [Ilustraĵo: DE UNU EL LA BRETOJ, ALICIO,
+            FALANTE TRA LA ŜAKTO, DEPRENIS MARMELADUJON.]
+
+"Nu," pensis Alicio, "kiam mi rakontos en la hejmo pri ĉi tiu falego,
+ĉiuj admiros mian maltimon; kaj, estonte, eĉ pri falo de l' supro
+ĝis malsupro de l' ŝtuparo mi nezorge ridos; kaj se mi falos eĉ de
+la tegmento, mi kredeble ne multe priparolos la falon." (_Tion_ oni
+povas kredi.)
+
+Malsupren, ankoraŭ malsupren! Ĉu _neniam_ la falo finiĝos? "Mi
+volus scii," diris ŝi laŭte, "kiom da kilometroj mi jam falis. Mi
+nepre alproksimiĝas la ter-centron. Tio estus, laŭ mi, preskaŭ
+ses kaj duono miloj da kilometroj." (Alicio jam antaŭe lernis en la
+lernĉambro kelkajn tiuspecajn faktojn, kaj kvankam la nuna tempo
+ne estis—pro manko da aŭskultantoj—oportuna por elmontri sian
+klerecon, tamen estis por ŝi bona praktiko tradiri la faktojn.)
+"Jes, tio estas certe la ĝusta interspaco, sed en kian latitudon aŭ
+longitudon mi penetris?" (Pri kio estas latitudo kaj longitudo Alicio
+havis nenian ideon, sed nur elparoli tiajn belege majestajn vortojn
+kvazaŭ donis al ŝi agrablajn sentojn.)
+
+Post ne longe ŝi rekomencis:—"Eble mi trafalos tra la tuta terglobo!
+kaj estos tre, tre strange elfali inter la homoj kiuj marŝas
+kapmalsupre! mi kredas ke oni nomas ilin la _Antipatioj_." (Ĉe eksono
+de tiu strangaĵo ŝi certe _ne_ sopiris aŭskultantojn); "mi ja devos
+demandi al ili en kiun landon mi enfalis, dirante 'Bonvolu, Sinjorino,
+diri al mi ĉu tiu ĉi lando estas Nov-Zelando aŭ Aŭstralio?'" (Ŝi
+penis klinsaluti! Imagu al vi, karaj legantoj, kiel oni povus klinsaluti
+falante tra l' aero. Ĉu _vi_ povus tion fari?) "Sed ŝi nepre nomus min
+malklera bubino. Do, nur malutilus demandi tion! Pli bone estus serĉi
+la nomon ie sur la muroj surskribitan."
+
+Malsupren, ankoraŭ malsupren! Krom babili ja estis nenio por fari,
+sekve Alicio baldaŭ denove ekparolis: "Hodiaŭ vespere _Dajna_
+tre sopiros min." (_Dajna_ estas ŝia kato.) "Mi esperas ke ĉe la
+temanĝo oni ne forgesos ŝian subtason da lakto. _Dajna_, vi karul',
+ho se vi nur estus tie ĉi kun mi! Ne estas musoj en la aero, sed
+vesperton vi eble povus kapti, kaj vesperto ja tre similas al muso.
+Sed ĉu katoj manĝas vespertojn?" Alicio okaze nun fariĝis dormema,
+kaj dorme ripetadis:—"Ĉu katoj manĝas vespertojn? Ĉu katoj
+manĝas vespertojn?" kaj iafoje ŝi ĉuis anstataŭe "Ĉu katojn
+manĝas vespertoj?" (Ĉar ŝi kapablis respondi nek unu nek alian el
+la du demandoj, ne tre grave estis kiun "ĉuon" ŝi esprimis.) Ŝi
+sentis sin ekdormanta, kaj ĵus komencis sonĝi ke ŝi marŝas mano en
+mano kun _Dajna_ kaj diras al ŝi tre solene:—"_Dajna_, vi diru al
+mi la veron; ĉu iam vi manĝis vesperton?" kiam (ho, la surprizego!)
+subite ŝi falis _plomp_! sur amason da sekaj folioj. La falego
+efektive finiĝis!
+
+Pro la folioj ŝi ricevis nenian vundon. Do, stariginte sin sur la
+piedojn ŝi rigardis supren. Super la kapo ĉio estis malluma, sed
+rekte antaŭ ŝi vidiĝis longa koridoro, kaj jen forkuras tra ĝi la
+Blanka Kuniklo. Ne perdinte eĉ unu momenton, Alicio rapide postsekvis
+kaj aŭdis ke ĝi diras, malaperante post murangulo, "se mi malfruos,
+ĉielo savu miajn orelojn!"
+
+En tiu momento ŝi estis preskaŭ apuda; tamen, kiam ŝi preterpasis
+la angulon, la kuniklo jam malaperis. Kaj ŝi trovis sin sola en ia
+longa malalta halo lumigita per serio de lampoj kiuj pendas de la
+plafono. Ĉirkaŭ la halo estis pordoj; sed ĉiuj estis fermitaj.
+Alicio do marŝis laŭ unu flanko kaj remarŝis laŭ la alia penante
+malfermi la pordojn; sed ĉiu el ili estis ŝlosita, kaj Alicio
+malĝoje marŝis laŭ la mezo kaj demandis al si, ĉu ŝi jam neniam
+povos eliri la halon.
+
+Subite ŝi rimarkis antaŭ si tripiedan tableton faritan el vitro, kaj
+jen! kuŝis sur ĝi unu ora ŝlosileto. Tuj la ideo frapis ŝin ke
+ĝi nepre apartenas al iu el la halpordoj. Sed ho, ve! aŭ la seruroj
+estis tro grandaj, aŭ la ŝlosileto tro eta, ĉar neniun el ili ĝi
+malfermis. Tamen, ĉirkaŭirante la duan fojon, ŝi venis al malalta
+kurteno, kiun ŝi antaŭe ne rimarkis, kaj malantaŭ la kurteno, jen
+malgranda pordo alta je kvardek kelke da centimetroj; ŝi enŝovis la
+oran ŝlosileton, kaj (ho, la ĝojo!) ĝi taŭgis.
+
+Malferminte la pordeton, Alicio trovis ke ĝi kondukas en koridoreton
+ne multe pli ampleksan ol ordinara rat-tunelo. Starigante sin sur la
+genuoj, ŝi direktis la rigardojn,—tra la koridoreto—en—la plej
+belan ĝardenon, kiun oni povas imagi. Ho! kiel ŝi sopiris eliĝi
+tiun malluman halon, kaj ĉirkaŭvagadi inter jenaj helfloraj bedoj
+kaj dolĉaj fontanoj! Sed tra tiu pordeto ŝi ne povus trairigi eĉ
+la kapon! "Kaj eĉ se la kapo bone trairus," ekpensis nia kompatinda
+Alicio, "tre malmulte utilus _tio_ sen la ŝultroj! Ho, se mi nur
+havus la kapablon _teleskopiĝi_. Eble mi povus, se nur mi scius kiel
+oni komencas la klopodon?" Ĉar tiom da eksterordinaraj aferoj jam
+en tiu tago okazis ĉe ŝi, Alicio ja komencis kredi ke neebla estas
+preskaŭ nenio. Kompreneble neniel utilus staradi ĉe la pordeto,
+sekve ŝi reiris al la tablo kun la ekespero trovi sur ĝi alian
+ŝlosilon, aŭ eble libreton pri la arto teleskopiĝi; ĉi tiun fojon
+ŝi trovis sur ĝi boteleton ("kiu certege ne kuŝis tie antaŭe,"
+diris Alicio) kun surskribaĵo, ligita ĉirkaŭ la kolo, havanta la
+vortojn TRINKU MIN per belegaj grandaj literoj surskribitajn.
+
+"Tre facile estas diri 'Trinku min'" pensis la saĝulineto, "sed
+mi ne faros tion krom post plena esploro. Mi unue rigardu por vidi
+ĉu oni surskribis ĝin per 'veneno.'" Ĉar ŝi ja antaŭe legis
+kelke da bonmoralaj rakontoj pri infanoj kiuj aŭ mortbruliĝis, aŭ
+estis englutitaj de sovaĝaj bestoj, aŭ suferis diversajn aliajn
+malagrablaĵojn nur simple pro tio, ke ili ne volis atenti ian facilan
+regulon de la amikoj ofte instruitan, tian ekzemple kia estas la
+regulo ke brilvarmega fajrilo povas brulvundi la manon, se oni ĝin
+tenas tro longe; ankaŭ tio ĉi, ke se oni tre profunde tranĉos
+la fingron, ĝi kredeble sangos; kaj neniam ŝi forgesis ke se oni
+trinkos multe el botelo markita per 'veneno,' preskaŭ certe estas ke
+pli malpli frue ĝi malordigos la internaĵon.
+
+Do, certiĝinte ke ĉi tiun botelon oni _ne_ markis per 'veneno',
+Alicio kuraĝis gustumi la enhavon. "Ja, tre bongusta ĝi estas,"
+diris ŝi. (Ŝajnis al ŝi esti rava miksaĵo farita el ĉeriztorto,
+sukerita ovaĵo, ananaso, butersukeraĵo kaj rostita buterpano. Do ne
+mirinde estas ke tre baldaŭ la boteleto malpleniĝis!)
+
+
+       *       *       *       *       *
+
+
+"Ho, kian strangan senton! mi ja nepre teleskopiĝas!" Kaj fakte
+ĝuste tio okazis. Ŝi havis jam malpli ol tridek centimetrojn da
+alteco. Ŝia vizaĝo heliĝis, ĉar nun ŝi havas altecon ĝuste
+taŭgan por transiri la pordeton en tiun belegan ĝardenon. Tamen
+ŝi decidis atendi ankoraŭ kelkajn momentojn por sciiĝi ĉu ŝi
+malkreskos plue. Ŝi sentis pri tio kelkan timon, "ĉar"—diris
+ŝi—"povas okazi ke mi malkreskos ĝis nulo, same kiel kandelo. Kian
+aspekton mi havus en tiu okazo?" Kaj ŝi penis imagi al si la aspekton
+kiun kandelflamo havas post kiam oni estingis ĝin!
+
+Post iom da tempo, rimarkinte ke nenio plu okazas, ŝi decidis tuj iri
+en la ĝardenon. Sed ho ve! alveninte al la pordo, ŝi eltrovis ke
+ŝi ne havas la oran ŝlosileton; kaj irinte returne al la tablo por
+reposedi ĝin, (jen alia eltrovo!) ŝi tute ne povis atingi ĝin. Vidi
+ĝin tra la vitro ŝi povis tre bone, kaj penegis grimpi sur unu el la
+tri piedoj; sed ĝi estis tro glitiga; kaj fine, ellaciĝinte per la
+vana klopodado, la kompatinduleto sidiĝis sur la planko kaj ekploris.
+
+"Nu, do, tute ne utilas konduti tiamaniere," diris al si Alicio tre
+severe. "Mi ordonas al vi tuj ĉesi la ploron." Ŝi havis la kutimon
+sin tre bone konsili (sed tre malofte agis laŭ la konsilo!) kaj
+kelkfoje riproĉis sin tiel forte, ke ŝi efektive devis plori;
+kaj ŝi unu fojon punfrapis sin sur la vango pro la ofendo ke ŝi
+trompis sin dum iu vetludo kiun ŝi ludis kontraŭ si mem. (Nia
+Alicio ja estis neordinara infano kaj tre ŝatis ŝajnigi ke ŝi
+estas du personoj.) "Sed tiu ŝajnigo ne utilus nun"—ŝi malĝoje
+ekpensis—"ĉar ja restas da mi apenaŭ sufiĉe por fari eĉ unu
+respektindan personon!"
+
+Baldaŭ tamen ŝia rigardo falis sur vitran skatoleton, kiu kuŝas sub
+la tablo: malferminte ĝin, ŝi trovis interne tre malgrandan kukon,
+sur kiu oni markis (per korintoj) la vortojn: "Manĝu Min."
+
+"Nu," diris Alicio, "mi vin manĝos! Se vi igos min kreski, mi povos
+atingi la ŝlosilon; kaj, se male okazos, mi povos rampi sub la pordo.
+Ambaŭokaze mi eniĝos la ĝardenon, kaj se nur okazos _tio_, ne tre
+gravas la kielo." Sekve ŝi manĝis peceton de la kuko dirante al si
+"Laŭ kiu direkto, laŭ kiu do?" kaj tenante la manon sur la verto por
+palpe sciiĝi ĉu ĝi plialtiĝas aŭ male; kaj tre surprizis ŝin
+la konstato ke ŝi restas konstante samalta. Kiam oni manĝas kukon,
+tio ja okazas ordinare, sed Alicio jam tiom alkutimis atendi ke nenio
+okazos krom la neordinara, ke estis por ŝi tede kaj malinterese kiam
+okazis nur ordinaraĵoj. Do, por _ion_ okazigi, ŝi laboradis per la
+dentoj ĝis de la kuko neniom restis.
+
+
+
+
+                              ĈAPITRO II
+
+                      LA LAGETO FARITA EL LARMOJ
+
+
+"Neniam mi spertis tiaĵo," ekkriis Alicio, (pro eksciteco ŝi eĉ
+forgesis la akuzativon). "Jen mi plilongiĝas teleskope, kiel la plej
+granda teleskopo en la tuta mondo. Adiaŭ, piedetoj miaj!" (Kiam
+ŝi direktis la rigardojn al la piedoj, pro la plilongiĝo ili jam
+fariĝis tute malproksimaj, kaj apenaŭ ŝi povis vidi ilin.)
+
+"Ho, vi kompatinduloj! kiu morgaŭ vestos al vi la ŝtrumpojn kaj
+ŝuojn? Kompreneble ne _mi_; mi estos tro malproksime por okupi min
+pri vi; vi devos klopodi por vi mem. Tamen estas necese komplezi ilin;
+ĉar se ili ofendiĝos, ili eble rifuzos marŝi laŭ mia volo. Mi do
+en la kristnaska tempo donacos al ili paron da novaj botoj."
+
+Ŝi eĉ elpensadis detale kiel ŝi faros la necesajn aranĝojn. "Mi
+pagos al la portisto por liveri ilin, kaj kiel stranga tio ŝajnos,
+sendi donacon al siaj piedoj! Ankaŭ la adreso estos tre stranga:
+
+          _Al lia Moŝto la Dekstra Piedo Alicia,
+                     sur la Tapiŝeto
+                                apud Fajrgardilo
+                            (Kun amsalut' de Alicio)._
+
+Ho, kian sensencaĵon mi parolas!"
+
+En tiu momento ŝia kapo ekpremis la plafonon. Do, sen plua prokrasto
+ŝi levis la oran ŝlosileton kaj rapidis al la ĝardenpordeto. Sed
+havante la altecon de tri metroj, ŝi apenaŭ povis, kuŝante sur la
+planko, rigardi per unu okulo en la ĝardenon, kaj la tasko eniĝi en
+ĝin fariĝis ja pli ol iam utopia. Ŝi sidiĝis kaj denove ekploris.
+
+"Vi devas honti," ŝi diris al si, "vi granda bubino!" (ŝi certe
+ne eraris pri la lastaj du vortoj) "multe tro granda vi estas por
+plorkrii, vi tuj ĉesu!" Malgraŭ tiu akra sinriproĉo, ŝi ne ĉesis
+la ploradon, ĝis ŝi faligis kelkajn hektolitrojn da larmegoj, kaj
+etendis sin ĉirkaŭ ŝi larmlageto profunda je dek centimetroj kaj
+kovranta preskaŭ la tutan plankon de la halo.
+
+Post ne longa tempo ŝi aŭdis ian piedfrapetadon, kaj vigle forviŝis
+la larmojn por esplori kiu venas. Jen reaperis la Blanka Kuniklo lukse
+vestita, havante en unu mano paron da blankaj gantoj, kaj en la alia
+grandan ventumilon. Jen li alvenis, trotrapide, kaj murmuris al si:
+"Ho, la Dukino! Se mi igos ŝin atendi, ŝi tute furioziĝos!"
+
+Ĉar Alicio jam fariĝis preskaŭ senespera, ŝi estis preta peti
+helpon de kiu ajn. Do, kiam la Kuniklo sufiĉe apudiĝis, ŝi
+ekparolis per tre mallaŭta timplena voĉo: "Se al vi plaĉos,
+Sinjoro:—"
+
+La Kuniklo forte eksaltis, lasis fali gantojn kaj ventumilon, kaj per
+ĉiuj fortoj ekforkuregis en la mallumon!
+
+Alicio levis la gantojn kaj ventumilon, kaj ĉar estis en la halo tre
+varme, ŝi longadaŭre ventumadis sin kaj samtempe babiladis:—
+
+"Hieraŭ ĉio okazis laŭrutine, sed hodiaŭ ja ĉio estas stranga!
+Ĉu dum la nokto mi ŝanĝiĝis? mi esploru tion. Ĉu vere mi estis
+sama kiam mi leviĝis hodiaŭ matene? Mi kvazaŭ memoras ke mi sentis
+min _iom_ ŝanĝiĝinta. Sed se mi ne estas sama, jen alia demando;
+_kiu_ mi estas? Jen granda enigmo!" Kaj ŝi kategorie pripensis
+ĉiujn samaĝajn knabinetojn kiujn ŝi konas, por certiĝi ĉu ŝi
+ŝanĝiĝis en iun el ili.
+
+"Mi certe ne estas Ado, ĉar ŝia hararo falas sur la ŝultroj per
+longaj bukloj, kaj la mia estas tute ne bukla. Ankaŭ mi ne estas
+Mabelo, ĉar mi scias multe da lernaĵoj, kaj ŝi scias ja tre, tre
+malmulte. Ankaŭ ŝi estas _si_, kaj mi _mi_, kaj... ho, mi tute
+konfuziĝas! Mi provu ĉu mi ankoraŭ scias la jam longe konitajn
+faktojn. Por komenci: kvaroble kvin faras dekdu, kvaroble ses faras
+dektri, kvaroble sep faras.... Ho, tiamaniere neniam mi atingus dudek!
+Tamen la Multiplika Tabelo estas por mi indiferenta; mi ekzamenu min
+geografie. Londono estas ĉefurbo de Parizo, Parizo ĉefurbo de Romo,
+kaj Romo.... Ne, denove mi eraras, certege. Mi nepre ŝanĝiĝis en
+Mabelon. Mi penos deklami 'Rigardu! Jen abelo vigla.'"
+
+Kaj kruciginte la manojn sur la genuoj same kiel en la lernejo kiam
+ŝi ripetas parkeraĵojn, ŝi komencis tiun konatan poemon. Sed ŝia
+voĉo sonis raŭka kaj nepropra, kaj eĉ la vortoj ne tute similis la
+originalajn.
+
+                      _Rigardu! Jen la krokodil'!
+                        La voston li netigas;
+                      Ŝprucante akvon el la Nil'
+                        La skvamojn li briligas._
+
+                      _Senmova restas la buŝeg',
+                        Li ungojn kaŝas ruze;
+                      Jen fiŝoj naĝas tra l' kaveg'
+                        Frapfermas li amuze._
+
+"Jen certe ne la ĝustaj vortoj," diris Alicio malĝoje, kaj denove
+la okuloj pleniĝis de larmoj, dum ŝi daŭrigis: "Do, mi nepre estas
+Mabelo malgraŭ ĉio; sekve mi devos loĝi en tiu ŝia mallarĝa
+maloportuna domaĉeto; mi havos neniun ŝatindan ludilon, kaj devos
+lerni sennombrajn lecionojn. Ne! Pri tio mi decidiĝis. Se mi estos
+Mabelo, mi restos ĉi tie, kaj neniom utilos ke oni demetu la kapon
+ĉe la enirejo al la tunelo kaj diru per karesa voĉo 'Resupreniru,
+karulo.' Mi nur rigardos supren kaj demandos 'Kiu do mi estas? Vi
+certigu tion, kaj _poste, se mi ŝatos esti tiu persono_, mi konsentos
+supreniri. Se ne, mi restos ĉi tie, ĝis mi fariĝos iu alia.' Sed ho
+ve! mi tre, tre volas ke oni venu. Jam tro longan tempon mi restas tie
+ĉi tutsola, kaj mi sopiras la hejmon."
+
+Dirante tion ŝi okaze rigardis la manojn kaj rimarkis mirigite ke ŝi
+vestis—dum ŝi babilas—unu el la blankaj kapridfelaj gantoj de la
+Kuniklo.
+
+"Kiel ajn mi faris _tion_?" pensis ŝi. "Mi ja denove malkreskas."
+
+Ŝi stariĝis, kaj irinte al la tablo por kompare mezuri sin,
+eltrovis ke nun ŝi havas proksimume sesdek centimetrojn da alteco,
+kaj ankoraŭ rapide malkreskas. Certiĝinte ke tion kaŭzas la
+ventumilo, ŝi tuj lasis ĝin fali, kaj per tio apenaŭ ŝi evitis la
+malagrablaĵon malkreski ĝis nulo.
+
+"Jen evito vere mirakla! Ĉar preskaŭ mi nuliĝis!" diris Alicio,
+iom timigita per la subita ŝanĝo, "tamen estas bona afero trovi sin
+ankoraŭ ekzistanta; kaj jam nun mi povas eniri la ĝardenon." Ŝi do
+kuris avide al la pordeto; sed ho ve! ĝi refermiĝis, kaj jen la ora
+ŝlosileto kuŝis, kiel antaŭe, sur la tablo; kaj "la afero staras
+pli malprospere ol ĉiam," ŝi plordiris, "ĉar neniam mi estis tiel
+absurde malgranda, estas ja ne tolereble."
+
+En la momento kiam ŝi diris tion, ŝia piedo glitis, kaj ŝi trovis
+sin plaŭde enfalinta en salan akvon. Subakviĝinte ĝis la mentono,
+ŝi unue supozis ke ŝi estas falinta en la maron, kaj ekpensis
+"en tiu okazo mi povos hejmiĝi vagonare." (Alicio nur unufoje en
+la vivo forrestadis ĉe la marbordo, kaj el tiu sperto formis al
+si la konkludon ke, kien ajn oni irus sur la angla marbordo, oni
+trovus longan serion de banmaŝinoj en la maro, post ili kelke da
+infanoj kiuj per lignaj fosiloj fosas la sablon; malantaŭe, serion
+de apartamentaj domoj, kun, malantaŭ ĉio, stacidomo.) Tamen post
+nelonge ŝi sciiĝis ke ŝi estas en la lageto farita de la larmoj
+kiujn ŝi ploris estante trimetrulo. "Ho, se nur mi ne tiom plorus!"
+diris ŝi, ĉirkaŭnaĝante por trovi la bordon. "Pro tiuj larmoj mi
+nun eble suferos la punon droni en la larmoj mem. Tio estos tre, tre
+stranga, sed hodiaŭ _ĉio_ ja estas stranga."
+
+En tiu momento ŝi ekaŭdis ke io ne tre malproksime de ŝi
+ĉirkaŭbaraktas en la lageto, kaj ŝi naĝis en la direkto de la
+plaŭdado por esplori kio ĝi estas: unue ŝi supozis ke la besto
+nepre estos aŭ rosmaro aŭ hipopotamo; sed rememorante ke ŝi mem
+nun estas tre malgranda, ŝi fine konstatis ke ĝi estas nur muso
+englitinta en la akvon same kiel ŝi mem.
+
+"Ĉu eble utilus," pensis Alicio, "alparoli ĉi tiun muson? Ĉio
+estas tiel neordinara ĉi tie, ke kredeble ĝi havas la kapablon
+paroli, kaj almenaŭ ne malutilos provi ĝin." Do ŝi ekparolis
+per: "Ho muso, ĉu vi konas la elirejon el tiu ĉi lageto? Mi tre
+laciĝas, ho Muso, ĉirkaŭnaĝante en ĝi." (Alicio kredis ke "Ho
+Muso" estas nepre prava formo por alparoli muson; ŝi neniam ĝis tiu
+tago alparolis muson, sed ŝi memoris el la latina lernolibro de sia
+frato la deklinacion: "Muso—de muso—al muso—muson—ho muso!")
+
+La Muso rigardis ŝin scivole, tamen diris nenion, sed faris signon al
+ŝi palpebrumante per unu okuleto.
+
+"Ĝi eble estas franca muso alveninta Anglujon kun Vilhelmo la
+Venkanto; sekve ĝi povas ne kompreni la anglan lingvon." (Malgraŭ
+la fakto ke ŝi bone konis multe da historiaj nomoj kaj epizodoj,
+Alicio ne havis tre klarajn ideojn pri _datoj_!) Ŝi do rekomencis
+france, dirante "_où est ma chatte?_" (la unua frazo en ŝia
+lernolibro).
+
+La Muso tuj eksaltis el la akvo, kaj ĝia tuta korpo timskuiĝis.
+
+"Ho, pardonu! mi petegas," ekkriis Alicio, timante ke ŝi vundis la
+sentojn al la kompatinda besto, "mi tute forgesis ke vi ne amas la
+katojn."
+
+"Ne—amas—katojn," diris ripete la Muso per pasia sibla voĉo. "Ĉu
+_vi_, se vi estus mi, amus la katojn?"
+
+"Nu, eble ne," Alicio respondis per paciga tono, "sed ne koleriĝu.
+Malgraŭ ĉio, mi tre ŝatus montri al vi nian katon _Dajna_; vi nepre
+ekamus la katojn, se nur vi povus vidi _ŝin_. Ŝi estas la plej kara
+dorlotaĵo en tuta la mondo,"—Alicio malvigle sencele naĝetis dum
+ŝi parolis—"kaj tiel komforte ŝi murmuras apud la fajro lekante
+la piedojn kaj viŝante la vizaĝon; ankaŭ tiel bela molaĵo por
+dorloti sur la genuoj, ankaŭ tiel lerta muskaptisto—ho, pardonu,"
+denove ekkriis Alicio, ĉar la Muso elstarigis erinace la tutan felon;
+sekve ŝi estis certa ke ĝi tre profunde ofendiĝis, kaj ŝi rapidis
+aldoni: "Se estas al vi malagrable, ni ne plu parolu pri _Dajna_."
+
+"_Ni_ ne plu!" ekkriis la Muso, kiu tremis ĝis la lasta vostharo.
+"Ĉu vi imagas ke _mi_ volus priparoli tian temon? Ĉiam nia familio
+malamis la katojn kaj nun malamas, malamindaj malĝentilaj bestoj!
+Estonte vi jam neniam aŭdigu antaŭ mi eĉ la nomon kato!"
+
+"Tion mi promesas tre volonte," diris Alicio, kaj dume klopodis trovi
+alian paroltemon. "Ĉu vi... ĉu vi ŝatas... la hundojn?"
+
+La Muso ne respondis. Sekve Alicio avide daŭrigis:—
+
+"Proksime de nia domo loĝas bela, ĉarma, hundeto, kiun mi tre
+ŝatus ke vi vidu. Ĝi estas malgranda, helokula rathundo kun longa
+bukla brunhararo. Ĝi kapablas realporti la aĵojn forĵetitajn; ĝi
+petas manĝaĵon sidante sur la vosto, kaj havas aliajn ĉiuspecajn
+kapablojn; mi ne povas memori eĉ la duonon da ili. Ĝi apartenas
+al iu farmisto kiu diras ke pro ĝiaj kapabloj ĝi valoras mil
+spesmilojn. Li certigas ke ĝi mortigas ĉiujn ratojn kaj... Ho,
+ve! ve! Denove mi ofendis ĝin." Ĉar jen! la Muso naĝas for, for
+per ĉiuj fortoj, kun tia rapideco ke li faras irante tra la akvo
+grandan plaŭdbruon.
+
+Ŝi realvokis ĝin per sia plej dolĉa tono. "Vi _kara_ Muso, revenu!
+mi petegas; nek katojn nek hundojn ni priparolos, se al vi ne
+plaĉos." Aŭdinte tion, la Muso turnis sin malrapide kaj renaĝis al
+ŝi. Ĝia vizaĝo estis tre pala (pro kolero, pensis en si Alicio),
+kaj per mallaŭta tremanta voĉo ĝi diris: "Ni naĝu al la bordo,
+kaj poste mi rakontos al vi mian historion, por komprenigi pro kio
+mi malamas la katojn kaj hundojn." Kaj certe estus malprudente plu
+prokrasti la elnaĝon, ĉar en la lageton jam enfalis tiom da birdoj
+kaj bestoj ke ili komencis premi sin reciproke. Jen Anaso naĝis
+kun Dodo, jen Loro kun Agleto, jen multe da aliaj strangaĵoj,
+birdbestoj kaj bestbirdoj. Unua naĝis Alicio; post ŝi sekvis la tuta
+birdbestaro. Post kelka tempo ĉiuj atingis la bordon kaj staris kune
+sur la tero, tre malsekaj.
+
+
+
+
+                             ĈAPITRO III
+
+          POST STRANGA VETKURO SEKVAS STRANGA MUS-TEJLO.[1]
+
+
+La kunvenintoj sur la bordo prezentis tre strangan aspekton. Jen
+birdoj kun plumoj malordigitaj, jen bestoj kun felo algluiĝinta
+al la korpo: ĉiuj estis akvogutantaj, malkomfortaj, malagrablaj.
+Kompreneble la unua demando estis: kiamaniere resekiĝi? Ili
+interkonsiliĝis pri tio, kaj post kelke da minutoj ŝajnis al Alicio
+tute ordinara afero trovi sin babilanta kun ili kvazaŭ al personoj
+jam longe konataj. Ŝi havis longan argumentadon kun la Loro, kiu en
+la fino fariĝis malagrabla kaj volis diri nenion krom "mi estas la
+pli aĝa, kaj pro tio mi scias pli." Ĉar Alicio rifuzis konsenti al
+tio, ne sciante kiom da jaroj li havas, kaj ĉar la Loro absolute
+rifuzis doni tiun sciigon, restis nenio plu direbla.
+
+Fine la Muso, kiu ŝajne estis aŭtoritatulo, ekkriis: "Vi sidiĝu
+ĉiuj, kaj aŭskultu _min_. Mi tre baldaŭ igos vin sufiĉe sekaj!"
+
+Ili do sidiĝis, ĉiuj en unu granda rondo, kun la Muso en la centro.
+
+Alicio fikse kaj atente rigardadis la Muson, ĉar ŝi havis fortan
+antaŭsenton, ke ŝi nepre suferos malvarmumon, se ŝi ne baldaŭ
+resekiĝos.
+
+"Hm," komencis la Muso kun tre impona mieno "ĉu ĉiuj estas pretaj?
+Jen la plej bona sekigaĵo kiun mi konas. Silentu ĉiuj, mi petas!
+'Vilhelmo Venkinto, kies aferon la papo subtenis, baldaŭ subigis la
+anglan popolon, kiu pro manko de probatalantoj alkutimiĝis dum la
+lastaj jaroj al uzurpado kaj venkiĝo. Edvino kaj Morkaro, grafoj de
+Mercio kaj Nortumbrio—'"
+
+"Ho, ve!" ĝemis la Loro, frosttremante.
+
+"Pardonu," diris la Muso tre ĝentile (kvankam li tre sulkigis la
+brovojn), "ĉu vi parolis?"
+
+"Ne mi," la Loro rapide respondis.
+
+"Mi kredis ke jes," diris la Muso. "Sed mi daŭrigu. 'Edvino kaj
+Morkaro grafoj de Mercio kaj Nortumbrio fariĝis liaj partianoj, kaj
+eĉ Stigando la patrujama ĉefepiskopo de _Canterbury_ trovis ĝin[2]
+konsilinda—"
+
+"Trovis _kion?_" diris la Anaso.
+
+"Trovis _ĝin_," la Muso respondis iom malafable. "Ĉu vi ne komprenas
+kion signifas 'ĝi'?"
+
+"Nu, mi tre bone komprenas kion 'ĝi' signifas, kiam mi trovas ion.
+Plej ofte 'ĝi' estas rano aŭ vermo. Tamen la demando estas: kion
+trovis la ĉefepiskopo?"
+
+"Tiun demandon la Muso ne atentis sed daŭrigis rapide: 'trovis ĝin
+konsilinda iri kun _Edgar Atheling_ por renkonti Vilhelmon kaj proponi
+al li la kronon. Sed la insulta fiero de liaj Normanoj—' kiel vi
+sentas vin nun, mia kara?" ĝi diris abrupte, alparolante Alicion.
+
+"Malseka, same malseka kiel en la komenco," Alicio respondis iom
+melankolie. "Via rakonto ne sekigas min."
+
+"Kon-sid-er-ad-inte la ĵus anonc-itan rezult-at-on," ekdiris solene
+la Dodo, "mi proponas ke ĉi tiu kunsido tuj fermiĝu por ke oni
+el-kon-sid-er-adu kaj senprokraste ef-ekt-iv-ig-u pli energiajn
+ri-med-ojn."
+
+"Kian lingvon vi parolas?" demandis la Agleto. "De tiuj longaj vortoj
+mi ne scias la signifon, kaj plue mi kredas ke vi ne scias mem."
+
+La Agleto deklinis la kapon por kaŝi sian mokridon, sed kelkaj el la
+birdoj sibleridis aŭdeble. La Dodo per voĉo ofendita reparolis pli
+simple: "Jen kion mi intencis diri: la plej bona rimedo por sekigi nin
+estus la 'Kaŭko'-vetkuro."
+
+"Kio do estas Kaŭko?" diris Alicio. Tiun demandon ŝi faris, ne
+dezirante la informon, sed nur ĉar ŝi rimarkis ke la Dodo paŭzas
+kaj ŝajne opinias ke _iu_ devas paroli, kaj ĉar neniu alia montris
+la inklinon paroli.
+
+La Dodo respondis ke: "La plej bona rimedo por klarigi ĝin estas
+per la ago mem." (Kaj ĉar ian vintran tagon vi eble volos mem
+eksperimenti la ludon, mi klarigos kiamaniere la Dodo aranĝis ĝin.)
+
+Unue, ĝi markis per kreto rondforman kurejon (la preciza formo ne
+gravas). Due, ĝi starigis ĉiujn partoprenontojn ĉe diversaj punktoj
+de la kretstreko. Oni ne diris, laŭ angla kutimo, "unu, du, tri,
+FOR!" sed ĉiu devis komenci kaj ĉesi la kuradon laŭ sia propra
+inklino, kaj pro tio ne estis facile kompreni kiam la afero finiĝis.
+Tamen post longa kurado, eble duonhora, ĉiuj tute resekiĝis, kaj la
+Dodo subite ekkriis: "La Kaŭko finiĝis."
+
+Ĉiuj amasiĝis ĉirkaŭ la Dodo, spiregante kaj demandante: "Sed kiu
+venkis?"
+
+Tiun demandon la Dodo en la unua momento ne povis respondi.
+
+Ĝi sidis longan tempon kun unu fingro premata sur la frunto (en tiu
+sama sintenado kiun ordinare havas Ŝejkspir en niaj bildoj). En la
+fino la Dodo diris:—"Ĉiuj venkis, kaj ĉiu devas ricevi premion."
+
+Plena ĥoro da voĉoj demandis samtempe: "Sed kiu la premiojn
+disdonos?"
+
+"Ja _ŝi_ kompreneble," diris la Dodo, kaj montris per unu fingro sur
+Alicion. Sekve, la tuta aro amasiĝis ĉirkaŭ ŝi kaj kriis konfuze
+"La premiojn, la premiojn." Kion fari? La kompatinda Alicio havanta
+alian ideon neniun, enŝovis la manon en sian poŝon kaj feliĉe
+trovis tie pakaĵeton da sukeraĵoj (kiujn per bonŝanco la sala akvo
+ne difektis) kaj ilin ŝi disdonacis kiel premiojn. Sufiĉis ĝuste
+por donaci al ĉiuj po unu.
+
+"Sed ŝi mem nepre rajtas ricevi premion," diris la Muso.
+
+"Certe," tre serioze respondis la Dodo, kaj turnis sin al Alicio
+dirante:
+
+"Kion alian vi havas en la poŝo?" Alicio respondis malĝoje ke "nur
+fingroingon." "Ĝin transdonu al mi," diris la Dodo.
+
+Denove ĉiuj amasiĝis ĉirkaŭ ŝi, dum la Dodo solene prezentis
+la fingroingon dirante: "Ni petas ke vi bonvolu akcepti ĉi tiun
+elegantan fingroingon." Ĉe la fino de tiu mallonga parolo ĉiuj
+aplaŭdis.
+
+                 [Ilustraĵo: LA DODO SOLENE PREZENTAS
+                 AL ALICIO ŜIAN PROPRAN FINGROINGON.]
+
+Alicio pensis interne ke la tuta afero estas absurda, sed ĉiuj
+tenadis sin tiel serioze ke ŝi ne kuraĝis ridi. Ankaŭ ĉar ŝi ne
+povis elpensi ion dirindan, ŝi nur simple klinis respekte la kapon
+akceptante la ingon, kaj tenadis sin kiel eble plej serioze.
+
+Kaj nun sekvis la manĝado de la sukeraĵoj. Tio kaŭzis ne malmulte
+da bruo kaj konfuzo. Grandaj birdoj plendis ke ili ne povas gustumi
+siajn; malgrandaj aliflanke sufokiĝis, kaj estis necese kuraci ilin
+per la dorsfrapada kuraco. Tamen ĉio fine elfariĝis. Ili sidigis sin
+denove en la rondo kaj petis al la Muso ke ĝi rakontu al ili ion plu.
+
+"Vi ja promesis rakonti al mi vian historion," diris Alicio, "kaj
+la kaŭzon pro kiu vi malamas la... la... la... Ko kaj Ho." Tiujn
+komencajn literojn ŝi aldonis per tre mallaŭta flustro, ektimante ke
+ĝi ree ofendiĝos.
+
+"Mia tejlo,"[3] diris la Muso, "estas tre longa kaj tre malĝoja."
+
+"Mi vidas ke ĝi estas longa," diris Alicio rigardante kun miro ĝian
+voston, "sed kial vi ĝin nomas malĝoja?" Kaj dum la daŭro de la
+rakonto ŝi tiel konfuzis sin pri tiu enigmo ke ŝia koncepto pri ĝi
+enhavis kune la ideojn de ambaŭ tejlaĵoj. Jen la vostrakonto aŭ
+rakontvosto:
+
+
+               Furi' diris al
+                    Mus', kiun
+                       trafis
+                          li ĵus,
+                            'Ni havu
+                              proceson,
+                                procesos mi
+                              vin! Ne ekpenu
+                           rifuzi; tio,
+                        nur por amuzi
+                     min, estas
+                 necesa; defendu
+               do vin!'
+                 'Ne utilus,
+                    sinjor';
+                      diris mus' kun
+                         fervor'—
+                            'Sen juĝistoj
+                                     procesi
+                                     tempperdo
+                                  ja estas.'
+                               'Mi vin
+                             juĝos
+                          tutsole'
+                       —diris li
+                          ruzparole.
+                            Li muson
+                               kondamnis;
+                                    nun
+                                     sola
+                                         li
+                                           restas.
+
+
+"Vi ne atentas," diris la Muso al Alicio kun severa mieno. "Pri kio vi
+pensas?"
+
+"Pardonu," respondis ŝi tre humile, "vi jam alvenis ĉe la kvina
+vostkurbo, ĉu ne?"
+
+"Mi ne!" ekkriis la Muso.
+
+"Mine', mine'," ripetis Alicio "do vi certe estas franca Muso; sed
+kial vi, katmalamanto, nun alvokas katon?"
+
+La kolerema Muso tuj levis sin kaj ekforiris, ĵetante post si la
+riproĉon:
+
+"Ne tolereble estas ke vi insultu min per tia sensencaĵo."
+
+"Mi ne intencis ofendi, vere ne!" ekkriis Alicio per petega voĉo "kaj
+vi ja estas tre ofendema." Anstataŭ respondi, la Muso nur graŭlis
+kolere.
+
+"Revenu, mi petegas, kaj finu la rakonton," Alicio laŭte kriis al la
+foriranta Muso. Poste ĉiuj kriis ĥore: "Jes, revenu, revenu." Tamen
+la Muso nur skuis malpacience la kapon, plirapidigis la paŝojn, kaj
+malaperis.
+
+La Loro malkontente diris: "Estas domaĝo ke ĝi ne volis reveni,"
+unu maljuna krabino profitis la okazon por diri al la filino: "Ha,
+mia kara, tio estu por vi solena averto por ke neniam _vi_ perdu la
+bonhumoron," kaj la malrespekta krabido akre respondis: "Vi fermu la
+buŝon, panjo; vi ja difektus la paciencon eĉ al ostro."
+
+"Ho, kiel mi volus ke nia _Dajna_ estu tie ĉi," Alicio diris tion al
+neniu aparte sed kvazaŭ ŝi volis mem aŭdi siajn pensojn, "ŝi ja
+kapablus tuj reporti ĝin."
+
+"Kiu do estas _Dajna_, se estas permesite tion demandi," diris
+ĝentile la Loro. Alicio respondis avide, ĉar ĉiam ŝi estis preta
+paroli pri sia kara katinjo. "_Dajna_ estas mia kato. Ŝi estas la
+plej bona muskaptisto kiun vi povus eĉ imagi; kaj se vi vidus ŝin
+_bird_kaptanta,..."
+
+Tiuj vortoj kaŭzis inter la ĉeestantoj vere rimarkindajn sentojn.
+Kelkaj el la birdoj tuj forportis sin. Unu maljuna pigo tre zorge
+enfaldis sin per la vestoj kaj anoncis ke, ĉar la noktaj vaporoj
+malbone efikas sur la gorĝo, ŝi devas hejmeniĝi. La kanario kriis
+per trempepanta voĉo al siaj idoj: "Forvenu, karuletoj, la horo jam
+pasis, je kiu vi devis kuŝiĝi."
+
+Pro diversaj tiaj pretekstoj ĉiuj foriris unu post alia, ĝis Alicio
+restis tute sola. "Se nur mi ne estus nominta _Dajna'n_!" ŝi diris
+melankolie. "Supre en la hejmo ĉiuj ŝatas ŝin, ĉi tie funde,
+neniu. Tamen, laŭ mi, ŝi estas la plej bona kato en la tuta mondo.
+Ho, _Dajna_, vi kara _Dajna_, ĉu jam neniam mi revidos vin?" Kaj nun
+sentante sin tre sola kaj tre malĝoja, ŝi denove ekploris.
+
+Post iom da tempo, ekaŭdante kelkajn piedpaŝetaĵojn, ŝi avide
+direktis la rigardojn al ili, en la espero ke eble la Muso regajnis la
+bonhumoron kaj nun revenas por fini sian rakonton.
+
+
+
+
+                              ĈAPITRO IV
+
+                  ĈEFE PRI UNU LACERTO NOMATA BIL[4]
+
+
+Alvenis ne la Muso, sed la Blanka Kuniklo, Ĝi trotis malrapide,
+kaj ĉirkaŭrigardadis, kvazaŭ ĝi serĉas ion. Ŝi aŭdis ĝin
+murmuri al si: "Ho, la Dukino, ho, miaj karaj piedoj, ho miaj felo kaj
+vangharoj! Ŝi ekzekutigos min. Tio estas same certa kiel la fakto ke
+mi ne amas la ĉasputorojn! Kie en la tuta mondo mi lasis ilin fali?"
+
+Alicio tuj divenis ke ĝi serĉas la ventumilon kaj la paron da
+blankaj gantoj kapridfelaj, kaj ŝi bonkore komencis ĉirkaŭserĉi
+ilin. Sed ne prosperis al ŝi trovi ilin, ĉar de kiam ŝi naĝadis
+en la lageto, ĉio absolute ŝanĝiĝis; malaperis la vitra
+tablo, la pordeto, kaj eĉ la granda halo mem. Baldaŭ dum Alicio
+ĉirkaŭserĉas, la Kuniklo rimarkis ŝin, kaj per kolera voĉo
+ekkriis al ŝi: "Nu, Mariano, kion do _vi_ faras ĉi tie ekstere?
+Vi tuj kuru en la domon kaj alportu paron da gantoj kaj ventumilon.
+Rapidu, for!"
+
+Alicio tuj ekkuris en la direkto al kiu ĝi montris. Pro timo de ĝia
+kolero ŝi eĉ ne provis klarigi ke ŝi ne estas Mariano.
+
+"Li ja kredas ke mi estas lia ĉambristino," ŝi al si diris, kurante.
+"Kia surprizego estos por li eltrovi kiu mi estas! Sed bone estos
+alporti al li la ventumilon kaj gantojn, t.e. se prosperos al mi trovi
+ilin."
+
+Dirante tion, ŝi trovis sin staranta antaŭ ĉarma malgranda dometo
+kun sur la pordo neta nom-tabulo kaj gravurita sur ĝi la nomo Sro.
+B. Kuniklo. Ŝi eniris, ne frapinte la pordon, kaj rapidis supren per
+ŝtuparo timante ke ŝi renkontiĝos kun la efektiva Mariano, kaj
+estos forigita el la domo antaŭ ol ŝi povos trovi la ventumilon kaj
+gantojn.
+
+"Kiel strange estas," diris Alicio al si, "esti ĉirkaŭsendata de
+Kuniklo! Eble ankaŭ _Dajna_ igos min porti por ŝi depeŝojn. Jen kio
+povus okazi. 'Fraŭlino Alicio, venu, pretigu vin por la promeno.'
+'Post unu momento, varnjo; tamen ĝis _Dajna_ revenos, mi devas gardi
+la mustruon, por ke la muso ne eliru.' Sed mi kredas ke, se _Dajna_
+komencus tiamaniere estri la domanojn, oni ne permesus al ŝi resti en
+la domo."
+
+Dum ŝi parolis, ŝi trovis sin en neta ĉambreto kiu havis tablon
+apud la fenestro, kaj jen sur la tablo (kion ŝi esperis trovi)
+ventumilo kaj kelkaj paroj da blankaj gantetoj. Preninte la ventumilon
+kaj unu paron da gantoj, ŝi estis tuj forlasonta la ĉambron kiam
+okaze ŝi rimarkis, starantan apud la spegulo, boteleton. Tiu boteleto
+_ne_ havis surskribon kun la invito TRINKU MIN, tamen ŝi malŝtopis
+kaj almetis ĝin al la lipoj. "Kiam ajn mi aŭ manĝas aŭ trinkas ĉi
+tie funde, nepre okazas _io_ stranga, do mi volas provi kian efikon
+havos ĉi tiu boteleto. Mi tre esperas ke ĝi denove grandigos min,
+ĉar mi vere enuas esti tia malgrandaĵeto kia nun mi estas."
+
+Kaj tian efikon ĝi fakte havis, efikon preskaŭ tujan; ĉar antaŭ
+ol ŝi eltrinkis duonon de la enhavo, ŝi sentis la kapon premata
+kontraŭ la plafono, kaj devis klini la dorson por ke ŝi ne rompu
+al si la kolon. Si tuj demetis la boteleton dirante: "Sufiĉas! mi
+esperas ke mi ne kreskos plu. Jam mi ne povas eliri tra la pordo. Ho,
+mi tre volas ke mi ne tiom trinkis."
+
+Ho, ve! Jam tro malfrue estis por voli tion. La kresko tute _ne_
+ĉesis, sed daŭradis ĝis ŝi devis stari sur la genuoj, kaj plu
+daŭradis ĝis eĉ por tio mankis spaco. Ŝi klopodis kuŝi sur la
+planko havante unu kubuton kontraŭ la pordo kaj la alian klinitan
+ĉirkaŭ la kapo. Sed ankoraŭ plu ŝi kreskis, kaj—jen, ŝia lasta
+rimedo—ŝi ŝovis unu brakon el la fenestro kaj unu piedon en la
+kamentubon, dirante:
+
+"Nu, kio ajn okazos, jam nenion plu _mi_ povas fari. Kio al mi okazos?
+Kio?" Tre feliĉe por Alicio la sorĉboteleto jam plene efikis; ŝi ne
+plu kreskis, tamen ŝia nuna amplekso estis por ŝi tre malkomforta,
+kaj ĉar ŝajne ekzistis nenia eblo iam eliri tiun ĉambron, ni ne
+miru ke ŝi nun fariĝis tre malgaja.
+
+"Estis multe pli agrable en la hejmo," pensis la kompatindulo, "ĉar
+tie ne okazis ke oni ĉiam alterne kreskis kaj malkreskis, kaj
+ĉirkaŭ-ordoniĝis de musoj kaj kunikloj. Preskaŭ mi volas ke mi ne
+estus enirinta tiun tuneleton; tamen, malgraŭ ĉio, la ĉitiea vivo
+estas certe kurioza kaj interesa. Ho, mi tre miras _kio_ okazis al mi.
+En la pasinto, kiam mi legis la fefabelojn, mi ĉiam supozis ke en
+la reala mondo tute ne okazas tiaj aferoj; sed jen mi mem trovas min
+en la mezo de ia vera fefabelo! Oni devos, oni certege devos, verki
+libron pri mi. Mi mem verkos ĝin, tuj kiam mi estos plenkreskinta.
+Sed mi ja estas plene kreskinta jam nun"—diris ŝi per malgaja voĉo
+"almenaŭ tie ĉi ne estas spaco por kreski plu. Ĉu sekvas do (pensis
+ŝi) ke mi neniam fariĝos pli _aĝa_ ol nun? Tio ja estus unuflanke
+tre agrabla: neniam fariĝi maljunulino! Sed aliflanke, devi ĉiam
+lerni la lecionojn, ho, mi ne ŝatus _tion_!"
+
+"Vi stulta Alicio," ŝi respondis al si, "Kiel vi povus lerni
+lecionojn _tie ĉi_? Apenaŭ estas spaco por _vi_, kie do lokiĝus
+lernolibroj?" Kaj tiamaniere ŝi daŭrigis la konversacion, diskutante
+kaj argumentante kontraŭ si.
+
+           [Ilustraĵo: LA KUNIKLO FALAS EN SIAN KUKUMEJON.]
+
+Post kelkaj momentoj ŝi ĉesis paroli kaj aŭskultis, ĉar ŝi aŭdis
+ekster la ĉambro ies voĉon diranta: "Mariano, Mariano! se vi ne tuj
+alportos al mi la gantojn—" Sekvis la sonoj de piedtrotetado supren
+laŭ la ŝtuparo. Alicio komprenis ke la Kuniklo venas por serĉi
+Marianon. Pro timo al li, ŝi tiel forte tremis ke la tuta dometo
+skuiĝis. Ŝi ja forgesis ke nun ŝi estas preskaŭ miloble pli granda
+ol la Kuniklo, kaj tute ne bezonas timi ĝin.
+
+Laŭ la aŭdataj sonoj la Kuniklo alvenis ĝis la pordo, kaj
+klopodadas malfermi ĝin. Sed, ĉar la pordo estis malfermebla
+nur internen, kaj ĉar Alicio forte premas ĝin per la kubuto,
+tiu klopodado malsukcesis. Ŝi aŭdis ĝin diri al si: "Do, mi
+ĉirkaŭiros kaj eniĝos tra la fenestro."
+
+"Vi ne faros _tion_" pensis Alicio. Atendinte ĝis ŝi aŭdas la
+Kuniklon apude sub la fenestro, ŝi subite eletendis la manon kaj
+faris provkapton en la aero. En la manon ŝi ricevis nenion, sed
+aŭdis subitan timekkrion, la falon de ia korpo, kaj samtempe la sonon
+de frakasata vitro. El tio ŝi konkludis ke ĝi falis en kukumejon,
+aŭ en ion tiuspecan.
+
+Post unu momenton ŝi aŭdis tre koleran voĉon (certe la voĉon de
+l' Kuniklo) diranta: "Pat, Pat, kie vi estas, kanajlo?" kaj responde
+(de malproksime) jen alia voĉo de ŝi nekonata: "Se plaĉas, Moŝto,
+jen mi tie ĉi. Mi fosas pomojn."
+
+"Fosas _pomojn_? Ĉi tien, sencerbulo, kaj eligu min el _ĉi tio_."
+(Denove aŭdiĝas sonoj de frakasata vitro.)
+
+"Nun, vi diru al mi, Pat, kio tio estas en la fenestro?"
+
+"Brako, Ekscelenco." (Laŭ la akcento per kiu li parolis li certe
+estis irlandano.)
+
+"Ĉu 'brako' vi diris, stultulo? Kiu en la tuta mondo iam vidis brakon
+tiel grandan? Ĝi ja ŝtopas la tutan fenestron."
+
+"Estas vero, Ekscelenco; sed, malgraŭ ĉio, ĝi estas brako."
+
+"Nu, ĝi ne devas esti tie, kio ajn ĝi estas. Vi iru tuj kaj forprenu
+ĝin."
+
+Post tio sekvis longa silento; nur malofte Alicio aŭdis flustraĵojn:
+ekze.,
+
+"Mi ne ŝatas ĝin, Moŝto, tut' ne, tut' ne!" kaj "Vi obeu,
+malkuraĝulo."
+
+En la fino ŝi la duan fojon eletendis la manon kaj faris provkapton
+en la aero. Ĉi tiun fojon ŝi aŭdis _du_ timkriojn, kaj ankaŭ
+duobliĝis la sonoj de frakasata vitro. "Tiu kukumejo nepre havas
+multe da kadroj," pensis Alicio. "Kion oni projektos nun? Pri la
+projekto eltiri min el la fenestro, se nur ili povus, mi estus tute
+kontenta, ĉar mi ja ne volas resti tie ĉi eterne."
+
+Pasis kelka tempo en plena silento. Poste rompis la silenton rulbruo
+de malgrandaj vagonradoj, kaj voĉoj ne malmultaj ekparolis ĉiuj
+kune. Ŝi elaŭdis nur la sekvantajn:
+
+      "Kie la alia ŝtupetaro?—Mi ja devis alporti nur unu, la
+      alian Bil alportas—Bilĉo, ĝin starigu tie ĉi—Jen en
+      ĉi tiu angulo ni starigu ilin—Ne, ne! antaŭ ĉio necesas
+      kunligi ilin, alie ni ne atingos la fenestron—Vi ne ĝenu
+      vin, ili jam sufiĉe taŭgas—Vi, Bil, ekkaptu ĉi tiun
+      ŝnuron—Ĉu la tegmento subtenos la premon?—Gardu vin,
+      jen malfiksiĝinta ardezaĵo—Ho, ĝi jam falas, gardu la
+      kapojn sube—(Laŭta frakaso)—Nu, kiu fuŝis tion?—Mi
+      kredas ke Bil—Kiu devas derampi la kamentubon?—Ne, mi
+      ne volas, vi rampu mem—Tion ne _mi_, Bil devas—Bil, la
+      mastro ordonas ke vi derampu."
+
+"Do, Bil devas derampi la kamentubon," pensis Alicio. "Ĉiujn
+malagrablaĵojn oni trudas al Bil. Mi ne volus esti en la situacio
+de Sro. Bil. La fajrujo estas tre mallarĝa, sed malgraŭ ĉio mi
+nepre sukcesos trafi lin per la piedo." Ŝi eltiris la piedon kiel
+eble pleje el la tubo kaj atendis ĝis ŝi aŭdis tutapude en la tubo
+ĉirkaŭgratadon kaj rampadon de iu besteto (kiaspeca ĝi estis, ŝi
+el la sonoj ne povis diveni). Tiam dirante al si 'Tio nepre estas Bil'
+ŝi provfrapis per la piedo en la tubon, kaj atende aŭskultis.
+
+Unue ŝi aŭdis laŭtan ĥoron:
+
+      "Jen Bil tie supre! Pafiĝis el tubo!! Falas teren!!!"
+
+Poste la voĉo de l' Kuniklo diranta tutsole: "_Kaptu lin, vi ĉe la
+barilo._" Sekvis unumomenta silento kaj fine alia konfuza voĉaro:
+
+      "Subtenu la kapon—Brandon. Ne sufoku lin—Kio al vi
+      okazis, kunulo—Diru al ni—"
+
+Aŭdiĝis responde tre malforta sibla voĉo ("jen la voĉo de Bil,"
+pensis Alicio).
+
+      "Nu, apenaŭ mi scias—ne pli, dankojn—jam
+      mi refortiĝas—mi estas tro konfuzita por
+      rakonti—io—kvazaŭ risorte—atakis min—kaj
+      mi pafiĝis supren kiel raketo—jen ĉio."
+
+      "Tute vere, ni ja vidis vin," diris la aliaj.
+
+"Ni devas ekbruligi la domon," diris la voĉo de l' Kuniklo. Alicio tuj
+ekkriis kiel eble plej laŭte "se vi tion atencos, mi instigos kontraŭ
+vi _Dajna'n_."
+
+Sekvis tuja kaj plena silento. "Kion nun ili faros?" pensis Alicio.
+Laŭ ŝi la plej prudenta rimedo estus forpreni la tegmenton.
+
+Post unu, du momentoj denove komencis ĉirkaŭmoviĝo, kaj la Kuniklo
+aŭdigis sin dirante: "Sufiĉos por komenco unu plena puŝĉaro."
+
+"Plena puŝĉaro da kio?" pensis Alicio. Tiu dubo ne daŭris
+longe, ĉar en tiu sama momento, enŝutiĝis tra la fenestro, kun
+kvazaŭ-hajla bruo, amaso da ŝtonetoj, kaj kelkaj el ili eĉ frapis
+al ŝi la vizaĝon. Ŝi diris al si: "Tion mi tuj ĉesigos," kaj
+aldonis laŭte: "Se vi ree faros tion, mi _Dajna'n_...."
+
+Denove la tuja kaj plena silento!
+
+Alicio surprize rimarkis ke la ŝtonetoj kuŝantaj sur la planko
+ĉiuj ŝanĝiĝas en kuketojn, kaj venis en sian kapon la feliĉa
+ideo "Se mi manĝos unu el tiuj kuketoj, nepre okazos al mi _iuspeca_
+korpŝanĝo, kaj ĉar nun tia ŝanĝo neniel povas kreskigi min,
+sekvas ke la efiko estos malkreskiga."
+
+Ŝi do englutis unu, kaj kun granda ĝojo konstatis ke ŝi tuj
+komencas malkreski. Tuj kiam ŝi estis sufiĉe malalta por trairi
+la pordon, ŝi forkuris el la domo, kaj trovis ke granda aro da
+malgrandaj birdoj kaj bestoj staras ekstere atendante ŝin. La
+kompatinda lacerto Bil sidis en la mezo subtenate de du kobajoj kiuj
+donas al li trinkaĵon el boteleto. Ĉiuj sin ĵetis al Alicio, sed
+ŝi forkuris kiel eble plej rapide kaj baldaŭ trovis sin staranta
+sekure en densa arbaro.
+
+"Kaj nun," diris al si Alicio ĉirkaŭvaganta en la arbaro, "la unua
+celo kompreneble estas rekreski ĝis la ordinara grandeco, kaj la dua
+estas trovi la vojon en tiun belan ĝardenon."
+
+Sendube tre bona plano! sed, bedaŭrinde, ŝi ne havis eĉ la plej
+malgrandan ideon kiamaniere ŝi devos plenumi ĝin. Dum ŝi serĉe
+esploris inter la arboj, akra hundbojo altiris ŝian atenton.
+
+Jen grandega hundido de alte rigardis sur ŝin el grandaj rondaj
+okuloj, kaj malvigle etendis unu piedon por tuŝi ŝin. "Ho, vi
+dorlotaĵeto," diris ŝi en sia plej dorlota voĉo, kaj penis fajfi al
+ĝi. Sed interne ŝi tre timis pensante ke ĝi eble estas malsata, kaj
+en tiu okazo povas formanĝi ŝin, malgraŭ la dorloto.
+
+Apenaŭ konsciante kion ŝi faras, ŝi levis malgrandan branĉeton kaj
+tenis ĝin antaŭ la hundido, kiu tuj saltis en la aeron kun laŭta
+ĝojbojo, kaj ĵetinte sin sur la branĉeto ŝajnigis mortskui ĝin.
+
+Por eviti esti piedpremata, Alicio gardis sin malantaŭ granda
+kardo. Tuj kiam ŝi reaperis sur la alia flanko, branĉeto en mano,
+la hundido denove atakis, kaj pro ĝia arda deziro ĝin kapti,
+tute renversiĝis. Alicio, pensante en si ke tio estas kvazaŭ oni
+ludus kun tirĉevalo, kaj en ĉiu momento atendante ke ŝi estos
+piedpremata, ree ĉirkaŭkuris la kardon. La hundido, siaparte,
+komencis fari rapide tutan serion da sinĵetoj; ĉiufoje ĝi nur
+malmulte antaŭen kuris, sed multe kuris malantaŭen. Senĉese ĝi
+raŭke bojadis, ĝis fine ĝi sidiĝis malproksime, kaj spiregadis,
+kun lango elpendiĝanta kaj la grandaj okuloj duonfermitaj.
+
+Tiu momento ŝajnis al Alicio oportuna por forkuro. Ŝi tuj ekkuris,
+kaj ne ĉesis kuradi ĝis ŝi sentis sin laca kaj spireganta, kaj (pro
+la longa interspaco) la bojado fariĝis apenaŭ aŭdebla.
+
+"Tamen ĝi estis tre bela hundeto," diris Alicio apogante sin kontraŭ
+ranunkuleto por ripozi; kaj ventumante sin per unu el ĝiaj folioj
+ŝi daŭrigis: "Mi tre volus instrui al ĝi lertfaraĵojn, se nur mi
+estus... taŭgegranda. Ho, preskaŭ mi forgesis ke mi devas rekreski!
+Mi konsideru kion fari; mi kredas ke nepre estos necese ke mi trinku
+aŭ manĝu _ion_. Sed jen la ĉefa demando: kion trinki aŭ manĝi."
+
+Alicio ĉirkaŭrigardis sur ĉiujn florojn kaj herbtrunketojn, sed
+nenion ŝi vidis kiu havis la aspekton esti la taŭga manĝaĵo. Sed
+jen, apud ŝi, staris granda fungo, egale alta kun ŝi mem. Esplorinte
+ĝin, sube kaj ĉirkaŭe, ŝi decidiĝis esplori ankaŭ la supron.
+Levinte sin sur la piedpintojn, ŝi havis la okulojn ĝuste super la
+rando. Sidantan sur la supro, kun la brakoj falditaj, ŝi ekvidis
+grandan bluhaŭtan raŭpon kiu serene fumas longan turkan pipon.
+
+
+
+
+                              ĈAPITRO V
+
+                  ALICIO RICEVAS ADMONON DE LA RAŬPO
+
+
+Tre longan tempon Alicio kaj la Raŭpo silente rigardis unu la alian;
+fine la Raŭpo elprenis la pipon el la buŝo kaj alparolis ŝin per
+malvigla dormema voĉo:
+
+"Kiu _vi_ estas?" ĝi diris.
+
+Jen ne tre kuraĝiga komenco! Alicio respondis malsinfide:
+
+"Apenaŭ mi scias, Sinjoro, en la nuna momento. Mi bone scias kiu
+mi est_is_, kiam mi leviĝis hodiaŭ matene, sed mi kredas ke mi
+ŝanĝiĝis multfoje dum la tago."
+
+"Kion vi volas kredigi per tio?" diris tre severe la Raŭpo. "Klarigu
+vin."
+
+"Bedaŭrinde, Sinjoro, mi ne povas klarigi _min_" diris Alicio, "ĉar
+mi ja ne estas mi mem."
+
+—"Ne komprenas," diris la Raŭpo.
+
+"Tamen mi ne povas igi ĝin pli klara," Alicio tre ĝentile respondis,
+"ĉar mi mem ne komprenas. Kaj, ke la korpalteco ofte malsamiĝas dum
+la daŭro de unu tago estas tre konfuzige."
+
+—"_Ne_ estas," diris la Raŭpo.
+
+"Nu, eble vi ne ankoraŭ spertis ĝin," diris Alicio, "sed kiam vi
+devas ŝanĝiĝi en krizalidon—tio ja nepre okazos ian tagon—kaj
+poste en papilion, vi sentos vin _iom_ konfuzata, ĉu ne?"
+
+"Tute _ne_," diris la Raŭpo.
+
+"Nu, kredeble viaj sentoj ne similas la miajn," diris Alicio, "tamen
+tio estus certe tre konfuziga por _mi_!"
+
+"Vi!" diris la Raŭpo malestime, "kiu _vi_ estas?"
+
+Tio ja rekondukis ilin al la komenciĝo. Alicio, sentante sin ĝenata
+per la tre mallongaj diroj de la Raŭpo, tenadis sin iom fiere, kaj
+diris tre serioze, "Laŭ mia opinio, vi devas unue diri al mi, kiu
+_vi_ estas."
+
+"Kial?" diris la Raŭpo.
+
+Jen alia konfuziga demando! Ĉar ŝi ne povis elpensi ian kialon, kaj
+ĉar la Raŭpo ŝajnis esti malagrablulo, Alicio ekforiris.
+
+La Raŭpo laŭte kriis post ŝi. "Revenu! mi havas por vi gravan
+konsilon."
+
+Tio sonis al ŝi bonpromesa: ŝi do revenis.
+
+"_Ne koleriĝu_," diris la Raŭpo, kaj tuj silentis.
+
+"Ĉu nenion plu?" diris Alicio, subpremante kiel eble plej bone sian
+koleron.
+
+"Jes," diris la Raŭpo.
+
+Ĉar ŝi havis nenion alian por fari kaj ĉar la Raŭpo _eble_ diros
+ion atentindan, ŝi decidis resti. Dum kelkaj minutoj ĝi silente
+fumadis, sed en la fino malfaldis la brakojn, elprenis la pipon el la
+buŝo, kaj diris:—
+
+"Vi do kredas ke vi estas ŝanĝita?"
+
+"Mi timas ke jes, Sinjoro," diris Alicio. "Mi hodiaŭ ne povas memori
+la aferojn kiel kutime, kaj mi ne restas samalta dum eĉ dek minutoj."
+
+—"Ne povas memori _kiajn_ aferojn?" diris la Raŭpo.
+
+"Nu, ekzemple, mi penis diri '_Rigardu! Jen abel' klopoda_' sed ĉio
+elvenis malsame," Alicio respondis per tre melankolia voĉo.
+
+"Deklamu 'Patro Vilhelmo'" diris la Raŭpo.
+
+Alicio kunfaldis la manojn kaj komencis:—
+
+            Patro Vilĉ'! Patro Vilĉ'! (alparolas la filo)
+              Blankhara vi kaj maljunulo,
+            Staras _vi_ sur la kap' kiel korpbalancilo?
+              Ĉu ĝi taŭgas por okdekjarulo?
+
+            "Dum junec'," Patro Vilĉo respondis al filo,
+              Mi ja timis difekton al cerbo.
+            Da cerbo nun havas mi malpli ol grilo,
+              Do tre ofte kapstaras sur herbo.
+
+            Maljunulo vi—tion denove mi diras,
+              Ankaŭ grasa ĝis plena sfereco,
+            Tamen elrenversite la ĉambron eniras!
+              Ho! de kie al vi l' elasteco?
+
+            Mi ja igis la korpon tre bone fleksebla,
+              (Li respondis tre vigle al filo)
+            Per jena ŝmiraĵo—por _vi_ aĉetebla
+              Pobotele per unu spesmilo.
+
+            Maljunul'! (la demandon la filo nun ŝanĝis)
+              Ja sendenta al vi la makzelo,
+            Sed anseron kun ostoj, eĉ bek' vi formanĝis!
+              Jen vere mirinda muelo!
+
+            Dum juneco min logis la leĝoscienco
+              Je l' edzino mi havis procesojn:
+            Eĉ sur feron mi nun (dank' al tiu parenco)
+              Povus fari la makzelimpresojn!
+
+            Tre maljuna vi estas! pro tiu okazo
+              Senpoviĝas, ĉu ne, la okulo?
+            Tamen jen balanciĝas angil' sur la nazo!
+              Ho, klarigu, mirinda lertulo!
+
+            Tri klarigojn vi havis (kolera l' ekkrio)
+              Vi forkuru, vi—fosu tomatojn!
+            Mi ne plu da instruo... sufiĉas ja tio!
+              Forpermeson ricevu aŭ—batojn.
+
+—"Ne prave!" diris la Raŭpo.
+
+"Mi timas ke ne _tute_" diris Alicio hontante; "kelkaj el la vortoj
+ŝanĝiĝis."
+
+"Malprave, de komenco ĝis fino," diris decide la Raŭpo. Sekvis
+kelkminuta silento.
+
+Unue parolis la Raŭpo. "Kiun grandecon vi deziras havi?" ĝi diris.
+
+"Ho, pri grandeco, mi ne estas tre postulema," rapide Alicio
+respondis, "sed vi scias ke oni ne ŝatas tiel ofte ŝanĝiĝi."
+
+—"Ne scias," diris la Raŭpo.
+
+Alicio nenion respondis. Neniam en la vivo oni tiom kontraŭdiris al
+ŝi, kaj ŝi konsciis ke rapide ŝi perdas la paciencon. "Do vi estas
+jam nun kontenta?" diris la Raŭpo.
+
+"Ne, sinjoro," diris Alicio; "mi ŝatus esti iomete pli granda, se al
+vi ne malplaĉas, ĉar ok centimetroj estas ja alteco tute bizara."
+
+"Tre _bona_ alteco," interrompis kolere la Raŭpo, kaj ĉe la diro
+starigis sin vertikale. (Ĝi havis precize ok centimetrojn!)
+
+—"Sed por mi ja ne kutima," plendis la kompatinda etulino.
+
+Kaj ŝi pensis en si: "Se nur la bestoj kaj birdoj ne estus tiel
+ofendiĝemaj!"
+
+"Vi alkutimiĝos post kelka tempo," diris la Raŭpo, kaj enbuŝiginte
+la pipon, ĝi denove ekfumis.
+
+Ĉi tiun fojon Alicio pacience atendis ĝis ĝi reparolos memvole.
+Post unu, du minutoj la Raŭpo demetis la pipon kaj skuis sin. Tiam,
+derampinte de la fungo, ĝi rampis for en la herbon, kaj, rampante,
+ĵetis post si la rimarkon:
+
+"Unu flanko igos vin kreski, la alia malkreskigos."
+
+Ĉi tion kaj nenion plu! "Unu flanko de _kio_? Alia flanko de _kio_?"
+pensis en si Alicio.
+
+La Raŭpo tuj respondis al ŝia _penso_, dirante "De la fungo," kaj
+post unu momento malaperis.
+
+Alicio restis senmova kaj zorge rigardis la fungon, penante eltrovi
+kie estas ĝiaj du "flankoj," kaj ĉar ĝi estis plenronda, ŝi trovis
+tiun problemon tre malfacila. Fine, ŝi streĉis la brakojn ĉirkaŭ
+la fungon, kaj per ĉiu mano forrompis unu peceton.
+
+"Kaj nun kiu estas 'unu' kaj kiu 'alia'?" diris ŝi mordetante la
+dekstran peceton por provi la efikon.
+
+En sama momento ŝi sentis fortan frapon sub la mentono. (Ĝi frapis
+la piedojn!)
+
+Tiu subita ŝanĝo tre timigis ŝin. Sed kredante ke ŝi nepre ne
+devas perdi tempon, ŝi tuj klopodis por manĝi iom de la maldekstra
+peceto. La mentono kaj la piedoj tiel forte kunpremiĝis, ke apenaŭ
+ŝi povis malfermi la buŝon, sed fine prosperis al ŝi enigi kelkajn
+erojn de la maldekstra peceto.
+
+
+       *       *       *       *       *
+
+
+"Bone! Jam mia kapo liberiĝis," diris Alicio, ĝojigite. Sed la ĝojo
+tuj ŝanĝiĝis en timon, kiam ŝi rimarkis ke la ŝultroj malaperis.
+Derigardante, ŝi povis vidi nur grandegan longon da kolo, kiu ŝajne
+kreskas el ia maro de verdaj folioj tre malproksime de ŝiaj okuloj.
+
+"Kio en la tuta mondo estas jena verdaĵo?" diris Alicio, "kaj kien
+malaperis la ŝultroj? Kaj vi, ho, kompatindaj manoj, pro kio mi
+ne povas vidi _vin_?" Ŝi dume ĉirkaŭmovis ilin sed sekvis nenia
+rezulto krom ke la malproksima foliaro iom ondiĝis.
+
+Ĉar tute ne sukcesis la klopodoj levi la manojn ĝis la kapo, ŝi
+penis mallevi al ili la kapon, kaj tre ĝojis eltrovante ke ŝia kolo
+estas en ĉiu direkto tre fleksebla, same kiel serpento. Jam kurbinte
+ĝin en gracian zigzagon ŝi celis enigi ĝin inter la foliaron, kaj
+eltrovis ke tiu malproksima verda maro estas nur suproj de la arboj
+sub kiuj ŝi ĉirkaŭvagis kaj parolis kun la Raŭpo.
+
+Sed en tiu momento ŝi aŭdis akran siblokrion, kaj rapide retiris la
+kapon, ĉar jen granda Kolombo flugas kontraŭ ŝia vizaĝo kaj forte
+frapas ŝin per la flugiloj.
+
+"Vi _serpento_!" kriegis la Kolombo.
+
+"Mi _ne_ estas serpento," indignis Alicio, "vi ne ataku min!"
+
+"Serpento, mi ĝin rediras," ripetis la Kolombo, sed malpli ekscitite,
+kaj kun ĝemo aldonis la informon: "Ĉiujn rimedojn mi provis, sed
+kontraŭ ili, nenio taŭgas."—
+
+"Mi ne havas eĉ la plej malgrandan ideon pri kio vi parolas," diris
+Alicio.
+
+—"Mi provis la arbradikojn, la deklivojn, kaj kreskaĵajn barilojn,"
+daŭrigis la Kolombo, tute ne atentante ŝin, "sed eviti la
+serpentojn, neeble."
+
+Alicio pli kaj pli konfuziĝis, sed ŝi decidis ke ne utilos diri ion
+ĝis la Kolombo finos.
+
+"Sufiĉe ĝenis min la tasko elkovi la ovojn," diris la Kolombo, "sed
+ankaŭ mi devis nokte kaj tage gardi kontraŭ la serpentoj. Mi ja dum
+la lastaj tri semajnoj ne povis dormi unu momenton."
+
+"Mi tre bedaŭras ke oni ĉagrenis vin," diris Alicio, ekkomprenante
+la situacion.
+
+"Kaj ĵus kiam mi elektis la plej altan arbon en la tuta arbaro,"
+daŭrigis la Kolombo per voĉo absolute kriega, "por ke mi fine
+liberiĝu de ili, ili venas tordegante sin el la ĉielo mem. Fju!
+Serpento!"
+
+"Tamen mi _ne_ estas serpento, ree mi ĝin diras," protestis Alicio.
+"Mi estas... estas...."
+
+"Nu, _kio_ vi estas?" diris la Kolombo. "Vi ja evidente penas trovi
+taŭgan malveraĵon."
+
+"Mi estas... knabineto," iom dube diris Alicio, rememorante kiom da
+ŝanĝoj ŝi en tiu tago jam spertis.
+
+"Vere tre kredinda aserto!" la Kolombo respondis tre sarkasme, "mi dum
+la pasinta vivo vidis multe da knabinetoj sed eĉ ne unu kiu havis
+tian kolon kian vi. Ne, ne! Serpento vi estas, kaj ne utilas ĝin nei.
+Kredeble vi diros al mi ke neniam vi gustumis ovon?"
+
+"Ovojn mi certe gustumis," diris Alicio, (ŝi estis ja tre verdira
+infano) "sed la knabinetoj egale kun la serpentoj ofte manĝas ovojn."
+
+"Tion mi ne kredas," diris la Kolombo, "sed, se tiel estas, ĉiu
+knabineto sekve estas iuspeca serpento. Jen ĉio!"
+
+Tio ĉi estis por Alicio tute nova ideo; do ŝi unu, du momentojn
+staris silente, kaj la Kolombo profitis la okazon por aldiri:
+
+"Mi tre bone scias ke vi nuntempe serĉas ovojn, do al mi ne grave
+estas ĉu knabineto vi estas aŭ serpento!"
+
+"Tamen al _mi_ estas tre grave," respondis Alicio rapide. "Fakte, mi
+_ne_ serĉas ovojn; kaj se mi serĉus, mi ne volus la viajn, ĉar nur
+la kuiritajn ovojn mi ŝatas."
+
+"Nu, do, vi iru for!" diris la Kolombo malafable, kaj retrankviliĝis
+sur sia nesto.
+
+Alicio kurbigis sin kiel eble plej bone inter la arboj, sed ŝia kolo
+ofte implikiĝis inter la branĉoj kaj kelkfoje ŝi devis malligi
+ĝin. Post kelka tempo memorante ke ŝi ankoraŭ havas en la manoj la
+fungopecetojn, ŝi klopodadis tre zorge, mordetante jen unu jen la
+alian, kaj pro tio proporcie kreskis kaj malkreskis, ĝis fine ŝi
+sukcesis rehavi la propran kutiman al ŝi altecon.
+
+Jam tiel longe ŝi havis diversajn neproprajn altecojn ke unue ŝi
+sentis sin stranga, rehavante la propran. Tamen post kelkaj minutoj
+ŝi alkutimiĝis ĝin, kaj komencis kunparoli kun si jene:—
+
+"Nu, jam la duonon de mia projekto mi elfaris. Kiel konfuzigaj estis
+tiuj ŝanĝiĝoj. Mi eĉ ne povis esti certa en ĉiu momento kio mi
+fariĝos en la sekvanta. Sed nun mi havas la propran altecon, kaj
+restas nur—eniĝi en tiun belan ĝardenon. Kiamaniere mi devas
+klopodi pri tio?"
+
+Dirante tion, ŝi alvenis, neatendante, al ebena senarba terpeco, kun
+(en la mezo) unu malgranda dometo, kies alteco estis iom pli ol unu
+metro.
+
+"Kiuj ajn loĝas tie," pensis Alicio, "tute ne konvenas ke mi renkontu
+ilin havante la nunan grandecon, mi ja morttimigus ilin."
+
+Do ŝi denove mordetis la dekstran fungopecon, kaj ne kuraĝis
+alproksimiĝi la dometon ĝis ŝi estis nur dudek kelke da centimetroj
+alta.
+
+
+
+
+                              ĈAPITRO VI
+
+                          PRI LA PORKINFANO
+
+
+Kelkan tempon ŝi staris senmove, fikse rigardante la dometon kaj
+konsiderante kion ŝi faros. Dum ŝi ankoraŭ staris dubante,
+subite el la arbaro alkuris livrevestita lakeo (nur pro la livreo
+ŝi konkludis ke li estas lakeo, el la vizaĝo ŝi estus nominta
+lin fiŝo). La noveveninto laŭte frapis sur la pordon per siaj
+manartikoj, kaj malfermis al li alia livrevestita lakeo, havanta
+rondan vizaĝon kaj grandajn ranokulojn. Alicio ankaŭ rimarkis ke
+ambaŭ lakeoj havas la harojn pudritajn kaj buklitajn ĉirkaŭ la tuta
+kapo.
+
+Ĉar ŝi tre volis scii kio okazos inter ili, ŝi ŝtelmarŝis el la
+arbaro por subaŭskulti ilin.
+
+Komencis la Fiŝ-Lakeo; liverante el sub la brako grandegan leteron
+preskaŭ egale grandan kun si mem, li diris per solena voĉo:—"Por
+la Dukino, La Kera Damo invitas ŝin por kroketludo."
+
+La Ran-Lakeo ripetis per same solena voĉo, nur iom ŝanĝante la
+vortordon:—"De la Kera Damo, kiu invitas por kroketludi la Dukinon."
+
+Tiam ambaŭ profunde klinis sin, kaj iliaj buklaroj interligiĝis. Ĉe
+tio Alicio tiel laŭte ekridis, ke ŝi devis rekaŝi sin en la arbaron
+pro la timo ke ili aŭdos ŝin. Kiam ŝi denove ŝtelrigardis al la
+dometo, la Fiŝ-Lakeo jam antaŭe malaperis, kaj la alia sidas sur la
+grundo antaŭ la pordo kaj rigardas malinteligente la ĉielon.
+
+Alicio paŝis antaŭen kaj frapis malkuraĝe sur la pordo.
+
+"Tute ne utilas frapi," diris la Lakeo, "kaj jen du kaŭzoj; unue
+ĉar mi staras ĉe la sama flanko kiel vi; kaj due, ĉar tie interne
+oni tiom bruas ke neniu povus aŭdi la frapon," (kaj certege, dum
+li parolas, okazas interne tre eksterordinara bruo—oni konstante
+plorkriegas kaj ternas, kaj je mallongaj intertempoj okazas ankaŭ
+granda krakado kvazaŭ plado aŭ kaldrono estas dispecigata).
+
+"Bonvolu do diri kiel mi povos eniĝi," diris Alicio.
+
+"Eble iom utilus ke vi frapu," la Lakeo diris, tute ne atentante ŝian
+demandon, "se la pordo starus inter ni; ekzemple, se vi estus interne,
+vi povus frapi, kaj mi ja povus eligi vin." Dum li parolis tiujn
+vortojn, li rigardis senĉese la ĉielon, kaj pro tio Alicio opiniis
+ke li estas tre malĝentila: "Sed eble li ne povas ne," ŝi pensis
+en si, "ĉar jen liaj okuloj staras preskaŭ ĉe la verto. Tamen,
+malgraŭ tio li devas respondi demandojn,"; kaj ŝi ripetis laŭte:
+
+"Kiel mi povos eniĝi?"
+
+"Mi sidados tie ĉi," la Lakeo diris, "ĝis morgaŭ—"
+
+En ĉi tiu momento la dompordo malfermiĝis, kaj oni ĵetis for
+grandan teleron celante lian kapon; ĝi nur ektuŝis al li la nazon,
+kaj dispeciĝis kontraŭ la plej apuda arbo.
+
+—"aŭ eble postmorgaŭ," la Lakeo daŭrigis per sama tono, kvazaŭ
+nenio okazis.
+
+"Kiel mi povos eniĝi?" Alicio jam la trian fojon kaj preskaŭ kolere
+demandis.
+
+"Ĉu _iam_ vi eniĝos?" diris la Lakeo. "Tio ja estas la unua
+demando."
+
+Sendube! Tamen Alicio ne ŝatis ke oni tion diru. Ŝi kolere diris al
+si:—
+
+"La ĉitieaj kreitaĵoj ja argumentas netolereble, frenezige."
+
+Al la Lakeo ŝia silenta indigno prezentis bonan okazon por ripeti
+kun variaĵoj la antaŭan diron:—"Mi sidos tie ĉi," li diris,
+"interrompe aŭ seninterrompe dum multaj tagoj."
+
+"Sed kion _mi_ devas fari?" diris Alicio.
+
+"Ĉion, kion ajn vi volas!" diris la Lakeo, kaj komencis fajfi. Alicio
+perdis la paciencon.
+
+                   [Ilustraĵo: LA DUKINA KUIREJO.]
+
+"Ho, tute ne utilas paroli al _li_," diris ŝi, "li ja estas
+sencerbulo."
+
+Dirinte tion, ŝi malfermis mem la pordon kaj—eniris.
+
+La pordo kondukis rekte en grandan kuirejon, kiu estis laŭ ĝia tuta
+longo plena je fumo. Jen en la mezo, sur tripieda skabelo sidas la
+Dukino vartante infaneton: la kuiristino kurbiĝas super la fajro,
+kaj ĉirkaŭmovas per granda ferkulero la enhavon—kredeble ian
+supaĵon—de unu granda kaldrono.
+
+"Tiu supo certege enhavas tro da pipro," diris al si Alicio; pro
+konstantaj terneksplodoj apenaŭ ŝi povis eligi la vortojn. Eĉ
+la Dukino ternis ne malofte; la infano senĉese aŭ ternis aŭ
+plorkriegis, kaj en la kuirejo _ne_ ternadis nur la kuiristino kaj
+unu granda kato kiu sidas apud la fajrujo kaj grimacas kun la buŝo
+etendita de unu orelo ĝis la alia.
+
+"Bonvolu, mi petas, klarigi al mi," Alicio komencis timeme (ĉar ŝi
+iom dubis ĉu estas laŭ bonmoroj ke ŝi parolu unue), "pro kio via
+kato grimacas tiamaniere?"
+
+"Ĝi estas _Cheshire_[5] kato, kaj jen kial!" diris la Dukino. "Vi
+Porko!"
+
+Ŝi parolis la lastajn vortojn kun tia subita forto ke Alicio
+eksaltis; sed ŝi tuj komprenis ke la Dukino alparolas ne ŝin sed la
+infanon: do ŝi refariĝis kuraĝa kaj daŭrigis:—"Gis nun mi ne
+sciis ke la _Ĉeŝŝa_ katoj ĉiam grimacas; mi eĉ ne sciis ke ili
+havas tian kapablon."
+
+"Ĉiuj havas la kapablon," diris la Dukino kaj la plimulto, "praktikas
+ĝin."
+
+"Mi mem ne konas eĉ unu praktikantan," diris Alicio, eksentante kun
+ĝojo ke jam fine komencas por ŝi vere interesa konversacio.
+
+"En tiu okazo, oni povas certiĝi ke vi tre malmulte konas," akre
+respondis la Dukino.
+
+Ĉi tiun diron Alicio tute ne ŝatis, kaj tuj eksentis fortan deziron
+proponi alian temon. Dum ŝi penis trovi ion taŭgan, la kuiristino
+levis la kaldronon for de la fajro kaj komencis vigle ataki la Dukinon
+kaj la infanon; komencante per la fajriloj, ŝi ĵetis sur ilin ĉion
+atingeblan, ĉion ĵeteblan. Flugis tra la aero unu kaserolo, kaj
+kelkaj pladoj, kaj kvazaŭ hajlis per teleroj.
+
+Tiujn eksterordinarajn ĵetaĵojn la Dukino ne atentis, eĉ kiam ili
+frapis ŝin, kaj la infano jam antaŭe tiel forte kriegis ke oni ne
+povis sciiĝi ĉu ĝi ricevas vundojn aŭ ne.
+
+"Ho, rigardu, zorgu,—mi petegas—la infanon!" Alicio ekkriis.
+
+Ŝi saltadis agonie. "Ho, ve! oni fortranĉos la amindan
+nazeton"—ĉar en tiu momento granda kaserolo preterflugante minacis
+forporti ĝin.
+
+"Se ĉiu volus atenti nur _siajn_ aferojn," diris la Dukino per raŭka
+malagrabla voĉo, "la mondo rondirus multe pli rapide."
+
+"Kaj tio ja estus nur _mal_utilo," diris avide Alicio, profitante
+la okazon montri sian astronomian instruitecon. "Ni konsideru kiel
+terure tio efikus sur la tagdaŭro. La Tero turniĝas en la daŭro de
+dudekkvar horoj; se do ĉirkaŭ la akso[6]—"
+
+"Ŝi parolis pri akso," diris interrompante la Dukino, "do per akso
+dehaku al ŝi la kapon."
+
+Alicio ne sen timo observis la kuiristinon por sciiĝi ĉu ŝi volos
+plenumi la dukinan ordonon. Sed la kuiristino klopodadis pri la supo
+kaj ŝajne ne aŭskultis. Sekve Alicio kuraĝis daŭrigi: "La daŭro
+estas dudekkvar horoj, mi _kredas_, aŭ ĉu eble dekdu? Mi—"
+
+"Ho, pri tio vi ne enuigu _min_" diris la Dukino "ĉar neniam mi povis
+toleri la ciferaĉojn." Kaj ŝi rekomencis varti la infanon, kantante
+al ĝi strangaspecan lulkanton, kaj ĉe ĉiu linifino ŝi forte skuis
+la kompatindan etaĵon:—
+
+                    _Vi forte skuu la infanon,
+                      Ne traktu kondolence!
+                    Vidigas ĝi, ternante, planon
+                      Ĉagreni vin intence!_
+
+                                Ĥoro.
+          (en kiu partoprenis la kuiristino kaj la bebo mem)
+                           _Ŭaŭ, Ŭaŭ, Ŭaŭ!_
+
+Dum la Dukino kantis la duan verson ŝi forte kaj daŭre ĵetadis la
+infanon supren kaj rekaptis ĝin, kaj la kompatinduleto tiel forte
+kriegis ke Alicio apenaŭ povis aŭdi la vortojn:—
+
+                    _Mi devas la infanon skui
+                      Kaj bati kiam ternas;
+                    Ĉar li la pipron povas ĝui,
+                      Jam longe li ĝin lernas._
+
+                                Ĥoro.
+                           _Ŭaŭ, Ŭaŭ, Ŭaŭ!_
+
+"Jen! Se al vi plaĉas, _vi_ povas varti ĝin!" diris la Dukino al
+Alicio kvazaŭ ĵetante la infanon al ŝi. "Mi devas pretigi min por
+la kroketludo ĉe la Damo," kaj ŝi eliris rapide la ĉambron. La
+kuiristino en la ĝusta elira momento ĵetis kontraŭ ŝi grandan
+kaserolon, sed ĝi maltrafis.
+
+La infano estis strangforma kreaĵeto, kiu etendis la brakojn kaj
+krurojn en ĉiu direkto (kiel marstelo, pensis Alicio). Do apenaŭ
+al ŝi prosperis kapti ĝin. Tuj post la kapto ŝi rimarkis ke ĝi
+_puf-puf_—as kiel lokomotivo kaj alterne duobligas kaj rektigas sin.
+Sekve dum la unuaj minutoj Alicio apenaŭ povis teni ĝin. Baldaŭ
+tamen ŝi eltrovis ke la unu nura metodo taŭge varti ĝin estas tordi
+la korpon en bantformon, kaj premteni dekstran orelon kaj maldekstran
+piedon, por ke ĝi ne malligu sin.
+
+Tion farinte ŝi forportis ĝin for de la domo. "Se mi ne forportos
+ĉi tiun infanon, oni certe mortigos ĝin post nemultaj tagoj. Do, se
+mi ne forprenus ĝin, mi estus mem kulpa je la mortigo."
+
+La lastajn vortojn Alicio diris laŭte, kaj la etaĵo (ĝi jam de
+longe ĉesis terni) responde—porkblekis! "Ci ne devas grunti," diris
+Alicio; "tio ja estas tute maltaŭga rimedo por esprimi la sentojn!"
+
+Sed denove la infano gruntis. Sekve Alicio tre serioze observis la
+vizaĝon, por vidi kio estas al ĝi. Sendube ĝi havis tre porkan
+nazon, kiu pli similis al porka nazego ol al hombeba nazeto; ankaŭ la
+okuloj fariĝis tre malgrandaj, kaj entute Alicio ne ŝatis la nunan
+ŝajnon.
+
+"Eble ĝi nur plorkrietis," ŝi pensis kaj denove rigardis en la
+okulojn por vidi ĉu enestas larmoj.
+
+Larmoj ne enestis.
+
+"Se vi intencas fariĝi porketo," diris ŝi serioze, "mi tuj ĉesos
+prizorgi vin; vi atentu tion!" La porkinfano denove plorkriis aŭ
+plorblekis (neeble estas paroli precize) kaj dum kelka tempo ili iris
+silente.
+
+Alicio ĵus komencis pensi en si "Do, kion fari pri tiu ĉi kreitaĵo,
+kiam mi rehejmiĝos," kiam denove ĝi gruntis, gruntis tiel forte kaj
+tiel _porke_, ke ŝi derigardis, mirigite, eĉ timigite, en ĝian
+vizaĝon. Oni jam ne povus dubi plu: jen porkido, vera porkido. Ŝi
+tuj sentis ke estus absurde porti ĝin plu.
+
+Do ŝi mallevis la besteton, kaj vidis ĝin, tuj post la mallevo,
+fortroti trankvile en la arbaron. Kaj jen por Alicio granda
+senzorgigo, "ĉar," diris ŝi, "kiam ĝi estos plukreskinta ĝi
+fariĝos terure malbela infano, kvankam nun, se oni nomos ĝin porko,
+ĝi tre bone aspektas."
+
+Ŝi komencis pripensi aliajn infanojn de ŝi konatajn, kiuj pli bone
+taŭgus kiel porkoj kaj ĵus diras al si "se nur oni scius la metodon
+ŝanĝi ilin"—kiam subite ŝi eksaltas mirigite; jen, tutapude,
+sidas sur arbobranĉo la _Ĉeŝŝa_ kato.
+
+"Sinjoro _Ĉeŝŝa_ kato"—Ŝi komencis malkuraĝe, ĉar ŝi ne povis
+konjekti ĉu ĝi ŝatus tiun formon, aŭ preferus "Via kata moŝto."
+
+Tamen, ĉar ĝi nur grimacis pliamplekse, Alicio konkludis ke ĝis nun
+ĝi ne ofendiĝis. Ŝi do daŭrigis:—
+
+"Ĉu vi afable diros al mi, mi petas, laŭ kiu direkto mi devas iri de
+tie ĉi?"
+
+"Tio _iom_ dependas de la loko kiun vi celas," diris la Kato.
+
+"Ne tre grave al mi kien—" komencis Alicio.
+
+"Sekve, ne tre grave en kiu direkto vi iros," interrompis la Kato.
+
+"Se nur _iun_ lokon mi atingos," Alicio daŭrigis.
+
+"Ho, iun aŭ alian vi nepre atingos," respondis la Kato, "se nur
+sufiĉe longe vi marŝos."
+
+Alicio konfesis en si ke _tion_ oni ne povas nei. Do ŝi eksperimentis
+alian demandon:—"Kiaj personoj loĝas proksime de tie ĉi?"
+
+"En tiu direkto," diris la Kato, ĉirkaŭsvingante la dekstran
+antaŭpiedon, "Ĉapelisto loĝas, kaj en jena (montrante per la alia)
+loĝas Martleporo.[7] Vi vizitu kiun ajn; ambaŭ estas frenezaj."
+
+"Sed mi ne volas renkonti frenezulojn," diris Alicio.
+
+"Ho, tion vi ne povas eviti," respondis la Kato, "ĉe ni ĉiu estas
+freneza, senescepte. Mi estas freneza; ankaŭ vi!"
+
+"Kiel vi scias ke mi estas freneza?" Alicio demandis.
+
+"Nepre," diris la Kato, "ĉar alie vi ne venus tien ĉi."
+
+Ŝajnis al Alicio ke tio tute ne estas pruvo; tamen, preterlasante
+sin, ŝi demandis "kaj kiel vi scias ke vi estas mem freneza?"
+
+"Por komenci," la Kato respondis, "vi konsentas ke hundoj ne estas
+frenezaj?"
+
+"Jes, mi povas konsenti al tio," diris Alicio.
+
+"Nu do," la Kato daŭrigis, "la hundoj graŭlas kiam ili estas
+kolerigitaj, kaj svingas la voston, kiam ĝojigitaj. Mi, kontraste,
+graŭlas ĝojigite kaj kolerante svingas la voston. Ĉu do mi ne estas
+freneza?"
+
+"Al tio mi ne konsentas," Alicio tuj respondis, "ĉar ne per graŭlo
+la katoj esprimas plezuron; laŭ mi, ilia maniero esprimi plezuron
+estas tre dolĉa _murmuro_."
+
+"Vi ĝin nomu laŭ via prefero," diris la Kato. "Ĉu hodiaŭ vi
+kroketludos ĉe la Damo?"
+
+"Tion mi tre ŝatus," Alicio respondis avide, "sed ĝis nun mi ne
+ricevis inviton."
+
+"Vi tie vidos min," diris la Kato kaj—malaperis!
+
+Tio ne multe surprizis Alicion; ŝi ja jam alkutimiĝis al strangaj
+okazoj. Dum ŝi rigardas la lokon, kie antaŭe sidis la Kato, ĝi
+subite reaperis. "Pardonu," ĝi diris, "kio okazis je la bebo?
+Preskaŭ mi forgesis demandi!"
+
+"Fariĝis porketo," Alicio respondis tre trankvile, kvazaŭ la Kato
+revenis laŭ la ordinara venmaniero.
+
+"Mi kredis ke tio okazos," diris la Kato kaj denove malaperis.
+
+Iom da tempo Alicio staris atende, kredante ke ŝi eble revidos ĝin.
+Poste ŝi komencis iri en la direkto de la loko kie, laŭ la Kato,
+loĝas la Martleporo. "Ĉapelistojn," ŝi diris al si, "mi jam konas;
+do la Martleporo estos por mi multe pli interesa: kaj ĉar ni jam
+havas Majon, ĝi eble ne estos furioza; aŭ almenaŭ malpli furioza ol
+en Marto."
+
+Dirante tion, ŝi suprenrigardis. Jen denove la Kato sidis sur
+arbobranĉo.
+
+"Ĉu vi diris porkon, aŭ forkon?" diris la Kato.
+
+"Porkon," respondis Alicio, "kaj mi multe preferus, se ĉe sekvantaj
+alvenoj vi bonvolus aperi kaj malaperi malpli subite: tiu subiteco via
+estas por mi vere kapturniga."
+
+"Laŭ via plaĉo," diris la Kato, kaj tuj ekmalaperis tutmalrapide,
+komencante per la vostpinto kaj finante per la grimaco, kiu restis
+kelkajn momentojn post kiam la cetera korpo malaperis.
+
+"Nu," pensis Alicio, "tre ofte mi vidis katon sen grimaco; sed
+_grimaco sen kato_! jen la plej kurioza objekto kiun mi iam vidis en
+la tuta vivo."
+
+Irinte antaŭen kelkajn paŝojn plu, ŝi ekvidis la domon de la
+Martleporo. Ŝi kredis ke tio ĉi certe estas _lia_ domo, ĉar la
+du kamentuboj havis la suprojn en formo de longaj oreloj, kaj la
+tegmento estis kovrita per felo. La domo estis multe pli granda ol
+la dukina; sekve ŝi ne kuraĝis alproksimiĝi ĝis ŝi mordetis iom
+de la maldekstra fungopeco, kaj altigis sin ĝis proksimume sepdek
+centimetroj. Havante tiun altecon ŝi marŝis rekte al la domo, sed
+ŝi ankoraŭ iom timis dirante al si:—"Malgraŭ ĉio ĝi povas esti
+furioze freneza. Preskaŭ mi volus esti irinta ĉe la Ĉapeliston."
+
+                 [Ilustraĵo: DOMO DE LA MARTLEPORO.]
+
+
+
+
+                             ĈAPITRO VII
+
+                       TETRINKADO ĈE FRENEZULOJ
+
+
+Jen sub arbo antaŭ la domo ŝi vidis tablon; ĉe la tablo sidis,
+tetrinkante, la Martleporo kaj la Ĉapelisto; ankaŭ inter ili sidis
+Gliro, kiu dormas profunde. La du aliaj apogis sur ĝi la kubutojn,
+kaj babiladis ĉirkaŭ ĝia kapo. "Tre malkomforte por la Gliro,"
+pensis Alicio, "tamen, ĉar ĝi dormas profunde, ĝi kredeble ne
+sentas la malkomforton."
+
+Kvankam la tablo estis granda, la ĵus priskribita trio amasiĝis en
+unu angulo. Ekvidinte Alicion, ili tuj kriis unuvoĉe. "Ne pli da
+sidlokoj, ne pli!"
+
+"Jen _kelkaj_" diris Alicio indignante, kaj sidigis sin en granda
+apogseĝo ĉe unu fino de la tablo.
+
+"Prenu da vino," per mokafabla voĉo alparolis ŝin la Martleporo.
+
+Alicio per vigla serĉrigardo esploris la tutan tablon, kaj vidis sur
+ĝi—krom teaĵoj—nenion.
+
+"Mi ne vidas vinon," ŝi diris.
+
+"Nek mi," diris la Martleporo.
+
+"Do vi kondutis neĝentile, proponante ĝin," kolere Alicio respondis.
+
+"Ankaŭ vi, sidante ĉe ni sen invito," akre respondis la Martleporo.
+
+"Neniu sciigis ke la tablo apartenas al _vi_" diris Alicio "oni ja
+surmetis manĝilarojn por multe pli ol tri personoj."
+
+"Vi tranĉigu la hararon," subite intermetis la Ĉapelisto. De
+l' komenco li estis rigardeginta Alicion kun evidenta scivolemo,
+kaj nun la unuan fojon alparolis ŝin.
+
+"Ne decas kritiki la personaĵojn; tio ja estas tre malĝentila."
+Alicio diris tion tre severe.
+
+La Ĉapelisto tre larĝe malfermis la okulojn, aŭdinte tion.
+Anstataŭ respondi, li subite proponis la enigmon: "Je kio la korvo
+similas skribotablon?"
+
+"Bone, oni komencas proponi enigmojn: jam nun ni amuziĝos," pensis
+Alicio, kaj ŝi diris laŭte: "Mi kredas ke mi sukcesos mem solvi
+tion."
+
+"Ĉu per 'solvi' vi intencas diri ke vi povos trovi la respondon?"
+diris la Martleporo.
+
+"Ĝuste tion," respondis Alicio.
+
+"Tamen, vi devas ĉiam diri kion vi intencas," diris la Martleporo.
+
+"Tion mi ĉiam faras," Alicio komencis vigle, "almenaŭ... (per voĉo
+pli duba)... mi ĉiam intencas kion mi diras, kaj jen la sama afero,
+ĉu ne?"
+
+"Tute ne sama," kontraŭdiris la Ĉapelisto. "Laŭ tiu logiko, oni
+povus diri, ke samaj estas 'Mi vidas kion mi manĝas' kaj 'Mi manĝas
+kion mi vidas.'"
+
+..."Laŭ tiu logiko, oni povus diri," intermetis siavice la
+Martleporo, "ke samaj estas 'Mi ŝatas kion mi ricevas' kaj 'Mi
+ricevas kion mi ŝatas.'"
+
+La Gliro certe ne vekiĝis, li certe dormparolis; jen lia diro:
+
+"Laŭ tiu principo, oni povus diri, ke samaj estas 'Mi spiras dum mi
+dormas' kaj 'Mi dormas dum mi spiras.'"
+
+"Por _vi_, ili fakte estas samaj," diris la Ĉapelisto.
+
+Sekvis kelkminuta silento, kiun Alicio profitis por rememori al ĉiuj
+faktoj de si konataj pri korvoj kaj skribotabloj.
+
+La Ĉapelisto unue rompis la silenton. Alicio rimarkis en la lastaj
+momentoj, ke li prenas la horloĝon el sia poŝo kaj maltrankvile
+observas ĝin, ke fine li skuis ĝin kaj tenis apud la orelo. Tiam
+turnante sin al Alicio li demandis: "Kiun daton ni havas?"
+
+Post iom da pripenso Alicio respondis: la kvaran Majo.
+
+"Sekve, ĝi eraras je du tagoj! Ĉu mi ne diris al vi, ke butero ne
+taŭgos por la radaro?" Dirante tion li turnis tre indignan rigardon
+sur la Martleporon.
+
+"Nur la plej bonkvalitan mi uzis," protestis la Martleporo.
+
+"Jes, sed kune kun la butero kelkaj paneroj nepre eniĝis," la alia
+riproĉe diris, "vi ne devis enigi ĝin per la pantranĉilo."
+
+La Martleporo prenis la horloĝon, kaj malĝoje observis ĝin; poste
+li trempis ĝin en sian tason, kaj denove observis. Tamen li ne povis
+elpensi ion pli dirindan ol la antaŭa diro:—
+
+"Nur la plej bonan buteron mi uzis."
+
+Alicio scivole rigardis la poŝhorloĝon trans lia ŝultro. "Jen tre
+kurioza horloĝo," ŝi ekkriis, "ĝi ja indikas la monatdatojn, kaj la
+horojn ĝi ne indikas."
+
+"Pro kio ĝi devas?" la Ĉapelisto demandis. "Ĉu via poŝhorloĝo
+montras por vi la jarojn?"
+
+"Kompreneble ne!" Alicio tre flue respondis. "Ĉar se ĝi montrus la
+jarojn, ĝi devus indiki dum tre longa tempo la saman ciferon."
+
+"Kaj ĝuste tiun fakton vi povus konstati pri la mia," diris la
+Ĉapelisto.
+
+Alicio tute konfuziĝis. La lasta diro de l' Ĉapelisto, kvankam ne
+malbona Esperantaĵo, ŝajnis al ŝi konduki nenien. Ŝi nur diris
+ĝentile: "Mi ne komprenas."
+
+"La Gliro ree endormiĝis," diris la Ĉapelisto, kaj verŝis sur ĝian
+nazon iom da varma teo. Ĉe tio, la Gliro malpacience skuis la kapon,
+kaj diris, ne malferminte la okulojn:—
+
+"Ja, kompreneble! Ĝuste tion mi mem intencis diri."
+
+"Ĉu vi jam solvis la enigmon?" demandis la Ĉapelisto, denove
+turnante sin al Alicio.
+
+"Ne, mi fordonas la solvon," diris Alicio. "Diru al mi la solvon."
+
+"Mi ne havas pri la solvo eĉ la plej malklaran ideon," li respondis.
+
+—"Ne ekzistas solvo," diris la Martleporo.
+
+Alicio ekĝemis enue. "Mi opinias," ŝi diris, "ke vi devas pli bone
+uzi la tempon ol malŝpari ĝin proponante ne solveblajn enigmojn."
+
+"Se vi konus la Tempon tiel bone kiel mi," diris la Ĉapelisto, "vi ne
+uzus 'ĝi' priparolante '_lin_.'"
+
+"Mi ne komprenas," diris Alicio.
+
+"Verŝajne ne," diris la Ĉapelisto, balancante la kapon malestime.
+"Mi kuraĝus diri ke neniam vi eĉ parolis al Tempo?"[8]
+
+"Eble ne," Alicio respondis iom singarde, "tamen, lernante la
+muzikon, mi ĉiam devas tempbati."[9]
+
+"Ha, jen la kaŭzo," diris la Ĉapelisto. "Li ja ne ŝatas tiun
+batadon. Se vi nur volus esti pli agrabla, li preskaŭ ĉion farus
+pri la horloĝoj laŭ viaj preferoj. Ekzemple, ĉe la naŭa matene,
+kiam vi devas komenci la lecionojn, vi nur devus murmuri al li vian
+deziron, kaj jen la indikiloj tuj montrus la unuan horon kaj vi havus
+la tagmanĝon."
+
+"Tio estus agrabla, certege," diris Alicio. Tamen, profundiĝinte en
+pensojn, ŝi poste aldonis:
+
+"Sed en tiu okazo, mi ja ne estus preta por la manĝo, mi ne estus
+malsata!"
+
+"En la komenco, eble ne," diris la Ĉapelisto, "sed vi povus teni la
+horloĝon ĉe la unua, ĝis vi _fariĝus_ malsata."
+
+"Ĉu vi tiel mastrumas ĝin?" Alicio demandis.
+
+La Ĉapelisto malĝoje svingis la kapon. "Tion ne mi," li respondis,
+"ĉar li kaj mi malpacis en la pasinta Marto, ĵus antaŭ kiam _tiu_
+freneziĝis (montrante per sia tekulero al la Martleporo). Ĝi okazis
+ĉe la granda koncerto kiun organizis la Kera Damo. Mi devis kanti:
+
+               _Tvink'l,[10] Tvink'l! Vesperteto
+                 Kia via afereto?_
+
+Vi kredeble konas tiun kanton?"
+
+"Mi certe aŭdis ion similan," diris Alicio.
+
+"La daŭrigo," diris la Ĉapelisto, "estas jena."
+
+               _Tra l' aer' vi ŝovas vin
+               Majeste, kiel anasin'.
+                 Tvink'l, Tvink'l!_...
+
+En tiu momento la Gliro skuis sin kaj komencis dormkanti:
+
+"_Tvink'l, tvink'l, tvink'l._"... Ĉar laŭŝajne ĝi havis la
+intencon daŭrigi sen fino tian tvink'ladon, oni pinĉis al ĝi la
+orelojn por ĉesigi ĝin.—
+
+—"Nu, apenaŭ mi finis la unuan verson," diris la Ĉapelisto, "la
+Kera Damo eksaltis kaj laŭte kriegis: 'Li mortigas la Tempon; oni
+senkapigu lin.'"
+
+"Ho, la kruela sovaĝulino," ekkriis Alicio.
+
+"Kaj de post tiu tago ĝis nun," la Ĉapelisto malgaje daŭrigis, "la
+Tempo ĉion rifuzas al mi. Ĉiam konstante li nun donas al mi la sesan
+posttagmeze."
+
+Vere frapanta ideo venis al Alicio. "Jen la kaŭzo, ĉu ne, pro kiu mi
+vidas sur la tablo tiom da temanĝiloj?"
+
+"Precize," respondis la Ĉapelisto, ekĝemante. "Ĉiam la tehoro, kaj
+neniam ni havas intertempon eĉ por viŝi la ilojn."
+
+"Do, vi ĉirkaŭmovas vin?" demandis Alicio.
+
+"Precize," diris la Ĉapelisto, "laŭ eluzo de la manĝiloj."
+
+"Sed kio okazas," Alicio kuraĝis demandi, "kiam vi denove revenas
+antaŭ la unue uzitaj?"
+
+—"Ni ŝanĝu la paroltemon," la Martleporo interrompis, oscedante.
+"Ĉi tio enuigas min! Mi proponas ke la Fraŭlineto rakontu al ni
+fabelon."
+
+"Bedaŭrinde, mi eĉ ne unu povas memori," diris Alicio. La propono ja
+timigis ŝin.
+
+"Do, la Gliro devas," ambaŭ kriis unuvoĉe. "Vekiĝu, Gliro!" Ili
+pinĉis ĝin sur ambaŭ oreloj samtempe.
+
+La Gliro malrapide malfermis la okulojn, kaj diris per raŭka,
+malforta voĉo: "Mi ne dormis; la vortojn, kiujn vi ambaŭ diris, mi
+aŭdis ĉiujn, ĉiujn senescepte."
+
+"Vi rakontu al ni fabelon," diris la Martleporo.
+
+"Jes, bonvolu, mi petas," Alicio diris petege.
+
+"Ankaŭ ne prokrastu," aldonis la Ĉapelisto, "ĉar, se vi prokrastos,
+vi nepre re-endormiĝos antaŭ ol fini."
+
+La Gliro tuj komencis, tre rapidante:—"Estis iam tri fratinetoj,
+kiujn oni nomis Elnjo, Lanjo, kaj Tinjo. Ili loĝis ĉe la fundo de
+tre profunda puto."
+
+"Kion do ili manĝis?" diris Alicio. (La demandoj pri manĝaj kaj
+trinkaj aĵoj ĉiam havis por ŝi specialan intereson.)
+
+Post du minuta konsiderado la Gliro respondis: "Ili nutris sin per
+melaso."
+
+"Tion ja ili ne povus," Alicio protestis tre ĝentile, "ĉar ili
+fariĝus malsanaj."
+
+"Kaj fakte _estis_" diris la Gliro "tre malsanaj."
+
+Alicio penis imagi al si, kiaspeca estus la vivo, se ŝi loĝus en
+putfundo kaj nutrus sin per melaso; sed la peno estis tro konfuziga,
+sekve ŝi demandis: "Kial ili loĝis en la putfundo?"
+
+—"Prenu pli da teo," diris al ŝi la Martleporo, kun tre serioza
+mieno.
+
+"Ĝis nun mi havis neniom," respondis Alicio, ofendite, "sekve mi ne
+povas preni _pli_."
+
+"Denove vi malpravas," intermetis la Ĉapelisto. "Ĉu vi ne devis
+diri ke vi ne povus preni _malpli_? Tre facile ja estas preni pli ol
+neniom."
+
+"Neniu petis _vian_ opinion," diris Alicio indignante.
+
+"Ho, ho!" triumfe kriis la Ĉapelisto. "Kiu _nun_ rompas la regulon
+pri personaĵoj?"
+
+Al tio Alicio ne povis trovi taŭgan respondon. Sekve ŝi servis al
+si teon kaj buterpanon, kaj poste turnis sin denove al la Gliro kaj
+ripetis la demandon:
+
+"Pro kio ili loĝis en la putfundo?"
+
+Jam la duan fojon la Gliro bezonis duminutan konsideradon; fine li
+diris: "La puto estis melasa puto."
+
+"Neeble, ne ekzistas tiaĵo," Alicio komencis tre indigne. Sed la
+Ĉapelisto kaj la Martleporo ambaŭ sible admonis ŝin per Ŝ—!
+Ŝ—! kaj la Gliro mem per ofendita voĉo minacis ŝin, dirante:
+
+"Se vi ne kapablas konduti ĝentile, vi devas mem fini la fabelon."
+
+"Ho, volu daŭrigi, mi petegas," Alicio ekkriis. "Mi ne ree
+interrompos vin; eble ekzistas _unu_."
+
+"Vi kredas ke nur unu?" la Gliro indigne ekkriis. Tamen li konsentis
+daŭrigi.
+
+"Do, tiuj tri fratinetoj—ili ja lernis la desegnarton—"
+
+"Kion ili desegnis?" diris Alicio, jam forgesinte sian promeson.
+
+Ĉi tiun fojon eĉ ne unu momenton la Gliro konsideris.
+
+"Melason," li diris.
+
+—"Mi bezonas puran tason," interrompis la Ĉapelisto. "Ni ĉiuj movu
+nin maldekstren je unu sidloko."
+
+Li movis sin laŭ la diro; lin sekvis la Gliro, kaj la Martleporo
+translokigis sin en la seĝon de la Gliro. Alicio, ne tre volonte,
+prenis la antaŭan lokon de la Martleporo. El la ŝanĝoj ja
+profitis nur la Ĉapelisto, kaj ĉar la Martleporo ĵus antaŭ la
+translokiĝo renversis la laktokruĉon en sian teleron, Alicio certe
+malprofitis.—
+
+Ĉar ŝi ne volis reofendi la Gliron, ŝi komencis tre singarde:
+
+"Mi ne komprenas. De kie ili desegnis[11] la melason?"
+
+"Oni povas ĉerpi[12] akvon el akvoputo," la Ĉapelisto klarigis, "do
+egalfacile estas ĉerpi (t.e. desegni) melason el melasoputo, ĉu ne?
+vi malklera bubineto?"
+
+Alicio pro lia malĝentileco tute ne atentis la Ĉapeliston: al la
+Gliro ŝi diris:—
+
+"Sed ili ja vivis en la puto."
+
+"Vivis en la puto? Certege! Sed _vi, vi sen la puto_ ja malsukcesus
+desegni la melason el ĝi!" La Gliro, dirante tion, tre longigis la
+vokalojn, kaj iom kunligis apartajn vortojn laŭ la parolmaniero de
+kelkaj angloj kiuj eklernis la lingvon en tre malmoderna epoko.
+
+Alicio tiel konfuziĝis per tiu respondo ke, dum kelka tempo, ŝi
+lasis al la Gliro seninterrompe daŭrigi la rakonton.
+
+"Ili lernis la arton desegni," diris la Gliro, oscedante kaj frotante
+la okulojn (ĉar ĝi jam refariĝis dormema) "kaj desegnis aĵojn
+ĉiuspecajn, ĉion komenciĝantan per la litero M——"
+
+"Kial per M?" diris Alicio.
+
+"Kial _ne_ per M?" diris la Martleporo. Alicio silentiĝis.
+
+La Gliro, jam ferminte la okulojn, ekdormetis, sed pro la fortaj
+pinĉoj de la Ĉapelisto, ĝi revekiĝis kun subita ekkrieto, kaj
+daŭrigis:
+
+—"Komencigantan per M, ekzemple Muskaptilojn, Memoron,
+Multecon—ĉu iam vi vidis desegnaĵon kiu reprezentas Multecon?"
+
+Alicio, tre konfuzite, respondis: "Nu, se efektive mi devas respondi
+tiun demandon, mi ne _pensas_—"
+
+"Se vi ne _pensas_, vi ne rajtas paroli," diris la Ĉapelisto.
+
+Tiun lastan malĝentilaĵon Alicio ne povis toleri. Ŝi levis sin kaj
+kun tre ofendita mieno marŝis for de la tablo.
+
+La Gliro tuj endormiĝis; kaj nek la Ĉapelisto nek la Martleporo
+atentis ŝian foriron, kvankam kelkfoje ŝi rigardis malantaŭen en
+la espero ke ili revokos ŝin. La lastan fojon kiam ŝi vidis ilin,
+ambaŭ staris super la Gliro, klopodante per ĉiuj fortoj prempaki
+ĝin en la tekruĉon!
+
+"Neniam mi volos reviziti _ilin_" diris Alicio.
+
+         [Ilustraĵo: LA GLIRO ESTAS ENIGATA EN LA TEKRUĈON.]
+
+"Neniam en la tuta vivo mi ĉeestis pli tedan pli enuigan tetrinkadon
+ol ĉe ili."
+
+Dume ŝi iris tra la arbaro, zorge elektante la piedlokojn. Post iom
+da marŝado, ŝi rimarkis unu arbon kiu havas pordeton en la trunko
+kondukantan internen. "Jen tre kurioza arbo," pensis ŝi. "Tamen
+hodiaŭ ĉio estas kurioza. Kredeble estus bona afero eniri"—kaj
+eniris.
+
+Denove ŝi trovis sin en la longa halo apud la vitra tableto. "Nu, ĉi
+tiun fojon mi klopodos pli lerte," ŝi diris al si.
+
+Preninte la oran ŝlosileton, ŝi unue malŝlosis la pordon kiu
+kondukas en la ĝardenon. Tiam, ŝi mordetis la fungopecon (kiun
+ŝi ankoraŭ havis en la poŝo) ĝis ŝi estis tridek centimetrojn
+alta, kaj _fine_—post tiom da malsukcesoj—trovis sin en la belega
+ĝardeno inter la helkoloraj florbedoj kaj ĉarmaj fontanoj.
+
+
+
+
+                             ĈAPITRO VIII
+
+                      KROKETLUDO ĈE LA KERA DAMO
+
+
+Ne malproksime de l' enirejo staris granda rozarbo; kreskis sur ĝi
+blankaj rozoj, sed jen tri ĝardenistoj okupis sin pentrante ilin
+ruĝaj. Ĉar tio ŝajnis al Alicio tre stranga ago, ŝi alproksimigis
+sin por observi ilin. Ĵus alvenante, ŝi aŭdis unu el ili diranta:
+"Kvin, vi gardu vin, vi jam ne ŝprucu sur min la kolorilon."
+
+"Mi ne povis ne," diris Kvin malafable. "Sep ŝancelis al mi la
+kubuton." Sep rigardis supren kaj diris: "Jen ĝuste vi, Kvin; ĉiam
+vi kulpigas la kunulojn."
+
+"_Vi_, Sep, _vi_ ne kuraĝu paroli!" rediris Kvin. "Nur hieraŭ mi
+aŭdis la Damon diranta ke vi meritas esti senkapigita."
+
+"Pro kia kulpo do?" demandis la unue parolinta.
+
+"Tio ne estas _via_ afero, Du," diris Sep.
+
+"Ĝi nepre estas lia," asertis Kvin, "kaj mi volonte sciigas al li:
+la kulpo estas ke Sep alportis al la kuiristo tuliptuberojn anstataŭ
+bulboj."
+
+Sep pasie deĵetis sian broson, kaj komencis. "Nu, el ĉiuj maljustaj
+aferoj—"
+
+Sed en tiu momento li okaze ekvidis Alicion, kiu staras apude
+observante ilin. Li rapide subigis lian koleron, la aliaj
+ĉirkaŭrigardis serĉante la kaŭzon de lia ekhalto, kaj ĉiuj humile
+salutis ŝin.
+
+"Ĉu vi afable volus diri al mi," Alicio demandis iom timeme, "kial vi
+kolorigas tiujn rozojn?"
+
+Kvin kaj Sep diris nenion, sed direktis la rigardojn sur Du, kiu per
+tre mallaŭta voĉo komencis: "Nu, Fraŭlino, la fakto estas ke jena
+arbo devis esti ruĝroza, kaj ni erare plantis blankrozan. Se la Damo
+eltrovus tion, ŝi ja ekzekutigus nin ĉiujn. Sekve, ni nun klopodas
+laŭeble por ke, antaŭ ol ŝi alvenos,—"
+
+En tiu momento Kvin, kiu kun zorgplena vizaĝo konstante rigardadis
+trans la ĝardenon, ekkriis; "Jen la Damo, jen la Damo!"
+
+La tri ĝardenistoj tuj ĵetis sin teren kaj kuŝis sur la ventroj.
+Alicio ekaŭdis la sonojn de multaj piedpaŝoj, kaj alrigardis. Ŝi
+sentis fortan ekscitecon kaj fortan deziron vidi la Damon.
+
+Unue marŝis dek soldatoj, kiuj portas trefojn; tiuj soldatoj havis
+platajn rektangulajn korpformojn—same kiel la tri ĝardenistoj—kun
+la manoj kaj piedoj apud la kvar anguloj. Sekvis dek korteganoj; tiuj
+ĉi estis ornamitaj super la tuta korpo per karooj, kaj marŝis duope,
+kiel ankaŭ la soldatoj. Post la korteganoj sekvis duope la reĝaj
+infanoj; ili marŝis mano en mano kaj ĝoje saltadis. Post ili sekvis
+la gastoj; la plimulto el ili estis gereĝoj, kaj inter ili Alicio
+rimarkis la Blankan Kuniklon. Ĝi parolas rapide kaj eksciteme, kaj
+ridetas ĉe ĉiu diro de la aliaj. Post la gastoj solene marŝis la
+Kera Lakeo, kiu portas sur velura kuseno la reĝan kronon; kaj en la
+fino de ĉi tiu majesta procesio jen la REĜO kaj DAMO KERAJ!
+
+Alicio iom dubis ĉu ŝi ni devas—same kiel la tri
+ĝardenistoj—kuŝi horizontale sur la ventro. Sed ŝi ne povis
+memori ke ekzistas tia regulo pri procesioj "kaj krome," pensis ŝi,
+"por kio utilus la procesioj, se la ĉeestantoj devus kuŝi sur la
+ventro, kaj sekve ne povus vidi ilin?"
+
+Do, ŝi staris serene, kaj atendis.
+
+Kiam la eminentuloj alvenis apud Alicion, ĉiuj haltis kaj rigardis
+ŝin.
+
+La Damo, turnante sin al la Lakeo, demandis severe: "Kiu _ŝi_ estas?"
+
+La Lakeo nur klinis sin riverence kaj ridetis.
+
+"Vi idioto!" diris la Damo, kaj skuis malpacience la kapon. Poste ŝi
+turnis sin rekte al Alicio, dirante: "Kiel oni nomas vin, infano?"
+
+                     [Ilustraĵo: LA VITRA TABLO.]
+
+"Mia nomo estas Alicio, se plaĉas al via Dama Moŝtino," ŝi
+respondis tre ĝentile, sed ŝi aldiris al si aparte: "Ili ja estas
+nur aro da ludkartoj; mi certe ne devas timi ludkartojn."
+
+"Kaj kiuj jenaj estas?" diris la Damo, montrante al la tri
+ĝardenistoj, kiuj kuŝas ĉirkaŭ la rozarbo. Ĉar ili kuŝis sur la
+ventro, kaj la desegno sur la dorsoj estis identa por la tuta aro,
+pro tio la Damo ne povis diveni ĉu ili estas ĝardenistoj, soldatoj,
+korteganoj, aŭ eĉ tri el siaj propraj infanoj.
+
+"Kiel ajn _mi_ povas sciigi tion?" diris Alicio, "ĝi tute ne estas
+mia afero."
+
+(Sed malgraŭ la ekstera kuraĝo, ŝi interne iom tremis.)
+
+La vizaĝo de l' Damo purpuriĝis pro kolero; fikse rigardeginte Alicion
+dum unu momento, same kiel rigardegas la sovaĝaj bestoj, ŝi kriegis:
+"Oni senkapigu ŝin, oni sen—"
+
+"_Oni sen_-sencaĵon parolas!" diris Alicio tre laŭte kaj tre firme;
+kaj la Damo silentiĝis!
+
+La Reĝo metis la manon sur ŝian brakon, dirante per tre malkuraĝa
+voĉo. "Konsideru, karulino, ke ŝi estas nur infanino."
+
+La Damo malestime turnis sin for de li, kaj ordonis al la Lakeo, ke li
+turnu ilin supren. La Lakeo zorge aliflankigis ilin laŭ la ordono,
+levante ilin per la piedo.
+
+"Levu vin," diris la Damo per laŭta, sibla voĉo. La tri ĝardenistoj
+tuj levis sin sur la piedojn, kaj komencis klinsaluti la Reĝon, la
+Damon, la reĝajn infanojn, k.c.
+
+"Ĉesu tion," kriegis la Damo, "vi donas al mi la kapturniĝon!"
+Ekvidante la rozarbon, ŝi daŭrigis: "Kion ajn vi tie ĉi faris?"
+
+"Se plaĉas al via Dama Moŝtino," diris Du per tre humila voĉo,
+starigante sin sur unu genuo: "Ni estas penintaj—"
+
+"Mi komprenas," diris la Damo, kiu intertempe estis apude rigardinta
+la pentritajn rozojn: "Oni senkapigu ilin!"
+
+La procesio marŝis for, escepte nur tri soldatojn, kiuj restis por
+ekzekuti la malfeliĉajn ĝardenistojn. Tiuj ĉi kuris al Alicio por
+ke ŝi protektu ilin.
+
+"Mi ne permesos al ili ekzekuti vin," diris Alicio, kaj ŝi tuj
+kaŝmetis ilin en grandan florpoton, kiu staris apude. La tri
+soldatoj, ĉirkaŭvagadinte kelkajn minutojn por serĉi ilin, fine
+marŝis for por rekuniĝi kun la ceteraj.
+
+"Ĉu iliaj kapoj estas jam for de la ŝultroj?" ekkriis la Damo,
+revidante ilin.
+
+"Iliaj kapoj jam estas _for_" laŭte kriis la soldatoj "se plaĉas al
+via Dama Moŝtino."
+
+"Bone," diris la Damo.—"Ĉu vi povas kroketludi?"
+
+La soldatoj ne respondis, sed rigardis Alicion, ĉar por ŝi la Damo
+evidente intencis la lastan demandon.
+
+"Jes," kriis Alicio avide.
+
+"Venu do," respondis la Damo.
+
+Alicio aligis sin al la procesio inter la gastoj, kaj treege ŝi volis
+scii kio estas okazonta.
+
+"Estas... estas tre bela tago," diris ĉe ŝia flanko iu malforta
+voĉo.
+
+Turnante la kapon, ŝi vidis ke la Blanka Kuniklo marŝas duope kun
+ŝi kaj time rigardas en ŝian vizaĝon.
+
+"Tre bela," konsentis Alicio. "Kie la Dukino?"
+
+"Ŝ! Ŝ!" la Kuniklo tuj flustris en ŝian orelon, kaj ĵetis
+zorgoplenan rigardon trans sia ŝultro. Tiam, levinte sin sur la
+piedpintoj, li metis la buŝon al ŝia orelo kaj diris en ĝin: "Oni
+mortkondamnis ŝin."
+
+"Pro kio?" Alicio demandis.
+
+"Ĉu vi diris 'Domaĝe'?" diris la Kuniklo.
+
+"Ne, certe ne!" respondis Alicio. "Laŭ mi tute ne estas domaĝe. Mi
+diris 'Pro kio.'"
+
+"Ŝi ja survangis la Damon—" la Kuniklo komencis.
+
+Alicio preskaŭ sufokis sin, penante ne tro laŭte ridegi.
+
+"Ŝ—!" la Kuniklo murmuris denove "la Damo aŭdos vin. Ŝi ja
+alvenis iom malfrue, kaj la Damo diris—"
+
+"Ĉeiĝu la ludlokojn," ektondris la Damo.
+
+Oni tuj komencis ĉirkaŭkuri en ĉiu direkto, kaj pro la klopodoj
+ĉeiĝi, faligis sin reciproke. Tamen en la fino (post kelke da
+minutoj) ĉiuj trovis la proprajn lokojn, kaj la ludo komenciĝis.
+Neniam en la tuta vivo Alicio vidis tian strangan kroketludejon.
+Ĉie sur la grundo alterniĝis paralelaj ondlinioj; anstataŭ
+lignopilkoj oni uzis erinacojn; por frapi ilin, anstataŭ la ordinara
+lignomartelaĵo, oni havis vivantan fenikopteron; kaj la arkojn oni
+anstataŭis per soldatoj, kiuj devis kurbigi sin kaj staradi senmove
+sur la manoj kaj piedoj egale.
+
+Por Alicio la ĉefa malfacilo estis la malfacilo elregi la
+fenikopteron. Prosperis al ŝi komforte formeti la korpon sub
+sia brako kun la kruroj pendantaj post ŝi. Sed plej ofte kiam
+ŝi jam bone rektigis la kolon, kaj estis preta frapi per ĝia
+kapo la erinacon, ĝi persistis ĉirkaŭtordi sin kaj rigardi en
+ŝian vizaĝon kun ridinde konfuzita mieno. Ĉe ĉiu revido de tiu
+konfuzita birdvizaĝo ŝi ne povis ne ekridegi; ankaŭ, kiam ŝi
+sukcesis malsuprenigi la kapon, kaj denove volis fari la frapon, jen
+la erinaco, malvolvinte sin dum ŝi penis mastrumi la birdon, jam
+rampas for. Krom ĉio ĉi, en la direkto kien ŝi volas frapsendi la
+erinacon, plej ofte malhelpis la tre onda grundsurfaco; kaj fine la
+arkoj ofte rektigis sin kaj marŝis for por alparoli aliajn arkojn.
+Alicio baldaŭ konvinkiĝis ke la kroketludo, kiel oni ludas ĝin ĉe
+la Kera Damo, estas tre malfacila.
+
+La partoprenantoj, ne atendante la vicon, ludis ĉiuj samtempe. Oni
+ĉiam diskutadis, kies estas la diversaj erinacoj; oni malpacis,
+kaj eĉ batalis por posedi ilin. Post ne longa tempo, la Damo tute
+furioziĝis, ĉirkaŭ marŝegante kaj kriegante ĉiuminute, "Oni
+senkapigu lin, oni senkapigu ŝin!"
+
+Tio estis por Alicio tre maltrankviliga. Estas vero, ke ĝis nun ŝi
+ne havis disputon kun la Damo, sed ŝi tre bone sciis ke tio facile
+povas okazi, "kaj se mi ofendos ŝin," pensis ŝi, "kio okazos al mi?
+Tie ĉi oni tiel ofte ordonas senkapigojn, ke mirinde estas ke eĉ unu
+individuo restas vivanta."
+
+"Ŝi ĉirkaŭrigardis, serĉante rimedojn por forkuri," kaj dubante
+ĉu ŝi povos retiri sin nerimarkite. Dum tiu ĉirkaŭrigardado ŝi
+rimarkis strangan aperon en la aero. Unue ŝi ne povis imagi kio ĝi
+estas; sed observinte ĝin kelke da momentoj, ŝi konstatis ke ĝi
+estas grimaco. "Do, la _Ĉeŝŝa_ Kato venas," ŝi konkludis, "nun mi
+havos kunparolanton."
+
+"Ĉu vi bone progresas en la ludo?" diris la Kato, kiam aperis nur
+la buŝo kaj la cetera parolilaro. Tuj kiam aperis la okuloj, Alicio
+amike salutis. "Sed ne utilas alparoli ĝin," pensis ŝi, "ĝis la
+oreloj aperos, aŭ almenaŭ unu el ili."
+
+Post unu minuto jam aperis la tuta kapo. Alicio demetis sian
+fenikopteron, kaj komencis doni plenan raporton pri la ludado,
+ĝojante, ke nun ŝi havas atentan aŭskultanton. La Kato ŝajne
+opiniis, ke jam estas videbla sufiĉe da lia korpo, kaj li aperigis
+nenion plu.
+
+"Laŭ mi, oni ludas tre maljuste," diris Alicio per iom plenda voĉo,
+"kaj ĉiuj tiel laŭte malpacas, ke mi ne povas aŭdi mian propran
+voĉon; oni ne havas definitivajn regulojn, aŭ se ekzistas tiaj, oni
+ne atentas ilin. Ankaŭ vi ne povas imagi kiel konfuzige estas ke
+ĉiuj ludiloj—pilkoj, arkoj, k.t.p. estas vivaj. Ekzemple, jen la
+arko kiun mi devas celi promenas ĉe la alia bordo de la ludejo; kaj
+ĵus kiam mi volis martelumi la pilkon de la Damo, ĝi forkuris de la
+mia!"
+
+"Ĉu vi trovas la Damon agrabla?" diris la Kato per mallaŭta voĉo.
+
+"Tute ne," respondis Alicio. "Ŝi ja estas tiel ekstreme—"
+
+En tiu momento ŝi rimarkis ke la Damo staras malantaŭ ŝi kaj
+aŭskultas, do ŝi daŭrigis: "—lerta kaj trafema, ke neniu alia
+havas eĉ la plej malgrandan venkŝancon."
+
+La Damo ridetis afable kaj preterpasis!
+
+"Kiun ajn vi alparolas?" diris la Reĝo, alvenante antaŭ Alicion, kaj
+rigardante el larĝe malfermitaj okuloj la Katkapon.
+
+"Unu mian amikon," Alicio ĝentile respondis. "Permesu ke mi prezentu
+al vi—la _Ĉeŝŝa_ Katon."
+
+"Mi tute ne aprobas ĝian aspekton," diris la Reĝo, "tamen se al ĝi
+plaĉos, mi permesos al ĝi kisi mian manon."
+
+"Tio _ne_ plaĉas," diris la Kato.
+
+La Reĝo metis sian reĝan korpon por protekto malantaŭ Alicion.
+
+"Vi ne insultu," diris li el tiu rifuĝejo, "kaj—ne rigardu min."
+
+"La Kato ja _rajtas_ rigardi vin,"[13] diris Alicio. "Tion mi certe
+legis en iu libro kvankam mi ne povas rememori la titolon."
+
+"Tamen ĝi devas esti formovita," diris la Reĝo fortemfaze. Kaj
+alvokinte la Damon, kiu en tiu momento preterpasas, "Mi tre volas,"
+diris li, "ke vi, karulino, formovigu tiun katon."
+
+Por forigi ĉiujn malagrablaĵojn, ĉu gravaj, ĉu trivialaj, la Damo
+ja havis ĉiam la saman rimedon. "Senkapigu ĝin," ŝi diris, eĉ ne
+turnante la kapon por rigardi.
+
+"Do, mi venigos mem la ekzekutiston," diris la Reĝo, kaj tiucele li
+tuj rapidis for.
+
+En tiu momento Alicio ekaŭdis la voĉon de la Damo, kiu malproksime
+kriegas furioze. Jam tri ludantojn la Damo mortkondamnis nur pro
+neĉeesto en siaj vicoj. La ludado fariĝis tiel miksita, ke Alicio
+neniel povis certiĝi kiam ŝi havas la vicon. Do, ŝi prudente
+decidiĝis reiri por eltrovi, se eble, la nunan staton de la ludo, kaj
+serĉi sian erinacon. Sian erinacon ŝi trovis batalanta kontraŭ alia
+erinaco. Jen tre oportuna momento por martelumi ilin unu per alia, sed
+unu cirkonstanco malhelpis; ŝia fenikoptero forestis en alia parto de
+la ĝardeno, kie (laŭ la informo de ŝiaj okuloj) ĝi klopodadas per
+tre mallertaj flugpenoj levi sin sur arbon.
+
+Ŝi rekaptis la fenikopteron kaj reportis al sia ludloko; sed la
+batalo jam finiĝis kaj neniu el la erinacoj restis videbla.
+
+"Tio tamen ne estas tre grava," pensis Alicio, "ĉar ankaŭ malaperis
+ĉiuj arkoj." Do, pakinte la fenikopteron sub la brako, por ke ĝi ne
+ree foriĝu, ŝi reiris al la Kato, en la espero iom pli babiladi kun
+ĝi.
+
+Ĉirkaŭ la Kato la gastoj grandamase kolektiĝis, kaj forta disputado
+okazas inter la ekzekutisto kaj la gereĝoj. Ĉiuj ĉi parolas
+samtempe; la ceteraj silente ĉirkaŭstaras, kaj ekscitite aŭskultas.
+
+Tuj kiam Alicio aperis, ĉiuj disputantoj alvokis ŝin por decidi la
+aferon.
+
+Sed ĉar ĉiuj parolis samtempe, estis por ŝi tre malfacile bone
+aŭdi la diratajn vortojn.
+
+               [Ilustraĵo: LA GEREĜOJ ARGUMENTAS KUN LA
+          EKZEKUTISTO PRI EKZEKUTO DE LA SENKORPA KATKAPO.]
+
+La ekzekutisto argumentis ke oni ne povas detranĉi kapon, se ne
+ekzistas korpo de kiu oni povas apartigi ĝin. Neniam en la tuta vivo
+li devis trakti tian aferon, kaj li jam estas tro aĝa por komenci
+tute novan metion.
+
+La Reĝo argumentis: "Oni ja povas senkapigi ĉion, kio nur havas
+kapon; oni do ne parolu sensencaĵon."
+
+Kaj jen fine la dama argumento: "Se _iel_ la afero ne estos dece
+konsentita jam nun, mi ĉiujn senescepte ekzekutigos."
+
+(Tio ĉi ja iom klarigas la kaŭzon de la jam aludita eksciteco de la
+gastoj!)
+
+Alicio ne povis elpensi ion pli dirindan ol:
+
+"Ĝi apartenas al la Dukino; mi konsilas ke vi turnu vin al ŝi."
+
+"Ŝi estas en la kondamnitejo, vi venigu ŝin," diris la Damo.
+
+La ekzekutisto tuj ekrapidis for, kiel sago el pafarko.
+
+Tuj post lia foriro la Katkapo komencis esti kvazaŭ nebula; kiam li
+revenis kun la Dukino, ĝi jam tute malaperis. Sekve la Reĝo kaj la
+ekzekutisto ĉirkaŭkuris kiel frenezuloj serĉante ĝin, kaj la aliaj
+iris returne al la ludejo.
+
+
+
+
+                              ĈAPITRO IX
+
+               LA VIV-HISTORIO DE LA FALSA KELONIO[14]
+
+
+"Vi ne povas imagi," diris la Dukino, "kiel ĝojige estas por mi
+revidi _vin_, mia kara." Dirante tion, ŝi ligis sin al Alicio
+per la brako en tre bonkamarada maniero, kaj ili ekmarŝis kune.
+
+Tre plaĉis al Alicio trovi, ke la Dukino estas nun bonhumora, kaj ŝi
+interne pensis ke antaŭe, kiam ili renkontiĝis en la kuirejo, eble
+igis ŝin malagrabla nur la pipro.
+
+"Kiam _mi_ estos Dukino," pensis ŝi, "da pipro mi havos en mia
+kuirejo ĝuste neniom. Supo povas esti tre bona sen pipro. Eble pipro
+estas ĉiam la kaŭzo kiu igas la homojn koleraj." Kaj ŝi daŭrigis
+tre fiere, kvazaŭ konsciante ke nun ŝi eldonas novan principon,
+tre gravan por la homoj:—"Nur vinagro acidigas ilin, nur kamomilo
+maldolĉigas, kaj—(lasta kaj plej grava principo)—nur sukeraĵoj
+dolĉigas la infanojn. Se nur la plenaĝuloj _tion_ scius, ili estus
+ja malpli ŝparemaj—"
+
+Ŝi jam tute forgesis la Dukinon, kaj eksaltis surprize, aŭdante
+ŝian voĉon diranta:—
+
+"Vi ion pripensas, mia kara, kaj pro tio forgesas paroli. Mi ne povas
+en la nuna momento citi la moralon de tio, sed kredeble mi rememoros
+ĝin poste."
+
+"Eble ĝi ne havas moralon," Alicio kuraĝis diri.
+
+"_Tut! Tut!_ Vi bubino," diris la Dukino, "ĉio ja havas moralon, se
+nur oni povas trovi ĝin." Dum ŝi parolis, la Dukino premis sin pli
+forte kontraŭ Alicio.
+
+Alicio ne tre ŝatis tiun ĉi troproksimiĝon; unue, ĉar la Dukino
+estas (de proksime) tre malbela; kaj due, ĉar ŝi havas ĝuste la
+taŭgan altecon por apogi sian akran mentonon sur la ŝultro de
+Alicio. Tamen, ĉar ŝi ne volis esti malagrabla, ŝi laŭeble toleris
+ĉion.
+
+"La kroketludo ŝajnas nun progresi pli bone," diris ŝi.
+
+"Mi konsentas," diris la Dukino, "kaj de tio la moralo estas: 'Ho, nur
+la amo, nur la amo igas la mondon rondiri.'"
+
+"Ĉu ne _iu_," preskaŭ sarkasme demandis Alicio, "antaŭe diris en la
+kuirejo ke la kondiĉo de tiu rondiro estas ke ĉiu atentu nur sian
+aferon?"
+
+"Nu, la signifo ja estas preskaŭ sama," diris la Dukino, ŝultrumante
+Alicion per sia mentonego, "kaj de tio la moralo estas: 'Se vi
+prizorgas la sencon, la sonoj prizorgos sin mem.'"
+
+"Ĉe ĉiu afero ŝi ja volas trovi moralon," pensis Alicio.
+
+"Vi eble miras, kial mi ne ĉirkaŭprenas al vi la talion," diris iom
+poste la Dukino. "La kaŭzo estas, ke mi dubas pri la bonhumoro de via
+fenikoptero. Ĉu mi faros la provon?"
+
+"Ne, li eble mordus vin." Alicio diris tion pro singardaj motivoj; ŝi
+tute ne deziris la provon.
+
+"Estas vero," respondis la Dukino. "Fenikopteroj kaj mustardo ambaŭ
+mordas; kaj jen la moralo: 'Samspecaj birdoj flugas kune.'"
+
+"Tamen mustardo ne estas birdo," Alicio kritikis.
+
+"Vi estas prava, kiel ĉiam," afable konsentis la Dukino. "Mi tre
+admiras vian spritecon; per viaj paroloj vi ja igas ĉion klara."
+
+"Mi kredas ke mustardo estas mineralo, ĉu ne?" diris Alicio.
+
+"Jes, kompreneble," diris la Dukino. (Ŝi ŝajne estis preta konsenti
+al ĉio ajn de Alicio dirota.) "Ne malproksime de tie ĉi mi mem havas
+grandan mustardminejon, kaj la moralo: 'Da tio kion mi jam havas _en
+min'_, vi ne tro enigu _en min_.'"
+
+Alicio dume profundiĝis en pensojn, kaj pro tio ne atentis—eĉ ne
+aŭdis—pri la dukina minejo. Post unu minuto ŝi ekkriis:
+
+"Ho jam fine mi bone memoras: Mustardo estas legomo, kvankam ĝi ne
+havas la aspekton esti tia."
+
+"Mi tute konsentas," denove diris la konsentema Dukino, "kaj jen
+la moralo:—'Vi ĉiam estu laŭ la aspekto'—aŭ se vi volas ke
+mi esprimu ĝin pli klare:—'Vi neniam imagu al vi ke vi ne estas
+aliaspekta ol tio, kio al aliaj ŝajnus ke kio vi aŭ estis aŭ
+aspektus esti, ne estas aliaspekta ol kio vi antaŭe estis, estus
+ŝajninta al ili esti aliaspekta.'"
+
+"Mi kredas ke _tion_ mi povus pli bone kompreni," diris Alicio
+tre ĝentile, "se mi havus ĝin skribitan antaŭ la okuloj; sed,
+bedaŭrinde mi ne tute sukcesis kapti la signifon dum vi parolis."
+
+"Tio ja," diris la Dukino per tre memkontenta voĉo, "estas nur
+nulaĵo kompare kun la diroj kiujn mi povus eldiri."
+
+"Tamen ne ĝenu vin, mi petas," Alicio rapide respondis, "donante
+plilongan klarigon; mi timas ke vi tro lacigus vin per tia laboro."
+
+"Ho, ne parolu pri la laboro, mi petas," diris la Dukino, "mi ja
+oferas al vi donace ĉion, kion mi diris ĝis nun."
+
+"Jen donaco efektive nulkosta!" pensis Alicio. "Mi tute ne ŝatus, ke
+la naskotagaj donacoj estu tiaspecaj." Sed tion ŝi ne kuraĝis diri
+laŭte.
+
+"Ĉu ree vi pensas?" diris la Dukino, kaj Alicio denove sentis sur la
+ŝultro speciale fortan ekpremon de la dukina mentono.
+
+"Mi ja rajtas pensi," iom akre respondis Alicio, ĉar ŝi komencis
+senti sin ĝenata.
+
+"Vi rajtas certe," konsentis la Dukino, "sed ne pli ol porkoj rajtas
+flugi; kaj la M—"
+
+Sed en tiu momento Alicio forte surpriziĝis, ĉar eĉ en la komenco
+de tiu tre ŝatata vorto, la dukina voĉo ekvelkis, kaj la dukina
+brako, ligita kun la ŝia, forte tremis. Jen, rekte kontraŭ ili,
+vizaĝo kontraŭ vizaĝo, staris la Kera Damo, kun la brakoj falditaj.
+Ŝi sulkigas fulmotondre la brovojn.
+
+"Estas bela tago, via Dama Moŝtino," la Dukino komencis per tre
+humila kaj malforta voĉo.
+
+"Jam nun mi admonas vin," la Damo pasie interrompis ŝin, piedfrapante
+la grundon, "aŭ vi aŭ via kapo jam nun devas esti for, vi elektu!"
+
+La Dukino elektis, kaj—malaperis!
+
+"Ni daŭrigu la ludadon," la Damo diris al Alicio; kaj Alicio, tro
+timigite por eligi eĉ unu vorton, per malvolantaj paŝoj sekvis ŝin
+al la ludejo. La aliaj gastoj, profitante la foreston de la Damo jam
+sidiĝis sub la arboj por ripozi. Sed ekvidinte la Damon, ili tuj
+levis sin kaj enue ekludis. Por instigi ilin la Damo anoncis ke eĉ
+unumomenta prokrasto kostos al la prokrastanto—la vivon. Dum la
+tuta ludtempo, tra la tuta ludkampo, la Damo ne ĉesis malpaci kun la
+aliaj ludantoj kaj ĉiumomente kriegis "Senkapigu lin," aŭ "Senkapigu
+ŝin." La soldatoj devis gardi la ĉiuminute mortkondamnatojn; por
+plenumi tiun devon, estis necese ke ili forlasu la luddevon, t.e. la
+devon esti arkoj; kaj konsekvence restis post duonhoro eĉ ne unu
+arko; ĉiuj partoprenintoj (krom la Reĝo, la Damo, kaj Alicio) estis
+jam mortkondamnitaj kaj soldate gardataj.
+
+La Damo—pro manko da senkapigebla materialo—ĉesis labori, kaj per
+spireganta voĉo demandis al Alicio:
+
+"Ĉu vi jam vidis la Falsan Kelonion?"
+
+"Ne," respondis ŝi, "eĉ mi ne scias kio estas Falsa Kelonio."
+
+"Ĝi estas," la Damo respondis, "la kreitaĵo, el kiu oni faras la
+falskelonian supon."
+
+"Mi neniam vidis tian beston," diris Alicio, "aŭ eĉ aŭdis pri ĝi."
+
+"Vi venu, do," diris la Damo, "kaj li mem diros al vi sian
+vivhistorion."
+
+En la momento kiam ŝi ekiris kun la Damo, ŝi aŭdis la Reĝon
+diranta (per tre mallaŭta voĉo) al la tuta ĉeestantaro: "Oni vin
+pardonas—ĉiujn."
+
+"Jen tre bona afero," ŝi pensis. "Do, malgraŭ ĉio, tiuj teruraj
+ekzekutoj ne efektiviĝos. Mi tre, tre ĝojas pri tio."
+
+Baldaŭ ili alvenis al Grifo kuŝanta en la sunlumo kaj profunde
+dormanta. (Se vi ne scias kio estas Grifo, rigardu la ilustraĵon.)
+
+"Levu vin, dormemulo," ordonis la Damo, "kaj konduku ĉi tiun
+fraŭlinon al la Falsa Kelonio, por ke ŝi aŭskultu lian
+vivhistorion." Tiam por ekskuzi sin al Alicio ŝi aldonis: "Mi mem
+devas iri returne por aranĝi kelkajn ekzekutojn kiujn mi ordonis."
+
+Kaj ŝi foriris lasante Alicion sola kun la Grifo.
+
+La Grifo, levinte sin kaj frotinte la okulojn, atendis ĝis la Damo
+malaperis kaj tuj—tuj mokridis ŝin. "Jen bona ŝerco," li diris,
+duone al si, duone al Alicio.
+
+"Ho, ĝin diru al mi, mi petas," Alicio diris.
+
+                [Ilustraĵo: LA GRIFO PROFUNDE DORMIS.]
+
+"Nu, la ŝerco estas _ŝi_ mem," diris la Grifo. "Ĉio tio pri la
+ekzekutoj estas nur ŝia fantazio; oni ja fakte neniun ekzekutas!
+Tamen, vi rapidiĝu!"
+
+"Tie ĉi ĉiu ja ordonas rapidiĝi," pensis Alicio, dum ŝi malrapide
+sekvas ĝin. "Neniam en la tuta vivo oni tiom ĉirkaŭordonis min,
+neniam!"
+
+Ne multe progresinte, ili jam ekvidis malproksime la Falsan Kelonion.
+Li sidis tutsola sur iu rokrando, kaj havis tre tristan mienon. Kiam
+ili pli proksimiĝis, Alicio povis aŭdi, ke li ĝemas tiel profunde
+ke li riskas rompi al si la koron. Ŝi eksentis por li tre fortan
+kompaton, kaj demandis al la Grifo:
+
+"Kiaspeca estas lia doloro?"
+
+Sed la Grifo respondis per preskaŭ tiaj samaj vortoj, kiajn li ĵus
+uzis pri la Damo:
+
+"Ĉio tio pri la doloro estas nur lia fantazio; li ja ne havas realajn
+dolorojn.—Tamen, vi rapidiĝu."
+
+Do, ili marŝis kune rekte al la Falsa Kelonio. Tiu rigardis ilin el
+grandaj larmplenaj okuloj, sed diris nenion.
+
+"Tiu ĉi fraŭlino tre deziras scii vian historion," diris la Grifo.
+
+"Mi volonte diros ĝin al ŝi," diris la Falsa Kelonio per profunda,
+kvazaŭ kaverna voĉo. "Vi ambaŭ sidiĝu, mi petas. Kaj eĉ ne unu
+vorton parolu, ĝis mi finos."
+
+Ili do sidiĝis, kaj dum kelkaj minutoj _neniu_ parolis. Alicio pensis
+interne, "Kiamaniere li povos fini, se neniam li komencos, _tion_ mi
+ne povas kompreni." Tamen ŝi pacience atendis.
+
+"Iam en la pasinto," diris fine la Falsa Kelonio kun profunda ekĝemo,
+"mi estis _vera_ Kelonio."
+
+Sekvis tiujn vortojn tre longa silento, kiun interrompis nur la
+okazaj interjekcioj (_Hjckrrh, Hjckrrh_) de la Grifo kaj la konstanta
+plorĝemado de la Falsa Kelonio. Alicio preskaŭ decidiĝis levi sin
+kaj peti forpermeson, dirante 'Mi tre dankas vin, sinjoro, por via
+interesa rakonto.' Tamen, ĉar ŝi supozis, ke li nepre diros iom pli,
+ŝi restis trankvile, kaj nenion diris.
+
+"Kiam mi estis malgrandulo," fine la Falsa Kelonio daŭrigis iom pli
+trankvile (kvankam eĉ nun li plorĝemis ne malofte), "la gepatroj
+sendis min al lernejo en la maro. La instruisto estis iu maljuna
+kelonio—ni kutime nomis lin Testud'—"
+
+"Pro kio vi nomis lin Testud' ĉar li ne estis Testudo?" interrompis
+Alicio.
+
+"Ni ja nomis lin Testud', ĉar li estis fame konata _te-studento_, kaj
+tre ŝatis paroli pri la te-kulturo. Ĉu vi ne povis konkludi tion, ne
+demandinte?"
+
+La Falsa Kelonio evidente indignis, ke pro ŝia malspriteco li devis
+doni tiun klarigon.
+
+Kaj la Grifo aldonis: "Vi devas honti, demandinte pri tia simpla
+afero."
+
+Tiam, por doni pli fortan emfazon al la riproĉo, ambaŭ sidis silente
+kaj rigardegis Alicion, ĝis pro konfuzo ŝi estus tre kontenta ke
+la tero malfermiĝu kaj kovru ŝin. Fine, la Grifo diris al la Falsa
+Kelonio:
+
+"Vi rapidu, malrapidulo! oni ne povas tie ĉi atendi la tutan tagon."
+
+La Falsa Kelonio daŭrigis per jenaj vortoj:—
+
+"Jes, ni iris al la lernejo en la maro, kvankam vi eble ne kredas
+tion—"
+
+"Mi ne diris ke mi ne kredas," interrompis Alicio.
+
+"Vi ja ofte diris tion," diris la Falsa Kelonio, "almenaŭ se vi
+similas aliajn hominfanojn."
+
+Kaj antaŭ ol Alicio povis ree ekparoli, la Grifo ekkriis al ŝi
+severe: "Vi fermu la buŝon!"
+
+La Falsa Kelonio daŭrigis: "Tre bonan instruadon ni havis; fakte, ni
+iris lernejon ĉiutage—"
+
+"Pri tio vi ne devas fanfaroni," diris Alicio, "ankaŭ mi iras en
+ĉiutagan lernejon."
+
+"Ĉu vi lernas _ekstraĵojn_?" demandis la Falsa Kelonio.
+
+"Jes," respondis Alicio, "la francan lingvon kaj la muzikon."
+
+"Ankaŭ la vestlavadon?" demandis plue la Falsa Kelonio.
+
+"Certege ne!" indignis Alicio.
+
+"Do, malgraŭ ĉio, la via ne estis efektive altranga, bonstila
+lernejo," diris triumfe la Falsa Kelonio. "En la nia, oni ja presigis
+ĉe la kontfino:
+
+'La franca lingvo, la muziko, kaj la _vestlavado_—ekstraj.'"
+
+"Laŭ mi, vi ne multe bezonis la vestlavadon," diris Alicio "ĉar vi
+vivis sur la marfundo."
+
+"Miaj gepatroj povis pagi nek por tiu ekstraĵo, nek por la aliaj,"
+la Falsa Kelonio diris ĝemante. "Ili pagis nur la ordinarajn
+kurspagojn."
+
+"Kiajn temojn la ordinara kurso enhavis?" Alicio demandis.
+
+"Por komenci," respondis la Falsa Kelonio, "La Libro-lekado kaj la
+Plumskrapado; ankaŭ la diversaj fakoj de Aritmetiko—Ambicio,
+Korpremo, Multimpliko, kaj Diveno."
+
+"Pri Multimpliko," Alicio kuraĝis diri, "mi neniam aŭdis. Kio ĝi
+estas?"
+
+La Grifo levis surprize ambaŭ birdpiedojn. (Li ankaŭ havis en la
+posta parto du bestpiedojn—vidu la ilustraĵon.)
+
+"Kion?" Ĝi ekkriis "neniam aŭdis pri Multimpliko kaj tamen scias
+pri la Divenarto? Nu tiu arto kaj la arto multimpliki estas reciproke
+konversaj; kaj nur postkiam oni _multe_ praktikis implikon, estas
+permesate eĉ komenci la arton diveni. Diveno sen antaŭa impliko
+estas ja tute senvalora. Tamen vi, ne konante Multimplikon, pretendas
+bone koni la Divenon. Eĉ idioto ne kredus tion."
+
+Alicio jam ne havis la kuraĝon por demandi plu al la Grifo pri la
+marlerneja Aritmetiko. Turnante sin for de li, ŝi demandis al la
+Falsa Kelonio:
+
+"Kion alian vi devis lerni?"
+
+"En la unua loko, la Misterojn," respondis la Falsa Kelonio kalkulante
+la temojn per siaj piedaĵoj, nome Mistero Antikva kaj Mistero
+Moderna: ankaŭ la Disigarto. La Disigarta instruisto estis maljuna
+angilo kiu venis nur unufojon en ĉiu semajno; li instruis al ni
+disigi ĉiujn objektojn, ĉu ebenaj, ĉu solidaj kaj _Kolerigi
+florbildojn_.
+
+"Kiamaniere oni faris tion?" demandis Alicio.
+
+"Nu, la detala klarigo estus ja tre teda," diris la Falsa Kelonio,
+"tamen mi certigas al vi ke niaj lernejanoj, se ili bezonus, ekzemple,
+ruĝigi blankajn rozojn (kiel hodiaŭ la ĝardenistoj de la Damo)
+tre hontus uzi ilian kolorilon; kaj eĉ por ruĝigi la Damon mem, la
+koleriga metodo estus multe pli bonartista ol la koloriga. Eble la
+Grifo volos aldoni pluan klarigon."
+
+"Mi ne povas," diris la Grifo, "ĉar pro manko da tempo mi neniam
+lernis la kolerigarton. La klasika profesoro tre okupis mian tempon;
+li ja estis vera kankro."
+
+"Mi ne lernis de li," diris ĝemante la Falsa Kelonio. "Oni diris ke
+li instruis la Ratinan kaj Blekan lingvojn. Ĉu mi estas prava?"
+
+"Tute prava," diris la Grifo, ankaŭ ĝemante, kaj pro la dolorigaj
+memoraĵoj ili ambaŭ kovris la vizaĝojn per la piedaĵoj.
+
+"Kaj kiom da horoj ĉiutage vi studis en la lernejo?" Alicio faris
+tiun demandon en la celo kiel eble plej rapide enkonduki novan
+paroltemon.
+
+"Dek horojn," respondis la Falsa Kelonio, "en la unua tago, naŭ en la
+dua kaj tiel plu."
+
+"Jen tre kurioza aranĝo," diris Alicio.
+
+"_Nu, ligiĝis_ kun tiu 'kurioza' aranĝo," aldiris la Grifo, "unu
+tre ŝatata konsekvenco; ĉar en la dekunua tago _nuligiĝis_ ĉiuj
+lecionoj."
+
+"Ĉu vi volas komprenigi," diris Alicio tre mirigite "ke en la dekunua
+tago la lernejanoj havis la tempon tute libera?"
+
+"Certe," diris la Falsturto.
+
+"Kaj kio okazis en la dekdua tago," Alicio vigle demandis.
+
+"Jen sufiĉe pri la lecionoj," la Grifo interrompis ŝin tre firme.
+"La Falsa Kelonio nun rakontos al vi ion pri la ludoj."
+
+
+
+
+                              ĈAPITRO X
+
+                          LA OMARA KVADRILO
+
+
+La Falsa Kelonio profunde ekĝemis, kaj tiris la postan flankon de unu
+piedaĵo trans la okuloj. Li fikse rigardis Alicion kaj forte penis
+paroli, sed liaj plorĝemoj dum kelkaj minutoj neebligis la parolojn.
+
+"Li kondutas same kvazaŭ li havas oston en la gorĝo," diris la Grifo
+kaj tuj klopodis (per fortaj skuoj kaj manfrapoj sur la dorson) eligi
+la oston. Fine la Falsa Kelonio regajnis la voĉpovon, kaj kun larmoj
+glitfalantaj sur siaj vangoj komencis:
+
+"Eble vi ne loĝis longan tempon sub la maro (Alicio intermetis 'Mi
+neniam') eble ankaŭ vi neniam estas prezentita al Omaro—(Alicio
+komencis diri 'Mi unufojon gustumis—' sed rapide haltigis sin kaj
+diris anstataŭe 'Mi neniam')—do vi eĉ ne povas imagi, kia rava
+afero estas la Omara Kvadrilo."
+
+"Mi devas konfesi ke ne," diris Alicio. "Kiaspeca ĝi estas?"
+
+"Nu," la Grifo respondis, "oni komence formiĝas en unu rangon laŭ la
+marbordo—"
+
+"En du rangojn," interrompis la Falsa Kelonio, "da fokoj, kelonioj,
+k.c. Poste, kiam oni formovis ĉiujn meduzojn—"
+
+—"Kio ordinare konsumas multe da tempo," intermetis la Grifo.
+
+—"Oni du fojojn antaŭen iras—"
+
+—"ĉiu kun sia kundancanta omaro,"—ree interrompis la Grifo.
+
+—"Kompreneble," konsentis la Falsa Kelonio—"du fojojn antaŭen
+iras, turniĝas kun la kunulo—"
+
+—"Ŝanĝas la kunulon kaj reiras samvice," diris la Grifo.
+
+—"Poste," la Falsa Kelonio rekomencis, "oni ja ĵetas la—"
+
+—"la omarojn," ekkriis ekscitite la Grifo, kaj saltis en la aeron.
+
+—"Kiel eble plej malproksimen en la maron—"
+
+—"Naĝsekvas ilin," la Grifo kriis, ankoraŭ pli ekscitite.
+
+—"Renversas sin en la maro—" dirante tion eĉ la Falsa Kelonio
+saltis furioze sur la piedpintoj.
+
+—"Denove ŝanĝas la kunulon—" Ĉi tiun fojon la Grifo tiel forte
+kriegis, ke ŝajnis al Alicio ke ŝiaj oreloj krevas.
+
+—"Renaĝas al tero, kaj—jen la fino de l' unua movado," diris la
+Falsa Kelonio. En tiu momento li subite mallaŭtigis la voĉon, kaj
+ambaŭ bestoj kiuj ĵus freneze ĉirkaŭsaltis, ree sidiĝis, kaj
+rigardis Alicion trankvile kaj tre melankolie.
+
+"Ĝi nepre estus tre plezuriga danco por alrigardi," diris Alicio.
+
+"Ĉu vi volus vidi iometon da ĝi?" demandis la Falsa Kelonio.
+
+"Ho, mi tre ŝatus ĝin," respondis Alicio.
+
+"Ni do tradancu kune la unuan parton," diris la Falsa Kelonio al la
+Grifo, "la omarojn ni ja povos imagi. Kiu el ni kantos la muzikon?"
+
+"Ho, _vi_ kantu," diris la Grifo, "ĉar mi forgesis la vortojn."
+
+Ili do komencis danci ĉirkaŭ Alicio. Ne malofte, pro tro apudaj
+paŝoj, ili piedpremis al ŝi la piedfingrojn. Ambaŭ markis la
+taktojn svingante la dekstran antaŭpiedaĵon; kaj tre malrapide, tre
+triste la Falsa Kelonio kantis:—
+
+      _"Ho, Limak', vi plirapidu!" la merlango plende ĝemas;
+      "Ĉar fokeno post ni sekvas, kaj la voston al mi premas!
+      Kelonioj kaj omaroj je fervoro ĉiuj bolas,
+      Kaj atendas vin sur sablo!   Ĉu vi ankaŭ danci volas?
+      Vi konsentas, ĉu ne vere?   Vi konsentas partopreni?
+      Vi konsentas.   Ĉu ne vere?   Ho, konsentu partopreni._
+
+      _Ho, imagu vi la ravon esti supren altlevita!
+      Esti kun omar' kunulo for en maron forĵetita!"
+      "Ne!   Tro longen!" diris la limak', skuante sin timeme,
+      "Mi ne volas."   Al merlango do rifuzis li dankeme.
+      Ja konsenti li ne volis, li ne povis partopreni,
+      Ja konsenti li ne povis, li ne volis partopreni._
+
+      _Fiŝamiko al li diris "Ne tre gravas la distancoj;
+      Aliborde estas ja alia lando kaj la Francoj!
+      Ju pli longen de Anglujo, pli apude al Francujo!
+      Do, ne timu!   Ĉar sur ambaŭ bordoj jen por vi patrujo.
+      Vi konsentas, ĉu ne vere?   Vi konsentas partopreni?
+      Vi konsentas, ĉu ne vere?   Ho, konsentu partopreni!"_
+
+Kiam la dancado finiĝis, Alicio interne sentis ke ĝi estas teda kaj
+eĉ ne sendanĝera por ŝi; tamen ŝi diris ĝentile:—
+
+"Mi tre dankas; mi tre interesiĝis vidante la dancadon; kaj speciale
+plaĉis al mi tiu kurioza kanto pri la merlango."
+
+"Ho, pri la merlangoj," diris la Falsa Kelonio, "vi kompreneble vidis
+ilin?"
+
+"Jes," Alicio respondis, "tre ofte mi vidis ilin en _la frit_—"
+
+"Pri _Lafrito_, mi ne scias kie sidas tiu urbo," diris la Falsa
+Kelonio, "sed se vi tre ofte vidis ilin, vi kompreneble konas kian
+aspekton ili havas?"
+
+"Mi kredas ke jes," diris Alicio, konsiderante. "Ili havas la vostojn
+en la buŝoj; ankaŭ ili estas kovritaj per paneroj."
+
+"Pri la paneroj vi eraras," diris la Falsa Kelonio, "ili ne povas pro
+la marviŝo teni panerojn sur la korpo. Sed pri la vostoj vi _ne_
+eraras, kaj la kaŭzo ja estas—"
+
+En tiu momento la Falsa Kelonio oscedis kaj fermis la okulojn, dirante
+al la Grifo: "_Vi_ diru al ŝi pri la kaŭzo kaj ĉion tion."
+
+"La kaŭzo estas," diris la Grifo, "ke ili persistis iri danci kun
+omaroj; do, oni ĵetis ilin malproksimen en la maro; do ili havis tre
+longan falon; do, la vostoj fiksiĝis en la buŝoj, kaj oni ne povis
+malfiksi ilin; do—jen ĉio."
+
+"Mi dankas," diris Alicio, "tio estas por mi tre interesa. Ĝis
+hodiaŭ mi sciis tre malmulte pri merlangoj."
+
+"Mi povas diri al vi pli ol tio, se al vi plaĉos," diris la Grifo.
+"Ĉu vi scias kial oni nomas tiun fiŝon merlango?"
+
+"Mi neniam pripensis tiun demandon," diris Alicio. "Kial do?"
+
+"Ĉar ĝia lango estas ĉiam en la maro," klarigis la Grifo, "kaj
+la maron ĝi prefere silabas per 'e' nur pro ĝia partianeco por la
+Francoj; vi kredeble rimarkis per kia sopira voĉo ĝi kantis '_pli
+apude al Francujo_.'"
+
+(En la angla teksto li tute alie klarigis la nomon. Por ekkompreni
+ĝin, oni devas identigi en la pensoj la vortojn "merlango" kaj
+"blankigilo" kiuj en angla lingvo havas saman sonon _ŭhajting_. Jen
+la teksta dialogo:—
+
+"Ĉu vi scias kial oni nomas ĝin merlango?" diris la Grifo.
+
+"Mi neniam pripensis tiun demandon," diris Alicio. "Kial do?"
+
+"Ĝi poluras la bot-kaj ŝuojn," diris tre solene la Grifo.
+
+"Pol-ur-as la bot-kaj ŝu-ojn," Alicio ripetis tre malrapide,
+dispecigante la vortojn en la celo eligi la nepre kaŝitan signifon.
+
+"Per kio oni poluras viajn ŝuojn?" demandis la Grifo.
+
+Alicio rigardis sur ilin kaj iom konsideris antaŭ ol respondi:
+
+"Mi kredas ke oni traktas ilin per ciro aŭ iu alia nigrigilo."
+
+"Tie ĉi, sub la maro," diris la Grifo per tre profunda voĉo, "oni
+poluras botojn per _blankigilo_. Do, vi nun komprenas.")
+
+"Kaj el kio oni fabrikas viajn piedirilojn?" Alicio demandis scivole.
+
+"Ho, pri la piediriloj," respondis la Grifo, "unue mi konsilas al vi
+ne uzi tiajn longajn kombinaĵojn, kiujn nur la plej lertaj maranoj
+povas uzi sen la danĝero esti malkomprenataj. Due, por respondi
+la demandon, jen la iloj kiujn ni uzas por igi la submaranojn _pie
+diri_ la veron—ni metas sub la piedoj algojn, efektive ĉion
+_verdan_, ĉar, bedaŭrinde, ne ĉiuj niaj gejunuloj estas instinkte
+_verd-iremaj_."
+
+"Se mi estus la merlango," diris Alicio ankoraŭ pripensante la
+kanton, "mi dirus al la fokeno: 'Malantaŭen Sinjoro! oni ne bezonas
+_vin_.'"
+
+"La Merlangoj ja ĉiam volas kunhavi fokenon," diris la Falsa Kelonio
+"kaj sen fokeno neniu prudenta merlango volus vojaĝi ien en la maro."
+
+"Ĉu vere ne?" Alicio demandis tre mirigite.
+
+"Kompreneble ne," respondis la Falsa Kelonio, "ĉar dum la vojaĝo li
+eble bezonos reklami siajn komercaĵojn en la vizitataj havenoj, kaj
+kunhavante fokenon li povos respondi senĝene al la demando: 'Ĉu vi
+havas afiŝon?' nur montrante al ĝi kaj dirante 'Jen, sidante sur la
+pakaĵoj, _jena fiŝo_!'"
+
+Ĉar Alicio ne tuj komprenis lian klarigon pri la fiŝa afiŝo, la
+Falsa Kelonio ofendiĝis kaj la Grifo profitis la silenton por proponi
+ke nun Alicio rakontu al ili _sian_ historion.
+
+"Mi nur povus rakonti miajn aventurojn komencante per la hodiaŭa
+mateno," diris Alicio naive, "ĉar ne utilus priparoli la antaŭajn
+tagojn, eĉ la hieraŭan, pro tio ke mi ne estis la sama persono."
+
+"Ĉion tion vi devas klarigi," diris la Falsa Kelonio.
+
+"Ne, ne! la aventurojn antaŭ ĉio alia," diris malpacience la Grifo,
+"per klarigoj oni ja terure perdas la tempon."
+
+Sekve, Alicio komencis rakonti al ili siajn aventurojn de la tempo
+kiam ŝi ekvidis la Blankan Kuniklon. En la komenco ŝi sentis sin tre
+timema, pro la fakto ke ambaŭ bestoj tre alproksimiĝis al ŝi—ĉe
+ĉiu flanko po unu—kaj tre larĝe malfermis la okulojn kaj buŝojn.
+Tamen dum la rakontado ŝi iom post iom fariĝis pli sinfida.
+
+La aŭskultantoj restis tute trankvilaj ĝis ŝi rakontis pri la
+deklamo (antaŭ la Raŭpo) de la poemo "_Patro Vilĉo_." Kiam ŝi
+diris al ili ke la vortoj elvenis el la buŝo tute malpravaj, la Falsa
+Kelonio profunde enspiregis kaj diris "Jen tre kurioza fakto."
+
+"Apenaŭ povus esti io pli kurioza," aldonis la Grifo.
+
+"La vortoj elvenis malpravaj," ripetis la Falsa Kelonio, kaj profunde
+pensis.
+
+Post kelkaj momentoj ĝi diris:—
+
+"Mi do tre ŝatus aŭskulti, se la Fraŭlino volus nun deklami ian
+versaĵon. Vi ordonu ke ŝi komencu."
+
+Li rigardis la Grifon kvazaŭ li kredas ke ĝi havas la rajton ordoni
+ŝin.
+
+"Vi stariĝu," diris la Grifo al Alicio, "kaj deklamu '_la
+Dormemulo_.'"
+
+"La kreitaĵoj ja terure ordonadas min," pensis Alicio, "kaj igas min
+deklami la parkeraĵojn same kiel se mi estus en la lernejo."
+
+Tamen ŝi leviĝis kaj komencis la deklamon, sed ŝia kapo pleniĝis
+de la Omara Kvadrilo en tia grado ke apenaŭ ŝi konsciis kion ŝi
+diras, kaj la vortoj venis tre, tre kurioze:—
+
+      _Jen la voĉ' de l' Omar'! mi aŭdis la krion,
+      "Vi min bakis tro brune, vi iru Azion!"
+      La hararon netigas en ĉiu okazo
+      La anas' per l' okuloj, sed li per la nazo.
+      Kiam seka la sablo, li kvazaŭ monarĥo
+      Malestime parolas eĉ pri la ŝarko.
+      Kiam tajdo kun ŝarkoj amase enfluas
+      Malfiera la voĉo per kiu li bruas._
+
+"Tiuj certe ne estas la vortoj kiujn _mi_ lernis en la infaneco,"
+diris la Grifo.
+
+"Tiujn vortojn mi neniam aŭdis ĝis la nuna momento," diris la Falsa
+Kelonio, "ĝi ja estas nur sensencaĵo."
+
+Alicio diris nenion. Fininte la verson, ŝi sidiĝis, metis la manojn
+al la kapo, kaj ekmiris ĉu iam ŝia vivo refariĝos ordinara.
+
+"Mi tre volus scii la klarigon de ĉio tio," diris la Falsa Kelonio.
+
+"Ŝi ne povas klarigi," la Grifo vigle intermetis. "Eldiru la duan
+verson."
+
+"Sed pri lia hararo," persistis la Falsa Kelonio, "li fakte ne povus
+netigi ĝin per la nazo."
+
+Alicio havis nenion por diri; ŝi nur rigardis ilin senhelpe.
+
+"Vi eldiru la duan verson," ripetis la Grifo, "ĝi komenciĝas per la
+vortoj '_Lian domon pasante_—'"
+
+Alicio ne kuraĝis malobei, kvankam ŝi estis certa ke ĉio nepre
+elvenos malprave. Per tremanta voĉo ŝi eldiris:—
+
+      _Lian domon pasante, per unu okulo
+      Mi ekvidis panteron kun guf' por kunulo.
+      La pantero englutis ja ĉion gluteblan,
+      Al la gufo lasante nenion manĝeblan.
+      La festeno finiĝis: al la guf' li permesis
+      La kuleron enpoŝi; li mem ne forgesis
+      La tranĉilon enpaki virinan en mufon
+      Kaj per tio li ankaŭ distranĉis la—!_
+
+En tiu momento la Falsa Kelonio malpacience interrompis ŝin:—
+
+"Por kio utilas," li diris, "ke vi eldiru tiajn versaĉojn, ne dume
+klarigante ilin? Ĝi estas ja la plej konfuziga lingvaĵo kiun iam en
+la vivo mi aŭskultis."
+
+"Jes," konsente diris la Grifo, "ankaŭ mi opinias ke estos bone ne
+plu daŭrigi tiun deklamaĵon." Ankaŭ Alicio tre ĝoje konsentis.
+
+"Ĉu vi volas ke ni tradancu la duan parton de la Omara Danco?"
+proponis la Grifo "aŭ ĉu vi eble preferus ke la Falsa Kelonio kantu
+al vi?"
+
+"Ho, mi certe preferus la kanton, se la Falsa Kelonio komplezos."
+Alicio respondis tiel fervore ke la Grifo diris, ofendite:
+
+"H'm! Pri gustoj ne utilas diskuti. Do, se agrable al vi, karulo, vi
+kantu por ŝi '_Kelonia Supo_.'"
+
+La Falsa Kelonio ekĝemis profunde, kaj kantis per voĉo iafoje
+plorsufokita:
+
+               _Supo alloga de verda kolor'
+                 Preta je la sepa hor'!
+               De la vespero la ĉefa glor'!
+                 Supo vespera, bela vi Sup'!
+                 Supo vespera, bela vi Sup'!
+               Su-upo ve-espera, Su-upo ve-espera
+                 Bela, ho bela vi Sup'!_
+
+               _Ho, bela Supo! pli bona ol truf',
+                 Ol supo el bovida huf'!
+               Ĉion fordonus mi por suf—
+                 —iĉe da vi, ho bela vi Sup'!
+                 —iĉe da vi, ho, bela vi Sup'!
+               Su-upo ve-espera, Su-upo ve-espera!
+                 Bela, ho bela vi Sup'!
+                       —VI SUP'!_
+
+"Denove la ĥoron," ekkriis la Grifo. Sed kiam la Falsa Kelonio
+nur komencis rekanti ĝin, de iu malproksima loko aŭdiĝis laŭta
+ekkrio:—
+
+"_La proceso komenciĝas!_"
+
+"Vi rapidu do," kriis la Grifo al Alicio, kaj preninte ŝin per la
+mano, ĝi rapidis for, ne atendante la finon de la ĥoro.
+
+"Pri—kio—oni—pro—cesas?" Alicio dum la kurado demandis spiregante;
+sed la Grifo nur kuris pli rapide. Dume sekvis ilin—pli kaj pli
+mallaŭte—la voĉo de la Falsa Kelonio finanta per tre melankoliaj
+tonoj la rekantaĵon:
+
+               _Su-upo ve-espera! Supo ve-espera!
+                 Bela, ho bela vi Sup'!_
+
+
+
+
+                              ĈAPITRO XI
+
+                      KIU FORŜTELIS LA TORTOJN?
+
+
+Kiam ili alvenis, la Keraj Gereĝoj jam sidis sur sia trono,
+ĉirkaŭite de granda amaso da bestetoj kaj birdetoj, ankaŭ la tuta
+aro da ludkartoj.
+
+Jen antaŭ la trono staris la Lakeo; li havis la manojn kunligitajn
+per granda ferĉeno, kaj gardis lin du soldatoj, ĉiuflanke po unu.
+Apud la Reĝo staris la Blanka Kuniklo; en la dekstra mano tiu ĉi
+havis trumpeton, kaj en la maldekstra li portis grandan rulaĵon
+pergamenan. En la mezo de la juĝejo estis tablo, kaj sur la tablo
+Alicio ekvidis grandan pladon plenan je tortoj. Tian allogan aspekton
+ili havis, ke nur surrigardi ilin funkciigis la salivglandojn. "Mi
+tre volas," pensis ŝi, "ke oni tuj finu la proceson kaj disdonu la
+tortojn."
+
+Tamen, konkludinte el la mienoj de la ĉeestantoj ke tio _ne_ okazos,
+ŝi—por pasigi la tempon—komencis ĉirkaŭrigardi.
+
+Ĝis la nuna momento neniam en la tuta vivo ŝi ĉeestis juĝejon;
+tamen ŝi estis _iom_ leginta pri tiaj aferoj, kaj tre kontente ŝi
+konstatis ke ŝi povas facile identigi preskaŭ ĉion en la ĉambro.
+
+"Jen," ŝi komencis, "sub la granda peruko, jen la juĝisto."
+
+Sendube! Sed li estis ankaŭ la Reĝo, kaj ĉar li portis la kronon
+super la peruko (se vi volas vidi _kiel_, vidu la ilustraĵon sur
+paĝo 120 [LA KUIRISTINO RIFUZAS ATESTI.]) li havis la aspekton esti
+tre malkomforta; ankaŭ la krono certe ne sidis konvene.
+
+"Kaj jen," pensis Alicio daŭrigante la klasifikon, "la
+_ĵurintarejo_, kaj jenaj dekdu kreitaĵoj—ŝi nepre devis uzi tiun
+vorton, ĉar unuj ja estis bestoj, kaj aliaj estis birdoj—supozeble
+estas la _ĵurintoj_."
+
+Ŝi du, tri fojojn ripetis la vortojn "ĵurintoj, ĵurintarejo," ĉar
+ŝi kredis, kaj ja rajtis kredi, ke nur tre malmultaj knabinetoj ŝiaj
+samaĝuloj havas pri tiuj vortoj ian ajn ideon.
+
+La dekdu ĵurintoj skribadis (ĉiuj senescepte) sur ardezaĵoj.
+
+"Kion ili faras?" ŝi flustris al la Grifo, "ja antaŭ komenco de la
+proceso, ili nepre nenion povas havi por skribi."
+
+"Ili skribas ĉiu sian propran nomon," la Grifo mallaŭte respondis,
+"pro la timo ke antaŭ la finiĝo de l' proceso ili forgesos ĝin."
+
+"La stultuloj!" Alicio komencis per laŭta indigna voĉo, sed tuj
+ĉesis pro la fakto ke la Blanka Kuniklo ordonis: "Silenton en la
+juĝejo," kaj la Reĝo, almetinte la okulvitrojn, ĉirkaŭrigardis por
+sciiĝi kiu parolas.
+
+Alicio povis certiĝi, same kvazaŭ ŝi rigardus la ardezojn de
+malantaŭ iliaj ŝultroj, ke ĉiuj ĵurintoj skribas sur la ardezoj
+"Stultuloj," kaj eĉ ŝi povis rimarki ke unu el ili, ne sciante mem
+per kiaj literoj silabi la vorton, devas peti la informon de sia
+najbaro. "Kiam la proceso finiĝos," pensis Alicio, "oni havos sur
+tiuj ardezoj vere vidindan miksaĵon!"
+
+La grifelo de unu ĵurinto komencis grinci. _Tion_ kompreneble
+Alicio ne povis toleri. Do, ĉirkaŭirinte la juĝejon, kaj preninte
+oportunan starlokon malantaŭ li, ŝi tre baldaŭ sukcesis forŝteli
+nerimarkite la grifelon. Tiel lerte ŝi klopodis ke la ĵurinteto (ĝi
+estas ja Bil Lacerto!) tute ne povis kompreni kien ĝi malaperis. Li
+do, post longa ĉirkaŭserĉado, fine klopodadis kiel eble plej bone
+skribi per unu fingro. Sed ne multe utilis _tio_, ĉar la fingro faris
+sur la ardezo nenian postsignon.
+
+"La Heroldo legu la kulpigon," diris subite la Reĝo.
+
+Laŭ tiu ordono, la Blanka Kuniklo trifoje ludblovis la trumpeton, kaj
+poste malvolvis la pergamenan rulaĵon, kaj legis laŭte:
+
+               _La Kera Damo bakis tortojn
+                 En iu somertago!
+               Lakeo ŝtelis tiujn tortojn
+                 Kaj kaŝis sub kratago!_
+
+"Vi tuj konsideru la verdikton," ordonis la Reĝo, direktante siajn
+rigardojn al la ĵurintoj.
+
+"Ne, ne ankoraŭ," vigle intermetis la Kuniklo. "Antaŭ tio estas multe
+da procedoj."
+
+"Alvoku la unuan atestanton," diris suflorite la Reĝo.
+
+La Blanka Kuniklo tuj blovis trifoje la trumpeton, kaj laŭte
+kriis:—"Unua atestanto!"
+
+La unua atestanto estis la Ĉapelisto. Li venis en la ĉambron tra
+flanka pordo, havante en unu mano tetason kaj en la alia pecon da
+buterpano.
+
+"Pardonu, via Reĝa Moŝto," li komencis, "ke mi kunportas ĉi
+tiujn teaĵojn; kiam mi ricevis la alvokon, mi ne ankoraŭ finis la
+temanĝadon."
+
+"Vi devis esti fininta," diris la Rego, "Kiam vi komencis?"
+
+La Ĉapelisto rigardis al la Martleporo kaj la Gliro, kiuj jam sekvis
+lin en la juĝejon kaj stariĝis kune, brako en brako.
+
+"Je la dekkvara de Marto, mi kredas," li prove diris.
+
+"Dekkvina," "Deksesa," korektis la Martleporo kaj la Gliro, preskaŭ
+sammomente.
+
+"Elskribu tion," diris la Reĝo al la ĵurintaro.
+
+Laŭ tiu ordono, la ĵurintaro elskribis ĉiujn tri datojn sur la
+ardezoj; poste kalkulis la sumon, kaj eligis solvon en spesmiloj kaj
+spesdekoj!
+
+"Demetu vian ĉapelon," diris la Reĝo al la atestanto.
+
+"Ĝi ne estas mia," kontraŭdiris la Ĉapelisto.
+
+"Do, _ŝtelita_!" ekkriis la Reĝo, turnante sin al la ĵurintoj:
+ĉiuj notis ke la ĉapelo estas ŝtelita.
+
+"Mi tenas provizon da ili por vendi," la Ĉapelisto klarigis. "Propran
+ĉapelon mi havas neniun. Mi estas ja Ĉapelisto."
+
+Kaj nun la Damo almetis la okulvitrojn kaj severe rigardegis la
+Ĉapeliston. Sub ŝia rigardego tiu paliĝis kaj tremis.
+
+"Vi diru vian evidencon," diris la Reĝo. "Se vi persistos konduti en
+tia ridinde timigita maniero, mi tuj ekzekutigos vin."
+
+Tiu minaco ja ne kuraĝigis la atestanton. Li senĉese ŝanĝis la
+sintenadon, apogante la korpon jen sur unu piedo, jen sur la alia. Kun
+tre maltrankvila mieno li konstante rigardis la Damon; kaj, pro lia
+konfuziĝo, li eĉ elmordis grandan pecon el la tetaso anstataŭ el la
+buterpano!
+
+En tiu momento Alicio havis tre kuriozan korpsenton. Kio povus esti la
+kaŭzo? Post ne longe ŝi konstatis ke ankoraŭ unu fojon ŝi komencas
+_kreski_. Unue ŝi preskaŭ decidiĝis stariĝi kaj eliri la juĝejon.
+Tamen post plua pripenso, ŝi opiniis ke estos pli bone resti kie ŝi
+nun sidas, ĝis manko da spaco devigos la eliron.
+
+"Bonvolu ne tiel forte premi min," diris la Gliro, kiu nun troviĝis
+sidanta apud ŝi. "Apenaŭ mi povas spiri."
+
+"Pardonu, sed mi ne povas ne," Alicio respondis humile. "Mi ja
+kreskas."
+
+"Vi ne rajtas kreski tie ĉi," diris la Gliro.
+
+"Sensencaĵo," rediris Alicio pli kuraĝe. "Ankaŭ _vi_ kreskas."
+
+"Jes," respondis la Gliro. "Sed mi kreskas laŭ normala rapideco, kaj
+vi malnormale, ridinde!" Kaj kun tre malagrabla mieno li eligis sin el
+sia sidloko, kaj transiris al la alia flanko de l' juĝejo. La Damo dume
+eĉ ne unu momenton ĉesis rigardegi la Ĉapeliston, kaj, en la momento
+kiam la Gliro transiras la juĝejon, ŝi diris al unu el la ĉambelanoj:
+"Alportu al mi la liston de la kantintoj en la lasta koncerto." Aŭdinte
+tiun ordonon la Ĉapelisto tremis tra la tuta korpo tiel forte, ke
+ambaŭ ŝuoj fortremiĝis de la piedoj.
+
+"Vi nur eldiru vian evidencon," ripetis kolere la Reĝo; "se ne, mi
+nepre ekzekutigos vin, ĉu vi estas nerve afliktata, aŭ ne."
+
+"Se plaĉas al via Reĝa Moŝto," la Ĉapelisto tuj komencis per
+tremanta voĉo—"mi estas malriĉulo—kaj apenaŭ mi komencis mian
+temanĝon—t.e. komencis antaŭ nur kelkaj tagoj—kaj pro la fakto
+ke la buterpano fariĝis tiel maldika—kaj ke la teo tvinklis tiel
+forte—"
+
+"Kio tio estas pri _tvinklo_?" la Reĝo demandis.
+
+"Ĝi komenciĝis per la Te—" diris la Ĉapelisto.
+
+"Kompreneble '_tvinklo_' komenciĝas per T" diris vigle la Reĝo. "Ĉu
+vi volas insulti min kredigante ke mi estas neklerulo?—vi daŭrigu!"
+
+—"Mi estas malriĉulo," la Ĉapelisto rekomencis "kaj preskaŭ ĉio
+pli malpli _tvinklis_ post la teo, sed la Martleporo diris—"
+
+"Mi _ne_ diris," la Martleporo rapide intermetis.
+
+"Vi _diris_—" insistis la Ĉapelisto.
+
+"Mi tion neas," diris la Martleporo.
+
+"Li neas 'tion'" diris la Reĝo, "do ellasu 'tion' el la evidenco."
+
+"Nu, se ne la Martleporo, certe la Gliro diris—" kaj la Ĉapelisto
+ĉirkaŭregardis por vidi ĉu ankaŭ li neos—sed la Gliro nenion
+neis, ĉar li profunde endormiĝis.
+
+"Kaj poste," la Ĉapelisto daŭrigis, "mi tranĉis pli da
+buterpano—"
+
+"Sed kion la Gliro diris?" demandis unu ĵurinto.
+
+"Tion mi ne povas memori," respondis la Ĉapelisto.
+
+"Se vi ne memoros," minacis la Reĝo, "mi ekzekutigos vin."
+
+La kompatinda Ĉapelisto lasis fali la tetason kaj buterpanon, kaj
+humile surgenuis. Denove jam la trian fojon, li komencis:—
+
+"Mi—se plaĉas al via Reĝa Moŝto—estas tre malriĉa—"
+
+"Konsente, tre malriĉa vi estas je la parolarto," diris la Reĝo,
+"ĝin vi certe ne posedas."
+
+Ĉe tiu reĝa ŝerco, unu kobajo aplaŭdis, kaj estis tuj subpremita
+de la oficistoj. (Ĉar 'subpremita' estas iom malfacila vorto,
+mi volas klarigi la agmanieron. Oni havis en la juĝejo grandan
+kanvassakon, kunligeblan ĉe la buŝo per ŝnuretoj. En tiun sakon oni
+ŝovis la kobajon, kaj poste sidis sur la sako.)
+
+"Estas bona afero ke mi vidis tion," pensis Alicio. "Tre ofte mi
+legas en la ĵurnaloj ke ĉe la fino de iu proceso 'kelkaj personoj
+ekaplaŭdis, sed la aplaŭdantoj estis tuj subpremitaj de la oficistoj
+de la juĝejo.' Kaj ĝis nun neniam mi povis kompreni kion precize tio
+signifas."
+
+"Se nenion plu vi povas diri pri la afero," diris la Reĝo, "estas
+permesite al vi deiri."
+
+"Mi ja ne povas," kontraŭdiris la Ĉapelisto, "deiri pli malsupren,
+ĉar jam mi staras sur la planko."
+
+"Tamen vi povas _decidi desidi_ tie," respondis la Reĝo.
+
+Ĉe tio la alia kobajo aplaŭdis kaj—estis subpremita.
+
+"Nu," pensis Alicio, "eble nun, foriginte la kobajojn, oni povos pli
+bone progresi."
+
+"Mi preferus hejmeniĝi por daŭrigi la temanĝadon," diris la
+Ĉapelisto, kaj tre time li observis la Damon, kiu legas la liston de
+kantintoj.
+
+"Vi havas la forpermeson," diris la Reĝo, kaj la Ĉapelisto tuj
+eliĝis la juĝejon, eĉ ne revestinte la ŝuojn.
+
+—"Kaj vi senkapigu lin ekstere," la Damo aldonis al unu el la
+oficistoj. Sed antaŭ ol la oficisto atingis la pordon, jam la
+Ĉapelisto tute malaperis.
+
+"Alvoku la duan atestanton," ordonis la Reĝo.
+
+La dua atestanto estis la Dukina kuiristino. Ŝi portis en la mano
+la piprujon, kaj Alicio facile divenis kiu envenos, jam antaŭ la
+enveno; ĉar ŝi rimarkis ke inter la starantoj apud la pordo subite
+komenciĝis forta kaj konstanta ternado.
+
+"Vi eldiru vian evidenc—" la Reĝo nur komencis.
+
+"Rifuzas!" diris la kuiristino.
+
+La Reĝo, konsternite, rigardis la Blankan Kuniklon, kiu per mallaŭta
+voĉo diris:—
+
+"Ĉi tiun atestanton via Reĝa Moŝto devas _kros_-ekzameni."
+
+"Nu, se tio estas nepre necesa," la Reĝo diris rezignacie, "mi faros
+ĝin laŭ mia eblo."
+
+              [Ilustraĵo: LA KUIRISTINO RIFUZAS ATESTI.]
+
+Do, faldinte la brakojn kaj sulkiginte la brovojn kontraŭ la
+kuiristino, ĝis liaj okuloj preskaŭ tute fermiĝis, li demandis per
+tre profunda voĉo:—"El kio oni faras tortojn?"
+
+"Plejparte el pipro," respondis la kuiristino.
+
+"El melaso," korektis iu dorma voĉo malantaŭ ŝi.
+
+"Kaptu tiun Gliron," furioze kriis la Damo. "Senkapigu tiun Gliron!
+Eligu lin el la juĝejo! Subpremu lin! Pinĉu lin! Ŝiru al li la
+vangharojn!"
+
+Dum kelkaj momentoj la tuta juĝantaro konfuziĝis, klopodadante
+eligi la Gliron. Kiam fine ĉio retrankviliĝis, la kuiristino jam
+malaperis.
+
+"Ne grave estas," diris la Reĝo. Interne, li ja estis tre kontenta.
+"Alvoku la trian atestanton," li rapide daŭrigis, kaj aldonis per
+mallaŭta voĉo al la Damo:
+
+"Bonvolu, mia karulino, _mem_ krosekzameni la venontan. Pro tiu laboro
+la kapo al mi preskaŭ krevas."
+
+Alicio observis la Blankan Kuniklon, dum li manfuŝas la liston, kaj
+ŝi tre miris kian ŝajnon havos la venonta atestanto; "ĉar," ŝi
+diris al si, "oni ĝis nun ricevis tre malmulte da evidenco."
+
+Imagu al vi ŝian surprizon kiam ŝi aŭdis la kuniklon per la plej
+alta tono de sia kunikla voĉeto ellegi la nomon "Alicio."
+
+
+
+
+                             ĈAPITRO XII
+
+                           ALICIO ATESTANTO
+
+
+"Jen mi" ekkriis Alicio. Pro la eksciteco sin trovi alvokata, ŝi
+tute forgesis ke dum la lastaj minutoj ŝi tre multe kreskis; kaj
+tiel subite ŝi eksaltis supren, ke ŝi renversis per la jupo la
+ĵurintarujon, kaj faligis ĉiujn ĵurintojn sur la kapojn de la sube
+starantoj.
+
+Jen ili kuŝis sur la planko kaj senhelpe baraktadis, rememorigante
+al ŝi kio okazis en la hejmo antaŭ unu semajno, kiam ŝi akcidente
+renversis el globo aron da ruĝaj fiŝoj.
+
+"Ho, pardonu, mi petegas," ŝi ekkriis tre ĉagrenite, kaj komencis
+kiel eble plej rapide relevi ilin. La ĵus aludita akcidento ja
+venigis en ŝian kapon la ideon ke, se ŝi ne sukcesos tuj kolekti kaj
+residigi ilin, ili nepre mortos.
+
+"La proceson oni ne povas daŭrigi," diris la Reĝo per tre serioza
+voĉo, "ĝis ĉiuj ĵurintoj residiĝos—_ĉiuj_." Ripetante la
+lastan vorton, li fikse rigardis Alicion.
+
+Alicio do rerigardis al la ĵurintarujo, kaj vidis, ke pro sia
+eksciteco ŝi remetis la Lacerton kun la kapo malsupren. Pro tio la
+kompatinda besteto melankolie svingadis la voston, sed tute ne povis
+rektigi sin. Elpreninte ĝin, ŝi restarigis ĝin konvene. Tamen
+_private_ ŝi opiniis ke Sro. "Bil" havus egale saman valoron en la
+proceso, ĉu li sidus renversite aŭ kapsupre.
+
+Kiam la ĵurintoj iom retrankviliĝis post la renversiĝo, kaj oni
+trovis kaj redonis al ili la ardezojn kaj grifelojn, ili tuj komencis
+elskribi plenan historion de la akcidento, escepte nur la Lacerton,
+kiu pro la terura ŝoko sidis kun la buŝo malfermita kaj rigardis la
+plafonon.
+
+—"Kion vi scias pri ĉi tiu afero?" la Reĝo demandis al Alicio.
+
+"Nenion," ŝi respondis.
+
+"Nenion ajn?" persistis la Reĝo.
+
+"Nenion ajn."
+
+"Tio estas tre grava," diris la Reĝo turnante sin al la ĵurintoj.
+
+Tiuj ĵus komencis skribi tion sur la ardezoj. Sed la Blanka Kuniklo
+tre sulkigis la brovojn, kaj faris al la Reĝo malaproban geston,
+dirante per tre respekta voĉo: "Kompreneble via Reĝa Moŝto intencis
+diri _mal_grava?"
+
+"Malgrava, kompreneble," la Reĝo diris laŭte. Tamen, mallaŭtvoĉe
+li daŭre diradis al si: "grava, malgrava, malgrava, grava" kvazaŭ li
+eksperimentas kiu vorto havas la pli bonan sonon.
+
+Kelkaj ĵurintoj skribis "grava," aliaj skribis "malgrava." Alicio
+povis mem vidi tion, ĉar ŝi staris sufiĉe proksime por rigardi sur
+la ardezojn. "Tamen tio ne esta grava," ŝi pensis.
+
+En tiu momento la Reĝo subite ordonis "Silenton!"—Li ja en la
+lastaj minutoj diligente skribis en sia notlibro—kaj nun li legis el
+tiu libro: "'Regulo Kvardekdua' '_Neniu persono, kies alteco superas
+unu kilometron, rajtas resti en la juĝejo._'"
+
+"_Mi_ ne havas tian altecon," protestis Alicio.
+
+"Vi havas," diris la Reĝo.
+
+"Preskaŭ _du_ kilometrojn," aldonis la Damo.
+
+"Nu, ĉiuokaze mi ne volas iri," diris Alicio. "Plue, tio ne estas
+vera regulo; vi ja ĵus nun elpensis ĝin."
+
+"Kiel vi kuraĝas tion diri?" diris la Reĝo. "Ne estas en la libro
+eĉ unu regulo pli malnova!"
+
+"En tiu okazo, ĝi devis esti la unua," kritikis Alicio.
+
+La Reĝo paliĝis kaj tuj fermis la notlibron. "Konsideru la
+verdikton," li diris al la ĵurintoj per mallaŭta trema voĉo.
+
+La Blanka Kuniklo eksaltis ekscitite.
+
+"Se plaĉas al via Reĝa Moŝto," diris li, "ni ankoraŭ havas pli da
+evidenco por aŭskulti. Oni ĵus trovis tiun ĉi paperon."
+
+"Kion ĝi enhavas?" demandis la Damo.
+
+"Ne ankoraŭ mi malfermis ĝin," diris la Kuniklo; "sed ĝi ŝajnas
+esti letero skribita de la juĝato al—al iu."
+
+"Nepre al _iu_" diris la Reĝo "escepte se ĝi estas skribita al
+Neniu, kaj ordinare oni ne skribas al _li_."
+
+"Al kiu ĝi estas adresita?" demandis unu ĵurinto.
+
+"Ĝi tute ne estas adresita," diris la Blanka Kuniklo. "Fakte, nenio
+estas skribita sur la eksteraĵo."
+
+Dirante tion li malfaldis la paperon, kaj aldonis:—
+
+"Post ĉio dirita, ĝi ne estas letero; ĝi estas versaĵoj."
+
+"Ĉu ili estas skribitaj per la manskribo de la juĝato?" demandis
+alia ĵurinto.
+
+"Ne," respondis la Blanka Kuniklo, "kaj jen la plej nekomprenebla
+afero."
+
+Ĉe tio la mienoj de la tuta ĵurintaro proklamis plenan konfuziĝon.
+
+"Do, li nepre imitis _ies_ manskribon," diris la Reĝo. (La mienoj de
+la ĵurintoj reheliĝis.)
+
+"Se plaĉas al via Reĝa Moŝto," diris la juĝato mem, "mi ne skribis
+ĝin, kaj neniu povas pruvi ke mi skribis ĝin. Ĝi ja ne estas
+subskribita ĉe la fino."
+
+"Se vi ne subskribis," diris la Reĝo, "tio nur pligravigas la
+ofendon. Vi nepre _intencis_ ian friponaĵon, ĉar alie vi certe estus
+subskribinta la paperon kiel honestulo."
+
+Sekvis universala aklamado. Oni ja sentis ke tio estas la unua vere
+sprita diro, kiun la Reĝo diris dum la tuta tago.
+
+"Tio pruvas ke li estas kulpa," diris la Damo.
+
+"Ĝi pruvas nenion," diris Alicio. "Vi ja ankoraŭ ne scias ĉu la
+versaĵoj eĉ rilatas la nunan aferon."
+
+"Legu ilin," la Reĝo ordonis.
+
+La Blanka Kuniklo almetis siajn okulvitrojn.
+
+"Kie vi volas ke mi komencu?" li demandis.
+
+"Komencu ĉe la komenco," diris la Reĝo solene, "kaj daŭrigu ĝis vi
+venos al la fino; kaj ĉe la fino ĉesu legi."
+
+Jen la versaĵoj kiujn la Blanka Kuniklo legis:
+
+                     _Li diris ke vi vidis ŝin
+                       Kaj nomis min ĉe li, ho!
+                     Ŝi laŭdis min (atentu ĝin)
+                       Sed ne pri la talio._
+
+                     _Anoncis li ke restos mi
+                       Ĉi tie—ni ĝin sciis.
+                     "Se la aferon puŝos ŝi,
+                       Ho ve al mi," vi kriis._
+
+                     _Al ŝi nur unu, du al li,
+                       Tri, kvar al ni li donis!
+                     Sed ĉiuj venis re al vi
+                       Li tion ne oponis._
+
+                     _Se mi aŭ ŝi en tio ĉi
+                       Kulpiĝus, li tre fida
+                     Ke igos nin liberaj vi
+                       Kiel nin vi nun vidas._
+
+                     _Supozis mi ke estis vi
+                       Malhelpo al la planoj
+                     (Dolor' vi for! ekkriis ŝi)
+                       De ni kaj ĝi—pri ranoj._
+
+                     _Ne sciu li pri ŝia ŝat';
+                       Ĉar tiu devas esti
+                     Sekreta—kiel diplomat'!
+                       Ĉu vi ne volas resti?_
+
+"Jen la plej grava evidencaĵo kiun ni ĝis nun aŭskultis," diris
+kontente la Reĝo, kaj frotis al si la manojn. "Nun do la ĵurintoj
+konsid..."
+
+"Se iu el ili povos klarigi ĝin," diris Alicio—ŝi en la lastaj
+minutoj tiom grandiĝis ke ŝi jam ne timis interrompi eĉ la Reĝon
+mem—"mi donacos al li ses pencojn (250sd.); mi mem kredas ke enestas
+en ĝi eĉ ne unu ero da racia signifo."
+
+Ĉiuj ĵurintoj elskribis sur la ardezoj ke "_Ŝi_ kredas ke enestas
+eĉ ne unu ero da signifo," sed neniu el ili, malgraŭ la oferita
+premio, penis klarigi la versojn.
+
+"Se enestas nenia signifo," diris la Reĝo, "tio ja ŝparos al ni
+multe da ĝeno, ĉar signifojn ni ne bezonas serĉi. Tamen, mi ne
+estas certa," li daŭrigis, etendante la versojn sur la genuo kaj
+kritike per unu okulo rigardante ilin; "Mi malgraŭ ĉio komencas
+trovi en ili ian signifon. '_Sed ne pri la talio._' Nur rigardante la
+juĝaton, oni tuj komprenas, kial ŝi ne laŭdis _lian_ talion."
+
+"Do jam ni faras progreson," li daŭrigis sinkontente. "'_Ni ĝin
+sciis_' tio kompreneble aludas la ĵurintojn. '_Al ŝi nur unu, du
+al li, Tri, kvar al ni li donis_' jen kion li faris disdonacante la
+tortojn."
+
+"Sed," kontraŭdiris Alicio, "la daŭrigo montras ke '_ĉiuj venis re
+al vi_.'"
+
+"Kaj jen ili," triumfis la Reĝo, montrante sur la tablon. "Nenio
+povas esti pli klara pruvo ol tio. Ankaŭ tion ĉi atentu: '_Dolor'
+vi for, ekkriis ŝi._' Ĉu vi, mia kara, (turnante sin al la Damo) ne
+ordonis ke la Loro estu for? Tamen, jen li sidas!"
+
+"Certege," kriis la Damo, kaj furioze ĵetis kontraŭ la Loron grandan
+inkujon.
+
+La inkujo trafis—ne la Loron—sed Bil Lacerton. Tiu jam de longe
+ĉesis skribi per la fingro, ĉar li ne sukcesis fari per ĝi markojn;
+sed nun la kompatinda besteto laboreme rekomencis la fingroskribon,
+uzante la inkon, kiu gutfalis de lia vizaĝo.
+
+La Loro tute ne atentis la inkujon; li nur ĝentile klinis sin antaŭ
+la trono kaj majeste marŝis for.
+
+"_Doloro for!_ Do, Loro, for!" la Reĝo ripetis per speciale atentiga
+voĉo, kaj ĉirkaŭrigardis la ĉeestantaron kun afabla rideto.
+
+Sekvis tre embarasa silento. Fine la Reĝo devis anonci "Mi faris
+ŝercon," kaj—tuj la korteganoj aplaŭdis amase.
+
+"La ĵurintoj konsideru la verdikton," diris la Reĝo, jam la dudekan
+fojon!
+
+Ĉi tiun fojon la Damo interrompis. "Ne, ne," ŝi diris, "ni havu unue
+la juĝon, kaj nur poste la verdikton."
+
+"Vi parolas sensencaĵon," laŭte diris Alicio.
+
+"Senkapigu ŝin," kriegis la Damo per ŝia plej alta voĉtono.
+
+Tamen neniu ekmovis sin!
+
+"Mi ne timas _vin_" diris Alicio (ŝi jam kreskis ĝis sia normala
+alteco). "Vi ja estas nenio,—nenio krom ludkartaro!"
+
+La tuta kartaro tuj suprenleviĝis en la aeron kaj ree flugfalis sur
+ŝin. Ŝi eligis krieton, krieton duone timan kaj duone koleran, penis
+forfrapi ilin kaj—
+
+
+
+
+—trovis sin kuŝanta sur la deklivo. Jen la fratino vartis ŝian
+kapon sur la genuoj kaj forbrosas kelke da sekaj folioj falintaj de la
+arboj sur ŝian vizaĝon.
+
+"Vi vekiĝu, Anjo, vi vekiĝu, kara," diris la fratino. "Vi ja tre,
+tre longe dormis."
+
+"Ho, mi estas sonĝinta tian kuriozan sonĝon," diris Alicio.
+
+Kaj ŝi rakontis al la fratino laŭeble ĉiujn ĉi strangajn
+Aventurojn, kiujn vi ĵus tralegis.
+
+Kiam ŝi finis la rakonton, la fratino kisis ŝin, dirante:—
+
+"Jen tre kurioza sonĝo certege, Anjo. Sed jam malfruiĝas; vi do kuru
+en la domon por la temanĝo."
+
+Alicio tuj levis sin kaj rajte pensis—dum ŝi kuras—kian mirindan
+sonĝon ŝi sonĝis!
+
+
+       *       *       *       *       *
+
+
+Sed la fratino ankoraŭ sidis sur la deklivo, apogante la kapon per
+la mano, kaj rigardante la sunsubiron. Ŝi komencis pripensi la
+fratineton kaj ĉiujn ŝiajn aventurojn, ĝis ankaŭ ŝi falis en
+revon.
+
+Jen ŝia revo:—
+
+Unue pri Alicio mem ŝi revis. En ŝia fantazio denove la manetoj de
+Alicio kunligiĝis sur ŝiaj genuoj, denove tiuj klarbluaj okuloj
+de Alicio rigardas supren en ŝiajn. Ŝi kvazaŭ aŭdis la verajn
+voĉtonojn, kvazaŭ vidis tiun nur-Alician kapskuon (por postenigi la
+vageman buklon, kiu ĉiam malgraŭ ĉio volas fali antaŭ la okuloj);
+kaj dum ŝi aŭskultas—aŭ ŝajnas aŭskulti—la tuta ĉirkaŭaĵo
+fariĝis plene posedata de tiuj strangaj sonĝvivaĵoj.
+
+Jen la longa herbaĵo murmuris ĉe ŝiaj piedoj ĉar la Blanka Kuniklo
+preterpasas—jen la timigita Muso plaŭde naĝas tra la tutapuda al ŝi
+akvo—Jen ŝi ekaŭdis la tintadon de la tetasoj, dum la Martleporo
+kun siaj kunuloj partoprenas la neniam finiĝantan manĝadon, kaj
+la altvoĉajn kriojn de la Damo ordonanta la malfeliĉajn gastojn
+for, for al la ekzekutisto! Ankaŭ, jen la porkinfano ternadas sur
+la dukinaj genuoj, dum frakasiĝas ĉirkaŭe la teleroj kaj pladoj.
+Denove plenigis la aeron tiu stranga krio de la Grifo, tiuj gratoj
+de l' Lacerta grifelo, la sufokaj blekoj de la subpremataj kobajoj;
+kaj malproksime, aŭdiĝas la plorĝemoj de la Falsa Kelonio.
+
+Tre longe ŝi sidadis, kun okuloj fermitaj, kaj preskaŭ kredis ke
+ŝi mem vagas en tiu stranga Mirlando, kvankam ŝi bone konsciis ke,
+se nur ŝi malfermos la okulojn, la fantazioj malaperos, kaj ĉio
+refariĝos ordinara.
+
+Se ŝi malfermos la okulojn, jam ne murmurigos la herbon Blanka
+Kuniklo, sed nur la vento; la akvoplaŭdojn kaŭzos ne la Muso,
+sed nur ŝanceliĝantaj kanoj; la tintadantaj tetasoj refariĝos
+ŝafsonoriloj; tuj mortos la altvoĉaj krioj de la furioza Damo,
+renaskiĝante kiel krioj de la ŝafpaŝtisto; la infana ternado kaj
+ĉiuj aliaj strangaj bruoj fariĝos—nur konfuzita bruaro de la
+farmkorto; kaj, anstataŭ la profundaj ĝemoj de la Falsa Kelonio,
+ŝi aŭdos de malproksime la blekadon de la bovinoj.
+
+Fine, ŝi imagis al si kiel ĉi tiu sama fratineto en la venontaj
+jaroj estos mem plenaĝa virino; kiel ŝi kredeble gardos, dum la
+maturaj jaroj, la simplan kaj ameman koron kiu karakterizas la nunan
+infanecon; kiel ŝi kredeble kolektos ĉirkaŭ si aliajn infanojn, kaj
+al _ili_ briligos la okulojn per multe da strangaj rakontoj, eble
+eĉ per tiu ĉi stranga Sonĝo; kiel ŝi kredeble simpatie partoprenos
+ĉiujn iliajn simplajn ĝojojn kaj malĝojojn, rememorante siajn
+infanjarojn kaj la belajn somertagojn.
+
+
+       *       *       *       *       *
+
+
+[En la libro mem, la piednotoj troviĝas plejparte ĉe la piedoj de
+la koncernaj paĝoj. Por ne interrompi la fluon de la rakonto en tiu
+ĉi unupaĝa versio preparita de Distributed Proofreaders, la piednotoj
+estas kolektitaj ĉi tie, ĉe la fino de la unu (longa!) paĝo.]
+
+[1] [3]   La vorto "tejl" prezentas al anglolingvanoj du diversajn
+          ideojn, la ideon "vosto" kaj la ideon "rakonto."
+
+[2]       La aŭtoro tie ĉi kritikas (per la buŝo de l' Anaso) la
+          anglan kutimon enmeti sen bezono la vortojn "ĝi" "ĝin" por
+          turni la atenton al longa subjekta aŭ objekta frazeto, kiu
+          sekvas: en la teksto "ĝin" = "iri kun E.A..... por proponi
+          al li la kronon."
+
+[4]       Angla mallongaĵo, inter familianoj, por Vilhelmo.
+
+[5]       _Cheshire_ (Ĉeŝŝa) estas la angla graflando en kiu sidas
+          la urbo _Chester_ (Ĉesta); ekzistas popoldiro ke nur en
+          tiu graflando la katoj havas la kapablon grimaci.
+
+[6]       En angla lingvo, "akso" havas ankaŭ la signifon "hakilo."
+
+[7]       "Same freneza kiel leporo en Marto" estas angla popoldiro.
+
+[8]       La angla frazeto kiun uzis la Ĉapelisto estas dusencaĵo kies
+          ordinara signifo estas "paroli ĝis fiksita templimo ekze 10
+          minutojn"; ĝi povas ankaŭ signifi "alparoli Tempon."
+
+[9]       Jen alia dusencaĵo: Alicio intencis esprimi "laŭtkalkuli la
+          taktojn," sed la Ĉapelisto komprenis aŭ ŝajnigis kompreni
+          "bati Tempon."
+
+[10]      Angla vorto kiu signifas "lumi kiel steloj lumas," "brili
+          intermite."
+
+[11] [12] La sama angla vorto "_draw_" havas la signifojn "desegni"
+          kaj "ĉerpi."
+
+[13]      "Eĉ Kato rajtas rigardi Reĝon" estas angla popoldiro.
+
+[14]      Krom multaj aliaj supoj, la anglaj havas du, kiujn oni nomas
+          "kelonia" kaj "falskelonia." La unua, kompreneble, estas
+          farata el kelonia viando. La alia estas je gusto tre simila;
+          kaj oni konkludas ke se kelonia supo estas farata el la vera
+          kelonio, la falskelonia nur povas esti farata el la Falsa
+          Kelonio.
+
+
+       *       *       *       *       *
+
+
+               TURNBULL AND SPEARS, PRINTERS, EDINBURGH
+
+
+
+
+
+
+End of the Project Gutenberg EBook of La Aventuroj de Alicio en Mirlando, by 
+Lewis Carroll
+
+*** END OF THIS PROJECT GUTENBERG EBOOK LA AVENTUROJ DE ALICIO EN MIRLANDO ***
+
+***** This file should be named 17482-0.txt or 17482-0.zip *****
+This and all associated files of various formats will be found in:
+        http://www.gutenberg.org/1/7/4/8/17482/
+
+Produced by David Starner, William Patterson and the Online
+Distributed Proofreading Team at http://www.pgdp.net
+
+
+Updated editions will replace the previous one--the old editions
+will be renamed.
+
+Creating the works from public domain print editions means that no
+one owns a United States copyright in these works, so the Foundation
+(and you!) can copy and distribute it in the United States without
+permission and without paying copyright royalties.  Special rules,
+set forth in the General Terms of Use part of this license, apply to
+copying and distributing Project Gutenberg-tm electronic works to
+protect the PROJECT GUTENBERG-tm concept and trademark.  Project
+Gutenberg is a registered trademark, and may not be used if you
+charge for the eBooks, unless you receive specific permission.  If you
+do not charge anything for copies of this eBook, complying with the
+rules is very easy.  You may use this eBook for nearly any purpose
+such as creation of derivative works, reports, performances and
+research.  They may be modified and printed and given away--you may do
+practically ANYTHING with public domain eBooks.  Redistribution is
+subject to the trademark license, especially commercial
+redistribution.
+
+
+
+*** START: FULL LICENSE ***
+
+THE FULL PROJECT GUTENBERG LICENSE
+PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORK
+
+To protect the Project Gutenberg-tm mission of promoting the free
+distribution of electronic works, by using or distributing this work
+(or any other work associated in any way with the phrase "Project
+Gutenberg"), you agree to comply with all the terms of the Full Project
+Gutenberg-tm License (available with this file or online at
+http://gutenberg.org/license).
+
+
+Section 1.  General Terms of Use and Redistributing Project Gutenberg-tm
+electronic works
+
+1.A.  By reading or using any part of this Project Gutenberg-tm
+electronic work, you indicate that you have read, understand, agree to
+and accept all the terms of this license and intellectual property
+(trademark/copyright) agreement.  If you do not agree to abide by all
+the terms of this agreement, you must cease using and return or destroy
+all copies of Project Gutenberg-tm electronic works in your possession.
+If you paid a fee for obtaining a copy of or access to a Project
+Gutenberg-tm electronic work and you do not agree to be bound by the
+terms of this agreement, you may obtain a refund from the person or
+entity to whom you paid the fee as set forth in paragraph 1.E.8.
+
+1.B.  "Project Gutenberg" is a registered trademark.  It may only be
+used on or associated in any way with an electronic work by people who
+agree to be bound by the terms of this agreement.  There are a few
+things that you can do with most Project Gutenberg-tm electronic works
+even without complying with the full terms of this agreement.  See
+paragraph 1.C below.  There are a lot of things you can do with Project
+Gutenberg-tm electronic works if you follow the terms of this agreement
+and help preserve free future access to Project Gutenberg-tm electronic
+works.  See paragraph 1.E below.
+
+1.C.  The Project Gutenberg Literary Archive Foundation ("the Foundation"
+or PGLAF), owns a compilation copyright in the collection of Project
+Gutenberg-tm electronic works.  Nearly all the individual works in the
+collection are in the public domain in the United States.  If an
+individual work is in the public domain in the United States and you are
+located in the United States, we do not claim a right to prevent you from
+copying, distributing, performing, displaying or creating derivative
+works based on the work as long as all references to Project Gutenberg
+are removed.  Of course, we hope that you will support the Project
+Gutenberg-tm mission of promoting free access to electronic works by
+freely sharing Project Gutenberg-tm works in compliance with the terms of
+this agreement for keeping the Project Gutenberg-tm name associated with
+the work.  You can easily comply with the terms of this agreement by
+keeping this work in the same format with its attached full Project
+Gutenberg-tm License when you share it without charge with others.
+
+1.D.  The copyright laws of the place where you are located also govern
+what you can do with this work.  Copyright laws in most countries are in
+a constant state of change.  If you are outside the United States, check
+the laws of your country in addition to the terms of this agreement
+before downloading, copying, displaying, performing, distributing or
+creating derivative works based on this work or any other Project
+Gutenberg-tm work.  The Foundation makes no representations concerning
+the copyright status of any work in any country outside the United
+States.
+
+1.E.  Unless you have removed all references to Project Gutenberg:
+
+1.E.1.  The following sentence, with active links to, or other immediate
+access to, the full Project Gutenberg-tm License must appear prominently
+whenever any copy of a Project Gutenberg-tm work (any work on which the
+phrase "Project Gutenberg" appears, or with which the phrase "Project
+Gutenberg" is associated) is accessed, displayed, performed, viewed,
+copied or distributed:
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.org
+
+1.E.2.  If an individual Project Gutenberg-tm electronic work is derived
+from the public domain (does not contain a notice indicating that it is
+posted with permission of the copyright holder), the work can be copied
+and distributed to anyone in the United States without paying any fees
+or charges.  If you are redistributing or providing access to a work
+with the phrase "Project Gutenberg" associated with or appearing on the
+work, you must comply either with the requirements of paragraphs 1.E.1
+through 1.E.7 or obtain permission for the use of the work and the
+Project Gutenberg-tm trademark as set forth in paragraphs 1.E.8 or
+1.E.9.
+
+1.E.3.  If an individual Project Gutenberg-tm electronic work is posted
+with the permission of the copyright holder, your use and distribution
+must comply with both paragraphs 1.E.1 through 1.E.7 and any additional
+terms imposed by the copyright holder.  Additional terms will be linked
+to the Project Gutenberg-tm License for all works posted with the
+permission of the copyright holder found at the beginning of this work.
+
+1.E.4.  Do not unlink or detach or remove the full Project Gutenberg-tm
+License terms from this work, or any files containing a part of this
+work or any other work associated with Project Gutenberg-tm.
+
+1.E.5.  Do not copy, display, perform, distribute or redistribute this
+electronic work, or any part of this electronic work, without
+prominently displaying the sentence set forth in paragraph 1.E.1 with
+active links or immediate access to the full terms of the Project
+Gutenberg-tm License.
+
+1.E.6.  You may convert to and distribute this work in any binary,
+compressed, marked up, nonproprietary or proprietary form, including any
+word processing or hypertext form.  However, if you provide access to or
+distribute copies of a Project Gutenberg-tm work in a format other than
+"Plain Vanilla ASCII" or other format used in the official version
+posted on the official Project Gutenberg-tm web site (www.gutenberg.org),
+you must, at no additional cost, fee or expense to the user, provide a
+copy, a means of exporting a copy, or a means of obtaining a copy upon
+request, of the work in its original "Plain Vanilla ASCII" or other
+form.  Any alternate format must include the full Project Gutenberg-tm
+License as specified in paragraph 1.E.1.
+
+1.E.7.  Do not charge a fee for access to, viewing, displaying,
+performing, copying or distributing any Project Gutenberg-tm works
+unless you comply with paragraph 1.E.8 or 1.E.9.
+
+1.E.8.  You may charge a reasonable fee for copies of or providing
+access to or distributing Project Gutenberg-tm electronic works provided
+that
+
+- You pay a royalty fee of 20% of the gross profits you derive from
+     the use of Project Gutenberg-tm works calculated using the method
+     you already use to calculate your applicable taxes.  The fee is
+     owed to the owner of the Project Gutenberg-tm trademark, but he
+     has agreed to donate royalties under this paragraph to the
+     Project Gutenberg Literary Archive Foundation.  Royalty payments
+     must be paid within 60 days following each date on which you
+     prepare (or are legally required to prepare) your periodic tax
+     returns.  Royalty payments should be clearly marked as such and
+     sent to the Project Gutenberg Literary Archive Foundation at the
+     address specified in Section 4, "Information about donations to
+     the Project Gutenberg Literary Archive Foundation."
+
+- You provide a full refund of any money paid by a user who notifies
+     you in writing (or by e-mail) within 30 days of receipt that s/he
+     does not agree to the terms of the full Project Gutenberg-tm
+     License.  You must require such a user to return or
+     destroy all copies of the works possessed in a physical medium
+     and discontinue all use of and all access to other copies of
+     Project Gutenberg-tm works.
+
+- You provide, in accordance with paragraph 1.F.3, a full refund of any
+     money paid for a work or a replacement copy, if a defect in the
+     electronic work is discovered and reported to you within 90 days
+     of receipt of the work.
+
+- You comply with all other terms of this agreement for free
+     distribution of Project Gutenberg-tm works.
+
+1.E.9.  If you wish to charge a fee or distribute a Project Gutenberg-tm
+electronic work or group of works on different terms than are set
+forth in this agreement, you must obtain permission in writing from
+both the Project Gutenberg Literary Archive Foundation and Michael
+Hart, the owner of the Project Gutenberg-tm trademark.  Contact the
+Foundation as set forth in Section 3 below.
+
+1.F.
+
+1.F.1.  Project Gutenberg volunteers and employees expend considerable
+effort to identify, do copyright research on, transcribe and proofread
+public domain works in creating the Project Gutenberg-tm
+collection.  Despite these efforts, Project Gutenberg-tm electronic
+works, and the medium on which they may be stored, may contain
+"Defects," such as, but not limited to, incomplete, inaccurate or
+corrupt data, transcription errors, a copyright or other intellectual
+property infringement, a defective or damaged disk or other medium, a
+computer virus, or computer codes that damage or cannot be read by
+your equipment.
+
+1.F.2.  LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the "Right
+of Replacement or Refund" described in paragraph 1.F.3, the Project
+Gutenberg Literary Archive Foundation, the owner of the Project
+Gutenberg-tm trademark, and any other party distributing a Project
+Gutenberg-tm electronic work under this agreement, disclaim all
+liability to you for damages, costs and expenses, including legal
+fees.  YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
+LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
+PROVIDED IN PARAGRAPH F3.  YOU AGREE THAT THE FOUNDATION, THE
+TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
+LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
+INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
+DAMAGE.
+
+1.F.3.  LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+defect in this electronic work within 90 days of receiving it, you can
+receive a refund of the money (if any) you paid for it by sending a
+written explanation to the person you received the work from.  If you
+received the work on a physical medium, you must return the medium with
+your written explanation.  The person or entity that provided you with
+the defective work may elect to provide a replacement copy in lieu of a
+refund.  If you received the work electronically, the person or entity
+providing it to you may choose to give you a second opportunity to
+receive the work electronically in lieu of a refund.  If the second copy
+is also defective, you may demand a refund in writing without further
+opportunities to fix the problem.
+
+1.F.4.  Except for the limited right of replacement or refund set forth
+in paragraph 1.F.3, this work is provided to you 'AS-IS' WITH NO OTHER
+WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.
+
+1.F.5.  Some states do not allow disclaimers of certain implied
+warranties or the exclusion or limitation of certain types of damages.
+If any disclaimer or limitation set forth in this agreement violates the
+law of the state applicable to this agreement, the agreement shall be
+interpreted to make the maximum disclaimer or limitation permitted by
+the applicable state law.  The invalidity or unenforceability of any
+provision of this agreement shall not void the remaining provisions.
+
+1.F.6.  INDEMNITY - You agree to indemnify and hold the Foundation, the
+trademark owner, any agent or employee of the Foundation, anyone
+providing copies of Project Gutenberg-tm electronic works in accordance
+with this agreement, and any volunteers associated with the production,
+promotion and distribution of Project Gutenberg-tm electronic works,
+harmless from all liability, costs and expenses, including legal fees,
+that arise directly or indirectly from any of the following which you do
+or cause to occur: (a) distribution of this or any Project Gutenberg-tm
+work, (b) alteration, modification, or additions or deletions to any
+Project Gutenberg-tm work, and (c) any Defect you cause.
+
+
+Section  2.  Information about the Mission of Project Gutenberg-tm
+
+Project Gutenberg-tm is synonymous with the free distribution of
+electronic works in formats readable by the widest variety of computers
+including obsolete, old, middle-aged and new computers.  It exists
+because of the efforts of hundreds of volunteers and donations from
+people in all walks of life.
+
+Volunteers and financial support to provide volunteers with the
+assistance they need, is critical to reaching Project Gutenberg-tm's
+goals and ensuring that the Project Gutenberg-tm collection will
+remain freely available for generations to come.  In 2001, the Project
+Gutenberg Literary Archive Foundation was created to provide a secure
+and permanent future for Project Gutenberg-tm and future generations.
+To learn more about the Project Gutenberg Literary Archive Foundation
+and how your efforts and donations can help, see Sections 3 and 4
+and the Foundation web page at http://www.pglaf.org.
+
+
+Section 3.  Information about the Project Gutenberg Literary Archive
+Foundation
+
+The Project Gutenberg Literary Archive Foundation is a non profit
+501(c)(3) educational corporation organized under the laws of the
+state of Mississippi and granted tax exempt status by the Internal
+Revenue Service.  The Foundation's EIN or federal tax identification
+number is 64-6221541.  Its 501(c)(3) letter is posted at
+http://pglaf.org/fundraising.  Contributions to the Project Gutenberg
+Literary Archive Foundation are tax deductible to the full extent
+permitted by U.S. federal laws and your state's laws.
+
+The Foundation's principal office is located at 4557 Melan Dr. S.
+Fairbanks, AK, 99712., but its volunteers and employees are scattered
+throughout numerous locations.  Its business office is located at
+809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887, email
+business@pglaf.org.  Email contact links and up to date contact
+information can be found at the Foundation's web site and official
+page at http://pglaf.org
+
+For additional contact information:
+     Dr. Gregory B. Newby
+     Chief Executive and Director
+     gbnewby@pglaf.org
+
+
+Section 4.  Information about Donations to the Project Gutenberg
+Literary Archive Foundation
+
+Project Gutenberg-tm depends upon and cannot survive without wide
+spread public support and donations to carry out its mission of
+increasing the number of public domain and licensed works that can be
+freely distributed in machine readable form accessible by the widest
+array of equipment including outdated equipment.  Many small donations
+($1 to $5,000) are particularly important to maintaining tax exempt
+status with the IRS.
+
+The Foundation is committed to complying with the laws regulating
+charities and charitable donations in all 50 states of the United
+States.  Compliance requirements are not uniform and it takes a
+considerable effort, much paperwork and many fees to meet and keep up
+with these requirements.  We do not solicit donations in locations
+where we have not received written confirmation of compliance.  To
+SEND DONATIONS or determine the status of compliance for any
+particular state visit http://pglaf.org
+
+While we cannot and do not solicit contributions from states where we
+have not met the solicitation requirements, we know of no prohibition
+against accepting unsolicited donations from donors in such states who
+approach us with offers to donate.
+
+International donations are gratefully accepted, but we cannot make
+any statements concerning tax treatment of donations received from
+outside the United States.  U.S. laws alone swamp our small staff.
+
+Please check the Project Gutenberg Web pages for current donation
+methods and addresses.  Donations are accepted in a number of other
+ways including checks, online payments and credit card donations.
+To donate, please visit: http://pglaf.org/donate
+
+
+Section 5.  General Information About Project Gutenberg-tm electronic
+works.
+
+Professor Michael S. Hart is the originator of the Project Gutenberg-tm
+concept of a library of electronic works that could be freely shared
+with anyone.  For thirty years, he produced and distributed Project
+Gutenberg-tm eBooks with only a loose network of volunteer support.
+
+
+Project Gutenberg-tm eBooks are often created from several printed
+editions, all of which are confirmed as Public Domain in the U.S.
+unless a copyright notice is included.  Thus, we do not necessarily
+keep eBooks in compliance with any particular paper edition.
+
+
+Most people start at our Web site which has the main PG search facility:
+
+     http://www.gutenberg.org
+
+This Web site includes information about Project Gutenberg-tm,
+including how to make donations to the Project Gutenberg Literary
+Archive Foundation, how to help produce our new eBooks, and how to
+subscribe to our email newsletter to hear about new eBooks.
