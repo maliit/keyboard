@@ -34,6 +34,7 @@ HEADERS += \
     greeterstatus.h \
     keyboardgeometry.h \
     keyboardsettings.h \
+    mirinputregionupdater.h \
 #    updatenotifier.h \
 
 SOURCES += \
@@ -43,6 +44,7 @@ SOURCES += \
     greeterstatus.cpp \
     keyboardgeometry.cpp \
     keyboardsettings.cpp \
+    mirinputregionupdater.cpp \
 #    updatenotifier.cpp \
 
 target.path += $${MALIIT_PLUGINS_DIR}
