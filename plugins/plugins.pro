@@ -18,6 +18,7 @@ SUBDIRS = \
     fa \
     fi \
     fr \
+    fr_ch \
     gd \
     he \
     hr \
@@ -33,6 +34,7 @@ SUBDIRS = \
     pt \
     ro \
     ru \
+    tr \
     sl \
     sr \
     sv \

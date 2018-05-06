@@ -20,25 +20,25 @@ TARGET          = $$qtLibraryTarget(frplugin)
 EXAMPLE_FILES = frenchplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/fr/
+PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/fr-ch/
 
-lang_db_fr.commands += \
+lang_db_fr_ch.commands += \
   rm -f $$PWD/database_fr.db && \
   text2ngram -n 1 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt && \
   text2ngram -n 2 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt && \
   text2ngram -n 3 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt
-lang_db_fr.files += $$PWD/database_fr.db
+lang_db_fr_ch.files += $$PWD/database_fr.db
 
-lang_db_fr_install.files += $$PWD/database_fr.db
-lang_db_fr_install.path = $$PLUGIN_INSTALL_PATH
+lang_db_fr_ch_install.files += $$PWD/database_fr.db
+lang_db_fr_ch_install.path = $$PLUGIN_INSTALL_PATH
 
-QMAKE_EXTRA_TARGETS += lang_db_fr lang_db_fr_install
+QMAKE_EXTRA_TARGETS += lang_db_fr_ch lang_db_fr_ch_install
 
 overrides.files += $$PWD/overrides.csv
 overrides.path += $$PLUGIN_INSTALL_PATH
 
 target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_fr_install overrides
+INSTALLS += target lang_db_fr_ch_install overrides
 
 
 OTHER_FILES += \
