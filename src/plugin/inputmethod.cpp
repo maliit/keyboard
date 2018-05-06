@@ -126,6 +126,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerDoubleSpaceFullStop();
     d->registerStayHidden();
     d->registerPluginPaths();
+    d->registerOpacity();
 
     //fire signal so all listeners know what active language is
     Q_EMIT activeLanguageChanged(d->activeLanguage);
@@ -417,9 +418,9 @@ void InputMethod::updateWordEngine()
 {
     Q_D(InputMethod);
 
-    if (d->contentType != FreeTextContentType
+    if (d->contentType != FreeTextContentType && d->contentType != UrlContentType
         && !(d->editor.wordEngine()->languageFeature()->alwaysShowSuggestions()
-             && (d->contentType == UrlContentType || d->contentType == EmailContentType))) {
+             && d->contentType == EmailContentType)) {
         d->wordEngineEnabled = false;
     }
 
@@ -656,6 +657,12 @@ int InputMethod::cursorPosition() const
 {
     Q_D(const InputMethod);
     return d->editor.text()->cursorPosition();
+}
+
+double InputMethod::opacity() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.opacity();
 }
 
 void InputMethod::replacePreedit(const QString &preedit)

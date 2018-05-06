@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-06-02 00:06+0100\n"
-"PO-Revision-Date: 2016-06-04 23:32+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
+"PO-Revision-Date: 2017-04-04 23:36+0000\n"
+"Last-Translator: Víctor R. Ruiz <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-16 06:16+0000\n"
-"X-Generator: Launchpad (build 18269)\n"
+"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
+"X-Generator: Launchpad (build 18343)\n"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "Settings"
@@ -103,7 +103,7 @@ msgstr "Japonés"
 
 #: ../qml/keys/languages.js:39
 msgid "Latvian"
-msgstr ""
+msgstr "Letón"
 
 #: ../qml/keys/languages.js:40
 msgid "Dutch"

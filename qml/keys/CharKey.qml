@@ -74,7 +74,7 @@ Item {
     // be used, depending on the state. If no extended/extendedShifted arrays exist, no annotation is shown
     property string annotation: ""
 
-    /*! indicates if te key is currently pressed/down*/
+    /*! indicates if the key is currently pressed/down*/
     property alias currentlyPressed: keyMouseArea.pressed
 
     /* internal */
@@ -177,7 +177,7 @@ Item {
                 anchors.topMargin: units.gu(UI.annotationTopMargin)
                 anchors.rightMargin: units.gu(UI.annotationRightMargin)
                 font.family: UI.annotationFont
-                font.pixelSize: fullScreenItem.tablet ? units.dp(UI.tabletAnnotationFontSize) : units.dp(UI.phoneAnnotationFontSize)
+                font.pixelSize: fontSize / 3
                 font.weight: Font.Light
                 color: UI.annotationFontColor
                 visible: !panel.hideKeyLabels
