@@ -67,6 +67,12 @@ MultiPointTouchArea {
                         swipedOut = true;
                         cancelPress();
                     }
+                    
+                    // Dirty hack, see onReleased below
+                    if (point.y > panel.height) {
+                        // Touch point released past height of keyboard.
+                        return;
+                    }
 
                     var distance = point.y - lastY;
                     // If changing direction wait until movement passes 1 gu
@@ -76,11 +82,11 @@ MultiPointTouchArea {
                         lastY = point.y;
                         lastYChange = distance;
                     }
-                    // Hide if we get close to the bottom of the screen
+                    // Hide if we get close to the bottom of the screen.
                     // This works around issues with devices with touch buttons
                     // below the screen preventing release events when swiped
                     // over
-                    if(point.sceneY > fullScreenItem.height - units.gu(4) && point.y > startY + units.gu(8) && !held) {
+                    if(!held && point.sceneY > fullScreenItem.height - units.gu(4) && point.y > startY + units.gu(8)) {
                         maliit_input_method.hide();
                     }
                 } else {
@@ -131,13 +137,24 @@ MultiPointTouchArea {
     }
 
     onReleased: {
-        // Allow the user to swipe away the keyboard
-        if (point.y > startY + units.gu(8) && !held) {
-            maliit_input_method.hide();
-        } else {
-            bounceBackAnimation.from = keyboardSurface.y;
-            bounceBackAnimation.start();
+
+        // Don't evaluate if the release point is above the start point
+        // or further away from its start than the height of the whole keyboard.
+        // This works around touches sometimes being recognized as ending below
+        // the bottom of the screen.
+        if (point.y > panel.height) {
+            console.warn("Touch point released past height of keyboard. Ignoring.");
+        } else if (!(point.y <= startY)) {
+            // Handles swiping away the keyboard
+            // Hide if the end point is more than 8 grid units from the start
+            if (!held && point.y > startY + units.gu(8)) {
+                maliit_input_method.hide();
+            } else {
+                bounceBackAnimation.from = keyboardSurface.y;
+                bounceBackAnimation.start();
+            }
         }
+
         pressed = false;
         held = false;
         holdTimer.stop();
