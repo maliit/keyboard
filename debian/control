@@ -120,6 +120,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-italian (>= ${source:Version}),
          ubuntu-keyboard-japanese (>= ${source:Version}),
          ubuntu-keyboard-latvian (>= ${source:Version}),
+         ubuntu-keyboard-lithuanian (>= ${source:Version}),
          ubuntu-keyboard-korean (>= ${source:Version}),
          ubuntu-keyboard-norwegian-bokmal (>= ${source:Version}),
          ubuntu-keyboard-polish (>= ${source:Version}),
@@ -355,6 +356,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Latvian
  Data files for the Ubuntu virtual keyboard - Latvian
+
+Package: ubuntu-keyboard-lithuanian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-lt,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Lithuanian
+ Data files for the Ubuntu virtual keyboard - Lithuanian
 
 Package: ubuntu-keyboard-korean
 Architecture: any

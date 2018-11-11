@@ -6,16 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-06-02 00:06+0100\n"
-"PO-Revision-Date: 2016-03-10 15:30+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-10 19:57+0200\n"
+"PO-Revision-Date: 2018-12-10 19:58+0200\n"
 "Last-Translator: Mantas <mantas.bond@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../qml/keys/LanguageMenu.qml:81
 msgid "Settings"
@@ -30,122 +31,146 @@ msgid "Azerbaijani"
 msgstr "Azerbaidžaniečių"
 
 #: ../qml/keys/languages.js:21
+msgid "Bulgarian"
+msgstr "Belgų"
+
+#: ../qml/keys/languages.js:22
 msgid "Bosnian"
 msgstr "Bosnių"
 
-#: ../qml/keys/languages.js:22
+#: ../qml/keys/languages.js:23
 msgid "Catalan"
 msgstr "Katalonų"
 
-#: ../qml/keys/languages.js:23
+#: ../qml/keys/languages.js:24
 msgid "Czech"
 msgstr "Čekų"
 
-#: ../qml/keys/languages.js:24
+#: ../qml/keys/languages.js:25
 msgid "Danish"
 msgstr "Danų"
 
-#: ../qml/keys/languages.js:25
+#: ../qml/keys/languages.js:26
 msgid "German"
 msgstr "Vokiečių"
 
-#: ../qml/keys/languages.js:26
+#: ../qml/keys/languages.js:27
 msgid "Emoji"
 msgstr "Šypsenelės"
 
-#: ../qml/keys/languages.js:27
+#: ../qml/keys/languages.js:28
 msgid "Greek"
 msgstr "Graikų"
 
-#: ../qml/keys/languages.js:28
+#: ../qml/keys/languages.js:29
 msgid "English"
 msgstr "Anglų"
 
-#: ../qml/keys/languages.js:29
+#: ../qml/keys/languages.js:30
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#: ../qml/keys/languages.js:31
 msgid "Spanish"
 msgstr "Ispanų"
 
-#: ../qml/keys/languages.js:30
+#: ../qml/keys/languages.js:32
+msgid "Persian"
+msgstr "Persų"
+
+#: ../qml/keys/languages.js:33
 msgid "Finnish"
 msgstr "Suomių"
 
-#: ../qml/keys/languages.js:31
+#: ../qml/keys/languages.js:34
 msgid "French"
 msgstr "Prancūzų"
 
-#: ../qml/keys/languages.js:32
+#: ../qml/keys/languages.js:35
 msgid "Scottish Gaelic"
 msgstr "Škotų gėlų"
 
-#: ../qml/keys/languages.js:33
+#: ../qml/keys/languages.js:36
 msgid "Hebrew"
 msgstr "Hebrajų"
 
-#: ../qml/keys/languages.js:34
+#: ../qml/keys/languages.js:37
 msgid "Croatian"
 msgstr "Kroatų"
 
-#: ../qml/keys/languages.js:35
+#: ../qml/keys/languages.js:38
 msgid "Hungarian"
 msgstr "Vengrų"
 
-#: ../qml/keys/languages.js:36
+#: ../qml/keys/languages.js:39
 msgid "Icelandic"
 msgstr "Islandų"
 
-#: ../qml/keys/languages.js:37
+#: ../qml/keys/languages.js:40
 msgid "Italian"
 msgstr "Italų"
 
-#: ../qml/keys/languages.js:38
+#: ../qml/keys/languages.js:41
 msgid "Japanese"
 msgstr "Japonų"
 
-#: ../qml/keys/languages.js:39
+#: ../qml/keys/languages.js:42
+msgid "Lithuanian"
+msgstr "Lietuvių"
+
+#: ../qml/keys/languages.js:43
 msgid "Latvian"
 msgstr "Latvių"
 
-#: ../qml/keys/languages.js:40
+#: ../qml/keys/languages.js:44
+msgid "Korean"
+msgstr "Koriečių"
+
+#: ../qml/keys/languages.js:45
 msgid "Dutch"
 msgstr "Nyderlandų"
 
-#: ../qml/keys/languages.js:41
+#: ../qml/keys/languages.js:46
 msgid "Norwegian"
 msgstr "Norvegų"
 
-#: ../qml/keys/languages.js:42
+#: ../qml/keys/languages.js:47
 msgid "Polish"
 msgstr "Lenkų"
 
-#: ../qml/keys/languages.js:43
+#: ../qml/keys/languages.js:48
 msgid "Portuguese"
 msgstr "Portugalų"
 
-#: ../qml/keys/languages.js:44
+#: ../qml/keys/languages.js:49
 msgid "Romanian"
 msgstr "Rumunų"
 
-#: ../qml/keys/languages.js:45
+#: ../qml/keys/languages.js:50
 msgid "Russian"
 msgstr "Rusų"
 
-#: ../qml/keys/languages.js:46
+#: ../qml/keys/languages.js:51
 msgid "Slovenian"
 msgstr "Slovėnų"
 
-#: ../qml/keys/languages.js:47
+#: ../qml/keys/languages.js:52
 msgid "Serbian"
 msgstr "Serbų"
 
-#: ../qml/keys/languages.js:48
+#: ../qml/keys/languages.js:53
 msgid "Swedish"
 msgstr "Švedų"
 
-#: ../qml/keys/languages.js:49
+#: ../qml/keys/languages.js:54
+msgid "Turkish"
+msgstr "Turkų"
+
+#: ../qml/keys/languages.js:55
 msgid "Ukrainian"
 msgstr "Ukrainiečių"
 
-#: ../qml/keys/languages.js:50
+#: ../qml/keys/languages.js:56
 msgid ""
 "Chinese\n"
 "(Pinyin)"
@@ -153,7 +178,7 @@ msgstr ""
 "Kinų\n"
 "(Pinyin)"
 
-#: ../qml/keys/languages.js:51
+#: ../qml/keys/languages.js:57
 msgid ""
 "Chinese\n"
 "(Chewing)"
