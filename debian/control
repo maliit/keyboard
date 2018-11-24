@@ -55,7 +55,9 @@ Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
          ubuntu-keyboard-english (>= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-Breaks: unity8 (<< 8.13),
+Replaces: ubuntu-touch-session (<< 0.109),
+Breaks: ubuntu-touch-session (<< 0.109),
+        unity8 (<< 8.13),
 Description: Ubuntu on-screen keyboard
  Ubuntu Keyboard based on Maliit-Keyboard
  .
@@ -107,6 +109,7 @@ Depends: libautopilot-qt (>= 1.4),
          ubuntu-keyboard-dutch (>= ${source:Version}),
          ubuntu-keyboard-emoji (>= ${source:Version}),
          ubuntu-keyboard-english (>= ${source:Version}),
+         ubuntu-keyboard-persian (>= ${source:Version}),
          ubuntu-keyboard-finnish (>= ${source:Version}),
          ubuntu-keyboard-french (>= ${source:Version}),
          ubuntu-keyboard-german (>= ${source:Version}),
@@ -159,6 +162,15 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Bosnian
  Data files for the Ubuntu virtual keyboard - Bosnian
+
+Package: ubuntu-keyboard-bulgarian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         hunspell-bg,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Bulgarian
+ Data files for the Ubuntu virtual keyboard - Bulgarian
 
 Package: ubuntu-keyboard-catalan
 Architecture: any
@@ -223,6 +235,7 @@ Description: Ubuntu on-screen keyboard data files - Dutch
 Package: ubuntu-keyboard-emoji
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
+         qml-module-qtquick-localstorage,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Emoji
@@ -236,6 +249,24 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - English
  Data files for the Ubuntu virtual keyboard - English
+
+Package: ubuntu-keyboard-esperanto
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-eo,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Esperanto
+ Data files for the Ubuntu virtual keyboard - Esperanto
+
+Package: ubuntu-keyboard-persian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         myspell-fa,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Persian
+ Data files for the Ubuntu virtual keyboard - Persian
 
 Package: ubuntu-keyboard-finnish
 Architecture: any
@@ -321,7 +352,7 @@ Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),
          myspell-lv,
          ${misc:Depends},
-         ${shlibs:Depends},	 
+         ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Latvian
  Data files for the Ubuntu virtual keyboard - Latvian
 
@@ -423,6 +454,22 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Swedish
  Data files for the Ubuntu virtual keyboard - Swedish
+
+Package: ubuntu-keyboard-swiss-french
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+        ${misc:Depends},
+        ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Swiss French
+ Data files for the Ubuntu virtual keyboard - Swiss French
+
+Package: ubuntu-keyboard-turkish
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+        ${misc:Depends},
+        ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Turkish
+ Data files for the Ubuntu virtual keyboard - Turkish
 
 Package: ubuntu-keyboard-ukrainian
 Architecture: any

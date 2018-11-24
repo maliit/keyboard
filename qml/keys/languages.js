@@ -18,6 +18,7 @@ function languageIdToName(languageId)
 {
     if (languageId == "ar")         return i18n.tr("Arabic");
     if (languageId == "az")         return i18n.tr("Azerbaijani");
+    if (languageId == "bg")         return i18n.tr("Bulgarian");
     if (languageId == "bs")         return i18n.tr("Bosnian");
     if (languageId == "ca")         return i18n.tr("Catalan");
     if (languageId == "cs")         return i18n.tr("Czech");
@@ -26,7 +27,9 @@ function languageIdToName(languageId)
     if (languageId == "emoji")      return i18n.tr("Emoji");
     if (languageId == "el")         return i18n.tr("Greek");
     if (languageId == "en")         return i18n.tr("English");
+    if (languageId == "eo")         return i18n.tr("Esperanto");
     if (languageId == "es")         return i18n.tr("Spanish");
+    if (languageId == "fa")         return i18n.tr("Persian");
     if (languageId == "fi")         return i18n.tr("Finnish");
     if (languageId == "fr")         return i18n.tr("French");
     if (languageId == "gd")         return i18n.tr("Scottish Gaelic");
@@ -47,10 +50,11 @@ function languageIdToName(languageId)
     if (languageId == "sl")         return i18n.tr("Slovenian");
     if (languageId == "sr")         return i18n.tr("Serbian");
     if (languageId == "sv")         return i18n.tr("Swedish");
+    if (languageId == "tr")         return i18n.tr("Turkish");
     if (languageId == "uk")         return i18n.tr("Ukrainian");
     if (languageId == "zh-hans")         return i18n.tr("Chinese\n(Pinyin)");
     if (languageId == "zh-hant")         return i18n.tr("Chinese\n(Chewing)");
 
     // fallback
     return languageId.charAt(0).toUpperCase() + languageId.slice(1);
-}   
+}
