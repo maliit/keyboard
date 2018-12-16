@@ -26,7 +26,7 @@ Rectangle {
 
     Rectangle {
         anchors.fill: parent
-        color: UI.backgroundColor
+        color: fullScreenItem.theme.backgroundColor
     }
 
     ListView {

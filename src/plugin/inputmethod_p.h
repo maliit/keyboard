@@ -330,6 +330,12 @@ public:
         QObject::connect(&m_settings, SIGNAL(opacityChanged(double)),
                         q, SIGNAL(opacityChanged(double)));
     }
+    
+    void registerTheme()
+    {
+        QObject::connect(&m_settings, SIGNAL(themeChanged(QString)),
+                        q, SIGNAL(themeChanged(QString)));
+    }
 
     void closeOskWindow()
     {

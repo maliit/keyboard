@@ -127,6 +127,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerStayHidden();
     d->registerPluginPaths();
     d->registerOpacity();
+    d->registerTheme();
 
     //fire signal so all listeners know what active language is
     Q_EMIT activeLanguageChanged(d->activeLanguage);
@@ -663,6 +664,12 @@ double InputMethod::opacity() const
 {
     Q_D(const InputMethod);
     return d->m_settings.opacity();
+}
+
+const QString InputMethod::theme() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.theme();
 }
 
 void InputMethod::replacePreedit(const QString &preedit)

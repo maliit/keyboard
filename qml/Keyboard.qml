@@ -31,6 +31,7 @@
 
 import QtQuick 2.4
 import "constants.js" as Const
+import "theme_loader.js" as Theme
 import "keys/"
 import "keys/key_constants.js" as UI
 import Ubuntu.Components 1.3
@@ -47,6 +48,7 @@ Item {
     property int prevSwipePositionY
     property int cursorSwipeDuration: 400
     property var timerSwipe: swipeTimer
+    property var theme: Theme.defaultTheme
 
     property variant input_method: maliit_input_method
     property variant event_handler: maliit_event_handler
@@ -55,6 +57,8 @@ Item {
     onYChanged: fullScreenItem.reportKeyboardVisibleRect();
     onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
+    
+    Component.onCompleted: Theme.load(maliit_input_method.theme)
 
     Item {
         id: canvas
@@ -139,7 +143,7 @@ Item {
                 Rectangle {
                     width: parent.width
                     height: units.dp(1)
-                    color: UI.dividerColor
+                    color: fullScreenItem.theme.dividerColor
                     anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
                 }
 
@@ -157,6 +161,13 @@ Item {
                                                       : 0
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
+                //TODO: Sets the theme for all UITK components used in the OSK. Replace those components to remove the need for this.
+                ActionItem{
+                    id: dummy
+                    
+                    visible: false
+                    theme.name: fullScreenItem.theme.toolkitTheme
+                }
 
                 Item {
                     id: keyboardComp
@@ -173,7 +184,7 @@ Item {
 
                         anchors.fill: parent
 
-                        color: UI.backgroundColor
+                        color: fullScreenItem.theme.backgroundColor
                     }
                 
                     Item {
@@ -279,6 +290,7 @@ Item {
                 }
                 keypad.delayedAutoCaps = false;
             }
+            onThemeChanged: Theme.load(target.theme)
         }
 
         MouseArea {
@@ -289,7 +301,7 @@ Item {
             Rectangle {
                 anchors.fill: parent
                 visible: parent.enabled
-                color: UI.charKeyPressedColor
+                color: fullScreenItem.theme.charKeyPressedColor
                 opacity: 0.5
             }
 

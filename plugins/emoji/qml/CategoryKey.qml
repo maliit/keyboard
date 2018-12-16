@@ -21,7 +21,8 @@ CharKey {
     shifted: label
     overridePressArea: true
     width: panel.keyWidth * 0.89
-    normalColor: UI.backgroundColor
+    normalColor: fullScreenItem.theme.backgroundColor
+    borderColor: normalColor
     pressedColor: normalColor
     fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
     layer.enabled: !highlight

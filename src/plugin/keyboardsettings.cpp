@@ -49,6 +49,7 @@ const QLatin1String STAY_HIDDEN_KEY = QLatin1String("stayHidden");
 const QLatin1String DISABLE_HEIGHT_KEY = QLatin1String("disableHeight");
 const QLatin1String PLUGIN_PATHS_KEY = QLatin1String("pluginPaths");
 const QLatin1String OPACITY_KEY = QLatin1String("opacity");
+const QLatin1String THEME_KEY = QLatin1String("theme");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -227,6 +228,16 @@ double KeyboardSettings::opacity() const
 }
 
 /*!
+ * \brief KeyboardSettings::theme returns the current theme of the
+ * on-screen keyboard
+ * \return theme of the on-screen keyboard
+ */
+QString KeyboardSettings::theme() const
+{
+    return m_settings->get(THEME_KEY).toString();
+}
+
+/*!
  * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
  * \param key
@@ -274,8 +285,13 @@ void KeyboardSettings::settingUpdated(const QString &key)
         return;
     } else if (key == PLUGIN_PATHS_KEY) {
         Q_EMIT pluginPathsChanged(pluginPaths());
+        return;
     } else if (key == OPACITY_KEY) {
         Q_EMIT opacityChanged(opacity());
+        return;
+    } else if (key == THEME_KEY) {
+        Q_EMIT themeChanged(theme());
+        return;
     }
 
     qWarning() << Q_FUNC_INFO << "unknown settings key:" << key;

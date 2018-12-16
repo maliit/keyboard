@@ -16,7 +16,7 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItem
+import Ubuntu.Components.ListItems 1.3 as ListItems
 
 import "key_constants.js" as UI
 import "languages.js" as Languages
@@ -33,11 +33,16 @@ Item {
 
         onClicked: canvas.languageMenuShown = false
     }
-
-    BorderImage {
-        id: name
+    
+    Rectangle{
+        color: fullScreenItem.theme.charKeyColor
         anchors.fill: parent
-        source: "../images/popover.sci"
+        anchors.margins: units.gu(0.1)
+        radius: units.gu(0.8)
+        border{
+            width: units.gu(0.1)
+            color: fullScreenItem.theme.popupBorderColor
+        }
     }
 
     ListView {
@@ -49,38 +54,61 @@ Item {
         clip: true
 
         model: maliit_input_method.enabledLanguages
-
-        delegate: ListItem.Standard {
-            text: Languages.languageIdToName(modelData)
-            showDivider: modelData != maliit_input_method.enabledLanguages[maliit_input_method.enabledLanguages.length - 1]
-            control: CheckBox {
-                checked: maliit_input_method.activeLanguage == modelData
-                onVisibleChanged: {
-                    checked = maliit_input_method.activeLanguage == modelData
+        
+        delegate: ListItem {
+                highlightColor: fullScreenItem.theme.charKeyPressedColor
+                divider{
+                    visible: modelData != maliit_input_method.enabledLanguages[maliit_input_method.enabledLanguages.length - 1]
+                    colorFrom: fullScreenItem.theme.popupBorderColor
+                    colorTo: fullScreenItem.theme.popupBorderColor
                 }
+                
+                ListItemLayout {
+                    title.text: Languages.languageIdToName(modelData)
+                    title.color: fullScreenItem.theme.fontColor
+                    CheckBox {
+                        SlotsLayout.position: SlotsLayout.Trailing;
+                        checked: maliit_input_method.activeLanguage == modelData
+                        onVisibleChanged: {
+                            checked = maliit_input_method.activeLanguage == modelData
+                        }
+                        onClicked: {
+                            maliit_input_method.activeLanguage = modelData
+                            canvas.languageMenuShown = false;
+                        }
+                    }
+                }
+
                 onClicked: {
                     maliit_input_method.activeLanguage = modelData
                     canvas.languageMenuShown = false;
                 }
-            }
-            onClicked: {
-                maliit_input_method.activeLanguage = modelData
-                canvas.languageMenuShown = false;
-            }
-        }
+           }
 
         Component {
             id: settingsComp
             Column {
                 width: menuList.width
                 height: settingsItem.height + settingsDiv.height * 2
-                ListItem.ThinDivider { id: settingsDiv }
-                ListItem.ThinDivider { }
-                ListItem.Standard {
+                
+                ListItem {
+                    id: settingsDiv
+                    height: units.dp(2)
+                    divider{
+                        height: units.dp(2)
+                        colorFrom: fullScreenItem.theme.popupBorderColor
+                        colorTo: fullScreenItem.theme.popupBorderColor
+                    }
+                }
+                ListItem {
                     id: settingsItem
-                    text: i18n.tr("Settings") + "…"
-                    showDivider: false
-                    onClicked: {
+                    highlightColor: fullScreenItem.theme.charKeyPressedColor
+                    divider.visible: false
+                    ListItemLayout {
+                       title.text: i18n.tr("Settings") + "…"
+                       title.color: fullScreenItem.theme.fontColor
+                   }
+                   onClicked: {
                         Qt.openUrlExternally("settings:///system/language")
                         canvas.languageMenuShown = false;
                         maliit_input_method.hide();

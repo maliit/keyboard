@@ -8,4 +8,4 @@ usr/share/maliit/plugins/com/ubuntu/KeyboardContainer.qml
 usr/share/maliit/plugins/com/ubuntu/WordRibbon.qml
 usr/share/maliit/plugins/com/ubuntu/api_tests.qml
 usr/share/maliit/plugins/com/ubuntu/constants.js
-
+usr/share/maliit/plugins/com/ubuntu/theme_loader.js

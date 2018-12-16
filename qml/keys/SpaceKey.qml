@@ -24,8 +24,8 @@ ActionKey {
     label: " ";
     shifted: " ";
 
-    normalColor: UI.charKeyColor
-    pressedColor: UI.charKeyPressedColor
+    normalColor: fullScreenItem.theme.charKeyColor
+    pressedColor: fullScreenItem.theme.charKeyPressedColor
 
     action: "space"
     switchBackFromSymbols: true

@@ -64,11 +64,12 @@ KeyPopover {
     onEnabledChanged: {
         canvas.extendedKeysShown = enabled
     }
-
-    BorderImage {
-        id: popoverBackground
-
-        anchors.centerIn: anchorItem
+    
+    Rectangle{
+		id: popoverBackground
+		
+		
+		anchors.centerIn: anchorItem
         anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
 
         width: {
@@ -79,8 +80,13 @@ KeyPopover {
         }
 
         height: rowOfKeys.height
-
-        source: "../images/popover.sci"
+        
+		color: fullScreenItem.theme.charKeyColor
+		radius: units.gu(0.8)
+		border{
+			width: units.gu(0.1)
+			color: fullScreenItem.theme.popupBorderColor
+		}
 
         onXChanged: {
 
@@ -130,7 +136,7 @@ KeyPopover {
                     font.family: UI.fontFamily
                     font.pixelSize: fontSize
                     font.weight: Font.Light
-                    color: key.highlight ? UI.selectionColor : UI.fontColor
+                    color: key.highlight ? fullScreenItem.theme.selectionColor : fullScreenItem.theme.fontColor
                     Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
                 }
 
@@ -169,5 +175,4 @@ KeyPopover {
         popover.enabled = false
     }
 }
-
 
