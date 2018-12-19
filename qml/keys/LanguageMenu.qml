@@ -59,13 +59,13 @@ Item {
                 highlightColor: fullScreenItem.theme.charKeyPressedColor
                 divider{
                     visible: modelData != maliit_input_method.enabledLanguages[maliit_input_method.enabledLanguages.length - 1]
-                    colorFrom: fullScreenItem.theme.popupBorderColor
-                    colorTo: fullScreenItem.theme.popupBorderColor
                 }
                 
                 ListItemLayout {
                     title.text: Languages.languageIdToName(modelData)
                     title.color: fullScreenItem.theme.fontColor
+                    title.elide: Text.ElideRight
+                    title.maximumLineCount: 2
                     CheckBox {
                         SlotsLayout.position: SlotsLayout.Trailing;
                         checked: maliit_input_method.activeLanguage == modelData
@@ -96,8 +96,6 @@ Item {
                     height: units.dp(2)
                     divider{
                         height: units.dp(2)
-                        colorFrom: fullScreenItem.theme.popupBorderColor
-                        colorTo: fullScreenItem.theme.popupBorderColor
                     }
                 }
                 ListItem {
