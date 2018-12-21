@@ -48,10 +48,10 @@ KeyPopover {
     }
     
     Rectangle{
-		id: popper
-		
-		
-		width: parent.width
+        id: popper
+        
+        
+        width: parent.width
         height: parent.height
 
         anchors.centerIn: anchorItem
@@ -62,12 +62,12 @@ KeyPopover {
         transformOrigin: Item.Bottom
         opacity: animationStep
         
-		color: fullScreenItem.theme.charKeyColor
-		radius: units.gu(0.8)
-		border{
-			width: units.gu(0.1)
-			color: fullScreenItem.theme.popupBorderColor
-		}
+        color: fullScreenItem.theme.charKeyColor
+        radius: units.gu(0.8)
+        border{
+            width: units.gu(0.1)
+            color: fullScreenItem.theme.popupBorderColor
+        }
 
         onXChanged: {
             if (x < UI.popoverEdgeMargin) {
