@@ -66,10 +66,10 @@ KeyPopover {
     }
     
     Rectangle{
-		id: popoverBackground
-		
-		
-		anchors.centerIn: anchorItem
+        id: popoverBackground
+        
+        
+        anchors.centerIn: anchorItem
         anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
 
         width: {
@@ -81,12 +81,12 @@ KeyPopover {
 
         height: rowOfKeys.height
         
-		color: fullScreenItem.theme.charKeyColor
-		radius: units.gu(0.8)
-		border{
-			width: units.gu(0.1)
-			color: fullScreenItem.theme.popupBorderColor
-		}
+        color: fullScreenItem.theme.charKeyColor
+        radius: units.gu(0.8)
+        border{
+            width: units.gu(0.1)
+            color: fullScreenItem.theme.popupBorderColor
+        }
 
         onXChanged: {
 
@@ -175,4 +175,3 @@ KeyPopover {
         popover.enabled = false
     }
 }
-
