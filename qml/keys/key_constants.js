@@ -50,12 +50,17 @@ var popoverCellPadding = 2.2; // gu
 var popoverTopMargin   = 10; // dp
 var popoverEdgeMargin = 2.2; // gu
 var popoverSquat      = 3; // gu, when no wordribbon, avoid click-through above input trap
+var popupBorderColor = "#888888"
+
+var keyBorderEnabled = false
 
 var charKeyColor          = "white"
 var charKeyPressedColor   = "#d9d9d9"
+var charKeyBorderColor = "#888888"
 
 var actionKeyColor        = "#cdcdcd"
 var actionKeyPressedColor = "#aeaeae"
+var actionKeyBorderColor = "#888888"
 
 var top_margin = 1;  // gu
 var bottom_margin = 0; // gu
@@ -79,3 +84,6 @@ var phoneKeyboardHeightLandscape = 0.49; // percent of screen
 
 var tabletKeyboardHeightPortrait = 0.31; // percent of screen
 var tabletKeyboardHeightLandscape = 0.34; // percent of screen
+
+/* for UITK Components */
+var toolkitTheme = "Ubuntu.Components.Themes.Ambiance" 

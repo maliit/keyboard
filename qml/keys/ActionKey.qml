@@ -37,13 +37,14 @@ CharKey {
     // action keys are a bit wider
     width: panel.keyWidth + units.gu( padding )
 
-    normalColor: UI.actionKeyColor
-    pressedColor: UI.actionKeyPressedColor
+    normalColor: fullScreenItem.theme.actionKeyColor
+    pressedColor: fullScreenItem.theme.actionKeyPressedColor
+    borderColor: fullScreenItem.theme.actionKeyBorderColor
 
     // can be overwritten by keys
-    property color colorNormal: UI.fontColor
-    property color colorShifted: UI.fontColor
-    property color colorCapsLock: UI.fontColor
+    property color colorNormal: fullScreenItem.theme.fontColor
+    property color colorShifted: fullScreenItem.theme.fontColor
+    property color colorCapsLock: fullScreenItem.theme.fontColor
 
     // Make it possible for the visible area of the key to differ from the
     // actual key size. This allows us to extend the touch area of the bottom

@@ -182,8 +182,9 @@ KeyPad {
                 visible: label != ""
                 label: emoji != null ? emoji.char : ""
                 shifted: label
-                normalColor: UI.backgroundColor
-                pressedColor: UI.backgroundColor
+                normalColor: fullScreenItem.theme.backgroundColor
+                borderColor: normalColor
+                pressedColor: fullScreenItem.theme.backgroundColor
                 fontSize: units.gu(2.5)
                 onKeySent: {
                     internal.updateRecent(key);
@@ -216,8 +217,9 @@ KeyPad {
             id: languageMenuButton
             label: "ABC"
             shifted: label
-            normalColor: UI.backgroundColor
-            pressedColor: UI.backgroundColor
+            normalColor: fullScreenItem.theme.backgroundColor
+            borderColor: normalColor
+            pressedColor: fullScreenItem.theme.backgroundColor
         }
 
         CategoryKey {
@@ -320,8 +322,9 @@ KeyPad {
 
         BackspaceKey {
             padding: 0
-            normalColor: UI.backgroundColor
-            pressedColor: UI.backgroundColor
+            normalColor: fullScreenItem.theme.backgroundColor
+            pressedColor: fullScreenItem.theme.backgroundColor
+            borderColor: normalColor
         }
     }
 }

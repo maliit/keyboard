@@ -46,10 +46,11 @@ KeyPopover {
             hidePopperAnimation.start();
         }
     }
-
-    BorderImage {
+    
+    Rectangle{
         id: popper
-
+        
+        
         width: parent.width
         height: parent.height
 
@@ -60,8 +61,13 @@ KeyPopover {
         scale: animationStep
         transformOrigin: Item.Bottom
         opacity: animationStep
-
-        source: Qt.resolvedUrl("../images/magnified_key.sci")
+        
+        color: fullScreenItem.theme.charKeyColor
+        radius: units.gu(0.8)
+        border{
+            width: units.gu(0.1)
+            color: fullScreenItem.theme.popupBorderColor
+        }
 
         onXChanged: {
             if (x < UI.popoverEdgeMargin) {
@@ -87,7 +93,7 @@ KeyPopover {
             font.pixelSize: panel.keyHeight * 0.6
             verticalAlignment: Text.AlignVCenter
 
-            color: UI.fontColor
+            color: fullScreenItem.theme.fontColor
         }
 
         NumberAnimation {

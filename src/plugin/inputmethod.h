@@ -63,6 +63,7 @@ class InputMethod
     Q_PROPERTY(int cursorPosition READ cursorPosition WRITE setCursorPosition NOTIFY cursorPositionChanged)
 
     Q_PROPERTY(double opacity READ opacity NOTIFY opacityChanged)
+    Q_PROPERTY(QString theme READ theme NOTIFY themeChanged)
     Q_PROPERTY(QString surroundingLeft READ surroundingLeft)
     Q_PROPERTY(QString surroundingRight READ surroundingRight)
 
@@ -137,6 +138,7 @@ public:
     int cursorPosition() const;
     void setCursorPosition(const int pos);
     double opacity() const;
+    const QString theme() const;
 
     QObject* actionKeyOverride() const;
 
@@ -172,6 +174,7 @@ Q_SIGNALS:
     void preeditChanged(QString preedit);
     void cursorPositionChanged(int cursor_position);
     void opacityChanged(double opacity);
+    void themeChanged(QString theme);
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();

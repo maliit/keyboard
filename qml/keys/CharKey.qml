@@ -63,8 +63,11 @@ Item {
     readonly property double rightOffset: buttonRect.anchors.rightMargin
 
     /* design */
-    property string normalColor: UI.charKeyColor
-    property string pressedColor: UI.charKeyPressedColor
+    property string normalColor: fullScreenItem.theme.charKeyColor
+    property string pressedColor: fullScreenItem.theme.charKeyPressedColor
+    property bool borderEnabled: fullScreenItem.theme.keyBorderEnabled
+    property string borderColor: borderEnabled ? fullScreenItem.theme.charKeyBorderColor : "transparent"
+    
     // Scale the font so the label fits if a long word is set
     property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8)) 
                            * (4 / (label.length >= 2 ? (label.length <= 6 ? label.length + 2.5 : 8) : 4));
@@ -141,6 +144,10 @@ Item {
             anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.bottomMargin: key.rowMargin
+            border{
+                width: borderEnabled ? units.gu(0.1) : 0
+                color: borderColor
+            }
             radius: units.dp(4)
 
             /// label of the key
@@ -152,7 +159,7 @@ Item {
                 font.family: UI.fontFamily
                 font.pixelSize: fontSize
                 font.weight: Font.Light
-                color: UI.fontColor
+                color: fullScreenItem.theme.fontColor
                 anchors.right: parent.right
                 anchors.left: parent.left
                 anchors.leftMargin: units.gu(0.2)
@@ -179,7 +186,7 @@ Item {
                 font.family: UI.annotationFont
                 font.pixelSize: fontSize / 3
                 font.weight: Font.Light
-                color: UI.annotationFontColor
+                color: fullScreenItem.theme.annotationFontColor
                 visible: !panel.hideKeyLabels
             }
 

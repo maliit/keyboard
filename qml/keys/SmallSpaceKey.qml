@@ -21,14 +21,13 @@ import "key_constants.js" as UI
 import "languages.js" as Languages
 
 ActionKey {
-    normalColor: UI.charKeyColor
-    pressedColor: UI.charKeyPressedColor
+    normalColor: fullScreenItem.theme.charKeyColor
+    pressedColor: fullScreenItem.theme.charKeyPressedColor
 
-    Image {
-        anchors.centerIn: parent
-        source: "../images/keyboard_spacebar.png"
-    }
-
+    iconNormal: "keyboard-spacebar"
+    iconShifted: "keyboard-spacebar"
+    iconCapsLock: "keyboard-spacebar"
+    
     action: "space"
     switchBackFromSymbols: true
 }
