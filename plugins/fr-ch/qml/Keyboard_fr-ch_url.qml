@@ -32,7 +32,7 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
 
-            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedSchifted: ["1"]; leftSide: true; }
+            CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "w"; shifted: "W"; extended: ["2"]; extendedShifted: ["2"] }
             CharKey { label: "e"; shifted: "E"; extended: ["é","è","ë","ê","ė", "3", "ę", "ē"]; extendedShifted: ["É","È","Ë","Ê","Ė", "3","Ę","Ē"] }
             CharKey { label: "r"; shifted: "R"; extended: ["4"]; extendedShifted: ["4"] }
@@ -48,7 +48,7 @@ KeyPad {
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
-            CharKey { label: "a"; shifted: ["A"; à","â","æ","á","ã","ā"]; extendedShifted: ["1", "À","Â","Æ","Á","Ã","Ā"]; leftSide: true; }
+            CharKey { label: "a"; shifted: "A"; extended: ["à","â","æ","á","ã","ā"]; extendedShifted: ["À","Â","Æ","Á","Ã","Ā"]; leftSide: true; }
             CharKey { label: "s"; shifted: "S"; }
             CharKey { label: "d"; shifted: "D"; }
             CharKey { label: "f"; shifted: "F"; }
@@ -85,8 +85,7 @@ KeyPad {
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
-            CharKey        { id: atKey;    label: "@"; shifted: "@";     anchors.left: languageMenuButton.right; height: parent.height; }
-            SpaceKey       { id: spaceKey;                               anchors.left: atKey.right; anchors.right: urlKey.left; noMagnifier: true; height: parent.height; }
+            CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: languageMenuButton.right; height: parent.height; }
             UrlKey         { id: urlKey; label: ".ch"; extended: [".com", ".ca", ".cd", ".ci", ".fr", ".be", ".ht"]; anchors.right: dotKey.left; height: parent.height; }
             CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "-", "_", "!", "+", "%","#","/"]; extendedShifted: ["?", "-", "_", "!", "+", "%","#","/"]; anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }

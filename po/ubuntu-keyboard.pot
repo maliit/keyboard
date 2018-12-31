@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 17:56+0000\n"
+"POT-Creation-Date: 2018-12-30 18:41-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/keys/LanguageMenu.qml:81
+#: ../qml/keys/LanguageMenu.qml:106
 msgid "Settings"
 msgstr ""
 
@@ -86,96 +86,102 @@ msgid "French"
 msgstr ""
 
 #: ../qml/keys/languages.js:35
-msgid "Scottish Gaelic"
+msgid ""
+"French\n"
+"(Swiss)"
 msgstr ""
 
 #: ../qml/keys/languages.js:36
-msgid "Hebrew"
+msgid "Scottish Gaelic"
 msgstr ""
 
 #: ../qml/keys/languages.js:37
-msgid "Croatian"
+msgid "Hebrew"
 msgstr ""
 
 #: ../qml/keys/languages.js:38
-msgid "Hungarian"
+msgid "Croatian"
 msgstr ""
 
 #: ../qml/keys/languages.js:39
-msgid "Icelandic"
+msgid "Hungarian"
 msgstr ""
 
 #: ../qml/keys/languages.js:40
-msgid "Italian"
+msgid "Icelandic"
 msgstr ""
 
 #: ../qml/keys/languages.js:41
-msgid "Japanese"
+msgid "Italian"
 msgstr ""
 
 #: ../qml/keys/languages.js:42
-msgid "Lithuanian"
+msgid "Japanese"
 msgstr ""
 
 #: ../qml/keys/languages.js:43
-msgid "Latvian"
+msgid "Lithuanian"
 msgstr ""
 
 #: ../qml/keys/languages.js:44
-msgid "Korean"
+msgid "Latvian"
 msgstr ""
 
 #: ../qml/keys/languages.js:45
-msgid "Dutch"
+msgid "Korean"
 msgstr ""
 
 #: ../qml/keys/languages.js:46
-msgid "Norwegian"
+msgid "Dutch"
 msgstr ""
 
 #: ../qml/keys/languages.js:47
-msgid "Polish"
+msgid "Norwegian"
 msgstr ""
 
 #: ../qml/keys/languages.js:48
-msgid "Portuguese"
+msgid "Polish"
 msgstr ""
 
 #: ../qml/keys/languages.js:49
-msgid "Romanian"
+msgid "Portuguese"
 msgstr ""
 
 #: ../qml/keys/languages.js:50
-msgid "Russian"
+msgid "Romanian"
 msgstr ""
 
 #: ../qml/keys/languages.js:51
-msgid "Slovenian"
+msgid "Russian"
 msgstr ""
 
 #: ../qml/keys/languages.js:52
-msgid "Serbian"
+msgid "Slovenian"
 msgstr ""
 
 #: ../qml/keys/languages.js:53
-msgid "Swedish"
+msgid "Serbian"
 msgstr ""
 
 #: ../qml/keys/languages.js:54
-msgid "Turkish"
+msgid "Swedish"
 msgstr ""
 
 #: ../qml/keys/languages.js:55
-msgid "Ukrainian"
+msgid "Turkish"
 msgstr ""
 
 #: ../qml/keys/languages.js:56
+msgid "Ukrainian"
+msgstr ""
+
+#: ../qml/keys/languages.js:57
 msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
 
-#: ../qml/keys/languages.js:57
+#: ../qml/keys/languages.js:58
 msgid ""
 "Chinese\n"
 "(Chewing)"
