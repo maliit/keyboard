@@ -8,7 +8,7 @@ export PKG_CONFIG_PATH=/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig
 endif
 
 %:
-	dh $@ --fail-missing --with python3
+	dh $@ --fail-missing --with python3 --parallel
 
 override_dh_auto_configure:
 	dh_auto_configure -- -recursive \
