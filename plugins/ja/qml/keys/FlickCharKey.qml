@@ -95,9 +95,9 @@ Item {
             anchors.bottomMargin: key.rowMargin
             radius: units.dp(4)
             border{
-				width: borderEnabled ? units.gu(0.1) : 0
-				color: borderColor
-			}
+                width: borderEnabled ? units.gu(0.1) : 0
+                color: borderColor
+            }
 
             /// label of the key
             //  the label is also the value subitted to the app
