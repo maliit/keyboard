@@ -55,8 +55,10 @@ Item {
     readonly property double rightOffset: buttonRect.anchors.rightMargin
 
     /* design */
-    property string normalColor: UI.charKeyColor
-    property string pressedColor: UI.charKeyPressedColor
+    property string normalColor: fullScreenItem.theme.charKeyColor
+    property string pressedColor: fullScreenItem.theme.charKeyPressedColor
+    property bool borderEnabled: fullScreenItem.theme.keyBorderEnabled
+    property string borderColor: borderEnabled ? fullScreenItem.theme.charKeyBorderColor : "transparent"
     property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8));
 
     /// annotation shows a small label in the upper right corner
@@ -92,6 +94,10 @@ Item {
             anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.bottomMargin: key.rowMargin
             radius: units.dp(4)
+            border{
+				width: borderEnabled ? units.gu(0.1) : 0
+				color: borderColor
+			}
 
             /// label of the key
             //  the label is also the value subitted to the app
@@ -107,7 +113,7 @@ Item {
                     font.family: UI.fontFamily
                     font.pixelSize: fontSize
                     font.weight: Font.Light
-                    color: UI.fontColor
+                    color: fullScreenItem.theme.fontColor
                     textFormat: Text.StyledText
                 }
 
@@ -121,7 +127,7 @@ Item {
                     font.family: UI.annotationFont
                     font.pixelSize: fullScreenItem.tablet ? units.dp(UI.tabletAnnotationFontSize) : units.dp(UI.phoneAnnotationFontSize)
                     font.weight: Font.Light
-                    color: UI.annotationFontColor
+                    color: fullScreenItem.theme.annotationFontColor
                     visible: annotation != ""
                 }
             }

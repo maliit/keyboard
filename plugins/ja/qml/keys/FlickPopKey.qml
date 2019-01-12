@@ -22,12 +22,13 @@ Rectangle {
     height: units.gu(UI.fontSize + UI.flickMargin)
 
     property string labelChar
-    property color labelColor: UI.fontColor
+    property color labelColor: fullScreenItem.theme.fontColor
     property real labelOpacity: 1.0
     visible: labelChar ? true : false
 
+    color: fullScreenItem.theme.charKeyColor
     border.width: units.gu(UI.flickBorderWidth)
-    border.color: UI.flickBorderColor
+    border.color: fullScreenItem.theme.popupBorderColor
     radius: width / 10
 
     Text {

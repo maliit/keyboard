@@ -25,8 +25,9 @@ FlickCharKey {
     padding: UI.actionKeyPadding
     label: kana.label
     leaves: ["↻", "", "あ", "A"]
-    normalColor: UI.actionKeyColor
-    pressedColor: UI.actionKeyPressedColor
+    normalColor: fullScreenItem.theme.actionKeyColor
+    pressedColor: fullScreenItem.theme.actionKeyPressedColor
+    borderColor: fullScreenItem.theme.actionKeyBorderColor
 
     overridePressArea: true
 
@@ -45,7 +46,7 @@ FlickCharKey {
                 name: "kana"
                 PropertyChanges {
                     target: kana;
-                    label: "<font color=\"" + UbuntuColors.orange + "\">あ</font>/A";
+                    label: "<font color=\"" + fullScreenItem.theme.selectionColor + "\">あ</font>/A";
                     state: "kana";
                 }
             },
@@ -53,7 +54,7 @@ FlickCharKey {
                 name: "alnum"
                 PropertyChanges {
                     target: kana;
-                    label: "あ/<font color=\"" + UbuntuColors.orange + "\">A</font>";
+                    label: "あ/<font color=\"" + fullScreenItem.theme.selectionColor + "\">A</font>";
                     state: "alnum";
                 }
             }
