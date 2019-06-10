@@ -252,6 +252,12 @@ public:
         QObject::connect(&m_settings, SIGNAL(keyPressHapticFeedbackChanged(bool)),
                          q, SIGNAL(useHapticFeedbackChanged()));
     }
+    
+    void registerEnableMagnifier()
+    {
+        QObject::connect(&m_settings, SIGNAL(enableMagnifierChanged(bool)),
+                         q, SIGNAL(enableMagnifierChanged()));
+    }
 
     void registerAutoCorrectSetting()
     {

@@ -286,7 +286,7 @@ Item {
                 return;
             }
             magnifier.currentlyAssignedKey = key
-            magnifier.shown = !noMagnifier
+            magnifier.shown = !noMagnifier && maliit_input_method.enableMagnifier
 
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();

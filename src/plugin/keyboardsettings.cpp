@@ -44,6 +44,7 @@ const QLatin1String SPELL_CHECKING_KEY = QLatin1String("spellChecking");
 const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_KEY = QLatin1String("keyPressFeedback");
 const QLatin1String KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY = QLatin1String("keyPressFeedbackSound");
 const QLatin1String KEY_PRESS_HAPTIC_FEEDBACK_KEY = QLatin1String("keyPressHapticFeedback");
+const QLatin1String ENABLE_MAGNIFIER_KEY = QLatin1String("enableMagnifier");
 const QLatin1String DOUBLE_SPACE_FULL_STOP_KEY = QLatin1String("doubleSpaceFullStop");
 const QLatin1String STAY_HIDDEN_KEY = QLatin1String("stayHidden");
 const QLatin1String DISABLE_HEIGHT_KEY = QLatin1String("disableHeight");
@@ -177,6 +178,16 @@ bool KeyboardSettings::keyPressHapticFeedback() const
 }
 
 /*!
+ * \brief KeyboardSettings::enableMagnifier returns true if magnifier is enabled
+ * when the user presses a keyboard key
+ * \return
+ */
+bool KeyboardSettings::enableMagnifier() const
+{
+    return m_settings->get(ENABLE_MAGNIFIER_KEY).toBool();
+}
+
+/*!
  * \brief KeyboardSettings::keyPressFeedbackSound returns the path to the current key
  * feedback sound
  * \return path to the feedback sound
@@ -270,6 +281,9 @@ void KeyboardSettings::settingUpdated(const QString &key)
         return;
     } else if (key == KEY_PRESS_HAPTIC_FEEDBACK_KEY) {
         Q_EMIT keyPressHapticFeedbackChanged(keyPressHapticFeedback());
+        return;
+    } else if (key == ENABLE_MAGNIFIER_KEY) {
+        Q_EMIT enableMagnifierChanged(enableMagnifier());
         return;
     } else if (key == KEY_PRESS_AUDIO_FEEDBACK_SOUND_KEY) {
         Q_EMIT keyPressAudioFeedbackSoundChanged(keyPressAudioFeedbackSound());

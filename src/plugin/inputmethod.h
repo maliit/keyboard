@@ -56,6 +56,7 @@ class InputMethod
     Q_PROPERTY(QString audioFeedbackSound READ audioFeedbackSound NOTIFY audioFeedbackSoundChanged)
     Q_PROPERTY(QObject* actionKeyOverride READ actionKeyOverride NOTIFY actionKeyOverrideChanged)
     Q_PROPERTY(bool useHapticFeedback READ useHapticFeedback NOTIFY useHapticFeedbackChanged)
+    Q_PROPERTY(bool enableMagnifier READ enableMagnifier NOTIFY enableMagnifierChanged)
     Q_PROPERTY(QString keyboardState READ keyboardState WRITE setKeyboardState NOTIFY keyboardStateChanged)
     Q_PROPERTY(bool hasSelection READ hasSelection NOTIFY hasSelectionChanged)
     Q_PROPERTY(QString currentPluginPath READ currentPluginPath NOTIFY currentPluginPathChanged)
@@ -125,6 +126,7 @@ public:
     bool useAudioFeedback() const;
     const QString audioFeedbackSound() const;
     bool useHapticFeedback() const;
+    bool enableMagnifier() const;
 
     const QString keyboardState() const;
     Q_SLOT void setKeyboardState(const QString& state);
@@ -162,6 +164,7 @@ Q_SIGNALS:
     void useAudioFeedbackChanged();
     void audioFeedbackSoundChanged(QString sound);
     void useHapticFeedbackChanged();
+    void enableMagnifierChanged();
     void wordEngineEnabledChanged(bool wordEngineEnabled);
     void wordRibbonEnabledChanged(bool wordRibbonEnabled);
     void windowGeometryRectChanged(QRect rect);

@@ -87,5 +87,10 @@
       <description>Specifies the theme of the on-screen keyboard</description>
       <default>'Ambiance'</default>
     </key>
+    <key name="enable-magnifier" type="b">
+      <summary>Enable key magnifier</summary>
+      <description>Shows the magnifier when a key is pressed.</description>
+      <default>true</default>
+    </key>
   </schema>
 </schemalist>

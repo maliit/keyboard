@@ -117,6 +117,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAudioFeedbackSoundSetting();
     d->registerAudioFeedbackSetting();
     d->registerHapticFeedbackSetting();
+    d->registerEnableMagnifier();
     d->registerAutoCorrectSetting();
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
@@ -525,6 +526,15 @@ bool InputMethod::useHapticFeedback() const
 {
     Q_D(const InputMethod);
     return d->m_settings.keyPressHapticFeedback();
+}
+
+//! \brief InputMethod::enableMagnifier is true, when keys should display magnifier
+//!  when pressed
+//! \return
+bool InputMethod::enableMagnifier() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.enableMagnifier();
 }
 
 //! \brief InputMethod::actionKeyOverride returns any override information about
