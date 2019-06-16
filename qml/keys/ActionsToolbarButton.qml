@@ -28,7 +28,7 @@ AbstractButton {
     style: Rectangle {
         color: normalColor
 
-        Connections{
+        Connections {
             target: toolbarButton
             onPressedChanged:{
                 if (target.pressed) {

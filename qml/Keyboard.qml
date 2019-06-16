@@ -329,7 +329,7 @@ Item {
             }
             
             enabled: cursorSwipe
-            
+
             Rectangle {
                 anchors.fill: parent
                 visible: parent.enabled

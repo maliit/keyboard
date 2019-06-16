@@ -36,15 +36,15 @@ Rectangle{
     ]
     
     // Disable clicking behind the toolbar
-    MouseArea{
+    MouseArea {
         anchors.fill: parent
         z: -1
     }
     
-    RowLayout{
+    RowLayout {
         anchors.fill: parent
         
-        ActionBar{
+        ActionBar {
             id: leadingActionBar
             
             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
@@ -59,7 +59,7 @@ Rectangle{
             ]
         }
         
-        ActionBar{
+        ActionBar {
             id: trailingActionBar
             
             Layout.fillHeight: true
