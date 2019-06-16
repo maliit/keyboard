@@ -15,12 +15,10 @@
  */
 
 import QtQuick 2.4
-import QtMultimedia 5.0
 import QtQuick.Window 2.0
 import "languages/"
 import "keys/"
 import UbuntuKeyboard 1.0
-import QtFeedback 5.0
 
 Item {
     id: panel
@@ -70,26 +68,6 @@ Item {
     Magnifier {
         id: magnifier
         shown: false
-    }
-
-    SoundEffect {
-        id: audioFeedback
-        source: maliit_input_method.audioFeedbackSound
-    }
-
-    Connections {
-        target: maliit_input_method
-        onAudioFeedbackSoundChanged: audioFeedback.source = sound;
-    }
-
-    HapticsEffect {
-        id: pressEffect
-        attackIntensity: 0.0
-        attackTime: 50
-        intensity: 1.0
-        duration: 10
-        fadeTime: 50
-        fadeIntensity: 0.0
     }
 
     states: [

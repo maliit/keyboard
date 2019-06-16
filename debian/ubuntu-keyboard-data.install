@@ -3,6 +3,8 @@ usr/share/maliit/plugins/com/ubuntu/images/
 usr/share/maliit/plugins/com/ubuntu/keys/
 usr/share/maliit/plugins/com/ubuntu/languages/
 usr/share/maliit/plugins/com/ubuntu/styles/
+usr/share/maliit/plugins/com/ubuntu/ActionsToolbar.qml
+usr/share/maliit/plugins/com/ubuntu/FloatingActions.qml
 usr/share/maliit/plugins/com/ubuntu/Keyboard.qml
 usr/share/maliit/plugins/com/ubuntu/KeyboardContainer.qml
 usr/share/maliit/plugins/com/ubuntu/WordRibbon.qml

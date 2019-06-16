@@ -35,6 +35,8 @@ import "theme_loader.js" as Theme
 import "keys/"
 import "keys/key_constants.js" as UI
 import Ubuntu.Components 1.3
+import QtFeedback 5.0
+import QtMultimedia 5.0
 
 Item {
     id: fullScreenItem
@@ -46,7 +48,7 @@ Item {
     property bool cursorSwipe: false
     property int prevSwipePositionX
     property int prevSwipePositionY
-    property int cursorSwipeDuration: 400
+    property int cursorSwipeDuration: 5000
     property var timerSwipe: swipeTimer
     property var theme: Theme.defaultTheme
 
@@ -114,8 +116,8 @@ Item {
             //fix for lp:1277186
             //only filter children when wordRibbon visible
             drag.filterChildren: wordRibbon.visible
-            // Avoid conflict with extended key swipe selection
-            enabled: !canvas.extendedKeysShown
+            // Avoid conflict with extended key swipe selection and cursor swipe mode
+            enabled: !canvas.extendedKeysShown && !fullScreenItem.cursorSwipe
 
             onReleased: {
                 if (keyboardSurface.y > jumpBackThreshold) {
@@ -162,12 +164,22 @@ Item {
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
                 //TODO: Sets the theme for all UITK components used in the OSK. Replace those components to remove the need for this.
-                ActionItem{
+                ActionItem {
                     id: dummy
                     
                     visible: false
                     theme.name: fullScreenItem.theme.toolkitTheme
+                }                
+                
+                ActionsToolbar {
+                    id: toolbar
+                    objectName: "actionsToolbar"
+                    
+                    visible: fullScreenItem.cursorSwipe
+                    height: fullScreenItem.tablet ? units.gu(UI.tabletWordribbonHeight) : units.gu(UI.phoneWordribbonHeight)
+                    state: wordRibbon.visible ? "wordribbon" : "top"
                 }
+                    
 
                 Item {
                     id: keyboardComp
@@ -258,6 +270,9 @@ Item {
                         keypad.switchBack = false;
                         maliit_input_method.activeLanguage = maliit_input_method.previousLanguage;
                     }
+                    
+                    // Exit cursor swipe mode when the keyboard hides
+                    fullScreenItem.exitSwipeMode();
                 }
                 // Wait for the first show operation to complete before
                 // allowing hiding, as the conditions when the keyboard
@@ -292,19 +307,46 @@ Item {
             }
             onThemeChanged: Theme.load(target.theme)
         }
+        
+        FloatingActions {
+            id: floatingActions
+            objectName: "floatingActions"
+            
+            z: 1
+            visible: fullScreenItem.cursorSwipe && !cursorSwipeArea.pressed
+        }
 
         MouseArea {
             id: cursorSwipeArea
-            anchors.fill: parent
+            
+            property point firstPress
+            property point lastRelease
+            property bool selectionMode: false
+            
+            anchors {
+                fill: parent
+                topMargin: toolbar.height
+            }
+            
             enabled: cursorSwipe
-
+            
             Rectangle {
                 anchors.fill: parent
                 visible: parent.enabled
-                color: fullScreenItem.theme.charKeyPressedColor
-                opacity: 0.5
+                color: cursorSwipeArea.selectionMode ? fullScreenItem.theme.selectionColor : fullScreenItem.theme.charKeyPressedColor
             }
-
+            
+            function exitSelectionMode() {
+                selectionMode = false
+                fullScreenItem.timerSwipe.restart()
+            }
+            
+            onSelectionModeChanged: {
+                if (fullScreenItem.cursorSwipe) {
+                    fullScreenItem.keyFeedback();
+                }
+            }
+            
             onMouseXChanged: {
                 processSwipe(mouseX, mouseY)
             }
@@ -313,10 +355,45 @@ Item {
                 prevSwipePositionX = mouseX
                 prevSwipePositionY = mouseY
                 fullScreenItem.timerSwipe.stop()
+                
+                if (firstPress === Qt.point(0,0)) {
+                    firstPress = Qt.point(mouse.x, mouse.y)
+                }
             }
 
             onReleased: {
-                fullScreenItem.timerSwipe.restart()
+                if (!cursorSwipeArea.selectionMode) {
+                    fullScreenItem.timerSwipe.restart()
+                    firstPress = Qt.point(0,0)
+                } else {
+                    fullScreenItem.timerSwipe.stop()
+                    
+                    // TODO: Disabled word selection until input_method.hasSelection is fixed in QtWebEngine
+                    /*
+                    if(!input_method.hasSelection){
+                        fullScreenItem.selectWord()
+                        cursorSwipeArea.selectionMode = false
+                        fullScreenItem.timerSwipe.restart()
+                    }
+                    */
+                }
+
+                lastRelease = Qt.point(mouse.x, mouse.y)
+            }
+            
+            onDoubleClicked: {
+                // We avoid triggering double click accidentally by using a threshold
+                var xReleaseDiff = Math.abs(lastRelease.x - firstPress.x)
+                var yReleaseDiff = Math.abs(lastRelease.y - firstPress.y)
+                
+                var threshold = units.gu(2)
+
+                if (xReleaseDiff < threshold && yReleaseDiff < threshold) {
+                    cursorSwipeArea.selectionMode = true
+                    fullScreenItem.timerSwipe.stop()
+                }
+                
+                firstPress = Qt.point(0,0)
             }
         }
 
@@ -327,14 +404,59 @@ Item {
         interval: cursorSwipeDuration
         running: false
         onTriggered: {
-            fullScreenItem.cursorSwipe = false
-            // We only enable autocaps after cursor movement has stopped
-            if (keypad.delayedAutoCaps) {
-                keypad.activeKeypadState = "SHIFTED"
-                keypad.delayedAutoCaps = false
-            } else {
-                keypad.activeKeypadState = "NORMAL"
-            }
+            fullScreenItem.exitSwipeMode();
+        }
+    }
+    
+    onCursorSwipeChanged:{
+        if (cursorSwipe && input_method.hasSelection) {
+            cursorSwipeArea.selectionMode = true
+        }
+        
+        fullScreenItem.keyFeedback();
+    }
+    
+    SoundEffect {
+        id: audioFeedback
+        source: maliit_input_method.audioFeedbackSound
+    }
+    
+    HapticsEffect {
+        id: pressEffect
+        attackIntensity: 0.0
+        attackTime: 50
+        intensity: 1.0
+        duration: 10
+        fadeTime: 50
+        fadeIntensity: 0.0
+    }
+    
+    Connections {
+        target: maliit_input_method
+        onAudioFeedbackSoundChanged: audioFeedback.source = sound;
+    }
+    
+    function keyFeedback() {
+        if (maliit_input_method.useHapticFeedback) {
+            pressEffect.start()
+        }
+        
+        if (maliit_input_method.useAudioFeedback) {
+            audioFeedback.play()
+        }
+    }
+    
+    function exitSwipeMode() {
+        fullScreenItem.cursorSwipe = false
+        fullScreenItem.timerSwipe.stop()
+        cursorSwipeArea.selectionMode = false
+        
+        // We only enable autocaps after cursor movement has stopped
+        if (keypad.delayedAutoCaps) {
+            keypad.activeKeypadState = "SHIFTED"
+            keypad.delayedAutoCaps = false
+        } else {
+            keypad.activeKeypadState = "NORMAL"
         }
     }
 
@@ -380,20 +502,94 @@ Item {
     function sendEndKey() {
         event_handler.onKeyReleased("", "end");
     }
+    function selectLeft() {
+        event_handler.onKeyReleased("SelectPreviousChar", "keysequence");
+    }
+    function selectRight() {
+        event_handler.onKeyReleased("SelectNextChar", "keysequence");
+    }
+    function selectUp() {
+        event_handler.onKeyReleased("SelectPreviousLine", "keysequence");
+    }
+    function selectDown() {
+        event_handler.onKeyReleased("SelectNextLine", "keysequence");
+    }
+    function selectWord() {
+        event_handler.onKeyReleased("MoveToPreviousWord", "keysequence");
+        event_handler.onKeyReleased("SelectNextWord", "keysequence");
+    }
+    function selectStartOfLine() {
+        event_handler.onKeyReleased("SelectStartOfLine", "keysequence");
+    }
+    function selectEndOfLine() {
+        event_handler.onKeyReleased("SelectEndOfLine", "keysequence");
+    }
+    function selectStartOfDocument() {
+        event_handler.onKeyReleased("SelectStartOfDocument", "keysequence");
+    }
+    function selectEndOfDocument() {
+        event_handler.onKeyReleased("SelectEndOfDocument", "keysequence");
+    }
+    function selectAll() {
+        event_handler.onKeyReleased("SelectAll", "keysequence");
+    }
+    function moveToStartOfLine() {
+        event_handler.onKeyReleased("MoveToStartOfLine", "keysequence");
+    }
+    function moveToEndOfLine() {
+        event_handler.onKeyReleased("MoveToEndOfLine", "keysequence");
+    }
+    function moveToStartOfDocument() {
+        event_handler.onKeyReleased("MoveToStartOfDocument", "keysequence");
+    }
+    function moveToEndOfDocument() {
+        event_handler.onKeyReleased("MoveToEndOfDocument", "keysequence");
+    }
+    function redo() {
+        event_handler.onKeyReleased("Redo", "keysequence");
+    }
+    function undo() {
+        event_handler.onKeyReleased("Undo", "keysequence");
+    }
+    function paste() {
+        event_handler.onKeyReleased("Paste", "keysequence");
+    }
+    function copy() {
+        event_handler.onKeyReleased("Copy", "keysequence");
+    }
+    function cut() {
+        event_handler.onKeyReleased("Cut", "keysequence");
+    }
 
     function processSwipe(positionX, positionY) {
-        if (positionX < prevSwipePositionX - units.gu(1) && input_method.surroundingLeft != "") {
-            sendLeftKey();
+        // TODO: Removed input_method.surrounding* from the criteria until they are fixed in QtWebEngine
+        if (positionX < prevSwipePositionX - units.gu(1) /*&& input_method.surroundingLeft != ""*/) {
+            if(cursorSwipeArea.selectionMode){
+                selectLeft();
+            }else{
+                sendLeftKey();
+            }
             prevSwipePositionX = positionX
-        } else if (positionX > prevSwipePositionX + units.gu(1) && input_method.surroundingRight != "") {
-            sendRightKey();
+        } else if (positionX > prevSwipePositionX + units.gu(1) /*&& input_method.surroundingRight != ""*/) {
+            if(cursorSwipeArea.selectionMode){
+                selectRight();
+            }else{
+                sendRightKey();
+            }
             prevSwipePositionX = positionX
-        }
-        if (positionY < prevSwipePositionY - units.gu(4)) {
-            sendUpKey();
+        } else if (positionY < prevSwipePositionY - units.gu(4)) {
+            if(cursorSwipeArea.selectionMode){
+                selectUp();
+            }else{
+                sendUpKey();
+            }
             prevSwipePositionY = positionY
         } else if (positionY > prevSwipePositionY + units.gu(4)) {
-            sendDownKey();
+            if(cursorSwipeArea.selectionMode){
+                selectDown();
+            }else{
+                sendDownKey();
+            }
             prevSwipePositionY = positionY
         }
     }
