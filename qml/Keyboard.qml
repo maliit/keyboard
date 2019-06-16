@@ -175,6 +175,7 @@ Item {
                     id: toolbar
                     objectName: "actionsToolbar"
                     
+                    z: 1
                     visible: fullScreenItem.cursorSwipe
                     height: fullScreenItem.tablet ? units.gu(UI.tabletWordribbonHeight) : units.gu(UI.phoneWordribbonHeight)
                     state: wordRibbon.visible ? "wordribbon" : "top"
