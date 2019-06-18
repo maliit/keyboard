@@ -1068,9 +1068,6 @@ void AbstractTextEditor::onKeyboardStateChanged(QString state) {
 
 void AbstractTextEditor::sendKeySequence(const QString &action, const QKeySequence &sequence) {
 
-    // if (debug) qDebug() << InputContextName << __PRETTY_FUNCTION__ << "action" << action;
-
-    // NOTE: currently not trying to trigger action directly
     static const Qt::KeyboardModifiers AllModifiers = Qt::ShiftModifier | Qt::ControlModifier | Qt::AltModifier
             | Qt::MetaModifier | Qt::KeypadModifier;
 

@@ -68,6 +68,7 @@ Rectangle{
             delegate: ActionsToolbarButton{fullLayout: fullScreenItem.width > units.gu(45)}
             
             // TODO: Disabled dynamic visibility of copy and cut buttons until input_method.hasSelection is working properly in QtWebEngine
+            // ubports/ubuntu-touch#1157 <https://github.com/ubports/ubuntu-touch/issues/1157>
             actions: [
                 Action { text: i18n.tr("Paste"); iconName: "edit-paste"; onTriggered: fullScreenItem.paste(); },
                 Action { text: i18n.tr("Copy"); iconName: "edit-copy"; /*visible: input_method.hasSelection; */ onTriggered: {fullScreenItem.copy(); fullScreenItem.sendLeftKey();} },

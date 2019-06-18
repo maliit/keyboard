@@ -335,6 +335,22 @@ Item {
                 anchors.fill: parent
                 visible: parent.enabled
                 color: cursorSwipeArea.selectionMode ? fullScreenItem.theme.selectionColor : fullScreenItem.theme.charKeyPressedColor
+                
+                Label {
+                    visible: !cursorSwipeArea.pressed
+                    horizontalAlignment: Text.AlignHCenter
+                    color: cursorSwipeArea.selectionMode ? UbuntuColors.porcelain : fullScreenItem.theme.fontColor
+                    wrapMode: Text.WordWrap
+                    
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    
+                    text: cursorSwipeArea.selectionMode ? i18n.tr("Swipe to move selection") 
+                                : i18n.tr("Swipe to move cursor") + "\n\n" + i18n.tr("Double-tap to enter selection mode")
+                }
             }
             
             function exitSelectionMode() {
@@ -370,6 +386,7 @@ Item {
                     fullScreenItem.timerSwipe.stop()
                     
                     // TODO: Disabled word selection until input_method.hasSelection is fixed in QtWebEngine
+                    // ubports/ubuntu-touch#1157 <https://github.com/ubports/ubuntu-touch/issues/1157>
                     /*
                     if(!input_method.hasSelection){
                         fullScreenItem.selectWord()
@@ -564,6 +581,7 @@ Item {
 
     function processSwipe(positionX, positionY) {
         // TODO: Removed input_method.surrounding* from the criteria until they are fixed in QtWebEngine
+        // ubports/ubuntu-touch#1157 <https://github.com/ubports/ubuntu-touch/issues/1157>
         if (positionX < prevSwipePositionX - units.gu(1) /*&& input_method.surroundingLeft != ""*/) {
             if(cursorSwipeArea.selectionMode){
                 selectLeft();
@@ -578,7 +596,9 @@ Item {
                 sendRightKey();
             }
             prevSwipePositionX = positionX
-        } else if (positionY < prevSwipePositionY - units.gu(4)) {
+        } 
+
+        if (positionY < prevSwipePositionY - units.gu(4)) {
             if(cursorSwipeArea.selectionMode){
                 selectUp();
             }else{
