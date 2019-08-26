@@ -34,7 +34,7 @@ KeyPad {
 
             CharKey { label: "q"; shifted: "Q"; extended: ["1"]; extendedShifted: ["1"]; leftSide: true; }
             CharKey { label: "w"; shifted: "W"; extended: ["2"]; extendedShifted: ["2"] }
-            CharKey { label: "e"; shifted: "E"; extended: ["é","è","ë","ê","ė", "3", "ę", "ē"]; extendedShifted: ["É","È","Ë","Ê","Ė", "3","Ę","Ē"] }
+            CharKey { label: "e"; shifted: "E"; extended: ["3","è","ë","ê","ė", "é", "ę", "ē"]; extendedShifted: ["3","È","Ë","Ê","Ė", "É","Ę","Ē"] }
             CharKey { label: "r"; shifted: "R"; extended: ["4"]; extendedShifted: ["4"] }
             CharKey { label: "t"; shifted: "T"; extended: ["5"]; extendedShifted: ["5"] }
             CharKey { label: "z"; shifted: "Z"; extended: ["6"]; extendedShifted: ["6"] }
