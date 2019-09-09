@@ -36,7 +36,7 @@ Item {
     property bool highlight: false;
 
     property string action
-    property bool noMagnifier: false
+    property bool noMagnifier: !maliit_input_method.enableMagnifier
     property bool skipAutoCaps: false
     property bool switchBackFromSymbols: false
 
@@ -141,7 +141,7 @@ Item {
             height: units.gu((UI.fontSize + UI.flickMargin) * 3)
             chars: leaves
             index: keyFlickArea.index
-            visible: key.currentlyPressed && chars.length > 1
+            visible: key.currentlyPressed && chars.length > 1 && !noMagnifier
         }
     }
 
