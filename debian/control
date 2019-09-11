@@ -109,6 +109,7 @@ Depends: autopilot-qt5 (>= 1.4),
          ubuntu-keyboard-dutch (>= ${source:Version}),
          ubuntu-keyboard-emoji (>= ${source:Version}),
          ubuntu-keyboard-english (>= ${source:Version}),
+         ubuntu-keyboard-english-dvorak (>= ${source:Version}),
          ubuntu-keyboard-persian (>= ${source:Version}),
          ubuntu-keyboard-finnish (>= ${source:Version}),
          ubuntu-keyboard-french (>= ${source:Version}),
@@ -250,6 +251,16 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - English
  Data files for the Ubuntu virtual keyboard - English
+
+Package: ubuntu-keyboard-english-dvorak
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ubuntu-keyboard-english,
+         hunspell-en-us,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - English Dvorak
+ Data files for the Ubuntu virtual keyboard - English Dvorak
 
 Package: ubuntu-keyboard-esperanto
 Architecture: any
