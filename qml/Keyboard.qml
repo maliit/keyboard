@@ -348,7 +348,7 @@ Item {
                         verticalCenter: parent.verticalCenter
                     }
                     
-                    text: cursorSwipeArea.selectionMode ? i18n.tr("Swipe to move selection") 
+                    text: cursorSwipeArea.selectionMode ? i18n.tr("Swipe to move selection") + "\n\n" + i18n.tr("Double-tap to exit selection mode")
                                 : i18n.tr("Swipe to move cursor") + "\n\n" + i18n.tr("Double-tap to enter selection mode")
                 }
             }
@@ -407,8 +407,12 @@ Item {
                 var threshold = units.gu(2)
 
                 if (xReleaseDiff < threshold && yReleaseDiff < threshold) {
-                    cursorSwipeArea.selectionMode = true
-                    fullScreenItem.timerSwipe.stop()
+                    if (!cursorSwipeArea.selectionMode) {
+                        cursorSwipeArea.selectionMode = true
+                        fullScreenItem.timerSwipe.stop()
+                    } else {
+                        exitSelectionMode();
+                    }
                 }
                 
                 firstPress = Qt.point(0,0)

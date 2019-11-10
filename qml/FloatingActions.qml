@@ -62,11 +62,7 @@ RowLayout {
                 text: i18n.tr("Done")
                 iconName: "ok"
                 onTriggered: {
-                    if (cursorSwipeArea.selectionMode) {
-                        cursorSwipeArea.exitSelectionMode()
-                    } else {
-                        fullScreenItem.exitSwipeMode()
-                    }
+                    fullScreenItem.exitSwipeMode()
                 }
             }
     }
