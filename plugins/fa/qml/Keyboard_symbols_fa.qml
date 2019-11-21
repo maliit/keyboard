@@ -83,7 +83,7 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight + units.gu(UI.bottom_margin*2);
+            height: panel.keyHeight + units.gu(UI.row_margin);
 
             SymbolShiftKey { id: symShiftKey; label: "اب‌پ"; shifted: "اب‌پ"; anchors.left: parent.left; height: parent.height; }
             CharKey        { id: commaKey;    label: "،"; shifted: "،";     anchors.left: symShiftKey.right; height: parent.height; }
