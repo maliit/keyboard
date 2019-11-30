@@ -185,6 +185,7 @@ KeyPad {
                 normalColor: UI.backgroundColor
                 pressedColor: UI.backgroundColor
                 fontSize: units.gu(2.5)
+                fontFamily: "Noto Color Emoji"
                 onKeySent: {
                     internal.updateRecent(key);
                 }

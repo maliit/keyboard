@@ -19,7 +19,7 @@
 var tabletKeyMargins  =   0.5;    // gu
 var phoneKeyMargins = 0.25 // gu
 var fontSize    =   2.5;    // gu
-var fontFamily  =   "Ubuntu";
+var fontFamily  =   "Noto";
 var fontColor   =   "#333333";
 var fontBold    =   false;
 var selectionColor = "#19B6EE";
@@ -32,7 +32,7 @@ var phoneAnnotationFontSize = 10; // dp
 var annotationTopMargin = 0.35; // gu
 var annotationRightMargin = 0.65; // gu
 var annotationFontColor = "#333333";
-var annotationFont = "Ubuntu";
+var annotationFont = "Noto";
 
 var spaceOpacity = 0.33;
 

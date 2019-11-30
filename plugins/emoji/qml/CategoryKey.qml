@@ -24,6 +24,7 @@ CharKey {
     normalColor: UI.backgroundColor
     pressedColor: normalColor
     fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
+    fontFamily: "Noto Color Emoji"
     layer.enabled: !highlight
     layer.effect: ShaderEffect {
         fragmentShader: "
