@@ -357,7 +357,7 @@ install(FILES qml/constants.js qml/Keyboard.qml qml/KeyboardContainer.qml qml/Wo
 
 install(DIRECTORY data/styles
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
-install(FILES data/styles/ubuntu/images/icon_backspace18.png
+install(FILES data/styles/ubuntu/images/icon_backspace@18.png
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
         RENAME erase.png)
 install(FILES data/styles/ubuntu/images/icon_enter@18.png
@@ -418,6 +418,6 @@ if(enable-tests)
 endif()
 
 add_custom_target(install_${PROJECT_NAME}
-        $(MAKE) install
+        ${CMAKE_BUILD_TOOL} install
         DEPENDS ${PROJECT_NAME}
         COMMENT "Installing ${PROJECT_NAME}")

@@ -5,6 +5,7 @@ set_package_properties(PRESAGE PROPERTIES
 
 find_library(PRESAGE_LIBRARIES presage)
 find_path(PRESAGE_INCLUDE_DIRS presage.h)
+find_program(PRESAGE_TEXT2NGRAM text2ngram)
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(PRESAGE DEFAULT_MSG PRESAGE_LIBRARIES PRESAGE_INCLUDE_DIRS)
@@ -26,8 +27,8 @@ function(add_ngram)
 
     add_custom_command(OUTPUT "${_database}"
             COMMAND rm -f ${_database}
-            COMMAND text2ngram -n 1 -l -f sqlite -o ${_database} ${_infile}
-            COMMAND text2ngram -n 2 -l -f sqlite -o ${_database} ${_infile}
-            COMMAND text2ngram -n 3 -l -f sqlite -o ${_database} ${_infile}
+            COMMAND ${PRESAGE_TEXT2NGRAM} -n 1 -l -f sqlite -o ${_database} ${_infile}
+            COMMAND ${PRESAGE_TEXT2NGRAM} -n 2 -l -f sqlite -o ${_database} ${_infile}
+            COMMAND ${PRESAGE_TEXT2NGRAM} -n 3 -l -f sqlite -o ${_database} ${_infile}
             DEPENDS ${_infile} VERBATIM)
 endfunction()
