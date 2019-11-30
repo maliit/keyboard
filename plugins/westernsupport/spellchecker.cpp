@@ -108,7 +108,7 @@ void SpellCheckerPrivate::addUserDictionary(const QString &user_dictionary)
         if (file.open(QFile::ReadOnly)) {
             QTextStream stream(&file);
             while (!stream.atEnd()) {
-                hunspell->add(codec->fromUnicode(stream.readLine()));
+                hunspell->add(codec->fromUnicode(stream.readLine()).toStdString());
             }
         }
     }
@@ -190,7 +190,7 @@ bool SpellChecker::spell(const QString &word)
         return true;
     }
 
-    return d->hunspell->spell(d->codec->fromUnicode(word));
+    return d->hunspell->spell(d->codec->fromUnicode(word).toStdString());
 }
 
 
@@ -207,22 +207,20 @@ QStringList SpellChecker::suggest(const QString &word,
         return QStringList();
     }
 
-    char** suggestions = nullptr;
-    const int suggestions_count = d->hunspell->suggest(&suggestions, d->codec->fromUnicode(word));
+    const auto suggestions = d->hunspell->suggest(d->codec->fromUnicode(word).toStdString());
 
     // Less than zero means some error.
-    if (suggestions_count < 0) {
+    if (suggestions.empty()) {
         qWarning() << __PRETTY_FUNCTION__ << ": Failed to get suggestions for" << word << ".";
         return QStringList();
     }
 
     QStringList result;
-    const int final_limit((limit < 0) ? suggestions_count : qMin(limit, suggestions_count));
+    const int final_limit((limit < 0) ? suggestions.size() : qMin(limit, static_cast<int>(suggestions.size())));
 
     for (int index(0); index < final_limit; ++index) {
-        result << d->codec->toUnicode(suggestions[index]);
+        result << d->codec->toUnicode(suggestions[index].c_str());
     }
-    d->hunspell->free_list(&suggestions, suggestions_count);
     return result;
 }
 
@@ -272,7 +270,7 @@ void SpellChecker::updateWord(const QString &word)
     }
 
     // Non-zero return value means some error.
-    if (d->hunspell->add(d->codec->fromUnicode(word))) {
+    if (d->hunspell->add(d->codec->fromUnicode(word).toStdString())) {
         qWarning() << __PRETTY_FUNCTION__ << ": Failed to add '" << word << "' to user dictionary.";
     }
 }
