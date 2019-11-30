@@ -77,6 +77,7 @@ Item {
         onWordribbon_visibleChanged: fullScreenItem.reportKeyboardVisibleRect();
 
         property bool languageMenuShown: false
+        property alias languageMenu: languageMenu
         property bool extendedKeysShown: false
 
         property bool firstShow: true
@@ -200,8 +201,6 @@ Item {
                         anchors.centerIn: parent
                         height: contentHeight > keypad.height ? keypad.height : contentHeight
                         width: units.gu(30);
-                        enabled: canvas.languageMenuShown
-                        visible: canvas.languageMenuShown
                     }
                 } // keyboardComp
             }
@@ -233,7 +232,7 @@ Item {
                 name: "HIDDEN"
                 PropertyChanges { target: keyboardSurface; y: canvas.height }
                 onCompleted: {
-                    canvas.languageMenuShown = false;
+                    canvas.languageMenu.close();
                     keypad.closeExtendedKeys();
                     keypad.activeKeypadState = "NORMAL";
                     keypad.state = "CHARACTERS";

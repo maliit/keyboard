@@ -1,5 +1,6 @@
 /*
  * Copyright 2013 Canonical Ltd.
+ * Copyright 2019 Jan Arne Petersen
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -16,72 +17,38 @@
 
 import QtQuick 2.4
 
-import QtQuick.Controls 2.1
+import QtQuick.Controls 2.13
 
 import "key_constants.js" as UI
 import "languages.js" as Languages
 
-Item {
+Menu {
 
-    property double contentHeight: menuList.contentHeight + units.gu(UI.languageMenuListViewPadding);
+    modal: true
 
-    MouseArea {
-        width: fullScreenItem.width
-        height: fullScreenItem.height
-
-        anchors.centerIn: parent
-
-        onClicked: canvas.languageMenuShown = false
-    }
-
-    BorderImage {
-        id: name
-        anchors.fill: parent
-        source: "../images/popover.sci"
-    }
-
-    ListView {
-        id: menuList
-        anchors.centerIn: parent
-        width: parent.width - units.gu(UI.languageMenuListViewPadding)
-        height: parent.height - units.gu(UI.languageMenuListViewPadding)
-        interactive: true
-        clip: true
-
+    Repeater {
         model: maliit_input_method.enabledLanguages
 
-        delegate: RadioDelegate {
-            anchors.left: parent.left
-            anchors.right: parent.right
+        delegate: MenuItem {
             text: Languages.languageIdToName(modelData)
-//            showDivider: modelData != maliit_input_method.enabledLanguages[maliit_input_method.enabledLanguages.length - 1]
+            checkable: true
+            autoExclusive: true
             checked: maliit_input_method.activeLanguage == modelData
             onClicked: {
                 maliit_input_method.activeLanguage = modelData
-                canvas.languageMenuShown = false;
+                canvas.languageMenu.close()
             }
         }
-
-        Component {
-            id: settingsComp
-            Column {
-                width: menuList.width
-                height: settingsItem.height // + settingsDiv.height * 2
-//                ListItem.ThinDivider { id: settingsDiv }
-//                ListItem.ThinDivider { }
-                ItemDelegate {
-                    id: settingsItem
-                    text: qsTr("Settings") + "…"
-//                    showDivider: false
-                    onClicked: {
-                        Qt.openUrlExternally("settings:///system/language")
-                        canvas.languageMenuShown = false;
-                        maliit_input_method.hide();
-                    }
-                }
-            }
-        }
-        footer: greeter_status.greeterActive ? null : settingsComp
     }
-
+    MenuSeparator {
+    }
+    MenuItem {
+        id: settingsItem
+        text: qsTr("Settings") + "…"
+        onClicked: {
+            Qt.openUrlExternally("settings:///system/language")
+            canvas.languageMenu.close();
+            maliit_input_method.hide();
+        }
+    }
 }

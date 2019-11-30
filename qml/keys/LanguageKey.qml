@@ -49,7 +49,7 @@ ActionKey {
         if (maliit_input_method.previousLanguage && maliit_input_method.previousLanguage != maliit_input_method.activeLanguage) {
             maliit_input_method.activeLanguage = maliit_input_method.previousLanguage
         } else {
-            canvas.languageMenuShown = true
+            canvas.languageMenu.open()
         }
     }
 
@@ -60,7 +60,7 @@ ActionKey {
         if (maliit_input_method.useHapticFeedback)
             pressEffect.start();
 
-        canvas.languageMenuShown = true
+        canvas.languageMenu.open()
         held = true;
     }
 }
