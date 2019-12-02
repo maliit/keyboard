@@ -16,16 +16,14 @@
 
 import QtQuick 2.4
 
+import MaliitKeyboard 2.0
+
 ActionKey {
     action: "shift"
     overridePressArea: true
 
     onPressed: {
-        if (maliit_input_method.useAudioFeedback)
-            audioFeedback.play();
-
-        if (maliit_input_method.useHapticFeedback)
-            pressEffect.start();
+        Feedback.keyPressed();
 
         if (panel.activeKeypadState == "NORMAL")
             panel.activeKeypadState = "SHIFTED";

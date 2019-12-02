@@ -16,6 +16,8 @@
 
 import QtQuick 2.4
 
+import MaliitKeyboard 2.0
+
 ActionKey {
     iconNormal: "language-chooser";
     iconShifted: "language-chooser";
@@ -31,12 +33,8 @@ ActionKey {
     action: "language"
 
     onPressed: {
-        if (maliit_input_method.useAudioFeedback)
-            audioFeedback.play();
+        Feedback.keyPressed();
 
-        if (maliit_input_method.useHapticFeedback)
-            pressEffect.start();
-        
         held = false;
     }
 
@@ -54,11 +52,7 @@ ActionKey {
     }
 
     onPressAndHold: {
-        if (maliit_input_method.useAudioFeedback)
-            audioFeedback.play();
-
-        if (maliit_input_method.useHapticFeedback)
-            pressEffect.start();
+        Feedback.keyPressed();
 
         canvas.languageMenu.open()
         held = true;

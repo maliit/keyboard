@@ -33,6 +33,9 @@ find_package(GIO REQUIRED)
 
 find_package(Qt5DBus)
 
+find_package(Qt5Multimedia)
+find_package(Qt5Feedback)
+
 find_package(Anthy)
 find_package(Pinyin)
 find_package(Chewing)
@@ -147,6 +150,8 @@ target_compile_definitions(gsettings-qt PRIVATE -DQT_NO_KEYWORDS)
 set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/editor.cpp
         src/plugin/editor.h
+        src/plugin/feedback.cpp
+        src/plugin/feedback.h
         src/plugin/greeterstatus.cpp
         src/plugin/greeterstatus.h
         src/plugin/updatenotifier.cpp
@@ -162,8 +167,9 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/units.h)
 
 add_library(maliit-keyboard-common STATIC ${MALIIT_KEYBOARD_COMMON_SOURCES})
-target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt)
+target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia Qt5::Feedback)
 target_compile_definitions(maliit-keyboard-common PRIVATE ${maliit-keyboard-definitions})
+target_compile_features(maliit-keyboard-common PRIVATE cxx_std_17)
 
 set(MALIIT_KEYBOARD_PLUGIN_SOURCES
         src/plugin/plugin.cpp

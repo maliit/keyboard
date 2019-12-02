@@ -16,6 +16,8 @@
 
 import QtQuick 2.4
 
+import MaliitKeyboard 2.0
+
 import "key_constants.js" as UI
 
 FlickCharKey {
@@ -73,10 +75,6 @@ FlickCharKey {
     }
 
     onPressed: {
-        if (maliit_input_method.useAudioFeedback)
-            audioFeedback.play();
-
-        if (maliit_input_method.useHapticFeedback)
-            pressEffect.start();
+        Feedback.keyPressed();
     }
 }

@@ -15,7 +15,8 @@
  */
 
 import QtQuick 2.4
-import QtMultimedia 5.0
+
+import MaliitKeyboard 2.0
 
 import "key_constants.js" as UI
 
@@ -195,8 +196,7 @@ Item {
                 return;
             }
             if (activeExtendedModel != undefined) {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
 
                 swipeReady = false;
                 swipeTimer.restart();
@@ -280,11 +280,7 @@ Item {
             magnifier.currentlyAssignedKey = key
             magnifier.shown = !noMagnifier
 
-            if (maliit_input_method.useAudioFeedback)
-                audioFeedback.play();
-            
-            if (maliit_input_method.useHapticFeedback)
-                 pressEffect.start();
+            Feedback.keyPressed();
 
             // Quick workaround to fix initial autocaps - not beautiful, but works
             if(action != "backspace") {
@@ -315,8 +311,8 @@ Item {
                     var posY = extendedKeys[i].y;
                     if(mx > posX && mx < (posX + extendedKeys[i].width)
                        && my > posY && my < (posY + extendedKeys[i].height * 2.5)) {
-                        if(!extendedKeys[i].highlight && maliit_input_method.useHapticFeedback) {
-                            pressEffect.start();
+                        if(!extendedKeys[i].highlight) {
+                            Feedback.startPressEffect();
                         }
                         extendedKeys[i].highlight = true;
                         currentExtendedKey = extendedKeys[i];

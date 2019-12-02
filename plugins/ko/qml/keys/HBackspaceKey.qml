@@ -15,6 +15,9 @@
  */
 
 import QtQuick 2.4
+
+import MaliitKeyboard 2.0
+
 import keys 1.0
 
 import "parser.js" as Parser
@@ -59,11 +62,7 @@ ActionKey {
     }
 
     onPressed: {
-        if (maliit_input_method.useAudioFeedback)
-            audioFeedback.play();
-
-        if (maliit_input_method.useHapticFeedback)
-            pressEffect.start();
+        Feedback.keyPressed();
 
         if (!isPreedit) {
             event_handler.onKeyPressed("", action);

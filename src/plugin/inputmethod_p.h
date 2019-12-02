@@ -18,6 +18,7 @@
 #include "coreutils.h"
 
 #include "editor.h"
+#include "feedback.h"
 #include "greeterstatus.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
@@ -35,6 +36,7 @@
 #include <qglobal.h>
 #include <QDebug>
 
+#include <memory>
 
 namespace
 {
@@ -90,6 +92,8 @@ public:
     GreeterStatus *m_greeterStatus;
     Units *m_units;
 
+    std::unique_ptr<Feedback> m_feedback;
+
     WordRibbon* wordRibbon;
 
     int previous_position;
@@ -118,6 +122,7 @@ public:
         , m_settings()
         , m_greeterStatus(new GreeterStatus())
         , m_units(new Units(q))
+        , m_feedback(std::make_unique<Feedback>(&m_settings))
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {
@@ -195,6 +200,8 @@ public:
 
     void setContextProperties(QQmlContext *qml_context)
     {
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Keyboard", q);
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Feedback", m_feedback.get());
         qml_context->setContextProperty(QStringLiteral("maliit_input_method"), q);
         qml_context->setContextProperty(QStringLiteral("maliit_geometry"), m_geometry);
         qml_context->setContextProperty(QStringLiteral("maliit_event_handler"), &event_handler);

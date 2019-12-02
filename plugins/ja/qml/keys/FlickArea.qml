@@ -16,6 +16,8 @@
 
 import QtQuick 2.4
 
+import MaliitKeyboard 2.0
+
 MultiPointTouchArea {
     id: root
 
@@ -72,8 +74,7 @@ MultiPointTouchArea {
         if (old_index != index) {
             old_index = index
 
-            if (maliit_input_method.useHapticFeedback)
-                pressEffect.start();
+            Feedback.startPressEffect();
         }
     }
 }

@@ -16,6 +16,9 @@
 
 import QtQuick 2.4
 import QtQuick.LocalStorage 2.0
+
+import MaliitKeyboard 2.0
+
 import keys 1.0
 import "emoji.js" as Emoji
 
@@ -227,8 +230,7 @@ KeyPad {
             highlight: (c1.midVisibleIndex < internal.recentEmoji.length && c1.midVisibleIndex > 0)
                        || (c1.contentX == 0 && internal.recentEmoji.length > 0)
             onPressed: {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
                 internal.jumpTo(0);
             }
         }           
@@ -240,8 +242,7 @@ KeyPad {
                         && !recentCat.highlight)
                        || c1.midVisibleIndex == -1
             onPressed: {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
                 internal.jumpTo(internal.recentEmoji.length);
                 if (internal.recentEmoji.length < internal.maxRecent) {
                     c1.startingPosition = true;
@@ -253,8 +254,7 @@ KeyPad {
             label: "🐶"
             highlight: c1.midVisibleIndex >= 540 + internal.recentEmoji.length && c1.midVisibleIndex < 701 + internal.recentEmoji.length
             onPressed: {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
                 internal.jumpTo(540 + internal.recentEmoji.length);
             }
         }
@@ -263,8 +263,7 @@ KeyPad {
             label: "🍏"
             highlight: c1.midVisibleIndex >= 701 + internal.recentEmoji.length && c1.midVisibleIndex < 786 + internal.recentEmoji.length
             onPressed: {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
                 internal.jumpTo(701 + internal.recentEmoji.length);
             }
         }
@@ -273,8 +272,7 @@ KeyPad {
             label: "🎾"
             highlight: c1.midVisibleIndex >= 786 + internal.recentEmoji.length && c1.midVisibleIndex < 931 + internal.recentEmoji.length
             onPressed: {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
                 internal.jumpTo(786 + internal.recentEmoji.length);
             }
         }
@@ -283,8 +281,7 @@ KeyPad {
             label: "🚗"
              highlight: c1.midVisibleIndex >= 931 + internal.recentEmoji.length && c1.midVisibleIndex < 1050 + internal.recentEmoji.length
             onPressed: {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
                 internal.jumpTo(931 + internal.recentEmoji.length);
             }
         }
@@ -293,8 +290,7 @@ KeyPad {
             label: "💡"
             highlight: c1.midVisibleIndex >= 1050 + internal.recentEmoji.length && c1.midVisibleIndex < 1229 + internal.recentEmoji.length
             onPressed: {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
                 internal.jumpTo(1050 + internal.recentEmoji.length);
             }
         }
@@ -303,8 +299,7 @@ KeyPad {
             label: "❤"
             highlight: c1.midVisibleIndex >= 1229 + internal.recentEmoji.length && c1.midVisibleIndex < 1512 + internal.recentEmoji.length
             onPressed: {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
                 internal.jumpTo(1229 + internal.recentEmoji.length);
             }
         }
@@ -313,8 +308,7 @@ KeyPad {
             label: "🌍"
             highlight: c1.midVisibleIndex >= 1512 + internal.recentEmoji.length
             onPressed: {
-                if (maliit_input_method.useHapticFeedback)
-                    pressEffect.start();
+                Feedback.startPressEffect();
                 internal.jumpTo(1512 + internal.recentEmoji.length);
             }
         }

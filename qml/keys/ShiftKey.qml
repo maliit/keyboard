@@ -16,6 +16,8 @@
 
 import QtQuick 2.4
 
+import MaliitKeyboard 2.0
+
 import "key_constants.js" as UI
 
 ActionKey {
@@ -35,11 +37,7 @@ ActionKey {
             doubleClick = false;
             return;
         }
-        if (maliit_input_method.useAudioFeedback)
-            audioFeedback.play();
-
-        if (maliit_input_method.useHapticFeedback)
-            pressEffect.start();
+        Feedback.keyPressed();
 
         if (panel.activeKeypadState == "NORMAL")
             panel.activeKeypadState = "SHIFTED";
@@ -50,18 +48,13 @@ ActionKey {
     }
 
     onPressAndHold: {
-        if (maliit_input_method.useHapticFeedback)
-            pressEffect.start();
+        Feedback.startPressEffect();
 
         panel.activeKeypadState = "CAPSLOCK"
     }
 
     onDoubleClicked: {
-        if (maliit_input_method.useAudioFeedback)
-            audioFeedback.play();
-
-        if (maliit_input_method.useHapticFeedback)
-            pressEffect.start();
+        Feedback.keyPressed();
 
         panel.activeKeypadState = "CAPSLOCK"
         doubleClick = true;

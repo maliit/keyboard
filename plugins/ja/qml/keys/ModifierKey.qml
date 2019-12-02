@@ -16,6 +16,8 @@
 
 import QtQuick 2.4
 
+import MaliitKeyboard 2.0
+
 import "modifier.js" as Modifier
 import "key_constants.js" as UI
 
@@ -60,11 +62,7 @@ FlickCharKey {
     }
 
     onPressed: {
-        if (maliit_input_method.useAudioFeedback)
-            audioFeedback.play();
-
-        if (maliit_input_method.useHapticFeedback)
-             pressEffect.start();
+        Feedback.keyPressed();
 
         if (isPreedit) {
             lastChar = preedit.charAt(cursorPosition-1)

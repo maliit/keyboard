@@ -39,7 +39,7 @@ MaliitKeyboardPlugin::MaliitKeyboardPlugin(QObject *parent)
     : QObject(parent)
     , Maliit::Plugins::InputMethodPlugin()
 {
-    qmlRegisterUncreatableType<InputMethod>("MaliitKeyboard", 1, 0, "InputMethod",
+    qmlRegisterUncreatableType<InputMethod>("MaliitKeyboard", 2, 0, "InputMethod",
                                             QStringLiteral("InputMethod can't be created in QML"));
 }
 
