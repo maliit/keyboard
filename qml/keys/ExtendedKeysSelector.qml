@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2013 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -68,8 +68,9 @@ KeyPopover {
     Rectangle{
         id: popoverBackground
         
-        
-        anchors.centerIn: anchorItem
+        //fix anchor loop, see https://forum.qt.io/topic/103522/anchor-loop-with-layout-centerin/4
+        anchors.horizontalCenter: anchorItem.horizontalCenter
+        anchors.verticalCenter: anchorItem.verticalCenter
         anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
 
         width: {

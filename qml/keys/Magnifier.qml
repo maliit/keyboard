@@ -54,7 +54,9 @@ KeyPopover {
         width: parent.width
         height: parent.height
 
-        anchors.centerIn: anchorItem
+        //fix anchor loop, see https://forum.qt.io/topic/103522/anchor-loop-with-layout-centerin/4
+        anchors.horizontalCenter: anchorItem.horizontalCenter
+        anchors.verticalCenter: anchorItem.verticalCenter
 
         // this property is used to synchronize scale and opacity animation
         property real animationStep: 0
