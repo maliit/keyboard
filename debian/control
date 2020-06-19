@@ -475,6 +475,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
 Description: Ubuntu on-screen keyboard data files - Swiss French
  Data files for the Ubuntu virtual keyboard - Swiss French
 
+Package: ubuntu-keyboard-thai
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+        ${misc:Depends},
+        ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Thai
+ Data files for the Ubuntu virtual keyboard - Thai
+
 Package: ubuntu-keyboard-turkish
 Architecture: any
 Depends: ubuntu-keyboard (= ${binary:Version}),

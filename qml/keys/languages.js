@@ -53,6 +53,7 @@ function languageIdToName(languageId)
     if (languageId == "sl")         return i18n.tr("Slovenian");
     if (languageId == "sr")         return i18n.tr("Serbian");
     if (languageId == "sv")         return i18n.tr("Swedish");
+    if (languageId == "th")         return i18n.tr("Thai");
     if (languageId == "tr")         return i18n.tr("Turkish");
     if (languageId == "uk")         return i18n.tr("Ukrainian");
     if (languageId == "zh-hans")         return i18n.tr("Chinese\n(Pinyin)");

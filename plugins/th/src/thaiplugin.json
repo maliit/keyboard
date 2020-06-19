@@ -1,0 +1,7 @@
+{
+    "IID": "com.canonical.UbuntuKeyboard.LanguagePluginInterface",
+    "MetaData": {
+    },
+    "className": "ThaiPlugin",
+    "debug": true
+}
