@@ -41,8 +41,7 @@ KeyPad {
             CharKey { label: "u"; shifted: "U"; extended: ["7"]; extendedShifted: ["7"] }
             CharKey { label: "i"; shifted: "I"; extended: ["8"]; extendedShifted: ["8"] }
             CharKey { label: "o"; shifted: "O"; extended: ["9", "ó"]; extendedShifted: ["9", "Ó"] }
-            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"] }
-            CharKey { label: "ż"; shifted: "Ż"; rightSide: true; }
+            CharKey { label: "p"; shifted: "P"; extended: ["0"]; extendedShifted: ["0"]; rightSide: true; }
         }
 
         Row {
@@ -57,9 +56,7 @@ KeyPad {
             CharKey { label: "h"; shifted: "H"; }
             CharKey { label: "j"; shifted: "J"; }
             CharKey { label: "k"; shifted: "K"; }
-            CharKey { label: "l"; shifted: "L"; extended: ["ł"]; extendedShifted: ["Ł"] }
-            CharKey { label: "ł"; shifted: "Ł"; }
-            CharKey { label: "ą"; shifted: "Ą"; rightSide: true; }
+            CharKey { label: "l"; shifted: "L"; extended: ["ł"]; extendedShifted: ["Ł"]; rightSide: true; }
         }
 
         Row {
@@ -74,7 +71,6 @@ KeyPad {
             CharKey { label: "b"; shifted: "B"; }
             CharKey { label: "n"; shifted: "N"; extended: ["ń"]; extendedShifted: ["Ń"] }
             CharKey { label: "m"; shifted: "M"; }
-            CharKey { label: "ę"; shifted: "Ę"; }
             BackspaceKey {}
         }
 
