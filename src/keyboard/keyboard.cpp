@@ -30,6 +30,7 @@
 
 int main(int argc, char **argv) {
     setenv("QT_IM_MODULE", "none", true);
+    setenv("QT_WAYLAND_SHELL_INTEGRATION", "inputpanel-shell", true);
 
     QGuiApplication app(argc, argv);
 
