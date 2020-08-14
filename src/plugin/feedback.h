@@ -57,7 +57,9 @@ Q_SIGNALS:
 private:
     const KeyboardSettings *m_settings;
     std::unique_ptr<QSoundEffect> m_audioEffect;
+#ifdef HAVE_QT5_FEEDBACK
     std::unique_ptr<QFeedbackHapticsEffect> m_pressEffect;
+#endif
 };
 
 }

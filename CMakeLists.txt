@@ -167,7 +167,11 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/units.h)
 
 add_library(maliit-keyboard-common STATIC ${MALIIT_KEYBOARD_COMMON_SOURCES})
-target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia Qt5::Feedback)
+target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia)
+if (Qt5Feedback_FOUND)
+    target_link_libraries(maliit-keyboard-common Qt5::Feedback)
+    target_compile_definitions(maliit-keyboard-common PUBLIC HAVE_QT5_FEEDBACK)
+endif()
 target_compile_definitions(maliit-keyboard-common PRIVATE ${maliit-keyboard-definitions})
 target_compile_features(maliit-keyboard-common PRIVATE cxx_std_17)
 

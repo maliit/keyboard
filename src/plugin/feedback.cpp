@@ -19,7 +19,9 @@
 #include "keyboardsettings.h"
 
 #include <QtMultimedia/QSoundEffect>
+#ifdef HAVE_QT5_FEEDBACK
 #include <QtFeedback/QFeedbackHapticsEffect>
+#endif
 
 #include <memory>
 
@@ -29,18 +31,22 @@ Feedback::Feedback(const KeyboardSettings *settings)
     : QObject()
     , m_settings(settings)
     , m_audioEffect(std::make_unique<QSoundEffect>())
+#ifdef HAVE_QT5_FEEDBACK
     , m_pressEffect(std::make_unique<QFeedbackHapticsEffect>())
+#endif
 {
     connect(settings, &KeyboardSettings::keyPressAudioFeedbackChanged, this, &Feedback::useAudioFeedbackChanged);
     connect(settings, &KeyboardSettings::keyPressAudioFeedbackSoundChanged, this, &Feedback::audioFeedbackSoundChanged);
     connect(settings, &KeyboardSettings::keyPressHapticFeedbackChanged, this, &Feedback::useHapticFeedbackChanged);
     m_audioEffect->setSource(QUrl(audioFeedbackSound()));
+#ifdef HAVE_QT5_FEEDBACK
     m_pressEffect->setAttackIntensity(0.0);
     m_pressEffect->setAttackTime(50);
     m_pressEffect->setIntensity(1.0);
     m_pressEffect->setDuration(10);
     m_pressEffect->setFadeTime(50);
     m_pressEffect->setFadeIntensity(0.0);
+#endif
 }
 
 Feedback::~Feedback() = default;
@@ -53,8 +59,10 @@ void Feedback::playAudio()
 
 void Feedback::startPressEffect()
 {
+#ifdef HAVE_QT5_FEEDBACK
     if (useHapticFeedback())
         m_pressEffect->start();
+#endif
 }
 
 void Feedback::keyPressed()
