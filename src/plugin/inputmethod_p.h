@@ -185,12 +185,12 @@ public:
 
         if (QGuiApplication::platformName() == QLatin1String("ubuntumirclient")) {
             view->setFlags(InputMethodWindowType); /* Mir-only OSK window type */
-
-            // When keyboard geometry changes, update the window's input mask
-            QObject::connect(m_geometry, &KeyboardGeometry::visibleRectChanged, view, [this]() {
-                view->setMask(m_geometry->visibleRect().toRect());
-            });
         }
+
+        // When keyboard geometry changes, update the window's input mask
+        QObject::connect(m_geometry, &KeyboardGeometry::visibleRectChanged, view, [this]() {
+            view->setMask(m_geometry->visibleRect().toRect());
+        });
     }
 
     void setLayoutOrientation(Qt::ScreenOrientation screenOrientation)

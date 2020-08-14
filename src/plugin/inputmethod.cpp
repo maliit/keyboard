@@ -654,7 +654,8 @@ void InputMethod::onVisibleRectChanged()
 
     QRect visibleRect = d->m_geometry->visibleRect().toRect();
 
-    if (d->m_settings.disableHeight() && QGuiApplication::platformName() == QLatin1String("ubuntumirclient")) {
+    if (d->m_settings.disableHeight() &&
+        (QGuiApplication::platformName() == "ubuntumirclient" || QGuiApplication::platformName() == "wayland")) {
         visibleRect.setHeight(0);
     }
 
