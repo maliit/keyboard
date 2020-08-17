@@ -39,7 +39,7 @@ Item {
     objectName: "fullScreenItem"
 
     property bool landscape: width > height
-    readonly property bool tablet: landscape ? width >= units.gu(90) : height >= units.gu(90)
+    readonly property bool tablet: landscape ? width >= 8.0 * (90) : height >= 8.0 * (90)
 
     property bool cursorSwipe: false
     property int prevSwipePositionX
@@ -95,7 +95,7 @@ Item {
         MouseArea {
             id: swipeArea
 
-            property int jumpBackThreshold: units.gu(10)
+            property int jumpBackThreshold: 8.0 * (10)
 
             anchors.left: parent.left
             anchors.right: parent.right
@@ -138,7 +138,7 @@ Item {
 
                 Rectangle {
                     width: parent.width
-                    height: units.dp(1)
+                    height: (1)
                     color: UI.dividerColor
                     anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
                 }
@@ -152,8 +152,8 @@ Item {
                     anchors.bottom: keyboardComp.top
                     width: parent.width;
 
-                    height: canvas.wordribbon_visible ? (fullScreenItem.tablet ? units.gu(UI.tabletWordribbonHeight)
-                                                                               : units.gu(UI.phoneWordribbonHeight))
+                    height: canvas.wordribbon_visible ? (fullScreenItem.tablet ? 8.0 * (UI.tabletWordribbonHeight)
+                                                                               : 8.0 * (UI.phoneWordribbonHeight))
                                                       : 0
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
@@ -180,7 +180,7 @@ Item {
                         id: borderTop
                         width: parent.width
                         anchors.top: parent.top.bottom
-                        height: wordRibbon.visible ? 0 : units.gu(UI.top_margin)
+                        height: wordRibbon.visible ? 0 : 8.0 * (UI.top_margin)
                     }
 
                     KeyboardContainer {
@@ -188,7 +188,7 @@ Item {
 
                         anchors.top: borderTop.bottom
                         anchors.bottom: background.bottom
-                        anchors.bottomMargin: units.gu(UI.bottom_margin)
+                        anchors.bottomMargin: 8.0 * (UI.bottom_margin)
                         width: parent.width
                         hideKeyLabels: fullScreenItem.cursorSwipe
 
@@ -200,7 +200,7 @@ Item {
                         objectName: "languageMenu"
                         anchors.centerIn: parent
                         height: contentHeight > keypad.height ? keypad.height : contentHeight
-                        width: units.gu(30);
+                        width: 8.0 * (30);
                     }
                 } // keyboardComp
             }
@@ -368,17 +368,17 @@ Item {
     }
 
     function processSwipe(positionX, positionY) {
-        if (positionX < prevSwipePositionX - units.gu(1) && input_method.surroundingLeft != "") {
+        if (positionX < prevSwipePositionX - 8.0 * (1) && input_method.surroundingLeft != "") {
             sendLeftKey();
             prevSwipePositionX = positionX
-        } else if (positionX > prevSwipePositionX + units.gu(1) && input_method.surroundingRight != "") {
+        } else if (positionX > prevSwipePositionX + 8.0 * (1) && input_method.surroundingRight != "") {
             sendRightKey();
             prevSwipePositionX = positionX
         }
-        if (positionY < prevSwipePositionY - units.gu(4)) {
+        if (positionY < prevSwipePositionY - 8.0 * (4)) {
             sendUpKey();
             prevSwipePositionY = positionY
-        } else if (positionY > prevSwipePositionY + units.gu(4)) {
+        } else if (positionY > prevSwipePositionY + 8.0 * (4)) {
             sendDownKey();
             prevSwipePositionY = positionY
         }

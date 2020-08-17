@@ -35,7 +35,7 @@ Item {
     property var extendedShifted; // list of extended keys in shifted state
     property var currentExtendedKey; // The currently highlighted extended key
     property bool highlight: false;
-    property double textCenterOffset: units.gu(-0.15)
+    property double textCenterOffset: 8.0 * (-0.15)
 
     property string valueToSubmit: keyLabel.text
 
@@ -50,11 +50,11 @@ Item {
     property bool leftSide: false
     property bool rightSide: false
 
-    property double rowMargin: fullScreenItem.tablet ? units.gu(UI.tabletRowMargin)
-                                                     : (fullScreenItem.landscape ? units.dp(UI.phoneRowMarginLandscape)
-                                                                                 : units.dp(UI.phoneRowMarginPortrait))
-    property double keyMargin: fullScreenItem.tablet ? units.gu(UI.tabletKeyMargins)
-                                                     : units.gu(UI.phoneKeyMargins)
+    property double rowMargin: fullScreenItem.tablet ? 8.0 * (UI.tabletRowMargin)
+                                                     : (fullScreenItem.landscape ? (UI.phoneRowMarginLandscape)
+                                                                                 : (UI.phoneRowMarginPortrait))
+    property double keyMargin: fullScreenItem.tablet ? 8.0 * (UI.tabletKeyMargins)
+                                                     : 8.0 * (UI.phoneKeyMargins)
 
     // These properties are used by autopilot to determine the visible 
     // portion of the key to press
@@ -141,7 +141,7 @@ Item {
             anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.bottomMargin: key.rowMargin
-            radius: units.dp(4)
+            radius: (4)
 
             /// label of the key
             //  the label is also the value subitted to the app
@@ -155,8 +155,8 @@ Item {
                 color: UI.fontColor
                 anchors.right: parent.right
                 anchors.left: parent.left
-                anchors.leftMargin: units.gu(0.2)
-                anchors.rightMargin: units.gu(0.2)
+                anchors.leftMargin: 8.0 * (0.2)
+                anchors.rightMargin: 8.0 * (0.2)
                 anchors.verticalCenter: parent.verticalCenter 
                 anchors.verticalCenterOffset: key.textCenterOffset
                 horizontalAlignment: Text.AlignHCenter
@@ -174,8 +174,8 @@ Item {
         
                 anchors.right: parent.right
                 anchors.top: parent.top
-                anchors.topMargin: units.gu(UI.annotationTopMargin)
-                anchors.rightMargin: units.gu(UI.annotationRightMargin)
+                anchors.topMargin: 8.0 * (UI.annotationTopMargin)
+                anchors.rightMargin: 8.0 * (UI.annotationRightMargin)
                 font.family: UI.annotationFont
                 font.pixelSize: fontSize / 3
                 font.weight: Font.Light

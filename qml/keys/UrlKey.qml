@@ -18,7 +18,7 @@ import QtQuick 2.4
 import "../keys/key_constants.js" as UI
 
 CharKey {
-    width: panel.keyWidth + units.gu( UI.emailLayoutUrlKeyPadding )
+    width: panel.keyWidth + 8.0 * ( UI.emailLayoutUrlKeyPadding )
 
     label: ".com";
     shifted: label

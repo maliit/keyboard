@@ -35,7 +35,7 @@ ActionKey {
 
     Label {
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: -parent.rowMargin / 2 - units.gu(0.15)
+        anchors.verticalCenterOffset: -parent.rowMargin / 2 - 8.0 * (0.15)
         font.family: UI.fontFamily
         font.weight: Font.Light
         font.pixelSize: parent.fontSize * 0.6

@@ -163,8 +163,7 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/keyboardgeometry.h
         src/plugin/keyboardsettings.cpp
         src/plugin/keyboardsettings.h
-        src/plugin/units.cpp
-        src/plugin/units.h)
+        )
 
 add_library(maliit-keyboard-common STATIC ${MALIIT_KEYBOARD_COMMON_SOURCES})
 target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia)

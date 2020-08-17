@@ -6,7 +6,7 @@ MainView {
 
     automaticOrientation: true
 
-    property int inputWidth: units.gu( 14 )
+    property int inputWidth: 8.0 * ( 14 )
 
     Rectangle {
         anchors.fill: parent
@@ -15,16 +15,16 @@ MainView {
 
     Column {
         id: c1
-        y: units.gu(3)
+        y: 8.0 * (3)
 
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: units.gu(1)
+        spacing: 8.0 * (1)
 
         Text {
             id: label
             text: "OSK Layout Test"
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: units.gu(2)
+            font.pixelSize: 8.0 * (2)
             font.bold: true
         }
 
@@ -32,10 +32,10 @@ MainView {
          * Url Characters
          */
         Row {
-            spacing: units.gu(1)
+            spacing: 8.0 * (1)
             Item {
                 width: inputWidth
-                height: units.gu(4);
+                height: 8.0 * (4);
 
                 Rectangle {
                     anchors.fill: parent
@@ -47,14 +47,14 @@ MainView {
                     color: "black"; selectionColor: "red"
 
                     inputMethodHints: Qt.ImhUrlCharactersOnly
-                    font.pixelSize: units.gu(3)
+                    font.pixelSize: 8.0 * (3)
                     font.bold: false
                 }
             }
             Text {
                 text: "Qt.ImhUrlCharactersOnly"
                 anchors.verticalCenter: parent
-                font.pixelSize: units.gu(1.5)
+                font.pixelSize: 8.0 * (1.5)
             }
         }
 
@@ -62,10 +62,10 @@ MainView {
          * Qt.ImhNone
          */
         Row {
-            spacing: units.gu(1)
+            spacing: 8.0 * (1)
             Item {
                 width: inputWidth
-                height: units.gu(8);
+                height: 8.0 * (8);
 
                 Rectangle {
                     anchors.fill: parent
@@ -77,14 +77,14 @@ MainView {
                     color: "black"; selectionColor: "red"
 
                     inputMethodHints: Qt.ImhNone
-                    font.pixelSize: units.gu(3)
+                    font.pixelSize: 8.0 * (3)
                     font.bold: false
                 }
             }
             Text {
                 text: "Qt.ImhNone, multiline"
                 anchors.verticalCenter: parent
-                font.pixelSize: units.gu(1.5)
+                font.pixelSize: 8.0 * (1.5)
             }
         }
 
@@ -92,10 +92,10 @@ MainView {
          * Qt.ImhDigitsOnly
          */
         Row {
-            spacing: units.gu(1)
+            spacing: 8.0 * (1)
             Item {
                 width: inputWidth
-                height: units.gu(4);
+                height: 8.0 * (4);
 
                 Rectangle {
                     anchors.fill: parent
@@ -107,14 +107,14 @@ MainView {
                     color: "black"; selectionColor: "red"
 
                     inputMethodHints: Qt.ImhDigitsOnly
-                    font.pixelSize: units.gu(3)
+                    font.pixelSize: 8.0 * (3)
                     font.bold: false
                 }
             }
             Text {
                 text: "Qt.ImhDigitsOnly"
                 anchors.verticalCenter: parent
-                font.pixelSize: units.gu(1.5)
+                font.pixelSize: 8.0 * (1.5)
             }
         }
 
@@ -122,10 +122,10 @@ MainView {
          * Qt.ImhDialableCharactersOnly
          */
         Row {
-            spacing: units.gu(1)
+            spacing: 8.0 * (1)
             Item {
                 width: inputWidth
-                height: units.gu(4);
+                height: 8.0 * (4);
 
                 Rectangle {
                     anchors.fill: parent
@@ -137,14 +137,14 @@ MainView {
                     color: "black"; selectionColor: "red"
 
                     inputMethodHints: Qt.ImhDialableCharactersOnly
-                    font.pixelSize: units.gu(3)
+                    font.pixelSize: 8.0 * (3)
                     font.bold: false
                 }
             }
             Text {
                 text: "Qt.ImhDialableCharactersOnly"
                 anchors.verticalCenter: parent
-                font.pixelSize: units.gu(1.5)
+                font.pixelSize: 8.0 * (1.5)
             }
         }
 
@@ -152,10 +152,10 @@ MainView {
          * Qt.ImhEmailCharactersOnly
          */
         Row {
-            spacing: units.gu(1)
+            spacing: 8.0 * (1)
             Item {
                 width: inputWidth
-                height: units.gu(4);
+                height: 8.0 * (4);
 
                 Rectangle {
                     anchors.fill: parent
@@ -167,14 +167,14 @@ MainView {
                     color: "black"; selectionColor: "red"
 
                     inputMethodHints: Qt.ImhEmailCharactersOnly
-                    font.pixelSize: units.gu(3)
+                    font.pixelSize: 8.0 * (3)
                     font.bold: false
                 }
             }
             Text {
                 text: "Qt.ImhEmailCharactersOnly"
                 anchors.verticalCenter: parent
-                font.pixelSize: units.gu(1.5)
+                font.pixelSize: 8.0 * (1.5)
             }
         }
     } // column
@@ -182,14 +182,14 @@ MainView {
     Rectangle {
         id: fakeBrowserUrlBar
         width: keyboardRect.width
-        height: units.gu(4)
+        height: 8.0 * (4)
         color: "orange"
         anchors.bottom: keyboardRect.top
 
         Text {
             visible: Qt.inputMethod.visible
             anchors.centerIn: parent
-            font.pixelSize: units.gu(1)
+            font.pixelSize: 8.0 * (1)
             text: "app bottom"
         }
     }

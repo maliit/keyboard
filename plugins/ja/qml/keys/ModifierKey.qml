@@ -25,7 +25,7 @@ FlickCharKey {
     label: (isPreedit && layoutState == "kana") ? " ゛ ゜" : "␣"
     leaves: isPreedit ? preeditLeaves : ["␣", "□"]
     annotation: isPreedit ? "大⇔小" : ""
-    fontSize: isPreedit ? units.gu( UI.fontSize ) * 0.8 : units.gu( UI.fontSize )
+    fontSize: isPreedit ? 8.0 * ( UI.fontSize ) * 0.8 : 8.0 * ( UI.fontSize )
 
     overridePressArea: true
 

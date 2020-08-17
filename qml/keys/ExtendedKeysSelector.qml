@@ -65,7 +65,7 @@ KeyPopover {
         id: popoverBackground
 
         anchors.centerIn: anchorItem
-        anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
+        anchors.verticalCenterOffset: -(UI.popoverTopMargin)
 
         width: {
             if (rowOfKeys.width < keypad.keyWidth)
@@ -101,7 +101,7 @@ KeyPopover {
     Row {
         id: rowOfKeys
         anchors.centerIn: anchorItem
-        anchors.verticalCenterOffset: -units.dp(UI.popoverTopMargin)
+        anchors.verticalCenterOffset: -(UI.popoverTopMargin)
 
         Component.onCompleted: __width = 0
 
@@ -111,7 +111,7 @@ KeyPopover {
 
             Item {
                 id: key
-                width: textCell.width + units.gu( UI.popoverCellPadding );
+                width: textCell.width + 8.0 * ( UI.popoverCellPadding );
 
                 height: panel.keyHeight;
 
@@ -127,7 +127,7 @@ KeyPopover {
                     font.pixelSize: fontSize
                     font.weight: Font.Light
                     color: key.highlight ? UI.selectionColor : UI.fontColor
-                    Component.onCompleted: __width += (textCell.width + units.gu( UI.popoverCellPadding));
+                    Component.onCompleted: __width += (textCell.width + 8.0 * ( UI.popoverCellPadding));
                 }
 
                 function commit(skipAutoCaps) {

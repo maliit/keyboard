@@ -47,7 +47,7 @@ Rectangle {
         id: wordCandidateDelegate
         Item {
             id: wordCandidateItem
-            width: wordItem.width + units.gu(2)
+            width: wordItem.width + 8.0 * (2)
             height: wordRibbonCanvas.height
             anchors.margins: 0
             property alias word_text: wordItem // For testing in Autopilot
@@ -56,15 +56,15 @@ Rectangle {
             Item {
                 anchors.fill: parent
                 anchors.margins: {
-                    top: units.gu(0)
-                    bottom: units.gu(0)
-                    left: units.gu(2)
-                    right: units.gu(2)
+                    top: 8.0 * (0)
+                    bottom: 8.0 * (0)
+                    left: 8.0 * (2)
+                    right: 8.0 * (2)
                 }
 
                 Label {
                     id: wordItem
-                    font.pixelSize: units.dp(fullScreenItem.tablet ? UI.tabletWordRibbonFontSize : UI.phoneWordRibbonFontSize)
+                    font.pixelSize: (fullScreenItem.tablet ? UI.tabletWordRibbonFontSize : UI.phoneWordRibbonFontSize)
                     font.family: UI.fontFamily
                     font.weight: textBold ? Font.Bold : Font.Light
                     text: word;

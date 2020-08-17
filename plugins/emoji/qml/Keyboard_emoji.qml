@@ -154,11 +154,11 @@ KeyPad {
         anchors.right: parent.right
         model: ListModel { }
         flow: GridView.FlowTopToBottom
-        flickDeceleration: units.gu(500)
+        flickDeceleration: 8.0 * (500)
         snapMode: GridView.SnapToRow
         cellWidth: fullScreenItem.landscape ? panel.keyWidth * 0.7 : panel.keyWidth
         cellHeight: panel.keyHeight
-        cacheBuffer: units.gu(30)
+        cacheBuffer: 8.0 * (30)
         onContentXChanged: {
             magnifier.shown = false;
             magnifier.currentlyAssignedKey = null;
@@ -187,7 +187,7 @@ KeyPad {
                 shifted: label
                 normalColor: UI.backgroundColor
                 pressedColor: UI.backgroundColor
-                fontSize: units.gu(2.5)
+                fontSize: 8.0 * (2.5)
                 fontFamily: "Noto Color Emoji"
                 onKeySent: {
                     internal.updateRecent(key);
