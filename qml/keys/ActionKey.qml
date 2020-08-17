@@ -36,7 +36,7 @@ CharKey {
     property int padding: UI.actionKeyPadding
 
     // action keys are a bit wider
-    width: panel.keyWidth + units.gu( padding )
+    width: panel.keyWidth + 8.0 * ( padding )
 
     normalColor: UI.actionKeyColor
     pressedColor: UI.actionKeyPressedColor
@@ -62,7 +62,7 @@ CharKey {
                                                          : ""
             property color color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - units.gu(0.15)
+            anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - 8.0 * (0.15)
             height: actionKeyRoot.fontSize
             fillMode: Image.PreserveAspectFit
             visible: false

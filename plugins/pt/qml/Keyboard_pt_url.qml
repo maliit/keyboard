@@ -79,12 +79,12 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight + units.gu(UI.row_margin);
+            height: panel.keyHeight + 8.0 * (UI.row_margin);
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
             CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: languageMenuButton.right; height: parent.height; }
-            UrlKey         { id: urlKey; label: ".com.br"; extended: [".com", ".pt", ".mz", ".ao", ".gw", ".tl"]; anchors.right: dotKey.left; height: parent.height; width: panel.keyWidth + units.gu(UI.emailLayoutUrlKeyPadding + 0.5); }
+            UrlKey         { id: urlKey; label: ".com.br"; extended: [".com", ".pt", ".mz", ".ao", ".gw", ".tl"]; anchors.right: dotKey.left; height: parent.height; width: panel.keyWidth + 8.0 * (UI.emailLayoutUrlKeyPadding + 0.5); }
             CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "-", "_", "!", "+", "%","#","/"]; extendedShifted: ["?", "-", "_", "!", "+", "%","#","/"]; anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }

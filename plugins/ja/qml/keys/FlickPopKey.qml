@@ -18,15 +18,15 @@ import QtQuick 2.4
 import "key_constants.js" as UI
 
 Rectangle {
-    width: units.gu(UI.fontSize + UI.flickMargin)
-    height: units.gu(UI.fontSize + UI.flickMargin)
+    width: 8.0 * (UI.fontSize + UI.flickMargin)
+    height: 8.0 * (UI.fontSize + UI.flickMargin)
 
     property string labelChar
     property color labelColor: UI.fontColor
     property real labelOpacity: 1.0
     visible: labelChar ? true : false
 
-    border.width: units.gu(UI.flickBorderWidth)
+    border.width: 8.0 * (UI.flickBorderWidth)
     border.color: UI.flickBorderColor
     radius: width / 10
 
@@ -34,7 +34,7 @@ Rectangle {
         anchors.centerIn: parent
         text: parent.labelChar
         font.family: UI.fontFamily
-        font.pixelSize: units.gu(UI.fontSize)
+        font.pixelSize: 8.0 * (UI.fontSize)
         font.bold: UI.fontBold
         color: parent.labelColor
         opacity: parent.labelOpacity

@@ -27,7 +27,7 @@ KeyPad {
         id: c1
         anchors.fill: parent
         spacing: 0
-        property real offset: units.gu(0.3)
+        property real offset: 8.0 * (0.3)
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
@@ -97,7 +97,7 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight + units.gu(UI.row_margin);
+            height: panel.keyHeight + 8.0 * (UI.row_margin);
 
             SymbolShiftKey { id: symShiftKey; label: "符号";             anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }

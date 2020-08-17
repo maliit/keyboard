@@ -21,5 +21,5 @@ import keys 1.0
 ActionKey {
     label: "戻す";
     action: "undo";
-    fontSize: units.gu(UI.undoFontSize);
+    fontSize: 8.0 * (UI.undoFontSize);
 }

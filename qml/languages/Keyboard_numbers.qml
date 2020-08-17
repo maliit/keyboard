@@ -26,18 +26,18 @@ KeyPad {
     Column {
         id: c1
         anchors.fill: parent
-        anchors.leftMargin: units.gu(1);
-        anchors.rightMargin: units.gu(1);
-        anchors.bottomMargin: units.gu(1);
+        anchors.leftMargin: 8.0 * (1);
+        anchors.rightMargin: 8.0 * (1);
+        anchors.bottomMargin: 8.0 * (1);
 
-        property double numKeyWidth: panel.keyWidth - units.gu(0.75);
-        property double numKeyHeight: panel.keyHeight - units.gu(1);
+        property double numKeyWidth: panel.keyWidth - 8.0 * (0.75);
+        property double numKeyHeight: panel.keyHeight - 8.0 * (1);
 
-        spacing: units.gu(1);
+        spacing: 8.0 * (1);
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            spacing: units.gu(0.5);
+            spacing: 8.0 * (0.5);
 
             CharKey { label: "1"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
             CharKey { label: "2"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
@@ -47,7 +47,7 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            spacing: units.gu(0.5);
+            spacing: 8.0 * (0.5);
 
             CharKey { label: "4"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
             CharKey { label: "5"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
@@ -57,7 +57,7 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            spacing: units.gu(0.5);
+            spacing: 8.0 * (0.5);
 
             CharKey { label: "7"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
             CharKey { label: "8"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
@@ -67,7 +67,7 @@ KeyPad {
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            spacing: units.gu(0.5);
+            spacing: 8.0 * (0.5);
 
             CharKey { label: "+"; annotation: "#*"; extended: ["#", "*"]; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
             CharKey { label: "0"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
