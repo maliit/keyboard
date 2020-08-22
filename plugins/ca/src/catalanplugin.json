@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.CatalanPlugin",
-    "MetaData": {
-    },
-    "className": "CatalanPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "ca",
+    "Language": "Catalan"
 }

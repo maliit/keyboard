@@ -14,7 +14,7 @@ class ChineseLanguageFeatures;
 class PinyinPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.PinyinPlugin" FILE "pinyinplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "pinyinplugin.json")
 
 public:
     explicit PinyinPlugin(QObject *parent = nullptr);

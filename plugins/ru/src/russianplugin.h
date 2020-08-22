@@ -7,7 +7,7 @@
 class RussianPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.RussianPlugin" FILE "russianplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "russianplugin.json")
 
 public:
     explicit RussianPlugin(QObject* parent = nullptr)

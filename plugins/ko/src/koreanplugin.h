@@ -16,7 +16,7 @@ class CandidatesCallback;
 class KoreanPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.KoreanPlugin" FILE "koreanplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "koreanplugin.json")
 
 public:
     explicit KoreanPlugin(QObject *parent = nullptr);

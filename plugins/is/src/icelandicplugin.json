@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.IcelandicPlugin",
-    "MetaData": {
-    },
-    "className": "IcelandicPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "is",
+    "Language": "Icelandic"
 }

@@ -7,7 +7,7 @@
 class IcelandicPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.IcelandicPlugin" FILE "icelandicplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "icelandicplugin.json")
 
 public:
     explicit IcelandicPlugin(QObject* parent = nullptr)

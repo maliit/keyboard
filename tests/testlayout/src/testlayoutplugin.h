@@ -7,7 +7,7 @@
 class TestLayoutPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.TestLayoutPlugin" FILE "testlayoutplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "testlayoutplugin.json")
 
 public:
     explicit TestLayoutPlugin(QObject* parent = 0)

@@ -7,7 +7,7 @@
 class BosnianPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.BosnianPlugin" FILE "bosnianplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "bosnianplugin.json")
 
 public:
     explicit BosnianPlugin(QObject* parent = nullptr)

@@ -12,7 +12,7 @@ class EmojiLanguageFeatures;
 class EmojiPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.EmojiPlugin" FILE "emojiplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "emojiplugin.json")
 
 public:
     explicit EmojiPlugin(QObject *parent = nullptr);

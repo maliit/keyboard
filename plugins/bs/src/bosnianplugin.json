@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.BosnianPlugin",
-    "MetaData": {
-    },
-    "className": "BosnianPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "bs",
+    "Language": "Bosnian"
 }

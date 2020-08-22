@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.KoreanPlugin",
-    "MetaData": {
-    },
-    "className": "KoreanPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "ko",
+    "Language": "Korean"
 }

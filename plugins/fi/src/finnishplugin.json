@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.FinnishPlugin",
-    "MetaData": {
-    },
-    "className": "FinnishPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "fi",
+    "Language": "Finnish"
 }

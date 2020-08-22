@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.ArabicPlugin",
-    "MetaData": {
-    },
-    "className": "ArabicPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "ar",
+    "Language": "Arabic"
 }

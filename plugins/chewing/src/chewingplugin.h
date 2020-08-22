@@ -14,7 +14,7 @@ class ChewingLanguageFeatures;
 class ChewingPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.ChewingPlugin" FILE "chewingplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "chewingplugin.json")
 
 public:
     explicit ChewingPlugin(QObject *parent = nullptr);

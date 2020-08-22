@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.NorwegianPlugin",
-    "MetaData": {
-    },
-    "className": "NorwegianPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "nb",
+    "Language": "Norwegian"
 }

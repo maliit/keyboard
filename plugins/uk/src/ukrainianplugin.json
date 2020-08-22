@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.UkrainianPlugin",
-    "MetaData": {
-    },
-    "className": "UkrainianPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "uk",
+    "Language": "Ukrainian"
 }

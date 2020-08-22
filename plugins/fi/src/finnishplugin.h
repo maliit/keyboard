@@ -7,7 +7,7 @@
 class FinnishPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.FinnishPlugin" FILE "finnishplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "finnishplugin.json")
 
 public:
     explicit FinnishPlugin(QObject* parent = nullptr)

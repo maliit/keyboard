@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.HungarianPlugin",
-    "MetaData": {
-    },
-    "className": "HungarianPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "hu",
+    "Language": "Hungarian"
 }

@@ -7,7 +7,7 @@
 class HebrewPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.HebrewPlugin" FILE "hebrewplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "hebrewplugin.json")
 
 public:
     explicit HebrewPlugin(QObject* parent = nullptr)

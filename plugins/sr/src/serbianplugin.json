@@ -1,7 +1,5 @@
 {
-    "IID": "org.qt-project.Qt.Examples.SerbianPlugin",
-    "MetaData": {
-    },
-    "className": "SerbianPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "sr",
+    "Language": "Serbian"
 }

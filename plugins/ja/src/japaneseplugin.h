@@ -12,7 +12,7 @@ class JapaneseLanguageFeatures;
 class JapanesePlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.JapanesePlugin" FILE "japaneseplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "japaneseplugin.json")
 
 public:
     explicit JapanesePlugin(QObject* parent = nullptr);

@@ -9,7 +9,7 @@
 class AzerbaijaniPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Examples.AzerbaijaniPlugin" FILE "azerbaijaniplugin.json")
+    Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "azerbaijaniplugin.json")
 
 public:
     explicit AzerbaijaniPlugin(QObject* parent = nullptr)
