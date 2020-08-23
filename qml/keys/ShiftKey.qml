@@ -21,9 +21,9 @@ import MaliitKeyboard 2.0
 import "key_constants.js" as UI
 
 ActionKey {
-    iconSourceNormal: "../images/keyboard-caps-disabled.svg"
-    iconSourceShifted: "../images/keyboard-caps-enabled.svg"
-    iconSourceCapsLock: "../images/keyboard-caps-locked.svg"
+    iconSourceNormal: Theme.imagesPath + "/keyboard-caps-disabled.svg"
+    iconSourceShifted: Theme.imagesPath + "/keyboard-caps-enabled.svg"
+    iconSourceCapsLock: Theme.imagesPath + "/keyboard-caps-locked.svg"
 
     action: "shift"
 

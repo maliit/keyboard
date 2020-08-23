@@ -22,6 +22,7 @@
 #include "greeterstatus.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
+#include "theme.h"
 
 #include "models/wordribbon.h"
 #include "logic/eventhandler.h"
@@ -91,12 +92,13 @@ public:
     GreeterStatus *m_greeterStatus;
 
     std::unique_ptr<Feedback> m_feedback;
+    std::unique_ptr<Theme> m_theme;
 
     WordRibbon* wordRibbon;
 
     int previous_position;
 
-    QStringList pluginPaths;
+    QStringList languagesPaths;
     QString currentPluginPath;
 
     explicit InputMethodPrivate(InputMethod * const _q,
@@ -120,6 +122,7 @@ public:
         , m_settings()
         , m_greeterStatus(new GreeterStatus())
         , m_feedback(std::make_unique<Feedback>(&m_settings))
+        , m_theme(std::make_unique<Theme>())
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {
@@ -160,18 +163,18 @@ public:
         view->setFormat(format);
         view->setColor(QColor(Qt::transparent));
 
-        updatePluginPaths();
+        updateLanguagesPaths();
 
         // TODO: Figure out whether two views can share one engine.
         QQmlEngine *const engine(view->engine());
 
         QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
         if (!prefix.isEmpty()) {
-            engine->addImportPath(prefix + QDir::separator() + MALIIT_KEYBOARD_DATA_DIR);
-            engine->addImportPath(prefix + QDir::separator() + QStringLiteral(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
+            engine->addImportPath(prefix + QDir::separator() + MALIIT_KEYBOARD_QML_DIR);
+            engine->addImportPath(prefix + QDir::separator() + QStringLiteral(MALIIT_KEYBOARD_QML_DIR) + QDir::separator() + "keys");
         } else {
-            engine->addImportPath(MALIIT_KEYBOARD_DATA_DIR);
-            engine->addImportPath(QStringLiteral(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
+            engine->addImportPath(MALIIT_KEYBOARD_QML_DIR);
+            engine->addImportPath(QStringLiteral(MALIIT_KEYBOARD_QML_DIR) + QDir::separator() + "keys");
         }
 
         setContextProperties(engine->rootContext());
@@ -199,6 +202,7 @@ public:
     {
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Keyboard", q);
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Feedback", m_feedback.get());
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Theme", m_theme.get());
         qml_context->setContextProperty(QStringLiteral("maliit_input_method"), q);
         qml_context->setContextProperty(QStringLiteral("maliit_geometry"), m_geometry);
         qml_context->setContextProperty(QStringLiteral("maliit_event_handler"), &event_handler);
@@ -207,16 +211,15 @@ public:
         qml_context->setContextProperty(QStringLiteral("greeter_status"), m_greeterStatus);
     }
 
-    void updatePluginPaths()
+    void updateLanguagesPaths()
     {
-        pluginPaths.clear();
-        QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
+        languagesPaths.clear();
+        QString prefix = qgetenv("MALIIT_KEYBOARD_LANGUAGES_PATH");
         if (!prefix.isEmpty()) {
-            pluginPaths.append(prefix + QDir::separator() + QStringLiteral(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
-        } else {
-            pluginPaths.append(QStringLiteral(MALIIT_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+            languagesPaths.append(prefix);
         }
-        pluginPaths.append(m_settings.pluginPaths());
+        languagesPaths.append(QStringLiteral(MALIIT_KEYBOARD_LANGUAGES_DIR));
+        languagesPaths.append(m_settings.pluginPaths());
     }
 
     /*

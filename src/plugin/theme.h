@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright (c) 2020 Jan Arne Petersen
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,22 +14,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.4
+#ifndef THEME_H
+#define THEME_H
 
-import "key_constants.js" as UI
-import "languages.js" as Languages
+#include <QObject>
 
-import MaliitKeyboard 2.0
+namespace MaliitKeyboard
+{
 
-ActionKey {
-    normalColor: UI.charKeyColor
-    pressedColor: UI.charKeyPressedColor
+class Theme : public QObject
+{
+    Q_OBJECT
 
-    Image {
-        anchors.centerIn: parent
-        source: Theme.imagesPath + "/keyboard_spacebar.png"
-    }
+    Q_PROPERTY(QUrl iconsPath READ iconsPath NOTIFY iconsPathChanged)
+    Q_PROPERTY(QUrl imagesPath READ imagesPath NOTIFY imagesPathChanged)
 
-    action: "space"
-    switchBackFromSymbols: true
+public:
+    explicit Theme(QObject *parent = nullptr);
+    ~Theme() override;
+
+    [[nodiscard]] QUrl iconsPath() const;
+    [[nodiscard]] QUrl imagesPath() const;
+
+Q_SIGNALS:
+    void iconsPathChanged();
+    void imagesPathChanged();
+};
+
 }
+
+#endif //THEME_H

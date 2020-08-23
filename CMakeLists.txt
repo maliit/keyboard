@@ -17,9 +17,9 @@ if(NOT DEFINED QT5_QML_INSTALL_DIR)
 endif()
 
 set(HUNSPELL_DICT_PATH "/usr/share/myspell" CACHE PATH "Directory containing hunspell dictionary files")
-set(MALIIT_PLUGINS_DATA_DIR "${CMAKE_INSTALL_DATADIR}/maliit/plugins" CACHE PATH "Directory containing maliit-plugins data")
-set(MALIIT_KEYBOARD_DATA_DIR "${MALIIT_PLUGINS_DATA_DIR}/org/maliit" CACHE PATH "Directory containing maliit-keyboard data")
-set(MALIIT_KEYBOARD_LIB_DIR "${MALIIT_PLUGINS_DATA_DIR}/org/maliit/lib" CACHE PATH "Directory containing maliit-keyboard data")
+set(MALIIT_KEYBOARD_QML_DIR "${CMAKE_INSTALL_LIBDIR}/maliit/keyboard2/qml" CACHE PATH "Directory containing maliit-keyboard QML files")
+set(MALIIT_KEYBOARD_DATA_DIR "${CMAKE_INSTALL_DATADIR}/maliit/keyboard2" CACHE PATH "Directory containing maliit-keyboard data files")
+set(MALIIT_KEYBOARD_LANGUAGES_DIR "${CMAKE_INSTALL_LIBDIR}/maliit/keyboard2/languages" CACHE PATH "Directory containing maliit-keyboard data")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -91,8 +91,9 @@ set(WESTERNSUPPORT_SOURCES
 set(maliit-keyboard-libraries Qt5::Core)
 set(maliit-keyboard-definitions HUNSPELL_DICT_PATH="${HUNSPELL_DICT_PATH}"
         MALIIT_PLUGINS_DATA_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_PLUGINS_DATA_DIR}"
+        MALIIT_KEYBOARD_QML_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_KEYBOARD_QML_DIR}"
         MALIIT_KEYBOARD_DATA_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_KEYBOARD_DATA_DIR}"
-        MALIIT_KEYBOARD_LIB_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_KEYBOARD_LIB_DIR}")
+        MALIIT_KEYBOARD_LANGUAGES_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_KEYBOARD_LANGUAGES_DIR}")
 set(maliit-keyboard-include-dirs)
 
 if(enable-presage)
@@ -163,7 +164,7 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/keyboardgeometry.h
         src/plugin/keyboardsettings.cpp
         src/plugin/keyboardsettings.h
-        )
+        src/plugin/theme.cpp src/plugin/theme.h)
 
 add_library(maliit-keyboard-common STATIC ${MALIIT_KEYBOARD_COMMON_SOURCES})
 target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia)
@@ -213,16 +214,16 @@ endif()
             plugins/${_language}/qml/Keyboard_${_language}_email.qml
             plugins/${_language}/qml/Keyboard_${_language}_url.qml
             plugins/${_language}/qml/Keyboard_${_language}_url_search.qml
-            DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+            DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
     install(TARGETS ${_language}plugin
-            LIBRARY DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+            LIBRARY DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
 if(enable-presage)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/database_${_language}.db
-            DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+            DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
 endif()
     foreach(_file IN LISTS ARGN)
         install(FILES plugins/${_language}/${_file}
-                DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+                DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
     endforeach()
 endfunction()
 
@@ -266,23 +267,23 @@ function(abstract_language_plugin _language _full_language)
     target_include_directories(${_language}plugin PRIVATE src/lib/logic ${abstract_language_plugin_INCLUDE_DIRS})
     target_compile_definitions(${_language}plugin PRIVATE ${abstract_language_plugin_DEFINITIONS})
     install(TARGETS ${_language}plugin
-            LIBRARY DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+            LIBRARY DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
     install(FILES plugins/${_plugindir}/qml/Keyboard_${_language}.qml
             plugins/${_plugindir}/qml/Keyboard_${_language}_email.qml
             plugins/${_plugindir}/qml/Keyboard_${_language}_url.qml
             plugins/${_plugindir}/qml/Keyboard_${_language}_url_search.qml
-            DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+            DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
     foreach(_file IN LISTS abstract_language_plugin_FILES)
         install(FILES plugins/${_plugindir}/${_file}
-                DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+                DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
     endforeach()
     foreach(_dir IN LISTS abstract_language_plugin_DIRECTORY)
         install(DIRECTORY plugins/${_plugindir}/${_dir}
-                DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+                DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
     endforeach()
     if(enable-presage AND (NOT ${abstract_language_plugin_NGRAM_DATABASE} EQUAL ""))
         install(FILES ${CMAKE_CURRENT_BINARY_DIR}/database_${_language}.db
-                DESTINATION ${MALIIT_KEYBOARD_LIB_DIR}/${_language})
+                DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
     endif()
 endfunction()
 
@@ -359,11 +360,13 @@ install(TARGETS maliit-keyboard-plugin maliit-keyboard
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/maliit/plugins
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-install(DIRECTORY qml/images qml/keys qml/languages
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
+install(DIRECTORY qml/keys qml/languages
+        DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
 install(FILES qml/constants.js qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
+        DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
 
+install(DIRECTORY qml/images
+        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(DIRECTORY data/styles
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(FILES data/styles/ubuntu/images/icon_backspace@18.png

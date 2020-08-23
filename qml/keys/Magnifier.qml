@@ -15,6 +15,9 @@
  */
 
 import QtQuick 2.4
+
+import MaliitKeyboard 2.0
+
 import "key_constants.js" as UI
 
 /*!
@@ -61,7 +64,7 @@ KeyPopover {
         transformOrigin: Item.Bottom
         opacity: animationStep
 
-        source: Qt.resolvedUrl("../images/magnified_key.sci")
+        source: Theme.imagesPath + "/magnified_key.sci"
 
         onXChanged: {
             if (x < UI.popoverEdgeMargin) {

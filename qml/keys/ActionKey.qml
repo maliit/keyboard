@@ -19,6 +19,8 @@ import QtQuick 2.4
 import QtQuick.Controls 2.1
 import QtGraphicalEffects 1.0
 
+import MaliitKeyboard 2.0
+
 import "key_constants.js" as UI
 
 CharKey {
@@ -58,7 +60,7 @@ CharKey {
         Image {
             id: iconImage
             source: iconSourceNormal !== "" ? iconSourceNormal
-                                            : iconNormal ? "../icons/%1.png".arg(iconNormal)
+                                            : iconNormal ? Theme.iconsPath + "/%1.png".arg(iconNormal)
                                                          : ""
             property color color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
@@ -84,7 +86,7 @@ CharKey {
             PropertyChanges {
                 target: iconImage
                 source: iconSourceShifted !== "" ? iconSourceShifted 
-                                                 : iconShifted ? "../icons/%1.png".arg(iconShifted)
+                                                 : iconShifted ? Theme.iconsPath + "/%1.png".arg(iconShifted)
                                                                : ""
                 color: actionKeyRoot.colorShifted
             }
@@ -94,7 +96,7 @@ CharKey {
             PropertyChanges {
                 target: iconImage
                 source: iconSourceCapsLock !== "" ? iconSourceCapsLock
-                                                  : iconCapsLock ? "../icons/%1.png".arg(iconCapsLock)
+                                                  : iconCapsLock ? Theme.iconsPath + "/%1.png".arg(iconCapsLock)
                                                                 : ""
                 color: actionKeyRoot.colorCapsLock
             }

@@ -82,7 +82,7 @@ Qt::ScreenOrientation rotationAngleToScreenOrientation(int angle)
     }
 }
 
-const QString g_maliit_keyboard_qml(MALIIT_KEYBOARD_DATA_DIR "/Keyboard.qml");
+const QString g_maliit_keyboard_qml(MALIIT_KEYBOARD_QML_DIR "/Keyboard.qml");
 
 } // unnamed namespace
 
@@ -584,7 +584,7 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
 
     qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
 
-    foreach(QString pluginPath, d->pluginPaths) {
+    foreach(QString pluginPath, d->languagesPaths) {
         QDir testDir(pluginPath + QDir::separator() + newLanguage);
         if (testDir.exists()) {
             d->currentPluginPath = testDir.absolutePath();
@@ -722,7 +722,7 @@ QString InputMethod::surroundingRight()
 
 bool InputMethod::languageIsSupported(const QString plugin) {
     Q_D(const InputMethod);
-    foreach(QString pluginPath, d->pluginPaths) {
+    foreach(QString pluginPath, d->languagesPaths) {
         QDir testDir(pluginPath + QDir::separator() + plugin);
         if (testDir.exists()) {
             return true;
@@ -734,10 +734,11 @@ bool InputMethod::languageIsSupported(const QString plugin) {
 
 void InputMethod::onLanguageChanged(const QString &language) {
     Q_D(InputMethod);
-    foreach(QString pluginPath, d->pluginPaths) {
-        QFile testFile(pluginPath + QDir::separator() + language + QDir::separator() + "lib" + language + "plugin.so");
-        if (testFile.exists()) {
-            Q_EMIT languagePluginChanged(testFile.fileName(), language);
+    for (const auto& languagePath : std::as_const(d->languagesPaths)) {
+        QPluginLoader languagePlugin(QStringLiteral("%1/%2/lib%2plugin.so").arg(languagePath, language));
+        const auto& metaData = languagePlugin.metaData();
+        if (metaData.value(u8"IID").toString() == QLatin1String("io.maliit.keyboard.LanguagePlugin.1")) {
+            Q_EMIT languagePluginChanged(languagePlugin.fileName(), language);
             return;
         }
     }
@@ -748,5 +749,5 @@ void InputMethod::onPluginPathsChanged(const QStringList& pluginPaths) {
     Q_D(InputMethod);
     Q_UNUSED(pluginPaths);
 
-    d->updatePluginPaths();
+    d->updateLanguagesPaths();
 }
