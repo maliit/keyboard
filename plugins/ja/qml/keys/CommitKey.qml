@@ -15,7 +15,9 @@
  */
 
 import QtQuick 2.4
-import "key_constants.js" as UI
+
+import MaliitKeyboard 2.0
+
 import keys 1.0
 
 ActionKey {
@@ -27,10 +29,10 @@ ActionKey {
     // overrideIcon has high priority over label
     label: overrideIconName == "" ? overrideLabel : ""
     // Scale the font so the label fits if a long word is set
-    fontSize: 8.0 * (UI.symbolShiftKeyFontSize) * (4 / (label.length >= 4 ? (label.length <= 6 ? label.length : 6) : 4));
+    fontSize: Device.symbolShiftKeyFontSize * (4 / (label.length >= 4 ? (label.length <= 6 ? label.length : 6) : 4));
     shifted: label
 
-    iconNormal: (overrideIconName == "") && (overrideLabel == "") ? "keyboard-return" : overrideIconName
+    iconNormal: (overrideIconName == "") && (overrideLabel == "") ? "keyboard-enter" : overrideIconName
     iconShifted: iconNormal
     iconCapsLock: iconNormal
 

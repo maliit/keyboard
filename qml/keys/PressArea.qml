@@ -16,6 +16,8 @@
 
 import QtQuick 2.4
 
+import MaliitKeyboard 2.0
+
 /*!
   MultiPointTouchArea is similar to the MouseArea
   But to enable multiple PressAreas to be touched at the same time, this is based
@@ -71,7 +73,7 @@ MultiPointTouchArea {
                     var distance = point.y - lastY;
                     // If changing direction wait until movement passes 1 gu
                     // to avoid jitter
-                    if ((lastYChange * distance > 0 || Math.abs(distance) > 8.0 * (1)) && !held) {
+                    if ((lastYChange * distance > 0 || Math.abs(distance) > Device.gu(1)) && !held) {
                         keyboardSurface.y += distance;
                         lastY = point.y;
                         lastYChange = distance;
@@ -80,7 +82,7 @@ MultiPointTouchArea {
                     // This works around issues with devices with touch buttons
                     // below the screen preventing release events when swiped
                     // over
-                    if(point.sceneY > fullScreenItem.height - 8.0 * (4) && point.y > startY + 8.0 * (8) && !held) {
+                    if(point.sceneY > fullScreenItem.height - Device.gu(4) && point.y > startY + Device.gu(8) && !held) {
                         maliit_input_method.hide();
                     }
                 } else {
@@ -132,7 +134,7 @@ MultiPointTouchArea {
 
     onReleased: {
         // Allow the user to swipe away the keyboard
-        if (point.y > startY + 8.0 * (8) && !held) {
+        if (point.y > startY + Device.gu(8) && !held) {
             maliit_input_method.hide();
         } else {
             bounceBackAnimation.from = keyboardSurface.y;

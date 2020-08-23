@@ -15,8 +15,10 @@
  */
 
 import QtQuick 2.4
-import "../../keys"
-import "../../keys/key_constants.js" as UI
+
+import MaliitKeyboard 2.0
+
+import keys 1.0
 
 KeyPad {
     anchors.fill: parent
@@ -83,7 +85,7 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight + 8.0 * (UI.bottom_margin*2);
+            height: panel.keyHeight + Device.bottom_margin * 2;
 
             SymbolShiftKey { id: symShiftKey; label: "اب‌پ"; shifted: "اب‌پ"; anchors.left: parent.left; height: parent.height; }
             CharKey        { id: commaKey;    label: "،"; shifted: "،";     anchors.left: symShiftKey.right; height: parent.height; }

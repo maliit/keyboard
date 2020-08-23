@@ -15,6 +15,9 @@
  */
 
 import QtQuick 2.4
+
+import MaliitKeyboard 2.0
+
 import keys 1.0
 
 KeyPad {
@@ -79,13 +82,13 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight + 8.0 * (UI.row_margin);
+            height: panel.keyHeight + Device.row_margin;
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
             CharKey        { id: slashKey; label: "/"; shifted: "/";     anchors.left: languageMenuButton.right; height: parent.height; }
             SpaceKey       { id: spaceKey;                               anchors.left: slashKey.right; anchors.right: urlKey.left; noMagnifier: true; height: parent.height; }
-            UrlKey         { id: urlKey; label: ".com.br"; extended: [".com", ".pt", ".mz", ".ao", ".gw", ".tl"]; anchors.right: dotKey.left; height: parent.height; width: panel.keyWidth + 8.0 * (UI.emailLayoutUrlKeyPadding + 0.5); }
+            UrlKey         { id: urlKey; label: ".com.br"; extended: [".com", ".pt", ".mz", ".ao", ".gw", ".tl"]; anchors.right: dotKey.left; height: parent.height; width: panel.keyWidth + Device.emailLayoutUrlKeyPadding + Device.gu(0.5); }
             CharKey        { id: dotKey;      label: "."; shifted: "."; extended: ["?", "-", "_", "!", "+", "%","#","/"]; extendedShifted: ["?", "-", "_", "!", "+", "%","#","/"]; anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }

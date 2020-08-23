@@ -18,8 +18,6 @@ import QtQuick 2.4
 
 import MaliitKeyboard 2.0
 
-import "key_constants.js" as UI
-
 /*!
   Item to show a "bubble" with a text in the center.
   The bottom center is where the bubble points to, and it animates to that position

@@ -15,10 +15,11 @@
  */
 
 import QtQuick 2.4
-import "../keys/key_constants.js" as UI
+
+import MaliitKeyboard 2.0
 
 CharKey {
-    width: panel.keyWidth + 8.0 * ( UI.emailLayoutUrlKeyPadding )
+    width: panel.keyWidth + Device.emailLayoutUrlKeyPadding
 
     label: ".com";
     shifted: label

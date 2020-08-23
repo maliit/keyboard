@@ -18,8 +18,6 @@ import QtQuick 2.4
 
 import MaliitKeyboard 2.0
 
-import "key_constants.js" as UI
-
 ActionKey {
     iconSourceNormal: Theme.imagesPath + "/keyboard-caps-disabled.svg"
     iconSourceShifted: Theme.imagesPath + "/keyboard-caps-enabled.svg"

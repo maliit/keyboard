@@ -18,8 +18,6 @@ import QtQuick 2.4
 
 import MaliitKeyboard 2.0
 
-import "key_constants.js" as UI
-
 /*!
   Item to show a "bubble" with a text in the center.
   The bottom center is where the bubble points to, and it animates to that position
@@ -29,11 +27,11 @@ KeyPopover {
     id: root
 
     width: currentlyAssignedKey ? (panel.keyWidth > label.width ? 
-                                  panel.keyWidth + 8.0 * (UI.magnifierHorizontalPadding)
-                                  : label.width + 8.0 * (UI.magnifierHorizontalPadding)) : 0
+                                  panel.keyWidth + Device.magnifierHorizontalPadding
+                                  : label.width + Device.magnifierHorizontalPadding) : 0
     // Use visible key height instead of real key height to allow for bottom
     // row touch area to be extended
-    height: currentlyAssignedKey ? panel.keyHeight + 8.0 * (UI.magnifierVerticalPadding) : 0
+    height: currentlyAssignedKey ? panel.keyHeight + Device.magnifierVerticalPadding : 0
 
     /*! Sets the Magnifier visible or invisible*/
     property bool shown: false
@@ -72,15 +70,15 @@ KeyPopover {
         }
 
         onXChanged: {
-            if (x < UI.popoverEdgeMargin) {
-                anchorItem.x += Math.abs(x) + UI.popoverEdgeMargin;
+            if (x < Device.popoverEdgeMargin) {
+                anchorItem.x += Math.abs(x) + Device.popoverEdgeMargin;
                 return;
             }
 
             var rightEdge = (x + width);
-            if ( rightEdge > (panel.width - UI.popoverEdgeMargin)) {
+            if ( rightEdge > (panel.width - Device.popoverEdgeMargin)) {
                 var diff = rightEdge - panel.width;
-                anchorItem.x -= diff + UI.popoverEdgeMargin;
+                anchorItem.x -= diff + Device.popoverEdgeMargin;
             }
         }
 
@@ -90,7 +88,7 @@ KeyPopover {
             anchors.centerIn: parent
             height: parent.height
             text: currentlyAssignedKey ? currentlyAssignedKey.valueToSubmit : ""
-            font.family: UI.fontFamily
+            font.family: Theme.fontFamily
             font.weight: Font.Light
             font.pixelSize: panel.keyHeight * 0.6
             verticalAlignment: Text.AlignVCenter

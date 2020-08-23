@@ -33,16 +33,14 @@ import QtQuick 2.4
 
 import MaliitKeyboard 2.0
 
-import "constants.js" as Const
 import "keys/"
-import "keys/key_constants.js" as UI
 
 Item {
     id: fullScreenItem
     objectName: "fullScreenItem"
 
     property bool landscape: width > height
-    readonly property bool tablet: landscape ? width >= 8.0 * (90) : height >= 8.0 * (90)
+    readonly property bool tablet: landscape ? width >= Device.gu(90) : height >= Device.gu(90)
 
     property bool cursorSwipe: false
     property int prevSwipePositionX
@@ -66,10 +64,8 @@ Item {
         anchors.left: parent.left
 
         width: parent.width
-        height: fullScreenItem.height * (fullScreenItem.landscape ? fullScreenItem.tablet ? UI.tabletKeyboardHeightLandscape 
-                                                                                          : UI.phoneKeyboardHeightLandscape
-                                                                  : fullScreenItem.tablet ? UI.tabletKeyboardHeightPortrait 
-                                                                                          : UI.phoneKeyboardHeightPortrait)
+        height: fullScreenItem.height * (fullScreenItem.landscape ? Device.keyboardHeightLandscape
+                                                                  : Device.keyboardHeightPortrait)
                                       + wordRibbon.height + borderTop.height
 
         property int keypadHeight: height;
@@ -98,7 +94,7 @@ Item {
         MouseArea {
             id: swipeArea
 
-            property int jumpBackThreshold: 8.0 * (10)
+            property int jumpBackThreshold: Device.gu(10)
 
             anchors.left: parent.left
             anchors.right: parent.right
@@ -155,8 +151,7 @@ Item {
                     anchors.bottom: keyboardComp.top
                     width: parent.width;
 
-                    height: canvas.wordribbon_visible ? (fullScreenItem.tablet ? 8.0 * (UI.tabletWordribbonHeight)
-                                                                               : 8.0 * (UI.phoneWordribbonHeight))
+                    height: canvas.wordribbon_visible ? Device.wordRibbonHeight
                                                       : 0
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
@@ -183,7 +178,7 @@ Item {
                         id: borderTop
                         width: parent.width
                         anchors.top: parent.top.bottom
-                        height: wordRibbon.visible ? 0 : 8.0 * (UI.top_margin)
+                        height: wordRibbon.visible ? 0 : Device.top_margin
                     }
 
                     KeyboardContainer {
@@ -191,7 +186,7 @@ Item {
 
                         anchors.top: borderTop.bottom
                         anchors.bottom: background.bottom
-                        anchors.bottomMargin: 8.0 * (UI.bottom_margin)
+                        anchors.bottomMargin: Device.bottom_margin
                         width: parent.width
                         hideKeyLabels: fullScreenItem.cursorSwipe
 
@@ -203,7 +198,7 @@ Item {
                         objectName: "languageMenu"
                         anchors.centerIn: parent
                         height: contentHeight > keypad.height ? keypad.height : contentHeight
-                        width: 8.0 * (30);
+                        width: Device.gu(30);
                     }
                 } // keyboardComp
             }
@@ -371,17 +366,17 @@ Item {
     }
 
     function processSwipe(positionX, positionY) {
-        if (positionX < prevSwipePositionX - 8.0 * (1) && input_method.surroundingLeft != "") {
+        if (positionX < prevSwipePositionX - Device.gu(1) && input_method.surroundingLeft != "") {
             sendLeftKey();
             prevSwipePositionX = positionX
-        } else if (positionX > prevSwipePositionX + 8.0 * (1) && input_method.surroundingRight != "") {
+        } else if (positionX > prevSwipePositionX + Device.gu(1) && input_method.surroundingRight != "") {
             sendRightKey();
             prevSwipePositionX = positionX
         }
-        if (positionY < prevSwipePositionY - 8.0 * (4)) {
+        if (positionY < prevSwipePositionY - Device.gu(4)) {
             sendUpKey();
             prevSwipePositionY = positionY
-        } else if (positionY > prevSwipePositionY + 8.0 * (4)) {
+        } else if (positionY > prevSwipePositionY + Device.gu(4)) {
             sendDownKey();
             prevSwipePositionY = positionY
         }

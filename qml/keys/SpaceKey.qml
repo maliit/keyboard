@@ -20,7 +20,6 @@ import QtQuick.Controls 2.1
 
 import MaliitKeyboard 2.0
 
-import "key_constants.js" as UI
 import "languages.js" as Languages
 
 ActionKey {
@@ -37,11 +36,11 @@ ActionKey {
 
     Label {
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: -parent.rowMargin / 2 - 8.0 * (0.15)
-        font.family: UI.fontFamily
+        anchors.verticalCenterOffset: -parent.rowMargin / 2 - Device.gu(0.15)
+        font.family: Theme.fontFamily
         font.weight: Font.Light
         font.pixelSize: parent.fontSize * 0.6
-        opacity: UI.spaceOpacity
+        opacity: Theme.spaceOpacity
         text: Languages.languageIdToName(maliit_input_method.activeLanguage)
         horizontalAlignment: Text.AlignHCenter
         visible: !panel.hideKeyLabels

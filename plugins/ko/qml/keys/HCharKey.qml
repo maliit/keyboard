@@ -16,8 +16,9 @@
 
 import QtQuick 2.4
 
+import MaliitKeyboard 2.0
+
 import keys 1.0
-import "key_constants.js" as UI
 import "parser.js" as Parser
 
 CharKey {

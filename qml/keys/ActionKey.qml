@@ -21,8 +21,6 @@ import QtGraphicalEffects 1.0
 
 import MaliitKeyboard 2.0
 
-import "key_constants.js" as UI
-
 CharKey {
     id: actionKeyRoot
     property string iconNormal: ""
@@ -35,10 +33,10 @@ CharKey {
 
     noMagnifier: true
     skipAutoCaps: true
-    property int padding: UI.actionKeyPadding
+    property int padding: Device.actionKeyPadding
 
     // action keys are a bit wider
-    width: panel.keyWidth + 8.0 * ( padding )
+    width: panel.keyWidth + padding
 
     normalColor: Theme.actionKeyColor
     pressedColor: Theme.actionKeyPressedColor
@@ -65,7 +63,7 @@ CharKey {
                                                          : ""
             property color color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - 8.0 * (0.15)
+            anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - Device.gu(0.15)
             height: actionKeyRoot.fontSize
             fillMode: Image.PreserveAspectFit
             visible: false

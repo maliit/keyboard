@@ -16,7 +16,6 @@
 
 import QtQuick 2.4
 
-import "key_constants.js" as UI
 import "languages.js" as Languages
 
 import MaliitKeyboard 2.0

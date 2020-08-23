@@ -1,6 +1,9 @@
 
 
 import QtQuick 2.4
+
+import MaliitKeyboard 2.0
+
 import Ubuntu.Components 1.3
 
 MainView {
@@ -8,8 +11,8 @@ MainView {
 
     automaticOrientation: true
 
-    width: 8.0 * (18)
-    height: 8.0 * (18)
+    width: Device.gu(18)
+    height: Device.gu(18)
 
     Rectangle {
         anchors.fill: parent
@@ -18,29 +21,29 @@ MainView {
 
     Column {
 
-        y: 8.0 * (3)
+        y: Device.gu(3)
         width: parent.width
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: 8.0 * (1)
+        spacing: Device.gu(1)
 
-        anchors.margins: 8.0 * (1)
+        anchors.margins: Device.gu(1)
 
         Text {
             id: label
             text: "OSK TestApp"
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 8.0 * (2)
+            font.pixelSize: Device.gu(2)
             font.bold: true
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            spacing: 8.0 * (1)
+            spacing: Device.gu(1)
 
             Button {
                 color: "red"
                 text: "show()"
-                width: 8.0 * (18)
+                width: Device.gu(18)
                 onClicked: Qt.inputMethod.show()
 
             }
@@ -48,7 +51,7 @@ MainView {
             Button {
                 color: "red"
                 text: "hide()"
-                width: 8.0 * (18)
+                width: Device.gu(18)
                 onClicked: Qt.inputMethod.hide()
             }
         }
@@ -57,20 +60,20 @@ MainView {
             anchors.horizontalCenter: parent.horizontalCenter;
 
             text: qsTr("note: show/hide requires focus on a text input")
-            font.pixelSize: 8.0 * (1)
+            font.pixelSize: Device.gu(1)
             color: "gray"
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
 
-            spacing: 8.0 * (1)
+            spacing: Device.gu(1)
 
             Rectangle {
-                width: 8.0 * (18);
+                width: Device.gu(18);
                 height: firstInputButton.height;
 
-                anchors.leftMargin: 8.0 * (1)
+                anchors.leftMargin: Device.gu(1)
 
                 color: "white"
 
@@ -81,7 +84,7 @@ MainView {
 
                     // Qt.ImhPreferNumbers
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhUrlCharactersOnly | Qt.ImhNoPredictiveText
-                    font.pixelSize: 8.0 * (3)
+                    font.pixelSize: Device.gu(3)
                     font.bold: true
                 }
             }
@@ -90,7 +93,7 @@ MainView {
                 id: firstInputButton
                 color: "yellow"
                 text: "Focus/Unfocus"
-                width: 8.0 * (18)
+                width: Device.gu(18)
                 onClicked: input.focus = !input.focus
             }
         }
@@ -98,10 +101,10 @@ MainView {
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
 
-            spacing: 8.0 * (1)
+            spacing: Device.gu(1)
 
             Rectangle {
-                width: 8.0 * (18);
+                width: Device.gu(18);
                 height: secondInputButton.height
 
                 color: "white"
@@ -111,7 +114,7 @@ MainView {
 
                     anchors.fill: parent
 
-                    font.pixelSize: 8.0 * (3)
+                    font.pixelSize: Device.gu(3)
                 }
             }
 
@@ -119,7 +122,7 @@ MainView {
                 id: secondInputButton
                 color: "yellow"
                 text: "Focus/Unfocus"
-                width: 8.0 * (18)
+                width: Device.gu(18)
                 onClicked: secondInput.focus = !secondInput.focus
             }
         }
@@ -130,22 +133,22 @@ MainView {
             Text {
                 id: textRectangle
 
-                font.pixelSize: 8.0 * (1)
+                font.pixelSize: Device.gu(1)
                 text: Qt.inputMethod.keyboardRectangle + " "
             }
 
             Rectangle {
                 id: clickBehindOSKDetectedIndicator
 
-                width: 8.0 * (18)
-                height: 8.0 * (3)
+                width: Device.gu(18)
+                height: Device.gu(3)
                 state: "default"
 
                 Text {
                     id: clickBehindOSKDetectedIndicatorText
                     anchors.centerIn: parent
                     text: "clicked"
-                    font.pixelSize: 8.0 * (2)
+                    font.pixelSize: Device.gu(2)
                     font.bold: true
                 }
 
@@ -182,7 +185,7 @@ MainView {
 
             anchors.horizontalCenter: parent.horizontalCenter;
 
-            font.pixelSize: 8.0 * (2)
+            font.pixelSize: Device.gu(2)
             text: "keyboard reports visible: " + Qt.inputMethod.visible
         }
 
@@ -191,14 +194,14 @@ MainView {
     Rectangle {
         id: fakeBrowserUrlBar
         width: keyboardRect.width
-        height: 8.0 * (4)
+        height: Device.gu(4)
         color: "orange"
         anchors.bottom: keyboardRect.top
 
         Text {
             visible: Qt.inputMethod.visible
             anchors.centerIn: parent
-            font.pixelSize: 8.0 * (1)
+            font.pixelSize: Device.gu(1)
             text: "browser url bar"
         }
     }

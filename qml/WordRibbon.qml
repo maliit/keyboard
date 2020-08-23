@@ -20,8 +20,6 @@ import QtQuick.Controls 2.1
 
 import MaliitKeyboard 2.0
 
-import "keys/key_constants.js" as UI
-
 Rectangle {
 
     id: wordRibbonCanvas
@@ -49,7 +47,7 @@ Rectangle {
         id: wordCandidateDelegate
         Item {
             id: wordCandidateItem
-            width: wordItem.width + 8.0 * (2)
+            width: wordItem.width + Device.gu(2)
             height: wordRibbonCanvas.height
             anchors.margins: 0
             property alias word_text: wordItem // For testing in Autopilot
@@ -58,16 +56,16 @@ Rectangle {
             Item {
                 anchors.fill: parent
                 anchors.margins: {
-                    top: 8.0 * (0)
-                    bottom: 8.0 * (0)
-                    left: 8.0 * (2)
-                    right: 8.0 * (2)
+                    top: 0
+                    bottom: 0
+                    left: Device.gu(2)
+                    right: Device.gu(2)
                 }
 
                 Label {
                     id: wordItem
-                    font.pixelSize: (fullScreenItem.tablet ? UI.tabletWordRibbonFontSize : UI.phoneWordRibbonFontSize)
-                    font.family: UI.fontFamily
+                    font.pixelSize: Device.wordRibbonFontSize
+                    font.family: Theme.fontFamily
                     font.weight: textBold ? Font.Bold : Font.Light
                     text: word;
                     anchors.centerIn: parent

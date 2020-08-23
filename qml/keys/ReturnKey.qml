@@ -15,7 +15,8 @@
  */
 
 import QtQuick 2.4
-import "key_constants.js" as UI
+
+import MaliitKeyboard 2.0
 
 ActionKey {
     property var actionKeyOverride: maliit_input_method.actionKeyOverride

@@ -18,8 +18,6 @@ import QtQuick 2.4
 
 import MaliitKeyboard 2.0
 
-import "key_constants.js" as UI
-
 Item {
     id: key
 
@@ -42,11 +40,9 @@ Item {
     property bool leftSide: false
     property bool rightSide: false
 
-    property double rowMargin: fullScreenItem.tablet ? 8.0 * (UI.tabletRowMargin)
-                                                     : (fullScreenItem.landscape ? (UI.phoneRowMarginLandscape)
-                                                                                 : (UI.phoneRowMarginPortrait))
-    property double keyMargin: fullScreenItem.tablet ? 8.0 * (UI.tabletKeyMargins)
-                                                     : 8.0 * (UI.phoneKeyMargins)
+    property double rowMargin: fullScreenItem.landscape ? Device.rowMarginLandscape
+                                                        : Device.rowMarginPortrait
+    property double keyMargin: Device.keyMargins
 
     // These properties are used by autopilot to determine the visible
     // portion of the key to press
@@ -101,14 +97,14 @@ Item {
             //  the label is also the value subitted to the app
 
             Column {
-                spacing: 8.0 * ( UI.annotationMargins )
+                spacing: Device.gu(0.3)
                 anchors.centerIn: parent
 
                 Text {
                     id: keyLabel
                     text: label
                     anchors.horizontalCenter: parent.horizontalCenter
-                    font.family: UI.fontFamily
+                    font.family: Theme.fontFamily
                     font.pixelSize: fontSize
                     font.weight: Font.Light
                     color: Theme.fontColor
@@ -120,10 +116,10 @@ Item {
                     text: annotation
 
                     anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottomMargin: 8.0 * ( UI.annotationMargins )
+                    anchors.bottomMargin: Device.gu(0.3)
 
-                    font.family: UI.annotationFont
-                    font.pixelSize: fullScreenItem.tablet ? (UI.tabletAnnotationFontSize) : (UI.phoneAnnotationFontSize)
+                    font.family: Theme.annotationFontFamily
+                    font.pixelSize: Device.annotationFontSize
                     font.weight: Font.Light
                     color: Theme.annotationFontColor
                     visible: annotation != ""
@@ -135,8 +131,8 @@ Item {
             anchors.horizontalCenter: buttonRect.horizontalCenter
             anchors.bottom: buttonRect.top
             anchors.bottomMargin: key.height * 0.5
-            width: 8.0 * ((UI.fontSize + UI.flickMargin) * 3)
-            height: 8.0 * ((UI.fontSize + UI.flickMargin) * 3)
+            width: Device.fontSize + Device.flickMargin * 3
+            height: Device.fontSize + Device.flickMargin * 3
             chars: leaves
             index: keyFlickArea.index
             visible: key.currentlyPressed && chars.length > 1

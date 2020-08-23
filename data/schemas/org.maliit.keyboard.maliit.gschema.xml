@@ -85,7 +85,12 @@
     <key name="theme" type="s">
       <summary>Virtual Keyboard Theme</summary>
       <description>Specifies the theme of the maliit keyboard</description>
-      <default>'Default'</default>
+      <default>'Ambiance'</default>
+    </key>
+    <key name="device" type="s">
+      <summary>Virtual Keyboard device type</summary>
+      <description>Specifies the device type of the maliit keyboard ('default', 'tablet')</description>
+      <default>'default'</default>
     </key>
   </schema>
 </schemalist>

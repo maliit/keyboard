@@ -19,13 +19,12 @@ import QtQuick 2.4
 import MaliitKeyboard 2.0
 
 import "modifier.js" as Modifier
-import "key_constants.js" as UI
 
 FlickCharKey {
     label: (isPreedit && layoutState == "kana") ? " ゛ ゜" : "␣"
     leaves: isPreedit ? preeditLeaves : ["␣", "□"]
     annotation: isPreedit ? "大⇔小" : ""
-    fontSize: isPreedit ? 8.0 * ( UI.fontSize ) * 0.8 : 8.0 * ( UI.fontSize )
+    fontSize: isPreedit ? Device.fontSize * 0.8 : Device.fontSize
 
     overridePressArea: true
 

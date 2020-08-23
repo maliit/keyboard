@@ -267,6 +267,8 @@ void KeyboardSettings::settingUpdated(const QString &key)
         Q_EMIT opacityChanged(opacity());
     } else if (key == "theme")
         Q_EMIT themeChanged(theme());
+    else if (key == "device")
+        Q_EMIT deviceChanged(device());
 
     qWarning() << Q_FUNC_INFO << "unknown settings key:" << key;
 }
@@ -274,4 +276,9 @@ void KeyboardSettings::settingUpdated(const QString &key)
 QString KeyboardSettings::theme() const
 {
     return m_settings->get("theme").toString();
+}
+
+QString KeyboardSettings::device() const
+{
+    return m_settings->get("device").toString();
 }

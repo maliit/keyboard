@@ -46,6 +46,10 @@ class Theme : public QObject
     Q_PROPERTY(QColor actionKeyBorderColor READ actionKeyBorderColor NOTIFY themeChanged)
     Q_PROPERTY(bool keyBorderEnabled READ keyBorderEnabled NOTIFY themeChanged)
 
+    Q_PROPERTY(QString fontFamily READ fontFamily NOTIFY themeChanged)
+    Q_PROPERTY(QString annotationFontFamily READ fontFamily NOTIFY themeChanged)
+    Q_PROPERTY(double spaceOpacity READ spaceOpacity NOTIFY themeChanged)
+
 public:
     explicit Theme(const KeyboardSettings *settings, QObject *parent = nullptr);
     ~Theme() override;
@@ -66,6 +70,9 @@ public:
     [[nodiscard]] QColor charKeyBorderColor() const;
     [[nodiscard]] QColor actionKeyBorderColor() const;
     [[nodiscard]] bool keyBorderEnabled() const;
+    [[nodiscard]] QString fontFamily() const;
+    [[nodiscard]] QString annotationFontFamily() const;
+    [[nodiscard]] double spaceOpacity() const;
 
     void loadTheme(const QString &theme);
 

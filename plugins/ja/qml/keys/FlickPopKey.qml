@@ -18,27 +18,25 @@ import QtQuick 2.4
 
 import MaliitKeyboard 2.0
 
-import "key_constants.js" as UI
-
 Rectangle {
-    width: 8.0 * (UI.fontSize + UI.flickMargin)
-    height: 8.0 * (UI.fontSize + UI.flickMargin)
+    width: Device.fontSize + Device.flickMargin
+    height: Device.fontSize + Device.flickMargin
 
     property string labelChar
     property color labelColor: Theme.fontColor
     property real labelOpacity: 1.0
     visible: labelChar ? true : false
 
-    border.width: 8.0 * (UI.flickBorderWidth)
+    border.width: Device.flickBorderWidth
     border.color: Theme.popupBorderColor
     radius: width / 10
 
     Text {
         anchors.centerIn: parent
         text: parent.labelChar
-        font.family: UI.fontFamily
-        font.pixelSize: 8.0 * (UI.fontSize)
-        font.bold: UI.fontBold
+        font.family: Theme.fontFamily
+        font.pixelSize: Device.fontSize
+        font.bold: Device.fontBold
         color: parent.labelColor
         opacity: parent.labelOpacity
     }

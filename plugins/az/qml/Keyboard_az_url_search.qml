@@ -15,6 +15,9 @@
  */
 
 import QtQuick 2.4
+
+import MaliitKeyboard 2.0
+
 import keys 1.0
 
 KeyPad {
@@ -85,7 +88,7 @@ KeyPad {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            height: panel.keyHeight + 8.0 * (UI.bottom_margin*2);
+            height: panel.keyHeight + Device.bottom_margin * 2;
 
             SymbolShiftKey { id: symShiftKey;                            anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }

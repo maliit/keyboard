@@ -134,6 +134,22 @@ bool Theme::keyBorderEnabled() const
     return m_themeData.value("keyBorderEnabled").toBool(false);
 }
 
+QString Theme::fontFamily() const
+{
+    return m_themeData.value("fontFamily").toString("Noto");
+}
+
+QString Theme::annotationFontFamily() const
+{
+    return m_themeData.value("annotationFontFamily").toString("Noto");
+}
+
+double Theme::spaceOpacity() const
+{
+    return m_themeData.value("spaceOpacity").toDouble(0.33);
+}
+
+
 void Theme::loadTheme(const QString& theme)
 {
     const auto &themeFile = QFileInfo(theme).isRelative() ?

@@ -61,6 +61,7 @@ public:
     QStringList pluginPaths() const;
     double opacity() const;
     QString theme() const;
+    QString device() const;
 
 Q_SIGNALS:
     void activeLanguageChanged(QString);
@@ -79,6 +80,7 @@ Q_SIGNALS:
     void pluginPathsChanged(QStringList);
     void opacityChanged(double);
     void themeChanged(const QString&);
+    void deviceChanged(const QString&);
 
 private:
     Q_SLOT void settingUpdated(const QString &key);

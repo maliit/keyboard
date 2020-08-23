@@ -147,7 +147,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
             Text {
                 id: inputLabel
                 text: "%(label)s"
-                font.pixelSize: 8.0 * (3)
+                font.pixelSize: Device.gu(3)
                 anchors {
                     left: input.left
                     top: parent.top

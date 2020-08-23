@@ -164,7 +164,7 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/keyboardgeometry.h
         src/plugin/keyboardsettings.cpp
         src/plugin/keyboardsettings.h
-        src/plugin/theme.cpp src/plugin/theme.h)
+        src/plugin/theme.cpp src/plugin/theme.h src/plugin/device.cpp src/plugin/device.h)
 
 add_library(maliit-keyboard-common STATIC ${MALIIT_KEYBOARD_COMMON_SOURCES})
 target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia)
@@ -362,7 +362,7 @@ install(TARGETS maliit-keyboard-plugin maliit-keyboard
 
 install(DIRECTORY qml/keys qml/languages
         DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
-install(FILES qml/constants.js qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
+install(FILES qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
         DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
 
 install(DIRECTORY qml/images
@@ -370,6 +370,8 @@ install(DIRECTORY qml/images
 install(DIRECTORY data/styles
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(DIRECTORY data/themes
+        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
+install(DIRECTORY data/devices
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(FILES data/styles/ubuntu/images/icon_backspace@18.png
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons

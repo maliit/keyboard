@@ -18,8 +18,6 @@ import QtQuick 2.4
 
 import MaliitKeyboard 2.0
 
-import "key_constants.js" as UI
-
 KeyPopover {
     id: popover
     enabled: false
@@ -67,7 +65,7 @@ KeyPopover {
         id: popoverBackground
 
         anchors.centerIn: anchorItem
-        anchors.verticalCenterOffset: -(UI.popoverTopMargin)
+        anchors.verticalCenterOffset: -Device.popoverTopMargin
 
         width: {
             if (rowOfKeys.width < keypad.keyWidth)
@@ -79,23 +77,23 @@ KeyPopover {
         height: rowOfKeys.height
 
         color: Theme.charKeyColor
-        radius: 8 * (0.8)
+        radius: Device.gu(0.8)
         border {
-            width: 8 * (0.1)
+            width: Device.gu(0.1)
         	color: Theme.popupBorderColor
         }
 
         onXChanged: {
 
-            if (x < UI.popoverEdgeMargin) {
-                anchorItem.x += Math.abs(x) + UI.popoverEdgeMargin;
+            if (x < Device.popoverEdgeMargin) {
+                anchorItem.x += Math.abs(x) + Device.popoverEdgeMargin;
                 return
             }
 
             var rightEdge = (x + width)
-            if ( rightEdge > (panel.width - UI.popoverEdgeMargin)) {
+            if ( rightEdge > (panel.width - Device.popoverEdgeMargin)) {
                 var diff = rightEdge - panel.width
-                anchorItem.x -= diff + UI.popoverEdgeMargin;
+                anchorItem.x -= diff + Device.popoverEdgeMargin;
             }
         }
     }
@@ -108,7 +106,7 @@ KeyPopover {
     Row {
         id: rowOfKeys
         anchors.centerIn: anchorItem
-        anchors.verticalCenterOffset: -(UI.popoverTopMargin)
+        anchors.verticalCenterOffset: -Device.popoverTopMargin
 
         Component.onCompleted: __width = 0
 
@@ -118,7 +116,7 @@ KeyPopover {
 
             Item {
                 id: key
-                width: textCell.width + 8.0 * ( UI.popoverCellPadding );
+                width: textCell.width + Device.popoverCellPadding;
 
                 height: panel.keyHeight;
 
@@ -130,11 +128,11 @@ KeyPopover {
                     id: textCell
                     anchors.centerIn: parent;
                     text: modelData
-                    font.family: UI.fontFamily
+                    font.family: Theme.fontFamily
                     font.pixelSize: fontSize
                     font.weight: Font.Light
                     color: key.highlight ? Theme.selectionColor : Theme.fontColor
-                    Component.onCompleted: __width += (textCell.width + 8.0 * ( UI.popoverCellPadding));
+                    Component.onCompleted: __width += (textCell.width + Device.popoverCellPadding);
                 }
 
                 function commit(skipAutoCaps) {

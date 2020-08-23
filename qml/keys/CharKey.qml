@@ -18,8 +18,6 @@ import QtQuick 2.4
 
 import MaliitKeyboard 2.0
 
-import "key_constants.js" as UI
-
 Item {
     id: key
 
@@ -28,14 +26,14 @@ Item {
     width: leftSide || rightSide ? panel.keyWidth * 2 : panel.keyWidth
     height: panel.keyHeight
 
-    /* to be set in keyboard layouts */
+    // to be set in keyboard layouts
     property string label: ""
     property string shifted: ""
     property var extended; // list of extended keys
     property var extendedShifted; // list of extended keys in shifted state
     property var currentExtendedKey; // The currently highlighted extended key
     property bool highlight: false;
-    property double textCenterOffset: 8.0 * (-0.15)
+    property double textCenterOffset: Device.gu(-0.15)
 
     property string valueToSubmit: keyLabel.text
 
@@ -50,18 +48,16 @@ Item {
     property bool leftSide: false
     property bool rightSide: false
 
-    property double rowMargin: fullScreenItem.tablet ? 8.0 * (UI.tabletRowMargin)
-                                                     : (fullScreenItem.landscape ? (UI.phoneRowMarginLandscape)
-                                                                                 : (UI.phoneRowMarginPortrait))
-    property double keyMargin: fullScreenItem.tablet ? 8.0 * (UI.tabletKeyMargins)
-                                                     : 8.0 * (UI.phoneKeyMargins)
+    property double rowMargin: fullScreenItem.landscape ? Device.rowMarginLandscape
+                                                        : Device.rowMarginPortrait
+    property double keyMargin: Device.keyMargins
 
     // These properties are used by autopilot to determine the visible 
     // portion of the key to press
     readonly property double leftOffset: buttonRect.anchors.leftMargin
     readonly property double rightOffset: buttonRect.anchors.rightMargin
 
-    /* design */
+    // design
     property string normalColor: Theme.charKeyColor
     property string pressedColor: Theme.charKeyPressedColor
     property bool borderEnabled: Theme.keyBorderEnabled
@@ -155,14 +151,14 @@ Item {
             Text {
                 id: keyLabel
                 text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
-                font.family: UI.fontFamily
+                font.family: Theme.fontFamily
                 font.pixelSize: fontSize
                 font.weight: Font.Light
                 color: Theme.fontColor
                 anchors.right: parent.right
                 anchors.left: parent.left
-                anchors.leftMargin: 8.0 * (0.2)
-                anchors.rightMargin: 8.0 * (0.2)
+                anchors.leftMargin: Device.gu(0.2)
+                anchors.rightMargin: Device.gu(0.2)
                 anchors.verticalCenter: parent.verticalCenter 
                 anchors.verticalCenterOffset: key.textCenterOffset
                 horizontalAlignment: Text.AlignHCenter
@@ -180,9 +176,9 @@ Item {
         
                 anchors.right: parent.right
                 anchors.top: parent.top
-                anchors.topMargin: 8.0 * (UI.annotationTopMargin)
-                anchors.rightMargin: 8.0 * (UI.annotationRightMargin)
-                font.family: UI.annotationFont
+                anchors.topMargin: Device.annotationTopMargin
+                anchors.rightMargin: Device.annotationRightMargin
+                font.family: Theme.annotationFontFamily
                 font.pixelSize: fontSize / 3
                 font.weight: Font.Light
                 color: Theme.annotationFontColor
