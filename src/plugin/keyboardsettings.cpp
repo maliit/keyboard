@@ -265,8 +265,13 @@ void KeyboardSettings::settingUpdated(const QString &key)
         Q_EMIT pluginPathsChanged(pluginPaths());
     } else if (key == OPACITY_KEY) {
         Q_EMIT opacityChanged(opacity());
-    }
+    } else if (key == "theme")
+        Q_EMIT themeChanged(theme());
 
     qWarning() << Q_FUNC_INFO << "unknown settings key:" << key;
-    return;
+}
+
+QString KeyboardSettings::theme() const
+{
+    return m_settings->get("theme").toString();
 }

@@ -15,6 +15,9 @@
  */
 
 import QtQuick 2.4
+
+import MaliitKeyboard 2.0
+
 import "key_constants.js" as UI
 
 Rectangle {
@@ -22,12 +25,12 @@ Rectangle {
     height: 8.0 * (UI.fontSize + UI.flickMargin)
 
     property string labelChar
-    property color labelColor: UI.fontColor
+    property color labelColor: Theme.fontColor
     property real labelOpacity: 1.0
     visible: labelChar ? true : false
 
     border.width: 8.0 * (UI.flickBorderWidth)
-    border.color: UI.flickBorderColor
+    border.color: Theme.popupBorderColor
     radius: width / 10
 
     Text {

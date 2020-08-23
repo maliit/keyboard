@@ -30,6 +30,9 @@
  */
 
 import QtQuick 2.4
+
+import MaliitKeyboard 2.0
+
 import "constants.js" as Const
 import "keys/"
 import "keys/key_constants.js" as UI
@@ -139,7 +142,7 @@ Item {
                 Rectangle {
                     width: parent.width
                     height: (1)
-                    color: UI.dividerColor
+                    color: Theme.dividerColor
                     anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
                 }
 
@@ -173,7 +176,7 @@ Item {
 
                         anchors.fill: parent
 
-                        color: UI.backgroundColor
+                        color: Theme.backgroundColor
                     }
                 
                     Item {
@@ -287,7 +290,7 @@ Item {
             Rectangle {
                 anchors.fill: parent
                 visible: parent.enabled
-                color: UI.charKeyPressedColor
+                color: Theme.charKeyPressedColor
                 opacity: 0.5
             }
 

@@ -122,7 +122,7 @@ public:
         , m_settings()
         , m_greeterStatus(new GreeterStatus())
         , m_feedback(std::make_unique<Feedback>(&m_settings))
-        , m_theme(std::make_unique<Theme>())
+        , m_theme(std::make_unique<Theme>(&m_settings))
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {

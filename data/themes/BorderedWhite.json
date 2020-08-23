@@ -1,0 +1,16 @@
+{
+    "fontColor": "#333333",
+    "selectionColor": "#19B6EE",
+    "backgroundColor": "white",
+    "dividerColor": "#cdcdcd",
+    "annotationFontColor": "#333333",
+    "charKeyColor": "white",
+    "charKeyPressedColor": "#d9d9d9",
+    "actionKeyColor": "#cdcdcd",
+    "actionKeyPressedColor": "#aeaeae",
+    "toolkitTheme": "Ubuntu.Components.Themes.Ambiance" ,
+    "popupBorderColor": "#888888",
+    "keyBorderEnabled": true,
+    "charKeyBorderColor": "#888888",
+    "actionKeyBorderColor": "#888888"
+}

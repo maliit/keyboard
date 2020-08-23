@@ -15,14 +15,18 @@
  */
 
 import QtQuick 2.4
+
+import MaliitKeyboard 2.0
+
 import keys 1.0
 
 CharKey {
     shifted: label
     overridePressArea: true
     width: panel.keyWidth * 0.89
-    normalColor: UI.backgroundColor
+    normalColor: Theme.backgroundColor
     pressedColor: normalColor
+    borderColor: normalColor
     fontSize: fullScreenItem.landscape ? height / 1.8 : height / 2.5
     fontFamily: "Noto Color Emoji"
     layer.enabled: !highlight

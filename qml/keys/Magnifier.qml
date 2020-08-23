@@ -50,7 +50,7 @@ KeyPopover {
         }
     }
 
-    BorderImage {
+    Rectangle {
         id: popper
 
         width: parent.width
@@ -64,7 +64,12 @@ KeyPopover {
         transformOrigin: Item.Bottom
         opacity: animationStep
 
-        source: Theme.imagesPath + "/magnified_key.sci"
+        color: Theme.charKeyColor
+        radius: 8 * (0.8)
+        border {
+            width: 8 * (0.1)
+        	color: Theme.popupBorderColor
+        }
 
         onXChanged: {
             if (x < UI.popoverEdgeMargin) {
@@ -90,7 +95,7 @@ KeyPopover {
             font.pixelSize: panel.keyHeight * 0.6
             verticalAlignment: Text.AlignVCenter
 
-            color: UI.fontColor
+            color: Theme.fontColor
         }
 
         NumberAnimation {

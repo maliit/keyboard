@@ -82,5 +82,10 @@
       <range min="0.5" max="1.0"/>
       <default>1.0</default>
     </key>
+    <key name="theme" type="s">
+      <summary>Virtual Keyboard Theme</summary>
+      <description>Specifies the theme of the maliit keyboard</description>
+      <default>'Default'</default>
+    </key>
   </schema>
 </schemalist>

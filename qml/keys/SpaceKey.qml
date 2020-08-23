@@ -18,6 +18,8 @@ import QtQuick 2.4
 
 import QtQuick.Controls 2.1
 
+import MaliitKeyboard 2.0
+
 import "key_constants.js" as UI
 import "languages.js" as Languages
 
@@ -25,8 +27,8 @@ ActionKey {
     label: " ";
     shifted: " ";
 
-    normalColor: UI.charKeyColor
-    pressedColor: UI.charKeyPressedColor
+    normalColor: Theme.charKeyColor
+    pressedColor: Theme.charKeyPressedColor
 
     action: "space"
     switchBackFromSymbols: true
@@ -43,6 +45,7 @@ ActionKey {
         text: Languages.languageIdToName(maliit_input_method.activeLanguage)
         horizontalAlignment: Text.AlignHCenter
         visible: !panel.hideKeyLabels
+        color: Theme.fontColor
     }
 
     MouseArea {

@@ -22,13 +22,12 @@ import "languages.js" as Languages
 import MaliitKeyboard 2.0
 
 ActionKey {
-    normalColor: UI.charKeyColor
-    pressedColor: UI.charKeyPressedColor
+    normalColor: Theme.charKeyColor
+    pressedColor: Theme.charKeyPressedColor
 
-    Image {
-        anchors.centerIn: parent
-        source: Theme.imagesPath + "/keyboard_spacebar.png"
-    }
+    iconNormal: "keyboard_spacebar";
+    iconShifted: "keyboard_spacebar";
+    iconCapsLock: "keyboard_spacebar";
 
     action: "space"
     switchBackFromSymbols: true

@@ -63,7 +63,7 @@ KeyPopover {
         canvas.extendedKeysShown = enabled
     }
 
-    BorderImage {
+    Rectangle {
         id: popoverBackground
 
         anchors.centerIn: anchorItem
@@ -78,7 +78,12 @@ KeyPopover {
 
         height: rowOfKeys.height
 
-        source: Theme.imagesPath + "/popover.sci"
+        color: Theme.charKeyColor
+        radius: 8 * (0.8)
+        border {
+            width: 8 * (0.1)
+        	color: Theme.popupBorderColor
+        }
 
         onXChanged: {
 
@@ -128,7 +133,7 @@ KeyPopover {
                     font.family: UI.fontFamily
                     font.pixelSize: fontSize
                     font.weight: Font.Light
-                    color: key.highlight ? UI.selectionColor : UI.fontColor
+                    color: key.highlight ? Theme.selectionColor : Theme.fontColor
                     Component.onCompleted: __width += (textCell.width + 8.0 * ( UI.popoverCellPadding));
                 }
 

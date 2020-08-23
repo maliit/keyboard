@@ -18,6 +18,8 @@ import QtQuick 2.4
 
 import QtQuick.Controls 2.1
 
+import MaliitKeyboard 2.0
+
 import "keys/key_constants.js" as UI
 
 Rectangle {
@@ -28,7 +30,7 @@ Rectangle {
 
     Rectangle {
         anchors.fill: parent
-        color: UI.backgroundColor
+        color: Theme.backgroundColor
     }
 
     ListView {
@@ -69,6 +71,7 @@ Rectangle {
                     font.weight: textBold ? Font.Bold : Font.Light
                     text: word;
                     anchors.centerIn: parent
+                    color: Theme.fontColor
                 }
             }
 

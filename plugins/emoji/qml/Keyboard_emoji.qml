@@ -185,8 +185,9 @@ KeyPad {
                 visible: label != ""
                 label: emoji != null ? emoji.char : ""
                 shifted: label
-                normalColor: UI.backgroundColor
-                pressedColor: UI.backgroundColor
+                normalColor: Theme.backgroundColor
+                borderColor: normalColor
+                pressedColor: Theme.backgroundColor
                 fontSize: 8.0 * (2.5)
                 fontFamily: "Noto Color Emoji"
                 onKeySent: {
@@ -220,8 +221,9 @@ KeyPad {
             id: languageMenuButton
             label: "ABC"
             shifted: label
-            normalColor: UI.backgroundColor
-            pressedColor: UI.backgroundColor
+            normalColor: Theme.backgroundColor
+            borderColor: normalColor
+            pressedColor: Theme.backgroundColor
         }
 
         CategoryKey {
@@ -315,8 +317,9 @@ KeyPad {
 
         BackspaceKey {
             padding: 0
-            normalColor: UI.backgroundColor
-            pressedColor: UI.backgroundColor
+            normalColor: Theme.backgroundColor
+            borderColor: normalColor
+            pressedColor: Theme.backgroundColor
         }
     }
 }
