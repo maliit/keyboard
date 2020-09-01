@@ -139,6 +139,10 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
         d->view->setSource(QUrl::fromLocalFile(g_maliit_keyboard_qml));
     }
     d->view->setGeometry(qGuiApp->primaryScreen()->geometry());
+    connect(qGuiApp->primaryScreen(), &QScreen::geometryChanged,
+            this, [this, d](const QRect &geometry) {
+        d->view->setGeometry(geometry);
+    });
 }
 
 InputMethod::~InputMethod() = default;
