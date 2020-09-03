@@ -15,7 +15,7 @@ INCLUDEPATH    += \
 HEADERS         = \
     frenchplugin.h
 
-TARGET          = $$qtLibraryTarget(frplugin)
+TARGET          = $$qtLibraryTarget(fr-chplugin)
 
 EXAMPLE_FILES = frenchplugin.json
 
@@ -23,13 +23,13 @@ EXAMPLE_FILES = frenchplugin.json
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/fr-ch/
 
 lang_db_fr-ch.commands += \
-  rm -f $$PWD/database_fr.db && \
-  text2ngram -n 1 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt && \
-  text2ngram -n 2 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt && \
-  text2ngram -n 3 -l -f sqlite -o $$PWD/database_fr.db $$PWD/les_trois_mousquetaires.txt
-lang_db_fr-ch.files += $$PWD/database_fr.db
+  rm -f $$PWD/database_fr-ch.db && \
+  text2ngram -n 1 -l -f sqlite -o $$PWD/database_fr-ch.db $$PWD/les_trois_mousquetaires.txt && \
+  text2ngram -n 2 -l -f sqlite -o $$PWD/database_fr-ch.db $$PWD/les_trois_mousquetaires.txt && \
+  text2ngram -n 3 -l -f sqlite -o $$PWD/database_fr-ch.db $$PWD/les_trois_mousquetaires.txt
+lang_db_fr-ch.files += $$PWD/database_fr-ch.db
 
-lang_db_fr-ch_install.files += $$PWD/database_fr.db
+lang_db_fr-ch_install.files += $$PWD/database_fr-ch.db
 lang_db_fr-ch_install.path = $$PLUGIN_INSTALL_PATH
 
 QMAKE_EXTRA_TARGETS += lang_db_fr-ch lang_db_fr-ch_install
