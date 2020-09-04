@@ -22,28 +22,11 @@ EXAMPLE_FILES = frenchplugin.json
 # generate database for presage:
 PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/fr-ch/
 
-lang_db_fr-ch.commands += \
-  rm -f $$PWD/database_fr-ch.db && \
-  text2ngram -n 1 -l -f sqlite -o $$PWD/database_fr-ch.db $$PWD/les_trois_mousquetaires.txt && \
-  text2ngram -n 2 -l -f sqlite -o $$PWD/database_fr-ch.db $$PWD/les_trois_mousquetaires.txt && \
-  text2ngram -n 3 -l -f sqlite -o $$PWD/database_fr-ch.db $$PWD/les_trois_mousquetaires.txt
-lang_db_fr-ch.files += $$PWD/database_fr-ch.db
-
-lang_db_fr-ch_install.files += $$PWD/database_fr-ch.db
-lang_db_fr-ch_install.path = $$PLUGIN_INSTALL_PATH
-
-QMAKE_EXTRA_TARGETS += lang_db_fr-ch lang_db_fr-ch_install
-
-overrides.files += $$PWD/overrides.csv
-overrides.path += $$PLUGIN_INSTALL_PATH
-
-target.path = $$PLUGIN_INSTALL_PATH
-INSTALLS += target lang_db_fr-ch_install overrides
-
+#target.path = $$PLUGIN_INSTALL_PATH
+#INSTALLS += target
 
 OTHER_FILES += \
     frenchplugin.json \
-    les_trois_mousquetaires.txt
 
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
 
