@@ -88,7 +88,7 @@ void SpellPredictWorker::setLanguage(QString locale, QString pluginPath)
 {
     // locale for secondary layouts I.E., dvorak will be formatted as locale@layout
     // in this case we want to drop the layout portion
-    auto baseLocale = locale.split('@')[0];
+    auto baseLocale = locale.split(QRegExp("(@|\\-)"))[0];
     QString dbFileName = "database_"+baseLocale+".db";
     QString fullPath(pluginPath + QDir::separator() + dbFileName);
     m_spellChecker.setLanguage(locale);
