@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QThread>
+#include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
 #include "anthyadapter.h"
@@ -13,6 +14,7 @@ class JapanesePlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "japaneseplugin.json")
+    Q_INTERFACES(LanguagePluginInterface)
 
 public:
     explicit JapanesePlugin(QObject* parent = nullptr);

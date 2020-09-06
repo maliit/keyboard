@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QStringList>
 #include <QThread>
+#include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
 #include "chewingadapter.h"
@@ -15,6 +16,7 @@ class ChewingPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "chewingplugin.json")
+    Q_INTERFACES(LanguagePluginInterface)
 
 public:
     explicit ChewingPlugin(QObject *parent = nullptr);
