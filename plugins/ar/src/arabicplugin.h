@@ -2,13 +2,14 @@
 #define ARABICPLUGIN_H
 
 #include <QObject>
+#include "languageplugininterface.h"
 #include "westernlanguagesplugin.h"
 
 class ArabicPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "arabicplugin.json")
-
+    Q_INTERFACES(LanguagePluginInterface)
 public:
     explicit ArabicPlugin(QObject* parent = nullptr)
         : WesternLanguagesPlugin(parent)

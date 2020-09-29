@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QStringList>
+#include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
 #include <iostream>
@@ -13,6 +14,7 @@ class EmojiPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "io.maliit.keyboard.LanguagePlugin.1" FILE "emojiplugin.json")
+    Q_INTERFACES(LanguagePluginInterface)
 
 public:
     explicit EmojiPlugin(QObject *parent = nullptr);

@@ -60,7 +60,7 @@ public:
 
     bool clear_candidates_on_incoming;
 
-    AbstractLanguagePlugin* languagePlugin;
+    LanguagePluginInterface* languagePlugin;
 
     QPluginLoader pluginLoader;
 
@@ -94,7 +94,7 @@ public:
         QObject *plugin = pluginLoader.instance();
 
         if (plugin) {
-            languagePlugin = qobject_cast<AbstractLanguagePlugin *>(plugin);
+            languagePlugin = qobject_cast<LanguagePluginInterface *>(plugin);
             if (!languagePlugin) {
                 qCritical() << "wordengine.cpp - loading plugin failed: " + pluginPath;
 
@@ -411,9 +411,9 @@ void WordEngine::onLanguageChanged(const QString &pluginPath, const QString &lan
 
     Q_EMIT enabledChanged(isEnabled());
 
-    connect(d->languagePlugin, &AbstractLanguagePlugin::newSpellingSuggestions,
+    connect(static_cast<AbstractLanguagePlugin *>(d->languagePlugin), &AbstractLanguagePlugin::newSpellingSuggestions,
             this, &WordEngine::newSpellingSuggestions);
-    connect(d->languagePlugin, &AbstractLanguagePlugin::newPredictionSuggestions,
+    connect(static_cast<AbstractLanguagePlugin *>(d->languagePlugin), &AbstractLanguagePlugin::newPredictionSuggestions,
             this, &WordEngine::newPredictionSuggestions);
     Q_EMIT pluginChanged();
 }
