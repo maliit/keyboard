@@ -6,18 +6,59 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-06-02 00:06+0100\n"
-"PO-Revision-Date: 2015-02-27 16:47+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-18 19:28+0000\n"
+"PO-Revision-Date: 2020-12-06 17:41+0100\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: ../qml/keys/LanguageMenu.qml:81
+#: ../qml/ActionsToolbar.qml:56
+msgid "Select All"
+msgstr "Alles selecteren"
+
+#: ../qml/ActionsToolbar.qml:57
+msgid "Redo"
+msgstr "Opnieuw uitvoeren"
+
+#: ../qml/ActionsToolbar.qml:58
+msgid "Undo"
+msgstr "Ongedaan maken"
+
+#: ../qml/ActionsToolbar.qml:73
+msgid "Paste"
+msgstr "Plakken"
+
+#: ../qml/ActionsToolbar.qml:74
+msgid "Copy"
+msgstr "Kopiëren"
+
+#: ../qml/ActionsToolbar.qml:75
+msgid "Cut"
+msgstr "Knippen"
+
+#: ../qml/FloatingActions.qml:62
+msgid "Done"
+msgstr "Klaar"
+
+#: ../qml/Keyboard.qml:351
+msgid "Swipe to move selection"
+msgstr "Veeg om te selecteren"
+
+#: ../qml/Keyboard.qml:352
+msgid "Swipe to move cursor"
+msgstr "Veeg om cursor te verplaatsen"
+
+#: ../qml/Keyboard.qml:352
+msgid "Double-tap to enter selection mode"
+msgstr "Dubbeltik om selectiemodus te starten"
+
+#: ../qml/keys/LanguageMenu.qml:106
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -30,122 +71,154 @@ msgid "Azerbaijani"
 msgstr "Azerbeidjaans"
 
 #: ../qml/keys/languages.js:21
+msgid "Bulgarian"
+msgstr "Bulgaars"
+
+#: ../qml/keys/languages.js:22
 msgid "Bosnian"
 msgstr "Bosnisch"
 
-#: ../qml/keys/languages.js:22
+#: ../qml/keys/languages.js:23
 msgid "Catalan"
 msgstr "Catalaans"
 
-#: ../qml/keys/languages.js:23
+#: ../qml/keys/languages.js:24
 msgid "Czech"
 msgstr "Tsjechisch"
 
-#: ../qml/keys/languages.js:24
+#: ../qml/keys/languages.js:25
 msgid "Danish"
 msgstr "Deens"
 
-#: ../qml/keys/languages.js:25
+#: ../qml/keys/languages.js:26
 msgid "German"
 msgstr "Duits"
 
-#: ../qml/keys/languages.js:26
-msgid "Emoji"
-msgstr ""
-
 #: ../qml/keys/languages.js:27
-msgid "Greek"
-msgstr ""
+msgid "Emoji"
+msgstr "Emoji"
 
 #: ../qml/keys/languages.js:28
+msgid "Greek"
+msgstr "Grieks"
+
+#: ../qml/keys/languages.js:29
 msgid "English"
 msgstr "Engels"
 
-#: ../qml/keys/languages.js:29
+#: ../qml/keys/languages.js:30
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#: ../qml/keys/languages.js:31
 msgid "Spanish"
 msgstr "Spaans"
 
-#: ../qml/keys/languages.js:30
+#: ../qml/keys/languages.js:32
+msgid "Persian"
+msgstr "Perzisch"
+
+#: ../qml/keys/languages.js:33
 msgid "Finnish"
 msgstr "Fins"
 
-#: ../qml/keys/languages.js:31
+#: ../qml/keys/languages.js:34
 msgid "French"
 msgstr "Frans"
 
-#: ../qml/keys/languages.js:32
-msgid "Scottish Gaelic"
+#: ../qml/keys/languages.js:35
+msgid ""
+"French\n"
+"(Swiss)"
 msgstr ""
+"Frans\n"
+"(Zwitserland)"
 
-#: ../qml/keys/languages.js:33
+#: ../qml/keys/languages.js:36
+msgid "Scottish Gaelic"
+msgstr "Schots-Gaelisch"
+
+#: ../qml/keys/languages.js:37
 msgid "Hebrew"
 msgstr "Hebreeuws"
 
-#: ../qml/keys/languages.js:34
+#: ../qml/keys/languages.js:38
 msgid "Croatian"
 msgstr "Kroatisch"
 
-#: ../qml/keys/languages.js:35
+#: ../qml/keys/languages.js:39
 msgid "Hungarian"
 msgstr "Hongaars"
 
-#: ../qml/keys/languages.js:36
+#: ../qml/keys/languages.js:40
 msgid "Icelandic"
-msgstr ""
+msgstr "IJslands"
 
-#: ../qml/keys/languages.js:37
+#: ../qml/keys/languages.js:41
 msgid "Italian"
 msgstr "Italiaans"
 
-#: ../qml/keys/languages.js:38
+#: ../qml/keys/languages.js:42
 msgid "Japanese"
 msgstr "Japans"
 
-#: ../qml/keys/languages.js:39
+#: ../qml/keys/languages.js:43
+msgid "Lithuanian"
+msgstr "Litouws"
+
+#: ../qml/keys/languages.js:44
 msgid "Latvian"
 msgstr "Lets"
 
-#: ../qml/keys/languages.js:40
+#: ../qml/keys/languages.js:45
+msgid "Korean"
+msgstr "Koreaans"
+
+#: ../qml/keys/languages.js:46
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: ../qml/keys/languages.js:41
+#: ../qml/keys/languages.js:47
 msgid "Norwegian"
-msgstr ""
+msgstr "Noors"
 
-#: ../qml/keys/languages.js:42
+#: ../qml/keys/languages.js:48
 msgid "Polish"
 msgstr "Pools"
 
-#: ../qml/keys/languages.js:43
+#: ../qml/keys/languages.js:49
 msgid "Portuguese"
 msgstr "Portugees"
 
-#: ../qml/keys/languages.js:44
+#: ../qml/keys/languages.js:50
 msgid "Romanian"
-msgstr ""
+msgstr "Roemeens"
 
-#: ../qml/keys/languages.js:45
+#: ../qml/keys/languages.js:51
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../qml/keys/languages.js:46
+#: ../qml/keys/languages.js:52
 msgid "Slovenian"
-msgstr ""
+msgstr "Sloveens"
 
-#: ../qml/keys/languages.js:47
+#: ../qml/keys/languages.js:53
 msgid "Serbian"
 msgstr "Servisch"
 
-#: ../qml/keys/languages.js:48
+#: ../qml/keys/languages.js:54
 msgid "Swedish"
 msgstr "Zweeds"
 
-#: ../qml/keys/languages.js:49
-msgid "Ukrainian"
-msgstr ""
+#: ../qml/keys/languages.js:55
+msgid "Turkish"
+msgstr "Turks"
 
-#: ../qml/keys/languages.js:50
+#: ../qml/keys/languages.js:56
+msgid "Ukrainian"
+msgstr "Oekraïens"
+
+#: ../qml/keys/languages.js:57
 msgid ""
 "Chinese\n"
 "(Pinyin)"
@@ -153,7 +226,7 @@ msgstr ""
 "Chinees\n"
 "(Pinyin)"
 
-#: ../qml/keys/languages.js:51
+#: ../qml/keys/languages.js:58
 msgid ""
 "Chinese\n"
 "(Chewing)"
