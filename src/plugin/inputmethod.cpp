@@ -722,12 +722,15 @@ bool InputMethod::languageIsSupported(const QString plugin) {
 void InputMethod::onLanguageChanged(const QString &language) {
     Q_D(InputMethod);
     foreach(QString pluginPath, d->pluginPaths) {
-        QFile testFile(pluginPath + QDir::separator() + language + QDir::separator() + "lib" + language + "plugin.so");
+        QString path = pluginPath + QDir::separator() + language + QDir::separator() + "lib" + language + "plugin.so";
+        qDebug() << "pluginpath=" << path;
+        QFile testFile(path);
         if (testFile.exists()) {
             Q_EMIT languagePluginChanged(testFile.fileName(), language);
             return;
         }
     }
+
     qCritical() << "Couldn't find word engine plugin for " << language;
 }
 
