@@ -103,7 +103,6 @@ void SpellCheckerPrivate::addUserDictionary(const QString &user_dictionary)
     if (not hunspell)
         return;
 
-    qDebug() << "addUserDictionary:" << user_dictionary;
     if (not user_dictionary.isEmpty() and QFile::exists(user_dictionary)) {
         QFile file(user_dictionary);
         if (file.open(QFile::ReadOnly)) {
