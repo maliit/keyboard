@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2020-12-06 17:41+0100\n"
+"PO-Revision-Date: 2020-12-20 00:45+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
-"Language-Team: Dutch <nl@li.org>\n"
+"Language-Team: Dutch <https://translate.ubports.com/projects/ubports/"
+"keyboard-component/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.11.3\n"
 "X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Poedit 2.4.2\n"
 
 #: ../qml/ActionsToolbar.qml:56
 msgid "Select All"
@@ -52,11 +54,11 @@ msgstr "Veeg om te selecteren"
 
 #: ../qml/Keyboard.qml:352
 msgid "Swipe to move cursor"
-msgstr "Veeg om cursor te verplaatsen"
+msgstr "Veeg om de cursor te verplaatsen"
 
 #: ../qml/Keyboard.qml:352
 msgid "Double-tap to enter selection mode"
-msgstr "Dubbeltik om selectiemodus te starten"
+msgstr "Dubbeltik om de selectiemodus te starten"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Settings"
