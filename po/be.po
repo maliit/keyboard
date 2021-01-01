@@ -8,55 +8,58 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2015-05-04 08:06+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Belarusian <be@li.org>\n"
+"PO-Revision-Date: 2020-12-25 12:17+0000\n"
+"Last-Translator: Zmicer <nashtlumach@gmail.com>\n"
+"Language-Team: Belarusian <https://translate.ubports.com/projects/ubports/"
+"keyboard-component/be/>\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.11.3\n"
 "X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
 
 #: ../qml/ActionsToolbar.qml:56
 msgid "Select All"
-msgstr ""
+msgstr "Абраць усе"
 
 #: ../qml/ActionsToolbar.qml:57
 msgid "Redo"
-msgstr ""
+msgstr "Паўтарыць"
 
 #: ../qml/ActionsToolbar.qml:58
 msgid "Undo"
-msgstr ""
+msgstr "Адрабіць"
 
 #: ../qml/ActionsToolbar.qml:73
 msgid "Paste"
-msgstr ""
+msgstr "Уставіць"
 
 #: ../qml/ActionsToolbar.qml:74
 msgid "Copy"
-msgstr ""
+msgstr "Скапіяваць"
 
 #: ../qml/ActionsToolbar.qml:75
 msgid "Cut"
-msgstr ""
+msgstr "Выразаць"
 
 #: ../qml/FloatingActions.qml:62
 msgid "Done"
-msgstr ""
+msgstr "Завершана"
 
 #: ../qml/Keyboard.qml:351
 msgid "Swipe to move selection"
-msgstr ""
+msgstr "Правядзіце, каб перамясціць вылучэнне"
 
 #: ../qml/Keyboard.qml:352
 msgid "Swipe to move cursor"
-msgstr ""
+msgstr "Правядзіце, каб перамясціць курсор"
 
 #: ../qml/Keyboard.qml:352
 msgid "Double-tap to enter selection mode"
-msgstr ""
+msgstr "Двойчы націсніце, каб перайсці ў рэжым вылучэння"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Settings"
@@ -71,10 +74,8 @@ msgid "Azerbaijani"
 msgstr "Азербайджанская"
 
 #: ../qml/keys/languages.js:21
-#, fuzzy
-#| msgid "Hungarian"
 msgid "Bulgarian"
-msgstr "Вугорская"
+msgstr "Балгарская"
 
 #: ../qml/keys/languages.js:22
 msgid "Bosnian"
@@ -110,7 +111,7 @@ msgstr "Англійская"
 
 #: ../qml/keys/languages.js:30
 msgid "Esperanto"
-msgstr ""
+msgstr "Эсперанта"
 
 #: ../qml/keys/languages.js:31
 msgid "Spanish"
@@ -118,7 +119,7 @@ msgstr "Іспанская"
 
 #: ../qml/keys/languages.js:32
 msgid "Persian"
-msgstr ""
+msgstr "Персідская"
 
 #: ../qml/keys/languages.js:33
 msgid "Finnish"
@@ -129,12 +130,12 @@ msgid "French"
 msgstr "Французкая"
 
 #: ../qml/keys/languages.js:35
-#, fuzzy
-#| msgid "French"
 msgid ""
 "French\n"
 "(Swiss)"
-msgstr "Французкая"
+msgstr ""
+"Французкая\n"
+"(Швейцарыя)"
 
 #: ../qml/keys/languages.js:36
 msgid "Scottish Gaelic"
@@ -150,7 +151,7 @@ msgstr "Харвацкая"
 
 #: ../qml/keys/languages.js:39
 msgid "Hungarian"
-msgstr "Вугорская"
+msgstr "Венгерская"
 
 #: ../qml/keys/languages.js:40
 msgid "Icelandic"
@@ -162,19 +163,19 @@ msgstr "Італьянская"
 
 #: ../qml/keys/languages.js:42
 msgid "Japanese"
-msgstr ""
+msgstr "Японская"
 
 #: ../qml/keys/languages.js:43
 msgid "Lithuanian"
-msgstr ""
+msgstr "Летувісская"
 
 #: ../qml/keys/languages.js:44
 msgid "Latvian"
-msgstr ""
+msgstr "Латышская"
 
 #: ../qml/keys/languages.js:45
 msgid "Korean"
-msgstr ""
+msgstr "Карэйская"
 
 #: ../qml/keys/languages.js:46
 msgid "Dutch"
@@ -214,7 +215,7 @@ msgstr "Шведская"
 
 #: ../qml/keys/languages.js:55
 msgid "Turkish"
-msgstr ""
+msgstr "Турэцкая"
 
 #: ../qml/keys/languages.js:56
 msgid "Ukrainian"
@@ -225,12 +226,16 @@ msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
+"Кітайская\n"
+"(Піньінь)"
 
 #: ../qml/keys/languages.js:58
 msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
+"Кітайская\n"
+"(Чжуін)"
 
 #~ msgid "Chinese - Pinyin"
 #~ msgstr "Кітайская - піньінь"

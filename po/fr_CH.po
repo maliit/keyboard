@@ -1,100 +1,99 @@
-# Catalan translation for ubuntu-keyboard
-# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Canonical Ltd. 
 # This file is distributed under the same license as the ubuntu-keyboard package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2020-12-22 15:09+0000\n"
-"Last-Translator: Joan CiberSheep <cibersheep@gmail.com>\n"
-"Language-Team: Catalan <https://translate.ubports.com/projects/ubports/"
-"keyboard-component/ca/>\n"
-"Language: ca\n"
+"PO-Revision-Date: 2020-12-30 10:26+0000\n"
+"Last-Translator: Daniel Sparti <daniel.sparti@posteo.net>\n"
+"Language-Team: French (Switzerland) <https://translate.ubports.com/projects/"
+"ubports/keyboard-component/fr_CH/>\n"
+"Language: fr_CH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 3.11.3\n"
-"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
 
 #: ../qml/ActionsToolbar.qml:56
 msgid "Select All"
-msgstr "Selecciona-ho tot"
+msgstr "Sélectionner tout"
 
 #: ../qml/ActionsToolbar.qml:57
 msgid "Redo"
-msgstr "Refés"
+msgstr "Recommencer"
 
 #: ../qml/ActionsToolbar.qml:58
 msgid "Undo"
-msgstr "Desfés"
+msgstr "Annuler"
 
 #: ../qml/ActionsToolbar.qml:73
 msgid "Paste"
-msgstr "Enganxa"
+msgstr "Coller"
 
 #: ../qml/ActionsToolbar.qml:74
 msgid "Copy"
-msgstr "Copia"
+msgstr "Copier"
 
 #: ../qml/ActionsToolbar.qml:75
 msgid "Cut"
-msgstr "Retalla"
+msgstr "Couper"
 
 #: ../qml/FloatingActions.qml:62
 msgid "Done"
-msgstr "Fet"
+msgstr "Terminé"
 
 #: ../qml/Keyboard.qml:351
 msgid "Swipe to move selection"
-msgstr "Llisqueu per moure la selecció"
+msgstr "Faire glisser pour déplacer la sélection"
 
 #: ../qml/Keyboard.qml:352
 msgid "Swipe to move cursor"
-msgstr "Llisqueu per moure el cursor"
+msgstr "Faire glisser pour déplacer le curseur"
 
 #: ../qml/Keyboard.qml:352
 msgid "Double-tap to enter selection mode"
-msgstr "Toqueu dos cops per entrar en el mode de selecció"
+msgstr "Taper deux fois pour activer le mode sélection"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Settings"
-msgstr "Configuració"
+msgstr "Paramètres"
 
 #: ../qml/keys/languages.js:19
 msgid "Arabic"
-msgstr "Àrab"
+msgstr "Arabe"
 
 #: ../qml/keys/languages.js:20
 msgid "Azerbaijani"
-msgstr "Àzeri"
+msgstr "Azerbaïdjanais"
 
 #: ../qml/keys/languages.js:21
 msgid "Bulgarian"
-msgstr "Búlgar"
+msgstr "Bulgare"
 
 #: ../qml/keys/languages.js:22
 msgid "Bosnian"
-msgstr "Bosnià"
+msgstr "Bosniaque"
 
 #: ../qml/keys/languages.js:23
 msgid "Catalan"
-msgstr "Català"
+msgstr "Catalan"
 
 #: ../qml/keys/languages.js:24
 msgid "Czech"
-msgstr "Txec"
+msgstr "Tchèque"
 
 #: ../qml/keys/languages.js:25
 msgid "Danish"
-msgstr "Danès"
+msgstr "Danois"
 
 #: ../qml/keys/languages.js:26
 msgid "German"
-msgstr "Alemany"
+msgstr "Allemand"
 
 #: ../qml/keys/languages.js:27
 msgid "Emoji"
@@ -106,111 +105,111 @@ msgstr "Grec"
 
 #: ../qml/keys/languages.js:29
 msgid "English"
-msgstr "Anglès"
+msgstr "Anglais"
 
 #: ../qml/keys/languages.js:30
 msgid "Esperanto"
-msgstr "Esperanto"
+msgstr "Espéranto"
 
 #: ../qml/keys/languages.js:31
 msgid "Spanish"
-msgstr "Espanyol"
+msgstr "Espagnol"
 
 #: ../qml/keys/languages.js:32
 msgid "Persian"
-msgstr "Persa"
+msgstr "Perse"
 
 #: ../qml/keys/languages.js:33
 msgid "Finnish"
-msgstr "Finlandès"
+msgstr "Finnois"
 
 #: ../qml/keys/languages.js:34
 msgid "French"
-msgstr "Francès"
+msgstr "Français"
 
 #: ../qml/keys/languages.js:35
 msgid ""
 "French\n"
 "(Swiss)"
 msgstr ""
-"Francès \n"
-"(Suís)"
+"Français\n"
+"(Suisse)"
 
 #: ../qml/keys/languages.js:36
 msgid "Scottish Gaelic"
-msgstr "Gaèlic escocès"
+msgstr "Gaélique écossais"
 
 #: ../qml/keys/languages.js:37
 msgid "Hebrew"
-msgstr "Hebreu"
+msgstr "Hébreu"
 
 #: ../qml/keys/languages.js:38
 msgid "Croatian"
-msgstr "Croat"
+msgstr "Croate"
 
 #: ../qml/keys/languages.js:39
 msgid "Hungarian"
-msgstr "Hongarès"
+msgstr "Hongrois"
 
 #: ../qml/keys/languages.js:40
 msgid "Icelandic"
-msgstr "Islandès"
+msgstr "Islandais"
 
 #: ../qml/keys/languages.js:41
 msgid "Italian"
-msgstr "Italià"
+msgstr "Italien"
 
 #: ../qml/keys/languages.js:42
 msgid "Japanese"
-msgstr "japonès"
+msgstr "Japonais"
 
 #: ../qml/keys/languages.js:43
 msgid "Lithuanian"
-msgstr "Lituà"
+msgstr "Lituanien"
 
 #: ../qml/keys/languages.js:44
 msgid "Latvian"
-msgstr "Letó"
+msgstr "Letton"
 
 #: ../qml/keys/languages.js:45
 msgid "Korean"
-msgstr "Coreà"
+msgstr "Coréen"
 
 #: ../qml/keys/languages.js:46
 msgid "Dutch"
-msgstr "Holandès"
+msgstr "Néerlandais"
 
 #: ../qml/keys/languages.js:47
 msgid "Norwegian"
-msgstr "Noruec"
+msgstr "Norvégien"
 
 #: ../qml/keys/languages.js:48
 msgid "Polish"
-msgstr "Polonès"
+msgstr "Polonais"
 
 #: ../qml/keys/languages.js:49
 msgid "Portuguese"
-msgstr "Portuguès"
+msgstr "Portugais"
 
 #: ../qml/keys/languages.js:50
 msgid "Romanian"
-msgstr "Romanès"
+msgstr "Roumain"
 
 #: ../qml/keys/languages.js:51
 msgid "Russian"
-msgstr "Rus"
+msgstr "Russe"
 
 #: ../qml/keys/languages.js:52
 msgid "Slovenian"
-msgstr "Eslovè"
+msgstr "Slovène"
 
 #: ../qml/keys/languages.js:53
 msgid "Serbian"
-msgstr "Serbi"
+msgstr "Serbe"
 
 #: ../qml/keys/languages.js:54
 msgid "Swedish"
-msgstr "Suec"
+msgstr "Suédois"
 
 #: ../qml/keys/languages.js:55
 msgid "Turkish"
@@ -218,14 +217,14 @@ msgstr "Turc"
 
 #: ../qml/keys/languages.js:56
 msgid "Ukrainian"
-msgstr "Ucraïnès"
+msgstr "Ukrainien"
 
 #: ../qml/keys/languages.js:57
 msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
-"Xinès\n"
+"Chinois\n"
 "(Pinyin)"
 
 #: ../qml/keys/languages.js:58
@@ -233,11 +232,5 @@ msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
-"Xinès\n"
+"Chinois\n"
 "(Chewing)"
-
-#~ msgid "Chinese - Pinyin"
-#~ msgstr "Xinès, pinyin"
-
-#~ msgid "Language: "
-#~ msgstr "Llengua: "
