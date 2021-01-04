@@ -8,55 +8,57 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2015-06-30 10:57+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Tamil <ta@li.org>\n"
+"PO-Revision-Date: 2020-12-31 16:31+0000\n"
+"Last-Translator: GK <miscgk@pm.me>\n"
+"Language-Team: Tamil <https://translate.ubports.com/projects/ubports/"
+"keyboard-component/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.11.3\n"
 "X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
 
 #: ../qml/ActionsToolbar.qml:56
 msgid "Select All"
-msgstr ""
+msgstr "அனைத்தையும் தேர்ந்தெடு"
 
 #: ../qml/ActionsToolbar.qml:57
 msgid "Redo"
-msgstr ""
+msgstr "மீண்டும் செய்க"
 
 #: ../qml/ActionsToolbar.qml:58
 msgid "Undo"
-msgstr ""
+msgstr "செய்ததைத் தவிர்"
 
 #: ../qml/ActionsToolbar.qml:73
 msgid "Paste"
-msgstr ""
+msgstr "ஒட்டுக"
 
 #: ../qml/ActionsToolbar.qml:74
 msgid "Copy"
-msgstr ""
+msgstr "நகலெடு"
 
 #: ../qml/ActionsToolbar.qml:75
 msgid "Cut"
-msgstr ""
+msgstr "வெட்டுக"
 
 #: ../qml/FloatingActions.qml:62
 msgid "Done"
-msgstr ""
+msgstr "முடிந்தது"
 
 #: ../qml/Keyboard.qml:351
 msgid "Swipe to move selection"
-msgstr ""
+msgstr "தேர்வு செய்ததை நகர்த்துவதற்கு, தேய்க்க"
 
 #: ../qml/Keyboard.qml:352
 msgid "Swipe to move cursor"
-msgstr ""
+msgstr "நிலைக்காட்டியை நகர்த்துவதற்கு, தேய்க்க"
 
 #: ../qml/Keyboard.qml:352
 msgid "Double-tap to enter selection mode"
-msgstr ""
+msgstr "தேர்வு செய்யும் முறைக்குள் செல்ல இருமுறைத் தட்டுக"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Settings"
@@ -72,7 +74,7 @@ msgstr "அசெர்பெய்ஜானி"
 
 #: ../qml/keys/languages.js:21
 msgid "Bulgarian"
-msgstr ""
+msgstr "பல்கேரியன்"
 
 #: ../qml/keys/languages.js:22
 msgid "Bosnian"
@@ -104,126 +106,132 @@ msgstr "கிரேக்கம்"
 
 #: ../qml/keys/languages.js:29
 msgid "English"
-msgstr ""
+msgstr "ஆங்கிலம்"
 
 #: ../qml/keys/languages.js:30
 msgid "Esperanto"
-msgstr ""
+msgstr "எஸ்பரான்தோ"
 
 #: ../qml/keys/languages.js:31
 msgid "Spanish"
-msgstr ""
+msgstr "எசுப்பானியனால்"
 
 #: ../qml/keys/languages.js:32
 msgid "Persian"
-msgstr ""
+msgstr "பாரசீகம்"
 
 #: ../qml/keys/languages.js:33
 msgid "Finnish"
-msgstr ""
+msgstr "சுவோமி"
 
 #: ../qml/keys/languages.js:34
 msgid "French"
-msgstr ""
+msgstr "பிரெஞ்சு"
 
 #: ../qml/keys/languages.js:35
 msgid ""
 "French\n"
 "(Swiss)"
 msgstr ""
+"ப்ரெஞ்சு\n"
+"(சுவிசு)"
 
 #: ../qml/keys/languages.js:36
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "சுகாத்திசு கேலிக்கு"
 
 #: ../qml/keys/languages.js:37
 msgid "Hebrew"
-msgstr ""
+msgstr "எபிரேயம்"
 
 #: ../qml/keys/languages.js:38
 msgid "Croatian"
-msgstr ""
+msgstr "குரோவாசியம்"
 
 #: ../qml/keys/languages.js:39
 msgid "Hungarian"
-msgstr ""
+msgstr "அங்கேரியம்"
 
 #: ../qml/keys/languages.js:40
 msgid "Icelandic"
-msgstr ""
+msgstr "இசுலேன்சுகம்"
 
 #: ../qml/keys/languages.js:41
 msgid "Italian"
-msgstr ""
+msgstr "இத்தாலியம்"
 
 #: ../qml/keys/languages.js:42
 msgid "Japanese"
-msgstr ""
+msgstr "சப்பானியம்"
 
 #: ../qml/keys/languages.js:43
 msgid "Lithuanian"
-msgstr ""
+msgstr "இலுத்துவானியம்"
 
 #: ../qml/keys/languages.js:44
 msgid "Latvian"
-msgstr ""
+msgstr "இலத்துவியம்"
 
 #: ../qml/keys/languages.js:45
 msgid "Korean"
-msgstr ""
+msgstr "கொரியம்"
 
 #: ../qml/keys/languages.js:46
 msgid "Dutch"
-msgstr ""
+msgstr "டச்சு"
 
 #: ../qml/keys/languages.js:47
 msgid "Norwegian"
-msgstr ""
+msgstr "நார்வேசியம்"
 
 #: ../qml/keys/languages.js:48
 msgid "Polish"
-msgstr ""
+msgstr "போலியம்"
 
 #: ../qml/keys/languages.js:49
 msgid "Portuguese"
-msgstr ""
+msgstr "போர்த்துக்கேயம்"
 
 #: ../qml/keys/languages.js:50
 msgid "Romanian"
-msgstr ""
+msgstr "உருமானியம்"
 
 #: ../qml/keys/languages.js:51
 msgid "Russian"
-msgstr ""
+msgstr "உருசியம்"
 
 #: ../qml/keys/languages.js:52
 msgid "Slovenian"
-msgstr ""
+msgstr "சுலோவேனியம்"
 
 #: ../qml/keys/languages.js:53
 msgid "Serbian"
-msgstr ""
+msgstr "செருபியம்"
 
 #: ../qml/keys/languages.js:54
 msgid "Swedish"
-msgstr ""
+msgstr "சுவீடியம்"
 
 #: ../qml/keys/languages.js:55
 msgid "Turkish"
-msgstr ""
+msgstr "துர்கிஷ்"
 
 #: ../qml/keys/languages.js:56
 msgid "Ukrainian"
-msgstr ""
+msgstr "உக்ரெய்னியன்"
 
 #: ../qml/keys/languages.js:57
 msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
+"சீனம்\n"
+"(பின்யின்)"
 
 #: ../qml/keys/languages.js:58
 msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
+"சீனம்\n"
+"(Chewing)"

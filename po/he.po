@@ -8,55 +8,58 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2016-05-04 08:39+0000\n"
-"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <he@li.org>\n"
+"PO-Revision-Date: 2020-12-24 08:57+0000\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew <https://translate.ubports.com/projects/ubports/"
+"keyboard-component/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Weblate 3.11.3\n"
 "X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
 
 #: ../qml/ActionsToolbar.qml:56
 msgid "Select All"
-msgstr ""
+msgstr "לבחור הכול"
 
 #: ../qml/ActionsToolbar.qml:57
 msgid "Redo"
-msgstr ""
+msgstr "ביצוע חוזר"
 
 #: ../qml/ActionsToolbar.qml:58
 msgid "Undo"
-msgstr ""
+msgstr "החזרה"
 
 #: ../qml/ActionsToolbar.qml:73
 msgid "Paste"
-msgstr ""
+msgstr "הדבקה"
 
 #: ../qml/ActionsToolbar.qml:74
 msgid "Copy"
-msgstr ""
+msgstr "העתקה"
 
 #: ../qml/ActionsToolbar.qml:75
 msgid "Cut"
-msgstr ""
+msgstr "גזירה"
 
 #: ../qml/FloatingActions.qml:62
 msgid "Done"
-msgstr ""
+msgstr "סיום"
 
 #: ../qml/Keyboard.qml:351
 msgid "Swipe to move selection"
-msgstr ""
+msgstr "יש להחליק כדי להעביר את הבחירה"
 
 #: ../qml/Keyboard.qml:352
 msgid "Swipe to move cursor"
-msgstr ""
+msgstr "יש להחליק כדי להעביר את הסמן"
 
 #: ../qml/Keyboard.qml:352
 msgid "Double-tap to enter selection mode"
-msgstr ""
+msgstr "נגיעה כפולה כדי להיכנס למצב בחירה"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Settings"
@@ -71,10 +74,8 @@ msgid "Azerbaijani"
 msgstr "אזרית"
 
 #: ../qml/keys/languages.js:21
-#, fuzzy
-#| msgid "Hungarian"
 msgid "Bulgarian"
-msgstr "הונגרית"
+msgstr "בולגרית"
 
 #: ../qml/keys/languages.js:22
 msgid "Bosnian"
@@ -110,7 +111,7 @@ msgstr "אנגלית"
 
 #: ../qml/keys/languages.js:30
 msgid "Esperanto"
-msgstr ""
+msgstr "אספרנטו"
 
 #: ../qml/keys/languages.js:31
 msgid "Spanish"
@@ -118,7 +119,7 @@ msgstr "ספרדית"
 
 #: ../qml/keys/languages.js:32
 msgid "Persian"
-msgstr ""
+msgstr "פרסית"
 
 #: ../qml/keys/languages.js:33
 msgid "Finnish"
@@ -129,12 +130,12 @@ msgid "French"
 msgstr "צרפתית"
 
 #: ../qml/keys/languages.js:35
-#, fuzzy
-#| msgid "French"
 msgid ""
 "French\n"
 "(Swiss)"
-msgstr "צרפתית"
+msgstr ""
+"צרפתית\n"
+"(שווייץ)"
 
 #: ../qml/keys/languages.js:36
 msgid "Scottish Gaelic"
@@ -166,7 +167,7 @@ msgstr "יפנית"
 
 #: ../qml/keys/languages.js:43
 msgid "Lithuanian"
-msgstr ""
+msgstr "ליטאית"
 
 #: ../qml/keys/languages.js:44
 msgid "Latvian"
@@ -174,7 +175,7 @@ msgstr "לטבית"
 
 #: ../qml/keys/languages.js:45
 msgid "Korean"
-msgstr ""
+msgstr "קוריאנית"
 
 #: ../qml/keys/languages.js:46
 msgid "Dutch"
@@ -214,7 +215,7 @@ msgstr "שבדית"
 
 #: ../qml/keys/languages.js:55
 msgid "Turkish"
-msgstr ""
+msgstr "טורקית"
 
 #: ../qml/keys/languages.js:56
 msgid "Ukrainian"
