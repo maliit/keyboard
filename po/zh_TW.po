@@ -8,55 +8,57 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2014-11-19 14:31+0000\n"
-"Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
-"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-02-14 20:35+0000\n"
+"Last-Translator: louies0623 <louies0623@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <https://translate.ubports.com/projects/"
+"ubports/keyboard-component/zh_Hant/>\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.11.3\n"
 "X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
 
 #: ../qml/ActionsToolbar.qml:56
 msgid "Select All"
-msgstr ""
+msgstr "全部選取"
 
 #: ../qml/ActionsToolbar.qml:57
 msgid "Redo"
-msgstr ""
+msgstr "重做"
 
 #: ../qml/ActionsToolbar.qml:58
 msgid "Undo"
-msgstr ""
+msgstr "復原"
 
 #: ../qml/ActionsToolbar.qml:73
 msgid "Paste"
-msgstr ""
+msgstr "貼上"
 
 #: ../qml/ActionsToolbar.qml:74
 msgid "Copy"
-msgstr ""
+msgstr "複製"
 
 #: ../qml/ActionsToolbar.qml:75
 msgid "Cut"
-msgstr ""
+msgstr "剪下"
 
 #: ../qml/FloatingActions.qml:62
 msgid "Done"
-msgstr ""
+msgstr "完成"
 
 #: ../qml/Keyboard.qml:351
 msgid "Swipe to move selection"
-msgstr ""
+msgstr "滑動即可移動選項"
 
 #: ../qml/Keyboard.qml:352
 msgid "Swipe to move cursor"
-msgstr ""
+msgstr "滑動即可移動游標"
 
 #: ../qml/Keyboard.qml:352
 msgid "Double-tap to enter selection mode"
-msgstr ""
+msgstr "點兩次即可進入選項模式"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Settings"
@@ -71,8 +73,6 @@ msgid "Azerbaijani"
 msgstr "亞塞拜然文"
 
 #: ../qml/keys/languages.js:21
-#, fuzzy
-#| msgid "Hungarian"
 msgid "Bulgarian"
 msgstr "匈牙利文"
 
@@ -110,7 +110,7 @@ msgstr "英文"
 
 #: ../qml/keys/languages.js:30
 msgid "Esperanto"
-msgstr ""
+msgstr "世界語"
 
 #: ../qml/keys/languages.js:31
 msgid "Spanish"
@@ -118,7 +118,7 @@ msgstr "西班牙文"
 
 #: ../qml/keys/languages.js:32
 msgid "Persian"
-msgstr ""
+msgstr "波斯語"
 
 #: ../qml/keys/languages.js:33
 msgid "Finnish"
@@ -129,12 +129,12 @@ msgid "French"
 msgstr "法文"
 
 #: ../qml/keys/languages.js:35
-#, fuzzy
-#| msgid "French"
 msgid ""
 "French\n"
 "(Swiss)"
-msgstr "法文"
+msgstr ""
+"法文\n"
+"(瑞士)"
 
 #: ../qml/keys/languages.js:36
 msgid "Scottish Gaelic"
@@ -162,11 +162,11 @@ msgstr "義大利文"
 
 #: ../qml/keys/languages.js:42
 msgid "Japanese"
-msgstr ""
+msgstr "日文"
 
 #: ../qml/keys/languages.js:43
 msgid "Lithuanian"
-msgstr ""
+msgstr "立陶宛語"
 
 #: ../qml/keys/languages.js:44
 msgid "Latvian"
@@ -174,7 +174,7 @@ msgstr "拉脫維亞文"
 
 #: ../qml/keys/languages.js:45
 msgid "Korean"
-msgstr ""
+msgstr "韓文"
 
 #: ../qml/keys/languages.js:46
 msgid "Dutch"
@@ -214,7 +214,7 @@ msgstr "瑞典文"
 
 #: ../qml/keys/languages.js:55
 msgid "Turkish"
-msgstr ""
+msgstr "土耳其語"
 
 #: ../qml/keys/languages.js:56
 msgid "Ukrainian"
@@ -225,12 +225,16 @@ msgid ""
 "Chinese\n"
 "(Pinyin)"
 msgstr ""
+"中文\n"
+"(拼音)"
 
 #: ../qml/keys/languages.js:58
 msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
+"中文\n"
+"(注音)"
 
 #~ msgid "Chinese - Pinyin"
 #~ msgstr "中文 - 拼音"
