@@ -38,7 +38,8 @@ Feedback::Feedback(const KeyboardSettings *settings)
     connect(settings, &KeyboardSettings::keyPressAudioFeedbackChanged, this, &Feedback::useAudioFeedbackChanged);
     connect(settings, &KeyboardSettings::keyPressAudioFeedbackSoundChanged, this, &Feedback::audioFeedbackSoundChanged);
     connect(settings, &KeyboardSettings::keyPressHapticFeedbackChanged, this, &Feedback::useHapticFeedbackChanged);
-    m_audioEffect->setSource(QUrl(audioFeedbackSound()));
+    m_audioEffect->setSource(QUrl::fromLocalFile(audioFeedbackSound()));
+    m_audioEffect->setVolume(0.1);
 #ifdef HAVE_QT5_FEEDBACK
     m_pressEffect->setAttackIntensity(0.0);
     m_pressEffect->setAttackTime(50);
