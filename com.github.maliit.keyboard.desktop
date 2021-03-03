@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Maliit
+Exec=maliit-keyboard
+Type=Application
+X-KDE-Wayland-VirtualKeyboard=true
+Icon=input-keyboard-virtual
+NoDisplay=true

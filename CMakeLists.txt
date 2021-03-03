@@ -391,6 +391,9 @@ install(FILES qml/images/keyboard_spacebar@27.png
 install(FILES data/schemas/org.maliit.keyboard.maliit.gschema.xml
         DESTINATION share/glib-2.0/schemas/)
 
+install(FILES com.github.maliit.keyboard.desktop
+        DESTINATION share/applications)
+
 # TODO add all tests
 if(enable-tests)
     enable_testing()
