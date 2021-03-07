@@ -319,8 +319,7 @@ Item {
 
         MouseArea {
             id: cursorSwipeArea
-            
-            property point firstPress
+
             property point lastRelease
             property bool selectionMode: false
             
@@ -372,16 +371,11 @@ Item {
                 prevSwipePositionX = mouseX
                 prevSwipePositionY = mouseY
                 fullScreenItem.timerSwipe.stop()
-                
-                if (firstPress === Qt.point(0,0)) {
-                    firstPress = Qt.point(mouse.x, mouse.y)
-                }
             }
 
             onReleased: {
                 if (!cursorSwipeArea.selectionMode) {
                     fullScreenItem.timerSwipe.restart()
-                    firstPress = Qt.point(0,0)
                 } else {
                     fullScreenItem.timerSwipe.stop()
                     
@@ -401,9 +395,9 @@ Item {
             
             onDoubleClicked: {
                 // We avoid triggering double click accidentally by using a threshold
-                var xReleaseDiff = Math.abs(lastRelease.x - firstPress.x)
-                var yReleaseDiff = Math.abs(lastRelease.y - firstPress.y)
-                
+                var xReleaseDiff = Math.abs(lastRelease.x - mouse.x)
+                var yReleaseDiff = Math.abs(lastRelease.y - mouse.y)
+
                 var threshold = units.gu(2)
 
                 if (xReleaseDiff < threshold && yReleaseDiff < threshold) {
@@ -414,8 +408,6 @@ Item {
                         exitSelectionMode();
                     }
                 }
-                
-                firstPress = Qt.point(0,0)
             }
         }
         
