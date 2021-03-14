@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2020-12-26 07:27+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"PO-Revision-Date: 2021-03-11 10:43+0000\n"
+"Last-Translator: Jan Christian Sherdahl <jan@sherdahl.no>\n"
 "Language-Team: Norwegian Bokmål <https://translate.ubports.com/projects/"
 "ubports/keyboard-component/nb/>\n"
 "Language: nb\n"
@@ -73,10 +73,8 @@ msgid "Azerbaijani"
 msgstr "Aserbadjansk"
 
 #: ../qml/keys/languages.js:21
-#, fuzzy
-#| msgid "Hungarian"
 msgid "Bulgarian"
-msgstr "Ungarsk"
+msgstr "Bulgarsk"
 
 #: ../qml/keys/languages.js:22
 msgid "Bosnian"
@@ -131,8 +129,6 @@ msgid "French"
 msgstr "Fransk"
 
 #: ../qml/keys/languages.js:35
-#, fuzzy
-#| msgid "French"
 msgid ""
 "French\n"
 "(Swiss)"

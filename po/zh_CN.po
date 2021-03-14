@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2021-02-05 20:31+0000\n"
-"Last-Translator: Atomos <kouryu.lyu@gmail.com>\n"
+"PO-Revision-Date: 2021-03-04 10:32+0000\n"
+"Last-Translator: Sam Zhang <sammyok@163.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.ubports.com/projects/"
 "ubports/keyboard-component/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -22,43 +22,43 @@ msgstr ""
 
 #: ../qml/ActionsToolbar.qml:56
 msgid "Select All"
-msgstr ""
+msgstr "全选"
 
 #: ../qml/ActionsToolbar.qml:57
 msgid "Redo"
-msgstr ""
+msgstr "重做"
 
 #: ../qml/ActionsToolbar.qml:58
 msgid "Undo"
-msgstr ""
+msgstr "撤销"
 
 #: ../qml/ActionsToolbar.qml:73
 msgid "Paste"
-msgstr ""
+msgstr "粘贴"
 
 #: ../qml/ActionsToolbar.qml:74
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: ../qml/ActionsToolbar.qml:75
 msgid "Cut"
-msgstr ""
+msgstr "剪切"
 
 #: ../qml/FloatingActions.qml:62
 msgid "Done"
-msgstr ""
+msgstr "完成"
 
 #: ../qml/Keyboard.qml:351
 msgid "Swipe to move selection"
-msgstr ""
+msgstr "滑动选择"
 
 #: ../qml/Keyboard.qml:352
 msgid "Swipe to move cursor"
-msgstr ""
+msgstr "滑动移动光标"
 
 #: ../qml/Keyboard.qml:352
 msgid "Double-tap to enter selection mode"
-msgstr ""
+msgstr "双击进入选择模式"
 
 #: ../qml/keys/LanguageMenu.qml:106
 msgid "Settings"
@@ -73,10 +73,8 @@ msgid "Azerbaijani"
 msgstr "阿塞拜疆语(Azerbaijani)"
 
 #: ../qml/keys/languages.js:21
-#, fuzzy
-#| msgid "Hungarian"
 msgid "Bulgarian"
-msgstr "匈牙利语(Hungarian)"
+msgstr "保加利亚语"
 
 #: ../qml/keys/languages.js:22
 msgid "Bosnian"
@@ -100,11 +98,11 @@ msgstr "德语"
 
 #: ../qml/keys/languages.js:27
 msgid "Emoji"
-msgstr ""
+msgstr "表情"
 
 #: ../qml/keys/languages.js:28
 msgid "Greek"
-msgstr ""
+msgstr "希腊语"
 
 #: ../qml/keys/languages.js:29
 msgid "English"
@@ -112,7 +110,7 @@ msgstr "英语"
 
 #: ../qml/keys/languages.js:30
 msgid "Esperanto"
-msgstr ""
+msgstr "世界语"
 
 #: ../qml/keys/languages.js:31
 msgid "Spanish"
@@ -120,7 +118,7 @@ msgstr "西班牙语"
 
 #: ../qml/keys/languages.js:32
 msgid "Persian"
-msgstr ""
+msgstr "波斯语"
 
 #: ../qml/keys/languages.js:33
 msgid "Finnish"
@@ -140,7 +138,7 @@ msgstr "法语"
 
 #: ../qml/keys/languages.js:36
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "苏格兰盖立语"
 
 #: ../qml/keys/languages.js:37
 msgid "Hebrew"
@@ -156,7 +154,7 @@ msgstr "匈牙利语(Hungarian)"
 
 #: ../qml/keys/languages.js:40
 msgid "Icelandic"
-msgstr ""
+msgstr "冰岛语"
 
 #: ../qml/keys/languages.js:41
 msgid "Italian"
@@ -164,19 +162,19 @@ msgstr "意大利语(Italian)"
 
 #: ../qml/keys/languages.js:42
 msgid "Japanese"
-msgstr ""
+msgstr "日语"
 
 #: ../qml/keys/languages.js:43
 msgid "Lithuanian"
-msgstr ""
+msgstr "立陶宛语"
 
 #: ../qml/keys/languages.js:44
 msgid "Latvian"
-msgstr ""
+msgstr "拉脱维亚语"
 
 #: ../qml/keys/languages.js:45
 msgid "Korean"
-msgstr ""
+msgstr "韩国语"
 
 #: ../qml/keys/languages.js:46
 msgid "Dutch"
@@ -184,7 +182,7 @@ msgstr "荷兰语"
 
 #: ../qml/keys/languages.js:47
 msgid "Norwegian"
-msgstr ""
+msgstr "挪威语"
 
 #: ../qml/keys/languages.js:48
 msgid "Polish"
@@ -196,7 +194,7 @@ msgstr "葡萄牙语(Portuguese)"
 
 #: ../qml/keys/languages.js:50
 msgid "Romanian"
-msgstr ""
+msgstr "罗马尼亚语"
 
 #: ../qml/keys/languages.js:51
 msgid "Russian"
@@ -204,7 +202,7 @@ msgstr "俄语"
 
 #: ../qml/keys/languages.js:52
 msgid "Slovenian"
-msgstr ""
+msgstr "斯洛文尼亚语"
 
 #: ../qml/keys/languages.js:53
 msgid "Serbian"
@@ -216,11 +214,11 @@ msgstr "瑞典语"
 
 #: ../qml/keys/languages.js:55
 msgid "Turkish"
-msgstr ""
+msgstr "土耳其语"
 
 #: ../qml/keys/languages.js:56
 msgid "Ukrainian"
-msgstr ""
+msgstr "乌克兰语"
 
 #: ../qml/keys/languages.js:57
 msgid ""
@@ -233,6 +231,8 @@ msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
+"中文\n"
+"（中文）"
 
 #~ msgid "Chinese - Pinyin"
 #~ msgstr "汉语 - 拼音"
