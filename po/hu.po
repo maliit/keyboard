@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2021-01-28 03:24+0000\n"
-"Last-Translator: Adam <padamyno@gmail.com>\n"
+"PO-Revision-Date: 2021-03-17 10:43+0000\n"
+"Last-Translator: David Farkas <dvdfrks@gmail.com>\n"
 "Language-Team: Hungarian <https://translate.ubports.com/projects/ubports/"
 "keyboard-component/hu/>\n"
 "Language: hu\n"
@@ -46,7 +46,7 @@ msgstr ""
 
 #: ../qml/FloatingActions.qml:62
 msgid "Done"
-msgstr ""
+msgstr "Kész"
 
 #: ../qml/Keyboard.qml:351
 msgid "Swipe to move selection"
