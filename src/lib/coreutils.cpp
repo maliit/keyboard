@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Jan Arne Petersen
+ * Copyright (c) 2013 Thomas Moenicke
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
