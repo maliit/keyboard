@@ -102,10 +102,10 @@ set(maliit-keyboard-include-dirs)
 if(enable-presage)
     find_package(Presage REQUIRED)
 
-    if(PRESAGE_FOUND)
+    if(Presage_FOUND)
         list(APPEND maliit-keyboard-definitions HAVE_PRESAGE)
-        list(APPEND maliit-keyboard-libraries ${PRESAGE_LIBRARIES})
-        list(APPEND maliit-keyboard-include-dirs ${PRESAGE_INCLUDE_DIRS})
+        list(APPEND maliit-keyboard-libraries ${Presage_LIBRARIES})
+        list(APPEND maliit-keyboard-include-dirs ${Presage_INCLUDE_DIRS})
 
         list(APPEND WESTERNSUPPORT_SOURCES
                 plugins/westernsupport/candidatescallback.cpp
@@ -118,8 +118,8 @@ endif()
 if(enable-hunspell)
     find_package(Hunspell REQUIRED)
     list(APPEND maliit-keyboard-definitions HAVE_HUNSPELL)
-    list(APPEND maliit-keyboard-libraries ${HUNSPELL_LIBRARIES})
-    list(APPEND maliit-keyboard-include-dirs ${HUNSPELL_INCLUDE_DIRS})
+    list(APPEND maliit-keyboard-libraries ${Hunspell_LIBRARIES})
+    list(APPEND maliit-keyboard-include-dirs ${Hunspell_INCLUDE_DIRS})
 endif()
 
 add_library(maliit-keyboard-lib STATIC ${MALIIT_KEYBOARD_LIB_SOURCES})
@@ -323,11 +323,11 @@ language_plugin(sv swedish free_ebook.txt src/overrides.csv)
 language_plugin(uk ukrainian free_ebook.txt)
 
 abstract_language_plugin(emoji emoji ABSTRACT_LANGUAGE_PLUGIN FILES qml/CategoryKey.qml qml/emoji.js)
-if(ANTHY_FOUND)
+if(Anthy_FOUND)
     abstract_language_plugin(ja japanese ABSTRACT_LANGUAGE_PLUGIN
             SOURCES anthyadapter.cpp anthyadapter.h
-            LIBRARIES ${ANTHY_LIBRARIES}
-            INCLUDE_DIRS ${ANTHY_INCLUDE_DIRS}
+            LIBRARIES ${Anthy_LIBRARIES}
+            INCLUDE_DIRS ${Anthy_INCLUDE_DIRS}
             DIRECTORY qml/keys)
 endif()
 if(enable-presage)
@@ -337,21 +337,21 @@ if(enable-presage)
             LIBRARIES westernsupport
             DIRECTORY qml/keys)
 endif()
-if(PINYIN_FOUND)
+if(Pinyin_FOUND)
     abstract_language_plugin(zh-hans pinyin ABSTRACT_LANGUAGE_PLUGIN
             PLUGIN_DIR pinyin
             LANGUAGE_FEATURES chinese
             SOURCES pinyinadapter.cpp pinyinadapter.h
-            LIBRARIES ${PINYIN_LIBRARIES}
-            INCLUDE_DIRS ${PINYIN_INCLUDE_DIRS}
-            DEFINITIONS PINYIN_DATA_DIR="${PINYIN_DATA_DIR}")
+            LIBRARIES ${Pinyin_LIBRARIES}
+            INCLUDE_DIRS ${Pinyin_INCLUDE_DIRS}
+            DEFINITIONS PINYIN_DATA_DIR="${Pinyin_DATA_DIR}")
 endif()
-if(CHEWING_FOUND)
+if(Chewing_FOUND)
     abstract_language_plugin(zh-hant chewing ABSTRACT_LANGUAGE_PLUGIN
             PLUGIN_DIR chewing
             SOURCES chewingadapter.cpp chewingadapter.h
-            LIBRARIES ${CHEWING_LIBRARIES}
-            INCLUDE_DIRS ${CHEWING_INCLUDE_DIRS})
+            LIBRARIES ${Chewing_LIBRARIES}
+            INCLUDE_DIRS ${Chewing_INCLUDE_DIRS})
 endif()
 
 # Installation

@@ -1,15 +1,15 @@
 include(FeatureSummary)
-set_package_properties(PRESAGE PROPERTIES
+set_package_properties(Presage PROPERTIES
         URL "http://presage.sourceforge.net/"
         DESCRIPTION "Presage is an intelligent predictive text entry platform.")
 
-find_library(PRESAGE_LIBRARIES presage)
-find_path(PRESAGE_INCLUDE_DIRS presage.h)
-find_program(PRESAGE_TEXT2NGRAM text2ngram)
+find_library(Presage_LIBRARIES presage)
+find_path(Presage_INCLUDE_DIRS presage.h)
+find_program(Presage_TEXT2NGRAM text2ngram)
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(PRESAGE DEFAULT_MSG PRESAGE_LIBRARIES PRESAGE_INCLUDE_DIRS)
-mark_as_advanced(PRESAGE_INCLUDE_DIRS PRESAGE_LIBRARIES)
+find_package_handle_standard_args(Presage DEFAULT_MSG Presage_LIBRARIES Presage_INCLUDE_DIRS)
+mark_as_advanced(Presage_INCLUDE_DIRS Presage_LIBRARIES)
 
 function(add_ngram)
     # Parse arguments
@@ -27,8 +27,8 @@ function(add_ngram)
 
     add_custom_command(OUTPUT "${_database}"
             COMMAND rm -f ${_database}
-            COMMAND ${PRESAGE_TEXT2NGRAM} -n 1 -l -f sqlite -o ${_database} ${_infile}
-            COMMAND ${PRESAGE_TEXT2NGRAM} -n 2 -l -f sqlite -o ${_database} ${_infile}
-            COMMAND ${PRESAGE_TEXT2NGRAM} -n 3 -l -f sqlite -o ${_database} ${_infile}
+            COMMAND ${Presage_TEXT2NGRAM} -n 1 -l -f sqlite -o ${_database} ${_infile}
+            COMMAND ${Presage_TEXT2NGRAM} -n 2 -l -f sqlite -o ${_database} ${_infile}
+            COMMAND ${Presage_TEXT2NGRAM} -n 3 -l -f sqlite -o ${_database} ${_infile}
             DEPENDS ${_infile} VERBATIM)
 endfunction()
