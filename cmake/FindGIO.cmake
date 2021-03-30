@@ -14,7 +14,7 @@ execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable gdbus_codegen gio-2.
 string(REGEX REPLACE "[\r\n]" " " GDBUS_CODEGEN_EXECUTABLE "${GDBUS_CODEGEN_EXECUTABLE}")
 string(REGEX REPLACE " +$" "" GDBUS_CODEGEN_EXECUTABLE "${GDBUS_CODEGEN_EXECUTABLE}")
 
-# handle the QUIETLY and REQUIRED arguments and set GLIB2_FOUND to TRUE if
+# handle the QUIETLY and REQUIRED arguments and set GLib2_FOUND to TRUE if
 # all listed variables are TRUE
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(GIO DEFAULT_MSG GIO_LIBRARIES GIO_INCLUDE_DIRS)
