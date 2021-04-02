@@ -113,6 +113,7 @@ Depends: autopilot-qt5 (>= 1.4),
          ubuntu-keyboard-japanese (>= ${source:Version}),
          ubuntu-keyboard-latvian (>= ${source:Version}),
          ubuntu-keyboard-lithuanian (>= ${source:Version}),
+         ubuntu-keyboard-macedonian (>= ${source:Version}),
          ubuntu-keyboard-korean (>= ${source:Version}),
          ubuntu-keyboard-norwegian-bokmal (>= ${source:Version}),
          ubuntu-keyboard-polish (>= ${source:Version}),
@@ -367,6 +368,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Lithuanian
  Data files for the Ubuntu virtual keyboard - Lithuanian
+
+Package: ubuntu-keyboard-macedonian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Macedonian
+ Data files for the Ubuntu virtual keyboard - Macedonian
 
 Package: ubuntu-keyboard-korean
 Architecture: any

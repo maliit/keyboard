@@ -29,6 +29,7 @@ SUBDIRS = \
     ja \
     lt \
     lv \
+    mk \
     ko \
     nb \
     nl \

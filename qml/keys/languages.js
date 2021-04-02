@@ -43,6 +43,7 @@ function languageIdToName(languageId)
     if (languageId == "ja")         return i18n.tr("Japanese");
     if (languageId == "lt")         return i18n.tr("Lithuanian");
     if (languageId == "lv")         return i18n.tr("Latvian");
+    if (languageId == "mk")         return i18n.tr("Macedonian");
     if (languageId == "ko")         return i18n.tr("Korean");
     if (languageId == "nl")         return i18n.tr("Dutch");
     if (languageId == "nb")         return i18n.tr("Norwegian");
