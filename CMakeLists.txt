@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(maliit-keyboard VERSION 1.9)
+project(maliit-keyboard VERSION 2.0)
 
 option(enable-presage "Use presage to calculate word candidates (maliit-keyboard-plugin only)" ON)
 option(enable-hunspell "Use hunspell for error correction (maliit-keyboard-plugin only)" ON)
