@@ -189,7 +189,7 @@ void WordEngine::setWordPredictionEnabled(bool enabled)
         enabled = false;
     }
 
-    if (d->languagePlugin->languageFeature()->alwaysShowSuggestions()) {
+    if (d->languagePlugin && d->languagePlugin->languageFeature()->alwaysShowSuggestions()) {
         // Override requested setting for languages that should always
         // display suggestions, such as Pinyin
         enabled = true;
