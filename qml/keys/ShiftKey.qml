@@ -20,9 +20,9 @@ import Ubuntu.Components 1.3
 import "key_constants.js" as UI
 
 ActionKey {
-    iconSourceNormal: "../images/keyboard-caps-disabled.svg"
-    iconSourceShifted: "../images/keyboard-caps-enabled.svg"
-    iconSourceCapsLock: "../images/keyboard-caps-locked.svg"
+    iconNormal: "keyboard-caps-disabled"
+    iconShifted: "keyboard-caps-enabled"
+    iconCapsLock: "keyboard-caps-locked"
 
     action: "shift"
 
