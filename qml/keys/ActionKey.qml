@@ -76,7 +76,7 @@ CharKey {
             name: "SHIFTED"
             PropertyChanges {
                 target: iconImage
-                source: iconSourceShifted !== "" ? iconSourceShifted 
+                source: iconSourceShifted !== "" ? iconSourceShifted
                                                  : iconShifted ? "image://theme/%1".arg(iconShifted)
                                                                : ""
                 color: actionKeyRoot.colorShifted
