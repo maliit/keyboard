@@ -57,7 +57,7 @@ Item {
     property double keyMargin: fullScreenItem.tablet ? units.gu(UI.tabletKeyMargins)
                                                      : units.gu(UI.phoneKeyMargins)
 
-    // These properties are used by autopilot to determine the visible 
+    // These properties are used by autopilot to determine the visible
     // portion of the key to press
     readonly property double leftOffset: buttonRect.anchors.leftMargin
     readonly property double rightOffset: buttonRect.anchors.rightMargin
@@ -67,9 +67,9 @@ Item {
     property string pressedColor: fullScreenItem.theme.charKeyPressedColor
     property bool borderEnabled: fullScreenItem.theme.keyBorderEnabled
     property string borderColor: borderEnabled ? fullScreenItem.theme.charKeyBorderColor : "transparent"
-    
+
     // Scale the font so the label fits if a long word is set
-    property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8)) 
+    property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8))
                            * (4 / (label.length >= 2 ? (label.length <= 6 ? label.length + 2.5 : 8) : 4));
 
     /// annotation shows a small label in the upper right corner
@@ -130,7 +130,7 @@ Item {
 
     // Make it possible for the visible area of the key to differ from the
     // actual key size. This allows us to extend the touch area of the bottom
-    // row of keys all the way to the bottom of the keyboard, whilst 
+    // row of keys all the way to the bottom of the keyboard, whilst
     // maintaining the same visual appearance.
     Item {
         anchors.top: parent.top
@@ -152,7 +152,7 @@ Item {
 
             /// label of the key
             //  the label is also the value subitted to the app
-        
+
             Text {
                 id: keyLabel
                 text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
@@ -164,21 +164,21 @@ Item {
                 anchors.left: parent.left
                 anchors.leftMargin: units.gu(0.2)
                 anchors.rightMargin: units.gu(0.2)
-                anchors.verticalCenter: parent.verticalCenter 
+                anchors.verticalCenter: parent.verticalCenter
                 anchors.verticalCenterOffset: key.textCenterOffset
                 horizontalAlignment: Text.AlignHCenter
                 // Avoid eliding characters that are slightly too wide (e.g. some emoji and chinese characters)
                 elide: text.length <= 4 ? Text.ElideNone : Text.ElideRight
                 visible: !panel.hideKeyLabels
             }
-        
+
             /// shows an annotation
             // used e.g. for indicating the existence of extended keys
-        
+
             Text {
                 id: annotationLabel
                 text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
-        
+
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.topMargin: units.gu(UI.annotationTopMargin)
@@ -237,11 +237,11 @@ Item {
                     currentExtendedKey.commit();
                     currentExtendedKey = null;
                 } else {
-                    extendedKeysSelector.closePopover(); 
+                    extendedKeysSelector.closePopover();
                 }
             } else if(!swipedOut) {
                 // Read this prior to altering autocaps
-                var keyToSend = valueToSubmit; 
+                var keyToSend = valueToSubmit;
                 if (magnifier.currentlyAssignedKey == key) {
                     magnifier.shown = false;
                 }
@@ -290,7 +290,7 @@ Item {
 
             if (maliit_input_method.useAudioFeedback)
                 audioFeedback.play();
-            
+
             if (maliit_input_method.useHapticFeedback)
                  pressEffect.start();
 
