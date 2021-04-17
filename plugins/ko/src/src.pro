@@ -58,7 +58,6 @@ OTHER_FILES += \
 # hunspell
 CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
-LIBS += -lhunspell
 DEFINES += HAVE_HUNSPELL
 
 # presage
