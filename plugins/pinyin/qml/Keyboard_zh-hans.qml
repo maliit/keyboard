@@ -24,7 +24,7 @@ KeyPad {
     anchors.fill: parent
 
     content: c1
-    symbols: "languages/Keyboard_symbols.qml"
+    symbols: "languages/Keyboard_symbols_zh-hans.qml"
 
     Column {
         id: c1
@@ -85,9 +85,9 @@ KeyPad {
 
             SymbolShiftKey { id: symShiftKey; label: "符号";              anchors.left: parent.left; height: parent.height; }
             LanguageKey    { id: languageMenuButton;                     anchors.left: symShiftKey.right; height: parent.height; }
-            CharKey        { id: commaKey;    label: ","; shifted: "，";  anchors.left: languageMenuButton.right; height: parent.height; }
+            CharKey        { id: commaKey;    label: "，"; shifted: ",";  anchors.left: languageMenuButton.right; height: parent.height; }
             SpaceKey       { id: spaceKey;                               anchors.left: commaKey.right; anchors.right: dotKey.left; noMagnifier: true; height: parent.height; }
-            CharKey        { id: dotKey;      label: "。"; shifted: "。"; anchors.right: enterKey.left; height: parent.height; }
+            CharKey        { id: dotKey;      label: "。"; shifted: "."; anchors.right: enterKey.left; height: parent.height; }
             ReturnKey      { id: enterKey;                               anchors.right: parent.right; height: parent.height; }
         }
     } // column
