@@ -44,7 +44,7 @@ KeyPad {
             CharKey { label: "7"; shifted: "<"; }
             CharKey { label: "8"; shifted: ">"; }
             CharKey { label: "9"; shifted: "["; }
-            CharKey { label: "0"; shifted: "]"; rightSide: true; }
+            CharKey { label: "0"; shifted: "]"; extended: ["°"]; rightSide: true; }
         }
 
         Row {
