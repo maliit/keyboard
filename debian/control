@@ -90,6 +90,7 @@ Depends: autopilot-qt5 (>= 1.4),
          ubuntu-keyboard (>= ${source:Version}),
          ubuntu-keyboard-arabic (>= ${source:Version}),
          ubuntu-keyboard-azerbaijani (>= ${source:Version}),
+         ubuntu-keyboard-belarusian (>= ${source:Version}),
          ubuntu-keyboard-bosnian (>= ${source:Version}),
          ubuntu-keyboard-catalan (>= ${source:Version}),
          ubuntu-keyboard-chinese-chewing (>= ${source:Version}),
@@ -148,6 +149,14 @@ Depends: ubuntu-keyboard (= ${binary:Version}),
          ${shlibs:Depends},
 Description: Ubuntu on-screen keyboard data files - Azerbaijani
  Data files for the Ubuntu virtual keyboard - Azerbaijani
+
+Package: ubuntu-keyboard-belarusian
+Architecture: any
+Depends: ubuntu-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Ubuntu on-screen keyboard data files - Belarusian
+ Data files for the Ubuntu virtual keyboard - Belarusian
 
 Package: ubuntu-keyboard-bosnian
 Architecture: any
