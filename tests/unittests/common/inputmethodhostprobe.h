@@ -98,8 +98,6 @@ public:
     void setGlobalCorrectionEnabled(bool) {}
     void switchPlugin(Maliit::SwitchDirection) {}
     void switchPlugin(const QString&) {}
-    void setScreenRegion(const QRegion&) {}
-    void setInputMethodArea(const QRegion&) {}
     void setSelection(int, int) {}
     void setOrientationAngleLocked(bool) {}
     QList<MImPluginDescription> pluginDescriptions(Maliit::HandlerState) const {return QList<MImPluginDescription>();}
