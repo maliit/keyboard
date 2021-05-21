@@ -108,9 +108,9 @@ public:
     void invokeAction(const QString &,
                       const QKeySequence &) override {}
 
-    void registerWindow(QWindow*, Maliit::Position) override;
-    void setScreenRegion(const QRegion&, QWindow*) override;
-    void setInputMethodArea(const QRegion&, QWindow*) override;
+    void registerWindow(QWindow*, Maliit::Position) override {}
+    void setScreenRegion(const QRegion&, QWindow*) override {}
+    void setInputMethodArea(const QRegion&, QWindow*) override {}
 
 };
 
