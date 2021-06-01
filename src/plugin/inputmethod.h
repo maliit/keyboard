@@ -62,8 +62,6 @@ class InputMethod
     Q_PROPERTY(QString surroundingLeft READ surroundingLeft)
     Q_PROPERTY(QString surroundingRight READ surroundingRight)
 
-    Q_ENUMS(TextContentType)
-
 public:
     /// Same as Maliit::TextContentType but usable in QML
     enum TextContentType {
@@ -74,6 +72,7 @@ public:
         UrlContentType = Maliit::UrlContentType,
         CustomContentType = Maliit::CustomContentType
     };
+    Q_ENUM(TextContentType);
 
     explicit InputMethod(MAbstractInputMethodHost *host);
     ~InputMethod() override;
