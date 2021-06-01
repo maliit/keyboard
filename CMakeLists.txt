@@ -393,6 +393,8 @@ install(FILES data/schemas/org.maliit.keyboard.maliit.gschema.xml
 
 install(FILES com.github.maliit.keyboard.desktop
         DESTINATION share/applications)
+install(FILES com.github.maliit.keyboard.metainfo.xml
+        DESTINATION share/metainfo)
 
 # TODO add all tests
 if(enable-tests)
