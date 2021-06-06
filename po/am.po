@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2021-01-31 01:30+0000\n"
+"PO-Revision-Date: 2021-06-06 00:41+0000\n"
 "Last-Translator: Samson <sambelet@yahoo.com>\n"
 "Language-Team: Amharic <https://translate.ubports.com/projects/ubports/"
 "keyboard-component/am/>\n"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../qml/ActionsToolbar.qml:74
 msgid "Copy"
-msgstr ""
+msgstr "ኮፒ"
 
 #: ../qml/ActionsToolbar.qml:75
 msgid "Cut"
