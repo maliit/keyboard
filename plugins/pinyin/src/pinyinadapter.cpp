@@ -23,9 +23,15 @@
 #include <string.h>
 
 #include <QDebug>
+#include <QLoggingCategory>
 #include <QCoreApplication>
 
 #define MAX_SUGGESTIONS 100
+
+namespace
+{
+    Q_LOGGING_CATEGORY(Pinyin, "maliit.pinyin")
+}
 
 PinyinAdapter::PinyinAdapter(QObject *parent) :
     QObject(parent),
@@ -58,7 +64,10 @@ void PinyinAdapter::parse(const QString& string)
     std::cout << std::endl;
 #endif
 
-    pinyin_guess_candidates(m_instance, 0, SORT_BY_PHRASE_LENGTH_AND_PINYIN_LENGTH_AND_FREQUENCY);
+    // HACK TODO remove this and correct behaviour
+    m_offset = 0;
+
+    pinyin_guess_candidates(m_instance, m_offset, SORT_BY_PHRASE_LENGTH_AND_PINYIN_LENGTH_AND_FREQUENCY);
 
     candidates.clear();
     guint len = 0;
@@ -83,16 +92,22 @@ void PinyinAdapter::parse(const QString& string)
 
 void PinyinAdapter::wordCandidateSelected(const QString& word)
 {
-    Q_UNUSED(word)
+    auto index = candidates.indexOf(word);
+    qCDebug(Pinyin) << "Word chosen is `" << word << "', index=" << index;
+    //Q_ASSERT(index != -1);
 
     lookup_candidate_t * candidate = nullptr;
-    if (pinyin_get_candidate(m_instance, 1, &candidate)) {
-        pinyin_choose_candidate(m_instance, 0, candidate);
+    if (pinyin_get_candidate(m_instance, index, &candidate)) {
+        qCDebug(Pinyin) << "Choosing word, offset was" << m_offset;
+        m_offset = pinyin_choose_candidate(m_instance, m_offset, candidate);
+        qCDebug(Pinyin) << "Word chosen, offset is now" << m_offset;
     }
+
+    // TODO: Emit this only when the sequence is finished
+    Q_EMIT completed(word);
 }
 
 void PinyinAdapter::reset()
 {
     pinyin_reset(m_instance);
 }
-

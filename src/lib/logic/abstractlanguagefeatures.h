@@ -41,7 +41,7 @@ class AbstractLanguageFeatures
     // FIXME: Add a language/locale property (also for AbstractWordEngine)
 public:
     virtual ~AbstractLanguageFeatures() {}
-    
+
     virtual bool alwaysShowSuggestions() const = 0;
     virtual bool autoCapsAvailable() const = 0;
     virtual bool activateAutoCaps(const QString &preedit) const = 0;
@@ -58,6 +58,20 @@ public:
     virtual bool restorePreedit() const { return true; }
     virtual bool commitOnSpace() const { return true; }
     virtual bool showPrimaryInPreedit() const { return false; }
+
+    /*!
+     * \brief Whether we should delay committing the candidate word selected.
+     *
+     * In some input methods (e.g. Chinese Pinyin), there may exist partial
+     * candidates. That is, a candidate word may correspond to a part of
+     * the preedit string. In this case, when a user select a candidate word,
+     * we should refrain from committing *that* word directly, but wait for
+     * the input method to request committing.
+     *
+     * \returns true if we should delay committing the selected candidate,
+     * false otherwise.
+     */
+    virtual bool shouldDelayCandidateCommit() const { return false; }
 
     Maliit::TextContentType contentType() const { return m_contentType; }
     void setContentType(Maliit::TextContentType contentType) { m_contentType = contentType; }

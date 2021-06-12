@@ -83,6 +83,7 @@ signals:
     void preeditFaceChanged(Model::Text::PreeditFace face);
     void primaryCandidateChanged(QString candidate);
     void pluginChanged();
+    void commitTextRequested(const QString &text);
 
 private:
     virtual void fetchCandidates(Model::Text *text) = 0;

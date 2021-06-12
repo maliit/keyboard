@@ -146,7 +146,7 @@ public:
                          wordRibbon, &MaliitKeyboard::WordRibbon::onWordCandidatesChanged);
 
         QObject::connect(wordRibbon, &MaliitKeyboard::WordRibbon::wordCandidateSelected,
-                         &editor,  &MaliitKeyboard::AbstractTextEditor::replaceAndCommitPreedit);
+                         &editor,  &MaliitKeyboard::AbstractTextEditor::onWordCandidateSelected);
 
         QObject::connect(wordRibbon, &MaliitKeyboard::WordRibbon::userCandidateSelected,
                          &editor,  &MaliitKeyboard::AbstractTextEditor::addToUserDictionary);
@@ -156,6 +156,9 @@ public:
 
         QObject::connect(wordRibbon, &MaliitKeyboard::WordRibbon::wordCandidateSelected,
                          editor.wordEngine(), &MaliitKeyboard::Logic::AbstractWordEngine::onWordCandidateSelected);
+
+        QObject::connect(editor.wordEngine(), &MaliitKeyboard::Logic::AbstractWordEngine::commitTextRequested,
+                         &editor, &MaliitKeyboard::AbstractTextEditor::replaceAndCommitPreedit);
 
     #ifdef DISABLED_FLAGS_FROM_SURFACE
         view->setFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint

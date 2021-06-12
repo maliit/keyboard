@@ -36,6 +36,8 @@ public:
     bool ignoreSimilarity() const override;
     bool wordEngineAvailable() const override;
     QString fullStopSequence() const override;
+
+    bool shouldDelayCandidateCommit() const override;
 };
 
 #endif // CHINESELANGUAGEFEATURES_H

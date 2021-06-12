@@ -53,6 +53,15 @@ public:
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions);
     void newPredictionSuggestions(QString word, QStringList suggestions);
+    /*!
+     * \brief Manually request text to be committed.
+     *
+     * This needs to be used when shouldDelayCandidateCommit() for
+     * this language is true.
+     *
+     * \sa AbstractLanguageFeatures::shouldDelayCandidateCommit()
+     */
+    void commitTextRequested(const QString &text);
 };
 
 #endif // ABSTRACTLANGUAGEPLUGIN_H

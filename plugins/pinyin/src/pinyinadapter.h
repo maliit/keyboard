@@ -32,6 +32,7 @@ class PinyinAdapter : public QObject
     pinyin_instance_t* m_instance;
 
     bool m_processingWords;
+    std::size_t m_offset{};
 
 public:
     explicit PinyinAdapter(QObject *parent = nullptr);
@@ -39,6 +40,13 @@ public:
 
 signals:
     void newPredictionSuggestions(QString, QStringList);
+    /*!
+     * \brief Signals that the whole Pinyin sequence is converted
+     * to Chinese characters.
+     *
+     * \param text The converted Chinese characters.
+     */
+    void completed(const QString &text);
 
 public slots:
     void parse(const QString& string);
