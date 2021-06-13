@@ -76,8 +76,8 @@ void PinyinAdapter::wordCandidateSelected(const QString& word)
 {
     auto index = candidates.indexOf(word);
     qCDebug(Pinyin) << "Word chosen is `" << word << "', index=" << index;
-    if (index == -1) {
-        // The user has choosen the preedit text
+    if (index == -1 || index == 0) {
+        // The user has choosen the preedit text or partially converted sequence
         resetSequence();
         // Special case, we don't need to prepend m_convertedChars
         Q_EMIT completed(word);
@@ -85,15 +85,14 @@ void PinyinAdapter::wordCandidateSelected(const QString& word)
     }
 
     lookup_candidate_t * candidate = nullptr;
-    if (pinyin_get_candidate(m_instance, index, &candidate)) {
+    auto indexInPinyin = index - 1;
+    if (pinyin_get_candidate(m_instance, indexInPinyin, &candidate)) {
         qCDebug(Pinyin) << "Choosing word, offset was" << m_offset;
         m_offset = pinyin_choose_candidate(m_instance, m_offset, candidate);
         qCDebug(Pinyin) << "Word chosen, offset is now" << m_offset;
     }
 
     m_convertedChars += word;
-
-    auto remainingSeq = m_currentSequence.mid(m_offset);
 
     if (m_offset == m_currentSequence.size()) { // The sequence is completed
         qCDebug(Pinyin) << "Sequence is completed";
@@ -102,7 +101,7 @@ void PinyinAdapter::wordCandidateSelected(const QString& word)
         Q_EMIT completed(textToCommit);
     } else { // We still have remaining pinyin sequence, re-generate candidate list.
         //genCandidatesForCurrentSequence(m_convertedChars + remainingSeq);
-        auto newPreedit = m_convertedChars + remainingSeq.join("");
+        auto newPreedit = m_convertedChars + remainingSequence().join("");
         qCDebug(Pinyin) << "Sequence is not completed, refresh candidates";
         qCDebug(Pinyin) << "new preedit is" << newPreedit;
         //Q_EMIT partialResultObtained(newPreedit);
@@ -112,6 +111,7 @@ void PinyinAdapter::wordCandidateSelected(const QString& word)
 
 void PinyinAdapter::reset()
 {
+    resetSequence();
     pinyin_reset(m_instance);
 }
 
@@ -132,6 +132,8 @@ QStringList PinyinAdapter::getCurrentPinyinSequence(const QString &preeditString
 
     // auto adjustedString = preeditString.mid(chineseCharsCount);
 
+    resetSequence();
+
     auto pinyinLength = pinyin_parse_more_full_pinyins(m_instance, preeditString.toUtf8().data());
 
     QStringList seq;
@@ -141,21 +143,21 @@ QStringList PinyinAdapter::getCurrentPinyinSequence(const QString &preeditString
                     pinyinLength,
                     [this, &offset]() {
                         ChewingKey *key;
+                        auto origOffset = offset;
                         auto st = pinyin_get_pinyin_key(m_instance, offset, &key);
-                        if (!st) { qCWarning(Pinyin) << "Cannot get pinyin key at" << offset; return QString(); }
                         ++offset;
+
+                        if (!st) { qCWarning(Pinyin) << "Cannot get pinyin key at" << origOffset; return QString(); }
+
                         char *string;
                         st = pinyin_get_pinyin_string(m_instance, key, &string);
-                        if (!st) { qCWarning(Pinyin) << "Cannot get pinyin string at" << offset; return QString(); }
+                        if (!st) { qCWarning(Pinyin) << "Cannot get pinyin string at" << origOffset; return QString(); }
                         auto ret = QString(string);
                         g_free(string);
                         return ret;
                     });
 
     qCDebug(Pinyin) << "current sequence is" << seq;
-
-    // reset offset
-    //m_offset = 0;
 
     return seq;
 }
@@ -171,6 +173,11 @@ void PinyinAdapter::genCandidatesForCurrentSequence(const QString &string, Updat
     pinyin_guess_candidates(m_instance, m_offset, SORT_BY_PHRASE_LENGTH_AND_PINYIN_LENGTH_AND_FREQUENCY);
 
     candidates.clear();
+
+    auto maybePartiallyConvertedSeq = m_convertedChars + remainingSequence().join("");
+
+    candidates.append(maybePartiallyConvertedSeq);
+
     guint len = 0;
     pinyin_get_n_candidate(m_instance, &len);
     len = len > MAX_SUGGESTIONS ? MAX_SUGGESTIONS : len;
@@ -191,4 +198,9 @@ void PinyinAdapter::genCandidatesForCurrentSequence(const QString &string, Updat
     qCDebug(Pinyin) << "current string is" << string;
     qCDebug(Pinyin) << "candidates are" << candidates;
     Q_EMIT newPredictionSuggestions(string, candidates, strategy);
+}
+
+QStringList PinyinAdapter::remainingSequence() const
+{
+    return m_currentSequence.mid(m_offset);
 }

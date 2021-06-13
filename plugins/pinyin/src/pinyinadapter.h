@@ -82,6 +82,8 @@ private:
      * This functions emits newPredictionSuggestions().
      */
     void genCandidatesForCurrentSequence(const QString &preedit, UpdateCandidateListStrategy strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
+
+    QStringList remainingSequence() const;
 };
 
 
