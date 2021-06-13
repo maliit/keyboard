@@ -72,9 +72,12 @@ public:
 
     Q_SLOT void onWordCandidateSelected(QString word) override;
     Q_SLOT void onLanguageChanged(const QString& pluginPath, const QString& languageId) override;
+
     Q_SLOT void updateQmlCandidates(QStringList qmlCandidates) override;
-    Q_SLOT void newSpellingSuggestions(QString word, QStringList suggestions);
-    Q_SLOT void newPredictionSuggestions(QString word, QStringList suggestions);
+    Q_SLOT void newSpellingSuggestions(QString word, QStringList suggestions,
+                                       int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
+    Q_SLOT void newPredictionSuggestions(QString word, QStringList suggestions,
+                                         int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
 
     AbstractLanguageFeatures* languageFeature() override;
 

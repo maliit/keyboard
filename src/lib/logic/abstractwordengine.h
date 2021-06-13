@@ -84,6 +84,7 @@ signals:
     void primaryCandidateChanged(QString candidate);
     void pluginChanged();
     void commitTextRequested(const QString &text);
+    void changePreeditRequested(const QString &text);
 
 private:
     virtual void fetchCandidates(Model::Text *text) = 0;

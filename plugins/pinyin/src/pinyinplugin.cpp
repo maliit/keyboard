@@ -47,9 +47,9 @@ AbstractLanguageFeatures* PinyinPlugin::languageFeature()
     return m_chineseLanguageFeatures;
 }
 
-void PinyinPlugin::finishedProcessing(QString word, QStringList suggestions)
+void PinyinPlugin::finishedProcessing(QString word, QStringList suggestions, int strategy)
 {
-    Q_EMIT newPredictionSuggestions(word, suggestions);
+    Q_EMIT newPredictionSuggestions(word, suggestions, strategy);
     if (word != m_nextWord) {
         Q_EMIT parsePredictionText(word);
     } else {

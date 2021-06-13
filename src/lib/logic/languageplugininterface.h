@@ -6,6 +6,14 @@
 
 class AbstractLanguageFeatures;
 
+enum UpdateCandidateListStrategy
+{
+    //! Clear the candidates only when needed
+    ClearWhenNeeded,
+    //! Always clear candidate list
+    AlwaysClear,
+};
+
 class LanguagePluginInterface
 {
 public:
@@ -27,4 +35,3 @@ public:
 Q_DECLARE_INTERFACE(LanguagePluginInterface, LanguagePluginInterface_iid)
 
 #endif // LANGUAGEPLUGININTERFACE_H
-

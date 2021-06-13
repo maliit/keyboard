@@ -270,7 +270,7 @@ void WordEngine::fetchCandidates(Model::Text *text)
     }
 }
 
-void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions)
+void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions, int strategy)
 {
     Q_D(WordEngine);
 
@@ -286,6 +286,8 @@ void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions)
     if (d->clear_candidates_on_incoming) {
         clearCandidates();
         d->clear_candidates_on_incoming = false;
+    } else if (strategy == UpdateCandidateListStrategy::AlwaysClear) {
+        clearCandidates();
     }
 
     Q_FOREACH(const QString &correction, suggestions) {
@@ -299,7 +301,7 @@ void WordEngine::newSpellingSuggestions(QString word, QStringList suggestions)
     suggestionMutex.unlock();
 }
 
-void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions)
+void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions, int strategy)
 {
     Q_D(WordEngine);
 
@@ -315,6 +317,8 @@ void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions)
     if (d->clear_candidates_on_incoming) {
         clearCandidates();
         d->clear_candidates_on_incoming = false;
+    } else if (strategy == UpdateCandidateListStrategy::AlwaysClear) {
+        clearCandidates();
     }
 
     Q_FOREACH(const QString &correction, suggestions) {
@@ -417,6 +421,9 @@ void WordEngine::onLanguageChanged(const QString &pluginPath, const QString &lan
             this, &WordEngine::newPredictionSuggestions);
     connect(static_cast<AbstractLanguagePlugin *>(d->languagePlugin), &AbstractLanguagePlugin::commitTextRequested,
             this, &WordEngine::commitTextRequested);
+    connect(static_cast<AbstractLanguagePlugin *>(d->languagePlugin), &AbstractLanguagePlugin::changePreeditRequested,
+            this, &WordEngine::changePreeditRequested);
+
     Q_EMIT pluginChanged();
 }
 

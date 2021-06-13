@@ -21,7 +21,7 @@ class PinyinPlugin : public AbstractLanguagePlugin
 public:
     explicit PinyinPlugin(QObject *parent = nullptr);
     ~PinyinPlugin() override;
-    
+
     void predict(const QString& surroundingLeft, const QString& preedit) override;
     void wordCandidateSelected(QString word) override;
 
@@ -35,10 +35,10 @@ public:
 signals:
     void parsePredictionText(QString preedit);
     void candidateSelected(QString word);
-    
+
 public slots:
-    void finishedProcessing(QString word, QStringList suggestions);
-    
+    void finishedProcessing(QString word, QStringList suggestions, int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
+
 private:
     QThread *m_pinyinThread;
     PinyinAdapter *m_pinyinAdapter;
