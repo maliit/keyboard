@@ -441,8 +441,6 @@ void WordEngine::onLanguageChanged(const QString &pluginPath, const QString &lan
             this, &WordEngine::newPredictionSuggestions);
     connect(static_cast<AbstractLanguagePlugin *>(d->languagePlugin), &AbstractLanguagePlugin::commitTextRequested,
             this, &WordEngine::commitTextRequested);
-    connect(static_cast<AbstractLanguagePlugin *>(d->languagePlugin), &AbstractLanguagePlugin::changePreeditRequested,
-            this, &WordEngine::changePreeditRequested);
 
     Q_EMIT pluginChanged();
 }

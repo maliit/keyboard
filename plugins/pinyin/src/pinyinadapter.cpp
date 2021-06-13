@@ -100,11 +100,9 @@ void PinyinAdapter::wordCandidateSelected(const QString& word)
         resetSequence();
         Q_EMIT completed(textToCommit);
     } else { // We still have remaining pinyin sequence, re-generate candidate list.
-        //genCandidatesForCurrentSequence(m_convertedChars + remainingSeq);
-        auto newPreedit = m_convertedChars + remainingChars();
+        auto partialResult = m_convertedChars + remainingChars();
         qCDebug(Pinyin) << "Sequence is not completed, refresh candidates";
-        qCDebug(Pinyin) << "new preedit is" << newPreedit;
-        //Q_EMIT partialResultObtained(newPreedit);
+        qCDebug(Pinyin) << "Partial result is" << partialResult;
         genCandidatesForCurrentSequence(m_preedit, UpdateCandidateListStrategy::AlwaysClear);
     }
 }

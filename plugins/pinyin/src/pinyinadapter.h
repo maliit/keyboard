@@ -51,14 +51,6 @@ signals:
      * \param text The converted Chinese characters.
      */
     void completed(const QString &text);
-    /*!
-     * \brief Signals that a part of the Pinyin sequence is
-     * converted to Chinese characters.
-     *
-     * \param text The mix of converted Chinese characters and
-     * Pinyin sequence.
-     */
-    void partialResultObtained(const QString &text);
 
 public slots:
     void parse(const QString& string);

@@ -64,17 +64,6 @@ signals:
      * \sa AbstractLanguageFeatures::shouldDelayCandidateCommit()
      */
     void commitTextRequested(const QString &text);
-
-    /*!
-     * \brief Manually request preedit text to be changed.
-     *
-     * This needs to be used when shouldDelayCandidateCommit() for
-     * this language is true, and you would like to change
-     * the preedit text.
-     *
-     * \sa AbstractLanguageFeatures::shouldDelayCandidateCommit()
-     */
-    void changePreeditRequested(const QString &text);
 };
 
 #endif // ABSTRACTLANGUAGEPLUGIN_H

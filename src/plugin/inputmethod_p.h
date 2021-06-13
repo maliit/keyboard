@@ -160,12 +160,6 @@ public:
         QObject::connect(editor.wordEngine(), &MaliitKeyboard::Logic::AbstractWordEngine::commitTextRequested,
                          &editor, &MaliitKeyboard::AbstractTextEditor::replaceAndCommitPreedit);
 
-        QObject::connect(editor.wordEngine(), &MaliitKeyboard::Logic::AbstractWordEngine::changePreeditRequested,
-                         &editor, [this](const QString &text) {
-                                      editor.clearPreedit();
-                                      editor.replacePreedit(text);
-                                  });
-
 
     #ifdef DISABLED_FLAGS_FROM_SURFACE
         view->setFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
