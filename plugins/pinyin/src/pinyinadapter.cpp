@@ -94,14 +94,14 @@ void PinyinAdapter::wordCandidateSelected(const QString& word)
 
     m_convertedChars += word;
 
-    if (m_offset == m_currentSequence.size()) { // The sequence is completed
+    if (remainingChars().isEmpty()) { // The sequence is completed
         qCDebug(Pinyin) << "Sequence is completed";
         auto textToCommit = m_convertedChars;
         resetSequence();
         Q_EMIT completed(textToCommit);
     } else { // We still have remaining pinyin sequence, re-generate candidate list.
         //genCandidatesForCurrentSequence(m_convertedChars + remainingSeq);
-        auto newPreedit = m_convertedChars + remainingSequence().join("");
+        auto newPreedit = m_convertedChars + remainingChars();
         qCDebug(Pinyin) << "Sequence is not completed, refresh candidates";
         qCDebug(Pinyin) << "new preedit is" << newPreedit;
         //Q_EMIT partialResultObtained(newPreedit);
@@ -113,6 +113,75 @@ void PinyinAdapter::reset()
 {
     resetSequence();
     pinyin_reset(m_instance);
+}
+
+struct PinyinSequenceIterator
+{
+    using value_type = QString;
+    using reference = const QString &;
+    using iterator_category = std::input_iterator_tag;
+    using pointer = const QString *;
+    using difference_type = std::ptrdiff_t;
+
+    pinyin_instance_t *m_instance;
+    std::size_t m_offset;
+    std::size_t m_next;
+    QString m_str;
+
+    PinyinSequenceIterator(pinyin_instance_t *instance, std::size_t offset);
+
+    PinyinSequenceIterator &operator++();
+    const QString &operator*() const;
+
+    bool operator==(const PinyinSequenceIterator &that) const;
+    bool operator!=(const PinyinSequenceIterator &that) const { return !(*this == that); }
+};
+
+PinyinSequenceIterator::PinyinSequenceIterator(pinyin_instance_t *instance, std::size_t offset)
+    : m_instance(instance)
+    , m_offset(offset)
+    , m_next(offset + 1) // to be overriden later
+{
+    ChewingKey *key;
+    auto st = pinyin_get_pinyin_key(m_instance, offset, &key);
+
+    // If it failed, we are maybe at the end of sequence, so just ignore it
+    if (!st) { return; }
+
+    char *string{};
+    st = pinyin_get_pinyin_string(m_instance, key, &string);
+    m_str = QString(string);
+
+    if (!st) { return; }
+    g_free(string);
+
+    ChewingKeyRest *keyRest;
+
+    st = pinyin_get_pinyin_key_rest(m_instance, m_offset, &keyRest);
+    if (!st) { return; }
+    guint16 begin, end;
+    st = pinyin_get_pinyin_key_rest_positions(
+        m_instance, keyRest, &begin, &end);
+
+    qCDebug(Pinyin) << "begin=" << begin << "end=" << end;
+    // the next offset is at the end of the current pinyin
+    m_next = end;
+}
+
+PinyinSequenceIterator &PinyinSequenceIterator::operator++()
+{
+    return *this = PinyinSequenceIterator(m_instance, m_next);
+}
+
+const QString &PinyinSequenceIterator::operator*() const
+{
+    return m_str;
+}
+
+bool PinyinSequenceIterator::operator==(const PinyinSequenceIterator &that) const
+{
+    return m_instance == that.m_instance
+        && m_offset == that.m_offset;
 }
 
 QStringList PinyinAdapter::getCurrentPinyinSequence(const QString &preeditString)
@@ -136,26 +205,14 @@ QStringList PinyinAdapter::getCurrentPinyinSequence(const QString &preeditString
 
     auto pinyinLength = pinyin_parse_more_full_pinyins(m_instance, preeditString.toUtf8().data());
 
+    if (!pinyinLength) { return {}; }
+
     QStringList seq;
-    std::size_t offset{};
 
-    std::generate_n(std::back_inserter(seq),
-                    pinyinLength,
-                    [this, &offset]() {
-                        ChewingKey *key;
-                        auto origOffset = offset;
-                        auto st = pinyin_get_pinyin_key(m_instance, offset, &key);
-                        ++offset;
-
-                        if (!st) { qCWarning(Pinyin) << "Cannot get pinyin key at" << origOffset; return QString(); }
-
-                        char *string;
-                        st = pinyin_get_pinyin_string(m_instance, key, &string);
-                        if (!st) { qCWarning(Pinyin) << "Cannot get pinyin string at" << origOffset; return QString(); }
-                        auto ret = QString(string);
-                        g_free(string);
-                        return ret;
-                    });
+    std::copy(
+        PinyinSequenceIterator(m_instance, 0),
+        PinyinSequenceIterator(m_instance, pinyinLength),
+        std::back_inserter(seq));
 
     qCDebug(Pinyin) << "current sequence is" << seq;
 
@@ -174,7 +231,7 @@ void PinyinAdapter::genCandidatesForCurrentSequence(const QString &string, Updat
 
     candidates.clear();
 
-    auto maybePartiallyConvertedSeq = m_convertedChars + remainingSequence().join("");
+    auto maybePartiallyConvertedSeq = m_convertedChars + remainingChars();
 
     candidates.append(maybePartiallyConvertedSeq);
 
@@ -202,5 +259,10 @@ void PinyinAdapter::genCandidatesForCurrentSequence(const QString &string, Updat
 
 QStringList PinyinAdapter::remainingSequence() const
 {
-    return m_currentSequence.mid(m_offset);
+    return m_currentSequence.mid(m_convertedChars.size());
+}
+
+QString PinyinAdapter::remainingChars() const
+{
+    return m_preedit.mid(m_offset);
 }

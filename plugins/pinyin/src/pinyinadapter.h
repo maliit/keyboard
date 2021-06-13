@@ -84,6 +84,7 @@ private:
     void genCandidatesForCurrentSequence(const QString &preedit, UpdateCandidateListStrategy strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
 
     QStringList remainingSequence() const;
+    QString remainingChars() const;
 };
 
 
