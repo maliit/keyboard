@@ -85,7 +85,12 @@ private:
     //! \reimp
     void fetchCandidates(Model::Text *text) override;
     //! \reimp_end
+
+    //! Calculate the primary candidate if there is not any.
     void calculatePrimaryCandidate();
+    //! Calculate the primary candidate unconditionally.
+    void forceCalculatePrimaryCandidate();
+    void calculatePrimaryCandidateImpl();
     bool similarWords(QString word1, QString word2);
 
     const QScopedPointer<WordEnginePrivate> d_ptr;

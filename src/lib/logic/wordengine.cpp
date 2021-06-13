@@ -325,7 +325,11 @@ void WordEngine::newPredictionSuggestions(QString word, QStringList suggestions,
         appendToCandidates(d->candidates, WordCandidate::SourcePrediction, correction);
     }
 
-    calculatePrimaryCandidate();
+    if (strategy == UpdateCandidateListStrategy::AlwaysClear) {
+        forceCalculatePrimaryCandidate();
+    } else {
+        calculatePrimaryCandidate();
+    }
 
     Q_EMIT candidatesChanged(*d->candidates);
 
@@ -342,6 +346,18 @@ void WordEngine::calculatePrimaryCandidate()
         // suggestions
         return;
     }
+
+    return calculatePrimaryCandidateImpl();
+}
+
+void WordEngine::forceCalculatePrimaryCandidate()
+{
+    return calculatePrimaryCandidateImpl();
+}
+
+void WordEngine::calculatePrimaryCandidateImpl()
+{
+    Q_D(WordEngine);
 
     if (!d->auto_correct_enabled) {
         if (d->candidates->size() > 1 && d->candidates->at(0).word() == d->candidates->at(1).word()) {
