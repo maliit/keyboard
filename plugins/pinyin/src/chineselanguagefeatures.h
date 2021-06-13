@@ -38,6 +38,8 @@ public:
     QString fullStopSequence() const override;
 
     bool shouldDelayCandidateCommit() const override;
+
+    std::size_t primaryCandidateIndex() const override;
 };
 
 #endif // CHINESELANGUAGEFEATURES_H

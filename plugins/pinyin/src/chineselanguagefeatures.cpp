@@ -101,3 +101,8 @@ bool ChineseLanguageFeatures::shouldDelayCandidateCommit() const
 {
     return true;
 }
+
+std::size_t ChineseLanguageFeatures::primaryCandidateIndex() const
+{
+    return 2;
+}

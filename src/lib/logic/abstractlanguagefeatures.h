@@ -73,6 +73,15 @@ public:
      */
     virtual bool shouldDelayCandidateCommit() const { return false; }
 
+    /*!
+     * The index of primary candidate in the list.
+     *
+     * Note that the candidate list signalled by the corresponding language
+     * plugin must be of either size 0 or 1, or a size greater than or
+     * equal to primaryCandidateIndex()
+     */
+    virtual std::size_t primaryCandidateIndex() const { return 1; }
+
     Maliit::TextContentType contentType() const { return m_contentType; }
     void setContentType(Maliit::TextContentType contentType) { m_contentType = contentType; }
 

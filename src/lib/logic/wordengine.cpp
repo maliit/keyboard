@@ -367,6 +367,10 @@ void WordEngine::calculatePrimaryCandidateImpl()
         return;
     }
 
+    auto primaryIndex = d->languagePlugin->languageFeature()->primaryCandidateIndex();
+
+    Q_ASSERT(d->candidates->size() <= 1 || d->candidates->size() > primaryIndex);
+
     if (d->candidates->size() == 0) {
         // We should always have at least one entry due to the user input
         qWarning() << __PRETTY_FUNCTION__ << "User candidate missing";
@@ -374,11 +378,11 @@ void WordEngine::calculatePrimaryCandidateImpl()
         // We don't have any predictions, so the user input is the primary candidate
         WordCandidate primary = d->candidates->value(0);
         Q_EMIT primaryCandidateChanged(primary.word());
-    } else if (d->candidates->at(0).word() == d->candidates->at(1).word()) {
+    } else if (d->candidates->at(0).word() == d->candidates->at(primaryIndex).word()) {
         // The user candidate matches the first prediction; remove the prediction
         // and make the user input the primary candidate so as not to duplicate
         // the word.
-        d->candidates->removeAt(1);
+        d->candidates->removeAt(primaryIndex);
         WordCandidate primary = d->candidates->value(0);
         primary.setPrimary(true);
         d->candidates->replace(0, primary);
@@ -392,7 +396,7 @@ void WordEngine::calculatePrimaryCandidateImpl()
         Q_EMIT primaryCandidateChanged(primary.word());
         d->currentText->setRestoredPreedit(false);
     } else if (!d->languagePlugin->languageFeature()->ignoreSimilarity()
-               && !similarWords(d->candidates->at(0).word(), d->candidates->at(1).word())) {
+               && !similarWords(d->candidates->at(0).word(), d->candidates->at(primaryIndex).word())) {
         // The prediction is too different to the user input, so the user input
         // becomes the primary candidate
         WordCandidate primary = d->candidates->value(0);
@@ -401,9 +405,9 @@ void WordEngine::calculatePrimaryCandidateImpl()
         Q_EMIT primaryCandidateChanged(primary.word());
     } else {
         // The first prediction is the primary candidate
-        WordCandidate primary = d->candidates->value(1);
+        WordCandidate primary = d->candidates->value(primaryIndex);
         primary.setPrimary(true);
-        d->candidates->replace(1, primary);
+        d->candidates->replace(primaryIndex, primary);
         Q_EMIT primaryCandidateChanged(primary.word());
     }
 
