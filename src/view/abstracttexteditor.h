@@ -157,6 +157,8 @@ public:
     Q_SLOT void setPreeditFace(Model::Text::PreeditFace face);
     Q_SLOT void setPrimaryCandidate(QString);
 
+    Q_SLOT void onWordCandidateSelected(const QString &word);
+
 private:
     const QScopedPointer<AbstractTextEditorPrivate> d_ptr;
 

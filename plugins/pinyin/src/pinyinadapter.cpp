@@ -1,5 +1,6 @@
 /*
  * Copyright 2013 Canonical Ltd.
+ * Copyright (C) 2021 Tusooa Zhu <tusooa@kazv.moe>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -17,15 +18,24 @@
 #include "pinyinadapter.h"
 
 #include <iostream>
+#include <algorithm>
+#include <iterator>
 
 #include <iconv.h>
 #include <string>
 #include <string.h>
 
 #include <QDebug>
+#include <QLoggingCategory>
 #include <QCoreApplication>
+#include <QRegExp>
 
 #define MAX_SUGGESTIONS 100
+
+namespace
+{
+    Q_LOGGING_CATEGORY(Pinyin, "maliit.pinyin")
+}
 
 PinyinAdapter::PinyinAdapter(QObject *parent) :
     QObject(parent),
@@ -45,7 +55,9 @@ PinyinAdapter::~PinyinAdapter()
 
 void PinyinAdapter::parse(const QString& string)
 {
-    pinyin_parse_more_full_pinyins(m_instance, string.toLatin1().data());
+    m_preedit = string;
+
+    m_currentSequence = getCurrentPinyinSequence(string);
 
 #ifdef PINYIN_DEBUG
     for (int i = 0; i < m_instance->m_pinyin_keys->len; i ++)
@@ -58,9 +70,170 @@ void PinyinAdapter::parse(const QString& string)
     std::cout << std::endl;
 #endif
 
-    pinyin_guess_candidates(m_instance, 0, SORT_BY_PHRASE_LENGTH_AND_PINYIN_LENGTH_AND_FREQUENCY);
+    genCandidatesForCurrentSequence(string);
+}
+
+void PinyinAdapter::wordCandidateSelected(const QString& word)
+{
+    auto index = candidates.indexOf(word);
+    qCDebug(Pinyin) << "Word chosen is `" << word << "', index=" << index;
+    if (index == -1 || index == 0) {
+        // The user has choosen the preedit text or partially converted sequence
+        resetSequence();
+        // Special case, we don't need to prepend m_convertedChars
+        Q_EMIT completed(word);
+        return;
+    }
+
+    lookup_candidate_t * candidate = nullptr;
+    auto indexInPinyin = index - 1;
+    if (pinyin_get_candidate(m_instance, indexInPinyin, &candidate)) {
+        qCDebug(Pinyin) << "Choosing word, offset was" << m_offset;
+        m_offset = pinyin_choose_candidate(m_instance, m_offset, candidate);
+        qCDebug(Pinyin) << "Word chosen, offset is now" << m_offset;
+    }
+
+    m_convertedChars += word;
+
+    if (remainingChars().isEmpty()) { // The sequence is completed
+        qCDebug(Pinyin) << "Sequence is completed";
+        auto textToCommit = m_convertedChars;
+        resetSequence();
+        Q_EMIT completed(textToCommit);
+    } else { // We still have remaining pinyin sequence, re-generate candidate list.
+        auto partialResult = m_convertedChars + remainingChars();
+        qCDebug(Pinyin) << "Sequence is not completed, refresh candidates";
+        qCDebug(Pinyin) << "Partial result is" << partialResult;
+        genCandidatesForCurrentSequence(m_preedit, UpdateCandidateListStrategy::AlwaysClear);
+    }
+}
+
+void PinyinAdapter::reset()
+{
+    resetSequence();
+    pinyin_reset(m_instance);
+}
+
+struct PinyinSequenceIterator
+{
+    using value_type = QString;
+    using reference = const QString &;
+    using iterator_category = std::input_iterator_tag;
+    using pointer = const QString *;
+    using difference_type = std::ptrdiff_t;
+
+    pinyin_instance_t *m_instance;
+    std::size_t m_offset;
+    std::size_t m_next;
+    QString m_str;
+
+    PinyinSequenceIterator(pinyin_instance_t *instance, std::size_t offset);
+
+    PinyinSequenceIterator &operator++();
+    const QString &operator*() const;
+
+    bool operator==(const PinyinSequenceIterator &that) const;
+    bool operator!=(const PinyinSequenceIterator &that) const { return !(*this == that); }
+};
+
+PinyinSequenceIterator::PinyinSequenceIterator(pinyin_instance_t *instance, std::size_t offset)
+    : m_instance(instance)
+    , m_offset(offset)
+    , m_next(offset + 1) // to be overriden later
+{
+    ChewingKey *key;
+    auto st = pinyin_get_pinyin_key(m_instance, offset, &key);
+
+    // If it failed, we are maybe at the end of sequence, so just ignore it
+    if (!st) { return; }
+
+    char *string{};
+    st = pinyin_get_pinyin_string(m_instance, key, &string);
+    m_str = QString(string);
+
+    if (!st) { return; }
+    g_free(string);
+
+    ChewingKeyRest *keyRest;
+
+    st = pinyin_get_pinyin_key_rest(m_instance, m_offset, &keyRest);
+    if (!st) { return; }
+    guint16 begin, end;
+    st = pinyin_get_pinyin_key_rest_positions(
+        m_instance, keyRest, &begin, &end);
+
+    qCDebug(Pinyin) << "begin=" << begin << "end=" << end;
+    // the next offset is at the end of the current pinyin
+    m_next = end;
+}
+
+PinyinSequenceIterator &PinyinSequenceIterator::operator++()
+{
+    return *this = PinyinSequenceIterator(m_instance, m_next);
+}
+
+const QString &PinyinSequenceIterator::operator*() const
+{
+    return m_str;
+}
+
+bool PinyinSequenceIterator::operator==(const PinyinSequenceIterator &that) const
+{
+    return m_instance == that.m_instance
+        && m_offset == that.m_offset;
+}
+
+QStringList PinyinAdapter::getCurrentPinyinSequence(const QString &preeditString)
+{
+    // auto oldSequence = m_currentSequence;
+
+    // auto firstAlphabeticIndex = preeditString.indexOf(QRegExp("[a-z]"));
+
+    // if (firstAlphabeticIndex == -1) {
+    //     qCDebug(Pinyin) << "The sequence is completed, ignoring";
+    //     return {};
+    // }
+
+    // auto chineseCharsCount = firstAlphabeticIndex;
+
+    // m_convertedChars = preeditString.mid(0, chineseCharsCount);
+
+    // auto adjustedString = preeditString.mid(chineseCharsCount);
+
+    resetSequence();
+
+    auto pinyinLength = pinyin_parse_more_full_pinyins(m_instance, preeditString.toUtf8().data());
+
+    if (!pinyinLength) { return {}; }
+
+    QStringList seq;
+
+    std::copy(
+        PinyinSequenceIterator(m_instance, 0),
+        PinyinSequenceIterator(m_instance, pinyinLength),
+        std::back_inserter(seq));
+
+    qCDebug(Pinyin) << "current sequence is" << seq;
+
+    return seq;
+}
+
+void PinyinAdapter::resetSequence()
+{
+    m_offset = 0;
+    m_convertedChars.clear();
+}
+
+void PinyinAdapter::genCandidatesForCurrentSequence(const QString &string, UpdateCandidateListStrategy strategy)
+{
+    pinyin_guess_candidates(m_instance, m_offset, SORT_BY_PHRASE_LENGTH_AND_PINYIN_LENGTH_AND_FREQUENCY);
 
     candidates.clear();
+
+    auto maybePartiallyConvertedSeq = m_convertedChars + remainingChars();
+
+    candidates.append(maybePartiallyConvertedSeq);
+
     guint len = 0;
     pinyin_get_n_candidate(m_instance, &len);
     len = len > MAX_SUGGESTIONS ? MAX_SUGGESTIONS : len;
@@ -78,21 +251,17 @@ void PinyinAdapter::parse(const QString& string)
         }
     }
 
-    Q_EMIT newPredictionSuggestions(string, candidates);
+    qCDebug(Pinyin) << "current string is" << string;
+    qCDebug(Pinyin) << "candidates are" << candidates;
+    Q_EMIT newPredictionSuggestions(string, candidates, strategy);
 }
 
-void PinyinAdapter::wordCandidateSelected(const QString& word)
+QStringList PinyinAdapter::remainingSequence() const
 {
-    Q_UNUSED(word)
-
-    lookup_candidate_t * candidate = nullptr;
-    if (pinyin_get_candidate(m_instance, 1, &candidate)) {
-        pinyin_choose_candidate(m_instance, 0, candidate);
-    }
+    return m_currentSequence.mid(m_convertedChars.size());
 }
 
-void PinyinAdapter::reset()
+QString PinyinAdapter::remainingChars() const
 {
-    pinyin_reset(m_instance);
+    return m_preedit.mid(m_offset);
 }
-

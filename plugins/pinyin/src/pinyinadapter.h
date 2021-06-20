@@ -21,6 +21,7 @@
 #include <QStringList>
 
 #include "pinyin.h"
+#include "abstractlanguageplugin.h"
 
 class PinyinAdapter : public QObject
 {
@@ -32,18 +33,50 @@ class PinyinAdapter : public QObject
     pinyin_instance_t* m_instance;
 
     bool m_processingWords;
+    QStringList m_currentSequence;
+    QString m_convertedChars;
+    QString m_preedit;
+    std::size_t m_offset{};
 
 public:
     explicit PinyinAdapter(QObject *parent = nullptr);
     ~PinyinAdapter() override;
 
 signals:
-    void newPredictionSuggestions(QString, QStringList);
+    void newPredictionSuggestions(QString, QStringList, int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
+    /*!
+     * \brief Signals that the whole Pinyin sequence is converted
+     * to Chinese characters.
+     *
+     * \param text The converted Chinese characters.
+     */
+    void completed(const QString &text);
 
 public slots:
     void parse(const QString& string);
     void wordCandidateSelected(const QString& word);
     void reset();
+
+private:
+    /*!
+     * \brief Obtain the current pinyin sequence from preedit string.
+     */
+    QStringList getCurrentPinyinSequence(const QString &preeditString);
+
+    /*!
+     * \brief Reset the current pinyin sequence.
+     */
+    void resetSequence();
+
+    /*!
+     * \brief Get the candidates for the current pinyin sequence.
+     *
+     * This functions emits newPredictionSuggestions().
+     */
+    void genCandidatesForCurrentSequence(const QString &preedit, UpdateCandidateListStrategy strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
+
+    QStringList remainingSequence() const;
+    QString remainingChars() const;
 };
 
 

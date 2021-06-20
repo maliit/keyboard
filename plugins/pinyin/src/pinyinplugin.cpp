@@ -15,6 +15,7 @@ PinyinPlugin::PinyinPlugin(QObject *parent) :
     connect(m_pinyinAdapter, &PinyinAdapter::newPredictionSuggestions, this, &PinyinPlugin::finishedProcessing);
     connect(this, &PinyinPlugin::parsePredictionText, m_pinyinAdapter, &PinyinAdapter::parse);
     connect(this, &PinyinPlugin::candidateSelected, m_pinyinAdapter, &PinyinAdapter::wordCandidateSelected);
+    connect(m_pinyinAdapter, &PinyinAdapter::completed, this, &AbstractLanguagePlugin::commitTextRequested);
     m_pinyinThread->start();
 }
 
@@ -37,6 +38,7 @@ void PinyinPlugin::predict(const QString& surroundingLeft, const QString& preedi
 
 void PinyinPlugin::wordCandidateSelected(QString word)
 {
+    qDebug() << "Pinyin plugin: selecting word " << word;
     Q_EMIT candidateSelected(word);
 }
 
@@ -45,9 +47,9 @@ AbstractLanguageFeatures* PinyinPlugin::languageFeature()
     return m_chineseLanguageFeatures;
 }
 
-void PinyinPlugin::finishedProcessing(QString word, QStringList suggestions)
+void PinyinPlugin::finishedProcessing(QString word, QStringList suggestions, int strategy)
 {
-    Q_EMIT newPredictionSuggestions(word, suggestions);
+    Q_EMIT newPredictionSuggestions(word, suggestions, strategy);
     if (word != m_nextWord) {
         Q_EMIT parsePredictionText(word);
     } else {

@@ -32,7 +32,7 @@ bool ChineseLanguageFeatures::alwaysShowSuggestions() const
 
 bool ChineseLanguageFeatures::autoCapsAvailable() const
 {
-    // Automatic switching to capital letters doen't make sense when 
+    // Automatic switching to capital letters doen't make sense when
     // inputting Pinyin
     return false;
 }
@@ -95,4 +95,14 @@ bool ChineseLanguageFeatures::wordEngineAvailable() const
 QString ChineseLanguageFeatures::fullStopSequence() const
 {
     return QStringLiteral("。");
+}
+
+bool ChineseLanguageFeatures::shouldDelayCandidateCommit() const
+{
+    return true;
+}
+
+std::size_t ChineseLanguageFeatures::primaryCandidateIndex() const
+{
+    return 2;
 }

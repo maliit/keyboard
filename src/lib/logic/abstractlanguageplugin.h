@@ -51,8 +51,19 @@ public:
     bool setLanguage(const QString& languageId, const QString& pluginPath) override;
 
 signals:
-    void newSpellingSuggestions(QString word, QStringList suggestions);
-    void newPredictionSuggestions(QString word, QStringList suggestions);
+    void newSpellingSuggestions(QString word, QStringList suggestions,
+                                int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
+    void newPredictionSuggestions(QString word, QStringList suggestions,
+                                  int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
+    /*!
+     * \brief Manually request text to be committed.
+     *
+     * This needs to be used when shouldDelayCandidateCommit() for
+     * this language is true.
+     *
+     * \sa AbstractLanguageFeatures::shouldDelayCandidateCommit()
+     */
+    void commitTextRequested(const QString &text);
 };
 
 #endif // ABSTRACTLANGUAGEPLUGIN_H

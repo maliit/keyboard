@@ -293,7 +293,7 @@ AbstractTextEditor::AbstractTextEditor(const EditorOptions &options,
 
     connect(word_engine, &Logic::AbstractWordEngine::primaryCandidateChanged,
             this,        &AbstractTextEditor::setPrimaryCandidate);
-    
+
     connect(this,        &AbstractTextEditor::autoCorrectEnabledChanged,
             word_engine, &Logic::AbstractWordEngine::setAutoCorrectEnabled);
 
@@ -384,7 +384,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         bool auto_caps_activated = false;
         const bool isSeparator = d->word_engine->languageFeature()->isSeparator(text);
         const bool isSymbol = d->word_engine->languageFeature()->isSymbol(text);
-        const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() && 
+        const bool replace_preedit = d->auto_correct_enabled && not d->text->primaryCandidate().isEmpty() &&
                     not d->text->preedit().isEmpty() && isSeparator;
         const bool enablePreeditAtInsertion = d->word_engine->languageFeature()->enablePreeditAtInsertion();
 
@@ -491,7 +491,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
             }
         }
 
-        // Delete automatically inserted full stop if the user continues 
+        // Delete automatically inserted full stop if the user continues
         // pressing space after a double space.
         if (look_for_a_triple_space) {
             singleBackspace();
@@ -515,7 +515,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 // If the user has added an apostrophe to the end of the word
                 // we should preserve this, as it may be user as a single quote
                 // or the plural form of certain names (but would otherwise be
-                // replaced by auto-correct as it's treated as a normal 
+                // replaced by auto-correct as it's treated as a normal
                 // character for use inside words).
                 d->text->setPreedit(d->text->preedit() + "'");
                 d->previous_preedit_position -= 1;
@@ -535,7 +535,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                  && !textOnLeft.at(textOnLeft.count() - 2).isSpace()
                  && textOnLeftTrimmed.count() > 0
                  && !d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 1))
-                 && !(textOnLeftTrimmed.endsWith(QLatin1String(")")) 
+                 && !(textOnLeftTrimmed.endsWith(QLatin1String(")"))
                       && textOnLeftTrimmed.count() > 1
                       && d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 2)))) {
             removeTrailingWhitespaces();
@@ -715,6 +715,21 @@ void AbstractTextEditor::replaceTextWithPreedit(const QString &replacement, int 
 
     Q_EMIT preeditChanged(d->text->preedit());
     Q_EMIT cursorPositionChanged(d->text->cursorPosition());
+}
+
+void AbstractTextEditor::onWordCandidateSelected(const QString &word)
+{
+    Q_D(AbstractTextEditor);
+
+    if (not d->valid()) {
+        return;
+    }
+
+    if (d->word_engine->languageFeature()->shouldDelayCandidateCommit()) {
+        return;
+    }
+
+    replaceAndCommitPreedit(word);
 }
 
 //! \brief Replaces current preedit with given replacement and then
@@ -1012,7 +1027,7 @@ void AbstractTextEditor::singleBackspace()
         in_word = true;
         d->text->removeFromPreedit(1);
         textOnLeft += d->text->preedit();
-        
+
         // Clear previous word candidates
         Q_EMIT wordCandidatesChanged(WordCandidateList());
         sendPreeditString(d->text->preedit(), d->text->preeditFace(),

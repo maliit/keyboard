@@ -72,9 +72,12 @@ public:
 
     Q_SLOT void onWordCandidateSelected(QString word) override;
     Q_SLOT void onLanguageChanged(const QString& pluginPath, const QString& languageId) override;
+
     Q_SLOT void updateQmlCandidates(QStringList qmlCandidates) override;
-    Q_SLOT void newSpellingSuggestions(QString word, QStringList suggestions);
-    Q_SLOT void newPredictionSuggestions(QString word, QStringList suggestions);
+    Q_SLOT void newSpellingSuggestions(QString word, QStringList suggestions,
+                                       int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
+    Q_SLOT void newPredictionSuggestions(QString word, QStringList suggestions,
+                                         int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
 
     AbstractLanguageFeatures* languageFeature() override;
 
@@ -82,7 +85,12 @@ private:
     //! \reimp
     void fetchCandidates(Model::Text *text) override;
     //! \reimp_end
+
+    //! Calculate the primary candidate if there is not any.
     void calculatePrimaryCandidate();
+    //! Calculate the primary candidate unconditionally.
+    void forceCalculatePrimaryCandidate();
+    void calculatePrimaryCandidateImpl();
     bool similarWords(QString word1, QString word2);
 
     const QScopedPointer<WordEnginePrivate> d_ptr;
