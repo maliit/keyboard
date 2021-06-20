@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="inputmethod">
+  <id>com.github.maliit.keyboard</id>
+  <name>Maliit Keyboard</name>
+  <summary>A virtual keyboard for touch devices</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LGPL-3.0-only</project_license>
+  <developer_name>Maliit Team</developer_name>
+  <description>
+    <p>This is a Virtual Keyboard for touch devices. It's used by many projects like Plasma Mobile, Ubuntu Touch and originally the Nokia N9. You can use it to write into the applications in several different languages including many different scripts as well.</p>
+    <p>Beyond typing, it supports word correction and prediction, multitouch, different layouts, emoji and styling.</p>
+  </description>
+  <provides>
+    <binary>maliit-keyboard</binary>
+  </provides>
+</component>
+
