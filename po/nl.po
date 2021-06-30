@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: ubuntu-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
-"PO-Revision-Date: 2021-03-17 11:27+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"PO-Revision-Date: 2021-06-30 19:36+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://translate.ubports.com/projects/ubports/"
 "keyboard-component/nl/>\n"
 "Language: nl\n"
@@ -26,7 +26,7 @@ msgstr "Alles selecteren"
 
 #: ../qml/ActionsToolbar.qml:57
 msgid "Redo"
-msgstr "Opnieuw uitvoeren"
+msgstr "Opnieuw"
 
 #: ../qml/ActionsToolbar.qml:58
 msgid "Undo"
