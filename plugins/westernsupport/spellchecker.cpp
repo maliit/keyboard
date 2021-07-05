@@ -41,10 +41,9 @@ public:
     Hunspell(const char *, const char *, const char * = NULL) : encoding("UTF-8") {}
     int add_dic (const char *, const char * = NULL) { return 0; }
     char *get_dic_encoding() { return encoding.data(); }
-    int spell(const char *, int * = NULL, char ** = NULL) { return 1; }
-    int suggest(char *** lst, const char *) { if (lst) { *lst = NULL; } return 0; }
-    void free_list(char ***, int) {}
-    int add(const char *) { return 0; }
+    bool spell(const std::string&, int* = NULL, std::string* = NULL) { return true; }
+    std::vector<std::string> suggest(const std::string&) { return std::vector<std::string>(); }
+    int add(const std::string&) { return 0; }
 private:
     // Using QByteArray here instead of just returning "UTF-8" in get_dic_encoding
     // to avoid a following warning:
@@ -207,20 +206,18 @@ QStringList SpellChecker::suggest(const QString &word,
         return QStringList();
     }
 
-    const auto suggestions = d->hunspell->suggest(d->codec->fromUnicode(word).toStdString());
-
-    // Less than zero means some error.
-    if (suggestions.empty()) {
-        qWarning() << __PRETTY_FUNCTION__ << ": Failed to get suggestions for" << word << ".";
-        return QStringList();
-    }
+    auto suggestions = d->hunspell->suggest(
+                                d->codec->fromUnicode(word).toStdString());
 
     QStringList result;
-    const int final_limit((limit < 0) ? suggestions.size() : qMin(limit, static_cast<int>(suggestions.size())));
 
-    for (int index(0); index < final_limit; ++index) {
-        result << d->codec->toUnicode(suggestions[index].c_str());
+    for (auto const & s: suggestions) {
+        if (result.size() == limit)
+            break;
+
+        result.append(d->codec->toUnicode(s.data(), s.size()));
     }
+
     return result;
 }
 
