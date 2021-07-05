@@ -95,9 +95,9 @@ defineReplace(maliitDynamicLib) {
     return($${MALIIT_DYNAMIC_PREFIX}$${1}$${MALIIT_DYNAMIC_SUFFIX})
 }
 
-LOMIRI_KEYBOARD_TARGET = ubuntu-keyboard
-LOMIRI_KEYBOARD_VIEW_TARGET = ubuntu-keyboard-view
-LOMIRI_KEYBOARD_PLUGIN_TARGET = ubuntu-keyboard-plugin
+LOMIRI_KEYBOARD_TARGET = lomiri-keyboard
+LOMIRI_KEYBOARD_VIEW_TARGET = lomiri-keyboard-view
+LOMIRI_KEYBOARD_PLUGIN_TARGET = lomiri-keyboard-plugin
 
 LOMIRI_KEYBOARD_LIB = src/lib/$$maliitStaticLib($${LOMIRI_KEYBOARD_TARGET})
 LOMIRI_KEYBOARD_VIEW_LIB = src/view/$$maliitStaticLib($${LOMIRI_KEYBOARD_VIEW_TARGET})
