@@ -27,7 +27,7 @@ isEmpty(LIBDIR) {
 }
 
 isEmpty(MALIIT_DEFAULT_PROFILE) {
-    MALIIT_DEFAULT_PROFILE = ubuntu
+    MALIIT_DEFAULT_PROFILE = lomiri
 }
 
 isEmpty(HUNSPELL_DICT_PATH) {
