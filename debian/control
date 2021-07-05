@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Michael Hasselmann <michaelh@openismus.com>
 Build-Depends: debhelper (>= 9),
+               dh-python,
                doxygen,
                libanthy-dev,
                libchewing3-dev,
@@ -85,7 +86,7 @@ Package: ubuntu-keyboard-autopilot
 Architecture: all
 Depends: autopilot-qt5 (>= 1.4),
          ${misc:Depends},
-         ${python:Depends},
+         ${python3:Depends},
          python3-evdev,
          ubuntu-keyboard (>= ${source:Version}),
          ubuntu-keyboard-arabic (>= ${source:Version}),
