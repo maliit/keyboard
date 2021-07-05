@@ -31,7 +31,7 @@ from autopilot.testcase import AutopilotTestCase
 from autopilot.input import Pointer, Touch
 from autopilot.matchers import Eventually
 from autopilot.platform import model
-from ubuntuuitoolkit import base
+from lomiriuitoolkit import base
 
 from ubuntu_keyboard.emulators.keyboard import Keyboard
 from ubuntu_keyboard.emulators.keypad import KeyPadState
@@ -137,7 +137,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
         simple_script = dedent("""
         import QtQuick 2.4
-        import Ubuntu.Components 1.3
+        import Lomiri.Components 1.3
 
         Rectangle {
             id: window
@@ -524,7 +524,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
 
         qml = dedent("""
         import QtQuick 2.4
-        import Ubuntu.Components 1.3
+        import Lomiri.Components 1.3
 
         Rectangle {
             id: window
@@ -1258,7 +1258,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
         """
         qml = dedent("""
         import QtQuick 2.4
-        import Ubuntu.Components 1.3
+        import Lomiri.Components 1.3
         import Ubuntu.Web 0.2
 
         Rectangle {
@@ -1304,7 +1304,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
         """
         qml = dedent("""
         import QtQuick 2.4
-        import Ubuntu.Components 1.3
+        import Lomiri.Components 1.3
         import Ubuntu.Web 0.2
 
         Rectangle {
@@ -1352,7 +1352,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
         """
         qml = dedent("""
         import QtQuick 2.4
-        import Ubuntu.Components 1.1
+        import Lomiri.Components 1.1
         import Ubuntu.Web 0.2
 
         Rectangle {
@@ -1410,7 +1410,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
         """
         qml = dedent("""
         import QtQuick 2.4
-        import Ubuntu.Components 1.3
+        import Lomiri.Components 1.3
         import Ubuntu.Web 0.2
 
         Rectangle {

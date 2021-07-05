@@ -25,7 +25,7 @@ from time import sleep
 import logging
 import os
 
-import ubuntuuitoolkit as toolkit
+import lomiriuitoolkit as toolkit
 from autopilot.input import Pointer, Touch
 from autopilot.introspection import (
     get_proxy_object_for_existing_process,
@@ -103,7 +103,7 @@ class Keyboard(object):
             try:
                 Keyboard.__maliit = get_proxy_object_for_existing_process(
                     connection_name='org.maliit.server',
-                    emulator_base=toolkit.UbuntuUIToolkitCustomProxyObjectBase
+                    emulator_base=toolkit.LomiriUIToolkitCustomProxyObjectBase
                 )
 
                 if Keyboard.__maliit is None:

@@ -20,12 +20,12 @@
 import logging
 from collections import namedtuple
 
-import ubuntuuitoolkit
+import lomiriuitoolkit
 
 logger = logging.getLogger(__name__)
 
 
-class Key(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class Key(lomiriuitoolkit.LomiriUIToolkitCustomProxyObjectBase):
     """An emulator that encapsulates details of a keyboard key (i.e. extended
     characters).
 

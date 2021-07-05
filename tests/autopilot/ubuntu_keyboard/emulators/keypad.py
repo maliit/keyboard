@@ -19,7 +19,7 @@
 
 import logging
 
-import ubuntuuitoolkit
+import lomiriuitoolkit
 
 from ubuntu_keyboard.emulators.key import Key
 
@@ -33,7 +33,7 @@ class KeyPadState:
     CAPSLOCK = "CAPSLOCK"
 
 
-class KeyPad(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class KeyPad(lomiriuitoolkit.LomiriUIToolkitCustomProxyObjectBase):
     """A basic emulator that provides the details of the keys contained within.
 
     """

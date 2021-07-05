@@ -25,7 +25,7 @@ Build-Depends: debhelper (>= 9),
                qtdeclarative5-dev,
                qtdeclarative5-private-dev,
                qml-module-qtmultimedia,
-               qml-module-ubuntu-components,
+               qml-module-lomiri-components,
                xvfb,
                presage,
 Standards-Version: 3.9.5
@@ -63,7 +63,7 @@ Description: Ubuntu on-screen keyboard
 Package: ubuntu-keyboard-data
 Architecture: all
 Depends: fonts-droid-fallback | fonts-droid | fonts-noto-cjk,
-         qml-module-ubuntu-components,
+         qml-module-lomiri-components,
          ${misc:Depends},
 Description: Ubuntu on-screen keyboard data files
  Data files for the Ubuntu virtual keyboard

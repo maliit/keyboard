@@ -8,7 +8,7 @@
     "charKeyPressedColor": "#d9d9d9",
     "actionKeyColor": "#cdcdcd",
     "actionKeyPressedColor": "#aeaeae",
-    "toolkitTheme": "Ubuntu.Components.Themes.Ambiance" ,
+    "toolkitTheme": "Lomiri.Components.Themes.Ambiance" ,
     "popupBorderColor": "#888888",
     "keyBorderEnabled": true,
     "charKeyBorderColor": "#888888",

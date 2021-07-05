@@ -34,7 +34,7 @@ import "constants.js" as Const
 import "theme_loader.js" as Theme
 import "keys/"
 import "keys/key_constants.js" as UI
-import Ubuntu.Components 1.3
+import Lomiri.Components 1.3
 import QtFeedback 5.0
 import QtMultimedia 5.0
 
@@ -282,7 +282,7 @@ Item {
             }
         ]
         transitions: Transition {
-            UbuntuNumberAnimation { target: keyboardSurface; properties: "y"; }
+            LomiriNumberAnimation { target: keyboardSurface; properties: "y"; }
         }
 
         Connections {
@@ -338,7 +338,7 @@ Item {
                 Label {
                     visible: !cursorSwipeArea.pressed && !bottomSwipe.pressed
                     horizontalAlignment: Text.AlignHCenter
-                    color: cursorSwipeArea.selectionMode ? UbuntuColors.porcelain : fullScreenItem.theme.fontColor
+                    color: cursorSwipeArea.selectionMode ? LomiriColors.porcelain : fullScreenItem.theme.fontColor
                     wrapMode: Text.WordWrap
                     
                     anchors {
