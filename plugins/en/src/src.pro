@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(enplugin)
 EXAMPLE_FILES = englishplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/en/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/en/
 
 lang_db_en.commands += \
   rm -f $$PWD/database_en.db && \

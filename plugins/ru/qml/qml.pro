@@ -6,7 +6,7 @@ include($${TOP_SRCDIR}/config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-lang_ru.path = "$${UBUNTU_KEYBOARD_LIB_DIR}/ru/"
+lang_ru.path = "$${LOMIRI_KEYBOARD_LIB_DIR}/ru/"
 lang_ru.files = *.qml *.js
 
 INSTALLS += lang_ru

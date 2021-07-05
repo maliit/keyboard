@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(itplugin)
 EXAMPLE_FILES = italianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/it/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/it/
 
 lang_db_it.commands += \
   rm -f $$PWD/database_it.db && \

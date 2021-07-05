@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(elplugin)
 EXAMPLE_FILES = greekplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/el/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/el/
 
 lang_db_el.commands += \
   rm -f $$PWD/database_el.db && \

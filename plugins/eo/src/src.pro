@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(eoplugin)
 EXAMPLE_FILES = esperantoplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/eo/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/eo/
 
 lang_db_eo.commands += \
   rm -f $$PWD/database_eo.db && \

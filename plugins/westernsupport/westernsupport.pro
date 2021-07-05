@@ -37,14 +37,14 @@ HEADERS += \
     $${TOP_SRCDIR}/src/lib/logic/abstractlanguageplugin.h
 
 
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}
+target.path = $${LOMIRI_KEYBOARD_LIB_DIR}
 INSTALLS += target
 
 # for plugins
 API_HEADERS = westernlanguagesplugin.h
 
 api_headers.files = $$API_HEADERS
-api_headers.path = $$UBUNTU_KEYBOARD_HEADERS_DIR
+api_headers.path = $$LOMIRI_KEYBOARD_HEADERS_DIR
 INSTALLS += api_headers
 
 

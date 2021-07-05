@@ -162,11 +162,11 @@ public:
 
         QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
         if (!prefix.isEmpty()) {
-            engine->addImportPath(prefix + QDir::separator() + UBUNTU_KEYBOARD_DATA_DIR);
-            engine->addImportPath(prefix + QDir::separator() + QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
+            engine->addImportPath(prefix + QDir::separator() + LOMIRI_KEYBOARD_DATA_DIR);
+            engine->addImportPath(prefix + QDir::separator() + QString(LOMIRI_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
         } else {
-            engine->addImportPath(UBUNTU_KEYBOARD_DATA_DIR);
-            engine->addImportPath(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
+            engine->addImportPath(LOMIRI_KEYBOARD_DATA_DIR);
+            engine->addImportPath(QString(LOMIRI_KEYBOARD_DATA_DIR) + QDir::separator() + "keys");
         }
 
         setContextProperties(engine->rootContext());
@@ -221,9 +221,9 @@ public:
         pluginPaths.clear();
         QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
         if (!prefix.isEmpty()) {
-            pluginPaths.append(prefix + QDir::separator() + QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+            pluginPaths.append(prefix + QDir::separator() + QString(LOMIRI_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
         } else {
-            pluginPaths.append(QString(UBUNTU_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+            pluginPaths.append(QString(LOMIRI_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
         }
         pluginPaths.append(m_settings.pluginPaths());
     }

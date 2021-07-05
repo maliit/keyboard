@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(svplugin)
 EXAMPLE_FILES = swedishplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/sv/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/sv/
 
 lang_db_sv.commands += \
   rm -f $$PWD/database_sv.db && \

@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(nbplugin)
 EXAMPLE_FILES = norwegianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/nb/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/nb/
 
 lang_db_nb.commands += \
   rm -f $$PWD/database_nb.db && \

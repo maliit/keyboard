@@ -6,10 +6,10 @@ include($${TOP_SRCDIR}/config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-lang_ja.path = "$$UBUNTU_KEYBOARD_LIB_DIR/ja/"
+lang_ja.path = "$$LOMIRI_KEYBOARD_LIB_DIR/ja/"
 lang_ja.files = *.qml *.js
 
-lang_ja_keys.path = "$$UBUNTU_KEYBOARD_LIB_DIR/ja/keys"
+lang_ja_keys.path = "$$LOMIRI_KEYBOARD_LIB_DIR/ja/keys"
 lang_ja_keys.files = keys/*.qml keys/*.js
 
 INSTALLS += lang_ja lang_ja_keys

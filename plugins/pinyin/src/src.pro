@@ -30,7 +30,7 @@ TARGET          = $$qtLibraryTarget(zh-hansplugin)
 EXAMPLE_FILES = pinyinplugin.json
 
 # install
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}/zh-hans/
+target.path = $${LOMIRI_KEYBOARD_LIB_DIR}/zh-hans/
 INSTALLS += target
 
 OTHER_FILES += \

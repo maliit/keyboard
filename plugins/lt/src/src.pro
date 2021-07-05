@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(ltplugin)
 EXAMPLE_FILES = lithuanianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/lt/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/lt/
 
 lang_db_lt.commands += \
   rm -f $$PWD/database_lt.db && \

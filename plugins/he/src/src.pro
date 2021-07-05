@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(heplugin)
 EXAMPLE_FILES = hebrewplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/he/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/he/
 
 lang_db_he.commands += \
   rm -f $$PWD/database_he.db && \
