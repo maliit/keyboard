@@ -1,4 +1,4 @@
-Source: ubuntu-keyboard
+Source: lomiri-keyboard
 Section: libs
 Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
