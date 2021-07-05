@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(srplugin)
 EXAMPLE_FILES = serbianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/sr/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/sr/
 
 lang_db_sr.commands += \
   rm -f $$PWD/database_sr.db && \

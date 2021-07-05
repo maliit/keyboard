@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(azplugin)
 EXAMPLE_FILES = azerbaijaniplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/az/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/az/
 
 lang_db_az.commands += \
   rm -f $$PWD/database_az.db && \

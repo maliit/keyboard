@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(gdplugin)
 EXAMPLE_FILES = gaelicplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/gd/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/gd/
 
 lang_db_gd.commands += \
   rm -f $$PWD/database_gd.db && \

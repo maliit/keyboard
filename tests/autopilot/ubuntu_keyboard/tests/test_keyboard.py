@@ -1460,7 +1460,7 @@ class UbuntuKeyboardPluginPaths(UbuntuKeyboardTests):
         gsettings.set_strv(
             "plugin-paths", [
                 "/custom/share/maliit/plugins/com/ubuntu/lib",
-                "/usr/share/maliit/tests/ubuntu-keyboard/"
+                "/usr/share/maliit/tests/lomiri-keyboard/"
             ])
         gsettings.set_strv("enabled-languages", ["en", "testlayout"])
         gsettings.set_string("previous-language", "testlayout")

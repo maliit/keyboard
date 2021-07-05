@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(huplugin)
 EXAMPLE_FILES = hungarianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/hu/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/hu/
 
 lang_db_hu.commands += \
   rm -f $$PWD/database_hu.db && \

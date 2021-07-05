@@ -50,14 +50,18 @@ enable-opengl {
 
 LOMIRI_KEYBOARD_PACKAGENAME = lomiri-keyboard
 LOMIRI_KEYBOARD_VERSION = $$system(cat $$PWD/VERSION)
-LOMIRI_KEYBOARD_DATA_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu"
-LOMIRI_KEYBOARD_LIB_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/lib"
-LOMIRI_KEYBOARD_TEST_DIR = "/usr/share/maliit/tests/ubuntu-keyboard"
-LOMIRI_KEYBOARD_HEADERS_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/include"
+LOMIRI_KEYBOARD_DATA_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/lomiri-keyboard"
+# FIXME: make it configurable while still has a sensible default
+# on Debian-like multiarch LIBDIR.
+LOMIRI_KEYBOARD_LIB_DIR = "$${PREFIX}/lib/lomiri-keyboard"
+LOMIRI_KEYBOARD_PLUGIN_DIR = "$${LOMIRI_KEYBOARD_LIB_DIR}/plugins"
+LOMIRI_KEYBOARD_TEST_DIR = "/usr/share/maliit/tests/lomiri-keyboard"
+LOMIRI_KEYBOARD_HEADERS_DIR = "$${PREFIX}/include/lomiri-keyboard"
 
 PINYIN_DATA_DIR = "$$system(pkg-config --variable pkgdatadir libpinyin)/data"
 
 DEFINES += LOMIRI_KEYBOARD_DATA_DIR=\\\"$${LOMIRI_KEYBOARD_DATA_DIR}\\\"
+DEFINES += LOMIRI_KEYBOARD_PLUGIN_DIR=\\\"$${LOMIRI_KEYBOARD_PLUGIN_DIR}\\\"
 DEFINES += MALIIT_PLUGINS_DATA_DIR=\\\"$${MALIIT_PLUGINS_DATA_DIR}\\\"
 DEFINES += PINYIN_DATA_DIR=\\\"$${PINYIN_DATA_DIR}\\\"
 

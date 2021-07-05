@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(bsplugin)
 EXAMPLE_FILES = bosnianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/bs/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/bs/
 
 lang_db_bs.commands += \
   rm -f $$PWD/database_bs.db && \

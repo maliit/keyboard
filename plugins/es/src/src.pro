@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(esplugin)
 EXAMPLE_FILES = spanishplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/es/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/es/
 
 lang_db_es.commands += \
   rm -f $$PWD/database_es.db && \

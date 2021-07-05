@@ -27,7 +27,7 @@ TARGET          = $$qtLibraryTarget(zh-hantplugin)
 EXAMPLE_FILES = chewingplugin.json
 
 # install
-target.path = $${LOMIRI_KEYBOARD_LIB_DIR}/zh-hant/
+target.path = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/zh-hant/
 INSTALLS += target
 
 OTHER_FILES += \

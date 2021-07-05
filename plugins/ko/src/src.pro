@@ -34,7 +34,7 @@ TARGET          = $$qtLibraryTarget(koplugin)
 EXAMPLE_FILES = koreanplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/ko/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/ko/
 
 lang_db_ko.commands += \
   rm -f $$PWD/database_ko.db && \

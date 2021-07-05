@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(caplugin)
 EXAMPLE_FILES = catalanplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/ca/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/ca/
 
 lang_db_ca.commands += \
   rm -f $$PWD/database_ca.db && \

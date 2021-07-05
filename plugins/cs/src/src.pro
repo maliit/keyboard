@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(csplugin)
 EXAMPLE_FILES = czechplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/cs/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/cs/
 
 lang_db_cs.commands += \
   rm -f $$PWD/database_cs.db && \

@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(trplugin)
 EXAMPLE_FILES = turkishplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/tr/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/tr/
 
 lang_db_tr.commands += \
   rm -f $$PWD/database_tr.db && \

@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(slplugin)
 EXAMPLE_FILES = slovenianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/sl/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/sl/
 
 lang_db_sl.commands += \
   rm -f $$PWD/database_sl.db && \

@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(roplugin)
 EXAMPLE_FILES = romanianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/ro/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/ro/
 
 lang_db_ro.commands += \
   rm -f $$PWD/database_ro.db && \

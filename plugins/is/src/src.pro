@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(isplugin)
 EXAMPLE_FILES = icelandicplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/is/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/is/
 
 lang_db_is.commands += \
   rm -f $$PWD/database_is.db && \

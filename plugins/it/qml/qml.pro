@@ -6,7 +6,7 @@ include($${TOP_SRCDIR}/config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-lang_it.path = "$$LOMIRI_KEYBOARD_LIB_DIR/it/"
+lang_it.path = "$$LOMIRI_KEYBOARD_PLUGIN_DIR/it/"
 lang_it.files = *.qml *.js
 
 INSTALLS += lang_it

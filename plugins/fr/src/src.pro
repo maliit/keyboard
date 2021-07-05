@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(frplugin)
 EXAMPLE_FILES = frenchplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/fr/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/fr/
 
 lang_db_fr.commands += \
   rm -f $$PWD/database_fr.db && \

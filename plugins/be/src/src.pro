@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(beplugin)
 EXAMPLE_FILES = belarusianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_LIB_DIR}/be/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/be/
 
 lang_db_be.commands += \
   rm -f $$PWD/database_be.db && \

@@ -221,9 +221,9 @@ public:
         pluginPaths.clear();
         QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
         if (!prefix.isEmpty()) {
-            pluginPaths.append(prefix + QDir::separator() + QString(LOMIRI_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+            pluginPaths.append(prefix + QDir::separator() + QString(LOMIRI_KEYBOARD_PLUGIN_DIR));
         } else {
-            pluginPaths.append(QString(LOMIRI_KEYBOARD_DATA_DIR) + QDir::separator() + "lib");
+            pluginPaths.append(QString(LOMIRI_KEYBOARD_PLUGIN_DIR));
         }
         pluginPaths.append(m_settings.pluginPaths());
     }
