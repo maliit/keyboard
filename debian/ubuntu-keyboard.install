@@ -1,5 +1,5 @@
 debian/server.conf etc/xdg/maliit.org/
 usr/lib/maliit/plugins/liblomiri-keyboard-plugin.so
 usr/lib/lomiri-keyboard/libwesternsupport.a
-usr/share/locale/*/LC_MESSAGES/ubuntu-keyboard.mo
+usr/share/locale/*/LC_MESSAGES/lomiri-keyboard.mo
 debian/upstart/maliit-server.conf /usr/share/upstart/sessions/

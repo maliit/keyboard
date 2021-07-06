@@ -1,11 +1,11 @@
-# Faroese translation for ubuntu-keyboard
+# Faroese translation for lomiri-keyboard
 # Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
-# This file is distributed under the same license as the ubuntu-keyboard package.
+# This file is distributed under the same license as the lomiri-keyboard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ubuntu-keyboard\n"
+"Project-Id-Version: lomiri-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
 "PO-Revision-Date: 2016-04-19 12:41+0000\n"

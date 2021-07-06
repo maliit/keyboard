@@ -39,8 +39,8 @@ MaliitKeyboardPlugin::MaliitKeyboardPlugin(QObject *parent)
     : QObject(parent)
     , Maliit::Plugins::InputMethodPlugin()
 {
-    bindtextdomain("ubuntu-keyboard", NULL);
-    textdomain("ubuntu-keyboard");
+    bindtextdomain("lomiri-keyboard", NULL);
+    textdomain("lomiri-keyboard");
 
     qmlRegisterUncreatableType<InputMethod>("LomiriKeyboard", 1, 0, "InputMethod",
                                             QString("InputMethod can't be created in QML"));
