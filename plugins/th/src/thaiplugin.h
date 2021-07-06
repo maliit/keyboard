@@ -10,7 +10,7 @@ class ThaiLanguageFeatures;
 class ThaiPlugin : public AbstractLanguagePlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "com.canonical.UbuntuKeyboard.LanguagePluginInterface" FILE "thaiplugin.json")
+    Q_PLUGIN_METADATA(IID "com.lomiri.LomiriKeyboard.LanguagePluginInterface" FILE "thaiplugin.json")
     Q_INTERFACES(LanguagePluginInterface)
 
 public:

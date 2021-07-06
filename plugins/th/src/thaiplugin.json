@@ -1,5 +1,5 @@
 {
-    "IID": "com.canonical.UbuntuKeyboard.LanguagePluginInterface",
+    "IID": "com.lomiri.LomiriKeyboard.LanguagePluginInterface",
     "MetaData": {
     },
     "className": "ThaiPlugin",
