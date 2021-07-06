@@ -1259,7 +1259,7 @@ class LomiriKeyboardOxide(LomiriKeyboardTests):
         qml = dedent("""
         import QtQuick 2.4
         import Lomiri.Components 1.3
-        import Ubuntu.Web 0.2
+        import Lomiri.Web 0.2
 
         Rectangle {
             id: window
@@ -1305,7 +1305,7 @@ class LomiriKeyboardOxide(LomiriKeyboardTests):
         qml = dedent("""
         import QtQuick 2.4
         import Lomiri.Components 1.3
-        import Ubuntu.Web 0.2
+        import Lomiri.Web 0.2
 
         Rectangle {
             id: window
@@ -1353,7 +1353,7 @@ class LomiriKeyboardOxide(LomiriKeyboardTests):
         qml = dedent("""
         import QtQuick 2.4
         import Lomiri.Components 1.1
-        import Ubuntu.Web 0.2
+        import Lomiri.Web 0.2
 
         Rectangle {
             id: window
@@ -1411,7 +1411,7 @@ class LomiriKeyboardOxide(LomiriKeyboardTests):
         qml = dedent("""
         import QtQuick 2.4
         import Lomiri.Components 1.3
-        import Ubuntu.Web 0.2
+        import Lomiri.Web 0.2
 
         Rectangle {
             id: window
