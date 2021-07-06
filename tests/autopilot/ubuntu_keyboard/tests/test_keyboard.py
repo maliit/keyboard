@@ -1,6 +1,6 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
-# Ubuntu Keyboard Test Suite
+# Lomiri Keyboard Test Suite
 # Copyright (C) 2013, 2015 Canonical
 #
 # This program is free software: you can redistribute it and/or modify
@@ -55,7 +55,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
     def setUp(self):
         if model() == "Desktop":
-            self.skipTest("Ubuntu Keyboard tests only run on device.")
+            self.skipTest("Lomiri Keyboard tests only run on device.")
         super(UbuntuKeyboardTests, self).setUp()
         self.set_test_settings()
         sleep(5)  # Have to give time for gsettings change to propogate

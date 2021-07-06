@@ -1,6 +1,6 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
-# Ubuntu Keyboard Test Suite
+# Lomiri Keyboard Test Suite
 # Copyright (C) 2013, 2015 Canonical
 #
 # This program is free software: you can redistribute it and/or modify
@@ -73,7 +73,7 @@ class Keyboard(object):
             raise
         except StateNotFoundError:
             logger.error(
-                "Unable to find the Ubuntu Keyboard object within the "
+                "Unable to find the Lomiri Keyboard object within the "
                 "maliit server, aborting."
             )
             raise

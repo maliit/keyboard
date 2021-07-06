@@ -1,6 +1,6 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
-# Ubuntu Keyboard Test Suite
+# Lomiri Keyboard Test Suite
 # Copyright (C) 2013 Canonical
 #
 # This program is free software: you can redistribute it and/or modify
