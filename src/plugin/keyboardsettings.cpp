@@ -217,7 +217,7 @@ bool KeyboardSettings::stayHidden() const
 
 /*!
  * \brief KeyboardSettings::pluginPaths returns a list of paths containing
- * ubuntu-keyboard layout plugins
+ * lomiri-keyboard layout plugins
  */
 QStringList KeyboardSettings::pluginPaths() const
 {
