@@ -27,8 +27,8 @@
  *
  */
 
-#ifndef UBUNTU_KEYBOARD_EXTENSION_H
-#define UBUNTU_KEYBOARD_EXTENSION_H
+#ifndef LOMIRI_KEYBOARD_EXTENSION_H
+#define LOMIRI_KEYBOARD_EXTENSION_H
 
 #include <QtCore>
 #include <QtQuick>
