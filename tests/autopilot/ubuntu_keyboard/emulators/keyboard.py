@@ -64,7 +64,7 @@ class Keyboard(object):
         try:
             self.keyboard = self.maliit.select_single(
                 "QQuickItem",
-                objectName="ubuntuKeyboard"
+                objectName="lomiriKeyboard"
             )
         except ValueError as e:
             e.args += (
