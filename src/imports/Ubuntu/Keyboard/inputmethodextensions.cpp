@@ -32,7 +32,7 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace Ubuntu {
+namespace Lomiri {
 namespace Keyboard {
 
 /*!
@@ -119,5 +119,5 @@ InputMethodExtension *InputMethod::qmlAttachedProperties(QObject *obj)
     return new InputMethodExtension(obj);
 }
 
-} // namespace Ubuntu
+} // namespace Lomiri
 } // namespace Keyboard

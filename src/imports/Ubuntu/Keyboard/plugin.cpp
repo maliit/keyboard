@@ -32,7 +32,7 @@
 
 #include <QQmlEngine>
 
-namespace Ubuntu {
+namespace Lomiri {
 namespace Keyboard {
 
 void InputMethodExtensionPlugin::registerTypes(const char *uri)
@@ -42,5 +42,5 @@ void InputMethodExtensionPlugin::registerTypes(const char *uri)
     qmlRegisterType<InputMethod>(uri, 0, 1, "InputMethod");
 }
 
-} // namespace Ubuntu
+} // namespace Lomiri
 } // namespace Keyboard

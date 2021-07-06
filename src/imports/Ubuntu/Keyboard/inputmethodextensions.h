@@ -33,7 +33,7 @@
 #include <QtCore>
 #include <QtQuick>
 
-namespace Ubuntu {
+namespace Lomiri {
 namespace Keyboard {
 
 class InputMethodExtension : public QObject
@@ -66,9 +66,9 @@ public:
     static InputMethodExtension *qmlAttachedProperties(QObject *obj);
 };
 
-} // namespace Ubuntu
+} // namespace Lomiri
 } // namespace Keyboard
 
-QML_DECLARE_TYPEINFO(Ubuntu::Keyboard::InputMethod, QML_HAS_ATTACHED_PROPERTIES)
+QML_DECLARE_TYPEINFO(Lomiri::Keyboard::InputMethod, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif
