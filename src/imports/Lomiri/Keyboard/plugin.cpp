@@ -37,7 +37,7 @@ namespace Keyboard {
 
 void InputMethodExtensionPlugin::registerTypes(const char *uri)
 {
-    // @uri Ubuntu.Maliit
+    // @uri Lomiri.Keyboard
     qmlRegisterType<InputMethodExtension>();
     qmlRegisterType<InputMethod>(uri, 0, 1, "InputMethod");
 }

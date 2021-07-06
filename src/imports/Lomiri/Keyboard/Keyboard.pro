@@ -1,7 +1,7 @@
 TEMPLATE = lib
 QT += qml quick gui
 CONFIG += qt plugin no_keywords
-TARGET = ubuntu-keyboard-qml
+TARGET = lomiri-keyboard-qml
 
 HEADERS += \
     plugin.h \
@@ -14,7 +14,7 @@ SOURCES += \
 QMLDIR_FILE = qmldir
 
 # deployment rules for the plugin
-installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)Ubuntu/Keyboard
+installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)Lomiri/Keyboard
 target.path = $$installPath
 
 qmldir_file.path = $$installPath

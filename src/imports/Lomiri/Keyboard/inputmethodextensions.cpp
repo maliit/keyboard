@@ -37,7 +37,7 @@ namespace Keyboard {
 
 /*!
     \qmltype InputMethod
-    \inqmlmodule Ubuntu.Keyboard 0.1
+    \inqmlmodule Lomiri.Keyboard 0.1
     \brief The InputMethod is a helper class used to attach properties used by Ubuntu Keyboard into input fields
 
     Example:
