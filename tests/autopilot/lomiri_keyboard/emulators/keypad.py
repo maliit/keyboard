@@ -21,7 +21,7 @@ import logging
 
 import lomiriuitoolkit
 
-from ubuntu_keyboard.emulators.key import Key
+from lomiri_keyboard.emulators.key import Key
 
 
 logger = logging.getLogger(__name__)

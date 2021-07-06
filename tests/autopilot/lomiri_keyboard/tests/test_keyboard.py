@@ -33,8 +33,8 @@ from autopilot.matchers import Eventually
 from autopilot.platform import model
 from lomiriuitoolkit import base
 
-from ubuntu_keyboard.emulators.keyboard import Keyboard
-from ubuntu_keyboard.emulators.keypad import KeyPadState
+from lomiri_keyboard.emulators.keyboard import Keyboard
+from lomiri_keyboard.emulators.keypad import KeyPadState
 
 from gi.repository import Gio
 
@@ -44,7 +44,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class UbuntuKeyboardTests(AutopilotTestCase):
+class LomiriKeyboardTests(AutopilotTestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -56,7 +56,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
     def setUp(self):
         if model() == "Desktop":
             self.skipTest("Lomiri Keyboard tests only run on device.")
-        super(UbuntuKeyboardTests, self).setUp()
+        super(LomiriKeyboardTests, self).setUp()
         self.set_test_settings()
         sleep(5)  # Have to give time for gsettings change to propogate
         self.pointer = Pointer(Touch.create())
@@ -94,7 +94,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
 
         # Use installed desktop file so that Mir allows us to connect with
         # our test QML apps
-        desktop_file = "/usr/share/applications/ubuntu-keyboard-tester.desktop"
+        desktop_file = "/usr/share/applications/lomiri-keyboard-tester.desktop"
         return self.launch_test_application(
             base.get_qmlscene_launch_command(),
             qml_path,
@@ -170,7 +170,7 @@ class UbuntuKeyboardTests(AutopilotTestCase):
         return self._start_qml_script(simple_script)
 
 
-class UbuntuKeyboardTestsAccess(UbuntuKeyboardTests):
+class LomiriKeyboardTestsAccess(LomiriKeyboardTests):
 
     def test_keyboard_is_available(self):
         keyboard = Keyboard()
@@ -183,7 +183,7 @@ class UbuntuKeyboardTestsAccess(UbuntuKeyboardTests):
         self.assertThat(keyboard.is_available, Eventually(Equals(True)))
 
 
-class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
+class LomiriKeyboardTypingTests(LomiriKeyboardTests):
 
     scenarios = [
         (
@@ -229,7 +229,7 @@ class UbuntuKeyboardTypingTests(UbuntuKeyboardTests):
         self.assertThat(text_area.text, Eventually(Equals(self.input)))
 
 
-class UbuntuKeyboardKeyMappingTests(UbuntuKeyboardTests):
+class LomiriKeyboardKeyMappingTests(LomiriKeyboardTests):
 
     scenarios = [
         (
@@ -279,7 +279,7 @@ class UbuntuKeyboardKeyMappingTests(UbuntuKeyboardTests):
             self.assertThat(text_area.text, Eventually(Equals(result)))
 
 
-class UbuntuKeyboardStateKeyMappingTests(UbuntuKeyboardTests):
+class LomiriKeyboardStateKeyMappingTests(LomiriKeyboardTests):
 
     scenarios = [
         (
@@ -356,7 +356,7 @@ class UbuntuKeyboardStateKeyMappingTests(UbuntuKeyboardTests):
                                            self.expected_state)
 
 
-class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
+class LomiriKeyboardStateChanges(LomiriKeyboardTests):
 
     def test_keyboard_layout_starts_shifted(self):
         """When first launched the keyboard state must be
@@ -559,7 +559,7 @@ class UbuntuKeyboardStateChanges(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
+class LomiriKeyboardInputTypeStateChange(LomiriKeyboardTests):
 
     scenarios = [
         (
@@ -628,7 +628,7 @@ class UbuntuKeyboardInputTypeStateChange(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
+class LomiriKeyboardAdvancedFeatures(LomiriKeyboardTests):
 
     def test_double_space_fullstop(self):
         """After tapping space twice a fullstop should be entered.
@@ -829,7 +829,7 @@ class UbuntuKeyboardAdvancedFeatures(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
+class LomiriKeyboardPinyin(LomiriKeyboardTests):
 
     scenarios = [
         (
@@ -932,7 +932,7 @@ class UbuntuKeyboardPinyin(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardChewing(UbuntuKeyboardTests):
+class LomiriKeyboardChewing(LomiriKeyboardTests):
 
     scenarios = [
         (
@@ -1053,7 +1053,7 @@ class UbuntuKeyboardChewing(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardSelection(UbuntuKeyboardTests):
+class LomiriKeyboardSelection(LomiriKeyboardTests):
 
     def test_delete_selection(self):
         """Selecting a word and then pressing backspace should delete the
@@ -1106,7 +1106,7 @@ class UbuntuKeyboardSelection(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
+class LomiriKeyboardEmoji(LomiriKeyboardTests):
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
@@ -1160,7 +1160,7 @@ class UbuntuKeyboardEmoji(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
+class LomiriKeyboardLanguageMenu(LomiriKeyboardTests):
 
     def setUp(self):
         super().setUp()
@@ -1249,7 +1249,7 @@ class UbuntuKeyboardLanguageMenu(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardOxide(UbuntuKeyboardTests):
+class LomiriKeyboardOxide(LomiriKeyboardTests):
 
     def test_autocomplete(self):
         """Test that words are auto-completed when entered into an oxide text
@@ -1453,7 +1453,7 @@ class UbuntuKeyboardOxide(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardPluginPaths(UbuntuKeyboardTests):
+class LomiriKeyboardPluginPaths(LomiriKeyboardTests):
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
@@ -1491,7 +1491,7 @@ class UbuntuKeyboardPluginPaths(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
+class LomiriKeyboardLayouts(LomiriKeyboardTests):
 
     scenarios = []
 
@@ -1597,7 +1597,7 @@ class UbuntuKeyboardLayouts(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardCursorTests(UbuntuKeyboardTests):
+class LomiriKeyboardCursorTests(LomiriKeyboardTests):
 
     def test_cursor_movement(self):
         """Test that autopilot is able to move the cursor
@@ -1626,7 +1626,7 @@ class UbuntuKeyboardCursorTests(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardJapaneseTests(UbuntuKeyboardTests):
+class LomiriKeyboardJapaneseTests(LomiriKeyboardTests):
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
@@ -1680,7 +1680,7 @@ class UbuntuKeyboardJapaneseTests(UbuntuKeyboardTests):
         )
 
 
-class UbuntuKeyboardKoreanTests(UbuntuKeyboardTests):
+class LomiriKeyboardKoreanTests(LomiriKeyboardTests):
 
     def set_test_settings(self):
         gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")

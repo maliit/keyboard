@@ -19,7 +19,7 @@
 
 from collections import defaultdict
 
-from ubuntu_keyboard.emulators.keypad import KeyPad
+from lomiri_keyboard.emulators.keypad import KeyPad
 
 from time import sleep
 import logging

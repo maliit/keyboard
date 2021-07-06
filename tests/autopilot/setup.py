@@ -23,13 +23,13 @@ from distutils.core import setup
 from setuptools import find_packages
 
 setup(
-    name='ubuntu_keyboard',
+    name='lomiri_keyboard',
     version='1.0',
     description='Lomiri Keyboard autopilot tests and emulators.',
     url='https://launchpad.net/ubuntu-keyboard',
     license='GPLv3',
     packages=find_packages(),
     data_files=[
-        ('share/applications', ['ubuntu-keyboard-tester.desktop'])
+        ('share/applications', ['lomiri-keyboard-tester.desktop'])
     ]
 )
