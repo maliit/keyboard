@@ -26,7 +26,7 @@ setup(
     name='lomiri_keyboard',
     version='1.0',
     description='Lomiri Keyboard autopilot tests and emulators.',
-    url='https://launchpad.net/ubuntu-keyboard',
+    url='https://gitlab.com/ubports/core/lomiri-keyboard',
     license='GPLv3',
     packages=find_packages(),
     data_files=[
