@@ -8,7 +8,9 @@ debian/ubuntu-keyboard-data/
 debian/ubuntu-keyboard-tests/
 *.debhelper.log
 *.substvars
-*.so
+*.o
+*.a
+*.so*
 tests/editor/editor
 tests/language-layout-loading/language-layout-loading
 tests/language-layout-switching/language-layout-switching
