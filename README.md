@@ -24,8 +24,8 @@ Logs are saved in `~/.cache/upstart/maalit-server.log`. They can be viewed direc
 
 To list available options (in UBports), type
 
-    gsettings list-recursively com.canonical.keyboard.maliit
+    gsettings list-recursively com.lomiri.keyboard.maliit
 
 and to set them
 
-    gsettings set com.canonical.keyboard.maliit option value 
+    gsettings set com.lomiri.keyboard.maliit option value 

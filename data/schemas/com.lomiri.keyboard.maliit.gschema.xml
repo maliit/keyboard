@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema id="com.canonical.keyboard.maliit" path="/com/canonical/keyboard/maliit/">
+  <schema id="com.lomiri.keyboard.maliit" path="/com/lomiri/keyboard/maliit/">
     <key name="active-language" type="s">
       <summary>Active language</summary>
       <description>Currently active language, selected by user in the keyboard language menu</description>

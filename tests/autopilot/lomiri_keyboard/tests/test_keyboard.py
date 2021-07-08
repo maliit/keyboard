@@ -62,7 +62,7 @@ class LomiriKeyboardTests(AutopilotTestCase):
         self.pointer = Pointer(Touch.create())
 
     def set_test_settings(self):
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_strv(
             "enabled-languages", ["en", "es", "de",
                                   "zh-hans", "zh-hant", "emoji"])
@@ -263,7 +263,7 @@ class LomiriKeyboardKeyMappingTests(LomiriKeyboardTests):
         self._disable_double_space_full_stop()
 
     def _disable_double_space_full_stop(self):
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_boolean("double-space-full-stop", False)
 
     def test_can_type_using_key_mapping(self):
@@ -867,7 +867,7 @@ class LomiriKeyboardPinyin(LomiriKeyboardTests):
     ]
 
     def set_test_settings(self):
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_string("active-language", "zh-hans")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
@@ -970,7 +970,7 @@ class LomiriKeyboardChewing(LomiriKeyboardTests):
     ]
 
     def set_test_settings(self):
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_string("active-language", "zh-hant")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
@@ -1109,7 +1109,7 @@ class LomiriKeyboardSelection(LomiriKeyboardTests):
 class LomiriKeyboardEmoji(LomiriKeyboardTests):
 
     def set_test_settings(self):
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_strv("enabled-languages", ["en", "emoji"])
         gsettings.set_string("previous-language", "emoji")
         gsettings.set_string("active-language", "emoji")
@@ -1164,7 +1164,7 @@ class LomiriKeyboardLanguageMenu(LomiriKeyboardTests):
 
     def setUp(self):
         super().setUp()
-        self.gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        self.gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
 
     def _set_keyboard_language(self, language):
         self.gsettings.set_string("active-language", language)
@@ -1432,7 +1432,7 @@ class LomiriKeyboardOxide(LomiriKeyboardTests):
         }
 
         """)
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", False)
         gsettings.set_boolean("predictive-text", False)
@@ -1456,7 +1456,7 @@ class LomiriKeyboardOxide(LomiriKeyboardTests):
 class LomiriKeyboardPluginPaths(LomiriKeyboardTests):
 
     def set_test_settings(self):
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_strv(
             "plugin-paths", [
                 "/custom/share/maliit/plugins/com/ubuntu/lib",
@@ -1575,7 +1575,7 @@ class LomiriKeyboardLayouts(LomiriKeyboardTests):
         keyboard = Keyboard()
         self.addCleanup(keyboard.dismiss)
 
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_string("active-language", self.layout)
 
         self.assertThat(
@@ -1629,7 +1629,7 @@ class LomiriKeyboardCursorTests(LomiriKeyboardTests):
 class LomiriKeyboardJapaneseTests(LomiriKeyboardTests):
 
     def set_test_settings(self):
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_string("active-language", "ja")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
@@ -1683,7 +1683,7 @@ class LomiriKeyboardJapaneseTests(LomiriKeyboardTests):
 class LomiriKeyboardKoreanTests(LomiriKeyboardTests):
 
     def set_test_settings(self):
-        gsettings = Gio.Settings.new("com.canonical.keyboard.maliit")
+        gsettings = Gio.Settings.new("com.lomiri.keyboard.maliit")
         gsettings.set_string("active-language", "ko")
         gsettings.set_boolean("auto-capitalization", True)
         gsettings.set_boolean("auto-completion", True)
