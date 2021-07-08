@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: UBports Developers <developers@ubports.com>
 XSBC-Original-Maintainer: Michael Hasselmann <michaelh@openismus.com>
 Build-Depends: debhelper (>= 9),
+               dh-migrations,
                dh-python,
                doxygen,
                libanthy-dev,
