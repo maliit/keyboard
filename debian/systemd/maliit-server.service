@@ -3,8 +3,6 @@ Description=Maliit OSK Server
 # nowadays, maliit-server needs to start *after* Lomiri, or it crashes while
 # trying to poke geometry
 After=lomiri-full-greeter.service lomiri-full-shell.service lomiri-greeter.service lomiri-shell.service
-# Restart with Lomiri
-PartOf=lomiri-full-greeter.service lomiri-full-shell.service lomiri-greeter.service lomiri-shell.service
 
 [Service]
 # needed to fix lp:1233550
