@@ -179,7 +179,7 @@ Package: lomiri-keyboard-catalan
 Architecture: any
 Depends: lomiri-keyboard (= ${binary:Version}),
          ${misc:Depends},
-         myspell-ca,
+         hunspell-ca,
          ${shlibs:Depends},
 Description: Lomiri on-screen keyboard data files - Catalan
  Data files for the Lomiri virtual keyboard - Catalan
@@ -229,7 +229,7 @@ Description: Lomiri on-screen keyboard data files - Danish
 Package: lomiri-keyboard-dutch
 Architecture: any
 Depends: lomiri-keyboard (= ${binary:Version}),
-         myspell-nl,
+         hunspell-nl,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Lomiri on-screen keyboard data files - Dutch
@@ -345,7 +345,7 @@ Description: Lomiri on-screen keyboard data files - Icelandic
 Package: lomiri-keyboard-italian
 Architecture: any
 Depends: lomiri-keyboard (= ${binary:Version}),
-         myspell-it
+         hunspell-it,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Lomiri on-screen keyboard data files - Italian
@@ -363,7 +363,7 @@ Description: Lomiri on-screen keyboard data files - Japanese
 Package: lomiri-keyboard-latvian
 Architecture: any
 Depends: lomiri-keyboard (= ${binary:Version}),
-         myspell-lv,
+         hunspell-lv,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Lomiri on-screen keyboard data files - Latvian
@@ -372,7 +372,7 @@ Description: Lomiri on-screen keyboard data files - Latvian
 Package: lomiri-keyboard-lithuanian
 Architecture: any
 Depends: lomiri-keyboard (= ${binary:Version}),
-         myspell-lt,
+         hunspell-lt,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Lomiri on-screen keyboard data files - Lithuanian
@@ -407,7 +407,7 @@ Description: Lomiri on-screen keyboard data files - Norwegian Bokmål
 Package: lomiri-keyboard-polish
 Architecture: any
 Depends: lomiri-keyboard (= ${binary:Version}),
-         myspell-pl,
+         hunspell-pl,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Lomiri on-screen keyboard data files - Polish
@@ -443,7 +443,7 @@ Description: Lomiri on-screen keyboard data files - Russian
 Package: lomiri-keyboard-slovenian
 Architecture: any
 Depends: lomiri-keyboard (= ${binary:Version}),
-         myspell-sl,
+         hunspell-sl,
          ${misc:Depends},
          ${shlibs:Depends},
 Description: Lomiri on-screen keyboard data files - Slovenian
