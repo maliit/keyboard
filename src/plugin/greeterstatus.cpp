@@ -22,13 +22,13 @@
 GreeterStatus::GreeterStatus(QObject *parent) : QObject(parent)
 {
     QDBusConnection connection = QDBusConnection::sessionBus();
-    QDBusInterface greeterPropsIface("com.canonical.UnityGreeter",
-                                     "/",
+    QDBusInterface greeterPropsIface("com.lomiri.LomiriGreeter",
+                                     "/com/lomiri/LomiriGreeter",
                                      "org.freedesktop.DBus.Properties");
-    QDBusReply<QVariant> reply = greeterPropsIface.call("Get", "com.canonical.UnityGreeter", "IsActive");
+    QDBusReply<QVariant> reply = greeterPropsIface.call("Get", "com.lomiri.LomiriGreeter", "IsActive");
     m_greeterActive = reply.isValid() && reply.value().toBool();
-    connection.connect("com.canonical.UnityGreeter",
-                       "/",
+    connection.connect("com.lomiri.LomiriGreeter",
+                       "/com/lomiri/LomiriGreeter",
                        "org.freedesktop.DBus.Properties",
                        "PropertiesChanged",
                        this,
@@ -44,7 +44,7 @@ void GreeterStatus::greeterPropertiesChanged(const QString &interface, const QVa
 {
     Q_UNUSED(invalidated);
 
-    if (interface == "com.canonical.UnityGreeter") {
+    if (interface == "com.lomiri.LomiriGreeter") {
         if (changed.contains("IsActive")) {
             m_greeterActive = changed.value("IsActive").toBool();
             Q_EMIT greeterActiveChanged();

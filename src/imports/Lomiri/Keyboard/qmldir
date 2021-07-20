@@ -1,0 +1,2 @@
+module Lomiri.Keyboard
+plugin lomiri-keyboard-qml

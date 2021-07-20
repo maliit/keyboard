@@ -41,10 +41,9 @@ public:
     Hunspell(const char *, const char *, const char * = NULL) : encoding("UTF-8") {}
     int add_dic (const char *, const char * = NULL) { return 0; }
     char *get_dic_encoding() { return encoding.data(); }
-    int spell(const char *, int * = NULL, char ** = NULL) { return 1; }
-    int suggest(char *** lst, const char *) { if (lst) { *lst = NULL; } return 0; }
-    void free_list(char ***, int) {}
-    int add(const char *) { return 0; }
+    bool spell(const std::string&, int* = NULL, std::string* = NULL) { return true; }
+    std::vector<std::string> suggest(const std::string&) { return std::vector<std::string>(); }
+    int add(const std::string&) { return 0; }
 private:
     // Using QByteArray here instead of just returning "UTF-8" in get_dic_encoding
     // to avoid a following warning:
@@ -108,7 +107,7 @@ void SpellCheckerPrivate::addUserDictionary(const QString &user_dictionary)
         if (file.open(QFile::ReadOnly)) {
             QTextStream stream(&file);
             while (!stream.atEnd()) {
-                hunspell->add(codec->fromUnicode(stream.readLine()));
+                hunspell->add(codec->fromUnicode(stream.readLine()).toStdString());
             }
         }
     }
@@ -191,7 +190,7 @@ bool SpellChecker::spell(const QString &word)
         return true;
     }
 
-    return d->hunspell->spell(d->codec->fromUnicode(word));
+    return d->hunspell->spell(d->codec->fromUnicode(word).toStdString());
 }
 
 
@@ -208,22 +207,18 @@ QStringList SpellChecker::suggest(const QString &word,
         return QStringList();
     }
 
-    char** suggestions = NULL;
-    const int suggestions_count = d->hunspell->suggest(&suggestions, d->codec->fromUnicode(word));
-
-    // Less than zero means some error.
-    if (suggestions_count < 0) {
-        qWarning() << __PRETTY_FUNCTION__ << ": Failed to get suggestions for" << word << ".";
-        return QStringList();
-    }
+    auto suggestions = d->hunspell->suggest(
+                                d->codec->fromUnicode(word).toStdString());
 
     QStringList result;
-    const int final_limit((limit < 0) ? suggestions_count : qMin(limit, suggestions_count));
 
-    for (int index(0); index < final_limit; ++index) {
-        result << d->codec->toUnicode(suggestions[index]);
+    for (auto const & s: suggestions) {
+        if (result.size() == limit)
+            break;
+
+        result.append(d->codec->toUnicode(s.data(), s.size()));
     }
-    d->hunspell->free_list(&suggestions, suggestions_count);
+
     return result;
 }
 
@@ -273,7 +268,7 @@ void SpellChecker::updateWord(const QString &word)
     }
 
     // Non-zero return value means some error.
-    if (d->hunspell->add(d->codec->fromUnicode(word))) {
+    if (d->hunspell->add(d->codec->fromUnicode(word).toStdString())) {
         qWarning() << __PRETTY_FUNCTION__ << ": Failed to add '" << word << "' to user dictionary.";
     }
 }

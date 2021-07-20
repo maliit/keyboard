@@ -1,6 +1,6 @@
 CONFIG += ordered 
 TEMPLATE = subdirs
-SUBDIRS = Ubuntu
+SUBDIRS = Lomiri
 
 
 

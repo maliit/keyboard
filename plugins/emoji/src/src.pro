@@ -25,7 +25,7 @@ TARGET          = $$qtLibraryTarget(emojiplugin)
 EXAMPLE_FILES = emojiplugin.json
 
 # install
-target.path = $${UBUNTU_KEYBOARD_LIB_DIR}/emoji/
+target.path = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/emoji/
 INSTALLS += target
 
 OTHER_FILES += \

@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(mkplugin)
 EXAMPLE_FILES = macedonianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/mk/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/mk/
 
 OTHER_FILES += \
     macedonianplugin.json \

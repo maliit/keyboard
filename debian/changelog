@@ -1,3 +1,8 @@
+lomiri-keyboard (1.0) UNRELEASED; urgency=medium
+
+
+ -- Ratchanan Srirattanamet <ratchanan@ubports.com>  Mon, 05 Jul 2021 15:21:20 +0700
+
 ubuntu-keyboard (0.100+15.04+ubports) xenial; urgency=medium
 
   [ Masoud Abkenar ]

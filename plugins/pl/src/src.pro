@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(plplugin)
 EXAMPLE_FILES = polishplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/pl/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/pl/
 
 lang_db_pl.commands += \
   rm -f $$PWD/database_pl.db && \

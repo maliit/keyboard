@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(ruplugin)
 EXAMPLE_FILES = russianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/ru/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/ru/
 
 lang_db_ru.commands += \
   rm -f $$PWD/database_ru.db && \

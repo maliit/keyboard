@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(bgplugin)
 EXAMPLE_FILES = bulgarianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/bg/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/bg/
 
 lang_db_bg.commands += \
   rm -f $$PWD/database_bg.db && \

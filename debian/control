@@ -1,9 +1,11 @@
-Source: ubuntu-keyboard
+Source: lomiri-keyboard
 Section: libs
 Priority: optional
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Maintainer: UBports Developers <developers@ubports.com>
 XSBC-Original-Maintainer: Michael Hasselmann <michaelh@openismus.com>
 Build-Depends: debhelper (>= 9),
+               dh-migrations,
+               dh-python,
                doxygen,
                libanthy-dev,
                libchewing3-dev,
@@ -12,7 +14,7 @@ Build-Depends: debhelper (>= 9),
                libglib2.0-dev,
                libgsettings-qt-dev,
                libhunspell-dev,
-               libpinyin7-dev,
+               libpinyin13-dev,
                libpresage-dev,
                libxml2-utils,
                maliit-framework-dev (>= 0.99.0+git20130615+97e8335-0ubuntu3),
@@ -25,32 +27,30 @@ Build-Depends: debhelper (>= 9),
                qtdeclarative5-dev,
                qtdeclarative5-private-dev,
                qml-module-qtmultimedia,
-               qml-module-ubuntu-components,
+               qml-module-lomiri-components,
                xvfb,
                presage,
 Standards-Version: 3.9.5
-Homepage: https://launchpad.net/ubuntu-keyboard
-# If you aren't a member of ~phablet-team but need to upload packaging changes,
-# just go ahead.  ~phablet-team will notice and sync up the code again.
-Vcs-Bzr: https://code.launchpad.net/~phablet-team/ubuntu-keyboard/trunk
+Homepage: https://gitlab.com/ubports/core/lomiri-keyboard
+Vcs-Git: https://gitlab.com/ubports/core/lomiri-keyboard.git
 X-Ubuntu-Use-Langpack: yes
 
-Package: ubuntu-keyboard
+Package: lomiri-keyboard
 Architecture: any
 Depends: maliit-framework (>= 0.99.0+git20130615+97e8335-0ubuntu3),
          qml-module-qtquick-window2,
 # Because of native interface features used by MirInputRegionUpdater which only
 # newer qtubuntu implements
          qtubuntu-desktop (>= 0.64) | qtubuntu-android (>= 0.64) | libqt5gui5 | libqt5gui5-gles,
-         ubuntu-keyboard-data (>= ${source:Version}),
-         ubuntu-keyboard-english (>= ${source:Version}),
+         lomiri-keyboard-data (>= ${source:Version}),
+         lomiri-keyboard-english (>= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
 Replaces: ubuntu-touch-session (<< 0.109),
 Breaks: ubuntu-touch-session (<< 0.109),
         unity8 (<< 8.13),
-Description: Ubuntu on-screen keyboard
- Ubuntu Keyboard based on Maliit-Keyboard
+Description: Lomiri on-screen keyboard
+ Lomiri Keyboard based on Maliit-Keyboard
  .
  Maliit provides a flexible and cross-platform input method framework. It has a
  plugin-based client-server architecture where applications act as clients and
@@ -58,469 +58,469 @@ Description: Ubuntu on-screen keyboard
  link currently uses D-Bus. Maliit is an open source framework (LGPL 2) with
  open source plugins (BSD).
  .
- Ubuntu-Keyboard on-screen keyboard is a Maliit plugin.
+ Lomiri-Keyboard on-screen keyboard is a Maliit plugin.
 
-Package: ubuntu-keyboard-data
+Package: lomiri-keyboard-data
 Architecture: all
 Depends: fonts-droid-fallback | fonts-droid | fonts-noto-cjk,
-         qml-module-ubuntu-components,
+         qml-module-lomiri-components,
          ${misc:Depends},
-Description: Ubuntu on-screen keyboard data files
- Data files for the Ubuntu virtual keyboard
+Description: Lomiri on-screen keyboard data files
+ Data files for the Lomiri virtual keyboard
 
-Package: ubuntu-keyboard-dev
+Package: lomiri-keyboard-dev
 Architecture: all
 Depends: ${misc:Depends},
-Description: Ubuntu on-screen keyboard - development files
+Description: Lomiri on-screen keyboard - development files
 
-Package: ubuntu-keyboard-tests
+Package: lomiri-keyboard-tests
 Architecture: any
-Depends: ubuntu-keyboard (>= ${source:Version}),
+Depends: lomiri-keyboard (>= ${source:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard tests
- Tests for the Ubuntu virtual keyboard
+Description: Lomiri on-screen keyboard tests
+ Tests for the Lomiri virtual keyboard
 
-Package: ubuntu-keyboard-autopilot
+Package: lomiri-keyboard-autopilot
 Architecture: all
 Depends: autopilot-qt5 (>= 1.4),
          ${misc:Depends},
-         ${python:Depends},
+         ${python3:Depends},
          python3-evdev,
-         ubuntu-keyboard (>= ${source:Version}),
-         ubuntu-keyboard-arabic (>= ${source:Version}),
-         ubuntu-keyboard-azerbaijani (>= ${source:Version}),
-         ubuntu-keyboard-belarusian (>= ${source:Version}),
-         ubuntu-keyboard-bosnian (>= ${source:Version}),
-         ubuntu-keyboard-catalan (>= ${source:Version}),
-         ubuntu-keyboard-chinese-chewing (>= ${source:Version}),
-         ubuntu-keyboard-chinese-pinyin (>= ${source:Version}),
-         ubuntu-keyboard-croatian (>= ${source:Version}),
-         ubuntu-keyboard-czech (>= ${source:Version}),
-         ubuntu-keyboard-danish (>= ${source:Version}),
-         ubuntu-keyboard-dutch (>= ${source:Version}),
-         ubuntu-keyboard-emoji (>= ${source:Version}),
-         ubuntu-keyboard-english (>= ${source:Version}),
-         ubuntu-keyboard-english-dvorak (>= ${source:Version}),
-         ubuntu-keyboard-persian (>= ${source:Version}),
-         ubuntu-keyboard-finnish (>= ${source:Version}),
-         ubuntu-keyboard-french (>= ${source:Version}),
-         ubuntu-keyboard-german (>= ${source:Version}),
-         ubuntu-keyboard-greek (>= ${source:Version}),
-         ubuntu-keyboard-hebrew (>= ${source:Version}),
-         ubuntu-keyboard-hungarian (>= ${source:Version}),
-         ubuntu-keyboard-icelandic (>= ${source:Version}),
-         ubuntu-keyboard-italian (>= ${source:Version}),
-         ubuntu-keyboard-japanese (>= ${source:Version}),
-         ubuntu-keyboard-latvian (>= ${source:Version}),
-         ubuntu-keyboard-lithuanian (>= ${source:Version}),
-         ubuntu-keyboard-macedonian (>= ${source:Version}),
-         ubuntu-keyboard-korean (>= ${source:Version}),
-         ubuntu-keyboard-norwegian-bokmal (>= ${source:Version}),
-         ubuntu-keyboard-polish (>= ${source:Version}),
-         ubuntu-keyboard-portuguese (>= ${source:Version}),
-         ubuntu-keyboard-romanian (>= ${source:Version}),
-         ubuntu-keyboard-russian (>= ${source:Version}),
-         ubuntu-keyboard-scottish-gaelic (>= ${source:Version}),
-         ubuntu-keyboard-serbian (>= ${source:Version}),
-         ubuntu-keyboard-slovenian (>= ${source:Version}),
-         ubuntu-keyboard-spanish (>= ${source:Version}),
-         ubuntu-keyboard-ukrainian (>= ${source:Version}),
-         ubuntu-keyboard-tests (>= ${source:Version}),
-         ubuntu-ui-toolkit-autopilot
-Description: Tests and emulators package for ubuntu-keyboard
- Autopilot tests for the ubuntu-keyboard package
+         lomiri-keyboard (>= ${source:Version}),
+         lomiri-keyboard-arabic (>= ${source:Version}),
+         lomiri-keyboard-azerbaijani (>= ${source:Version}),
+         lomiri-keyboard-belarusian (>= ${source:Version}),
+         lomiri-keyboard-bosnian (>= ${source:Version}),
+         lomiri-keyboard-catalan (>= ${source:Version}),
+         lomiri-keyboard-chinese-chewing (>= ${source:Version}),
+         lomiri-keyboard-chinese-pinyin (>= ${source:Version}),
+         lomiri-keyboard-croatian (>= ${source:Version}),
+         lomiri-keyboard-czech (>= ${source:Version}),
+         lomiri-keyboard-danish (>= ${source:Version}),
+         lomiri-keyboard-dutch (>= ${source:Version}),
+         lomiri-keyboard-emoji (>= ${source:Version}),
+         lomiri-keyboard-english (>= ${source:Version}),
+         lomiri-keyboard-english-dvorak (>= ${source:Version}),
+         lomiri-keyboard-persian (>= ${source:Version}),
+         lomiri-keyboard-finnish (>= ${source:Version}),
+         lomiri-keyboard-french (>= ${source:Version}),
+         lomiri-keyboard-german (>= ${source:Version}),
+         lomiri-keyboard-greek (>= ${source:Version}),
+         lomiri-keyboard-hebrew (>= ${source:Version}),
+         lomiri-keyboard-hungarian (>= ${source:Version}),
+         lomiri-keyboard-icelandic (>= ${source:Version}),
+         lomiri-keyboard-italian (>= ${source:Version}),
+         lomiri-keyboard-japanese (>= ${source:Version}),
+         lomiri-keyboard-latvian (>= ${source:Version}),
+         lomiri-keyboard-lithuanian (>= ${source:Version}),
+         lomiri-keyboard-macedonian (>= ${source:Version}),
+         lomiri-keyboard-korean (>= ${source:Version}),
+         lomiri-keyboard-norwegian-bokmal (>= ${source:Version}),
+         lomiri-keyboard-polish (>= ${source:Version}),
+         lomiri-keyboard-portuguese (>= ${source:Version}),
+         lomiri-keyboard-romanian (>= ${source:Version}),
+         lomiri-keyboard-russian (>= ${source:Version}),
+         lomiri-keyboard-scottish-gaelic (>= ${source:Version}),
+         lomiri-keyboard-serbian (>= ${source:Version}),
+         lomiri-keyboard-slovenian (>= ${source:Version}),
+         lomiri-keyboard-spanish (>= ${source:Version}),
+         lomiri-keyboard-ukrainian (>= ${source:Version}),
+         lomiri-keyboard-tests (>= ${source:Version}),
+         lomiri-ui-toolkit-autopilot
+Description: Tests and emulators package for lomiri-keyboard
+ Autopilot tests for the lomiri-keyboard package
 
 
 
-Package: ubuntu-keyboard-arabic
+Package: lomiri-keyboard-arabic
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-ar,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Arabic
- Data files for the Ubuntu virtual keyboard - Arabic
+Description: Lomiri on-screen keyboard data files - Arabic
+ Data files for the Lomiri virtual keyboard - Arabic
 
-Package: ubuntu-keyboard-azerbaijani
+Package: lomiri-keyboard-azerbaijani
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Azerbaijani
- Data files for the Ubuntu virtual keyboard - Azerbaijani
+Description: Lomiri on-screen keyboard data files - Azerbaijani
+ Data files for the Lomiri virtual keyboard - Azerbaijani
 
-Package: ubuntu-keyboard-belarusian
+Package: lomiri-keyboard-belarusian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Belarusian
- Data files for the Ubuntu virtual keyboard - Belarusian
+Description: Lomiri on-screen keyboard data files - Belarusian
+ Data files for the Lomiri virtual keyboard - Belarusian
 
-Package: ubuntu-keyboard-bosnian
+Package: lomiri-keyboard-bosnian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Bosnian
- Data files for the Ubuntu virtual keyboard - Bosnian
+Description: Lomiri on-screen keyboard data files - Bosnian
+ Data files for the Lomiri virtual keyboard - Bosnian
 
-Package: ubuntu-keyboard-bulgarian
+Package: lomiri-keyboard-bulgarian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-bg,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Bulgarian
- Data files for the Ubuntu virtual keyboard - Bulgarian
+Description: Lomiri on-screen keyboard data files - Bulgarian
+ Data files for the Lomiri virtual keyboard - Bulgarian
 
-Package: ubuntu-keyboard-catalan
+Package: lomiri-keyboard-catalan
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          ${misc:Depends},
-         myspell-ca,
+         hunspell-ca,
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Catalan
- Data files for the Ubuntu virtual keyboard - Catalan
+Description: Lomiri on-screen keyboard data files - Catalan
+ Data files for the Lomiri virtual keyboard - Catalan
 
-Package: ubuntu-keyboard-chinese-chewing
+Package: lomiri-keyboard-chinese-chewing
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
-         ${misc:Depends},
-         ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Chinese Chewing
-
-Package: ubuntu-keyboard-chinese-pinyin
-Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Chinese Pinyin
- Data files for the Ubuntu virtual keyboard - Chinese Pinyin
+Description: Lomiri on-screen keyboard data files - Chinese Chewing
 
-Package: ubuntu-keyboard-croatian
+Package: lomiri-keyboard-chinese-pinyin
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Lomiri on-screen keyboard data files - Chinese Pinyin
+ Data files for the Lomiri virtual keyboard - Chinese Pinyin
+
+Package: lomiri-keyboard-croatian
+Architecture: any
+Depends: lomiri-keyboard (= ${binary:Version}),
 	 myspell-hr
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Croatian
- Data files for the Ubuntu virtual keyboard - Croatian
+Description: Lomiri on-screen keyboard data files - Croatian
+ Data files for the Lomiri virtual keyboard - Croatian
 
-Package: ubuntu-keyboard-czech
+Package: lomiri-keyboard-czech
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-cs
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Czech
- Data files for the Ubuntu virtual keyboard - Czech
+Description: Lomiri on-screen keyboard data files - Czech
+ Data files for the Lomiri virtual keyboard - Czech
 
-Package: ubuntu-keyboard-danish
+Package: lomiri-keyboard-danish
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-da,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Danish
- Data files for the Ubuntu virtual keyboard - Danish
+Description: Lomiri on-screen keyboard data files - Danish
+ Data files for the Lomiri virtual keyboard - Danish
 
-Package: ubuntu-keyboard-dutch
+Package: lomiri-keyboard-dutch
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
-         myspell-nl,
+Depends: lomiri-keyboard (= ${binary:Version}),
+         hunspell-nl,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Dutch
- Data files for the Ubuntu virtual keyboard - Dutch
+Description: Lomiri on-screen keyboard data files - Dutch
+ Data files for the Lomiri virtual keyboard - Dutch
 
-Package: ubuntu-keyboard-emoji
+Package: lomiri-keyboard-emoji
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          qml-module-qtquick-localstorage,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Emoji
- Data files for the Ubuntu virtual keyboard - Emoji
+Description: Lomiri on-screen keyboard data files - Emoji
+ Data files for the Lomiri virtual keyboard - Emoji
 
-Package: ubuntu-keyboard-english
+Package: lomiri-keyboard-english
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-en-us,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - English
- Data files for the Ubuntu virtual keyboard - English
+Description: Lomiri on-screen keyboard data files - English
+ Data files for the Lomiri virtual keyboard - English
 
-Package: ubuntu-keyboard-english-dvorak
+Package: lomiri-keyboard-english-dvorak
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
-         ubuntu-keyboard-english,
+Depends: lomiri-keyboard (= ${binary:Version}),
+         lomiri-keyboard-english,
          hunspell-en-us,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - English Dvorak
- Data files for the Ubuntu virtual keyboard - English Dvorak
+Description: Lomiri on-screen keyboard data files - English Dvorak
+ Data files for the Lomiri virtual keyboard - English Dvorak
 
-Package: ubuntu-keyboard-esperanto
+Package: lomiri-keyboard-esperanto
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-eo,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Esperanto
- Data files for the Ubuntu virtual keyboard - Esperanto
+Description: Lomiri on-screen keyboard data files - Esperanto
+ Data files for the Lomiri virtual keyboard - Esperanto
 
-Package: ubuntu-keyboard-persian
+Package: lomiri-keyboard-persian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-fa,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Persian
- Data files for the Ubuntu virtual keyboard - Persian
+Description: Lomiri on-screen keyboard data files - Persian
+ Data files for the Lomiri virtual keyboard - Persian
 
-Package: ubuntu-keyboard-finnish
+Package: lomiri-keyboard-finnish
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Finnish
- Data files for the Ubuntu virtual keyboard - Finnish
+Description: Lomiri on-screen keyboard data files - Finnish
+ Data files for the Lomiri virtual keyboard - Finnish
 
-Package: ubuntu-keyboard-french
+Package: lomiri-keyboard-french
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-fr,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - French
- Data files for the Ubuntu virtual keyboard - French
+Description: Lomiri on-screen keyboard data files - French
+ Data files for the Lomiri virtual keyboard - French
 
-Package: ubuntu-keyboard-german
+Package: lomiri-keyboard-german
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-de-de,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - German
- Data files for the Ubuntu virtual keyboard - German
+Description: Lomiri on-screen keyboard data files - German
+ Data files for the Lomiri virtual keyboard - German
 
-Package: ubuntu-keyboard-greek
+Package: lomiri-keyboard-greek
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-el-gr,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Greek
- Data files for the Ubuntu virtual keyboard - Greek
+Description: Lomiri on-screen keyboard data files - Greek
+ Data files for the Lomiri virtual keyboard - Greek
 
-Package: ubuntu-keyboard-hebrew
+Package: lomiri-keyboard-hebrew
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-he
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Hebrew
- Data files for the Ubuntu virtual keyboard - Hebrew
+Description: Lomiri on-screen keyboard data files - Hebrew
+ Data files for the Lomiri virtual keyboard - Hebrew
 
-Package: ubuntu-keyboard-hungarian
+Package: lomiri-keyboard-hungarian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-hu,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Hungarian
- Data files for the Ubuntu virtual keyboard - Hungarian
+Description: Lomiri on-screen keyboard data files - Hungarian
+ Data files for the Lomiri virtual keyboard - Hungarian
 
-Package: ubuntu-keyboard-icelandic
+Package: lomiri-keyboard-icelandic
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Icelandic
- Data files for the Ubuntu virtual keyboard - Icelandic
+Description: Lomiri on-screen keyboard data files - Icelandic
+ Data files for the Lomiri virtual keyboard - Icelandic
 
-Package: ubuntu-keyboard-italian
+Package: lomiri-keyboard-italian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
-         myspell-it
+Depends: lomiri-keyboard (= ${binary:Version}),
+         hunspell-it,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Italian
- Data files for the Ubuntu virtual keyboard - Italian
+Description: Lomiri on-screen keyboard data files - Italian
+ Data files for the Lomiri virtual keyboard - Italian
 
-Package: ubuntu-keyboard-japanese
+Package: lomiri-keyboard-japanese
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          anthy,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Japanese
- Data files for the Ubuntu virtual keyboard - Japanese
+Description: Lomiri on-screen keyboard data files - Japanese
+ Data files for the Lomiri virtual keyboard - Japanese
 
-Package: ubuntu-keyboard-latvian
+Package: lomiri-keyboard-latvian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
-         myspell-lv,
+Depends: lomiri-keyboard (= ${binary:Version}),
+         hunspell-lv,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Latvian
- Data files for the Ubuntu virtual keyboard - Latvian
+Description: Lomiri on-screen keyboard data files - Latvian
+ Data files for the Lomiri virtual keyboard - Latvian
 
-Package: ubuntu-keyboard-lithuanian
+Package: lomiri-keyboard-lithuanian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
-         myspell-lt,
+Depends: lomiri-keyboard (= ${binary:Version}),
+         hunspell-lt,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Lithuanian
- Data files for the Ubuntu virtual keyboard - Lithuanian
+Description: Lomiri on-screen keyboard data files - Lithuanian
+ Data files for the Lomiri virtual keyboard - Lithuanian
 
-Package: ubuntu-keyboard-macedonian
+Package: lomiri-keyboard-macedonian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Macedonian
- Data files for the Ubuntu virtual keyboard - Macedonian
+Description: Lomiri on-screen keyboard data files - Macedonian
+ Data files for the Lomiri virtual keyboard - Macedonian
 
-Package: ubuntu-keyboard-korean
+Package: lomiri-keyboard-korean
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-ko,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Korean
- Data files for the Ubuntu virtual keyboard - Korean
+Description: Lomiri on-screen keyboard data files - Korean
+ Data files for the Lomiri virtual keyboard - Korean
 
-Package: ubuntu-keyboard-norwegian-bokmal
+Package: lomiri-keyboard-norwegian-bokmal
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-nb
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Norwegian Bokmål
- Data files for the Ubuntu virtual keyboard - Norwegian Bokmål
+Description: Lomiri on-screen keyboard data files - Norwegian Bokmål
+ Data files for the Lomiri virtual keyboard - Norwegian Bokmål
 
-Package: ubuntu-keyboard-polish
+Package: lomiri-keyboard-polish
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
-         myspell-pl,
+Depends: lomiri-keyboard (= ${binary:Version}),
+         hunspell-pl,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Polish
- Data files for the Ubuntu virtual keyboard - Polish
+Description: Lomiri on-screen keyboard data files - Polish
+ Data files for the Lomiri virtual keyboard - Polish
 
-Package: ubuntu-keyboard-portuguese
+Package: lomiri-keyboard-portuguese
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-pt
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Portuguese
- Data files for the Ubuntu virtual keyboard - Portuguese
+Description: Lomiri on-screen keyboard data files - Portuguese
+ Data files for the Lomiri virtual keyboard - Portuguese
 
-Package: ubuntu-keyboard-romanian
+Package: lomiri-keyboard-romanian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-ro,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Romanian
- Data files for the Ubuntu virtual keyboard - Romanian
+Description: Lomiri on-screen keyboard data files - Romanian
+ Data files for the Lomiri virtual keyboard - Romanian
 
-Package: ubuntu-keyboard-russian
+Package: lomiri-keyboard-russian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-ru,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Russian
- Data files for the Ubuntu virtual keyboard - Russian
+Description: Lomiri on-screen keyboard data files - Russian
+ Data files for the Lomiri virtual keyboard - Russian
 
-Package: ubuntu-keyboard-slovenian
+Package: lomiri-keyboard-slovenian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
-         myspell-sl,
+Depends: lomiri-keyboard (= ${binary:Version}),
+         hunspell-sl,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Slovenian
- Data files for the Ubuntu virtual keyboard - Slovenian
+Description: Lomiri on-screen keyboard data files - Slovenian
+ Data files for the Lomiri virtual keyboard - Slovenian
 
-Package: ubuntu-keyboard-serbian
+Package: lomiri-keyboard-serbian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-sr,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Serbian
- Data files for the Ubuntu virtual keyboard - Serbian
+Description: Lomiri on-screen keyboard data files - Serbian
+ Data files for the Lomiri virtual keyboard - Serbian
 
-Package: ubuntu-keyboard-scottish-gaelic
+Package: lomiri-keyboard-scottish-gaelic
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-gd,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Scottish Gaelic
- Data files for the Ubuntu virtual keyboard - Scottish Gaelic
+Description: Lomiri on-screen keyboard data files - Scottish Gaelic
+ Data files for the Lomiri virtual keyboard - Scottish Gaelic
 
-Package: ubuntu-keyboard-spanish
+Package: lomiri-keyboard-spanish
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-es
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Spanish
- Data files for the Ubuntu virtual keyboard - Spanish
+Description: Lomiri on-screen keyboard data files - Spanish
+ Data files for the Lomiri virtual keyboard - Spanish
 
-Package: ubuntu-keyboard-swedish
+Package: lomiri-keyboard-swedish
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          hunspell-sv | hunspell-sv-se,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Swedish
- Data files for the Ubuntu virtual keyboard - Swedish
+Description: Lomiri on-screen keyboard data files - Swedish
+ Data files for the Lomiri virtual keyboard - Swedish
 
-Package: ubuntu-keyboard-swiss-french
+Package: lomiri-keyboard-swiss-french
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
         ${misc:Depends},
         ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Swiss French
- Data files for the Ubuntu virtual keyboard - Swiss French
+Description: Lomiri on-screen keyboard data files - Swiss French
+ Data files for the Lomiri virtual keyboard - Swiss French
 
-Package: ubuntu-keyboard-thai
+Package: lomiri-keyboard-thai
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
         ${misc:Depends},
         ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Thai
- Data files for the Ubuntu virtual keyboard - Thai
+Description: Lomiri on-screen keyboard data files - Thai
+ Data files for the Lomiri virtual keyboard - Thai
 
-Package: ubuntu-keyboard-turkish
+Package: lomiri-keyboard-turkish
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
         ${misc:Depends},
         ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Turkish
- Data files for the Ubuntu virtual keyboard - Turkish
+Description: Lomiri on-screen keyboard data files - Turkish
+ Data files for the Lomiri virtual keyboard - Turkish
 
-Package: ubuntu-keyboard-ukrainian
+Package: lomiri-keyboard-ukrainian
 Architecture: any
-Depends: ubuntu-keyboard (= ${binary:Version}),
+Depends: lomiri-keyboard (= ${binary:Version}),
          myspell-uk,
          ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - Ukrainian
- Data files for the Ubuntu virtual keyboard - Ukrainian
+Description: Lomiri on-screen keyboard data files - Ukrainian
+ Data files for the Lomiri virtual keyboard - Ukrainian
 
-Package: qtdeclarative5-ubuntu-keyboard-extensions0.1
+Package: qml-module-lomiri-keyboard
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-Description: Ubuntu on-screen keyboard data files - QML plugin
- QMl extension for the Ubuntu virtual keyboard
+Description: Lomiri on-screen keyboard data files - QML plugin
+ QMl extension for the Lomiri virtual keyboard

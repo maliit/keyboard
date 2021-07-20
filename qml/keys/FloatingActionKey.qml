@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import Ubuntu.Components 1.3
+import Lomiri.Components 1.3
 
 AbstractButton {
     id: floatingActionKey
@@ -36,8 +36,8 @@ AbstractButton {
 
         Behavior on color {
             ColorAnimation {
-                easing: UbuntuAnimation.StandardEasing
-                duration: UbuntuAnimation.BriskDuration
+                easing: LomiriAnimation.StandardEasing
+                duration: LomiriAnimation.BriskDuration
             }
         }
     }

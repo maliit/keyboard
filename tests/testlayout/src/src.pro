@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(testlayoutplugin)
 EXAMPLE_FILES = testlayoutplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_TEST_DIR}/testlayout/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_TEST_DIR}/testlayout/
 
 lang_db_testlayout.commands += \
   rm -f $$PWD/database_testlayout.db && \

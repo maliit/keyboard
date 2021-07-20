@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(daplugin)
 EXAMPLE_FILES = danishplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/da/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/da/
 
 lang_db_da.commands += \
   rm -f $$PWD/database_da.db && \

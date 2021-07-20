@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(arplugin)
 EXAMPLE_FILES = arabicplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/ar/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/ar/
 
 lang_db_ar.commands += \
   rm -f $$PWD/database_ar.db && \

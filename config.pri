@@ -27,7 +27,7 @@ isEmpty(LIBDIR) {
 }
 
 isEmpty(MALIIT_DEFAULT_PROFILE) {
-    MALIIT_DEFAULT_PROFILE = ubuntu
+    MALIIT_DEFAULT_PROFILE = lomiri
 }
 
 isEmpty(HUNSPELL_DICT_PATH) {
@@ -48,16 +48,20 @@ enable-opengl {
     DEFINES += MALIIT_KEYBOARD_HAVE_OPENGL
 }
 
-UBUNTU_KEYBOARD_PACKAGENAME = ubuntu-keyboard
-UBUNTU_KEYBOARD_VERSION = $$system(cat $$PWD/VERSION)
-UBUNTU_KEYBOARD_DATA_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu"
-UBUNTU_KEYBOARD_LIB_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/lib"
-UBUNTU_KEYBOARD_TEST_DIR = "/usr/share/maliit/tests/ubuntu-keyboard"
-UBUNTU_KEYBOARD_HEADERS_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/include"
+LOMIRI_KEYBOARD_PACKAGENAME = lomiri-keyboard
+LOMIRI_KEYBOARD_VERSION = $$system(cat $$PWD/VERSION)
+LOMIRI_KEYBOARD_DATA_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/lomiri-keyboard"
+# FIXME: make it configurable while still has a sensible default
+# on Debian-like multiarch LIBDIR.
+LOMIRI_KEYBOARD_LIB_DIR = "$${PREFIX}/lib/lomiri-keyboard"
+LOMIRI_KEYBOARD_PLUGIN_DIR = "$${LOMIRI_KEYBOARD_LIB_DIR}/plugins"
+LOMIRI_KEYBOARD_TEST_DIR = "/usr/share/maliit/tests/lomiri-keyboard"
+LOMIRI_KEYBOARD_HEADERS_DIR = "$${PREFIX}/include/lomiri-keyboard"
 
 PINYIN_DATA_DIR = "$$system(pkg-config --variable pkgdatadir libpinyin)/data"
 
-DEFINES += UBUNTU_KEYBOARD_DATA_DIR=\\\"$${UBUNTU_KEYBOARD_DATA_DIR}\\\"
+DEFINES += LOMIRI_KEYBOARD_DATA_DIR=\\\"$${LOMIRI_KEYBOARD_DATA_DIR}\\\"
+DEFINES += LOMIRI_KEYBOARD_PLUGIN_DIR=\\\"$${LOMIRI_KEYBOARD_PLUGIN_DIR}\\\"
 DEFINES += MALIIT_PLUGINS_DATA_DIR=\\\"$${MALIIT_PLUGINS_DATA_DIR}\\\"
 DEFINES += PINYIN_DATA_DIR=\\\"$${PINYIN_DATA_DIR}\\\"
 
@@ -91,10 +95,10 @@ defineReplace(maliitDynamicLib) {
     return($${MALIIT_DYNAMIC_PREFIX}$${1}$${MALIIT_DYNAMIC_SUFFIX})
 }
 
-UBUNTU_KEYBOARD_TARGET = ubuntu-keyboard
-UBUNTU_KEYBOARD_VIEW_TARGET = ubuntu-keyboard-view
-UBUNTU_KEYBOARD_PLUGIN_TARGET = ubuntu-keyboard-plugin
+LOMIRI_KEYBOARD_TARGET = lomiri-keyboard
+LOMIRI_KEYBOARD_VIEW_TARGET = lomiri-keyboard-view
+LOMIRI_KEYBOARD_PLUGIN_TARGET = lomiri-keyboard-plugin
 
-UBUNTU_KEYBOARD_LIB = src/lib/$$maliitStaticLib($${UBUNTU_KEYBOARD_TARGET})
-UBUNTU_KEYBOARD_VIEW_LIB = src/view/$$maliitStaticLib($${UBUNTU_KEYBOARD_VIEW_TARGET})
-UBUNTU_KEYBOARD_PLUGIN_LIB = src/plugin/$$maliitDynamicLib($${UBUNTU_KEYBOARD_PLUGIN_TARGET})
+LOMIRI_KEYBOARD_LIB = src/lib/$$maliitStaticLib($${LOMIRI_KEYBOARD_TARGET})
+LOMIRI_KEYBOARD_VIEW_LIB = src/view/$$maliitStaticLib($${LOMIRI_KEYBOARD_VIEW_TARGET})
+LOMIRI_KEYBOARD_PLUGIN_LIB = src/plugin/$$maliitDynamicLib($${LOMIRI_KEYBOARD_PLUGIN_TARGET})

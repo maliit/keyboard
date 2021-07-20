@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 
-PROJECTNAME = ubuntu-keyboard
+PROJECTNAME = lomiri-keyboard
 
 SOURCECODE = ../qml/*.qml \
              ../qml/keys/*.qml \ 

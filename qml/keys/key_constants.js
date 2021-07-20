@@ -86,4 +86,4 @@ var tabletKeyboardHeightPortrait = 0.31; // percent of screen
 var tabletKeyboardHeightLandscape = 0.34; // percent of screen
 
 /* for UITK Components */
-var toolkitTheme = "Ubuntu.Components.Themes.Ambiance" 
+var toolkitTheme = "Lomiri.Components.Themes.Ambiance" 

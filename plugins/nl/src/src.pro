@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(nlplugin)
 EXAMPLE_FILES = dutchplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/nl/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/nl/
 
 lang_db_nl.commands += \
   rm -f $$PWD/database_nl.db && \

@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(hrplugin)
 EXAMPLE_FILES = croatianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/hr/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/hr/
 
 lang_db_hr.commands += \
   rm -f $$PWD/database_hr.db && \

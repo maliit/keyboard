@@ -1,0 +1,13 @@
+usr/share/glib-2.0/schemas/
+usr/share/maliit/plugins/lomiri-keyboard/images/
+usr/share/maliit/plugins/lomiri-keyboard/keys/
+usr/share/maliit/plugins/lomiri-keyboard/languages/
+usr/share/maliit/plugins/lomiri-keyboard/styles/
+usr/share/maliit/plugins/lomiri-keyboard/ActionsToolbar.qml
+usr/share/maliit/plugins/lomiri-keyboard/FloatingActions.qml
+usr/share/maliit/plugins/lomiri-keyboard/Keyboard.qml
+usr/share/maliit/plugins/lomiri-keyboard/KeyboardContainer.qml
+usr/share/maliit/plugins/lomiri-keyboard/WordRibbon.qml
+usr/share/maliit/plugins/lomiri-keyboard/api_tests.qml
+usr/share/maliit/plugins/lomiri-keyboard/constants.js
+usr/share/maliit/plugins/lomiri-keyboard/theme_loader.js

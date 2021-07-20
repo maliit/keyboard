@@ -9,10 +9,10 @@ TARGET = ut_repeat-backspace
 QT = core testlib gui
 
 LIBS += \
-    $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_PLUGIN_LIB} \
-    $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB} \
+    $${TOP_BUILDDIR}/$${LOMIRI_KEYBOARD_PLUGIN_LIB} \
+    $${TOP_BUILDDIR}/$${LOMIRI_KEYBOARD_LIB} \
     -lgsettings-qt
-PRE_TARGETDEPS += $${TOP_BUILDDIR}/$${UBUNTU_KEYBOARD_LIB}
+PRE_TARGETDEPS += $${TOP_BUILDDIR}/$${LOMIRI_KEYBOARD_LIB}
 
 HEADERS += \
     ../common/wordengineprobe.h \

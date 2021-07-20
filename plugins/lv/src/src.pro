@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(lvplugin)
 EXAMPLE_FILES = latvianplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/lv/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/lv/
 
 lang_db_lv.commands += \
   rm -f $$PWD/database_lv.db && \

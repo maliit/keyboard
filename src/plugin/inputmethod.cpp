@@ -86,7 +86,7 @@ Qt::ScreenOrientation rotationAngleToScreenOrientation(int angle)
     }
 }
 
-const QString g_maliit_keyboard_qml(UBUNTU_KEYBOARD_DATA_DIR "/Keyboard.qml");
+const QString g_maliit_keyboard_qml(LOMIRI_KEYBOARD_DATA_DIR "/Keyboard.qml");
 
 } // unnamed namespace
 

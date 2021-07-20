@@ -1,0 +1,7 @@
+# Because dh-systemd does not support user units for compat levels below 12, we manually make the WantedBy link
+# FIXME: drop this once we bump DH compat level to 12 or higher
+
+/usr/lib/systemd/user/maliit-server.service /usr/lib/systemd/user/lomiri-full-greeter.service.wants/maliit-server.service
+/usr/lib/systemd/user/maliit-server.service /usr/lib/systemd/user/lomiri-full-shell.service.wants/maliit-server.service
+/usr/lib/systemd/user/maliit-server.service /usr/lib/systemd/user/lomiri-greeter.service.wants/maliit-server.service
+/usr/lib/systemd/user/maliit-server.service /usr/lib/systemd/user/lomiri-shell.service.wants/maliit-server.service

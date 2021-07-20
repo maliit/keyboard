@@ -1,11 +1,11 @@
-# French (Canada) translation for ubuntu-keyboard
+# French (Canada) translation for lomiri-keyboard
 # Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
-# This file is distributed under the same license as the ubuntu-keyboard package.
+# This file is distributed under the same license as the lomiri-keyboard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ubuntu-keyboard\n"
+"Project-Id-Version: lomiri-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-18 19:28+0000\n"
 "PO-Revision-Date: 2021-03-13 12:33+0000\n"

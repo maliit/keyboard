@@ -40,7 +40,7 @@ var load = function (jsonName){
         }
     };
 
-    xhr.open('GET', "styles/ubuntu/themes/" + jsonName + ".json", true);
+    xhr.open('GET', "styles/lomiri/themes/" + jsonName + ".json", true);
     xhr.send();
 
 }

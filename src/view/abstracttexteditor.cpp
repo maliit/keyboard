@@ -620,6 +620,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         
     case Key::ActionCommand:
         invokeAction(text, QKeySequence::fromString(key.commandSequence()));
+        break;
 
     case Key::ActionLeftLayout:
         Q_EMIT leftLayoutSelected();

@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(deplugin)
 EXAMPLE_FILES = germanplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/de/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/de/
 
 lang_db_de.commands += \
   rm -f $$PWD/database_de.db && \

@@ -6,7 +6,7 @@ include($${TOP_SRCDIR}/config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-lang_eo.path = "$$UBUNTU_KEYBOARD_LIB_DIR/eo/"
+lang_eo.path = "$$LOMIRI_KEYBOARD_PLUGIN_DIR/eo/"
 lang_eo.files = *.qml *.js
 
 INSTALLS += lang_eo

@@ -6,7 +6,7 @@ include($${TOP_SRCDIR}/config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-lang_emoji.path = "$${UBUNTU_KEYBOARD_LIB_DIR}/emoji/"
+lang_emoji.path = "$${LOMIRI_KEYBOARD_PLUGIN_DIR}/emoji/"
 lang_emoji.files = *.qml *.js
 
 INSTALLS += lang_emoji

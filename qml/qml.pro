@@ -3,17 +3,17 @@ include(../config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-qml.path = $$UBUNTU_KEYBOARD_DATA_DIR
+qml.path = $$LOMIRI_KEYBOARD_DATA_DIR
 qml.files = *.qml *.js
 
-qml_keys.path = "$$UBUNTU_KEYBOARD_DATA_DIR/keys"
+qml_keys.path = "$$LOMIRI_KEYBOARD_DATA_DIR/keys"
 qml_keys.files = keys/*.qml keys/*.js keys/qmldir
 
-qml_languages.path = "$$UBUNTU_KEYBOARD_DATA_DIR/languages"
+qml_languages.path = "$$LOMIRI_KEYBOARD_DATA_DIR/languages"
 qml_languages.files = languages/*.qml languages/*.js
 
 
-images.path = "$$UBUNTU_KEYBOARD_DATA_DIR/images"
+images.path = "$$LOMIRI_KEYBOARD_DATA_DIR/images"
 images.files = images/*.png images/*.sci images/*.svg
 
 INSTALLS += qml qml_keys qml_languages images

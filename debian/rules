@@ -8,11 +8,11 @@ export PKG_CONFIG_PATH=/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig
 endif
 
 %:
-	dh $@ --fail-missing --with python3 --parallel
+	dh $@ --fail-missing --with python3,migrations --parallel
 
 override_dh_auto_configure:
 	dh_auto_configure -- -recursive \
-	                     MALIIT_DEFAULT_PROFILE=ubuntu \
+	                     MALIIT_DEFAULT_PROFILE=lomiri \
 	                     CONFIG+=debug \
 	                     CONFIG+=nodoc \
 	                     CONFIG+=enable-presage \

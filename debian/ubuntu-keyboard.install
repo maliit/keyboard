@@ -1,5 +1,0 @@
-debian/server.conf etc/xdg/maliit.org/
-usr/lib/maliit/plugins/libubuntu-keyboard-plugin.so
-usr/share/maliit/plugins/com/ubuntu/lib/libwesternsupport.a
-usr/share/locale/*/LC_MESSAGES/ubuntu-keyboard.mo
-debian/upstart/maliit-server.conf /usr/share/upstart/sessions/

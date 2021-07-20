@@ -59,8 +59,8 @@ const QLatin1String THEME_KEY = QLatin1String("theme");
  */
 KeyboardSettings::KeyboardSettings(QObject *parent) :
     QObject(parent)
-  , m_settings(new QGSettings("com.canonical.keyboard.maliit",
-                              "/com/canonical/keyboard/maliit/", this))
+  , m_settings(new QGSettings("com.lomiri.keyboard.maliit",
+                              "/com/lomiri/keyboard/maliit/", this))
 {
     QObject::connect(m_settings, SIGNAL(changed(QString)),
                      this, SLOT(settingUpdated(QString)));
@@ -217,7 +217,7 @@ bool KeyboardSettings::stayHidden() const
 
 /*!
  * \brief KeyboardSettings::pluginPaths returns a list of paths containing
- * ubuntu-keyboard layout plugins
+ * lomiri-keyboard layout plugins
  */
 QStringList KeyboardSettings::pluginPaths() const
 {
