@@ -755,3 +755,20 @@ void InputMethod::onPluginPathsChanged(const QStringList& pluginPaths) {
 
     d->updateLanguagesPaths();
 }
+
+void InputMethod::showSystemSettings()
+{
+    // Make sure we are not forcing the inputpanel-shell into the processes we issue
+    auto previous = qgetenv("QT_WAYLAND_SHELL_INTEGRATION");
+    qunsetenv("QT_WAYLAND_SHELL_INTEGRATION");
+
+    if (qgetenv("XDG_CURRENT_DESKTOP") == "KDE") {
+        QDesktopServices::openUrl(QUrl("systemsettings://kcm_virtualkeyboard"));
+    } else {
+        QDesktopServices::openUrl(QUrl("settings://system/language"));
+    }
+
+    if (!previous.isEmpty()) {
+        qputenv("QT_WAYLAND_SHELL_INTEGRATION", previous);
+    }
+}
