@@ -41,6 +41,7 @@ OTHER_FILES += \
     esperantoplugin.json \
     alicio_en_mirlando.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

@@ -40,6 +40,7 @@ OTHER_FILES += \
     persianplugin.json \
     free_ebook.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

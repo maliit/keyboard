@@ -44,6 +44,7 @@ OTHER_FILES += \
     italianplugin.json \
     la_francia_dal_primo_impero.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

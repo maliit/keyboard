@@ -41,6 +41,7 @@ OTHER_FILES += \
     greekplugin.json \
     grazia_deledda-christos_alexandridis.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 
