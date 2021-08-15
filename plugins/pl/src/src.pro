@@ -41,6 +41,7 @@ OTHER_FILES += \
     polishplugin.json \
     ziemia_obiecana_tom_pierwszy_4.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

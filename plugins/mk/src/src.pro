@@ -25,6 +25,7 @@ PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_PLUGIN_DIR}/mk/
 OTHER_FILES += \
     macedonianplugin.json \
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

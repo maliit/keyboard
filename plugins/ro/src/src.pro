@@ -44,6 +44,7 @@ OTHER_FILES += \
     romanianplugin.json \
     amintiri_din_copilarie.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

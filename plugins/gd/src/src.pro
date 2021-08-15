@@ -42,6 +42,7 @@ OTHER_FILES += \
     gaelicplugin.json \
     teacsa.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

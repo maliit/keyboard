@@ -41,6 +41,7 @@ OTHER_FILES += \
     icelandicplugin.json \
     althingi_umraedur_2004_2005.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

@@ -45,6 +45,7 @@ OTHER_FILES += \
     frenchplugin.json \
     les_trois_mousquetaires.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

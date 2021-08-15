@@ -41,6 +41,7 @@ OTHER_FILES += \
     testlayoutplugin.json \
     the_picture_of_dorian_gray.txt
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

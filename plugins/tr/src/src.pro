@@ -41,6 +41,7 @@ OTHER_FILES += \
     free_ebook.txt \
     turkishplugin.json
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 

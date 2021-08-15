@@ -28,6 +28,7 @@ INSTALLS += target
 OTHER_FILES += \
     frenchplugin.json \
 
+CONFIG += link_pkgconfig
 PKGCONFIG += hunspell
 LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 
