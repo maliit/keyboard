@@ -30,6 +30,7 @@
 
 #include "spellchecker.h"
 #include "candidatescallback.h"
+#include "languageplugininterface.h"
 #include <presage.h>
 
 #include <QObject>
@@ -55,8 +56,10 @@ public slots:
     void addOverride(const QString& orig, const QString& overriden);
 
 signals:
-    void newSpellingSuggestions(QString word, QStringList suggestions);
-    void newPredictionSuggestions(QString word, QStringList suggestions);
+    void newSpellingSuggestions(QString word, QStringList suggestions,
+                                int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
+    void newPredictionSuggestions(QString word, QStringList suggestions,
+                                  int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
 
 private:
     std::string m_candidatesContext;

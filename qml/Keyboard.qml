@@ -45,9 +45,10 @@ Item {
     property bool cursorSwipe: false
     property int prevSwipePositionX
     property int prevSwipePositionY
-    property int cursorSwipeDuration: 400
+    property int cursorSwipeDuration: 5000
     property var timerSwipe: swipeTimer
-    
+    property var theme: Theme.defaultTheme
+
     property variant input_method: maliit_input_method
     property variant event_handler: maliit_event_handler
 
@@ -55,6 +56,8 @@ Item {
     onYChanged: fullScreenItem.reportKeyboardVisibleRect();
     onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
+    
+    Component.onCompleted: Theme.load(maliit_input_method.theme)
 
     Item {
         id: canvas
@@ -109,8 +112,8 @@ Item {
             //fix for lp:1277186
             //only filter children when wordRibbon visible
             drag.filterChildren: wordRibbon.visible
-            // Avoid conflict with extended key swipe selection
-            enabled: !canvas.extendedKeysShown
+            // Avoid conflict with extended key swipe selection and cursor swipe mode
+            enabled: !canvas.extendedKeysShown && !fullScreenItem.cursorSwipe
 
             onReleased: {
                 if (keyboardSurface.y > jumpBackThreshold) {
@@ -155,6 +158,24 @@ Item {
                                                       : 0
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
+                //TODO: Sets the theme for all UITK components used in the OSK. Replace those components to remove the need for this.
+                ActionItem {
+                    id: dummy
+                    
+                    visible: false
+                    theme.name: fullScreenItem.theme.toolkitTheme
+                }                
+                
+                ActionsToolbar {
+                    id: toolbar
+                    objectName: "actionsToolbar"
+                    
+                    z: 1
+                    visible: fullScreenItem.cursorSwipe
+                    height: fullScreenItem.tablet ? units.gu(UI.tabletWordribbonHeight) : units.gu(UI.phoneWordribbonHeight)
+                    state: wordRibbon.visible ? "wordribbon" : "top"
+                }
+                    
 
                 Item {
                     id: keyboardComp
@@ -243,6 +264,9 @@ Item {
                         keypad.switchBack = false;
                         maliit_input_method.activeLanguage = maliit_input_method.previousLanguage;
                     }
+                    
+                    // Exit cursor swipe mode when the keyboard hides
+                    fullScreenItem.exitSwipeMode();
                 }
                 // Wait for the first show operation to complete before
                 // allowing hiding, as the conditions when the keyboard
@@ -275,20 +299,65 @@ Item {
                 }
                 keypad.delayedAutoCaps = false;
             }
+            onThemeChanged: Theme.load(target.theme)
+        }
+        
+        FloatingActions {
+            id: floatingActions
+            objectName: "floatingActions"
+            
+            z: 1
+            visible: fullScreenItem.cursorSwipe && !cursorSwipeArea.pressed && !bottomSwipe.pressed
         }
 
         MouseArea {
             id: cursorSwipeArea
-            anchors.fill: parent
+
+            property point lastRelease
+            property bool selectionMode: false
+            
+            anchors {
+                fill: parent
+                topMargin: toolbar.height
+            }
+            
             enabled: cursorSwipe
 
             Rectangle {
                 anchors.fill: parent
                 visible: parent.enabled
-                color: Theme.charKeyPressedColor
+                color: cusrorSwipeArea.selectionMode ? Theme.selectionColor : Theme.charKeyPressedColor
                 opacity: 0.5
+                
+                Label {
+                    visible: !cursorSwipeArea.pressed && !bottomSwipe.pressed
+                    horizontalAlignment: Text.AlignHCenter
+                    // FIXME: selected font color should differ
+                    color: cursorSwipeArea.selectionMode ? Theme.fontColor : Theme.fontColor
+                    wrapMode: Text.WordWrap
+                    
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    
+                    text: cursorSwipeArea.selectionMode ? qsTr("Swipe to move selection") + "\n\n" + qsTr("Double-tap to exit selection mode")
+                                : qsTr("Swipe to move cursor") + "\n\n" + qsTr("Double-tap to enter selection mode")
+                }
             }
-
+            
+            function exitSelectionMode() {
+                selectionMode = false
+                fullScreenItem.timerSwipe.restart()
+            }
+            
+            onSelectionModeChanged: {
+                if (fullScreenItem.cursorSwipe) {
+                    Feedback.keyPressed();
+                }
+            }
+            
             onMouseXChanged: {
                 processSwipe(mouseX, mouseY)
             }
@@ -300,7 +369,100 @@ Item {
             }
 
             onReleased: {
-                fullScreenItem.timerSwipe.restart()
+                if (!cursorSwipeArea.selectionMode) {
+                    fullScreenItem.timerSwipe.restart()
+                } else {
+                    fullScreenItem.timerSwipe.stop()
+                    
+                    // TODO: Disabled word selection until input_method.hasSelection is fixed in QtWebEngine
+                    // ubports/ubuntu-touch#1157 <https://github.com/ubports/ubuntu-touch/issues/1157>
+                    /*
+                    if(!input_method.hasSelection){
+                        fullScreenItem.selectWord()
+                        cursorSwipeArea.selectionMode = false
+                        fullScreenItem.timerSwipe.restart()
+                    }
+                    */
+                }
+
+                lastRelease = Qt.point(mouse.x, mouse.y)
+            }
+            
+            onDoubleClicked: {
+                // We avoid triggering double click accidentally by using a threshold
+                var xReleaseDiff = Math.abs(lastRelease.x - mouse.x)
+                var yReleaseDiff = Math.abs(lastRelease.y - mouse.y)
+
+                var threshold = units.gu(2)
+
+                if (xReleaseDiff < threshold && yReleaseDiff < threshold) {
+                    if (!cursorSwipeArea.selectionMode) {
+                        cursorSwipeArea.selectionMode = true
+                        fullScreenItem.timerSwipe.stop()
+                    } else {
+                        exitSelectionMode();
+                    }
+                }
+            }
+        }
+        
+        SwipeArea{
+            id: bottomSwipe
+            
+            property bool draggingCustom: distance >= units.gu(4)
+            property bool readyToSwipe: false
+
+            height: units.gu(1.5)
+            anchors{
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            direction: SwipeArea.Upwards
+            immediateRecognition: true
+
+            onDraggingCustomChanged:{
+                if (dragging && !fullScreenItem.cursorSwipe) {
+                    readyToSwipe = false
+                    swipeDelay.restart()
+                    fullScreenItem.cursorSwipe = true
+                }
+            }
+
+            onTouchPositionChanged: {
+                if (fullScreenItem.cursorSwipe && readyToSwipe) {
+                    fullScreenItem.processSwipe(touchPosition.x, touchPosition.y)
+                }
+            }
+
+            onPressedChanged: {
+                if (!pressed) {
+                    fullScreenItem.timerSwipe.restart()
+                }else{
+                    fullScreenItem.timerSwipe.stop()
+                }
+            }
+            
+            Timer {
+                id: swipeDelay
+                interval: 100
+                running: false
+                onTriggered: {
+                    fullScreenItem.prevSwipePositionX = bottomSwipe.touchPosition.x
+                    fullScreenItem.prevSwipePositionY = bottomSwipe.touchPosition.y
+                    bottomSwipe.readyToSwipe = true
+                }
+            }
+        }
+
+        Icon {
+            id: bottomHint
+            name: "toolkit_bottom-edge-hint"
+            visible: !fullScreenItem.cursorSwipe
+            width: units.gu(3)
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                bottom: parent.bottom
             }
         }
 
@@ -311,14 +473,29 @@ Item {
         interval: cursorSwipeDuration
         running: false
         onTriggered: {
-            fullScreenItem.cursorSwipe = false
-            // We only enable autocaps after cursor movement has stopped
-            if (keypad.delayedAutoCaps) {
-                keypad.activeKeypadState = "SHIFTED"
-                keypad.delayedAutoCaps = false
-            } else {
-                keypad.activeKeypadState = "NORMAL"
-            }
+            fullScreenItem.exitSwipeMode();
+        }
+    }
+    
+    onCursorSwipeChanged:{
+        if (cursorSwipe && input_method.hasSelection) {
+            cursorSwipeArea.selectionMode = true
+        }
+        
+        Feedback.keyPressed();
+    }
+    
+    function exitSwipeMode() {
+        fullScreenItem.cursorSwipe = false
+        fullScreenItem.timerSwipe.stop()
+        cursorSwipeArea.selectionMode = false
+        
+        // We only enable autocaps after cursor movement has stopped
+        if (keypad.delayedAutoCaps) {
+            keypad.activeKeypadState = "SHIFTED"
+            keypad.delayedAutoCaps = false
+        } else {
+            keypad.activeKeypadState = "NORMAL"
         }
     }
 
@@ -364,20 +541,94 @@ Item {
     function sendEndKey() {
         event_handler.onKeyReleased("", "end");
     }
+    function selectLeft() {
+        event_handler.onKeyReleased("SelectPreviousChar", "keysequence");
+    }
+    function selectRight() {
+        event_handler.onKeyReleased("SelectNextChar", "keysequence");
+    }
+    function selectUp() {
+        event_handler.onKeyReleased("SelectPreviousLine", "keysequence");
+    }
+    function selectDown() {
+        event_handler.onKeyReleased("SelectNextLine", "keysequence");
+    }
+    function selectWord() {
+        event_handler.onKeyReleased("MoveToPreviousWord", "keysequence");
+        event_handler.onKeyReleased("SelectNextWord", "keysequence");
+    }
+    function selectStartOfLine() {
+        event_handler.onKeyReleased("SelectStartOfLine", "keysequence");
+    }
+    function selectEndOfLine() {
+        event_handler.onKeyReleased("SelectEndOfLine", "keysequence");
+    }
+    function selectStartOfDocument() {
+        event_handler.onKeyReleased("SelectStartOfDocument", "keysequence");
+    }
+    function selectEndOfDocument() {
+        event_handler.onKeyReleased("SelectEndOfDocument", "keysequence");
+    }
+    function selectAll() {
+        event_handler.onKeyReleased("SelectAll", "keysequence");
+    }
+    function moveToStartOfLine() {
+        event_handler.onKeyReleased("MoveToStartOfLine", "keysequence");
+    }
+    function moveToEndOfLine() {
+        event_handler.onKeyReleased("MoveToEndOfLine", "keysequence");
+    }
+    function moveToStartOfDocument() {
+        event_handler.onKeyReleased("MoveToStartOfDocument", "keysequence");
+    }
+    function moveToEndOfDocument() {
+        event_handler.onKeyReleased("MoveToEndOfDocument", "keysequence");
+    }
+    function redo() {
+        event_handler.onKeyReleased("Redo", "keysequence");
+    }
+    function undo() {
+        event_handler.onKeyReleased("Undo", "keysequence");
+    }
+    function paste() {
+        event_handler.onKeyReleased("Paste", "keysequence");
+    }
+    function copy() {
+        event_handler.onKeyReleased("Copy", "keysequence");
+    }
+    function cut() {
+        event_handler.onKeyReleased("Cut", "keysequence");
+    }
 
     function processSwipe(positionX, positionY) {
         if (positionX < prevSwipePositionX - Device.gu(1) && input_method.surroundingLeft != "") {
-            sendLeftKey();
+            if(cursorSwipeArea.selectionMode){
+                selectLeft();
+            }else{
+                sendLeftKey();
+            }
             prevSwipePositionX = positionX
         } else if (positionX > prevSwipePositionX + Device.gu(1) && input_method.surroundingRight != "") {
-            sendRightKey();
+            if(cursorSwipeArea.selectionMode){
+                selectRight();
+            }else{
+                sendRightKey();
+            }
             prevSwipePositionX = positionX
         }
         if (positionY < prevSwipePositionY - Device.gu(4)) {
-            sendUpKey();
+            if(cursorSwipeArea.selectionMode){
+                selectUp();
+            }else{
+                sendUpKey();
+            }
             prevSwipePositionY = positionY
         } else if (positionY > prevSwipePositionY + Device.gu(4)) {
-            sendDownKey();
+            if(cursorSwipeArea.selectionMode){
+                selectDown();
+            }else{
+                sendDownKey();
+            }
             prevSwipePositionY = positionY
         }
     }

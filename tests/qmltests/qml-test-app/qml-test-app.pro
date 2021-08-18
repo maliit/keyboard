@@ -3,7 +3,7 @@ include(../../../config.pri)
 TARGET = dummy
 TEMPLATE = lib
 
-qml.path = "$${UBUNTU_KEYBOARD_TEST_DIR}"
+qml.path = "$${LOMIRI_KEYBOARD_TEST_DIR}"
 qml.files = *.qml
 
 INSTALLS += qml

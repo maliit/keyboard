@@ -1,2 +1,15 @@
-/cmake-build-debug/
-/.idea/
+-/cmake-build-debug/
+-/.idea/
+Makefile
+moc_*
+*.moc
+*.o
+*.a
+*.so*
+tests/editor/editor
+tests/language-layout-loading/language-layout-loading
+tests/language-layout-switching/language-layout-switching
+tests/preedit-string/preedit-string
+tests/repeat-backspace/repeat-backspace
+tests/unittests/libdummy.so.1*
+tests/word-candidates/word-candidates

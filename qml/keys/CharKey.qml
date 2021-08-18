@@ -52,7 +52,7 @@ Item {
                                                         : Device.rowMarginPortrait
     property double keyMargin: Device.keyMargins
 
-    // These properties are used by autopilot to determine the visible 
+    // These properties are used by autopilot to determine the visible
     // portion of the key to press
     readonly property double leftOffset: buttonRect.anchors.leftMargin
     readonly property double rightOffset: buttonRect.anchors.rightMargin
@@ -61,9 +61,10 @@ Item {
     property string normalColor: Theme.charKeyColor
     property string pressedColor: Theme.charKeyPressedColor
     property bool borderEnabled: Theme.keyBorderEnabled
-    property color borderColor: Theme.charKeyBorderColor
+    property color borderColor: borderEnabled ? Theme.charKeyBorderColor : "transparent"
+
     // Scale the font so the label fits if a long word is set
-    property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8)) 
+    property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8))
                            * (4 / (label.length >= 2 ? (label.length <= 6 ? label.length + 2.5 : 8) : 4));
     property alias fontFamily: keyLabel.font.family
 
@@ -125,7 +126,7 @@ Item {
 
     // Make it possible for the visible area of the key to differ from the
     // actual key size. This allows us to extend the touch area of the bottom
-    // row of keys all the way to the bottom of the keyboard, whilst 
+    // row of keys all the way to the bottom of the keyboard, whilst
     // maintaining the same visual appearance.
     Item {
         anchors.top: parent.top
@@ -147,7 +148,7 @@ Item {
 
             /// label of the key
             //  the label is also the value subitted to the app
-        
+
             Text {
                 id: keyLabel
                 text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
@@ -166,14 +167,14 @@ Item {
                 elide: text.length <= 4 ? Text.ElideNone : Text.ElideRight
                 visible: !panel.hideKeyLabels
             }
-        
+
             /// shows an annotation
             // used e.g. for indicating the existence of extended keys
-        
+
             Text {
                 id: annotationLabel
                 text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
-        
+
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.topMargin: Device.annotationTopMargin
@@ -231,11 +232,11 @@ Item {
                     currentExtendedKey.commit();
                     currentExtendedKey = null;
                 } else {
-                    extendedKeysSelector.closePopover(); 
+                    extendedKeysSelector.closePopover();
                 }
             } else if(!swipedOut) {
                 // Read this prior to altering autocaps
-                var keyToSend = valueToSubmit; 
+                var keyToSend = valueToSubmit;
                 if (magnifier.currentlyAssignedKey == key) {
                     magnifier.shown = false;
                 }
@@ -280,7 +281,7 @@ Item {
                 return;
             }
             magnifier.currentlyAssignedKey = key
-            magnifier.shown = !noMagnifier
+            magnifier.shown = !noMagnifier && maliit_input_method.enableMagnifier
 
             Feedback.keyPressed();
 

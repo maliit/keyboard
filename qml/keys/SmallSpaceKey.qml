@@ -27,7 +27,7 @@ ActionKey {
     iconNormal: "keyboard_spacebar";
     iconShifted: "keyboard_spacebar";
     iconCapsLock: "keyboard_spacebar";
-
+    
     action: "space"
     switchBackFromSymbols: true
 }

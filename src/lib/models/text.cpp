@@ -109,8 +109,8 @@ void Text::commitPreedit()
     // we would expect the text editor to just update the surrounding text.
     // Raises the question whether we should have commitPreedit here at all,
     // but it does preserve some consistency at least.
-    m_surrounding = m_preedit;
-    m_surrounding_offset = m_preedit.length();
+    m_surrounding += m_preedit;
+    m_surrounding_offset += m_preedit.length();
     m_preedit.clear();
     m_primary_candidate.clear();
     m_face = PreeditDefault;

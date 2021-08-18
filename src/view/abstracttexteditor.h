@@ -179,6 +179,7 @@ private:
     void autoRepeatWordBackspace();
     QString wordLeftOfCursor() const;
 
+    void sendKeySequence(const QString &action, const QKeySequence &sequence);
     void sendKeyPressAndReleaseEvents(int key, Qt::KeyboardModifiers modifiers,
                                       const QString& text = QString());
 

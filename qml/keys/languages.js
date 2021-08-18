@@ -18,6 +18,8 @@ function languageIdToName(languageId)
 {
     if (languageId == "ar")         return qsTr("Arabic");
     if (languageId == "az")         return qsTr("Azerbaijani");
+    if (languageId == "be")         return qsTr("Belarusian");
+    if (languageId == "bg")         return qsTr("Bulgarian");
     if (languageId == "bs")         return qsTr("Bosnian");
     if (languageId == "ca")         return qsTr("Catalan");
     if (languageId == "cs")         return qsTr("Czech");
@@ -26,11 +28,13 @@ function languageIdToName(languageId)
     if (languageId == "emoji")      return qsTr("Emoji");
     if (languageId == "el")         return qsTr("Greek");
     if (languageId == "en")         return qsTr("English");
+    if (languageId == "en@dv")      return qsTr("English\n(Dvorak)");
     if (languageId == "eo")         return qsTr("Esperanto");
     if (languageId == "es")         return qsTr("Spanish");
     if (languageId == "fa")         return qsTr("Persian");
     if (languageId == "fi")         return qsTr("Finnish");
     if (languageId == "fr")         return qsTr("French");
+    if (languageId == "fr-ch")      return qsTr("French\n(Swiss)");
     if (languageId == "gd")         return qsTr("Scottish Gaelic");
     if (languageId == "he")         return qsTr("Hebrew");
     if (languageId == "hr")         return qsTr("Croatian");
@@ -38,7 +42,9 @@ function languageIdToName(languageId)
     if (languageId == "is")         return qsTr("Icelandic");
     if (languageId == "it")         return qsTr("Italian");
     if (languageId == "ja")         return qsTr("Japanese");
+    if (languageId == "lt")         return qsTr("Lithuanian");
     if (languageId == "lv")         return qsTr("Latvian");
+    if (languageId == "mk")         return qsTr("Macedonian");
     if (languageId == "ko")         return qsTr("Korean");
     if (languageId == "nl")         return qsTr("Dutch");
     if (languageId == "nb")         return qsTr("Norwegian");
@@ -49,6 +55,8 @@ function languageIdToName(languageId)
     if (languageId == "sl")         return qsTr("Slovenian");
     if (languageId == "sr")         return qsTr("Serbian");
     if (languageId == "sv")         return qsTr("Swedish");
+    if (languageId == "th")         return qsTr("Thai");
+    if (languageId == "tr")         return qsTr("Turkish");
     if (languageId == "uk")         return qsTr("Ukrainian");
     if (languageId == "zh-hans")         return qsTr("Chinese\n(Pinyin)");
     if (languageId == "zh-hant")         return qsTr("Chinese\n(Chewing)");

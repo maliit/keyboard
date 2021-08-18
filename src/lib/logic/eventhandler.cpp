@@ -102,6 +102,10 @@ void EventHandler::onKeyReleased(QString label, QString action)
         key.setAction(Key::ActionHome);
     else if (action == QLatin1String("end"))
         key.setAction(Key::ActionEnd);
+    else if (action == "keysequence") {
+        key.setCommandSequence(label);
+        key.setAction(Key::ActionKeySequence);
+    }
     else
         key.setAction(Key::ActionInsert);
 
