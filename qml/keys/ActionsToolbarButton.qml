@@ -1,23 +1,21 @@
 import QtQuick 2.9
-import Lomiri.Components 1.3
+import QtQuick.Controls 2.9
 import QtQuick.Layouts 1.3
-import "key_constants.js" as UI
+import QtGraphicalEffects 1.0
+
+import MaliitKeyboard 2.0
 
 AbstractButton {
     id: toolbarButton
     
     /* design */
-    property string normalColor: fullScreenItem.theme.backgroundColor
-    property string pressedColor: fullScreenItem.theme.charKeyPressedColor
+    readonly property string normalColor: Theme.backgroundColor
+    readonly property string pressedColor: Theme.charKeyPressedColor
     
     property bool fullLayout: false
-    
-    anchors {
-        top: parent ? parent.top : undefined
-        bottom: parent ? parent.bottom : undefined
-    }
-    width: buttonsRow.width + units.gu(2)
-    
+
+    width: buttonsRow.width + Device.gu(2)
+
     action: modelData
     
     onClicked: {
@@ -25,7 +23,7 @@ AbstractButton {
         fullScreenItem.timerSwipe.restart();
     }
     
-    style: Rectangle {
+    background: Rectangle {
         color: normalColor
 
         Connections {
@@ -41,8 +39,7 @@ AbstractButton {
 
         Behavior on color {
             ColorAnimation {
-                easing: LomiriAnimation.StandardEasing
-                duration: LomiriAnimation.BriskDuration
+                duration: 333
             }
         }
     }
@@ -50,23 +47,33 @@ AbstractButton {
     RowLayout {
         id: buttonsRow
 
-        spacing: units.gu(0.5)
+        spacing: Device.gu(0.5)
         anchors {
             top: parent.top
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
         }
         
-        Icon {
+        Image {
             id: icon
 
-            Layout.preferredWidth: label.text ? units.gu(2) : units.gu(3)
+            Layout.preferredWidth: label.text ? Device.gu(2) : Device.gu(3)
             Layout.preferredHeight: Layout.preferredWidth
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             
-            name: action.iconName
-            visible: action.iconName
-            color: fullScreenItem.theme.fontColor
+            source: Theme.iconsPath + "/%1.png".arg(action.icon.name)
+            fillMode: Image.PreserveAspectFit
+            visible: false
+        }
+        ColorOverlay {
+            Layout.preferredWidth: label.text ? Device.gu(2) : Device.gu(3)
+            Layout.preferredHeight: Layout.preferredWidth
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+            cached: true
+            source: icon
+            visible: action.icon.name != ""
+            color: Theme.fontColor
         }
         
         Label {
@@ -76,12 +83,12 @@ AbstractButton {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             
             visible: fullLayout
-            font.pixelSize: units.dp(fullScreenItem.tablet ? UI.tabletWordRibbonFontSize : UI.phoneWordRibbonFontSize)
-            font.family: UI.fontFamily
+            font.pixelSize: Device.wordRibbonFontSize
+            font.family: Theme.fontFamily
             font.weight: Font.Normal
             text: action.text
             elide: Text.ElideRight
-            color: fullScreenItem.theme.fontColor
+            color: Theme.fontColor
         }
     }
 }

@@ -1,13 +1,15 @@
 import QtQuick 2.9
-import Lomiri.Components 1.3
+import QtQuick.Controls 2.9
 import QtQuick.Layouts 1.3
-import "keys/"
 
+import MaliitKeyboard 2.0
+
+import "keys/"
 
 Rectangle{
     id: actionsToolbar
 	
-    color: fullScreenItem.theme.backgroundColor
+    color: Theme.backgroundColor
     
     anchors {
         left: parent.left
@@ -44,36 +46,47 @@ Rectangle{
     RowLayout {
         anchors.fill: parent
         
-        ActionBar {
+        RowLayout {
             id: leadingActionBar
             
             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
             Layout.fillHeight: true
-            
-            numberOfSlots: 4
-            delegate: ActionsToolbarButton{fullLayout: fullScreenItem.width > units.gu(80)}
-            actions: [		
-                Action { text: qsTr("Select All"); iconName: "edit-select-all"; onTriggered: fullScreenItem.selectAll(); },
-                Action { text: qsTr("Redo"); iconName: "redo"; onTriggered: fullScreenItem.redo();},
-                Action { text: qsTr("Undo"); iconName: "undo"; onTriggered: fullScreenItem.undo();}
+
+            readonly property list<Action> actions: [
+                Action { text: qsTr("Select All"); icon.name: "edit-select-all"; onTriggered: fullScreenItem.selectAll(); },
+                Action { text: qsTr("Redo"); icon.name: "redo"; onTriggered: fullScreenItem.redo();},
+                Action { text: qsTr("Undo"); icon.name: "undo"; onTriggered: fullScreenItem.undo();}
             ]
+
+            Repeater {
+                delegate: ActionsToolbarButton {
+                    Layout.fillHeight: true
+                    fullLayout: fullScreenItem.width > Device.gu(80)
+                }
+                model: leadingActionBar.actions
+            }
         }
-        
-        ActionBar {
+
+        RowLayout {
             id: trailingActionBar
             
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-            
-            delegate: ActionsToolbarButton{fullLayout: fullScreenItem.width > units.gu(45)}
-            
-            // TODO: Disabled dynamic visibility of copy and cut buttons until input_method.hasSelection is working properly in QtWebEngine
-            // ubports/ubuntu-touch#1157 <https://github.com/ubports/ubuntu-touch/issues/1157>
-            actions: [
-                Action { text: qsTr("Paste"); iconName: "edit-paste"; onTriggered: fullScreenItem.paste(); },
-                Action { text: qsTr("Copy"); iconName: "edit-copy"; /*visible: input_method.hasSelection; */ onTriggered: {fullScreenItem.copy(); fullScreenItem.sendLeftKey();} },
-                Action { text: qsTr("Cut"); iconName: "edit-cut"; /*visible: input_method.hasSelection; */ onTriggered: fullScreenItem.cut(); }
+
+            readonly property list<Action> actions: [
+                // TODO: Disabled dynamic visibility of copy and cut buttons until input_method.hasSelection is working properly in QtWebEngine
+                // ubports/ubuntu-touch#1157 <https://github.com/ubports/ubuntu-touch/issues/1157>
+                Action { text: qsTr("Paste"); icon.name: "edit-paste"; onTriggered: fullScreenItem.paste(); },
+                Action { text: qsTr("Copy"); icon.name: "edit-copy"; enabled: input_method.hasSelection; onTriggered: {fullScreenItem.copy(); fullScreenItem.sendLeftKey();} },
+                Action { text: qsTr("Cut"); icon.name: "edit-cut"; enabled: input_method.hasSelection; onTriggered: fullScreenItem.cut(); }
             ]
+            Repeater {
+                delegate: ActionsToolbarButton {
+                    Layout.fillHeight: true
+                    fullLayout: fullScreenItem.width > Device.gu(45)
+                }
+                model: trailingActionBar.actions
+            }
         }
     }
 }

@@ -30,6 +30,8 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 2.4
+import QtGraphicalEffects 1.0
 
 import MaliitKeyboard 2.0
 
@@ -57,8 +59,6 @@ Item {
     onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
     
-    Component.onCompleted: Theme.load(maliit_input_method.theme)
-
     Item {
         id: canvas
         objectName: "MaliitKeyboard" // Allow us to specify a specific keyboard within autopilot.
@@ -158,13 +158,6 @@ Item {
                                                       : 0
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
-                //TODO: Sets the theme for all UITK components used in the OSK. Replace those components to remove the need for this.
-                ActionItem {
-                    id: dummy
-                    
-                    visible: false
-                    theme.name: fullScreenItem.theme.toolkitTheme
-                }                
                 
                 ActionsToolbar {
                     id: toolbar
@@ -172,7 +165,7 @@ Item {
                     
                     z: 1
                     visible: fullScreenItem.cursorSwipe
-                    height: fullScreenItem.tablet ? units.gu(UI.tabletWordribbonHeight) : units.gu(UI.phoneWordribbonHeight)
+                    height: Device.wordRibbonHeight
                     state: wordRibbon.visible ? "wordribbon" : "top"
                 }
                     
@@ -299,7 +292,6 @@ Item {
                 }
                 keypad.delayedAutoCaps = false;
             }
-            onThemeChanged: Theme.load(target.theme)
         }
         
         FloatingActions {
@@ -307,7 +299,7 @@ Item {
             objectName: "floatingActions"
             
             z: 1
-            visible: fullScreenItem.cursorSwipe && !cursorSwipeArea.pressed && !bottomSwipe.pressed
+            visible: fullScreenItem.cursorSwipe && !cursorSwipeArea.pressed
         }
 
         MouseArea {
@@ -326,14 +318,14 @@ Item {
             Rectangle {
                 anchors.fill: parent
                 visible: parent.enabled
-                color: cusrorSwipeArea.selectionMode ? Theme.selectionColor : Theme.charKeyPressedColor
-                opacity: 0.5
+                color: cursorSwipeArea.selectionMode ? Theme.selectionColor : Theme.charKeyPressedColor
+                opacity: 0.92
                 
                 Label {
-                    visible: !cursorSwipeArea.pressed && !bottomSwipe.pressed
+                    visible: !cursorSwipeArea.pressed
                     horizontalAlignment: Text.AlignHCenter
                     // FIXME: selected font color should differ
-                    color: cursorSwipeArea.selectionMode ? Theme.fontColor : Theme.fontColor
+                    color: cursorSwipeArea.selectionMode ? "#fefefe" : Theme.fontColor
                     wrapMode: Text.WordWrap
                     
                     anchors {
@@ -393,7 +385,7 @@ Item {
                 var xReleaseDiff = Math.abs(lastRelease.x - mouse.x)
                 var yReleaseDiff = Math.abs(lastRelease.y - mouse.y)
 
-                var threshold = units.gu(2)
+                var threshold = Device.gu(2)
 
                 if (xReleaseDiff < threshold && yReleaseDiff < threshold) {
                     if (!cursorSwipeArea.selectionMode) {
@@ -405,67 +397,6 @@ Item {
                 }
             }
         }
-        
-        SwipeArea{
-            id: bottomSwipe
-            
-            property bool draggingCustom: distance >= units.gu(4)
-            property bool readyToSwipe: false
-
-            height: units.gu(1.5)
-            anchors{
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-            direction: SwipeArea.Upwards
-            immediateRecognition: true
-
-            onDraggingCustomChanged:{
-                if (dragging && !fullScreenItem.cursorSwipe) {
-                    readyToSwipe = false
-                    swipeDelay.restart()
-                    fullScreenItem.cursorSwipe = true
-                }
-            }
-
-            onTouchPositionChanged: {
-                if (fullScreenItem.cursorSwipe && readyToSwipe) {
-                    fullScreenItem.processSwipe(touchPosition.x, touchPosition.y)
-                }
-            }
-
-            onPressedChanged: {
-                if (!pressed) {
-                    fullScreenItem.timerSwipe.restart()
-                }else{
-                    fullScreenItem.timerSwipe.stop()
-                }
-            }
-            
-            Timer {
-                id: swipeDelay
-                interval: 100
-                running: false
-                onTriggered: {
-                    fullScreenItem.prevSwipePositionX = bottomSwipe.touchPosition.x
-                    fullScreenItem.prevSwipePositionY = bottomSwipe.touchPosition.y
-                    bottomSwipe.readyToSwipe = true
-                }
-            }
-        }
-
-        Icon {
-            id: bottomHint
-            name: "toolkit_bottom-edge-hint"
-            visible: !fullScreenItem.cursorSwipe
-            width: units.gu(3)
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                bottom: parent.bottom
-            }
-        }
-
     } // canvas
 
     Timer {

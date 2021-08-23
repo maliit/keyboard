@@ -1,6 +1,9 @@
 import QtQuick 2.9
-import Lomiri.Components 1.3
+import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.3
+
+import MaliitKeyboard 2.0
+
 import "keys/"
 
 RowLayout {
@@ -8,18 +11,18 @@ RowLayout {
         top: parent.top
         left: parent.left
         right: parent.right
-        margins: units.gu(1)
-        topMargin: toolbar.height + units.gu(1)
+        margins: Device.gu(1)
+        topMargin: toolbar.height + Device.gu(1)
     }
     
     FloatingActionKey {
         id: startLineButton
         
         Layout.alignment: Qt.AlignLeft
-        Layout.preferredWidth: units.gu(5)
-        Layout.preferredHeight: units.gu(5)
+        Layout.preferredWidth: Device.gu(5)
+        Layout.preferredHeight: Device.gu(5)
         action: Action {
-                iconName: "go-first"
+                icon.name: "go-first"
                 onTriggered: {
                     if (cursorSwipeArea.selectionMode) {
                         fullScreenItem.selectStartOfLine();
@@ -33,12 +36,11 @@ RowLayout {
     FloatingActionKey {
         id: startDocButton
         
-        iconRotation: 90
         Layout.alignment: Qt.AlignLeft
-        Layout.preferredWidth: units.gu(5)
-        Layout.preferredHeight: units.gu(5)
+        Layout.preferredWidth: Device.gu(5)
+        Layout.preferredHeight: Device.gu(5)
         action: Action {
-                iconName: "go-first"
+                icon.name: "go-top"
                 onTriggered: {
                     if (cursorSwipeArea.selectionMode) {
                         fullScreenItem.selectStartOfDocument();
@@ -54,13 +56,13 @@ RowLayout {
         
         Layout.alignment: Qt.AlignHCenter
         Layout.fillWidth: true
-        Layout.minimumWidth: units.gu(5)
-        Layout.maximumWidth: units.gu(20)
-        Layout.preferredHeight: units.gu(5)
+        Layout.minimumWidth: Device.gu(5)
+        Layout.maximumWidth: Device.gu(20)
+        Layout.preferredHeight: Device.gu(5)
         keyFeedback: false
         action: Action {
                 text: qsTr("Done")
-                iconName: "ok"
+                icon.name: "ok"
                 onTriggered: {
                     fullScreenItem.exitSwipeMode()
                 }
@@ -72,12 +74,11 @@ RowLayout {
     FloatingActionKey {
         id: endDocButton
         
-        iconRotation: 90
         Layout.alignment: Qt.AlignRight
-        Layout.preferredWidth: units.gu(5)
-        Layout.preferredHeight: units.gu(5)
+        Layout.preferredWidth: Device.gu(5)
+        Layout.preferredHeight: Device.gu(5)
         action: Action {
-                iconName: "go-last"
+                icon.name: "go-bottom"
                 onTriggered: {
                     if (cursorSwipeArea.selectionMode) {
                         fullScreenItem.selectEndOfDocument();
@@ -92,10 +93,10 @@ RowLayout {
         id: endLineButton
         
         Layout.alignment: Qt.AlignRight
-        Layout.preferredWidth: units.gu(5)
-        Layout.preferredHeight: units.gu(5)
+        Layout.preferredWidth: Device.gu(5)
+        Layout.preferredHeight: Device.gu(5)
         action: Action {
-                iconName: "go-last"
+                icon.name: "go-last"
                 onTriggered: {
                     if (cursorSwipeArea.selectionMode) {
                         fullScreenItem.selectEndOfLine();

@@ -1,5 +1,5 @@
 {
-    "IID": "com.lomiri.LomiriKeyboard.LanguagePluginInterface",
+    "IID": "io.maliit.keyboard.LangaugePlugin.1",
     "MetaData": {
     },
     "className": "ThaiPlugin",

@@ -1,16 +1,17 @@
 import QtQuick 2.9
-import Lomiri.Components 1.3
+import QtQuick.Controls 2.9
+import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
+
+import MaliitKeyboard 2.0
 
 AbstractButton {
     id: floatingActionKey
     
     /* design */
-    property string normalColor: fullScreenItem.theme.charKeyColor
-    property string pressedColor: fullScreenItem.theme.charKeyPressedColor
+    property string normalColor: Theme.charKeyColor
+    property string pressedColor: Theme.charKeyPressedColor
     property bool keyFeedback: true
-    
-    //TODO: Remove if ever more appropriate icons become available that don't need rotation.
-    property alias iconRotation: icon.rotation
     
     onClicked: {
         if (keyFeedback) {
@@ -19,9 +20,9 @@ AbstractButton {
         fullScreenItem.timerSwipe.restart();
     }
 
-    style: Rectangle {
+    background: Rectangle {
         color: normalColor
-        radius: units.gu(0.5)
+        radius: Device.gu(0.5)
 
         Connections {
             target: floatingActionKey
@@ -36,37 +37,52 @@ AbstractButton {
 
         Behavior on color {
             ColorAnimation {
-                easing: LomiriAnimation.StandardEasing
-                duration: LomiriAnimation.BriskDuration
+                duration: 333
             }
         }
     }
 
-    Row {
+    RowLayout {
         id: buttonsRow
 
-        spacing: units.gu(0.5)
+        spacing: Device.gu(0.5)
         anchors {
             centerIn: parent
         }
 
-        Icon {
+        Image {
             id: icon
 
-            name: action.iconName
-            width: label.text ? units.gu(2) : units.gu(3)
-            height: width
-            visible: action.iconName
-            color: fullScreenItem.theme.fontColor
+            Layout.preferredWidth: label.text ? Device.gu(2) : Device.gu(3)
+            Layout.preferredHeight: Layout.preferredWidth
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+            source: Theme.iconsPath + "/%1.png".arg(action.icon.name)
+            fillMode: Image.PreserveAspectFit
+            visible: false
+        }
+
+        ColorOverlay {
+            Layout.preferredWidth: label.text ? Device.gu(2) : Device.gu(3)
+            Layout.preferredHeight: Layout.preferredWidth
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+            cached: true
+            source: icon
+            color: Theme.fontColor
+            visible: action.icon.name != ""
         }
 
         Label {
             id: label
 
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            
             text: action.text
             renderType: Text.QtRendering
             font.weight: Font.Normal
-            color: fullScreenItem.theme.fontColor
+            color: Theme.fontColor
         }
     }
 }
