@@ -47,7 +47,7 @@ Menu {
         id: settingsItem
         text: qsTr("Settings") + "…"
         onClicked: {
-            Qt.openUrlExternally("settings:///system/language")
+            Keyboard.showSystemSettings();
             canvas.languageMenu.close();
             maliit_input_method.hide();
         }

@@ -145,6 +145,8 @@ public:
 
     Q_SLOT void onPluginPathsChanged(const QStringList& pluginPaths);
 
+    Q_INVOKABLE void showSystemSettings();
+
 Q_SIGNALS:
     void contentTypeChanged(TextContentType contentType);
     void activateAutocaps();
