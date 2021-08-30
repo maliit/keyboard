@@ -160,6 +160,8 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/greeterstatus.h
         src/plugin/updatenotifier.cpp
         src/plugin/updatenotifier.h
+        src/plugin/iconprovider.cpp
+        src/plugin/iconprovider.h
         src/plugin/inputmethod.cpp
         src/plugin/inputmethod.h
         src/plugin/inputmethod_p.h
