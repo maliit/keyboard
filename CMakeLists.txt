@@ -378,18 +378,6 @@ install(DIRECTORY data/themes
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(DIRECTORY data/devices
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
-install(FILES data/styles/ubuntu/images/icon_backspace@18.png
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
-        RENAME erase.png)
-install(FILES data/styles/ubuntu/images/icon_enter@18.png
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
-        RENAME keyboard-enter.png)
-install(FILES data/styles/ubuntu/images/language-icon.png
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
-        RENAME language-chooser.png)
-install(FILES qml/images/keyboard_spacebar@27.png
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
-        RENAME keyboard_spacebar.png)
 install(FILES data/schemas/org.maliit.keyboard.maliit.gschema.xml
         DESTINATION share/glib-2.0/schemas/)
 
