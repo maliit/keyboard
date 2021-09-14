@@ -48,16 +48,13 @@ Theme::Theme(const KeyboardSettings *settings, QObject *parent)
 
 Theme::~Theme() = default;
 
-QUrl Theme::iconsPath() const
+QString Theme::iconTheme() const
 {
-    if (m_themeData.contains("iconsDir")) {
-        const auto &icons = m_themeData.value("iconsDir").toString();
-        if (QFileInfo(icons).isRelative())
-            return QUrl().resolved(icons);
-        return QUrl::fromLocalFile(icons);
+    if (m_themeData.contains("iconTheme")) {
+        return m_themeData.value("iconTheme").toString();
     }
 
-    return QUrl::fromLocalFile(MALIIT_KEYBOARD_DATA_DIR "/icons");
+    return QStringLiteral();
 }
 
 QUrl Theme::imagesPath() const

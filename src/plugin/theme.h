@@ -40,7 +40,7 @@ class Theme : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QUrl iconsPath READ iconsPath NOTIFY themeChanged)
+    Q_PROPERTY(QString iconTheme READ iconTheme NOTIFY themeChanged)
     Q_PROPERTY(QUrl imagesPath READ imagesPath NOTIFY themeChanged)
 
     Q_PROPERTY(QColor fontColor READ fontColor NOTIFY themeChanged)
@@ -65,7 +65,7 @@ public:
     explicit Theme(const KeyboardSettings *settings, QObject *parent = nullptr);
     ~Theme() override;
 
-    [[nodiscard]] QUrl iconsPath() const;
+    [[nodiscard]] QString iconTheme() const;
     [[nodiscard]] QUrl imagesPath() const;
 
     [[nodiscard]] QColor fontColor() const;
