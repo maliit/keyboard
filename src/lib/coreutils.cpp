@@ -67,12 +67,6 @@ const QString &maliitKeyboardDataDirectory()
     return data_directory;
 }
 
-const QString &maliitKeyboardStyleProfilesDirectory()
-{
-    static const QString styles_profiles_directory(maliitKeyboardDataDirectory() + "/styles");
-    return styles_profiles_directory;
-}
-
 QString idFromKey(const Key &key)
 {
     switch (key.action()) {
