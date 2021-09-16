@@ -219,8 +219,6 @@ KeyPad {
 
         LanguageKey {
             id: languageMenuButton
-            label: "ABC"
-            shifted: label
             normalColor: Theme.backgroundColor
             borderColor: normalColor
             pressedColor: Theme.backgroundColor
