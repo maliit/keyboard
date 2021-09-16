@@ -6,8 +6,6 @@ option(enable-presage "Use presage to calculate word candidates (maliit-keyboard
 option(enable-hunspell "Use hunspell for error correction (maliit-keyboard-plugin only)" ON)
 option(enable-tests "Build tests" OFF)
 
-set(MALIIT_DEFAULT_PROFILE "ubuntu" CACHE STRING "Default keyboard style")
-
 # Install paths
 include(GNUInstallDirs)
 
@@ -49,8 +47,6 @@ set(MALIIT_KEYBOARD_LIB_SOURCES
         src/lib/logic/eventhandler.cpp
         src/lib/logic/eventhandler.h
         src/lib/logic/languageplugininterface.h
-        src/lib/logic/style.cpp
-        src/lib/logic/style.h
         src/lib/logic/wordengine.cpp
         src/lib/logic/wordengine.h
 
@@ -64,8 +60,6 @@ set(MALIIT_KEYBOARD_LIB_SOURCES
         src/lib/models/keydescription.h
         src/lib/models/layout.cpp
         src/lib/models/layout.h
-        src/lib/models/styleattributes.cpp
-        src/lib/models/styleattributes.h
         src/lib/models/text.cpp
         src/lib/models/text.h
         src/lib/models/wordcandidate.cpp
@@ -372,7 +366,7 @@ install(FILES qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
 
 install(DIRECTORY qml/images
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
-install(DIRECTORY data/styles
+install(DIRECTORY data/sounds
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(DIRECTORY data/themes
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})

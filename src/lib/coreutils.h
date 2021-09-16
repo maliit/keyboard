@@ -37,7 +37,6 @@ namespace CoreUtils {
 const QString &pluginLanguageDirectory();
 const QString &pluginDataDirectory();
 const QString &maliitKeyboardDataDirectory();
-const QString &maliitKeyboardStyleProfilesDirectory();
 QString idFromKey(const Key &key);
 }} // namespace MaliitKeyboard, CoreUtils
 
