@@ -246,7 +246,7 @@ function(abstract_language_plugin _language _full_language)
     set(PLUGIN_SOURCES
             plugins/${_plugindir}/src/${_full_language}plugin.h
             plugins/${_plugindir}/src/${_full_language}plugin.json)
-    if(EXISTS plugins/${_plugindir}/src/${_full_language}plugin.cpp)
+    if(EXISTS ${CMAKE_SOURCE_DIR}/plugins/${_plugindir}/src/${_full_language}plugin.cpp)
         list(APPEND PLUGIN_SOURCES
             plugins/${_plugindir}/src/${_full_language}plugin.cpp)
     endif()
@@ -254,7 +254,7 @@ function(abstract_language_plugin _language _full_language)
         list(APPEND PLUGIN_SOURCES
                 plugins/${_plugindir}/src/${abstract_language_plugin_LANGUAGE_FEATURES}languagefeatures.cpp
                 plugins/${_plugindir}/src/${abstract_language_plugin_LANGUAGE_FEATURES}languagefeatures.h)
-    elseif(EXISTS plugins/${_plugindir}/src/${_full_language}languagefeatures.cpp)
+    elseif(EXISTS ${CMAKE_SOURCE_DIR}/plugins/${_plugindir}/src/${_full_language}languagefeatures.cpp)
         list(APPEND PLUGIN_SOURCES
                 plugins/${_plugindir}/src/${_full_language}languagefeatures.cpp
                 plugins/${_plugindir}/src/${_full_language}languagefeatures.h)
@@ -381,7 +381,7 @@ install(TARGETS maliit-keyboard-plugin maliit-keyboard
 
 install(DIRECTORY qml/keys qml/languages
         DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
-install(FILES qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
+install(FILES qml/ActionsToolbar.qml qml/FloatingActions.qml qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
         DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
 
 install(DIRECTORY qml/images
