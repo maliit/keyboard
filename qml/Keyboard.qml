@@ -354,6 +354,10 @@ Item {
                 processSwipe(mouseX, mouseY)
             }
 
+            onMouseYChanged: {
+                processSwipe(mouseX, mouseY)
+            }
+
             onPressed: {
                 prevSwipePositionX = mouseX
                 prevSwipePositionY = mouseY
@@ -532,14 +536,14 @@ Item {
     }
 
     function processSwipe(positionX, positionY) {
-        if (positionX < prevSwipePositionX - Device.gu(1) && input_method.surroundingLeft != "") {
+        if (positionX < prevSwipePositionX - Device.gu(1)) {
             if(cursorSwipeArea.selectionMode){
                 selectLeft();
             }else{
                 sendLeftKey();
             }
             prevSwipePositionX = positionX
-        } else if (positionX > prevSwipePositionX + Device.gu(1) && input_method.surroundingRight != "") {
+        } else if (positionX > prevSwipePositionX + Device.gu(1)) {
             if(cursorSwipeArea.selectionMode){
                 selectRight();
             }else{

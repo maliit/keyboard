@@ -19,9 +19,9 @@ import QtQuick 2.4
 import MaliitKeyboard 2.0
 
 ActionKey {
-    iconSourceNormal: Theme.imagesPath + "/keyboard-caps-disabled.svg"
-    iconSourceShifted: Theme.imagesPath + "/keyboard-caps-enabled.svg"
-    iconSourceCapsLock: Theme.imagesPath + "/keyboard-caps-locked.svg"
+    iconNormal: "keyboard-caps-disabled"
+    iconShifted: "keyboard-caps-enabled"
+    iconCapsLock: "keyboard-caps-locked"
 
     action: "shift"
 

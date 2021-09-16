@@ -17,7 +17,6 @@
 import QtQuick 2.4
 
 import QtQuick.Controls 2.1
-import QtGraphicalEffects 1.0
 
 import MaliitKeyboard 2.0
 
@@ -26,10 +25,6 @@ CharKey {
     property string iconNormal: ""
     property string iconShifted: ""
     property string iconCapsLock: ""
-
-    property string iconSourceNormal: ""
-    property string iconSourceShifted: ""
-    property string iconSourceCapsLock: ""
 
     noMagnifier: true
     skipAutoCaps: true
@@ -56,24 +51,14 @@ CharKey {
         height: panel.keyHeight
         width: parent.width
 
-        Image {
+        KeyIcon {
             id: iconImage
-            source: iconSourceNormal !== "" ? iconSourceNormal
-                                            : iconNormal ? Theme.iconsPath + "/%1.png".arg(iconNormal)
-                                                         : ""
-            property color color: actionKeyRoot.colorNormal
+            name: iconNormal
+            color: actionKeyRoot.colorNormal
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -actionKeyRoot.rowMargin / 2 - Device.gu(0.15)
             height: actionKeyRoot.fontSize
-            fillMode: Image.PreserveAspectFit
-            visible: false
-        }
-        ColorOverlay {
-            cached: true
-            anchors.fill: iconImage
-            source: iconImage
-            color: iconImage.color
-            visible: (label == "" && !panel.hideKeyLabels)
+            width: height
         }
     }
 
@@ -84,9 +69,7 @@ CharKey {
             name: "SHIFTED"
             PropertyChanges {
                 target: iconImage
-                source: iconSourceShifted !== "" ? iconSourceShifted 
-                                                 : iconShifted ? Theme.iconsPath + "/%1.png".arg(iconShifted)
-                                                               : ""
+                name: iconShifted
                 color: actionKeyRoot.colorShifted
             }
         },
@@ -94,9 +77,7 @@ CharKey {
             name: "CAPSLOCK"
             PropertyChanges {
                 target: iconImage
-                source: iconSourceCapsLock !== "" ? iconSourceCapsLock
-                                                  : iconCapsLock ? Theme.iconsPath + "/%1.png".arg(iconCapsLock)
-                                                                : ""
+                name: iconCapsLock
                 color: actionKeyRoot.colorCapsLock
             }
         }

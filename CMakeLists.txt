@@ -6,8 +6,6 @@ option(enable-presage "Use presage to calculate word candidates (maliit-keyboard
 option(enable-hunspell "Use hunspell for error correction (maliit-keyboard-plugin only)" ON)
 option(enable-tests "Build tests" OFF)
 
-set(MALIIT_DEFAULT_PROFILE "lomiri" CACHE STRING "Default keyboard style")
-
 # Install paths
 include(GNUInstallDirs)
 
@@ -49,8 +47,6 @@ set(MALIIT_KEYBOARD_LIB_SOURCES
         src/lib/logic/eventhandler.cpp
         src/lib/logic/eventhandler.h
         src/lib/logic/languageplugininterface.h
-        src/lib/logic/style.cpp
-        src/lib/logic/style.h
         src/lib/logic/wordengine.cpp
         src/lib/logic/wordengine.h
 
@@ -64,8 +60,6 @@ set(MALIIT_KEYBOARD_LIB_SOURCES
         src/lib/models/keydescription.h
         src/lib/models/layout.cpp
         src/lib/models/layout.h
-        src/lib/models/styleattributes.cpp
-        src/lib/models/styleattributes.h
         src/lib/models/text.cpp
         src/lib/models/text.h
         src/lib/models/wordcandidate.cpp
@@ -160,6 +154,8 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/greeterstatus.h
         src/plugin/updatenotifier.cpp
         src/plugin/updatenotifier.h
+        src/plugin/iconprovider.cpp
+        src/plugin/iconprovider.h
         src/plugin/inputmethod.cpp
         src/plugin/inputmethod.h
         src/plugin/inputmethod_p.h
@@ -390,24 +386,12 @@ install(FILES qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
 
 install(DIRECTORY qml/images
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
-install(DIRECTORY data/styles
+install(DIRECTORY data/sounds
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(DIRECTORY data/themes
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(DIRECTORY data/devices
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
-install(FILES data/styles/lomiri/images/icon_backspace@18.png
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
-        RENAME erase.png)
-install(FILES data/styles/lomiri/images/icon_enter@18.png
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
-        RENAME keyboard-enter.png)
-install(FILES data/styles/lomiri/images/language-icon.png
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
-        RENAME language-chooser.png)
-install(FILES qml/images/keyboard_spacebar@27.png
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR}/icons
-        RENAME keyboard_spacebar.png)
 install(FILES data/schemas/org.maliit.keyboard.maliit.gschema.xml
         DESTINATION share/glib-2.0/schemas/)
 

@@ -1,10 +1,5 @@
 /*
- * This file is part of Maliit Plugins
- *
- * Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies). All rights reserved.
- * Copyright (C) 2012 One Laptop per Child Association
- *
- * Contact: Mohammad Anwari <Mohammad.Anwari@nokia.com>
+ * Copyright (c) 2021 Rodney Dawes
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -29,53 +24,34 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+#ifndef ICONPROVIDER_H
+#define ICONPROVIDER_H
 
-#ifndef MALIIT_KEYBOARD_STYLE_H
-#define MALIIT_KEYBOARD_STYLE_H
+#include "theme.h"
 
-#include "models/styleattributes.h"
+#include <QQuickImageProvider>
 
-#include <QtCore>
-
-namespace MaliitKeyboard {
-
-class StylePrivate;
-
-class Style;
-typedef QSharedPointer<Style> SharedStyle;
-
-class Style
-    : public QObject
+namespace MaliitKeyboard
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(Style)
-    Q_DECLARE_PRIVATE(Style)
 
+class IconProvider: public QQuickImageProvider
+{
 public:
-    enum Directory {
-        Images, //!< used to query image directoryPath().
-        Sounds, //!< used to query sounds directoryPath().
-        Fonts   //!< used to query fonts directoryPath().
-    };
+    IconProvider(Theme* theme);
+    ~IconProvider() = default;
+    QPixmap  requestPixmap(const QString& id,
+                           QSize* size,
+                           const QSize& requestedSize) override;
 
-    explicit Style(QObject *parent = nullptr);
-    ~Style() override;
-
-    void setProfile(const QString &profile);
-    QString profile() const;
-    QStringList availableProfiles() const;
-
-    virtual QString directory(Directory directory) const;
-
-    StyleAttributes * attributes() const;
-    StyleAttributes * extendedKeysAttributes() const;
-
-    Q_SIGNAL void profileChanged();
 
 private:
-    const QScopedPointer<StylePrivate> d_ptr;
+    void updateLayoutDirection(Qt::LayoutDirection direction);
+    void updateThemeName();
+
+    Qt::LayoutDirection m_layoutDirection;
+    Theme* m_theme;
 };
 
-} // namespace MaliitKeyboard
+}
 
-#endif // MALIIT_KEYBOARD_STYLE_H
+#endif // ICONPROVIDER_H
