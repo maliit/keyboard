@@ -1,8 +1,9 @@
-Maliit Keyboard 2
-=================
+Maliit Keyboard
+===============
 
-Based on Ubuntu Keyboard. Ubuntu Keyboard was a QML and C++ based Keyboard Plugin for Maliit, based on the Maliit
-Reference plugin, taking into account the special UI/UX requests of Ubuntu Phone.
+Maliit Keyboard is a free software virtual keyboard for Linux systems with Wayland and X11 display servers. It supports many different languages and emoji. It is implemented as a plug-in for Maliit Framework.
+
+Maliit Keyboard evolved from the [reference keyboard plug-in](https://github.com/maliit/plugins) and [Ubuntu Keyboard](https://launchpad.net/ubuntu-keyboard). Ubuntu Keyboard was a fork of the reference plugin which was taking into account the special UI/UX needs of Ubuntu Phone.
 
 License
 -------
