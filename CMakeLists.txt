@@ -24,7 +24,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-find_package(MaliitPlugins 2.1.0 REQUIRED)
+find_package(MaliitPlugins 0.99.1 REQUIRED)
 
 find_package(GLib2 REQUIRED)
 find_package(GIO REQUIRED)
