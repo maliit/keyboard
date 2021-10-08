@@ -763,7 +763,7 @@ void InputMethod::showSystemSettings()
     qunsetenv("QT_WAYLAND_SHELL_INTEGRATION");
 
     if (qgetenv("XDG_CURRENT_DESKTOP") == "KDE") {
-        QDesktopServices::openUrl(QUrl("systemsettings://kcm_virtualkeyboard"));
+        QDesktopServices::openUrl(QUrl("systemsettings://kcm_mobile_virtualkeyboard"));
     } else {
         QDesktopServices::openUrl(QUrl("settings://system/language"));
     }
