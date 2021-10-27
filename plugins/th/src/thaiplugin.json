@@ -1,7 +1,5 @@
 {
-    "IID": "io.maliit.keyboard.LangaugePlugin.1",
-    "MetaData": {
-    },
-    "className": "ThaiPlugin",
-    "debug": true
+    "IID": "io.maliit.keyboard.LanguagePlugin.1",
+    "LanguageId": "th",
+    "Language": "Thai"
 }
