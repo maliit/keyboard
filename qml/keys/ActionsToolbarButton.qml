@@ -54,24 +54,14 @@ AbstractButton {
             horizontalCenter: parent.horizontalCenter
         }
         
-        Image {
+        KeyIcon {
             id: icon
 
             Layout.preferredWidth: label.text ? Device.gu(2) : Device.gu(3)
             Layout.preferredHeight: Layout.preferredWidth
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             
-            source: Theme.iconsPath + "/%1.png".arg(action.icon.name)
-            fillMode: Image.PreserveAspectFit
-            visible: false
-        }
-        ColorOverlay {
-            Layout.preferredWidth: label.text ? Device.gu(2) : Device.gu(3)
-            Layout.preferredHeight: Layout.preferredWidth
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-
-            cached: true
-            source: icon
+            name: action.icon.name
             visible: action.icon.name != ""
             color: Theme.fontColor
         }
