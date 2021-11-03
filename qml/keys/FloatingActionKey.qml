@@ -15,7 +15,7 @@ AbstractButton {
     
     onClicked: {
         if (keyFeedback) {
-            fullScreenItem.keyFeedback();
+            Feedback.keyPressed();
         }
         fullScreenItem.timerSwipe.restart();
     }

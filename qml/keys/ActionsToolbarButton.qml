@@ -19,7 +19,7 @@ AbstractButton {
     action: modelData
     
     onClicked: {
-        fullScreenItem.keyFeedback();
+        Feedback.keyPressed();
         fullScreenItem.timerSwipe.restart();
     }
     
