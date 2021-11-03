@@ -6,15 +6,19 @@ import MaliitKeyboard 2.0
 
 import "keys/"
 
-RowLayout {
+Item {
     anchors {
-        top: parent.top
-        left: parent.left
-        right: parent.right
+        fill: parent
         margins: Device.gu(1)
         topMargin: toolbar.height + Device.gu(1)
     }
-    
+
+    RowLayout {
+        anchors {
+            left: parent.left
+            top: parent.top
+        }
+
     FloatingActionKey {
         id: startLineButton
         
@@ -50,27 +54,33 @@ RowLayout {
                 }
             }
     }
-    
+    }
+
     FloatingActionKey {
         id: doneButton
         
-        Layout.alignment: Qt.AlignHCenter
-        Layout.fillWidth: true
-        Layout.minimumWidth: Device.gu(5)
-        Layout.maximumWidth: Device.gu(20)
-        Layout.preferredHeight: Device.gu(5)
+        width: Device.gu(5)
+        height: width
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+        }
         keyFeedback: false
         action: Action {
-                text: qsTr("Done")
-                icon.name: "ok"
-                onTriggered: {
-                    fullScreenItem.exitSwipeMode()
-                }
+            icon.name: "go-previous"
+            onTriggered: {
+                fullScreenItem.exitSwipeMode()
             }
+        }
     }
         
-        
-        
+
+    RowLayout {
+        anchors {
+            right: parent.right
+            top: parent.top
+        }
+
     FloatingActionKey {
         id: endDocButton
         
@@ -105,5 +115,6 @@ RowLayout {
                     }
                 }
             }
+    }
     }
 }
