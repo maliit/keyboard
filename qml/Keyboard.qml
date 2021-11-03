@@ -304,6 +304,7 @@ Item {
         MouseArea {
             id: cursorSwipeArea
 
+            property point firstPress
             property point lastRelease
             property bool selectionMode: false
             
@@ -318,7 +319,6 @@ Item {
                 anchors.fill: parent
                 visible: parent.enabled
                 color: cursorSwipeArea.selectionMode ? Theme.selectionColor : Theme.charKeyPressedColor
-                opacity: 0.92
                 
                 Label {
                     visible: !cursorSwipeArea.pressed
@@ -361,11 +361,16 @@ Item {
                 prevSwipePositionX = mouseX
                 prevSwipePositionY = mouseY
                 fullScreenItem.timerSwipe.stop()
+
+                if (firstPress === Qt.point(0,0)) {
+                    firstPress = Qt.point(mouse.x, mouse.y)
+                }
             }
 
             onReleased: {
                 if (!cursorSwipeArea.selectionMode) {
                     fullScreenItem.timerSwipe.restart()
+                    firstPress = Qt.point(0,0)
                 } else {
                     fullScreenItem.timerSwipe.stop()
                     
@@ -398,6 +403,8 @@ Item {
                         exitSelectionMode();
                     }
                 }
+
+                firstPress = Qt.point(0,0)
             }
         }
     } // canvas
