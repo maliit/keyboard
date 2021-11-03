@@ -16,7 +16,7 @@
 
 import QtQuick 2.4
 
-import MaliitKeyobard 2.0
+import MaliitKeyboard 2.0
 
 import keys 1.0
 import "keys/"

@@ -337,7 +337,7 @@ abstract_language_plugin(en@dv englishdvorak
     FILES src/overrides.csv
     LIBRARIES westernsupport)
 abstract_language_plugin(fr-ch french LIBRARIES westernsupport)
-abstract_language_plugin(th thai)
+abstract_language_plugin(th thai LIBRARIES westernsupport DIRECTORY qml/keys)
 abstract_language_plugin(emoji emoji ABSTRACT_LANGUAGE_PLUGIN FILES qml/CategoryKey.qml qml/emoji.js)
 if(Anthy_FOUND)
     abstract_language_plugin(ja japanese ABSTRACT_LANGUAGE_PLUGIN
