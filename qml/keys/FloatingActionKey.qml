@@ -21,6 +21,7 @@ AbstractButton {
     }
 
     background: Rectangle {
+        id: bg
         color: normalColor
         radius: Device.gu(0.5)
 
@@ -28,9 +29,9 @@ AbstractButton {
             target: floatingActionKey
             onPressedChanged: {
                 if (target.pressed) {
-                    color = pressedColor
+                    bg.color = pressedColor
                 } else {
-                    color = Qt.binding(function(){return normalColor})
+                    bg.color = Qt.binding(function(){return normalColor})
                 }
             }
         }
@@ -50,25 +51,14 @@ AbstractButton {
             centerIn: parent
         }
 
-        Image {
+        KeyIcon {
             id: icon
 
             Layout.preferredWidth: label.text ? Device.gu(2) : Device.gu(3)
             Layout.preferredHeight: Layout.preferredWidth
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
-            source: Theme.iconsPath + "/%1.png".arg(action.icon.name)
-            fillMode: Image.PreserveAspectFit
-            visible: false
-        }
-
-        ColorOverlay {
-            Layout.preferredWidth: label.text ? Device.gu(2) : Device.gu(3)
-            Layout.preferredHeight: Layout.preferredWidth
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-
-            cached: true
-            source: icon
+            name: action.icon.name
             color: Theme.fontColor
             visible: action.icon.name != ""
         }
@@ -78,7 +68,8 @@ AbstractButton {
 
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            
+
+            visible: action.text
             text: action.text
             renderType: Text.QtRendering
             font.weight: Font.Normal
