@@ -57,6 +57,7 @@ ActionKey {
         }
 
         onPressed: {
+            Feedback.keyPressed()
             spaceKey.currentlyPressed = true
             fullScreenItem.timerSwipe.stop()
         }
