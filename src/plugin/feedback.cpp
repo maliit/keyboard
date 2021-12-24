@@ -54,8 +54,8 @@ Feedback::Feedback(const KeyboardSettings *settings)
 #ifdef HAVE_QT5_FEEDBACK
     m_pressEffect->setAttackIntensity(0.0);
     m_pressEffect->setAttackTime(50);
-    m_pressEffect->setIntensity(1.0);
-    m_pressEffect->setDuration(150);
+    m_pressEffect->setIntensity(0.5);
+    m_pressEffect->setDuration(100);
     m_pressEffect->setFadeTime(50);
     m_pressEffect->setFadeIntensity(0.0);
 #endif
