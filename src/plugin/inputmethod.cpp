@@ -270,22 +270,22 @@ bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
             d->actionKeyOverrider->setLabel(QString());
             break;
         case Qt::EnterKeyDone:
-            d->actionKeyOverrider->setLabel(tr("Done"));
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Done"));
             break;
         case Qt::EnterKeyGo:
-            d->actionKeyOverrider->setLabel(tr("Go"));
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Go"));
             break;
         case Qt::EnterKeySend:
-            d->actionKeyOverrider->setLabel(tr("Send"));
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Send"));
             break;
         case Qt::EnterKeySearch:
-            d->actionKeyOverrider->setLabel(tr("Search"));
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Search"));
             break;
         case Qt::EnterKeyNext:
-            d->actionKeyOverrider->setLabel(tr("Next"));
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Next"));
             break;
         case Qt::EnterKeyPrevious:
-            d->actionKeyOverrider->setLabel(tr("Previous"));
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Previous"));
             break;
     }
     emit actionKeyOverrideChanged();
