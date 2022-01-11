@@ -33,6 +33,7 @@ find_package(Qt5DBus)
 
 find_package(Qt5Multimedia)
 find_package(Qt5Feedback)
+find_package(Intl REQUIRED)
 
 find_package(Anthy)
 find_package(Pinyin)
@@ -87,6 +88,8 @@ set(WESTERNSUPPORT_SOURCES
 
 set(maliit-keyboard-libraries Qt5::Core)
 set(maliit-keyboard-definitions HUNSPELL_DICT_PATH="${HUNSPELL_DICT_PATH}"
+        MALIIT_GETTEXT_PACKAGE="${PROJECT_NAME}"
+        MALIIT_LOCALE_DIR="${CMAKE_INSTALL_LOCALEDIR}/locale"
         MALIIT_PLUGINS_DATA_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_PLUGINS_DATA_DIR}"
         MALIIT_KEYBOARD_QML_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_KEYBOARD_QML_DIR}"
         MALIIT_KEYBOARD_DATA_DIR="${CMAKE_INSTALL_PREFIX}/${MALIIT_KEYBOARD_DATA_DIR}"
@@ -150,6 +153,8 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/editor.h
         src/plugin/feedback.cpp
         src/plugin/feedback.h
+        src/plugin/gettext.cpp
+        src/plugin/gettext.h
         src/plugin/greeterstatus.cpp
         src/plugin/greeterstatus.h
         src/plugin/updatenotifier.cpp
@@ -166,7 +171,7 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/theme.cpp src/plugin/theme.h src/plugin/device.cpp src/plugin/device.h)
 
 add_library(maliit-keyboard-common STATIC ${MALIIT_KEYBOARD_COMMON_SOURCES})
-target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia)
+target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia ${Intl_LIBRARIES})
 if (Qt5Feedback_FOUND)
     target_link_libraries(maliit-keyboard-common Qt5::Feedback)
     target_compile_definitions(maliit-keyboard-common PUBLIC HAVE_QT5_FEEDBACK)

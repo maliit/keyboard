@@ -20,6 +20,7 @@
 #include "device.h"
 #include "editor.h"
 #include "feedback.h"
+#include "gettext.h"
 #include "greeterstatus.h"
 #include "iconprovider.h"
 #include "keyboardgeometry.h"
@@ -97,6 +98,7 @@ public:
     std::unique_ptr<Theme> m_theme;
     std::unique_ptr<Device> m_device;
     std::unique_ptr<IconProvider> m_iconProvider;
+    std::unique_ptr<Gettext> m_gettext;
 
     WordRibbon* wordRibbon;
 
@@ -129,6 +131,7 @@ public:
         , m_theme(std::make_unique<Theme>(&m_settings))
         , m_device(std::make_unique<Device>(&m_settings))
         , m_iconProvider(std::make_unique<IconProvider>(m_theme.get()))
+        , m_gettext(std::make_unique<Gettext>())
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {
@@ -219,6 +222,7 @@ public:
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Feedback", m_feedback.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Theme", m_theme.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Device", m_device.get());
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Gettext", m_gettext.get());
         qml_context->setContextProperty(QStringLiteral("maliit_input_method"), q);
         qml_context->setContextProperty(QStringLiteral("maliit_geometry"), m_geometry);
         qml_context->setContextProperty(QStringLiteral("maliit_event_handler"), &event_handler);
