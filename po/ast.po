@@ -1,0 +1,168 @@
+# Asturian translation for ubuntu-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
+"PO-Revision-Date: 2015-04-03 16:20+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Asturian <ast@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
+"X-Generator: Launchpad (build 18343)\n"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "Settings"
+msgstr "Axustes"
+
+#: ../qml/keys/languages.js:19
+msgid "Arabic"
+msgstr "Árabe"
+
+#: ../qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr "Azerbaixanu"
+
+#: ../qml/keys/languages.js:21
+msgid "Bosnian"
+msgstr "Bosniu"
+
+#: ../qml/keys/languages.js:22
+msgid "Catalan"
+msgstr "Catalán"
+
+#: ../qml/keys/languages.js:23
+msgid "Czech"
+msgstr "Checu"
+
+#: ../qml/keys/languages.js:24
+msgid "Danish"
+msgstr "Danés"
+
+#: ../qml/keys/languages.js:25
+msgid "German"
+msgstr "Alemán"
+
+#: ../qml/keys/languages.js:26
+msgid "Emoji"
+msgstr "Fustaxes"
+
+#: ../qml/keys/languages.js:27
+msgid "Greek"
+msgstr "Griegu"
+
+#: ../qml/keys/languages.js:28
+msgid "English"
+msgstr "Inglés"
+
+#: ../qml/keys/languages.js:29
+msgid "Spanish"
+msgstr "Castellán"
+
+#: ../qml/keys/languages.js:30
+msgid "Finnish"
+msgstr "Finés"
+
+#: ../qml/keys/languages.js:31
+msgid "French"
+msgstr "Francés"
+
+#: ../qml/keys/languages.js:32
+msgid "Scottish Gaelic"
+msgstr "Gaélicu escocés"
+
+#: ../qml/keys/languages.js:33
+msgid "Hebrew"
+msgstr "Hebréu"
+
+#: ../qml/keys/languages.js:34
+msgid "Croatian"
+msgstr "Croata"
+
+#: ../qml/keys/languages.js:35
+msgid "Hungarian"
+msgstr "Húngaru"
+
+#: ../qml/keys/languages.js:36
+msgid "Icelandic"
+msgstr "Islandés"
+
+#: ../qml/keys/languages.js:37
+msgid "Italian"
+msgstr "Italianu"
+
+#: ../qml/keys/languages.js:38
+msgid "Japanese"
+msgstr "Xaponés"
+
+#: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr "Letón"
+
+#: ../qml/keys/languages.js:40
+msgid "Dutch"
+msgstr "Holandés"
+
+#: ../qml/keys/languages.js:41
+msgid "Norwegian"
+msgstr "Noruegu"
+
+#: ../qml/keys/languages.js:42
+msgid "Polish"
+msgstr "Polacu"
+
+#: ../qml/keys/languages.js:43
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: ../qml/keys/languages.js:44
+msgid "Romanian"
+msgstr "Rumanu"
+
+#: ../qml/keys/languages.js:45
+msgid "Russian"
+msgstr "Rusu"
+
+#: ../qml/keys/languages.js:46
+msgid "Slovenian"
+msgstr "Eslovenu"
+
+#: ../qml/keys/languages.js:47
+msgid "Serbian"
+msgstr "Serbiu"
+
+#: ../qml/keys/languages.js:48
+msgid "Swedish"
+msgstr "Suecu"
+
+#: ../qml/keys/languages.js:49
+msgid "Ukrainian"
+msgstr "Ucranianu"
+
+#: ../qml/keys/languages.js:50
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr ""
+"Chinu\n"
+"(Pinyin)"
+
+#: ../qml/keys/languages.js:51
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr ""
+"Chinu\n"
+"(Chewing)"
+
+#~ msgid "Chinese - Pinyin"
+#~ msgstr "Chinu - Pinyin"
+
+#~ msgid "Language: "
+#~ msgstr "Llingua: "

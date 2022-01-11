@@ -1,0 +1,164 @@
+# Marathi translation for ubuntu-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
+"PO-Revision-Date: 2015-04-04 03:22+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Marathi <mr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
+"X-Generator: Launchpad (build 18343)\n"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "Settings"
+msgstr "सेटिंग्स्"
+
+#: ../qml/keys/languages.js:19
+msgid "Arabic"
+msgstr "अरेबिक"
+
+#: ../qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr "अझेरबैजानी"
+
+#: ../qml/keys/languages.js:21
+msgid "Bosnian"
+msgstr "बोस्नीयन"
+
+#: ../qml/keys/languages.js:22
+msgid "Catalan"
+msgstr "कॅटालॉन"
+
+#: ../qml/keys/languages.js:23
+msgid "Czech"
+msgstr "चेक"
+
+#: ../qml/keys/languages.js:24
+msgid "Danish"
+msgstr "डॅनिश"
+
+#: ../qml/keys/languages.js:25
+msgid "German"
+msgstr "जर्मन"
+
+#: ../qml/keys/languages.js:26
+msgid "Emoji"
+msgstr "ईमोजी"
+
+#: ../qml/keys/languages.js:27
+msgid "Greek"
+msgstr "ग्रीक"
+
+#: ../qml/keys/languages.js:28
+msgid "English"
+msgstr "इंग्रजी"
+
+#: ../qml/keys/languages.js:29
+msgid "Spanish"
+msgstr "स्पॅनिश"
+
+#: ../qml/keys/languages.js:30
+msgid "Finnish"
+msgstr "फिनीश"
+
+#: ../qml/keys/languages.js:31
+msgid "French"
+msgstr "फ्रेंच"
+
+#: ../qml/keys/languages.js:32
+msgid "Scottish Gaelic"
+msgstr "स्कॉटिश गेलिक"
+
+#: ../qml/keys/languages.js:33
+msgid "Hebrew"
+msgstr "हिब्रू"
+
+#: ../qml/keys/languages.js:34
+msgid "Croatian"
+msgstr "क्रोएशियन"
+
+#: ../qml/keys/languages.js:35
+msgid "Hungarian"
+msgstr "हंगेरियन"
+
+#: ../qml/keys/languages.js:36
+msgid "Icelandic"
+msgstr "आइसलँडिक"
+
+#: ../qml/keys/languages.js:37
+msgid "Italian"
+msgstr "इटालियन"
+
+#: ../qml/keys/languages.js:38
+msgid "Japanese"
+msgstr "जपानी"
+
+#: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr "ला‍ट्वियन"
+
+#: ../qml/keys/languages.js:40
+msgid "Dutch"
+msgstr "डच"
+
+#: ../qml/keys/languages.js:41
+msgid "Norwegian"
+msgstr "नॉर्वेजियन"
+
+#: ../qml/keys/languages.js:42
+msgid "Polish"
+msgstr "पोलिश"
+
+#: ../qml/keys/languages.js:43
+msgid "Portuguese"
+msgstr "पोर्तुगीज"
+
+#: ../qml/keys/languages.js:44
+msgid "Romanian"
+msgstr "रोमानियन"
+
+#: ../qml/keys/languages.js:45
+msgid "Russian"
+msgstr "रशियन"
+
+#: ../qml/keys/languages.js:46
+msgid "Slovenian"
+msgstr "स्लोव्हेनियन"
+
+#: ../qml/keys/languages.js:47
+msgid "Serbian"
+msgstr "सर्बियन"
+
+#: ../qml/keys/languages.js:48
+msgid "Swedish"
+msgstr "स्वीडिश"
+
+#: ../qml/keys/languages.js:49
+msgid "Ukrainian"
+msgstr "यूक्रेनियन"
+
+#: ../qml/keys/languages.js:50
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr "चिनी (पिनयिन)"
+
+#: ../qml/keys/languages.js:51
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr "चिनी (चविंग)"
+
+#~ msgid "Chinese - Pinyin"
+#~ msgstr "चीनी - पिनयिन"
+
+#~ msgid "Language: "
+#~ msgstr "भाषा: "

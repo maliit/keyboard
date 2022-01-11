@@ -1,0 +1,165 @@
+# Lithuanian translation for ubuntu-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the ubuntu-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
+"PO-Revision-Date: 2016-03-10 15:30+0000\n"
+"Last-Translator: Mantas <mantas.bond@gmail.com>\n"
+"Language-Team: Lithuanian <lt@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
+"X-Generator: Launchpad (build 18343)\n"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "Settings"
+msgstr "Nustatymai"
+
+#: ../qml/keys/languages.js:19
+msgid "Arabic"
+msgstr "Arabų"
+
+#: ../qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr "Azerbaidžaniečių"
+
+#: ../qml/keys/languages.js:21
+msgid "Bosnian"
+msgstr "Bosnių"
+
+#: ../qml/keys/languages.js:22
+msgid "Catalan"
+msgstr "Katalonų"
+
+#: ../qml/keys/languages.js:23
+msgid "Czech"
+msgstr "Čekų"
+
+#: ../qml/keys/languages.js:24
+msgid "Danish"
+msgstr "Danų"
+
+#: ../qml/keys/languages.js:25
+msgid "German"
+msgstr "Vokiečių"
+
+#: ../qml/keys/languages.js:26
+msgid "Emoji"
+msgstr "Šypsenelės"
+
+#: ../qml/keys/languages.js:27
+msgid "Greek"
+msgstr "Graikų"
+
+#: ../qml/keys/languages.js:28
+msgid "English"
+msgstr "Anglų"
+
+#: ../qml/keys/languages.js:29
+msgid "Spanish"
+msgstr "Ispanų"
+
+#: ../qml/keys/languages.js:30
+msgid "Finnish"
+msgstr "Suomių"
+
+#: ../qml/keys/languages.js:31
+msgid "French"
+msgstr "Prancūzų"
+
+#: ../qml/keys/languages.js:32
+msgid "Scottish Gaelic"
+msgstr "Škotų gėlų"
+
+#: ../qml/keys/languages.js:33
+msgid "Hebrew"
+msgstr "Hebrajų"
+
+#: ../qml/keys/languages.js:34
+msgid "Croatian"
+msgstr "Kroatų"
+
+#: ../qml/keys/languages.js:35
+msgid "Hungarian"
+msgstr "Vengrų"
+
+#: ../qml/keys/languages.js:36
+msgid "Icelandic"
+msgstr "Islandų"
+
+#: ../qml/keys/languages.js:37
+msgid "Italian"
+msgstr "Italų"
+
+#: ../qml/keys/languages.js:38
+msgid "Japanese"
+msgstr "Japonų"
+
+#: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr "Latvių"
+
+#: ../qml/keys/languages.js:40
+msgid "Dutch"
+msgstr "Nyderlandų"
+
+#: ../qml/keys/languages.js:41
+msgid "Norwegian"
+msgstr "Norvegų"
+
+#: ../qml/keys/languages.js:42
+msgid "Polish"
+msgstr "Lenkų"
+
+#: ../qml/keys/languages.js:43
+msgid "Portuguese"
+msgstr "Portugalų"
+
+#: ../qml/keys/languages.js:44
+msgid "Romanian"
+msgstr "Rumunų"
+
+#: ../qml/keys/languages.js:45
+msgid "Russian"
+msgstr "Rusų"
+
+#: ../qml/keys/languages.js:46
+msgid "Slovenian"
+msgstr "Slovėnų"
+
+#: ../qml/keys/languages.js:47
+msgid "Serbian"
+msgstr "Serbų"
+
+#: ../qml/keys/languages.js:48
+msgid "Swedish"
+msgstr "Švedų"
+
+#: ../qml/keys/languages.js:49
+msgid "Ukrainian"
+msgstr "Ukrainiečių"
+
+#: ../qml/keys/languages.js:50
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr ""
+"Kinų\n"
+"(Pinyin)"
+
+#: ../qml/keys/languages.js:51
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr ""
+"Kinų\n"
+"(Chewing)"
+
+#~ msgid "Chinese - Pinyin"
+#~ msgstr "Kinų - Pinjinas"

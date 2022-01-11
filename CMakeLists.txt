@@ -385,6 +385,9 @@ install(FILES com.github.maliit.keyboard.desktop
 install(FILES com.github.maliit.keyboard.metainfo.xml
         DESTINATION share/metainfo)
 
+# Translations
+add_subdirectory(po)
+
 # TODO add all tests
 if(enable-tests)
     enable_testing()
