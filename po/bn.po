@@ -1,11 +1,11 @@
-# Bengali translation for ubuntu-keyboard
+# Bengali translation for maliit-keyboard
 # Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
-# This file is distributed under the same license as the ubuntu-keyboard package.
+# This file is distributed under the same license as the maliit-keyboard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ubuntu-keyboard\n"
+"Project-Id-Version: maliit-keyboard\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-06-02 00:06+0100\n"
 "PO-Revision-Date: 2015-12-11 16:58+0000\n"
