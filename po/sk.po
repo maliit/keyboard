@@ -1,0 +1,165 @@
+# Slovak translation for maliit-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the maliit-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: maliit-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
+"PO-Revision-Date: 2016-06-27 07:15+0000\n"
+"Last-Translator: P_E_T_O <Unknown>\n"
+"Language-Team: Slovak <sk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
+"X-Generator: Launchpad (build 18343)\n"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "Settings"
+msgstr "Nastavenia"
+
+#: ../qml/keys/languages.js:19
+msgid "Arabic"
+msgstr "Arabčina"
+
+#: ../qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr "Azerbajdžančina"
+
+#: ../qml/keys/languages.js:21
+msgid "Bosnian"
+msgstr "Bosniačina"
+
+#: ../qml/keys/languages.js:22
+msgid "Catalan"
+msgstr "Katalánčina"
+
+#: ../qml/keys/languages.js:23
+msgid "Czech"
+msgstr "Čeština"
+
+#: ../qml/keys/languages.js:24
+msgid "Danish"
+msgstr "Dánčina"
+
+#: ../qml/keys/languages.js:25
+msgid "German"
+msgstr "Nemčina"
+
+#: ../qml/keys/languages.js:26
+msgid "Emoji"
+msgstr "Emoji"
+
+#: ../qml/keys/languages.js:27
+msgid "Greek"
+msgstr "Gréčtina"
+
+#: ../qml/keys/languages.js:28
+msgid "English"
+msgstr "Angličtina"
+
+#: ../qml/keys/languages.js:29
+msgid "Spanish"
+msgstr "Španielčina"
+
+#: ../qml/keys/languages.js:30
+msgid "Finnish"
+msgstr "Fínčina"
+
+#: ../qml/keys/languages.js:31
+msgid "French"
+msgstr "Francúzština"
+
+#: ../qml/keys/languages.js:32
+msgid "Scottish Gaelic"
+msgstr "Škótska Gaelština"
+
+#: ../qml/keys/languages.js:33
+msgid "Hebrew"
+msgstr "Hebrejčina"
+
+#: ../qml/keys/languages.js:34
+msgid "Croatian"
+msgstr "Chorvátčina"
+
+#: ../qml/keys/languages.js:35
+msgid "Hungarian"
+msgstr "Maďarčina"
+
+#: ../qml/keys/languages.js:36
+msgid "Icelandic"
+msgstr "Islandčina"
+
+#: ../qml/keys/languages.js:37
+msgid "Italian"
+msgstr "Taliančina"
+
+#: ../qml/keys/languages.js:38
+msgid "Japanese"
+msgstr "Japončina"
+
+#: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr "Lotyština"
+
+#: ../qml/keys/languages.js:40
+msgid "Dutch"
+msgstr "Holandčina"
+
+#: ../qml/keys/languages.js:41
+msgid "Norwegian"
+msgstr "Nórčina"
+
+#: ../qml/keys/languages.js:42
+msgid "Polish"
+msgstr "Poľština"
+
+#: ../qml/keys/languages.js:43
+msgid "Portuguese"
+msgstr "Portugalčina"
+
+#: ../qml/keys/languages.js:44
+msgid "Romanian"
+msgstr "Rumunčina"
+
+#: ../qml/keys/languages.js:45
+msgid "Russian"
+msgstr "Ruština"
+
+#: ../qml/keys/languages.js:46
+msgid "Slovenian"
+msgstr "Slovinčina"
+
+#: ../qml/keys/languages.js:47
+msgid "Serbian"
+msgstr "Srbčina"
+
+#: ../qml/keys/languages.js:48
+msgid "Swedish"
+msgstr "Švédčina"
+
+#: ../qml/keys/languages.js:49
+msgid "Ukrainian"
+msgstr "Ukrajinčina"
+
+#: ../qml/keys/languages.js:50
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr ""
+"Čínština\n"
+"(Pinyin)"
+
+#: ../qml/keys/languages.js:51
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr ""
+"Čínština\n"
+"(Chewing)"
+
+#~ msgid "Chinese - Pinyin"
+#~ msgstr "Čínština - Pinyin"

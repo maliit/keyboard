@@ -1,0 +1,168 @@
+# Uyghur translation for maliit-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the maliit-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: maliit-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
+"PO-Revision-Date: 2015-09-27 10:52+0000\n"
+"Last-Translator: Eltikin <eltikinuyghur@hotmail.com>\n"
+"Language-Team: Uyghur <ug@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
+"X-Generator: Launchpad (build 18343)\n"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "Settings"
+msgstr "تەڭشەكلەر"
+
+#: ../qml/keys/languages.js:19
+msgid "Arabic"
+msgstr "ئەرەبچە"
+
+#: ../qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr "ئەزەربەيجانچە"
+
+#: ../qml/keys/languages.js:21
+msgid "Bosnian"
+msgstr "بوسنىيەچە"
+
+#: ../qml/keys/languages.js:22
+msgid "Catalan"
+msgstr "كاتالانچە"
+
+#: ../qml/keys/languages.js:23
+msgid "Czech"
+msgstr "چېخچە"
+
+#: ../qml/keys/languages.js:24
+msgid "Danish"
+msgstr "دانىشچە"
+
+#: ../qml/keys/languages.js:25
+msgid "German"
+msgstr "گېرمانچە"
+
+#: ../qml/keys/languages.js:26
+msgid "Emoji"
+msgstr "چىراي ئىپادە بەلگسى"
+
+#: ../qml/keys/languages.js:27
+msgid "Greek"
+msgstr "گىرېكچە"
+
+#: ../qml/keys/languages.js:28
+msgid "English"
+msgstr "ئىنگلىزچە"
+
+#: ../qml/keys/languages.js:29
+msgid "Spanish"
+msgstr "ئىسپانچە"
+
+#: ../qml/keys/languages.js:30
+msgid "Finnish"
+msgstr "فىنچە"
+
+#: ../qml/keys/languages.js:31
+msgid "French"
+msgstr "فىرانسۇزچە"
+
+#: ../qml/keys/languages.js:32
+msgid "Scottish Gaelic"
+msgstr "شوتلاندىيە گائېل تىلى"
+
+#: ../qml/keys/languages.js:33
+msgid "Hebrew"
+msgstr "ئىبرانىچە"
+
+#: ../qml/keys/languages.js:34
+msgid "Croatian"
+msgstr "خورۋاتچە"
+
+#: ../qml/keys/languages.js:35
+msgid "Hungarian"
+msgstr "ھونگىرچە"
+
+#: ../qml/keys/languages.js:36
+msgid "Icelandic"
+msgstr "ئىسلاندچە"
+
+#: ../qml/keys/languages.js:37
+msgid "Italian"
+msgstr "ئىتالىيانچە"
+
+#: ../qml/keys/languages.js:38
+msgid "Japanese"
+msgstr "ياپونچە"
+
+#: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr "لاتۋىئانچە"
+
+#: ../qml/keys/languages.js:40
+msgid "Dutch"
+msgstr "گوللاندىيەچە"
+
+#: ../qml/keys/languages.js:41
+msgid "Norwegian"
+msgstr "نورۋېگىيەچە"
+
+#: ../qml/keys/languages.js:42
+msgid "Polish"
+msgstr "پولەكچە"
+
+#: ../qml/keys/languages.js:43
+msgid "Portuguese"
+msgstr "پورتۇگالچە"
+
+#: ../qml/keys/languages.js:44
+msgid "Romanian"
+msgstr "رۇمىنىيەچە"
+
+#: ../qml/keys/languages.js:45
+msgid "Russian"
+msgstr "رۇسچە"
+
+#: ../qml/keys/languages.js:46
+msgid "Slovenian"
+msgstr "سىلوۋېنىيەچە"
+
+#: ../qml/keys/languages.js:47
+msgid "Serbian"
+msgstr "سېربچە"
+
+#: ../qml/keys/languages.js:48
+msgid "Swedish"
+msgstr "شۋېدچە"
+
+#: ../qml/keys/languages.js:49
+msgid "Ukrainian"
+msgstr "ئۇكرائىنچە"
+
+#: ../qml/keys/languages.js:50
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr ""
+"خەنزۇچە\n"
+"(Pinyin)"
+
+#: ../qml/keys/languages.js:51
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr ""
+"خەنزۇچە\n"
+"(Chewing)"
+
+#~ msgid "Chinese - Pinyin"
+#~ msgstr "خەنچەـپىنيىن"
+
+#~ msgid "Language: "
+#~ msgstr "تىل "

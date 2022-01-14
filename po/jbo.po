@@ -1,0 +1,161 @@
+# Lojban translation for maliit-keyboard
+# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
+# This file is distributed under the same license as the maliit-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: maliit-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
+"PO-Revision-Date: 2016-06-06 09:40+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Lojban <jbo@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
+"X-Generator: Launchpad (build 18343)\n"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "Settings"
+msgstr "se cuxna"
+
+#: ../qml/keys/languages.js:19
+msgid "Arabic"
+msgstr "xrabo"
+
+#: ../qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr "le bangrazerbaijan"
+
+#: ../qml/keys/languages.js:21
+msgid "Bosnian"
+msgstr "le bangrgugdebuʼa"
+
+#: ../qml/keys/languages.js:22
+msgid "Catalan"
+msgstr "le katlana"
+
+#: ../qml/keys/languages.js:23
+msgid "Czech"
+msgstr "le tce'exo"
+
+#: ../qml/keys/languages.js:24
+msgid "Danish"
+msgstr "lebangrdanmark"
+
+#: ../qml/keys/languages.js:25
+msgid "German"
+msgstr "le dotybau"
+
+#: ../qml/keys/languages.js:26
+msgid "Emoji"
+msgstr "le cisma"
+
+#: ../qml/keys/languages.js:27
+msgid "Greek"
+msgstr "le xelso"
+
+#: ../qml/keys/languages.js:28
+msgid "English"
+msgstr "le gilbau"
+
+#: ../qml/keys/languages.js:29
+msgid "Spanish"
+msgstr "lo sanbau"
+
+#: ../qml/keys/languages.js:30
+msgid "Finnish"
+msgstr "le bangrsuomi"
+
+#: ../qml/keys/languages.js:31
+msgid "French"
+msgstr "le fasybau"
+
+#: ../qml/keys/languages.js:32
+msgid "Scottish Gaelic"
+msgstr "le gal'k"
+
+#: ../qml/keys/languages.js:33
+msgid "Hebrew"
+msgstr "le xebro"
+
+#: ../qml/keys/languages.js:34
+msgid "Croatian"
+msgstr "le xorvato"
+
+#: ../qml/keys/languages.js:35
+msgid "Hungarian"
+msgstr "le magjaro"
+
+#: ../qml/keys/languages.js:36
+msgid "Icelandic"
+msgstr "le bangrxislenska"
+
+#: ../qml/keys/languages.js:37
+msgid "Italian"
+msgstr "le bangrxitalia"
+
+#: ../qml/keys/languages.js:38
+msgid "Japanese"
+msgstr ""
+
+#: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr ""
+
+#: ../qml/keys/languages.js:40
+msgid "Dutch"
+msgstr "le bangrnederlanda"
+
+#: ../qml/keys/languages.js:41
+msgid "Norwegian"
+msgstr "le banrnorweg"
+
+#: ../qml/keys/languages.js:42
+msgid "Polish"
+msgstr "le bangrpolska"
+
+#: ../qml/keys/languages.js:43
+msgid "Portuguese"
+msgstr "le potybau"
+
+#: ../qml/keys/languages.js:44
+msgid "Romanian"
+msgstr "le bangnromania"
+
+#: ../qml/keys/languages.js:45
+msgid "Russian"
+msgstr "le rukybau"
+
+#: ../qml/keys/languages.js:46
+msgid "Slovenian"
+msgstr "le slovino"
+
+#: ../qml/keys/languages.js:47
+msgid "Serbian"
+msgstr "le bangrserbi"
+
+#: ../qml/keys/languages.js:48
+msgid "Swedish"
+msgstr "le zvero"
+
+#: ../qml/keys/languages.js:49
+msgid "Ukrainian"
+msgstr "le vukro"
+
+#: ../qml/keys/languages.js:50
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr ""
+
+#: ../qml/keys/languages.js:51
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr ""
+
+#~ msgid "Chinese - Pinyin"
+#~ msgstr "le pynxin"

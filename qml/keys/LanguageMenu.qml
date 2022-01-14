@@ -45,7 +45,7 @@ Menu {
     }
     MenuItem {
         id: settingsItem
-        text: qsTr("Settings") + "…"
+        text: Gettext.qsTr("Settings") + "…"
         onClicked: {
             Keyboard.showSystemSettings();
             canvas.languageMenu.close();

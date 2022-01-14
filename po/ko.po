@@ -1,0 +1,164 @@
+# Korean translation for maliit-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the maliit-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: maliit-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
+"PO-Revision-Date: 2015-02-09 10:46+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Korean <ko@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
+"X-Generator: Launchpad (build 18343)\n"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "Settings"
+msgstr "설정"
+
+#: ../qml/keys/languages.js:19
+msgid "Arabic"
+msgstr "아랍어"
+
+#: ../qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr "아제르바이잔어"
+
+#: ../qml/keys/languages.js:21
+msgid "Bosnian"
+msgstr "보스니아어"
+
+#: ../qml/keys/languages.js:22
+msgid "Catalan"
+msgstr "카탈루냐어"
+
+#: ../qml/keys/languages.js:23
+msgid "Czech"
+msgstr "체코어"
+
+#: ../qml/keys/languages.js:24
+msgid "Danish"
+msgstr "덴마크어"
+
+#: ../qml/keys/languages.js:25
+msgid "German"
+msgstr "독일어"
+
+#: ../qml/keys/languages.js:26
+msgid "Emoji"
+msgstr "이모지"
+
+#: ../qml/keys/languages.js:27
+msgid "Greek"
+msgstr "그리스어"
+
+#: ../qml/keys/languages.js:28
+msgid "English"
+msgstr "영어"
+
+#: ../qml/keys/languages.js:29
+msgid "Spanish"
+msgstr "스페인어"
+
+#: ../qml/keys/languages.js:30
+msgid "Finnish"
+msgstr "핀란드어"
+
+#: ../qml/keys/languages.js:31
+msgid "French"
+msgstr "프랑스어"
+
+#: ../qml/keys/languages.js:32
+msgid "Scottish Gaelic"
+msgstr "스코트랜드 게일어"
+
+#: ../qml/keys/languages.js:33
+msgid "Hebrew"
+msgstr "히브리어"
+
+#: ../qml/keys/languages.js:34
+msgid "Croatian"
+msgstr "크로아티아어"
+
+#: ../qml/keys/languages.js:35
+msgid "Hungarian"
+msgstr "헝가리어"
+
+#: ../qml/keys/languages.js:36
+msgid "Icelandic"
+msgstr "아이슬란드어"
+
+#: ../qml/keys/languages.js:37
+msgid "Italian"
+msgstr "이탈리아어"
+
+#: ../qml/keys/languages.js:38
+msgid "Japanese"
+msgstr "일본"
+
+#: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr "라트비아어"
+
+#: ../qml/keys/languages.js:40
+msgid "Dutch"
+msgstr "네덜란드어"
+
+#: ../qml/keys/languages.js:41
+msgid "Norwegian"
+msgstr "노르웨이어"
+
+#: ../qml/keys/languages.js:42
+msgid "Polish"
+msgstr "폴란드어"
+
+#: ../qml/keys/languages.js:43
+msgid "Portuguese"
+msgstr "포르투갈어"
+
+#: ../qml/keys/languages.js:44
+msgid "Romanian"
+msgstr "루마니아어"
+
+#: ../qml/keys/languages.js:45
+msgid "Russian"
+msgstr "러시아어"
+
+#: ../qml/keys/languages.js:46
+msgid "Slovenian"
+msgstr "슬로베니아어"
+
+#: ../qml/keys/languages.js:47
+msgid "Serbian"
+msgstr "세르비아어"
+
+#: ../qml/keys/languages.js:48
+msgid "Swedish"
+msgstr "스웨덴어"
+
+#: ../qml/keys/languages.js:49
+msgid "Ukrainian"
+msgstr "우크라이나어"
+
+#: ../qml/keys/languages.js:50
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr "중국어(간체)"
+
+#: ../qml/keys/languages.js:51
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr "중국어(번체)"
+
+#~ msgid "Language: "
+#~ msgstr "언어: "
+
+#~ msgid "Chinese - Pinyin"
+#~ msgstr "중국어 - 병음"

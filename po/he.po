@@ -1,0 +1,162 @@
+# Hebrew translation for maliit-keyboard
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the maliit-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: maliit-keyboard\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-06-02 00:06+0100\n"
+"PO-Revision-Date: 2016-05-04 08:39+0000\n"
+"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew <he@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
+"X-Generator: Launchpad (build 18343)\n"
+
+#: ../qml/keys/LanguageMenu.qml:81
+msgid "Settings"
+msgstr "הגדרות"
+
+#: ../qml/keys/languages.js:19
+msgid "Arabic"
+msgstr "ערבית"
+
+#: ../qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr "אזרית"
+
+#: ../qml/keys/languages.js:21
+msgid "Bosnian"
+msgstr "בוסנית"
+
+#: ../qml/keys/languages.js:22
+msgid "Catalan"
+msgstr "קטלאנית"
+
+#: ../qml/keys/languages.js:23
+msgid "Czech"
+msgstr "צ׳כית"
+
+#: ../qml/keys/languages.js:24
+msgid "Danish"
+msgstr "דנית"
+
+#: ../qml/keys/languages.js:25
+msgid "German"
+msgstr "גרמנית"
+
+#: ../qml/keys/languages.js:26
+msgid "Emoji"
+msgstr "אימוג׳י"
+
+#: ../qml/keys/languages.js:27
+msgid "Greek"
+msgstr "יוונית"
+
+#: ../qml/keys/languages.js:28
+msgid "English"
+msgstr "אנגלית"
+
+#: ../qml/keys/languages.js:29
+msgid "Spanish"
+msgstr "ספרדית"
+
+#: ../qml/keys/languages.js:30
+msgid "Finnish"
+msgstr "פינית"
+
+#: ../qml/keys/languages.js:31
+msgid "French"
+msgstr "צרפתית"
+
+#: ../qml/keys/languages.js:32
+msgid "Scottish Gaelic"
+msgstr "גאלית סקוטית"
+
+#: ../qml/keys/languages.js:33
+msgid "Hebrew"
+msgstr "עברית"
+
+#: ../qml/keys/languages.js:34
+msgid "Croatian"
+msgstr "קרואטית"
+
+#: ../qml/keys/languages.js:35
+msgid "Hungarian"
+msgstr "הונגרית"
+
+#: ../qml/keys/languages.js:36
+msgid "Icelandic"
+msgstr "איסלנדית"
+
+#: ../qml/keys/languages.js:37
+msgid "Italian"
+msgstr "איטלקית"
+
+#: ../qml/keys/languages.js:38
+msgid "Japanese"
+msgstr "יפנית"
+
+#: ../qml/keys/languages.js:39
+msgid "Latvian"
+msgstr "לטבית"
+
+#: ../qml/keys/languages.js:40
+msgid "Dutch"
+msgstr "הולנדית"
+
+#: ../qml/keys/languages.js:41
+msgid "Norwegian"
+msgstr "נורבגית"
+
+#: ../qml/keys/languages.js:42
+msgid "Polish"
+msgstr "פולנית"
+
+#: ../qml/keys/languages.js:43
+msgid "Portuguese"
+msgstr "פורטוגלית"
+
+#: ../qml/keys/languages.js:44
+msgid "Romanian"
+msgstr "רומנית"
+
+#: ../qml/keys/languages.js:45
+msgid "Russian"
+msgstr "רוסית"
+
+#: ../qml/keys/languages.js:46
+msgid "Slovenian"
+msgstr "סלובנית"
+
+#: ../qml/keys/languages.js:47
+msgid "Serbian"
+msgstr "סרבית"
+
+#: ../qml/keys/languages.js:48
+msgid "Swedish"
+msgstr "שבדית"
+
+#: ../qml/keys/languages.js:49
+msgid "Ukrainian"
+msgstr "אוקראינית"
+
+#: ../qml/keys/languages.js:50
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr ""
+"סינית\n"
+"(פִּין-יִין)"
+
+#: ../qml/keys/languages.js:51
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr ""
+"סינית\n"
+"(צ׳ואינג)"
