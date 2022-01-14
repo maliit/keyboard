@@ -1,75 +1,73 @@
-# Chinese (Simplified) translation for maliit-keyboard
-# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Canonical Ltd. 
 # This file is distributed under the same license as the maliit-keyboard package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: maliit-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-14 13:08-0500\n"
-"PO-Revision-Date: 2021-05-03 03:33+0000\n"
-"Last-Translator: Enceka <enceka@yeah.net>\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2021-03-04 00:27+0000\n"
+"Last-Translator: helabasa <R45XvezA@pm.me>\n"
+"Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 3.11.3\n"
-"X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
 
 #: qml/ActionsToolbar.qml:56
 msgid "Undo"
-msgstr "撤销"
+msgstr ""
 
 #: qml/ActionsToolbar.qml:57
 msgid "Redo"
-msgstr "重做"
+msgstr "පෙරසේ"
 
 #: qml/ActionsToolbar.qml:58
 msgid "Select All"
-msgstr "全选"
+msgstr "සියල්ල තෝරන්න"
 
 #: qml/ActionsToolbar.qml:82
 msgid "Cut"
-msgstr "剪切"
+msgstr ""
 
 #: qml/ActionsToolbar.qml:83
 msgid "Copy"
-msgstr "复制"
+msgstr "පිටපත්"
 
 #: qml/ActionsToolbar.qml:84
 msgid "Paste"
-msgstr "粘贴"
+msgstr "අලවන්න"
 
 #: qml/Keyboard.qml:336
 msgid "Swipe to move selection"
-msgstr "滑动选择"
+msgstr ""
 
 #: qml/Keyboard.qml:336
-#, fuzzy
 msgid "Double-tap to exit selection mode"
-msgstr "双击进入选择模式"
+msgstr ""
 
 #: qml/Keyboard.qml:337
 msgid "Swipe to move cursor"
-msgstr "滑动移动光标"
+msgstr ""
 
 #: qml/Keyboard.qml:337
 msgid "Double-tap to enter selection mode"
-msgstr "双击进入选择模式"
+msgstr ""
 
 #: qml/keys/LanguageMenu.qml:48
 msgid "Settings"
-msgstr "设置"
+msgstr ""
 
 #: qml/keys/languages.js:19
 msgid "Arabic"
-msgstr "阿拉伯语(Arabic)"
+msgstr ""
 
 #: qml/keys/languages.js:20
 msgid "Azerbaijani"
-msgstr "阿塞拜疆语(Azerbaijani)"
+msgstr ""
 
 #: qml/keys/languages.js:21
 msgid "Belarusian"
@@ -77,110 +75,107 @@ msgstr ""
 
 #: qml/keys/languages.js:22
 msgid "Bulgarian"
-msgstr "保加利亚语"
+msgstr ""
 
 #: qml/keys/languages.js:23
 msgid "Bosnian"
-msgstr "波斯尼亚语(Bosnian)"
+msgstr ""
 
 #: qml/keys/languages.js:24
 msgid "Catalan"
-msgstr "加泰罗尼亚语(Catalan)"
+msgstr ""
 
 #: qml/keys/languages.js:25
 msgid "Czech"
-msgstr "捷克语(Czech)"
+msgstr ""
 
 #: qml/keys/languages.js:26
 msgid "Danish"
-msgstr "丹麦语"
+msgstr ""
 
 #: qml/keys/languages.js:27
 msgid "German"
-msgstr "德语"
+msgstr ""
 
 #: qml/keys/languages.js:28
 msgid "Emoji"
-msgstr "表情"
+msgstr ""
 
 #: qml/keys/languages.js:29
 msgid "Greek"
-msgstr "希腊语"
+msgstr ""
 
 #: qml/keys/languages.js:30
 msgid "English"
-msgstr "英语"
+msgstr ""
 
 #: qml/keys/languages.js:31
-#, fuzzy
 msgid ""
 "English\n"
 "(Dvorak)"
-msgstr "英语"
+msgstr ""
 
 #: qml/keys/languages.js:32
 msgid "Esperanto"
-msgstr "世界语"
+msgstr ""
 
 #: qml/keys/languages.js:33
 msgid "Spanish"
-msgstr "西班牙语"
+msgstr ""
 
 #: qml/keys/languages.js:34
 msgid "Persian"
-msgstr "波斯语"
+msgstr ""
 
 #: qml/keys/languages.js:35
 msgid "Finnish"
-msgstr "芬兰语"
+msgstr ""
 
 #: qml/keys/languages.js:36
 msgid "French"
-msgstr "法语"
+msgstr ""
 
 #: qml/keys/languages.js:37
 msgid ""
 "French\n"
 "(Swiss)"
 msgstr ""
-"法语\n"
-"(瑞士)"
 
 #: qml/keys/languages.js:38
 msgid "Scottish Gaelic"
-msgstr "苏格兰盖立语"
+msgstr ""
 
 #: qml/keys/languages.js:39
 msgid "Hebrew"
-msgstr "希伯来语"
+msgstr ""
 
 #: qml/keys/languages.js:40
 msgid "Croatian"
-msgstr "克罗地亚语(Croatian)"
+msgstr ""
 
 #: qml/keys/languages.js:41
 msgid "Hungarian"
-msgstr "匈牙利语(Hungarian)"
+msgstr ""
 
 #: qml/keys/languages.js:42
 msgid "Icelandic"
-msgstr "冰岛语"
+msgstr ""
 
 #: qml/keys/languages.js:43
 msgid "Italian"
-msgstr "意大利语(Italian)"
+msgstr ""
 
 #: qml/keys/languages.js:44
 msgid "Japanese"
-msgstr "日语"
+msgstr ""
 
 #: qml/keys/languages.js:45
 msgid "Lithuanian"
-msgstr "立陶宛语"
+msgstr ""
 
 #: qml/keys/languages.js:46
 msgid "Latvian"
-msgstr "拉脱维亚语"
+msgstr ""
 
 #: qml/keys/languages.js:47
 msgid "Macedonian"
@@ -188,43 +183,43 @@ msgstr ""
 
 #: qml/keys/languages.js:48
 msgid "Korean"
-msgstr "韩国语"
+msgstr ""
 
 #: qml/keys/languages.js:49
 msgid "Dutch"
-msgstr "荷兰语"
+msgstr ""
 
 #: qml/keys/languages.js:50
 msgid "Norwegian"
-msgstr "挪威语"
+msgstr ""
 
 #: qml/keys/languages.js:51
 msgid "Polish"
-msgstr "波兰语(Polish)"
+msgstr ""
 
 #: qml/keys/languages.js:52
 msgid "Portuguese"
-msgstr "葡萄牙语(Portuguese)"
+msgstr ""
 
 #: qml/keys/languages.js:53
 msgid "Romanian"
-msgstr "罗马尼亚语"
+msgstr ""
 
 #: qml/keys/languages.js:54
 msgid "Russian"
-msgstr "俄语"
+msgstr ""
 
 #: qml/keys/languages.js:55
 msgid "Slovenian"
-msgstr "斯洛文尼亚语"
+msgstr ""
 
 #: qml/keys/languages.js:56
 msgid "Serbian"
-msgstr "塞尔维亚语(Serbian)"
+msgstr ""
 
 #: qml/keys/languages.js:57
 msgid "Swedish"
-msgstr "瑞典语"
+msgstr ""
 
 #: qml/keys/languages.js:58
 msgid "Thai"
@@ -232,29 +227,27 @@ msgstr ""
 
 #: qml/keys/languages.js:59
 msgid "Turkish"
-msgstr "土耳其语"
+msgstr ""
 
 #: qml/keys/languages.js:60
 msgid "Ukrainian"
-msgstr "乌克兰语"
+msgstr ""
 
 #: qml/keys/languages.js:61
 msgid ""
 "Chinese\n"
 "(Pinyin)"
-msgstr "（拼音）"
+msgstr ""
 
 #: qml/keys/languages.js:62
 msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
-"中文\n"
-"（中文）"
 
 #: src/plugin/inputmethod.cpp:275
 msgid "Done"
-msgstr "完成"
+msgstr ""
 
 #: src/plugin/inputmethod.cpp:278
 msgid "Go"
@@ -275,9 +268,3 @@ msgstr ""
 #: src/plugin/inputmethod.cpp:290
 msgid "Previous"
 msgstr ""
-
-#~ msgid "Chinese - Pinyin"
-#~ msgstr "汉语 - 拼音"
-
-#~ msgid "Language: "
-#~ msgstr "语言： "
