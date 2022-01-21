@@ -97,6 +97,8 @@ set(maliit-keyboard-definitions HUNSPELL_DICT_PATH="${HUNSPELL_DICT_PATH}"
 set(maliit-keyboard-include-dirs)
 
 if(enable-presage)
+    # Presage headers incompatible with C++17, which is default in newer GCC
+    set(CMAKE_CXX_STANDARD 14)
     find_package(Presage REQUIRED)
 
     if(Presage_FOUND)
