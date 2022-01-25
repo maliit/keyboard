@@ -15,7 +15,6 @@ file(GLOB PO_FILES *.po)
 
 add_custom_target(${POT_FILE}
                   COMMENT "Generating translation template"
-                  BYPRODUCTS ${POT_FILE}
                   COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} -o ${POT_FILE}
                           --from-code=UTF-8
                           --c++ --qt --add-comments=TRANSLATORS
