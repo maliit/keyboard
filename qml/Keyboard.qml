@@ -219,7 +219,10 @@ Item {
 
         PropertyAnimation {
             id: bounceBackAnimation
-            target: keyboardSurface
+            // Animations don't have an "enabled" property, so just set the
+            // target to null if animation is disabled, which effectively also
+            // disables the animation.
+            target: maliit_input_method.animationEnabled ? keyboardSurface : null
             properties: "y"
             easing.type: Easing.OutBounce;
             easing.overshoot: 2.0
@@ -267,6 +270,7 @@ Item {
             }
         ]
         transitions: Transition {
+            enabled: maliit_input_method.animationEnabled
             NumberAnimation { target: keyboardSurface; properties: "y"; duration: 165}
         }
 

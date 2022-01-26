@@ -107,6 +107,8 @@ public:
     QStringList languagesPaths;
     QString currentPluginPath;
 
+    bool animationEnabled = true;
+
     explicit InputMethodPrivate(InputMethod * const _q,
                                 MAbstractInputMethodHost *host)
         : q(_q)
