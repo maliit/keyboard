@@ -62,6 +62,21 @@ bool MockLanguageFeatures::isSeparator(const QString &text) const
     return false;
 }
 
+bool MockLanguageFeatures::isSymbol(const QString &text) const
+{
+    static const QString symbols = QString::fromUtf8("#()[]");
+
+    if (text.isEmpty()) {
+        return false;
+    }
+
+    if (symbols.contains(text.right(1))) {
+        return true;
+    }
+
+    return false;
+}
+
 namespace MaliitKeyboard {
 namespace Logic {
 

@@ -1,0 +1,270 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Canonical Ltd. 
+# This file is distributed under the same license as the maliit-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: maliit-keyboard\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-14 13:08-0500\n"
+"PO-Revision-Date: 2021-03-04 00:27+0000\n"
+"Last-Translator: helabasa <R45XvezA@pm.me>\n"
+"Language: si\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.11.3\n"
+
+#: qml/ActionsToolbar.qml:56
+msgid "Undo"
+msgstr ""
+
+#: qml/ActionsToolbar.qml:57
+msgid "Redo"
+msgstr "පෙරසේ"
+
+#: qml/ActionsToolbar.qml:58
+msgid "Select All"
+msgstr "සියල්ල තෝරන්න"
+
+#: qml/ActionsToolbar.qml:82
+msgid "Cut"
+msgstr ""
+
+#: qml/ActionsToolbar.qml:83
+msgid "Copy"
+msgstr "පිටපත්"
+
+#: qml/ActionsToolbar.qml:84
+msgid "Paste"
+msgstr "අලවන්න"
+
+#: qml/Keyboard.qml:336
+msgid "Swipe to move selection"
+msgstr ""
+
+#: qml/Keyboard.qml:336
+msgid "Double-tap to exit selection mode"
+msgstr ""
+
+#: qml/Keyboard.qml:337
+msgid "Swipe to move cursor"
+msgstr ""
+
+#: qml/Keyboard.qml:337
+msgid "Double-tap to enter selection mode"
+msgstr ""
+
+#: qml/keys/LanguageMenu.qml:48
+msgid "Settings"
+msgstr ""
+
+#: qml/keys/languages.js:19
+msgid "Arabic"
+msgstr ""
+
+#: qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr ""
+
+#: qml/keys/languages.js:21
+msgid "Belarusian"
+msgstr ""
+
+#: qml/keys/languages.js:22
+msgid "Bulgarian"
+msgstr ""
+
+#: qml/keys/languages.js:23
+msgid "Bosnian"
+msgstr ""
+
+#: qml/keys/languages.js:24
+msgid "Catalan"
+msgstr ""
+
+#: qml/keys/languages.js:25
+msgid "Czech"
+msgstr ""
+
+#: qml/keys/languages.js:26
+msgid "Danish"
+msgstr ""
+
+#: qml/keys/languages.js:27
+msgid "German"
+msgstr ""
+
+#: qml/keys/languages.js:28
+msgid "Emoji"
+msgstr ""
+
+#: qml/keys/languages.js:29
+msgid "Greek"
+msgstr ""
+
+#: qml/keys/languages.js:30
+msgid "English"
+msgstr ""
+
+#: qml/keys/languages.js:31
+msgid ""
+"English\n"
+"(Dvorak)"
+msgstr ""
+
+#: qml/keys/languages.js:32
+msgid "Esperanto"
+msgstr ""
+
+#: qml/keys/languages.js:33
+msgid "Spanish"
+msgstr ""
+
+#: qml/keys/languages.js:34
+msgid "Persian"
+msgstr ""
+
+#: qml/keys/languages.js:35
+msgid "Finnish"
+msgstr ""
+
+#: qml/keys/languages.js:36
+msgid "French"
+msgstr ""
+
+#: qml/keys/languages.js:37
+msgid ""
+"French\n"
+"(Swiss)"
+msgstr ""
+
+#: qml/keys/languages.js:38
+msgid "Scottish Gaelic"
+msgstr ""
+
+#: qml/keys/languages.js:39
+msgid "Hebrew"
+msgstr ""
+
+#: qml/keys/languages.js:40
+msgid "Croatian"
+msgstr ""
+
+#: qml/keys/languages.js:41
+msgid "Hungarian"
+msgstr ""
+
+#: qml/keys/languages.js:42
+msgid "Icelandic"
+msgstr ""
+
+#: qml/keys/languages.js:43
+msgid "Italian"
+msgstr ""
+
+#: qml/keys/languages.js:44
+msgid "Japanese"
+msgstr ""
+
+#: qml/keys/languages.js:45
+msgid "Lithuanian"
+msgstr ""
+
+#: qml/keys/languages.js:46
+msgid "Latvian"
+msgstr ""
+
+#: qml/keys/languages.js:47
+msgid "Macedonian"
+msgstr ""
+
+#: qml/keys/languages.js:48
+msgid "Korean"
+msgstr ""
+
+#: qml/keys/languages.js:49
+msgid "Dutch"
+msgstr ""
+
+#: qml/keys/languages.js:50
+msgid "Norwegian"
+msgstr ""
+
+#: qml/keys/languages.js:51
+msgid "Polish"
+msgstr ""
+
+#: qml/keys/languages.js:52
+msgid "Portuguese"
+msgstr ""
+
+#: qml/keys/languages.js:53
+msgid "Romanian"
+msgstr ""
+
+#: qml/keys/languages.js:54
+msgid "Russian"
+msgstr ""
+
+#: qml/keys/languages.js:55
+msgid "Slovenian"
+msgstr ""
+
+#: qml/keys/languages.js:56
+msgid "Serbian"
+msgstr ""
+
+#: qml/keys/languages.js:57
+msgid "Swedish"
+msgstr ""
+
+#: qml/keys/languages.js:58
+msgid "Thai"
+msgstr ""
+
+#: qml/keys/languages.js:59
+msgid "Turkish"
+msgstr ""
+
+#: qml/keys/languages.js:60
+msgid "Ukrainian"
+msgstr ""
+
+#: qml/keys/languages.js:61
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr ""
+
+#: qml/keys/languages.js:62
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:275
+msgid "Done"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:278
+msgid "Go"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:281
+msgid "Send"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:284
+msgid "Search"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:287
+msgid "Next"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:290
+msgid "Previous"
+msgstr ""

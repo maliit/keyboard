@@ -9,7 +9,7 @@ TARGET = ut_languagefeatures
 QT = core testlib
 
 QMAKE_LFLAGS_RPATH=$${TOP_BUILDDIR}/src/plugin
-LIBS += -L$${TOP_BUILDDIR}/src/plugin -lubuntu-keyboard-plugin
+LIBS += -L$${TOP_BUILDDIR}/src/plugin -llomiri-keyboard-plugin
 
 INCLUDEPATH    += \
     $${TOP_SRCDIR}/src/lib/ \

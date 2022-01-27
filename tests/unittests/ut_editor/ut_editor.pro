@@ -11,7 +11,7 @@ QT = core gui testlib
 
 QMAKE_LFLAGS_RPATH=$${TOP_BUILDDIR}/src/plugin
 
-LIBS += -L$${TOP_BUILDDIR}/src/plugin -lubuntu-keyboard-plugin -lgsettings-qt
+LIBS += -L$${TOP_BUILDDIR}/src/plugin -llomiri-keyboard-plugin -lgsettings-qt
 
 HEADERS += \
     wordengineprobe.h \

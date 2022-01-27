@@ -86,9 +86,30 @@ void SpellPredictWorker::parsePredictionText(const QString& surroundingLeft, con
 
 void SpellPredictWorker::setLanguage(QString locale, QString pluginPath)
 {
-    QString dbFileName = "database_"+locale+".db";
+    // locale for secondary layouts I.E., dvorak will be formatted as locale@layout, swiss keyboard as "fr-ch"
+    // in this case we want to drop the layout portion
+    QStringList tmpLocales = locale.split(QRegExp("(@|\\-)"));
+    QString baseLocale;
+    if (tmpLocales.size() > 1) {
+        baseLocale = tmpLocales[0];
+        pluginPath = pluginPath.mid(0, pluginPath.size()-(locale.size()-baseLocale.size()));
+    } else {
+        baseLocale = locale;
+    }
+
+    QString dbFileName = "database_"+baseLocale+".db";
     QString fullPath(pluginPath + QDir::separator() + dbFileName);
-    m_spellChecker.setLanguage(locale);
+    qDebug() << "DB path:" << fullPath.toLatin1().data();
+
+    //fallback method when there is a difference between locale and the plugin path ( e.g locale=fr, pluginpath end with fr-ch )
+    if (!QFile::exists(fullPath)) {
+        qDebug() << "db path not found, try alternative to main lang plugin directory";
+        pluginPath.truncate(pluginPath.lastIndexOf(QDir::separator()));
+        fullPath = pluginPath + QDir::separator() + locale  + QDir::separator() + dbFileName;
+        qDebug() << "New Database path:" << fullPath.toLatin1().data();
+    }
+
+    m_spellChecker.setLanguage(baseLocale);
     m_spellChecker.setEnabled(true);
 
     try {

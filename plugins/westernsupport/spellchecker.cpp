@@ -290,7 +290,7 @@ bool SpellChecker::setLanguage(const QString &language)
         QString lang = language;
         lang.truncate(2);
         qWarning() << "Did not find a dictionary for" << language << " - checking for " << lang;
-        if (language.length() > 2) {
+        if (language.length() > 2 && language != lang) {
             return setLanguage(lang);
         }
 

@@ -1,0 +1,279 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Canonical Ltd. 
+# This file is distributed under the same license as the maliit-keyboard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: maliit-keyboard\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-14 13:08-0500\n"
+"PO-Revision-Date: 2020-12-30 10:26+0000\n"
+"Last-Translator: Daniel Sparti <daniel.sparti@posteo.net>\n"
+"Language: fr_CH\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.11.3\n"
+
+#: qml/ActionsToolbar.qml:56
+msgid "Undo"
+msgstr "Annuler"
+
+#: qml/ActionsToolbar.qml:57
+msgid "Redo"
+msgstr "Recommencer"
+
+#: qml/ActionsToolbar.qml:58
+msgid "Select All"
+msgstr "Sélectionner tout"
+
+#: qml/ActionsToolbar.qml:82
+msgid "Cut"
+msgstr "Couper"
+
+#: qml/ActionsToolbar.qml:83
+msgid "Copy"
+msgstr "Copier"
+
+#: qml/ActionsToolbar.qml:84
+msgid "Paste"
+msgstr "Coller"
+
+#: qml/Keyboard.qml:336
+msgid "Swipe to move selection"
+msgstr "Faire glisser pour déplacer la sélection"
+
+#: qml/Keyboard.qml:336
+#, fuzzy
+msgid "Double-tap to exit selection mode"
+msgstr "Taper deux fois pour activer le mode sélection"
+
+#: qml/Keyboard.qml:337
+msgid "Swipe to move cursor"
+msgstr "Faire glisser pour déplacer le curseur"
+
+#: qml/Keyboard.qml:337
+msgid "Double-tap to enter selection mode"
+msgstr "Taper deux fois pour activer le mode sélection"
+
+#: qml/keys/LanguageMenu.qml:48
+msgid "Settings"
+msgstr "Paramètres"
+
+#: qml/keys/languages.js:19
+msgid "Arabic"
+msgstr "Arabe"
+
+#: qml/keys/languages.js:20
+msgid "Azerbaijani"
+msgstr "Azerbaïdjanais"
+
+#: qml/keys/languages.js:21
+#, fuzzy
+msgid "Belarusian"
+msgstr "Perse"
+
+#: qml/keys/languages.js:22
+msgid "Bulgarian"
+msgstr "Bulgare"
+
+#: qml/keys/languages.js:23
+msgid "Bosnian"
+msgstr "Bosniaque"
+
+#: qml/keys/languages.js:24
+msgid "Catalan"
+msgstr "Catalan"
+
+#: qml/keys/languages.js:25
+msgid "Czech"
+msgstr "Tchèque"
+
+#: qml/keys/languages.js:26
+msgid "Danish"
+msgstr "Danois"
+
+#: qml/keys/languages.js:27
+msgid "German"
+msgstr "Allemand"
+
+#: qml/keys/languages.js:28
+msgid "Emoji"
+msgstr "Emoji"
+
+#: qml/keys/languages.js:29
+msgid "Greek"
+msgstr "Grec"
+
+#: qml/keys/languages.js:30
+msgid "English"
+msgstr "Anglais"
+
+#: qml/keys/languages.js:31
+#, fuzzy
+msgid ""
+"English\n"
+"(Dvorak)"
+msgstr "Anglais"
+
+#: qml/keys/languages.js:32
+msgid "Esperanto"
+msgstr "Espéranto"
+
+#: qml/keys/languages.js:33
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: qml/keys/languages.js:34
+msgid "Persian"
+msgstr "Perse"
+
+#: qml/keys/languages.js:35
+msgid "Finnish"
+msgstr "Finnois"
+
+#: qml/keys/languages.js:36
+msgid "French"
+msgstr "Français"
+
+#: qml/keys/languages.js:37
+msgid ""
+"French\n"
+"(Swiss)"
+msgstr ""
+"Français\n"
+"(Suisse)"
+
+#: qml/keys/languages.js:38
+msgid "Scottish Gaelic"
+msgstr "Gaélique écossais"
+
+#: qml/keys/languages.js:39
+msgid "Hebrew"
+msgstr "Hébreu"
+
+#: qml/keys/languages.js:40
+msgid "Croatian"
+msgstr "Croate"
+
+#: qml/keys/languages.js:41
+msgid "Hungarian"
+msgstr "Hongrois"
+
+#: qml/keys/languages.js:42
+msgid "Icelandic"
+msgstr "Islandais"
+
+#: qml/keys/languages.js:43
+msgid "Italian"
+msgstr "Italien"
+
+#: qml/keys/languages.js:44
+msgid "Japanese"
+msgstr "Japonais"
+
+#: qml/keys/languages.js:45
+msgid "Lithuanian"
+msgstr "Lituanien"
+
+#: qml/keys/languages.js:46
+msgid "Latvian"
+msgstr "Letton"
+
+#: qml/keys/languages.js:47
+msgid "Macedonian"
+msgstr ""
+
+#: qml/keys/languages.js:48
+msgid "Korean"
+msgstr "Coréen"
+
+#: qml/keys/languages.js:49
+msgid "Dutch"
+msgstr "Néerlandais"
+
+#: qml/keys/languages.js:50
+msgid "Norwegian"
+msgstr "Norvégien"
+
+#: qml/keys/languages.js:51
+msgid "Polish"
+msgstr "Polonais"
+
+#: qml/keys/languages.js:52
+msgid "Portuguese"
+msgstr "Portugais"
+
+#: qml/keys/languages.js:53
+msgid "Romanian"
+msgstr "Roumain"
+
+#: qml/keys/languages.js:54
+msgid "Russian"
+msgstr "Russe"
+
+#: qml/keys/languages.js:55
+msgid "Slovenian"
+msgstr "Slovène"
+
+#: qml/keys/languages.js:56
+msgid "Serbian"
+msgstr "Serbe"
+
+#: qml/keys/languages.js:57
+msgid "Swedish"
+msgstr "Suédois"
+
+#: qml/keys/languages.js:58
+msgid "Thai"
+msgstr ""
+
+#: qml/keys/languages.js:59
+msgid "Turkish"
+msgstr "Turc"
+
+#: qml/keys/languages.js:60
+msgid "Ukrainian"
+msgstr "Ukrainien"
+
+#: qml/keys/languages.js:61
+msgid ""
+"Chinese\n"
+"(Pinyin)"
+msgstr ""
+"Chinois\n"
+"(Pinyin)"
+
+#: qml/keys/languages.js:62
+msgid ""
+"Chinese\n"
+"(Chewing)"
+msgstr ""
+"Chinois\n"
+"(Chewing)"
+
+#: src/plugin/inputmethod.cpp:275
+msgid "Done"
+msgstr "Terminé"
+
+#: src/plugin/inputmethod.cpp:278
+msgid "Go"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:281
+msgid "Send"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:284
+msgid "Search"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:287
+msgid "Next"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:290
+msgid "Previous"
+msgstr ""

@@ -53,12 +53,16 @@ class InputMethod
     Q_PROPERTY(QString activeLanguage READ activeLanguage WRITE setActiveLanguage NOTIFY activeLanguageChanged)
     Q_PROPERTY(QString previousLanguage READ previousLanguage WRITE setPreviousLanguage NOTIFY previousLanguageChanged)
     Q_PROPERTY(QObject* actionKeyOverride READ actionKeyOverride NOTIFY actionKeyOverrideChanged)
+    Q_PROPERTY(bool useHapticFeedback READ useHapticFeedback NOTIFY useHapticFeedbackChanged)
+    Q_PROPERTY(bool enableMagnifier READ enableMagnifier NOTIFY enableMagnifierChanged)
     Q_PROPERTY(QString keyboardState READ keyboardState WRITE setKeyboardState NOTIFY keyboardStateChanged)
     Q_PROPERTY(bool hasSelection READ hasSelection NOTIFY hasSelectionChanged)
     Q_PROPERTY(QString currentPluginPath READ currentPluginPath NOTIFY currentPluginPathChanged)
     Q_PROPERTY(QString preedit READ preedit WRITE replacePreedit NOTIFY preeditChanged)
     Q_PROPERTY(int cursorPosition READ cursorPosition WRITE setCursorPosition NOTIFY cursorPositionChanged)
+
     Q_PROPERTY(double opacity READ opacity NOTIFY opacityChanged)
+    Q_PROPERTY(QString theme READ theme NOTIFY themeChanged)
     Q_PROPERTY(QString surroundingLeft READ surroundingLeft)
     Q_PROPERTY(QString surroundingRight READ surroundingRight)
 
@@ -119,6 +123,7 @@ public:
     bool useAudioFeedback() const;
     const QString audioFeedbackSound() const;
     bool useHapticFeedback() const;
+    bool enableMagnifier() const;
 
     const QString keyboardState() const;
     Q_SLOT void setKeyboardState(const QString& state);
@@ -132,6 +137,7 @@ public:
     int cursorPosition() const;
     void setCursorPosition(const int pos);
     double opacity() const;
+    const QString theme() const;
 
     QObject* actionKeyOverride() const;
 
@@ -157,6 +163,7 @@ Q_SIGNALS:
     void useAudioFeedbackChanged();
     void audioFeedbackSoundChanged(QString sound);
     void useHapticFeedbackChanged();
+    void enableMagnifierChanged();
     void wordEngineEnabledChanged(bool wordEngineEnabled);
     void wordRibbonEnabledChanged(bool wordRibbonEnabled);
     void windowGeometryRectChanged(QRect rect);
@@ -169,6 +176,7 @@ Q_SIGNALS:
     void preeditChanged(QString preedit);
     void cursorPositionChanged(int cursor_position);
     void opacityChanged(double opacity);
+    void themeChanged(QString theme);
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();

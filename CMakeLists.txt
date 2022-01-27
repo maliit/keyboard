@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.9)
 
 project(maliit-keyboard VERSION 2.1.0)
 
@@ -239,19 +239,29 @@ function(abstract_language_plugin _language _full_language)
     set(multiValueArgs SOURCES LIBRARIES INCLUDE_DIRS DEFINITIONS FILES DIRECTORY)
     cmake_parse_arguments(abstract_language_plugin "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
+    # To support layout style variations such as en@dv we need to avoid using
+    # the @ character in variables, so split and replace it with _
+    set(_target ${_language})
+    if(${_language} MATCHES "^(.*)\@(.*)$")
+        set(_target ${CMAKE_MATCH_1}_${CMAKE_MATCH_2})
+    endif()
+
     set(_plugindir ${_language})
     if(NOT ${abstract_language_plugin_PLUGIN_DIR} EQUAL "")
         set(_plugindir ${abstract_language_plugin_PLUGIN_DIR})
     endif()
     set(PLUGIN_SOURCES
-            plugins/${_plugindir}/src/${_full_language}plugin.cpp
             plugins/${_plugindir}/src/${_full_language}plugin.h
             plugins/${_plugindir}/src/${_full_language}plugin.json)
+    if(EXISTS ${CMAKE_SOURCE_DIR}/plugins/${_plugindir}/src/${_full_language}plugin.cpp)
+        list(APPEND PLUGIN_SOURCES
+            plugins/${_plugindir}/src/${_full_language}plugin.cpp)
+    endif()
     if(NOT ${abstract_language_plugin_LANGUAGE_FEATURES} EQUAL "")
         list(APPEND PLUGIN_SOURCES
                 plugins/${_plugindir}/src/${abstract_language_plugin_LANGUAGE_FEATURES}languagefeatures.cpp
                 plugins/${_plugindir}/src/${abstract_language_plugin_LANGUAGE_FEATURES}languagefeatures.h)
-    else()
+    elseif(EXISTS ${CMAKE_SOURCE_DIR}/plugins/${_plugindir}/src/${_full_language}languagefeatures.cpp)
         list(APPEND PLUGIN_SOURCES
                 plugins/${_plugindir}/src/${_full_language}languagefeatures.cpp
                 plugins/${_plugindir}/src/${_full_language}languagefeatures.h)
@@ -268,11 +278,11 @@ function(abstract_language_plugin _language _full_language)
         add_ngram(TEXT plugins/${_plugindir}/src/${abstract_language_plugin_NGRAM_DATABASE} DATABASE database_${_language}.db)
         list(APPEND PLUGIN_SOURCES database_${_language}.db)
     endif()
-    add_library(${_language}plugin MODULE ${PLUGIN_SOURCES})
-    target_link_libraries(${_language}plugin Qt5::Core Maliit::Plugins ${abstract_language_plugin_LIBRARIES})
-    target_include_directories(${_language}plugin PRIVATE src/lib/logic ${abstract_language_plugin_INCLUDE_DIRS})
-    target_compile_definitions(${_language}plugin PRIVATE ${abstract_language_plugin_DEFINITIONS})
-    install(TARGETS ${_language}plugin
+    add_library(${_target}plugin MODULE ${PLUGIN_SOURCES})
+    target_link_libraries(${_target}plugin Qt5::Core Maliit::Plugins ${abstract_language_plugin_LIBRARIES})
+    target_include_directories(${_target}plugin PRIVATE src/lib/logic ${abstract_language_plugin_INCLUDE_DIRS})
+    target_compile_definitions(${_target}plugin PRIVATE ${abstract_language_plugin_DEFINITIONS})
+    install(TARGETS ${_target}plugin
             LIBRARY DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
     install(FILES plugins/${_plugindir}/qml/Keyboard_${_language}.qml
             plugins/${_plugindir}/qml/Keyboard_${_language}_email.qml
@@ -295,6 +305,8 @@ endfunction()
 
 language_plugin(ar arabic free_ebook.txt)
 language_plugin(az azerbaijani free_ebook.txt)
+language_plugin(be belarusian free_ebook.txt)
+language_plugin(bg bulgarian free_ebook.txt)
 language_plugin(bs bosnian free_ebook.txt)
 language_plugin(ca catalan paulina_buxareu.txt src/overrides.csv)
 language_plugin(cs czech free_ebook.txt)
@@ -313,7 +325,9 @@ language_plugin(hr croatian knjiga.txt)
 language_plugin(hu hungarian free_ebook.txt)
 language_plugin(is icelandic althingi_umraedur_2004_2005.txt)
 language_plugin(it italian la_francia_dal_primo_impero.txt src/overrides.csv)
+language_plugin(lt lithuanian free_ebook.txt)
 language_plugin(lv latvian free_ebook.txt)
+language_plugin(mk macedonian free_ebook.txt)
 language_plugin(nb norwegian free_ebook.txt)
 language_plugin(nl dutch free_ebook.txt src/overrides.csv)
 language_plugin(pl polish ziemia_obiecana_tom_pierwszy_4.txt)
@@ -323,8 +337,14 @@ language_plugin(ru russian free_ebook.txt)
 language_plugin(sl slovenian free_ebook.txt)
 language_plugin(sr serbian free_ebook.txt)
 language_plugin(sv swedish free_ebook.txt src/overrides.csv)
+language_plugin(tr turkish free_ebook.txt)
 language_plugin(uk ukrainian free_ebook.txt)
 
+abstract_language_plugin(en@dv englishdvorak
+    FILES src/overrides.csv
+    LIBRARIES westernsupport)
+abstract_language_plugin(fr-ch french LIBRARIES westernsupport)
+abstract_language_plugin(th thai LIBRARIES westernsupport DIRECTORY qml/keys)
 abstract_language_plugin(emoji emoji ABSTRACT_LANGUAGE_PLUGIN FILES qml/CategoryKey.qml qml/emoji.js)
 if(Anthy_FOUND)
     abstract_language_plugin(ja japanese ABSTRACT_LANGUAGE_PLUGIN
@@ -368,7 +388,7 @@ install(TARGETS maliit-keyboard-plugin maliit-keyboard
 
 install(DIRECTORY qml/keys qml/languages
         DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
-install(FILES qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
+install(FILES qml/ActionsToolbar.qml qml/FloatingActions.qml qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
         DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
 
 install(DIRECTORY qml/images

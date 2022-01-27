@@ -33,7 +33,7 @@ Item {
     property bool highlight: false;
 
     property string action
-    property bool noMagnifier: false
+    property bool noMagnifier: !maliit_input_method.enableMagnifier
     property bool skipAutoCaps: false
     property bool switchBackFromSymbols: false
 
@@ -53,7 +53,7 @@ Item {
     property color normalColor: Theme.charKeyColor
     property color pressedColor: Theme.charKeyPressedColor
     property bool borderEnabled: Theme.keyBorderEnabled
-    property color borderColor: Theme.charKeyBorderColor
+    property color borderColor: borderEnabled ? Theme.charKeyBorderColor : "transparent"
     property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8));
 
     /// annotation shows a small label in the upper right corner
@@ -135,7 +135,7 @@ Item {
             height: Device.fontSize + Device.flickMargin * 3
             chars: leaves
             index: keyFlickArea.index
-            visible: key.currentlyPressed && chars.length > 1
+            visible: key.currentlyPressed && chars.length > 1 && !noMagnifier
         }
     }
 

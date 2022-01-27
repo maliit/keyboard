@@ -43,6 +43,7 @@ public:
     virtual ~MockLanguageFeatures() {}
 
     virtual bool isSeparator(const QString &text) const;
+    virtual bool isSymbol(const QString &text) const;
     virtual bool alwaysShowSuggestions() const { return false; }
     virtual bool autoCapsAvailable() const { return true; }
     virtual bool activateAutoCaps(const QString &preedit) const;

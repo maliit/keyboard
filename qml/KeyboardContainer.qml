@@ -106,6 +106,7 @@ Item {
 
             if (!maliit_input_method.languageIsSupported(language)) {
                 console.log("Language '" + language + "' not supported - using 'en' instead");
+                maliit_input_method.activeLanguage = "en";
                 language = "en";
             }
 

@@ -30,7 +30,7 @@ public:
     virtual bool setLanguage(const QString& languageId, const QString &pluginPath) = 0;
 };
 
-#define LanguagePluginInterface_iid "com.canonical.UbuntuKeyboard.LanguagePluginInterface"
+#define LanguagePluginInterface_iid "com.lomiri.LomiriKeyboard.LanguagePluginInterface"
 
 Q_DECLARE_INTERFACE(LanguagePluginInterface, LanguagePluginInterface_iid)
 

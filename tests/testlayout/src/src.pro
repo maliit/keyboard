@@ -20,7 +20,7 @@ TARGET          = $$qtLibraryTarget(testlayoutplugin)
 EXAMPLE_FILES = testlayoutplugin.json
 
 # generate database for presage:
-PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_TEST_DIR}/testlayout/
+PLUGIN_INSTALL_PATH = $${LOMIRI_KEYBOARD_TEST_DIR}/testlayout/
 
 lang_db_testlayout.commands += \
   rm -f $$PWD/database_testlayout.db && \
@@ -41,7 +41,9 @@ OTHER_FILES += \
     testlayoutplugin.json \
     the_picture_of_dorian_gray.txt
 
-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
+CONFIG += link_pkgconfig
+PKGCONFIG += hunspell
+LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
 
 INCLUDEPATH += $${TOP_SRCDIR}/plugins/westernsupport
 DEPENDPATH += $${TOP_SRCDIR}/plugins/westernsupport

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Lomiri Keyboard Tester
+GenericName=Lomiri Keyboard Tester
+Comment=Test application for Lomiri Keyboard autopilot tests
+Icon=/usr/share/maliit/plugins/lomiri-keyboard/images/keyboard_popover.png
+Type=Application
+Terminal=false
+X-Lomiri-Touch=true
+X-Lomiri-Single-Instance=true
+X-Lomiri-Supported-Orientations=primary

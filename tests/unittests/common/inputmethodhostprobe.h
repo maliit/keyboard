@@ -81,38 +81,36 @@ public:
     Q_SIGNAL void keyEventSent(QKeyEvent ev);
 
     // unused reimpl
-    int contentType(bool&) {return 0;}
-    bool correctionEnabled(bool&) {return false;}
-    bool predictionEnabled(bool&) {return false;}
-    bool autoCapitalizationEnabled(bool&) {return false;}
-    bool surroundingText(QString&, int&) {return false;}
-    bool hasSelection(bool&) {return false;}
-    int inputMethodMode(bool&) {return 0;}
-    QRect preeditRectangle(bool&) {return QRect();}
-    QRect cursorRectangle(bool&) {return QRect();}
-    int anchorPosition(bool&) {return 0;}
-    QString selection(bool&) {return QString();}
-    void notifyImInitiatedHiding() {}
-    void setRedirectKeys(bool) {}
-    void setDetectableAutoRepeat(bool) {}
-    void setGlobalCorrectionEnabled(bool) {}
-    void switchPlugin(Maliit::SwitchDirection) {}
-    void switchPlugin(const QString&) {}
-    void setScreenRegion(const QRegion&) {}
-    void setInputMethodArea(const QRegion&) {}
-    void setSelection(int, int) {}
-    void setOrientationAngleLocked(bool) {}
-    QList<MImPluginDescription> pluginDescriptions(Maliit::HandlerState) const {return QList<MImPluginDescription>();}
+    int contentType(bool&) override {return 0;}
+    bool correctionEnabled(bool&) override {return false;}
+    bool predictionEnabled(bool&) override {return false;}
+    bool autoCapitalizationEnabled(bool&) override {return false;}
+    bool surroundingText(QString&, int&) override {return false;}
+    bool hasSelection(bool&) override {return false;}
+    int inputMethodMode(bool&) override {return 0;}
+    QRect preeditRectangle(bool&) override {return QRect();}
+    QRect cursorRectangle(bool&) override {return QRect();}
+    int anchorPosition(bool&) override {return 0;}
+    QString selection(bool&) override {return QString();}
+    void notifyImInitiatedHiding() override {}
+    void setRedirectKeys(bool) override {}
+    void setDetectableAutoRepeat(bool) override {}
+    void setGlobalCorrectionEnabled(bool) override {}
+    void switchPlugin(Maliit::SwitchDirection) override {}
+    void switchPlugin(const QString&) override {}
+    void setSelection(int, int) override {}
+    void setOrientationAngleLocked(bool) override {}
+    QList<MImPluginDescription> pluginDescriptions(Maliit::HandlerState) const override {return QList<MImPluginDescription>();}
     Maliit::Plugins::AbstractPluginSetting* registerPluginSetting(const QString &,
                                                                   const QString &,
                                                                   Maliit::SettingEntryType ,
-                                                                  const QVariantMap &) { return 0; }
+                                                                  const QVariantMap &) override { return 0; }
     void invokeAction(const QString &,
-                      const QKeySequence &) {}
+                      const QKeySequence &) override {}
 
-    virtual void registerWindow(QWindow*, Maliit::Position);
-    virtual void setScreenRegion(const QRegion&, QWindow*);
-    virtual void setInputMethodArea(const QRegion&, QWindow*);
+    void registerWindow(QWindow*, Maliit::Position) override {}
+    void setScreenRegion(const QRegion&, QWindow*) override {}
+    void setInputMethodArea(const QRegion&, QWindow*) override {}
 
 };
 

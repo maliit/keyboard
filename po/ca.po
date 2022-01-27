@@ -6,146 +6,239 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: maliit-keyboard\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-06-02 00:06+0100\n"
-"PO-Revision-Date: 2016-06-02 12:56+0000\n"
-"Last-Translator: David Planella <david.planella@gmail.com>\n"
-"Language-Team: Catalan <ca@li.org>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-14 13:08-0500\n"
+"PO-Revision-Date: 2020-12-22 15:09+0000\n"
+"Last-Translator: Joan CiberSheep <cibersheep@gmail.com>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.11.3\n"
 "X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
 
-#: ../qml/keys/LanguageMenu.qml:81
+#: qml/ActionsToolbar.qml:56
+msgid "Undo"
+msgstr "Desfés"
+
+#: qml/ActionsToolbar.qml:57
+msgid "Redo"
+msgstr "Refés"
+
+#: qml/ActionsToolbar.qml:58
+msgid "Select All"
+msgstr "Selecciona-ho tot"
+
+#: qml/ActionsToolbar.qml:82
+msgid "Cut"
+msgstr "Retalla"
+
+#: qml/ActionsToolbar.qml:83
+msgid "Copy"
+msgstr "Copia"
+
+#: qml/ActionsToolbar.qml:84
+msgid "Paste"
+msgstr "Enganxa"
+
+#: qml/Keyboard.qml:336
+msgid "Swipe to move selection"
+msgstr "Llisqueu per moure la selecció"
+
+#: qml/Keyboard.qml:336
+#, fuzzy
+msgid "Double-tap to exit selection mode"
+msgstr "Toqueu dos cops per entrar en el mode de selecció"
+
+#: qml/Keyboard.qml:337
+msgid "Swipe to move cursor"
+msgstr "Llisqueu per moure el cursor"
+
+#: qml/Keyboard.qml:337
+msgid "Double-tap to enter selection mode"
+msgstr "Toqueu dos cops per entrar en el mode de selecció"
+
+#: qml/keys/LanguageMenu.qml:48
 msgid "Settings"
-msgstr "Paràmetres"
+msgstr "Configuració"
 
-#: ../qml/keys/languages.js:19
+#: qml/keys/languages.js:19
 msgid "Arabic"
 msgstr "Àrab"
 
-#: ../qml/keys/languages.js:20
+#: qml/keys/languages.js:20
 msgid "Azerbaijani"
 msgstr "Àzeri"
 
-#: ../qml/keys/languages.js:21
+#: qml/keys/languages.js:21
+msgid "Belarusian"
+msgstr ""
+
+#: qml/keys/languages.js:22
+msgid "Bulgarian"
+msgstr "Búlgar"
+
+#: qml/keys/languages.js:23
 msgid "Bosnian"
 msgstr "Bosnià"
 
-#: ../qml/keys/languages.js:22
+#: qml/keys/languages.js:24
 msgid "Catalan"
 msgstr "Català"
 
-#: ../qml/keys/languages.js:23
+#: qml/keys/languages.js:25
 msgid "Czech"
 msgstr "Txec"
 
-#: ../qml/keys/languages.js:24
+#: qml/keys/languages.js:26
 msgid "Danish"
 msgstr "Danès"
 
-#: ../qml/keys/languages.js:25
+#: qml/keys/languages.js:27
 msgid "German"
 msgstr "Alemany"
 
-#: ../qml/keys/languages.js:26
+#: qml/keys/languages.js:28
 msgid "Emoji"
 msgstr "Emoji"
 
-#: ../qml/keys/languages.js:27
+#: qml/keys/languages.js:29
 msgid "Greek"
 msgstr "Grec"
 
-#: ../qml/keys/languages.js:28
+#: qml/keys/languages.js:30
 msgid "English"
 msgstr "Anglès"
 
-#: ../qml/keys/languages.js:29
+#: qml/keys/languages.js:31
+#, fuzzy
+msgid ""
+"English\n"
+"(Dvorak)"
+msgstr "Anglès"
+
+#: qml/keys/languages.js:32
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#: qml/keys/languages.js:33
 msgid "Spanish"
 msgstr "Espanyol"
 
-#: ../qml/keys/languages.js:30
+#: qml/keys/languages.js:34
+msgid "Persian"
+msgstr "Persa"
+
+#: qml/keys/languages.js:35
 msgid "Finnish"
 msgstr "Finlandès"
 
-#: ../qml/keys/languages.js:31
+#: qml/keys/languages.js:36
 msgid "French"
 msgstr "Francès"
 
-#: ../qml/keys/languages.js:32
+#: qml/keys/languages.js:37
+msgid ""
+"French\n"
+"(Swiss)"
+msgstr ""
+"Francès \n"
+"(Suís)"
+
+#: qml/keys/languages.js:38
 msgid "Scottish Gaelic"
 msgstr "Gaèlic escocès"
 
-#: ../qml/keys/languages.js:33
+#: qml/keys/languages.js:39
 msgid "Hebrew"
 msgstr "Hebreu"
 
-#: ../qml/keys/languages.js:34
+#: qml/keys/languages.js:40
 msgid "Croatian"
 msgstr "Croat"
 
-#: ../qml/keys/languages.js:35
+#: qml/keys/languages.js:41
 msgid "Hungarian"
 msgstr "Hongarès"
 
-#: ../qml/keys/languages.js:36
+#: qml/keys/languages.js:42
 msgid "Icelandic"
 msgstr "Islandès"
 
-#: ../qml/keys/languages.js:37
+#: qml/keys/languages.js:43
 msgid "Italian"
 msgstr "Italià"
 
-#: ../qml/keys/languages.js:38
+#: qml/keys/languages.js:44
 msgid "Japanese"
 msgstr "japonès"
 
-#: ../qml/keys/languages.js:39
+#: qml/keys/languages.js:45
+msgid "Lithuanian"
+msgstr "Lituà"
+
+#: qml/keys/languages.js:46
 msgid "Latvian"
 msgstr "Letó"
 
-#: ../qml/keys/languages.js:40
+#: qml/keys/languages.js:47
+msgid "Macedonian"
+msgstr ""
+
+#: qml/keys/languages.js:48
+msgid "Korean"
+msgstr "Coreà"
+
+#: qml/keys/languages.js:49
 msgid "Dutch"
 msgstr "Holandès"
 
-#: ../qml/keys/languages.js:41
+#: qml/keys/languages.js:50
 msgid "Norwegian"
 msgstr "Noruec"
 
-#: ../qml/keys/languages.js:42
+#: qml/keys/languages.js:51
 msgid "Polish"
 msgstr "Polonès"
 
-#: ../qml/keys/languages.js:43
+#: qml/keys/languages.js:52
 msgid "Portuguese"
 msgstr "Portuguès"
 
-#: ../qml/keys/languages.js:44
+#: qml/keys/languages.js:53
 msgid "Romanian"
 msgstr "Romanès"
 
-#: ../qml/keys/languages.js:45
+#: qml/keys/languages.js:54
 msgid "Russian"
 msgstr "Rus"
 
-#: ../qml/keys/languages.js:46
+#: qml/keys/languages.js:55
 msgid "Slovenian"
 msgstr "Eslovè"
 
-#: ../qml/keys/languages.js:47
+#: qml/keys/languages.js:56
 msgid "Serbian"
 msgstr "Serbi"
 
-#: ../qml/keys/languages.js:48
+#: qml/keys/languages.js:57
 msgid "Swedish"
 msgstr "Suec"
 
-#: ../qml/keys/languages.js:49
+#: qml/keys/languages.js:58
+msgid "Thai"
+msgstr ""
+
+#: qml/keys/languages.js:59
+msgid "Turkish"
+msgstr "Turc"
+
+#: qml/keys/languages.js:60
 msgid "Ukrainian"
 msgstr "Ucraïnès"
 
-#: ../qml/keys/languages.js:50
+#: qml/keys/languages.js:61
 msgid ""
 "Chinese\n"
 "(Pinyin)"
@@ -153,13 +246,37 @@ msgstr ""
 "Xinès\n"
 "(Pinyin)"
 
-#: ../qml/keys/languages.js:51
+#: qml/keys/languages.js:62
 msgid ""
 "Chinese\n"
 "(Chewing)"
 msgstr ""
 "Xinès\n"
 "(Chewing)"
+
+#: src/plugin/inputmethod.cpp:275
+msgid "Done"
+msgstr "Fet"
+
+#: src/plugin/inputmethod.cpp:278
+msgid "Go"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:281
+msgid "Send"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:284
+msgid "Search"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:287
+msgid "Next"
+msgstr ""
+
+#: src/plugin/inputmethod.cpp:290
+msgid "Previous"
+msgstr ""
 
 #~ msgid "Chinese - Pinyin"
 #~ msgstr "Xinès, pinyin"

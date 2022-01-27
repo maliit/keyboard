@@ -92,5 +92,10 @@
       <description>Specifies the device type of the maliit keyboard ('default', 'tablet')</description>
       <default>'default'</default>
     </key>
+    <key name="enable-magnifier" type="b">
+      <summary>Enable key magnifier</summary>
+      <description>Shows the magnifier when a key is pressed.</description>
+      <default>true</default>
+    </key>
   </schema>
 </schemalist>

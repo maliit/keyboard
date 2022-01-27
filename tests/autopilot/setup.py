@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 #
-# Ubuntu Keyboard Autopilot Test Suite
+# Lomiri Keyboard Autopilot Test Suite
 # Copyright (C) 2013 Canonical
 #
 # This program is free software: you can redistribute it and/or modify
@@ -23,13 +23,13 @@ from distutils.core import setup
 from setuptools import find_packages
 
 setup(
-    name='ubuntu_keyboard',
+    name='lomiri_keyboard',
     version='1.0',
-    description='Ubuntu Keyboard autopilot tests and emulators.',
-    url='https://launchpad.net/ubuntu-keyboard',
+    description='Lomiri Keyboard autopilot tests and emulators.',
+    url='https://gitlab.com/ubports/core/lomiri-keyboard',
     license='GPLv3',
     packages=find_packages(),
     data_files=[
-        ('share/applications', ['ubuntu-keyboard-tester.desktop'])
+        ('share/applications', ['lomiri-keyboard-tester.desktop'])
     ]
 )

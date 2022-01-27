@@ -263,6 +263,12 @@ public:
                          q, &InputMethod::useHapticFeedbackChanged);
     }
 
+    void registerEnableMagnifier()
+    {
+        QObject::connect(&m_settings, SIGNAL(enableMagnifierChanged(bool)),
+                         q, SIGNAL(enableMagnifierChanged()));
+    }
+
     void registerAutoCorrectSetting()
     {
         QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::autoCompletionChanged,
@@ -339,6 +345,12 @@ public:
     {
         QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::opacityChanged,
                         q, &InputMethod::opacityChanged);
+    }
+
+    void registerTheme()
+    {
+        QObject::connect(&m_settings, SIGNAL(themeChanged(QString)),
+                        q, SIGNAL(themeChanged(QString)));
     }
 
     void closeOskWindow()

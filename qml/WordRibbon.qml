@@ -76,6 +76,8 @@ Rectangle {
             MouseArea {
                 anchors.fill: wordCandidateItem
                 onPressed: {
+                    Feedback.keyPressed();
+                    
                     wordRibbonCanvas.state = "SELECTED"
                     event_handler.onWordCandidatePressed(wordItem.text, isUserInput)
                 }
