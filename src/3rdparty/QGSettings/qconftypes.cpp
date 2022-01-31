@@ -230,7 +230,7 @@ GVariant *qconf_types_collect_from_variant(const GVariantType *gtype, const QVar
             gsize size = array.size();
             gpointer data;
 
-            data = g_memdup(array.data(), size);
+            data = g_memdup2(array.data(), size);
 
             return g_variant_new_from_data(G_VARIANT_TYPE_BYTESTRING,
                                            data, size, TRUE, g_free, data);
