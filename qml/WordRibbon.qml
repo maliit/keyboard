@@ -26,11 +26,6 @@ Rectangle {
     objectName: "wordRibbenCanvas"
     state: "NORMAL"
 
-    Rectangle {
-        anchors.fill: parent
-        color: Theme.backgroundColor
-    }
-
     ListView {
         id: listView
         objectName: "wordListView"
@@ -94,17 +89,16 @@ Rectangle {
             name: "NORMAL"
             PropertyChanges {
                 target: wordRibbonCanvas
-                color: "transparent"
+                color: Theme.backgroundColor
             }
         },
         State {
             name: "SELECTED"
             PropertyChanges {
                 target: wordRibbonCanvas
-                color: "#e4e4e4"
+                color: Theme.actionKeyPressedColor
             }
         }
     ]
 
 }
-
