@@ -250,7 +250,10 @@ void SpellChecker::addToUserWordList(const QString &word)
     QDir::home().mkpath(QFileInfo(user_dictionary).absolutePath());
     if (user_dictionary.open(QFile::Append)) {
         QTextStream stream(&user_dictionary);
-        stream << word << endl;
+        // Qt 5.15 replaces endl with Qt::endl, so do the equivalent here so
+        // this can still compile against 5.12
+        stream << word << '\n';
+        stream.flush();
     }
 
     updateWord(word);

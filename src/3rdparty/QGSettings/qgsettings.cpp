@@ -105,7 +105,7 @@ bool QGSettings::trySet(const QString &key, const QVariant &value)
 QStringList QGSettings::keys() const
 {
     QStringList list;
-    gchar **keys = g_settings_list_keys(priv->settings);
+    gchar **keys = g_settings_schema_list_keys(priv->schema);
     for (int i = 0; keys[i]; i++)
         list.append(qtify_name(keys[i]));
 
