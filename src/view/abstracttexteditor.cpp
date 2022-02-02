@@ -420,6 +420,11 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
                 commitPreedit();
                 alreadyAppended = true;
             }
+            else if (d->keyboardState == QLatin1String("EMOJI")) {
+                d->text->appendToPreedit(text);
+                commitPreedit();
+                alreadyAppended = true;
+            }
         }
 
         // if we had modified the preedit already because of a separator entry, there is no need to perform all the
