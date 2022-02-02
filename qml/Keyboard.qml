@@ -148,7 +148,7 @@ Item {
                     id: wordRibbon
                     objectName: "wordRibbon"
 
-                    visible: canvas.wordribbon_visible
+                    visible: canvas.wordribbon_visible && keypad.state !== "EMOJI"
 
                     anchors.bottom: keyboardComp.top
                     width: parent.width;
