@@ -45,8 +45,6 @@ public:
     
     QString activeLanguage() const;
     void setActiveLanguage(const QString& id);
-    QString previousLanguage() const;
-    void setPreviousLanguage(const QString& id);
     QStringList enabledLanguages() const;
     bool autoCapitalization() const;
     bool autoCompletion() const;
@@ -66,7 +64,6 @@ public:
 
 Q_SIGNALS:
     void activeLanguageChanged(QString);
-    void previousLanguageChanged(QString);
     void enabledLanguagesChanged(QStringList);
     void autoCapitalizationChanged(bool);
     void autoCompletionChanged(bool);

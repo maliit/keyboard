@@ -47,7 +47,6 @@ ActionKey {
     }
 
     onReleased: {
-        panel.switchBack = false;
         if (held) {
             return;
         }

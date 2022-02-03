@@ -253,12 +253,6 @@ Item {
                     maliit_input_method.close();
                     canvas.hidingComplete = true;
                     reportKeyboardVisibleRect();
-                    // Switch back to the previous layout if we're in
-                    // in a layout like emoji that requests switchBack
-                    if (keypad.switchBack && maliit_input_method.previousLanguage) {
-                        keypad.switchBack = false;
-                        maliit_input_method.activeLanguage = maliit_input_method.previousLanguage;
-                    }
                     
                     // Exit cursor swipe mode when the keyboard hides
                     fullScreenItem.exitSwipeMode();
