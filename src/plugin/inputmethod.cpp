@@ -747,7 +747,7 @@ QString InputMethod::surroundingRight()
     return d->editor.text()->surroundingRight();
 }
 
-bool InputMethod::isAnimationEnabled() const
+bool InputMethod::isAnimationEnabled()
 {
     Q_D(InputMethod);
     return d->animationEnabled;
