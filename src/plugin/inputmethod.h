@@ -65,7 +65,7 @@ class InputMethod
     Q_PROPERTY(QString theme READ theme NOTIFY themeChanged)
     Q_PROPERTY(QString surroundingLeft READ surroundingLeft)
     Q_PROPERTY(QString surroundingRight READ surroundingRight)
-    Q_PROPERTY(bool animationEnabled READ isAnimationEnabled CONSTANT)
+    Q_PROPERTY(bool animationEnabled READ isAnimationEnabled NOTIFY animationEnabledChanged)
 
 public:
     /// Same as Maliit::TextContentType but usable in QML
@@ -145,7 +145,7 @@ public:
     QString surroundingLeft();
     QString surroundingRight();
 
-    bool isAnimationEnabled() const;
+    bool isAnimationEnabled();
 
     Q_SLOT void close();
 
@@ -180,6 +180,7 @@ Q_SIGNALS:
     void cursorPositionChanged(int cursor_position);
     void opacityChanged(double opacity);
     void themeChanged(QString theme);
+    void animationEnabledChanged();
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();

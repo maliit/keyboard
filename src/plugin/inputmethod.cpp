@@ -139,6 +139,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     bool animationOk = false;
     int animationEnv = qEnvironmentVariableIntValue("MALIIT_ENABLE_ANIMATIONS", &animationOk);
     d->animationEnabled = animationOk && animationEnv != 0;
+    Q_EMIT animationEnabledChanged();
 
     QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
     if (!prefix.isEmpty()) {
@@ -747,7 +748,7 @@ QString InputMethod::surroundingRight()
     return d->editor.text()->surroundingRight();
 }
 
-bool InputMethod::isAnimationEnabled() const
+bool InputMethod::isAnimationEnabled()
 {
     Q_D(InputMethod);
     return d->animationEnabled;
