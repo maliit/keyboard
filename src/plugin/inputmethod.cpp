@@ -340,6 +340,10 @@ void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
     d->enabledLanguages = d->m_settings.enabledLanguages();
+    // Reset the value if it gets unset
+    if (d->enabledLanguages.length() == 0) {
+        d->m_settings.resetEnabledLanguages();
+    }
     // Switch to first language in enabled languages if the currently active
     // language is no longer enabled
     if (!d->enabledLanguages.contains(d->activeLanguage)) {
@@ -604,20 +608,33 @@ void InputMethod::selectNextLanguage()
 //! \brief InputMethod::setActiveLanguage
 //! Sets the currently active/used language
 //! \param newLanguage id of the new language. For example "en" or "es"
-//! FIXME check if the language is supported - if not use "en" as fallback
 void InputMethod::setActiveLanguage(const QString &newLanguage)
 {
     Q_D(InputMethod);
 
     qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
 
+    QString newPluginPath;
     foreach(QString pluginPath, d->languagesPaths) {
         QDir testDir(pluginPath + QDir::separator() + newLanguage);
         if (testDir.exists()) {
-            d->currentPluginPath = testDir.absolutePath();
+            newPluginPath = testDir.absolutePath();
             break;
         }
     }
+    // The language plpugin was not found, so reset the active language
+    if (newPluginPath.isEmpty()) {
+        d->m_settings.resetActiveLanguage();
+        // If the plugin was not found, and was in enabledLanguages list,
+        // also remove it from there
+        auto enabled = enabledLanguages();
+        if (enabled.contains(newLanguage)) {
+            enabled.removeAll(newLanguage);
+            d->m_settings.setEnabledLanguages(enabled);
+        }
+        return;
+    }
+    d->currentPluginPath = newPluginPath;
 
     if (d->activeLanguage == newLanguage)
         return;

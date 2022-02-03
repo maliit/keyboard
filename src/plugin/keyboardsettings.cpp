@@ -72,10 +72,7 @@ KeyboardSettings::KeyboardSettings(QObject *parent) :
     auto enabled = enabledLanguages();
     if (enabled.contains(emoji)) {
         enabled.removeAll(emoji);
-        if (enabled.isEmpty()) {
-            enabled << QLatin1String("en");
-        }
-        m_settings->set(ENABLED_LANGUAGES_KEY, enabled);
+        setEnabledLanguages(enabled);
     }
     if (activeLanguage() == emoji) {
         setActiveLanguage(enabled[0]);
@@ -97,6 +94,11 @@ void KeyboardSettings::setActiveLanguage(const QString& id)
     m_settings->set(ACTIVE_LANGUAGE_KEY, QVariant(id));
 }
 
+void KeyboardSettings::resetActiveLanguage()
+{
+    m_settings->reset(ACTIVE_LANGUAGE_KEY);
+}
+
 /*!
  * \brief KeyboardSettings::enabledLanguages returns a list of languages that are
  * active
@@ -105,6 +107,20 @@ void KeyboardSettings::setActiveLanguage(const QString& id)
 QStringList KeyboardSettings::enabledLanguages() const
 {
     return m_settings->get(ENABLED_LANGUAGES_KEY).toStringList();
+}
+
+void KeyboardSettings::setEnabledLanguages(const QStringList& ids)
+{
+    if (ids.isEmpty()) {
+        resetEnabledLanguages();
+        return;
+    }
+    m_settings->set(ENABLED_LANGUAGES_KEY, ids);
+}
+
+void KeyboardSettings::resetEnabledLanguages()
+{
+    m_settings->reset(ENABLED_LANGUAGES_KEY);
 }
 
 /*!
