@@ -340,6 +340,11 @@ void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
     d->enabledLanguages = d->m_settings.enabledLanguages();
+    // Switch to first language in enabled languages if the currently active
+    // language is no longer enabled
+    if (!d->enabledLanguages.contains(d->activeLanguage)) {
+        setActiveLanguage(d->enabledLanguages.front());
+    }
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
 
