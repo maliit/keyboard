@@ -52,8 +52,8 @@ ActionKey {
             return;
         }
 
-        if (maliit_input_method.previousLanguage && maliit_input_method.previousLanguage != maliit_input_method.activeLanguage) {
-            maliit_input_method.activeLanguage = maliit_input_method.previousLanguage
+        if (altLangs) {
+            Keyboard.selectNextLanguage();
         } else {
             keypad.state = "EMOJI"
         }

@@ -114,6 +114,7 @@ public:
     const QStringList &enabledLanguages() const;
 
     const QString &activeLanguage() const;
+    Q_INVOKABLE void selectNextLanguage();
     Q_SLOT void setActiveLanguage(const QString& newLanguage);
 
     const QString &previousLanguage() const;

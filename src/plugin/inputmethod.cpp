@@ -596,6 +596,18 @@ const QString InputMethod::audioFeedbackSound() const
     return d->m_settings.keyPressAudioFeedbackSound();
 }
 
+//! \brief InputMethod::selectNextLanguage
+//! Sets the active language to the next language in the enaabled languages list
+void InputMethod::selectNextLanguage()
+{
+    auto const& langs = enabledLanguages();
+    if (activeLanguage() == langs.back()) {
+        setActiveLanguage(langs.front());
+    } else {
+        setActiveLanguage(langs[langs.indexOf(activeLanguage()) + 1]);
+    }
+}
+
 //! \brief InputMethod::setActiveLanguage
 //! Sets the currently active/used language
 //! \param newLanguage id of the new language. For example "en" or "es"
