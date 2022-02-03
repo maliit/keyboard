@@ -134,6 +134,12 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     // settings to be initialized first:
     d->setLayoutOrientation(d->appsCurrentOrientation);
 
+    // If MALIIT_ENABLE_ANIMATIONS environment is set and 0, disable animations,
+    // otherwise enable them.
+    bool animationOk = false;
+    int animationEnv = qEnvironmentVariableIntValue("MALIIT_ENABLE_ANIMATIONS", &animationOk);
+    d->animationEnabled = animationOk && animationEnv != 0;
+
     QString prefix = qgetenv("KEYBOARD_PREFIX_PATH");
     if (!prefix.isEmpty()) {
         d->view->setSource(QUrl::fromLocalFile(prefix + QDir::separator() + g_maliit_keyboard_qml));
@@ -739,6 +745,12 @@ QString InputMethod::surroundingRight()
 {
     Q_D(InputMethod);
     return d->editor.text()->surroundingRight();
+}
+
+bool InputMethod::isAnimationEnabled() const
+{
+    Q_D(InputMethod);
+    return d->animationEnabled;
 }
 
 bool InputMethod::languageIsSupported(const QString plugin) {
