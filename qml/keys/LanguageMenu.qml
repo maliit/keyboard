@@ -41,6 +41,13 @@ Menu {
             }
         }
     }
+    MenuItem {
+        text: Gettext.qsTr("Emoji")
+        onClicked: {
+            keypad.state = "EMOJI";
+            canvas.languageMenu.close();
+        }
+    }
     MenuSeparator {
     }
     MenuItem {

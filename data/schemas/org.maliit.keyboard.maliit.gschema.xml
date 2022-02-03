@@ -14,7 +14,7 @@
     <key name="enabled-languages" type="as">
       <summary>Enabled languages</summary>
       <description>User-defined list of activatable languages.</description>
-      <default>['en', 'emoji']</default>
+      <default>['en']</default>
     </key>
     <key name="auto-capitalization" type="b">
       <summary>Auto-capitalization</summary>

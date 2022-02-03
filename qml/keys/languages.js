@@ -25,7 +25,6 @@ function languageIdToName(languageId)
     if (languageId == "cs")         return Gettext.qsTr("Czech");
     if (languageId == "da")         return Gettext.qsTr("Danish");
     if (languageId == "de")         return Gettext.qsTr("German");
-    if (languageId == "emoji")      return Gettext.qsTr("Emoji");
     if (languageId == "el")         return Gettext.qsTr("Greek");
     if (languageId == "en")         return Gettext.qsTr("English");
     if (languageId == "en@dv")      return Gettext.qsTr("English\n(Dvorak)");

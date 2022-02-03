@@ -19,10 +19,18 @@ import QtQuick 2.4
 import MaliitKeyboard 2.0
 
 ActionKey {
-    iconNormal: "language-chooser";
-    iconShifted: "language-chooser";
-    iconCapsLock: "language-chooser";
+    iconNormal: altLangs ? "language-chooser" : ""
+    iconShifted: iconNormal
+    iconCapsLock: iconNormal
 
+    label: altLangs ? "" : "☻"
+    shifted: label
+
+    extended: altLangs ? ["☻"] : []
+    extendedShifted: extended
+    noMagnifier: true
+
+    readonly property bool altLangs: maliit_input_method.enabledLanguages.length > 1
     property bool held: false;
 
     padding: 0
@@ -47,7 +55,7 @@ ActionKey {
         if (maliit_input_method.previousLanguage && maliit_input_method.previousLanguage != maliit_input_method.activeLanguage) {
             maliit_input_method.activeLanguage = maliit_input_method.previousLanguage
         } else {
-            canvas.languageMenu.open()
+            keypad.state = "EMOJI"
         }
     }
 

@@ -64,6 +64,30 @@ KeyboardSettings::KeyboardSettings(QObject *parent) :
 {
     QObject::connect(m_settings, &QGSettings::changed,
                      this, &KeyboardSettings::settingUpdated);
+
+    /* With the moving of the emoji keyboard to being an internal mode,
+     * rather than a plugin, some of the settings may need cleaning up
+     * a bit, so do that here, to ensure the upgrade is smooth.
+     */
+    QLatin1String emoji("emoji");
+    auto enabled = enabledLanguages();
+    if (enabled.contains(emoji)) {
+        enabled.removeAll(emoji);
+        if (enabled.isEmpty()) {
+            enabled << QLatin1String("en");
+        }
+        m_settings->set(ENABLED_LANGUAGES_KEY, enabled);
+    }
+    if (activeLanguage() == emoji) {
+        setActiveLanguage(enabled[0]);
+    }
+    if (previousLanguage() == emoji) {
+        if (enabled.length() > 1) {
+            setPreviousLanguage(enabled.back());
+        } else {
+            setPreviousLanguage(QLatin1String(""));
+        }
+    }
 }
 
 /*!

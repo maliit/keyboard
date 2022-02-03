@@ -59,6 +59,15 @@ Item {
         }
     }
 
+    Loader {
+        id: emojiKeypadLoader
+        objectName: "emojiKeypadLoader"
+        anchors.fill: parent
+        asynchronous: true
+        visible: panel.state === "EMOJI"
+        source: "languages/Keyboard_emoji.qml"
+    }
+
     ExtendedKeysSelector {
         id: extendedKeysSelector
         objectName: "extendedKeysSelector"
@@ -73,9 +82,24 @@ Item {
     states: [
         State {
             name: "CHARACTERS"
+            PropertyChanges {
+                target: characterKeypadLoader
+                visible: true
+            }
         },
         State {
             name: "SYMBOLS"
+            PropertyChanges {
+                target: characterKeypadLoader
+                visible: true
+            }
+        },
+        State {
+            name: "EMOJI"
+            PropertyChanges {
+                target: characterKeypadLoader
+                visible: false
+            }
         }
     ]
 

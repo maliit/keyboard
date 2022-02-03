@@ -26,11 +26,6 @@ KeyPad {
     anchors.fill: parent
 
     content: c1
-    symbols: "languages/Keyboard_symbols.qml"
-
-    Component.onCompleted: {
-        panel.switchBack = true;
-    }
 
     QtObject {
         id: internal
@@ -188,7 +183,6 @@ KeyPad {
                 normalColor: Theme.backgroundColor
                 borderColor: normalColor
                 pressedColor: Theme.backgroundColor
-                fontSize: Device.gu(2.5)
                 fontFamily: "Noto Color Emoji"
                 onKeySent: {
                     internal.updateRecent(key);
@@ -215,10 +209,14 @@ KeyPad {
         anchors.right: parent.right
         height: panel.keyHeight
 
-        spacing: fullScreenItem.tablet ? panel.keyWidth / 5 : 0
+        //spacing: fullScreenItem.tablet ? panel.keyWidth / 5 : 0
 
-        LanguageKey {
-            id: languageMenuButton
+        SymbolShiftKey {
+            id: symbolShiftKey
+            label: ""
+            shifted: label
+            iconNormal: "go-previous-symbolic"
+            iconShifted: iconNormal
             normalColor: Theme.backgroundColor
             borderColor: normalColor
             pressedColor: Theme.backgroundColor
