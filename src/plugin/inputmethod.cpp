@@ -119,7 +119,6 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerAutoCapsSetting();
     d->registerWordEngineSetting();
     d->registerActiveLanguage();
-    d->registerPreviousLanguage();
     d->registerEnabledLanguages();
     d->registerDoubleSpaceFullStop();
     d->registerStayHidden();
@@ -341,8 +340,14 @@ void InputMethod::onEnabledLanguageSettingsChanged()
 {
     Q_D(InputMethod);
     d->enabledLanguages = d->m_settings.enabledLanguages();
-    if (!d->enabledLanguages.contains(d->previousLanguage)) {
-        setPreviousLanguage(QString());
+    // Reset the value if it gets unset
+    if (d->enabledLanguages.length() == 0) {
+        d->m_settings.resetEnabledLanguages();
+    }
+    // Switch to first language in enabled languages if the currently active
+    // language is no longer enabled
+    if (!d->enabledLanguages.contains(d->activeLanguage)) {
+        setActiveLanguage(d->enabledLanguages.front());
     }
     Q_EMIT enabledLanguagesChanged(d->enabledLanguages);
 }
@@ -543,14 +548,6 @@ const QString &InputMethod::activeLanguage() const
     return d->activeLanguage;
 }
 
-//! \brief InputMethod::previousLanguage returns the language that was used
-//! immediately prior to the current activeLanguage
-const QString &InputMethod::previousLanguage() const
-{
-    Q_D(const InputMethod);
-    return d->previousLanguage;
-}
-
 //! \brief InputMethod::useAudioFeedback is true, when keys should play a audio
 //! feedback when pressed
 //! \return
@@ -596,30 +593,54 @@ const QString InputMethod::audioFeedbackSound() const
     return d->m_settings.keyPressAudioFeedbackSound();
 }
 
+//! \brief InputMethod::selectNextLanguage
+//! Sets the active language to the next language in the enaabled languages list
+void InputMethod::selectNextLanguage()
+{
+    auto const& langs = enabledLanguages();
+    if (activeLanguage() == langs.back()) {
+        setActiveLanguage(langs.front());
+    } else {
+        setActiveLanguage(langs[langs.indexOf(activeLanguage()) + 1]);
+    }
+}
+
 //! \brief InputMethod::setActiveLanguage
 //! Sets the currently active/used language
 //! \param newLanguage id of the new language. For example "en" or "es"
-//! FIXME check if the language is supported - if not use "en" as fallback
 void InputMethod::setActiveLanguage(const QString &newLanguage)
 {
     Q_D(InputMethod);
 
     qDebug() << "in inputMethod.cpp setActiveLanguage() activeLanguage is:" << newLanguage;
 
+    QString newPluginPath;
     foreach(QString pluginPath, d->languagesPaths) {
         QDir testDir(pluginPath + QDir::separator() + newLanguage);
         if (testDir.exists()) {
-            d->currentPluginPath = testDir.absolutePath();
+            newPluginPath = testDir.absolutePath();
             break;
         }
     }
+    // The language plpugin was not found, so reset the active language
+    if (newPluginPath.isEmpty()) {
+        d->m_settings.resetActiveLanguage();
+        // If the plugin was not found, and was in enabledLanguages list,
+        // also remove it from there
+        auto enabled = enabledLanguages();
+        if (enabled.contains(newLanguage)) {
+            enabled.removeAll(newLanguage);
+            d->m_settings.setEnabledLanguages(enabled);
+        }
+        return;
+    }
+    d->currentPluginPath = newPluginPath;
 
     if (d->activeLanguage == newLanguage)
         return;
 
     d->editor.commitPreedit();
 
-    setPreviousLanguage(d->activeLanguage);
     d->activeLanguage = newLanguage;
     d->host->setLanguage(newLanguage);
     d->m_settings.setActiveLanguage(newLanguage);
@@ -627,23 +648,6 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
     qDebug() << "in inputMethod.cpp setActiveLanguage() emitting activeLanguageChanged to" << d->activeLanguage;
     Q_EMIT activeLanguageChanged(d->activeLanguage);
 }
-
-//! \brief InputMethod::setPreviousLanguage
-//! Set the language used immediately prior to the current active language.
-//! \param prevLanguage id the previous language used. e.g. "en" or "emoji"
-void InputMethod::setPreviousLanguage(const QString &prevLanguage)
-{
-    Q_D(InputMethod);
-
-    if (d->previousLanguage == prevLanguage)
-        return;
-
-    d->previousLanguage = prevLanguage;
-    d->m_settings.setPreviousLanguage(prevLanguage);
-
-    Q_EMIT previousLanguageChanged(d->previousLanguage);
-}
-
 
 void InputMethod::onWordEnginePluginChanged()
 {

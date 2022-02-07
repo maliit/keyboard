@@ -82,7 +82,6 @@ public:
     bool wordEngineEnabled;
     InputMethod::TextContentType contentType;
     QString activeLanguage;
-    QString previousLanguage;
     QStringList enabledLanguages;
     Qt::ScreenOrientation appsCurrentOrientation;
     QString keyboardState;
@@ -120,7 +119,6 @@ public:
         , wordEngineEnabled(false)
         , contentType(InputMethod::FreeTextContentType)
         , activeLanguage(QStringLiteral("en"))
-        , previousLanguage()
         , enabledLanguages(activeLanguage)
         , appsCurrentOrientation(qGuiApp->primaryScreen()->orientation())
         , keyboardState(QStringLiteral("CHARACTERS"))
@@ -303,15 +301,6 @@ public:
         activeLanguage = m_settings.activeLanguage();
         qDebug() << "inputmethod_p.h registerActiveLanguage(): activeLanguage is:" << activeLanguage;
         q->setActiveLanguage(activeLanguage);
-    }
-
-    void registerPreviousLanguage()
-    {
-        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::previousLanguageChanged,
-                         q, &InputMethod::setPreviousLanguage);
-
-        previousLanguage = m_settings.previousLanguage();
-        q->setPreviousLanguage(previousLanguage);
     }
 
     void registerEnabledLanguages()

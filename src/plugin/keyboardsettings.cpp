@@ -35,7 +35,6 @@
 using namespace MaliitKeyboard;
 
 const QLatin1String ACTIVE_LANGUAGE_KEY = QLatin1String("activeLanguage");
-const QLatin1String PREVIOUS_LANGUAGE_KEY = QLatin1String("previousLanguage");
 const QLatin1String ENABLED_LANGUAGES_KEY = QLatin1String("enabledLanguages");
 const QLatin1String AUTO_CAPITALIZATION_KEY = QLatin1String("autoCapitalization");
 const QLatin1String AUTO_COMPLETION_KEY = QLatin1String("autoCompletion");
@@ -73,20 +72,10 @@ KeyboardSettings::KeyboardSettings(QObject *parent) :
     auto enabled = enabledLanguages();
     if (enabled.contains(emoji)) {
         enabled.removeAll(emoji);
-        if (enabled.isEmpty()) {
-            enabled << QLatin1String("en");
-        }
-        m_settings->set(ENABLED_LANGUAGES_KEY, enabled);
+        setEnabledLanguages(enabled);
     }
     if (activeLanguage() == emoji) {
         setActiveLanguage(enabled[0]);
-    }
-    if (previousLanguage() == emoji) {
-        if (enabled.length() > 1) {
-            setPreviousLanguage(enabled.back());
-        } else {
-            setPreviousLanguage(QLatin1String(""));
-        }
     }
 }
 
@@ -105,20 +94,9 @@ void KeyboardSettings::setActiveLanguage(const QString& id)
     m_settings->set(ACTIVE_LANGUAGE_KEY, QVariant(id));
 }
 
-/*!
- * \brief KeyboardSettings::previousLanguage returns the language that was 
- * active immediately before the current one.
- * \return previously language
- */
-
-QString KeyboardSettings::previousLanguage() const
+void KeyboardSettings::resetActiveLanguage()
 {
-    return m_settings->get(PREVIOUS_LANGUAGE_KEY).toString();
-}
-
-void KeyboardSettings::setPreviousLanguage(const QString& id)
-{
-    m_settings->set(PREVIOUS_LANGUAGE_KEY, QVariant(id));
+    m_settings->reset(ACTIVE_LANGUAGE_KEY);
 }
 
 /*!
@@ -129,6 +107,20 @@ void KeyboardSettings::setPreviousLanguage(const QString& id)
 QStringList KeyboardSettings::enabledLanguages() const
 {
     return m_settings->get(ENABLED_LANGUAGES_KEY).toStringList();
+}
+
+void KeyboardSettings::setEnabledLanguages(const QStringList& ids)
+{
+    if (ids.isEmpty()) {
+        resetEnabledLanguages();
+        return;
+    }
+    m_settings->set(ENABLED_LANGUAGES_KEY, ids);
+}
+
+void KeyboardSettings::resetEnabledLanguages()
+{
+    m_settings->reset(ENABLED_LANGUAGES_KEY);
 }
 
 /*!
@@ -270,9 +262,6 @@ void KeyboardSettings::settingUpdated(const QString &key)
 {
     if (key == ACTIVE_LANGUAGE_KEY) {
         Q_EMIT activeLanguageChanged(activeLanguage());
-        return;
-    } else if (key == PREVIOUS_LANGUAGE_KEY) {
-        Q_EMIT previousLanguageChanged(previousLanguage());
         return;
     } else if (key == ENABLED_LANGUAGES_KEY) {
         Q_EMIT enabledLanguagesChanged(enabledLanguages());

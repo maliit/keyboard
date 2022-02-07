@@ -45,9 +45,10 @@ public:
     
     QString activeLanguage() const;
     void setActiveLanguage(const QString& id);
-    QString previousLanguage() const;
-    void setPreviousLanguage(const QString& id);
+    void resetActiveLanguage();
     QStringList enabledLanguages() const;
+    void setEnabledLanguages(const QStringList& ids);
+    void resetEnabledLanguages();
     bool autoCapitalization() const;
     bool autoCompletion() const;
     bool predictiveText() const;
@@ -66,7 +67,6 @@ public:
 
 Q_SIGNALS:
     void activeLanguageChanged(QString);
-    void previousLanguageChanged(QString);
     void enabledLanguagesChanged(QStringList);
     void autoCapitalizationChanged(bool);
     void autoCompletionChanged(bool);

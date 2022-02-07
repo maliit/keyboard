@@ -51,7 +51,6 @@ class InputMethod
     Q_PROPERTY(TextContentType contentType READ contentType WRITE setContentType NOTIFY contentTypeChanged)
     Q_PROPERTY(QStringList enabledLanguages READ enabledLanguages NOTIFY enabledLanguagesChanged)
     Q_PROPERTY(QString activeLanguage READ activeLanguage WRITE setActiveLanguage NOTIFY activeLanguageChanged)
-    Q_PROPERTY(QString previousLanguage READ previousLanguage WRITE setPreviousLanguage NOTIFY previousLanguageChanged)
     Q_PROPERTY(QObject* actionKeyOverride READ actionKeyOverride NOTIFY actionKeyOverrideChanged)
     Q_PROPERTY(bool useHapticFeedback READ useHapticFeedback NOTIFY useHapticFeedbackChanged)
     Q_PROPERTY(bool enableMagnifier READ enableMagnifier NOTIFY enableMagnifierChanged)
@@ -114,10 +113,8 @@ public:
     const QStringList &enabledLanguages() const;
 
     const QString &activeLanguage() const;
+    Q_INVOKABLE void selectNextLanguage();
     Q_SLOT void setActiveLanguage(const QString& newLanguage);
-
-    const QString &previousLanguage() const;
-    Q_SLOT void setPreviousLanguage(const QString& prevLanguage);
 
     Q_SLOT void onVisibleRectChanged();
 
@@ -162,7 +159,6 @@ Q_SIGNALS:
     void deactivateAutocaps();
     void enabledLanguagesChanged(QStringList languages);
     void activeLanguageChanged(QString language);
-    void previousLanguageChanged(QString language);
     void useAudioFeedbackChanged();
     void audioFeedbackSoundChanged(QString sound);
     void useHapticFeedbackChanged();
