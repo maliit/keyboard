@@ -80,9 +80,7 @@ set(WESTERNSUPPORT_SOURCES
         plugins/westernsupport/westernlanguagesplugin.h
         plugins/westernsupport/westernsupport.cpp
         plugins/westernsupport/westernsupport.h
-        plugins/westernsupport/westernsupport_global.h
-        src/lib/logic/abstractlanguageplugin.cpp
-        src/lib/logic/abstractlanguageplugin.h)
+        plugins/westernsupport/westernsupport_global.h)
 
 # TODO install logic/languageplugininterface.h and logic/abstractplugininterface.h as HEADERS
 
@@ -215,7 +213,7 @@ if(enable-presage)
     list(APPEND PLUGIN_SOURCES database_${_language}.db)
 endif()
     add_library(${_language}plugin MODULE ${PLUGIN_SOURCES})
-    target_link_libraries(${_language}plugin westernsupport)
+    target_link_libraries(${_language}plugin maliit-keyboard-common westernsupport)
     install(FILES plugins/${_language}/qml/Keyboard_${_language}.qml
             plugins/${_language}/qml/Keyboard_${_language}_email.qml
             plugins/${_language}/qml/Keyboard_${_language}_url.qml
@@ -279,7 +277,7 @@ function(abstract_language_plugin _language _full_language)
         list(APPEND PLUGIN_SOURCES database_${_language}.db)
     endif()
     add_library(${_target}plugin MODULE ${PLUGIN_SOURCES})
-    target_link_libraries(${_target}plugin Qt5::Core Maliit::Plugins ${abstract_language_plugin_LIBRARIES})
+    target_link_libraries(${_target}plugin Qt5::Core Maliit::Plugins maliit-keyboard-common ${abstract_language_plugin_LIBRARIES})
     target_include_directories(${_target}plugin PRIVATE src/lib/logic ${abstract_language_plugin_INCLUDE_DIRS})
     target_compile_definitions(${_target}plugin PRIVATE ${abstract_language_plugin_DEFINITIONS})
     install(TARGETS ${_target}plugin
@@ -344,7 +342,7 @@ abstract_language_plugin(en@dv englishdvorak
     FILES src/overrides.csv
     LIBRARIES westernsupport)
 abstract_language_plugin(fr-ch french LIBRARIES westernsupport)
-abstract_language_plugin(th thai LIBRARIES westernsupport DIRECTORY qml/keys)
+abstract_language_plugin(th thai DIRECTORY qml/keys)
 
 if(Anthy_FOUND)
     abstract_language_plugin(ja japanese ABSTRACT_LANGUAGE_PLUGIN
