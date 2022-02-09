@@ -773,9 +773,8 @@ bool InputMethod::languageIsSupported(const QString plugin) {
 void InputMethod::onLanguageChanged(const QString &language) {
     Q_D(InputMethod);
     for (const auto& languagePath : std::as_const(d->languagesPaths)) {
-        QPluginLoader languagePlugin(QStringLiteral("%1/%2/lib%2plugin.so").arg(languagePath, language));
-        const auto& metaData = languagePlugin.metaData();
-        if (metaData.value(u8"IID").toString() == QLatin1String("io.maliit.keyboard.LanguagePlugin.1")) {
+        QFile languagePlugin(languagePath + QDir::separator() + language + QDir::separator() + QStringLiteral("lib%1plugin.so").arg(language));
+        if (languagePlugin.exists()) {
             Q_EMIT languagePluginChanged(languagePlugin.fileName(), language);
             return;
         }

@@ -80,9 +80,7 @@ set(WESTERNSUPPORT_SOURCES
         plugins/westernsupport/westernlanguagesplugin.h
         plugins/westernsupport/westernsupport.cpp
         plugins/westernsupport/westernsupport.h
-        plugins/westernsupport/westernsupport_global.h
-        src/lib/logic/abstractlanguageplugin.cpp
-        src/lib/logic/abstractlanguageplugin.h)
+        plugins/westernsupport/westernsupport_global.h)
 
 # TODO install logic/languageplugininterface.h and logic/abstractplugininterface.h as HEADERS
 
@@ -207,6 +205,13 @@ target_include_directories(westernsupport PUBLIC src/lib/logic plugins/westernsu
 target_compile_definitions(westernsupport PRIVATE ${maliit-keyboard-definitions})
 
 function(language_plugin _language _full_language _ebook)
+    # To support layout style variations such as en@dv we need to avoid using
+    # the @ character in variables, so split and replace it with _
+    set(_target ${_language})
+    if(${_language} MATCHES "^(.*)\@(.*)$")
+        set(_target ${CMAKE_MATCH_1}_${CMAKE_MATCH_2})
+    endif()
+
     set(PLUGIN_SOURCES
             plugins/${_language}/src/${_full_language}plugin.h
             plugins/${_language}/src/${_full_language}plugin.json)
@@ -214,14 +219,15 @@ if(enable-presage)
     add_ngram(TEXT plugins/${_language}/src/${_ebook} DATABASE database_${_language}.db)
     list(APPEND PLUGIN_SOURCES database_${_language}.db)
 endif()
-    add_library(${_language}plugin MODULE ${PLUGIN_SOURCES})
-    target_link_libraries(${_language}plugin westernsupport)
+    add_library(${_target}plugin MODULE ${PLUGIN_SOURCES})
+    set_target_properties(${_target}plugin PROPERTIES OUTPUT_NAME ${_language}plugin)
+    target_link_libraries(${_target}plugin maliit-keyboard-common westernsupport)
     install(FILES plugins/${_language}/qml/Keyboard_${_language}.qml
             plugins/${_language}/qml/Keyboard_${_language}_email.qml
             plugins/${_language}/qml/Keyboard_${_language}_url.qml
             plugins/${_language}/qml/Keyboard_${_language}_url_search.qml
             DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
-    install(TARGETS ${_language}plugin
+    install(TARGETS ${_target}plugin
             LIBRARY DESTINATION ${MALIIT_KEYBOARD_LANGUAGES_DIR}/${_language})
 if(enable-presage)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/database_${_language}.db
@@ -279,7 +285,8 @@ function(abstract_language_plugin _language _full_language)
         list(APPEND PLUGIN_SOURCES database_${_language}.db)
     endif()
     add_library(${_target}plugin MODULE ${PLUGIN_SOURCES})
-    target_link_libraries(${_target}plugin Qt5::Core Maliit::Plugins ${abstract_language_plugin_LIBRARIES})
+    set_target_properties(${_target}plugin PROPERTIES OUTPUT_NAME ${_language}plugin)
+    target_link_libraries(${_target}plugin Qt5::Core Maliit::Plugins maliit-keyboard-common ${abstract_language_plugin_LIBRARIES})
     target_include_directories(${_target}plugin PRIVATE src/lib/logic ${abstract_language_plugin_INCLUDE_DIRS})
     target_compile_definitions(${_target}plugin PRIVATE ${abstract_language_plugin_DEFINITIONS})
     install(TARGETS ${_target}plugin
@@ -344,7 +351,7 @@ abstract_language_plugin(en@dv englishdvorak
     FILES src/overrides.csv
     LIBRARIES westernsupport)
 abstract_language_plugin(fr-ch french LIBRARIES westernsupport)
-abstract_language_plugin(th thai LIBRARIES westernsupport DIRECTORY qml/keys)
+abstract_language_plugin(th thai DIRECTORY qml/keys)
 
 if(Anthy_FOUND)
     abstract_language_plugin(ja japanese ABSTRACT_LANGUAGE_PLUGIN
