@@ -35,6 +35,7 @@ find_package(Qt5Multimedia)
 find_package(Qt5Feedback)
 find_package(Intl REQUIRED)
 
+find_package(AnthyUnicode)
 find_package(Anthy)
 find_package(Pinyin)
 find_package(Chewing)
@@ -353,7 +354,13 @@ abstract_language_plugin(en@dv englishdvorak
 abstract_language_plugin(fr-ch french LIBRARIES westernsupport)
 abstract_language_plugin(th thai DIRECTORY qml/keys)
 
-if(Anthy_FOUND)
+if(AnthyUnicode_FOUND)
+    abstract_language_plugin(ja japanese ABSTRACT_LANGUAGE_PLUGIN
+            SOURCES anthyadapter.cpp anthyadapter.h
+            LIBRARIES ${AnthyUnicode_LIBRARIES}
+            INCLUDE_DIRS ${AnthyUnicode_INCLUDE_DIRS}
+            DIRECTORY qml/keys)
+elseif(Anthy_FOUND)
     abstract_language_plugin(ja japanese ABSTRACT_LANGUAGE_PLUGIN
             SOURCES anthyadapter.cpp anthyadapter.h
             LIBRARIES ${Anthy_LIBRARIES}
