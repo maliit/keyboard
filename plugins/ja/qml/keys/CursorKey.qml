@@ -32,13 +32,13 @@ ActionKey {
     overridePressArea: true;
 
     onReleased: {
-        if (isPreedit) {
+        if (isPreedit && !fullScreenItem.cursorSwipe) {
             if (action == "left" && cursorPosition > 0) {
                 maliit_input_method.cursorPosition--
             } else if (action == "right" && cursorPosition < preedit.length) {
                 maliit_input_method.cursorPosition++
             }
-        } else {
+        } else if (!fullScreenItem.cursorSwipe) {
             event_handler.onKeyReleased("", action);
         }
     }
@@ -51,6 +51,9 @@ ActionKey {
     }
 
     onPressAndHold: {
-        return;
+        fullScreenItem.cursorSwipe = true;
+        if (rightSide) {
+            cursorSwipeArea.selectionMode = true;
+        }
     }
 }
