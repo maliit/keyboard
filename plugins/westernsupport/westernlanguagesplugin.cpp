@@ -1,9 +1,6 @@
 #include "westernlanguagesplugin.h"
 #include "westernlanguagefeatures.h"
-
-#ifdef HAVE_PRESAGE
 #include "spellpredictworker.h"
-#endif
 
 #include <QDebug>
 
@@ -15,7 +12,6 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
   , m_spellCheckEnabled(false)
   , m_processingSpelling(false)
 {
-#ifdef HAVE_PRESAGE
     m_spellPredictThread = new QThread();
     m_spellPredictWorker = new SpellPredictWorker();
     m_spellPredictWorker->moveToThread(m_spellPredictThread);
@@ -29,16 +25,13 @@ WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
     connect(this, &WesternLanguagesPlugin::addToUserWordList, m_spellPredictWorker, &SpellPredictWorker::addToUserWordList);
     connect(this, &WesternLanguagesPlugin::addOverride, m_spellPredictWorker, &SpellPredictWorker::addOverride);
     m_spellPredictThread->start();
-#endif
 }
 
 WesternLanguagesPlugin::~WesternLanguagesPlugin()
 {
-#ifdef HAVE_PRESAGE
     m_spellPredictWorker->deleteLater();
     m_spellPredictThread->quit();
     m_spellPredictThread->wait();
-#endif
 }
 
 void WesternLanguagesPlugin::predict(const QString& surroundingLeft, const QString& preedit)

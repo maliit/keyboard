@@ -35,7 +35,7 @@ namespace Logic {
 
 //! \class WordEngineProbe
 //! A word engine that deterministcally predicts word candidates, in such a
-//! way that it can be used for tests. Does not require Hunspell or Presage.
+//! way that it can be used for tests. Does not require Hunspell.
 
 
 //! \param parent The owner of this instance (optional).

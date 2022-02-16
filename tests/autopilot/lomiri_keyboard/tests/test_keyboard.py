@@ -1717,10 +1717,6 @@ class LomiriKeyboardKoreanTests(LomiriKeyboardTests):
 
 
 def maliit_cleanup():
-    presagedir = os.path.expanduser("~/.presage")
-    if os.path.exists(presagedir + ".bak") and os.path.exists(presagedir):
-        shutil.rmtree(presagedir)
-        os.rename(presagedir + ".bak", presagedir)
     maliitdir = os.path.expanduser("~/.local/share/maliit-server")
     if os.path.exists(maliitdir + ".bak") and os.path.exists(maliitdir):
         shutil.rmtree(maliitdir)
@@ -1729,9 +1725,6 @@ def maliit_cleanup():
 
 
 # Clear away any learnt predictions and recent emoji
-presagedir = os.path.expanduser("~/.presage")
-if os.path.exists(presagedir):
-    os.rename(presagedir, presagedir + ".bak")
 maliitdir = os.path.expanduser("~/.local/share/maliit-server")
 if os.path.exists(maliitdir):
     os.rename(maliitdir, maliitdir + ".bak")

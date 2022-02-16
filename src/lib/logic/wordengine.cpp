@@ -38,8 +38,7 @@ namespace Logic {
 #define DEFAULT_PLUGIN MALIIT_KEYBOARD_LANGUAGES_DIR "/en/libenplugin.so"
 
 //! \class WordEngine
-//! \brief Provides error correction (based on Hunspell) and word
-//! prediction (based on Presage).
+//! \brief Provides error correction (based on Hunspell)
 
 class WordEnginePrivate
 {
@@ -79,7 +78,7 @@ public:
         delete languagePlugin;
         pluginLoader.unload();
 
-        // to avoid hickups in libpresage, libpinyin
+        // to avoid hickups in libpinyin
         QLocale::setDefault(QLocale::c());
         setlocale(LC_NUMERIC, "C");
 

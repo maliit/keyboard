@@ -8,12 +8,9 @@
 #include "spellchecker.h"
 #include "abstractlanguageplugin.h"
 
-#ifdef HAVE_PRESAGE
 #include "spellpredictworker.h"
-#endif
 
 class WesternLanguageFeatures;
-class CandidatesCallback;
 class SpellPredictWorker;
 
 class WesternLanguagesPlugin : public AbstractLanguagePlugin
