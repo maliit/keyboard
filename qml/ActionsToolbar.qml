@@ -53,9 +53,9 @@ Rectangle{
             Layout.fillHeight: true
 
             readonly property list<Action> actions: [
-                Action { text: qsTr("Undo"); icon.name: "edit-undo"; onTriggered: fullScreenItem.undo();},
-                Action { text: qsTr("Redo"); icon.name: "edit-redo"; onTriggered: fullScreenItem.redo();},
-                Action { text: qsTr("Select All"); icon.name: "edit-select-all"; onTriggered: fullScreenItem.selectAll(); }
+                Action { text: qsTr("Undo"); icon.name: "edit-undo-symbolic"; onTriggered: fullScreenItem.undo();},
+                Action { text: qsTr("Redo"); icon.name: "edit-redo-symbolic"; onTriggered: fullScreenItem.redo();},
+                Action { text: qsTr("Select All"); icon.name: "edit-select-all-symbolic"; onTriggered: fullScreenItem.selectAll(); }
             ]
 
             Repeater {
@@ -79,9 +79,9 @@ Rectangle{
             readonly property list<Action> actions: [
                 // TODO: Disabled dynamic visibility of copy and cut buttons until input_method.hasSelection is working properly in QtWebEngine
                 // ubports/ubuntu-touch#1157 <https://github.com/ubports/ubuntu-touch/issues/1157>
-                Action { text: qsTr("Cut"); icon.name: "edit-cut"; onTriggered: {console.log("cut"); fullScreenItem.cut();} },
-                Action { text: qsTr("Copy"); icon.name: "edit-copy"; onTriggered: {fullScreenItem.copy(); fullScreenItem.sendLeftKey();} },
-                Action { text: qsTr("Paste"); icon.name: "edit-paste"; onTriggered: fullScreenItem.paste(); }
+                Action { text: qsTr("Cut"); icon.name: "edit-cut-symbolic"; onTriggered: {console.log("cut"); fullScreenItem.cut();} },
+                Action { text: qsTr("Copy"); icon.name: "edit-copy-symbolic"; onTriggered: {fullScreenItem.copy(); fullScreenItem.sendLeftKey();} },
+                Action { text: qsTr("Paste"); icon.name: "edit-paste-symbolic"; onTriggered: fullScreenItem.paste(); }
             ]
             Repeater {
                 delegate: ActionsToolbarButton {
