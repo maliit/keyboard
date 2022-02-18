@@ -26,7 +26,7 @@ Item {
         Layout.preferredWidth: Device.gu(5)
         Layout.preferredHeight: Device.gu(5)
         action: Action {
-                icon.name: "go-first"
+                icon.name: "go-first-symbolic"
                 onTriggered: {
                     if (cursorSwipeArea.selectionMode) {
                         fullScreenItem.selectStartOfLine();
@@ -44,7 +44,7 @@ Item {
         Layout.preferredWidth: Device.gu(5)
         Layout.preferredHeight: Device.gu(5)
         action: Action {
-                icon.name: "go-top"
+                icon.name: "go-top-symbolic"
                 onTriggered: {
                     if (cursorSwipeArea.selectionMode) {
                         fullScreenItem.selectStartOfDocument();
@@ -67,7 +67,7 @@ Item {
         }
         keyFeedback: false
         action: Action {
-            icon.name: "go-previous"
+            icon.name: "go-previous-symbolic"
             onTriggered: {
                 fullScreenItem.exitSwipeMode()
             }
@@ -88,7 +88,7 @@ Item {
         Layout.preferredWidth: Device.gu(5)
         Layout.preferredHeight: Device.gu(5)
         action: Action {
-                icon.name: "go-bottom"
+                icon.name: "go-bottom-symbolic"
                 onTriggered: {
                     if (cursorSwipeArea.selectionMode) {
                         fullScreenItem.selectEndOfDocument();
@@ -106,7 +106,7 @@ Item {
         Layout.preferredWidth: Device.gu(5)
         Layout.preferredHeight: Device.gu(5)
         action: Action {
-                icon.name: "go-last"
+                icon.name: "go-last-symbolic"
                 onTriggered: {
                     if (cursorSwipeArea.selectionMode) {
                         fullScreenItem.selectEndOfLine();

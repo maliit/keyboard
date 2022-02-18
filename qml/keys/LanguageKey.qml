@@ -19,7 +19,7 @@ import QtQuick 2.4
 import MaliitKeyboard 2.0
 
 ActionKey {
-    iconNormal: altLangs ? "language-chooser" : ""
+    iconNormal: altLangs ? "language-chooser-symbolic" : ""
     iconShifted: iconNormal
     iconCapsLock: iconNormal
 

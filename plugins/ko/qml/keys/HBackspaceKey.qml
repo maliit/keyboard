@@ -23,9 +23,9 @@ import keys 1.0
 import "parser.js" as Parser
 
 ActionKey {
-    iconNormal: "erase";
-    iconShifted: "erase";
-    iconCapsLock: "erase";
+    iconNormal: "edit-clear-symbolic";
+    iconShifted: "edit-clear-symbolic";
+    iconCapsLock: "edit-clear-symbolic";
     action: "backspace";
 
     property string preedit: maliit_input_method.preedit

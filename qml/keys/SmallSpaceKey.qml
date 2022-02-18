@@ -24,9 +24,9 @@ ActionKey {
     normalColor: Theme.charKeyColor
     pressedColor: Theme.charKeyPressedColor
 
-    iconNormal: "keyboard_spacebar";
-    iconShifted: "keyboard_spacebar";
-    iconCapsLock: "keyboard_spacebar";
+    iconNormal: "keyboard-spacebar-symbolic";
+    iconShifted: "keyboard-spacebar-symbolic";
+    iconCapsLock: "keyboard-spacebar-symbolic";
     
     action: "space"
     switchBackFromSymbols: true

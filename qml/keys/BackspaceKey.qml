@@ -17,8 +17,8 @@
 import QtQuick 2.4
 
 ActionKey {
-    iconNormal: "edit-clear";
-    iconShifted: "edit-clear";
-    iconCapsLock: "edit-clear";
+    iconNormal: "edit-clear-symoblic";
+    iconShifted: "edit-clear-symbolic";
+    iconCapsLock: "edit-clear-symbolic";
     action: "backspace";
 }
