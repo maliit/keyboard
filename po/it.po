@@ -2,14 +2,15 @@
 # Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the maliit-keyboard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+# Albano Battistella <albano_battistella@hotmail.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: maliit-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-14 13:08-0500\n"
-"PO-Revision-Date: 2021-01-17 20:07+0000\n"
-"Last-Translator: Mike <miguel2000@livecom.it>\n"
+"PO-Revision-Date: 2022-02-19 09:07+0100\n"
+"Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,9 +48,8 @@ msgid "Swipe to move selection"
 msgstr "Trascinare per spostare la selezione"
 
 #: qml/Keyboard.qml:336
-#, fuzzy
 msgid "Double-tap to exit selection mode"
-msgstr "Doppio tocco per entrare in modalità selezione"
+msgstr "Tocca due volte per uscire dalla modalità di selezione"
 
 #: qml/Keyboard.qml:337
 msgid "Swipe to move cursor"
@@ -73,7 +73,7 @@ msgstr "Azero"
 
 #: qml/keys/languages.js:21
 msgid "Belarusian"
-msgstr ""
+msgstr "Biellorusso"
 
 #: qml/keys/languages.js:22
 msgid "Bulgarian"
@@ -184,7 +184,7 @@ msgstr "Lettone"
 
 #: qml/keys/languages.js:47
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedone"
 
 #: qml/keys/languages.js:48
 msgid "Korean"
@@ -260,23 +260,23 @@ msgstr "Fatto"
 
 #: src/plugin/inputmethod.cpp:278
 msgid "Go"
-msgstr ""
+msgstr "Vai"
 
 #: src/plugin/inputmethod.cpp:281
 msgid "Send"
-msgstr ""
+msgstr "Invio"
 
 #: src/plugin/inputmethod.cpp:284
 msgid "Search"
-msgstr ""
+msgstr "Cerca"
 
 #: src/plugin/inputmethod.cpp:287
 msgid "Next"
-msgstr ""
+msgstr "Prossimo"
 
 #: src/plugin/inputmethod.cpp:290
 msgid "Previous"
-msgstr ""
+msgstr "Precedente"
 
 #~ msgid "Chinese - Pinyin"
 #~ msgstr "Cinese - Pinyn"
