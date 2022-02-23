@@ -230,7 +230,11 @@ GVariant *qconf_types_collect_from_variant(const GVariantType *gtype, const QVar
             gsize size = array.size();
             gpointer data;
 
-            data = g_memdup2(array.data(), size);
+#ifdef GLIB_VERSION_2_68
+             data = g_memdup2(array.data(), size);
+#else
+             data = g_memdup(array.data(), size);
+#endif
 
             return g_variant_new_from_data(G_VARIANT_TYPE_BYTESTRING,
                                            data, size, TRUE, g_free, data);
