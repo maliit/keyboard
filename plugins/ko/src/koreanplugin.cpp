@@ -73,9 +73,9 @@ bool KoreanPlugin::setLanguage(const QString& languageId, const QString& pluginP
     return true;
 }
 
-void KoreanPlugin::addSpellingOverride(const QString& orig, const QString& overriden)
+void KoreanPlugin::addSpellingOverride(const QString& orig, const QString& overridden)
 {
-    Q_EMIT addOverride(orig, overriden);
+    Q_EMIT addOverride(orig, overridden);
 }
 
 void KoreanPlugin::loadOverrides(const QString& pluginPath) {

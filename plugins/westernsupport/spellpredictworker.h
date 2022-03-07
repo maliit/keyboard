@@ -53,7 +53,7 @@ public slots:
     void setLanguage(QString language, QString pluginPath);
     void setSpellCheckLimit(int limit);
     void addToUserWordList(const QString& word);
-    void addOverride(const QString& orig, const QString& overriden);
+    void addOverride(const QString& orig, const QString& overridden);
 
 signals:
     void newSpellingSuggestions(QString word, QStringList suggestions,

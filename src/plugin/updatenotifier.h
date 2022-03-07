@@ -58,12 +58,12 @@ public:
     ~UpdateNotifier() override;
 
     void notify(MImUpdateEvent *event);
-    void notifyOverride(const Logic::KeyOverrides &overriden_keys,
+    void notifyOverride(const Logic::KeyOverrides &overridden_keys,
                         bool update = false);
 
     Q_SIGNAL void cursorPositionChanged(int cursor_position,
                                         const QString &surrounding_text);
-    Q_SIGNAL void keysOverriden(const Logic::KeyOverrides &overriden_keys,
+    Q_SIGNAL void keysOverridden(const Logic::KeyOverrides &overridden_keys,
                                 bool update);
 
 private:

@@ -47,7 +47,7 @@ public:
 
     bool use_predictive_text;
     bool requested_prediction_state; // The state requested by settings prior
-                                     // to being overriden by any language
+                                     // to being overridden by any language
                                      // specific requirements
 
     bool use_spell_checker;
