@@ -145,7 +145,7 @@ void SpellPredictWorker::setSpellCheckLimit(int limit)
     m_limit = limit;
 }
 
-void SpellPredictWorker::addOverride(const QString& orig, const QString& overriden)
+void SpellPredictWorker::addOverride(const QString& orig, const QString& overridden)
 {
-    m_overrides[orig] = overriden;
+    m_overrides[orig] = overridden;
 }

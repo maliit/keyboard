@@ -80,9 +80,9 @@ bool WesternLanguagesPlugin::setLanguage(const QString& languageId, const QStrin
     return true;
 }
 
-void WesternLanguagesPlugin::addSpellingOverride(const QString& orig, const QString& overriden)
+void WesternLanguagesPlugin::addSpellingOverride(const QString& orig, const QString& overridden)
 {
-    Q_EMIT addOverride(orig, overriden);
+    Q_EMIT addOverride(orig, overridden);
 }
 
 void WesternLanguagesPlugin::loadOverrides(const QString& pluginPath) {

@@ -139,7 +139,7 @@ struct PinyinSequenceIterator
 PinyinSequenceIterator::PinyinSequenceIterator(pinyin_instance_t *instance, std::size_t offset)
     : m_instance(instance)
     , m_offset(offset)
-    , m_next(offset + 1) // to be overriden later
+    , m_next(offset + 1) // to be overridden later
 {
     ChewingKey *key;
     auto st = pinyin_get_pinyin_key(m_instance, offset, &key);

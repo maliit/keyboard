@@ -33,7 +33,7 @@ public:
     void spellCheckerSuggest(const QString& word, int limit) override;
     void addToSpellCheckerUserWordList(const QString& word) override;
     bool setLanguage(const QString& languageId, const QString& pluginPath) override;
-    virtual void addSpellingOverride(const QString& orig, const QString& overriden);
+    virtual void addSpellingOverride(const QString& orig, const QString& overridden);
     virtual void loadOverrides(const QString& pluginPath);
 
 signals:
@@ -43,7 +43,7 @@ signals:
     void parsePredictionText(QString surroundingLeft, QString preedit);
     void setPredictionLanguage(QString language);
     void addToUserWordList(const QString& word);
-    void addOverride(const QString& orig, const QString& overriden);
+    void addOverride(const QString& orig, const QString& overridden);
 
 public slots:
     void spellCheckFinishedProcessing(QString word, QStringList suggestions);
