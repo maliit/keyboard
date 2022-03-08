@@ -68,8 +68,8 @@ KeyPopover {
         color: Theme.charKeyColor
         radius: 8 * (0.8)
         border {
-            width: 8 * (0.1)
-        	color: Theme.popupBorderColor
+            width: 1
+            color: "#888888"
         }
 
         onXChanged: {

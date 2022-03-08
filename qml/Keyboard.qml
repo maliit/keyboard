@@ -130,13 +130,6 @@ Item {
                 onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
                 onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
 
-                Rectangle {
-                    width: parent.width
-                    height: (1)
-                    color: Theme.dividerColor
-                    anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
-                }
-
                 WordRibbon {
                     id: wordRibbon
                     objectName: "wordRibbon"
@@ -199,6 +192,13 @@ Item {
                         width: Device.gu(30);
                     }
                 } // keyboardComp
+
+                Rectangle {
+                    width: parent.width
+                    height: 1
+                    color: "#888888"
+                    anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
+                }
             }
         }
 

@@ -28,7 +28,7 @@ Rectangle {
     visible: labelChar ? true : false
 
     border.width: Device.flickBorderWidth
-    border.color: Theme.popupBorderColor
+    border.color: "#888888"
     radius: width / 10
 
     Text {

@@ -79,8 +79,8 @@ KeyPopover {
         color: Theme.charKeyColor
         radius: Device.gu(0.8)
         border {
-            width: Device.gu(0.1)
-        	color: Theme.popupBorderColor
+            width: 1
+            color: "#888888"
         }
 
         onXChanged: {
