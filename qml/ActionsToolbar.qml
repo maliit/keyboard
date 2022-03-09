@@ -6,11 +6,9 @@ import MaliitKeyboard 2.0
 
 import "keys/"
 
-Rectangle{
+Item {
     id: actionsToolbar
 	
-    color: Theme.backgroundColor
-    
     anchors {
         left: parent.left
         right: parent.right
