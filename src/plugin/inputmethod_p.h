@@ -21,7 +21,7 @@
 #include "editor.h"
 #include "feedback.h"
 #include "gettext.h"
-#include "iconprovider.h"
+
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
 #include "theme.h"
@@ -94,7 +94,6 @@ public:
     std::unique_ptr<Feedback> m_feedback;
     std::unique_ptr<Theme> m_theme;
     std::unique_ptr<Device> m_device;
-    std::unique_ptr<IconProvider> m_iconProvider;
     std::unique_ptr<Gettext> m_gettext;
 
     WordRibbon* wordRibbon;
@@ -127,7 +126,6 @@ public:
         , m_feedback(std::make_unique<Feedback>(&m_settings))
         , m_theme(std::make_unique<Theme>(&m_settings))
         , m_device(std::make_unique<Device>(&m_settings))
-        , m_iconProvider(std::make_unique<IconProvider>(m_theme.get()))
         , m_gettext(std::make_unique<Gettext>())
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
@@ -186,9 +184,6 @@ public:
         }
 
         registerTypes();
-
-        // Add our image provider for handling icon themes
-        engine->addImageProvider(QLatin1String("icon"), m_iconProvider.get());
 
         // workaround: resizeMode not working in current qpa imlementation
         // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
