@@ -48,7 +48,6 @@ Item {
     property int prevSwipePositionY
     property int cursorSwipeDuration: 5000
     property var timerSwipe: swipeTimer
-    property var theme: Theme.defaultTheme
 
     property variant input_method: Keyboard
     property variant event_handler: MaliitEventHandler
@@ -290,16 +289,25 @@ Item {
             
             enabled: cursorSwipe
 
+            // An invisible text field to be able to get selection colors from
+            // thte qqc2 style in use, for selection mode
+            TextField {
+                id: textArea
+                width: 0
+                height: 0
+                visible: false
+            }
+
             Rectangle {
                 anchors.fill: parent
                 visible: parent.enabled
-                color: cursorSwipeArea.selectionMode ? Theme.selectionColor : Theme.charKeyPressedColor
+                color: cursorSwipeArea.selectionMode ? textArea.selectionColor : "#888888"
                 
                 Label {
                     visible: !cursorSwipeArea.pressed
                     horizontalAlignment: Text.AlignHCenter
                     // FIXME: selected font color should differ
-                    color: cursorSwipeArea.selectionMode ? "#fefefe" : Theme.fontColor
+                    color: cursorSwipeArea.selectionMode ? textArea.selectedTextColor : "#313131"
                     wrapMode: Text.WordWrap
                     
                     anchors {
