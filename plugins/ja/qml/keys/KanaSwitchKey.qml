@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 2.12
 
 import MaliitKeyboard 2.0
 
@@ -22,9 +23,6 @@ FlickCharKey {
     padding: Device.actionKeyPadding
     label: kana.label
     leaves: ["↻", "", "あ", "A"]
-    normalColor: Theme.actionKeyColor
-    pressedColor: Theme.actionKeyPressedColor
-    borderColor: Theme.actionKeyBorderColor
 
     overridePressArea: true
 
@@ -32,6 +30,14 @@ FlickCharKey {
     property string default_state: "kana"
 
     state: kana.state
+
+    // Invisible text field to get selection color from style
+    TextField {
+        id: textArea
+        width: 0
+        height: 0
+        visible: false
+    }
 
     Item {
         id: kana
@@ -43,7 +49,7 @@ FlickCharKey {
                 name: "kana"
                 PropertyChanges {
                     target: kana;
-                    label: "<font color=\"" + Theme.selectionColor + "\">あ</font>/A";
+                    label: "<font color=\"" + textArea.selectionColor + "\">あ</font>/A";
                     state: "kana";
                 }
             },
@@ -51,7 +57,7 @@ FlickCharKey {
                 name: "alnum"
                 PropertyChanges {
                     target: kana;
-                    label: "あ/<font color=\"" + Theme.selectionColor + "\">A</font>";
+                    label: "あ/<font color=\"" + textArea.selectionColor + "\">A</font>";
                     state: "alnum";
                 }
             }

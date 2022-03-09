@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 2.12
 
 import MaliitKeyboard 2.0
 
@@ -50,10 +51,6 @@ Item {
     readonly property double rightOffset: buttonRect.anchors.rightMargin
 
     /* design */
-    property color normalColor: Theme.charKeyColor
-    property color pressedColor: Theme.charKeyPressedColor
-    property bool borderEnabled: Theme.keyBorderEnabled
-    property color borderColor: borderEnabled ? Theme.charKeyBorderColor : "transparent"
     property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8));
 
     /// annotation shows a small label in the upper right corner
@@ -81,18 +78,13 @@ Item {
         height: panel.keyHeight
         width: parent.width
 
-        Rectangle {
+        ToolButton {
             id: buttonRect
-            color: key.currentlyPressed || key.highlight ? pressedColor : normalColor
             anchors.fill: parent
             anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.bottomMargin: key.rowMargin
-            radius: (4)
-            border {
-			    width: borderEnabled ? 8 * (0.1) : 0
-				color: borderColor
-			}
+
             /// label of the key
             //  the label is also the value subitted to the app
 
@@ -100,28 +92,24 @@ Item {
                 spacing: Device.gu(0.3)
                 anchors.centerIn: parent
 
-                Text {
+                Label {
                     id: keyLabel
                     text: label
                     anchors.horizontalCenter: parent.horizontalCenter
-                    font.family: Theme.fontFamily
-                    font.pixelSize: fontSize
+                    font.pixelSize: key.fontSize
                     font.weight: Font.Light
-                    color: Theme.fontColor
                     textFormat: Text.StyledText
                 }
 
-                Text {
+                Label {
                     id: annotationLabel
                     text: annotation
 
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottomMargin: Device.gu(0.3)
 
-                    font.family: Theme.annotationFontFamily
                     font.pixelSize: Device.annotationFontSize
                     font.weight: Font.Light
-                    color: Theme.annotationFontColor
                     visible: annotation != ""
                 }
             }
