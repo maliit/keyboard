@@ -116,7 +116,7 @@ Item {
                 }
             }
 
-            Item {
+            Page {
                 id: keyboardSurface
                 objectName: "keyboardSurface"
 
@@ -165,14 +165,6 @@ Item {
 
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
 
-                    Rectangle {
-                        id: background
-
-                        anchors.fill: parent
-
-                        color: Theme.backgroundColor
-                    }
-                
                     KeyboardContainer {
                         id: keypad
 
