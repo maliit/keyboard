@@ -24,7 +24,6 @@
 
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
-#include "theme.h"
 
 #include "models/wordribbon.h"
 #include "logic/eventhandler.h"
@@ -92,7 +91,6 @@ public:
     KeyboardSettings m_settings;
 
     std::unique_ptr<Feedback> m_feedback;
-    std::unique_ptr<Theme> m_theme;
     std::unique_ptr<Device> m_device;
     std::unique_ptr<Gettext> m_gettext;
 
@@ -124,7 +122,6 @@ public:
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , m_feedback(std::make_unique<Feedback>(&m_settings))
-        , m_theme(std::make_unique<Theme>(&m_settings))
         , m_device(std::make_unique<Device>(&m_settings))
         , m_gettext(std::make_unique<Gettext>())
         , wordRibbon(new WordRibbon)
@@ -208,7 +205,6 @@ public:
     {
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Keyboard", q);
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Feedback", m_feedback.get());
-        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Theme", m_theme.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Device", m_device.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Gettext", m_gettext.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "MaliitGeometry", m_geometry);
@@ -322,12 +318,6 @@ public:
     {
         QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::opacityChanged,
                         q, &InputMethod::opacityChanged);
-    }
-
-    void registerTheme()
-    {
-        QObject::connect(&m_settings, SIGNAL(themeChanged(QString)),
-                        q, SIGNAL(themeChanged(QString)));
     }
 
     void closeOskWindow()

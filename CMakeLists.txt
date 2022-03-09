@@ -165,7 +165,8 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/keyboardgeometry.h
         src/plugin/keyboardsettings.cpp
         src/plugin/keyboardsettings.h
-        src/plugin/theme.cpp src/plugin/theme.h src/plugin/device.cpp src/plugin/device.h)
+        src/plugin/device.cpp
+        src/plugin/device.h)
 
 add_library(maliit-keyboard-common STATIC ${MALIIT_KEYBOARD_COMMON_SOURCES})
 target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia ${Intl_LIBRARIES})
@@ -401,8 +402,6 @@ install(DIRECTORY qml/keys qml/languages
 install(FILES qml/ActionsToolbar.qml qml/FloatingActions.qml qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
         DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
 
-install(DIRECTORY data/themes
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(DIRECTORY data/devices
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(FILES data/schemas/org.maliit.keyboard.maliit.gschema.xml
