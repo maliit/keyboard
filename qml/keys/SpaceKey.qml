@@ -26,9 +26,6 @@ ActionKey {
     label: " ";
     shifted: " ";
 
-    normalColor: Theme.charKeyColor
-    pressedColor: Theme.charKeyPressedColor
-
     action: "space"
     switchBackFromSymbols: true
 
@@ -37,14 +34,11 @@ ActionKey {
     Label {
         anchors.centerIn: parent
         anchors.verticalCenterOffset: -parent.rowMargin / 2 - Device.gu(0.15)
-        font.family: Theme.fontFamily
         font.weight: Font.Light
         font.pixelSize: parent.fontSize * 0.6
-        opacity: Theme.spaceOpacity
         text: Languages.languageIdToName(Keyboard.activeLanguage)
         horizontalAlignment: Text.AlignHCenter
         visible: !panel.hideKeyLabels
-        color: Theme.fontColor
     }
 
     MouseArea {
