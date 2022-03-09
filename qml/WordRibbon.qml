@@ -21,11 +21,11 @@ import QtQuick.Layouts 1.12
 
 import MaliitKeyboard 2.0
 
-Rectangle {
+Page {
 
     id: wordRibbonCanvas
     objectName: "wordRibbenCanvas"
-    state: "NORMAL"
+    anchors.margins: 0
 
     ListView {
         id: listView
@@ -40,8 +40,23 @@ Rectangle {
         leftMargin: Device.gu(1)
         rightMargin: Device.gu(1)
         topMargin: 0
-        bottomMargin: Device.top_margin
+        bottomMargin: Device.top_margin * 2
         spacing: Device.gu(2)
+    }
+
+    // Invisible components to get normal and selection colors from the current
+    // qqc2 style for showing visual feedback of selected word completion
+    TextField {
+        id: textArea
+        width: 0
+        height: 0
+        visible: false
+    }
+    Label {
+        id: label
+        width: 0
+        height: 0
+        visible: false
     }
 
     Component {
@@ -51,7 +66,7 @@ Rectangle {
             // Use 1/3 of pixel height of parent converted to grid units
             // as a minimum width threshhold, so that short suggestions
             // are wide enough to tap with a thumb
-            width: Math.max(Device.gu(height / 3), implicitWidth)
+            width: Math.max(Device.gu(height / 3), wordItem.width)
             height: wordRibbonCanvas.height
             spacing: listView.spacing
 
@@ -61,28 +76,25 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 Layout.fillHeight: true
 
-                property bool textBold: isPrimaryCandidate || listView.count == 1 // Exposed for autopilot
-
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-
-                font.pixelSize: parent.height - Device.top_margin * 2
-                font.family: Theme.fontFamily
-                font.weight: textBold ? Font.Bold : Font.Light
+                font.bold: isPrimaryCandidate || listView.count == 1
+                font.pixelSize: parent.height - Device.top_margin * 4
                 text: word
-                color: Theme.fontColor
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
 
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
+                        wordItem.color = textArea.selectionColor;
                         Feedback.keyPressed();
-
-                        wordRibbonCanvas.state = "SELECTED"
                         event_handler.onWordCandidatePressed(wordItem.text, isUserInput)
                     }
                     onReleased: {
-                        wordRibbonCanvas.state = "NORMAL"
+                        wordItem.color = label.color;
                         event_handler.onWordCandidateReleased(wordItem.text, isUserInput)
+                    }
+                    onPositionChanged: {
+                        wordItem.color = label.color;
                     }
                 }
             }
@@ -100,22 +112,4 @@ Rectangle {
             }
         }
     }
-
-    states: [
-        State {
-            name: "NORMAL"
-            PropertyChanges {
-                target: wordRibbonCanvas
-                color: Theme.backgroundColor
-            }
-        },
-        State {
-            name: "SELECTED"
-            PropertyChanges {
-                target: wordRibbonCanvas
-                color: Theme.actionKeyPressedColor
-            }
-        }
-    ]
-
 }
