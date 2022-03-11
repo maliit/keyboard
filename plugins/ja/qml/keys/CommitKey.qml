@@ -28,8 +28,6 @@ ActionKey {
     enabled: actionKeyOverride ? actionKeyOverride.enabled : true
     // overrideIcon has high priority over label
     label: overrideIconName == "" ? overrideLabel : ""
-    // Scale the font so the label fits if a long word is set
-    fontSize: Device.symbolShiftKeyFontSize * (4 / (label.length >= 4 ? (label.length <= 6 ? label.length : 6) : 4));
     shifted: label
 
     iconNormal: (overrideIconName == "") && (overrideLabel == "") ? "keyboard-enter-symoblic" : overrideIconName
