@@ -138,6 +138,9 @@ Item {
             anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.bottomMargin: key.rowMargin
 
+            // Disable hover so that highlight doesn't stick on touch screens
+            hoverEnabled: false
+
             // Icon of the key
             icon.name: key.iconNormal
             icon.height: key.fontSize

@@ -13,6 +13,9 @@ Button {
     icon.name: action.icon.name
     display: action.text ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
     
+    // Disable hover so that highlight doesn't stick on touch screens
+    hoverEnabled: false
+
     onClicked: {
         if (keyFeedback) {
             Feedback.keyPressed();

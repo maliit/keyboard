@@ -14,6 +14,9 @@ ToolButton {
     icon.name: action.icon.name
     display: fullLayout ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
     
+    // Disable hover so that highlight doesn't stick on touch screens
+    hoverEnabled: false
+
     onClicked: {
         Feedback.keyPressed();
         fullScreenItem.timerSwipe.restart();
