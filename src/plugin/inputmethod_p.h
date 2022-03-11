@@ -36,6 +36,7 @@
 #include <QStringList>
 #include <qglobal.h>
 #include <QDebug>
+#include <QQuickStyle>
 
 #include <memory>
 
@@ -127,6 +128,15 @@ public:
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {
+
+        // Set the icon theme to use to an appropriate value.
+        auto style = QQuickStyle::name().toLower();
+        if (style == QStringLiteral("suru")) {
+            QIcon::setThemeName(QStringLiteral("suru"));
+        } else {
+            QIcon::setThemeName(QStringLiteral("breeze"));
+        }
+
         view = createWindow(host);
 
         m_device->setWindow(view);

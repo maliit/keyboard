@@ -31,6 +31,7 @@ find_package(GIO REQUIRED)
 
 find_package(Qt5DBus)
 
+find_package(Qt5QuickControls2 REQUIRED)
 find_package(Qt5Multimedia)
 find_package(Qt5Feedback)
 find_package(Intl REQUIRED)
@@ -169,7 +170,7 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/device.h)
 
 add_library(maliit-keyboard-common STATIC ${MALIIT_KEYBOARD_COMMON_SOURCES})
-target_link_libraries(maliit-keyboard-common Qt5::DBus Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia ${Intl_LIBRARIES})
+target_link_libraries(maliit-keyboard-common Qt5::DBus Qt5::QuickControls2 Maliit::Plugins maliit-keyboard-lib maliit-keyboard-view gsettings-qt Qt5::Multimedia ${Intl_LIBRARIES})
 if (Qt5Feedback_FOUND)
     target_link_libraries(maliit-keyboard-common Qt5::Feedback)
     target_compile_definitions(maliit-keyboard-common PUBLIC HAVE_QT5_FEEDBACK)
