@@ -204,7 +204,7 @@ Item {
             name: "SHIFTED"
             PropertyChanges {
                 target: keyButton
-                icon.name: iconShifted
+                icon.name: iconShifted ? iconShifted : iconNormal
             }
             PropertyChanges {
                 target: keyLabel
@@ -219,7 +219,7 @@ Item {
             name: "CAPSLOCK"
             PropertyChanges {
                 target: keyButton
-                icon.name: iconCapsLock
+                icon.name: iconCapsLock ? iconCapsLock : iconShifted ? iconShifted : iconNormal
             }
             PropertyChanges {
                 target: keyLabel
