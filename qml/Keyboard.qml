@@ -152,6 +152,12 @@ Item {
                     height: Device.wordRibbonHeight
                 }
                     
+                Rectangle {
+                    width: parent.width
+                    height: 1
+                    color: "#888888"
+                    anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
+                }
 
                 Item {
                     id: keyboardComp
@@ -183,13 +189,6 @@ Item {
                         width: Device.gu(30);
                     }
                 } // keyboardComp
-
-                Rectangle {
-                    width: parent.width
-                    height: 1
-                    color: "#888888"
-                    anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
-                }
             }
         }
 
