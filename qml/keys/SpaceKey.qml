@@ -16,8 +16,8 @@
 
 import QtQuick 2.4
 
-import QtQuick.Controls 2.1
-
+import QtQuick.Controls 2.12
+import QtQuick.Window 2.12
 import MaliitKeyboard 2.0
 
 import "languages.js" as Languages
@@ -31,10 +31,18 @@ ActionKey {
 
     overridePressArea: true
 
+    Rectangle {
+        anchors.margins: 8
+        anchors.fill: parent
+        color: "#888888"
+        radius: 8 / Screen.devicePixelRatio
+        opacity: spaceKey.currentlyPressed ? 0.0 : 0.25
+    }
+
     Label {
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: -parent.rowMargin / 2 - Device.gu(0.15)
         font.weight: Font.Light
+        opacity: 0.6
         font.pixelSize: parent.fontSize * 0.6
         text: Languages.languageIdToName(Keyboard.activeLanguage)
         horizontalAlignment: Text.AlignHCenter
