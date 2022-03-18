@@ -63,7 +63,7 @@ Item {
         objectName: "emojiKeypadLoader"
         anchors.fill: parent
         asynchronous: true
-        visible: panel.state === "EMOJI"
+        active: panel.state === "EMOJI"
         source: "languages/Keyboard_emoji.qml"
     }
 
