@@ -14,6 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#pragma once
+
 #include "inputmethod.h"
 #include "coreutils.h"
 
@@ -33,6 +35,8 @@
 
 #include <maliit/plugins/abstractinputmethodhost.h>
 #include <maliit/plugins/abstractpluginsetting.h>
+
+#include <LayerShellQt/Window>
 
 #include <QtQuick>
 #include <QStringList>
@@ -57,6 +61,12 @@ typedef QMap<QString, SharedOverride>::const_iterator OverridesIterator;
 QQuickView *createWindow(MAbstractInputMethodHost *host)
 {
     QScopedPointer<QQuickView> view(new QQuickView);
+
+    LayerShellQt::Window *layerShell = LayerShellQt::Window::get(view.get());
+    layerShell->setLayer(LayerShellQt::Window::LayerTop);
+    layerShell->setAnchors(LayerShellQt::Window::AnchorBottom);
+    layerShell->setKeyboardInteractivity(LayerShellQt::Window::KeyboardInteractivityOnDemand);
+    layerShell->setScope(QStringLiteral("input-panel"));
 
     QSurfaceFormat format;
     format.setAlphaBufferSize(8);

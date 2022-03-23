@@ -35,6 +35,8 @@ find_package(Qt5Multimedia)
 find_package(Qt5Feedback)
 find_package(Intl REQUIRED)
 
+find_package(LayerShellQt REQUIRED)
+
 find_package(AnthyUnicode)
 find_package(Anthy)
 find_package(Pinyin)
@@ -179,6 +181,8 @@ if (Qt5Feedback_FOUND)
 endif()
 target_compile_definitions(maliit-keyboard-common PRIVATE ${maliit-keyboard-definitions})
 target_compile_features(maliit-keyboard-common PRIVATE cxx_std_17)
+
+target_link_libraries(maliit-keyboard-common LayerShellQt::Interface)
 
 set(MALIIT_KEYBOARD_PLUGIN_SOURCES
         src/plugin/plugin.cpp
