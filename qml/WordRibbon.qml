@@ -17,6 +17,7 @@
 import QtQuick 2.4
 
 import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 
 import MaliitKeyboard 2.0
 
@@ -36,22 +37,24 @@ Rectangle {
         orientation: ListView.Horizontal
         delegate: wordCandidateDelegate
 
+        spacing: Device.gu(2)
     }
 
     Component {
         id: wordCandidateDelegate
-        Item {
+        RowLayout {
             id: wordCandidateItem
             // Use 1/3 of pixel height of parent converted to grid units
             // as a minimum width threshhold, so that short suggestions
             // are wide enough to tap with a thumb
             width: Math.max(Device.gu(height / 3), implicitWidth)
             height: wordRibbonCanvas.height
-            anchors.leftMargin: Device.gu(2)
-            anchors.rightMargin: Device.gu(2)
+            spacing: listView.spacing
 
             Label {
                 id: wordItem
+
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                 property bool textBold: isPrimaryCandidate || listView.count == 1 // Exposed for autopilot
 
@@ -77,6 +80,18 @@ Rectangle {
                         event_handler.onWordCandidateReleased(wordItem.text, isUserInput)
                     }
                 }
+            }
+
+            // FIXME: ListView doesn't support separators directly so we need
+            // to be a little hacky to add a muted separator between word
+            // candidates, so that multi-word suggestions are distinct
+            Rectangle {
+                Layout.alignment: Qt.AlignVCenter
+                width: 1
+                height: parent.height * 0.5
+                color: wordItem.color
+                opacity: 0.3
+                visible: index != listView.count - 1
             }
         }
     }
