@@ -16,7 +16,7 @@
 
 import QtQuick 2.4
 
-import QtQuick.Controls 2.1
+import QtQuick.Controls 2.12
 
 import MaliitKeyboard 2.0
 
@@ -44,41 +44,35 @@ Rectangle {
             id: wordCandidateItem
             width: wordItem.width + Device.gu(2)
             height: wordRibbonCanvas.height
-            anchors.margins: 0
-            property alias word_text: wordItem // For testing in Autopilot
-            property bool textBold: isPrimaryCandidate || listView.count == 1 // Exposed for autopilot
+            anchors.leftMargin: Device.gu(2)
+            anchors.rightMargin: Device.gu(2)
 
-            Item {
-                anchors.fill: parent
-                anchors.margins: {
-                    top: 0
-                    bottom: 0
-                    left: Device.gu(2)
-                    right: Device.gu(2)
-                }
+            Label {
+                id: wordItem
 
-                Label {
-                    id: wordItem
-                    font.pixelSize: Device.wordRibbonFontSize
-                    font.family: Theme.fontFamily
-                    font.weight: textBold ? Font.Bold : Font.Light
-                    text: word;
-                    anchors.centerIn: parent
-                    color: Theme.fontColor
-                }
-            }
+                property bool textBold: isPrimaryCandidate || listView.count == 1 // Exposed for autopilot
 
-            MouseArea {
-                anchors.fill: wordCandidateItem
-                onPressed: {
-                    Feedback.keyPressed();
-                    
-                    wordRibbonCanvas.state = "SELECTED"
-                    event_handler.onWordCandidatePressed(wordItem.text, isUserInput)
-                }
-                onReleased: {
-                    wordRibbonCanvas.state = "NORMAL"
-                    event_handler.onWordCandidateReleased(wordItem.text, isUserInput)
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+
+                font.pixelSize: parent.height * 0.7
+                font.family: Theme.fontFamily
+                font.weight: textBold ? Font.Bold : Font.Light
+                text: word
+                color: Theme.fontColor
+
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        Feedback.keyPressed();
+
+                        wordRibbonCanvas.state = "SELECTED"
+                        event_handler.onWordCandidatePressed(wordItem.text, isUserInput)
+                    }
+                    onReleased: {
+                        wordRibbonCanvas.state = "NORMAL"
+                        event_handler.onWordCandidateReleased(wordItem.text, isUserInput)
+                    }
                 }
             }
         }
