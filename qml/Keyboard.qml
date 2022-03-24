@@ -156,10 +156,8 @@ Item {
                     id: toolbar
                     objectName: "actionsToolbar"
                     
-                    z: 1
                     visible: fullScreenItem.cursorSwipe
                     height: Device.wordRibbonHeight
-                    state: wordRibbon.visible ? "wordribbon" : "top"
                 }
                     
 

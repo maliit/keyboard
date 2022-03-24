@@ -16,27 +16,6 @@ Rectangle{
         right: parent.right
     }
 
-    states: [
-        State {
-            name: "wordribbon"
-        
-            AnchorChanges {
-                target: actionsToolbar
-                anchors.top: undefined
-                anchors.bottom: keyboardComp.top
-            }
-        },
-        State {
-            name: "top"
-
-            AnchorChanges {
-                target: actionsToolbar
-                anchors.top: parent.top
-                anchors.bottom: undefined
-            }
-         }
-    ]
-    
     // Disable clicking behind the toolbar
     MouseArea {
         anchors.fill: parent
