@@ -42,7 +42,10 @@ Rectangle {
         id: wordCandidateDelegate
         Item {
             id: wordCandidateItem
-            width: wordItem.width + Device.gu(2)
+            // Use 1/3 of pixel height of parent converted to grid units
+            // as a minimum width threshhold, so that short suggestions
+            // are wide enough to tap with a thumb
+            width: Math.max(Device.gu(height / 3), implicitWidth)
             height: wordRibbonCanvas.height
             anchors.leftMargin: Device.gu(2)
             anchors.rightMargin: Device.gu(2)
