@@ -153,8 +153,8 @@ Item {
                     anchors.bottom: keyboardComp.top
                     width: parent.width;
 
-                    height: canvas.wordribbon_visible ? Device.wordRibbonHeight
-                                                      : 0
+                    // Use a size proportional to the height of keyboard keys
+                    height: visible ? keypad.keyHeight * 0.5 : 0
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
                 
