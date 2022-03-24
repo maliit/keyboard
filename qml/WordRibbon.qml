@@ -37,6 +37,10 @@ Rectangle {
         orientation: ListView.Horizontal
         delegate: wordCandidateDelegate
 
+        leftMargin: Device.gu(1)
+        rightMargin: Device.gu(1)
+        topMargin: 0
+        bottomMargin: Device.top_margin
         spacing: Device.gu(2)
     }
 
@@ -55,13 +59,14 @@ Rectangle {
                 id: wordItem
 
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                Layout.fillHeight: true
 
                 property bool textBold: isPrimaryCandidate || listView.count == 1 // Exposed for autopilot
 
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
 
-                font.pixelSize: parent.height * 0.7
+                font.pixelSize: parent.height - Device.top_margin * 2
                 font.family: Theme.fontFamily
                 font.weight: textBold ? Font.Bold : Font.Light
                 text: word
