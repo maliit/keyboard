@@ -15,4 +15,4 @@ The majority of individual files in `qml` are under LGPL-3.0-only. New contribut
 
 All new code outside the `qml` directory should be licensed as defined in `COPYING.BSD`.
 
-Artwork is licensed under Creative Commons Attribution 3.0 license. See `COPYING.CC-BY`.
+Artwork is licensed under Creative Commons Attribution 4.0 license. See `COPYING.CC-BY`.
