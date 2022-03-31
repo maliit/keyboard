@@ -393,7 +393,7 @@ endif()
 
 # Installation
 
-install(FILES COPYING COPYING.BSD COPYING.CC-BY README.md
+install(FILES COPYING COPYING.BSD COPYING.CC-BY-SA README.md
         DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/maliit-keyboard)
 
 install(TARGETS maliit-keyboard-plugin maliit-keyboard
