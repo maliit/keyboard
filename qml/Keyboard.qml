@@ -68,9 +68,6 @@ Item {
         width: parent.width
         height: fullScreenItem.height * (fullScreenItem.landscape ? Device.keyboardHeightLandscape
                                                                   : Device.keyboardHeightPortrait)
-                                      + wordRibbon.height + borderTop.height
-
-        property int keypadHeight: height;
 
         visible: true
 
@@ -98,11 +95,7 @@ Item {
 
             property int jumpBackThreshold: Device.gu(10)
 
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            height: (parent.height - canvas.keypadHeight) + wordRibbon.height +
-                    borderTop.height
+            anchors.fill: parent
 
             drag.target: keyboardSurface
             drag.axis: Drag.YAxis;
@@ -148,13 +141,14 @@ Item {
                     id: wordRibbon
                     objectName: "wordRibbon"
 
-                    visible: canvas.wordribbon_visible && keypad.state !== "EMOJI"
+                    // Hide thte word ribbon when in emoji or cursor mode
+                    visible: !fullScreenItem.cursorSwipe && canvas.wordribbon_visible && keypad.state !== "EMOJI"
 
                     anchors.bottom: keyboardComp.top
                     width: parent.width;
 
-                    height: canvas.wordribbon_visible ? Device.wordRibbonHeight
-                                                      : 0
+                    // Use a size proportional to the height of keyboard keys
+                    height: visible ? keypad.keyHeight * 0.5 : 0
                     onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
                 }
                 
@@ -162,10 +156,8 @@ Item {
                     id: toolbar
                     objectName: "actionsToolbar"
                     
-                    z: 1
                     visible: fullScreenItem.cursorSwipe
                     height: Device.wordRibbonHeight
-                    state: wordRibbon.visible ? "wordribbon" : "top"
                 }
                     
 
@@ -173,7 +165,8 @@ Item {
                     id: keyboardComp
                     objectName: "keyboardComp"
 
-                    height: canvas.keypadHeight - wordRibbon.height + keypad.anchors.topMargin
+                    visible: !fullScreenItem.cursorSwipe
+                    height: parent.height
                     width: parent.width
                     anchors.bottom: parent.bottom
 
@@ -187,20 +180,12 @@ Item {
                         color: Theme.backgroundColor
                     }
                 
-                    Item {
-                        id: borderTop
-                        width: parent.width
-                        anchors.top: parent.top.bottom
-                        height: wordRibbon.visible ? 0 : Device.top_margin
-                    }
-
                     KeyboardContainer {
                         id: keypad
 
-                        anchors.top: borderTop.bottom
-                        anchors.bottom: background.bottom
+                        anchors.fill: parent
+                        anchors.topMargin: wordRibbon.visible ? 0 : Device.top_margin
                         anchors.bottomMargin: Device.bottom_margin
-                        width: parent.width
                         hideKeyLabels: fullScreenItem.cursorSwipe
 
                         onPopoverEnabledChanged: fullScreenItem.reportKeyboardVisibleRect();
