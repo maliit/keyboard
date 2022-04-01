@@ -41,7 +41,6 @@ class Theme : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QString iconTheme READ iconTheme NOTIFY themeChanged)
-    Q_PROPERTY(QUrl imagesPath READ imagesPath NOTIFY themeChanged)
 
     Q_PROPERTY(QColor fontColor READ fontColor NOTIFY themeChanged)
     Q_PROPERTY(QColor selectionColor READ selectionColor NOTIFY themeChanged)
@@ -66,7 +65,6 @@ public:
     ~Theme() override;
 
     [[nodiscard]] QString iconTheme() const;
-    [[nodiscard]] QUrl imagesPath() const;
 
     [[nodiscard]] QColor fontColor() const;
     [[nodiscard]] QColor selectionColor() const;

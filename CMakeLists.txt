@@ -393,7 +393,7 @@ endif()
 
 # Installation
 
-install(FILES COPYING COPYING.BSD COPYING.CC-BY README.md
+install(FILES COPYING COPYING.BSD README.md
         DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/maliit-keyboard)
 
 install(TARGETS maliit-keyboard-plugin maliit-keyboard
@@ -405,8 +405,6 @@ install(DIRECTORY qml/keys qml/languages
 install(FILES qml/ActionsToolbar.qml qml/FloatingActions.qml qml/Keyboard.qml qml/KeyboardContainer.qml qml/WordRibbon.qml
         DESTINATION ${MALIIT_KEYBOARD_QML_DIR})
 
-install(DIRECTORY qml/images
-        DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(DIRECTORY data/sounds
         DESTINATION ${MALIIT_KEYBOARD_DATA_DIR})
 install(DIRECTORY data/themes

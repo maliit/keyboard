@@ -14,5 +14,3 @@ The majority of individual files in `src` are under a BSD license as written in 
 The majority of individual files in `qml` are under LGPL-3.0-only. New contributions in that directory should be licensed under LGPL-3.0-or-later or aforementioned BSD license.
 
 All new code outside the `qml` directory should be licensed as defined in `COPYING.BSD`.
-
-Artwork is licensed under Creative Commons Attribution 3.0 license. See `COPYING.CC-BY`.
