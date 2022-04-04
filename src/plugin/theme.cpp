@@ -57,18 +57,6 @@ QString Theme::iconTheme() const
     return QStringLiteral();
 }
 
-QUrl Theme::imagesPath() const
-{
-    if (m_themeData.contains("imagesDir")) {
-        const auto &images = m_themeData.value("imagesDir").toString();
-        if (QFileInfo(images).isRelative())
-            return QUrl().resolved(images);
-        return QUrl::fromLocalFile(images);
-    }
-
-    return QUrl::fromLocalFile(MALIIT_KEYBOARD_DATA_DIR "/images");
-}
-
 QColor Theme::colorByName(const char *name, const QColor &defaultColor) const
 {
     if (m_themeData.contains(name)) {
