@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: '*'
+
+jobs:
+  build-kde-neon:
+    name: KDE Neon
+    runs-on: ubuntu-latest
+    container: ubuntu:focal
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install deps
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          echo "deb [trusted=yes] http://archive.neon.kde.org/unstable focal main" >> /etc/apt/sources.list.d/neon.list
+          apt-get update
+          apt-get dist-upgrade --purge -y
+          apt-get -y install build-essential cmake doxygen gettext libanthy-dev libchewing3-dev libhunspell-dev libpinyin13-dev libpresage-dev maliit-framework-dev pkg-config qtbase5-dev qtdeclarative5-dev qtfeedback5-dev qtmultimedia5-dev presage
+
+      - name: Build
+        run: |
+          cmake -DCMAKE_BUILD_TYPE=debug -DCMAKE_INSTALL_PREFIX=/usr .
+          make -j8
