@@ -167,10 +167,6 @@ public:
                          &editor, &MaliitKeyboard::AbstractTextEditor::replaceAndCommitPreedit);
 
 
-    #ifdef DISABLED_FLAGS_FROM_SURFACE
-        view->setFlags(Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
-                          | Qt::X11BypassWindowManagerHint | Qt::WindowDoesNotAcceptFocus);
-    #endif
         view->setWindowState(Qt::WindowNoState);
 
         QSurfaceFormat format = view->format();
