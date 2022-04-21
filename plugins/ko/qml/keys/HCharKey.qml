@@ -34,22 +34,22 @@ CharKey {
 
         function onKeyReleased(keyString, action) {
             // get previous preedit string
-            var preedit = maliit_input_method.preedit;
+            var preedit = Keyboard.preedit;
 
             if (Parser.is_hangul(keyString)) {
                 // parsing preedit until compose one syllable. 
                 if (preedit.length > 1) { 
                     var syllableString = preedit.substring(0,preedit.length - 1);
                     var preeditString = preedit[preedit.length - 1];
-                    maliit_input_method.preedit = syllableString + Parser.add_jamo(preeditString, keyString);
+                    Keyboard.preedit = syllableString + Parser.add_jamo(preeditString, keyString);
                 } else {
-                    maliit_input_method.preedit = Parser.add_jamo(preedit, keyString);
+                    Keyboard.preedit = Parser.add_jamo(preedit, keyString);
                 }
 
                 return;
             }
 
-            maliit_input_method.preedit = preedit + keyString;
+            Keyboard.preedit = preedit + keyString;
             event_handler.onKeyReleased("", "commit");
         }
     }

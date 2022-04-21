@@ -89,7 +89,7 @@ MultiPointTouchArea {
                     // below the screen preventing release events when swiped
                     // over
                     if(point.sceneY > fullScreenItem.height - Device.gu(4) && point.y > startY + Device.gu(8) && !held) {
-                        maliit_input_method.hide();
+                        Keyboard.hide();
                     }
                 } else {
                     lastY = point.y;
@@ -149,7 +149,7 @@ MultiPointTouchArea {
             // Handles swiping away the keyboard
             // Hide if the end point is more than 8 grid units from the start
             if (!held && point.y > startY + Device.gu(8)) {
-                maliit_input_method.hide();
+                Keyboard.hide();
             } else {
                 bounceBackAnimation.from = keyboardSurface.y;
                 bounceBackAnimation.start();

@@ -223,7 +223,6 @@ public:
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Theme", m_theme.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Device", m_device.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Gettext", m_gettext.get());
-        qml_context->setContextProperty(QStringLiteral("maliit_input_method"), q);
         qml_context->setContextProperty(QStringLiteral("maliit_geometry"), m_geometry);
         qml_context->setContextProperty(QStringLiteral("maliit_event_handler"), &event_handler);
         qml_context->setContextProperty(QStringLiteral("maliit_wordribbon"), wordRibbon);

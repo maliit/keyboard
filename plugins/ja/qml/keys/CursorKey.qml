@@ -25,8 +25,8 @@ ActionKey {
     leftSide: action == "left";
     rightSide: action == "right";
 
-    property string preedit: maliit_input_method.preedit
-    property int cursorPosition: maliit_input_method.cursorPosition
+    property string preedit: Keyboard.preedit
+    property int cursorPosition: Keyboard.cursorPosition
     property bool isPreedit: preedit != ""
 
     overridePressArea: true;
@@ -34,9 +34,9 @@ ActionKey {
     onReleased: {
         if (isPreedit && !fullScreenItem.cursorSwipe) {
             if (action == "left" && cursorPosition > 0) {
-                maliit_input_method.cursorPosition--
+                Keyboard.cursorPosition--
             } else if (action == "right" && cursorPosition < preedit.length) {
-                maliit_input_method.cursorPosition++
+                Keyboard.cursorPosition++
             }
         } else if (!fullScreenItem.cursorSwipe) {
             event_handler.onKeyReleased("", action);

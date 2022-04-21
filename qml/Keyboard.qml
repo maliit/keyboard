@@ -50,7 +50,7 @@ Item {
     property var timerSwipe: swipeTimer
     property var theme: Theme.defaultTheme
 
-    property variant input_method: maliit_input_method
+    property variant input_method: Keyboard
     property variant event_handler: maliit_event_handler
 
     onXChanged: fullScreenItem.reportKeyboardVisibleRect();
@@ -88,7 +88,7 @@ Item {
         onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
         onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
 
-        opacity: maliit_input_method.opacity
+        opacity: Keyboard.opacity
 
         MouseArea {
             id: swipeArea
@@ -207,7 +207,7 @@ Item {
             // Animations don't have an "enabled" property, so just set the
             // target to null if animation is disabled, which effectively also
             // disables the animation.
-            target: maliit_input_method.animationEnabled ? keyboardSurface : null
+            target: Keyboard.animationEnabled ? keyboardSurface : null
             properties: "y"
             easing.type: Easing.OutBounce;
             easing.overshoot: 2.0
@@ -235,7 +235,7 @@ Item {
                     keypad.closeExtendedKeys();
                     keypad.activeKeypadState = "NORMAL";
                     keypad.state = "CHARACTERS";
-                    maliit_input_method.close();
+                    Keyboard.close();
                     canvas.hidingComplete = true;
                     reportKeyboardVisibleRect();
                     
@@ -249,7 +249,7 @@ Item {
             }
         ]
         transitions: Transition {
-            enabled: maliit_input_method.animationEnabled
+            enabled: Keyboard.animationEnabled
             NumberAnimation { target: keyboardSurface; properties: "y"; duration: 165}
         }
 

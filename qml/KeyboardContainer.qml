@@ -103,15 +103,15 @@ Item {
     ]
 
     onStateChanged: {
-        maliit_input_method.keyboardState = state
+        Keyboard.keyboardState = state
     }
 
     QtObject {
         id: internal
 
         property Item activeKeypad: characterKeypadLoader.item
-        property string characterKeypadSource: loadLayout(maliit_input_method.contentType,
-                                                          maliit_input_method.activeLanguage)
+        property string characterKeypadSource: loadLayout(Keyboard.contentType,
+                                                          Keyboard.activeLanguage)
         property string symbolKeypadSource: activeKeypad ? activeKeypad.symbols : ""
 
         onCharacterKeypadSourceChanged: {
@@ -121,15 +121,15 @@ Item {
         function loadLayout(contentType, activeLanguage)
         {
             var language = activeLanguage.toLowerCase();
-            if (!maliit_input_method.languageIsSupported(language)) {
+            if (!Keyboard.languageIsSupported(language)) {
                 // If we don't have a layout for this specific locale 
                 // check more generic locale
                 language = language.slice(0,2);
             }
 
-            if (!maliit_input_method.languageIsSupported(language)) {
+            if (!Keyboard.languageIsSupported(language)) {
                 console.log("Language '" + language + "' not supported - using 'en' instead");
-                maliit_input_method.activeLanguage = "en";
+                Keyboard.activeLanguage = "en";
                 language = "en";
             }
 
@@ -148,18 +148,18 @@ Item {
             // EmailContentType
             if (contentType === 3) {
                 canvas.layoutId = "email";
-                return maliit_input_method.currentPluginPath + "/Keyboard_" + language + "_email.qml";
+                return Keyboard.currentPluginPath + "/Keyboard_" + language + "_email.qml";
             }
 
             // UrlContentType
             if (contentType === 4) {
                 canvas.layoutId = "url";
-                return maliit_input_method.currentPluginPath + "/Keyboard_" + language + "_url_search.qml";
+                return Keyboard.currentPluginPath + "/Keyboard_" + language + "_url_search.qml";
             }
 
             // FreeTextContentType used as fallback
             canvas.layoutId = "freetext";
-            return maliit_input_method.currentPluginPath + "/Keyboard_" + language + ".qml";
+            return Keyboard.currentPluginPath + "/Keyboard_" + language + ".qml";
         }
     }
 }
