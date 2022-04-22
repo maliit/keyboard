@@ -223,7 +223,7 @@ public:
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "MaliitGeometry", m_geometry);
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "MaliitEventHandler", &event_handler);
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "WordModel", wordRibbon);
-        qml_context->setContextProperty(QStringLiteral("maliit_word_engine"), editor.wordEngine());
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "WordEngine", editor.wordEngine());
     }
 
     void updateLanguagesPaths()

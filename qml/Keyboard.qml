@@ -71,7 +71,7 @@ Item {
 
         visible: true
 
-        property bool wordribbon_visible: maliit_word_engine.enabled
+        property bool wordribbon_visible: WordEngine.enabled
         onWordribbon_visibleChanged: fullScreenItem.reportKeyboardVisibleRect();
 
         property bool languageMenuShown: false
