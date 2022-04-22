@@ -51,7 +51,7 @@ Item {
     property var theme: Theme.defaultTheme
 
     property variant input_method: Keyboard
-    property variant event_handler: maliit_event_handler
+    property variant event_handler: MaliitEventHandler
 
     onXChanged: fullScreenItem.reportKeyboardVisibleRect();
     onYChanged: fullScreenItem.reportKeyboardVisibleRect();
