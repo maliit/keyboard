@@ -189,7 +189,7 @@ public:
             engine->addImportPath(QStringLiteral(MALIIT_KEYBOARD_QML_DIR) + QDir::separator() + "keys");
         }
 
-        setContextProperties(engine->rootContext());
+        registerTypes();
 
         // Add our image provider for handling icon themes
         engine->addImageProvider(QLatin1String("icon"), m_iconProvider.get());
@@ -213,7 +213,7 @@ public:
         m_geometry->setOrientation(screenOrientation);
     }
 
-    void setContextProperties(QQmlContext *qml_context)
+    void registerTypes()
     {
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Keyboard", q);
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Feedback", m_feedback.get());
