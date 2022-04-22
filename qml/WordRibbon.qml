@@ -32,7 +32,7 @@ Rectangle {
         objectName: "wordListView"
         anchors.fill: parent
 
-        model: maliit_wordribbon
+        model: WordModel
 
         orientation: ListView.Horizontal
         delegate: wordCandidateDelegate

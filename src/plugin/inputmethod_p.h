@@ -222,7 +222,7 @@ public:
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Gettext", m_gettext.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "MaliitGeometry", m_geometry);
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "MaliitEventHandler", &event_handler);
-        qml_context->setContextProperty(QStringLiteral("maliit_wordribbon"), wordRibbon);
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "WordModel", wordRibbon);
         qml_context->setContextProperty(QStringLiteral("maliit_word_engine"), editor.wordEngine());
     }
 
