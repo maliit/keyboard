@@ -21,7 +21,6 @@
 #include "editor.h"
 #include "feedback.h"
 #include "gettext.h"
-#include "greeterstatus.h"
 #include "iconprovider.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
@@ -91,7 +90,6 @@ public:
 
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
-    GreeterStatus *m_greeterStatus;
 
     std::unique_ptr<Feedback> m_feedback;
     std::unique_ptr<Theme> m_theme;
@@ -126,7 +124,6 @@ public:
         , preedit()
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
-        , m_greeterStatus(new GreeterStatus())
         , m_feedback(std::make_unique<Feedback>(&m_settings))
         , m_theme(std::make_unique<Theme>(&m_settings))
         , m_device(std::make_unique<Device>(&m_settings))
@@ -227,7 +224,6 @@ public:
         qml_context->setContextProperty(QStringLiteral("maliit_event_handler"), &event_handler);
         qml_context->setContextProperty(QStringLiteral("maliit_wordribbon"), wordRibbon);
         qml_context->setContextProperty(QStringLiteral("maliit_word_engine"), editor.wordEngine());
-        qml_context->setContextProperty(QStringLiteral("greeter_status"), m_greeterStatus);
     }
 
     void updateLanguagesPaths()
