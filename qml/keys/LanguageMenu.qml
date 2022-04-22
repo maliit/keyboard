@@ -56,7 +56,6 @@ Menu {
         onClicked: {
             Keyboard.showSystemSettings();
             canvas.languageMenu.close();
-            Keyboard.hide();
         }
     }
 }
