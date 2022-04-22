@@ -109,7 +109,7 @@ Item {
 
             onReleased: {
                 if (keyboardSurface.y > jumpBackThreshold) {
-                    maliit_geometry.shown = false;
+                    MaliitGeometry.shown = false;
                 } else {
                     bounceBackAnimation.from = keyboardSurface.y
                     bounceBackAnimation.start();
@@ -224,7 +224,7 @@ Item {
                     canvas.firstShow = false;
                     canvas.hidingComplete = false;
                 }
-                when: maliit_geometry.shown === true
+                when: MaliitGeometry.shown === true
             },
 
             State {
@@ -245,7 +245,7 @@ Item {
                 // Wait for the first show operation to complete before
                 // allowing hiding, as the conditions when the keyboard
                 // has never been visible can trigger a hide operation
-                when: maliit_geometry.shown === false && canvas.firstShow === false
+                when: MaliitGeometry.shown === false && canvas.firstShow === false
             }
         ]
         transitions: Transition {
@@ -442,7 +442,7 @@ Item {
             return;
         }
 
-        maliit_geometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
+        MaliitGeometry.visibleRect = Qt.rect(obj.x, obj.y, obj.width, obj.height);
     }
 
     // Autopilot needs to be able to move the cursor even when the layout
