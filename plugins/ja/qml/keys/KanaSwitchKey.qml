@@ -28,7 +28,7 @@ FlickCharKey {
 
     overridePressArea: true
 
-    property bool isPreedit: maliit_input_method.preedit.length > 0
+    property bool isPreedit: Keyboard.preedit.length > 0
     property string default_state: "kana"
 
     state: kana.state

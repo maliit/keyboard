@@ -156,8 +156,6 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/feedback.h
         src/plugin/gettext.cpp
         src/plugin/gettext.h
-        src/plugin/greeterstatus.cpp
-        src/plugin/greeterstatus.h
         src/plugin/updatenotifier.cpp
         src/plugin/updatenotifier.h
         src/plugin/iconprovider.cpp

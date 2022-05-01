@@ -33,7 +33,7 @@ Item {
     property bool highlight: false;
 
     property string action
-    property bool noMagnifier: !maliit_input_method.enableMagnifier
+    property bool noMagnifier: !Keyboard.enableMagnifier
     property bool skipAutoCaps: false
     property bool switchBackFromSymbols: false
 

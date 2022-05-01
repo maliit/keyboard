@@ -28,7 +28,7 @@ ActionKey {
     iconCapsLock: "edit-clear-symbolic";
     action: "backspace";
 
-    property string preedit: maliit_input_method.preedit
+    property string preedit: Keyboard.preedit
     property string m_preedit: ""
     property string syllable_preedit: ""
     property string last_preedit: ""
@@ -44,14 +44,14 @@ ActionKey {
 
                 m_preedit = Parser.erase_jamo(last_preedit);
                 if (m_preedit != ""){ /* exsit jamo */
-                    maliit_input_method.preedit = syllable_preedit + m_preedit;
+                    Keyboard.preedit = syllable_preedit + m_preedit;
                 } else {
-                    maliit_input_method.preedit = syllable_preedit;
+                    Keyboard.preedit = syllable_preedit;
                 }
             } else {
                   if (Parser.is_syllable(preedit)){ /* preedit is one syllable */
                     m_preedit = Parser.erase_jamo(preedit);
-                    maliit_input_method.preedit = m_preedit;
+                    Keyboard.preedit = m_preedit;
                   } else { /* it is only jamo like "ㄱ" or "ㅏ" */
                      event_handler.onKeyReleased("", action);
                   }

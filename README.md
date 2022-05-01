@@ -9,7 +9,7 @@ License
 -------
 The license of the combined work is LGPL-3.0-only. 
 
-The majority of individual files in `src` are under a BSD license as written in `COPYING.BSD`. The exception is `src/plugin/greeterstatus.cpp` and `src/plugin/greeterstatus.h` which are under LGPL-3.0-only.
+The majority of individual files in `src` are under a BSD license as written in `COPYING.BSD`.
 
 The majority of individual files in `qml` are under LGPL-3.0-only. New contributions in that directory should be licensed under LGPL-3.0-or-later or aforementioned BSD license.
 

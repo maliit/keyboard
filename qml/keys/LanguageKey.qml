@@ -30,7 +30,7 @@ ActionKey {
     extendedShifted: extended
     noMagnifier: true
 
-    readonly property bool altLangs: maliit_input_method.enabledLanguages.length > 1
+    readonly property bool altLangs: Keyboard.enabledLanguages.length > 1
     property bool held: false;
 
     padding: 0

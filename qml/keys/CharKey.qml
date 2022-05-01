@@ -281,7 +281,7 @@ Item {
                 return;
             }
             magnifier.currentlyAssignedKey = key
-            magnifier.shown = !noMagnifier && maliit_input_method.enableMagnifier
+            magnifier.shown = !noMagnifier && Keyboard.enableMagnifier
 
             Feedback.keyPressed();
 

@@ -28,15 +28,15 @@ Menu {
     modal: true
 
     Repeater {
-        model: maliit_input_method.enabledLanguages
+        model: Keyboard.enabledLanguages
 
         delegate: MenuItem {
             text: Languages.languageIdToName(modelData)
             checkable: true
             autoExclusive: true
-            checked: maliit_input_method.activeLanguage == modelData
+            checked: Keyboard.activeLanguage == modelData
             onClicked: {
-                maliit_input_method.activeLanguage = modelData
+                Keyboard.activeLanguage = modelData
                 canvas.languageMenu.close()
             }
         }
@@ -56,7 +56,6 @@ Menu {
         onClicked: {
             Keyboard.showSystemSettings();
             canvas.languageMenu.close();
-            maliit_input_method.hide();
         }
     }
 }

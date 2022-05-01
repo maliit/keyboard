@@ -21,7 +21,6 @@
 #include "editor.h"
 #include "feedback.h"
 #include "gettext.h"
-#include "greeterstatus.h"
 #include "iconprovider.h"
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
@@ -91,7 +90,6 @@ public:
 
     KeyboardGeometry *m_geometry;
     KeyboardSettings m_settings;
-    GreeterStatus *m_greeterStatus;
 
     std::unique_ptr<Feedback> m_feedback;
     std::unique_ptr<Theme> m_theme;
@@ -126,7 +124,6 @@ public:
         , preedit()
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
-        , m_greeterStatus(new GreeterStatus())
         , m_feedback(std::make_unique<Feedback>(&m_settings))
         , m_theme(std::make_unique<Theme>(&m_settings))
         , m_device(std::make_unique<Device>(&m_settings))
@@ -188,7 +185,7 @@ public:
             engine->addImportPath(QStringLiteral(MALIIT_KEYBOARD_QML_DIR) + QDir::separator() + "keys");
         }
 
-        setContextProperties(engine->rootContext());
+        registerTypes();
 
         // Add our image provider for handling icon themes
         engine->addImageProvider(QLatin1String("icon"), m_iconProvider.get());
@@ -212,19 +209,17 @@ public:
         m_geometry->setOrientation(screenOrientation);
     }
 
-    void setContextProperties(QQmlContext *qml_context)
+    void registerTypes()
     {
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Keyboard", q);
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Feedback", m_feedback.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Theme", m_theme.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Device", m_device.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Gettext", m_gettext.get());
-        qml_context->setContextProperty(QStringLiteral("maliit_input_method"), q);
-        qml_context->setContextProperty(QStringLiteral("maliit_geometry"), m_geometry);
-        qml_context->setContextProperty(QStringLiteral("maliit_event_handler"), &event_handler);
-        qml_context->setContextProperty(QStringLiteral("maliit_wordribbon"), wordRibbon);
-        qml_context->setContextProperty(QStringLiteral("maliit_word_engine"), editor.wordEngine());
-        qml_context->setContextProperty(QStringLiteral("greeter_status"), m_greeterStatus);
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "MaliitGeometry", m_geometry);
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "MaliitEventHandler", &event_handler);
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "WordModel", wordRibbon);
+        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "WordEngine", editor.wordEngine());
     }
 
     void updateLanguagesPaths()
