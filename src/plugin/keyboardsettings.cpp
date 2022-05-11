@@ -50,6 +50,7 @@ const QLatin1String DISABLE_HEIGHT_KEY = QLatin1String("disableHeight");
 const QLatin1String PLUGIN_PATHS_KEY = QLatin1String("pluginPaths");
 const QLatin1String OPACITY_KEY = QLatin1String("opacity");
 const QLatin1String THEME_KEY = QLatin1String("theme");
+const QLatin1String HIDE_EMOJI_KEY = QLatin1String("hideEmoji");
 
 /*!
  * \brief KeyboardSettings::KeyboardSettings class to load the settings, and
@@ -254,6 +255,14 @@ QString KeyboardSettings::theme() const
 }
 
 /*!
+ * \brief KeyboardSettings::hideEmoji returns true if the emoji keys
+ * should not be shown.
+ */
+bool KeyboardSettings::hideEmoji() const {
+    return m_settings->get(HIDE_EMOJI_KEY).toBool();
+}
+
+/*!
  * \brief KeyboardSettings::settingUpdated slot to handle changes in the settings backend
  * A specialized signal is emitted for the affected setting
  * \param key
@@ -307,6 +316,9 @@ void KeyboardSettings::settingUpdated(const QString &key)
         return;
     } else if (key == THEME_KEY) {
         Q_EMIT themeChanged(theme());
+        return;
+    } else if (key == HIDE_EMOJI_KEY) {
+        Q_EMIT hideEmojiChanged(hideEmoji());
         return;
     } else if (key == "device")
         Q_EMIT deviceChanged(device());

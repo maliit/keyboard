@@ -43,6 +43,8 @@ Menu {
     }
     MenuItem {
         text: Gettext.qsTr("Emoji")
+        visible: !Keyboard.hideEmojiEnabled
+        height: visible ? implicitHeight : 0
         onClicked: {
             keypad.state = "EMOJI";
             canvas.languageMenu.close();

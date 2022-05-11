@@ -335,6 +335,12 @@ public:
                         q, SIGNAL(themeChanged(QString)));
     }
 
+    void registerHideEmojiSetting()
+    {
+        QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::hideEmojiChanged,
+                        q, &InputMethod::hideEmojiEnabledChanged);
+    }
+
     void closeOskWindow()
     {
         if (!view->isVisible())

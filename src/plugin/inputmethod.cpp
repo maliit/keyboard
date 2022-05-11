@@ -125,6 +125,7 @@ InputMethod::InputMethod(MAbstractInputMethodHost *host)
     d->registerPluginPaths();
     d->registerOpacity();
     d->registerTheme();
+    d->registerHideEmojiSetting();
 
     //fire signal so all listeners know what active language is
     Q_EMIT activeLanguageChanged(d->activeLanguage);
@@ -756,6 +757,12 @@ bool InputMethod::isAnimationEnabled()
 {
     Q_D(InputMethod);
     return d->animationEnabled;
+}
+
+bool InputMethod::isHideEmojiEnabled() const
+{
+    Q_D(const InputMethod);
+    return d->m_settings.hideEmoji();
 }
 
 bool InputMethod::languageIsSupported(const QString plugin) {

@@ -92,5 +92,10 @@
       <description>Shows the magnifier when a key is pressed.</description>
       <default>true</default>
     </key>
+    <key name="hide-emoji" type="b">
+      <summary>Hides emoji keys</summary>
+      <description>Hides the emoji keys.</description>
+      <default>false</default>
+    </key>
   </schema>
 </schemalist>

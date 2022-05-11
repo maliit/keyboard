@@ -64,6 +64,7 @@ public:
     double opacity() const;
     QString theme() const;
     QString device() const;
+    bool hideEmoji() const;
 
 Q_SIGNALS:
     void activeLanguageChanged(QString);
@@ -83,6 +84,7 @@ Q_SIGNALS:
     void opacityChanged(double);
     void themeChanged(const QString&);
     void deviceChanged(const QString&);
+    void hideEmojiChanged(bool);
 
 private:
     Q_SLOT void settingUpdated(const QString &key);

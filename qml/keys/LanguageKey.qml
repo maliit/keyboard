@@ -19,19 +19,21 @@ import QtQuick 2.4
 import MaliitKeyboard 2.0
 
 ActionKey {
-    iconNormal: altLangs ? "language-chooser-symbolic" : ""
+    iconNormal: (altLangs || hideEmoji) ? "language-chooser-symbolic" : ""
     iconShifted: iconNormal
     iconCapsLock: iconNormal
 
-    label: altLangs ? "" : "☻"
+    label: (altLangs || hideEmoji) ? "" : "☻"
     shifted: label
 
-    extended: altLangs ? ["☻"] : []
+    extended: (altLangs && !hideEmoji) ? ["☻"] : []
     extendedShifted: extended
     noMagnifier: true
 
     readonly property bool altLangs: Keyboard.enabledLanguages.length > 1
     property bool held: false;
+
+    readonly property bool hideEmoji: Keyboard.hideEmojiEnabled
 
     padding: 0
 
@@ -53,7 +55,7 @@ ActionKey {
 
         if (altLangs) {
             Keyboard.selectNextLanguage();
-        } else {
+        } else if (!hideEmoji) {
             keypad.state = "EMOJI"
         }
     }

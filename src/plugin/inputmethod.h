@@ -65,6 +65,7 @@ class InputMethod
     Q_PROPERTY(QString surroundingLeft READ surroundingLeft)
     Q_PROPERTY(QString surroundingRight READ surroundingRight)
     Q_PROPERTY(bool animationEnabled READ isAnimationEnabled NOTIFY animationEnabledChanged)
+    Q_PROPERTY(bool hideEmojiEnabled READ isHideEmojiEnabled NOTIFY hideEmojiEnabledChanged)
 
 public:
     /// Same as Maliit::TextContentType but usable in QML
@@ -144,6 +145,8 @@ public:
 
     bool isAnimationEnabled();
 
+    bool isHideEmojiEnabled() const;
+
     Q_SLOT void close();
 
     Q_INVOKABLE bool languageIsSupported(const QString plugin);
@@ -177,6 +180,7 @@ Q_SIGNALS:
     void opacityChanged(double opacity);
     void themeChanged(QString theme);
     void animationEnabledChanged();
+    void hideEmojiEnabledChanged(bool hidden);
 
 private:
     Q_SLOT void onAutoCorrectSettingChanged();
