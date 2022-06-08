@@ -431,7 +431,7 @@ if(enable-tests)
             tests/unittests/common/utils.cpp
             tests/unittests/common/utils.h)
 
-    target_link_libraries(test-utils PUBLIC Qt5::Core Qt5::Gui Qt5::Test)
+    target_link_libraries(test-utils PUBLIC Qt5::Core Qt5::Gui Qt5::Test Maliit::Plugins)
     target_include_directories(test-utils INTERFACE tests/common tests maliit-keyboard)
 
     function(create_test name)
