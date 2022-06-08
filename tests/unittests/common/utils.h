@@ -35,7 +35,7 @@
 class QObject;
 class QString;
 class QCoreApplication;
-class QApplication;
+class QGuiApplication;
 
 namespace TestUtils {
 
