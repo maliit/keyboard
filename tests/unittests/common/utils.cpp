@@ -33,8 +33,6 @@
 
 #include <QtCore>
 
-#include <QCoreApplication>
-
 namespace TestUtils {
 
 // Requires event loop. Use SIGNAL macro for signal parameter.
