@@ -24,12 +24,6 @@ private:
 
     QCOMPARE(wr.candidates().size(), 0);
 
-
-    QHash<int, QByteArray> roles;
-    roles.insert(WordRibbon::WordRole, "word");
-    QCOMPARE( wr.roleNames(), roles );
-
-
     WordCandidate wc1(WordCandidate::SourceUnknown, "word_1");
     WordCandidate wc2(WordCandidate::SourceUnknown, "word_2");
     WordCandidate wc3(WordCandidate::SourceUnknown, "word_3");
