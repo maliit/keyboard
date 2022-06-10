@@ -449,7 +449,9 @@ if(enable-tests)
     endfunction()
 
     create_test(ut_languagefeatures)
-    create_test(ut_repeat-backspace)
+    create_test(ut_repeat-backspace
+            tests/unittests/common/wordengineprobe.cpp
+            tests/unittests/common/wordengineprobe.h)
     create_test(ut_editor
             tests/unittests/ut_editor/wordengineprobe.cpp
             tests/unittests/ut_editor/wordengineprobe.h)
