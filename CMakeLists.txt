@@ -4,7 +4,7 @@ project(maliit-keyboard VERSION 2.2.1.1)
 
 option(enable-presage "Use presage to calculate word candidates (maliit-keyboard-plugin only)" ON)
 option(enable-hunspell "Use hunspell for error correction (maliit-keyboard-plugin only)" ON)
-option(enable-tests "Build tests" OFF)
+option(enable-tests "Build tests" ON)
 
 # Install paths
 include(GNUInstallDirs)
