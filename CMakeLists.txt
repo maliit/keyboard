@@ -455,7 +455,7 @@ if(enable-tests)
     create_test(ut_editor
             tests/unittests/ut_editor/wordengineprobe.cpp
             tests/unittests/ut_editor/wordengineprobe.h)
-    create_test(ut_preedit-string)
+    #create_test(ut_preedit-string)
     create_test(ut_text)
     create_test(ut_word-candidates
             tests/unittests/ut_word-candidates/wordengineprobe.cpp
