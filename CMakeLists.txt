@@ -427,12 +427,11 @@ if(enable-tests)
     add_library(test-utils STATIC
             tests/unittests/common/inputmethodhostprobe.cpp
             tests/unittests/common/inputmethodhostprobe.h
-            tests/unittests/common/utils-gui.cpp
             tests/unittests/common/utils.cpp
             tests/unittests/common/utils.h)
 
-    target_link_libraries(test-utils PUBLIC Qt5::Core Qt5::Gui Qt5::Test)
-    target_include_directories(test-utils INTERFACE tests/common tests maliit-keyboard)
+    target_link_libraries(test-utils PUBLIC Maliit::Plugins Qt5::Core Qt5::Gui Qt5::Test westernsupport)
+    target_include_directories(test-utils PUBLIC tests/unittests tests/unittests/common src src/lib)
 
     function(create_test name)
         set(_extra_sources ${ARGV})
@@ -442,7 +441,7 @@ if(enable-tests)
                 tests/unittests/${name}/${name}.cpp
                 ${_extra_sources})
 
-        target_link_libraries(${name} test-utils ${_libs})
+        target_link_libraries(${name} test-utils maliit-keyboard-common ${_libs})
 
         add_test(${name} ${name})
 
