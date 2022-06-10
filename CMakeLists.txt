@@ -465,8 +465,3 @@ if(enable-tests)
             MALIIT_PLUGINS_DATADIR=${CMAKE_SOURCE_DIR}/data)
 
 endif()
-
-add_custom_target(install_${PROJECT_NAME}
-        ${CMAKE_BUILD_TOOL} install
-        DEPENDS ${PROJECT_NAME}
-        COMMENT "Installing ${PROJECT_NAME}")
