@@ -641,7 +641,6 @@ void InputMethod::setActiveLanguage(const QString &newLanguage)
     d->editor.commitPreedit();
 
     d->activeLanguage = newLanguage;
-    d->host->setLanguage(newLanguage);
     d->m_settings.setActiveLanguage(newLanguage);
 
     qDebug() << "in inputMethod.cpp setActiveLanguage() emitting activeLanguageChanged to" << d->activeLanguage;

@@ -101,10 +101,6 @@ public:
     void setSelection(int, int) override {}
     void setOrientationAngleLocked(bool) override {}
     QList<MImPluginDescription> pluginDescriptions(Maliit::HandlerState) const override {return QList<MImPluginDescription>();}
-    Maliit::Plugins::AbstractPluginSetting* registerPluginSetting(const QString &,
-                                                                  const QString &,
-                                                                  Maliit::SettingEntryType ,
-                                                                  const QVariantMap &) override { return 0; }
     void invokeAction(const QString &,
                       const QKeySequence &) override {}
 
