@@ -55,7 +55,7 @@ KeyPad {
             CharKey { label: "4"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
             CharKey { label: "5"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
             CharKey { label: "6"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
-            SmallSpaceKey { padding: 0; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: ","; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
         }
 
         Row {
@@ -72,9 +72,9 @@ KeyPad {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: Device.gu(0.5);
 
-            CharKey { label: "+"; annotation: "#*"; extended: ["#", "*"]; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
-            CharKey { label: "0"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
             CharKey { label: "."; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            CharKey { label: "0"; noMagnifier: true; width: c1.numKeyWidth; height: c1.numKeyHeight; }
+            Item { width: c1.numKeyWidth; height: c1.numKeyHeight; }
             ReturnKey { padding: 0; width: c1.numKeyWidth; height: c1.numKeyHeight; }
         }
     } // column
