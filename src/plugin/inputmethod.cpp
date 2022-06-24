@@ -795,8 +795,8 @@ void InputMethod::showSystemSettings()
     auto previous = qgetenv("QT_WAYLAND_SHELL_INTEGRATION");
     qunsetenv("QT_WAYLAND_SHELL_INTEGRATION");
 
-    if (qgetenv("XDG_CURRENT_DESKTOP") == "KDE") {
-        QDesktopServices::openUrl(QUrl("systemsettings://kcm_mobile_virtualkeyboard"));
+    if (qEnvironmentVariable("PLASMA_PLATFORM").contains(QStringLiteral("phone"))) {
+        QDesktopServices::openUrl(QUrl("systemsettings://kcm_mobile_onscreenkeyboard"));
     } else {
         QDesktopServices::openUrl(QUrl("settings://system/language"));
     }
