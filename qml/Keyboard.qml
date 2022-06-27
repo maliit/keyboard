@@ -255,7 +255,7 @@ Item {
 
         Connections {
             target: input_method
-            onActivateAutocaps: {
+            function onActivateAutocaps() {
                 if (keypad.state == "CHARACTERS" && keypad.activeKeypadState != "CAPSLOCK" && !cursorSwipe) {
                     keypad.activeKeypadState = "SHIFTED";
                     keypad.autoCapsTriggered = true;
@@ -264,10 +264,10 @@ Item {
                 }
             }
 
-            onKeyboardReset: {
+            function onKeyboardReset() {
                 keypad.state = "CHARACTERS"
             }
-            onDeactivateAutocaps: {
+            function onDeactivateAutocaps() {
                 if(keypad.autoCapsTriggered) {
                     keypad.activeKeypadState = "NORMAL";
                     keypad.autoCapsTriggered = false;
