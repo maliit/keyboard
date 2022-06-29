@@ -180,9 +180,6 @@ KeyPad {
                 visible: label != ""
                 label: emoji != null ? emoji.char : ""
                 shifted: label
-                normalColor: Theme.backgroundColor
-                borderColor: normalColor
-                pressedColor: Theme.backgroundColor
                 fontFamily: "Noto Color Emoji"
                 onKeySent: {
                     internal.updateRecent(key);
@@ -217,9 +214,6 @@ KeyPad {
             shifted: label
             iconNormal: "go-previous-symbolic"
             iconShifted: iconNormal
-            normalColor: Theme.backgroundColor
-            borderColor: normalColor
-            pressedColor: Theme.backgroundColor
         }
 
         CategoryKey {
@@ -313,9 +307,6 @@ KeyPad {
 
         BackspaceKey {
             padding: 0
-            normalColor: Theme.backgroundColor
-            borderColor: normalColor
-            pressedColor: Theme.backgroundColor
         }
     }
 }

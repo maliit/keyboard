@@ -15,29 +15,46 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 2.12
 
 import MaliitKeyboard 2.0
 
 Rectangle {
+    id: popkey
+
     width: Device.fontSize + Device.flickMargin
     height: Device.fontSize + Device.flickMargin
 
     property string labelChar
-    property color labelColor: Theme.fontColor
+    property bool selected: false
     property real labelOpacity: 1.0
     visible: labelChar ? true : false
 
+    // Invisible tooltip to get popup colors
+    ToolTip {
+        id: tip
+        visible: false
+    }
+
+    color: tip.background.color
     border.width: Device.flickBorderWidth
-    border.color: Theme.popupBorderColor
+    border.color: tip.background.border.color
     radius: width / 10
 
-    Text {
+    // Invisible text field to get selection colors
+    TextField {
+        id: textArea
+        width: 0
+        height: 0
+        visible: false
+    }
+
+    Label {
         anchors.centerIn: parent
         text: parent.labelChar
-        font.family: Theme.fontFamily
         font.pixelSize: Device.fontSize
         font.bold: Device.fontBold
-        color: parent.labelColor
+        color: popkey.selected ? textArea.selectionColor : textArea.color
         opacity: parent.labelOpacity
     }
 }

@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 2.12
 
 import MaliitKeyboard 2.0
 
@@ -27,6 +28,9 @@ Item {
     height: panel.keyHeight
 
     // to be set in keyboard layouts
+    property string iconNormal: ""
+    property string iconShifted: ""
+    property string iconCapsLock: ""
     property string label: ""
     property string shifted: ""
     property var extended; // list of extended keys
@@ -54,14 +58,8 @@ Item {
 
     // These properties are used by autopilot to determine the visible
     // portion of the key to press
-    readonly property double leftOffset: buttonRect.anchors.leftMargin
-    readonly property double rightOffset: buttonRect.anchors.rightMargin
-
-    // design
-    property string normalColor: Theme.charKeyColor
-    property string pressedColor: Theme.charKeyPressedColor
-    property bool borderEnabled: Theme.keyBorderEnabled
-    property color borderColor: borderEnabled ? Theme.charKeyBorderColor : "transparent"
+    readonly property double leftOffset: keyButton.anchors.leftMargin
+    readonly property double rightOffset: keyButton.anchors.rightMargin
 
     // Scale the font so the label fits if a long word is set
     property int fontSize: (fullScreenItem.landscape ? (height / 2) : (height / 2.8))
@@ -133,29 +131,29 @@ Item {
         height: panel.keyHeight
         width: parent.width
 
-        Rectangle {
-            id: buttonRect
-            color: key.currentlyPressed || key.highlight ? pressedColor : normalColor
+        ToolButton {
+            id: keyButton
             anchors.fill: parent
             anchors.leftMargin: key.leftSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.rightMargin: key.rightSide ? (parent.width - panel.keyWidth) + key.keyMargin : key.keyMargin
             anchors.bottomMargin: key.rowMargin
-            border {
-                width: borderEnabled ? 8 * (0.1) : 0
-                color: borderColor
-            }
-            radius: (4)
+
+            // Disable hover so that highlight doesn't stick on touch screens
+            hoverEnabled: false
+
+            // Icon of the key
+            icon.name: key.iconNormal
+            icon.height: key.fontSize
+            icon.width: key.fontSize
 
             /// label of the key
             //  the label is also the value subitted to the app
 
-            Text {
+            Label {
                 id: keyLabel
-                text: (panel.activeKeypadState === "NORMAL") ? label : shifted;
-                font.family: Theme.fontFamily
-                font.pixelSize: fontSize
+                text: label
+                font.pixelSize: key.fontSize
                 font.weight: Font.Light
-                color: Theme.fontColor
                 anchors.right: parent.right
                 anchors.left: parent.left
                 anchors.leftMargin: Device.gu(0.2)
@@ -171,23 +169,67 @@ Item {
             /// shows an annotation
             // used e.g. for indicating the existence of extended keys
 
-            Text {
+            Label {
                 id: annotationLabel
-                text: (panel.activeKeypadState != "NORMAL") ? __annotationLabelShifted : __annotationLabelNormal
+                text: __annotationLabelNormal
 
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.topMargin: Device.annotationTopMargin
                 anchors.rightMargin: Device.annotationRightMargin
-                font.family: Theme.annotationFontFamily
-                font.pixelSize: fontSize / 3
+                font.pixelSize: key.fontSize / 2
                 font.weight: Font.Light
-                color: Theme.annotationFontColor
                 visible: !panel.hideKeyLabels
             }
 
         }
     }
+
+    // make sure the icon and/or labels change with the state
+    state: panel.activeKeypadState
+    states: [
+        State {
+            name: "NORMAL"
+            PropertyChanges {
+                target: keyButton
+                icon.name: iconNormal
+            }
+            PropertyChanges {
+                target: keyLabel
+                text: label
+            }
+            PropertyChanges {
+                target: annotationLabel
+                text: __annotationLabelNormal
+            }
+        },
+        State {
+            name: "SHIFTED"
+            PropertyChanges {
+                target: keyButton
+                icon.name: iconShifted ? iconShifted : iconNormal
+            }
+            PropertyChanges {
+                target: keyLabel
+                text: shifted
+            }
+            PropertyChanges {
+                target: annotationLabel
+                text: __annotationLabelShifted
+            }
+        },
+        State {
+            name: "CAPSLOCK"
+            PropertyChanges {
+                target: keyButton
+                icon.name: iconCapsLock ? iconCapsLock : iconShifted ? iconShifted : iconNormal
+            }
+            PropertyChanges {
+                target: keyLabel
+                text: shifted
+            }
+        }
+    ]
 
     PressArea {
         id: keyMouseArea

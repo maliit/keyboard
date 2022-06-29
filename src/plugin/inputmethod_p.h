@@ -21,10 +21,9 @@
 #include "editor.h"
 #include "feedback.h"
 #include "gettext.h"
-#include "iconprovider.h"
+
 #include "keyboardgeometry.h"
 #include "keyboardsettings.h"
-#include "theme.h"
 
 #include "models/wordribbon.h"
 #include "logic/eventhandler.h"
@@ -37,6 +36,7 @@
 #include <QStringList>
 #include <qglobal.h>
 #include <QDebug>
+#include <QQuickStyle>
 
 #include <memory>
 
@@ -92,9 +92,7 @@ public:
     KeyboardSettings m_settings;
 
     std::unique_ptr<Feedback> m_feedback;
-    std::unique_ptr<Theme> m_theme;
     std::unique_ptr<Device> m_device;
-    std::unique_ptr<IconProvider> m_iconProvider;
     std::unique_ptr<Gettext> m_gettext;
 
     WordRibbon* wordRibbon;
@@ -125,13 +123,20 @@ public:
         , m_geometry(new KeyboardGeometry(q))
         , m_settings()
         , m_feedback(std::make_unique<Feedback>(&m_settings))
-        , m_theme(std::make_unique<Theme>(&m_settings))
         , m_device(std::make_unique<Device>(&m_settings))
-        , m_iconProvider(std::make_unique<IconProvider>(m_theme.get()))
         , m_gettext(std::make_unique<Gettext>())
         , wordRibbon(new WordRibbon)
         , previous_position(-1)
     {
+
+        // Set the icon theme to use to an appropriate value.
+        auto style = QQuickStyle::name().toLower();
+        if (style == QStringLiteral("suru")) {
+            QIcon::setThemeName(QStringLiteral("suru"));
+        } else {
+            QIcon::setThemeName(QStringLiteral("breeze"));
+        }
+
         view = createWindow(host);
 
         m_device->setWindow(view);
@@ -187,9 +192,6 @@ public:
 
         registerTypes();
 
-        // Add our image provider for handling icon themes
-        engine->addImageProvider(QLatin1String("icon"), m_iconProvider.get());
-
         // workaround: resizeMode not working in current qpa imlementation
         // http://qt-project.org/doc/qt-5.0/qtquick/qquickview.html#ResizeMode-enum
         view->setResizeMode(QQuickView::SizeRootObjectToView);
@@ -213,7 +215,6 @@ public:
     {
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Keyboard", q);
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Feedback", m_feedback.get());
-        qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Theme", m_theme.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Device", m_device.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "Gettext", m_gettext.get());
         qmlRegisterSingletonInstance("MaliitKeyboard", 2, 0, "MaliitGeometry", m_geometry);
@@ -327,12 +328,6 @@ public:
     {
         QObject::connect(&m_settings, &MaliitKeyboard::KeyboardSettings::opacityChanged,
                         q, &InputMethod::opacityChanged);
-    }
-
-    void registerTheme()
-    {
-        QObject::connect(&m_settings, SIGNAL(themeChanged(QString)),
-                        q, SIGNAL(themeChanged(QString)));
     }
 
     void closeOskWindow()

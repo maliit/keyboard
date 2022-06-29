@@ -21,9 +21,6 @@ import "languages.js" as Languages
 import MaliitKeyboard 2.0
 
 ActionKey {
-    normalColor: Theme.charKeyColor
-    pressedColor: Theme.charKeyPressedColor
-
     iconNormal: "keyboard-spacebar-symbolic";
     iconShifted: "keyboard-spacebar-symbolic";
     iconCapsLock: "keyboard-spacebar-symbolic";

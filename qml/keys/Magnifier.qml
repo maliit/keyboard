@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 2.12
 
 import MaliitKeyboard 2.0
 
@@ -65,11 +66,17 @@ KeyPopover {
         transformOrigin: Item.Bottom
         opacity: animationStep
 
-        color: Theme.charKeyColor
+        // Invisible tooltip to copy the qqc2 style colors from
+        ToolTip {
+            id: tip
+            visible: false
+        }
+
+        color: tip.background.color
         radius: 8 * (0.8)
         border {
-            width: 8 * (0.1)
-        	color: Theme.popupBorderColor
+            width: tip.background.border.width
+            color: tip.background.border.color
         }
 
         onXChanged: {
@@ -86,17 +93,14 @@ KeyPopover {
         }
 
 
-        Text {
+        Label {
             id: label
             anchors.centerIn: parent
             height: parent.height
             text: currentlyAssignedKey ? currentlyAssignedKey.valueToSubmit : ""
-            font.family: Theme.fontFamily
             font.weight: Font.Light
             font.pixelSize: panel.keyHeight * 0.6
             verticalAlignment: Text.AlignVCenter
-
-            color: Theme.fontColor
         }
 
         NumberAnimation {

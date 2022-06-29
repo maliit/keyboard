@@ -36,34 +36,34 @@ Item {
         labelChar: chars[0]
         anchors.centerIn: parent
         labelOpacity: index == 0 ? 1.0 : 0.6
-        labelColor: index == 0 ? Theme.selectionColor : Theme.fontColor
+        selected: index == 0
     }
     FlickPopKey {
         labelChar: chars[1] ? chars[1] : ""
         anchors.verticalCenter: center.verticalCenter
         anchors.right: center.left
         labelOpacity: index == 1 ? 1.0 : 0.6
-        labelColor: index == 1 ? Theme.selectionColor : Theme.fontColor
+        selected: index == 1
     }
     FlickPopKey {
         labelChar: chars[2] ? chars[2] : ""
         anchors.horizontalCenter: center.horizontalCenter
         anchors.bottom: center.top
         labelOpacity: index == 2 ? 1.0 : 0.6
-        labelColor: index == 2 ? Theme.selectionColor : Theme.fontColor
+        selected: index == 2
     }
     FlickPopKey {
         labelChar: chars[3] ? chars[3] : ""
         anchors.verticalCenter: center.verticalCenter
         anchors.left: center.right
         labelOpacity: index == 3 ? 1.0 : 0.6
-        labelColor: index == 3 ? Theme.selectionColor : Theme.fontColor
+        selected: index == 3
     }
     FlickPopKey {
         labelChar: chars[4] ? chars[4] : ""
         anchors.horizontalCenter: center.horizontalCenter
         anchors.top: center.bottom
         labelOpacity: index == 4 ? 1.0 : 0.6
-        labelColor: index == 4 ? Theme.selectionColor : Theme.fontColor
+        selected: index == 4
     }
 }

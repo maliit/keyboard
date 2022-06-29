@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 2.12
 
 import MaliitKeyboard 2.0
 
@@ -76,11 +77,17 @@ KeyPopover {
 
         height: rowOfKeys.height
 
-        color: Theme.charKeyColor
+        // Invisible tooltip to copy the qqc2 style colors from
+        ToolTip {
+            id: tip
+            visible: false
+        }
+
+        color: tip.background.color
         radius: Device.gu(0.8)
         border {
-            width: Device.gu(0.1)
-        	color: Theme.popupBorderColor
+            width: tip.background.border.width
+            color: tip.background.border.color
         }
 
         onXChanged: {
@@ -124,14 +131,21 @@ KeyPopover {
                 property bool highlight: false
                 opacity: highlight ? 1.0 : 0.6
 
-                Text {
+                // Invisible text field to get selection colors from
+                TextField {
+                    id: textArea
+                    width: 0
+                    height: 0
+                    visible: false
+                }
+
+                Label {
                     id: textCell
                     anchors.centerIn: parent;
                     text: modelData
-                    font.family: Theme.fontFamily
                     font.pixelSize: fontSize
                     font.weight: Font.Light
-                    color: key.highlight ? Theme.selectionColor : Theme.fontColor
+                    color: key.highlight ? textArea.selectionColor : textArea.color
                     Component.onCompleted: __width += (textCell.width + Device.popoverCellPadding);
                 }
 
