@@ -112,6 +112,7 @@ public:
     void setScreenRegion(const QRegion&, QWindow*) override {}
     void setInputMethodArea(const QRegion&, QWindow*) override {}
 
+    QVariant inputMethodQuery(Qt::InputMethodQuery, const QVariant&) const override { return 0; }
 };
 
 #endif // INPUTMETHODHOSTPROBE_H

@@ -63,6 +63,11 @@ public:
 
     virtual AbstractLanguageFeatures* languageFeature();
 
+    Q_SLOT void onWordCandidateSelected(QString) override {};
+    Q_SLOT void onLanguageChanged(const QString&, const QString&) override {};
+
+    Q_SLOT void updateQmlCandidates(QStringList) override {};
+
 private:
     virtual void fetchCandidates(Model::Text *text);
 };
