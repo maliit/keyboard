@@ -27,7 +27,7 @@ AbstractButton {
 
         Connections {
             target: floatingActionKey
-            onPressedChanged: {
+            function onPressedChanged() {
                 if (target.pressed) {
                     bg.color = pressedColor
                 } else {

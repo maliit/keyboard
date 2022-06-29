@@ -28,7 +28,7 @@ AbstractButton {
 
         Connections {
             target: toolbarButton
-            onPressedChanged:{
+            function onPressedChanged(){
                 if (target.pressed) {
                     color = pressedColor
                 } else {
