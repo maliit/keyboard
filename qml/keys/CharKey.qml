@@ -117,9 +117,9 @@ Item {
             __annotationLabelNormal = annotation
             __annotationLabelShifted = annotation
         } else {
-            if (extended)
+            if (extended && extended[0])
                 __annotationLabelNormal = extended[0]
-            if (extendedShifted)
+            if (extendedShifted && extendedShifted[0])
                 __annotationLabelShifted = extendedShifted[0]
         }
     }
