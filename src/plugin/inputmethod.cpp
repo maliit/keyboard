@@ -260,45 +260,6 @@ void InputMethod::handleClientChange()
     hide();
 }
 
-bool InputMethod::imExtensionEvent(MImExtensionEvent *event)
-{
-    Q_D(InputMethod);
-
-    if (not event or event->type() != MImExtensionEvent::Update) {
-        return false;
-    }
-
-    auto enterKeyType = inputMethodHost()->inputMethodQuery(Qt::ImEnterKeyType).value<Qt::EnterKeyType>();
-
-    d->actionKeyOverrider.reset(new MKeyOverride(actionKeyName));
-    switch (enterKeyType) {
-        case Qt::EnterKeyDefault:
-        case Qt::EnterKeyReturn:
-            d->actionKeyOverrider->setLabel(QString());
-            break;
-        case Qt::EnterKeyDone:
-            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Done"));
-            break;
-        case Qt::EnterKeyGo:
-            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Go"));
-            break;
-        case Qt::EnterKeySend:
-            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Send"));
-            break;
-        case Qt::EnterKeySearch:
-            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Search"));
-            break;
-        case Qt::EnterKeyNext:
-            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Next"));
-            break;
-        case Qt::EnterKeyPrevious:
-            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Previous"));
-            break;
-    }
-    emit actionKeyOverrideChanged();
-    return true;
-}
-
 void InputMethod::onAutoCorrectSettingChanged()
 {
     Q_D(InputMethod);
@@ -459,6 +420,36 @@ void InputMethod::update()
         checkAutocaps();
         d->previous_position = position;
     }
+
+    // Check for action key overrides
+    auto enterKeyType = inputMethodHost()->inputMethodQuery(Qt::ImEnterKeyType).value<Qt::EnterKeyType>();
+
+    d->actionKeyOverrider.reset(new MKeyOverride(actionKeyName));
+    switch (enterKeyType) {
+        case Qt::EnterKeyDefault:
+        case Qt::EnterKeyReturn:
+            d->actionKeyOverrider->setLabel(QString());
+            break;
+        case Qt::EnterKeyDone:
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Done"));
+            break;
+        case Qt::EnterKeyGo:
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Go"));
+            break;
+        case Qt::EnterKeySend:
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Send"));
+            break;
+        case Qt::EnterKeySearch:
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Search"));
+            break;
+        case Qt::EnterKeyNext:
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Next"));
+            break;
+        case Qt::EnterKeyPrevious:
+            d->actionKeyOverrider->setLabel(d->m_gettext->qsTr("Previous"));
+            break;
+    }
+    emit actionKeyOverrideChanged();
 }
 
 void InputMethod::updateWordEngine()
