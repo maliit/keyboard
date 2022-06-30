@@ -42,13 +42,10 @@
 #include "view/setup.h"
 
 #include <maliit/plugins/subviewdescription.h>
-#include <maliit/plugins/updateevent.h>
 #include <maliit/namespace.h>
 
 #include <QGuiApplication>
 
-
-class MImUpdateEvent;
 
 using namespace MaliitKeyboard;
 

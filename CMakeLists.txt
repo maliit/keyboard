@@ -157,8 +157,6 @@ set(MALIIT_KEYBOARD_COMMON_SOURCES
         src/plugin/feedback.h
         src/plugin/gettext.cpp
         src/plugin/gettext.h
-        src/plugin/updatenotifier.cpp
-        src/plugin/updatenotifier.h
         src/plugin/inputmethod.cpp
         src/plugin/inputmethod.h
         src/plugin/inputmethod_p.h
