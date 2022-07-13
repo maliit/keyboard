@@ -253,7 +253,10 @@ Item {
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
                 extendedKeysSelector.currentlyAssignedKey = key
                 var extendedKeys = extendedKeysSelector.keys;
-                var middleKey = extendedKeys.length > 1 ? Math.floor(extendedKeys.length / 2) - 1 : 0;
+                var middleKey = extendedKeys.length > 1 ? Math.floor(extendedKeys.length / 2) - 1: 0;
+                if (extendedKeys.length > 5 && extendedKeysSelector.multirow) {
+                    middleKey = extendedKeys.length - middleKey - 1;
+                }
                 extendedKeys[middleKey].highlight = true;
                 currentExtendedKey = extendedKeys[middleKey];
             }
@@ -357,8 +360,8 @@ Item {
                 for(var i = 0; i < extendedKeys.length; i++) {
                     var posX = extendedKeys[i].x;
                     var posY = extendedKeys[i].y;
-                    if(mx > posX && mx < (posX + extendedKeys[i].width)
-                       && my > posY && my < (posY + extendedKeys[i].height * 2.5)) {
+                    if(mx > posX && mx < (posX + extendedKeys[i].width * 1.25 )
+                       && my > posY && my < (posY + extendedKeys[i].height * (extendedKeysSelector.multirow ? 1.3 : 2.5))) {
                         if(!extendedKeys[i].highlight) {
                             Feedback.startPressEffect();
                         }
