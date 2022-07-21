@@ -29,7 +29,6 @@ KeyPopover {
     property alias rowY: rowOfKeys.y
     property int fontSize: 0
 
-    property int __width: 0
     property string __commitStr: ""
 
     onExtendedKeysModelChanged: {
@@ -115,15 +114,13 @@ KeyPopover {
         anchors.centerIn: anchorItem
         anchors.verticalCenterOffset: -Device.popoverTopMargin
 
-        Component.onCompleted: __width = 0
-
         Repeater {
             id: keyRepeater
             model: extendedKeysModel
 
             Item {
                 id: key
-                width: textCell.width + Device.popoverCellPadding;
+                width: panel.keyWidth
 
                 height: panel.keyHeight;
 
@@ -146,7 +143,6 @@ KeyPopover {
                     font.pixelSize: fontSize
                     font.weight: Font.Light
                     color: key.highlight ? textArea.selectionColor : textArea.color
-                    Component.onCompleted: __width += (textCell.width + Device.popoverCellPadding);
                 }
 
                 function commit(skipAutoCaps) {
