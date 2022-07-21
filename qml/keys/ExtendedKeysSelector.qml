@@ -16,6 +16,7 @@
 
 import QtQuick 2.4
 import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 
 import MaliitKeyboard 2.0
 
@@ -29,16 +30,31 @@ KeyPopover {
     property alias rowY: rowOfKeys.y
     property int fontSize: 0
 
+    // A readonly variable to check if our grid has multiple rows
+    readonly property bool multirow: rowOfKeys.columns < (extendedKeysModel ? extendedKeysModel.length : 0)
+
     property string __commitStr: ""
 
     onExtendedKeysModelChanged: {
         if (extendedKeysModel && extendedKeysModel.length > 1) {
+            // Reset columns to length, to avoid having weird positioning
+            // when switching extended keys
+            rowOfKeys.columns = extendedKeysModel.length;
+
             // Place the first key in the middle of the model so that it gets
             // selected by default
             var middleKey = Math.floor(extendedKeysModel.length / 2);
+            if (extendedKeysModel.length > 5) {
+                middleKey -= 1;
+            }
             var reorderedModel = extendedKeysModel.slice(0); // Ensure the array is cloned
+            var defaultKey = extendedKeysModel[0];
             reorderedModel.splice(extendedKeysModel.length % 2 == 0 ? middleKey : middleKey + 1, 0, extendedKeysModel[0]);
             reorderedModel.shift();
+            if (reorderedModel.length > 5) {
+                rowOfKeys.columns = Math.ceil(reorderedModel.length / 2);
+                reorderedModel.reverse();
+            }
             keyRepeater.model = reorderedModel;
         } else {
             keyRepeater.model = extendedKeysModel;
@@ -109,7 +125,7 @@ KeyPopover {
         onClicked: closePopover();
     }
 
-    Row {
+    GridLayout {
         id: rowOfKeys
         anchors.centerIn: anchorItem
         anchors.verticalCenterOffset: -Device.popoverTopMargin
