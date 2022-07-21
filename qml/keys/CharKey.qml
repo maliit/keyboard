@@ -141,6 +141,9 @@ Item {
             // Disable hover so that highlight doesn't stick on touch screens
             hoverEnabled: false
 
+            // Tell the ToolButton to be drawn as pressed, when pressed
+            down: keyMouseArea.pressed
+
             // Icon of the key
             icon.name: key.iconNormal
             icon.height: key.fontSize
