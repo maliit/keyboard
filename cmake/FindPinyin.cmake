@@ -9,7 +9,7 @@ pkg_check_modules(PC_Pinyin QUIET libpinyin)
 find_library(Pinyin_LIBRARIES NAMES pinyin ${PC_Pinyin_LIBRARIES} HINTS ${PC_Pinyin_LIBRARY_DIRS})
 find_path(Pinyin_INCLUDE_DIRS pinyin.h HINTS ${PC_Pinyin_INCLUDE_DIRS})
 
-if(Pinyin_FOUND)
+if(PC_Pinyin_FOUND)
         execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable pkgdatadir libpinyin
                 OUTPUT_VARIABLE PC_Pinyin_DATA_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
         find_path(Pinyin_DATA_DIR bigram.db HINTS ${PC_Pinyin_DATA_DIR}/data)
