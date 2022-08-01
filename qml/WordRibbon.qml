@@ -77,7 +77,7 @@ Page {
                 Layout.fillHeight: true
 
                 font.bold: isPrimaryCandidate || listView.count == 1
-                font.pixelSize: parent.height - Device.top_margin * 4
+                font.pixelSize: parent.height / 2
                 text: word
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
