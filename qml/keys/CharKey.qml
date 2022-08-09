@@ -383,12 +383,4 @@ Item {
             keyMouseArea.evaluateSelectorSwipe();
         }
     }
-
-    Connections {
-        target: swipeArea.drag
-        function onActiveChanged() {
-            if (swipeArea.drag.active)
-                keyMouseArea.cancelPress();
-        }
-    }
 }
