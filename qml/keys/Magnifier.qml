@@ -27,12 +27,8 @@ import MaliitKeyboard 2.0
 KeyPopover {
     id: root
 
-    width: currentlyAssignedKey ? (panel.keyWidth > label.width ? 
-                                  panel.keyWidth + Device.magnifierHorizontalPadding
-                                  : label.width + Device.magnifierHorizontalPadding) : 0
-    // Use visible key height instead of real key height to allow for bottom
-    // row touch area to be extended
-    height: currentlyAssignedKey ? panel.keyHeight + Device.magnifierVerticalPadding : 0
+    width: panel.keyWidth
+    height: panel.keyHeight * 2
 
     /*! Sets the Magnifier visible or invisible*/
     property bool shown: false
@@ -95,12 +91,16 @@ KeyPopover {
 
         Label {
             id: label
-            anchors.centerIn: parent
-            height: parent.height
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
             text: currentlyAssignedKey ? currentlyAssignedKey.valueToSubmit : ""
             font.weight: Font.Light
             font.pixelSize: panel.keyHeight * 0.6
             verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
         }
 
         NumberAnimation {
