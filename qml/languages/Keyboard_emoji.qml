@@ -182,6 +182,7 @@ KeyPad {
                 shifted: label
                 fontFamily: "Noto Color Emoji"
                 fontSize: height / 2
+                noMagnifier: true
                 onKeySent: {
                     internal.updateRecent(key);
                 }
