@@ -149,6 +149,8 @@ Item {
             icon.height: key.fontSize
             icon.width: key.fontSize
 
+            display: label == "" ? AbstractButton.IconOnly : AbstractButton.TextOnly
+
             /// label of the key
             //  the label is also the value subitted to the app
 
