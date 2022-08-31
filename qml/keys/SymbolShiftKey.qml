@@ -19,8 +19,8 @@ import QtQuick 2.4
 import MaliitKeyboard 2.0
 
 ActionKey {
-    label: "?123";
-    shifted: "?123";
+    label: panel.state == "SYMBOLS" ? "ABC" : "?123"
+    shifted: panel.state == "SYMBOLS" ? "ABC" : "?123"
     action: "symbols";
 
     overridePressArea: true;
