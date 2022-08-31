@@ -30,7 +30,6 @@ Item {
     property bool delayedAutoCaps: false
 
     property string activeKeypadState: "NORMAL"
-    property alias popoverEnabled: extendedKeysSelector.enabled
 
     property Item lastKeyPressed // Used for determining double click validity in PressArea
 

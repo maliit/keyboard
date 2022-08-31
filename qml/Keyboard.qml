@@ -176,8 +176,6 @@ Item {
                         anchors.fill: parent
                         anchors.topMargin: wordRibbon.visible ? 0 : Device.top_margin
                         anchors.bottomMargin: Device.bottom_margin
-
-                        onPopoverEnabledChanged: fullScreenItem.reportKeyboardVisibleRect();
                     }
 
                     LanguageMenu {
