@@ -182,7 +182,7 @@ Item {
                 anchors.top: parent.top
                 anchors.topMargin: Device.annotationTopMargin
                 anchors.rightMargin: Device.annotationRightMargin
-                font.pixelSize: key.fontSize / 2
+                font.pixelSize: key.fontSize / 2.25
                 font.weight: Font.Light
                 visible: !panel.hideKeyLabels
             }
