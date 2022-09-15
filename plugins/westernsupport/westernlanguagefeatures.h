@@ -50,6 +50,7 @@ public:
     virtual bool isSymbol(const QString &text) const;
     virtual bool ignoreSimilarity() const;
     virtual bool wordEngineAvailable() const;
+    virtual bool restorePreedit() const;
 };
 
 #endif // MALIITKEYBOARD_LANGUAGEFEATURES_H
