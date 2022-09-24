@@ -46,12 +46,20 @@ ActionKey {
     }
 
     onPressAndHold: {
+        if (panel.state == "SYMBOLS") {
+            return;
+        }
+
         Feedback.startPressEffect();
 
         panel.activeKeypadState = "CAPSLOCK"
     }
 
     onDoubleClicked: {
+        if (panel.state == "SYMBOLS") {
+            return;
+        }
+
         Feedback.keyPressed();
 
         panel.activeKeypadState = "CAPSLOCK"
