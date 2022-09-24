@@ -149,6 +149,8 @@ Item {
             icon.height: key.fontSize
             icon.width: key.fontSize
 
+            display: label == "" ? AbstractButton.IconOnly : AbstractButton.TextOnly
+
             /// label of the key
             //  the label is also the value subitted to the app
 
@@ -179,7 +181,7 @@ Item {
                 anchors.top: parent.top
                 anchors.topMargin: Device.annotationTopMargin
                 anchors.rightMargin: Device.annotationRightMargin
-                font.pixelSize: key.fontSize / 2
+                font.pixelSize: key.fontSize / 2.25
                 font.weight: Font.Light
             }
 
