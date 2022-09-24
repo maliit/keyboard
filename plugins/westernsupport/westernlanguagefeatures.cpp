@@ -112,3 +112,8 @@ bool WesternLanguageFeatures::wordEngineAvailable() const
 {
     return true;
 }
+
+bool WesternLanguageFeatures::restorePreedit() const
+{
+    return true;
+}
