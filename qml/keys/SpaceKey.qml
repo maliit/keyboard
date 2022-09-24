@@ -46,7 +46,6 @@ ActionKey {
         font.pixelSize: parent.fontSize * 0.6
         text: Languages.languageIdToName(Keyboard.activeLanguage)
         horizontalAlignment: Text.AlignHCenter
-        visible: !panel.hideKeyLabels
     }
 
     MouseArea {
