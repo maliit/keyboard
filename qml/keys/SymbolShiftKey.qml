@@ -25,12 +25,19 @@ ActionKey {
 
     overridePressArea: true;
 
+    // Internal proerty for preserving previous active keypad state
+    property string __oldKeypadState: panel.activeKeypadState
+
     onPressed: {
         Feedback.keyPressed();
 
-        if (panel.state == "CHARACTERS")
+        if (panel.state == "CHARACTERS") {
+            __oldKeypadState = panel.activeKeypadState;
+            panel.activeKeypadState = "NORMAL";
             panel.state = "SYMBOLS";
-        else
+        } else {
+            panel.activeKeypadState = __oldKeypadState;
             panel.state = "CHARACTERS";
+        }
     }
 }
