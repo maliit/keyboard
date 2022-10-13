@@ -120,11 +120,6 @@ KeyPopover {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: closePopover();
-    }
-
     GridLayout {
         id: rowOfKeys
         anchors.centerIn: anchorItem
@@ -175,11 +170,6 @@ KeyPopover {
                 }
             }
         }
-    }
-
-    function enableMouseArea()
-    {
-        extendedKeysMouseArea.enabled = true
     }
 
     function __restoreAssignedKey()
