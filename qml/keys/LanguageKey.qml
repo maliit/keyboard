@@ -26,8 +26,7 @@ ActionKey {
     label: altLangs ? "" : "☻"
     shifted: label
 
-    extended: altLangs ? ["☻"] : []
-    extendedShifted: extended
+    annotation: altLangs ? "☻" : ""
     noMagnifier: true
 
     readonly property bool altLangs: Keyboard.enabledLanguages.length > 1
