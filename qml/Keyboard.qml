@@ -110,8 +110,12 @@ Item {
                 if (keyboardSurface.y > jumpBackThreshold) {
                     MaliitGeometry.shown = false;
                 } else {
-                    bounceBackAnimation.from = keyboardSurface.y
-                    bounceBackAnimation.start();
+                    if (maliit_input_method.animationEnabled) {
+                        bounceBackAnimation.from = keyboardSurface.y;
+                        bounceBackAnimation.start();
+                    } else {
+                        keyboardSurface.y = 0;
+                    }
                 }
             }
 
@@ -191,10 +195,7 @@ Item {
 
         PropertyAnimation {
             id: bounceBackAnimation
-            // Animations don't have an "enabled" property, so just set the
-            // target to null if animation is disabled, which effectively also
-            // disables the animation.
-            target: Keyboard.animationEnabled ? keyboardSurface : null
+            target: keyboardSurface
             properties: "y"
             easing.type: Easing.OutBounce;
             easing.overshoot: 2.0
