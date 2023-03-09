@@ -53,6 +53,8 @@ MultiPointTouchArea {
         holdTimer.stop();
     }
 
+    enabled: MaliitGeometry.shown
+
     touchPoints: [
         TouchPoint { 
             id: point
