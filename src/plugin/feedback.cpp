@@ -55,7 +55,7 @@ Feedback::Feedback(const KeyboardSettings *settings)
     m_pressEffect->setAttackIntensity(0.0);
     m_pressEffect->setAttackTime(50);
     m_pressEffect->setIntensity(0.5);
-    m_pressEffect->setDuration(100);
+    m_pressEffect->setDuration(10);
     m_pressEffect->setFadeTime(50);
     m_pressEffect->setFadeIntensity(0.0);
 #endif
