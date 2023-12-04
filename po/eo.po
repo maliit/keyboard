@@ -20,43 +20,43 @@ msgstr ""
 
 #: qml/ActionsToolbar.qml:56
 msgid "Undo"
-msgstr ""
+msgstr "Malfari"
 
 #: qml/ActionsToolbar.qml:57
 msgid "Redo"
-msgstr ""
+msgstr "Refari"
 
 #: qml/ActionsToolbar.qml:58
 msgid "Select All"
-msgstr ""
+msgstr "Elekti ĉion"
 
 #: qml/ActionsToolbar.qml:82
 msgid "Cut"
-msgstr ""
+msgstr "Eltondi"
 
 #: qml/ActionsToolbar.qml:83
 msgid "Copy"
-msgstr ""
+msgstr "Kopii"
 
 #: qml/ActionsToolbar.qml:84
 msgid "Paste"
-msgstr ""
+msgstr "Aglui"
 
 #: qml/Keyboard.qml:336
 msgid "Swipe to move selection"
-msgstr ""
+msgstr "Ŝovumi por movi elekto"
 
 #: qml/Keyboard.qml:336
 msgid "Double-tap to exit selection mode"
-msgstr ""
+msgstr "Duobla frapeto por eliri elektaĵoreĝimo"
 
 #: qml/Keyboard.qml:337
 msgid "Swipe to move cursor"
-msgstr ""
+msgstr "Ŝovumi por movi kursoro"
 
 #: qml/Keyboard.qml:337
 msgid "Double-tap to enter selection mode"
-msgstr ""
+msgstr "Duobla frapeto por eniri elektaĵoreĝimo"
 
 #: qml/keys/LanguageMenu.qml:48
 msgid "Settings"
@@ -72,11 +72,11 @@ msgstr "Azerbajĝana"
 
 #: qml/keys/languages.js:21
 msgid "Belarusian"
-msgstr ""
+msgstr "Belorusa"
 
 #: qml/keys/languages.js:22
 msgid "Bulgarian"
-msgstr ""
+msgstr "Bulgara"
 
 #: qml/keys/languages.js:23
 msgid "Bosnian"
@@ -119,7 +119,7 @@ msgstr "Angla"
 
 #: qml/keys/languages.js:32
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanta"
 
 #: qml/keys/languages.js:33
 msgid "Spanish"
@@ -127,7 +127,7 @@ msgstr "Hispana"
 
 #: qml/keys/languages.js:34
 msgid "Persian"
-msgstr ""
+msgstr "Persa"
 
 #: qml/keys/languages.js:35
 msgid "Finnish"
@@ -170,23 +170,23 @@ msgstr "Itala"
 
 #: qml/keys/languages.js:44
 msgid "Japanese"
-msgstr ""
+msgstr "Japana"
 
 #: qml/keys/languages.js:45
 msgid "Lithuanian"
-msgstr ""
+msgstr "Litova"
 
 #: qml/keys/languages.js:46
 msgid "Latvian"
-msgstr ""
+msgstr "Latva"
 
 #: qml/keys/languages.js:47
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedona"
 
 #: qml/keys/languages.js:48
 msgid "Korean"
-msgstr ""
+msgstr "Korea"
 
 #: qml/keys/languages.js:49
 msgid "Dutch"
@@ -226,11 +226,11 @@ msgstr "Sveda"
 
 #: qml/keys/languages.js:58
 msgid "Thai"
-msgstr ""
+msgstr "Taja"
 
 #: qml/keys/languages.js:59
 msgid "Turkish"
-msgstr ""
+msgstr "Turka"
 
 #: qml/keys/languages.js:60
 msgid "Ukrainian"
@@ -246,31 +246,31 @@ msgstr ""
 msgid ""
 "Chinese\n"
 "(Chewing)"
-msgstr ""
+msgstr "Ĉina"
 
 #: src/plugin/inputmethod.cpp:275
 msgid "Done"
-msgstr ""
+msgstr "Farite"
 
 #: src/plugin/inputmethod.cpp:278
 msgid "Go"
-msgstr ""
+msgstr "Iru"
 
 #: src/plugin/inputmethod.cpp:281
 msgid "Send"
-msgstr ""
+msgstr "Sendu"
 
 #: src/plugin/inputmethod.cpp:284
 msgid "Search"
-msgstr ""
+msgstr "Serĉu"
 
 #: src/plugin/inputmethod.cpp:287
 msgid "Next"
-msgstr ""
+msgstr "Sekva"
 
 #: src/plugin/inputmethod.cpp:290
 msgid "Previous"
-msgstr ""
+msgstr "Antaŭa"
 
 #~ msgid "Language: "
 #~ msgstr "Lingvo: "
