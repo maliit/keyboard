@@ -53,7 +53,7 @@ KeyPad {
 
             CharKey { label: "a"; shifted: "A"; extended: ["ä","à","á","ã","â","å","æ"]; extendedShifted: ["Ä","À","Â","Á","Ã","Å","Æ"]; leftSide: true; }
             CharKey { label: "s"; shifted: "S"; extended: ["ß","ş","$"]; extendedShifted: ["ẞ","Ş","$"] }
-            CharKey { label: "d"; shifted: "D"; extended: ["€"] }
+            CharKey { label: "d"; shifted: "D"; }
             CharKey { label: "f"; shifted: "F"; extended: ["%"] }
             CharKey { label: "g"; shifted: "G"; extended: ["&","ğ"]; extendedShifted: ["Ğ"]; }
             CharKey { label: "h"; shifted: "H"; extended: ["-"] }
