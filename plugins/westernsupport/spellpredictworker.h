@@ -29,15 +29,11 @@
 #define SPELLPREDICTWORKER_H
 
 #include "spellchecker.h"
-#include "candidatescallback.h"
 #include "languageplugininterface.h"
-#include <presage.h>
 
 #include <QObject>
 #include <QStringList>
 #include <QMap>
-
-class CandidatesCallback;
 
 class SpellPredictWorker : public QObject
 {
@@ -62,9 +58,6 @@ signals:
                                   int strategy = UpdateCandidateListStrategy::ClearWhenNeeded);
 
 private:
-    std::string m_candidatesContext;
-    CandidatesCallback m_presageCandidates;
-    Presage m_presage;
     SpellChecker m_spellChecker;
     int m_limit;
     QMap<QString, QString> m_overrides;

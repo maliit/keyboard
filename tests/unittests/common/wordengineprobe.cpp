@@ -36,7 +36,7 @@ namespace Logic {
 //! \class WordEngineProbe
 //! A word engine that deterministically predicts word candidates, in
 //! such a way that it can be used for tests. Does not require
-//! Hunspell or Presage. This word engine is for language where all
+//! Hunspell. This word engine is for language where all
 //! words begin with "a" and ends with "d". So, if we type "abc" we
 //! can expect "abcd". If we type "abcd" we expect no candidates, but
 //! it is a correct word. If we type "bcd" then we get no candidates,

@@ -313,7 +313,7 @@ private:
         // prediction. I guess you will need to add
         // WordEngine::setSpellChecker() API so that you can inject a
         // fake spellchecker, for the tests. Otherwise, the test would
-        // have to be skipped when there's no hunspell/presage, which
+        // have to be skipped when there's no hunspell, which
         // I wouldn't like to have.
 
         QFETCH(Logic::LayoutHelper::Orientation, orientation);

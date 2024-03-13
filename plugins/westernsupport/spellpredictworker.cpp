@@ -31,20 +31,13 @@
 
 SpellPredictWorker::SpellPredictWorker(QObject *parent)
     : QObject(parent)
-    , m_candidatesContext()
-    , m_presageCandidates(CandidatesCallback(m_candidatesContext))
-    , m_presage(&m_presageCandidates)
     , m_spellChecker()
     , m_limit(5)
 {
-    m_presage.config("Presage.Selector.SUGGESTIONS", "6");
-    m_presage.config("Presage.Selector.REPEAT_SUGGESTIONS", "yes");
 }
 
 void SpellPredictWorker::parsePredictionText(const QString& surroundingLeft, const QString& origPreedit)
 {
-    m_candidatesContext = (surroundingLeft.toStdString() + origPreedit.toStdString());
-
     QStringList list;
 
     QString preedit = origPreedit;
@@ -59,26 +52,6 @@ void SpellPredictWorker::parsePredictionText(const QString& surroundingLeft, con
     } else if(m_spellChecker.spell(preedit)) {
         // If the user input is spelt correctly add it to the start of the predictions
         list << preedit;
-    }
-
-    try {
-        const std::vector<std::string> predictions = m_presage.predict();
-
-        std::vector<std::string>::const_iterator it;
-        for (it = predictions.begin(); it != predictions.end(); ++it) {
-            QString prediction = QString::fromStdString(*it);
-            // Presage will implicitly learn any words the user types as part
-            // of its prediction model, so we only provide predictions for 
-            // words that have been explicitly added to the spellcheck dictionary.
-            QString predictionTitleCase = prediction;
-            predictionTitleCase[0] = prediction.at(0).toUpper();
-            if (m_spellChecker.spell(prediction) || m_spellChecker.spell(predictionTitleCase) || m_spellChecker.spell(prediction.toUpper())) {
-                list << prediction;
-            }
-        }
-
-    } catch (int error) {
-        qWarning() << "An exception was thrown in libpresage when calling predict(), exception nr: " << error;
     }
 
     Q_EMIT newPredictionSuggestions(origPreedit, list);
@@ -97,26 +70,8 @@ void SpellPredictWorker::setLanguage(QString locale, QString pluginPath)
         baseLocale = locale;
     }
 
-    QString dbFileName = "database_"+baseLocale+".db";
-    QString fullPath(pluginPath + QDir::separator() + dbFileName);
-    qDebug() << "DB path:" << fullPath.toLatin1().data();
-
-    //fallback method when there is a difference between locale and the plugin path ( e.g locale=fr, pluginpath end with fr-ch )
-    if (!QFile::exists(fullPath)) {
-        qDebug() << "db path not found, try alternative to main lang plugin directory";
-        pluginPath.truncate(pluginPath.lastIndexOf(QDir::separator()));
-        fullPath = pluginPath + QDir::separator() + locale  + QDir::separator() + dbFileName;
-        qDebug() << "New Database path:" << fullPath.toLatin1().data();
-    }
-
     m_spellChecker.setLanguage(baseLocale);
     m_spellChecker.setEnabled(true);
-
-    try {
-        m_presage.config("Presage.Predictors.DefaultSmoothedNgramPredictor.DBFILENAME", fullPath.toLatin1().data());
-    } catch (int error) {
-        qWarning() << "An exception was thrown in libpresage when changing language database, exception nr: " << error;
-    }
 }
 
 void SpellPredictWorker::suggest(const QString& word, int limit)

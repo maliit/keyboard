@@ -5,14 +5,12 @@
 #include <QStringList>
 #include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
-#include "candidatescallback.h"
 #include "spellchecker.h"
 #include "spellpredictworker.h"
 
 #include <iostream>
 
 class KoreanLanguageFeatures;
-class CandidatesCallback;
 
 class KoreanPlugin : public AbstractLanguagePlugin
 {

@@ -5,8 +5,6 @@
 #include "languageplugininterface.h"
 #include "westernlanguagesplugin.h"
 
-//#include <presage.h>
-
 class EnglishDvorakPlugin : public WesternLanguagesPlugin
 {
     Q_OBJECT
