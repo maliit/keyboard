@@ -172,6 +172,33 @@ KeyPopover {
         }
     }
 
+    // Determine which extended key we're underneath when swiping,
+    // highlight it and set it as the currentExtendedKey (to be committed
+    // when press is released)
+    function evaluateSelectorSwipe(mouseX, mouseY) {
+        let currentExtendedKey = null;
+        if (enabled && currentlyAssignedKey != null) {
+            var keyMapping = mapToItem(currentlyAssignedKey, rowX, rowY);
+            var mx = mouseX - keyMapping.x;
+            var my = mouseY - keyMapping.y;
+            for (var i = 0; i < keys.length; i++) {
+                var posX = keys[i].x;
+                var posY = keys[i].y;
+                if (mx > posX && mx < (posX + keys[i].width)
+                    && my > posY && my < (posY + (keys[i].height * (posY == rowOfKeys.height - panel.keyHeight ? 2 : 1)))) {
+                    if (!keys[i].highlight) {
+                        Feedback.startPressEffect();
+                    }
+                    keys[i].highlight = true;
+                    currentExtendedKey = keys[i];
+                } else if('highlight' in keys[i]) {
+                    keys[i].highlight = false;
+                }
+            }
+        }
+        return currentExtendedKey;
+    }
+
     function __restoreAssignedKey()
     {
         currentlyAssignedKey.state = "NORMAL"

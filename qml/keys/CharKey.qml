@@ -100,9 +100,6 @@ Item {
     property bool allowPreeditHandler: false
     property var preeditHandler: null
 
-    // Don't detect swipe changes until the swipeTimer has expired to prevent
-    // accidentally selecting something other than the default extended key
-    property bool swipeReady: false
 
     signal pressed()
     signal released()
@@ -246,8 +243,6 @@ Item {
             if (activeExtendedModel != undefined) {
                 Feedback.startPressEffect();
 
-                swipeReady = false;
-                swipeTimer.restart();
                 magnifier.shown = false
                 extendedKeysSelector.enabled = true
                 extendedKeysSelector.extendedKeysModel = activeExtendedModel
@@ -347,40 +342,8 @@ Item {
             }
         }
 
-        // Determine which extended key we're underneath when swiping,
-        // highlight it and set it as the currentExtendedKey (to be committed
-        // when press is released)
         function evaluateSelectorSwipe() {
-            if (extendedKeysSelector.enabled && swipeReady) {
-                var extendedKeys = extendedKeysSelector.keys;
-                currentExtendedKey = null;
-                var keyMapping = extendedKeysSelector.mapToItem(key, extendedKeysSelector.rowX, extendedKeysSelector.rowY);
-                var mx = mouseX - keyMapping.x;
-                var my = mouseY - keyMapping.y;
-                for(var i = 0; i < extendedKeys.length; i++) {
-                    var posX = extendedKeys[i].x;
-                    var posY = extendedKeys[i].y;
-                    if(mx > posX && mx < (posX + extendedKeys[i].width * 1.25 )
-                       && my > posY && my < (posY + extendedKeys[i].height * (extendedKeysSelector.multirow ? 1.3 : 2.5))) {
-                        if(!extendedKeys[i].highlight) {
-                            Feedback.startPressEffect();
-                        }
-                        extendedKeys[i].highlight = true;
-                        currentExtendedKey = extendedKeys[i];
-                    } else if('highlight' in extendedKeys[i]) {
-                        extendedKeys[i].highlight = false;
-                    }
-                }
-            }
-        }
-    }
-
-    Timer {
-        id: swipeTimer
-        interval: 750
-        onTriggered: {
-            swipeReady = true;
-            keyMouseArea.evaluateSelectorSwipe();
+            currentExtendedKey = extendedKeysSelector.evaluateSelectorSwipe(mouseX, mouseY);
         }
     }
 
