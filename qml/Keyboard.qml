@@ -28,7 +28,7 @@
  *
  */
 
-import QtQuick 2.4
+import QtQuick 2.12
 import QtQuick.Controls 2.4
 
 import MaliitKeyboard 2.0
@@ -91,26 +91,75 @@ Item {
         MouseArea {
             id: swipeArea
 
-            property int jumpBackThreshold: Device.gu(10)
-
             anchors.fill: parent
 
-            drag.target: keyboardSurface
-            drag.axis: Drag.YAxis;
-            drag.minimumY: 0
-            drag.maximumY: parent.height
-            //fix for lp:1277186
-            //only filter children when wordRibbon visible
-            drag.filterChildren: wordRibbon.visible
             // Avoid conflict with extended key swipe selection and cursor swipe mode
             enabled: !canvas.extendedKeysShown && !fullScreenItem.cursorSwipe
 
-            onReleased: {
-                if (keyboardSurface.y > jumpBackThreshold) {
+            // The percentage we are open by (0.0 -> 1.0)
+            // It is reset to 1.0 by state when opened
+            property real openFactor: 1.0
+
+            // Whether the swipe is in the closing direction
+            property bool isClosing: false
+
+            // How far you swipe down to fully close
+            readonly property real swipeDownDistance: height * 0.8
+
+            // How many pixels we need to swipe before we can consider closing the keyboard
+            readonly property int jumpBackThreshold: Device.gu(10)
+
+            property real previousY: 0
+            onPositionChanged: (mouse) => {
+                swipeDelta(mouse.y - previousY);
+                previousY = mouse.y;
+            }
+            onReleased: swipeRelease()
+
+            function swipeDelta(deltaY) {
+                const progressFactor = deltaY / swipeDownDistance;
+                const newOpenFactor = Math.max(0.0, Math.min(1.0, openFactor - progressFactor));
+                isClosing = newOpenFactor < openFactor;
+                openFactor = newOpenFactor;
+
+                if (swipeArea.openFactor <= 0.0) {
+                    Keyboard.hide();
                     MaliitGeometry.shown = false;
+                }
+            }
+
+            function swipeRelease() {
+                previousY = 0;
+                const pixelsMovedBy = swipeDownDistance * (1.0 - openFactor);
+
+                if (isClosing && pixelsMovedBy > jumpBackThreshold) {
+                    // Close keyboard if we are in closing direction, and surpassed threshold
+                    openFactorAnimation.from = openFactor;
+                    openFactorAnimation.to = 0.0;
+                    openFactorAnimation.restart();
                 } else {
-                    bounceBackAnimation.from = keyboardSurface.y
-                    bounceBackAnimation.start();
+                    // Keep keyboard open otherwise
+                    openFactorAnimation.from = openFactor;
+                    openFactorAnimation.to = 1.0;
+                    openFactorAnimation.restart();
+                }
+
+                isClosing = false;
+            }
+
+            PropertyAnimation {
+                id: openFactorAnimation
+                duration: 100
+                target: swipeArea
+                properties: "openFactor"
+                easing.type: Easing.Linear;
+
+                onFinished: {
+                    // close keyboard if it is visually closed
+                    if (swipeArea.openFactor <= 0.0) {
+                        Keyboard.hide();
+                        MaliitGeometry.shown = false;
+                    }
                 }
             }
 
@@ -118,15 +167,7 @@ Item {
                 id: keyboardSurface
                 objectName: "keyboardSurface"
 
-                x:0
-                y:0
-                width: parent.width
-                height: canvas.height
-
-                onXChanged: fullScreenItem.reportKeyboardVisibleRect();
-                onYChanged: fullScreenItem.reportKeyboardVisibleRect();
-                onWidthChanged: fullScreenItem.reportKeyboardVisibleRect();
-                onHeightChanged: fullScreenItem.reportKeyboardVisibleRect();
+                anchors.fill: parent
 
                 WordRibbon {
                     id: wordRibbon
@@ -158,9 +199,30 @@ Item {
                     anchors.bottom: wordRibbon.visible ? wordRibbon.top : keyboardComp.top
                 }
 
+                // Close chevron that shows as you swipe down the keyboard
+                Item {
+                    width: closeChevron.width
+                    height: closeChevron.height
+                    anchors.centerIn: parent
+
+                    // Slowly show chevron
+                    opacity: Math.max(0.0, 1.0 - swipeArea.openFactor * 1.3)
+                    scale: Math.max(0.0, 1.0 - swipeArea.openFactor * 1.3)
+
+                    Label {
+                        id: closeChevron
+                        text: '⌄'
+                        font.pixelSize: keyboardSurface.height * 0.25
+                    }
+                }
+
                 Item {
                     id: keyboardComp
                     objectName: "keyboardComp"
+
+                    // Hide as you swipe down the keyboard
+                    // We lower opacity at a faster rate than the openFactor property
+                    opacity: 1.0 - Math.min(1.0, (1.0 - swipeArea.openFactor) * 1.5)
 
                     visible: !fullScreenItem.cursorSwipe
                     height: parent.height
@@ -188,24 +250,12 @@ Item {
             }
         }
 
-        PropertyAnimation {
-            id: bounceBackAnimation
-            // Animations don't have an "enabled" property, so just set the
-            // target to null if animation is disabled, which effectively also
-            // disables the animation.
-            target: Keyboard.animationEnabled ? keyboardSurface : null
-            properties: "y"
-            easing.type: Easing.OutBounce;
-            easing.overshoot: 2.0
-            to: 0
-        }
-
         state: "HIDDEN"
 
         states: [
             State {
                 name: "SHOWN"
-                PropertyChanges { target: keyboardSurface; y: 0; }
+                PropertyChanges { target: swipeArea; openFactor: 1.0; }
                 onCompleted: {
                     canvas.firstShow = false;
                     canvas.hidingComplete = false;
@@ -215,7 +265,6 @@ Item {
 
             State {
                 name: "HIDDEN"
-                PropertyChanges { target: keyboardSurface; y: canvas.height }
                 onCompleted: {
                     canvas.languageMenu.close();
                     keypad.closeExtendedKeys();
