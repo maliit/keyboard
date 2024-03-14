@@ -346,12 +346,4 @@ Item {
             currentExtendedKey = extendedKeysSelector.evaluateSelectorSwipe(mouseX, mouseY);
         }
     }
-
-    Connections {
-        target: swipeArea.drag
-        function onActiveChanged() {
-            if (swipeArea.drag.active)
-                keyMouseArea.cancelPress();
-        }
-    }
 }
