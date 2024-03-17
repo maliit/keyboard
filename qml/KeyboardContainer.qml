@@ -132,25 +132,31 @@ Item {
             }
 
             // NumberContentType
-            if (contentType === 1) {
+            if (contentType === Keyboard.NumberContentType) {
                 canvas.layoutId = "number";
                 return "languages/Keyboard_numbers.qml";
             }
 
+            // FormattedNumberContentType
+            if (contentType === Keyboard.FormattedNumberContentType) {
+                canvas.layoutId = "formatted";
+                return "languages/Keyboard_formattednumbers.qml";
+            }
+
             // PhoneNumberContentType
-            if (contentType === 2) {
+            if (contentType === Keyboard.PhoneNumberContentType ) {
                 canvas.layoutId = "telephone";
                 return "languages/Keyboard_telephone.qml";
             }
 
             // EmailContentType
-            if (contentType === 3) {
+            if (contentType === Keyboard.EmailContentType) {
                 canvas.layoutId = "email";
                 return Keyboard.currentPluginPath + "/Keyboard_" + language + "_email.qml";
             }
 
             // UrlContentType
-            if (contentType === 4) {
+            if (contentType === Keyboard.UrlContentType) {
                 canvas.layoutId = "url";
                 return Keyboard.currentPluginPath + "/Keyboard_" + language + "_url_search.qml";
             }

@@ -70,6 +70,7 @@ public:
     enum TextContentType {
         FreeTextContentType = Maliit::FreeTextContentType,
         NumberContentType = Maliit::NumberContentType,
+        FormattedNumberContentType = Maliit::FormattedNumberContentType,
         PhoneNumberContentType = Maliit::PhoneNumberContentType,
         EmailContentType = Maliit::EmailContentType,
         UrlContentType = Maliit::UrlContentType,
@@ -96,7 +97,6 @@ public:
     void handleAppOrientationChanged(int angle) override;
     void handleClientChange() override;
     void reset() override;
-    bool imExtensionEvent(MImExtensionEvent *event) override;
     void setKeyOverrides(const QMap<QString, QSharedPointer<MKeyOverride> > &overrides) override;
     //! \reimp_end
 

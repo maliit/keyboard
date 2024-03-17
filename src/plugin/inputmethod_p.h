@@ -30,7 +30,6 @@
 #include "logic/wordengine.h"
 
 #include <maliit/plugins/abstractinputmethodhost.h>
-#include <maliit/plugins/abstractpluginsetting.h>
 
 #include <QtQuick>
 #include <QStringList>
@@ -49,7 +48,6 @@ const Qt::WindowType InputMethodWindowType = (Qt::WindowType)(0x00000080 | Qt::W
 
 using namespace MaliitKeyboard;
 
-typedef QScopedPointer<Maliit::Plugins::AbstractPluginSetting> ScopedSetting;
 typedef QSharedPointer<MKeyOverride> SharedOverride;
 typedef QMap<QString, SharedOverride>::const_iterator OverridesIterator;
 
