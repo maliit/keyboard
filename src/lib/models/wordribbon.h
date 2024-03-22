@@ -35,7 +35,6 @@
 #include "models/wordcandidate.h"
 #include "models/area.h"
 
-#include <QtCore>
 
 namespace MaliitKeyboard {
 

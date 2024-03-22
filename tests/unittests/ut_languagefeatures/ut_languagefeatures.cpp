@@ -27,7 +27,6 @@
 
 #include "westernlanguagefeatures.h"
 
-#include <QtCore>
 #include <QtTest>
 
 namespace MaliitKeyboard {

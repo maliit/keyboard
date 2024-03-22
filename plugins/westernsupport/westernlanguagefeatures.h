@@ -32,7 +32,6 @@
 #define MALIITKEYBOARD_LANGUAGEFEATURES_H
 
 #include "abstractlanguagefeatures.h"
-#include <QObject>
 
 class WesternLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {

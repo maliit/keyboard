@@ -32,12 +32,9 @@
 #ifndef MALIIT_KEYBOARD_EDITOR_H
 #define MALIIT_KEYBOARD_EDITOR_H
 
-#include "models/key.h"
-#include "models/wordcandidate.h"
 #include "view/abstracttexteditor.h"
 
 #include <maliit/plugins/abstractinputmethodhost.h>
-#include <QtCore>
 
 namespace MaliitKeyboard {
 

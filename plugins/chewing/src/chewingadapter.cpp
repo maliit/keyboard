@@ -16,14 +16,8 @@
 
 #include "chewingadapter.h"
 
-#include <iostream>
 
-#include <iconv.h>
-#include <string>
-#include <string.h>
 
-#include <QChar>
-#include <QCoreApplication>
 
 #define CHEWING_MAX_LEN 32
 

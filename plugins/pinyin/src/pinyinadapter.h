@@ -17,8 +17,6 @@
 #ifndef PINYINADAPTER_H
 #define PINYINADAPTER_H
 
-#include <QObject>
-#include <QStringList>
 
 #include "pinyin.h"
 #include "abstractlanguageplugin.h"

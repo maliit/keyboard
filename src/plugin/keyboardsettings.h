@@ -31,7 +31,6 @@
 #define KEYBOARDSETTINGS_H
 
 #include <QObject>
-#include <QStringList>
 
 class QGSettings;
 

@@ -18,7 +18,6 @@
 #define CHEWINGLANGUAGEFEATURES_H
 
 #include "abstractlanguagefeatures.h"
-#include <QObject>
 
 class ChewingLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {

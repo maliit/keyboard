@@ -33,7 +33,6 @@
 #define TESTUTILS_H
 
 class QObject;
-class QString;
 
 namespace TestUtils {
 

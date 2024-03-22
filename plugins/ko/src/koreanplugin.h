@@ -1,14 +1,9 @@
 #ifndef KOREANPLUGIN_H
 #define KOREANPLUGIN_H
 
-#include <QObject>
-#include <QStringList>
-#include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
-#include "spellchecker.h"
 #include "spellpredictworker.h"
 
-#include <iostream>
 
 class KoreanLanguageFeatures;
 

@@ -2,7 +2,6 @@
 #include "koreanlanguagefeatures.h"
 #include "spellpredictworker.h"
 
-#include <QDebug>
 
 KoreanPlugin::KoreanPlugin(QObject *parent) :
     AbstractLanguagePlugin(parent)
