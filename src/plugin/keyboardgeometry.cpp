@@ -27,7 +27,6 @@
 
 #include "keyboardgeometry.h"
 
-#include <QDebug>
 
 KeyboardGeometry::KeyboardGeometry(QObject *parent) :
     QObject(parent)

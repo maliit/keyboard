@@ -16,7 +16,6 @@
 
 #include "qconftypes.h"
 
-#include <QStringList>
 
 /* This file is responsible for conversion between C++ values and GVariant *.
  *

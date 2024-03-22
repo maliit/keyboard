@@ -18,7 +18,6 @@
 #define CHINESELANGUAGEFEATURES_H
 
 #include "abstractlanguagefeatures.h"
-#include <QObject>
 
 class ChineseLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {

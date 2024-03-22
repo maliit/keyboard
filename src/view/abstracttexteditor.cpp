@@ -30,10 +30,8 @@
  */
 
 #include "abstracttexteditor.h"
-#include "models/wordribbon.h"
 #include "logic/abstractlanguagefeatures.h"
 
-#include <QElapsedTimer>
 
 namespace MaliitKeyboard {
 

@@ -18,7 +18,6 @@
 #define CHEWINGADAPTER_H
 
 #include <QObject>
-#include <QStringList>
 
 #include "chewing.h"
 

@@ -29,7 +29,6 @@
 
 #include "keyboardsettings.h"
 
-#include <QFile>
 #include <QFileInfo>
 #include <QJsonDocument>
 #include <QScreen>

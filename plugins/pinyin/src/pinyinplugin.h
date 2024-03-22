@@ -1,14 +1,11 @@
 #ifndef PINYINPLUGIN_H
 #define PINYINPLUGIN_H
 
-#include <QObject>
-#include <QStringList>
 #include <QThread>
 #include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
 #include "pinyinadapter.h"
-#include <iostream>
 
 class ChineseLanguageFeatures;
 

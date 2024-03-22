@@ -34,7 +34,6 @@
 
 #include "models/area.h"
 
-#include <QtCore>
 
 namespace MaliitKeyboard {
 

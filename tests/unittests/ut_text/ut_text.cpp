@@ -27,7 +27,6 @@
 
 #include "models/text.h"
 
-#include <QtCore>
 #include <QtTest>
 
 namespace MaliitKeyboard {

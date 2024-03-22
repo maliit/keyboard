@@ -32,23 +32,16 @@
 #include "inputmethod.h"
 #include "inputmethod_p.h"
 
-#include "models/key.h"
-#include "models/keyarea.h"
-#include "models/wordribbon.h"
-#include "models/layout.h"
 
 #include "logic/abstractlanguagefeatures.h"
 
 #include "view/setup.h"
 
-#include <maliit/plugins/subviewdescription.h>
 #include <maliit/plugins/updateevent.h>
 #include <maliit/namespace.h>
 
-#include <QGuiApplication>
 
 
-class MImUpdateEvent;
 
 using namespace MaliitKeyboard;
 

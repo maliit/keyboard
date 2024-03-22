@@ -31,9 +31,6 @@
 #include "spellchecker.h"
 #include "languageplugininterface.h"
 
-#include <QObject>
-#include <QStringList>
-#include <QMap>
 
 class SpellPredictWorker : public QObject
 {

@@ -32,8 +32,6 @@
 #include "models/text.h"
 #include "editor.h"
 
-#include <QtGui/QKeyEvent>
-#include <QTimer>
 #include <maliit/namespace.h>
 
 namespace MaliitKeyboard {

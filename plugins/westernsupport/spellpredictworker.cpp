@@ -27,7 +27,6 @@
 
 #include "spellpredictworker.h"
 
-#include <QDebug>
 
 SpellPredictWorker::SpellPredictWorker(QObject *parent)
     : QObject(parent)

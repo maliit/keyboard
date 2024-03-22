@@ -52,11 +52,6 @@ private:
 };
 #endif
 
-#include <QFile>
-#include <QTextStream>
-#include <QTextCodec>
-#include <QStringList>
-#include <QDebug>
 #include <QDir>
 
 //! \class SpellChecker

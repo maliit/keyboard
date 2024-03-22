@@ -18,7 +18,6 @@
 #define KOREANLANGUAGEFEATURES_H
 
 #include "abstractlanguagefeatures.h"
-#include <QObject>
 
 class KoreanLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {

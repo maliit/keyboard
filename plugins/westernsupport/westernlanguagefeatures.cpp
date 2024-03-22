@@ -30,7 +30,6 @@
 
 #include "westernlanguagefeatures.h"
 
-#include <QtCore>
 
 WesternLanguageFeatures::WesternLanguageFeatures(QObject *parent) :
     QObject(parent)

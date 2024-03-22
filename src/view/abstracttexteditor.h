@@ -37,7 +37,6 @@
 #include "models/text.h"
 #include "logic/abstractwordengine.h"
 
-#include <QtCore>
 #include <QtGui/QKeyEvent>
 
 namespace MaliitKeyboard {

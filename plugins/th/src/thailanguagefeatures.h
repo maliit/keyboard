@@ -18,7 +18,6 @@
 #define THAILANGUAGEFEATURES_H
 
 #include "abstractlanguagefeatures.h"
-#include <QObject>
 
 class ThaiLanguageFeatures : public QObject, public AbstractLanguageFeatures
 {

@@ -31,20 +31,14 @@
 #ifndef MALIIT_KEYBOARD_EVENTHANDLER_H
 #define MALIIT_KEYBOARD_EVENTHANDLER_H
 
-#include <QtCore>
 #include "models/wordcandidate.h"
 
 namespace MaliitKeyboard {
 
 class Key;
 
-namespace Model {
-class Layout;
-}
-
 namespace Logic {
 
-class LayoutUpdater;
 
 class EventHandler
     : public QObject

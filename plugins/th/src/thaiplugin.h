@@ -1,8 +1,6 @@
 #ifndef THAIPLUGIN_H
 #define THAIPLUGIN_H
 
-#include <QObject>
-#include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
 class ThaiLanguageFeatures;

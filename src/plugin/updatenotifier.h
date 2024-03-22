@@ -32,7 +32,6 @@
 #define MALIIT_KEYBOARD_UPDATENOTIFIER_H
 
 #include <QtCore>
-#include <maliit/plugins/keyoverride.h>
 
 class MImUpdateEvent;
 

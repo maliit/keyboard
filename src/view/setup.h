@@ -34,18 +34,10 @@
 
 namespace MaliitKeyboard {
 
-class Glass;
-class Renderer;
 class AbstractTextEditor;
 
 namespace Logic {
-class LayoutHelper;
-class LayoutUpdater;
 class EventHandler;
-}
-
-namespace Model {
-class Layout;
 }
 
 namespace Setup {

@@ -2,7 +2,6 @@
 #include "westernlanguagefeatures.h"
 #include "spellpredictworker.h"
 
-#include <QDebug>
 
 WesternLanguagesPlugin::WesternLanguagesPlugin(QObject *parent) :
     AbstractLanguagePlugin(parent)

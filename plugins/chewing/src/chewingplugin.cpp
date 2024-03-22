@@ -1,7 +1,6 @@
 #include "chewingplugin.h"
 #include "chewinglanguagefeatures.h"
 
-#include <QDebug>
 
 ChewingPlugin::ChewingPlugin(QObject *parent) :
     AbstractLanguagePlugin(parent)
