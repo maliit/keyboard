@@ -24,7 +24,7 @@ KeyPad {
     anchors.fill: parent
 
     content: c1
-    symbols: "/usr/lib/maliit/keyboard2/languages/fa/Keyboard_symbols_fa.qml"
+    symbols: "languages/Keyboard_symbols.qml"
 
     Column {
         id: c1
