@@ -24,7 +24,7 @@ KeyPad {
     anchors.fill: parent
 
     content: c1
-    symbols: "lib/fa/Keyboard_symbols_fa.qml"
+    symbols: "languages/Keyboard_symbols.qml"
 
     Column {
         id: c1
@@ -37,14 +37,15 @@ KeyPad {
 
             CharKey { label: "ض"; extended: ["۱","1"]; shifted: "ض"; extendedShifted: ["۱","1"]; leftSide: true; }
             CharKey { label: "ص"; extended: ["۲","2","٬"]; shifted: "ص"; extendedShifted: ["۲","2","٬"]; }
-            CharKey { label: "ق"; extended: ["۳","3","٫"]; shifted: "ق"; extendedShifted: ["۳","3","٫"]; }
-            CharKey { label: "ف"; extended: ["۴","4"]; shifted: "ف"; extendedShifted: ["۴","4"]; }
-            CharKey { label: "غ"; extended: ["۵","5"]; shifted: "غ"; extendedShifted: ["۵","5"]; }
-            CharKey { label: "ع"; extended: ["۶","6"]; shifted: "ع"; extendedShifted: ["۶","6"]; }
-            CharKey { label: "ه"; extended: ["۷","7","ه‍","ة"]; shifted: "ه"; extendedShifted: ["۷","7","ه‍","ة"]; }
-            CharKey { label: "خ"; extended: ["۸","8"]; shifted: "خ"; extendedShifted: ["۸","8"]; }
-            CharKey { label: "ح"; extended: ["۹","9"]; shifted: "ح"; extendedShifted: ["۹","9"]; }
-            CharKey { label: "ج"; extended: ["۰","0"]; shifted: "ج"; extendedShifted: ["۰","0"]; rightSide: true; }
+            CharKey { label: "ث"; extended: ["۳","3","٫"]; shifted: "ث"; extendedShifted: ["۳","3","٫"]; }
+            CharKey { label: "ق"; extended: ["۴","4"]; shifted: "ق"; extendedShifted: ["۴","4"]; }
+            CharKey { label: "ف"; extended: ["۵","5"]; shifted: "ف"; extendedShifted: ["۵","5"]; }
+            CharKey { label: "غ"; extended: ["۶","6"]; shifted: "غ"; extendedShifted: ["۶","6"]; }
+            CharKey { label: "ع"; extended: ["۷","7"]; shifted: "ع"; extendedShifted: ["۷","7"]; }
+            CharKey { label: "ه"; extended: ["۸","8"]; shifted: "ه"; extendedShifted: ["۸","8"]; }
+            CharKey { label: "خ"; extended: ["۹","9"]; shifted: "خ"; extendedShifted: ["۹","9"]; }
+            CharKey { label: "ح"; extended: ["۰","0"]; shifted: "ح"; extendedShifted: ["۰","0"];  }
+            CharKey { label: "ج"; shifted: "ج"; rightSide: true; }
         }
 
         Row {
@@ -57,23 +58,25 @@ KeyPad {
             CharKey { label: "ب"; shifted: "ب"; }
             CharKey { label: "ل"; shifted: "ل"; }
             CharKey { label: "ا"; extended: ["آ","أ","إ","ء"]; shifted: "ا"; extendedShifted: ["آ","أ","إ","ء"]; }
-            CharKey { label: "ت"; extended: ["ث","ة"]; shifted: "ت"; extendedShifted: ["ث","ة"]; }
+            CharKey { label: "ت"; extended: ["ة"]; shifted: "ت"; extendedShifted: ["ة"]; }
             CharKey { label: "ن"; shifted: "ن"; }
-            CharKey { label: "م"; shifted: "م"; rightSide: true; }
+            CharKey { label: "م"; shifted: "م"; }
+            CharKey { label: "ک"; shifted: "ک"; }
+            CharKey { label: "گ"; shifted: "گ";  rightSide: true; }
         }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter;
             spacing: 0
-
-            CharKey { label: "ط"; extended: ["ظ","ك"]; shifted: "ط"; extendedShifted: ["ظ","ك"]; }
-            CharKey { label: "ز"; extended: ["ژ"]; shifted: "ز"; extendedShifted: ["ژ"]; }
+            CharKey { label: "ظ"; extended: ["ك"]; shifted: "ط"; extendedShifted: ["ك"]; }
+            CharKey { label: "ط"; shifted: "ط"; }
+            CharKey { label: "ژ"; shifted: "ژ"; }
+            CharKey { label: "ز"; shifted: "ز"; }
             CharKey { label: "ر"; shifted: "ر"; }
-            CharKey { label: "د"; extended: ["ذ"]; shifted: "د"; extendedShifted: ["ذ"]; }
+            CharKey { label: "ذ"; shifted: "ذ"; }
+            CharKey { label: "د"; shifted: "د"; }
             CharKey { label: "پ"; shifted: "پ"; }
             CharKey { label: "و"; extended: ["ؤ"]; shifted: "و"; extendedShifted: ["ؤ"]; }
-            CharKey { label: "ک"; shifted: "ک"; }
-            CharKey { label: "گ"; shifted: "گ"; }
             CharKey { label: "چ"; shifted: "چ"; }
             BackspaceKey { padding: 0 }
         }
