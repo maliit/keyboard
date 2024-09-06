@@ -45,12 +45,10 @@
 
 #include "view/setup.h"
 #include "plugin/editor.h"
-#include "plugin/updatenotifier.h"
 #include "inputmethodhostprobe.h"
 #include "wordengineprobe.h"
 
 #include <maliit/plugins/testsurfacefactory.h>
-#include <maliit/plugins/updateevent.h>
 
 #include <QtTest>
 #include <QtCore>
@@ -147,19 +145,6 @@ bool operator==(const Maliit::PreeditTextFormat &a, const Maliit::PreeditTextFor
     return ((a.start == b.start) and (a.length == b.length) and (a.preeditFace == b.preeditFace));
 }
 
-MImUpdateEvent *createUpdateEvent(const QString &surrounding_text,
-                                  int cursor_position)
-{
-    const char *const cur_pos("cursorPosition");
-    QStringList properties_changed(cur_pos);
-    QMap<QString, QVariant> update;
-
-    update.insert(cur_pos, cursor_position);
-    update.insert("surroundingText", surrounding_text);
-
-    return new MImUpdateEvent(update, properties_changed);
-}
-
 } // unnamed namespace
 
 struct BasicSetupTest
@@ -175,7 +160,6 @@ struct BasicSetupTest
 
     Editor editor;
     InputMethodHostProbe host;
-    UpdateNotifier notifier;
 };
 
 class SetupTest
@@ -477,10 +461,6 @@ private:
         QFETCH(bool, expected_preedit_string_sent);
 
         BasicSetupTest test_setup;
-        QScopedPointer<MImUpdateEvent> update_event(createUpdateEvent(surrounding_text,
-                                                                      cursor_position));
-
-        test_setup.notifier.notify(update_event.data());
 
         QCOMPARE(test_setup.host.preeditStringSent(), expected_preedit_string_sent);
         if (expected_preedit_string_sent) {
@@ -602,10 +582,6 @@ private:
         QFETCH(int, expected_cursor_position);
 
         SetupTest test_setup;
-        QScopedPointer<MImUpdateEvent> update_event(createUpdateEvent(surrounding_text,
-                                                                      cursor_position));
-
-        test_setup.notifier.notify(update_event.data());
 
         Q_FOREACH (const QString &k, keys) {
             test_setup.event_handler.onPressed(lookup(k));
