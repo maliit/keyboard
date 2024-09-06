@@ -33,9 +33,6 @@
 #define MALIIT_KEYBOARD_PLUGIN_H
 
 #include <maliit/plugins/inputmethodplugin.h>
-#include <QtCore>
-#include <QtGui>
-
 class MaliitKeyboardPlugin
     : public QObject, public Maliit::Plugins::InputMethodPlugin
 {

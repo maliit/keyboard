@@ -1,14 +1,9 @@
 #ifndef WESTERNLANGUAGESPLUGIN_H
 #define WESTERNLANGUAGESPLUGIN_H
 
-#include <QObject>
 
-#include "languageplugininterface.h"
-#include "westernlanguagefeatures.h"
-#include "spellchecker.h"
 #include "abstractlanguageplugin.h"
 
-#include "spellpredictworker.h"
 
 class WesternLanguageFeatures;
 class SpellPredictWorker;

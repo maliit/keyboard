@@ -30,7 +30,6 @@
  */
 
 #include "inputmethodhostprobe.h"
-#include <QtDebug>
 
 InputMethodHostProbe::InputMethodHostProbe()
     : m_commit_string_history()

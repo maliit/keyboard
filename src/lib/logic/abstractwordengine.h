@@ -33,7 +33,6 @@
 
 #include "models/text.h"
 #include "models/wordcandidate.h"
-#include <QtCore>
 
 class AbstractLanguageFeatures;
 

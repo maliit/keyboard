@@ -21,14 +21,8 @@
 #include <algorithm>
 #include <iterator>
 
-#include <iconv.h>
-#include <string>
-#include <string.h>
 
-#include <QDebug>
 #include <QLoggingCategory>
-#include <QCoreApplication>
-#include <QRegExp>
 
 #define MAX_SUGGESTIONS 100
 

@@ -20,7 +20,6 @@
 #define __QGSETTINGS_H__
 
 #include <QObject>
-#include <QStringList>
 
 /**
  * @brief QGSettings provides access to application settings stored with GSettings.

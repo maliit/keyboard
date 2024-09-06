@@ -32,10 +32,6 @@
 #include "setup.h"
 #include "abstracttexteditor.h"
 
-#include "models/layout.h"
-#include "models/key.h"
-#include "models/wordcandidate.h"
-#include "models/text.h"
 
 #include "logic/eventhandler.h"
 

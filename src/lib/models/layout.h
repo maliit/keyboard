@@ -32,17 +32,10 @@
 #define MALIIT_KEYBOARD_LAYOUT_H
 
 #include "models/key.h"
-#include <QtCore>
 
 namespace MaliitKeyboard {
 
 class KeyArea;
-
-
-namespace Logic {
-class LayoutHelper;
-class LayoutUpdater;
-}
 
 namespace Model {
 

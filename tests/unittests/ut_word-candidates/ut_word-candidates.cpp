@@ -28,16 +28,13 @@
  *
  */
 
-#include "utils.h"
 #include "wordengineprobe.h"
 #include "common/inputmethodhostprobe.h"
 
 #include "plugin/editor.h"
 #include "models/key.h"
 #include "models/text.h"
-#include "view/setup.h"
 
-#include <QtCore>
 #include <QtTest>
 
 using namespace MaliitKeyboard;

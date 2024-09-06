@@ -32,13 +32,10 @@
 #ifndef MALIIT_KEYBOARD_WORDENGINE_H
 #define MALIIT_KEYBOARD_WORDENGINE_H
 
-#include "models/text.h"
 #include "logic/abstractwordengine.h"
 #include "logic/abstractlanguagefeatures.h"
 #include "languageplugininterface.h"
 
-#include <QtCore>
-#include <QMutex>
 
 namespace MaliitKeyboard {
 namespace Logic {

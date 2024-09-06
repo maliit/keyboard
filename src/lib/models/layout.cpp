@@ -31,10 +31,7 @@
 #include "layout.h"
 #include "keyarea.h"
 #include "key.h"
-#include "keydescription.h"
 
-#include <QtGui/QGuiApplication>
-#include <QScreen>
 
 namespace MaliitKeyboard {
 namespace Model {

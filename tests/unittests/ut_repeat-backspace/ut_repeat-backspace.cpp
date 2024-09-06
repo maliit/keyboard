@@ -32,13 +32,11 @@
 #include "utils.h"
 #include "models/key.h"
 #include "models/text.h"
-#include "logic/wordengine.h"
 #include "plugin/editor.h"
 #include "common/wordengineprobe.h"
 
 #include <inputmethodhostprobe.h>
 
-#include <QtCore>
 #include <QtTest>
 
 using namespace MaliitKeyboard;

@@ -33,8 +33,6 @@
 #include "inputmethod.h"
 
 #include <QtQml>
-#include <libintl.h>
-
 MaliitKeyboardPlugin::MaliitKeyboardPlugin(QObject *parent)
     : QObject(parent)
     , Maliit::Plugins::InputMethodPlugin()

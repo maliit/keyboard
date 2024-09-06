@@ -1,14 +1,10 @@
 #ifndef CHEWINGPLUGIN_H
 #define CHEWINGPLUGIN_H
 
-#include <QObject>
-#include <QStringList>
 #include <QThread>
-#include "languageplugininterface.h"
 #include "abstractlanguageplugin.h"
 
 #include "chewingadapter.h"
-#include <iostream>
 
 class ChewingLanguageFeatures;
 

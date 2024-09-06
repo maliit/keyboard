@@ -33,11 +33,8 @@
 #define MALIIT_KEYBOARD_INPUTMETHOD_H
 
 #include <maliit/plugins/abstractinputmethod.h>
-#include <maliit/plugins/abstractinputmethodhost.h>
 #include <maliit/plugins/keyoverride.h>
 
-#include <QtGui>
-#include <QtQuick/QQuickView>
 
 class InputMethodPrivate;
 

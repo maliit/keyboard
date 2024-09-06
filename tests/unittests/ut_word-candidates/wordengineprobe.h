@@ -34,7 +34,6 @@
 #include "logic/abstractwordengine.h"
 #include "logic/abstractlanguagefeatures.h"
 
-#include <QtCore>
 
 class MockLanguageFeatures : public AbstractLanguageFeatures
 {
