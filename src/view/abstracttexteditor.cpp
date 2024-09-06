@@ -617,11 +617,11 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionDown:
         event_key = Qt::Key_Down;
         break;
-        
+
     case Key::ActionKeySequence:
         sendKeySequence(text, QKeySequence::fromString(key.commandSequence()));
         break;
-        
+
     case Key::ActionCommand:
         invokeAction(text, QKeySequence::fromString(key.commandSequence()));
         break;
@@ -640,6 +640,22 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     case Key::ActionEnd:
         event_key = Qt::Key_End;
+        break;
+
+    case Key::ActionEscape:
+        event_key = Qt::Key_Escape;
+        break;
+
+    case Key::ActionPageUp:
+        event_key = Qt::Key_PageUp;
+        break;
+
+    case Key::ActionPageDown:
+        event_key = Qt::Key_PageDown;
+        break;
+
+    case Key::ActionTab:
+        event_key = Qt::Key_Tab;
         break;
 
     default:
