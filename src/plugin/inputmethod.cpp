@@ -790,6 +790,8 @@ void InputMethod::showSystemSettings()
 
     if (qEnvironmentVariable("PLASMA_PLATFORM").contains(QStringLiteral("phone"))) {
         QDesktopServices::openUrl(QUrl("systemsettings://kcm_mobile_onscreenkeyboard"));
+    } else if (qEnvironmentVariable("KDE_SESSION_VERSION").contains(QStringLiteral("6"))) {
+        QDesktopServices::openUrl(QUrl("systemsettings://kcm_regionandlang"));
     } else {
         QDesktopServices::openUrl(QUrl("settings://system/language"));
     }
