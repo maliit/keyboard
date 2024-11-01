@@ -38,7 +38,20 @@ KeyPad {
         property var db
 
         Component.onCompleted: {
-            db = LocalStorage.openDatabaseSync("Emoji", "1.0", "Storage for emoji keyboard layout", 1000000);
+            try {
+                db = LocalStorage.openDatabaseSync("Emoji", "1.0", "Storage for emoji keyboard layout", 1000000);
+            } catch(e) {
+                console.log("Couldn't initialize local storage for emoji keyboard: " + e)
+                db = {
+                    transaction: function(txfun) {
+                        txfun({
+                            executeSql: function(sql) {
+                                return { rows: [] }
+                            }
+                        })
+                    }
+                }
+            }
 
             db.transaction(
                 function(tx) {
