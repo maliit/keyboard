@@ -165,6 +165,8 @@ KeyPopover {
                     } else if (!skipAutoCaps) {
                         if (popover.parent.activeKeypadState === "SHIFTED" && popover.parent.state === "CHARACTERS")
                             popover.parent.activeKeypadState = "NORMAL"
+                        if (popover.parent.activeKeypadState === "CONTROL" && popover.parent.state === "CHARACTERS")
+                            popover.parent.activeKeypadState = "NORMAL"
                     }
                     popover.closePopover();
                 }

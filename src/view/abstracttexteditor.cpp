@@ -617,11 +617,11 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
     case Key::ActionDown:
         event_key = Qt::Key_Down;
         break;
-        
+
     case Key::ActionKeySequence:
         sendKeySequence(text, QKeySequence::fromString(key.commandSequence()));
         break;
-        
+
     case Key::ActionCommand:
         invokeAction(text, QKeySequence::fromString(key.commandSequence()));
         break;
@@ -640,6 +640,30 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
     case Key::ActionEnd:
         event_key = Qt::Key_End;
+        break;
+
+    case Key::ActionEscape:
+        event_key = Qt::Key_Escape;
+        break;
+
+    case Key::ActionPageUp:
+        event_key = Qt::Key_PageUp;
+        break;
+
+    case Key::ActionPageDown:
+        event_key = Qt::Key_PageDown;
+        break;
+
+    case Key::ActionTab:
+        event_key = Qt::Key_Tab;
+        break;
+
+    case Key::ActionControl:
+        event_key = Qt::Key_Control;
+        break;
+
+    case Key::ActionCapsLock:
+        event_key = Qt::Key_CapsLock;
         break;
 
     default:
@@ -1179,7 +1203,7 @@ void AbstractTextEditor::sendKeySequence(const QString &action, const QKeySequen
         const int key = actionSequence[i] & ~AllModifiers;
         const int modifiers = actionSequence[i] & AllModifiers;
         QString text("");
-        if (modifiers == Qt::NoModifier || modifiers == Qt::ShiftModifier) {
+        if (modifiers == Qt::NoModifier || modifiers == Qt::ShiftModifier || modifiers == Qt::ControlModifier) {
             text = QString(key);
         }
         sendKeyPressAndReleaseEvents(key, static_cast<Qt::KeyboardModifiers>(modifiers), text);

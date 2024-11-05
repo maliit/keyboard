@@ -290,6 +290,8 @@ Item {
                 else if (!skipAutoCaps) {
                     if (panel.activeKeypadState === "SHIFTED" && panel.state === "CHARACTERS")
                         panel.activeKeypadState = "NORMAL";
+                    if (panel.activeKeypadState === "CONTROL" && panel.state === "CHARACTERS")
+                        panel.activeKeypadState = "NORMAL";
                 }
                 if (switchBackFromSymbols && panel.state === "SYMBOLS") {
                     panel.state = "CHARACTERS";

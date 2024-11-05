@@ -18,3 +18,15 @@ PressArea 1.0 PressArea.qml
 SpaceKey 1.0 SpaceKey.qml
 UrlKey 1.0 UrlKey.qml
 CategoryKey 1.0 CategoryKey.qml
+UpKey 1.0 UpKey.qml
+DownKey 1.0 DownKey.qml
+LeftKey 1.0 LeftKey.qml
+RightKey 1.0 RightKey.qml
+EscapeKey 1.0 EscapeKey.qml
+TabKey 1.0 TabKey.qml
+HomeKey 1.0 HomeKey.qml
+EndKey 1.0 EndKey.qml
+PageUpKey 1.0 PageUpKey.qml
+PageDownKey 1.0 PageDownKey.qml
+CapsLockKey 1.0 CapsLockKey.qml
+ControlKey 1.0 ControlKey.qml

@@ -101,6 +101,16 @@ void EventHandler::onKeyReleased(QString label, QString action)
         key.setAction(Key::ActionHome);
     else if (action == QLatin1String("end"))
         key.setAction(Key::ActionEnd);
+    else if (action == QLatin1String("tab"))
+        key.setAction(Key::ActionTab);
+    else if (action == QLatin1String("ctrl"))
+        key.setAction(Key::ActionControl);
+    else if (action == QLatin1String("escape"))
+        key.setAction(Key::ActionEscape);
+    else if (action == QLatin1String("pageeup"))
+        key.setAction(Key::ActionPageUp);
+    else if (action == QLatin1String("pageeup"))
+        key.setAction(Key::ActionPageDown);
     else if (action == "keysequence") {
         key.setCommandSequence(label);
         key.setAction(Key::ActionKeySequence);

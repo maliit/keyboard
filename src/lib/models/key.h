@@ -72,6 +72,11 @@ public:
         ActionRightLayout, //!< Switch to right/next language layout.
         ActionHome, //!< Key moves cursor to beginning of text.
         ActionEnd, //!< Key moves cursor to end of text.
+        ActionEscape, //!< Key sends Escape
+        ActionPageUp, //!< Key sends PageUp
+        ActionPageDown, //!< Key sends PageDown
+        ActionControl, //!< Key sends Control
+        ActionCapsLock, //!< Key sends CapsLock
         NumActions
     };
 
