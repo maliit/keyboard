@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: maliit-keyboard\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-14 13:08-0500\n"
-"PO-Revision-Date: 2021-10-04 12:20+0000\n"
+"PO-Revision-Date: 2025-01-03 14:09-0300\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.11.3\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Launchpad-Export-Date: 2017-04-07 06:31+0000\n"
 
 #: qml/ActionsToolbar.qml:56
@@ -47,9 +48,8 @@ msgid "Swipe to move selection"
 msgstr "Deslice para mover la selección"
 
 #: qml/Keyboard.qml:336
-#, fuzzy
 msgid "Double-tap to exit selection mode"
-msgstr "Toque dos veces para entrar en el modo de selección"
+msgstr "Toque dos veces para salir del modo de selección"
 
 #: qml/Keyboard.qml:337
 msgid "Swipe to move cursor"
@@ -73,7 +73,7 @@ msgstr "Azerí"
 
 #: qml/keys/languages.js:21
 msgid "Belarusian"
-msgstr ""
+msgstr "Bielorruso"
 
 #: qml/keys/languages.js:22
 msgid "Bulgarian"
@@ -112,11 +112,12 @@ msgid "English"
 msgstr "Inglés"
 
 #: qml/keys/languages.js:31
-#, fuzzy
 msgid ""
 "English\n"
 "(Dvorak)"
-msgstr "Inglés"
+msgstr ""
+"Inglés\n"
+"(Dvorak)"
 
 #: qml/keys/languages.js:32
 msgid "Esperanto"
@@ -184,7 +185,7 @@ msgstr "Letón"
 
 #: qml/keys/languages.js:47
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedonio"
 
 #: qml/keys/languages.js:48
 msgid "Korean"
@@ -228,7 +229,7 @@ msgstr "Sueco"
 
 #: qml/keys/languages.js:58
 msgid "Thai"
-msgstr ""
+msgstr "Tailandés"
 
 #: qml/keys/languages.js:59
 msgid "Turkish"
@@ -260,23 +261,23 @@ msgstr "Hecho"
 
 #: src/plugin/inputmethod.cpp:278
 msgid "Go"
-msgstr ""
+msgstr "Ir"
 
 #: src/plugin/inputmethod.cpp:281
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 #: src/plugin/inputmethod.cpp:284
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: src/plugin/inputmethod.cpp:287
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 #: src/plugin/inputmethod.cpp:290
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #~ msgid "Language: "
 #~ msgstr "Idioma: "
