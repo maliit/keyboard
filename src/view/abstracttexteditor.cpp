@@ -34,6 +34,7 @@
 #include "logic/abstractlanguagefeatures.h"
 
 #include <QElapsedTimer>
+#include <QRegularExpression>
 
 namespace MaliitKeyboard {
 
@@ -392,7 +393,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
 
         if (d->preedit_enabled) {
             if (!enablePreeditAtInsertion &&
-                    (d->text->surroundingRight().left(1).contains(QRegExp(R"([\w])")) || email_detected)) {
+                    (d->text->surroundingRight().left(1).contains(QRegularExpression(R"([\w])")) || email_detected)) {
                 // We're editing in the middle of a word or entering an email address, so just insert characters directly
                 d->text->appendToPreedit(text);
                 commitPreedit();
@@ -536,14 +537,14 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
         // a separator, and there isn't a separator immediately prior to a ')'
         else if (look_for_a_double_space
                  && not stopSequence.isEmpty()
-                 && textOnLeft.count() >= 2
-                 && textOnLeft.at(textOnLeft.count() - 1).isSpace()
-                 && !textOnLeft.at(textOnLeft.count() - 2).isSpace()
-                 && textOnLeftTrimmed.count() > 0
-                 && !d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 1))
+                 && textOnLeft.size() >= 2
+                 && textOnLeft.at(textOnLeft.size() - 1).isSpace()
+                 && !textOnLeft.at(textOnLeft.size() - 2).isSpace()
+                 && textOnLeftTrimmed.size() > 0
+                 && !d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.size() - 1))
                  && !(textOnLeftTrimmed.endsWith(QLatin1String(")"))
-                      && textOnLeftTrimmed.count() > 1
-                      && d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.count() - 2)))) {
+                      && textOnLeftTrimmed.size() > 1
+                      && d->word_engine->languageFeature()->isSeparator(textOnLeftTrimmed.at(textOnLeftTrimmed.size() - 2)))) {
             removeTrailingWhitespaces();
             if (!d->word_engine->languageFeature()->commitOnSpace()) {
                 // Commit when inserting a fullstop if we don't insert on spaces
@@ -1180,7 +1181,7 @@ void AbstractTextEditor::sendKeySequence(const QString &action, const QKeySequen
         const int modifiers = actionSequence[i] & AllModifiers;
         QString text("");
         if (modifiers == Qt::NoModifier || modifiers == Qt::ShiftModifier) {
-            text = QString(key);
+            text = QString::number(key);
         }
         sendKeyPressAndReleaseEvents(key, static_cast<Qt::KeyboardModifiers>(modifiers), text);
     }
@@ -1240,15 +1241,16 @@ void AbstractTextEditor::checkPreeditReentry(bool uncommittedDelete)
         } else {
             lastChar = text()->surrounding().at(currentOffset-1);
         }
-        if(!QRegExp(R"(\W+)").exactMatch(lastChar) && !d->word_engine->languageFeature()->isSymbol(lastChar)) {
-            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegExp(R"([\s\d]+)"));
+        if (!QRegularExpression(R"(\W+)").match(lastChar).hasMatch() &&
+            !d->word_engine->languageFeature()->isSymbol(lastChar)) {
+            QStringList leftWords = text()->surroundingLeft().trimmed().split(QRegularExpression (R"([\s\d]+)"));
             int trimDiff = text()->surroundingLeft().size() - text()->surroundingLeft().trimmed().size();
             if(leftWords.last().isEmpty()) {
                 // If removed char was punctuation trimming will result in an empty entry
                 leftWords.removeLast();
                 trimDiff += 1;
             }
-            if(d->text->surroundingRight().left(1).contains(QRegExp(R"([\w])"))) {
+            if(d->text->surroundingRight().left(1).contains(QRegularExpression (R"([\w])"))) {
                 // Don't enter pre-edit in the middle of a word
                 return;
             }

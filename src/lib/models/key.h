@@ -94,7 +94,7 @@ private:
     QString m_command_sequence;
 
 public:
-    explicit Key();
+    Key();
 
     // read-only properties:
     bool valid() const;

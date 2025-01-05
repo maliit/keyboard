@@ -61,7 +61,7 @@ void SpellPredictWorker::setLanguage(QString locale, QString pluginPath)
 {
     // locale for secondary layouts I.E., dvorak will be formatted as locale@layout, swiss keyboard as "fr-ch"
     // in this case we want to drop the layout portion
-    QStringList tmpLocales = locale.split(QRegExp("(@|\\-)"));
+    QStringList tmpLocales = locale.split(QRegularExpression("(@|\\-)"));
     QString baseLocale;
     if (tmpLocales.size() > 1) {
         baseLocale = tmpLocales[0];

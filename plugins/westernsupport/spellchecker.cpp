@@ -304,7 +304,7 @@ bool SpellChecker::setLanguage(const QString &language)
 
     d->aff_file = dictPath() + QDir::separator() + affMatches[0];
     d->dic_file = dictPath() + QDir::separator() + dicMatches[0];
-    d->user_dictionary_file = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + language + "_userDictionary.dic";
+    d->user_dictionary_file = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + QDir::separator() + language + "_userDictionary.dic";
 
     qDebug() << "spellechecker.cpp in setLanguage() aff_file=" << d->aff_file << "dic_file=" << d->dic_file << "user dictionary=" << d->user_dictionary_file;
 

@@ -100,7 +100,7 @@ void InputMethodHostProbe::sendPreeditString(const QString &string,
     m_last_cursor_pos = cursor_pos;
 }
 
-QKeyEvent InputMethodHostProbe::lastKeyEvent() const
+const KeyEvent & InputMethodHostProbe::lastKeyEvent() const
 {
     return m_last_key_event;
 }
@@ -112,9 +112,11 @@ int InputMethodHostProbe::keyEventCount() const
 
 void InputMethodHostProbe::sendKeyEvent(const QKeyEvent& event, Maliit::EventRequestType)
 {
-    m_last_key_event = event;
+    m_last_key_event.m_type = event.type();
+    m_last_key_event.m_key = event.key();
+    m_last_key_event.m_modifiers = event.modifiers();
     ++m_key_event_count;
-    Q_EMIT keyEventSent(m_last_key_event);
+    Q_EMIT keyEventSent(m_last_key_event.m_type, m_last_key_event.m_key, m_last_key_event.m_modifiers);
 }
 
 QList<Maliit::PreeditTextFormat> InputMethodHostProbe::lastPreeditTextFormatList() const

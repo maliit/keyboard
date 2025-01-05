@@ -37,6 +37,32 @@
 
 #include <QKeyEvent>
 
+class KeyEvent {
+public:
+    KeyEvent(QEvent::Type type, int key, Qt::KeyboardModifiers modifiers)
+    : m_type(type)
+    , m_key(key)
+    , m_modifiers(modifiers)
+    {
+    }
+    const inline QEvent::Type type() const {
+        return m_type;
+    }
+    const inline int key() const {
+        return m_key;
+    }
+    const inline Qt::KeyboardModifiers modifiers() const {
+        return m_modifiers;
+    }
+
+private:
+    QEvent::Type m_type;
+    int m_key;
+    Qt::KeyboardModifiers m_modifiers;
+
+    friend class InputMethodHostProbe;
+};
+
 class InputMethodHostProbe
     : public MAbstractInputMethodHost
 {
@@ -45,7 +71,7 @@ class InputMethodHostProbe
 private:
     QString m_commit_string_history;
     QString m_last_preedit_string;
-    QKeyEvent m_last_key_event;
+    KeyEvent m_last_key_event;
     int m_key_event_count;
     QList<Maliit::PreeditTextFormat> m_last_preedit_text_format_list;
     int m_last_replace_start;
@@ -60,7 +86,7 @@ public:
     void sendCommitString(const QString &string,
                           int replace_start,
                           int replace_length,
-                          int cursor_pos);
+                          int cursor_pos) override;
 
     QString lastPreeditString() const;
     int lastReplaceStart() const;
@@ -71,14 +97,14 @@ public:
                            const QList<Maliit::PreeditTextFormat> &format,
                            int replace_start, 
                            int replace_length,
-                           int cursor_pos);
+                           int cursor_pos) override;
 
-    QKeyEvent lastKeyEvent() const;
+    const KeyEvent & lastKeyEvent() const;
     int keyEventCount() const;
-    void sendKeyEvent(const QKeyEvent& event, Maliit::EventRequestType);
+    void sendKeyEvent(const QKeyEvent& event, Maliit::EventRequestType) override;
     QList<Maliit::PreeditTextFormat> lastPreeditTextFormatList() const;
 
-    Q_SIGNAL void keyEventSent(QKeyEvent ev);
+    Q_SIGNAL void keyEventSent(QEvent::Type type, int key, Qt::KeyboardModifiers modifiers);
 
     // unused reimpl
     int contentType(bool&) override {return 0;}

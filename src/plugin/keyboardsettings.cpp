@@ -30,6 +30,7 @@
 #include "keyboardsettings.h"
 
 #include <QDebug>
+#include <QVariant>
 #include <QGSettings/QGSettings>
 
 using namespace MaliitKeyboard;

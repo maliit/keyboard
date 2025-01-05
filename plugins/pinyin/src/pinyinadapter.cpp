@@ -25,10 +25,9 @@
 #include <string>
 #include <string.h>
 
+#include <QCoreApplication>
 #include <QDebug>
 #include <QLoggingCategory>
-#include <QCoreApplication>
-#include <QRegExp>
 
 #define MAX_SUGGESTIONS 100
 
